@@ -29,7 +29,10 @@ if (isAmazon && isVideo) {
     for (const Tag of Tags) {
       // Search for textcontent instead of classname
       //  if (SkipButtonText.test(Tag.textContent)) {
-      if (SkipButtonClass.test(Tag.classList)) {
+      if (
+        SkipButtonClass.test(Tag.classList) ||
+        SkipButtonText.test(Tag.textContent)
+      ) {
         found = Tag;
         break;
       }
@@ -40,16 +43,10 @@ if (isAmazon && isVideo) {
     Tags = document.getElementsByTagName("div");
     // for (var i = 0; i < Tags.length; i++) {
     for (const Tag of Tags) {
-      if (AdSkipClass.test(Tag.classList)) {
-        found = Tag;
-        break;
-      }
-    }
-    // click div element
-    found.click();
-    // for (var i = 0; i < Tags.length; i++) {
-    for (const Tag of Tags) {
-      if (SkipButtonText.test(Tag.textContent)) {
+      if (
+        AdSkipClass.test(Tag.classList) ||
+        SkipButtonText.test(Tag.textContent)
+      ) {
         found = Tag;
         break;
       }
