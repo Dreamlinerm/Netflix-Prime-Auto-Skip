@@ -18,16 +18,18 @@ if (isAmazon && isVideo) {
     skipAd();
   }, 500); //1000 = 1000ms = 1s
   let Tags;
-  let searchText = new RegExp("skipelement", "i");
+  let SkipButtonClass = new RegExp("skipelement", "i");
+  let SkipButtonText = new RegExp("Skip", "i");
+  let AdSkipClass = new RegExp("fu4rd6c f1cw2swo", "i");
+  //   document.getElementsByClassName("fu4rd6c f1cw2swo")[0].click();", "i");
   let found;
   function skipVideo() {
     Tags = document.getElementsByTagName("button");
     // for (var i = 0; i < Tags.length; i++) {
     for (const Tag of Tags) {
       // Search for textcontent instead of classname
-      //  if (searchText.test(Tag.textContent)) {
-      // searchText= Skip
-      if (searchText.test(Tag.classList)) {
+      //  if (SkipButtonText.test(Tag.textContent)) {
+      if (SkipButtonClass.test(Tag.classList)) {
         found = Tag;
         break;
       }
@@ -38,7 +40,16 @@ if (isAmazon && isVideo) {
     Tags = document.getElementsByTagName("div");
     // for (var i = 0; i < Tags.length; i++) {
     for (const Tag of Tags) {
-      if (searchText.test(Tag.textContent)) {
+      if (AdSkipClass.test(Tag.classList)) {
+        found = Tag;
+        break;
+      }
+    }
+    // click div element
+    found.click();
+    // for (var i = 0; i < Tags.length; i++) {
+    for (const Tag of Tags) {
+      if (SkipButtonText.test(Tag.textContent)) {
         found = Tag;
         break;
       }
