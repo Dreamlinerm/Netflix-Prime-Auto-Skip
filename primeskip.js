@@ -1,18 +1,17 @@
-var url = window.location;
-// var path = window.location.pathname;
+let url = window.location;
 // test url with regex for video
-var isVideo = /video/i.test(url);
-// alert(url + "\n" + isVideo);
+let isVideo = /video/i.test(url);
 if (isVideo) {
-  alert("test1");
+  //   alert("isVideo");
   setInterval(function () {
     // execute script
     skipVideo();
   }, 500); //1000 = 1000ms = 1s
+  let aTags;
+  let searchText = new RegExp("Skip", "i");
+  let found;
   function skipVideo() {
-    var aTags = document.getElementsByTagName("button");
-    var searchText = new RegExp("Skip", "i");
-    var found;
+    aTags = document.getElementsByTagName("button");
     // for (var i = 0; i < aTags.length; i++) {
     for (const Tag of aTags) {
       if (searchText.test(Tag.textContent)) {
