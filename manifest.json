@@ -3,7 +3,7 @@
   "name": "PrimeSkip",
   "version": "1.0",
 
-  "description": "Skips all intros on Amazon.",
+  "description": "Automatically skips intros on Amazon.",
   "homepage_url": "https://github.com/Dreamlinerm/PrimeSkip",
   "icons": {
     "48": "icons/PrimeSkipLogo--48.png"

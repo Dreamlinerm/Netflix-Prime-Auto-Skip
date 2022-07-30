@@ -1,14 +1,14 @@
 var url = window.location;
 // var path = window.location.pathname;
 // test url with regex for video
-var isVideo = /video|Safari/i.test(url);
+var isVideo = /video/i.test(url);
 // alert(url + "\n" + isVideo);
 if (isVideo) {
   alert("test1");
   setInterval(function () {
     // execute script
     skipVideo();
-  }, 1000); //1000 = 1000ms = 1s
+  }, 500); //1000 = 1000ms = 1s
   function skipVideo() {
     var aTags = document.getElementsByTagName("button");
     var searchText = new RegExp("Skip", "i");
