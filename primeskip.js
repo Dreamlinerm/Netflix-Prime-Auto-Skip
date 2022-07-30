@@ -10,21 +10,24 @@ let isVideo = /video/i.test(url);
 //   alert("isAmazon");
 // }
 if (isAmazon && isVideo) {
-  //alert("isVideo");
+  //   alert("isVideo");
   setInterval(function () {
-    // execute script
     // skip intro in video
     skipVideo();
-    //skipAd();
+    // skip ads
+    skipAd();
   }, 500); //1000 = 1000ms = 1s
   let Tags;
-  let searchText = new RegExp("Skip", "i");
+  let searchText = new RegExp("skipelement", "i");
   let found;
   function skipVideo() {
     Tags = document.getElementsByTagName("button");
     // for (var i = 0; i < Tags.length; i++) {
     for (const Tag of Tags) {
-      if (searchText.test(Tag.textContent)) {
+      // Search for textcontent instead of classname
+      //  if (searchText.test(Tag.textContent)) {
+      // searchText= Skip
+      if (searchText.test(Tag.classList)) {
         found = Tag;
         break;
       }
