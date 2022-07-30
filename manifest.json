@@ -1,0 +1,18 @@
+{
+  "manifest_version": 1,
+  "name": "PrimeSkip",
+  "version": "1.0",
+
+  "description": "Skips all intros on Amazon.",
+
+  "icons": {
+    "48": "icons/Logo/PrimeSkipLogo--48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.amazon/*"],
+      "js": ["skip.js"]
+    }
+  ]
+}
