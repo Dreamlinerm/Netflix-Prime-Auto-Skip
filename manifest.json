@@ -10,10 +10,10 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.amazon.de/*"],
+      "matches": ["<all_urls>"],
       "js": ["primeskip.js"]
     }
   ],
 
-  "permissions": ["*://*.amazon.de/*"]
+  "permissions": ["activeTab"]
 }
