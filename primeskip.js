@@ -23,3 +23,9 @@ if (isVideo) {
     found.click();
   }
 }
+// for(var sec=2; sec>0; sec--){
+//     found.textContent = "Skipping in "+sec+"seconds...";
+//     setTimeout(function(){
+//        found.click();
+//         }, 1000*sec);
+//    }
