@@ -1,6 +1,6 @@
 html,
 body {
-  width: 100px;
+  width: 300px;
 }
 
 .hidden {
@@ -24,9 +24,9 @@ body {
 }
 
 .reset {
-  background-color: #fbfbc9;
+  background-color: #5485ad;
 }
 
 .reset:hover {
-  background-color: #eaea9d;
+  background-color: #5280a5;
 }

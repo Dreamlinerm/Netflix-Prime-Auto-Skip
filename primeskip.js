@@ -7,20 +7,18 @@ let url = window.location;
 let isAmazon = /amazon/i.test(url);
 let isVideo = /video/i.test(url);
 if (isAmazon && isVideo) {
-  // localStorage
-  // let localStorage = window.localStorage;
-  // localStorage.setItem("skipVideo", "true");
-  // localStorage.setItem("skipAd", "true");
-  let skipVideos = localStorage.getItem("skipVideo");
-  let skipAds = localStorage.getItem("skipAd");
   if (skipVideo == null) {
-    localStorage.setItem("skipVideo", "true");
+    localStorage.setItem("skipVideo", true);
   }
   if (skipAd == null) {
-    localStorage.setItem("skipAd", "true");
+    localStorage.setItem("skipAd", true);
   }
-  console.log("skipVideo: ", skipVideos, "skipAd: ", skipAds);
+  let skipVideos = localStorage.getItem("skipVideo");
+  let skipAds = localStorage.getItem("skipAd");
   setInterval(function () {
+    skipVideos = localStorage.getItem("skipVideo");
+    skipAds = localStorage.getItem("skipAd");
+    // console.log("skipVideo: ", skipVideos, "skipAd: ", skipAds);
     // skip intro in video
     if (skipVideos) {
       skipVideo();
@@ -30,6 +28,17 @@ if (isAmazon && isVideo) {
       // does not currently work properly
       // skipAd();
     }
+    browser.runtime.onMessage.addListener((message) => {
+      if (message.command === "skipIntro") {
+        console.log("skipVideo", message.skipVideo);
+        localStorage.setItem("skipVideo", message.skipVideo);
+      } else if (message.command === "skipAd") {
+        console.log("skipAd", message.skipAd);
+        localStorage.setItem("skipAd", message.skipAd);
+      } else if (message.command === "reset") {
+        console.log("reset");
+      }
+    });
   }, 500); //1000 = 1000ms = 1s
   let SkipButtonClass = new RegExp("skipelement", "i");
   let SkipButtonText = new RegExp("Skip", "i");

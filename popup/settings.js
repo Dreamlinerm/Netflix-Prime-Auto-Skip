@@ -5,25 +5,85 @@
 const hidePage = `body > :not(.beastify-image) {
                     display: none;
                   }`;
+// browser.runtime.onMessage.addListener((message) => {
+//   if (message.command === "skipIntroStatus") {
+//     document.querySelector("#intro").checked = message.skipVideo;
+//     alert("skipVideo", message.skipVideo);
+//   } else if (message.command === "skipAdsStatus") {
+//     document.querySelector("#ads").checked = message.skipAd;
+//     alert("skipAd", message.skipAd);
+//   }
+// });
+// async function logListener(info) {
+//   try {
+//     let tabInfo = await browser.tabs.get(info.tabId);
+//     alert(tabInfo);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
+// TODO: cookies----------------------------
+// async function getTab() {
+//   return browser.tabs.query({ active: true, currentWindow: true });
+// }
+// const tab = await getTab();
+// console.log("tab", tab);
+// console.log("tab.url", tab.url);
+// const introCheckbox = document.querySelector("#intro");
+// const adsCheckbox = document.querySelector("#ads");
+// let cookie = browser.cookies.get({
+//   url: browser.tabs.query({ active: true, currentWindow: true })[0].url,
+//   name: "primeskip",
+// });
+// // if (cookie == null) {
+// let cookieVal = {
+//   skipVideos: introCheckbox.checked || "true",
+//   skipAds: adsCheckbox.checked || "true",
+// };
+// console.log(cookieVal);
+// browser.cookies.set({
+//   url: browser.tabs.query({ active: true, currentWindow: true })[0].url,
+//   name: "primeskip",
+//   value: JSON.stringify(cookieVal),
+// });
+// // }
+// cookie = browser.cookies.get({
+//   url: browser.tabs.query({ active: true, currentWindow: true })[0].url,
+//   name: "primeskip",
+// });
+// introCheckbox.checked = cookie.skipVideos;
+// adsCheckbox.checked = cookie.skipAds;
+// console.log("cookie", window.location.href, cookie.skipVideos, cookie.skipAds);
 
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
  * the content script in the page.
  */
 function listenForClicks() {
-  document.addEventListener("click", (e) => {
+  var listener = document.addEventListener("click", (e) => {
     /**
-     * Given the name of a beast, get the URL to the corresponding image.
+     * send a "skipIntro" message to the primeskip in the active tab.
      */
-    function beastNameToURL(beastName) {
-      switch (beastName) {
-        case "Frog":
-          return browser.runtime.getURL("beasts/frog.jpg");
-        case "Snake":
-          return browser.runtime.getURL("beasts/snake.jpg");
-        case "Turtle":
-          return browser.runtime.getURL("beasts/turtle.jpg");
-      }
+    function skipIntro(tabs) {
+      const introCheckbox = document.querySelector("#intro");
+      //   alert(introCheckbox.checked);
+      //   browser.tabs.get(tabs[0].id);
+      browser.tabs.sendMessage(tabs[0].id, {
+        command: "skipIntro",
+        skipVideo: introCheckbox.checked,
+      });
+    }
+    /**
+     * send a "skipIntro" message to the primeskip in the active tab.
+     */
+    function skipAd(tabs) {
+      const adsCheckbox = document.querySelector("#ads");
+      //   alert(adsCheckbox.checked);
+      browser.tabs.sendMessage(tabs[0].id, {
+        command: "skipAd",
+        skipAd: adsCheckbox.checked,
+      });
     }
 
     /**
@@ -33,11 +93,7 @@ function listenForClicks() {
      */
     function beastify(tabs) {
       browser.tabs.insertCSS({ code: hidePage }).then(() => {
-        let url = beastNameToURL(e.target.textContent);
-        browser.tabs.sendMessage(tabs[0].id, {
-          command: "beastify",
-          beastURL: url,
-        });
+        //sth
       });
     }
 
@@ -57,7 +113,7 @@ function listenForClicks() {
      * Just log the error to the console.
      */
     function reportError(error) {
-      console.error(`Could not beastify: ${error}`);
+      console.error(`There was an error: ${error}`);
     }
 
     /**
@@ -73,6 +129,16 @@ function listenForClicks() {
       browser.tabs
         .query({ active: true, currentWindow: true })
         .then(reset)
+        .catch(reportError);
+    } else if (e.target.classList.contains("intro")) {
+      browser.tabs
+        .query({ active: true, currentWindow: true })
+        .then(skipIntro)
+        .catch(reportError);
+    } else if (e.target.classList.contains("ads")) {
+      browser.tabs
+        .query({ active: true, currentWindow: true })
+        .then(skipAd)
         .catch(reportError);
     }
   });
@@ -93,7 +159,8 @@ function reportExecuteScriptError(error) {
  * and add a click handler.
  * If we couldn't inject the script, handle the error.
  */
+//browser.tabs .executeScript({ file: "/content_scripts/options.js" }) .then(listenForClicks) .catch(reportExecuteScriptError);
 browser.tabs
-  .executeScript({ file: "/content_scripts/primeskip.js" })
+  .executeScript({ file: "/content_scripts/options.js" })
   .then(listenForClicks)
   .catch(reportExecuteScriptError);
