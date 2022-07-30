@@ -6,7 +6,8 @@
   "description": "Automatically skips intros on Amazon.",
   "homepage_url": "https://github.com/Dreamlinerm/PrimeSkip",
   "icons": {
-    "48": "icons/PrimeSkipLogo--48.png"
+    "48": "icons/PrimeSkipLogo--48.png",
+    "96": "icons/PrimeSkipLogo--96.png"
   },
   "content_scripts": [
     {
@@ -15,5 +16,11 @@
     }
   ],
 
-  "permissions": ["activeTab"]
+  "permissions": ["activeTab"],
+  "browser_action": {
+    "default_icon": "icons/PrimeSkipLogo--48.png",
+    "default_title": "Beastify",
+    "default_popup": "popup/settings.html"
+  },
+  "web_accessible_resources": ["icons/PrimeSkipLogo--48.png"]
 }
