@@ -7,14 +7,16 @@ let url = window.location;
 let isAmazon = /amazon/i.test(url);
 let isVideo = /video/i.test(url);
 if (isAmazon && isVideo) {
-  if (skipVideo == null) {
-    localStorage.setItem("skipVideo", true);
-  }
-  if (skipAd == null) {
-    localStorage.setItem("skipAd", true);
-  }
   let skipVideos = localStorage.getItem("skipVideo");
   let skipAds = localStorage.getItem("skipAd");
+  if (skipVideos == null) {
+    localStorage.setItem("skipVideo", true);
+    skipVideos = true;
+  }
+  if (skipAds == null) {
+    localStorage.setItem("skipAd", true);
+    skipAds = true;
+  }
   setInterval(function () {
     skipVideos = localStorage.getItem("skipVideo");
     skipAds = localStorage.getItem("skipAd");

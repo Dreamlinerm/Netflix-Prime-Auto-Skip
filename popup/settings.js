@@ -56,6 +56,36 @@ const hidePage = `body > :not(.beastify-image) {
 // adsCheckbox.checked = cookie.skipAds;
 // console.log("cookie", window.location.href, cookie.skipVideos, cookie.skipAds);
 
+let skipVideos = localStorage.getItem("skipVideo");
+let skipAds = localStorage.getItem("skipAd");
+console.log("skipVideo: ", skipVideos, "skipAd: ", skipAds);
+if (skipVideos == null) {
+  console.log("skipVideo", true);
+  localStorage.setItem("skipVideo", true);
+  // skipVideos = true;
+}
+if (skipAds == null) {
+  console.log("skipAd", true);
+  localStorage.setItem("skipAd", true);
+  // skipAds = true;
+}
+function toBool(bool) {
+  if (bool == "true") {
+    return true;
+  } else {
+    return false;
+  }
+}
+document.querySelector("#intro").checked = toBool(skipVideos);
+document.querySelector("#ads").checked = toBool(skipAds);
+// browser.tabs
+//   .query({ active: true, currentWindow: true })
+//   .then(skipIntro)
+//   .catch(reportError);
+// browser.tabs
+//   .query({ active: true, currentWindow: true })
+//   .then(skipAd)
+//   .catch(reportError);
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
  * the content script in the page.
@@ -79,7 +109,6 @@ function listenForClicks() {
      */
     function skipAd(tabs) {
       const adsCheckbox = document.querySelector("#ads");
-      //   alert(adsCheckbox.checked);
       browser.tabs.sendMessage(tabs[0].id, {
         command: "skipAd",
         skipAd: adsCheckbox.checked,
@@ -115,27 +144,32 @@ function listenForClicks() {
     function reportError(error) {
       console.error(`There was an error: ${error}`);
     }
-
+    function invert(bool) {
+      if (bool == "true") {
+        return "false";
+      } else {
+        return "true";
+      }
+    }
     /**
      * Get the active tab,
      * then call "beastify()" or "reset()" as appropriate.
      */
-    if (e.target.classList.contains("beast")) {
-      browser.tabs
-        .query({ active: true, currentWindow: true })
-        .then(beastify)
-        .catch(reportError);
-    } else if (e.target.classList.contains("reset")) {
+    if (e.target.classList.contains("reset")) {
       browser.tabs
         .query({ active: true, currentWindow: true })
         .then(reset)
         .catch(reportError);
     } else if (e.target.classList.contains("intro")) {
+      const skipVideos = localStorage.getItem("skipVideo");
+      localStorage.setItem("skipVideo", invert(skipVideos));
       browser.tabs
         .query({ active: true, currentWindow: true })
         .then(skipIntro)
         .catch(reportError);
     } else if (e.target.classList.contains("ads")) {
+      const skipAds = localStorage.getItem("skipAd");
+      localStorage.setItem("skipAd", invert(skipAds));
       browser.tabs
         .query({ active: true, currentWindow: true })
         .then(skipAd)
