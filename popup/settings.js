@@ -55,7 +55,7 @@ const hidePage = `body > :not(.beastify-image) {
 // introCheckbox.checked = cookie.skipVideos;
 // adsCheckbox.checked = cookie.skipAds;
 // console.log("cookie", window.location.href, cookie.skipVideos, cookie.skipAds);
-
+// TODO: make runner which will cache the option.
 let skipVideos = localStorage.getItem("skipVideo");
 let skipAds = localStorage.getItem("skipAd");
 console.log("skipVideo: ", skipVideos, "skipAd: ", skipAds);

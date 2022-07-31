@@ -8,27 +8,6 @@
     return;
   }
   window.hasRun = true;
-
-  //   let skipVideos = localStorage.getItem("skipVideo");
-  //   let skipAds = localStorage.getItem("skipAd");
-  //   console.log("Popup opened", skipVideos, skipAds);
-  //   function logTabs(tabs) {
-  //     console.log(tabs);
-  //   }
-
-  //   browser.tabs.query({ currentWindow: true }, logTabs);
-
-  //   browser.tabs.sendMessage(
-  //     browser.tabs.query({ active: true, currentWindow: true })[0].id,
-  //     {
-  //       command: "skipIntroStatus",
-  //       skipVideo: skipVideos,
-  //     }
-  //   );
-  //   browser.tabs.sendMessage(tabs[0].id, {
-  //     command: "skipAdsStatus",
-  //     skipVideo: skipAds,
-  //   });
   /**
    * Given a URL to a beast image, remove all existing beasts, then
    * create and style an IMG node pointing to

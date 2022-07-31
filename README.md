@@ -10,3 +10,7 @@ This extension just includes:
 under "amazon" or any of its subdomains
 
 The content script skips every intro.
+
+npm install --global web-ext
+web-ext run
+web-ext build
