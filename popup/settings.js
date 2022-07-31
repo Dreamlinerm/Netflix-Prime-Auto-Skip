@@ -10,25 +10,30 @@ console.log("settings.js");
 // TODO: send settings to primeskip.js
 // global variables
 let settings;
-const defaultSettings = { primeSettings: { skipIntro: true, skipAd: true } };
-browser.storage.local.get("primeSettings", function (result) {
-  console.log("settings:Value currently is ", result.primeSettings);
-  settings = result.primeSettings;
+const defaultSettings = {
+  settings: {
+    Amazon: { skipIntro: true, skipAd: true },
+    Netflix: { skipIntro: true, skipCredits: true },
+  },
+};
+browser.storage.local.get("settings", function (result) {
+  console.log("settings:Value currently is ", result.settings);
+  settings = result.settings;
   if (typeof settings !== "object") {
     browser.storage.local.set(defaultSettings, function () {
       // console.log("settings:Value is set to ", defaultSettings);
     });
-    browser.storage.local.get("primeSettings", function (result) {
-      // console.log("settings:Value currently is ", result.primeSettings);
-      settings = result.primeSettings;
+    browser.storage.local.get("settings", function (result) {
+      // console.log("settings:Value currently is ", result.settings);
+      settings = result.settings;
     });
   }
-  document.querySelector("#intro").checked = settings.skipIntro;
-  document.querySelector("#ads").checked = settings.skipAd;
+  document.querySelector("#AmazonIntro").checked = settings.Amazon.skipIntro;
+  document.querySelector("#AmazonAds").checked = settings.Amazon.skipAd;
+  document.querySelector("#NetflixIntro").checked = settings.Netflix.skipIntro;
+  document.querySelector("#NetflixCredits").checked =
+    settings.Netflix.skipCredits;
 });
-
-// document.querySelector("#intro").checked = toBool(skipVideos);
-// document.querySelector("#ads").checked = toBool(skipAds);
 
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
@@ -50,35 +55,51 @@ function listenForClicks() {
     if (e.target.classList.contains("reset")) {
       browser.storage.local.set(defaultSettings, function () {});
       settings = defaultSettings;
-      document.querySelector("#intro").checked =
-        defaultSettings.primeSettings.skipIntro;
-      document.querySelector("#ads").checked =
-        defaultSettings.primeSettings.skipAd;
+      document.querySelector("#AmazonIntro").checked =
+        defaultSettings.settings.Amazon.skipIntro;
+      document.querySelector("#AmazonAds").checked =
+        defaultSettings.settings.Amazon.skipAd;
+      document.querySelector("#NetflixIntro").checked =
+        defaultSettings.settings.Netflix.skipIntro;
+      document.querySelector("#NetflixCredits").checked =
+        defaultSettings.settings.Netflix.skipCredits;
       // browser.tabs
       //   .query({ active: true, currentWindow: true })
       //   .then(reset)
       //   .catch(reportError);
-    } else if (e.target.classList.contains("intro")) {
-      settings.skipIntro = !settings.skipIntro;
+    } else if (e.target.classList.contains("AmazonIntro")) {
+      settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
       console.log("settings.skipIntro", settings);
       browser.storage.local.set(
         {
-          primeSettings: {
-            skipIntro: settings.skipIntro,
-            skipAd: settings.skipAd,
-          },
+          settings: settings,
         },
         function () {}
       );
-    } else if (e.target.classList.contains("ads")) {
-      settings.skipAd = !settings.skipAd;
+    } else if (e.target.classList.contains("AmazonAds")) {
+      settings.Amazon.skipAd = !settings.Amazon.skipAd;
       console.log("settings.skipIntro", settings);
       browser.storage.local.set(
         {
-          primeSettings: {
-            skipIntro: settings.skipIntro,
-            skipAd: settings.skipAd,
-          },
+          settings: settings,
+        },
+        function () {}
+      );
+    } else if (e.target.classList.contains("NetflixIntro")) {
+      settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
+      console.log("settings.skipIntro", settings);
+      browser.storage.local.set(
+        {
+          settings: settings,
+        },
+        function () {}
+      );
+    } else if (e.target.classList.contains("NetflixCredits")) {
+      settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
+      console.log("settings.skipIntro", settings);
+      browser.storage.local.set(
+        {
+          settings: settings,
         },
         function () {}
       );

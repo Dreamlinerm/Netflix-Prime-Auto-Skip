@@ -66,3 +66,9 @@ img {
   width: 100px;
   height: 100px;
 }
+.categoryPrime {
+  border: #06a9dc 1px solid;
+}
+.categoryNetflix {
+  border: #eb000d 1px solid;
+}
