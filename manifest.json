@@ -25,7 +25,7 @@
   "web_accessible_resources": ["icons/PrimeSkipLogo--48.png"],
   "browser_specific_settings": {
     "gecko": {
-      "id": "test@gmail.com"
+      "id": "primeskip@makre.de"
     }
   }
 }
