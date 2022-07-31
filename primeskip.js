@@ -8,6 +8,17 @@ let url = window.location;
 let isAmazon = /amazon/i.test(url);
 let isVideo = /video/i.test(url);
 let isNetflix = /netflix.com/i.test(url);
+let ua = navigator.userAgent;
+let language = "en";
+if (/de/i.test(ua) || /de/i.test(url)) {
+  language = "de";
+} else {
+  language = "en";
+}
+const SkipAdTranslation = {
+  en: "Skip",
+  de: "Überspringen",
+};
 if ((isAmazon && isVideo) || isNetflix) {
   console.log("primeskip.js");
   // global variables
@@ -61,13 +72,27 @@ if ((isAmazon && isVideo) || isNetflix) {
       }
       // skip ads
       if (settings.Amazon.skipAd) {
-        // does not currently work properly
-        // skipAd();
+        // currently only works for en/de
+        // TODO: add support for other languages
+        // TODO: add dropdown for language
+        // TODO: add textfield for buttonContent
+        //translate Überspringen || skip
+        //https://stackoverflow.com/questions/37098405/javascript-queryselector-find-div-by-innertext
+        let skipbutton = document
+          .evaluate(
+            "//div[text()='" + SkipAdTranslation[language] + "']",
+            document,
+            null,
+            XPathResult.ANY_TYPE,
+            null
+          )
+          .iterateNext();
+        skipbutton.click();
       }
     } else if (isNetflix) {
       // skip intro in video
       if (settings.Netflix.skipIntro) {
-        genericSkip(NetflixSkipIntro, "button");
+        genericSkipQuerySelector(NetflixSkipIntro);
       }
       if (settings.Netflix.skipCredits) {
         genericSkipQuerySelector(NetflixSkipCredits);
@@ -77,8 +102,7 @@ if ((isAmazon && isVideo) || isNetflix) {
   }, 500); //1000 = 1000ms = 1s
   const AmazonSkipIntro = new RegExp("skipelement", "i");
   const SkipButtonText = new RegExp("Skip", "i");
-  const AdSkipClass = new RegExp("fu4rd6c f1cw2swo", "i");
-  const NetflixSkipIntro = new RegExp("watch-video--skip-content-button", "i");
+  const NetflixSkipIntro = '[data-uia="player-skip-intro"]';
   const NetflixWatchCredits = '[data-uia="watch-credits-seamless-button"]';
   const NetflixSkipCredits = '[data-uia="next-episode-seamless-button"]';
   //   document.getElementsByClassName("fu4rd6c f1cw2swo")[0].click();", "i");
@@ -99,32 +123,28 @@ if ((isAmazon && isVideo) || isNetflix) {
       foundIntro.click();
     }
   }
+  async function genericSkipTextContent(skipSearchTerm, TagName) {
+    let IntroTags = document.getElementsByTagName(TagName);
+    let foundIntro;
+    // for (var i = 0; i < Tags.length; i++) {
+    for (const Tag of IntroTags) {
+      // Search for textcontent instead of classname
+      if (skipSearchTerm.test(Tag.textContent)) {
+        foundIntro = Tag;
+        break;
+      }
+    }
+    if (foundIntro) {
+      console.log("generic skipped Intro", foundIntro);
+      foundIntro.click();
+    }
+  }
   async function genericSkipQuerySelector(querySelector) {
     let found = document.querySelector(querySelector);
     console.log("found", found);
     if (found) {
       console.log("generic skipped Intro");
       found.click();
-    }
-  }
-
-  async function skipAd() {
-    let AdTags = document.getElementsByTagName("div");
-    let foundAd;
-    // for (var i = 0; i < Tags.length; i++) {
-    for (const Tag of AdTags) {
-      if (
-        AdSkipClass.test(Tag.classList) ||
-        SkipButtonText.test(Tag.textContent)
-      ) {
-        foundAd = Tag;
-        break;
-      }
-    }
-    // click div element
-    if (foundAd) {
-      console.log("skipped Ad");
-      foundAd.click();
     }
   }
 }
