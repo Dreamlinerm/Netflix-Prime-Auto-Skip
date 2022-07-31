@@ -13,4 +13,4 @@ The content script skips every intro.
 
 npm install --global web-ext
 web-ext run
-web-ext build
+web-ext build --overwrite-dest
