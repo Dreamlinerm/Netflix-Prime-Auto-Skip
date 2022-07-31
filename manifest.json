@@ -16,10 +16,10 @@
     }
   ],
 
-  "permissions": ["activeTab", "cookies", "<all_urls>"],
+  "permissions": ["activeTab", "cookies", "<all_urls>", "storage"],
   "browser_action": {
     "default_icon": "icons/PrimeSkipLogo--48.png",
-    "default_title": "Beastify",
+    "default_title": "PrimeSkip",
     "default_popup": "popup/settings.html"
   },
   "web_accessible_resources": ["icons/PrimeSkipLogo--48.png"]

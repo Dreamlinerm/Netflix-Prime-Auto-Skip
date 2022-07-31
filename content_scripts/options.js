@@ -4,6 +4,21 @@
    * If this content script is injected into the same page again,
    * it will do nothing next time.
    */
+  // global variables
+  // browser.storage.local.get("disabled", function (result) {
+  //   console.log("op:Value currently is " + result.disabled);
+  // });
+  // browser.storage.local.set({ disabled: true }, function () {
+  //   console.log("Value is set to " + true);
+  // });
+
+  // browser.storage.local.get("disabled", function (result) {
+  //   console.log("Value currently is " + result.disabled);
+  // });
+  // browser.storage.local.set({ disabled: false }, function () {
+  //   console.log("Value is set to " + false);
+  // });
+  console.log("options.js");
   if (window.hasRun) {
     return;
   }

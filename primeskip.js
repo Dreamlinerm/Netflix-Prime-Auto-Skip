@@ -2,45 +2,62 @@
 // match all amazon pages
 // *://*.amazon.de/*/video/*
 
+// console.log(window.hasRun);
 let url = window.location;
 // test url with regex for video
 let isAmazon = /amazon/i.test(url);
 let isVideo = /video/i.test(url);
+
 if (isAmazon && isVideo) {
-  let skipVideos = localStorage.getItem("skipVideo");
-  let skipAds = localStorage.getItem("skipAd");
-  if (skipVideos == null) {
-    localStorage.setItem("skipVideo", true);
-    skipVideos = true;
-  }
-  if (skipAds == null) {
-    localStorage.setItem("skipAd", true);
-    skipAds = true;
-  }
+  console.log("primeskip.js");
+  // global variables
+  let settings;
+  const defaultSettings = { primeSettings: { skipIntro: true, skipAd: true } };
+  browser.storage.local.get("primeSettings", function (result) {
+    console.log("prime:Value currently is ", result.primeSettings);
+    settings = result.primeSettings;
+    if (typeof settings !== "object") {
+      browser.storage.local.set(defaultSettings, function () {
+        // console.log("prime:Value is set to ", defaultSettings);
+      });
+      browser.storage.local.get("primeSettings", function (result) {
+        // console.log("prime:Value currently is ", result.primeSettings);
+        settings = result.primeSettings;
+      });
+    }
+  });
+
+  browser.storage.local.onChanged.addListener(function (changes, namespace) {
+    for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+      if (key == "primeSettings") {
+        settings = newValue;
+        console.log("settings = newValue", newValue);
+      }
+      console.log(
+        "Storage key ",
+        key,
+        " in namespace ",
+        namespace,
+        " changed.",
+        "Old value was ",
+        oldValue,
+        ", new value is ",
+        newValue,
+        "."
+      );
+    }
+  });
   setInterval(function () {
-    skipVideos = localStorage.getItem("skipVideo");
-    skipAds = localStorage.getItem("skipAd");
     // console.log("skipVideo: ", skipVideos, "skipAd: ", skipAds);
     // skip intro in video
-    if (skipVideos) {
+    if (settings.skipIntro) {
       skipVideo();
     }
     // skip ads
-    if (skipAds) {
+    if (settings.skipAd) {
       // does not currently work properly
       // skipAd();
     }
-    browser.runtime.onMessage.addListener((message) => {
-      if (message.command === "skipIntro") {
-        console.log("skipVideo", message.skipVideo);
-        localStorage.setItem("skipVideo", message.skipVideo);
-      } else if (message.command === "skipAd") {
-        console.log("skipAd", message.skipAd);
-        localStorage.setItem("skipAd", message.skipAd);
-      } else if (message.command === "reset") {
-        console.log("reset");
-      }
-    });
   }, 500); //1000 = 1000ms = 1s
   let SkipButtonClass = new RegExp("skipelement", "i");
   let SkipButtonText = new RegExp("Skip", "i");
