@@ -22,5 +22,10 @@
     "default_title": "PrimeSkip",
     "default_popup": "popup/settings.html"
   },
-  "web_accessible_resources": ["icons/PrimeSkipLogo--48.png"]
+  "web_accessible_resources": ["icons/PrimeSkipLogo--48.png"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "test@gmail.com"
+    }
+  }
 }
