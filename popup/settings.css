@@ -1,8 +1,11 @@
 html,
 body {
-  width: 300px;
+  width: 400px;
+  background-color: #212121;
 }
-
+div {
+  color: white;
+}
 .hidden {
   display: none;
 }
@@ -29,4 +32,25 @@ body {
 
 .reset:hover {
   background-color: #5280a5;
+}
+.flex {
+  display: flex;
+}
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-left: auto;
+}
+.line {
+  padding: 10px 10px;
+}
+p {
+  color: white;
+  font-size: 1.4em;
+  padding-right: 10px;
 }

@@ -48,6 +48,12 @@ function listenForClicks() {
      * then call "beastify()" or "reset()" as appropriate.
      */
     if (e.target.classList.contains("reset")) {
+      browser.storage.local.set(defaultSettings, function () {});
+      settings = defaultSettings;
+      document.querySelector("#intro").checked =
+        defaultSettings.primeSettings.skipIntro;
+      document.querySelector("#ads").checked =
+        defaultSettings.primeSettings.skipAd;
       // browser.tabs
       //   .query({ active: true, currentWindow: true })
       //   .then(reset)

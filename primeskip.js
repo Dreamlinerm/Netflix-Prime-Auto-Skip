@@ -71,10 +71,7 @@ if (isAmazon && isVideo) {
     for (const Tag of IntroTags) {
       // Search for textcontent instead of classname
       //  if (SkipButtonText.test(Tag.textContent)) {
-      if (
-        SkipButtonClass.test(Tag.classList) ||
-        SkipButtonText.test(Tag.textContent)
-      ) {
+      if (SkipButtonClass.test(Tag.classList)) {
         foundIntro = Tag;
         break;
       }
