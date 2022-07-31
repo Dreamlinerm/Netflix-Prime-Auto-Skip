@@ -3,10 +3,11 @@
   "name": "PrimeSkip",
   "version": "1.0",
 
-  "description": "Automatically skips intros on Amazon.",
+  "description": "Automatically skips intros and Ads on Amazon.",
   "homepage_url": "https://github.com/Dreamlinerm/PrimeSkip",
   "icons": {
-    "48": "icons/PrimeSkipLogo--48.png"
+    "48": "icons/PrimeSkipLogo--48.png",
+    "96": "icons/PrimeSkipLogo--96.png"
   },
   "content_scripts": [
     {
@@ -15,5 +16,16 @@
     }
   ],
 
-  "permissions": ["activeTab"]
+  "permissions": ["activeTab", "cookies", "<all_urls>", "storage"],
+  "browser_action": {
+    "default_icon": "icons/PrimeSkipLogo--48.png",
+    "default_title": "PrimeSkip",
+    "default_popup": "popup/settings.html"
+  },
+  "web_accessible_resources": ["icons/PrimeSkipLogo--48.png"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "primeskip@makre.de"
+    }
+  }
 }
