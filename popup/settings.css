@@ -18,29 +18,37 @@ div {
   cursor: pointer;
 }
 
-.beast:hover {
-  background-color: #cff2f2;
-}
-
-.beast {
-  background-color: #e5f2f2;
-}
-
 .reset {
   background-color: #5485ad;
+  flex-grow: 2;
+}
+
+.donate {
+  background-color: #5485ad;
+  /* transparent */
+  opacity: 0.5;
+  color: white;
+  text-decoration: none;
+  flex-grow: 1;
+  border: black 1px solid;
 }
 
 .reset:hover {
-  background-color: #5280a5;
+  background-color: #446a8a;
 }
 .flex {
   display: flex;
 }
-.flex-container {
+.flex {
   display: flex;
-  flex-direction: column;
+}
+.flex-center {
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+.flex-col {
+  flex-direction: column;
 }
 input[type="checkbox"] {
   transform: scale(1.5);
@@ -53,4 +61,8 @@ p {
   color: white;
   font-size: 1.4em;
   padding-right: 10px;
+}
+img {
+  width: 100px;
+  height: 100px;
 }
