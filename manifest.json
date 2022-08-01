@@ -4,7 +4,7 @@
   "version": "1.0.1",
 
   "description": "Skips intros, Ads and Credits on Amazon Prime and intros, credits on Netflix. It can be configured what to skip exactly in the settings.",
-  "homepage_url": "https://github.com/Dreamlinerm/PrimeSkip",
+  "homepage_url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip",
   "icons": {
     "48": "icons/NetflixAmazon Auto-Skip.svg",
     "32": "icons/NetflixAmazon Auto-Skip.svg",
