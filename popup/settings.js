@@ -13,7 +13,7 @@ let settings;
 const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipAd: true },
-    Netflix: { skipIntro: true, skipCredits: true },
+    Netflix: { skipIntro: true, skipCredits: true, skipRecap: true },
   },
 };
 browser.storage.local.get("settings", function (result) {
@@ -31,8 +31,8 @@ browser.storage.local.get("settings", function (result) {
   document.querySelector("#AmazonIntro").checked = settings.Amazon.skipIntro;
   document.querySelector("#AmazonAds").checked = settings.Amazon.skipAd;
   document.querySelector("#NetflixIntro").checked = settings.Netflix.skipIntro;
-  document.querySelector("#NetflixCredits").checked =
-    settings.Netflix.skipCredits;
+  document.querySelector("#NetflixRecap").checked = settings.Netflix.skipRecap;
+  document.querySelector("#NetflixCredits").checked = settings.Netflix.skipCredits;
 });
 
 /**
@@ -41,13 +41,6 @@ browser.storage.local.get("settings", function (result) {
  */
 function listenForClicks() {
   var listener = document.addEventListener("click", (e) => {
-    // function skipAd(tabs) {
-    //   const adsCheckbox = document.querySelector("#ads");
-    //   browser.tabs.sendMessage(tabs[0].id, {
-    //     command: "skipAd",
-    //     skipAd: adsCheckbox.checked,
-    //   });
-    // }
     /**
      * Get the active tab,
      * then call "beastify()" or "reset()" as appropriate.
@@ -55,18 +48,11 @@ function listenForClicks() {
     if (e.target.classList.contains("reset")) {
       browser.storage.local.set(defaultSettings, function () {});
       settings = defaultSettings;
-      document.querySelector("#AmazonIntro").checked =
-        defaultSettings.settings.Amazon.skipIntro;
-      document.querySelector("#AmazonAds").checked =
-        defaultSettings.settings.Amazon.skipAd;
-      document.querySelector("#NetflixIntro").checked =
-        defaultSettings.settings.Netflix.skipIntro;
-      document.querySelector("#NetflixCredits").checked =
-        defaultSettings.settings.Netflix.skipCredits;
-      // browser.tabs
-      //   .query({ active: true, currentWindow: true })
-      //   .then(reset)
-      //   .catch(reportError);
+      document.querySelector("#AmazonIntro").checked = defaultSettings.settings.Amazon.skipIntro;
+      document.querySelector("#AmazonRecap").checked = defaultSettings.settings.Amazon.skipRecap;
+      document.querySelector("#AmazonAds").checked = defaultSettings.settings.Amazon.skipAd;
+      document.querySelector("#NetflixIntro").checked = defaultSettings.settings.Netflix.skipIntro;
+      document.querySelector("#NetflixCredits").checked = defaultSettings.settings.Netflix.skipCredits;
     } else if (e.target.classList.contains("AmazonIntro")) {
       settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
       console.log("settings.skipIntro", settings);
@@ -88,6 +74,15 @@ function listenForClicks() {
     } else if (e.target.classList.contains("NetflixIntro")) {
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
       console.log("settings.skipIntro", settings);
+      browser.storage.local.set(
+        {
+          settings: settings,
+        },
+        function () {}
+      );
+    } else if (e.target.classList.contains("NetflixRecap")) {
+      settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
+      console.log("settings.skipRecap", settings);
       browser.storage.local.set(
         {
           settings: settings,
@@ -122,9 +117,5 @@ function reportExecuteScriptError(error) {
  * and add a click handler.
  * If we couldn't inject the script, handle the error.
  */
-// browser.tabs
-//   .executeScript({ file: "/content_scripts/options.js" })
-//   .then(listenForClicks)
-//   .catch(reportExecuteScriptError);
 
 listenForClicks().catch(reportExecuteScriptError);

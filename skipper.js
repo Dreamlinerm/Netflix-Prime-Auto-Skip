@@ -26,7 +26,7 @@ if ((isAmazon && isVideo) || isNetflix) {
   const defaultSettings = {
     settings: {
       Amazon: { skipIntro: true, skipAd: true },
-      Netflix: { skipIntro: true, skipCredits: true },
+      Netflix: { skipIntro: true, skipCredits: true, skipRecap: true },
     },
   };
   browser.storage.local.get("settings", function (result) {
@@ -40,45 +40,44 @@ if ((isAmazon && isVideo) || isNetflix) {
         settings = result.settings;
       });
     }
-    console.log(
-      "%cNetflix%c/%cPrime%c Auto-Skip: ",
-      "color:#e60010;font-size:1.5em;",
-      "color:white;;font-size:1.5em;",
-      "color:#00aeef;font-size:1.5em;",
-      "color:white;;font-size:1.5em;"
-    );
+    console.log("%cNetflix%c/%cPrime%c Auto-Skip: ", "color:#e60010;font-size:1.5em;", "color:white;;font-size:1.5em;", "color:#00aeef;font-size:1.5em;", "color:white;;font-size:1.5em;");
 
     console.log("version: ", version);
-    console.log("Settings", settings);
+    console.log("Settings", result.settings);
     console.log("Page", isAmazon ? "Amazon" : "Netflix");
-  });
+    console.log("Skip Ad Button Translation:", SkipAdTranslation[language]);
 
-  browser.storage.local.onChanged.addListener(function (changes, namespace) {
-    for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-      if (key == "settings") {
-        settings = newValue;
-        console.log("settings = newValue", newValue);
+    // Options for the observer (which mutations to observe)
+    const config = { attributes: true, childList: true, subtree: true };
+    // Create Button observers
+    // Netflix observers
+    const NetflixSkipIntroObserver = getNetflixObserver('[data-uia="player-skip-intro"]');
+    const NetflixSkipCreditsObserver = getNetflixObserver('[data-uia="next-episode-seamless-button"]');
+    // const NetflixWatchCreditsObserver = getNetflixObserver('[data-uia="watch-credits-seamless-button"]');
+    const NetflixSkipRecapObserver = getNetflixObserver('[data-uia="player-skip-recap"]');
+    // Amazon observers
+    const AmazonSkipIntro = new RegExp("skipelement", "i");
+    const AmazonSkipIntroObserver = getAmazonClassObserver(AmazonSkipIntro);
+    const AmazonSkipAdObserver = getAmazonAdObserver(SkipAdTranslation[language]);
+    // mutationObserver.disconnect();
+    if (isNetflix) {
+      console.log("is observing Netflix intro", result.settings.Netflix.skipIntro, result.settings.Netflix.skipCredits);
+      if (result.settings.Netflix.skipIntro) {
+        // works for intro
+        NetflixSkipIntroObserver.observe(document.documentElement, config);
       }
-      console.log(
-        "Storage key ",
-        key,
-        " in namespace ",
-        namespace,
-        " changed.",
-        "Old value was ",
-        oldValue,
-        ", new value is ",
-        newValue,
-        "."
-      );
-    }
-  });
-  setInterval(function () {
-    // console.log("skipVideo: ", skipVideos, "skipAd: ", skipAds);
-    if (isAmazon) {
-      // skip intro in video
+      if (result.settings.Netflix.skipCredits) {
+        // TODO: not working
+        NetflixSkipCreditsObserver.observe(document.documentElement, config);
+      }
+      if (result.settings.Netflix.skipRecap) {
+        // works for Recap
+        NetflixSkipRecapObserver.observe(document.documentElement, config);
+      }
+    } else {
       if (settings.Amazon.skipIntro) {
-        genericSkip(AmazonSkipIntro, "button");
+        // functionality checked
+        AmazonSkipIntroObserver.observe(document.documentElement, config);
       }
       // skip ads
       if (settings.Amazon.skipAd) {
@@ -88,74 +87,69 @@ if ((isAmazon && isVideo) || isNetflix) {
         // TODO: add textfield for buttonContent
         //translate Überspringen || skip
         //https://stackoverflow.com/questions/37098405/javascript-queryselector-find-div-by-innertext
-        let skipbutton = document
-          .evaluate(
-            "//div[text()='" + SkipAdTranslation[language] + "']",
-            document,
-            null,
-            XPathResult.ANY_TYPE,
-            null
-          )
-          .iterateNext();
-        skipbutton.click();
-      }
-    } else if (isNetflix) {
-      // skip intro in video
-      if (settings.Netflix.skipIntro) {
-        genericSkipQuerySelector(NetflixSkipIntro);
-      }
-      if (settings.Netflix.skipCredits) {
-        genericSkipQuerySelector(NetflixSkipCredits);
-      }
-      // genericSkipQuerySelector(NetflixWatchCredits);
-    }
-  }, 500); //1000 = 1000ms = 1s
-  const AmazonSkipIntro = new RegExp("skipelement", "i");
-  const SkipButtonText = new RegExp("Skip", "i");
-  const NetflixSkipIntro = '[data-uia="player-skip-intro"]';
-  const NetflixWatchCredits = '[data-uia="watch-credits-seamless-button"]';
-  const NetflixSkipCredits = '[data-uia="next-episode-seamless-button"]';
-  //   document.getElementsByClassName("fu4rd6c f1cw2swo")[0].click();", "i");
-  async function genericSkip(skipSearchTerm, TagName) {
-    let IntroTags = document.getElementsByTagName(TagName);
-    let foundIntro;
-    // for (var i = 0; i < Tags.length; i++) {
-    for (const Tag of IntroTags) {
-      // Search for textcontent instead of classname
-      //  if (SkipButtonText.test(Tag.textContent)) {
-      if (skipSearchTerm.test(Tag.classList)) {
-        foundIntro = Tag;
-        break;
+
+        // works but skips more often than needed
+        AmazonSkipAdObserver.observe(document.documentElement, config);
       }
     }
-    if (foundIntro) {
-      console.log("generic skipped Intro");
-      foundIntro.click();
-    }
-  }
-  async function genericSkipTextContent(skipSearchTerm, TagName) {
-    let IntroTags = document.getElementsByTagName(TagName);
-    let foundIntro;
-    // for (var i = 0; i < Tags.length; i++) {
-    for (const Tag of IntroTags) {
-      // Search for textcontent instead of classname
-      if (skipSearchTerm.test(Tag.textContent)) {
-        foundIntro = Tag;
-        break;
+  });
+
+  browser.storage.local.onChanged.addListener(function (changes, namespace) {
+    for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+      if (key == "settings") {
+        settings = newValue;
+        console.log(key, ": changed.", "Old value was ", oldValue, ", new value is ", newValue, ".");
+        if (isNetflix) {
+          if (oldValue.Netflix.skipIntro !== newValue.Netflix.skipIntro) {
+            if (newValue.Netflix.skipIntro) {
+              console.log("started observing Netflix intro");
+              NetflixSkipIntroObserver.observe(document.documentElement, config);
+            } else {
+              console.log("stopped observing Netflix intro");
+              NetflixSkipIntroObserver.disconnect();
+            }
+          }
+          if (oldValue.Netflix.skipCredits !== newValue.Netflix.skipCredits) {
+            if (newValue.Netflix.skipCredits) {
+              console.log("started observing Netflix credits");
+              NetflixSkipCreditsObserver.observe(document.documentElement, config);
+            } else {
+              console.log("stopped observing Netflix credits");
+              NetflixSkipCreditsObserver.disconnect();
+            }
+          }
+          if (oldValue.Netflix.skipRecap !== newValue.Netflix.skipRecap) {
+            if (newValue.Netflix.skipRecap) {
+              console.log("started observing Netflix recap");
+              NetflixSkipRecapObserver.observe(document.documentElement, config);
+            } else {
+              console.log("stopped observing Netflix recap");
+              NetflixSkipRecapObserver.disconnect();
+            }
+          }
+        } else {
+          if (oldValue.Amazon.skipIntro !== newValue.Amazon.skipIntro) {
+            if (newValue.Amazon.skipIntro) {
+              console.log("started observing Amazon intro");
+              AmazonSkipIntroObserver.observe(document.documentElement, config);
+            } else {
+              console.log("stopped observing Amazon intro");
+              AmazonSkipIntroObserver.disconnect();
+            }
+          }
+          if (oldValue.Amazon.skipAd !== newValue.Amazon.skipAd) {
+            if (newValue.Amazon.skipAd) {
+              console.log("started observing Amazon ad");
+              AmazonSkipAdObserver.observe(document.documentElement, config);
+            } else {
+              console.log("stopped observing Amazon ad");
+              AmazonSkipAdObserver.disconnect();
+            }
+          }
+        }
       }
     }
-    if (foundIntro) {
-      console.log("generic skipped Intro", foundIntro);
-      foundIntro.click();
-    }
-  }
-  async function genericSkipQuerySelector(querySelector) {
-    let found = document.querySelector(querySelector);
-    if (found) {
-      console.log("generic skipped Intro");
-      found.click();
-    }
-  }
+  });
 }
 // for(var sec=2; sec>0; sec--){
 //     found.textContent = "Skipping in "+sec+"seconds...";
@@ -163,3 +157,48 @@ if ((isAmazon && isVideo) || isNetflix) {
 //        found.click();
 //         }, 1000*sec);
 //    }
+
+// getObserver
+function getNetflixObserver(target) {
+  return (mutationObserver = new MutationObserver(function (mutations) {
+    // document.querySelector('[data-uia="player-skip-intro"]').click();
+    for (let mutation of mutations) {
+      for (let node of mutation.addedNodes) {
+        // alternative button.watch-video--skip-content-button
+        let button = node.querySelector(target)?.firstChild;
+        if (button) {
+          console.log("Netflix skipped", target);
+          button.click();
+        }
+        // node.querySelector(target)?.click();
+      }
+    }
+  }));
+}
+function getAmazonClassObserver(searchTerm) {
+  return (mutationObserver = new MutationObserver(function (mutations) {
+    for (let mutation of mutations) {
+      if (searchTerm.test(mutation.target.classList)) {
+        console.log("Amazon skipped", searchTerm);
+        mutation.target.click();
+      }
+      // skipSearchTerm.test(Tag.classList)
+    }
+  }));
+}
+function getAmazonAdObserver(searchTerm) {
+  return (mutationObserver = new MutationObserver(function (mutations) {
+    // console.log("evaluate3", document.evaluate("//div[text()='" + SkipAdTranslation[language] + "']", document, null, XPathResult.ANY_TYPE, null).iterateNext());
+    // get dv-web-player
+    let webPlayer = document.querySelector(".dv-player-fullscreen");
+    // if the webPlayer is shown on screen
+    // console.log("getComputedStyle(webPlayer).display", getComputedStyle(webPlayer).display);
+    if (webPlayer && getComputedStyle(webPlayer).display !== "none") {
+      let skipButton = document.evaluate("//div[text()='" + searchTerm + "']", document, null, XPathResult.ANY_TYPE, null).iterateNext();
+      if (skipButton) {
+        console.log("Amazon skipped Ad", skipButton);
+        skipButton.click();
+      }
+    }
+  }));
+}
