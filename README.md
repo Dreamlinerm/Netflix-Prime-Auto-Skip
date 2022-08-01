@@ -6,10 +6,9 @@
 
 This extension just includes:
 
-* a content script, "skip.js", that is injected into all pages, but will only run if under "amazon" or any of its subdomains and contains video in url.
+* a content script, "skipper.js", that is injected into all pages, but will only run if under "amazon","netflix" or any of its subdomains and contains video in url.
 
-The content script skips every intro and ad on amazon prime.
-
+Skips intros, Ads and Credits on Amazon Prime and intros, credits on Netflix. It can be configured what to skip exactly in the settings.
 ## Commands
 ### Install web-ext
 ```npm install --global web-ext```
