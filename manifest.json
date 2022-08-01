@@ -1,31 +1,30 @@
 {
   "manifest_version": 2,
-  "name": "PrimeSkip",
-  "version": "1.0",
+  "name": "Netflix/Prime Auto-Skip intros/Credits/ads",
+  "version": "1.1",
 
-  "description": "Automatically skips intros and Ads on Amazon.",
+  "description": "Skips intros, Ads and Credits on Amazon Prime and intros, credits on Netflix. It can be configured what to skip exactly in the settings.",
   "homepage_url": "https://github.com/Dreamlinerm/PrimeSkip",
   "icons": {
-    "48": "icons/PrimeSkipLogo--48.png",
-    "96": "icons/PrimeSkipLogo--96.png"
+    "48": "icons/NetflixAmazon Auto-Skip--48.png",
+    "96": "icons/NetflixAmazon Auto-Skip--96.png"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["primeskip.js"]
+      "js": ["skipper.js"]
     }
   ],
 
   "permissions": ["activeTab", "<all_urls>", "storage"],
   "browser_action": {
-    "default_icon": "icons/PrimeSkipLogo--48.png",
-    "default_title": "PrimeSkip",
+    "default_icon": "icons/NetflixAmazon Auto-Skip--48.png",
+    "default_title": "Netflix/Prime Auto-Skip ",
     "default_popup": "popup/settings.html"
   },
-  "web_accessible_resources": ["icons/PrimeSkipLogo--48.png"],
   "browser_specific_settings": {
     "gecko": {
-      "id": "primeskip@makre.de"
+      "id": "marvinkrebber@yahoo.de"
     }
   }
 }

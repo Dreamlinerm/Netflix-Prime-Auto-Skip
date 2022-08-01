@@ -9,14 +9,16 @@
   <body>
     <div id="popup-content" class="flex-center flex-col">
       <div>
-        <div class="flex-center">
-          <img src="../icons/PrimeSkipLogo--400.png" />
-          <h1>Prime Video skip</h1>
+        <div class="flex line">
+          <img src="../icons/NetflixAmazon Auto-Skip--400.png" />
+          <div class="flex-justify" style="flex-grow: 2">
+            <h1>Auto-skip</h1>
+          </div>
         </div>
         <div class="categoryPrime">
-          <h1>Prime Video skips:</h1>
+          <h1>Prime Video Auto-skips:</h1>
           <div class="line flex">
-            <p>Prime video skip intro:</p>
+            <p>Skip intro:</p>
             <input
               class="checkbox AmazonIntro"
               id="AmazonIntro"
@@ -24,7 +26,7 @@
             />
           </div>
           <div class="line flex">
-            <p>Prime video skip video Ads:</p>
+            <p>Skip Ads:</p>
             <input class="checkbox AmazonAds" id="AmazonAds" type="checkbox" />
           </div>
         </div>
@@ -39,7 +41,7 @@
             />
           </div>
           <div class="line flex">
-            <p>Skip Credits:</p>
+            <p>Skip to next Episode:</p>
             <input
               class="checkbox NetflixCredits"
               id="NetflixCredits"
@@ -47,16 +49,21 @@
             />
           </div>
         </div>
-        <div class="button reset line">Reset to default</div>
+        <div
+          class="button reset"
+          style="margin-top: 20px; margin-left: 1px; margin-right: 1px"
+        >
+          Reset to default
+        </div>
         <div class="flex">
           <a
-            class="button donate line"
+            class="button donate"
             href="https://github.com/Dreamlinerm/PrimeSkip"
             target="_blank"
             >Github</a
           >
           <a
-            class="button donate line"
+            class="button donate"
             href="https://paypal.me/MarvinKrebber"
             target="_blank"
             >Donate $</a

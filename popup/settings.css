@@ -11,7 +11,6 @@ div {
 }
 
 .button {
-  margin: 3% auto;
   padding: 4px;
   text-align: center;
   font-size: 1.5em;
@@ -32,6 +31,9 @@ div {
   flex-grow: 1;
   border: black 1px solid;
 }
+.donate:hover {
+  background-color: #2d8edd;
+}
 
 .reset:hover {
   background-color: #446a8a;
@@ -47,15 +49,28 @@ div {
   justify-content: center;
   align-items: center;
 }
+.flex-justify {
+  display: flex;
+  justify-content: center;
+}
+.flex-align {
+  display: flex;
+  align-items: center;
+}
 .flex-col {
   flex-direction: column;
+}
+.flex-between {
+  display: flex;
+  justify-content: space-between;
 }
 input[type="checkbox"] {
   transform: scale(1.5);
   margin-left: auto;
 }
-.line {
-  padding: 10px 10px;
+.line,
+h1 {
+  padding: 0px 10px;
 }
 p {
   color: white;
@@ -63,12 +78,12 @@ p {
   padding-right: 10px;
 }
 img {
-  width: 100px;
-  height: 100px;
+  /* width: 100px; */
+  height: 4em;
 }
 .categoryPrime {
-  border: #06a9dc 1px solid;
+  background-color: #00aeef;
 }
 .categoryNetflix {
-  border: #eb000d 1px solid;
+  background-color: #e60010;
 }
