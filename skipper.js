@@ -10,6 +10,7 @@ let isVideo = /video/i.test(url);
 let isNetflix = /netflix.com/i.test(url);
 let ua = navigator.userAgent;
 let language = "en";
+const version = "1.0.1";
 if (/de/i.test(ua) || /de/i.test(url)) {
   language = "de";
 } else {
@@ -20,7 +21,6 @@ const SkipAdTranslation = {
   de: "Überspringen",
 };
 if ((isAmazon && isVideo) || isNetflix) {
-  console.log("primeskip.js");
   // global variables
   let settings;
   const defaultSettings = {
@@ -30,7 +30,6 @@ if ((isAmazon && isVideo) || isNetflix) {
     },
   };
   browser.storage.local.get("settings", function (result) {
-    console.log("prime:Value currently is ", result.settings);
     settings = result.settings;
     if (typeof settings !== "object") {
       browser.storage.local.set(defaultSettings, function () {
@@ -41,6 +40,12 @@ if ((isAmazon && isVideo) || isNetflix) {
         settings = result.settings;
       });
     }
+    console.log("Netflix/Prime Auto-Skip version: ", version);
+    console.log("Netflix/Prime Auto-Skip Settings", settings);
+    console.log(
+      "Netflix/Prime Auto-Skip Page",
+      isAmazon ? "Amazon" : "Netflix"
+    );
   });
 
   browser.storage.local.onChanged.addListener(function (changes, namespace) {
@@ -141,7 +146,6 @@ if ((isAmazon && isVideo) || isNetflix) {
   }
   async function genericSkipQuerySelector(querySelector) {
     let found = document.querySelector(querySelector);
-    console.log("found", found);
     if (found) {
       console.log("generic skipped Intro");
       found.click();
