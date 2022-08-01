@@ -17,7 +17,7 @@
     }
   ],
 
-  "permissions": ["activeTab", "<all_urls>", "storage"],
+  "permissions": ["activeTab", "<all_urls>", "storage", "*://*.netflix.com/*"],
   "browser_action": {
     "default_icon": "icons/NetflixAmazon Auto-Skip.svg",
     "default_title": "Netflix/Prime Auto-Skip ",
