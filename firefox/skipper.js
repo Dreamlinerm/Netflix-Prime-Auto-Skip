@@ -204,12 +204,19 @@ function Amazon_Intro(mutations, observer) {
   }
 }
 
-const AmazonSkipCredits = new RegExp("skipelement", "i");
+const AmazonSkipCredits = new RegExp("nextupcard", "i");
+const AmazonSkipCredits2 = new RegExp("nextupcard-button", "i");
 const AmazonSkipCreditsObserver = new MutationObserver(Amazon_Credits);
 function Amazon_Credits(mutations, observer) {
   for (let mutation of mutations) {
-    if (mutation.target.className == "nextUp show") mutation.target.lastChild.lastChild.click();
-    if (mutation.target.className == "bottomPanelItem") if (mutation.target.lastChild.lastChild.lastChild.className != "nextTitleButton") mutation.target.lastChild.lastChild.lastChild.click();
+    if (AmazonSkipCredits.test(mutation.target.classList.toString())) {
+      for (let button of mutation?.target?.firstChild?.childNodes) {
+        if (button && AmazonSkipCredits2.test(button.classList.toString())) {
+          button.click();
+          console.log("skipped Credits", button);
+        }
+      }
+    }
   }
 }
 // works for english/german ads
