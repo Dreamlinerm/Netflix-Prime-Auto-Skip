@@ -10,6 +10,7 @@ This extension just includes:
 
 Skips intros, Ads and Credits on Amazon Prime and intros, credits on Netflix. It can be configured what to skip exactly in the settings.
 ## Commands
+```cd firefox```
 ### Install web-ext
 ```npm install --global web-ext```
 ### Run

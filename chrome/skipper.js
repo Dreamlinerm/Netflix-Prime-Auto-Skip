@@ -285,6 +285,11 @@ async function startNetflixSkipBlockedObserver() {
 async function startAmazonSkipIntroObserver() {
   if (settings.Amazon.skipIntro) {
     console.log("started observing| Intro");
+    let button = document.querySelector("[class*=skipelement]");
+    if (button) {
+      button.click();
+      console.log("Intro skipped");
+    }
     AmazonSkipIntroObserver.observe(document, config);
   } else {
     console.log("stopped observing| Intro");

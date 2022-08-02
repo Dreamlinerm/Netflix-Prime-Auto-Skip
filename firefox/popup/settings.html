@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="settings.css" />
+    <script src="settings.js" defer></script>
   </head>
 
   <body>
@@ -17,34 +18,38 @@
       <h2>Prime Video Auto-skips:</h2>
       <div class="line flex">
         <p>Skip Intro:</p>
-        <input class="checkbox AmazonIntro" id="AmazonIntro" type="checkbox" />
+        <input class="checkbox" id="AmazonIntro" type="checkbox" />
       </div>
       <!-- <div class="line flex">
             <p>Skip Recaps:</p>
             <input class="checkbox AmazonRecap" id="AmazonRecap" type="checkbox" />
           </div> -->
       <div class="line flex">
+        <p>Skip Credits:</p>
+        <input class="checkbox" id="AmazonCredits" type="checkbox" />
+      </div>
+      <div class="line flex">
         <p>Skip Ads:</p>
-        <input class="checkbox AmazonAds" id="AmazonAds" type="checkbox" />
+        <input class="checkbox" id="AmazonAds" type="checkbox" />
       </div>
     </div>
     <div class="categoryNetflix">
       <h2>Netflix skips:</h2>
       <div class="line flex">
         <p>Skip Intro:</p>
-        <input class="checkbox NetflixIntro" id="NetflixIntro" type="checkbox" />
+        <input class="checkbox" id="NetflixIntro" type="checkbox" />
       </div>
       <div class="line flex">
         <p>Skip Recaps:</p>
-        <input class="checkbox NetflixRecap" id="NetflixRecap" type="checkbox" />
+        <input class="checkbox" id="NetflixRecap" type="checkbox" />
       </div>
       <div class="line flex">
         <p>Skip Credits:</p>
-        <input class="checkbox NetflixCredits" id="NetflixCredits" type="checkbox" />
+        <input class="checkbox" id="NetflixCredits" type="checkbox" />
       </div>
       <div class="line flex">
-        <p>Resume Are you still watching? (not working right now)</p>
-        <input class="checkbox NetflixBlocked" id="NetflixBlocked" type="checkbox" />
+        <p>Resume Are you still watching?</p>
+        <input class="checkbox" id="NetflixBlocked" type="checkbox" />
       </div>
     </div>
     <div class="button reset" style="margin-top: 20px; margin-left: 1px; margin-right: 1px">Reset to default</div>
@@ -57,6 +62,5 @@
       <p>Pop-up not working on this page.</p>
       <p>Try the Amazon/Netflix page.</p>
     </div>
-    <script src="settings.js"></script>
   </body>
 </html>

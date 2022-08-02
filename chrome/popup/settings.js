@@ -3,8 +3,8 @@
  * except for elements that have the "beastify-image" class.
  */
 const hidePage = `body > :not(.beastify-image) {
-                    display: none;
-                  }`;
+  display: none;
+}`;
 console.log("settings.js");
 
 // TODO: send settings to primeskip.js
@@ -28,12 +28,18 @@ chrome.storage.sync.get("settings", function (result) {
       settings = result.settings;
     });
   }
-  document.querySelector("#AmazonIntro").checked = settings.Amazon.skipIntro;
-  document.querySelector("#AmazonAds").checked = settings.Amazon.skipAd;
-  document.querySelector("#NetflixIntro").checked = settings.Netflix.skipIntro;
-  document.querySelector("#NetflixRecap").checked = settings.Netflix.skipRecap;
-  document.querySelector("#NetflixCredits").checked = settings.Netflix.skipCredits;
-  document.querySelector("#NetflixBlocked").checked = settings.Netflix.skipBlocked;
+  let button = document.querySelector("#AmazonIntro");
+  if (button) button.checked = settings.Amazon.skipIntro;
+  button = document.querySelector("#AmazonAds");
+  if (button) button.checked = settings.Amazon.skipAd;
+  button = document.querySelector("#NetflixIntro");
+  if (button) button.checked = settings.Netflix.skipIntro;
+  button = document.querySelector("#NetflixRecap");
+  if (button) button.checked = settings.Netflix.skipRecap;
+  button = document.querySelector("#NetflixCredits");
+  if (button) button.checked = settings.Netflix.skipCredits;
+  button = document.querySelector("#NetflixBlocked");
+  if (button) button.checked = settings.Netflix.skipBlocked;
 });
 
 /**
@@ -41,7 +47,7 @@ chrome.storage.sync.get("settings", function (result) {
  * the content script in the page.
  */
 function listenForClicks() {
-  var listener = document.addEventListener("click", (e) => {
+  let listener = document.addEventListener("click", (e) => {
     /**
      * Get the active tab,
      * then call "beastify()" or "reset()" as appropriate.
@@ -49,14 +55,18 @@ function listenForClicks() {
     if (e.target.classList.contains("reset")) {
       chrome.storage.sync.set(defaultSettings, function () {});
       settings = defaultSettings;
-      document.querySelector("#AmazonIntro").checked = defaultSettings.settings.Amazon.skipIntro;
-      // document.querySelector("#AmazonRecap").checked = defaultSettings.settings.Amazon.skipRecap;
-      document.querySelector("#AmazonAds").checked = defaultSettings.settings.Amazon.skipAd;
-
-      document.querySelector("#NetflixIntro").checked = defaultSettings.settings.Netflix.skipIntro;
-      document.querySelector("#NetflixRecap").checked = defaultSettings.settings.Netflix.skipRecap;
-      document.querySelector("#NetflixCredits").checked = defaultSettings.settings.Netflix.skipCredits;
-      document.querySelector("#NetflixBlocked").checked = defaultSettings.settings.Netflix.skipBlocked;
+      let button = document.querySelector("#AmazonIntro");
+      if (button) button.checked = defaultSettings.settings.Amazon.skipIntro;
+      button = document.querySelector("#AmazonAds");
+      if (button) button.checked = defaultSettings.settings.Amazon.skipAd;
+      button = document.querySelector("#NetflixIntro");
+      if (button) button.checked = defaultSettings.settings.Netflix.skipIntro;
+      button = document.querySelector("#NetflixRecap");
+      if (button) button.checked = defaultSettings.settings.Netflix.skipRecap;
+      button = document.querySelector("#NetflixCredits");
+      if (button) button.checked = defaultSettings.settings.Netflix.skipCredits;
+      button = document.querySelector("#NetflixBlocked");
+      if (button) button.checked = defaultSettings.settings.Netflix.skipBlocked;
     } else if (e.target.classList.contains("AmazonIntro")) {
       settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
       console.log("settings.skipIntro", settings);
@@ -130,5 +140,9 @@ function reportExecuteScriptError(error) {
  * and add a click handler.
  * If we couldn't inject the script, handle the error.
  */
-
-listenForClicks().catch(reportExecuteScriptError);
+try {
+  listenForClicks();
+} catch (e) {
+  reportExecuteScriptError(e);
+  // expected output: "Parameter is not a number!"
+}

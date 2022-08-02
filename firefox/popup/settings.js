@@ -1,10 +1,3 @@
-/**
- * CSS to hide everything on the page,
- * except for elements that have the "beastify-image" class.
- */
-const hidePage = `body > :not(.beastify-image) {
-                    display: none;
-                  }`;
 console.log("settings.js");
 
 // TODO: send settings to primeskip.js
@@ -12,8 +5,8 @@ console.log("settings.js");
 let settings;
 const defaultSettings = {
   settings: {
-    Amazon: { skipIntro: true, skipAd: true },
-    Netflix: { skipIntro: true, skipCredits: true, skipRecap: true, skipBlocked: false },
+    Amazon: { skipIntro: true, skipCredits: true, skipAd: false },
+    Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
   },
 };
 browser.storage.local.get("settings", function (result) {
@@ -28,12 +21,20 @@ browser.storage.local.get("settings", function (result) {
       settings = result.settings;
     });
   }
-  document.querySelector("#AmazonIntro").checked = settings.Amazon.skipIntro;
-  document.querySelector("#AmazonAds").checked = settings.Amazon.skipAd;
-  document.querySelector("#NetflixIntro").checked = settings.Netflix.skipIntro;
-  document.querySelector("#NetflixRecap").checked = settings.Netflix.skipRecap;
-  document.querySelector("#NetflixCredits").checked = settings.Netflix.skipCredits;
-  document.querySelector("#NetflixBlocked").checked = settings.Netflix.skipBlocked;
+  let button = document.querySelector("#AmazonIntro");
+  if (button) button.checked = settings.Amazon.skipIntro;
+  button = document.querySelector("#AmazonCredits");
+  if (button) button.checked = settings.Amazon.skipCredits;
+  button = document.querySelector("#AmazonAds");
+  if (button) button.checked = settings.Amazon.skipAd;
+  button = document.querySelector("#NetflixIntro");
+  if (button) button.checked = settings.Netflix.skipIntro;
+  button = document.querySelector("#NetflixRecap");
+  if (button) button.checked = settings.Netflix.skipRecap;
+  button = document.querySelector("#NetflixCredits");
+  if (button) button.checked = settings.Netflix.skipCredits;
+  button = document.querySelector("#NetflixBlocked");
+  if (button) button.checked = settings.Netflix.skipBlocked;
 });
 
 /**
@@ -41,7 +42,7 @@ browser.storage.local.get("settings", function (result) {
  * the content script in the page.
  */
 function listenForClicks() {
-  var listener = document.addEventListener("click", (e) => {
+  let listener = document.addEventListener("click", (e) => {
     /**
      * Get the active tab,
      * then call "beastify()" or "reset()" as appropriate.
@@ -49,60 +50,45 @@ function listenForClicks() {
     if (e.target.classList.contains("reset")) {
       browser.storage.local.set(defaultSettings, function () {});
       settings = defaultSettings;
-      document.querySelector("#AmazonIntro").checked = defaultSettings.settings.Amazon.skipIntro;
-      // document.querySelector("#AmazonRecap").checked = defaultSettings.settings.Amazon.skipRecap;
-      document.querySelector("#AmazonAds").checked = defaultSettings.settings.Amazon.skipAd;
-
-      document.querySelector("#NetflixIntro").checked = defaultSettings.settings.Netflix.skipIntro;
-      document.querySelector("#NetflixRecap").checked = defaultSettings.settings.Netflix.skipRecap;
-      document.querySelector("#NetflixCredits").checked = defaultSettings.settings.Netflix.skipCredits;
-      document.querySelector("#NetflixBlocked").checked = defaultSettings.settings.Netflix.skipBlocked;
-    } else if (e.target.classList.contains("AmazonIntro")) {
+      let button = document.querySelector("#AmazonIntro");
+      if (button) button.checked = defaultSettings.settings.Amazon.skipIntro;
+      button = document.querySelector("#AmazonCredits");
+      if (button) button.checked = defaultSettings.settings.Amazon.skipCredits;
+      button = document.querySelector("#AmazonAds");
+      if (button) button.checked = defaultSettings.settings.Amazon.skipAd;
+      button = document.querySelector("#NetflixIntro");
+      if (button) button.checked = defaultSettings.settings.Netflix.skipIntro;
+      button = document.querySelector("#NetflixRecap");
+      if (button) button.checked = defaultSettings.settings.Netflix.skipRecap;
+      button = document.querySelector("#NetflixCredits");
+      if (button) button.checked = defaultSettings.settings.Netflix.skipCredits;
+      button = document.querySelector("#NetflixBlocked");
+      if (button) button.checked = defaultSettings.settings.Netflix.skipBlocked;
+    } else if (e.target.id === "AmazonCredits") {
+      settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
+      console.log("settings.skipCredits", settings);
+      browser.storage.local.set({ settings: settings }, function () {});
+    } else if (e.target.id === "AmazonIntro") {
       settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
       console.log("settings.skipIntro", settings);
-      browser.storage.local.set(
-        {
-          settings: settings,
-        },
-        function () {}
-      );
-    } else if (e.target.classList.contains("AmazonAds")) {
+      browser.storage.local.set({ settings: settings }, function () {});
+    } else if (e.target.id === "AmazonAds") {
       settings.Amazon.skipAd = !settings.Amazon.skipAd;
       console.log("settings.skipIntro", settings);
-      browser.storage.local.set(
-        {
-          settings: settings,
-        },
-        function () {}
-      );
-    } else if (e.target.classList.contains("NetflixIntro")) {
+      browser.storage.local.set({ settings: settings }, function () {});
+    } else if (e.target.id === "NetflixIntro") {
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
       console.log("settings.skipIntro", settings);
-      browser.storage.local.set(
-        {
-          settings: settings,
-        },
-        function () {}
-      );
-    } else if (e.target.classList.contains("NetflixRecap")) {
+      browser.storage.local.set({ settings: settings }, function () {});
+    } else if (e.target.id === "NetflixRecap") {
       settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
       console.log("settings.skipRecap", settings);
-      browser.storage.local.set(
-        {
-          settings: settings,
-        },
-        function () {}
-      );
-    } else if (e.target.classList.contains("NetflixCredits")) {
+      browser.storage.local.set({ settings: settings }, function () {});
+    } else if (e.target.id === "NetflixCredits") {
       settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
       console.log("settings.skipIntro", settings);
-      browser.storage.local.set(
-        {
-          settings: settings,
-        },
-        function () {}
-      );
-    } else if (e.target.classList.contains("NetflixBlocked")) {
+      browser.storage.local.set({ settings: settings }, function () {});
+    } else if (e.target.id === "NetflixBlocked") {
       settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
       console.log("settings.skipIntro", settings);
       browser.storage.local.set(
@@ -130,5 +116,9 @@ function reportExecuteScriptError(error) {
  * and add a click handler.
  * If we couldn't inject the script, handle the error.
  */
-
-listenForClicks().catch(reportExecuteScriptError);
+try {
+  listenForClicks();
+} catch (e) {
+  reportExecuteScriptError(e);
+  // expected output: "Parameter is not a number!"
+}
