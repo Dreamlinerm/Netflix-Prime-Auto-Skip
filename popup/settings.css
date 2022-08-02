@@ -69,8 +69,12 @@ input[type="checkbox"] {
   margin-left: auto;
 }
 .line,
-h1 {
-  padding: 0px 10px;
+h1,
+h2,
+h3,
+p {
+  padding: 5px 10px;
+  margin: unset;
 }
 p {
   color: white;
@@ -85,5 +89,6 @@ img {
   background-color: #00aeef;
 }
 .categoryNetflix {
+  margin-top: 5px;
   background-color: #e60010;
 }
