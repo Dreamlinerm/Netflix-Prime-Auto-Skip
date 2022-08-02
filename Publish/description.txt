@@ -1,0 +1,28 @@
+Recap:
+Überspringt Automatisch Intro, Abspann, Werbung auf Amazon Prime video und Intro, Rekapitulationen, Abspann auf Netflix. In den Einstellungen kann konfiguriert werden, was genau übersprungen werden soll.
+
+en:
+
+Every function can be turned on/off in the settings.
+Functions on Amazon Prime Video:
+  Auto-skipping every intro of a series
+  Auto-skipping every Ad for their own produced shows before you watch an episode
+  Auto-skipping the Credits in the end and automatically goes to the next episode
+Functions on Netflix:
+  Auto-skipping every intro of a series
+  Auto-skipping every Recap of the storyline in a series
+  Auto-skipping the Credits in the end and automatically goes to the next episode
+  Automatically resuming the video if Netflix asks if you want to continue watching
+
+de:
+
+Jede Funktion kann in den Einstellungen ein/ausgeschaltet werden.
+Funktionen auf Amazon Prime Video:
+   Automatisches Überspringen jedes Intros einer Serie
+   Automatisches Überspringen jeder Anzeige für ihre eigenen produzierten Shows vor einer Folge
+   Automatisches Überspringen des Abspann am Ende und Wechselt automatisch zur nächsten Episode
+Funktionen auf Netflix:
+   Automatisches Überspringen jedes Intros einer Serie
+   Automatisches Überspringen jeder Zusammenfassung der Handlung in der Serie
+   Automatisches Überspringen des Abspann am Ende und Wechselt automatisch zur nächsten Episode
+   Automatisches fortsetzen des Videos, wenn Netflix fragt, ob Sie es weiter ansehen möchten.
