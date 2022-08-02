@@ -1,3 +1,8 @@
+chrome manifest description 152 max length
+settings.js:
+  //timeout
+  setTimeout(() => {
+
 1. firefox: manifest version 2
 2. chrome: manifest version 3
 

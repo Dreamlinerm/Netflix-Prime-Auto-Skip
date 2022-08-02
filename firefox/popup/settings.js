@@ -21,20 +21,23 @@ browser.storage.local.get("settings", function (result) {
       settings = result.settings;
     });
   }
+  //timeout
+  // setTimeout(() => {
   let button = document.querySelector("#AmazonIntro");
-  if (button) button.checked = settings.Amazon.skipIntro;
+  if (button) button.checked = settings?.Amazon.skipIntro;
   button = document.querySelector("#AmazonCredits");
-  if (button) button.checked = settings.Amazon.skipCredits;
+  if (button) button.checked = settings?.Amazon.skipCredits;
   button = document.querySelector("#AmazonAds");
-  if (button) button.checked = settings.Amazon.skipAd;
+  if (button) button.checked = settings?.Amazon.skipAd;
   button = document.querySelector("#NetflixIntro");
-  if (button) button.checked = settings.Netflix.skipIntro;
+  if (button) button.checked = settings?.Netflix.skipIntro;
   button = document.querySelector("#NetflixRecap");
-  if (button) button.checked = settings.Netflix.skipRecap;
+  if (button) button.checked = settings?.Netflix.skipRecap;
   button = document.querySelector("#NetflixCredits");
-  if (button) button.checked = settings.Netflix.skipCredits;
+  if (button) button.checked = settings?.Netflix.skipCredits;
   button = document.querySelector("#NetflixBlocked");
-  if (button) button.checked = settings.Netflix.skipBlocked;
+  if (button) button.checked = settings?.Netflix.skipBlocked;
+  // }, 50);
 });
 
 /**
