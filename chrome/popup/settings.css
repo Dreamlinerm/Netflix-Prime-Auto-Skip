@@ -1,0 +1,94 @@
+html,
+body {
+  width: 400px;
+  background-color: #212121;
+}
+div {
+  color: white;
+}
+.hidden {
+  display: none;
+}
+
+.button {
+  padding: 4px;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.reset {
+  background-color: #5485ad;
+  flex-grow: 2;
+}
+
+.donate {
+  background-color: #5485ad;
+  /* transparent */
+  opacity: 0.5;
+  color: white;
+  text-decoration: none;
+  flex-grow: 1;
+  border: black 1px solid;
+}
+.donate:hover {
+  background-color: #2d8edd;
+}
+
+.reset:hover {
+  background-color: #446a8a;
+}
+.flex {
+  display: flex;
+}
+.flex {
+  display: flex;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-justify {
+  display: flex;
+  justify-content: center;
+}
+.flex-align {
+  display: flex;
+  align-items: center;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+input[type="checkbox"] {
+  transform: scale(1.5);
+  margin-left: auto;
+}
+.line,
+h1,
+h2,
+h3,
+p {
+  padding: 5px 10px;
+  margin: unset;
+}
+p {
+  color: white;
+  font-size: 1.4em;
+  padding-right: 10px;
+}
+img {
+  /* width: 100px; */
+  height: 4em;
+}
+.categoryPrime {
+  background-color: #00aeef;
+}
+.categoryNetflix {
+  margin-top: 5px;
+  background-color: #e60010;
+}

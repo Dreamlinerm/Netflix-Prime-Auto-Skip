@@ -1,0 +1,11 @@
+1. firefox: browser.storage.local
+1. chrome: chrome.storage.sync
+
+icons in manifest:
+"default_icon": "icons/NetflixAmazon Auto-Skip--400.png",
+
+    "16": "icons/NetflixAmazon Auto-Skip--16.png",
+    "48": "icons/NetflixAmazon Auto-Skip--48.png",
+    "96": "icons/NetflixAmazon Auto-Skip--96.png",
+    "128": "icons/NetflixAmazon Auto-Skip--128.png",
+    "400": "icons/NetflixAmazon Auto-Skip--400.png"

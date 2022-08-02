@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "Netflix/Prime Auto-Skip",
+  "version": "1.0",
+
+  "description": "Skips intros, Ads on Amazon Prime and intros, recaps, credits on Netflix. It can be configured what to skip exactly in the settings.",
+  "homepage_url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip",
+  "icons": {
+    "16": "icons/NetflixAmazon Auto-Skip--16.png",
+    "48": "icons/NetflixAmazon Auto-Skip--48.png",
+    "96": "icons/NetflixAmazon Auto-Skip--96.png",
+    "128": "icons/NetflixAmazon Auto-Skip--128.png",
+    "400": "icons/NetflixAmazon Auto-Skip--400.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["skipper.js"]
+    }
+  ],
+
+  "permissions": ["activeTab", "<all_urls>", "storage", "*://*.netflix.com/*"],
+  "browser_action": {
+    "default_icon": "icons/NetflixAmazon Auto-Skip--400.png",
+    "default_title": "Netflix/Prime Auto-Skip ",
+    "default_popup": "popup/settings.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "NetflixPrime@Autoskip.app"
+    }
+  }
+}
