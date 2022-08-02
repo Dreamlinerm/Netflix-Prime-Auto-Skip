@@ -13,7 +13,7 @@ let settings;
 const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipAd: true },
-    Netflix: { skipIntro: true, skipCredits: true, skipRecap: true, skipBlocked: true },
+    Netflix: { skipIntro: true, skipCredits: true, skipRecap: true, skipBlocked: false },
   },
 };
 browser.storage.local.get("settings", function (result) {

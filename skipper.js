@@ -23,11 +23,10 @@ const SkipAdTranslation = {
 let settings;
 if ((isAmazon && isVideo) || isNetflix) {
   // global variables
-
   const defaultSettings = {
     settings: {
       Amazon: { skipIntro: true, skipAd: true },
-      Netflix: { skipIntro: true, skipCredits: true, skipRecap: true, skipBlocked: true },
+      Netflix: { skipIntro: true, skipCredits: true, skipRecap: true, skipBlocked: false },
     },
   };
   browser.storage.local.get("settings", function (result) {
@@ -239,7 +238,7 @@ async function startNetflixSkipIntroObserver(observer, started) {
     NetflixSkipIntroObserver.disconnect();
   }
 }
-function startNetflixSkipRecapObserver() {
+async function startNetflixSkipRecapObserver() {
   if (settings.Netflix.skipRecap) {
     console.log("started observing| Recap");
     // document.querySelector('[data-uia="player-skip-recap"]')?.firstChild.click();
@@ -254,7 +253,7 @@ function startNetflixSkipRecapObserver() {
     NetflixSkipRecapObserver.disconnect();
   }
 }
-function startNetflixSkipCreditsObserver() {
+async function startNetflixSkipCreditsObserver() {
   if (settings.Netflix.skipCredits) {
     console.log("started observing| Credits");
     // document.querySelector('[data-uia="next-episode-seamless-button"]')?.firstChild.click();
@@ -269,7 +268,7 @@ function startNetflixSkipCreditsObserver() {
     NetflixSkipCreditsObserver.disconnect();
   }
 }
-function startNetflixSkipBlockedObserver() {
+async function startNetflixSkipBlockedObserver() {
   if (settings.Netflix.skipBlocked) {
     console.log("started observing| Blocked");
     let button = document.querySelector('[data-uia="player-blocked-play"]')?.firstChild;
@@ -283,7 +282,7 @@ function startNetflixSkipBlockedObserver() {
     NetflixSkipBlockedObserver.disconnect();
   }
 }
-function startAmazonSkipIntroObserver() {
+async function startAmazonSkipIntroObserver() {
   if (settings.Amazon.skipIntro) {
     console.log("started observing| Intro");
     AmazonSkipIntroObserver.observe(document, config);
@@ -292,7 +291,7 @@ function startAmazonSkipIntroObserver() {
     AmazonSkipIntroObserver.disconnect();
   }
 }
-function startAmazonSkipAdObserver() {
+async function startAmazonSkipAdObserver() {
   if (settings.Amazon.skipAd) {
     console.log("started observing| Ad with", SkipAdTranslation[language]);
     AmazonSkipAdObserver.observe(document, config);
