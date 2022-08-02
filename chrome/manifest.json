@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Netflix/Prime Auto-Skip",
   "version": "1.0",
 
@@ -19,15 +19,17 @@
     }
   ],
 
-  "permissions": ["activeTab", "<all_urls>", "storage", "*://*.netflix.com/*"],
-  "browser_action": {
-    "default_icon": "icons/NetflixAmazon Auto-Skip--400.png",
+  "permissions": ["activeTab", "storage"],
+  "action": {
+    "default_icon": {
+      "16": "icons/NetflixAmazon Auto-Skip--16.png",
+      "48": "icons/NetflixAmazon Auto-Skip--48.png",
+      "96": "icons/NetflixAmazon Auto-Skip--96.png",
+      "128": "icons/NetflixAmazon Auto-Skip--128.png",
+      "400": "icons/NetflixAmazon Auto-Skip--400.png"
+    },
     "default_title": "Netflix/Prime Auto-Skip ",
     "default_popup": "popup/settings.html"
   },
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "NetflixPrime@Autoskip.app"
-    }
-  }
+  "options_page": "popup/settings.html"
 }

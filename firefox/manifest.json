@@ -20,13 +20,16 @@
       "js": ["skipper.js"]
     }
   ],
-
-  "permissions": ["activeTab", "<all_urls>", "storage", "*://*.netflix.com/*"],
+  "permissions": ["activeTab", "storage"],
   "browser_action": {
     "default_icon": "icons/NetflixAmazon Auto-Skip.svg",
     "default_title": "Netflix/Prime Auto-Skip ",
     "default_popup": "popup/settings.html"
   },
+  "options_ui": {
+    "page": "popup/settings.html"
+  },
+
   "browser_specific_settings": {
     "gecko": {
       "id": "NetflixPrime@Autoskip.app"
