@@ -90,6 +90,7 @@ if ((isAmazon && isVideo) || isNetflix) {
         NetflixSkipBlockedObserver.observe(document, config);
       }
     } else {
+      console.log("started observing| intro", result.settings.Amazon.skipIntro, "|Ad", result.settings.Amazon.skipAd);
       if (settings.Amazon.skipIntro) {
         // functionality checked
         startAmazonSkipIntroObserver();
@@ -154,7 +155,7 @@ const config = { attributes: true, childList: true, subtree: true };
 // works for intro
 const NetflixSkipIntroObserver = new MutationObserver(Netflix_intro);
 function Netflix_intro(mutations, observer) {
-  console.log("observing intro", settings.Netflix.skipIntro);
+  // console.log("observing intro", settings.Netflix.skipIntro);
   for (let mutation of mutations) {
     for (let node of mutation.addedNodes) {
       node.querySelector('[data-uia="player-skip-intro"]')?.firstChild.click();
@@ -164,7 +165,7 @@ function Netflix_intro(mutations, observer) {
 // works for Recap
 const NetflixSkipRecapObserver = new MutationObserver(Netflix_Recap);
 function Netflix_Recap(mutations, observer) {
-  console.log("observing Recap", settings.Netflix.skipRecap);
+  // console.log("observing Recap", settings.Netflix.skipRecap);
   for (let mutation of mutations) {
     for (let node of mutation.addedNodes) {
       node.querySelector('[data-uia="player-skip-recap"]')?.firstChild.click();
@@ -174,13 +175,13 @@ function Netflix_Recap(mutations, observer) {
 // works on credits
 const NetflixSkipCreditsObserver = new MutationObserver(Netflix_Credits);
 function Netflix_Credits(mutations, observer) {
-  console.log("observing credits", settings.Netflix.skipCredits);
+  // console.log("observing credits", settings.Netflix.skipCredits);
   document.querySelector('[data-uia="next-episode-seamless-button"]')?.firstChild.click();
 }
 // TODO: find button for skipping
 const NetflixSkipBlockedObserver = new MutationObserver(Netflix_Blocked);
 function Netflix_Blocked(mutations, observer) {
-  console.log("observing Netflix Blocked", settings.Netflix.skipBlocked);
+  // console.log("observing Netflix Blocked", settings.Netflix.skipBlocked);
   for (let mutation of mutations) {
     for (let node of mutation.addedNodes) {
       node.querySelector('[data-uia="player-blocked-play"]')?.firstChild.click();
@@ -193,6 +194,7 @@ function Netflix_Blocked(mutations, observer) {
 const AmazonSkipIntro = new RegExp("skipelement", "i");
 const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
 function Amazon_Intro(mutations, observer) {
+  // console.log("observing Intro", settings.Amazon.skipIntro);
   for (let mutation of mutations) {
     if (AmazonSkipIntro.test(mutation.target.classList)) {
       console.log("Amazon skipped", AmazonSkipIntro);
@@ -205,6 +207,7 @@ function Amazon_Intro(mutations, observer) {
 // TODO: textaree for button content
 const AmazonSkipAdObserver = new MutationObserver(Amazon_Ad);
 function Amazon_Ad(mutations, observer) {
+  // console.log("observing Ad", settings.Amazon.skipAd);
   // get dv-web-player
   let webPlayer = document.querySelector(".dv-player-fullscreen");
   // if the webPlayer is shown on screen
