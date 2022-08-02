@@ -13,7 +13,7 @@ let settings;
 const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipAd: true },
-    Netflix: { skipIntro: true, skipCredits: true, skipRecap: true },
+    Netflix: { skipIntro: true, skipCredits: true, skipRecap: true, skipBlocked: true },
   },
 };
 browser.storage.local.get("settings", function (result) {
@@ -33,6 +33,7 @@ browser.storage.local.get("settings", function (result) {
   document.querySelector("#NetflixIntro").checked = settings.Netflix.skipIntro;
   document.querySelector("#NetflixRecap").checked = settings.Netflix.skipRecap;
   document.querySelector("#NetflixCredits").checked = settings.Netflix.skipCredits;
+  document.querySelector("#NetflixBlocked").checked = settings.Netflix.skipBlocked;
 });
 
 /**
@@ -49,10 +50,13 @@ function listenForClicks() {
       browser.storage.local.set(defaultSettings, function () {});
       settings = defaultSettings;
       document.querySelector("#AmazonIntro").checked = defaultSettings.settings.Amazon.skipIntro;
-      document.querySelector("#AmazonRecap").checked = defaultSettings.settings.Amazon.skipRecap;
+      // document.querySelector("#AmazonRecap").checked = defaultSettings.settings.Amazon.skipRecap;
       document.querySelector("#AmazonAds").checked = defaultSettings.settings.Amazon.skipAd;
+
       document.querySelector("#NetflixIntro").checked = defaultSettings.settings.Netflix.skipIntro;
+      document.querySelector("#NetflixRecap").checked = defaultSettings.settings.Netflix.skipRecap;
       document.querySelector("#NetflixCredits").checked = defaultSettings.settings.Netflix.skipCredits;
+      document.querySelector("#NetflixBlocked").checked = defaultSettings.settings.Netflix.skipBlocked;
     } else if (e.target.classList.contains("AmazonIntro")) {
       settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
       console.log("settings.skipIntro", settings);
@@ -91,6 +95,15 @@ function listenForClicks() {
       );
     } else if (e.target.classList.contains("NetflixCredits")) {
       settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
+      console.log("settings.skipIntro", settings);
+      browser.storage.local.set(
+        {
+          settings: settings,
+        },
+        function () {}
+      );
+    } else if (e.target.classList.contains("NetflixBlocked")) {
+      settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
       console.log("settings.skipIntro", settings);
       browser.storage.local.set(
         {
