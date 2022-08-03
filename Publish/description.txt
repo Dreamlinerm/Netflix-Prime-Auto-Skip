@@ -1,5 +1,5 @@
 Recap:
-Überspringt Automatisch Intro, Abspann, Werbung auf Amazon Prime video und Intro, Rekapitulationen, Abspann auf Netflix. In den Einstellungen kann konfiguriert werden, was genau übersprungen werden soll.
+Überspringt Automatisch Intro, Abspann, Werbung auf Amazon Prime video und Intro, Rekapitulationen, Abspann und Inaktivitätswarnungen auf Netflix.
 
 en:
 
