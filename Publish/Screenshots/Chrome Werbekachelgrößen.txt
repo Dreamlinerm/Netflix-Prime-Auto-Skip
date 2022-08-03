@@ -1,0 +1,20 @@
+Scrennshots:
+1280 x 800 oder 640 x 400
+
+Kleine Werbekachel
+
+Canvas 440 x 280
+
+JPEG oder 24-Bit-PNG (kein Alpha)
+
+Große Werbekachel
+
+Canvas 920 x 680
+
+JPEG oder 24-Bit-PNG (kein Alpha)
+
+Laufschrift-Werbekachel
+
+Canvas 1400 x 560
+
+JPEG oder 24-Bit-PNG (kein 
