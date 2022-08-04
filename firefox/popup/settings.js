@@ -10,14 +10,18 @@ browser.storage.local.get("settings", function (result) {
   settings = result.settings;
   if (typeof settings !== "object") {
     browser.storage.local.set(defaultSettings, function () {});
-    browser.storage.local.get("settings", function (result) {
-      settings = result.settings;
-      console.log("Newsettings:Value currently is ", settings);
-      setCheckboxesToSettings();
-    });
   } else {
     console.log("settings:Value currently is ", settings);
     setCheckboxesToSettings();
+  }
+});
+browser.storage.local.onChanged.addListener(function (changes, namespace) {
+  for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+    if (key == "settings") {
+      settings = newValue;
+      console.log(key, ": changed.", "Old value was ", oldValue, ", new value is ", newValue, ".");
+      setCheckboxesToSettings();
+    }
   }
 });
 function setCheckboxesToSettings() {
@@ -47,10 +51,8 @@ function listenForClicks() {
      * then call "beastify()" or "reset()" as appropriate.
      */
     if (e.target.classList.contains("reset")) {
+      console.log("settings resetted to", defaultSettings);
       browser.storage.local.set(defaultSettings, function () {});
-      settings = defaultSettings.settings;
-      setCheckboxesToSettings();
-      console.log("settings resetted to", settings);
     } else if (e.target.id === "AmazonCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
       console.log("settings.AmazonCredits", settings);

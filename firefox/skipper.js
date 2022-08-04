@@ -6,16 +6,12 @@ let isNetflix = /netflix.com/i.test(url);
 // not currently used for amazon skip ad button
 let ua = navigator.userAgent;
 let language = "en";
-const version = "1.0.1";
+const version = "1.0.2";
 if (/de/i.test(ua) || /de/i.test(url)) {
   language = "de";
 } else {
   language = "en";
 }
-const SkipAdTranslation = {
-  en: "Skip",
-  de: "Überspringen",
-};
 
 let settings;
 if ((isAmazon && isVideo) || isNetflix) {
@@ -178,6 +174,10 @@ function Amazon_Credits(mutations, observer) {
   }
 }
 
+// const SkipAdTranslation = {
+//   en: "Skip",
+//   de: "Überspringen",
+// };
 // const AmazonSkipAdObserver = new MutationObserver(Amazon_Ad);
 // async function Amazon_Ad(mutations, observer) {
 //   // the button classes are class="fu4rd6c f1cw2swo" but im not sure they are changed may need to refresh
