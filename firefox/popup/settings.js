@@ -46,10 +46,6 @@ function setCheckboxesToSettings() {
  */
 function listenForClicks() {
   let listener = document.addEventListener("click", (e) => {
-    /**
-     * Get the active tab,
-     * then call "beastify()" or "reset()" as appropriate.
-     */
     if (e.target.classList.contains("reset")) {
       console.log("settings resetted to", defaultSettings);
       browser.storage.local.set(defaultSettings, function () {});
@@ -96,13 +92,11 @@ function reportExecuteScriptError(error) {
 }
 
 /**
- * When the popup loads, inject a content script into the active tab,
- * and add a click handler.
+ * When the popup loads, add a click handler.
  * If we couldn't inject the script, handle the error.
  */
 try {
   listenForClicks();
 } catch (e) {
   reportExecuteScriptError(e);
-  // expected output: "Parameter is not a number!"
 }
