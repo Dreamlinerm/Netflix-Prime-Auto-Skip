@@ -11,7 +11,8 @@ h6 {
   font-family: "Lato", sans-serif;
 }
 html,
-body {
+body,
+.content {
   width: 400px;
   background-color: #212121;
 }
@@ -21,28 +22,42 @@ div {
 .hidden {
   display: none;
 }
-
+/* buttons */
 .button {
+  margin-top: 5px;
   padding: 4px;
+  /* margin: 0 10px; */
   text-align: center;
   font-size: 1.5em;
   cursor: pointer;
   border-radius: 10px;
+  transition-duration: 0.4s;
 }
 
 .reset {
   background-color: #5485ad;
   flex-grow: 2;
 }
-
-.donate {
+.github {
+  margin-right: 5px;
   background-color: #5485ad;
   /* transparent */
   opacity: 0.5;
   color: white;
   text-decoration: none;
   flex-grow: 1;
-  border: black 1px solid;
+}
+.github:hover {
+  background-color: #2d8edd;
+}
+.donate {
+  margin-left: 5px;
+  background-color: #5485ad;
+  /* transparent */
+  opacity: 0.5;
+  color: white;
+  text-decoration: none;
+  flex-grow: 1;
 }
 .donate:hover {
   background-color: #2d8edd;
@@ -96,6 +111,7 @@ img {
 }
 .title {
   padding-top: unset;
+  padding-bottom: unset;
 }
 .categoryPrime {
   background-color: #00aeef;
