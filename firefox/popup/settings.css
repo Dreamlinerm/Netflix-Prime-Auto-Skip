@@ -13,7 +13,7 @@ h6 {
 html,
 body,
 .content {
-  width: 400px;
+  /* width: 400px; */
   background-color: #212121;
 }
 div {
@@ -30,7 +30,7 @@ div {
   text-align: center;
   font-size: 1.5em;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 15px;
   transition-duration: 0.4s;
 }
 
