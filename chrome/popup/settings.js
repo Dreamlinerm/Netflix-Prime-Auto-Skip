@@ -10,14 +10,18 @@ chrome.storage.sync.get("settings", function (result) {
   settings = result.settings;
   if (typeof settings !== "object") {
     chrome.storage.sync.set(defaultSettings, function () {});
-    chrome.storage.sync.get("settings", function (result) {
-      settings = result.settings;
-      console.log("Newsettings:Value currently is ", settings);
-      setCheckboxesToSettings();
-    });
   } else {
     console.log("settings:Value currently is ", settings);
     setCheckboxesToSettings();
+  }
+});
+chrome.storage.sync.onChanged.addListener(function (changes, namespace) {
+  for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+    if (key == "settings") {
+      settings = newValue;
+      console.log(key, ": changed.", "Old value was ", oldValue, ", new value is ", newValue, ".");
+      setCheckboxesToSettings();
+    }
   }
 });
 function setCheckboxesToSettings() {
@@ -42,15 +46,9 @@ function setCheckboxesToSettings() {
  */
 function listenForClicks() {
   let listener = document.addEventListener("click", (e) => {
-    /**
-     * Get the active tab,
-     * then call "beastify()" or "reset()" as appropriate.
-     */
     if (e.target.classList.contains("reset")) {
+      console.log("settings resetted to", defaultSettings);
       chrome.storage.sync.set(defaultSettings, function () {});
-      settings = defaultSettings.settings;
-      setCheckboxesToSettings();
-      console.log("settings resetted to", settings);
     } else if (e.target.id === "AmazonCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
       console.log("settings.AmazonCredits", settings);
@@ -94,13 +92,11 @@ function reportExecuteScriptError(error) {
 }
 
 /**
- * When the popup loads, inject a content script into the active tab,
- * and add a click handler.
+ * When the popup loads, add a click handler.
  * If we couldn't inject the script, handle the error.
  */
 try {
   listenForClicks();
 } catch (e) {
   reportExecuteScriptError(e);
-  // expected output: "Parameter is not a number!"
 }

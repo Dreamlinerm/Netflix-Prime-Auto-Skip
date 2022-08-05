@@ -4,63 +4,92 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="settings.css" />
+    <!--  import "https://fonts.googleapis.com/css?family=Lato"; -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
     <script src="settings.js" defer></script>
   </head>
 
-  <body>
-    <div class="flex line">
-      <img src="../icons/NetflixAmazon Auto-Skip.svg" />
-      <div class="flex-justify" style="flex-grow: 2">
-        <h1>Auto-skip</h1>
+  <body class="flex-center flex-col">
+    <div class="content">
+      <div class="flex-center flex-col line">
+        <div class="flex-center flex-row">
+          <img src="../icons/NetflixAmazon Auto-Skip.svg" />
+          <div class="flex-center flex-col">
+            <h2 class="title">Auto-skip</h2>
+            <p style="color: grey; font-size: 1em">Version: 1.0.2</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="categoryPrime">
-      <h2>Prime Video Auto-skips:</h2>
-      <div class="line flex">
-        <p>Skip Intro:</p>
-        <input class="checkbox" id="AmazonIntro" type="checkbox" />
-      </div>
-      <!-- <div class="line flex">
+      <div class="categoryPrime">
+        <h2>Prime Video Auto-skips:</h2>
+        <div class="line flex">
+          <p>Skip Intro:</p>
+          <!-- Rounded switch -->
+          <label class="switch">
+            <input type="checkbox" id="AmazonIntro" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <!-- <div class="line flex">
             <p>Skip Recaps:</p>
             <input class="checkbox AmazonRecap" id="AmazonRecap" type="checkbox" />
           </div> -->
-      <div class="line flex">
-        <p>Skip Credits:</p>
-        <input class="checkbox" id="AmazonCredits" type="checkbox" />
+        <div class="line flex">
+          <p>Skip Credits:</p>
+          <label class="switch">
+            <input type="checkbox" id="AmazonCredits" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="line flex">
+          <p>Skip Ads:</p>
+          <label class="switch">
+            <input type="checkbox" id="AmazonAds" />
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
-      <div class="line flex">
-        <p>Skip Ads:</p>
-        <input class="checkbox" id="AmazonAds" type="checkbox" />
+      <div class="categoryNetflix">
+        <h2>Netflix Auto-skips:</h2>
+        <div class="line flex">
+          <p>Skip Intro:</p>
+          <label class="switch">
+            <input type="checkbox" id="NetflixIntro" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="line flex">
+          <p>Skip Recaps:</p>
+          <label class="switch">
+            <input type="checkbox" id="NetflixRecap" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="line flex">
+          <p>Skip Credits:</p>
+          <label class="switch">
+            <input type="checkbox" id="NetflixCredits" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="line flex">
+          <p>Resume inactivity warning</p>
+          <label class="switch">
+            <input type="checkbox" id="NetflixBlocked" />
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
-    </div>
-    <div class="categoryNetflix">
-      <h2>Netflix skips:</h2>
-      <div class="line flex">
-        <p>Skip Intro:</p>
-        <input class="checkbox" id="NetflixIntro" type="checkbox" />
+      <div class="button reset">Reset to default</div>
+      <div class="flex">
+        <a class="button github" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
+        <a class="button donate" href="https://paypal.me/MarvinKrebber" target="_blank">Donate $</a>
       </div>
-      <div class="line flex">
-        <p>Skip Recaps:</p>
-        <input class="checkbox" id="NetflixRecap" type="checkbox" />
-      </div>
-      <div class="line flex">
-        <p>Skip Credits:</p>
-        <input class="checkbox" id="NetflixCredits" type="checkbox" />
-      </div>
-      <div class="line flex">
-        <p>Resume Are you still watching?</p>
-        <input class="checkbox" id="NetflixBlocked" type="checkbox" />
-      </div>
-    </div>
-    <div class="button reset" style="margin-top: 20px; margin-left: 1px; margin-right: 1px">Reset to default</div>
-    <div class="flex">
-      <a class="button donate" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
-      <a class="button donate" href="https://paypal.me/MarvinKrebber" target="_blank">Donate $</a>
-    </div>
 
-    <div id="error-content" class="hidden">
-      <p>Pop-up not working on this page.</p>
-      <p>Try the Amazon/Netflix page.</p>
+      <div id="error-content" class="hidden">
+        <p>Pop-up not working on this page.</p>
+        <p>Try the Amazon/Netflix page.</p>
+      </div>
     </div>
   </body>
 </html>
