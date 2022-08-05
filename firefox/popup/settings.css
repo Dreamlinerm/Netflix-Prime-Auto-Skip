@@ -16,6 +16,9 @@ body,
   /* width: 400px; */
   background-color: #212121;
 }
+.content {
+  min-width: 400px;
+}
 div {
   color: white;
 }
