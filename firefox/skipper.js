@@ -1,11 +1,10 @@
-// all amazon urls under https://stackoverflow.com/questions/11401897/get-the-current-domain-name-with-javascript-not-the-path-etc
+// matches all amazon urls under https://en.wikipedia.org/wiki/Amazon_(company)#Website
 let hostname = window.location.hostname;
 let title = document.title;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title);
 let isNetflix = /netflix/i.test(hostname);
-// console.log("isAmazon", isAmazon, "isVideo", isVideo, "isNetflix", isNetflix);
-const version = "1.0.2";
+const version = "1.0.3";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
