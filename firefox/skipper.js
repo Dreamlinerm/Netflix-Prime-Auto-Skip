@@ -1,10 +1,11 @@
 // matches all amazon urls under https://en.wikipedia.org/wiki/Amazon_(company)#Website
 let hostname = window.location.hostname;
 let title = document.title;
+let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
-let isVideo = /video/i.test(title);
+let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.3";
+const version = "1.0.4";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
