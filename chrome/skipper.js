@@ -18,7 +18,7 @@ if (isVideo || isNetflix) {
   };
   chrome.storage.sync.get("settings", function (result) {
     settings = result.settings;
-    console.log("%cNetflix%c/%cPrime%c Auto-Skip: ", "color:#e60010;font-size:1.5em;", "color:white;;font-size:1.5em;", "color:#00aeef;font-size:1.5em;", "color:white;;font-size:1.5em;");
+    console.log("%cNetflix%c/%cPrime%c Auto-Skip: ", "color: #e60010;font-size: 1.5em;", "color: white;font-size: 1.5em;", "color: #00aeef;font-size: 1.5em;", "color: white;font-size: 1.5em;");
     console.log("version: ", version);
     console.log("Settings", settings);
     console.log("Page", isAmazon ? "Amazon" : "Netflix");
