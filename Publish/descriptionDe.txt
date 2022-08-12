@@ -1,49 +1,8 @@
----------------------firefox:
-en:
-
-It automatically skips intros, Credits, recaps, and anything else you don't want to watch on Netflix and Amazon Prime video.
-
-You can configure what to watch and what to skip in the settings Page.
-
-✨ Features
-
-Netflix Automatically skipping:
-
-<ul>
-<li>Intros</li>
-<li>Recaps</li>
-<li>Credits                 : automatically goes to the next episode</li>
-<li>Inactivity Warning      : automatically resuming the video</li>
-</ul>
-
-Amazon Prime video Automatically skipping:
-
-<ul>
-<li>Intros</li>
-<li>Credits: automatically goes to the next episode</li>
-<li>Self promoting ads</li>
-</ul>
-
-☔ Safe
-
-The extension is open sourced! Check it out if you want to contribute <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>.
-
-💕 Enjoying Netflix/Prime Auto-Skip?
-
-Leave a 5 star review! Reviews help build trust and attract new users!
-
-Buy me a <a href="https://paypal.me/MarvinKrebber" target="_blank">coffee</a>.
-
-Disclaimer
-
-Netflix and Amazon Prime videos are trademarks and the author of this addon is not affiliated with these companies.
-
-
-de:
----
+-------------------------------------------- firefox:
+--------------------------------------------
 Recap:
 Überspringt Automatisch Intro, Abspann, Werbung auf Amazon Prime video und Intro, Rekapitulationen, Abspann und Inaktivitätswarnungen auf Netflix. Sie können auf der Einstellungsseite konfigurieren, was angezeigt und was übersprungen werden soll.
----
+--------------------------------------------
 
 Es überspringt automatisch Intros, Credits, Zusammenfassungen und alles andere, was Sie nicht auf Netflix und Amazon Prime-Videos sehen möchten.
 
@@ -83,46 +42,6 @@ Haftungsausschluss
 Netflix und Amazon Prime-Videos sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
 
 --------------------------------------------  chrome:
-
-It automatically skips intros, Credits, recaps, and anything else you don't want to watch on Netflix and Amazon Prime video.
-
-You can configure what to watch and what to skip in the settings Page.
-
-✨ Features
-
-Netflix Automatically skipping:
-
-
-•Intros
-•Recaps
-•Credits                         : automatically goes to the next episode
-•Inactivity Warning      : automatically resuming the video
-
-
-Amazon Prime video Automatically skipping:
-
-
-•Intros
-•Credits                           : automatically goes to the next episode
-•Self promoting ads
-
-
-☔ Safe
-
-The extension is open sourced! Check Github out if you want to contribute (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
-
-💕 Enjoying Netflix/Prime Auto-Skip?
-
-Leave a 5 star review! Reviews help build trust and attract new users!
-
-Buy me a coffee (https://paypal.me/MarvinKrebber).
-
-Disclaimer
-
-Netflix and Amazon Prime videos are trademarks and the author of this addon is not affiliated with these companies.
-
-
-de:
 
 Es überspringt automatisch Intros, Credits, Zusammenfassungen und alles andere, was Sie nicht auf Netflix und Amazon Prime-Videos sehen möchten.
 
