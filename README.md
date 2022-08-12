@@ -8,7 +8,9 @@ This extension includes a content script, "skipper.js", that is injected into al
 
 It automatically skips intros, Credits, recaps, and anything else you don't want to watch on Netflix and Amazon Prime video.
 
-You can configure what to watch and what to skip in the settings Page.
+You can configure what to watch and what to skip in the settings Page:
+
+![Alt text](Publish/Screenshots/AddonMenu%20standalone.png?raw=true)
 
 ✨ Features
 
