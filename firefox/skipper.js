@@ -12,7 +12,7 @@ if (isVideo || isNetflix) {
   let settings;
   const defaultSettings = {
     settings: {
-      Amazon: { skipIntro: true, skipCredits: true, skipAd: true },
+      Amazon: { skipIntro: true, skipCredits: true, skipAd: false },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
     },
   };
