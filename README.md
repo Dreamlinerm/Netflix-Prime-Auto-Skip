@@ -61,4 +61,6 @@ Amazon Prime ClassList:
 ### Run
 ```web-ext run```
 ### Build
+copy firefox files to chrome and replace browser with chrome
+
 ```web-ext build --overwrite-dest```

@@ -16,14 +16,14 @@ if (isVideo || isNetflix) {
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
     },
   };
-  browser.storage.local.get("settings", function (result) {
+  browser.storage.sync.get("settings", function (result) {
     settings = result.settings;
     console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
     console.log("version: ", version);
     console.log("Settings", settings);
     console.log("Page %cNetflix%cAmazon", isNetflix ? "color: #e60010;" : "display:none;", !isNetflix ? "color: #00aeef;" : "display:none;");
     if (typeof settings !== "object") {
-      browser.storage.local.set(defaultSettings, function () {});
+      browser.storage.sync.set(defaultSettings, function () {});
     } else {
       if (isNetflix) {
         // start Observers depending on the settings
@@ -53,7 +53,7 @@ if (isVideo || isNetflix) {
     }
   });
 
-  browser.storage.local.onChanged.addListener(function (changes, namespace) {
+  browser.storage.sync.onChanged.addListener(function (changes, namespace) {
     for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
       if (key == "settings") {
         settings = newValue;
