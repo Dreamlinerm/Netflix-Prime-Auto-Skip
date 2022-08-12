@@ -31,6 +31,18 @@ Amazon Prime video Automatically skipping:
 Disclaimer
 
 Netflix and Amazon Prime videos are trademarks and the author of this addon is not affiliated with these companies.
+
+What is the addon searching the website for:
+Netflix data-uia=:
+Intro: player-skip-intro
+Recap: player-skip-recap, player-skip-preplay
+Credits: next-episode-seamless-button
+Inactivity Warning: interrupt-autoplay-continue
+Amazon Prime ClassList:
+Intro: skipelement
+Credits: nextupcard-button
+Self promoting ads: .fu4rd6c.f1cw2swo
+
 ## Commands
 ```cd firefox```
 ### Install web-ext

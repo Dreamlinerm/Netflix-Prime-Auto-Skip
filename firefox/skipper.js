@@ -108,7 +108,7 @@ if (isVideo || isNetflix) {
   function Netflix_Recap(mutations, observer) {
     for (let mutation of mutations) {
       for (let node of mutation.addedNodes) {
-        let button = node.querySelector('[data-uia="player-skip-recap"]');
+        let button = node.querySelector('[data-uia="player-skip-recap"]') || node.querySelector('[data-uia="player-skip-preplay"]');
         if (button) {
           button.click();
           console.log("Recap skipped", button);
@@ -224,7 +224,7 @@ if (isVideo || isNetflix) {
   async function startNetflixSkipRecapObserver() {
     if (settings.Netflix.skipRecap) {
       console.log("started observing| Recap");
-      let button = document.querySelector('[data-uia="player-skip-recap"]');
+      let button = document.querySelector('[data-uia="player-skip-recap"]') || document.querySelector('[data-uia="player-skip-preplay"]');
       if (button) {
         button.click();
         console.log("Recap skipped", button);
@@ -280,7 +280,7 @@ if (isVideo || isNetflix) {
   async function startAmazonSkipCreditsObserver() {
     if (settings.Amazon.skipCredits) {
       console.log("started observing| Credits");
-      let button = document.querySelector("[class*=not-the-right-class]");
+      let button = document.querySelector("[class*=nextupcard-button]");
       if (button) {
         button.click();
         console.log("Credits skipped", button);
