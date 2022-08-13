@@ -2,7 +2,7 @@
 let settings;
 const defaultSettings = {
   settings: {
-    Amazon: { skipIntro: true, skipCredits: true, skipAd: false },
+    Amazon: { skipIntro: true, skipCredits: true, skipAd: true },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
   },
 };

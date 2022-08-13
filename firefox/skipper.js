@@ -12,7 +12,7 @@ if (isVideo || isNetflix) {
   let settings;
   const defaultSettings = {
     settings: {
-      Amazon: { skipIntro: true, skipCredits: true, skipAd: false },
+      Amazon: { skipIntro: true, skipCredits: true, skipAd: true },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
     },
   };
@@ -195,11 +195,16 @@ if (isVideo || isNetflix) {
   async function Amazon_AdTimeout() {
     // set loop every 0.5 sec and check if ad is there
     setInterval(function () {
-      // the button classes are class="fu4rd6c f1cw2swo" but im not sure they are changed may need to refresh
-      let button = document.querySelector(".fu4rd6c.f1cw2swo");
-      if (button) {
-        button.click();
-        console.log("Ad skipped", button);
+      // if infobar is shown
+      let infobar = document.querySelector("[class*=infobar-container]").classList.contains("show");
+      if (infobar) {
+        // the button classes are class="fu4rd6c f1cw2swo" but im not sure they are changed may need to refresh
+        // adtimeindicator-text might be an alternative
+        let button = document.querySelector(".fu4rd6c.f1cw2swo");
+        if (button) {
+          button.click();
+          console.log("Ad skipped", button);
+        }
       }
       if (!settings.Amazon.skipAd) {
         return;
