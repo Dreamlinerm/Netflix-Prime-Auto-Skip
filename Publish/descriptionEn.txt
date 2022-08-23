@@ -1,6 +1,6 @@
 -------------------------------------------- firefox:
 
-It automatically skips intros, Credits, recaps, and anything else you don't want to watch on Netflix and Amazon Prime video.
+It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix and Amazon Prime video.
 
 You can configure what to watch and what to skip in the settings Page.
 
@@ -20,6 +20,7 @@ Amazon Prime video Automatically skipping:
 <ul>
 <li>Intros</li>
 <li>Credits: automatically goes to the next episode</li>
+<li>Freevee ads</li>
 <li>Self promoting ads</li>
 </ul>
 
@@ -40,7 +41,7 @@ Netflix and Amazon Prime videos are trademarks and the author of this addon is n
 
 --------------------------------------------  chrome:
 
-It automatically skips intros, Credits, recaps, and anything else you don't want to watch on Netflix and Amazon Prime video.
+It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix and Amazon Prime video.
 
 You can configure what to watch and what to skip in the settings Page.
 
@@ -60,6 +61,7 @@ Amazon Prime video Automatically skipping:
 
 •Intros
 •Credits                           : automatically goes to the next episode
+•Freevee ads
 •Self promoting ads
 
 

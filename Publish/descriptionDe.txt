@@ -1,10 +1,10 @@
 -------------------------------------------- firefox:
 --------------------------------------------
 Recap:
-Überspringt Automatisch Intro, Abspann, Werbung auf Amazon Prime video und Intro, Rekapitulationen, Abspann und Inaktivitätswarnungen auf Netflix. Sie können auf der Einstellungsseite konfigurieren, was angezeigt und was übersprungen werden soll.
+Überspringt Automatisch Werbung Intro, Abspann auf Amazon Prime video und Intro, Rekapitulationen, Abspann und Inaktivitätswarnungen auf Netflix.
 --------------------------------------------
 
-Es überspringt automatisch Intros, Credits, Zusammenfassungen und alles andere, was Sie nicht auf Netflix und Amazon Prime-Videos sehen möchten.
+Es überspringt automatisch Werbung, Intros, Credits, Zusammenfassungen und alles andere, was Sie nicht auf Netflix und Amazon Prime-Videos sehen möchten.
 
 Sie können auf der Einstellungsseite konfigurieren, was angezeigt und was übersprungen werden soll.
 
@@ -24,6 +24,7 @@ Amazon Prime-Video Automatisches Überspringen:
 <ul>
 <li>Intros</li>
 <li>Credits: Geht automatisch zur nächsten Folge</li>
+<li>Freevee Werbung</li>
 <li>Eigenwerbung</li>
 </ul>
 
@@ -43,7 +44,7 @@ Netflix und Amazon Prime-Videos sind Warenzeichen und der Autor dieses Addons is
 
 --------------------------------------------  chrome:
 
-Es überspringt automatisch Intros, Credits, Zusammenfassungen und alles andere, was Sie nicht auf Netflix und Amazon Prime-Videos sehen möchten.
+Es überspringt automatisch Werbung, Intros, Credits, Zusammenfassungen und alles andere, was Sie nicht auf Netflix und Amazon Prime-Videos sehen möchten.
 
 Sie können auf der Einstellungsseite konfigurieren, was angezeigt und was übersprungen werden soll.
 
@@ -63,6 +64,7 @@ Amazon Prime-Video Automatisches Überspringen:
 
 •Intros
 •Credits: Geht automatisch zur nächsten Folge
+•Freevee Werbung
 •Eigenwerbung
 
 
