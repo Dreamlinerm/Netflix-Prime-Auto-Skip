@@ -1,7 +1,10 @@
 # Prime Skip
 
 **This add-on injects JavaScript into the Netflix and Amazon web page.**
+## Published
+Firefox: https://addons.mozilla.org/de/firefox/addon/netflix-prime-auto-skip/
 
+Chrome: https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle
 ## What it does
 
 This extension includes a content script, "skipper.js", that is injected into all pages, but will only run if under "amazon/*/video","netflix".
@@ -52,6 +55,8 @@ Amazon Prime ClassList:
 * Intro: skipelement
 
 * Credits: nextupcard-button
+
+* Freevee ads: .atvwebplayersdk-adtimeindicator-text
 
 * Self promoting ads: .fu4rd6c.f1cw2swo
 
