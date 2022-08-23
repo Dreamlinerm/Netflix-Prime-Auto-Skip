@@ -6,7 +6,7 @@
 
 This extension includes a content script, "skipper.js", that is injected into all pages, but will only run if under "amazon/*/video","netflix".
 
-It automatically skips intros, Credits, recaps, and anything else you don't want to watch on Netflix and Amazon Prime video.
+It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix and Amazon Prime video.
 
 You can configure what to watch and what to skip in the settings Page:
 
@@ -28,6 +28,7 @@ Amazon Prime video Automatically skipping:
 * Intros
 * Credits: automatically goes to the next episode
 * Self promoting ads
+* Freevee Ads: Watch series for free without ads
 
 
 Disclaimer

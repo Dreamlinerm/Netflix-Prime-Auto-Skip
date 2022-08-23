@@ -1,11 +1,11 @@
 // global variables in localStorage
-let settings;
 const defaultSettings = {
   settings: {
-    Amazon: { skipIntro: true, skipCredits: true, skipAd: true },
+    Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
   },
 };
+let settings = defaultSettings.settings;
 chrome.storage.sync.get("settings", function (result) {
   settings = result.settings;
   if (typeof settings !== "object") {
@@ -31,6 +31,8 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.skipCredits;
   button = document.querySelector("#AmazonAds");
   if (button) button.checked = settings?.Amazon.skipAd;
+  button = document.querySelector("#AmazonFreevee");
+  if (button) button.checked = settings?.Amazon.blockFreevee;
   button = document.querySelector("#NetflixIntro");
   if (button) button.checked = settings?.Netflix.skipIntro;
   button = document.querySelector("#NetflixRecap");
@@ -60,6 +62,10 @@ function listenForClicks() {
     } else if (e.target.id === "AmazonAds") {
       settings.Amazon.skipAd = !settings.Amazon.skipAd;
       console.log("settings.AmazonAd", settings);
+      chrome.storage.sync.set({ settings: settings }, function () {});
+    } else if (e.target.id === "AmazonFreevee") {
+      settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
+      console.log("settings.blockFreevee", settings);
       chrome.storage.sync.set({ settings: settings }, function () {});
     } else if (e.target.id === "NetflixIntro") {
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
