@@ -5,7 +5,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.6";
+const version = "1.0.7";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -16,6 +16,7 @@ if (isVideo || isNetflix) {
     },
   };
   let settings = defaultSettings.settings;
+  let lastAdTimeText = "";
   chrome.storage.sync.get("settings", function (result) {
     settings = result.settings;
     console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
@@ -182,23 +183,30 @@ if (isVideo || isNetflix) {
 
   const FreeVeeConfig = { attributes: true, attributeFilter: [".atvwebplayersdk-adtimeindicator-text"], subtree: true, childList: true, attributeOldValue: false };
   const AmazonFreeVeeObserver = new MutationObserver(AmazonFreeVee);
-  function AmazonFreeVee(mutations, observer) {
-    // if (document.querySelector("[class*=infobar-container]").classList.contains("show")) {
+  async function AmazonFreeVee(mutations, observer) {
     let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
     let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
-    // !document.querySelector(".fu4rd6c.f1cw2swo")
-    if (adTimeText.textContent.length > 7 && video != null && adTimeText != null) {
+    // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
+    // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
+    if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
+      console.log("FreeVee Ad skipped", adTimeText.textContent);
+      lastAdTimeText = adTimeText.textContent;
+      resetLastATimeText();
       video.currentTime += parseInt(adTimeText.textContent.match(/\d+/)[0]);
-      console.log("FreeVee Ad skipped", adTimeText, video);
     }
-    // }
+  }
+  async function resetLastATimeText() {
+    // timeout of 0.5 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
+    setTimeout(() => {
+      lastAdTimeText = "";
+    }, 500);
   }
 
   const AmazonSkipAdObserver = new MutationObserver(Amazon_Ad);
   async function Amazon_Ad(mutations, observer) {
-    for (let mutation of mutations) {
-      if (mutation.target.classList.contains("atvwebplayersdk-infobar-container")) {
-        if (mutation.target.classList.contains("show")) {
+    if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
+      for (let mutation of mutations) {
+        if (mutation.target.classList.contains("atvwebplayersdk-infobar-container")) {
           let button = mutation.target.querySelector(".fu4rd6c.f1cw2swo");
           if (button) {
             button.click();
@@ -211,13 +219,10 @@ if (isVideo || isNetflix) {
 
   // a little to intense to do this every time but it works, not currently used
   async function Amazon_AdTimeout() {
-    // set loop every 0.5 sec and check if ad is there
+    // set loop every 1 sec and check if ad is there
     setInterval(function () {
       // if infobar is shown
-      if (document.querySelector("[class*=infobar-container]").classList.contains("show")) {
-        // the button classes are class="fu4rd6c f1cw2swo" but im not sure they are changed may need to refresh
-        // adtimeindicator-text might be an alternative like here
-        // document.querySelector(".atvwebplayersdk-adtimeindicator-text").parentNode.parentNode.querySelector("div:nth-child(3) > div:nth-child(2)")
+      if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
         let button = document.querySelector(".fu4rd6c.f1cw2swo");
         if (button) {
           button.click();
@@ -227,7 +232,7 @@ if (isVideo || isNetflix) {
       if (!settings.Amazon.skipAd) {
         return;
       }
-    }, 500);
+    }, 1000);
   }
   // start/stop the observers depending on settings
   async function startNetflixSkipIntroObserver() {
@@ -317,11 +322,18 @@ if (isVideo || isNetflix) {
   async function startAmazonSkipAdObserver() {
     if (settings.Amazon.skipAd === undefined || settings.Amazon.skipAd) {
       console.log("started observing| Self Ad");
-      // Amazon_AdTimeout();
-      AmazonSkipAdObserver.observe(document, config);
+      if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
+        let button = document.querySelector(".fu4rd6c.f1cw2swo");
+        if (button) {
+          button.click();
+          console.log("Self Ad skipped", button);
+        }
+      }
+      Amazon_AdTimeout();
+      // AmazonSkipAdObserver.observe(document, config);
     } else {
       console.log("stopped observing| Self Ad");
-      AmazonSkipAdObserver.disconnect();
+      // AmazonSkipAdObserver.disconnect();
     }
   }
   async function startAmazonBlockFreeveeObserver() {
@@ -330,6 +342,8 @@ if (isVideo || isNetflix) {
       let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
       let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
       if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && adTimeText != null) {
+        lastAdTimeText = adTimeText.textContent;
+        resetLastATimeText();
         video.currentTime += parseInt(adTimeText.textContent.match(/\d+/)[0]);
         console.log("FreeVee Ad skipped", adTimeText, video);
       }
