@@ -21,40 +21,38 @@
         </div>
       </div>
       <div class="categoryPrime">
-        <h2>Prime Video Auto-skips:</h2>
-        <div class="line flex">
-          <p>Skip Intro:</p>
+        <div class="flex flex-between" style="padding: 5px 0">
+          <h2>All Prime Video Auto-skips</h2>
           <label class="switch">
-            <input type="checkbox" id="AmazonIntro" />
+            <input type="checkbox" id="AmazonSkips" />
             <span class="slider round"></span>
           </label>
         </div>
-        <div class="line flex">
-          <p>Skip Credits:</p>
-          <label class="switch">
-            <input type="checkbox" id="AmazonCredits" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <!-- <div class="line flex">
-          <p>Skip every kind of Ad:</p>
-          <label class="switch">
-            <input type="checkbox" id="AmazonAllAds" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <div class="line flex-end flex-align" id="openAllAdsSettings">
-          <p id="openAllAdsSettings">More Ad settings:</p>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAllAdsSettings" class="downArrow">
-            <path d="M0 0 40 0 20 20 0 0" fill="grey" id="openAllAdsSettings" />
+        <div class="line flex-end flex-align" id="openAmazonSettings">
+          <p id="openAmazonSettings">Individual settings:</p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAmazonSettings" class="AmazonDownArrow">
+            <path d="M0 0 40 0 20 20 0 0" fill="white" id="openAmazonSettings" />
           </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAllAdsSettings" class="upArrow" style="display: none">
-            <path d="M20 0 40 20 0 20 20 0" fill="grey" id="openAllAdsSettings" />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAmazonSettings" class="AmazonUpArrow hidden">
+            <path d="M20 0 40 20 0 20 20 0" fill="white" id="openAmazonSettings" />
           </svg>
-        </div> -->
+        </div>
         <!-- show on click -->
-        <!-- style="display: none" -->
-        <div id="AllAdsSettings">
+        <div id="AmazonSettings" style="display: none">
+          <div class="line flex">
+            <p>Skip Intro:</p>
+            <label class="switch">
+              <input type="checkbox" id="AmazonIntro" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p>Skip Credits:</p>
+            <label class="switch">
+              <input type="checkbox" id="AmazonCredits" />
+              <span class="slider round"></span>
+            </label>
+          </div>
           <div class="line flex">
             <p>Skip Self Ads:</p>
             <label class="switch">
@@ -73,34 +71,52 @@
       </div>
 
       <div class="categoryNetflix">
-        <h2>Netflix Auto-skips:</h2>
-        <div class="line flex">
-          <p>Skip Intro:</p>
+        <div class="flex flex-between" style="padding: 5px 0">
+          <h2>All Netflix Auto-skips</h2>
           <label class="switch">
-            <input type="checkbox" id="NetflixIntro" />
+            <input type="checkbox" id="NetflixSkips" />
             <span class="slider round"></span>
           </label>
         </div>
-        <div class="line flex">
-          <p>Skip Recaps:</p>
-          <label class="switch">
-            <input type="checkbox" id="NetflixRecap" />
-            <span class="slider round"></span>
-          </label>
+        <div class="line flex-end flex-align" id="openNetflixSettings">
+          <p id="openNetflixSettings">Individual settings:</p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openNetflixSettings" class="NetflixDownArrow">
+            <path d="M0 0 40 0 20 20 0 0" fill="white" id="openNetflixSettings" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openNetflixSettings" class="NetflixUpArrow hidden">
+            <path d="M20 0 40 20 0 20 20 0" fill="white" id="openNetflixSettings" />
+          </svg>
         </div>
-        <div class="line flex">
-          <p>Skip Credits:</p>
-          <label class="switch">
-            <input type="checkbox" id="NetflixCredits" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <div class="line flex">
-          <p>Resume inactivity warning</p>
-          <label class="switch">
-            <input type="checkbox" id="NetflixBlocked" />
-            <span class="slider round"></span>
-          </label>
+        <!-- show on click -->
+        <div id="NetflixSettings" style="display: none">
+          <div class="line flex">
+            <p>Skip Intro:</p>
+            <label class="switch">
+              <input type="checkbox" id="NetflixIntro" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p>Skip Recaps:</p>
+            <label class="switch">
+              <input type="checkbox" id="NetflixRecap" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p>Skip Credits:</p>
+            <label class="switch">
+              <input type="checkbox" id="NetflixCredits" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p>Resume inactivity warning</p>
+            <label class="switch">
+              <input type="checkbox" id="NetflixBlocked" />
+              <span class="slider round"></span>
+            </label>
+          </div>
         </div>
       </div>
       <div class="button reset">Reset to default</div>

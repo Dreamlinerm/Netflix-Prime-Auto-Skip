@@ -95,6 +95,10 @@ div {
   display: flex;
   justify-content: space-between;
 }
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
 .line,
 h1,
 h2,

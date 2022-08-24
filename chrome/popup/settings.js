@@ -25,7 +25,9 @@ chrome.storage.sync.onChanged.addListener(function (changes, namespace) {
   }
 });
 function setCheckboxesToSettings() {
-  let button = document.querySelector("#AmazonIntro");
+  let button = document.querySelector("#AmazonSkips");
+  if (button) button.checked = settings?.Amazon.skipIntro && settings?.Amazon.skipCredits && settings?.Amazon.skipAd && settings?.Amazon.blockFreevee;
+  button = document.querySelector("#AmazonIntro");
   if (button) button.checked = settings?.Amazon.skipIntro;
   button = document.querySelector("#AmazonCredits");
   if (button) button.checked = settings?.Amazon.skipCredits;
@@ -33,6 +35,9 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.skipAd;
   button = document.querySelector("#AmazonFreevee");
   if (button) button.checked = settings?.Amazon.blockFreevee;
+
+  button = document.querySelector("#NetflixSkips");
+  if (button) button.checked = settings?.Netflix.skipIntro && settings?.Netflix.skipRecap && settings?.Netflix.skipCredits && settings?.Netflix.skipBlocked;
   button = document.querySelector("#NetflixIntro");
   if (button) button.checked = settings?.Netflix.skipIntro;
   button = document.querySelector("#NetflixRecap");
@@ -51,6 +56,25 @@ function listenForClicks() {
     if (e.target.classList.contains("reset")) {
       console.log("settings resetted to", defaultSettings);
       chrome.storage.sync.set(defaultSettings, function () {});
+    } else if (e.target.id === "AmazonSkips") {
+      const AmazonSkips = !(settings.Amazon.skipIntro && settings.Amazon.skipCredits && settings.Amazon.skipAd && settings.Amazon.blockFreevee);
+      settings.Amazon.skipIntro = AmazonSkips;
+      settings.Amazon.skipCredits = AmazonSkips;
+      settings.Amazon.skipAd = AmazonSkips;
+      settings.Amazon.blockFreevee = AmazonSkips;
+      console.log("settings.AmazonSkips", settings);
+      chrome.storage.sync.set({ settings: settings }, function () {});
+    } else if (e.target.id === "openAmazonSettings") {
+      let AmazonSettings = document.getElementById("AmazonSettings");
+      if (AmazonSettings.style.display === "none") {
+        AmazonSettings.style.display = "block";
+        document.getElementsByClassName("AmazonDownArrow")[0].style.display = "none";
+        document.getElementsByClassName("AmazonUpArrow")[0].style.display = "block";
+      } else {
+        AmazonSettings.style.display = "none";
+        document.getElementsByClassName("AmazonDownArrow")[0].style.display = "block";
+        document.getElementsByClassName("AmazonUpArrow")[0].style.display = "none";
+      }
     } else if (e.target.id === "AmazonCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
       console.log("settings.AmazonCredits", settings);
@@ -67,6 +91,27 @@ function listenForClicks() {
       settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
       console.log("settings.blockFreevee", settings);
       chrome.storage.sync.set({ settings: settings }, function () {});
+    }
+    //  -------------      Netflix        ---------------------------------------
+    else if (e.target.id === "NetflixSkips") {
+      const NetflixSkips = !(settings.Netflix.skipIntro && settings.Netflix.skipRecap && settings.Netflix.skipCredits && settings.Netflix.skipBlocked);
+      settings.Netflix.skipIntro = NetflixSkips;
+      settings.Netflix.skipRecap = NetflixSkips;
+      settings.Netflix.skipCredits = NetflixSkips;
+      settings.Netflix.skipBlocked = NetflixSkips;
+      console.log("settings.NetflixSkips", settings);
+      chrome.storage.sync.set({ settings: settings }, function () {});
+    } else if (e.target.id === "openNetflixSettings") {
+      let NetflixSettings = document.getElementById("NetflixSettings");
+      if (NetflixSettings.style.display == "none") {
+        NetflixSettings.style.display = "block";
+        document.getElementsByClassName("NetflixDownArrow")[0].style.display = "none";
+        document.getElementsByClassName("NetflixUpArrow")[0].style.display = "block";
+      } else {
+        NetflixSettings.style.display = "none";
+        document.getElementsByClassName("NetflixDownArrow")[0].style.display = "block";
+        document.getElementsByClassName("NetflixUpArrow")[0].style.display = "none";
+      }
     } else if (e.target.id === "NetflixIntro") {
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
       console.log("settings.NetflixIntro", settings);

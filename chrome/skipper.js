@@ -189,7 +189,7 @@ if (isVideo || isNetflix) {
     // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
     // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
     if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
-      console.log("FreeVee Ad skipped", adTimeText.textContent);
+      console.log("FreeVee Ad skipped|", adTimeText.textContent);
       lastAdTimeText = adTimeText.textContent;
       resetLastATimeText();
       video.currentTime += parseInt(adTimeText.textContent.match(/\d+/)[0]);
@@ -221,7 +221,7 @@ if (isVideo || isNetflix) {
   async function Amazon_AdTimeout() {
     // set loop every 1 sec and check if ad is there
     setInterval(function () {
-      // if infobar is shown
+      // if video is shown
       if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
         let button = document.querySelector(".fu4rd6c.f1cw2swo");
         if (button) {
@@ -245,7 +245,7 @@ if (isVideo || isNetflix) {
       }
       NetflixSkipIntroObserver.observe(document, NetflixConfig);
     } else {
-      console.log("stopped observing | intro");
+      console.log("stopped observing| intro");
       NetflixSkipIntroObserver.disconnect();
     }
   }
@@ -339,14 +339,6 @@ if (isVideo || isNetflix) {
   async function startAmazonBlockFreeveeObserver() {
     if (settings.Amazon.blockFreevee === undefined || settings.Amazon.blockFreevee) {
       console.log("started observing| FreeVee Ad");
-      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
-      let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
-      if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && adTimeText != null) {
-        lastAdTimeText = adTimeText.textContent;
-        resetLastATimeText();
-        video.currentTime += parseInt(adTimeText.textContent.match(/\d+/)[0]);
-        console.log("FreeVee Ad skipped", adTimeText, video);
-      }
       AmazonFreeVeeObserver.observe(document, FreeVeeConfig);
     } else {
       console.log("stopped observing| FreeVee Ad");
