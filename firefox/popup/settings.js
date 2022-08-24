@@ -29,6 +29,8 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.skipIntro;
   button = document.querySelector("#AmazonCredits");
   if (button) button.checked = settings?.Amazon.skipCredits;
+  // button = document.querySelector("#AmazonAllAds");
+  // if (button) button.checked = settings?.Amazon.skipAd && settings?.Amazon.blockFreevee;
   button = document.querySelector("#AmazonAds");
   if (button) button.checked = settings?.Amazon.skipAd;
   button = document.querySelector("#AmazonFreevee");
@@ -59,7 +61,14 @@ function listenForClicks() {
       settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
       console.log("settings.AmazonIntro", settings);
       browser.storage.sync.set({ settings: settings }, function () {});
-    } else if (e.target.id === "AmazonAds") {
+    }
+    // else if (e.target.id === "AmazonAllAds") {
+    //   settings.Amazon.skipAd = !(settings.Amazon.skipAd && settings.Amazon.blockFreevee);
+    //   settings.Amazon.blockFreevee = settings.Amazon.skipAd;
+    //   console.log("settings.AmazonAllAds", settings);
+    //   browser.storage.sync.set({ settings: settings }, function () {});
+    // }
+    else if (e.target.id === "AmazonAds") {
       settings.Amazon.skipAd = !settings.Amazon.skipAd;
       console.log("settings.AmazonAd", settings);
       browser.storage.sync.set({ settings: settings }, function () {});
@@ -84,6 +93,19 @@ function listenForClicks() {
       console.log("settings.NetflixBlocked", settings);
       browser.storage.sync.set({ settings: settings }, function () {});
     }
+    // else if (e.target.id === "openAllAdsSettings") {
+    //   console.log("clicked");
+    //   let AllAdsSettings = document.getElementById("AllAdsSettings");
+    //   if (AllAdsSettings.style.display == "block") {
+    //     AllAdsSettings.style.display = "none";
+    //     document.getElementsByClassName("downArrow")[0].style.display = "none";
+    //     document.getElementsByClassName("upArrow")[0].style.display = "block";
+    //   } else {
+    //     AllAdsSettings.style.display = "block";
+    //     document.getElementsByClassName("downArrow")[0].style.display = "block";
+    //     document.getElementsByClassName("upArrow")[0].style.display = "none";
+    //   }
+    // }
   });
 }
 

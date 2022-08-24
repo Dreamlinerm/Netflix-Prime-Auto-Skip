@@ -24,16 +24,11 @@
         <h2>Prime Video Auto-skips:</h2>
         <div class="line flex">
           <p>Skip Intro:</p>
-          <!-- Rounded switch -->
           <label class="switch">
             <input type="checkbox" id="AmazonIntro" />
             <span class="slider round"></span>
           </label>
         </div>
-        <!-- <div class="line flex">
-            <p>Skip Recaps:</p>
-            <input class="checkbox AmazonRecap" id="AmazonRecap" type="checkbox" />
-          </div> -->
         <div class="line flex">
           <p>Skip Credits:</p>
           <label class="switch">
@@ -41,21 +36,42 @@
             <span class="slider round"></span>
           </label>
         </div>
-        <div class="line flex">
-          <p>Skip Self Ads:</p>
+        <!-- <div class="line flex">
+          <p>Skip every kind of Ad:</p>
           <label class="switch">
-            <input type="checkbox" id="AmazonAds" />
+            <input type="checkbox" id="AmazonAllAds" />
             <span class="slider round"></span>
           </label>
         </div>
-        <div class="line flex">
-          <p>Block Freevee Ads:</p>
-          <label class="switch">
-            <input type="checkbox" id="AmazonFreevee" />
-            <span class="slider round"></span>
-          </label>
+        <div class="line flex-end flex-align" id="openAllAdsSettings">
+          <p id="openAllAdsSettings">More Ad settings:</p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAllAdsSettings" class="downArrow">
+            <path d="M0 0 40 0 20 20 0 0" fill="grey" id="openAllAdsSettings" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAllAdsSettings" class="upArrow" style="display: none">
+            <path d="M20 0 40 20 0 20 20 0" fill="grey" id="openAllAdsSettings" />
+          </svg>
+        </div> -->
+        <!-- show on click -->
+        <!-- style="display: none" -->
+        <div id="AllAdsSettings">
+          <div class="line flex">
+            <p>Skip Self Ads:</p>
+            <label class="switch">
+              <input type="checkbox" id="AmazonAds" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p>Block Freevee Ads:</p>
+            <label class="switch">
+              <input type="checkbox" id="AmazonFreevee" />
+              <span class="slider round"></span>
+            </label>
+          </div>
         </div>
       </div>
+
       <div class="categoryNetflix">
         <h2>Netflix Auto-skips:</h2>
         <div class="line flex">
