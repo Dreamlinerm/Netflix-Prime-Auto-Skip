@@ -9,17 +9,37 @@ let settings = defaultSettings.settings;
 browser.storage.sync.get("settings", function (result) {
   settings = result.settings;
   if (typeof settings !== "object") {
-    browser.storage.sync.set(defaultSettings, function () {});
+    browser.storage.sync.set(defaultSettings);
   } else {
-    console.log("settings:Value currently is ", settings);
+    console.log("settings:", settings);
+    // if there is an undefined setting, set it to the default
+    let changedSettings = false;
+    for (const key in defaultSettings.settings) {
+      if (typeof settings[key] === "undefined") {
+        console.log("undefined Setting:", key);
+        changedSettings = true;
+        settings[key] = defaultSettings.settings[key];
+      } else {
+        for (const subkey in defaultSettings.settings[key]) {
+          if (typeof settings[key][subkey] === "undefined") {
+            console.log("undefined Setting:", key, subkey);
+            changedSettings = true;
+            settings[key][subkey] = defaultSettings.settings[key][subkey];
+          }
+        }
+      }
+    }
     setCheckboxesToSettings();
+    if (changedSettings) {
+      browser.storage.sync.set({ settings });
+    }
   }
 });
 browser.storage.sync.onChanged.addListener(function (changes, namespace) {
   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
     if (key == "settings") {
       settings = newValue;
-      console.log(key, ": changed.", "Old value was ", oldValue, ", new value is ", newValue, ".");
+      console.log(key, "Old value:", oldValue, ", new value:", newValue);
       setCheckboxesToSettings();
     }
   }
@@ -55,7 +75,7 @@ function listenForClicks() {
   let listener = document.addEventListener("click", (e) => {
     if (e.target.classList.contains("reset")) {
       console.log("settings resetted to", defaultSettings);
-      browser.storage.sync.set(defaultSettings, function () {});
+      browser.storage.sync.set(defaultSettings);
     } else if (e.target.id === "AmazonSkips") {
       const AmazonSkips = !(settings.Amazon.skipIntro && settings.Amazon.skipCredits && settings.Amazon.skipAd && settings.Amazon.blockFreevee);
       settings.Amazon.skipIntro = AmazonSkips;
@@ -63,7 +83,7 @@ function listenForClicks() {
       settings.Amazon.skipAd = AmazonSkips;
       settings.Amazon.blockFreevee = AmazonSkips;
       console.log("settings.AmazonSkips", settings);
-      browser.storage.sync.set({ settings: settings }, function () {});
+      browser.storage.sync.set({ settings });
     } else if (e.target.id === "openAmazonSettings") {
       let AmazonSettings = document.getElementById("AmazonSettings");
       if (AmazonSettings.style.display === "none") {
@@ -78,19 +98,19 @@ function listenForClicks() {
     } else if (e.target.id === "AmazonCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
       console.log("settings.AmazonCredits", settings);
-      browser.storage.sync.set({ settings: settings }, function () {});
+      browser.storage.sync.set({ settings });
     } else if (e.target.id === "AmazonIntro") {
       settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
       console.log("settings.AmazonIntro", settings);
-      browser.storage.sync.set({ settings: settings }, function () {});
+      browser.storage.sync.set({ settings });
     } else if (e.target.id === "AmazonAds") {
       settings.Amazon.skipAd = !settings.Amazon.skipAd;
       console.log("settings.AmazonAd", settings);
-      browser.storage.sync.set({ settings: settings }, function () {});
+      browser.storage.sync.set({ settings });
     } else if (e.target.id === "AmazonFreevee") {
       settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
       console.log("settings.blockFreevee", settings);
-      browser.storage.sync.set({ settings: settings }, function () {});
+      browser.storage.sync.set({ settings });
     }
     //  -------------      Netflix        ---------------------------------------
     else if (e.target.id === "NetflixSkips") {
@@ -100,7 +120,7 @@ function listenForClicks() {
       settings.Netflix.skipCredits = NetflixSkips;
       settings.Netflix.skipBlocked = NetflixSkips;
       console.log("settings.NetflixSkips", settings);
-      browser.storage.sync.set({ settings: settings }, function () {});
+      browser.storage.sync.set({ settings });
     } else if (e.target.id === "openNetflixSettings") {
       let NetflixSettings = document.getElementById("NetflixSettings");
       if (NetflixSettings.style.display == "none") {
@@ -115,19 +135,19 @@ function listenForClicks() {
     } else if (e.target.id === "NetflixIntro") {
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
       console.log("settings.NetflixIntro", settings);
-      browser.storage.sync.set({ settings: settings }, function () {});
+      browser.storage.sync.set({ settings });
     } else if (e.target.id === "NetflixRecap") {
       settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
       console.log("settings.NetflixRecap", settings);
-      browser.storage.sync.set({ settings: settings }, function () {});
+      browser.storage.sync.set({ settings });
     } else if (e.target.id === "NetflixCredits") {
       settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
       console.log("settings.NetflixCredits", settings);
-      browser.storage.sync.set({ settings: settings }, function () {});
+      browser.storage.sync.set({ settings });
     } else if (e.target.id === "NetflixBlocked") {
       settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
       console.log("settings.NetflixBlocked", settings);
-      browser.storage.sync.set({ settings: settings }, function () {});
+      browser.storage.sync.set({ settings });
     }
   });
 }

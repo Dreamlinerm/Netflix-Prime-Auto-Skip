@@ -5,7 +5,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.7";
+const version = "1.0.8";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -24,38 +24,44 @@ if (isVideo || isNetflix) {
     console.log("Settings", settings);
     console.log("Page %cNetflix%cAmazon", isNetflix ? "color: #e60010;" : "display:none;", !isNetflix ? "color: #00aeef;" : "display:none;");
     if (typeof settings !== "object") {
-      browser.storage.sync.set(defaultSettings, function () {});
+      browser.storage.sync.set(defaultSettings);
     } else {
       if (isNetflix) {
         // start Observers depending on the settings
-        if (settings.Netflix.skipIntro === undefined || settings.Netflix.skipIntro) {
-          startNetflixSkipIntroObserver();
-        }
-        if (settings.Netflix.skipRecap === undefined || settings.Netflix.skipRecap) {
-          startNetflixSkipRecapObserver();
-        }
-        if (result.settings.Netflix.skipCredits === undefined || result.settings.Netflix.skipCredits) {
-          startNetflixSkipCreditsObserver();
-        }
-        if (settings.Netflix.skipBlocked === undefined || settings.Netflix.skipBlocked) {
-          startNetflixSkipBlockedObserver();
-        }
+        if (settings.Netflix?.skipIntro) startNetflixSkipIntroObserver();
+        if (settings.Netflix?.skipRecap) startNetflixSkipRecapObserver();
+        if (settings.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
+        if (settings.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
       } else {
-        if (settings.Amazon.skipIntro === undefined || settings.Amazon.skipIntro) {
-          startAmazonSkipIntroObserver();
-        }
-        if (settings.Amazon.skipCredits === undefined || settings.Amazon.skipCredits) {
-          startAmazonSkipCreditsObserver();
-        }
-        if (settings.Amazon.skipAd === undefined || settings.Amazon.skipAd) {
-          startAmazonSkipAdObserver();
-        }
-        if (settings.Amazon.blockFreevee === undefined || settings.Amazon.blockFreevee) {
+        if (settings.Amazon?.skipIntro) startAmazonSkipIntroObserver();
+        if (settings.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
+        if (settings.Amazon?.skipAd) startAmazonSkipAdObserver();
+        if (settings.Amazon?.blockFreevee) {
           // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
           setTimeout(function () {
             startAmazonBlockFreeveeObserver();
           }, 200);
         }
+      }
+      // if there is an undefined setting, set it to the default
+      let changedSettings = false;
+      for (const key in defaultSettings.settings) {
+        if (typeof settings[key] === "undefined") {
+          console.log("undefined Setting:", key);
+          changedSettings = true;
+          settings[key] = defaultSettings.settings[key];
+        } else {
+          for (const subkey in defaultSettings.settings[key]) {
+            if (typeof settings[key][subkey] === "undefined") {
+              console.log("undefined Setting:", key, subkey);
+              changedSettings = true;
+              settings[key][subkey] = defaultSettings.settings[key][subkey];
+            }
+          }
+        }
+      }
+      if (changedSettings) {
+        browser.storage.sync.set({ settings });
       }
     }
   });
@@ -64,34 +70,18 @@ if (isVideo || isNetflix) {
     for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
       if (key == "settings") {
         settings = newValue;
-        console.log(key, ": changed.", "Old value was ", oldValue, ", new value is ", newValue, ".");
+        console.log(key, "Old value:", oldValue, ", new value:", newValue);
         if (isNetflix) {
           // if value is changed then check if it is enabled or disabled
-          if (oldValue === undefined || newValue.Netflix.skipIntro !== oldValue.Netflix.skipIntro) {
-            startNetflixSkipIntroObserver();
-          }
-          if (oldValue === undefined || newValue.Netflix.skipRecap !== oldValue.Netflix.skipRecap) {
-            startNetflixSkipRecapObserver();
-          }
-          if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix.skipCredits) {
-            startNetflixSkipCreditsObserver();
-          }
-          if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix.skipBlocked) {
-            startNetflixSkipBlockedObserver();
-          }
+          if (oldValue === undefined || newValue.Netflix.skipIntro !== oldValue.Netflix.skipIntro) startNetflixSkipIntroObserver();
+          if (oldValue === undefined || newValue.Netflix.skipRecap !== oldValue.Netflix.skipRecap) startNetflixSkipRecapObserver();
+          if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix.skipCredits) startNetflixSkipCreditsObserver();
+          if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix.skipBlocked) startNetflixSkipBlockedObserver();
         } else {
-          if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon.skipIntro) {
-            startAmazonSkipIntroObserver();
-          }
-          if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon.skipCredits) {
-            startAmazonSkipCreditsObserver();
-          }
-          if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon.skipAd) {
-            startAmazonSkipAdObserver();
-          }
-          if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon.blockFreevee) {
-            startAmazonBlockFreeveeObserver();
-          }
+          if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon.skipIntro) startAmazonSkipIntroObserver();
+          if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon.skipCredits) startAmazonSkipCreditsObserver();
+          if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon.skipAd) startAmazonSkipAdObserver();
+          if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon.blockFreevee) startAmazonBlockFreeveeObserver();
         }
       }
     }
@@ -234,6 +224,7 @@ if (isVideo || isNetflix) {
       }
     }, 1000);
   }
+
   // start/stop the observers depending on settings
   async function startNetflixSkipIntroObserver() {
     if (settings.Netflix.skipIntro === undefined || settings.Netflix.skipIntro) {
