@@ -1,3 +1,9 @@
+// find out if on settings page or on popup page
+if (window.outerWidth > 100) {
+  AmazonSettings();
+  NetflixSettings();
+}
+
 // global variables in localStorage
 const defaultSettings = {
   settings: {
@@ -67,6 +73,29 @@ function setCheckboxesToSettings() {
   button = document.querySelector("#NetflixBlocked");
   if (button) button.checked = settings?.Netflix.skipBlocked;
 }
+// open and close the Amazon and Netflix Individual Settings
+function AmazonSettings(open = true) {
+  if (open) {
+    document.getElementById("AmazonSettings").style.display = "block";
+    document.getElementsByClassName("AmazonDownArrow")[0].style.display = "none";
+    document.getElementsByClassName("AmazonUpArrow")[0].style.display = "block";
+  } else {
+    document.getElementById("AmazonSettings").style.display = "none";
+    document.getElementsByClassName("AmazonDownArrow")[0].style.display = "block";
+    document.getElementsByClassName("AmazonUpArrow")[0].style.display = "none";
+  }
+}
+function NetflixSettings(open = true) {
+  if (open) {
+    document.getElementById("NetflixSettings").style.display = "block";
+    document.getElementsByClassName("NetflixDownArrow")[0].style.display = "none";
+    document.getElementsByClassName("NetflixUpArrow")[0].style.display = "block";
+  } else {
+    document.getElementById("NetflixSettings").style.display = "none";
+    document.getElementsByClassName("NetflixDownArrow")[0].style.display = "block";
+    document.getElementsByClassName("NetflixUpArrow")[0].style.display = "none";
+  }
+}
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
  * the content script in the page.
@@ -85,16 +114,8 @@ function listenForClicks() {
       console.log("settings.AmazonSkips", settings);
       browser.storage.sync.set({ settings });
     } else if (e.target.id === "openAmazonSettings") {
-      let AmazonSettings = document.getElementById("AmazonSettings");
-      if (AmazonSettings.style.display === "none") {
-        AmazonSettings.style.display = "block";
-        document.getElementsByClassName("AmazonDownArrow")[0].style.display = "none";
-        document.getElementsByClassName("AmazonUpArrow")[0].style.display = "block";
-      } else {
-        AmazonSettings.style.display = "none";
-        document.getElementsByClassName("AmazonDownArrow")[0].style.display = "block";
-        document.getElementsByClassName("AmazonUpArrow")[0].style.display = "none";
-      }
+      if (document.getElementById("AmazonSettings").style.display === "none") AmazonSettings();
+      else AmazonSettings(false);
     } else if (e.target.id === "AmazonCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
       console.log("settings.AmazonCredits", settings);
@@ -122,16 +143,8 @@ function listenForClicks() {
       console.log("settings.NetflixSkips", settings);
       browser.storage.sync.set({ settings });
     } else if (e.target.id === "openNetflixSettings") {
-      let NetflixSettings = document.getElementById("NetflixSettings");
-      if (NetflixSettings.style.display == "none") {
-        NetflixSettings.style.display = "block";
-        document.getElementsByClassName("NetflixDownArrow")[0].style.display = "none";
-        document.getElementsByClassName("NetflixUpArrow")[0].style.display = "block";
-      } else {
-        NetflixSettings.style.display = "none";
-        document.getElementsByClassName("NetflixDownArrow")[0].style.display = "block";
-        document.getElementsByClassName("NetflixUpArrow")[0].style.display = "none";
-      }
+      if (document.getElementById("NetflixSettings").style.display == "none") NetflixSettings();
+      else NetflixSettings(false);
     } else if (e.target.id === "NetflixIntro") {
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
       console.log("settings.NetflixIntro", settings);
