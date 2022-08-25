@@ -41,6 +41,9 @@ div {
   background-color: #5485ad;
   flex-grow: 2;
 }
+.reset:hover {
+  background-color: #446a8a;
+}
 .github {
   margin-right: 5px;
   background-color: #5485ad;
@@ -66,9 +69,6 @@ div {
   background-color: #2d8edd;
 }
 
-.reset:hover {
-  background-color: #446a8a;
-}
 .flex {
   display: flex;
 }
