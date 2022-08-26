@@ -13,7 +13,7 @@ if (isVideo || isNetflix) {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, adTimeSkipped: 0 },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
-      timeSkipped: 0,
+      Statistics: { IntroTimeSkipped: 0, RecapTimeSkipped: 0 },
     },
   };
   let settings = defaultSettings.settings;
@@ -87,8 +87,12 @@ if (isVideo || isNetflix) {
       }
     }
   });
-  function addTimeSkipped(time) {
-    settings.timeSkipped += time;
+  function addIntroTimeSkipped(time) {
+    settings.Statistics.IntroTimeSkipped += time;
+    browser.storage.sync.set({ settings });
+  }
+  function addRecapTimeSkipped(time) {
+    settings.Statistics.RecapTimeSkipped += time;
     browser.storage.sync.set({ settings });
   }
 
@@ -161,7 +165,7 @@ if (isVideo || isNetflix) {
         setTimeout(function () {
           const skippedTime = video.currentTime - time;
           console.log("Skipped time:", skippedTime);
-          addTimeSkipped(skippedTime);
+          addIntroTimeSkipped(skippedTime);
         }, 50);
       }
     }
