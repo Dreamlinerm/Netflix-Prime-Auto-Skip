@@ -59,8 +59,8 @@ function getTimeFormatted(sec = 0) {
   let minutes = Math.floor(((sec % 86400) % 3600) / 60);
   let seconds = Math.floor(((sec % 86400) % 3600) % 60);
   let text;
-  if (days > 0) text = `${days}d ${hours}h`;
-  else if (hours > 0) text = `${hours}h ${minutes}m`;
+  if (days > 0) text = `${days}d ${hours}h ${minutes}m`;
+  else if (hours > 0) text = `${hours}h ${minutes}m ${seconds}s`;
   else if (minutes > 0) text = `${minutes}m ${seconds}s`;
   else text = `${seconds}s`;
   return text;
