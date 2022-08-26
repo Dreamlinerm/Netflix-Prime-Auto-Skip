@@ -2,6 +2,7 @@
 if (window.outerWidth > 100) {
   AmazonSettings();
   NetflixSettings();
+  Statistics();
 }
 
 // global variables in localStorage
@@ -9,6 +10,7 @@ const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, adTimeSkipped: 0 },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
+    timeSkipped: 0,
   },
 };
 let settings = defaultSettings.settings;
@@ -50,6 +52,19 @@ browser.storage.sync.onChanged.addListener(function (changes, namespace) {
     }
   }
 });
+function getTimeFormatted(sec = 0) {
+  if (typeof sec !== "number") return "0s";
+  let days = Math.floor(sec / 86400);
+  let hours = Math.floor((sec % 86400) / 3600);
+  let minutes = Math.floor(((sec % 86400) % 3600) / 60);
+  let seconds = ((sec % 86400) % 3600) % 60;
+  let text;
+  if (days > 0) text = `${days}d ${hours}h`;
+  else if (hours > 0) text = `${hours}h ${minutes}m`;
+  else if (minutes > 0) text = `${minutes}m ${seconds}s`;
+  else text = `${seconds}s`;
+  return text;
+}
 function setCheckboxesToSettings() {
   let button = document.querySelector("#AmazonSkips");
   if (button) button.checked = settings?.Amazon.skipIntro && settings?.Amazon.skipCredits && settings?.Amazon.skipAd && settings?.Amazon.blockFreevee;
@@ -57,20 +72,8 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.skipIntro;
   button = document.querySelector("#AmazonCredits");
   if (button) button.checked = settings?.Amazon.skipCredits;
-
-  let days = Math.floor(settings?.Amazon.adTimeSkipped / 86400);
-  let hours = Math.floor((settings?.Amazon.adTimeSkipped - days * 86400) / 3600);
-  let minutes = Math.floor((settings?.Amazon.adTimeSkipped - days * 86400 - hours * 3600) / 60);
-  let seconds = settings?.Amazon.adTimeSkipped - days * 86400 - hours * 3600 - minutes * 60;
   button = document.querySelector("#AmazonAdTime");
-  let text;
-  if (days > 0) text = `${days}d ${hours}h`;
-  else if (hours > 0) text = `${hours}h ${minutes}m`;
-  else if (minutes > 0) text = `${minutes}m ${seconds}s`;
-  else text = `${seconds}s`;
-
-  if (button) button.innerHTML = text;
-
+  if (button) button.innerHTML = getTimeFormatted(settings?.Amazon.adTimeSkipped);
   button = document.querySelector("#AmazonAds");
   if (button) button.checked = settings?.Amazon.skipAd;
   button = document.querySelector("#AmazonFreevee");
@@ -108,6 +111,17 @@ function NetflixSettings(open = true) {
     document.getElementById("NetflixSettings").style.display = "none";
     document.getElementsByClassName("NetflixDownArrow")[0].style.display = "block";
     document.getElementsByClassName("NetflixUpArrow")[0].style.display = "none";
+  }
+}
+function Statistics(open = true) {
+  if (open) {
+    document.getElementById("Statistics").style.display = "block";
+    document.getElementsByClassName("StatisticsDownArrow")[0].style.display = "none";
+    document.getElementsByClassName("StatisticsUpArrow")[0].style.display = "block";
+  } else {
+    document.getElementById("Statistics").style.display = "none";
+    document.getElementsByClassName("StatisticsDownArrow")[0].style.display = "block";
+    document.getElementsByClassName("StatisticsUpArrow")[0].style.display = "none";
   }
 }
 /**
@@ -175,6 +189,11 @@ function listenForClicks() {
       settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
       console.log("settings.NetflixBlocked", settings);
       browser.storage.sync.set({ settings });
+    }
+    // Statistics
+    else if (e.target.id === "openStatistics") {
+      if (document.getElementById("Statistics").style.display === "none") Statistics();
+      else Statistics(false);
     }
   });
 }

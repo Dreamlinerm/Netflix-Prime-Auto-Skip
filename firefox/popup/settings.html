@@ -53,10 +53,6 @@
               <span class="slider round"></span>
             </label>
           </div>
-          <div class="line flex flex-between">
-            <p>Total Ad time Skipped:</p>
-            <p id="AmazonAdTime">0 s</p>
-          </div>
           <div class="line flex">
             <p>Skip Self Ads:</p>
             <label class="switch">
@@ -121,6 +117,26 @@
               <span class="slider round"></span>
             </label>
           </div>
+        </div>
+      </div>
+      <div class="line flex-end flex-align" id="openStatistics">
+        <p id="openStatistics">Statistics</p>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openStatistics" class="StatisticsDownArrow">
+          <path d="M0 0 40 0 20 20 0 0" fill="white" id="openStatistics" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openStatistics" class="StatisticsUpArrow hidden">
+          <path d="M20 0 40 20 0 20 20 0" fill="white" id="openStatistics" />
+        </svg>
+      </div>
+      <!-- show on click -->
+      <div id="Statistics" style="display: none">
+        <div class="line flex flex-between">
+          <p>Total Ad time Skipped:</p>
+          <p id="AmazonAdTime">0s</p>
+        </div>
+        <div class="line flex flex-between">
+          <p>Total Intro/Recap time Skipped:</p>
+          <p id="skippedTime">0s</p>
         </div>
       </div>
       <div class="button reset">Reset to default</div>
