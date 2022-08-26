@@ -9,9 +9,9 @@ if (window.outerWidth > 100) {
 // global variables in localStorage
 const defaultSettings = {
   settings: {
-    Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, adTimeSkipped: 0 },
+    Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
-    Statistics: { IntroTimeSkipped: 0, RecapTimeSkipped: 0 },
+    Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0 },
   },
 };
 let settings = defaultSettings.settings;
@@ -90,7 +90,7 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Netflix.skipBlocked;
   // Statistics
   button = document.querySelector("#AmazonAdTime");
-  if (button) button.innerHTML = getTimeFormatted(settings?.Amazon.adTimeSkipped);
+  if (button) button.innerHTML = getTimeFormatted(settings?.Statistics.AmazonAdTimeSkipped);
   button = document.querySelector("#IntroTimeSkipped");
   if (button) button.innerHTML = getTimeFormatted(settings?.Statistics.IntroTimeSkipped);
   button = document.querySelector("#RecapTimeSkipped");
@@ -210,7 +210,7 @@ function listenForClicks() {
     } else if (e.target.id === "upload") {
       // get the file from #file and console.log it
       const file = document.getElementById("file").files[0];
-      if ("application/json" === file.type) {
+      if (file !== undefined && "application/json" === file.type) {
         if (confirm(file.name + " will replace the Settings.\n\nAre you sure you want to do this?")) {
           // read contents of file
           const reader = new FileReader();

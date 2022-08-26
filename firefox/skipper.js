@@ -11,9 +11,9 @@ if (isVideo || isNetflix) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
-      Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, adTimeSkipped: 0 },
+      Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
-      Statistics: { IntroTimeSkipped: 0, RecapTimeSkipped: 0 },
+      Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0 },
     },
   };
   let settings = defaultSettings.settings;
@@ -215,7 +215,7 @@ if (isVideo || isNetflix) {
       if (typeof adTime === "number") {
         video.currentTime += adTime;
         console.log("FreeVee Ad skipped, length:", adTime, "s");
-        settings.Amazon.adTimeSkipped += adTime;
+        settings.Statistics.AmazonAdTimeSkipped += adTime;
         browser.storage.sync.set({ settings });
       }
     }
@@ -244,7 +244,7 @@ if (isVideo || isNetflix) {
             );
             // if adTime is number
             if (typeof adTime === "number") {
-              settings.Amazon.adTimeSkipped += adTime;
+              settings.Statistics.AmazonAdTimeSkipped += adTime;
             }
             browser.storage.sync.set({ settings });
             console.log("Self Ad skipped, length:", adTime, button);
@@ -285,7 +285,7 @@ if (isVideo || isNetflix) {
             resetLastATimeText();
             button.click();
             // if adTime is number
-            if (typeof adTime === "number") settings.Amazon.adTimeSkipped += adTime;
+            if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
             browser.storage.sync.set({ settings });
             console.log("Self Ad skipped, length:", adTime, button);
           }
@@ -412,7 +412,7 @@ if (isVideo || isNetflix) {
               .substring(1)
           );
           // if adTime is number
-          if (typeof adTime === "number") settings.Amazon.adTimeSkipped += adTime;
+          if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
           browser.storage.sync.set({ settings });
           console.log("Self Ad skipped, length:", adTime, button);
         }
