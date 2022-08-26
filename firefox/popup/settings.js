@@ -90,11 +90,11 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Netflix.skipBlocked;
   // Statistics
   button = document.querySelector("#AmazonAdTime");
-  if (button) button.innerHTML = getTimeFormatted(settings?.Statistics.AmazonAdTimeSkipped);
+  if (button) button.textContent = getTimeFormatted(settings?.Statistics.AmazonAdTimeSkipped);
   button = document.querySelector("#IntroTimeSkipped");
-  if (button) button.innerHTML = getTimeFormatted(settings?.Statistics.IntroTimeSkipped);
+  if (button) button.textContent = getTimeFormatted(settings?.Statistics.IntroTimeSkipped);
   button = document.querySelector("#RecapTimeSkipped");
-  if (button) button.innerHTML = getTimeFormatted(settings?.Statistics.RecapTimeSkipped);
+  if (button) button.textContent = getTimeFormatted(settings?.Statistics.RecapTimeSkipped);
   // import/export buttons
   button = document.querySelector("#save");
   if (button) {
