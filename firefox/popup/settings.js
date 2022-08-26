@@ -7,7 +7,7 @@ if (window.outerWidth > 100) {
 // global variables in localStorage
 const defaultSettings = {
   settings: {
-    Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
+    Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, adTimeSkipped: 0 },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
   },
 };
@@ -57,6 +57,22 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.skipIntro;
   button = document.querySelector("#AmazonCredits");
   if (button) button.checked = settings?.Amazon.skipCredits;
+  // if adTimeSkipped is greater than 60 show minutes and if it is 3600 show hours
+  let unit = "s";
+  let time = settings?.Amazon.adTimeSkipped;
+  if (settings?.Amazon.adTimeSkipped >= 60 && settings?.Amazon.adTimeSkipped < 3600) {
+    unit = "m";
+    time = Math.floor(time / 60);
+  } else if (settings?.Amazon.adTimeSkipped >= 3600 && settings?.Amazon.adTimeSkipped < 86400) {
+    unit = "h";
+    time = Math.floor(time / 3600);
+  } else if (settings?.Amazon.adTimeSkipped >= 86400) {
+    unit = "d";
+    time = Math.floor(time / 86400);
+  }
+  button = document.querySelector("#AmazonAdTime");
+  if (button) button.innerHTML = `${time} ${unit}`;
+
   button = document.querySelector("#AmazonAds");
   if (button) button.checked = settings?.Amazon.skipAd;
   button = document.querySelector("#AmazonFreevee");
