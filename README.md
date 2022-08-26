@@ -13,7 +13,7 @@ It automatically skips Ads, intros, Credits, recaps, and anything else you don't
 
 You can configure what to watch and what to skip in the settings Page:
 
-![Alt text](Publish/Screenshots/settings.png?raw=true)
+![Alt text](Publish/Screenshots/settingsFoldedOut.png?raw=true)
 
 ✨ Features
 
