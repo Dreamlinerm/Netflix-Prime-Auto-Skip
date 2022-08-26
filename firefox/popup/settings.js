@@ -2,7 +2,8 @@
 if (window.outerWidth > 100) {
   AmazonSettings();
   NetflixSettings();
-  Statistics();
+  // Statistics();
+  document.querySelector("#Export").style.display = "block";
 }
 
 // global variables in localStorage
@@ -94,6 +95,13 @@ function setCheckboxesToSettings() {
   if (button) button.innerHTML = getTimeFormatted(settings?.Statistics.IntroTimeSkipped);
   button = document.querySelector("#RecapTimeSkipped");
   if (button) button.innerHTML = getTimeFormatted(settings?.Statistics.RecapTimeSkipped);
+  // import/export buttons
+  button = document.querySelector("#save");
+  if (button) {
+    let file = new Blob([JSON.stringify(settings)], { type: "text/json" });
+    button.href = URL.createObjectURL(file);
+    button.download = "settings.json";
+  }
 }
 // open and close the Amazon and Netflix Individual Settings
 function AmazonSettings(open = true) {
@@ -199,6 +207,36 @@ function listenForClicks() {
     else if (e.target.id === "openStatistics") {
       if (document.getElementById("Statistics").style.display === "none") Statistics();
       else Statistics(false);
+    } else if (e.target.id === "upload") {
+      // get the file from #file and console.log it
+      const file = document.getElementById("file").files[0];
+      if ("application/json" === file.type) {
+        if (confirm(file.name + " will replace the Settings.\n\nAre you sure you want to do this?")) {
+          // read contents of file
+          const reader = new FileReader();
+          // reader.onload = (e) => {
+          reader.addEventListener("load", (e) => {
+            try {
+              // parse the JSON
+              const data = JSON.parse(e.target.result);
+              // set the settings to the parsed JSON
+              settings = data;
+              // save the settings to the storage
+              browser.storage.sync.set({ settings });
+              // reload the page
+              location.reload();
+              // };
+            } catch (e) {
+              alert("The file you uploaded is not a valid JSON file.");
+              return;
+            }
+          });
+          reader.readAsText(file);
+        }
+      } else {
+        alert("The file you uploaded is not a valid JSON file.");
+        return;
+      }
     }
   });
 }
