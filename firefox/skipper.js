@@ -87,13 +87,19 @@ if (isVideo || isNetflix) {
       }
     }
   });
-  function addIntroTimeSkipped(time) {
-    settings.Statistics.IntroTimeSkipped += time;
-    browser.storage.sync.set({ settings });
+  function addIntroTimeSkipped(startTime, endTime) {
+    if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+      console.log("Intro Time skipped", endTime - startTime);
+      settings.Statistics.IntroTimeSkipped += endTime - startTime;
+      browser.storage.sync.set({ settings });
+    }
   }
-  function addRecapTimeSkipped(time) {
-    settings.Statistics.RecapTimeSkipped += time;
-    browser.storage.sync.set({ settings });
+  function addRecapTimeSkipped(startTime, endTime) {
+    if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+      console.log("Recap Time skipped", endTime - startTime);
+      settings.Statistics.RecapTimeSkipped += endTime - startTime;
+      browser.storage.sync.set({ settings });
+    }
   }
 
   // Observers
@@ -107,8 +113,13 @@ if (isVideo || isNetflix) {
       for (let node of mutation.addedNodes) {
         let button = node.querySelector('[data-uia="player-skip-intro"]');
         if (button) {
+          let video = document.querySelectorAll("video")[0];
+          const time = video.currentTime;
           button.click();
           console.log("intro skipped", button);
+          setTimeout(function () {
+            addIntroTimeSkipped(time, video.currentTime);
+          }, 600);
         }
       }
     }
@@ -120,8 +131,13 @@ if (isVideo || isNetflix) {
       for (let node of mutation.addedNodes) {
         let button = node.querySelector('[data-uia="player-skip-recap"]') || node.querySelector('[data-uia="player-skip-preplay"]');
         if (button) {
+          let video = document.querySelectorAll("video")[0];
+          const time = video.currentTime;
           button.click();
           console.log("Recap skipped", button);
+          setTimeout(function () {
+            addRecapTimeSkipped(time, video.currentTime);
+          }, 600);
         }
       }
     }
@@ -152,22 +168,19 @@ if (isVideo || isNetflix) {
   // Amazon Observers
 
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
-  const AmazonSkipIntro = new RegExp("skipelement", "i");
+  // const AmazonSkipIntro = new RegExp("skipelement", "i");
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
   function Amazon_Intro(mutations, observer) {
-    for (let mutation of mutations) {
-      if (AmazonSkipIntro.test(mutation.target.firstChild.classList)) {
-        let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
-        const time = video.currentTime;
-        mutation.target.firstChild.click();
-        console.log("Intro skipped", mutation.target.firstChild);
-        //delay where the video is loaded
-        setTimeout(function () {
-          const skippedTime = video.currentTime - time;
-          console.log("Skipped time:", skippedTime);
-          addIntroTimeSkipped(skippedTime);
-        }, 50);
-      }
+    let button = document.querySelector("[class*=skipelement]");
+    if (button) {
+      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      const time = video.currentTime;
+      button.click();
+      console.log("Intro skipped", button);
+      //delay where the video is loaded
+      setTimeout(function () {
+        addIntroTimeSkipped(time, video.currentTime);
+      }, 50);
     }
   }
 
@@ -208,10 +221,10 @@ if (isVideo || isNetflix) {
     }
   }
   async function resetLastATimeText() {
-    // timeout of 0.5 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
+    // timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
     setTimeout(() => {
       lastAdTimeText = "";
-    }, 500);
+    }, 1000);
   }
 
   const AmazonSkipAdObserver = new MutationObserver(Amazon_Ad);
@@ -287,8 +300,13 @@ if (isVideo || isNetflix) {
       console.log("started observing| intro");
       let button = document.querySelector('[data-uia="player-skip-intro"]');
       if (button) {
+        let video = document.querySelectorAll("video")[0];
+        const time = video.currentTime;
         button.click();
         console.log("intro skipped", button);
+        setTimeout(function () {
+          addIntroTimeSkipped(time, video.currentTime);
+        }, 600);
       }
       NetflixSkipIntroObserver.observe(document, NetflixConfig);
     } else {
@@ -301,8 +319,13 @@ if (isVideo || isNetflix) {
       console.log("started observing| Recap");
       let button = document.querySelector('[data-uia="player-skip-recap"]') || document.querySelector('[data-uia="player-skip-preplay"]');
       if (button) {
+        let video = document.querySelectorAll("video")[0];
+        const time = video.currentTime;
         button.click();
         console.log("Recap skipped", button);
+        setTimeout(function () {
+          addRecapTimeSkipped(time, video.currentTime);
+        }, 600);
       }
       NetflixSkipRecapObserver.observe(document, NetflixConfig);
     } else {
@@ -343,8 +366,14 @@ if (isVideo || isNetflix) {
       console.log("started observing| Intro");
       let button = document.querySelector("[class*=skipelement]");
       if (button) {
+        let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+        const time = video.currentTime;
         button.click();
         console.log("Intro skipped", button);
+        //delay where the video is loaded
+        setTimeout(function () {
+          addIntroTimeSkipped(time, video.currentTime);
+        }, 50);
       }
       AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
     } else {
