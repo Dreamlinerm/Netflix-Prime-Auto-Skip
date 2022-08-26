@@ -87,6 +87,10 @@ if (isVideo || isNetflix) {
       }
     }
   });
+  function addTimeSkipped(time) {
+    settings.timeSkipped += time;
+    browser.storage.sync.set({ settings });
+  }
 
   // Observers
   // default Options for the observer (which mutations to observe)
@@ -149,8 +153,16 @@ if (isVideo || isNetflix) {
   function Amazon_Intro(mutations, observer) {
     for (let mutation of mutations) {
       if (AmazonSkipIntro.test(mutation.target.firstChild.classList)) {
+        let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+        const time = video.currentTime;
         mutation.target.firstChild.click();
         console.log("Intro skipped", mutation.target.firstChild);
+        //delay where the video is loaded
+        setTimeout(function () {
+          const skippedTime = video.currentTime - time;
+          console.log("Skipped time:", skippedTime);
+          addTimeSkipped(skippedTime);
+        }, 50);
       }
     }
   }

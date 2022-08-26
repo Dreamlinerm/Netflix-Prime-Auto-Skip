@@ -57,7 +57,7 @@ function getTimeFormatted(sec = 0) {
   let days = Math.floor(sec / 86400);
   let hours = Math.floor((sec % 86400) / 3600);
   let minutes = Math.floor(((sec % 86400) % 3600) / 60);
-  let seconds = ((sec % 86400) % 3600) % 60;
+  let seconds = Math.floor(((sec % 86400) % 3600) % 60);
   let text;
   if (days > 0) text = `${days}d ${hours}h`;
   else if (hours > 0) text = `${hours}h ${minutes}m`;
@@ -72,8 +72,6 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.skipIntro;
   button = document.querySelector("#AmazonCredits");
   if (button) button.checked = settings?.Amazon.skipCredits;
-  button = document.querySelector("#AmazonAdTime");
-  if (button) button.innerHTML = getTimeFormatted(settings?.Amazon.adTimeSkipped);
   button = document.querySelector("#AmazonAds");
   if (button) button.checked = settings?.Amazon.skipAd;
   button = document.querySelector("#AmazonFreevee");
@@ -89,6 +87,11 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Netflix.skipCredits;
   button = document.querySelector("#NetflixBlocked");
   if (button) button.checked = settings?.Netflix.skipBlocked;
+  // Statistics
+  button = document.querySelector("#AmazonAdTime");
+  if (button) button.innerHTML = getTimeFormatted(settings?.Amazon.adTimeSkipped);
+  button = document.querySelector("#timeSkipped");
+  if (button) button.innerHTML = getTimeFormatted(settings?.timeSkipped);
 }
 // open and close the Amazon and Netflix Individual Settings
 function AmazonSettings(open = true) {
