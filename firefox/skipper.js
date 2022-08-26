@@ -182,10 +182,12 @@ if (isVideo || isNetflix) {
       lastAdTimeText = adTimeText.textContent;
       resetLastATimeText();
       const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
-      video.currentTime += adTime;
-      console.log("FreeVee Ad skipped, length:", adTime, "s");
-      settings.Amazon.adTimeSkipped += adTime;
-      browser.storage.sync.set({ settings });
+      if (typeof adTime === "number") {
+        video.currentTime += adTime;
+        console.log("FreeVee Ad skipped, length:", adTime, "s");
+        settings.Amazon.adTimeSkipped += adTime;
+        browser.storage.sync.set({ settings });
+      }
     }
   }
   async function resetLastATimeText() {
@@ -204,7 +206,7 @@ if (isVideo || isNetflix) {
           if (button) {
             button.click();
             // only getting the time after :08
-            let adTime = parseInt(
+            const adTime = parseInt(
               document
                 .querySelector(".atvwebplayersdk-adtimeindicator-text")
                 .innerHTML.match(/[:]\d+/)[0]

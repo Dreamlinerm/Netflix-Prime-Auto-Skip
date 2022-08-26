@@ -57,21 +57,19 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.skipIntro;
   button = document.querySelector("#AmazonCredits");
   if (button) button.checked = settings?.Amazon.skipCredits;
-  // if adTimeSkipped is greater than 60 show minutes and if it is 3600 show hours
-  let unit = "s";
-  let time = settings?.Amazon.adTimeSkipped;
-  if (settings?.Amazon.adTimeSkipped >= 60 && settings?.Amazon.adTimeSkipped < 3600) {
-    unit = "m";
-    time = Math.floor(time / 60);
-  } else if (settings?.Amazon.adTimeSkipped >= 3600 && settings?.Amazon.adTimeSkipped < 86400) {
-    unit = "h";
-    time = Math.floor(time / 3600);
-  } else if (settings?.Amazon.adTimeSkipped >= 86400) {
-    unit = "d";
-    time = Math.floor(time / 86400);
-  }
+
+  let days = Math.floor(settings?.Amazon.adTimeSkipped / 86400);
+  let hours = Math.floor((settings?.Amazon.adTimeSkipped - days * 86400) / 3600);
+  let minutes = Math.floor((settings?.Amazon.adTimeSkipped - days * 86400 - hours * 3600) / 60);
+  let seconds = settings?.Amazon.adTimeSkipped - days * 86400 - hours * 3600 - minutes * 60;
   button = document.querySelector("#AmazonAdTime");
-  if (button) button.innerHTML = `${time} ${unit}`;
+  let text;
+  if (days > 0) text = `${days}d ${hours}h`;
+  else if (hours > 0) text = `${hours}h ${minutes}m`;
+  else if (minutes > 0) text = `${minutes}m ${seconds}s`;
+  else text = `${seconds}s`;
+
+  if (button) button.innerHTML = text;
 
   button = document.querySelector("#AmazonAds");
   if (button) button.checked = settings?.Amazon.skipAd;
