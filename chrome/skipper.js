@@ -5,7 +5,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.8";
+const version = "1.0.9";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -13,6 +13,7 @@ if (isVideo || isNetflix) {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
+      Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0 },
     },
   };
   let settings = defaultSettings.settings;
@@ -86,6 +87,20 @@ if (isVideo || isNetflix) {
       }
     }
   });
+  function addIntroTimeSkipped(startTime, endTime) {
+    if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+      console.log("Intro Time skipped", endTime - startTime);
+      settings.Statistics.IntroTimeSkipped += endTime - startTime;
+      chrome.storage.sync.set({ settings });
+    }
+  }
+  function addRecapTimeSkipped(startTime, endTime) {
+    if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+      console.log("Recap Time skipped", endTime - startTime);
+      settings.Statistics.RecapTimeSkipped += endTime - startTime;
+      chrome.storage.sync.set({ settings });
+    }
+  }
 
   // Observers
   // default Options for the observer (which mutations to observe)
@@ -98,8 +113,13 @@ if (isVideo || isNetflix) {
       for (let node of mutation.addedNodes) {
         let button = node.querySelector('[data-uia="player-skip-intro"]');
         if (button) {
+          let video = document.querySelectorAll("video")[0];
+          const time = video.currentTime;
           button.click();
           console.log("intro skipped", button);
+          setTimeout(function () {
+            addIntroTimeSkipped(time, video.currentTime);
+          }, 600);
         }
       }
     }
@@ -111,8 +131,13 @@ if (isVideo || isNetflix) {
       for (let node of mutation.addedNodes) {
         let button = node.querySelector('[data-uia="player-skip-recap"]') || node.querySelector('[data-uia="player-skip-preplay"]');
         if (button) {
+          let video = document.querySelectorAll("video")[0];
+          const time = video.currentTime;
           button.click();
           console.log("Recap skipped", button);
+          setTimeout(function () {
+            addRecapTimeSkipped(time, video.currentTime);
+          }, 600);
         }
       }
     }
@@ -143,14 +168,19 @@ if (isVideo || isNetflix) {
   // Amazon Observers
 
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
-  const AmazonSkipIntro = new RegExp("skipelement", "i");
+  // const AmazonSkipIntro = new RegExp("skipelement", "i");
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
   function Amazon_Intro(mutations, observer) {
-    for (let mutation of mutations) {
-      if (AmazonSkipIntro.test(mutation.target.firstChild.classList)) {
-        mutation.target.firstChild.click();
-        console.log("Intro skipped", mutation.target.firstChild);
-      }
+    let button = document.querySelector("[class*=skipelement]");
+    if (button) {
+      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      const time = video.currentTime;
+      button.click();
+      console.log("Intro skipped", button);
+      //delay where the video is loaded
+      setTimeout(function () {
+        addIntroTimeSkipped(time, video.currentTime);
+      }, 50);
     }
   }
 
@@ -179,17 +209,22 @@ if (isVideo || isNetflix) {
     // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
     // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
     if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
-      console.log("FreeVee Ad skipped|", adTimeText.textContent);
       lastAdTimeText = adTimeText.textContent;
       resetLastATimeText();
-      video.currentTime += parseInt(adTimeText.textContent.match(/\d+/)[0]);
+      const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
+      if (typeof adTime === "number") {
+        video.currentTime += adTime;
+        console.log("FreeVee Ad skipped, length:", adTime, "s");
+        settings.Statistics.AmazonAdTimeSkipped += adTime;
+        chrome.storage.sync.set({ settings });
+      }
     }
   }
   async function resetLastATimeText() {
-    // timeout of 0.5 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
+    // timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
     setTimeout(() => {
       lastAdTimeText = "";
-    }, 500);
+    }, 1000);
   }
 
   const AmazonSkipAdObserver = new MutationObserver(Amazon_Ad);
@@ -200,27 +235,61 @@ if (isVideo || isNetflix) {
           let button = mutation.target.querySelector(".fu4rd6c.f1cw2swo");
           if (button) {
             button.click();
-            console.log("Self Ad skipped", button);
+            // only getting the time after :08
+            const adTime = parseInt(
+              document
+                .querySelector(".atvwebplayersdk-adtimeindicator-text")
+                .innerHTML.match(/[:]\d+/)[0]
+                .substring(1)
+            );
+            // if adTime is number
+            if (typeof adTime === "number") {
+              settings.Statistics.AmazonAdTimeSkipped += adTime;
+            }
+            chrome.storage.sync.set({ settings });
+            console.log("Self Ad skipped, length:", adTime, button);
           }
         }
       }
     }
   }
-
   // a little to intense to do this every time but it works, not currently used
   async function Amazon_AdTimeout() {
+    let selfLastAdTime = 0;
+    async function resetLastATimeText() {
+      // timeout of 0.5 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
+      setTimeout(() => {
+        selfLastAdTime = "";
+      }, 500);
+    }
     // set loop every 1 sec and check if ad is there
-    setInterval(function () {
+    let AdInterval = setInterval(function () {
+      if (!settings.Amazon.skipAd) {
+        console.log("stopped observing| Self Ad");
+        clearInterval(AdInterval);
+        return;
+      }
       // if video is shown
       if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
         let button = document.querySelector(".fu4rd6c.f1cw2swo");
         if (button) {
-          button.click();
-          console.log("Self Ad skipped", button);
+          // only getting the time after :08
+          let adTime = parseInt(
+            document
+              .querySelector(".atvwebplayersdk-adtimeindicator-text")
+              .innerHTML.match(/[:]\d+/)[0]
+              .substring(1)
+          );
+          if (selfLastAdTime != adTime) {
+            selfLastAdTime = adTime;
+            resetLastATimeText();
+            button.click();
+            // if adTime is number
+            if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
+            chrome.storage.sync.set({ settings });
+            console.log("Self Ad skipped, length:", adTime, button);
+          }
         }
-      }
-      if (!settings.Amazon.skipAd) {
-        return;
       }
     }, 1000);
   }
@@ -231,8 +300,13 @@ if (isVideo || isNetflix) {
       console.log("started observing| intro");
       let button = document.querySelector('[data-uia="player-skip-intro"]');
       if (button) {
+        let video = document.querySelectorAll("video")[0];
+        const time = video.currentTime;
         button.click();
         console.log("intro skipped", button);
+        setTimeout(function () {
+          addIntroTimeSkipped(time, video.currentTime);
+        }, 600);
       }
       NetflixSkipIntroObserver.observe(document, NetflixConfig);
     } else {
@@ -245,8 +319,13 @@ if (isVideo || isNetflix) {
       console.log("started observing| Recap");
       let button = document.querySelector('[data-uia="player-skip-recap"]') || document.querySelector('[data-uia="player-skip-preplay"]');
       if (button) {
+        let video = document.querySelectorAll("video")[0];
+        const time = video.currentTime;
         button.click();
         console.log("Recap skipped", button);
+        setTimeout(function () {
+          addRecapTimeSkipped(time, video.currentTime);
+        }, 600);
       }
       NetflixSkipRecapObserver.observe(document, NetflixConfig);
     } else {
@@ -287,8 +366,14 @@ if (isVideo || isNetflix) {
       console.log("started observing| Intro");
       let button = document.querySelector("[class*=skipelement]");
       if (button) {
+        let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+        const time = video.currentTime;
         button.click();
         console.log("Intro skipped", button);
+        //delay where the video is loaded
+        setTimeout(function () {
+          addIntroTimeSkipped(time, video.currentTime);
+        }, 50);
       }
       AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
     } else {
@@ -313,19 +398,35 @@ if (isVideo || isNetflix) {
   async function startAmazonSkipAdObserver() {
     if (settings.Amazon.skipAd === undefined || settings.Amazon.skipAd) {
       console.log("started observing| Self Ad");
+      // only necessary for observer
+      /*
       if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
         let button = document.querySelector(".fu4rd6c.f1cw2swo");
         if (button) {
           button.click();
-          console.log("Self Ad skipped", button);
+          // only getting the time after :08
+          let adTime = parseInt(
+            document
+              .querySelector(".atvwebplayersdk-adtimeindicator-text")
+              .innerHTML.match(/[:]\d+/)[0]
+              .substring(1)
+          );
+          // if adTime is number
+          if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
+          chrome.storage.sync.set({ settings });
+          console.log("Self Ad skipped, length:", adTime, button);
         }
       }
+      AmazonSkipAdObserver.observe(document, config);
+      */
       Amazon_AdTimeout();
-      // AmazonSkipAdObserver.observe(document, config);
-    } else {
-      console.log("stopped observing| Self Ad");
-      // AmazonSkipAdObserver.disconnect();
     }
+    /*
+    else {
+      console.log("stopped observing| Self Ad");
+      AmazonSkipAdObserver.disconnect();
+    }
+    */
   }
   async function startAmazonBlockFreeveeObserver() {
     if (settings.Amazon.blockFreevee === undefined || settings.Amazon.blockFreevee) {

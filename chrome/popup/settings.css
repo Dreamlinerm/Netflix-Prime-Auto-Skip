@@ -129,6 +129,11 @@ img {
   background-color: #e60010;
   border-radius: 10px;
 }
+#Export {
+  margin-top: 5px;
+  background-color: grey;
+  border-radius: 10px;
+}
 
 /* Switch styling */
 label {

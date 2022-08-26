@@ -2,6 +2,8 @@
 if (window.outerWidth > 100) {
   AmazonSettings();
   NetflixSettings();
+  // Statistics();
+  document.querySelector("#Export").style.display = "block";
 }
 
 // global variables in localStorage
@@ -9,6 +11,7 @@ const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
+    Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0 },
   },
 };
 let settings = defaultSettings.settings;
@@ -50,6 +53,19 @@ chrome.storage.sync.onChanged.addListener(function (changes, namespace) {
     }
   }
 });
+function getTimeFormatted(sec = 0) {
+  if (typeof sec !== "number") return "0s";
+  let days = Math.floor(sec / 86400);
+  let hours = Math.floor((sec % 86400) / 3600);
+  let minutes = Math.floor(((sec % 86400) % 3600) / 60);
+  let seconds = Math.floor(((sec % 86400) % 3600) % 60);
+  let text;
+  if (days > 0) text = `${days}d ${hours}h ${minutes}m`;
+  else if (hours > 0) text = `${hours}h ${minutes}m ${seconds}s`;
+  else if (minutes > 0) text = `${minutes}m ${seconds}s`;
+  else text = `${seconds}s`;
+  return text;
+}
 function setCheckboxesToSettings() {
   let button = document.querySelector("#AmazonSkips");
   if (button) button.checked = settings?.Amazon.skipIntro && settings?.Amazon.skipCredits && settings?.Amazon.skipAd && settings?.Amazon.blockFreevee;
@@ -72,6 +88,20 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Netflix.skipCredits;
   button = document.querySelector("#NetflixBlocked");
   if (button) button.checked = settings?.Netflix.skipBlocked;
+  // Statistics
+  button = document.querySelector("#AmazonAdTime");
+  if (button) button.innerHTML = getTimeFormatted(settings?.Statistics.AmazonAdTimeSkipped);
+  button = document.querySelector("#IntroTimeSkipped");
+  if (button) button.innerHTML = getTimeFormatted(settings?.Statistics.IntroTimeSkipped);
+  button = document.querySelector("#RecapTimeSkipped");
+  if (button) button.innerHTML = getTimeFormatted(settings?.Statistics.RecapTimeSkipped);
+  // import/export buttons
+  button = document.querySelector("#save");
+  if (button) {
+    let file = new Blob([JSON.stringify(settings)], { type: "text/json" });
+    button.href = URL.createObjectURL(file);
+    button.download = "settings.json";
+  }
 }
 // open and close the Amazon and Netflix Individual Settings
 function AmazonSettings(open = true) {
@@ -94,6 +124,17 @@ function NetflixSettings(open = true) {
     document.getElementById("NetflixSettings").style.display = "none";
     document.getElementsByClassName("NetflixDownArrow")[0].style.display = "block";
     document.getElementsByClassName("NetflixUpArrow")[0].style.display = "none";
+  }
+}
+function Statistics(open = true) {
+  if (open) {
+    document.getElementById("Statistics").style.display = "block";
+    document.getElementsByClassName("StatisticsDownArrow")[0].style.display = "none";
+    document.getElementsByClassName("StatisticsUpArrow")[0].style.display = "block";
+  } else {
+    document.getElementById("Statistics").style.display = "none";
+    document.getElementsByClassName("StatisticsDownArrow")[0].style.display = "block";
+    document.getElementsByClassName("StatisticsUpArrow")[0].style.display = "none";
   }
 }
 /**
@@ -161,6 +202,41 @@ function listenForClicks() {
       settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
       console.log("settings.NetflixBlocked", settings);
       chrome.storage.sync.set({ settings });
+    }
+    // Statistics
+    else if (e.target.id === "openStatistics") {
+      if (document.getElementById("Statistics").style.display === "none") Statistics();
+      else Statistics(false);
+    } else if (e.target.id === "upload") {
+      // get the file from #file and console.log it
+      const file = document.getElementById("file").files[0];
+      if (file !== undefined && "application/json" === file.type) {
+        if (confirm(file.name + " will replace the Settings.\n\nAre you sure you want to do this?")) {
+          // read contents of file
+          const reader = new FileReader();
+          // reader.onload = (e) => {
+          reader.addEventListener("load", (e) => {
+            try {
+              // parse the JSON
+              const data = JSON.parse(e.target.result);
+              // set the settings to the parsed JSON
+              settings = data;
+              // save the settings to the storage
+              chrome.storage.sync.set({ settings });
+              // reload the page
+              location.reload();
+              // };
+            } catch (e) {
+              alert("The file you uploaded is not a valid JSON file.");
+              return;
+            }
+          });
+          reader.readAsText(file);
+        }
+      } else {
+        alert("The file you uploaded is not a valid JSON file.");
+        return;
+      }
     }
   });
 }
