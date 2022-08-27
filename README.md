@@ -19,6 +19,8 @@ It will work with other skippers, but it may behave unexpectedly.
 The script, "skipper.js", is injected into all urls containing "amazon.\*/\*/video" or "netflix.com".
 
 It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix and Prime video.
+<div style="display:flex">
+<div>
 
 ## ✨ Features
 Automatically skipping:
@@ -42,6 +44,7 @@ If you have any suggestions or Bugs, please open an issue.
 
 Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
 
+
 ## Settings
 
 Configure what is skipped in the settings Page.
@@ -49,8 +52,6 @@ Configure what is skipped in the settings Page.
 Import and Export all Settings.
 
 See Statistics.
-
-![Alt text](Publish/Screenshots/settingsFoldedOut.png?raw=true)
 
 ## How it works
 
@@ -74,6 +75,11 @@ The freevee ad text contains the ad length which is matched by
 * Freevee ads: .atvwebplayersdk-adtimeindicator-text
 
 and then skipped by forwarding by the ad length.
+
+</div>
+
+![Alt text](Publish/Screenshots/settingsFoldedOut.png?raw=true)
+</div>
 
 ## Run the Extension
 ```cd firefox```
