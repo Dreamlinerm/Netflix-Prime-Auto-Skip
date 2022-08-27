@@ -21,7 +21,7 @@ The script, "skipper.js", is injected into all urls containing "amazon.\*/\*/vid
 It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix and Prime video.
 <table>
 <tr>
-<td style="vertical-align:top">
+<td valign="top">
 
 ## ✨ Features
 Automatically skipping:
