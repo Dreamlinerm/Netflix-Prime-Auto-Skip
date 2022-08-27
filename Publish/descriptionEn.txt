@@ -1,8 +1,5 @@
 -------------------------------------------- firefox:
-
-It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix and Amazon Prime video.
-
-You can configure what to watch and what to skip in the settings Page.
+You can configure which Feature to enable in the Settings Page.
 
 ✨ Features
 
@@ -11,15 +8,15 @@ Netflix Automatically skipping:
 <ul>
 <li>Intros</li>
 <li>Recaps</li>
-<li>Credits                 : automatically goes to the next episode</li>
-<li>Inactivity Warning      : automatically resuming the video</li>
+<li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
+<li>Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video</li>
 </ul>
 
 Amazon Prime video Automatically skipping:
 
 <ul>
 <li>Intros</li>
-<li>Credits: automatically goes to the next episode</li>
+<li>Credits &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
 <li>Freevee ads</li>
 <li>Self promoting ads</li>
 </ul>
@@ -37,27 +34,20 @@ Buy me a <a href="https://paypal.me/MarvinKrebber" target="_blank">coffee</a>.
 Disclaimer
 
 Netflix and Amazon Prime videos are trademarks and the author of this addon is not affiliated with these companies.
-
-
 --------------------------------------------  chrome:
-
-It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix and Amazon Prime video.
-
-You can configure what to watch and what to skip in the settings Page.
+You can configure which Feature to enable in the Settings Page.
 
 ✨ Features
 
 Netflix Automatically skipping:
 
-
 •Intros
 •Recaps
 •Credits                         : automatically goes to the next episode
-•Inactivity Warning      : automatically resuming the video
+•Inactivity Warning        : automatically resuming the video
 
 
 Amazon Prime video Automatically skipping:
-
 
 •Intros
 •Credits                           : automatically goes to the next episode

@@ -1,12 +1,9 @@
 -------------------------------------------- firefox:
 --------------------------------------------
 Recap:
-Überspringt Automatisch Werbung Intro, Abspann auf Amazon Prime video und Intro, Rekapitulationen, Abspann und Inaktivitätswarnungen auf Netflix.
+Automatisch Werbung, Intros, Rekapitulationen, Abspanne auf Netflix und Prime video überspringen.
 --------------------------------------------
-
-Es überspringt automatisch Werbung, Intros, Credits, Zusammenfassungen und alles andere, was Sie nicht auf Netflix und Amazon Prime-Videos sehen möchten.
-
-Sie können auf der Einstellungsseite konfigurieren, was angezeigt und was übersprungen werden soll.
+Sie können kauf der Einstellungsseite konfigurieren, welche Funktionen aktiviert werden soll.
 
 ✨ Features
 
@@ -15,15 +12,15 @@ Netflix automatisches überspringen:
 <ul>
 <li>Intros</li>
 <li>Zusammenfassungen</li>
-<li>Credits: Geht automatisch zur nächsten Folge</li>
-<li>Inaktivitätswarnung: Video wird automatisch fortgesetzt</li>
+<li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Geht automatisch zur nächsten Folge</li>
+<li>Inaktivitätswarnung&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Video wird automatisch fortgesetzt</li>
 </ul>
 
 Amazon Prime-Video Automatisches Überspringen:
 
 <ul>
 <li>Intros</li>
-<li>Credits: Geht automatisch zur nächsten Folge</li>
+<li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Geht automatisch zur nächsten Folge</li>
 <li>Freevee Werbung</li>
 <li>Eigenwerbung</li>
 </ul>
@@ -41,7 +38,6 @@ Kaufen Sie mir einen <a href="https://paypal.me/MarvinKrebber" target="_blank">K
 Haftungsausschluss
 
 Netflix und Amazon Prime-Videos sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
-
 --------------------------------------------  chrome:
 
 Es überspringt automatisch Werbung, Intros, Credits, Zusammenfassungen und alles andere, was Sie nicht auf Netflix und Amazon Prime-Videos sehen möchten.
