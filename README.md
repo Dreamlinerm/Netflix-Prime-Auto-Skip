@@ -16,25 +16,21 @@ It will work with other skippers, but it may behave unexpectedly.
 
 ## What it does
 
-The script, "skipper.js", is injected into all pages containing "amazon.\*/\*/video" or "netflix.com".
+The script, "skipper.js", is injected into all urls containing "amazon.\*/\*/video" or "netflix.com".
 
 It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix and Prime video.
 
 ## ✨ Features
-
-Netflix Automatically skipping:
-
-
+Automatically skipping:
 * Intros
-* Recaps
 * Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode
+  
+Netflix:
+
+* Recaps
 * Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video
 
-Prime video Automatically skipping:
-
-
-* Intros
-* Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode
+Prime video:
 * Self promoting ads
 * Freevee Ads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Watch series for free without ads
 
