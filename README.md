@@ -53,6 +53,14 @@ Configure what is skipped in the settings Page.
 Import and Export all Settings.
 
 See Statistics.
+  
+</td>
+<td>
+
+![Alt text](Publish/Screenshots/settingsFoldedOut.png?raw=true)
+</td>
+</tr>
+</table>
 
 ## How it works
 
@@ -76,14 +84,6 @@ The freevee ad text contains the ad length which is matched by
 * Freevee ads: .atvwebplayersdk-adtimeindicator-text
 
 and then skipped by forwarding by the ad length.
-
-</td>
-<td>
-
-![Alt text](Publish/Screenshots/settingsFoldedOut.png?raw=true)
-</td>
-</tr>
-</table>
 
 ## Run the Extension
 ```cd firefox```
