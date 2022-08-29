@@ -1,3 +1,16 @@
+/*
+ * Netflix/Prime Auto-Skip
+ * Copyright (c) 2022 Marvin Krebber
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the  GNU General Public License v3.0.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License v3.0 for more details.
+ */
+
 // matches all amazon urls under https://en.wikipedia.org/wiki/Amazon_(company)#Website
 let hostname = window.location.hostname;
 let title = document.title;
