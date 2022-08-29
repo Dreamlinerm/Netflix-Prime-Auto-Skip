@@ -1,4 +1,5 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 ## [1.0.9] - 26-8-2022
@@ -16,7 +17,7 @@ All notable changes to this project will be documented in this file.
 ## [1.0.7] - 23-8-2022
 
 * improved addon Settings page to include disable all amazon/netflix button and dropdown to decrease menu size
-* fixed bug: freevee ad skipping may crash the site on first opening, now doesnt skip too often
+* fixed bug: freevee ad skipping may crash the site on first opening, now doesn't skip too often
   
 ## [1.0.6] - 23-8-2022
 
@@ -35,7 +36,7 @@ Bug fix and sync settings
 Missed Button and Bugfix
 
 * Updated the check if it is a video on Amazon to check the title and the url
-* Updated the skip Recap to also check for skip-preplay, which is a diffrent button
+* Updated the skip Recap to also check for skip-preplay, which is a different button
 * removed error in console.logs
 
 ## [1.0.3] - 9-8-2022
