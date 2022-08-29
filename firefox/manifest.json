@@ -16,32 +16,7 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "*://*.primevideo.com/*",
-        "*://*.amazon.eg/*",
-        "*://*.amazon.com.br/*",
-        "*://*.amazon.ca/*",
-        "*://*.amazon.com.mx/*",
-        "*://*.amazon.com/*",
-        "*://*.amazon.cn/*",
-        "*://*.amazon.in/*",
-        "*://*.amazon.co.jp/*",
-        "*://*.amazon.sg/*",
-        "*://*.amazon.ae/*",
-        "*://*.amazon.sa/*",
-        "*://*.amazon.fr/*",
-        "*://*.amazon.de/*",
-        "*://*.amazon.it/*",
-        "*://*.amazon.nl/*",
-        "*://*.amazon.pl/*",
-        "*://*.amazon.es/*",
-        "*://*.amazon.se/*",
-        "*://*.amazon.com.tr/*",
-        "*://*.amazon.co.uk/*",
-        "*://*.amazon.com.au/*",
-        "*://*.netflix.com/*",
-        "*://*.netflix.ca/*"
-      ],
+      "matches": ["*://*.primevideo.com/*", "*://*.amazon.com/*", "*://*.amazon.co.jp/*", "*://*.amazon.de/*", "*://*.amazon.co.uk/*", "*://*.netflix.com/*", "*://*.netflix.ca/*"],
       "js": ["skipper.js"]
     }
   ],

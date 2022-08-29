@@ -259,6 +259,7 @@ if (isVideo || isNetflix) {
 
   const AmazonSkipAdObserver = new MutationObserver(Amazon_Ad);
   async function Amazon_Ad(mutations, observer) {
+    // web player is shown
     if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
       for (let mutation of mutations) {
         if (mutation.target.classList.contains("atvwebplayersdk-infobar-container")) {
