@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.10] - 29.8.2022
+
+* added Segments skipped statistic
+* added Addon Badges that show on the icon when something is skipped.
+* fixed bug where the statistics are overridden if you have multiple instances of the addon running
+* improved self ad skipping logic
+* removed unnecessary url permission which use primevideo.com
+
 ## [1.0.9] - 26-8-2022
 
 * improved Amazon Intro skipping
