@@ -16,7 +16,16 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.primevideo.com/*", "*://*.amazon.com/*", "*://*.amazon.co.jp/*", "*://*.amazon.de/*", "*://*.amazon.co.uk/*", "*://*.netflix.com/*", "*://*.netflix.ca/*"],
+      "matches": [
+        "*://*.primevideo.com/*",
+        "*://*.amazon.com/*",
+        "*://*.amazon.co.jp/*",
+        "*://*.amazon.de/*",
+        "*://*.amazon.co.uk/*",
+        "*://*.netflix.com/*",
+        "*://*.netflix.ca/*",
+        "*://*.netflix.com.au/*"
+      ],
       "js": ["skipper.js"]
     }
   ],
