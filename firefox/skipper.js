@@ -25,7 +25,7 @@ if (isVideo || isNetflix) {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
-      Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0 },
+      Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     },
   };
   let settings = defaultSettings.settings;
@@ -96,23 +96,36 @@ if (isVideo || isNetflix) {
           if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon.skipAd) startAmazonSkipAdObserver();
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon.blockFreevee) startAmazonBlockFreeveeObserver();
         }
+        if (oldValue === undefined || newValue.Statistics.AmazonAdTimeSkipped !== oldValue.Statistics.AmazonAdTimeSkipped) {
+          settings.Statistics.AmazonAdTimeSkipped = newValue.Statistics.AmazonAdTimeSkipped;
+        }
+        if (oldValue === undefined || newValue.Statistics.IntroTimeSkipped !== oldValue.Statistics.IntroTimeSkipped) {
+          settings.Statistics.IntroTimeSkipped = newValue.Statistics.IntroTimeSkipped;
+        }
+        if (oldValue === undefined || newValue.Statistics.RecapTimeSkipped !== oldValue.Statistics.RecapTimeSkipped) {
+          settings.Statistics.RecapTimeSkipped = newValue.Statistics.RecapTimeSkipped;
+        }
+        if (oldValue === undefined || newValue.Statistics.SegmentsSkipped !== oldValue.Statistics.SegmentsSkipped) {
+          settings.Statistics.SegmentsSkipped = newValue.Statistics.SegmentsSkipped;
+          if (settings.Statistics.SegmentsSkipped === 0) {
+            setBadgeText("");
+          }
+        }
       }
     }
   });
   function addIntroTimeSkipped(startTime, endTime) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       console.log("Intro Time skipped", endTime - startTime);
-      increaseBadge();
       settings.Statistics.IntroTimeSkipped += endTime - startTime;
-      browser.storage.sync.set({ settings });
+      increaseBadge();
     }
   }
   function addRecapTimeSkipped(startTime, endTime) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       console.log("Recap Time skipped", endTime - startTime);
-      increaseBadge();
       settings.Statistics.RecapTimeSkipped += endTime - startTime;
-      browser.storage.sync.set({ settings });
+      increaseBadge();
     }
   }
 
@@ -234,7 +247,6 @@ if (isVideo || isNetflix) {
         console.log("FreeVee Ad skipped, length:", adTime, "s");
         settings.Statistics.AmazonAdTimeSkipped += adTime;
         increaseBadge();
-        browser.storage.sync.set({ settings });
       }
     }
   }
@@ -265,7 +277,6 @@ if (isVideo || isNetflix) {
               settings.Statistics.AmazonAdTimeSkipped += adTime;
             }
             increaseBadge();
-            browser.storage.sync.set({ settings });
             console.log("Self Ad skipped, length:", adTime, button);
           }
         }
@@ -306,7 +317,6 @@ if (isVideo || isNetflix) {
             // if adTime is number
             if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
             increaseBadge();
-            browser.storage.sync.set({ settings });
             console.log("Self Ad skipped, length:", adTime, button);
           }
         }
@@ -466,6 +476,8 @@ if (isVideo || isNetflix) {
     });
   }
   function increaseBadge() {
+    settings.Statistics.SegmentsSkipped++;
+    browser.storage.sync.set({ settings });
     browser.runtime.sendMessage({
       type: "increaseBadge",
     });

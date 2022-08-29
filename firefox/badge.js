@@ -10,7 +10,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License v3.0 for more details.
  */
-// Badge functions
 console.log("badge.js loaded");
 let Badges = {};
 /**
