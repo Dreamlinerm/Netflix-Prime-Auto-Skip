@@ -250,11 +250,11 @@ if (isVideo || isNetflix) {
       }
     }
   }
-  async function resetLastATimeText() {
+  async function resetLastATimeText(time = 1000) {
     // timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
     setTimeout(() => {
       lastAdTimeText = "";
-    }, 1000);
+    }, time);
   }
 
   const AmazonSkipAdObserver = new MutationObserver(Amazon_Ad);
@@ -285,13 +285,6 @@ if (isVideo || isNetflix) {
   }
   // a little to intense to do this every time but it works, not currently used
   async function Amazon_AdTimeout() {
-    let selfLastAdTime = 0;
-    async function resetLastATimeText() {
-      // timeout of 0.5 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
-      setTimeout(() => {
-        selfLastAdTime = "";
-      }, 500);
-    }
     // set loop every 1 sec and check if ad is there
     let AdInterval = setInterval(function () {
       if (!settings.Amazon.skipAd) {
@@ -310,13 +303,12 @@ if (isVideo || isNetflix) {
               .innerHTML.match(/[:]\d+/)[0]
               .substring(1)
           );
-          if (selfLastAdTime != adTime) {
-            selfLastAdTime = adTime;
-            resetLastATimeText();
+          if (lastAdTimeText !== "-1") {
             button.click();
-            // if adTime is number
+            lastAdTimeText = "-1";
             if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
             increaseBadge();
+            resetLastATimeText(1000);
             console.log("Self Ad skipped, length:", adTime, button);
           }
         }
