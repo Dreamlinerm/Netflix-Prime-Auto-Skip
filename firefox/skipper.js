@@ -10,7 +10,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License v3.0 for more details.
  */
-
 // matches all amazon urls under https://en.wikipedia.org/wiki/Amazon_(company)#Website
 let hostname = window.location.hostname;
 let title = document.title;
@@ -103,6 +102,7 @@ if (isVideo || isNetflix) {
   function addIntroTimeSkipped(startTime, endTime) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       console.log("Intro Time skipped", endTime - startTime);
+      increaseBadge();
       settings.Statistics.IntroTimeSkipped += endTime - startTime;
       browser.storage.sync.set({ settings });
     }
@@ -110,6 +110,7 @@ if (isVideo || isNetflix) {
   function addRecapTimeSkipped(startTime, endTime) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       console.log("Recap Time skipped", endTime - startTime);
+      increaseBadge();
       settings.Statistics.RecapTimeSkipped += endTime - startTime;
       browser.storage.sync.set({ settings });
     }
@@ -162,6 +163,7 @@ if (isVideo || isNetflix) {
     if (button) {
       button.click();
       console.log("Credits skipped", button);
+      increaseBadge();
     }
   }
 
@@ -173,6 +175,7 @@ if (isVideo || isNetflix) {
         if (button) {
           button.click();
           console.log("Blocked skipped", button);
+          increaseBadge();
         }
       }
     }
@@ -207,6 +210,7 @@ if (isVideo || isNetflix) {
         for (let button of mutation?.target?.firstChild?.childNodes) {
           if (button && AmazonSkipCredits2.test(button.classList.toString())) {
             button.click();
+            increaseBadge();
             console.log("skipped Credits", button);
           }
         }
@@ -229,6 +233,7 @@ if (isVideo || isNetflix) {
         video.currentTime += adTime;
         console.log("FreeVee Ad skipped, length:", adTime, "s");
         settings.Statistics.AmazonAdTimeSkipped += adTime;
+        increaseBadge();
         browser.storage.sync.set({ settings });
       }
     }
@@ -259,6 +264,7 @@ if (isVideo || isNetflix) {
             if (typeof adTime === "number") {
               settings.Statistics.AmazonAdTimeSkipped += adTime;
             }
+            increaseBadge();
             browser.storage.sync.set({ settings });
             console.log("Self Ad skipped, length:", adTime, button);
           }
@@ -299,6 +305,7 @@ if (isVideo || isNetflix) {
             button.click();
             // if adTime is number
             if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
+            increaseBadge();
             browser.storage.sync.set({ settings });
             console.log("Self Ad skipped, length:", adTime, button);
           }
@@ -449,5 +456,18 @@ if (isVideo || isNetflix) {
       console.log("stopped observing| FreeVee Ad");
       AmazonFreeVeeObserver.disconnect();
     }
+  }
+  // Badge functions
+
+  function setBadgeText(text) {
+    browser.runtime.sendMessage({
+      type: "setBadgeText",
+      content: text,
+    });
+  }
+  function increaseBadge() {
+    browser.runtime.sendMessage({
+      type: "increaseBadge",
+    });
   }
 }

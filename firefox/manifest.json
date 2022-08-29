@@ -51,6 +51,9 @@
     "default_title": "Netflix/Prime Auto-Skip ",
     "default_popup": "popup/settings.html"
   },
+  "background": {
+    "scripts": ["badge.js"]
+  },
   "options_ui": {
     "page": "popup/settings.html"
   },
