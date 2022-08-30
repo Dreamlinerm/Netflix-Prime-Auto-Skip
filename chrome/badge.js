@@ -1,5 +1,3 @@
-chrome.action.setBadgeBackgroundColor({ color: "#d90000" });
-// chrome.action.setBadgeText({ text: "1" });
 /*
  * Netflix/Prime Auto-Skip
  * Copyright (c) 2022 Marvin Krebber
@@ -13,6 +11,7 @@ chrome.action.setBadgeBackgroundColor({ color: "#d90000" });
  * GNU General Public License v3.0 for more details.
  */
 console.log("badge.js loaded");
+chrome.action.setBadgeBackgroundColor({ color: "#d90000" });
 let Badges = {};
 /**
  *

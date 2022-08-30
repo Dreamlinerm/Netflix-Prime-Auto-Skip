@@ -475,10 +475,6 @@ if (isVideo || isNetflix) {
     chrome.runtime.sendMessage({
       type: "increaseBadge",
     });
-    // chrome.runtime.sendMessage({
-    //   type: "setBadgeText",
-    //   content: "10",
-    // });
   }
   function resetBadge() {
     chrome.runtime.sendMessage({

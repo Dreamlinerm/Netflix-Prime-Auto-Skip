@@ -30,6 +30,7 @@ if (isVideo || isNetflix) {
   };
   let settings = defaultSettings.settings;
   let lastAdTimeText = "";
+  resetBadge();
   browser.storage.sync.get("settings", function (result) {
     settings = result.settings;
     console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
@@ -473,6 +474,11 @@ if (isVideo || isNetflix) {
     browser.storage.sync.set({ settings });
     browser.runtime.sendMessage({
       type: "increaseBadge",
+    });
+  }
+  function resetBadge() {
+    chrome.runtime.sendMessage({
+      type: "resetBadge",
     });
   }
 }

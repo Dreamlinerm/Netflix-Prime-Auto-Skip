@@ -18,7 +18,7 @@ let Badges = {};
  *
  */
 async function increaseBadge(tabId = null) {
-  if (Badges[tabId] === undefined) {
+  if (Badges[tabId] === undefined || typeof Badges[tabId] !== "number") {
     Badges[tabId] = 0;
   }
   Badges[tabId]++;
@@ -40,5 +40,7 @@ browser.runtime.onMessage.addListener(function (message, sender) {
     setBadgeText(message.content, sender.tab.id);
   } else if (message.type === "increaseBadge") {
     increaseBadge(sender.tab.id);
+  } else if (message.type === "resetBadge") {
+    delete Badges[sender.tab.id];
   }
 });
