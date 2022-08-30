@@ -109,7 +109,7 @@ if (isVideo || isNetflix) {
         if (oldValue === undefined || newValue.Statistics.SegmentsSkipped !== oldValue.Statistics.SegmentsSkipped) {
           settings.Statistics.SegmentsSkipped = newValue.Statistics.SegmentsSkipped;
           if (settings.Statistics.SegmentsSkipped === 0) {
-            setBadgeText("");
+            resetBadge();
           }
         }
       }
