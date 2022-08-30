@@ -42,6 +42,6 @@ browser.runtime.onMessage.addListener(function (message, sender) {
     increaseBadge(sender.tab.id);
   } else if (message.type === "resetBadge") {
     delete Badges[sender.tab.id];
-    chrome.action.setBadgeText({ text: "", tabId: sender.tab.id });
+    browser.browserAction.setBadgeText({ text: "", tabId: sender.tab.id });
   }
 });

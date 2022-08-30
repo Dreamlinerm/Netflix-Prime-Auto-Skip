@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.11] 30.8.2022
+
+* fixed bug when badge is not reset properly when pressing reset button
+
 ## [1.0.10] - 29.8.2022
 
 * added Segments skipped statistic
