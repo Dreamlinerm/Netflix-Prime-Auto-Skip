@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Netflix/Prime Auto-Skip",
-  "version": "1.0.9",
+  "version": "1.0.10",
 
   "description": "Automatically skip Ads, intros, Recaps, Credits, etc. on Netflix and Prime video.",
   "homepage_url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip",
@@ -16,29 +16,13 @@
     {
       "matches": [
         "*://*.primevideo.com/*",
-        "*://*.amazon.eg/*",
-        "*://*.amazon.com.br/*",
-        "*://*.amazon.ca/*",
-        "*://*.amazon.com.mx/*",
         "*://*.amazon.com/*",
-        "*://*.amazon.cn/*",
-        "*://*.amazon.in/*",
         "*://*.amazon.co.jp/*",
-        "*://*.amazon.sg/*",
-        "*://*.amazon.ae/*",
-        "*://*.amazon.sa/*",
-        "*://*.amazon.fr/*",
         "*://*.amazon.de/*",
-        "*://*.amazon.it/*",
-        "*://*.amazon.nl/*",
-        "*://*.amazon.pl/*",
-        "*://*.amazon.es/*",
-        "*://*.amazon.se/*",
-        "*://*.amazon.com.tr/*",
         "*://*.amazon.co.uk/*",
-        "*://*.amazon.com.au/*",
         "*://*.netflix.com/*",
-        "*://*.netflix.ca/*"
+        "*://*.netflix.ca/*",
+        "*://*.netflix.com.au/*"
       ],
       "js": ["skipper.js"]
     }
@@ -55,6 +39,9 @@
     },
     "default_title": "Netflix/Prime Auto-Skip ",
     "default_popup": "popup/settings.html"
+  },
+  "background": {
+    "service_worker": "badge.js"
   },
   "options_page": "popup/settings.html"
 }

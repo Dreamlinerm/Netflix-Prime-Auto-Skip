@@ -38,7 +38,7 @@ async function setBadgeText(text, tabId = null) {
 browser.runtime.onMessage.addListener(function (message, sender) {
   if (message.type === "setBadgeText") {
     setBadgeText(message.content, sender.tab.id);
-  } else if ((message.type = "increaseBadge")) {
+  } else if (message.type === "increaseBadge") {
     increaseBadge(sender.tab.id);
   }
 });

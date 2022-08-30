@@ -10,7 +10,6 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License v3.0 for more details.
  */
-
 // matches all amazon urls under https://en.wikipedia.org/wiki/Amazon_(company)#Website
 let hostname = window.location.hostname;
 let title = document.title;
@@ -18,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.9";
+const version = "1.0.10";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -26,11 +25,12 @@ if (isVideo || isNetflix) {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
-      Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0 },
+      Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     },
   };
   let settings = defaultSettings.settings;
   let lastAdTimeText = "";
+  resetBadge();
   chrome.storage.sync.get("settings", function (result) {
     settings = result.settings;
     console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
@@ -97,6 +97,21 @@ if (isVideo || isNetflix) {
           if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon.skipAd) startAmazonSkipAdObserver();
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon.blockFreevee) startAmazonBlockFreeveeObserver();
         }
+        if (oldValue === undefined || newValue.Statistics.AmazonAdTimeSkipped !== oldValue.Statistics.AmazonAdTimeSkipped) {
+          settings.Statistics.AmazonAdTimeSkipped = newValue.Statistics.AmazonAdTimeSkipped;
+        }
+        if (oldValue === undefined || newValue.Statistics.IntroTimeSkipped !== oldValue.Statistics.IntroTimeSkipped) {
+          settings.Statistics.IntroTimeSkipped = newValue.Statistics.IntroTimeSkipped;
+        }
+        if (oldValue === undefined || newValue.Statistics.RecapTimeSkipped !== oldValue.Statistics.RecapTimeSkipped) {
+          settings.Statistics.RecapTimeSkipped = newValue.Statistics.RecapTimeSkipped;
+        }
+        if (oldValue === undefined || newValue.Statistics.SegmentsSkipped !== oldValue.Statistics.SegmentsSkipped) {
+          settings.Statistics.SegmentsSkipped = newValue.Statistics.SegmentsSkipped;
+          if (settings.Statistics.SegmentsSkipped === 0) {
+            setBadgeText("");
+          }
+        }
       }
     }
   });
@@ -104,14 +119,14 @@ if (isVideo || isNetflix) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       console.log("Intro Time skipped", endTime - startTime);
       settings.Statistics.IntroTimeSkipped += endTime - startTime;
-      chrome.storage.sync.set({ settings });
+      increaseBadge();
     }
   }
   function addRecapTimeSkipped(startTime, endTime) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       console.log("Recap Time skipped", endTime - startTime);
       settings.Statistics.RecapTimeSkipped += endTime - startTime;
-      chrome.storage.sync.set({ settings });
+      increaseBadge();
     }
   }
 
@@ -162,6 +177,7 @@ if (isVideo || isNetflix) {
     if (button) {
       button.click();
       console.log("Credits skipped", button);
+      increaseBadge();
     }
   }
 
@@ -173,6 +189,7 @@ if (isVideo || isNetflix) {
         if (button) {
           button.click();
           console.log("Blocked skipped", button);
+          increaseBadge();
         }
       }
     }
@@ -207,6 +224,7 @@ if (isVideo || isNetflix) {
         for (let button of mutation?.target?.firstChild?.childNodes) {
           if (button && AmazonSkipCredits2.test(button.classList.toString())) {
             button.click();
+            increaseBadge();
             console.log("skipped Credits", button);
           }
         }
@@ -229,19 +247,20 @@ if (isVideo || isNetflix) {
         video.currentTime += adTime;
         console.log("FreeVee Ad skipped, length:", adTime, "s");
         settings.Statistics.AmazonAdTimeSkipped += adTime;
-        chrome.storage.sync.set({ settings });
+        increaseBadge();
       }
     }
   }
-  async function resetLastATimeText() {
+  async function resetLastATimeText(time = 1000) {
     // timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
     setTimeout(() => {
       lastAdTimeText = "";
-    }, 1000);
+    }, time);
   }
 
   const AmazonSkipAdObserver = new MutationObserver(Amazon_Ad);
   async function Amazon_Ad(mutations, observer) {
+    // web player is shown
     if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
       for (let mutation of mutations) {
         if (mutation.target.classList.contains("atvwebplayersdk-infobar-container")) {
@@ -259,7 +278,7 @@ if (isVideo || isNetflix) {
             if (typeof adTime === "number") {
               settings.Statistics.AmazonAdTimeSkipped += adTime;
             }
-            chrome.storage.sync.set({ settings });
+            increaseBadge();
             console.log("Self Ad skipped, length:", adTime, button);
           }
         }
@@ -268,13 +287,6 @@ if (isVideo || isNetflix) {
   }
   // a little to intense to do this every time but it works, not currently used
   async function Amazon_AdTimeout() {
-    let selfLastAdTime = 0;
-    async function resetLastATimeText() {
-      // timeout of 0.5 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
-      setTimeout(() => {
-        selfLastAdTime = "";
-      }, 500);
-    }
     // set loop every 1 sec and check if ad is there
     let AdInterval = setInterval(function () {
       if (!settings.Amazon.skipAd) {
@@ -293,13 +305,12 @@ if (isVideo || isNetflix) {
               .innerHTML.match(/[:]\d+/)[0]
               .substring(1)
           );
-          if (selfLastAdTime != adTime) {
-            selfLastAdTime = adTime;
-            resetLastATimeText();
+          if (lastAdTimeText !== "-1") {
             button.click();
-            // if adTime is number
+            lastAdTimeText = "-1";
             if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
-            chrome.storage.sync.set({ settings });
+            increaseBadge();
+            resetLastATimeText(1000);
             console.log("Self Ad skipped, length:", adTime, button);
           }
         }
@@ -449,5 +460,29 @@ if (isVideo || isNetflix) {
       console.log("stopped observing| FreeVee Ad");
       AmazonFreeVeeObserver.disconnect();
     }
+  }
+  // Badge functions
+
+  function setBadgeText(text) {
+    chrome.runtime.sendMessage({
+      type: "setBadgeText",
+      content: text,
+    });
+  }
+  function increaseBadge() {
+    settings.Statistics.SegmentsSkipped++;
+    chrome.storage.sync.set({ settings });
+    chrome.runtime.sendMessage({
+      type: "increaseBadge",
+    });
+    // chrome.runtime.sendMessage({
+    //   type: "setBadgeText",
+    //   content: "10",
+    // });
+  }
+  function resetBadge() {
+    chrome.runtime.sendMessage({
+      type: "resetBadge",
+    });
   }
 }

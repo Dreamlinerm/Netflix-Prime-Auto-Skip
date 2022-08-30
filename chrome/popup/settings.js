@@ -24,7 +24,7 @@ const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
-    Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0 },
+    Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
   },
 };
 let settings = defaultSettings.settings;
@@ -108,6 +108,8 @@ function setCheckboxesToSettings() {
   if (button) button.textContent = getTimeFormatted(settings?.Statistics.IntroTimeSkipped);
   button = document.querySelector("#RecapTimeSkipped");
   if (button) button.textContent = getTimeFormatted(settings?.Statistics.RecapTimeSkipped);
+  button = document.querySelector("#SegmentsSkipped");
+  if (button) button.textContent = settings?.Statistics.SegmentsSkipped;
   // import/export buttons
   button = document.querySelector("#save");
   if (button) {
