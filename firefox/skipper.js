@@ -119,23 +119,15 @@ if (isVideo || isNetflix) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       console.log("Intro Time skipped", endTime - startTime);
       settings.Statistics.IntroTimeSkipped += endTime - startTime;
-    } else {
-      // default length is 40 seconds
-      console.log("Intro Time skipped, default:", 40);
-      settings.Statistics.IntroTimeSkipped += 40;
+      increaseBadge();
     }
-    increaseBadge();
   }
   function addRecapTimeSkipped(startTime, endTime) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       console.log("Recap Time skipped", endTime - startTime);
       settings.Statistics.RecapTimeSkipped += endTime - startTime;
-    } else {
-      // default length is 30 seconds
-      console.log("Recap Time skipped, default:", 30);
-      settings.Statistics.RecapTimeSkipped += 30;
+      increaseBadge();
     }
-    increaseBadge();
   }
 
   // Observers
