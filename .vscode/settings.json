@@ -1,4 +1,7 @@
 {
-  "editor.experimental.stickyScroll.enabled": true,
-  "cSpell.words": ["Freevee"]
+  "cSpell.words": [
+    "Freevee"
+  ],
+  "editor.stickyScroll.enabled": true,
+  "task.allowAutomaticTasks": "on"
 }

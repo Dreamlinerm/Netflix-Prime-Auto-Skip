@@ -148,6 +148,7 @@ if (isVideo || isNetflix) {
           setTimeout(function () {
             addIntroTimeSkipped(time, video.currentTime);
           }, 600);
+          return;
         }
       }
     }
@@ -166,6 +167,7 @@ if (isVideo || isNetflix) {
           setTimeout(function () {
             addRecapTimeSkipped(time, video.currentTime);
           }, 600);
+          return;
         }
       }
     }
@@ -190,6 +192,7 @@ if (isVideo || isNetflix) {
           button.click();
           console.log("Blocked skipped", button);
           increaseBadge();
+          return;
         }
       }
     }
@@ -226,6 +229,7 @@ if (isVideo || isNetflix) {
             button.click();
             increaseBadge();
             console.log("skipped Credits", button);
+            return;
           }
         }
       }
@@ -280,6 +284,7 @@ if (isVideo || isNetflix) {
             }
             increaseBadge();
             console.log("Self Ad skipped, length:", adTime, button);
+            return;
           }
         }
       }
