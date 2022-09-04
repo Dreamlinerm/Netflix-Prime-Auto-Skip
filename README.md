@@ -92,7 +92,7 @@ and then skipped by forwarding by the ad length.
 ### Run
 ```web-ext run```
 ### Build
-copy firefox files to chrome and replace browser with chrome
+copy firefox files to chrome and replace "browser" with "chrome"
 
 ```web-ext build --overwrite-dest```
 
