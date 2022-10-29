@@ -460,6 +460,23 @@ if (isVideo || isNetflix) {
   async function startAmazonBlockFreeveeObserver() {
     if (settings.Amazon.blockFreevee === undefined || settings.Amazon.blockFreevee) {
       console.log("started observing| FreeVee Ad");
+
+      //skip add if turn on
+      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
+      // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
+      // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
+      if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
+        lastAdTimeText = adTimeText.textContent;
+        resetLastATimeText();
+        const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
+        if (typeof adTime === "number") {
+          video.currentTime += adTime;
+          console.log("FreeVee Ad skipped, length:", adTime, "s");
+          settings.Statistics.AmazonAdTimeSkipped += adTime;
+          increaseBadge();
+        }
+      }
       AmazonFreeVeeObserver.observe(document, FreeVeeConfig);
     } else {
       console.log("stopped observing| FreeVee Ad");
