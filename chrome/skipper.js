@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.12";
+const version = "1.0.13";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -148,6 +148,7 @@ if (isVideo || isNetflix) {
           setTimeout(function () {
             addIntroTimeSkipped(time, video.currentTime);
           }, 600);
+          return;
         }
       }
     }
@@ -166,6 +167,7 @@ if (isVideo || isNetflix) {
           setTimeout(function () {
             addRecapTimeSkipped(time, video.currentTime);
           }, 600);
+          return;
         }
       }
     }
@@ -190,6 +192,7 @@ if (isVideo || isNetflix) {
           button.click();
           console.log("Blocked skipped", button);
           increaseBadge();
+          return;
         }
       }
     }
@@ -226,6 +229,7 @@ if (isVideo || isNetflix) {
             button.click();
             increaseBadge();
             console.log("skipped Credits", button);
+            return;
           }
         }
       }
@@ -266,6 +270,8 @@ if (isVideo || isNetflix) {
         if (mutation.target.classList.contains("atvwebplayersdk-infobar-container")) {
           let button = mutation.target.querySelector(".fu4rd6c.f1cw2swo");
           if (button) {
+            // 200 ms timeout, because otherwise the subtitles wont show on the video
+            setTimeout(() => {}, 20);
             button.click();
             // only getting the time after :08
             const adTime = parseInt(
@@ -280,6 +286,7 @@ if (isVideo || isNetflix) {
             }
             increaseBadge();
             console.log("Self Ad skipped, length:", adTime, button);
+            return;
           }
         }
       }
@@ -455,6 +462,23 @@ if (isVideo || isNetflix) {
   async function startAmazonBlockFreeveeObserver() {
     if (settings.Amazon.blockFreevee === undefined || settings.Amazon.blockFreevee) {
       console.log("started observing| FreeVee Ad");
+
+      //skip add if turn on
+      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
+      // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
+      // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
+      if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
+        lastAdTimeText = adTimeText.textContent;
+        resetLastATimeText();
+        const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
+        if (typeof adTime === "number") {
+          video.currentTime += adTime;
+          console.log("FreeVee Ad skipped, length:", adTime, "s");
+          settings.Statistics.AmazonAdTimeSkipped += adTime;
+          increaseBadge();
+        }
+      }
       AmazonFreeVeeObserver.observe(document, FreeVeeConfig);
     } else {
       console.log("stopped observing| FreeVee Ad");
