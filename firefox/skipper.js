@@ -270,6 +270,8 @@ if (isVideo || isNetflix) {
         if (mutation.target.classList.contains("atvwebplayersdk-infobar-container")) {
           let button = mutation.target.querySelector(".fu4rd6c.f1cw2swo");
           if (button) {
+            // 200 ms timeout, because otherwise the subtitles wont show on the video
+            setTimeout(() => {}, 20);
             button.click();
             // only getting the time after :08
             const adTime = parseInt(
