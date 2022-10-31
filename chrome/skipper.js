@@ -310,7 +310,7 @@ if (isVideo || isNetflix) {
       let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
       if (video) {
         video.oncanplay = function () {
-          console.log("Can start playing video");
+          // console.log("Can start playing video");
           // if video is shown
           if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
             let button = document.querySelector(".fu4rd6c.f1cw2swo");
