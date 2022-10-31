@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.13";
+const version = "1.0.14";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -262,37 +262,42 @@ if (isVideo || isNetflix) {
     }, time);
   }
 
-  const AmazonSkipAdObserver = new MutationObserver(Amazon_Ad);
-  async function Amazon_Ad(mutations, observer) {
-    // web player is shown
-    if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
-      for (let mutation of mutations) {
-        if (mutation.target.classList.contains("atvwebplayersdk-infobar-container")) {
-          let button = mutation.target.querySelector(".fu4rd6c.f1cw2swo");
-          if (button) {
-            // 100 ms timeout, because otherwise the subtitles wont show on the video
-            setTimeout(() => {
-              button.click();
-              // only getting the time after :08
-              const adTime = parseInt(
-                document
-                  .querySelector(".atvwebplayersdk-adtimeindicator-text")
-                  .innerHTML.match(/[:]\d+/)[0]
-                  .substring(1)
-              );
-              // if adTime is number
-              if (typeof adTime === "number") {
-                settings.Statistics.AmazonAdTimeSkipped += adTime;
-              }
-              increaseBadge();
-              console.log("Self Ad skipped, length:", adTime, button);
-              return;
-            }, 100);
-          }
-        }
-      }
-    }
+  // const AmazonSkipAdObserver = new MutationObserver(Amazon_Ad);
+  // async function Amazon_Ad(mutations, observer) {
+  //   // web player is shown
+  //   if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
+  //     for (let mutation of mutations) {
+  //       if (mutation.target.classList.contains("atvwebplayersdk-infobar-container")) {
+  //         let button = mutation.target.querySelector(".fu4rd6c.f1cw2swo");
+  //         if (button) {
+  //           button.click();
+  //           // only getting the time after :08
+  //           const adTime = parseInt(
+  //             document
+  //               .querySelector(".atvwebplayersdk-adtimeindicator-text")
+  //               .innerHTML.match(/[:]\d+/)[0]
+  //               .substring(1)
+  //           );
+  //           // if adTime is number
+  //           if (typeof adTime === "number") {
+  //             settings.Statistics.AmazonAdTimeSkipped += adTime;
+  //           }
+  //           increaseBadge();
+  //           console.log("Self Ad skipped, length:", adTime, button);
+  //           return;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  async function resetAdSkipActive(time = 1000) {
+    // timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
+    setTimeout(() => {
+      adSkipActive = true;
+    }, time);
   }
+
+  adSkipActive = true;
   // a little to intense to do this every time but it works, not currently used
   async function Amazon_AdTimeout() {
     // set loop every 1 sec and check if ad is there
@@ -302,28 +307,41 @@ if (isVideo || isNetflix) {
         clearInterval(AdInterval);
         return;
       }
-      // if video is shown
-      if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
-        let button = document.querySelector(".fu4rd6c.f1cw2swo");
-        if (button) {
-          // only getting the time after :08
-          let adTime = parseInt(
-            document
-              .querySelector(".atvwebplayersdk-adtimeindicator-text")
-              .innerHTML.match(/[:]\d+/)[0]
-              .substring(1)
-          );
-          if (lastAdTimeText !== "-1") {
-            button.click();
-            lastAdTimeText = "-1";
-            if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
-            increaseBadge();
-            resetLastATimeText(1000);
-            console.log("Self Ad skipped, length:", adTime, button);
+      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      if (video) {
+        video.oncanplay = function () {
+          console.log("Can start playing video");
+          // if video is shown
+          if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
+            let button = document.querySelector(".fu4rd6c.f1cw2swo");
+            if (button) {
+              // only getting the time after :08
+              let adTime = parseInt(
+                document
+                  .querySelector(".atvwebplayersdk-adtimeindicator-text")
+                  .innerHTML.match(/[:]\d+/)[0]
+                  .substring(1)
+              );
+              if (adSkipActive) {
+                adSkipActive = false;
+                // 2000 works
+                // 1500 works
+                // 1000 doesnt work
+                setTimeout(() => {
+                  if (button) {
+                    button.click();
+                    if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
+                    increaseBadge();
+                    resetAdSkipActive(1000);
+                    console.log("Self Ad skipped, length:", adTime, button);
+                  }
+                }, 1500);
+              }
+            }
           }
-        }
+        };
       }
-    }, 1000);
+    }, 100);
   }
 
   // start/stop the observers depending on settings
