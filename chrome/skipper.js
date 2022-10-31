@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.12";
+const version = "1.0.13";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -270,23 +270,24 @@ if (isVideo || isNetflix) {
         if (mutation.target.classList.contains("atvwebplayersdk-infobar-container")) {
           let button = mutation.target.querySelector(".fu4rd6c.f1cw2swo");
           if (button) {
-            // 200 ms timeout, because otherwise the subtitles wont show on the video
-            setTimeout(() => {}, 20);
-            button.click();
-            // only getting the time after :08
-            const adTime = parseInt(
-              document
-                .querySelector(".atvwebplayersdk-adtimeindicator-text")
-                .innerHTML.match(/[:]\d+/)[0]
-                .substring(1)
-            );
-            // if adTime is number
-            if (typeof adTime === "number") {
-              settings.Statistics.AmazonAdTimeSkipped += adTime;
-            }
-            increaseBadge();
-            console.log("Self Ad skipped, length:", adTime, button);
-            return;
+            // 100 ms timeout, because otherwise the subtitles wont show on the video
+            setTimeout(() => {
+              button.click();
+              // only getting the time after :08
+              const adTime = parseInt(
+                document
+                  .querySelector(".atvwebplayersdk-adtimeindicator-text")
+                  .innerHTML.match(/[:]\d+/)[0]
+                  .substring(1)
+              );
+              // if adTime is number
+              if (typeof adTime === "number") {
+                settings.Statistics.AmazonAdTimeSkipped += adTime;
+              }
+              increaseBadge();
+              console.log("Self Ad skipped, length:", adTime, button);
+              return;
+            }, 100);
           }
         }
       }
