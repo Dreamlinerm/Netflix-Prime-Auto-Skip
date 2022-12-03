@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.14";
+const version = "1.0.15";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -290,15 +290,6 @@ if (isVideo || isNetflix) {
   //     }
   //   }
   // }
-  async function resetAdSkipActive(time = 1000) {
-    // timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
-    setTimeout(() => {
-      adSkipActive = true;
-    }, time);
-  }
-
-  adSkipActive = true;
-  // a little to intense to do this every time but it works, not currently used
   async function Amazon_AdTimeout() {
     // set loop every 1 sec and check if ad is there
     let AdInterval = setInterval(function () {
@@ -309,9 +300,9 @@ if (isVideo || isNetflix) {
       }
       let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
       if (video) {
-        video.oncanplay = function () {
-          console.log("Can start playing video");
-          // if video is shown
+        video.onplay = function () {
+          // console.log("started playing video");
+          // if video is playing
           if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
             let button = document.querySelector(".fu4rd6c.f1cw2swo");
             if (button) {
@@ -322,21 +313,15 @@ if (isVideo || isNetflix) {
                   .innerHTML.match(/[:]\d+/)[0]
                   .substring(1)
               );
-              if (adSkipActive) {
-                adSkipActive = false;
-                // 2000 works
-                // 1500 works
-                // 1000 doesnt work
-                setTimeout(() => {
-                  if (button) {
-                    button.click();
-                    if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
-                    increaseBadge();
-                    resetAdSkipActive(1000);
-                    console.log("Self Ad skipped, length:", adTime, button);
-                  }
-                }, 1500);
-              }
+              // wait for 100ms before skipping to make sure the button is not pressed too fast, or there will be inifinite loading
+              setTimeout(() => {
+                if (button) {
+                  button.click();
+                  if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
+                  increaseBadge();
+                  console.log("Self Ad skipped, length:", adTime, button);
+                }
+              }, 100);
             }
           }
         };
