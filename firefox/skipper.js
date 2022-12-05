@@ -226,23 +226,22 @@ if (isVideo || isNetflix) {
       button.style = "padding: 0px 22px; line-height: normal; min-width: 0px";
       button.setAttribute("class", "fqye4e3 f1ly7q5u fk9c3ap fz9ydgy f1xrlb00 f1hy0e6n fgbpje3 f1uteees f1h2a8xb  f1cg7427 fiqc9rt fg426ew f1ekwadg");
       button.setAttribute("data-uia", "reverse-intro-button");
-      button.textContent = "reverse skipped intro";
+      button.textContent = "watch skipped ?";
       document.querySelector(".f18oq18q.f6suwnu.fhxjtbc.f1ngx5al").appendChild(button);
-      // set 2 sec timeout
       buttonInHTML = document.querySelector('[data-uia="reverse-intro-button"]');
-      function test() {
+      function goBack() {
         video.currentTime = startTime;
         buttonInHTML.remove();
         console.log("stopped observing| Intro");
         AmazonSkipIntroObserver.disconnect();
         waitTime = endTime - startTime + 2;
-        console.log("waiting for:", waitTime);
+        // console.log("waiting for:", waitTime);
         setTimeout(function () {
           console.log("restarted observing| Intro");
           AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
         }, waitTime * 1000);
       }
-      buttonInHTML.addEventListener("click", test);
+      buttonInHTML.addEventListener("click", goBack);
       setTimeout(() => {
         buttonInHTML.remove();
         reverseButton = false;
