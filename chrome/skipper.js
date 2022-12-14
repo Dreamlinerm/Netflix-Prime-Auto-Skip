@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.15";
+const version = "1.0.16";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -212,8 +212,40 @@ if (isVideo || isNetflix) {
       console.log("Intro skipped", button);
       //delay where the video is loaded
       setTimeout(function () {
+        AmazonGobackbutton(video, time, video.currentTime);
         addIntroTimeSkipped(time, video.currentTime);
       }, 50);
+    }
+  }
+  reverseButton = false;
+  function AmazonGobackbutton(video, startTime, endTime) {
+    if (!reverseButton) {
+      reverseButton = true;
+      // go back button
+      const button = document.createElement("button");
+      button.style = "padding: 0px 22px; line-height: normal; min-width: 0px";
+      button.setAttribute("class", "fqye4e3 f1ly7q5u fk9c3ap fz9ydgy f1xrlb00 f1hy0e6n fgbpje3 f1uteees f1h2a8xb  f1cg7427 fiqc9rt fg426ew f1ekwadg");
+      button.setAttribute("data-uia", "reverse-button");
+      button.textContent = "Watch skipped ?";
+      document.querySelector(".f18oq18q.f6suwnu.fhxjtbc.f1ngx5al").appendChild(button);
+      buttonInHTML = document.querySelector('[data-uia="reverse-button"]');
+      function goBack() {
+        video.currentTime = startTime;
+        buttonInHTML.remove();
+        console.log("stopped observing| Intro");
+        AmazonSkipIntroObserver.disconnect();
+        waitTime = endTime - startTime + 2;
+        // console.log("waiting for:", waitTime);
+        setTimeout(function () {
+          console.log("restarted observing| Intro");
+          AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
+        }, waitTime * 1000);
+      }
+      buttonInHTML.addEventListener("click", goBack);
+      setTimeout(() => {
+        buttonInHTML.remove();
+        reverseButton = false;
+      }, 5000);
     }
   }
 
@@ -243,7 +275,7 @@ if (isVideo || isNetflix) {
     let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
     // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
     // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
-    if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
+    if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && !video.paused && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
       lastAdTimeText = adTimeText.textContent;
       resetLastATimeText();
       const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
