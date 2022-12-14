@@ -275,7 +275,7 @@ if (isVideo || isNetflix) {
     let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
     // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
     // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
-    if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
+    if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && !video.paused && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
       lastAdTimeText = adTimeText.textContent;
       resetLastATimeText();
       const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
