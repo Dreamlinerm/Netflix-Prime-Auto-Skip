@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.17";
+const version = "1.0.18";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -267,23 +267,32 @@ if (isVideo || isNetflix) {
       }
     }
   }
-
   const FreeVeeConfig = { attributes: true, attributeFilter: [".atvwebplayersdk-adtimeindicator-text"], subtree: true, childList: true, attributeOldValue: false };
   const AmazonFreeVeeObserver = new MutationObserver(AmazonFreeVee);
   async function AmazonFreeVee(mutations, observer) {
     let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
-    let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
-    // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
-    // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
-    if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && video.currentTime > 0 && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
-      lastAdTimeText = adTimeText.textContent;
-      resetLastATimeText();
-      const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
-      if (typeof adTime === "number") {
-        video.currentTime += adTime;
-        console.log("FreeVee Ad skipped, length:", adTime, "s");
-        settings.Statistics.AmazonAdTimeSkipped += adTime;
-        increaseBadge();
+    // fixes the issue of infinite loading/crashing if the first time a series is played.
+    if (video) {
+      if (video.currentTime != 0) {
+        skipAd();
+      } else if (!video.paused) {
+        skipAd();
+      }
+      function skipAd() {
+        let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
+        // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
+        // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
+        if (!document.querySelector(".fu4rd6c.f1cw2swo") && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
+          lastAdTimeText = adTimeText.textContent;
+          resetLastATimeText();
+          const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
+          if (typeof adTime === "number") {
+            video.currentTime += adTime;
+            console.log("FreeVee Ad skipped, length:", adTime, "s");
+            settings.Statistics.AmazonAdTimeSkipped += adTime;
+            increaseBadge();
+          }
+        }
       }
     }
   }
