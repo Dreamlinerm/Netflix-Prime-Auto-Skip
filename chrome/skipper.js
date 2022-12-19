@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.16";
+const version = "1.0.17";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -275,7 +275,7 @@ if (isVideo || isNetflix) {
     let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
     // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
     // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
-    if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && !video.paused && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
+    if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && video.currentTime > 0 && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
       lastAdTimeText = adTimeText.textContent;
       resetLastATimeText();
       const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
