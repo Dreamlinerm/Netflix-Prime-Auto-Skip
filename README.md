@@ -6,6 +6,12 @@
 
 Automatically skip Ads, intros, Credits, etc. on Prime video and Netflix.
 
+Firefox:
+<img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
+<img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
+Chrome: 
+<img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
+
 </div>
 
 ## Installation
