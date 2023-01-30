@@ -23,7 +23,7 @@ if (isVideo || isNetflix) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
-      Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
+      Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
       Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     },
@@ -56,7 +56,7 @@ if (isVideo || isNetflix) {
             startAmazonBlockFreeveeObserver();
           }, 200);
         }
-        startAmazonVideoObserver();
+        if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
       }
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
@@ -97,6 +97,7 @@ if (isVideo || isNetflix) {
           if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon.skipCredits) startAmazonSkipCreditsObserver();
           if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon.skipAd) startAmazonSkipAdObserver();
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon.blockFreevee) startAmazonBlockFreeveeObserver();
+          if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon.speedSlider) startAmazonSpeedSliderObserver();
         }
         if (oldValue === undefined || newValue.Statistics.AmazonAdTimeSkipped !== oldValue.Statistics.AmazonAdTimeSkipped) {
           settings.Statistics.AmazonAdTimeSkipped = newValue.Statistics.AmazonAdTimeSkipped;
@@ -200,19 +201,15 @@ if (isVideo || isNetflix) {
   }
 
   // Amazon Observers
-  const AmazonVideoConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
-  const AmazonVideoObserver = new MutationObserver(Amazon_Video);
-  function Amazon_Video(mutations, observer) {
+  const AmazonSpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
+  const AmazonSpeedSliderObserver = new MutationObserver(Amazon_SpeedSlider);
+  function Amazon_SpeedSlider(mutations, observer) {
     let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
     let alreadySlider = document.querySelector("#videoSpeedSlider");
     if (video) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
         let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
-        let speed = document.createElement("p");
-        speed.id = "videoSpeed";
-        speed.innerHTML = "1.0x";
-        position.appendChild(speed);
         let slider = document.createElement("input");
         slider.id = "videoSpeedSlider";
         slider.type = "range";
@@ -222,7 +219,11 @@ if (isVideo || isNetflix) {
         slider.step = "1";
         // slider.setAttribute("list", "markers");
         slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);";
-        position.appendChild(slider);
+        position.insertBefore(slider, position.firstChild);
+        let speed = document.createElement("p");
+        speed.id = "videoSpeed";
+        speed.innerHTML = "1.0x";
+        position.insertBefore(speed, position.firstChild);
         // let datalist = document.createElement("datalist");
         // datalist.id = "markers";
         // let option1 = document.createElement("option");
@@ -496,13 +497,40 @@ if (isVideo || isNetflix) {
       NetflixSkipBlockedObserver.disconnect();
     }
   }
-  async function startAmazonVideoObserver() {
-    if (true) {
-      console.log("started observing| Video");
-      AmazonVideoObserver.observe(document, AmazonVideoConfig);
+  async function startAmazonSpeedSliderObserver() {
+    if (settings.Amazon.speedSlider === undefined || settings.Amazon.speedSlider) {
+      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let alreadySlider = document.querySelector("#videoSpeedSlider");
+      if (video) {
+        if (!alreadySlider) {
+          // infobar position for the slider to be added
+          let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
+          let slider = document.createElement("input");
+          slider.id = "videoSpeedSlider";
+          slider.type = "range";
+          slider.min = "5";
+          slider.max = "15";
+          slider.value = "10";
+          slider.step = "1";
+          slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);";
+          position.insertBefore(slider, position.firstChild);
+          let speed = document.createElement("p");
+          speed.id = "videoSpeed";
+          speed.innerHTML = "1.0x";
+          position.insertBefore(speed, position.firstChild);
+          slider.oninput = function () {
+            speed.innerHTML = this.value / 10 + "x";
+            video.playbackRate = this.value / 10;
+          };
+        }
+      }
+      console.log("started adding | SpeedSlider");
+      AmazonSpeedSliderObserver.observe(document, AmazonSpeedSliderConfig);
     } else {
-      console.log("stopped observing| Intro");
-      AmazonVideoObserver.disconnect();
+      console.log("stopped adding| SpeedSlider");
+      AmazonSpeedSliderObserver.disconnect();
+      document.querySelector("#videoSpeed").remove();
+      document.querySelector("#videoSpeedSlider").remove();
     }
   }
 
