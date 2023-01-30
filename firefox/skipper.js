@@ -245,8 +245,12 @@ if (isVideo || isNetflix) {
       } else {
         // need to resync the slider with the video sometimes
         speed = document.querySelector("#videoSpeed");
+        if (video.playbackRate != alreadySlider.value / 10) {
+          video.playbackRate = alreadySlider.value / 10;
+        }
         // speed.innerHTML = 1 + "x";
         // alreadySlider.value = 10;
+        // console.log("test");
         alreadySlider.oninput = function () {
           speed.innerHTML = this.value / 10 + "x";
           video.playbackRate = this.value / 10;
