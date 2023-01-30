@@ -56,6 +56,7 @@ if (isVideo || isNetflix) {
             startAmazonBlockFreeveeObserver();
           }, 200);
         }
+        startAmazonVideoObserver();
       }
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
@@ -199,6 +200,35 @@ if (isVideo || isNetflix) {
   }
 
   // Amazon Observers
+  const AmazonVideoConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
+  const AmazonVideoObserver = new MutationObserver(Amazon_Video);
+  function Amazon_Video(mutations, observer) {
+    let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+    let alreadySlider = document.querySelector("#videoSpeedSlider");
+    if (video && !alreadySlider) {
+      // infobar position for the slider to be added
+      let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
+      let speed = document.createElement("p");
+      speed.id = "videoSpeed";
+      speed.innerHTML = "1.0x";
+      position.appendChild(speed);
+      let slider = document.createElement("input");
+      slider.id = "videoSpeedSlider";
+      slider.type = "range";
+      slider.min = "50";
+      slider.max = "150";
+      slider.value = "100";
+      slider.step = "25";
+      slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);";
+      position.appendChild(slider);
+
+      // Update the current slider value (each time you drag the slider handle)
+      slider.oninput = function () {
+        speed.innerHTML = this.value / 100 + "x";
+        video.playbackRate = this.value / 100;
+      };
+    }
+  }
 
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
@@ -437,6 +467,16 @@ if (isVideo || isNetflix) {
       NetflixSkipBlockedObserver.disconnect();
     }
   }
+  async function startAmazonVideoObserver() {
+    if (true) {
+      console.log("started observing| Video");
+      AmazonVideoObserver.observe(document, AmazonVideoConfig);
+    } else {
+      console.log("stopped observing| Intro");
+      AmazonVideoObserver.disconnect();
+    }
+  }
+
   async function startAmazonSkipIntroObserver() {
     if (settings.Amazon.skipIntro === undefined || settings.Amazon.skipIntro) {
       console.log("started observing| Intro");

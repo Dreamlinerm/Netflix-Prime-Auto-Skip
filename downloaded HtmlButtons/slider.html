@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #myRange {
+        height: 0.1875vw;
+        background: rgb(221, 221, 221);
+      }
+      #myRange::-moz-range-thumb {
+        background: rgb(221, 221, 221);
+        opacity: 0;
+        border: none;
+      }
+      #myRange::-webkit-slider-thumb {
+        background: rgb(221, 221, 221);
+        opacity: 0;
+        border: none;
+      }
+      #myRange::-webkit-slider-thumb:hover {
+        opacity: 1;
+      }
+      #myRange::-moz-range-thumb:hover {
+        opacity: 1;
+      }
+      #myRange::-moz-range-progress {
+        background-color: rgb(221, 221, 221);
+      }
+      #myRange::-moz-range-track {
+        background-color: rgb(64, 64, 64);
+      }
+    </style>
+  </head>
+  <body>
+    <video id="myVideo" width="320" height="176" controls>
+      <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+    <p id="demo">test</p>
+    <input id="myRange" type="range" min="50" max="150" value="100" />
+
+    <script>
+      var vid = document.getElementById("myVideo");
+
+      var slider = document.getElementById("myRange");
+      slider.step = "25";
+      var output = document.getElementById("demo");
+      output.innerHTML = slider.value; // Display the default slider value
+
+      // Update the current slider value (each time you drag the slider handle)
+      slider.oninput = function () {
+        output.innerHTML = this.value / 100;
+        vid.playbackRate = this.value / 100;
+      };
+    </script>
+  </body>
+</html>
