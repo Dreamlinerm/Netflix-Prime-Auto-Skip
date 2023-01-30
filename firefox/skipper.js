@@ -205,28 +205,53 @@ if (isVideo || isNetflix) {
   function Amazon_Video(mutations, observer) {
     let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
     let alreadySlider = document.querySelector("#videoSpeedSlider");
-    if (video && !alreadySlider) {
-      // infobar position for the slider to be added
-      let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
-      let speed = document.createElement("p");
-      speed.id = "videoSpeed";
-      speed.innerHTML = "1.0x";
-      position.appendChild(speed);
-      let slider = document.createElement("input");
-      slider.id = "videoSpeedSlider";
-      slider.type = "range";
-      slider.min = "50";
-      slider.max = "150";
-      slider.value = "100";
-      slider.step = "25";
-      slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);";
-      position.appendChild(slider);
-
-      // Update the current slider value (each time you drag the slider handle)
-      slider.oninput = function () {
-        speed.innerHTML = this.value / 100 + "x";
-        video.playbackRate = this.value / 100;
-      };
+    if (video) {
+      if (!alreadySlider) {
+        // infobar position for the slider to be added
+        let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
+        let speed = document.createElement("p");
+        speed.id = "videoSpeed";
+        speed.innerHTML = "1.0x";
+        position.appendChild(speed);
+        let slider = document.createElement("input");
+        slider.id = "videoSpeedSlider";
+        slider.type = "range";
+        slider.min = "5";
+        slider.max = "15";
+        slider.value = "10";
+        slider.step = "1";
+        // slider.setAttribute("list", "markers");
+        slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);";
+        position.appendChild(slider);
+        // let datalist = document.createElement("datalist");
+        // datalist.id = "markers";
+        // let option1 = document.createElement("option");
+        // option1.value = "5";
+        // // option1.label = "5";
+        // let option2 = document.createElement("option");
+        // option2.value = "10";
+        // // option2.label = "1";
+        // let option3 = document.createElement("option");
+        // option3.value = "15";
+        // // option3.label = "1.5";
+        // datalist.appendChild(option1);
+        // datalist.appendChild(option2);
+        // datalist.appendChild(option3);
+        // position.appendChild(datalist);
+        slider.oninput = function () {
+          speed.innerHTML = this.value / 10 + "x";
+          video.playbackRate = this.value / 10;
+        };
+      } else {
+        // need to resync the slider with the video sometimes
+        speed = document.querySelector("#videoSpeed");
+        // speed.innerHTML = 1 + "x";
+        // alreadySlider.value = 10;
+        alreadySlider.oninput = function () {
+          speed.innerHTML = this.value / 10 + "x";
+          video.playbackRate = this.value / 10;
+        };
+      }
     }
   }
 
