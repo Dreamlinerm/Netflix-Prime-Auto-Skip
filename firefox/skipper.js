@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.18";
+const version = "1.0.19";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -643,7 +643,7 @@ if (isVideo || isNetflix) {
     });
   }
   function resetBadge() {
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
       type: "resetBadge",
     });
   }
