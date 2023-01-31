@@ -222,7 +222,7 @@ if (isVideo || isNetflix) {
         position.insertBefore(slider, position.firstChild);
         let speed = document.createElement("p");
         speed.id = "videoSpeed";
-        speed.innerHTML = "1.0x";
+        speed.textContent = "1.0x";
         position.insertBefore(speed, position.firstChild);
         // let datalist = document.createElement("datalist");
         // datalist.id = "markers";
@@ -240,7 +240,7 @@ if (isVideo || isNetflix) {
         // datalist.appendChild(option3);
         // position.appendChild(datalist);
         slider.oninput = function () {
-          speed.innerHTML = this.value / 10 + "x";
+          speed.textContent = this.value / 10 + "x";
           video.playbackRate = this.value / 10;
         };
       } else {
@@ -249,11 +249,8 @@ if (isVideo || isNetflix) {
         if (video.playbackRate != alreadySlider.value / 10) {
           video.playbackRate = alreadySlider.value / 10;
         }
-        // speed.innerHTML = 1 + "x";
-        // alreadySlider.value = 10;
-        // console.log("test");
         alreadySlider.oninput = function () {
-          speed.innerHTML = this.value / 10 + "x";
+          speed.textContent = this.value / 10 + "x";
           video.playbackRate = this.value / 10;
         };
       }
@@ -516,10 +513,10 @@ if (isVideo || isNetflix) {
           position.insertBefore(slider, position.firstChild);
           let speed = document.createElement("p");
           speed.id = "videoSpeed";
-          speed.innerHTML = "1.0x";
+          speed.textContent = "1.0x";
           position.insertBefore(speed, position.firstChild);
           slider.oninput = function () {
-            speed.innerHTML = this.value / 10 + "x";
+            speed.textContent = this.value / 10 + "x";
             video.playbackRate = this.value / 10;
           };
         }
