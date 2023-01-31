@@ -22,7 +22,7 @@ if (window.outerWidth > 100) {
 // global variables in localStorage
 const defaultSettings = {
   settings: {
-    Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
+    Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
     Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
   },
@@ -90,6 +90,8 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.skipAd;
   button = document.querySelector("#AmazonFreevee");
   if (button) button.checked = settings?.Amazon.blockFreevee;
+  button = document.querySelector("#AmazonSpeedSlider");
+  if (button) button.checked = settings?.Amazon.speedSlider;
 
   button = document.querySelector("#NetflixSkips");
   if (button) button.checked = settings?.Netflix.skipIntro && settings?.Netflix.skipRecap && settings?.Netflix.skipCredits && settings?.Netflix.skipBlocked;
@@ -167,6 +169,7 @@ function listenForClicks() {
       settings.Amazon.skipCredits = AmazonSkips;
       settings.Amazon.skipAd = AmazonSkips;
       settings.Amazon.blockFreevee = AmazonSkips;
+      settings.Amazon.speedSlider = AmazonSkips;
       console.log("settings.AmazonSkips", settings);
       browser.storage.sync.set({ settings });
     } else if (e.target.id === "openAmazonSettings") {
@@ -187,6 +190,10 @@ function listenForClicks() {
     } else if (e.target.id === "AmazonFreevee") {
       settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
       console.log("settings.blockFreevee", settings);
+      browser.storage.sync.set({ settings });
+    } else if (e.target.id === "AmazonSpeedSlider") {
+      settings.Amazon.speedSlider = !settings.Amazon.speedSlider;
+      console.log("settings.AmazonSpeedSlider", settings);
       browser.storage.sync.set({ settings });
     }
     //  -------------      Netflix        ---------------------------------------

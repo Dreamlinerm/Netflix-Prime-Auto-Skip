@@ -17,13 +17,13 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.18";
+const version = "1.0.19";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
-      Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true },
+      Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
       Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     },
@@ -56,6 +56,7 @@ if (isVideo || isNetflix) {
             startAmazonBlockFreeveeObserver();
           }, 200);
         }
+        if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
       }
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
@@ -96,6 +97,7 @@ if (isVideo || isNetflix) {
           if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon.skipCredits) startAmazonSkipCreditsObserver();
           if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon.skipAd) startAmazonSkipAdObserver();
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon.blockFreevee) startAmazonBlockFreeveeObserver();
+          if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon.speedSlider) startAmazonSpeedSliderObserver();
         }
         if (oldValue === undefined || newValue.Statistics.AmazonAdTimeSkipped !== oldValue.Statistics.AmazonAdTimeSkipped) {
           settings.Statistics.AmazonAdTimeSkipped = newValue.Statistics.AmazonAdTimeSkipped;
@@ -199,6 +201,64 @@ if (isVideo || isNetflix) {
   }
 
   // Amazon Observers
+  const AmazonSpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
+  const AmazonSpeedSliderObserver = new MutationObserver(Amazon_SpeedSlider);
+  function Amazon_SpeedSlider(mutations, observer) {
+    let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+    let alreadySlider = document.querySelector("#videoSpeedSlider");
+    if (video) {
+      if (!alreadySlider) {
+        // infobar position for the slider to be added
+        let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
+        let slider = document.createElement("input");
+        slider.id = "videoSpeedSlider";
+        slider.type = "range";
+        slider.min = "5";
+        slider.max = "15";
+        slider.value = "10";
+        slider.step = "1";
+        // slider.setAttribute("list", "markers");
+        slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);";
+        position.insertBefore(slider, position.firstChild);
+        let speed = document.createElement("p");
+        speed.id = "videoSpeed";
+        speed.innerHTML = "1.0x";
+        position.insertBefore(speed, position.firstChild);
+        // let datalist = document.createElement("datalist");
+        // datalist.id = "markers";
+        // let option1 = document.createElement("option");
+        // option1.value = "5";
+        // // option1.label = "5";
+        // let option2 = document.createElement("option");
+        // option2.value = "10";
+        // // option2.label = "1";
+        // let option3 = document.createElement("option");
+        // option3.value = "15";
+        // // option3.label = "1.5";
+        // datalist.appendChild(option1);
+        // datalist.appendChild(option2);
+        // datalist.appendChild(option3);
+        // position.appendChild(datalist);
+        slider.oninput = function () {
+          speed.innerHTML = this.value / 10 + "x";
+          video.playbackRate = this.value / 10;
+        };
+      } else {
+        // need to resync the slider with the video sometimes
+        speed = document.querySelector("#videoSpeed");
+        if (video.playbackRate != alreadySlider.value / 10) {
+          video.playbackRate = alreadySlider.value / 10;
+        }
+        // speed.innerHTML = 1 + "x";
+        // alreadySlider.value = 10;
+        // console.log("test");
+        alreadySlider.oninput = function () {
+          speed.innerHTML = this.value / 10 + "x";
+          video.playbackRate = this.value / 10;
+        };
+      }
+    }
+  }
 
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
@@ -437,6 +497,43 @@ if (isVideo || isNetflix) {
       NetflixSkipBlockedObserver.disconnect();
     }
   }
+  async function startAmazonSpeedSliderObserver() {
+    if (settings.Amazon.speedSlider === undefined || settings.Amazon.speedSlider) {
+      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let alreadySlider = document.querySelector("#videoSpeedSlider");
+      if (video) {
+        if (!alreadySlider) {
+          // infobar position for the slider to be added
+          let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
+          let slider = document.createElement("input");
+          slider.id = "videoSpeedSlider";
+          slider.type = "range";
+          slider.min = "5";
+          slider.max = "15";
+          slider.value = "10";
+          slider.step = "1";
+          slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);";
+          position.insertBefore(slider, position.firstChild);
+          let speed = document.createElement("p");
+          speed.id = "videoSpeed";
+          speed.innerHTML = "1.0x";
+          position.insertBefore(speed, position.firstChild);
+          slider.oninput = function () {
+            speed.innerHTML = this.value / 10 + "x";
+            video.playbackRate = this.value / 10;
+          };
+        }
+      }
+      console.log("started adding | SpeedSlider");
+      AmazonSpeedSliderObserver.observe(document, AmazonSpeedSliderConfig);
+    } else {
+      console.log("stopped adding| SpeedSlider");
+      AmazonSpeedSliderObserver.disconnect();
+      document.querySelector("#videoSpeed").remove();
+      document.querySelector("#videoSpeedSlider").remove();
+    }
+  }
+
   async function startAmazonSkipIntroObserver() {
     if (settings.Amazon.skipIntro === undefined || settings.Amazon.skipIntro) {
       console.log("started observing| Intro");
@@ -546,7 +643,7 @@ if (isVideo || isNetflix) {
     });
   }
   function resetBadge() {
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
       type: "resetBadge",
     });
   }
