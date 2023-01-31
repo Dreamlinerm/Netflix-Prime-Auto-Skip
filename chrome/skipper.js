@@ -212,9 +212,9 @@ if (isVideo || isNetflix) {
         let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
 
         let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("width", "22px");
-        svg.setAttribute("height", "20px");
-        svg.setAttribute("viewBox", "2 2 20 20");
+        svg.setAttribute("width", "1.2vw");
+        svg.setAttribute("height", "1.2vw");
+        svg.setAttribute("viewBox", "0 0 24 24");
         svg.setAttribute("id", "speedbutton");
         let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
         path.setAttribute(
@@ -241,25 +241,15 @@ if (isVideo || isNetflix) {
           if (slider.style.display === "block") slider.style.display = "none";
           else slider.style.display = "block";
         };
+
         let speed = document.createElement("p");
         speed.id = "videoSpeed";
         speed.textContent = "1.0x";
         position.insertBefore(speed, position.firstChild);
-        // let datalist = document.createElement("datalist");
-        // datalist.id = "markers";
-        // let option1 = document.createElement("option");
-        // option1.value = "5";
-        // // option1.label = "5";
-        // let option2 = document.createElement("option");
-        // option2.value = "10";
-        // // option2.label = "1";
-        // let option3 = document.createElement("option");
-        // option3.value = "15";
-        // // option3.label = "1.5";
-        // datalist.appendChild(option1);
-        // datalist.appendChild(option2);
-        // datalist.appendChild(option3);
-        // position.appendChild(datalist);
+        speed.onclick = function () {
+          if (slider.style.display === "block") slider.style.display = "none";
+          else slider.style.display = "block";
+        };
         slider.oninput = function () {
           speed.textContent = this.value / 10 + "x";
           video.playbackRate = this.value / 10;
@@ -525,9 +515,9 @@ if (isVideo || isNetflix) {
           let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
 
           let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-          svg.setAttribute("width", "22px");
-          svg.setAttribute("height", "20px");
-          svg.setAttribute("viewBox", "2 2 20 20");
+          svg.setAttribute("width", "1.2vw");
+          svg.setAttribute("height", "1.2vw");
+          svg.setAttribute("viewBox", "0 0 24 24");
           svg.setAttribute("id", "speedbutton");
           let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
           path.setAttribute(
@@ -554,10 +544,15 @@ if (isVideo || isNetflix) {
             if (slider.style.display === "block") slider.style.display = "none";
             else slider.style.display = "block";
           };
+
           let speed = document.createElement("p");
           speed.id = "videoSpeed";
           speed.textContent = "1.0x";
           position.insertBefore(speed, position.firstChild);
+          speed.onclick = function () {
+            if (slider.style.display === "block") slider.style.display = "none";
+            else slider.style.display = "block";
+          };
           slider.oninput = function () {
             speed.textContent = this.value / 10 + "x";
             video.playbackRate = this.value / 10;
