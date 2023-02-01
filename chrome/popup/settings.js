@@ -12,7 +12,7 @@
  */
 
 // find out if on settings page or on popup page
-if (window.outerWidth > 100) {
+if (window?.outerWidth) {
   AmazonSettings();
   NetflixSettings();
   // Statistics();
