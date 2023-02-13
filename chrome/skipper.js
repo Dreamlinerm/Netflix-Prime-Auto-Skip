@@ -206,6 +206,14 @@ if (isVideo || isNetflix) {
   function Amazon_SpeedSlider(mutations, observer) {
     let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
     let alreadySlider = document.querySelector("#videoSpeedSlider");
+
+    // remove bad background hue which is annoying
+    //document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
+    let b = document.querySelector(".fkpovp9.f8hspre");
+    if (b && b.style.background != "rgba(0, 0, 0, 0.25)") {
+      b.style.background = "rgba(0, 0, 0, 0.25)";
+    }
+
     if (video) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
@@ -509,6 +517,13 @@ if (isVideo || isNetflix) {
     if (settings.Amazon.speedSlider === undefined || settings.Amazon.speedSlider) {
       let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
       let alreadySlider = document.querySelector("#videoSpeedSlider");
+
+      // remove bad background document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
+      let b = document.querySelector(".fkpovp9.f8hspre");
+      if (b && b.style.background != "rgba(0, 0, 0, 0.25)") {
+        b.style.background = "rgba(0, 0, 0, 0.25)";
+      }
+
       if (video) {
         if (!alreadySlider) {
           // infobar position for the slider to be added
