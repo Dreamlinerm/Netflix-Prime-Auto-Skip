@@ -579,9 +579,9 @@ if (isVideo || isNetflix) {
     } else {
       console.log("stopped adding| SpeedSlider");
       AmazonSpeedSliderObserver.disconnect();
-      document.querySelector("#videoSpeed").remove();
-      document.querySelector("#videoSpeedSlider").remove();
-      document.querySelector("#speedbutton").remove();
+      document.querySelector("#videoSpeed")?.remove();
+      document.querySelector("#videoSpeedSlider")?.remove();
+      document.querySelector("#speedbutton")?.remove();
     }
   }
 
