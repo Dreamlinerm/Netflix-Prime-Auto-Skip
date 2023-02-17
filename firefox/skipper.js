@@ -220,8 +220,7 @@ if (isVideo || isNetflix) {
         let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
 
         let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("width", "1.2vw");
-        svg.setAttribute("height", "1.2vw");
+        svg.setAttribute("style", "width:1.2vw;height:1.2vw");
         svg.setAttribute("viewBox", "0 0 24 24");
         svg.setAttribute("id", "speedbutton");
         let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -530,8 +529,7 @@ if (isVideo || isNetflix) {
           let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
 
           let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-          svg.setAttribute("width", "1.2vw");
-          svg.setAttribute("height", "1.2vw");
+          svg.setAttribute("style", "width:1.2vw;height:1.2vw");
           svg.setAttribute("viewBox", "0 0 24 24");
           svg.setAttribute("id", "speedbutton");
           let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
