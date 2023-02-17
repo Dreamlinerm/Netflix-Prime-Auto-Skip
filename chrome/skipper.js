@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.21";
+const version = "1.0.22";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -220,8 +220,7 @@ if (isVideo || isNetflix) {
         let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
 
         let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("width", "1.2vw");
-        svg.setAttribute("height", "1.2vw");
+        svg.setAttribute("style", "width:1.2vw;height:1.2vw");
         svg.setAttribute("viewBox", "0 0 24 24");
         svg.setAttribute("id", "speedbutton");
         let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -530,8 +529,7 @@ if (isVideo || isNetflix) {
           let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
 
           let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-          svg.setAttribute("width", "1.2vw");
-          svg.setAttribute("height", "1.2vw");
+          svg.setAttribute("style", "width:1.2vw;height:1.2vw");
           svg.setAttribute("viewBox", "0 0 24 24");
           svg.setAttribute("id", "speedbutton");
           let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -579,9 +577,9 @@ if (isVideo || isNetflix) {
     } else {
       console.log("stopped adding| SpeedSlider");
       AmazonSpeedSliderObserver.disconnect();
-      document.querySelector("#videoSpeed").remove();
-      document.querySelector("#videoSpeedSlider").remove();
-      document.querySelector("#speedbutton").remove();
+      document.querySelector("#videoSpeed")?.remove();
+      document.querySelector("#videoSpeedSlider")?.remove();
+      document.querySelector("#speedbutton")?.remove();
     }
   }
 

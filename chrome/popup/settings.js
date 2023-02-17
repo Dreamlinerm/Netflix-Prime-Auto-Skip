@@ -12,7 +12,7 @@
  */
 
 // find out if on settings page or on popup page
-if (window?.outerWidth) {
+if (window?.outerWidth > 50) {
   AmazonSettings();
   NetflixSettings();
   // Statistics();
@@ -173,8 +173,7 @@ function listenForClicks() {
       console.log("settings.AmazonSkips", settings);
       chrome.storage.sync.set({ settings });
     } else if (e.target.id === "openAmazonSettings") {
-      if (document.getElementById("AmazonSettings").style.display === "none") AmazonSettings();
-      else AmazonSettings(false);
+      AmazonSettings(document.getElementById("AmazonSettings").style.display === "none");
     } else if (e.target.id === "AmazonCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
       console.log("settings.AmazonCredits", settings);
@@ -206,8 +205,7 @@ function listenForClicks() {
       console.log("settings.NetflixSkips", settings);
       chrome.storage.sync.set({ settings });
     } else if (e.target.id === "openNetflixSettings") {
-      if (document.getElementById("NetflixSettings").style.display == "none") NetflixSettings();
-      else NetflixSettings(false);
+      NetflixSettings(document.getElementById("NetflixSettings").style.display == "none");
     } else if (e.target.id === "NetflixIntro") {
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
       console.log("settings.NetflixIntro", settings);
@@ -227,8 +225,7 @@ function listenForClicks() {
     }
     // Statistics
     else if (e.target.id === "openStatistics") {
-      if (document.getElementById("Statistics").style.display === "none") Statistics();
-      else Statistics(false);
+      Statistics(document.getElementById("Statistics").style.display === "none");
     } else if (e.target.id === "upload") {
       // get the file from #file and console.log it
       const file = document.getElementById("file").files[0];
