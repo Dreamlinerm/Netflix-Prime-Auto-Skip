@@ -100,7 +100,7 @@ and then skipped by forwarding by the ad length.
 ### Install web-ext
 ```npm install --global web-ext```
 ### Run
-```web-ext run```
+```web-ext run --devtools```
 ### Build
 copy firefox files to chrome and replace "browser" with "chrome"
 
