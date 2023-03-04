@@ -344,30 +344,35 @@ if (isVideo || isNetflix) {
   }
   const FreeVeeConfig = { attributes: true, attributeFilter: [".atvwebplayersdk-adtimeindicator-text"], subtree: true, childList: true, attributeOldValue: false };
   const AmazonFreeVeeObserver = new MutationObserver(AmazonFreeVee);
+  function skipAd(video) {
+    let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
+    if (adTimeText != null) {
+      const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
+      // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
+      // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
+      if (!document.querySelector(".fu4rd6c.f1cw2swo") && lastAdTimeText != adTime) {
+        lastAdTimeText = adTime;
+        resetLastATimeText();
+        if (typeof adTime === "number") {
+          // getting stuck loading when skipping ad longer than 100 seconds i think
+          let skipTime = adTime < 90 ? adTime : 90;
+          video.currentTime += skipTime;
+          console.log("FreeVee Ad skipped, length:", skipTime, "s");
+          settings.Statistics.AmazonAdTimeSkipped += skipTime;
+          increaseBadge();
+          video.removeEventListener("playing", skipAd);
+        }
+      }
+    }
+  }
   async function AmazonFreeVee(mutations, observer) {
     let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
     // fixes the issue of infinite loading/crashing if the first time a series is played.
     if (video) {
-      if (video.currentTime != 0) {
-        skipAd();
-      } else if (!video.paused) {
-        skipAd();
-      }
-      function skipAd() {
-        let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
-        // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
-        // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
-        if (!document.querySelector(".fu4rd6c.f1cw2swo") && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
-          lastAdTimeText = adTimeText.textContent;
-          resetLastATimeText();
-          const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
-          if (typeof adTime === "number") {
-            video.currentTime += adTime;
-            console.log("FreeVee Ad skipped, length:", adTime, "s");
-            settings.Statistics.AmazonAdTimeSkipped += adTime;
-            increaseBadge();
-          }
-        }
+      if (!video.paused && video.currentTime > 0) {
+        skipAd(video);
+      } else {
+        video.addEventListener("playing", skipAd(video));
       }
     }
   }
@@ -653,27 +658,14 @@ if (isVideo || isNetflix) {
   async function startAmazonBlockFreeveeObserver() {
     if (settings.Amazon.blockFreevee === undefined || settings.Amazon.blockFreevee) {
       console.log("started observing| FreeVee Ad");
-
-      //skip add if turn on
-      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
-      let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
-      // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
-      // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
-      if (!document.querySelector(".fu4rd6c.f1cw2swo") && video != null && adTimeText != null && lastAdTimeText != adTimeText.textContent) {
-        lastAdTimeText = adTimeText.textContent;
-        resetLastATimeText();
-        const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
-        if (typeof adTime === "number") {
-          video.currentTime += adTime;
-          console.log("FreeVee Ad skipped, length:", adTime, "s");
-          settings.Statistics.AmazonAdTimeSkipped += adTime;
-          increaseBadge();
-        }
-      }
       AmazonFreeVeeObserver.observe(document, FreeVeeConfig);
     } else {
       console.log("stopped observing| FreeVee Ad");
       AmazonFreeVeeObserver.disconnect();
+      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      if (video) {
+        video.removeEventListener("playing", skipAd);
+      }
     }
   }
   // Badge functions
