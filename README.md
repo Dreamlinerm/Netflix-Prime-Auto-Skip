@@ -46,8 +46,8 @@ Netflix:
 Prime video:
 * Self promoting ads
 * Freevee Ads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Watch series for free without ads
-* Adding a slider to the UI to change the playback speed
-* Remove blur when hovering over the video
+* Adding playback speed control to UI
+* Remove annoying blur when hovering over video
 
 ## Contributing
 

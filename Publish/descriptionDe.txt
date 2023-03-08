@@ -25,6 +25,13 @@ Amazon Prime-Video Automatisches Überspringen:
 <li>Eigenwerbung</li>
 </ul>
 
+Amazon Prime video andere Funktionen:
+
+<ul>
+<li>Wiedergabegeschwindigkeitskontrolle</li>
+<li>Entfernen der lästigen dunklen Unschärfe, wenn das overlay angezeigt wird</li>
+</ul>
+
 ☔ Sicher
 
 Die Erweiterung ist Open Source! Probieren Sie es aus, wenn Sie zu <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> beitragen möchten.
@@ -63,6 +70,10 @@ Amazon Prime-Video Automatisches Überspringen:
 •Freevee Werbung
 •Eigenwerbung
 
+Amazon Prime video andere Funktionen:
+
+•Wiedergabegeschwindigkeitskontrolle
+•Entfernen der lästigen dunklen Unschärfe, wenn das overlay angezeigt wird
 
 ☔ Sicher
 
