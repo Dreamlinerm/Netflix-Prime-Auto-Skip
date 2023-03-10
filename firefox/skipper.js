@@ -346,40 +346,57 @@ if (isVideo || isNetflix) {
       }
     }
   }
-  const FreeVeeConfig = { attributes: true, attributeFilter: [".atvwebplayersdk-adtimeindicator-text"], subtree: true, childList: true, attributeOldValue: false };
-  const AmazonFreeVeeObserver = new MutationObserver(AmazonFreeVee);
+
   function skipAd(video) {
     let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
-    if (adTimeText != null) {
+    if (adTimeText) {
       const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
       // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
       // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
       if (!document.querySelector(".fu4rd6c.f1cw2swo") && lastAdTimeText != adTime) {
-        lastAdTimeText = adTime;
         resetLastATimeText();
-        if (typeof adTime === "number") {
+        if (typeof adTime === "number" && adTime > 1) {
           // getting stuck loading when skipping ad longer than 100 seconds i think
-          let skipTime = adTime < 90 ? adTime : 90;
+          let skipTime = adTime < 10 ? adTime - 1 : 10;
           video.currentTime += skipTime;
           console.log("FreeVee Ad skipped, length:", skipTime, "s");
-          settings.Statistics.AmazonAdTimeSkipped += skipTime;
+          settings.Statistics.AmazonAdTimeSkipped += skipTime + 1;
           increaseBadge();
-          video.removeEventListener("playing", skipAd);
+          // video.removeEventListener("playing", skipAd);
         }
       }
     }
   }
-  async function AmazonFreeVee(mutations, observer) {
-    let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
-    // fixes the issue of infinite loading/crashing if the first time a series is played.
-    if (video) {
-      if (!video.paused && video.currentTime > 0) {
-        skipAd(video);
-      } else {
-        video.addEventListener("playing", skipAd(video));
+  // const FreeVeeConfig = { attributes: true, attributeFilter: [".atvwebplayersdk-adtimeindicator-text"], subtree: true, childList: true, attributeOldValue: false };
+  // const AmazonFreeVeeObserver = new MutationObserver(AmazonFreeVee);
+  // async function AmazonFreeVee(mutations, observer) {
+  //   let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+  //   // fixes the issue of infinite loading/crashing if the first time a series is played.
+  //   if (video) {
+  //     if (!video.paused && video.currentTime > 0) {
+  //       skipAd(video);
+  //     } else if (video.currentTime > 0) {
+  //       video.addEventListener("playing", skipAd(video));
+  //     }
+  //   }
+  // }
+
+  async function Amazon_FreeveeTimeout() {
+    // set loop every 1 sec and check if ad is there
+    let AdInterval = setInterval(function () {
+      if (!settings.Amazon.blockFreevee) {
+        console.log("stopped observing| FreeVee Ad");
+        clearInterval(AdInterval);
+        return;
       }
-    }
+      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      if (video && !video.paused && video.currentTime > 0) {
+        // && !video.paused
+        skipAd(video);
+      }
+    }, 100);
   }
+
   async function resetLastATimeText(time = 1000) {
     // timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
     setTimeout(() => {
@@ -667,15 +684,17 @@ if (isVideo || isNetflix) {
   async function startAmazonBlockFreeveeObserver() {
     if (settings.Amazon.blockFreevee === undefined || settings.Amazon.blockFreevee) {
       console.log("started observing| FreeVee Ad");
-      AmazonFreeVeeObserver.observe(document, FreeVeeConfig);
-    } else {
-      console.log("stopped observing| FreeVee Ad");
-      AmazonFreeVeeObserver.disconnect();
-      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
-      if (video) {
-        video.removeEventListener("playing", skipAd);
-      }
+      // AmazonFreeVeeObserver.observe(document, FreeVeeConfig);
+      Amazon_FreeveeTimeout();
     }
+    // else {
+    //   console.log("stopped observing| FreeVee Ad");
+    //   AmazonFreeVeeObserver.disconnect();
+    //   let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+    //   if (video) {
+    //     video.removeEventListener("playing", skipAd);
+    //   }
+    // }
   }
   // Badge functions
 
