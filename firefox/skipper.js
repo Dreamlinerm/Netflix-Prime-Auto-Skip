@@ -357,7 +357,7 @@ if (isVideo || isNetflix) {
         resetLastATimeText();
         if (typeof adTime === "number" && adTime > 1) {
           // getting stuck loading when skipping ad longer than 100 seconds i think
-          let skipTime = adTime < 10 ? adTime - 1 : 10;
+          let skipTime = adTime < 20 ? adTime - 1 : 20;
           video.currentTime += skipTime;
           console.log("FreeVee Ad skipped, length:", skipTime, "s");
           settings.Statistics.AmazonAdTimeSkipped += skipTime + 1;
