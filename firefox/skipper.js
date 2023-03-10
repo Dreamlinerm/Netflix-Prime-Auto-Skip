@@ -618,6 +618,7 @@ if (isVideo || isNetflix) {
       let button = document.querySelector("[class*=nextupcard-button]");
       if (button) {
         // only skipping to next episode not an entirely new series
+        // this not skipping between seasons, which is fine i think because amazon is still doing it
         let newEpNumber = document.querySelector("[class*=nextupcard-episode]");
         if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
           button.click();
