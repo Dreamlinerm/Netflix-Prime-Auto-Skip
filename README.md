@@ -47,6 +47,7 @@ Prime video:
 * Self promoting ads
 * Freevee Ads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Watch series for free without ads
 * Adding playback speed control to UI
+* Removing every Film and series that has to be paid for
 * Remove annoying blur when hovering over video
 
 ## Contributing
@@ -90,6 +91,7 @@ On Prime video it matches buttons with the Css Classes:
 * Intro: skipelement
 * Credits: nextupcard-button
 * Self promoting ads: .fu4rd6c.f1cw2swo
+* Paid Content: .o86fri (yallow text indicates paid films)
   
 The freevee ad text contains the ad length which is matched by 
 
