@@ -28,6 +28,7 @@ Amazon Prime-Video Automatisches Überspringen:
 Amazon Prime video andere Funktionen:
 
 <ul>
+<li>Filterung kostenpflichtiger Inhalte (Filme, Serien)</li>
 <li>Wiedergabegeschwindigkeitskontrolle</li>
 <li>Entfernen der lästigen dunklen Unschärfe, wenn das overlay angezeigt wird</li>
 </ul>
@@ -65,15 +66,16 @@ Netflix automatisches überspringen:
 Amazon Prime-Video Automatisches Überspringen:
 
 
-•Intros
-•Credits: Geht automatisch zur nächsten Folge
-•Freevee Werbung
-•Eigenwerbung
+• Intros
+• Credits: Geht automatisch zur nächsten Folge
+• Freevee Werbung
+• Eigenwerbung
 
 Amazon Prime video andere Funktionen:
 
-•Wiedergabegeschwindigkeitskontrolle
-•Entfernen der lästigen dunklen Unschärfe, wenn das overlay angezeigt wird
+• Filterung kostenpflichtiger Inhalte (Filme, Serien)
+• Wiedergabegeschwindigkeitskontrolle
+• Entfernen der lästigen dunklen Unschärfe, wenn das overlay angezeigt wird
 
 ☔ Sicher
 

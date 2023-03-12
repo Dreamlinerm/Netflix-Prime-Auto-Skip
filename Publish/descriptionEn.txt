@@ -24,6 +24,7 @@ Amazon Prime video Automatically skipping:
 Amazon Prime video other features:
 
 <ul>
+<li>Filtering paid content (movies, series)</li>
 <li>Adding playback speed control to UI</li>
 <li>Remove annoying blur when hovering over video</li>
 </ul>
@@ -56,15 +57,16 @@ Netflix Automatically skipping:
 
 Amazon Prime video Automatically skipping:
 
-•Intros
-•Credits                           : automatically goes to the next episode
-•Freevee ads
-•Self promoting ads
+• Intros
+• Credits                           : automatically goes to the next episode
+• Freevee ads
+• Self promoting ads
 
 Amazon Prime video other features:
 
-•Adding playback speed control to UI
-•Remove annoying blur when hovering over video
+• Filtering paid content (movies, series)
+• Adding playback speed control to UI
+• Remove annoying blur when hovering over video
 
 
 ☔ Safe
