@@ -47,7 +47,7 @@ Prime video:
 * Self promoting ads
 * Freevee Ads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Watch series for free without ads
 * Adding playback speed control to UI
-* Removing every Film and series that has to be paid for
+* Filtering paid content (movies, series)
 * Remove annoying blur when hovering over video
 
 ## Contributing
