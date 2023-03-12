@@ -17,13 +17,13 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.25";
+const version = "1.0.26";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
-      Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true },
+      Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
       Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     },
@@ -57,6 +57,7 @@ if (isVideo || isNetflix) {
           }, 200);
         }
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
+        if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
       }
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
@@ -98,6 +99,7 @@ if (isVideo || isNetflix) {
           if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon.skipAd) startAmazonSkipAdObserver();
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon.blockFreevee) startAmazonBlockFreeveeObserver();
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon.speedSlider) startAmazonSpeedSliderObserver();
+          if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon.filterPaid) startAmazonFilterPaidObserver();
         }
         if (oldValue === undefined || newValue.Statistics.AmazonAdTimeSkipped !== oldValue.Statistics.AmazonAdTimeSkipped) {
           settings.Statistics.AmazonAdTimeSkipped = newValue.Statistics.AmazonAdTimeSkipped;
@@ -273,6 +275,22 @@ if (isVideo || isNetflix) {
         };
       }
     }
+  }
+  const AmazonFilterPaidConfig = { attributes: true, attributeFilter: [".o86fri"], subtree: true, childList: true, attributeOldValue: false };
+  const AmazonFilterPaidObserver = new MutationObserver(Amazon_FilterPaid);
+  function Amazon_FilterPaid(mutations, observer) {
+    document.querySelectorAll(".o86fri").forEach((e) => {
+      a = e;
+      SectionCount = 0;
+      while (a.parentElement && SectionCount < 2) {
+        a = a.parentElement;
+        if (a.tagName == "SECTION") {
+          SectionCount++;
+        }
+      }
+      console.log("Filtered paid Element", a.parentElement);
+      a.remove();
+    });
   }
 
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
@@ -606,6 +624,16 @@ if (isVideo || isNetflix) {
       document.querySelector("#videoSpeed")?.remove();
       document.querySelector("#videoSpeedSlider")?.remove();
       document.querySelector("#speedbutton")?.remove();
+    }
+  }
+  async function startAmazonFilterPaidObserver() {
+    if (settings.Amazon.filterPaid === undefined || settings.Amazon.filterPaid) {
+      console.log("started filtering| Paid films");
+
+      AmazonFilterPaidObserver.observe(document, AmazonFilterPaidConfig);
+    } else {
+      console.log("stopped filtering| Paid films");
+      AmazonFilterPaidObserver.disconnect();
     }
   }
 

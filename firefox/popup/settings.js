@@ -22,7 +22,7 @@ if (window?.outerWidth > 400) {
 // global variables in localStorage
 const defaultSettings = {
   settings: {
-    Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true },
+    Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
     Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
   },
@@ -92,6 +92,8 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.blockFreevee;
   button = document.querySelector("#AmazonSpeedSlider");
   if (button) button.checked = settings?.Amazon.speedSlider;
+  button = document.querySelector("#AmazonfilterPaid");
+  if (button) button.checked = settings?.Amazon.filterPaid;
 
   button = document.querySelector("#NetflixSkips");
   if (button) button.checked = settings?.Netflix.skipIntro && settings?.Netflix.skipRecap && settings?.Netflix.skipCredits && settings?.Netflix.skipBlocked;
@@ -170,6 +172,7 @@ function listenForClicks() {
       settings.Amazon.skipAd = AmazonSkips;
       settings.Amazon.blockFreevee = AmazonSkips;
       settings.Amazon.speedSlider = AmazonSkips;
+      settings.Amazon.filterPaid = AmazonSkips;
       console.log("settings.AmazonSkips", settings);
       browser.storage.sync.set({ settings });
     } else if (e.target.id === "openAmazonSettings") {
@@ -193,6 +196,10 @@ function listenForClicks() {
     } else if (e.target.id === "AmazonSpeedSlider") {
       settings.Amazon.speedSlider = !settings.Amazon.speedSlider;
       console.log("settings.AmazonSpeedSlider", settings);
+      browser.storage.sync.set({ settings });
+    } else if (e.target.id === "AmazonfilterPaid") {
+      settings.Amazon.filterPaid = !settings.Amazon.filterPaid;
+      console.log("settings.filterPaid", settings);
       browser.storage.sync.set({ settings });
     }
     //  -------------      Netflix        ---------------------------------------
