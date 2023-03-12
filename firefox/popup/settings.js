@@ -81,7 +81,9 @@ function getTimeFormatted(sec = 0) {
 }
 function setCheckboxesToSettings() {
   let button = document.querySelector("#AmazonSkips");
-  if (button) button.checked = settings?.Amazon.skipIntro && settings?.Amazon.skipCredits && settings?.Amazon.skipAd && settings?.Amazon.blockFreevee;
+  if (button)
+    button.checked =
+      settings?.Amazon.skipIntro && settings?.Amazon.skipCredits && settings?.Amazon.skipAd && settings?.Amazon.blockFreevee && settings?.Amazon.speedSlider && settings?.Amazon.filterPaid;
   button = document.querySelector("#AmazonIntro");
   if (button) button.checked = settings?.Amazon.skipIntro;
   button = document.querySelector("#AmazonCredits");
@@ -166,7 +168,14 @@ function listenForClicks() {
       console.log("settings resetted to", defaultSettings);
       browser.storage.sync.set(defaultSettings);
     } else if (e.target.id === "AmazonSkips") {
-      const AmazonSkips = !(settings.Amazon.skipIntro && settings.Amazon.skipCredits && settings.Amazon.skipAd && settings.Amazon.blockFreevee);
+      const AmazonSkips = !(
+        settings.Amazon.skipIntro &&
+        settings.Amazon.skipCredits &&
+        settings.Amazon.skipAd &&
+        settings.Amazon.blockFreevee &&
+        settings.Amazon.speedSlider &&
+        settings.Amazon.filterPaid
+      );
       settings.Amazon.skipIntro = AmazonSkips;
       settings.Amazon.skipCredits = AmazonSkips;
       settings.Amazon.skipAd = AmazonSkips;
