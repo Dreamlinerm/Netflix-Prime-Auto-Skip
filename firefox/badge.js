@@ -45,3 +45,11 @@ browser.runtime.onMessage.addListener(function (message, sender) {
     browser.browserAction.setBadgeText({ text: "", tabId: sender.tab.id });
   }
 });
+
+browser.runtime.onInstalled.addListener((details) => {
+  if (details.reason === "update" || details.reason === "install") {
+    browser.tabs.create({
+      url: "popup/settings.html",
+    });
+  }
+});
