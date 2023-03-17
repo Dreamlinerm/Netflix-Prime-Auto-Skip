@@ -12,12 +12,12 @@
  */
 
 // find out if on settings page or on popup page
-if (window?.outerWidth > 400) {
-  AmazonSettings();
-  NetflixSettings();
-  // Statistics();
-  document.querySelector("#Export").style.display = "block";
-}
+// if (window?.outerWidth > 400) {
+//   AmazonSettings();
+//   NetflixSettings();
+//   // Statistics();
+//   document.querySelector("#Export").style.display = "block";
+// }
 
 // global variables in localStorage
 const defaultSettings = {

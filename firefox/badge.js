@@ -47,7 +47,6 @@ browser.runtime.onMessage.addListener(function (message, sender) {
 });
 
 browser.runtime.onInstalled.addListener((details) => {
-  console.log(details);
   if (details.reason === "update" || details.reason === "install") {
     browser.tabs.create({
       url: "popup/settings.html",

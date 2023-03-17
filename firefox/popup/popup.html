@@ -32,10 +32,6 @@
           </div>
         </div>
       </div>
-      <h2>New in this version:</h2>
-      <ul>
-        <li>automatic opening of the settings page when the extension is installed</li>
-      </ul>
       <div class="categoryPrime">
         <div class="flex flex-between" style="padding: 5px 5px">
           <h2>All Prime Video Auto-skips</h2>
@@ -54,7 +50,7 @@
           </svg>
         </div>
         <!-- show on click -->
-        <div id="AmazonSettings" style="display: block">
+        <div id="AmazonSettings" style="display: none">
           <div class="line flex">
             <p>Skip Intro:</p>
             <label class="switch">
@@ -118,7 +114,7 @@
           </svg>
         </div>
         <!-- show on click -->
-        <div id="NetflixSettings" style="display: block">
+        <div id="NetflixSettings" style="display: none">
           <div class="line flex">
             <p>Skip Intro:</p>
             <label class="switch">
@@ -159,7 +155,7 @@
         </svg>
       </div>
       <!-- show on click -->
-      <div id="Statistics" style="display: block">
+      <div id="Statistics" style="display: none">
         <div class="line flex flex-between">
           <p>Ad time Skipped:</p>
           <p id="AmazonAdTime">0s</p>
@@ -181,14 +177,6 @@
       <div class="flex">
         <a class="button github" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
         <a class="button donate" href="https://paypal.me/MarvinKrebber" target="_blank">Donate $</a>
-      </div>
-      <div id="Export" class="hidden">
-        <h2>Import/Export all Settings:</h2>
-        <div class="flex flex-col flex-align">
-          <a class="button" id="save">Save Settings as file</a>
-          <input type="file" id="file" name="settings" accept="text/json" />
-          <div class="button" id="upload">Upload settings</div>
-        </div>
       </div>
       <div id="error-content" class="hidden">
         <p>Pop-up not working on this page.</p>
