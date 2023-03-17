@@ -201,15 +201,6 @@ if (isVideo || isNetflix) {
       }
     }
   }
-  // oninstall open settings new feature
-  // chrome.runtime.onInstalled.addListener((reason) => {
-  //   if (reason === chrome.runtime.OnInstalledReason.INSTALL) {
-  //     chrome.tabs.create({
-  //       url: "onboarding.html"
-  //     });
-  //   }
-  // });
-  // https://developer.chrome.com/docs/extensions/reference/tabs/
   // const videoPlayer = netflix.appContext.state.playerApp.getAPI().videoPlayer;
   // const player = videoPlayer.getVideoPlayerBySessionId(videoPlayer.getAllPlayerSessionIds()[0]);
   // player.seek(1091243);
