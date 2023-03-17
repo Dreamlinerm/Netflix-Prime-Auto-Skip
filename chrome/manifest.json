@@ -28,7 +28,7 @@
     }
   ],
 
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "action": {
     "default_icon": {
       "16": "icons/NetflixAmazon Auto-Skip--16.png",
