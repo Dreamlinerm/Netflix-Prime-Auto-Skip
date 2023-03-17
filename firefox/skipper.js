@@ -201,6 +201,15 @@ if (isVideo || isNetflix) {
       }
     }
   }
+  // oninstall open settings new feature
+  // chrome.runtime.onInstalled.addListener((reason) => {
+  //   if (reason === chrome.runtime.OnInstalledReason.INSTALL) {
+  //     chrome.tabs.create({
+  //       url: "onboarding.html"
+  //     });
+  //   }
+  // });
+  // https://developer.chrome.com/docs/extensions/reference/tabs/
 
   // Amazon Observers
   const AmazonSpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
