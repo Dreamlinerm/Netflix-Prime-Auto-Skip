@@ -216,16 +216,17 @@ if (isVideo || isNetflix) {
       }
       const video = document.querySelector("video");
       const adLength = Number(document.querySelector(".ltr-puk2kp")?.textContent);
-      if (video && adLength && video.playbackRate != 16) {
-        console.log("Ad skipped, length:", adLength, "s");
-        settings.Statistics.NetflixAdTimeSkipped += adLength;
-        increaseBadge();
-        video.playbackRate = 16;
-        if (video.paused) {
+      if (video) {
+        if (adLength && video.playbackRate != 16) {
+          console.log("Ad skipped, length:", adLength, "s");
+          settings.Statistics.NetflixAdTimeSkipped += adLength;
+          increaseBadge();
+          video.playbackRate = 16;
+        } else if (adLength && video.paused) {
           video.play();
+        } else if (video.playbackRate == 16 && !adLength) {
+          video.playbackRate = 1;
         }
-      } else if (video && video.playbackRate == 16 && !adLength) {
-        video.playbackRate = 1;
       }
     }, 100);
   }
