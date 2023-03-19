@@ -29,7 +29,6 @@
       "js": ["skipper.js"]
     }
   ],
-  "web_accessible_resources": ["inject.js"],
   "permissions": ["storage", "tabs"],
   "browser_action": {
     "default_icon": "icons/NetflixAmazon Auto-Skip.svg",

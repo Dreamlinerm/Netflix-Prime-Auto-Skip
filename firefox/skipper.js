@@ -25,7 +25,7 @@ if (isVideo || isNetflix) {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true },
-      Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
+      Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     },
   };
   let settings = defaultSettings.settings;
@@ -105,6 +105,9 @@ if (isVideo || isNetflix) {
         }
         if (oldValue === undefined || newValue.Statistics.AmazonAdTimeSkipped !== oldValue.Statistics.AmazonAdTimeSkipped) {
           settings.Statistics.AmazonAdTimeSkipped = newValue.Statistics.AmazonAdTimeSkipped;
+        }
+        if (oldValue === undefined || newValue.Statistics.NetflixAdTimeSkipped !== oldValue.Statistics.NetflixAdTimeSkipped) {
+          settings.Statistics.NetflixAdTimeSkipped = newValue.Statistics.NetflixAdTimeSkipped;
         }
         if (oldValue === undefined || newValue.Statistics.IntroTimeSkipped !== oldValue.Statistics.IntroTimeSkipped) {
           settings.Statistics.IntroTimeSkipped = newValue.Statistics.IntroTimeSkipped;
@@ -202,6 +205,29 @@ if (isVideo || isNetflix) {
         }
       }
     }
+  }
+
+  function Netflix_SkipAdInterval() {
+    let AdInterval = setInterval(() => {
+      if (!settings.Netflix?.NetflixAds) {
+        console.log("stopped observing| Ad");
+        clearInterval(AdInterval);
+        return;
+      }
+      const video = document.querySelector("video");
+      const adLength = Number(document.querySelector(".ltr-puk2kp")?.textContent);
+      if (video && adLength && video.playbackRate != 16) {
+        console.log("Ad skipped, length:", adLength, "s");
+        settings.Statistics.NetflixAdTimeSkipped += adLength;
+        increaseBadge();
+        video.playbackRate = 16;
+        if (video.paused) {
+          video.play();
+        }
+      } else if (video && video.playbackRate == 16 && !adLength) {
+        video.playbackRate = 1;
+      }
+    }, 100);
   }
 
   // Amazon Observers
@@ -562,13 +588,14 @@ if (isVideo || isNetflix) {
     if (settings.Netflix.NetflixAds === undefined || settings.Netflix.NetflixAds) {
       console.log("started observing| Ad");
       // Inject the script to the page:
-      let script = document.createElement("script");
-      script.src = chrome.runtime.getURL("inject.js?") + new URLSearchParams({ adLength: 1 });
-      (document.head || document.documentElement).appendChild(script);
+      // let script = document.createElement("script");
+      // script.src = chrome.runtime.getURL("inject.js?") + new URLSearchParams({ adLength: 1 });
+      // (document.head || document.documentElement).appendChild(script);
+      Netflix_SkipAdInterval();
     } else {
       console.log("stopped observing| Ad");
-      script = document.querySelector("script[src*='inject.js']");
-      if (script) script.remove();
+      // script = document.querySelector("script[src*='inject.js']");
+      // if (script) script.remove();
     }
   }
 

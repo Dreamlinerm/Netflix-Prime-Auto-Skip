@@ -73,7 +73,7 @@
             </label>
           </div>
           <div class="line flex">
-            <p>Block Freevee Ads:</p>
+            <p>Skip Freevee Ads:</p>
             <label class="switch">
               <input type="checkbox" id="AmazonFreevee" />
               <span class="slider round"></span>
@@ -137,16 +137,16 @@
             </label>
           </div>
           <div class="line flex">
-            <p>Resume inactivity warning</p>
+            <p>Skip Ads:</p>
             <label class="switch">
-              <input type="checkbox" id="NetflixBlocked" />
+              <input type="checkbox" id="NetflixAds" />
               <span class="slider round"></span>
             </label>
           </div>
           <div class="line flex">
-            <p>Fast Forward Ads:</p>
+            <p>Resume inactivity warning:</p>
             <label class="switch">
-              <input type="checkbox" id="NetflixAds" />
+              <input type="checkbox" id="NetflixBlocked" />
               <span class="slider round"></span>
             </label>
           </div>
@@ -163,16 +163,21 @@
       </div>
       <!-- show on click -->
       <div id="Statistics" style="display: none">
+        <h2>Skipped time:</h2>
         <div class="line flex flex-between">
-          <p>Ad time Skipped:</p>
+          <p>Amazon Ad:</p>
           <p id="AmazonAdTime">0s</p>
         </div>
         <div class="line flex flex-between">
-          <p>Intro time Skipped:</p>
+          <p>Netflix Ad:</p>
+          <p id="NetflixAdTime">0s</p>
+        </div>
+        <div class="line flex flex-between">
+          <p>Intro:</p>
           <p id="IntroTimeSkipped">0s</p>
         </div>
         <div class="line flex flex-between">
-          <p>Recap time Skipped:</p>
+          <p>Recap:</p>
           <p id="RecapTimeSkipped">0s</p>
         </div>
         <div class="line flex flex-between">

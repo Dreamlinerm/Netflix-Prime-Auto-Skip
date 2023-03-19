@@ -34,8 +34,7 @@
       </div>
       <h2>New in version 1.0.28:</h2>
       <ul style="font-size: 1.2em">
-        <li>Fast Forwarding Ads on Netflix by 2X</li>
-        <li>automatic opening of the settings when extension is updated/installed</li>
+        <li>Skipping Netflix Ads on basic tier</li>
       </ul>
       <div class="categoryPrime">
         <div class="flex flex-between" style="padding: 5px 5px">
@@ -55,7 +54,7 @@
           </svg>
         </div>
         <!-- show on click -->
-        <div id="AmazonSettings" style="display: block">
+        <div id="AmazonSettings">
           <div class="line flex">
             <p>Skip Intro:</p>
             <label class="switch">
@@ -78,7 +77,7 @@
             </label>
           </div>
           <div class="line flex">
-            <p>Block Freevee Ads:</p>
+            <p>Skip Freevee Ads:</p>
             <label class="switch">
               <input type="checkbox" id="AmazonFreevee" />
               <span class="slider round"></span>
@@ -119,7 +118,7 @@
           </svg>
         </div>
         <!-- show on click -->
-        <div id="NetflixSettings" style="display: block">
+        <div id="NetflixSettings">
           <div class="line flex">
             <p>Skip Intro:</p>
             <label class="switch">
@@ -142,16 +141,16 @@
             </label>
           </div>
           <div class="line flex">
-            <p>Resume inactivity warning:</p>
+            <p>Skip Ads:</p>
             <label class="switch">
-              <input type="checkbox" id="NetflixBlocked" />
+              <input type="checkbox" id="NetflixAds" />
               <span class="slider round"></span>
             </label>
           </div>
           <div class="line flex">
-            <p>Fast Forward Ads:</p>
+            <p>Resume inactivity warning:</p>
             <label class="switch">
-              <input type="checkbox" id="NetflixAds" />
+              <input type="checkbox" id="NetflixBlocked" />
               <span class="slider round"></span>
             </label>
           </div>
@@ -168,16 +167,21 @@
       </div>
       <!-- show on click -->
       <div id="Statistics" style="display: block">
+        <h2>Skipped time:</h2>
         <div class="line flex flex-between">
-          <p>Ad time Skipped:</p>
+          <p>Amazon Ad:</p>
           <p id="AmazonAdTime">0s</p>
         </div>
         <div class="line flex flex-between">
-          <p>Intro time Skipped:</p>
+          <p>Netflix Ad:</p>
+          <p id="NetflixAdTime">0s</p>
+        </div>
+        <div class="line flex flex-between">
+          <p>Intro:</p>
           <p id="IntroTimeSkipped">0s</p>
         </div>
         <div class="line flex flex-between">
-          <p>Recap time Skipped:</p>
+          <p>Recap:</p>
           <p id="RecapTimeSkipped">0s</p>
         </div>
         <div class="line flex flex-between">
