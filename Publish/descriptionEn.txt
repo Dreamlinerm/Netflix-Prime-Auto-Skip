@@ -10,7 +10,7 @@ Netflix Automatically skipping:
 <li>Recaps</li>
 <li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
 <li>Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video</li>
-<li>Fast Forward Netflix ads by 2x</li>
+<li>Basic tier Ads</li>
 </ul>
 
 Amazon Prime video Automatically skipping:
@@ -32,7 +32,7 @@ Amazon Prime video other features:
 
 ☔ Safe
 
-The extension is open sourced! Check it out if you want to contribute <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>.
+The extension is open sourced! Check <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> out if you want to contribute.
 
 💕 Enjoying Netflix/Prime Auto-Skip?
 
@@ -54,7 +54,7 @@ Netflix Automatically skipping:
 • Recaps
 • Credits                         : automatically goes to the next episode
 • Inactivity Warning        : automatically resuming the video
-• Fast Forward Netflix ads by 2x
+• Basic tier Ads
 
 
 Amazon Prime video Automatically skipping:
@@ -73,7 +73,7 @@ Amazon Prime video other features:
 
 ☔ Safe
 
-The extension is open sourced! Check Github out if you want to contribute (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
+The extension is open sourced! Check (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip) out if you want to contribute.
 
 💕 Enjoying Netflix/Prime Auto-Skip?
 

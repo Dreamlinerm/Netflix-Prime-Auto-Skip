@@ -14,7 +14,7 @@ Netflix automatisches überspringen:
 <li>Zusammenfassungen</li>
 <li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Geht automatisch zur nächsten Folge</li>
 <li>Inaktivitätswarnung&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Video wird automatisch fortgesetzt</li>
-<li>Netflix Werbung um das Doppelte beschleunigen</li>
+<li>Werbung der Basisstufe</li>
 </ul>
 
 Amazon Prime-Video Automatisches Überspringen:
@@ -36,7 +36,7 @@ Amazon Prime video andere Funktionen:
 
 ☔ Sicher
 
-Die Erweiterung ist Open Source! Probieren Sie es aus, wenn Sie zu <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> beitragen möchten.
+Die Erweiterung ist Open Source! Besuchen sie <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>, falls sie beitragen möchten.
 
 💕 Genießen Sie Netflix/Prime Auto-Skip?
 
@@ -62,7 +62,7 @@ Netflix automatisches überspringen:
 • Zusammenfassungen
 • Credits: Geht automatisch zur nächsten Folge
 • Inaktivitätswarnung: Video wird automatisch fortgesetzt
-• Netflix Werbung um das Doppelte beschleunigen
+• Werbung der Basisstufe
 
 Amazon Prime-Video Automatisches Überspringen:
 
@@ -80,7 +80,7 @@ Amazon Prime video andere Funktionen:
 
 ☔ Sicher
 
-Die Erweiterung ist Open Source! Probieren Sie es aus, wenn Sie zu Github beitragen möchten(https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
+Die Erweiterung ist Open Source! Besuchen sie (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip), falls sie beitragen möchten.
 
 💕 Genießen Sie Netflix/Prime Auto-Skip?
 
