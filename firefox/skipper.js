@@ -17,14 +17,14 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.27";
+const version = "1.0.28";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
-      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
+      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true },
       Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     },
   };
@@ -46,6 +46,7 @@ if (isVideo || isNetflix) {
         if (settings.Netflix?.skipRecap) startNetflixSkipRecapObserver();
         if (settings.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
         if (settings.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
+        if (settings.Netflix?.NetflixAds) startNetflixAdTimeout();
       } else {
         if (settings.Amazon?.skipIntro) startAmazonSkipIntroObserver();
         if (settings.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -93,6 +94,7 @@ if (isVideo || isNetflix) {
           if (oldValue === undefined || newValue.Netflix.skipRecap !== oldValue.Netflix.skipRecap) startNetflixSkipRecapObserver();
           if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix.skipCredits) startNetflixSkipCreditsObserver();
           if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix.skipBlocked) startNetflixSkipBlockedObserver();
+          if (oldValue === undefined || newValue.Netflix.NetflixAds !== oldValue.Netflix.NetflixAds) startNetflixAdTimeout();
         } else {
           if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon.skipIntro) startAmazonSkipIntroObserver();
           if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon.skipCredits) startAmazonSkipCreditsObserver();
@@ -556,6 +558,20 @@ if (isVideo || isNetflix) {
       NetflixSkipBlockedObserver.disconnect();
     }
   }
+  async function startNetflixAdTimeout() {
+    if (settings.Netflix.NetflixAds === undefined || settings.Netflix.NetflixAds) {
+      console.log("started observing| Ad");
+      // Inject the script to the page:
+      let script = document.createElement("script");
+      script.src = chrome.runtime.getURL("inject.js?") + new URLSearchParams({ adLength: 1 });
+      (document.head || document.documentElement).appendChild(script);
+    } else {
+      console.log("stopped observing| Ad");
+      script = document.querySelector("script[src*='inject.js']");
+      if (script) script.remove();
+    }
+  }
+
   async function startAmazonSpeedSliderObserver() {
     if (settings.Amazon.speedSlider === undefined || settings.Amazon.speedSlider) {
       let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");

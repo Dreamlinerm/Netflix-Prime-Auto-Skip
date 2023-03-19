@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Netflix/Prime Auto-Skip",
-  "version": "1.0.27",
+  "version": "1.0.28",
 
   "description": "Automatically skip Ads, intros, Recaps, Credits, etc. on Netflix and Prime video.",
   "homepage_url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip",
@@ -27,7 +27,12 @@
       "js": ["skipper.js"]
     }
   ],
-
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js"],
+      "matches": ["*://*.netflix.com/*", "*://*.netflix.ca/*", "*://*.netflix.com.au/*"]
+    }
+  ],
   "permissions": ["storage", "tabs"],
   "action": {
     "default_icon": {
