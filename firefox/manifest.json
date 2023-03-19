@@ -30,11 +30,11 @@
     }
   ],
   "web_accessible_resources": ["inject.js"],
-  "permissions": ["storage"],
+  "permissions": ["storage", "tabs"],
   "browser_action": {
     "default_icon": "icons/NetflixAmazon Auto-Skip.svg",
     "default_title": "Netflix/Prime Auto-Skip ",
-    "default_popup": "popup/settings.html"
+    "default_popup": "popup/popup.html"
   },
   "background": {
     "scripts": ["badge.js"]

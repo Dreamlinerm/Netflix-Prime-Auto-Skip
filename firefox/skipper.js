@@ -210,7 +210,6 @@ if (isVideo || isNetflix) {
   }
   inject();
 
-  // NetflixVideoObserver.observe(document, NetflixVideoConfig);
   // Amazon Observers
   const AmazonSpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
   const AmazonSpeedSliderObserver = new MutationObserver(Amazon_SpeedSlider);
