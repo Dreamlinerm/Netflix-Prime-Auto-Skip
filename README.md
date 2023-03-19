@@ -36,13 +36,15 @@ It automatically skips Ads, intros, Credits, recaps, and anything else you don't
 ## ✨ Features
 Automatically skipping:
 * Intros
+* Recaps
 * Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode
+* Ads
   
 Netflix:
 
 * Recaps
 * Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video
-* Fast Forward Netflix ads by 2x on basic subscription tier
+* Basic tier Ads
 
 Prime video:
 * Self promoting ads
