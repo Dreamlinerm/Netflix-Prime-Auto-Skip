@@ -34,13 +34,13 @@ let AdInterval = setInterval(function () {
   let adLength = document.querySelector(".ltr-puk2kp")?.textContent;
   if (adLength) {
     if (player && player.getPlaybackRate() !== 2) {
-      console.log("tried to fast forward");
+      console.log("Fast forwarding Ad");
       player.setPlaybackRate(2);
     }
   }
   // set to normal playback rate if ad is over
   else if (player.getPlaybackRate() > 1.5) {
-    console.log("tried to stop fast forward");
+    console.log("Stopped fast forwarding");
     player.setPlaybackRate(1);
   }
 }, 100);

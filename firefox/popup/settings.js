@@ -23,7 +23,7 @@
 const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
-    Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true },
+    Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true },
     Statistics: { AmazonAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
   },
 };
@@ -98,7 +98,7 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.filterPaid;
 
   button = document.querySelector("#NetflixSkips");
-  if (button) button.checked = settings?.Netflix.skipIntro && settings?.Netflix.skipRecap && settings?.Netflix.skipCredits && settings?.Netflix.skipBlocked;
+  if (button) button.checked = settings?.Netflix.skipIntro && settings?.Netflix.skipRecap && settings?.Netflix.skipCredits && settings?.Netflix.skipBlocked && settings?.Netflix.NetflixAds;
   button = document.querySelector("#NetflixIntro");
   if (button) button.checked = settings?.Netflix.skipIntro;
   button = document.querySelector("#NetflixRecap");
@@ -107,6 +107,8 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Netflix.skipCredits;
   button = document.querySelector("#NetflixBlocked");
   if (button) button.checked = settings?.Netflix.skipBlocked;
+  button = document.querySelector("#NetflixAds");
+  if (button) button.checked = settings?.Netflix.NetflixAds;
   // Statistics
   button = document.querySelector("#AmazonAdTime");
   if (button) button.textContent = getTimeFormatted(settings?.Statistics.AmazonAdTimeSkipped);
@@ -213,11 +215,12 @@ function listenForClicks() {
     }
     //  -------------      Netflix        ---------------------------------------
     else if (e.target.id === "NetflixSkips") {
-      const NetflixSkips = !(settings.Netflix.skipIntro && settings.Netflix.skipRecap && settings.Netflix.skipCredits && settings.Netflix.skipBlocked);
+      const NetflixSkips = !(settings?.Netflix.skipIntro && settings?.Netflix.skipRecap && settings?.Netflix.skipCredits && settings?.Netflix.skipBlocked && settings?.Netflix.NetflixAds);
       settings.Netflix.skipIntro = NetflixSkips;
       settings.Netflix.skipRecap = NetflixSkips;
       settings.Netflix.skipCredits = NetflixSkips;
       settings.Netflix.skipBlocked = NetflixSkips;
+      settings.Netflix.NetflixAds = NetflixSkips;
       console.log("settings.NetflixSkips", settings);
       browser.storage.sync.set({ settings });
     } else if (e.target.id === "openNetflixSettings") {
@@ -237,6 +240,10 @@ function listenForClicks() {
     } else if (e.target.id === "NetflixBlocked") {
       settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
       console.log("settings.NetflixBlocked", settings);
+      browser.storage.sync.set({ settings });
+    } else if (e.target.id === "NetflixAds") {
+      settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
+      console.log("settings.NetflixAds", settings);
       browser.storage.sync.set({ settings });
     }
     // Statistics
