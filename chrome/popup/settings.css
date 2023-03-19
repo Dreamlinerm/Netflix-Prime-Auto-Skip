@@ -81,6 +81,17 @@ div {
 .donate:hover {
   background-color: #2d8edd;
 }
+.Upload {
+  border-radius: 5px;
+  margin-left: 5px;
+  background-color: #e9e9ed;
+  color: black;
+  text-decoration: none;
+  flex-grow: 1;
+}
+.Upload:hover {
+  background-color: #d0d0d7;
+}
 
 .flex {
   display: flex;
