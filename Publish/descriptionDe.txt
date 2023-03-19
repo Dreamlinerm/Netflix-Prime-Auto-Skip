@@ -14,6 +14,7 @@ Netflix automatisches überspringen:
 <li>Zusammenfassungen</li>
 <li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Geht automatisch zur nächsten Folge</li>
 <li>Inaktivitätswarnung&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Video wird automatisch fortgesetzt</li>
+<li>Netflix Werbung um das Doppelte beschleunigen</li>
 </ul>
 
 Amazon Prime-Video Automatisches Überspringen:
@@ -57,11 +58,11 @@ Sie können auf der Einstellungsseite konfigurieren, was angezeigt und was über
 Netflix automatisches überspringen:
 
 
-•Intros
-•Zusammenfassungen
-•Credits: Geht automatisch zur nächsten Folge
-•Inaktivitätswarnung: Video wird automatisch fortgesetzt
-
+• Intros
+• Zusammenfassungen
+• Credits: Geht automatisch zur nächsten Folge
+• Inaktivitätswarnung: Video wird automatisch fortgesetzt
+• Netflix Werbung um das Doppelte beschleunigen
 
 Amazon Prime-Video Automatisches Überspringen:
 

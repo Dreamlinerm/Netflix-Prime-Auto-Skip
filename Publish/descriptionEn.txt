@@ -10,6 +10,7 @@ Netflix Automatically skipping:
 <li>Recaps</li>
 <li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
 <li>Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video</li>
+<li>Fast Forward Netflix ads by 2x</li>
 </ul>
 
 Amazon Prime video Automatically skipping:
@@ -49,10 +50,11 @@ You can configure which Feature to enable in the Settings Page.
 
 Netflix Automatically skipping:
 
-•Intros
-•Recaps
-•Credits                         : automatically goes to the next episode
-•Inactivity Warning        : automatically resuming the video
+• Intros
+• Recaps
+• Credits                         : automatically goes to the next episode
+• Inactivity Warning        : automatically resuming the video
+• Fast Forward Netflix ads by 2x
 
 
 Amazon Prime video Automatically skipping:
