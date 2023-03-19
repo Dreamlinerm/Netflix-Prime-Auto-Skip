@@ -413,19 +413,6 @@ if (isVideo || isNetflix) {
       }
     }
   }
-  // const FreeVeeConfig = { attributes: true, attributeFilter: [".atvwebplayersdk-adtimeindicator-text"], subtree: true, childList: true, attributeOldValue: false };
-  // const AmazonFreeVeeObserver = new MutationObserver(AmazonFreeVee);
-  // async function AmazonFreeVee(mutations, observer) {
-  //   let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
-  //   // fixes the issue of infinite loading/crashing if the first time a series is played.
-  //   if (video) {
-  //     if (!video.paused && video.currentTime > 0) {
-  //       skipAd(video);
-  //     } else if (video.currentTime > 0) {
-  //       video.addEventListener("playing", skipAd(video));
-  //     }
-  //   }
-  // }
 
   async function Amazon_FreeveeTimeout() {
     // set loop every 1 sec and check if ad is there
@@ -450,34 +437,6 @@ if (isVideo || isNetflix) {
     }, time);
   }
 
-  // const AmazonSkipAdObserver = new MutationObserver(Amazon_Ad);
-  // async function Amazon_Ad(mutations, observer) {
-  //   // web player is shown
-  //   if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
-  //     for (let mutation of mutations) {
-  //       if (mutation.target.classList.contains("atvwebplayersdk-infobar-container")) {
-  //         let button = mutation.target.querySelector(".fu4rd6c.f1cw2swo");
-  //         if (button) {
-  //           button.click();
-  //           // only getting the time after :08
-  //           const adTime = parseInt(
-  //             document
-  //               .querySelector(".atvwebplayersdk-adtimeindicator-text")
-  //               .innerHTML.match(/[:]\d+/)[0]
-  //               .substring(1)
-  //           );
-  //           // if adTime is number
-  //           if (typeof adTime === "number") {
-  //             settings.Statistics.AmazonAdTimeSkipped += adTime;
-  //           }
-  //           increaseBadge();
-  //           console.log("Self Ad skipped, length:", adTime, button);
-  //           return;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
   async function Amazon_AdTimeout() {
     // set loop every 1 sec and check if ad is there
     let AdInterval = setInterval(function () {
@@ -722,35 +681,8 @@ if (isVideo || isNetflix) {
   async function startAmazonSkipAdObserver() {
     if (settings.Amazon.skipAd === undefined || settings.Amazon.skipAd) {
       console.log("started observing| Self Ad");
-      // only necessary for observer
-      /*
-      if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
-        let button = document.querySelector(".fu4rd6c.f1cw2swo");
-        if (button) {
-          button.click();
-          // only getting the time after :08
-          let adTime = parseInt(
-            document
-              .querySelector(".atvwebplayersdk-adtimeindicator-text")
-              .innerHTML.match(/[:]\d+/)[0]
-              .substring(1)
-          );
-          // if adTime is number
-          if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
-          browser.storage.sync.set({ settings });
-          console.log("Self Ad skipped, length:", adTime, button);
-        }
-      }
-      AmazonSkipAdObserver.observe(document, config);
-      */
       Amazon_AdTimeout();
     }
-    /*
-    else {
-      console.log("stopped observing| Self Ad");
-      AmazonSkipAdObserver.disconnect();
-    }
-    */
   }
   async function startAmazonBlockFreeveeObserver() {
     if (settings.Amazon.blockFreevee === undefined || settings.Amazon.blockFreevee) {
@@ -758,17 +690,9 @@ if (isVideo || isNetflix) {
       // AmazonFreeVeeObserver.observe(document, FreeVeeConfig);
       Amazon_FreeveeTimeout();
     }
-    // else {
-    //   console.log("stopped observing| FreeVee Ad");
-    //   AmazonFreeVeeObserver.disconnect();
-    //   let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
-    //   if (video) {
-    //     video.removeEventListener("playing", skipAd);
-    //   }
-    // }
   }
-  // Badge functions
 
+  // Badge functions
   function setBadgeText(text) {
     browser.runtime.sendMessage({
       type: "setBadgeText",
