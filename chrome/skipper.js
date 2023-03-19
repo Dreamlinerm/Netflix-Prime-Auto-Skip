@@ -17,39 +17,39 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.29";
+const version = "1.0.30";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
-      Amazon: { skipIntro: true, chrome: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
-      Netflix: { skipIntro: true, skipRecap: true, chrome: true, skipBlocked: true, NetflixAds: true },
+      Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
+      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     },
   };
   let settings = defaultSettings.settings;
   let lastAdTimeText = "";
   resetBadge();
-  browser.storage.sync.get("settings", function (result) {
+  chrome.storage.sync.get("settings", function (result) {
     settings = result.settings;
     console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
     console.log("version: ", version);
     console.log("Settings", settings);
     console.log("Page %cNetflix%cAmazon", isNetflix ? "color: #e60010;" : "display:none;", !isNetflix ? "color: #00aeef;" : "display:none;");
     if (typeof settings !== "object") {
-      browser.storage.sync.set(defaultSettings);
+      chrome.storage.sync.set(defaultSettings);
     } else {
       if (isNetflix) {
         // start Observers depending on the settings
         if (settings.Netflix?.skipIntro) startNetflixSkipIntroObserver();
         if (settings.Netflix?.skipRecap) startNetflixSkipRecapObserver();
-        if (settings.Netflix?.chrome) startNetflixchromeObserver();
+        if (settings.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
         if (settings.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
         if (settings.Netflix?.NetflixAds) startNetflixAdTimeout();
       } else {
         if (settings.Amazon?.skipIntro) startAmazonSkipIntroObserver();
-        if (settings.Amazon?.chrome) startAmazonchromeObserver();
+        if (settings.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
         if (settings.Amazon?.skipAd) startAmazonSkipAdObserver();
         if (settings.Amazon?.blockFreevee) {
           // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
@@ -78,12 +78,12 @@ if (isVideo || isNetflix) {
         }
       }
       if (changedSettings) {
-        browser.storage.sync.set({ settings });
+        chrome.storage.sync.set({ settings });
       }
     }
   });
 
-  browser.storage.sync.onChanged.addListener(function (changes, namespace) {
+  chrome.storage.sync.onChanged.addListener(function (changes, namespace) {
     for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
       if (key == "settings") {
         settings = newValue;
@@ -92,12 +92,12 @@ if (isVideo || isNetflix) {
           // if value is changed then check if it is enabled or disabled
           if (oldValue === undefined || newValue.Netflix.skipIntro !== oldValue.Netflix.skipIntro) startNetflixSkipIntroObserver();
           if (oldValue === undefined || newValue.Netflix.skipRecap !== oldValue.Netflix.skipRecap) startNetflixSkipRecapObserver();
-          if (oldValue === undefined || newValue.Netflix.chrome !== oldValue.Netflix.chrome) startNetflixchromeObserver();
+          if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix.skipCredits) startNetflixSkipCreditsObserver();
           if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix.skipBlocked) startNetflixSkipBlockedObserver();
           if (oldValue === undefined || newValue.Netflix.NetflixAds !== oldValue.Netflix.NetflixAds) startNetflixAdTimeout();
         } else {
           if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon.skipIntro) startAmazonSkipIntroObserver();
-          if (oldValue === undefined || newValue.Amazon.chrome !== oldValue.Amazon.chrome) startAmazonchromeObserver();
+          if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon.skipCredits) startAmazonSkipCreditsObserver();
           if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon.skipAd) startAmazonSkipAdObserver();
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon.blockFreevee) startAmazonBlockFreeveeObserver();
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon.speedSlider) startAmazonSpeedSliderObserver();
@@ -182,7 +182,7 @@ if (isVideo || isNetflix) {
     }
   }
 
-  const NetflixchromeObserver = new MutationObserver(Netflix_Credits);
+  const NetflixSkipCreditsObserver = new MutationObserver(Netflix_Credits);
   function Netflix_Credits(mutations, observer) {
     let button = document.querySelector('[data-uia="next-episode-seamless-button"]');
     if (button) {
@@ -371,15 +371,15 @@ if (isVideo || isNetflix) {
     }
   }
 
-  const AmazonchromeConfig = { attributes: true, attributeFilter: [".nextupcard"], subtree: true, childList: true, attributeOldValue: false };
-  const Amazonchrome = new RegExp("nextupcard", "i");
-  const Amazonchrome2 = new RegExp("nextupcard-button", "i");
-  const AmazonchromeObserver = new MutationObserver(Amazon_Credits);
+  const AmazonSkipCreditsConfig = { attributes: true, attributeFilter: [".nextupcard"], subtree: true, childList: true, attributeOldValue: false };
+  const AmazonSkipCredits = new RegExp("nextupcard", "i");
+  const AmazonSkipCredits2 = new RegExp("nextupcard-button", "i");
+  const AmazonSkipCreditsObserver = new MutationObserver(Amazon_Credits);
   function Amazon_Credits(mutations, observer) {
     for (let mutation of mutations) {
-      if (Amazonchrome.test(mutation.target.classList.toString())) {
+      if (AmazonSkipCredits.test(mutation.target.classList.toString())) {
         for (let button of mutation?.target?.firstChild?.childNodes) {
-          if (button && Amazonchrome2.test(button.classList.toString())) {
+          if (button && AmazonSkipCredits2.test(button.classList.toString())) {
             // only skipping to next episode not an entirely new series
             let newEpNumber = document.querySelector("[class*=nextupcard-episode]");
             if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
@@ -516,18 +516,18 @@ if (isVideo || isNetflix) {
       NetflixSkipRecapObserver.disconnect();
     }
   }
-  async function startNetflixchromeObserver() {
-    if (settings.Netflix.chrome === undefined || settings.Netflix.chrome) {
+  async function startNetflixSkipCreditsObserver() {
+    if (settings.Netflix.skipCredits === undefined || settings.Netflix.skipCredits) {
       console.log("started observing| Credits");
       let button = document.querySelector('[data-uia="next-episode-seamless-button"]');
       if (button) {
         button.click();
         console.log("Credits skipped", button);
       }
-      NetflixchromeObserver.observe(document, NetflixConfig);
+      NetflixSkipCreditsObserver.observe(document, NetflixConfig);
     } else {
       console.log("stopped observing| Credits");
-      NetflixchromeObserver.disconnect();
+      NetflixSkipCreditsObserver.disconnect();
     }
   }
   async function startNetflixSkipBlockedObserver() {
@@ -660,8 +660,8 @@ if (isVideo || isNetflix) {
       AmazonSkipIntroObserver.disconnect();
     }
   }
-  async function startAmazonchromeObserver() {
-    if (settings.Amazon.chrome === undefined || settings.Amazon.chrome) {
+  async function startAmazonSkipCreditsObserver() {
+    if (settings.Amazon.skipCredits === undefined || settings.Amazon.skipCredits) {
       console.log("started observing| Credits");
       let button = document.querySelector("[class*=nextupcard-button]");
       if (button) {
@@ -673,10 +673,10 @@ if (isVideo || isNetflix) {
           console.log("Credits skipped", button);
         }
       }
-      AmazonchromeObserver.observe(document, AmazonchromeConfig);
+      AmazonSkipCreditsObserver.observe(document, AmazonSkipCreditsConfig);
     } else {
       console.log("stopped observing| Credits");
-      AmazonchromeObserver.disconnect();
+      AmazonSkipCreditsObserver.disconnect();
     }
   }
   async function startAmazonSkipAdObserver() {
@@ -695,20 +695,20 @@ if (isVideo || isNetflix) {
 
   // Badge functions
   function setBadgeText(text) {
-    browser.runtime.sendMessage({
+    chrome.runtime.sendMessage({
       type: "setBadgeText",
       content: text,
     });
   }
   function increaseBadge() {
     settings.Statistics.SegmentsSkipped++;
-    browser.storage.sync.set({ settings });
-    browser.runtime.sendMessage({
+    chrome.storage.sync.set({ settings });
+    chrome.runtime.sendMessage({
       type: "increaseBadge",
     });
   }
   function resetBadge() {
-    browser.runtime.sendMessage({
+    chrome.runtime.sendMessage({
       type: "resetBadge",
     });
   }
