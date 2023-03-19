@@ -27,7 +27,12 @@
       "js": ["skipper.js"]
     }
   ],
-
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js"],
+      "matches": ["*://*.netflix.com/*", "*://*.netflix.ca/*", "*://*.netflix.com.au/*"]
+    }
+  ],
   "permissions": ["storage"],
   "action": {
     "default_icon": {

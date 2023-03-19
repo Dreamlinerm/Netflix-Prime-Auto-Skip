@@ -205,15 +205,24 @@ if (isVideo || isNetflix) {
   // const player = videoPlayer.getVideoPlayerBySessionId(videoPlayer.getAllPlayerSessionIds()[0]);
   // player.seek(1091243);
 
-  const NetflixVideoConfig = { attributes: true, attributeFilter: [".ltr-puk2kp"], subtree: true, childList: true, attributeOldValue: false };
-  const NetflixVideoObserver = new MutationObserver(Netflix_Video);
-  function Netflix_Video(mutations, observer) {
-    // // console.log(mutations);
-    // let video = document.querySelector("video");
-    // let adLength = document.querySelector(".ltr-puk2kp")?.textContent;
-    // let player = document.querySelector("player");
-    // console.log(video, adLength);
+  // Inject the script to the page:
+  function inject() {
+    console.log("injecting script");
+    let s = document.createElement("script");
+    s.src = chrome.runtime.getURL("inject.js?") + new URLSearchParams({ adLength: 1 });
+    (document.head || document.documentElement).appendChild(s);
   }
+  inject();
+
+  // const NetflixVideoConfig = { attributes: true, attributeFilter: [".ltr-puk2kp"], subtree: true, childList: true, attributeOldValue: false };
+  // const NetflixVideoObserver = new MutationObserver(Netflix_Video);
+  // function Netflix_Video(mutations, observer) {
+  //   // // console.log(mutations);
+  //   // let video = document.querySelector("video");
+  //   // let adLength = document.querySelector(".ltr-puk2kp")?.textContent;
+  //   // let player = document.querySelector("player");
+  //   // console.log(video, adLength);
+  // }
 
   // NetflixVideoObserver.observe(document, NetflixVideoConfig);
   // Amazon Observers
