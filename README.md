@@ -42,6 +42,7 @@ Netflix:
 
 * Recaps
 * Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video
+* Fast Forward Netflix ads by 2x
 
 Prime video:
 * Self promoting ads
