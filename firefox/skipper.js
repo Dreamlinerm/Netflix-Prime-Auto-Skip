@@ -309,9 +309,8 @@ if (isVideo || isNetflix) {
   const AmazonFilterPaidConfig = { attributes: true, attributeFilter: [".o86fri"], subtree: true, childList: true, attributeOldValue: false };
   const AmazonFilterPaidObserver = new MutationObserver(Amazon_FilterPaid);
   function Amazon_FilterPaid(mutations, observer) {
-    document.querySelectorAll(".o86fri").forEach((e) => {
-      a = e;
-      SectionCount = 0;
+    document.querySelectorAll(".o86fri").forEach((a) => {
+      let SectionCount = 0;
       while (a.parentElement && SectionCount < 2) {
         a = a.parentElement;
         if (a.tagName == "SECTION") {
