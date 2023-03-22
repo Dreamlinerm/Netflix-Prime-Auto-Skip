@@ -51,7 +51,7 @@ Prime video:
 * Freevee Ads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Watch series for free without ads
 * Adding playback speed control to UI
 * Filtering paid content (movies, series)
-* Remove annoying blur when hovering over video
+* Remove annoying blur when hovering over video (same option as add playback speed slider)
 
 ## Contributing
 
@@ -88,6 +88,7 @@ On Netflix it matches the buttons with the data-uia tag containing:
 * Recap: player-skip-recap, player-skip-preplay
 * Credits: next-episode-seamless-button
 * Inactivity Warning: interrupt-autoplay-continue
+* Basic tier ads: matched by css class .ltr-puk2kp and the speed is set to 16x until the ad is over
 
 On Prime video it matches buttons with the Css Classes:
 
