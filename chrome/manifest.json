@@ -27,7 +27,7 @@
       "js": ["skipper.js"]
     }
   ],
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage"],
   "action": {
     "default_icon": {
       "16": "icons/NetflixAmazon Auto-Skip--16.png",
