@@ -146,40 +146,40 @@ if (isVideo || isNetflix) {
   const NetflixConfig = { attributes: true, attributeFilter: ["data-uia"], subtree: true, childList: true, attributeOldValue: false };
   const NetflixSkipIntroObserver = new MutationObserver(Netflix_intro);
   function Netflix_intro(mutations, observer) {
-    for (let mutation of mutations) {
-      for (let node of mutation.addedNodes) {
-        let button = node.querySelector('[data-uia="player-skip-intro"]');
-        if (button) {
-          let video = document.querySelectorAll("video")[0];
-          const time = video.currentTime;
-          button.click();
-          console.log("intro skipped", button);
-          setTimeout(function () {
-            addIntroTimeSkipped(time, video.currentTime);
-          }, 600);
-          return;
-        }
-      }
+    // for (let mutation of mutations) {
+    //   for (let node of mutation.addedNodes) {
+    let button = document.querySelector('[data-uia="player-skip-intro"]');
+    if (button) {
+      let video = document.querySelector("video");
+      const time = video.currentTime;
+      button.click();
+      console.log("intro skipped", button);
+      setTimeout(function () {
+        addIntroTimeSkipped(time, video.currentTime);
+      }, 600);
+      // return;
     }
+    //   }
+    // }
   }
 
   const NetflixSkipRecapObserver = new MutationObserver(Netflix_Recap);
   function Netflix_Recap(mutations, observer) {
-    for (let mutation of mutations) {
-      for (let node of mutation.addedNodes) {
-        let button = node.querySelector('[data-uia="player-skip-recap"]') || node.querySelector('[data-uia="player-skip-preplay"]');
-        if (button) {
-          let video = document.querySelectorAll("video")[0];
-          const time = video.currentTime;
-          button.click();
-          console.log("Recap skipped", button);
-          setTimeout(function () {
-            addRecapTimeSkipped(time, video.currentTime);
-          }, 600);
-          return;
-        }
-      }
+    // for (let mutation of mutations) {
+    //   for (let node of mutation.addedNodes) {
+    let button = document.querySelector('[data-uia="player-skip-recap"]') || document.querySelector('[data-uia="player-skip-preplay"]');
+    if (button) {
+      let video = document.querySelector("video");
+      const time = video.currentTime;
+      button.click();
+      console.log("Recap skipped", button);
+      setTimeout(function () {
+        addRecapTimeSkipped(time, video.currentTime);
+      }, 600);
+      // return;
     }
+    //   }
+    // }
   }
 
   const NetflixSkipCreditsObserver = new MutationObserver(Netflix_Credits);
@@ -194,17 +194,17 @@ if (isVideo || isNetflix) {
 
   const NetflixSkipBlockedObserver = new MutationObserver(Netflix_Blocked);
   function Netflix_Blocked(mutations, observer) {
-    for (let mutation of mutations) {
-      for (let node of mutation.addedNodes) {
-        let button = node.querySelector('[data-uia="interrupt-autoplay-continue"]');
-        if (button) {
-          button.click();
-          console.log("Blocked skipped", button);
-          increaseBadge();
-          return;
-        }
-      }
+    // for (let mutation of mutations) {
+    //   for (let node of mutation.addedNodes) {
+    let button = document.querySelector('[data-uia="interrupt-autoplay-continue"]');
+    if (button) {
+      button.click();
+      console.log("Blocked skipped", button);
+      increaseBadge();
+      // return;
     }
+    //   }
+    // }
   }
 
   function Netflix_SkipAdInterval() {
