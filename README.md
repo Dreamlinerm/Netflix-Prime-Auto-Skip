@@ -13,7 +13,7 @@ Firefox:
 <img src="https://img.shields.io/amo/rating/NetflixPrime@Autoskip.io" >
 Chrome: 
 <img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
-<img src="https://img.shields.io/badge/installs-229-informational" >
+<img src="https://img.shields.io/badge/installs-249-informational" >
 <img src="https://img.shields.io/chrome-web-store/rating/akaimhgappllmlkadblbdknhbfghdgle" >
 
 </div>
