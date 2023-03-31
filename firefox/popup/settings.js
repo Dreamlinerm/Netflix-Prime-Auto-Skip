@@ -114,6 +114,9 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Netflix.NetflixAds;
   button = document.querySelector("#NetflixProfile");
   if (button) button.checked = settings?.Netflix.profile;
+
+  button = document.querySelector("#profileName");
+  if (button) button.textContent = settings?.General.profileName;
   // Statistics
   button = document.querySelector("#AmazonAdTime");
   if (button) button.textContent = getTimeFormatted(settings?.Statistics.AmazonAdTimeSkipped);
