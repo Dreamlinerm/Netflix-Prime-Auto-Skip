@@ -24,8 +24,9 @@ if (isVideo || isNetflix) {
   const defaultSettings = {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
-      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true },
+      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, profile: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
+      General: { profileName: null },
     },
   };
   let settings = defaultSettings.settings;
@@ -42,6 +43,7 @@ if (isVideo || isNetflix) {
     } else {
       if (isNetflix) {
         // start Observers depending on the settings
+        if (settings.Netflix?.profile) startNetflixProfileObserver();
         if (settings.Netflix?.skipIntro) startNetflixSkipIntroObserver();
         if (settings.Netflix?.skipRecap) startNetflixSkipRecapObserver();
         if (settings.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
@@ -90,6 +92,7 @@ if (isVideo || isNetflix) {
         console.log(key, "Old value:", oldValue, ", new value:", newValue);
         if (isNetflix) {
           // if value is changed then check if it is enabled or disabled
+          if (oldValue === undefined || newValue.Netflix.profile !== oldValue.Netflix.profile) startNetflixProfileObserver();
           if (oldValue === undefined || newValue.Netflix.skipIntro !== oldValue.Netflix.skipIntro) startNetflixSkipIntroObserver();
           if (oldValue === undefined || newValue.Netflix.skipRecap !== oldValue.Netflix.skipRecap) startNetflixSkipRecapObserver();
           if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix.skipCredits) startNetflixSkipCreditsObserver();
@@ -144,42 +147,62 @@ if (isVideo || isNetflix) {
   const config = { attributes: true, childList: true, subtree: true };
   // Netflix Observers
   const NetflixConfig = { attributes: true, attributeFilter: ["data-uia"], subtree: true, childList: true, attributeOldValue: false };
+
+  const NetflixProfileObserver = new MutationObserver(Netflix_profile);
+  function Netflix_profile(mutations, observer) {
+    // there is a space before the - thats why slice -1
+    let currentProfileName = document.querySelector("[href*='/YourAccount']")?.getAttribute("aria-label")?.split("–")?.[0].slice(0, -1);
+    if (currentProfileName && currentProfileName !== settings.General.profileName) {
+      settings.General.profileName = currentProfileName;
+      chrome.storage.sync.set({ settings });
+      console.log("Profile switched to", currentProfileName);
+    }
+    let profileButtons = document.querySelectorAll(".profile-name");
+    profileButtons.forEach((button) => {
+      if (button.textContent === settings.General.profileName) {
+        button?.parentElement.click();
+        console.log("Profile automatically chosen:", settings.General.profileName);
+        increaseBadge();
+      }
+    });
+  }
+
   const NetflixSkipIntroObserver = new MutationObserver(Netflix_intro);
   function Netflix_intro(mutations, observer) {
-    for (let mutation of mutations) {
-      for (let node of mutation.addedNodes) {
-        let button = node.querySelector('[data-uia="player-skip-intro"]');
-        if (button) {
-          let video = document.querySelectorAll("video")[0];
-          const time = video.currentTime;
-          button.click();
-          console.log("intro skipped", button);
-          setTimeout(function () {
-            addIntroTimeSkipped(time, video.currentTime);
-          }, 600);
-          return;
-        }
-      }
+    // for (let mutation of mutations) {
+    //   for (let node of mutation.addedNodes) {
+    let button = document.querySelector('[data-uia="player-skip-intro"]');
+    if (button) {
+      let video = document.querySelector("video");
+      const time = video.currentTime;
+      button.click();
+      console.log("intro skipped", button);
+      setTimeout(function () {
+        addIntroTimeSkipped(time, video.currentTime);
+      }, 600);
+      // return;
     }
+    //   }
+    // }
   }
 
   const NetflixSkipRecapObserver = new MutationObserver(Netflix_Recap);
   function Netflix_Recap(mutations, observer) {
-    for (let mutation of mutations) {
-      for (let node of mutation.addedNodes) {
-        let button = node.querySelector('[data-uia="player-skip-recap"]') || node.querySelector('[data-uia="player-skip-preplay"]');
-        if (button) {
-          let video = document.querySelectorAll("video")[0];
-          const time = video.currentTime;
-          button.click();
-          console.log("Recap skipped", button);
-          setTimeout(function () {
-            addRecapTimeSkipped(time, video.currentTime);
-          }, 600);
-          return;
-        }
-      }
+    // for (let mutation of mutations) {
+    //   for (let node of mutation.addedNodes) {
+    let button = document.querySelector('[data-uia="player-skip-recap"]') || document.querySelector('[data-uia="player-skip-preplay"]');
+    if (button) {
+      let video = document.querySelector("video");
+      const time = video.currentTime;
+      button.click();
+      console.log("Recap skipped", button);
+      setTimeout(function () {
+        addRecapTimeSkipped(time, video.currentTime);
+      }, 600);
+      // return;
     }
+    //   }
+    // }
   }
 
   const NetflixSkipCreditsObserver = new MutationObserver(Netflix_Credits);
@@ -194,17 +217,17 @@ if (isVideo || isNetflix) {
 
   const NetflixSkipBlockedObserver = new MutationObserver(Netflix_Blocked);
   function Netflix_Blocked(mutations, observer) {
-    for (let mutation of mutations) {
-      for (let node of mutation.addedNodes) {
-        let button = node.querySelector('[data-uia="interrupt-autoplay-continue"]');
-        if (button) {
-          button.click();
-          console.log("Blocked skipped", button);
-          increaseBadge();
-          return;
-        }
-      }
+    // for (let mutation of mutations) {
+    //   for (let node of mutation.addedNodes) {
+    let button = document.querySelector('[data-uia="interrupt-autoplay-continue"]');
+    if (button) {
+      button.click();
+      console.log("Blocked skipped", button);
+      increaseBadge();
+      // return;
     }
+    //   }
+    // }
   }
 
   function Netflix_SkipAdInterval() {
@@ -248,50 +271,51 @@ if (isVideo || isNetflix) {
     if (video) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
-        let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
+        let position = document.querySelector("[class*=infobar-container]")?.firstChild?.children[2];
+        if (position) {
+          let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          svg.setAttribute("style", "width:1.2vw;height:1.2vw");
+          svg.setAttribute("viewBox", "0 0 24 24");
+          svg.setAttribute("id", "speedbutton");
+          let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          path.setAttribute(
+            "d",
+            "M17.6427 7.43779C14.5215 4.1874 9.47851 4.1874 6.35734 7.43779C3.21422 10.711 3.21422 16.0341 6.35734 19.3074L4.91474 20.6926C1.02842 16.6454 1.02842 10.0997 4.91474 6.05254C8.823 1.98249 15.177 1.98249 19.0853 6.05254C22.9716 10.0997 22.9716 16.6454 19.0853 20.6926L17.6427 19.3074C20.7858 16.0341 20.7858 10.711 17.6427 7.43779ZM14 14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14C10 12.8954 10.8954 12 12 12C12.1792 12 12.3528 12.0236 12.518 12.0677L15.7929 8.79289L17.2071 10.2071L13.9323 13.482C13.9764 13.6472 14 13.8208 14 14Z"
+          );
+          path.setAttribute("fill", "rgb(221, 221, 221)");
+          svg.setAttribute("fill", "rgb(221, 221, 221)");
+          svg.appendChild(path);
+          position.insertBefore(svg, position.firstChild);
 
-        let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("style", "width:1.2vw;height:1.2vw");
-        svg.setAttribute("viewBox", "0 0 24 24");
-        svg.setAttribute("id", "speedbutton");
-        let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-        path.setAttribute(
-          "d",
-          "M17.6427 7.43779C14.5215 4.1874 9.47851 4.1874 6.35734 7.43779C3.21422 10.711 3.21422 16.0341 6.35734 19.3074L4.91474 20.6926C1.02842 16.6454 1.02842 10.0997 4.91474 6.05254C8.823 1.98249 15.177 1.98249 19.0853 6.05254C22.9716 10.0997 22.9716 16.6454 19.0853 20.6926L17.6427 19.3074C20.7858 16.0341 20.7858 10.711 17.6427 7.43779ZM14 14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14C10 12.8954 10.8954 12 12 12C12.1792 12 12.3528 12.0236 12.518 12.0677L15.7929 8.79289L17.2071 10.2071L13.9323 13.482C13.9764 13.6472 14 13.8208 14 14Z"
-        );
-        path.setAttribute("fill", "rgb(221, 221, 221)");
-        svg.setAttribute("fill", "rgb(221, 221, 221)");
-        svg.appendChild(path);
-        position.insertBefore(svg, position.firstChild);
+          let slider = document.createElement("input");
+          slider.id = "videoSpeedSlider";
+          slider.type = "range";
+          slider.min = "5";
+          slider.max = "15";
+          slider.value = "10";
+          slider.step = "1";
+          // slider.setAttribute("list", "markers");
+          slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;";
+          position.insertBefore(slider, position.firstChild);
 
-        let slider = document.createElement("input");
-        slider.id = "videoSpeedSlider";
-        slider.type = "range";
-        slider.min = "5";
-        slider.max = "15";
-        slider.value = "10";
-        slider.step = "1";
-        // slider.setAttribute("list", "markers");
-        slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;";
-        position.insertBefore(slider, position.firstChild);
+          svg.onclick = function () {
+            if (slider.style.display === "block") slider.style.display = "none";
+            else slider.style.display = "block";
+          };
 
-        svg.onclick = function () {
-          if (slider.style.display === "block") slider.style.display = "none";
-          else slider.style.display = "block";
-        };
-
-        let speed = document.createElement("p");
-        speed.id = "videoSpeed";
-        speed.textContent = "1.0x";
-        position.insertBefore(speed, position.firstChild);
-        speed.onclick = function () {
-          if (slider.style.display === "block") slider.style.display = "none";
-          else slider.style.display = "block";
-        };
-        slider.oninput = function () {
-          speed.textContent = this.value / 10 + "x";
-          video.playbackRate = this.value / 10;
-        };
+          let speed = document.createElement("p");
+          speed.id = "videoSpeed";
+          speed.textContent = "1.0x";
+          position.insertBefore(speed, position.firstChild);
+          speed.onclick = function () {
+            if (slider.style.display === "block") slider.style.display = "none";
+            else slider.style.display = "block";
+          };
+          slider.oninput = function () {
+            speed.textContent = this.value / 10 + "x";
+            video.playbackRate = this.value / 10;
+          };
+        }
       } else {
         // need to resync the slider with the video sometimes
         speed = document.querySelector("#videoSpeed");
@@ -308,9 +332,8 @@ if (isVideo || isNetflix) {
   const AmazonFilterPaidConfig = { attributes: true, attributeFilter: [".o86fri"], subtree: true, childList: true, attributeOldValue: false };
   const AmazonFilterPaidObserver = new MutationObserver(Amazon_FilterPaid);
   function Amazon_FilterPaid(mutations, observer) {
-    document.querySelectorAll(".o86fri").forEach((e) => {
-      a = e;
-      SectionCount = 0;
+    document.querySelectorAll(".o86fri").forEach((a) => {
+      let SectionCount = 0;
       while (a.parentElement && SectionCount < 2) {
         a = a.parentElement;
         if (a.tagName == "SECTION") {
@@ -478,6 +501,16 @@ if (isVideo || isNetflix) {
   }
 
   // start/stop the observers depending on settings
+  async function startNetflixProfileObserver() {
+    if (settings.Netflix.profile === undefined || settings.Netflix.profile) {
+      console.log("started observing| Profile");
+      NetflixProfileObserver.observe(document, config);
+    } else {
+      console.log("stopped observing| Profile");
+      NetflixProfileObserver.disconnect();
+    }
+  }
+
   async function startNetflixSkipIntroObserver() {
     if (settings.Netflix.skipIntro === undefined || settings.Netflix.skipIntro) {
       console.log("started observing| intro");
@@ -573,50 +606,51 @@ if (isVideo || isNetflix) {
       if (video) {
         if (!alreadySlider) {
           // infobar position for the slider to be added
-          let position = document.querySelector("[class*=infobar-container]").firstChild.children[2];
+          let position = document.querySelector("[class*=infobar-container]")?.firstChild?.children[2];
+          if (position) {
+            let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("style", "width:1.2vw;height:1.2vw");
+            svg.setAttribute("viewBox", "0 0 24 24");
+            svg.setAttribute("id", "speedbutton");
+            let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute(
+              "d",
+              "M17.6427 7.43779C14.5215 4.1874 9.47851 4.1874 6.35734 7.43779C3.21422 10.711 3.21422 16.0341 6.35734 19.3074L4.91474 20.6926C1.02842 16.6454 1.02842 10.0997 4.91474 6.05254C8.823 1.98249 15.177 1.98249 19.0853 6.05254C22.9716 10.0997 22.9716 16.6454 19.0853 20.6926L17.6427 19.3074C20.7858 16.0341 20.7858 10.711 17.6427 7.43779ZM14 14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14C10 12.8954 10.8954 12 12 12C12.1792 12 12.3528 12.0236 12.518 12.0677L15.7929 8.79289L17.2071 10.2071L13.9323 13.482C13.9764 13.6472 14 13.8208 14 14Z"
+            );
+            path.setAttribute("fill", "rgb(221, 221, 221)");
+            svg.setAttribute("fill", "rgb(221, 221, 221)");
+            svg.appendChild(path);
+            position.insertBefore(svg, position.firstChild);
 
-          let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-          svg.setAttribute("style", "width:1.2vw;height:1.2vw");
-          svg.setAttribute("viewBox", "0 0 24 24");
-          svg.setAttribute("id", "speedbutton");
-          let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          path.setAttribute(
-            "d",
-            "M17.6427 7.43779C14.5215 4.1874 9.47851 4.1874 6.35734 7.43779C3.21422 10.711 3.21422 16.0341 6.35734 19.3074L4.91474 20.6926C1.02842 16.6454 1.02842 10.0997 4.91474 6.05254C8.823 1.98249 15.177 1.98249 19.0853 6.05254C22.9716 10.0997 22.9716 16.6454 19.0853 20.6926L17.6427 19.3074C20.7858 16.0341 20.7858 10.711 17.6427 7.43779ZM14 14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14C10 12.8954 10.8954 12 12 12C12.1792 12 12.3528 12.0236 12.518 12.0677L15.7929 8.79289L17.2071 10.2071L13.9323 13.482C13.9764 13.6472 14 13.8208 14 14Z"
-          );
-          path.setAttribute("fill", "rgb(221, 221, 221)");
-          svg.setAttribute("fill", "rgb(221, 221, 221)");
-          svg.appendChild(path);
-          position.insertBefore(svg, position.firstChild);
+            let slider = document.createElement("input");
+            slider.id = "videoSpeedSlider";
+            slider.type = "range";
+            slider.min = "5";
+            slider.max = "15";
+            slider.value = "10";
+            slider.step = "1";
+            // slider.setAttribute("list", "markers");
+            slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;";
+            position.insertBefore(slider, position.firstChild);
 
-          let slider = document.createElement("input");
-          slider.id = "videoSpeedSlider";
-          slider.type = "range";
-          slider.min = "5";
-          slider.max = "15";
-          slider.value = "10";
-          slider.step = "1";
-          // slider.setAttribute("list", "markers");
-          slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;";
-          position.insertBefore(slider, position.firstChild);
+            svg.onclick = function () {
+              if (slider.style.display === "block") slider.style.display = "none";
+              else slider.style.display = "block";
+            };
 
-          svg.onclick = function () {
-            if (slider.style.display === "block") slider.style.display = "none";
-            else slider.style.display = "block";
-          };
-
-          let speed = document.createElement("p");
-          speed.id = "videoSpeed";
-          speed.textContent = "1.0x";
-          position.insertBefore(speed, position.firstChild);
-          speed.onclick = function () {
-            if (slider.style.display === "block") slider.style.display = "none";
-            else slider.style.display = "block";
-          };
-          slider.oninput = function () {
-            speed.textContent = this.value / 10 + "x";
-            video.playbackRate = this.value / 10;
-          };
+            let speed = document.createElement("p");
+            speed.id = "videoSpeed";
+            speed.textContent = "1.0x";
+            position.insertBefore(speed, position.firstChild);
+            speed.onclick = function () {
+              if (slider.style.display === "block") slider.style.display = "none";
+              else slider.style.display = "block";
+            };
+            slider.oninput = function () {
+              speed.textContent = this.value / 10 + "x";
+              video.playbackRate = this.value / 10;
+            };
+          }
         }
       }
       console.log("started adding | SpeedSlider");
