@@ -15,6 +15,7 @@ Netflix automatisches überspringen:
 <li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Geht automatisch zur nächsten Folge</li>
 <li>Inaktivitätswarnung&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Video wird automatisch fortgesetzt</li>
 <li>Werbung der Basisstufe</li>
+<li>Automatisch zuletzt verwendetes Profil auswählen</li>
 </ul>
 
 Amazon Prime-Video Automatisches Überspringen:
@@ -43,50 +44,6 @@ Die Erweiterung ist Open Source! Besuchen sie <a href="https://github.com/Dreaml
 Hinterlassen Sie eine 5-Sterne-Bewertung! Bewertungen helfen, Vertrauen aufzubauen und neue Benutzer zu gewinnen!
 
 Kaufen Sie mir einen <a href="https://paypal.me/MarvinKrebber" target="_blank">Kaffee</a>.
-
-Haftungsausschluss
-
-Netflix und Amazon Prime-Videos sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
---------------------------------------------  chrome:
-
-Es überspringt automatisch Werbung, Intros, Credits, Zusammenfassungen und alles andere, was Sie nicht auf Netflix und Amazon Prime-Videos sehen möchten.
-
-Sie können auf der Einstellungsseite konfigurieren, was angezeigt und was übersprungen werden soll.
-
-✨ Features
-
-Netflix automatisches überspringen:
-
-
-• Intros
-• Zusammenfassungen
-• Credits: Geht automatisch zur nächsten Folge
-• Inaktivitätswarnung: Video wird automatisch fortgesetzt
-• Werbung der Basisstufe
-
-Amazon Prime-Video Automatisches Überspringen:
-
-
-• Intros
-• Credits: Geht automatisch zur nächsten Folge
-• Freevee Werbung
-• Eigenwerbung
-
-Amazon Prime video andere Funktionen:
-
-• Filterung kostenpflichtiger Inhalte (Filme, Serien)
-• Wiedergabegeschwindigkeitskontrolle
-• Entfernen der lästigen dunklen Unschärfe, wenn das overlay angezeigt wird
-
-☔ Sicher
-
-Die Erweiterung ist Open Source! Besuchen sie (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip), falls sie beitragen möchten.
-
-💕 Genießen Sie Netflix/Prime Auto-Skip?
-
-Hinterlassen Sie eine 5-Sterne-Bewertung! Bewertungen helfen, Vertrauen aufzubauen und neue Benutzer zu gewinnen!
-
-Kaufen Sie mir einen Kaffee (https://paypal.me/MarvinKrebber).
 
 Haftungsausschluss
 

@@ -45,6 +45,7 @@ Netflix:
 * Recaps
 * Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video
 * Basic tier Ads
+* Automatically pick last used profile
 
 Prime video:
 * Self promoting ads

@@ -11,6 +11,7 @@ Netflix Automatically skipping:
 <li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
 <li>Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video</li>
 <li>Basic tier Ads</li>
+<li>Automatically pick last used profile</li>
 </ul>
 
 Amazon Prime video Automatically skipping:
@@ -55,6 +56,7 @@ Netflix Automatically skipping:
 • Credits                         : automatically goes to the next episode
 • Inactivity Warning        : automatically resuming the video
 • Basic tier Ads
+• Automatically pick last used profile
 
 
 Amazon Prime video Automatically skipping:
