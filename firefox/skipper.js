@@ -92,19 +92,19 @@ if (isVideo || isNetflix) {
         console.log(key, "Old value:", oldValue, ", new value:", newValue);
         if (isNetflix) {
           // if value is changed then check if it is enabled or disabled
-          if (oldValue === undefined || newValue.Netflix.profile !== oldValue.Netflix.profile) startNetflixProfileObserver();
-          if (oldValue === undefined || newValue.Netflix.skipIntro !== oldValue.Netflix.skipIntro) startNetflixSkipIntroObserver();
-          if (oldValue === undefined || newValue.Netflix.skipRecap !== oldValue.Netflix.skipRecap) startNetflixSkipRecapObserver();
-          if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix.skipCredits) startNetflixSkipCreditsObserver();
-          if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix.skipBlocked) startNetflixSkipBlockedObserver();
-          if (oldValue === undefined || newValue.Netflix.NetflixAds !== oldValue.Netflix.NetflixAds) startNetflixAdTimeout();
+          if (oldValue === undefined || newValue.Netflix.profile !== oldValue.Netflix?.profile) startNetflixProfileObserver();
+          if (oldValue === undefined || newValue.Netflix.skipIntro !== oldValue.Netflix?.skipIntro) startNetflixSkipIntroObserver();
+          if (oldValue === undefined || newValue.Netflix.skipRecap !== oldValue.Netflix?.skipRecap) startNetflixSkipRecapObserver();
+          if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
+          if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
+          if (oldValue === undefined || newValue.Netflix.NetflixAds !== oldValue.Netflix?.NetflixAds) startNetflixAdTimeout();
         } else {
-          if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon.skipIntro) startAmazonSkipIntroObserver();
-          if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon.skipCredits) startAmazonSkipCreditsObserver();
-          if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon.skipAd) startAmazonSkipAdObserver();
-          if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon.blockFreevee) startAmazonBlockFreeveeObserver();
-          if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon.speedSlider) startAmazonSpeedSliderObserver();
-          if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon.filterPaid) startAmazonFilterPaidObserver();
+          if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon?.skipIntro) startAmazonSkipIntroObserver();
+          if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
+          if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon?.skipAd) startAmazonSkipAdObserver();
+          if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
+          if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
+          if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
         }
         if (oldValue === undefined || newValue.Statistics.AmazonAdTimeSkipped !== oldValue.Statistics.AmazonAdTimeSkipped) {
           settings.Statistics.AmazonAdTimeSkipped = newValue.Statistics.AmazonAdTimeSkipped;
@@ -502,7 +502,7 @@ if (isVideo || isNetflix) {
 
   // start/stop the observers depending on settings
   async function startNetflixProfileObserver() {
-    if (settings.Netflix.profile === undefined || settings.Netflix.profile) {
+    if (settings.Netflix?.profile === undefined || settings.Netflix.profile) {
       console.log("started observing| Profile");
       NetflixProfileObserver.observe(document, config);
     } else {
@@ -512,8 +512,8 @@ if (isVideo || isNetflix) {
   }
 
   async function startNetflixSkipIntroObserver() {
-    if (settings.Netflix.skipIntro === undefined || settings.Netflix.skipIntro) {
-      console.log("started observing| intro");
+    if (settings.Netflix?.skipIntro === undefined || settings.Netflix.skipIntro) {
+      console.log("started observing| Intro");
       let button = document.querySelector('[data-uia="player-skip-intro"]');
       if (button) {
         let video = document.querySelectorAll("video")[0];
@@ -526,12 +526,12 @@ if (isVideo || isNetflix) {
       }
       NetflixSkipIntroObserver.observe(document, NetflixConfig);
     } else {
-      console.log("stopped observing| intro");
+      console.log("stopped observing| Intro");
       NetflixSkipIntroObserver.disconnect();
     }
   }
   async function startNetflixSkipRecapObserver() {
-    if (settings.Netflix.skipRecap === undefined || settings.Netflix.skipRecap) {
+    if (settings.Netflix?.skipRecap === undefined || settings.Netflix.skipRecap) {
       console.log("started observing| Recap");
       let button = document.querySelector('[data-uia="player-skip-recap"]') || document.querySelector('[data-uia="player-skip-preplay"]');
       if (button) {
@@ -550,7 +550,7 @@ if (isVideo || isNetflix) {
     }
   }
   async function startNetflixSkipCreditsObserver() {
-    if (settings.Netflix.skipCredits === undefined || settings.Netflix.skipCredits) {
+    if (settings.Netflix?.skipCredits === undefined || settings.Netflix.skipCredits) {
       console.log("started observing| Credits");
       let button = document.querySelector('[data-uia="next-episode-seamless-button"]');
       if (button) {
@@ -564,7 +564,7 @@ if (isVideo || isNetflix) {
     }
   }
   async function startNetflixSkipBlockedObserver() {
-    if (settings.Netflix.skipBlocked === undefined || settings.Netflix.skipBlocked) {
+    if (settings.Netflix?.skipBlocked === undefined || settings.Netflix.skipBlocked) {
       console.log("started observing| Blocked");
       let button = document.querySelector('[data-uia="interrupt-autoplay-continue"]');
       if (button) {
@@ -578,22 +578,14 @@ if (isVideo || isNetflix) {
     }
   }
   async function startNetflixAdTimeout() {
-    if (settings.Netflix.NetflixAds === undefined || settings.Netflix.NetflixAds) {
+    if (settings.Netflix?.NetflixAds === undefined || settings.Netflix.NetflixAds) {
       console.log("started observing| Ad");
-      // Inject the script to the page:
-      // let script = document.createElement("script");
-      // script.src = chrome.runtime.getURL("inject.js?") + new URLSearchParams({ adLength: 1 });
-      // (document.head || document.documentElement).appendChild(script);
       Netflix_SkipAdInterval();
-    } else {
-      console.log("stopped observing| Ad");
-      // script = document.querySelector("script[src*='inject.js']");
-      // if (script) script.remove();
     }
   }
 
   async function startAmazonSpeedSliderObserver() {
-    if (settings.Amazon.speedSlider === undefined || settings.Amazon.speedSlider) {
+    if (settings.Amazon?.speedSlider === undefined || settings.Amazon.speedSlider) {
       let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
       let alreadySlider = document.querySelector("#videoSpeedSlider");
 
@@ -664,7 +656,7 @@ if (isVideo || isNetflix) {
     }
   }
   async function startAmazonFilterPaidObserver() {
-    if (settings.Amazon.filterPaid === undefined || settings.Amazon.filterPaid) {
+    if (settings.Amazon?.filterPaid === undefined || settings.Amazon.filterPaid) {
       console.log("started filtering| Paid films");
 
       AmazonFilterPaidObserver.observe(document, AmazonFilterPaidConfig);
@@ -675,7 +667,7 @@ if (isVideo || isNetflix) {
   }
 
   async function startAmazonSkipIntroObserver() {
-    if (settings.Amazon.skipIntro === undefined || settings.Amazon.skipIntro) {
+    if (settings.Amazon?.skipIntro === undefined || settings.Amazon.skipIntro) {
       console.log("started observing| Intro");
       let button = document.querySelector("[class*=skipelement]");
       if (button) {
@@ -695,7 +687,7 @@ if (isVideo || isNetflix) {
     }
   }
   async function startAmazonSkipCreditsObserver() {
-    if (settings.Amazon.skipCredits === undefined || settings.Amazon.skipCredits) {
+    if (settings.Amazon?.skipCredits === undefined || settings.Amazon.skipCredits) {
       console.log("started observing| Credits");
       let button = document.querySelector("[class*=nextupcard-button]");
       if (button) {
@@ -714,13 +706,13 @@ if (isVideo || isNetflix) {
     }
   }
   async function startAmazonSkipAdObserver() {
-    if (settings.Amazon.skipAd === undefined || settings.Amazon.skipAd) {
+    if (settings.Amazon?.skipAd === undefined || settings.Amazon.skipAd) {
       console.log("started observing| Self Ad");
       Amazon_AdTimeout();
     }
   }
   async function startAmazonBlockFreeveeObserver() {
-    if (settings.Amazon.blockFreevee === undefined || settings.Amazon.blockFreevee) {
+    if (settings.Amazon?.blockFreevee === undefined || settings.Amazon.blockFreevee) {
       console.log("started observing| FreeVee Ad");
       // AmazonFreeVeeObserver.observe(document, FreeVeeConfig);
       Amazon_FreeveeTimeout();
