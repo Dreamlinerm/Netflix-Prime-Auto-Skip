@@ -24,8 +24,9 @@ if (isVideo || isNetflix) {
   const defaultSettings = {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
-      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true },
+      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, profile: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
+      General: { profileName: null },
     },
   };
   let settings = defaultSettings.settings;
@@ -42,6 +43,7 @@ if (isVideo || isNetflix) {
     } else {
       if (isNetflix) {
         // start Observers depending on the settings
+        if (settings.Netflix?.profile) startNetflixProfileObserver();
         if (settings.Netflix?.skipIntro) startNetflixSkipIntroObserver();
         if (settings.Netflix?.skipRecap) startNetflixSkipRecapObserver();
         if (settings.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
@@ -90,6 +92,7 @@ if (isVideo || isNetflix) {
         console.log(key, "Old value:", oldValue, ", new value:", newValue);
         if (isNetflix) {
           // if value is changed then check if it is enabled or disabled
+          if (oldValue === undefined || newValue.Netflix.profile !== oldValue.Netflix.profile) startNetflixProfileObserver();
           if (oldValue === undefined || newValue.Netflix.skipIntro !== oldValue.Netflix.skipIntro) startNetflixSkipIntroObserver();
           if (oldValue === undefined || newValue.Netflix.skipRecap !== oldValue.Netflix.skipRecap) startNetflixSkipRecapObserver();
           if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix.skipCredits) startNetflixSkipCreditsObserver();
@@ -144,6 +147,26 @@ if (isVideo || isNetflix) {
   const config = { attributes: true, childList: true, subtree: true };
   // Netflix Observers
   const NetflixConfig = { attributes: true, attributeFilter: ["data-uia"], subtree: true, childList: true, attributeOldValue: false };
+
+  const NetflixProfileObserver = new MutationObserver(Netflix_profile);
+  function Netflix_profile(mutations, observer) {
+    // there is a space before the - thats why slice -1
+    let currentProfileName = document.querySelector("[href*='/YourAccount']")?.getAttribute("aria-label")?.split("–")?.[0].slice(0, -1);
+    if (currentProfileName && currentProfileName !== settings.General.profileName) {
+      settings.General.profileName = currentProfileName;
+      browser.storage.sync.set({ settings });
+      console.log("Profile switched to", currentProfileName);
+    }
+    let profileButtons = document.querySelectorAll(".profile-name");
+    profileButtons.forEach((button) => {
+      if (button.textContent === settings.General.profileName) {
+        button?.parentElement.click();
+        console.log("Profile automatically chosen:", settings.General.profileName);
+        increaseBadge();
+      }
+    });
+  }
+
   const NetflixSkipIntroObserver = new MutationObserver(Netflix_intro);
   function Netflix_intro(mutations, observer) {
     // for (let mutation of mutations) {
@@ -478,6 +501,16 @@ if (isVideo || isNetflix) {
   }
 
   // start/stop the observers depending on settings
+  async function startNetflixProfileObserver() {
+    if (settings.Netflix.profile === undefined || settings.Netflix.profile) {
+      console.log("started observing| Profile");
+      NetflixProfileObserver.observe(document, config);
+    } else {
+      console.log("stopped observing| Profile");
+      NetflixProfileObserver.disconnect();
+    }
+  }
+
   async function startNetflixSkipIntroObserver() {
     if (settings.Netflix.skipIntro === undefined || settings.Netflix.skipIntro) {
       console.log("started observing| intro");
