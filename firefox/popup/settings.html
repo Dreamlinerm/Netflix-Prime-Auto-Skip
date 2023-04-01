@@ -34,8 +34,7 @@
       </div>
       <h2>New in version 1.0.31:</h2>
       <ul style="font-size: 1.2em">
-        <li>Automatically choosing last used Netflix Profile</li>
-        <li>Fixed auto click on profile on the profile manage page</li>
+        <li>Show netflix profile picture in settings since name may be duplicate</li>
       </ul>
       <div class="flex flex-row">
         <div class="categoryPrime">
@@ -157,12 +156,15 @@
               </label>
             </div>
             <div class="line flex" style="align-items: center">
-              <p>Auto pick profile:</p>
-              <p id="profileName" style="padding-left: 0; font-size: 1em"></p>
+              <p>Auto pick last profile:</p>
               <label class="switch">
                 <input type="checkbox" id="NetflixProfile" />
                 <span class="slider round"></span>
               </label>
+            </div>
+            <div class="line flex">
+              <p id="profileName"></p>
+              <img id="profilePicture" class="hidden" style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px" />
             </div>
           </div>
         </div>

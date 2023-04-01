@@ -26,7 +26,7 @@ if (isVideo || isNetflix) {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, profile: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
-      General: { profileName: null },
+      General: { profileName: null, profilePicture: null },
     },
   };
   let settings = defaultSettings.settings;
@@ -151,16 +151,25 @@ if (isVideo || isNetflix) {
   const NetflixProfileObserver = new MutationObserver(Netflix_profile);
   function Netflix_profile(mutations, observer) {
     // there is a space before the - thats why slice -1
-    let currentProfileName = document.querySelector("[href*='/YourAccount']")?.getAttribute("aria-label")?.split("–")?.[0].slice(0, -1);
-    if (currentProfileName && currentProfileName !== settings.General.profileName) {
-      settings.General.profileName = currentProfileName;
-      browser.storage.sync.set({ settings });
-      console.log("Profile switched to", currentProfileName);
+    let currentProfile = document.querySelector("[href*='/YourAccount']");
+    if (currentProfile) {
+      const currentProfileName = currentProfile?.getAttribute("aria-label")?.split("–")?.[0].slice(0, -1);
+      if (currentProfileName && currentProfileName !== settings.General.profileName) {
+        // small profile picture
+        settings.General.profilePicture = currentProfile?.firstChild?.firstChild?.src;
+
+        settings.General.profileName = currentProfileName;
+        browser.storage.sync.set({ settings });
+        console.log("Profile switched to", currentProfileName);
+      }
     }
     if (!window.location.pathname.includes("Profile") && !window.location.pathname.includes("profile")) {
       let profileButtons = document.querySelectorAll(".profile-name");
       profileButtons.forEach((button) => {
         if (button.textContent === settings.General.profileName) {
+          // big profile picture
+          // slice(4, -1) to remove the url(" ") from the string
+          settings.General.profilePicture = button?.parentElement?.firstChild?.firstChild?.style?.backgroundImage?.slice(5, -2);
           button?.parentElement.click();
           console.log("Profile automatically chosen:", settings.General.profileName);
           increaseBadge();
