@@ -25,6 +25,7 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
+ - URL: [e.g. amazon.de, amazon.com, netflix.ca]
  - OS: [e.g. Windows]
  - Browser [e.g. chrome, firefox]
  - Addon-Version [e.g. 1.0.31 seen if you click on the menu on the top]
