@@ -329,15 +329,22 @@ if (isVideo || isNetflix) {
   const AmazonFilterPaidObserver = new MutationObserver(Amazon_FilterPaid);
   function Amazon_FilterPaid(mutations, observer) {
     document.querySelectorAll(".o86fri").forEach((a) => {
+      // don't iterate too long too much performance impact
+      let maxSectionDepth = 10;
       let SectionCount = 0;
-      while (a.parentElement && SectionCount < 2) {
+      while (a?.parentElement && SectionCount < 2 && maxSectionDepth > 0) {
         a = a.parentElement;
+        maxSectionDepth--;
         if (a.tagName == "SECTION") {
           SectionCount++;
         }
       }
-      console.log("Filtered paid Element", a.parentElement);
-      a.remove();
+      // fixes if no 2. section is found it will remove the hole page
+      if (a.tagName == "SECTION") {
+        console.log("Filtered paid Element", a.parentElement);
+        a.remove();
+        increaseBadge();
+      }
     });
   }
 
