@@ -25,7 +25,7 @@ const defaultSettings = {
     Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, profile: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
-    General: { profileName: null },
+    General: { profileName: null, profilePicture: null },
   },
 };
 let settings = defaultSettings.settings;
@@ -117,6 +117,12 @@ function setCheckboxesToSettings() {
 
   button = document.querySelector("#profileName");
   if (button) button.textContent = settings?.General.profileName;
+  button = document.querySelector("#profilePicture");
+  if (button && settings.General.profilePicture) {
+    button.setAttribute("src", settings?.General.profilePicture);
+    button.style.display = "block";
+  }
+
   // Statistics
   button = document.querySelector("#AmazonAdTime");
   if (button) button.textContent = getTimeFormatted(settings?.Statistics.AmazonAdTimeSkipped);

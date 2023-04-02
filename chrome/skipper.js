@@ -26,7 +26,7 @@ if (isVideo || isNetflix) {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, profile: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
-      General: { profileName: null },
+      General: { profileName: null, profilePicture: null },
     },
   };
   let settings = defaultSettings.settings;
@@ -151,16 +151,25 @@ if (isVideo || isNetflix) {
   const NetflixProfileObserver = new MutationObserver(Netflix_profile);
   function Netflix_profile(mutations, observer) {
     // there is a space before the - thats why slice -1
-    let currentProfileName = document.querySelector("[href*='/YourAccount']")?.getAttribute("aria-label")?.split("–")?.[0].slice(0, -1);
-    if (currentProfileName && currentProfileName !== settings.General.profileName) {
-      settings.General.profileName = currentProfileName;
-      chrome.storage.sync.set({ settings });
-      console.log("Profile switched to", currentProfileName);
+    let currentProfile = document.querySelector("[href*='/YourAccount']");
+    if (currentProfile) {
+      const currentProfileName = currentProfile?.getAttribute("aria-label")?.split("–")?.[0].slice(0, -1);
+      if (currentProfileName && currentProfileName !== settings.General.profileName) {
+        // small profile picture
+        settings.General.profilePicture = currentProfile?.firstChild?.firstChild?.src;
+
+        settings.General.profileName = currentProfileName;
+        chrome.storage.sync.set({ settings });
+        console.log("Profile switched to", currentProfileName);
+      }
     }
     if (!window.location.pathname.includes("Profile") && !window.location.pathname.includes("profile")) {
       let profileButtons = document.querySelectorAll(".profile-name");
       profileButtons.forEach((button) => {
         if (button.textContent === settings.General.profileName) {
+          // big profile picture
+          // slice(4, -1) to remove the url(" ") from the string
+          settings.General.profilePicture = button?.parentElement?.firstChild?.firstChild?.style?.backgroundImage?.slice(5, -2);
           button?.parentElement.click();
           console.log("Profile automatically chosen:", settings.General.profileName);
           increaseBadge();
@@ -320,15 +329,22 @@ if (isVideo || isNetflix) {
   const AmazonFilterPaidObserver = new MutationObserver(Amazon_FilterPaid);
   function Amazon_FilterPaid(mutations, observer) {
     document.querySelectorAll(".o86fri").forEach((a) => {
+      // don't iterate too long too much performance impact
+      let maxSectionDepth = 10;
       let SectionCount = 0;
-      while (a.parentElement && SectionCount < 2) {
+      while (a?.parentElement && SectionCount < 2 && maxSectionDepth > 0) {
         a = a.parentElement;
+        maxSectionDepth--;
         if (a.tagName == "SECTION") {
           SectionCount++;
         }
       }
-      console.log("Filtered paid Element", a.parentElement);
-      a.remove();
+      // fixes if no 2. section is found it will remove the hole page
+      if (a.tagName == "SECTION") {
+        console.log("Filtered paid Element", a.parentElement);
+        a.remove();
+        increaseBadge();
+      }
     });
   }
 
