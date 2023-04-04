@@ -35,7 +35,7 @@ if (isVideo || isNetflix) {
   browser.storage.sync.get("settings", function (result) {
     settings = result.settings;
     console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
-    console.log("version: ", version);
+    log("version: ", version);
     console.log("Settings", settings);
     console.log("Page %cNetflix%cAmazon", isNetflix ? "color: #e60010;" : "display:none;", !isNetflix ? "color: #00aeef;" : "display:none;");
     if (typeof settings !== "object") {
@@ -66,13 +66,13 @@ if (isVideo || isNetflix) {
       let changedSettings = false;
       for (const key in defaultSettings.settings) {
         if (typeof settings[key] === "undefined") {
-          console.log("undefined Setting:", key);
+          log("undefined Setting:", key);
           changedSettings = true;
           settings[key] = defaultSettings.settings[key];
         } else {
           for (const subkey in defaultSettings.settings[key]) {
             if (typeof settings[key][subkey] === "undefined") {
-              console.log("undefined Setting:", key, subkey);
+              log("undefined Setting:", key, subkey);
               changedSettings = true;
               settings[key][subkey] = defaultSettings.settings[key][subkey];
             }
@@ -89,7 +89,7 @@ if (isVideo || isNetflix) {
     for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
       if (key == "settings") {
         settings = newValue;
-        console.log(key, "Old value:", oldValue, ", new value:", newValue);
+        log(key, "Old value:", oldValue, ", new value:", newValue);
         if (isNetflix) {
           // if value is changed then check if it is enabled or disabled
           if (oldValue === undefined || newValue.Netflix.profile !== oldValue.Netflix?.profile) startNetflixProfileObserver();
@@ -129,17 +129,21 @@ if (isVideo || isNetflix) {
   });
   function addIntroTimeSkipped(startTime, endTime) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
-      console.log("Intro Time skipped", endTime - startTime);
+      log("Intro Time skipped", endTime - startTime);
       settings.Statistics.IntroTimeSkipped += endTime - startTime;
       increaseBadge();
     }
   }
   function addRecapTimeSkipped(startTime, endTime) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
-      console.log("Recap Time skipped", endTime - startTime);
+      log("Recap Time skipped", endTime - startTime);
       settings.Statistics.RecapTimeSkipped += endTime - startTime;
       increaseBadge();
     }
+  }
+  function log(a1, a2 = " ", a3 = " ", a4 = " ", a5 = " ") {
+    const date = new Date();
+    console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), a1, a2, a3, a4, a5);
   }
 
   // Observers
@@ -160,7 +164,7 @@ if (isVideo || isNetflix) {
 
         settings.General.profileName = currentProfileName;
         browser.storage.sync.set({ settings });
-        console.log("Profile switched to", currentProfileName);
+        log("Profile switched to", currentProfileName);
       }
     }
     if (!window.location.pathname.includes("Profile") && !window.location.pathname.includes("profile")) {
@@ -171,7 +175,7 @@ if (isVideo || isNetflix) {
           // slice(4, -1) to remove the url(" ") from the string
           settings.General.profilePicture = button?.parentElement?.firstChild?.firstChild?.style?.backgroundImage?.slice(5, -2);
           button?.parentElement.click();
-          console.log("Profile automatically chosen:", settings.General.profileName);
+          log("Profile automatically chosen:", settings.General.profileName);
           increaseBadge();
         }
       });
@@ -185,7 +189,7 @@ if (isVideo || isNetflix) {
       let video = document.querySelector("video");
       const time = video.currentTime;
       button.click();
-      console.log("intro skipped", button);
+      log("intro skipped", button);
       setTimeout(function () {
         addIntroTimeSkipped(time, video.currentTime);
       }, 600);
@@ -199,7 +203,7 @@ if (isVideo || isNetflix) {
       let video = document.querySelector("video");
       const time = video.currentTime;
       button.click();
-      console.log("Recap skipped", button);
+      log("Recap skipped", button);
       setTimeout(function () {
         addRecapTimeSkipped(time, video.currentTime);
       }, 600);
@@ -211,7 +215,7 @@ if (isVideo || isNetflix) {
     let button = document.querySelector('[data-uia="next-episode-seamless-button"]');
     if (button) {
       button.click();
-      console.log("Credits skipped", button);
+      log("Credits skipped", button);
       increaseBadge();
     }
   }
@@ -221,7 +225,7 @@ if (isVideo || isNetflix) {
     let button = document.querySelector('[data-uia="interrupt-autoplay-continue"]');
     if (button) {
       button.click();
-      console.log("Blocked skipped", button);
+      log("Blocked skipped", button);
       increaseBadge();
     }
   }
@@ -229,7 +233,7 @@ if (isVideo || isNetflix) {
   function Netflix_SkipAdInterval() {
     let AdInterval = setInterval(() => {
       if (!settings.Netflix?.NetflixAds) {
-        console.log("stopped observing| Ad");
+        log("stopped observing| Ad");
         clearInterval(AdInterval);
         return;
       }
@@ -237,7 +241,7 @@ if (isVideo || isNetflix) {
       const adLength = Number(document.querySelector(".ltr-puk2kp")?.textContent);
       if (video) {
         if (adLength && video.playbackRate != 16) {
-          console.log("Ad skipped, length:", adLength, "s");
+          log("Ad skipped, length:", adLength, "s");
           settings.Statistics.NetflixAdTimeSkipped += adLength;
           increaseBadge();
           video.playbackRate = 16;
@@ -341,7 +345,7 @@ if (isVideo || isNetflix) {
       }
       // fixes if no 2. section is found it will remove the hole page
       if (a.tagName == "SECTION") {
-        console.log("Filtered paid Element", a.parentElement);
+        log("Filtered paid Element", a.parentElement);
         a.remove();
         increaseBadge();
       }
@@ -357,7 +361,7 @@ if (isVideo || isNetflix) {
       let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
       const time = video.currentTime;
       button.click();
-      console.log("Intro skipped", button);
+      log("Intro skipped", button);
       //delay where the video is loaded
       setTimeout(function () {
         AmazonGobackbutton(video, time, video.currentTime);
@@ -380,12 +384,12 @@ if (isVideo || isNetflix) {
       function goBack() {
         video.currentTime = startTime;
         buttonInHTML.remove();
-        console.log("stopped observing| Intro");
+        log("stopped observing| Intro");
         AmazonSkipIntroObserver.disconnect();
         waitTime = endTime - startTime + 2;
-        // console.log("waiting for:", waitTime);
+        //log("waiting for:", waitTime);
         setTimeout(function () {
-          console.log("restarted observing| Intro");
+          log("restarted observing| Intro");
           AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
         }, waitTime * 1000);
       }
@@ -411,7 +415,7 @@ if (isVideo || isNetflix) {
             if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
               button.click();
               increaseBadge();
-              console.log("skipped Credits", button);
+              log("skipped Credits", button);
             }
             return;
           }
@@ -432,7 +436,7 @@ if (isVideo || isNetflix) {
           // getting stuck loading when skipping ad longer than 100 seconds i think
           let skipTime = adTime < 20 ? adTime - 1 : 20;
           video.currentTime += skipTime;
-          console.log("FreeVee Ad skipped, length:", skipTime, "s");
+          log("FreeVee Ad skipped, length:", skipTime, "s");
           settings.Statistics.AmazonAdTimeSkipped += skipTime + 1;
           increaseBadge();
           // video.removeEventListener("playing", skipAd);
@@ -445,7 +449,7 @@ if (isVideo || isNetflix) {
     // set loop every 1 sec and check if ad is there
     let AdInterval = setInterval(function () {
       if (!settings.Amazon.blockFreevee) {
-        console.log("stopped observing| FreeVee Ad");
+        log("stopped observing| FreeVee Ad");
         clearInterval(AdInterval);
         return;
       }
@@ -468,14 +472,14 @@ if (isVideo || isNetflix) {
     // set loop every 1 sec and check if ad is there
     let AdInterval = setInterval(function () {
       if (!settings.Amazon.skipAd) {
-        console.log("stopped observing| Self Ad");
+        log("stopped observing| Self Ad");
         clearInterval(AdInterval);
         return;
       }
       let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
       if (video) {
         video.onplay = function () {
-          // console.log("started playing video");
+          //log("started playing video");
           // if video is playing
           if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
             let button = document.querySelector(".fu4rd6c.f1cw2swo");
@@ -493,7 +497,7 @@ if (isVideo || isNetflix) {
                   button.click();
                   if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
                   increaseBadge();
-                  console.log("Self Ad skipped, length:", adTime, button);
+                  log("Self Ad skipped, length:", adTime, button);
                 }
               }, 100);
             }
@@ -506,83 +510,83 @@ if (isVideo || isNetflix) {
   // start/stop the observers depending on settings
   async function startNetflixProfileObserver() {
     if (settings.Netflix?.profile === undefined || settings.Netflix.profile) {
-      console.log("started observing| Profile");
+      log("started observing| Profile");
       NetflixProfileObserver.observe(document, config);
     } else {
-      console.log("stopped observing| Profile");
+      log("stopped observing| Profile");
       NetflixProfileObserver.disconnect();
     }
   }
 
   async function startNetflixSkipIntroObserver() {
     if (settings.Netflix?.skipIntro === undefined || settings.Netflix.skipIntro) {
-      console.log("started observing| Intro");
+      log("started observing| Intro");
       let button = document.querySelector('[data-uia="player-skip-intro"]');
       if (button) {
         let video = document.querySelectorAll("video")[0];
         const time = video.currentTime;
         button.click();
-        console.log("intro skipped", button);
+        log("intro skipped", button);
         setTimeout(function () {
           addIntroTimeSkipped(time, video.currentTime);
         }, 600);
       }
       NetflixSkipIntroObserver.observe(document, NetflixConfig);
     } else {
-      console.log("stopped observing| Intro");
+      log("stopped observing| Intro");
       NetflixSkipIntroObserver.disconnect();
     }
   }
   async function startNetflixSkipRecapObserver() {
     if (settings.Netflix?.skipRecap === undefined || settings.Netflix.skipRecap) {
-      console.log("started observing| Recap");
+      log("started observing| Recap");
       let button = document.querySelector('[data-uia="player-skip-recap"]') || document.querySelector('[data-uia="player-skip-preplay"]');
       if (button) {
         let video = document.querySelectorAll("video")[0];
         const time = video.currentTime;
         button.click();
-        console.log("Recap skipped", button);
+        log("Recap skipped", button);
         setTimeout(function () {
           addRecapTimeSkipped(time, video.currentTime);
         }, 600);
       }
       NetflixSkipRecapObserver.observe(document, NetflixConfig);
     } else {
-      console.log("stopped observing| Recap");
+      log("stopped observing| Recap");
       NetflixSkipRecapObserver.disconnect();
     }
   }
   async function startNetflixSkipCreditsObserver() {
     if (settings.Netflix?.skipCredits === undefined || settings.Netflix.skipCredits) {
-      console.log("started observing| Credits");
+      log("started observing| Credits");
       let button = document.querySelector('[data-uia="next-episode-seamless-button"]');
       if (button) {
         button.click();
-        console.log("Credits skipped", button);
+        log("Credits skipped", button);
       }
       NetflixSkipCreditsObserver.observe(document, NetflixConfig);
     } else {
-      console.log("stopped observing| Credits");
+      log("stopped observing| Credits");
       NetflixSkipCreditsObserver.disconnect();
     }
   }
   async function startNetflixSkipBlockedObserver() {
     if (settings.Netflix?.skipBlocked === undefined || settings.Netflix.skipBlocked) {
-      console.log("started observing| Blocked");
+      log("started observing| Blocked");
       let button = document.querySelector('[data-uia="interrupt-autoplay-continue"]');
       if (button) {
         button.click();
-        console.log("Blocked skipped", button);
+        log("Blocked skipped", button);
       }
       NetflixSkipBlockedObserver.observe(document, NetflixConfig);
     } else {
-      console.log("stopped observing| Blocked");
+      log("stopped observing| Blocked");
       NetflixSkipBlockedObserver.disconnect();
     }
   }
   async function startNetflixAdTimeout() {
     if (settings.Netflix?.NetflixAds === undefined || settings.Netflix.NetflixAds) {
-      console.log("started observing| Ad");
+      log("started observing| Ad");
       Netflix_SkipAdInterval();
     }
   }
@@ -648,10 +652,10 @@ if (isVideo || isNetflix) {
           }
         }
       }
-      console.log("started adding | SpeedSlider");
+      log("started adding| SpeedSlider");
       AmazonSpeedSliderObserver.observe(document, AmazonSpeedSliderConfig);
     } else {
-      console.log("stopped adding| SpeedSlider");
+      log("stopped adding| SpeedSlider");
       AmazonSpeedSliderObserver.disconnect();
       document.querySelector("#videoSpeed")?.remove();
       document.querySelector("#videoSpeedSlider")?.remove();
@@ -660,24 +664,24 @@ if (isVideo || isNetflix) {
   }
   async function startAmazonFilterPaidObserver() {
     if (settings.Amazon?.filterPaid === undefined || settings.Amazon.filterPaid) {
-      console.log("started filtering| Paid films");
+      log("started filtering| Paid films");
 
       AmazonFilterPaidObserver.observe(document, AmazonFilterPaidConfig);
     } else {
-      console.log("stopped filtering| Paid films");
+      log("stopped filtering| Paid films");
       AmazonFilterPaidObserver.disconnect();
     }
   }
 
   async function startAmazonSkipIntroObserver() {
     if (settings.Amazon?.skipIntro === undefined || settings.Amazon.skipIntro) {
-      console.log("started observing| Intro");
+      log("started observing| Intro");
       let button = document.querySelector("[class*=skipelement]");
       if (button) {
         let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
         const time = video.currentTime;
         button.click();
-        console.log("Intro skipped", button);
+        log("Intro skipped", button);
         //delay where the video is loaded
         setTimeout(function () {
           addIntroTimeSkipped(time, video.currentTime);
@@ -685,13 +689,13 @@ if (isVideo || isNetflix) {
       }
       AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
     } else {
-      console.log("stopped observing| Intro");
+      log("stopped observing| Intro");
       AmazonSkipIntroObserver.disconnect();
     }
   }
   async function startAmazonSkipCreditsObserver() {
     if (settings.Amazon?.skipCredits === undefined || settings.Amazon.skipCredits) {
-      console.log("started observing| Credits");
+      log("started observing| Credits");
       let button = document.querySelector("[class*=nextupcard-button]");
       if (button) {
         // only skipping to next episode not an entirely new series
@@ -699,24 +703,24 @@ if (isVideo || isNetflix) {
         let newEpNumber = document.querySelector("[class*=nextupcard-episode]");
         if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
           button.click();
-          console.log("Credits skipped", button);
+          log("Credits skipped", button);
         }
       }
       AmazonSkipCreditsObserver.observe(document, AmazonSkipCreditsConfig);
     } else {
-      console.log("stopped observing| Credits");
+      log("stopped observing| Credits");
       AmazonSkipCreditsObserver.disconnect();
     }
   }
   async function startAmazonSkipAdObserver() {
     if (settings.Amazon?.skipAd === undefined || settings.Amazon.skipAd) {
-      console.log("started observing| Self Ad");
+      log("started observing| Self Ad");
       Amazon_AdTimeout();
     }
   }
   async function startAmazonBlockFreeveeObserver() {
     if (settings.Amazon?.blockFreevee === undefined || settings.Amazon.blockFreevee) {
-      console.log("started observing| FreeVee Ad");
+      log("started observing| FreeVee Ad");
       // AmazonFreeVeeObserver.observe(document, FreeVeeConfig);
       Amazon_FreeveeTimeout();
     }
