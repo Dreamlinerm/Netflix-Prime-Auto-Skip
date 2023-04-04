@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.32";
+const version = "1.0.33";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -35,7 +35,7 @@ if (isVideo || isNetflix) {
   browser.storage.sync.get("settings", function (result) {
     settings = result.settings;
     console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
-    log("version: ", version);
+    console.log("version: ", version);
     console.log("Settings", settings);
     console.log("Page %cNetflix%cAmazon", isNetflix ? "color: #e60010;" : "display:none;", !isNetflix ? "color: #00aeef;" : "display:none;");
     if (typeof settings !== "object") {
@@ -491,7 +491,7 @@ if (isVideo || isNetflix) {
                   .innerHTML.match(/[:]\d+/)[0]
                   .substring(1)
               );
-              // wait for 100ms before skipping to make sure the button is not pressed too fast, or there will be inifinite loading
+              // wait for 100ms before skipping to make sure the button is not pressed too fast, or there will be infinite loading
               setTimeout(() => {
                 if (button) {
                   button.click();
@@ -499,7 +499,7 @@ if (isVideo || isNetflix) {
                   increaseBadge();
                   log("Self Ad skipped, length:", adTime, button);
                 }
-              }, 100);
+              }, 150);
             }
           }
         };
