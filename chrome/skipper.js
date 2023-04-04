@@ -35,9 +35,9 @@ if (isVideo || isNetflix) {
   chrome.storage.sync.get("settings", function (result) {
     settings = result.settings;
     console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
-    log("version: ", version);
+    console.log("version: ", version);
     console.log("Settings", settings);
-    console.log("Page %cNetflix%cAmazon", isNetflix ? "color: #e60010;" : "display:none;", !isNetflix ? "color: #00aeef;" : "display:none;");
+    console.log("Page %cNetflix%cAmazon", isNetflix ? "color: #e60010;" : "display:none;visibility: hidden;", !isNetflix ? "color: #00aeef;" : "display:none;");
     if (typeof settings !== "object") {
       chrome.storage.sync.set(defaultSettings);
     } else {
