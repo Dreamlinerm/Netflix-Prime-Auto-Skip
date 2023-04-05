@@ -58,7 +58,8 @@ chrome.runtime.onMessage.addListener(function (message, sender) {
 });
 
 chrome.runtime.onInstalled.addListener((details) => {
-  if (details.reason === "update" || details.reason === "install") {
+  // details.reason === "update" ||
+  if (details.reason === "install") {
     chrome.tabs.create({
       url: "popup/settings.html",
     });
