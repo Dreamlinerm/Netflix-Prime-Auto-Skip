@@ -353,12 +353,13 @@ if (isVideo || isNetflix) {
   function Amazon_FilterPaid(mutations, observer) {
     // if not on the shop page or homepremiere
     if (!window.location.href.includes("contentId=store") && !window.location.href.includes("contentId=homepremiere")) {
+      // yellow headline is not everywhere the same
       document.querySelectorAll(".o86fri").forEach((a) => {
         deletePaidCategory(a);
       });
-      // on category page
-      document.querySelectorAll(".GnSDwP").forEach((a) => {
-        if (getComputedStyle(a).color == "rgb(255, 204, 0)") deletePaidCategory(a);
+      // Mehr > is .GnSDwP //if (getComputedStyle(a).color == "rgb(255, 204, 0)")
+      document.querySelectorAll(".c3svnh a.Xa7aAK, .c3svnh a.Xa7aAK:link, .c3svnh a.Xa7aAK:visited").forEach((a) => {
+        deletePaidCategory(a);
       });
     }
   }
