@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.34";
+const version = "1.0.35";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -332,25 +332,36 @@ if (isVideo || isNetflix) {
   }
   const AmazonFilterPaidConfig = { attributes: true, attributeFilter: [".o86fri"], subtree: true, childList: true, attributeOldValue: false };
   const AmazonFilterPaidObserver = new MutationObserver(Amazon_FilterPaid);
-  function Amazon_FilterPaid(mutations, observer) {
-    document.querySelectorAll(".o86fri").forEach((a) => {
-      // don't iterate too long too much performance impact
-      let maxSectionDepth = 10;
-      let SectionCount = 0;
-      while (a?.parentElement && SectionCount < 2 && maxSectionDepth > 0) {
-        a = a.parentElement;
-        maxSectionDepth--;
-        if (a.tagName == "SECTION") {
-          SectionCount++;
-        }
-      }
-      // fixes if no 2. section is found it will remove the hole page
+  async function deletePaidCategory(a) {
+    // don't iterate too long too much performance impact
+    let maxSectionDepth = 10;
+    let SectionCount = 0;
+    while (a?.parentElement && SectionCount < 2 && maxSectionDepth > 0) {
+      a = a.parentElement;
+      maxSectionDepth--;
       if (a.tagName == "SECTION") {
-        log("Filtered paid Element", a.parentElement);
-        a.remove();
-        increaseBadge();
+        SectionCount++;
       }
-    });
+    }
+    // fixes if no 2. section is found it will remove the hole page
+    if (a.tagName == "SECTION") {
+      log("Filtered paid Element", a.parentElement);
+      a.remove();
+      increaseBadge();
+    }
+  }
+  function Amazon_FilterPaid(mutations, observer) {
+    // if not on the shop page or homepremiere
+    if (!window.location.href.includes("contentId=store") && !window.location.href.includes("contentId=homepremiere")) {
+      // yellow headline is not everywhere the same
+      document.querySelectorAll(".o86fri").forEach((a) => {
+        deletePaidCategory(a);
+      });
+      // Mehr > is .GnSDwP //if (getComputedStyle(a).color == "rgb(255, 204, 0)")
+      document.querySelectorAll(".c3svnh a.Xa7aAK, .c3svnh a.Xa7aAK:link, .c3svnh a.Xa7aAK:visited").forEach((a) => {
+        deletePaidCategory(a);
+      });
+    }
   }
 
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
