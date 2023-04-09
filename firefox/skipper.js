@@ -351,14 +351,16 @@ if (isVideo || isNetflix) {
     }
   }
   function Amazon_FilterPaid(mutations, observer) {
-    document.querySelectorAll(".o86fri").forEach((a) => {
-      deletePaidCategory(a);
-      log("test");
-    });
-    // on category page
-    document.querySelectorAll(".GnSDwP").forEach((a) => {
-      if (getComputedStyle(a).color == "rgb(255, 204, 0)") deletePaidCategory(a);
-    });
+    // if not on the shop page or homepremiere
+    if (!window.location.href.includes("contentId=store") && !window.location.href.includes("contentId=homepremiere")) {
+      document.querySelectorAll(".o86fri").forEach((a) => {
+        deletePaidCategory(a);
+      });
+      // on category page
+      document.querySelectorAll(".GnSDwP").forEach((a) => {
+        if (getComputedStyle(a).color == "rgb(255, 204, 0)") deletePaidCategory(a);
+      });
+    }
   }
 
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
