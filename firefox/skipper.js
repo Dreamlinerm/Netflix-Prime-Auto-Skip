@@ -155,9 +155,10 @@ if (isVideo || isNetflix) {
 
   const NetflixProfileObserver = new MutationObserver(Netflix_profile);
   function Netflix_profile(mutations, observer) {
-    // there is a space before the - thats why slice -1
+    // AutoPickProfile();
     let currentProfile = document.querySelector("[href*='/YourAccount']");
     if (currentProfile) {
+      // there is a space before the - thats why slice -1
       const currentProfileName = currentProfile?.getAttribute("aria-label")?.split("–")?.[0].slice(0, -1);
       if (currentProfileName && currentProfileName !== settings.General.profileName) {
         // small profile picture
@@ -168,6 +169,8 @@ if (isVideo || isNetflix) {
         log("Profile switched to", currentProfileName);
       }
     }
+  }
+  function AutoPickProfile() {
     if (!window.location.pathname.includes("Profile") && !window.location.pathname.includes("profile")) {
       let profileButtons = document.querySelectorAll(".profile-name");
       profileButtons.forEach((button) => {
@@ -523,6 +526,7 @@ if (isVideo || isNetflix) {
   async function startNetflixProfileObserver() {
     if (settings.Netflix?.profile === undefined || settings.Netflix.profile) {
       log("started observing| Profile");
+      AutoPickProfile();
       NetflixProfileObserver.observe(document, config);
     } else {
       log("stopped observing| Profile");
