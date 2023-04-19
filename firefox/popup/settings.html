@@ -39,16 +39,16 @@
       </ul>
       <div class="flex flex-row">
         <div class="sidenav">
-          <p id="MenuVideo" style="background-color: #e60010">General Video</p>
-          <p id="MenuAmazon">Prime Video specific</p>
-          <p id="MenuNetflix">Netflix specific</p>
+          <p id="MenuVideo" style="background-color: #e60010">Shared Settings</p>
+          <p id="MenuAmazon">Prime Video</p>
+          <p id="MenuNetflix">Netflix</p>
           <p id="MenuOther">Other</p>
           <p id="MenuStatistics">Statistics</p>
         </div>
         <div>
           <div class="categoryVideo" id="VideoSettings">
             <div class="flex flex-between" style="padding: 5px 5px">
-              <h2>General Video features</h2>
+              <h2>Shared Video features</h2>
               <label class="switch">
                 <input type="checkbox" id="VideoSkips" />
                 <span class="slider round"></span>
@@ -96,33 +96,13 @@
             <!-- show on click -->
             <div>
               <div class="line flex">
-                <p>Skip Intro:</p>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonIntro" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div class="line flex">
-                <p>Skip Credits:</p>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonCredits" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div class="line flex">
                 <p>Skip Self Ads:</p>
                 <label class="switch">
                   <input type="checkbox" id="AmazonAds" />
                   <span class="slider round"></span>
                 </label>
               </div>
-              <div class="line flex">
-                <p>Skip Freevee Ads:</p>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonFreevee" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
+
               <div class="line flex">
                 <p>Add Speed Slider:</p>
                 <label class="switch">
@@ -137,6 +117,30 @@
                   <span class="slider round"></span>
                 </label>
               </div>
+              <!-- 
+                Individual Settings removed
+                <div class="line flex">
+                <p>Skip Intro:</p>
+                <label class="switch">
+                  <input type="checkbox" id="AmazonIntro" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="line flex">
+                <p>Skip Credits:</p>
+                <label class="switch">
+                  <input type="checkbox" id="AmazonCredits" />
+                  <span class="slider round"></span>
+                </label>
+              </div> 
+              <div class="line flex">
+                <p>Skip Freevee Ads:</p>
+                <label class="switch">
+                  <input type="checkbox" id="AmazonFreevee" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              -->
             </div>
           </div>
           <div class="categoryNetflix hidden" style="margin-top: 0" id="NetflixSettings">
@@ -150,33 +154,13 @@
             <!-- show on click -->
             <div>
               <div class="line flex">
-                <p>Skip Intro:</p>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixIntro" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div class="line flex">
                 <p>Skip Recaps:</p>
                 <label class="switch">
                   <input type="checkbox" id="NetflixRecap" />
                   <span class="slider round"></span>
                 </label>
               </div>
-              <div class="line flex">
-                <p>Skip Credits:</p>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixCredits" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div class="line flex">
-                <p>Skip Ads:</p>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixAds" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
+
               <div class="line flex">
                 <p>Resume inactivity warning:</p>
                 <label class="switch">
@@ -195,6 +179,30 @@
                 <p id="profileName" style="text-transform: capitalize"></p>
                 <img id="profilePicture" class="hidden" style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px" />
               </div>
+
+              <!-- 
+              Individual Settings removed
+              <div class="line flex">
+                <p>Skip Intro:</p>
+                <label class="switch">
+                  <input type="checkbox" id="NetflixIntro" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="line flex">
+                <p>Skip Credits:</p>
+                <label class="switch">
+                  <input type="checkbox" id="NetflixCredits" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="line flex">
+                <p>Skip Ads:</p>
+                <label class="switch">
+                  <input type="checkbox" id="NetflixAds" />
+                  <span class="slider round"></span>
+                </label>
+              </div> -->
             </div>
           </div>
           <div id="StatisticsSettings" class="hidden">
