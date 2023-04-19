@@ -188,6 +188,9 @@ function Menu(setting) {
   document.getElementById("StatisticsSettings").style.display = "none";
   document.getElementById("MenuStatistics").style.setProperty("background-color", "");
 
+  document.getElementById("OtherSettings").style.display = "none";
+  document.getElementById("MenuOther").style.setProperty("background-color", "");
+
   document.getElementById(setting + "Settings").style.display = "block";
   document.getElementById("Menu" + setting).style.setProperty("background-color", "#e60010");
 }
@@ -214,6 +217,8 @@ function listenForClicks() {
       Menu("Netflix");
     } else if (e.target.id === "MenuStatistics") {
       Menu("Statistics");
+    } else if (e.target.id === "MenuOther") {
+      Menu("Other");
     }
     //  -------------      openSettings        ---------------------------------------
     else if (e.target.id === "openVideoSettings") {
