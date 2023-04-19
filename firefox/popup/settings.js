@@ -86,13 +86,21 @@ function setCheckboxesToSettings() {
   button = document.querySelector("#VideoSkips");
   if (button)
     button.checked =
-      settings?.Amazon.skipIntro && settings?.Netflix.skipIntro && settings?.Amazon.skipCredits && settings?.Netflix.skipCredits && settings?.Amazon.skipAd && settings?.Netflix.NetflixAds;
+      settings?.Amazon.skipIntro &&
+      settings?.Netflix.skipIntro &&
+      settings?.Amazon.skipCredits &&
+      settings?.Netflix.skipCredits &&
+      settings?.Amazon.skipAd &&
+      settings?.Netflix.NetflixAds &&
+      settings?.Video.playOnFullScreen;
   button = document.querySelector("#VideoIntro");
   if (button) button.checked = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro;
   button = document.querySelector("#VideoCredits");
   if (button) button.checked = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits;
   button = document.querySelector("#VideoAds");
   if (button) button.checked = settings?.Amazon.skipAd && settings?.Netflix.NetflixAds;
+  button = document.querySelector("#VideoFullScreen");
+  if (button) button.checked = settings?.Video.playOnFullScreen;
 
   //  -------------      Amazon        ---------------------------------------
   button = document.querySelector("#AmazonSkips");
@@ -250,6 +258,9 @@ function listenForClicks() {
       settings.Amazon.skipAd = !settings.Amazon.skipAd;
       settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
       setSettings("VideoAd");
+    } else if (e.target.id === "VideoFullScreen") {
+      settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
+      setSettings("playOnFullScreen");
     }
     //  -------------      Amazon        ---------------------------------------
     else if (e.target.id === "AmazonSkips") {
