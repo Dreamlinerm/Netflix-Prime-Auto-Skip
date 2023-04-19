@@ -90,7 +90,7 @@ function setCheckboxesToSettings() {
       settings?.Netflix.skipIntro &&
       settings?.Amazon.skipCredits &&
       settings?.Netflix.skipCredits &&
-      settings?.Amazon.skipAd &&
+      settings?.Amazon.blockFreevee &&
       settings?.Netflix.NetflixAds &&
       settings?.Video.playOnFullScreen;
   button = document.querySelector("#VideoIntro");
@@ -104,9 +104,7 @@ function setCheckboxesToSettings() {
 
   //  -------------      Amazon        ---------------------------------------
   button = document.querySelector("#AmazonSkips");
-  if (button)
-    button.checked =
-      settings?.Amazon.skipIntro && settings?.Amazon.skipCredits && settings?.Amazon.skipAd && settings?.Amazon.blockFreevee && settings?.Amazon.speedSlider && settings?.Amazon.filterPaid;
+  if (button) button.checked = settings?.Amazon.skipAd && settings?.Amazon.speedSlider && settings?.Amazon.filterPaid;
   button = document.querySelector("#AmazonIntro");
   if (button) button.checked = settings?.Amazon.skipIntro;
   button = document.querySelector("#AmazonCredits");
@@ -121,9 +119,7 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.filterPaid;
   //  -------------      Netflix        ---------------------------------------
   button = document.querySelector("#NetflixSkips");
-  if (button)
-    button.checked =
-      settings?.Netflix.skipIntro && settings?.Netflix.skipRecap && settings?.Netflix.skipCredits && settings?.Netflix.skipBlocked && settings?.Netflix.NetflixAds && settings?.Netflix.profile;
+  if (button) button.checked = settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile;
   button = document.querySelector("#NetflixIntro");
   if (button) button.checked = settings?.Netflix.skipIntro;
   button = document.querySelector("#NetflixRecap");
@@ -237,7 +233,7 @@ function listenForClicks() {
         settings?.Netflix.skipIntro &&
         settings?.Amazon.skipCredits &&
         settings?.Netflix.skipCredits &&
-        settings?.Amazon.skipAd &&
+        settings?.Amazon.blockFreevee &&
         settings?.Netflix.NetflixAds &&
         settings?.Video.playOnFullScreen
       );
@@ -245,7 +241,7 @@ function listenForClicks() {
       settings.Netflix.skipIntro = VideoSkips;
       settings.Amazon.skipCredits = VideoSkips;
       settings.Netflix.skipCredits = VideoSkips;
-      settings.Amazon.skipAd = VideoSkips;
+      settings.Amazon.blockFreevee = VideoSkips;
       settings.Netflix.NetflixAds = VideoSkips;
       settings.Video.playOnFullScreen = VideoSkips;
       setSettings("All VideoSkips");
@@ -267,17 +263,10 @@ function listenForClicks() {
     }
     //  -------------      Amazon        ---------------------------------------
     else if (e.target.id === "AmazonSkips") {
-      const AmazonSkips = !(
-        settings.Amazon.skipIntro &&
-        settings.Amazon.skipCredits &&
-        settings.Amazon.skipAd &&
-        settings.Amazon.blockFreevee &&
-        settings.Amazon.speedSlider &&
-        settings.Amazon.filterPaid
-      );
-      for (let key in settings.Amazon) {
-        settings.Amazon[key] = AmazonSkips;
-      }
+      const AmazonSkips = !(settings.Amazon.skipAd && settings.Amazon.speedSlider && settings.Amazon.filterPaid);
+      settings.Amazon.skipAd = AmazonSkips;
+      settings.Amazon.speedSlider = AmazonSkips;
+      settings.Amazon.filterPaid = AmazonSkips;
       setSettings("All AmazonSkips");
     } else if (e.target.id === "AmazonCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
@@ -300,17 +289,10 @@ function listenForClicks() {
     }
     //  -------------      Netflix        ---------------------------------------
     else if (e.target.id === "NetflixSkips") {
-      const NetflixSkips = !(
-        settings?.Netflix.skipIntro &&
-        settings?.Netflix.skipRecap &&
-        settings?.Netflix.skipCredits &&
-        settings?.Netflix.skipBlocked &&
-        settings?.Netflix.NetflixAds &&
-        settings?.Netflix.profile
-      );
-      for (let key in settings.Netflix) {
-        settings.Netflix[key] = NetflixSkips;
-      }
+      const NetflixSkips = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
+      settings.Netflix.skipRecap = NetflixSkips;
+      settings.Netflix.skipBlocked = NetflixSkips;
+      settings.Netflix.profile = NetflixSkips;
       setSettings("All NetflixSkips");
     } else if (e.target.id === "NetflixIntro") {
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
