@@ -213,6 +213,13 @@ function Statistics(open = true) {
     document.getElementsByClassName("StatisticsUpArrow")[0].style.display = "none";
   }
 }
+function Menu(button) {
+  document.getElementById("VideoSettings").style.display = "none";
+  document.getElementById("AmazonSettings").style.display = "none";
+  document.getElementById("NetflixSettings").style.display = "none";
+  document.getElementById("Statistics").style.display = "none";
+  document.getElementById(button).style.display = "block";
+}
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
  * the content script in the page.
@@ -226,6 +233,16 @@ function listenForClicks() {
     if (e.target.classList.contains("reset")) {
       settings = defaultSettings;
       setSettings("settings resetted to");
+    }
+    //  -------------      Menu        ---------------------------------------
+    else if (e.target.id === "MenuVideo") {
+      Menu("VideoSettings");
+    } else if (e.target.id === "MenuAmazon") {
+      Menu("AmazonSettings");
+    } else if (e.target.id === "MenuNetflix") {
+      Menu("NetflixSettings");
+    } else if (e.target.id === "MenuStatistics") {
+      Menu("Statistics");
     }
     //  -------------      Video        ---------------------------------------
     else if (e.target.id === "VideoSkips") {
