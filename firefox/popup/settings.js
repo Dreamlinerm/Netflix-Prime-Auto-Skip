@@ -169,55 +169,17 @@ function setCheckboxesToSettings() {
   }
 }
 // open and close the Amazon and Netflix Individual Settings
-function VideoSettings(open = true) {
-  if (open) {
-    document.getElementById("VideoSettings").style.display = "block";
-    document.getElementsByClassName("VideoDownArrow")[0].style.display = "none";
-    document.getElementsByClassName("VideoUpArrow")[0].style.display = "block";
-  } else {
-    document.getElementById("VideoSettings").style.display = "none";
-    document.getElementsByClassName("VideoDownArrow")[0].style.display = "block";
-    document.getElementsByClassName("VideoUpArrow")[0].style.display = "none";
-  }
-}
-function AmazonSettings(open = true) {
-  if (open) {
-    document.getElementById("AmazonSettings").style.display = "block";
-    document.getElementsByClassName("AmazonDownArrow")[0].style.display = "none";
-    document.getElementsByClassName("AmazonUpArrow")[0].style.display = "block";
-  } else {
-    document.getElementById("AmazonSettings").style.display = "none";
-    document.getElementsByClassName("AmazonDownArrow")[0].style.display = "block";
-    document.getElementsByClassName("AmazonUpArrow")[0].style.display = "none";
-  }
-}
-function NetflixSettings(open = true) {
-  if (open) {
-    document.getElementById("NetflixSettings").style.display = "block";
-    document.getElementsByClassName("NetflixDownArrow")[0].style.display = "none";
-    document.getElementsByClassName("NetflixUpArrow")[0].style.display = "block";
-  } else {
-    document.getElementById("NetflixSettings").style.display = "none";
-    document.getElementsByClassName("NetflixDownArrow")[0].style.display = "block";
-    document.getElementsByClassName("NetflixUpArrow")[0].style.display = "none";
-  }
-}
-function Statistics(open = true) {
-  if (open) {
-    document.getElementById("Statistics").style.display = "block";
-    document.getElementsByClassName("StatisticsDownArrow")[0].style.display = "none";
-    document.getElementsByClassName("StatisticsUpArrow")[0].style.display = "block";
-  } else {
-    document.getElementById("Statistics").style.display = "none";
-    document.getElementsByClassName("StatisticsDownArrow")[0].style.display = "block";
-    document.getElementsByClassName("StatisticsUpArrow")[0].style.display = "none";
-  }
+function openIndividualSettings(setting) {
+  const open = document.getElementById(setting + "Settings").style.display === "none";
+  document.getElementById(setting + "Settings").style.display = open ? "block" : "none";
+  document.getElementsByClassName(setting + "DownArrow")[0].style.display = open ? "none" : "block";
+  document.getElementsByClassName(setting + "UpArrow")[0].style.display = open ? "block" : "none";
 }
 function Menu(button) {
   document.getElementById("VideoSettings").style.display = "none";
   document.getElementById("AmazonSettings").style.display = "none";
   document.getElementById("NetflixSettings").style.display = "none";
-  document.getElementById("Statistics").style.display = "none";
+  document.getElementById("StatisticsSettings").style.display = "none";
   document.getElementById(button).style.display = "block";
 }
 /**
@@ -242,7 +204,17 @@ function listenForClicks() {
     } else if (e.target.id === "MenuNetflix") {
       Menu("NetflixSettings");
     } else if (e.target.id === "MenuStatistics") {
-      Menu("Statistics");
+      Menu("StatisticsSettings");
+    }
+    //  -------------      openSettings        ---------------------------------------
+    else if (e.target.id === "openVideoSettings") {
+      openIndividualSettings("Video");
+    } else if (e.target.id === "openAmazonSettings") {
+      openIndividualSettings("Amazon");
+    } else if (e.target.id === "openNetflixSettings") {
+      openIndividualSettings("Netflix");
+    } else if (e.target.id === "openStatistics") {
+      openIndividualSettings("Statistics");
     }
     //  -------------      Video        ---------------------------------------
     else if (e.target.id === "VideoSkips") {
@@ -263,8 +235,6 @@ function listenForClicks() {
       settings.Netflix.NetflixAds = VideoSkips;
       settings.Video.playOnFullScreen = VideoSkips;
       setSettings("All VideoSkips");
-    } else if (e.target.id === "openVideoSettings") {
-      VideoSettings(document.getElementById("VideoSettings").style.display === "none");
     } else if (e.target.id === "VideoIntro") {
       settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
@@ -298,8 +268,6 @@ function listenForClicks() {
       settings.Amazon.speedSlider = AmazonSkips;
       settings.Amazon.filterPaid = AmazonSkips;
       setSettings("All AmazonSkips");
-    } else if (e.target.id === "openAmazonSettings") {
-      AmazonSettings(document.getElementById("AmazonSettings").style.display === "none");
     } else if (e.target.id === "AmazonCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
       setSettings("AmazonCredits");
@@ -336,8 +304,6 @@ function listenForClicks() {
       settings.Netflix.NetflixAds = NetflixSkips;
       settings.Netflix.profile = NetflixSkips;
       setSettings("All NetflixSkips");
-    } else if (e.target.id === "openNetflixSettings") {
-      NetflixSettings(document.getElementById("NetflixSettings").style.display == "none");
     } else if (e.target.id === "NetflixIntro") {
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
       setSettings("NetflixIntro");
@@ -363,9 +329,7 @@ function listenForClicks() {
       setSettings("playOnFullScreen");
     }
     //  -------------      Statistics        ---------------------------------------
-    else if (e.target.id === "openStatistics") {
-      Statistics(document.getElementById("Statistics").style.display === "none");
-    } else if (e.target.id === "upload") {
+    else if (e.target.id === "upload") {
       // get the file from #file and console.log it
       const file = document.getElementById("file").files[0];
       if (file !== undefined && "application/json" === file.type) {
