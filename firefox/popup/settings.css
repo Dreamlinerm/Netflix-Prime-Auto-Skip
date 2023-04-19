@@ -235,6 +235,22 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+/* Firefox */
+/* html {
+  scrollbar-color: #212121 grey;
+  scrollbar-width: thin;
+} */
+/* WebKit and Chromiums */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #212121;
+}
+
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 5px;
+}
 
 /* The side navigation menu */
 .sidenav {
