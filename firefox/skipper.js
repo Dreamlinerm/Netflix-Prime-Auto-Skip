@@ -25,6 +25,7 @@ if (isVideo || isNetflix) {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, profile: true },
+      Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null },
     },
@@ -63,7 +64,7 @@ if (isVideo || isNetflix) {
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
       }
-      startUnPauseOnFullScreen(isNetflix);
+      startPlayOnFullScreen(isNetflix);
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
       for (const key in defaultSettings.settings) {
@@ -108,23 +109,9 @@ if (isVideo || isNetflix) {
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
         }
-        if (oldValue === undefined || newValue.Statistics.AmazonAdTimeSkipped !== oldValue.Statistics.AmazonAdTimeSkipped) {
-          settings.Statistics.AmazonAdTimeSkipped = newValue.Statistics.AmazonAdTimeSkipped;
-        }
-        if (oldValue === undefined || newValue.Statistics.NetflixAdTimeSkipped !== oldValue.Statistics.NetflixAdTimeSkipped) {
-          settings.Statistics.NetflixAdTimeSkipped = newValue.Statistics.NetflixAdTimeSkipped;
-        }
-        if (oldValue === undefined || newValue.Statistics.IntroTimeSkipped !== oldValue.Statistics.IntroTimeSkipped) {
-          settings.Statistics.IntroTimeSkipped = newValue.Statistics.IntroTimeSkipped;
-        }
-        if (oldValue === undefined || newValue.Statistics.RecapTimeSkipped !== oldValue.Statistics.RecapTimeSkipped) {
-          settings.Statistics.RecapTimeSkipped = newValue.Statistics.RecapTimeSkipped;
-        }
-        if (oldValue === undefined || newValue.Statistics.SegmentsSkipped !== oldValue.Statistics.SegmentsSkipped) {
-          settings.Statistics.SegmentsSkipped = newValue.Statistics.SegmentsSkipped;
-          if (settings.Statistics.SegmentsSkipped === 0) {
-            resetBadge();
-          }
+        startPlayOnFullScreen(isNetflix);
+        if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
+          resetBadge();
         }
       }
     }
@@ -528,7 +515,7 @@ if (isVideo || isNetflix) {
   // start/stop the observers depending on settings
 
   // Common functions
-  async function startUnPauseOnFullScreen(isNetflix) {
+  async function startPlayOnFullScreen(isNetflix) {
     if (settings.Netflix?.profile === undefined || settings.Netflix.profile || true) {
       log("started observing| Profile");
       function OnFullScreenChange() {
