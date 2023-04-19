@@ -70,17 +70,18 @@ div {
   background-color: #4d0000;
 }
 .ExternalPopupButton {
-  background-color: #4d0000;
+  background-color: #5485ad;
   color: white;
   text-decoration: none;
   border-radius: 15px;
   margin: 10px 5px;
   /* padding: 10px 20px; */
   flex-grow: 1;
-  opacity: 0.8;
+  /* opacity: 0.8; */
 }
 .ExternalPopupButton:hover {
-  background-color: #e60010;
+  /* background-color: #e60010; */
+  opacity: 0.8;
 }
 .Upload {
   border-radius: 5px;
