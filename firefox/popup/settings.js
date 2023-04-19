@@ -235,7 +235,8 @@ function listenForClicks() {
         settings?.Amazon.skipCredits &&
         settings?.Netflix.skipCredits &&
         settings?.Amazon.skipAd &&
-        settings?.Netflix.NetflixAds
+        settings?.Netflix.NetflixAds &&
+        settings?.Video.playOnFullScreen
       );
       settings.Amazon.skipIntro = VideoSkips;
       settings.Netflix.skipIntro = VideoSkips;
@@ -243,6 +244,7 @@ function listenForClicks() {
       settings.Netflix.skipCredits = VideoSkips;
       settings.Amazon.skipAd = VideoSkips;
       settings.Netflix.NetflixAds = VideoSkips;
+      settings.Video.playOnFullScreen = VideoSkips;
       setSettings("All VideoSkips");
     } else if (e.target.id === "openVideoSettings") {
       VideoSettings(document.getElementById("VideoSettings").style.display === "none");
