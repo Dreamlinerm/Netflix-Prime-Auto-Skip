@@ -264,3 +264,9 @@ input:checked + .slider:before {
 .menuButton:hover {
   background-color: #4d0000;
 }
+
+.description {
+  font-size: 17px;
+  padding: 10px 0 20px 20px;
+  color: #cccccc;
+}
