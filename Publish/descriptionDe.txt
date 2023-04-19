@@ -3,7 +3,7 @@
 Recap:
 Automatisch Werbung, Intros, Rekapitulationen, Abspanne auf Netflix und Prime video überspringen.
 --------------------------------------------
-Sie können kauf der Einstellungsseite konfigurieren, welche Funktionen aktiviert werden soll.
+Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert werden soll.
 
 ✨ Features
 
