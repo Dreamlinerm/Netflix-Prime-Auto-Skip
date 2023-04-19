@@ -259,10 +259,12 @@ if (isVideo || isNetflix) {
   }
 
   // Amazon Observers
+  const AmazonVideoClass = "#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video";
+
   const AmazonSpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
   const AmazonSpeedSliderObserver = new MutationObserver(Amazon_SpeedSlider);
   function Amazon_SpeedSlider(mutations, observer) {
-    let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+    let video = document.querySelector(AmazonVideoClass);
     let alreadySlider = document.querySelector("#videoSpeedSlider");
 
     // remove bad background hue which is annoying
@@ -373,7 +375,7 @@ if (isVideo || isNetflix) {
   function Amazon_Intro(mutations, observer) {
     let button = document.querySelector("[class*=skipelement]");
     if (button) {
-      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let video = document.querySelector(AmazonVideoClass);
       const time = video.currentTime;
       button.click();
       log("Intro skipped", button);
@@ -468,7 +470,7 @@ if (isVideo || isNetflix) {
         clearInterval(AdInterval);
         return;
       }
-      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let video = document.querySelector(AmazonVideoClass);
       if (video && !video.paused && video.currentTime > 0) {
         // && !video.paused
         skipAd(video);
@@ -491,7 +493,7 @@ if (isVideo || isNetflix) {
         clearInterval(AdInterval);
         return;
       }
-      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let video = document.querySelector(AmazonVideoClass);
       if (video) {
         video.onplay = function () {
           //log("started playing video");
@@ -521,6 +523,7 @@ if (isVideo || isNetflix) {
       }
     }, 100);
   }
+  // Common functions
 
   // start/stop the observers depending on settings
   async function startNetflixProfileObserver() {
@@ -609,7 +612,7 @@ if (isVideo || isNetflix) {
 
   async function startAmazonSpeedSliderObserver() {
     if (settings.Amazon?.speedSlider === undefined || settings.Amazon.speedSlider) {
-      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let video = document.querySelector(AmazonVideoClass);
       let alreadySlider = document.querySelector("#videoSpeedSlider");
 
       // remove bad background document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
@@ -694,7 +697,7 @@ if (isVideo || isNetflix) {
       log("started observing| Intro");
       let button = document.querySelector("[class*=skipelement]");
       if (button) {
-        let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+        let video = document.querySelector(AmazonVideoClass);
         const time = video.currentTime;
         button.click();
         log("Intro skipped", button);
