@@ -34,10 +34,10 @@
       </div>
       <h2>New in version 1.0.35:</h2>
       <ul style="font-size: 1.2em">
-        <li>Faster automatic profile pick on Netflix</li>
-        <li>Bugfix: did not filter paid films on Category pages on Amazon</li>
-        <li>Won't filter paid films in shop, since it doesn't make sense there (Amazon).</li>
+        <li>Now starts playing the video automatically if Fullscreen is opened</li>
+        <li>Added General Video Settings</li>
       </ul>
+
       <div class="flex flex-row">
         <div class="categoryPrime">
           <div class="flex flex-between" style="padding: 5px 5px">
@@ -171,29 +171,55 @@
           </div>
         </div>
       </div>
-      <div class="flex-center flex-row">
-        <div style="width: 50%">
-          <div id="Statistics" style="display: block">
-            <h2>Skipped time:</h2>
-            <div class="line flex flex-between">
-              <p>Amazon Ad:</p>
-              <p id="AmazonAdTime">0s</p>
+      <div class="flex flex-row">
+        <div style="width: 50%; height: fit-content">
+          <div class="categoryVideo">
+            <div class="flex flex-between" style="padding: 5px 5px">
+              <h2>General Video features</h2>
+              <label class="switch">
+                <input type="checkbox" id="VideoSkips" />
+                <span class="slider round"></span>
+              </label>
             </div>
-            <div class="line flex flex-between">
-              <p>Netflix Ad:</p>
-              <p id="NetflixAdTime">0s</p>
+            <div class="line flex-end flex-align" id="openVideoSettings">
+              <p id="openVideoSettings">Individual settings</p>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoDownArrow hidden">
+                <path d="M0 0 40 0 20 20 0 0" fill="white" id="openVideoSettings" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoUpArrow">
+                <path d="M20 0 40 20 0 20 20 0" fill="white" id="openVideoSettings" />
+              </svg>
             </div>
-            <div class="line flex flex-between">
-              <p>Intro:</p>
-              <p id="IntroTimeSkipped">0s</p>
-            </div>
-            <div class="line flex flex-between">
-              <p>Recap:</p>
-              <p id="RecapTimeSkipped">0s</p>
-            </div>
-            <div class="line flex flex-between" style="padding-left: 0">
-              <p>Segments Skipped:</p>
-              <p id="SegmentsSkipped">0</p>
+            <!-- show on click -->
+            <div id="VideoSettings" style="display: none">
+              <div class="line flex">
+                <p>Skip Intro:</p>
+                <label class="switch">
+                  <input type="checkbox" id="VideoIntro" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="line flex">
+                <p>Skip Credits:</p>
+                <label class="switch">
+                  <input type="checkbox" id="VideoCredits" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="line flex">
+                <p>Ads:</p>
+                <label class="switch">
+                  <input type="checkbox" id="VideoAds" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="line flex">
+                <p>Play on Fullscreen:</p>
+                <label class="switch">
+                  <input type="checkbox" id="VideoFullScreen" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -210,6 +236,31 @@
               <input type="file" id="file" name="settings" accept="text/json" />
               <div class="button Upload" id="upload">Upload settings</div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div id="Statistics" style="display: block">
+          <h2>Skipped time:</h2>
+          <div class="line flex flex-between">
+            <p>Amazon Ad:</p>
+            <p id="AmazonAdTime">0s</p>
+          </div>
+          <div class="line flex flex-between">
+            <p>Netflix Ad:</p>
+            <p id="NetflixAdTime">0s</p>
+          </div>
+          <div class="line flex flex-between">
+            <p>Intro:</p>
+            <p id="IntroTimeSkipped">0s</p>
+          </div>
+          <div class="line flex flex-between">
+            <p>Recap:</p>
+            <p id="RecapTimeSkipped">0s</p>
+          </div>
+          <div class="line flex flex-between" style="padding-left: 0">
+            <p>Segments Skipped:</p>
+            <p id="SegmentsSkipped">0</p>
           </div>
         </div>
       </div>
