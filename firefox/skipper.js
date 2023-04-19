@@ -63,6 +63,7 @@ if (isVideo || isNetflix) {
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
       }
+      startUnPauseOnFullScreen(isNetflix);
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
       for (const key in defaultSettings.settings) {
@@ -523,9 +524,31 @@ if (isVideo || isNetflix) {
       }
     }, 100);
   }
-  // Common functions
 
   // start/stop the observers depending on settings
+
+  // Common functions
+  async function startUnPauseOnFullScreen(isNetflix) {
+    if (settings.Netflix?.profile === undefined || settings.Netflix.profile || true) {
+      log("started observing| Profile");
+      function OnFullScreenChange() {
+        console.log(window.fullScreen);
+        let video;
+        if (isNetflix) video = document.querySelector("video");
+        else video = document.querySelector(AmazonVideoClass);
+        if (window.fullScreen && video) {
+          video.play();
+          console.log("play");
+        }
+      }
+      addEventListener("fullscreenchange", OnFullScreenChange);
+    } else {
+      log("stopped observing| Profile");
+      removeEventListener("fullscreenchange", OnFullScreenChange);
+    }
+  }
+
+  // Netflix
   async function startNetflixProfileObserver() {
     if (settings.Netflix?.profile === undefined || settings.Netflix.profile) {
       log("started observing| Profile");
