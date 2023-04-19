@@ -23,101 +23,96 @@
 
   <body class="flex-center flex-col">
     <div class="content">
-      <div class="flex-center flex-col line">
-        <div class="flex-center flex-row">
-          <img src="../icons/NetflixAmazon Auto-Skip.svg" />
-          <div class="flex-center flex-col">
-            <h2 class="title">Auto-skip</h2>
-            <p style="color: grey; font-size: 1em">Version: 1.0.35</p>
+      <div class="sidenav">
+        <div class="flex-center flex-col line">
+          <div class="flex-center flex-row">
+            <img src="../icons/NetflixAmazon Auto-Skip.svg" />
+            <div class="flex-center flex-col">
+              <h2 class="title">Auto-skip</h2>
+              <p style="color: grey; font-size: 1em">Version: 1.0.35</p>
+            </div>
           </div>
         </div>
+        <p id="MenuVideo" class="menuButton" style="background-color: #e60010">Shared Settings</p>
+        <p id="MenuAmazon" class="menuButton">Prime Video</p>
+        <p id="MenuNetflix" class="menuButton">Netflix</p>
+        <p id="MenuOther" class="menuButton">Other</p>
+        <p id="MenuStatistics" class="menuButton">Statistics</p>
+        <p id="MenuChangelog" class="menuButton">Changelog</p>
       </div>
-      <h2>New in version 1.0.35:</h2>
-      <ul style="font-size: 1.2em">
-        <li>Now starts playing the video automatically if Fullscreen is opened</li>
-        <li>Added General Video Settings</li>
-      </ul>
-      <div class="flex flex-row">
-        <div class="sidenav">
-          <p id="MenuVideo" style="background-color: #e60010">Shared Settings</p>
-          <p id="MenuAmazon">Prime Video</p>
-          <p id="MenuNetflix">Netflix</p>
-          <p id="MenuOther">Other</p>
-          <p id="MenuStatistics">Statistics</p>
-        </div>
-        <div>
-          <div class="categoryVideo" id="VideoSettings">
-            <div class="flex flex-between" style="padding: 5px 5px">
-              <h2>Shared Video features</h2>
+      <div>
+        <div class="categoryVideo" id="VideoSettings">
+          <div class="flex flex-between" style="padding: 5px 5px">
+            <h2>Shared Video features</h2>
+            <label class="switch">
+              <input type="checkbox" id="VideoSkips" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div>
+            <div class="line flex">
+              <p>Skip Intro:</p>
               <label class="switch">
-                <input type="checkbox" id="VideoSkips" />
+                <input type="checkbox" id="VideoIntro" />
                 <span class="slider round"></span>
               </label>
             </div>
-            <div>
-              <div class="line flex">
-                <p>Skip Intro:</p>
-                <label class="switch">
-                  <input type="checkbox" id="VideoIntro" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div class="line flex">
-                <p>Skip Credits:</p>
-                <label class="switch">
-                  <input type="checkbox" id="VideoCredits" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div class="line flex">
-                <p>Skip Ads:</p>
-                <label class="switch">
-                  <input type="checkbox" id="VideoAds" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div class="line flex">
-                <p>Play on Fullscreen:</p>
-                <label class="switch">
-                  <input type="checkbox" id="VideoFullScreen" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
+            <div class="line flex">
+              <p>Skip Credits:</p>
+              <label class="switch">
+                <input type="checkbox" id="VideoCredits" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="line flex">
+              <p>Skip Ads:</p>
+              <label class="switch">
+                <input type="checkbox" id="VideoAds" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="line flex">
+              <p>Play on Fullscreen:</p>
+              <label class="switch">
+                <input type="checkbox" id="VideoFullScreen" />
+                <span class="slider round"></span>
+              </label>
             </div>
           </div>
-          <div class="categoryPrime hidden" style="margin-top: 0" id="AmazonSettings">
-            <div class="flex flex-between" style="padding: 5px 5px">
-              <h2>Prime Video specific</h2>
+        </div>
+        <div class="categoryPrime hidden" style="margin-top: 0" id="AmazonSettings">
+          <div class="flex flex-between" style="padding: 5px 5px">
+            <h2>Prime Video specific</h2>
+            <label class="switch">
+              <input type="checkbox" id="AmazonSkips" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <!-- show on click -->
+          <div>
+            <div class="line flex">
+              <p>Skip Self Ads:</p>
               <label class="switch">
-                <input type="checkbox" id="AmazonSkips" />
+                <input type="checkbox" id="AmazonAds" />
                 <span class="slider round"></span>
               </label>
             </div>
-            <!-- show on click -->
-            <div>
-              <div class="line flex">
-                <p>Skip Self Ads:</p>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonAds" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
 
-              <div class="line flex">
-                <p>Add Speed Slider:</p>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonSpeedSlider" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div class="line flex">
-                <p>Remove paid content:</p>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonfilterPaid" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <!-- 
+            <div class="line flex">
+              <p>Add Speed Slider:</p>
+              <label class="switch">
+                <input type="checkbox" id="AmazonSpeedSlider" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="line flex">
+              <p>Remove paid content:</p>
+              <label class="switch">
+                <input type="checkbox" id="AmazonfilterPaid" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <!-- 
                 Individual Settings removed
                 <div class="line flex">
                 <p>Skip Intro:</p>
@@ -141,46 +136,46 @@
                 </label>
               </div>
               -->
-            </div>
           </div>
-          <div class="categoryNetflix hidden" style="margin-top: 0" id="NetflixSettings">
-            <div class="flex flex-between" style="padding: 5px 5px">
-              <h2>Netflix specific</h2>
+        </div>
+        <div class="categoryNetflix hidden" style="margin-top: 0" id="NetflixSettings">
+          <div class="flex flex-between" style="padding: 5px 5px">
+            <h2>Netflix specific</h2>
+            <label class="switch">
+              <input type="checkbox" id="NetflixSkips" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <!-- show on click -->
+          <div>
+            <div class="line flex">
+              <p>Skip Recaps:</p>
               <label class="switch">
-                <input type="checkbox" id="NetflixSkips" />
+                <input type="checkbox" id="NetflixRecap" />
                 <span class="slider round"></span>
               </label>
             </div>
-            <!-- show on click -->
-            <div>
-              <div class="line flex">
-                <p>Skip Recaps:</p>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixRecap" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
 
-              <div class="line flex">
-                <p>Resume inactivity warning:</p>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixBlocked" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div class="line flex" style="align-items: center">
-                <p>Auto pick last profile:</p>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixProfile" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div class="line flex">
-                <p id="profileName" style="text-transform: capitalize"></p>
-                <img id="profilePicture" class="hidden" style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px" />
-              </div>
+            <div class="line flex">
+              <p>Resume inactivity warning:</p>
+              <label class="switch">
+                <input type="checkbox" id="NetflixBlocked" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="line flex" style="align-items: center">
+              <p>Auto pick last profile:</p>
+              <label class="switch">
+                <input type="checkbox" id="NetflixProfile" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="line flex">
+              <p id="profileName" style="text-transform: capitalize"></p>
+              <img id="profilePicture" class="hidden" style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px" />
+            </div>
 
-              <!-- 
+            <!-- 
               Individual Settings removed
               <div class="line flex">
                 <p>Skip Intro:</p>
@@ -203,46 +198,271 @@
                   <span class="slider round"></span>
                 </label>
               </div> -->
-            </div>
           </div>
-          <div id="StatisticsSettings" class="hidden">
-            <h2>Skipped time:</h2>
-            <div class="line flex flex-between">
-              <p>Amazon Ad:</p>
-              <p id="AmazonAdTime">0s</p>
-            </div>
-            <div class="line flex flex-between">
-              <p>Netflix Ad:</p>
-              <p id="NetflixAdTime">0s</p>
-            </div>
-            <div class="line flex flex-between">
-              <p>Intro:</p>
-              <p id="IntroTimeSkipped">0s</p>
-            </div>
-            <div class="line flex flex-between">
-              <p>Recap:</p>
-              <p id="RecapTimeSkipped">0s</p>
-            </div>
-            <div class="line flex flex-between" style="padding-left: 0">
-              <p>Segments Skipped:</p>
-              <p id="SegmentsSkipped">0</p>
-            </div>
+        </div>
+        <div id="StatisticsSettings" class="hidden">
+          <h2>Skipped time:</h2>
+          <div class="line flex flex-between">
+            <p>Amazon Ad:</p>
+            <p id="AmazonAdTime">0s</p>
           </div>
-          <div id="OtherSettings" class="hidden">
-            <div id="Export">
-              <h2>Import/Export all Settings:</h2>
-              <div class="flex flex-col flex-align">
-                <a class="button" id="save">Save Settings as file</a>
-                <input type="file" id="file" name="settings" accept="text/json" />
-                <div class="button Upload" id="upload">Upload settings</div>
-              </div>
+          <div class="line flex flex-between">
+            <p>Netflix Ad:</p>
+            <p id="NetflixAdTime">0s</p>
+          </div>
+          <div class="line flex flex-between">
+            <p>Intro:</p>
+            <p id="IntroTimeSkipped">0s</p>
+          </div>
+          <div class="line flex flex-between">
+            <p>Recap:</p>
+            <p id="RecapTimeSkipped">0s</p>
+          </div>
+          <div class="line flex flex-between" style="padding-left: 0">
+            <p>Segments Skipped:</p>
+            <p id="SegmentsSkipped">0</p>
+          </div>
+        </div>
+        <div id="OtherSettings" class="hidden">
+          <div id="Export">
+            <h2>Import/Export all Settings:</h2>
+            <div class="flex flex-col flex-align">
+              <a class="button" id="save">Save Settings as file</a>
+              <input type="file" id="file" name="settings" accept="text/json" />
+              <div class="button Upload" id="upload">Upload settings</div>
             </div>
           </div>
           <div class="button reset">Reset Addon to default</div>
-          <div class="flex">
-            <a class="button github" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
-            <a class="button donate" href="https://paypal.me/MarvinKrebber" target="_blank">Donate $</a>
+        </div>
+        <!-- class="hidden" -->
+        <div id="ChangelogSettings" class="hidden">
+          <h2>Changelog</h2>
+          <div style="max-width: 1000px">
+            <div class="line flex">
+              <h2>1.0.36</h2>
+              <ul>
+                <li>Now starts playing the video automatically if Fullscreen is opened</li>
+                <li>Added General Video Settings</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.35</p>
+              <ul>
+                <li>Faster automatic profile pick on Netflix</li>
+                <li>Bugfix: did not filter paid films on Category pages on Amazon</li>
+                <li>Won't filter paid films in shop, since it doesn't make sense there (Amazon)</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.34</p>
+              <ul>
+                <li>does not open settings on update anymore</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.33</p>
+              <ul>
+                <li>Fixed infiinite loading issue with higher delay of 150 ms</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.32</p>
+              <ul>
+                <li>Fixed blank page bug on amazon prime with remove paid content feature</li>
+                <li>Show netflix profile picture in settings since name may be similar</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.31</p>
+              <ul>
+                <li>fixed auto click on profile on the profile manage page</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.30</p>
+              <ul>
+                <li>Automatically choosing last used Netflix Profile</li>
+                <li>Fixed arrow direction on settings page</li>
+                <li>Fixed various console errors</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.29</p>
+              <ul>
+                <li>proper Netflix Ad skip</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.28</p>
+              <ul>
+                <li>Fast Forwarding Ads on Netflix by 2X</li>
+                <li>automatic opening of the settings when the extension is updated/installed</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.27</p>
+              <ul>
+                <li>fixed Amazon enable/disable all button (speed slider and filter paid content were forgotten)</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.26</p>
+              <ul>
+                <li>filter Paid Content on Amazon, like Films and series</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.25</p>
+              <ul>
+                <li>changed the Amazon credit auto skip: It will now only skip if it is the same season in the same series.</li>
+                <li>changed Freevee Ad skip: Changed it to Interval, which fixes these bugs:</li>
+                <li>parts of the actual video were also skipped</li>
+                <li>sometimes Freevee ad was not skipped</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.24</p>
+              <ul>
+                <li>fixed issue of infinite loading on Freevee ad skip if it is longer than 90s</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.22</p>
+              <ul>
+                <li>fixed opened setting popups bug</li>
+                <li>fixed vw warning on slider</li>
+                <li>fixed warning if slider cannot be removed</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.21</p>
+              <ul>
+                <li>remove annoying background hue from amazon when mouse over on video</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.20</p>
+              <ul>
+                <li>added button to hide speed slider</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.19</p>
+              <ul>
+                <li>added a video speed slider to amazon prime video</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.18</p>
+              <ul>
+                <li>fixed bug not skipping ad between episodes</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.17</p>
+              <ul>
+                <li>fixed bug of forwarding into an ad won't skip it anymore</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.16</p>
+              <ul>
+                <li>implemented a go back button for Amazon, if the user wants to watch the intro</li>
+                <li>fixed the infinite loading on freevee on first launch of a film</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.15</p>
+              <ul>
+                <li>fixed: self ad skips disabling subtitles</li>
+                <li>fixed: self ad skips infinite loading on intial watching of series</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.14</p>
+              <ul>
+                <li>Fixed: not showing subtitles when self ad skipped</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.12</p>
+              <ul>
+                <li>Bugfix: if Amazon self ad is skipped, subtitles disappear</li>
+                <li>improved performance since function gets returned if found button.</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.11</p>
+              <ul>
+                <li>fixed bug when badge is not reset properly when pressing reset button</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.10</p>
+              <ul>
+                <li>added Segments skipped statistic</li>
+                <li>added Add-on Badges that show on the icon when something is skipped.</li>
+                <li>fixed bug where the statistics are overridden if you have multiple instances of the add-on running</li>
+                <li>improved self ad skipping logic</li>
+                <li>removed unnecessary URL permission which use primevideo.com</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.9</p>
+              <ul>
+                <li>impoved Amazon Intro skipping</li>
+                <li>Added Addon Statistics: Ad , Intro, Recap time skipped</li>
+                <li>added Importing and Exporting of Settings in the Settings page</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.8</p>
+              <ul>
+                <li>the Individual settings are now opened automatically in the settings page</li>
+                <li>bug fixed: if there is an version update with a new setting, it wont show that the new setting is activated, although it is.</li>
+                <li>removed unneccesarry , function () {} and {setttings:setttings}</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.7</p>
+              <ul>
+                <li>improved addon Settings page to include disable all amazon/netflix button and dropdown to decrease menu size</li>
+                <li>fixed bug: freevee ad skipping may crash the site on first opening, now doesn't skip too often</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.6</p>
+              <ul>
+                <li>Added Amazon Freevee ad skipping</li>
+                <li>better mutation observing => less computation</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.5</p>
+              <ul>
+                <li>synchronize the settings across accounts</li>
+                <li>bug fixed where ad is skipped when the infobar is not shown yet(misclicks)</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.4</p>
+              <ul>
+                <li>Updated the check if it is a video on Amazon to check the title and the url</li>
+                <li>Updated the skip Recap to also check for skip-preplay, which is a diffrent button</li>
+                <li>removed error in console.logs</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.0</p>
+              <ul>
+                <li>Initial Release</li>
+              </ul>
+            </div>
           </div>
+        </div>
+        <div class="flex">
+          <a class="button github" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
+          <a class="button donate" href="https://paypal.me/MarvinKrebber" target="_blank">Donate $</a>
         </div>
       </div>
       <div id="error-content" class="hidden">

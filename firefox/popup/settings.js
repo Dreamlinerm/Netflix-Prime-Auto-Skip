@@ -172,21 +172,11 @@ function openIndividualSettings(setting) {
   document.getElementsByClassName(setting + "UpArrow")[0].style.display = open ? "block" : "none";
 }
 function Menu(setting) {
-  document.getElementById("VideoSettings").style.display = "none";
-  document.getElementById("MenuVideo").style.setProperty("background-color", "");
-
-  document.getElementById("AmazonSettings").style.display = "none";
-  document.getElementById("MenuAmazon").style.setProperty("background-color", "");
-
-  document.getElementById("NetflixSettings").style.display = "none";
-  document.getElementById("MenuNetflix").style.setProperty("background-color", "");
-
-  document.getElementById("StatisticsSettings").style.display = "none";
-  document.getElementById("MenuStatistics").style.setProperty("background-color", "");
-
-  document.getElementById("OtherSettings").style.display = "none";
-  document.getElementById("MenuOther").style.setProperty("background-color", "");
-
+  const Pages = ["Video", "Amazon", "Netflix", "Statistics", "Other", "Changelog"];
+  for (const page of Pages) {
+    document.getElementById(page + "Settings").style.display = "none";
+    document.getElementById("Menu" + page).style.setProperty("background-color", "");
+  }
   document.getElementById(setting + "Settings").style.display = "block";
   document.getElementById("Menu" + setting).style.setProperty("background-color", "#e60010");
 }
@@ -215,6 +205,8 @@ function listenForClicks() {
       Menu("Statistics");
     } else if (e.target.id === "MenuOther") {
       Menu("Other");
+    } else if (e.target.id === "MenuChangelog") {
+      Menu("Changelog");
     }
     //  -------------      openSettings        ---------------------------------------
     else if (e.target.id === "openVideoSettings") {

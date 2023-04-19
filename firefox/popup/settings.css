@@ -239,19 +239,21 @@ input:checked + .slider:before {
   height: 100%; /* 100% Full-height */
   background-color: #111;
   margin-right: 5px;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
 }
 
 /* The navigation menu links */
-.sidenav p {
-  padding: 8px 8px 8px 8px;
-  text-decoration: none;
-  display: block;
-  border-style: solid;
-  border-width: 1px;
-  border-color: grey;
+.menuButton {
+  border-radius: 15px;
+  margin: 10px 20px;
+  padding: 10px 20px;
+  background-color: #242424;
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav p:hover {
-  color: #818181;
+.menuButton:hover {
+  background-color: #4d0000;
 }
