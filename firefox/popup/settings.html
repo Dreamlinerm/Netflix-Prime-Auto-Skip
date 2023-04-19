@@ -39,7 +39,7 @@
       </ul>
 
       <div class="flex flex-row">
-        <div class="categoryPrime">
+        <div class="categoryPrime" style="margin-top: 0">
           <div class="flex flex-between" style="padding: 5px 5px">
             <h2>All Prime Video Automations</h2>
             <label class="switch">
@@ -172,8 +172,8 @@
         </div>
       </div>
       <div class="flex flex-row">
-        <div style="width: 50%; height: fit-content">
-          <div class="categoryVideo">
+        <div style="width: 50%">
+          <div class="categoryVideo" style="margin-top: 5px">
             <div class="flex flex-between" style="padding: 5px 5px">
               <h2>General Video features</h2>
               <label class="switch">
@@ -191,7 +191,7 @@
               </svg>
             </div>
             <!-- show on click -->
-            <div id="VideoSettings" style="display: none">
+            <div id="VideoSettings">
               <div class="line flex">
                 <p>Skip Intro:</p>
                 <label class="switch">
@@ -239,29 +239,27 @@
           </div>
         </div>
       </div>
-      <div>
-        <div id="Statistics" style="display: block">
-          <h2>Skipped time:</h2>
-          <div class="line flex flex-between">
-            <p>Amazon Ad:</p>
-            <p id="AmazonAdTime">0s</p>
-          </div>
-          <div class="line flex flex-between">
-            <p>Netflix Ad:</p>
-            <p id="NetflixAdTime">0s</p>
-          </div>
-          <div class="line flex flex-between">
-            <p>Intro:</p>
-            <p id="IntroTimeSkipped">0s</p>
-          </div>
-          <div class="line flex flex-between">
-            <p>Recap:</p>
-            <p id="RecapTimeSkipped">0s</p>
-          </div>
-          <div class="line flex flex-between" style="padding-left: 0">
-            <p>Segments Skipped:</p>
-            <p id="SegmentsSkipped">0</p>
-          </div>
+      <div id="Statistics" style="display: block">
+        <h2>Skipped time:</h2>
+        <div class="line flex flex-between">
+          <p>Amazon Ad:</p>
+          <p id="AmazonAdTime">0s</p>
+        </div>
+        <div class="line flex flex-between">
+          <p>Netflix Ad:</p>
+          <p id="NetflixAdTime">0s</p>
+        </div>
+        <div class="line flex flex-between">
+          <p>Intro:</p>
+          <p id="IntroTimeSkipped">0s</p>
+        </div>
+        <div class="line flex flex-between">
+          <p>Recap:</p>
+          <p id="RecapTimeSkipped">0s</p>
+        </div>
+        <div class="line flex flex-between" style="padding-left: 0">
+          <p>Segments Skipped:</p>
+          <p id="SegmentsSkipped">0</p>
         </div>
       </div>
       <div id="error-content" class="hidden">
