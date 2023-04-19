@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.35";
+const version = "1.0.36";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -25,6 +25,7 @@ if (isVideo || isNetflix) {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, profile: true },
+      Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null },
     },
@@ -63,6 +64,7 @@ if (isVideo || isNetflix) {
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
       }
+      if (settings.Video.playOnFullScreen) startPlayOnFullScreen(isNetflix);
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
       for (const key in defaultSettings.settings) {
@@ -107,23 +109,9 @@ if (isVideo || isNetflix) {
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
         }
-        if (oldValue === undefined || newValue.Statistics.AmazonAdTimeSkipped !== oldValue.Statistics.AmazonAdTimeSkipped) {
-          settings.Statistics.AmazonAdTimeSkipped = newValue.Statistics.AmazonAdTimeSkipped;
-        }
-        if (oldValue === undefined || newValue.Statistics.NetflixAdTimeSkipped !== oldValue.Statistics.NetflixAdTimeSkipped) {
-          settings.Statistics.NetflixAdTimeSkipped = newValue.Statistics.NetflixAdTimeSkipped;
-        }
-        if (oldValue === undefined || newValue.Statistics.IntroTimeSkipped !== oldValue.Statistics.IntroTimeSkipped) {
-          settings.Statistics.IntroTimeSkipped = newValue.Statistics.IntroTimeSkipped;
-        }
-        if (oldValue === undefined || newValue.Statistics.RecapTimeSkipped !== oldValue.Statistics.RecapTimeSkipped) {
-          settings.Statistics.RecapTimeSkipped = newValue.Statistics.RecapTimeSkipped;
-        }
-        if (oldValue === undefined || newValue.Statistics.SegmentsSkipped !== oldValue.Statistics.SegmentsSkipped) {
-          settings.Statistics.SegmentsSkipped = newValue.Statistics.SegmentsSkipped;
-          if (settings.Statistics.SegmentsSkipped === 0) {
-            resetBadge();
-          }
+        if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
+        if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
+          resetBadge();
         }
       }
     }
@@ -259,10 +247,12 @@ if (isVideo || isNetflix) {
   }
 
   // Amazon Observers
+  const AmazonVideoClass = "#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video";
+
   const AmazonSpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
   const AmazonSpeedSliderObserver = new MutationObserver(Amazon_SpeedSlider);
   function Amazon_SpeedSlider(mutations, observer) {
-    let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+    let video = document.querySelector(AmazonVideoClass);
     let alreadySlider = document.querySelector("#videoSpeedSlider");
 
     // remove bad background hue which is annoying
@@ -373,7 +363,7 @@ if (isVideo || isNetflix) {
   function Amazon_Intro(mutations, observer) {
     let button = document.querySelector("[class*=skipelement]");
     if (button) {
-      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let video = document.querySelector(AmazonVideoClass);
       const time = video.currentTime;
       button.click();
       log("Intro skipped", button);
@@ -468,7 +458,7 @@ if (isVideo || isNetflix) {
         clearInterval(AdInterval);
         return;
       }
-      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let video = document.querySelector(AmazonVideoClass);
       if (video && !video.paused && video.currentTime > 0) {
         // && !video.paused
         skipAd(video);
@@ -491,7 +481,7 @@ if (isVideo || isNetflix) {
         clearInterval(AdInterval);
         return;
       }
-      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let video = document.querySelector(AmazonVideoClass);
       if (video) {
         video.onplay = function () {
           //log("started playing video");
@@ -523,6 +513,29 @@ if (isVideo || isNetflix) {
   }
 
   // start/stop the observers depending on settings
+
+  // Common functions
+  async function startPlayOnFullScreen(isNetflix) {
+    if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
+      log("started observing| PlayOnFullScreen");
+      function OnFullScreenChange() {
+        let video;
+        if (isNetflix) video = document.querySelector("video");
+        else video = document.querySelector(AmazonVideoClass);
+        if (window.fullScreen && video) {
+          video.play();
+          console.log("auto-played on fullscreen");
+          increaseBadge();
+        }
+      }
+      addEventListener("fullscreenchange", OnFullScreenChange);
+    } else {
+      log("stopped observing| PlayOnFullScreen");
+      removeEventListener("fullscreenchange", OnFullScreenChange);
+    }
+  }
+
+  // Netflix
   async function startNetflixProfileObserver() {
     if (settings.Netflix?.profile === undefined || settings.Netflix.profile) {
       log("started observing| Profile");
@@ -609,7 +622,7 @@ if (isVideo || isNetflix) {
 
   async function startAmazonSpeedSliderObserver() {
     if (settings.Amazon?.speedSlider === undefined || settings.Amazon.speedSlider) {
-      let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+      let video = document.querySelector(AmazonVideoClass);
       let alreadySlider = document.querySelector("#videoSpeedSlider");
 
       // remove bad background document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
@@ -694,7 +707,7 @@ if (isVideo || isNetflix) {
       log("started observing| Intro");
       let button = document.querySelector("[class*=skipelement]");
       if (button) {
-        let video = document.querySelector("#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video");
+        let video = document.querySelector(AmazonVideoClass);
         const time = video.currentTime;
         button.click();
         log("Intro skipped", button);

@@ -57,29 +57,31 @@ div {
 .reset:hover {
   background-color: #446a8a;
 }
-.github {
-  margin-right: 5px;
-  background-color: #5485ad;
-  /* transparent */
-  opacity: 0.5;
+.ExternalButton {
+  background-color: #e60010;
   color: white;
   text-decoration: none;
+  border-radius: 15px;
+  margin: 10px 20px;
+  padding: 10px 20px;
   flex-grow: 1;
 }
-.github:hover {
-  background-color: #2d8edd;
+.ExternalButton:hover {
+  background-color: #4d0000;
 }
-.donate {
-  margin-left: 5px;
+.ExternalPopupButton {
   background-color: #5485ad;
-  /* transparent */
-  opacity: 0.5;
   color: white;
   text-decoration: none;
+  border-radius: 15px;
+  margin: 10px 5px;
+  /* padding: 10px 20px; */
   flex-grow: 1;
+  /* opacity: 0.8; */
 }
-.donate:hover {
-  background-color: #2d8edd;
+.ExternalPopupButton:hover {
+  /* background-color: #e60010; */
+  opacity: 0.8;
 }
 .Upload {
   border-radius: 5px;
@@ -128,7 +130,7 @@ h1,
 h2,
 h3,
 p {
-  padding: 5px 10px;
+  padding: 5px 5px;
   margin: unset;
 }
 p {
@@ -144,7 +146,12 @@ img {
   padding-top: unset;
   padding-bottom: unset;
 }
+.categoryVideo {
+  background-color: #636363;
+  border-radius: 10px;
+}
 .categoryPrime {
+  margin-top: 5px;
   background-color: #00aeef;
   border-radius: 10px;
 }
@@ -227,4 +234,40 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+/* The side navigation menu */
+.sidenav {
+  /* height: 100vh; */
+  background-color: #111;
+  /* margin-right: 5px;
+   position: fixed; 
+   z-index: 1; 
+   top: 0; 
+   left: 0; */
+  border-radius: 15px;
+  margin: 15px;
+  gap: 20px;
+  min-width: 300px;
+  text-align: center;
+}
+
+/* The navigation menu links */
+.menuButton {
+  border-radius: 15px;
+  margin: 10px 20px;
+  padding: 10px 20px;
+  background-color: #242424;
+  text-decoration: none;
+}
+
+/* When you mouse over the navigation links, change their color */
+.menuButton:hover {
+  background-color: #4d0000;
+}
+
+.description {
+  font-size: 17px;
+  padding: 10px 0 20px 20px;
+  color: #cccccc;
 }

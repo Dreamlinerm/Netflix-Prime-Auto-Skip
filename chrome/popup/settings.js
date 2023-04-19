@@ -24,6 +24,7 @@ const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, profile: true },
+    Video: { playOnFullScreen: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null },
   },
@@ -81,10 +82,29 @@ function getTimeFormatted(sec = 0) {
   return text;
 }
 function setCheckboxesToSettings() {
-  let button = document.querySelector("#AmazonSkips");
+  let button;
+  button = document.querySelector("#VideoSkips");
   if (button)
     button.checked =
-      settings?.Amazon.skipIntro && settings?.Amazon.skipCredits && settings?.Amazon.skipAd && settings?.Amazon.blockFreevee && settings?.Amazon.speedSlider && settings?.Amazon.filterPaid;
+      settings?.Amazon.skipIntro &&
+      settings?.Netflix.skipIntro &&
+      settings?.Amazon.skipCredits &&
+      settings?.Netflix.skipCredits &&
+      settings?.Amazon.blockFreevee &&
+      settings?.Netflix.NetflixAds &&
+      settings?.Video.playOnFullScreen;
+  button = document.querySelector("#VideoIntro");
+  if (button) button.checked = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro;
+  button = document.querySelector("#VideoCredits");
+  if (button) button.checked = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits;
+  button = document.querySelector("#VideoAds");
+  if (button) button.checked = settings?.Amazon.skipAd && settings?.Netflix.NetflixAds;
+  button = document.querySelector("#VideoFullScreen");
+  if (button) button.checked = settings?.Video.playOnFullScreen;
+
+  //  -------------      Amazon        ---------------------------------------
+  button = document.querySelector("#AmazonSkips");
+  if (button) button.checked = settings?.Amazon.skipAd && settings?.Amazon.speedSlider && settings?.Amazon.filterPaid;
   button = document.querySelector("#AmazonIntro");
   if (button) button.checked = settings?.Amazon.skipIntro;
   button = document.querySelector("#AmazonCredits");
@@ -97,11 +117,9 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.speedSlider;
   button = document.querySelector("#AmazonfilterPaid");
   if (button) button.checked = settings?.Amazon.filterPaid;
-
+  //  -------------      Netflix        ---------------------------------------
   button = document.querySelector("#NetflixSkips");
-  if (button)
-    button.checked =
-      settings?.Netflix.skipIntro && settings?.Netflix.skipRecap && settings?.Netflix.skipCredits && settings?.Netflix.skipBlocked && settings?.Netflix.NetflixAds && settings?.Netflix.profile;
+  if (button) button.checked = settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile;
   button = document.querySelector("#NetflixIntro");
   if (button) button.checked = settings?.Netflix.skipIntro;
   button = document.querySelector("#NetflixRecap");
@@ -123,6 +141,10 @@ function setCheckboxesToSettings() {
     button.style.display = "block";
   }
 
+  // general video settings
+  button = document.querySelector("#playOnFullScreen");
+  if (button) button.checked = settings?.Video.playOnFullScreen;
+
   // Statistics
   button = document.querySelector("#AmazonAdTime");
   if (button) button.textContent = getTimeFormatted(settings?.Statistics.AmazonAdTimeSkipped);
@@ -143,141 +165,153 @@ function setCheckboxesToSettings() {
   }
 }
 // open and close the Amazon and Netflix Individual Settings
-function AmazonSettings(open = true) {
-  if (open) {
-    document.getElementById("AmazonSettings").style.display = "block";
-    document.getElementsByClassName("AmazonDownArrow")[0].style.display = "none";
-    document.getElementsByClassName("AmazonUpArrow")[0].style.display = "block";
-  } else {
-    document.getElementById("AmazonSettings").style.display = "none";
-    document.getElementsByClassName("AmazonDownArrow")[0].style.display = "block";
-    document.getElementsByClassName("AmazonUpArrow")[0].style.display = "none";
-  }
+function openIndividualSettings(setting) {
+  const open = document.getElementById(setting + "Settings").style.display === "none";
+  document.getElementById(setting + "Settings").style.display = open ? "block" : "none";
+  document.getElementsByClassName(setting + "DownArrow")[0].style.display = open ? "none" : "block";
+  document.getElementsByClassName(setting + "UpArrow")[0].style.display = open ? "block" : "none";
 }
-function NetflixSettings(open = true) {
-  if (open) {
-    document.getElementById("NetflixSettings").style.display = "block";
-    document.getElementsByClassName("NetflixDownArrow")[0].style.display = "none";
-    document.getElementsByClassName("NetflixUpArrow")[0].style.display = "block";
-  } else {
-    document.getElementById("NetflixSettings").style.display = "none";
-    document.getElementsByClassName("NetflixDownArrow")[0].style.display = "block";
-    document.getElementsByClassName("NetflixUpArrow")[0].style.display = "none";
+function Menu(setting) {
+  const Pages = ["Video", "Amazon", "Netflix", "Statistics", "Other", "Changelog"];
+  for (const page of Pages) {
+    document.getElementById(page + "Settings").style.display = "none";
+    document.getElementById("Menu" + page).style.setProperty("background-color", "");
   }
-}
-function Statistics(open = true) {
-  if (open) {
-    document.getElementById("Statistics").style.display = "block";
-    document.getElementsByClassName("StatisticsDownArrow")[0].style.display = "none";
-    document.getElementsByClassName("StatisticsUpArrow")[0].style.display = "block";
-  } else {
-    document.getElementById("Statistics").style.display = "none";
-    document.getElementsByClassName("StatisticsDownArrow")[0].style.display = "block";
-    document.getElementsByClassName("StatisticsUpArrow")[0].style.display = "none";
-  }
+  document.getElementById(setting + "Settings").style.display = "block";
+  document.getElementById("Menu" + setting).style.setProperty("background-color", "#e60010");
 }
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
  * the content script in the page.
  */
+function setSettings(log) {
+  console.log(log, settings);
+  chrome.storage.sync.set({ settings });
+}
 function listenForClicks() {
   let listener = document.addEventListener("click", (e) => {
     if (e.target.classList.contains("reset")) {
-      console.log("settings resetted to", defaultSettings);
+      console.log("settings resetted to default");
       chrome.storage.sync.set(defaultSettings);
-    } else if (e.target.id === "AmazonSkips") {
-      const AmazonSkips = !(
-        settings.Amazon.skipIntro &&
-        settings.Amazon.skipCredits &&
-        settings.Amazon.skipAd &&
-        settings.Amazon.blockFreevee &&
-        settings.Amazon.speedSlider &&
-        settings.Amazon.filterPaid
+    }
+    //  -------------      Menu        ---------------------------------------
+    else if (e.target.id === "MenuVideo") {
+      Menu("Video");
+    } else if (e.target.id === "MenuAmazon") {
+      Menu("Amazon");
+    } else if (e.target.id === "MenuNetflix") {
+      Menu("Netflix");
+    } else if (e.target.id === "MenuStatistics") {
+      Menu("Statistics");
+    } else if (e.target.id === "MenuOther") {
+      Menu("Other");
+    } else if (e.target.id === "MenuChangelog") {
+      Menu("Changelog");
+    }
+    //  -------------      openSettings        ---------------------------------------
+    else if (e.target.id === "openVideoSettings") {
+      openIndividualSettings("Video");
+    } else if (e.target.id === "openAmazonSettings") {
+      openIndividualSettings("Amazon");
+    } else if (e.target.id === "openNetflixSettings") {
+      openIndividualSettings("Netflix");
+    } else if (e.target.id === "openStatistics") {
+      openIndividualSettings("Statistics");
+    }
+    //  -------------      Video        ---------------------------------------
+    else if (e.target.id === "VideoSkips") {
+      const VideoSkips = !(
+        settings?.Amazon.skipIntro &&
+        settings?.Netflix.skipIntro &&
+        settings?.Amazon.skipCredits &&
+        settings?.Netflix.skipCredits &&
+        settings?.Amazon.blockFreevee &&
+        settings?.Netflix.NetflixAds &&
+        settings?.Video.playOnFullScreen
       );
-      settings.Amazon.skipIntro = AmazonSkips;
-      settings.Amazon.skipCredits = AmazonSkips;
+      settings.Amazon.skipIntro = VideoSkips;
+      settings.Netflix.skipIntro = VideoSkips;
+      settings.Amazon.skipCredits = VideoSkips;
+      settings.Netflix.skipCredits = VideoSkips;
+      settings.Amazon.blockFreevee = VideoSkips;
+      settings.Netflix.NetflixAds = VideoSkips;
+      settings.Video.playOnFullScreen = VideoSkips;
+      setSettings("All VideoSkips");
+    } else if (e.target.id === "VideoIntro") {
+      settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
+      settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
+      setSettings("VideoIntro");
+    } else if (e.target.id === "VideoCredits") {
+      settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
+      settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
+      setSettings("VideoCredits");
+    } else if (e.target.id === "VideoAds") {
+      settings.Amazon.skipAd = !settings.Amazon.skipAd;
+      settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
+      setSettings("VideoAd");
+    } else if (e.target.id === "VideoFullScreen") {
+      settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
+      setSettings("playOnFullScreen");
+    }
+    //  -------------      Amazon        ---------------------------------------
+    else if (e.target.id === "AmazonSkips") {
+      const AmazonSkips = !(settings.Amazon.skipAd && settings.Amazon.speedSlider && settings.Amazon.filterPaid);
       settings.Amazon.skipAd = AmazonSkips;
-      settings.Amazon.blockFreevee = AmazonSkips;
       settings.Amazon.speedSlider = AmazonSkips;
       settings.Amazon.filterPaid = AmazonSkips;
-      console.log("settings.AmazonSkips", settings);
-      chrome.storage.sync.set({ settings });
-    } else if (e.target.id === "openAmazonSettings") {
-      AmazonSettings(document.getElementById("AmazonSettings").style.display === "none");
+      setSettings("All AmazonSkips");
     } else if (e.target.id === "AmazonCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
-      console.log("settings.AmazonCredits", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("AmazonCredits");
     } else if (e.target.id === "AmazonIntro") {
       settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
-      console.log("settings.AmazonIntro", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("AmazonIntro");
     } else if (e.target.id === "AmazonAds") {
       settings.Amazon.skipAd = !settings.Amazon.skipAd;
-      console.log("settings.AmazonAd", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("AmazonAd");
     } else if (e.target.id === "AmazonFreevee") {
       settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
-      console.log("settings.blockFreevee", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("blockFreevee");
     } else if (e.target.id === "AmazonSpeedSlider") {
       settings.Amazon.speedSlider = !settings.Amazon.speedSlider;
-      console.log("settings.AmazonSpeedSlider", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("AmazonSpeedSlider");
     } else if (e.target.id === "AmazonfilterPaid") {
       settings.Amazon.filterPaid = !settings.Amazon.filterPaid;
-      console.log("settings.filterPaid", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("filterPaid");
     }
     //  -------------      Netflix        ---------------------------------------
     else if (e.target.id === "NetflixSkips") {
-      const NetflixSkips = !(
-        settings?.Netflix.skipIntro &&
-        settings?.Netflix.skipRecap &&
-        settings?.Netflix.skipCredits &&
-        settings?.Netflix.skipBlocked &&
-        settings?.Netflix.NetflixAds &&
-        settings?.Netflix.profile
-      );
-      settings.Netflix.skipIntro = NetflixSkips;
+      const NetflixSkips = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
       settings.Netflix.skipRecap = NetflixSkips;
-      settings.Netflix.skipCredits = NetflixSkips;
       settings.Netflix.skipBlocked = NetflixSkips;
-      settings.Netflix.NetflixAds = NetflixSkips;
       settings.Netflix.profile = NetflixSkips;
-      console.log("settings.NetflixSkips", settings);
-      chrome.storage.sync.set({ settings });
-    } else if (e.target.id === "openNetflixSettings") {
-      NetflixSettings(document.getElementById("NetflixSettings").style.display == "none");
+      setSettings("All NetflixSkips");
     } else if (e.target.id === "NetflixIntro") {
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
-      console.log("settings.NetflixIntro", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("NetflixIntro");
     } else if (e.target.id === "NetflixRecap") {
       settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
-      console.log("settings.NetflixRecap", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("NetflixRecap");
     } else if (e.target.id === "NetflixCredits") {
       settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
-      console.log("settings.NetflixCredits", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("NetflixCredits");
     } else if (e.target.id === "NetflixBlocked") {
       settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
-      console.log("settings.NetflixBlocked", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("NetflixBlocked");
     } else if (e.target.id === "NetflixAds") {
       settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
-      console.log("settings.NetflixAds", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("NetflixAds");
     } else if (e.target.id === "NetflixProfile") {
       settings.Netflix.profile = !settings.Netflix.profile;
-      console.log("settings.profile", settings);
-      chrome.storage.sync.set({ settings });
+      setSettings("profile");
     }
-    // Statistics
-    else if (e.target.id === "openStatistics") {
-      Statistics(document.getElementById("Statistics").style.display === "none");
-    } else if (e.target.id === "upload") {
+    //  -------------      Video        ---------------------------------------
+    else if (e.target.id === "playOnFullScreen") {
+      settings.video.playOnFullScreen = !settings.video.playOnFullScreen;
+      setSettings("playOnFullScreen");
+    }
+    //  -------------      Statistics        ---------------------------------------
+    else if (e.target.id === "upload") {
       // get the file from #file and console.log it
       const file = document.getElementById("file").files[0];
       if (file !== undefined && "application/json" === file.type) {
