@@ -32,6 +32,48 @@
           </div>
         </div>
       </div>
+      <div class="categoryVideo">
+        <div class="flex flex-between" style="padding: 5px 5px">
+          <h2>General Video features</h2>
+          <label class="switch">
+            <input type="checkbox" id="VideoSkips" />
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div class="line flex-end flex-align" id="openVideoSettings">
+          <p id="openVideoSettings">Individual settings</p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoDownArrow hidden">
+            <path d="M0 0 40 0 20 20 0 0" fill="white" id="openVideoSettings" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoUpArrow">
+            <path d="M20 0 40 20 0 20 20 0" fill="white" id="openVideoSettings" />
+          </svg>
+        </div>
+        <!-- show on click -->
+        <div id="VideoSettings" style="display: none">
+          <div class="line flex">
+            <p>Skip Intro:</p>
+            <label class="switch">
+              <input type="checkbox" id="VideoIntro" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p>Skip Credits:</p>
+            <label class="switch">
+              <input type="checkbox" id="VideoCredits" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p>Ads:</p>
+            <label class="switch">
+              <input type="checkbox" id="VideoAds" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+      </div>
       <div class="categoryPrime">
         <div class="flex flex-between" style="padding: 5px 5px">
           <h2>All Prime Video Automations</h2>

@@ -64,7 +64,7 @@ if (isVideo || isNetflix) {
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
       }
-      startPlayOnFullScreen(isNetflix);
+      if (settings.Video.playOnFullScreen) startPlayOnFullScreen(isNetflix);
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
       for (const key in defaultSettings.settings) {
@@ -109,7 +109,7 @@ if (isVideo || isNetflix) {
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
         }
-        startPlayOnFullScreen(isNetflix);
+        if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
         if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
           resetBadge();
         }
@@ -516,8 +516,8 @@ if (isVideo || isNetflix) {
 
   // Common functions
   async function startPlayOnFullScreen(isNetflix) {
-    if (settings.Netflix?.profile === undefined || settings.Netflix.profile || true) {
-      log("started observing| Profile");
+    if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
+      log("started observing| PlayOnFullScreen");
       function OnFullScreenChange() {
         console.log(window.fullScreen);
         let video;
@@ -530,7 +530,7 @@ if (isVideo || isNetflix) {
       }
       addEventListener("fullscreenchange", OnFullScreenChange);
     } else {
-      log("stopped observing| Profile");
+      log("stopped observing| PlayOnFullScreen");
       removeEventListener("fullscreenchange", OnFullScreenChange);
     }
   }

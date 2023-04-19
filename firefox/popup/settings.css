@@ -144,7 +144,12 @@ img {
   padding-top: unset;
   padding-bottom: unset;
 }
+.categoryVideo {
+  background-color: #636363;
+  border-radius: 10px;
+}
 .categoryPrime {
+  margin-top: 5px;
   background-color: #00aeef;
   border-radius: 10px;
 }
