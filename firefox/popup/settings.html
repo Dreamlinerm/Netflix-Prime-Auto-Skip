@@ -21,7 +21,7 @@
     <script src="settings.js" defer></script>
   </head>
 
-  <body class="flex" style="height: 100vh">
+  <body class="flex" style="height: 98vh">
     <div class="sidenav flex flex-col" style="flex-basis: 10%">
       <div class="flex-center flex-row" style="padding: 20px 20px">
         <img src="../icons/NetflixAmazon Auto-Skip.svg" />
@@ -41,13 +41,13 @@
       <div style="margin-top: auto">
         <div class="flex flex-col">
           <a class="button ExternalButton" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
-          <a class="button ExternalButton" href="https://paypal.me/MarvinKrebber" target="_blank">Donate $</a>
+          <a class="button ExternalButton" href="https://paypal.me/MarvinKrebber" target="_blank" style="margin-bottom: 20px">Donate $</a>
         </div>
       </div>
     </div>
-    <div class="content flex flex-col" style="height: 100vh; overflow: scroll; flex-basis: 90%">
-      <div>
-        <div class="categoryVideo" id="VideoSettings" style="background-color: unset">
+    <div class="content flex flex-col" style="height: 98vh; overflow: scroll; flex-basis: 90%">
+      <div style="padding: 80px 15% 0 3%">
+        <div class="categoryVideo" id="VideoSettings">
           <div class="flex flex-between" style="padding: 5px 5px">
             <h2>Shared Video features</h2>
             <label class="switch">
@@ -86,7 +86,7 @@
             </div>
           </div>
         </div>
-        <div class="categoryPrime hidden" style="margin-top: 0; background-color: unset" id="AmazonSettings">
+        <div class="categoryPrime hidden" id="AmazonSettings">
           <div class="flex flex-between" style="padding: 5px 5px">
             <h2>Prime Video specific</h2>
             <label class="switch">
@@ -144,7 +144,7 @@
               -->
           </div>
         </div>
-        <div class="categoryNetflix hidden" style="margin-top: 0; background-color: unset" id="NetflixSettings">
+        <div class="categoryNetflix hidden" id="NetflixSettings">
           <div class="flex flex-between" style="padding: 5px 5px">
             <h2>Netflix specific</h2>
             <label class="switch">
@@ -206,7 +206,7 @@
               </div> -->
           </div>
         </div>
-        <div id="StatisticsSettings" style="margin-top: 0; background-color: unset" class="hidden">
+        <div id="StatisticsSettings" class="hidden">
           <h2>Skipped time:</h2>
           <div class="line flex flex-between">
             <p>Amazon Ad:</p>
@@ -229,7 +229,7 @@
             <p id="SegmentsSkipped">0</p>
           </div>
         </div>
-        <div id="OtherSettings" style="margin-top: 0; background-color: unset" class="hidden">
+        <div id="OtherSettings" class="hidden">
           <div id="Export">
             <h2>Import/Export all Settings:</h2>
             <div class="flex flex-col flex-align">
@@ -240,7 +240,7 @@
           </div>
           <div class="button reset">Reset Addon to default</div>
         </div>
-        <div id="ChangelogSettings" style="margin-top: 0; background-color: unset" class="hidden">
+        <div id="ChangelogSettings" class="hidden">
           <h2>Changelog</h2>
           <div>
             <div class="line flex">
