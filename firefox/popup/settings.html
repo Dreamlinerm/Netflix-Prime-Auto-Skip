@@ -37,229 +37,238 @@
         <li>Now starts playing the video automatically if Fullscreen is opened</li>
         <li>Added General Video Settings</li>
       </ul>
-
       <div class="flex flex-row">
-        <div class="categoryPrime" style="margin-top: 0">
-          <div class="flex flex-between" style="padding: 5px 5px">
-            <h2>Prime Video specific</h2>
-            <label class="switch">
-              <input type="checkbox" id="AmazonSkips" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <div class="line flex-end flex-align" id="openAmazonSettings">
-            <p id="openAmazonSettings">Individual settings</p>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAmazonSettings" class="AmazonDownArrow hidden">
-              <path d="M0 0 40 0 20 20 0 0" fill="white" id="openAmazonSettings" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAmazonSettings" class="AmazonUpArrow">
-              <path d="M20 0 40 20 0 20 20 0" fill="white" id="openAmazonSettings" />
-            </svg>
-          </div>
-          <!-- show on click -->
-          <div id="AmazonSettings">
-            <div class="line flex">
-              <p>Skip Intro:</p>
-              <label class="switch">
-                <input type="checkbox" id="AmazonIntro" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex">
-              <p>Skip Credits:</p>
-              <label class="switch">
-                <input type="checkbox" id="AmazonCredits" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex">
-              <p>Skip Self Ads:</p>
-              <label class="switch">
-                <input type="checkbox" id="AmazonAds" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex">
-              <p>Skip Freevee Ads:</p>
-              <label class="switch">
-                <input type="checkbox" id="AmazonFreevee" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex">
-              <p>Add Speed Slider:</p>
-              <label class="switch">
-                <input type="checkbox" id="AmazonSpeedSlider" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex">
-              <p>Remove paid content:</p>
-              <label class="switch">
-                <input type="checkbox" id="AmazonfilterPaid" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-          </div>
+        <div class="sidenav">
+          <p>General Video</p>
+          <p>Prime Video specific</p>
+          <p>Netflix specific</p>
+          <p>Statistics</p>
         </div>
+        <div>
+          <div class="flex flex-row">
+            <div class="categoryPrime" style="margin-top: 0">
+              <div class="flex flex-between" style="padding: 5px 5px">
+                <h2>Prime Video specific</h2>
+                <label class="switch">
+                  <input type="checkbox" id="AmazonSkips" />
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div class="line flex-end flex-align" id="openAmazonSettings">
+                <p id="openAmazonSettings">Individual settings</p>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAmazonSettings" class="AmazonDownArrow hidden">
+                  <path d="M0 0 40 0 20 20 0 0" fill="white" id="openAmazonSettings" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAmazonSettings" class="AmazonUpArrow">
+                  <path d="M20 0 40 20 0 20 20 0" fill="white" id="openAmazonSettings" />
+                </svg>
+              </div>
+              <!-- show on click -->
+              <div id="AmazonSettings">
+                <div class="line flex">
+                  <p>Skip Intro:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="AmazonIntro" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex">
+                  <p>Skip Credits:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="AmazonCredits" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex">
+                  <p>Skip Self Ads:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="AmazonAds" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex">
+                  <p>Skip Freevee Ads:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="AmazonFreevee" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex">
+                  <p>Add Speed Slider:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="AmazonSpeedSlider" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex">
+                  <p>Remove paid content:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="AmazonfilterPaid" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
 
-        <div class="categoryNetflix" style="margin-top: 0; margin-left: 5px">
-          <div class="flex flex-between" style="padding: 5px 5px">
-            <h2>Netflix specific</h2>
-            <label class="switch">
-              <input type="checkbox" id="NetflixSkips" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <div class="line flex-end flex-align" id="openNetflixSettings">
-            <p id="openNetflixSettings">Individual settings</p>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openNetflixSettings" class="NetflixDownArrow hidden">
-              <path d="M0 0 40 0 20 20 0 0" fill="white" id="openNetflixSettings" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openNetflixSettings" class="NetflixUpArrow">
-              <path d="M20 0 40 20 0 20 20 0" fill="white" id="openNetflixSettings" />
-            </svg>
-          </div>
-          <!-- show on click -->
-          <div id="NetflixSettings">
-            <div class="line flex">
-              <p>Skip Intro:</p>
-              <label class="switch">
-                <input type="checkbox" id="NetflixIntro" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex">
-              <p>Skip Recaps:</p>
-              <label class="switch">
-                <input type="checkbox" id="NetflixRecap" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex">
-              <p>Skip Credits:</p>
-              <label class="switch">
-                <input type="checkbox" id="NetflixCredits" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex">
-              <p>Skip Ads:</p>
-              <label class="switch">
-                <input type="checkbox" id="NetflixAds" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex">
-              <p>Resume inactivity warning:</p>
-              <label class="switch">
-                <input type="checkbox" id="NetflixBlocked" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex" style="align-items: center">
-              <p>Auto pick last profile:</p>
-              <label class="switch">
-                <input type="checkbox" id="NetflixProfile" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex">
-              <p id="profileName" style="text-transform: capitalize"></p>
-              <img id="profilePicture" class="hidden" style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="flex flex-row">
-        <div style="width: 50%">
-          <div class="categoryVideo" style="margin-top: 5px">
-            <div class="flex flex-between" style="padding: 5px 5px">
-              <h2>General Video features</h2>
-              <label class="switch">
-                <input type="checkbox" id="VideoSkips" />
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <div class="line flex-end flex-align" id="openVideoSettings">
-              <p id="openVideoSettings">Individual settings</p>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoDownArrow hidden">
-                <path d="M0 0 40 0 20 20 0 0" fill="white" id="openVideoSettings" />
-              </svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoUpArrow">
-                <path d="M20 0 40 20 0 20 20 0" fill="white" id="openVideoSettings" />
-              </svg>
-            </div>
-            <!-- show on click -->
-            <div id="VideoSettings">
-              <div class="line flex">
-                <p>Skip Intro:</p>
+            <div class="categoryNetflix" style="margin-top: 0; margin-left: 5px">
+              <div class="flex flex-between" style="padding: 5px 5px">
+                <h2>Netflix specific</h2>
                 <label class="switch">
-                  <input type="checkbox" id="VideoIntro" />
+                  <input type="checkbox" id="NetflixSkips" />
                   <span class="slider round"></span>
                 </label>
               </div>
-              <div class="line flex">
-                <p>Skip Credits:</p>
-                <label class="switch">
-                  <input type="checkbox" id="VideoCredits" />
-                  <span class="slider round"></span>
-                </label>
+              <div class="line flex-end flex-align" id="openNetflixSettings">
+                <p id="openNetflixSettings">Individual settings</p>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openNetflixSettings" class="NetflixDownArrow hidden">
+                  <path d="M0 0 40 0 20 20 0 0" fill="white" id="openNetflixSettings" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openNetflixSettings" class="NetflixUpArrow">
+                  <path d="M20 0 40 20 0 20 20 0" fill="white" id="openNetflixSettings" />
+                </svg>
               </div>
-              <div class="line flex">
-                <p>Skip Ads:</p>
-                <label class="switch">
-                  <input type="checkbox" id="VideoAds" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
-              <div class="line flex">
-                <p>Play on Fullscreen:</p>
-                <label class="switch">
-                  <input type="checkbox" id="VideoFullScreen" />
-                  <span class="slider round"></span>
-                </label>
+              <!-- show on click -->
+              <div id="NetflixSettings">
+                <div class="line flex">
+                  <p>Skip Intro:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="NetflixIntro" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex">
+                  <p>Skip Recaps:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="NetflixRecap" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex">
+                  <p>Skip Credits:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="NetflixCredits" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex">
+                  <p>Skip Ads:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="NetflixAds" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex">
+                  <p>Resume inactivity warning:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="NetflixBlocked" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex" style="align-items: center">
+                  <p>Auto pick last profile:</p>
+                  <label class="switch">
+                    <input type="checkbox" id="NetflixProfile" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex">
+                  <p id="profileName" style="text-transform: capitalize"></p>
+                  <img id="profilePicture" class="hidden" style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px" />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div style="width: 50%">
-          <div class="button reset">Reset to default</div>
-          <div class="flex">
-            <a class="button github" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
-            <a class="button donate" href="https://paypal.me/MarvinKrebber" target="_blank">Donate $</a>
-          </div>
-          <div id="Export">
-            <h2>Import/Export all Settings:</h2>
-            <div class="flex flex-col flex-align">
-              <a class="button" id="save">Save Settings as file</a>
-              <input type="file" id="file" name="settings" accept="text/json" />
-              <div class="button Upload" id="upload">Upload settings</div>
+          <div class="flex flex-row">
+            <div style="width: 50%">
+              <div class="categoryVideo" style="margin-top: 5px">
+                <div class="flex flex-between" style="padding: 5px 5px">
+                  <h2>General Video features</h2>
+                  <label class="switch">
+                    <input type="checkbox" id="VideoSkips" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="line flex-end flex-align" id="openVideoSettings">
+                  <p id="openVideoSettings">Individual settings</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoDownArrow hidden">
+                    <path d="M0 0 40 0 20 20 0 0" fill="white" id="openVideoSettings" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoUpArrow">
+                    <path d="M20 0 40 20 0 20 20 0" fill="white" id="openVideoSettings" />
+                  </svg>
+                </div>
+                <!-- show on click -->
+                <div id="VideoSettings">
+                  <div class="line flex">
+                    <p>Skip Intro:</p>
+                    <label class="switch">
+                      <input type="checkbox" id="VideoIntro" />
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="line flex">
+                    <p>Skip Credits:</p>
+                    <label class="switch">
+                      <input type="checkbox" id="VideoCredits" />
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="line flex">
+                    <p>Skip Ads:</p>
+                    <label class="switch">
+                      <input type="checkbox" id="VideoAds" />
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="line flex">
+                    <p>Play on Fullscreen:</p>
+                    <label class="switch">
+                      <input type="checkbox" id="VideoFullScreen" />
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="width: 50%">
+              <div class="button reset">Reset to default</div>
+              <div class="flex">
+                <a class="button github" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
+                <a class="button donate" href="https://paypal.me/MarvinKrebber" target="_blank">Donate $</a>
+              </div>
+              <div id="Export">
+                <h2>Import/Export all Settings:</h2>
+                <div class="flex flex-col flex-align">
+                  <a class="button" id="save">Save Settings as file</a>
+                  <input type="file" id="file" name="settings" accept="text/json" />
+                  <div class="button Upload" id="upload">Upload settings</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div id="Statistics" style="display: block">
-        <h2>Skipped time:</h2>
-        <div class="line flex flex-between">
-          <p>Amazon Ad:</p>
-          <p id="AmazonAdTime">0s</p>
-        </div>
-        <div class="line flex flex-between">
-          <p>Netflix Ad:</p>
-          <p id="NetflixAdTime">0s</p>
-        </div>
-        <div class="line flex flex-between">
-          <p>Intro:</p>
-          <p id="IntroTimeSkipped">0s</p>
-        </div>
-        <div class="line flex flex-between">
-          <p>Recap:</p>
-          <p id="RecapTimeSkipped">0s</p>
-        </div>
-        <div class="line flex flex-between" style="padding-left: 0">
-          <p>Segments Skipped:</p>
-          <p id="SegmentsSkipped">0</p>
+          <div id="Statistics" style="display: block">
+            <h2>Skipped time:</h2>
+            <div class="line flex flex-between">
+              <p>Amazon Ad:</p>
+              <p id="AmazonAdTime">0s</p>
+            </div>
+            <div class="line flex flex-between">
+              <p>Netflix Ad:</p>
+              <p id="NetflixAdTime">0s</p>
+            </div>
+            <div class="line flex flex-between">
+              <p>Intro:</p>
+              <p id="IntroTimeSkipped">0s</p>
+            </div>
+            <div class="line flex flex-between">
+              <p>Recap:</p>
+              <p id="RecapTimeSkipped">0s</p>
+            </div>
+            <div class="line flex flex-between" style="padding-left: 0">
+              <p>Segments Skipped:</p>
+              <p id="SegmentsSkipped">0</p>
+            </div>
+          </div>
         </div>
       </div>
       <div id="error-content" class="hidden">

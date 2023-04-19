@@ -233,3 +233,25 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  background-color: #111;
+  margin-right: 5px;
+}
+
+/* The navigation menu links */
+.sidenav p {
+  padding: 8px 8px 8px 8px;
+  text-decoration: none;
+  display: block;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav p:hover {
+  color: #818181;
+}
