@@ -519,13 +519,13 @@ if (isVideo || isNetflix) {
     if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
       log("started observing| PlayOnFullScreen");
       function OnFullScreenChange() {
-        console.log(window.fullScreen);
         let video;
         if (isNetflix) video = document.querySelector("video");
         else video = document.querySelector(AmazonVideoClass);
         if (window.fullScreen && video) {
           video.play();
-          console.log("play");
+          console.log("auto-played on fullscreen");
+          increaseBadge();
         }
       }
       addEventListener("fullscreenchange", OnFullScreenChange);
