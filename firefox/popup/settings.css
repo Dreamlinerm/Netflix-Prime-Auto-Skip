@@ -57,29 +57,17 @@ div {
 .reset:hover {
   background-color: #446a8a;
 }
-.github {
-  margin-right: 5px;
-  background-color: #5485ad;
-  /* transparent */
-  opacity: 0.5;
+.ExternalButton {
+  background-color: #e60010;
   color: white;
   text-decoration: none;
+  border-radius: 15px;
+  margin: 10px 20px;
+  padding: 10px 20px;
   flex-grow: 1;
 }
-.github:hover {
-  background-color: #2d8edd;
-}
-.donate {
-  margin-left: 5px;
-  background-color: #5485ad;
-  /* transparent */
-  opacity: 0.5;
-  color: white;
-  text-decoration: none;
-  flex-grow: 1;
-}
-.donate:hover {
-  background-color: #2d8edd;
+.ExternalButton:hover {
+  background-color: #4d0000;
 }
 .Upload {
   border-radius: 5px;
@@ -236,13 +224,18 @@ input:checked + .slider:before {
 
 /* The side navigation menu */
 .sidenav {
-  height: 100%; /* 100% Full-height */
+  /* height: 100vh; */
   background-color: #111;
-  margin-right: 5px;
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
+  /* margin-right: 5px;
+  position: fixed; 
+  z-index: 1; 
+  top: 0; 
+  left: 0; */
+  border-radius: 15px;
+  margin: 15px;
+  gap: 20px;
+  min-width: 300px;
+  text-align: center;
 }
 
 /* The navigation menu links */
@@ -251,6 +244,7 @@ input:checked + .slider:before {
   margin: 10px 20px;
   padding: 10px 20px;
   background-color: #242424;
+  text-decoration: none;
 }
 
 /* When you mouse over the navigation links, change their color */
