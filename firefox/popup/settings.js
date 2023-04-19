@@ -175,12 +175,21 @@ function openIndividualSettings(setting) {
   document.getElementsByClassName(setting + "DownArrow")[0].style.display = open ? "none" : "block";
   document.getElementsByClassName(setting + "UpArrow")[0].style.display = open ? "block" : "none";
 }
-function Menu(button) {
+function Menu(setting) {
   document.getElementById("VideoSettings").style.display = "none";
+  document.getElementById("MenuVideo").style.setProperty("background-color", "");
+
   document.getElementById("AmazonSettings").style.display = "none";
+  document.getElementById("MenuAmazon").style.setProperty("background-color", "");
+
   document.getElementById("NetflixSettings").style.display = "none";
+  document.getElementById("MenuNetflix").style.setProperty("background-color", "");
+
   document.getElementById("StatisticsSettings").style.display = "none";
-  document.getElementById(button).style.display = "block";
+  document.getElementById("MenuStatistics").style.setProperty("background-color", "");
+
+  document.getElementById(setting + "Settings").style.display = "block";
+  document.getElementById("Menu" + setting).style.setProperty("background-color", "#e60010");
 }
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
@@ -198,13 +207,13 @@ function listenForClicks() {
     }
     //  -------------      Menu        ---------------------------------------
     else if (e.target.id === "MenuVideo") {
-      Menu("VideoSettings");
+      Menu("Video");
     } else if (e.target.id === "MenuAmazon") {
-      Menu("AmazonSettings");
+      Menu("Amazon");
     } else if (e.target.id === "MenuNetflix") {
-      Menu("NetflixSettings");
+      Menu("Netflix");
     } else if (e.target.id === "MenuStatistics") {
-      Menu("StatisticsSettings");
+      Menu("Statistics");
     }
     //  -------------      openSettings        ---------------------------------------
     else if (e.target.id === "openVideoSettings") {
