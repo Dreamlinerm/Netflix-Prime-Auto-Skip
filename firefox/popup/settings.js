@@ -270,12 +270,9 @@ function listenForClicks() {
         settings.Amazon.speedSlider &&
         settings.Amazon.filterPaid
       );
-      settings.Amazon.skipIntro = AmazonSkips;
-      settings.Amazon.skipCredits = AmazonSkips;
-      settings.Amazon.skipAd = AmazonSkips;
-      settings.Amazon.blockFreevee = AmazonSkips;
-      settings.Amazon.speedSlider = AmazonSkips;
-      settings.Amazon.filterPaid = AmazonSkips;
+      for (let key in settings.Amazon) {
+        settings.Amazon[key] = AmazonSkips;
+      }
       setSettings("All AmazonSkips");
     } else if (e.target.id === "AmazonCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
@@ -306,12 +303,9 @@ function listenForClicks() {
         settings?.Netflix.NetflixAds &&
         settings?.Netflix.profile
       );
-      settings.Netflix.skipIntro = NetflixSkips;
-      settings.Netflix.skipRecap = NetflixSkips;
-      settings.Netflix.skipCredits = NetflixSkips;
-      settings.Netflix.skipBlocked = NetflixSkips;
-      settings.Netflix.NetflixAds = NetflixSkips;
-      settings.Netflix.profile = NetflixSkips;
+      for (let key in settings.Netflix) {
+        settings.Netflix[key] = NetflixSkips;
+      }
       setSettings("All NetflixSkips");
     } else if (e.target.id === "NetflixIntro") {
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
