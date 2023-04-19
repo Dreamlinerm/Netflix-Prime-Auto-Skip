@@ -47,7 +47,7 @@
     </div>
     <div class="content flex flex-col" style="height: 98vh; overflow: scroll; flex-basis: 90%">
       <div style="padding: 80px 15% 0 3%">
-        <div class="categoryVideo" id="VideoSettings">
+        <div class="categoryVideo" id="VideoSettings" style="background-color: unset">
           <div class="flex flex-between" style="padding: 5px 5px">
             <h2>Shared Video features</h2>
             <label class="switch">
@@ -86,15 +86,14 @@
             </div>
           </div>
         </div>
-        <div class="categoryPrime hidden" id="AmazonSettings">
-          <div class="flex flex-between" style="padding: 5px 5px">
+        <div class="categoryPrime hidden" style="margin-top: 0; background-color: unset" id="AmazonSettings">
+          <div class="flex flex-between" style="padding: 5px 5px; color: #00aeef">
             <h2>Prime Video specific</h2>
             <label class="switch">
               <input type="checkbox" id="AmazonSkips" />
               <span class="slider round"></span>
             </label>
           </div>
-          <!-- show on click -->
           <div>
             <div class="line flex">
               <p>Skip Self Ads:</p>
@@ -144,8 +143,8 @@
               -->
           </div>
         </div>
-        <div class="categoryNetflix hidden" id="NetflixSettings">
-          <div class="flex flex-between" style="padding: 5px 5px">
+        <div class="categoryNetflix hidden" style="margin-top: 0; background-color: unset" id="NetflixSettings">
+          <div class="flex flex-between" style="padding: 5px 5px; color: #e60010">
             <h2>Netflix specific</h2>
             <label class="switch">
               <input type="checkbox" id="NetflixSkips" />
