@@ -298,7 +298,7 @@ input:checked + .slider:before {
   }
   .menuButton {
     margin: 5px;
-    padding: 5px;
+    padding: 5px 10px;
   }
   .ExternalButton {
     margin-bottom: 20px;
