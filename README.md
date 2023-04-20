@@ -10,11 +10,11 @@ Firefox:
 <img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
 <img src="https://img.shields.io/badge/installs-482-informational" >
 <img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
-<img src="https://img.shields.io/amo/rating/NetflixPrime@Autoskip.io" >
+<img src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010" >
 Chrome: 
 <img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
 <img src="https://img.shields.io/badge/installs-295-informational" >
-<img src="https://img.shields.io/chrome-web-store/rating/akaimhgappllmlkadblbdknhbfghdgle" >
+<img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" >
 
 </div>
 
