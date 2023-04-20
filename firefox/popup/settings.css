@@ -43,22 +43,26 @@ div {
 }
 /* buttons */
 .button {
-  margin-top: 5px;
-  padding: 4px;
-  /* margin: 0 10px; */
-  text-align: center;
   font-size: 1.5em;
   cursor: pointer;
-  border-radius: 15px;
   transition-duration: 0.4s;
+
+  margin: 5px;
+  border-radius: 15px;
+  padding: 5px 10px;
+  text-align: center;
+  background-color: #0082fc;
+  color: white;
+  text-decoration: none;
+  flex-grow: 1;
+}
+.button:hover {
+  /* background-color: #d0d0d7; */
+  opacity: 0.8;
 }
 
 .reset {
-  background-color: #5485ad;
-  flex-grow: 2;
-}
-.reset:hover {
-  background-color: #446a8a;
+  margin-top: 50px;
 }
 .ExternalButton {
   background-color: #e60010;
@@ -68,34 +72,22 @@ div {
   margin: 10px 20px;
   padding: 10px 20px;
   flex-grow: 1;
+  cursor: pointer;
 }
 .ExternalButton:hover {
   background-color: #4d0000;
 }
-.ExternalPopupButton {
-  background-color: #5485ad;
-  color: white;
-  text-decoration: none;
-  border-radius: 15px;
-  margin: 10px 5px;
-  /* padding: 10px 20px; */
-  flex-grow: 1;
-  /* opacity: 0.8; */
-}
-.ExternalPopupButton:hover {
-  /* background-color: #e60010; */
-  opacity: 0.8;
-}
 .Upload {
   border-radius: 5px;
-  margin-left: 5px;
-  background-color: #e9e9ed;
-  color: black;
+  padding: 10px;
+  background-color: #0082fc;
+  color: white;
   text-decoration: none;
   flex-grow: 1;
 }
 .Upload:hover {
-  background-color: #d0d0d7;
+  /* background-color: #d0d0d7; */
+  opacity: 0.8;
 }
 
 .flex {
@@ -161,11 +153,6 @@ img {
 .categoryNetflix {
   margin-top: 5px;
   background-color: #e60010;
-  border-radius: 10px;
-}
-#Export {
-  margin-top: 5px;
-  background-color: grey;
   border-radius: 10px;
 }
 
@@ -273,11 +260,12 @@ input:checked + .slider:before {
 /* The navigation menu links */
 .menuButton {
   border-radius: 15px;
-  margin: 10px 20px;
+  margin: 5px 15px;
   padding: 10px 20px;
   background-color: #242424;
   text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -289,6 +277,9 @@ input:checked + .slider:before {
   font-size: 17px;
   padding: 10px 0 20px 20px;
   color: #cccccc;
+}
+.IconBox {
+  padding: 20px 20px;
 }
 
 @media only screen and (max-height: 725px), only screen and (max-width: 1000px) {
@@ -305,5 +296,8 @@ input:checked + .slider:before {
   }
   .page {
     padding: 0px;
+  }
+  .IconBox {
+    padding: 10px 0px 0px 0px;
   }
 }

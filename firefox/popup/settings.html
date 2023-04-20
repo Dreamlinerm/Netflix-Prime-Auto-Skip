@@ -25,7 +25,7 @@
 
   <body class="flex" style="height: 98vh">
     <div class="sidenav flex flex-col" style="flex-basis: 20%">
-      <div class="flex-center flex-row" style="padding: 20px 20px">
+      <div class="flex-center flex-row IconBox">
         <img src="../icons/NetflixAmazon Auto-Skip.svg" />
         <div class="flex-center flex-col">
           <h2 class="title">Auto-skip</h2>
@@ -42,8 +42,8 @@
       </div>
       <div style="margin-top: auto">
         <div class="flex flex-col MenuButtons" style="flex-wrap: wrap; margin-bottom: 10px">
-          <a class="button ExternalButton" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
-          <a class="button ExternalButton" href="https://paypal.me/MarvinKrebber" target="_blank">Donate $</a>
+          <a class="button" style="margin: 5px 15px" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
+          <a class="button" style="margin: 5px 15px" href="https://paypal.me/MarvinKrebber" target="_blank">Donate $</a>
         </div>
       </div>
     </div>
@@ -240,12 +240,14 @@
           </div>
         </div>
         <div id="OtherSettings" class="hidden">
-          <div id="Export">
-            <h2>Import/Export all Settings:</h2>
+          <div>
             <div class="flex flex-col flex-align">
+              <h2>Import/Export all Settings</h2>
               <a class="button" id="save">Save Settings as file</a>
-              <input type="file" id="file" name="settings" accept="text/json" />
-              <div class="button Upload" id="upload">Upload settings</div>
+              <div class="flex flex-row flex-align">
+                <input type="file" id="file" name="settings" accept="text/json" />
+                <div class="button" id="upload">Upload settings</div>
+              </div>
             </div>
           </div>
           <div class="button reset">Reset Addon to default</div>
