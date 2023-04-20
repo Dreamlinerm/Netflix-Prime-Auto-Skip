@@ -98,7 +98,7 @@ function setCheckboxesToSettings() {
   button = document.querySelector("#VideoCredits");
   if (button) button.checked = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits;
   button = document.querySelector("#VideoAds");
-  if (button) button.checked = settings?.Amazon.skipAd && settings?.Netflix.NetflixAds;
+  if (button) button.checked = settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds;
   button = document.querySelector("#VideoFullScreen");
   if (button) button.checked = settings?.Video.playOnFullScreen;
 
