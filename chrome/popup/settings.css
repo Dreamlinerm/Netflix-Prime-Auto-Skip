@@ -56,6 +56,10 @@ div {
   color: white;
   text-decoration: none;
   flex-grow: 1;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 .button:hover {
   /* background-color: #d0d0d7; */
@@ -262,6 +266,9 @@ input:checked + .slider:before {
 #openNetflixSettings,
 #openStatistics {
   cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 .settingsIcon:hover {
   -webkit-animation: spin 4s linear infinite;
