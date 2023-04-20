@@ -12,12 +12,16 @@
  */
 
 // find out if on settings page or on popup page
+// if document.title is "Netflix/Prime Auto-Skip" then it is not the popup page
 // if (window?.outerWidth > 400) {
 //   AmazonSettings();
 //   NetflixSettings();
 //   // Statistics();
 //   document.querySelector("#Export").style.display = "block";
 // }
+// remove everything before # in window.location
+let url = window.location.href;
+if (url.includes("#")) Menu(url.split("#")[1]);
 
 // global variables in localStorage
 const defaultSettings = {

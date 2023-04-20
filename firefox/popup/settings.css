@@ -241,11 +241,13 @@ input:checked + .slider:before {
 .menuButton {
   border-radius: 15px;
   margin: 5px 15px;
-  padding: 10px 20px;
+  padding: 13px 20px;
   background-color: #242424;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
+  color: white;
+  font-size: 1.5em;
 }
 
 /* When you mouse over the navigation links, change their color */
