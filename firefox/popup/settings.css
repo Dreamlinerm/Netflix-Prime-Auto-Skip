@@ -281,6 +281,12 @@ input:checked + .slider:before {
 .IconBox {
   padding: 20px 20px;
 }
+#openVideoSettings,
+#openAmazonSettings,
+#openNetflixSettings,
+#openStatistics {
+  cursor: pointer;
+}
 
 @media only screen and (max-height: 725px), only screen and (max-width: 1000px) {
   .MenuButtons {
