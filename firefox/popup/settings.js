@@ -191,8 +191,10 @@ function setSettings(log) {
 function listenForClicks() {
   let listener = document.addEventListener("click", (e) => {
     if (e.target.classList.contains("reset")) {
-      console.log("settings resetted to default");
-      browser.storage.sync.set(defaultSettings);
+      if (confirm("Are you sure to reset every Setting including Statistics?")) {
+        console.log("settings resetted to default");
+        browser.storage.sync.set(defaultSettings);
+      }
     }
     //  -------------      Menu        ---------------------------------------
     else if (e.target.id === "MenuVideo") {
