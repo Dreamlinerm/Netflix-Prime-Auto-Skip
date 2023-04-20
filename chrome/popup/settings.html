@@ -22,7 +22,7 @@
   </head>
 
   <body class="flex" style="height: 98vh">
-    <div class="sidenav flex flex-col" style="flex-basis: 10%">
+    <div class="sidenav flex flex-col" style="flex-basis: 20%">
       <div class="flex-center flex-row" style="padding: 20px 20px">
         <img src="../icons/NetflixAmazon Auto-Skip.svg" />
         <div class="flex-center flex-col">
@@ -30,7 +30,7 @@
           <p style="font-size: 1em">v.1.0.37</p>
         </div>
       </div>
-      <div class="flex flex-col" style="flex-wrap: wrap; box-sizing: border-box">
+      <div class="flex flex-col MenuButtons" style="flex-wrap: wrap">
         <p id="MenuVideo" class="menuButton" style="background-color: #e60010">Shared Settings</p>
         <p id="MenuAmazon" class="menuButton">Prime Video</p>
         <p id="MenuNetflix" class="menuButton">Netflix</p>
@@ -39,14 +39,14 @@
         <p id="MenuChangelog" class="menuButton">Changelog</p>
       </div>
       <div style="margin-top: auto">
-        <div class="flex flex-col">
+        <div class="flex flex-col MenuButtons" style="flex-wrap: wrap">
           <a class="button ExternalButton" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
           <a class="button ExternalButton" href="https://paypal.me/MarvinKrebber" target="_blank" style="margin-bottom: 20px">Donate $</a>
         </div>
       </div>
     </div>
-    <div class="content flex flex-col" style="height: 98vh; overflow-y: auto; flex-basis: 90%">
-      <div style="padding: 80px 15% 0 3%">
+    <div class="content flex flex-col" style="height: 98vh; overflow-y: auto; flex-basis: 80%; min-height: 450px">
+      <div class="page">
         <div class="categoryVideo" id="VideoSettings" style="background-color: unset">
           <div class="flex flex-between" style="padding: 5px 5px">
             <h2>Shared Video features</h2>
