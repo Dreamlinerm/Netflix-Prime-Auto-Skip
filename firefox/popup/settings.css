@@ -288,7 +288,7 @@ input:checked + .slider:before {
   color: #cccccc;
 }
 
-@media only screen and (max-height: 725px), only screen and (max-width: 1200px) {
+@media only screen and (max-height: 725px), only screen and (max-width: 1000px) {
   .MenuButtons {
     flex-direction: row;
     justify-content: center;
