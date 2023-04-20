@@ -248,7 +248,7 @@ function listenForClicks() {
       settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
       setSettings("VideoCredits");
     } else if (e.target.id === "VideoAds") {
-      settings.Amazon.skipAd = !settings.Amazon.skipAd;
+      settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
       settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
       setSettings("VideoAd");
     } else if (e.target.id === "VideoFullScreen") {
