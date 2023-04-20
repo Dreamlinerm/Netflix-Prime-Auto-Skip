@@ -34,6 +34,7 @@ body,
 }
 .page {
   padding: 80px 15% 0 3%;
+  width: 97%;
 }
 div {
   color: white;
@@ -302,5 +303,8 @@ input:checked + .slider:before {
   .IconBox {
     padding: 10px 0px 0px 0px;
     flex-direction: row;
+  }
+  .page {
+    margin: 0 15px 0 15px;
   }
 }
