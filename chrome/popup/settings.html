@@ -19,16 +19,22 @@
     <!--  import "https://fonts.googleapis.com/css?family=Lato"; -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
     <script src="settings.js" defer></script>
+    <title>Settings - N/P Auto-skip</title>
+    <link rel="icon" type="image/x-icon" href="/icons/NetflixAmazon Auto-Skip.svg" />
   </head>
 
   <body class="flex" style="height: 98vh">
     <div class="sidenav flex flex-col" style="flex-basis: 20%">
-      <div class="flex-center flex-row" style="padding: 20px 20px">
-        <img src="../icons/NetflixAmazon Auto-Skip.svg" />
+      <div class="flex-center flex-row IconBox">
+        <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" />
         <div class="flex-center flex-col">
           <h2 class="title">Auto-skip</h2>
           <p style="font-size: 1em">v.1.0.37</p>
         </div>
+        <a class="flex-center flex-col" style="text-align: center; text-decoration: none" href="https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle">
+          <p style="font-size: 1em">Rate now!</p>
+          <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" />
+        </a>
       </div>
       <div class="flex flex-col MenuButtons" style="flex-wrap: wrap">
         <p id="MenuVideo" class="menuButton" style="background-color: #e60010">Shared Settings</p>
@@ -39,9 +45,9 @@
         <p id="MenuChangelog" class="menuButton">Changelog</p>
       </div>
       <div style="margin-top: auto">
-        <div class="flex flex-col MenuButtons" style="flex-wrap: wrap">
-          <a class="button ExternalButton" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
-          <a class="button ExternalButton" href="https://paypal.me/MarvinKrebber" target="_blank" style="margin-bottom: 20px">Donate $</a>
+        <div class="flex flex-col MenuButtons" style="flex-wrap: wrap; margin-bottom: 10px">
+          <a class="button" style="margin: 5px 15px" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>
+          <a class="button" style="margin: 5px 15px" href="https://paypal.me/MarvinKrebber" target="_blank">Donate $</a>
         </div>
       </div>
     </div>
@@ -238,12 +244,14 @@
           </div>
         </div>
         <div id="OtherSettings" class="hidden">
-          <div id="Export">
-            <h2>Import/Export all Settings:</h2>
+          <div>
             <div class="flex flex-col flex-align">
+              <h2>Import/Export all Settings</h2>
               <a class="button" id="save">Save Settings as file</a>
-              <input type="file" id="file" name="settings" accept="text/json" />
-              <div class="button Upload" id="upload">Upload settings</div>
+              <div class="flex flex-row flex-align">
+                <input type="file" id="file" name="settings" accept="text/json" />
+                <div class="button" id="upload">Upload settings</div>
+              </div>
             </div>
           </div>
           <div class="button reset">Reset Addon to default</div>
@@ -251,6 +259,13 @@
         <div id="ChangelogSettings" class="hidden">
           <h2>Changelog</h2>
           <div>
+            <div class="line flex">
+              <h2>1.0.38</h2>
+              <ul>
+                <li>Confirm reset addon</li>
+                <li>Changed button designs</li>
+              </ul>
+            </div>
             <div class="line flex">
               <h2>1.0.37</h2>
               <ul>
