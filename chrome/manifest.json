@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Netflix/Prime Auto-Skip",
-  "version": "1.0.38",
+  "version": "1.0.39",
 
   "description": "Automatically skip Ads, intros, Recaps, Credits, etc. on Netflix and Prime video.",
   "homepage_url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip",

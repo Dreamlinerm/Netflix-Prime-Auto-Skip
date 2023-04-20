@@ -98,7 +98,7 @@ function setCheckboxesToSettings() {
   button = document.querySelector("#VideoCredits");
   if (button) button.checked = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits;
   button = document.querySelector("#VideoAds");
-  if (button) button.checked = settings?.Amazon.skipAd && settings?.Netflix.NetflixAds;
+  if (button) button.checked = settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds;
   button = document.querySelector("#VideoFullScreen");
   if (button) button.checked = settings?.Video.playOnFullScreen;
 
@@ -191,8 +191,10 @@ function setSettings(log) {
 function listenForClicks() {
   let listener = document.addEventListener("click", (e) => {
     if (e.target.classList.contains("reset")) {
-      console.log("settings resetted to default");
-      chrome.storage.sync.set(defaultSettings);
+      if (confirm("Are you sure to reset every Setting including Statistics?")) {
+        console.log("settings resetted to default");
+        chrome.storage.sync.set(defaultSettings);
+      }
     }
     //  -------------      Menu        ---------------------------------------
     else if (e.target.id === "MenuVideo") {
