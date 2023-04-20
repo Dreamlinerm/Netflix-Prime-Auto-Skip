@@ -301,5 +301,6 @@ input:checked + .slider:before {
   }
   .IconBox {
     padding: 10px 0px 0px 0px;
+    flex-direction: row;
   }
 }
