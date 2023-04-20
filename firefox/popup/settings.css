@@ -33,7 +33,7 @@ body,
   min-width: 400px;
 }
 .page {
-  padding: 80px 15% 0 3%;
+  padding: 80px 0 0 3%;
   width: 97%;
 }
 div {
@@ -306,5 +306,6 @@ input:checked + .slider:before {
   }
   .page {
     margin: 0 15px 0 15px;
+    width: calc(100% - 30px);
   }
 }
