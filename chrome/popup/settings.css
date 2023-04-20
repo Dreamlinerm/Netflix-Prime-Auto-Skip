@@ -33,7 +33,8 @@ body,
   min-width: 400px;
 }
 .page {
-  padding: 80px 15% 0 3%;
+  padding: 80px 0 0 3%;
+  width: 97%;
 }
 div {
   color: white;
@@ -43,59 +44,26 @@ div {
 }
 /* buttons */
 .button {
-  margin-top: 5px;
-  padding: 4px;
-  /* margin: 0 10px; */
-  text-align: center;
   font-size: 1.5em;
   cursor: pointer;
-  border-radius: 15px;
   transition-duration: 0.4s;
+
+  margin: 5px;
+  border-radius: 15px;
+  padding: 5px 10px;
+  text-align: center;
+  background-color: #0082fc;
+  color: white;
+  text-decoration: none;
+  flex-grow: 1;
+}
+.button:hover {
+  /* background-color: #d0d0d7; */
+  opacity: 0.8;
 }
 
 .reset {
-  background-color: #5485ad;
-  flex-grow: 2;
-}
-.reset:hover {
-  background-color: #446a8a;
-}
-.ExternalButton {
-  background-color: #e60010;
-  color: white;
-  text-decoration: none;
-  border-radius: 15px;
-  margin: 10px 20px;
-  padding: 10px 20px;
-  flex-grow: 1;
-}
-.ExternalButton:hover {
-  background-color: #4d0000;
-}
-.ExternalPopupButton {
-  background-color: #5485ad;
-  color: white;
-  text-decoration: none;
-  border-radius: 15px;
-  margin: 10px 5px;
-  /* padding: 10px 20px; */
-  flex-grow: 1;
-  /* opacity: 0.8; */
-}
-.ExternalPopupButton:hover {
-  /* background-color: #e60010; */
-  opacity: 0.8;
-}
-.Upload {
-  border-radius: 5px;
-  margin-left: 5px;
-  background-color: #e9e9ed;
-  color: black;
-  text-decoration: none;
-  flex-grow: 1;
-}
-.Upload:hover {
-  background-color: #d0d0d7;
+  margin-top: 50px;
 }
 
 .flex {
@@ -141,7 +109,7 @@ p {
   font-size: 1.4em;
   padding-right: 10px;
 }
-img {
+.Logo {
   /* width: 100px; */
   height: 3em;
 }
@@ -161,11 +129,6 @@ img {
 .categoryNetflix {
   margin-top: 5px;
   background-color: #e60010;
-  border-radius: 10px;
-}
-#Export {
-  margin-top: 5px;
-  background-color: grey;
   border-radius: 10px;
 }
 
@@ -273,11 +236,12 @@ input:checked + .slider:before {
 /* The navigation menu links */
 .menuButton {
   border-radius: 15px;
-  margin: 10px 20px;
+  margin: 5px 15px;
   padding: 10px 20px;
   background-color: #242424;
   text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -290,6 +254,36 @@ input:checked + .slider:before {
   padding: 10px 0 20px 20px;
   color: #cccccc;
 }
+.IconBox {
+  padding: 20px 20px;
+}
+#openVideoSettings,
+#openAmazonSettings,
+#openNetflixSettings,
+#openStatistics {
+  cursor: pointer;
+}
+.settingsIcon:hover {
+  -webkit-animation: spin 4s linear infinite;
+  -moz-animation: spin 4s linear infinite;
+  animation: spin 4s linear infinite;
+}
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 
 @media only screen and (max-height: 725px), only screen and (max-width: 1000px) {
   .MenuButtons {
@@ -300,13 +294,18 @@ input:checked + .slider:before {
     margin: 5px;
     padding: 5px 10px;
   }
-  .ExternalButton {
-    margin-bottom: 20px;
-  }
   body {
     flex-direction: column;
   }
   .page {
     padding: 0px;
+  }
+  .IconBox {
+    padding: 10px 0px 0px 0px;
+    flex-direction: row;
+  }
+  .page {
+    margin: 0 15px 0 15px;
+    width: calc(100% - 30px);
   }
 }
