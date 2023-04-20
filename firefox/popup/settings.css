@@ -32,6 +32,9 @@ body,
 .content {
   min-width: 400px;
 }
+.page {
+  padding: 80px 15% 0 3%;
+}
 div {
   color: white;
 }
@@ -302,5 +305,8 @@ input:checked + .slider:before {
   }
   body {
     flex-direction: column;
+  }
+  .page {
+    padding: 0px;
   }
 }
