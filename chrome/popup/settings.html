@@ -30,7 +30,7 @@
           <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" />
           <div class="flex-center flex-col">
             <h2 class="title">Auto-skip</h2>
-            <p style="font-size: 1em">v.1.0.40</p>
+            <p style="font-size: 1em">v.1.0.41</p>
           </div>
         </div>
         <a
@@ -68,6 +68,9 @@
               <span class="slider round"></span>
             </label>
           </div>
+          <p class="description">
+            These options will only enable/disable the settings for both Prime Video and Netflix. If you want to only disable it specifically for one you have to go to its Individual settings.
+          </p>
           <hr />
           <div class="line flex">
             <p>Skip Intro:</p>
@@ -140,30 +143,31 @@
             </label>
           </div>
           <p class="description">Removing every paid movie category</p>
-          <!-- 
-                    Individual Settings removed
-                    <div class="line flex">
-                    <p>Skip Intro:</p>
-                    <label class="switch">
-                      <input type="checkbox" id="AmazonIntro" />
-                      <span class="slider round"></span>
-                    </label>
-                  </div>
-                  <div class="line flex">
-                    <p>Skip Credits:</p>
-                    <label class="switch">
-                      <input type="checkbox" id="AmazonCredits" />
-                      <span class="slider round"></span>
-                    </label>
-                  </div> 
-                  <div class="line flex">
-                    <p>Skip Freevee Ads:</p>
-                    <label class="switch">
-                      <input type="checkbox" id="AmazonFreevee" />
-                      <span class="slider round"></span>
-                    </label>
-                  </div>
-                  -->
+          <hr />
+
+          <h2>Shared Settings</h2>
+          <p class="description">These options will only enable/disable the Prime video part of the shared setting</p>
+          <div class="line flex">
+            <p>Skip Intro:</p>
+            <label class="switch">
+              <input type="checkbox" id="AmazonIntro" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p>Skip Credits:</p>
+            <label class="switch">
+              <input type="checkbox" id="AmazonCredits" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p>Skip Freevee Ads:</p>
+            <label class="switch">
+              <input type="checkbox" id="AmazonFreevee" />
+              <span class="slider round"></span>
+            </label>
+          </div>
         </div>
         <div class="categoryNetflix hidden" style="margin-top: 0; background-color: unset" id="NetflixSettings">
           <div class="flex flex-between" style="padding: 5px 5px; color: #e60010">
@@ -206,30 +210,30 @@
             <p id="profileName" style="text-transform: capitalize"></p>
             <img id="profilePicture" class="hidden" style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px" />
           </div>
-
-          <!-- 
-                  Individual Settings removed
-                  <div class="line flex">
-                    <p>Skip Intro:</p>
-                    <label class="switch">
-                      <input type="checkbox" id="NetflixIntro" />
-                      <span class="slider round"></span>
-                    </label>
-                  </div>
-                  <div class="line flex">
-                    <p>Skip Credits:</p>
-                    <label class="switch">
-                      <input type="checkbox" id="NetflixCredits" />
-                      <span class="slider round"></span>
-                    </label>
-                  </div>
-                  <div class="line flex">
-                    <p>Skip Ads:</p>
-                    <label class="switch">
-                      <input type="checkbox" id="NetflixAds" />
-                      <span class="slider round"></span>
-                    </label>
-                  </div> -->
+          <hr />
+          <h2>Shared Settings</h2>
+          <p class="description">These options will only enable/disable the Netflix part of the shared setting</p>
+          <div class="line flex">
+            <p>Skip Intro:</p>
+            <label class="switch">
+              <input type="checkbox" id="NetflixIntro" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p>Skip Credits:</p>
+            <label class="switch">
+              <input type="checkbox" id="NetflixCredits" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p>Skip Ads:</p>
+            <label class="switch">
+              <input type="checkbox" id="NetflixAds" />
+              <span class="slider round"></span>
+            </label>
+          </div>
         </div>
         <div id="StatisticsSettings" class="hidden">
           <h2>Skipped time:</h2>
@@ -271,7 +275,13 @@
           <h2>Changelog</h2>
           <div>
             <div class="line flex">
-              <h2>1.0.40</h2>
+              <h2>1.0.41</h2>
+              <ul>
+                <li>Added back Individual options for shared options on the Settings page</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.40</p>
               <ul>
                 <li>displayed shared skip ads incorrectly</li>
               </ul>
