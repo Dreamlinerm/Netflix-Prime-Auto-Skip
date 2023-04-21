@@ -29,9 +29,7 @@ It will work with other skippers, but it may behave unexpectedly.
 The script, "skipper.js", is injected into all urls containing "amazon.\*/\*/video" or "netflix.com".
 
 It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix and Prime video.
-<table>
-<tr>
-<td valign="top">
+
 
 ## ✨ Features
 Automatically skipping:
@@ -71,13 +69,7 @@ Import and Export all Settings.
 
 See Statistics.
   
-</td>
-<td>
-
-![Alt text](Publish/Screenshots/settingsFoldedOut.png?raw=true)
-</td>
-</tr>
-</table>
+![Settings.png](Publish/Screenshots/settings.png?raw=true)
 
 ## How it works
 
