@@ -12,7 +12,7 @@ On Netflix and Prime Video it automatically:
 <li>Plays on Fullscreen</li>
 </ul>
 
-On Netflix it also:
+On Netflix it also automatically:
 
 <ul>
 <li>Skips Recaps</li>
@@ -20,7 +20,7 @@ On Netflix it also:
 <li>Picks last used profile</li>
 </ul>
 
-On Amazon Prime Video it also:
+On Amazon Prime Video it also automatically:
 
 <ul>
 <li>Skips Self promoting ads</li>
@@ -54,13 +54,13 @@ On Netflix and Prime Video it automatically:
 • Skips Ads
 • Plays on Fullscreen
 
-On Netflix it automatically:
+On Netflix it also automatically:
 
 • Skips Recaps
 • Blocks Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video
 • Picks last used profile
 
-On Amazon Prime Video it automatically:
+On Amazon Prime Video it also automatically:
 
 • Skips Self promoting ads
 • Filters paid content (movies, series)
