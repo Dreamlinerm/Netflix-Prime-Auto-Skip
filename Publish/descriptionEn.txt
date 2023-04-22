@@ -3,32 +3,29 @@ You can configure which Feature to enable in the Settings Page.
 
 ✨ Features
 
-Netflix Automatically skipping:
-
+On Netflix and Prime Video it automatically:
 <ul>
-<li>Intros</li>
-<li>Recaps</li>
-<li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
-<li>Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video</li>
-<li>Basic tier Ads</li>
-<li>Automatically pick last used profile</li>
+<li>Skips Intros</li>
+<li>Skips Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
+<li>Skips Ads</li>
+<li>Plays on Fullscreen</li>
 </ul>
 
-Amazon Prime video Automatically skipping:
+On Netflix it automatically:
 
 <ul>
-<li>Intros</li>
-<li>Credits &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
-<li>Freevee ads</li>
-<li>Self promoting ads</li>
+<li>Skips Recaps</li>
+<li>Blocks Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video</li>
+<li>Picks last used profile</li>
 </ul>
 
-Amazon Prime video other features:
+On Amazon Prime Video it automatically:
 
 <ul>
-<li>Filtering paid content (movies, series)</li>
-<li>Adding playback speed control to UI</li>
-<li>Remove annoying blur when hovering over video</li>
+<li>Skips Self promoting ads</li>
+<li>Filters paid content (movies, series)</li>
+<li>Adds playback speed control to UI</li>
+<li>Removes annoying blur when hovering over video</li>
 </ul>
 
 ☔ Safe
