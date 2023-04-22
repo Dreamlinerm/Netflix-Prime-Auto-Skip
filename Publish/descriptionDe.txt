@@ -7,32 +7,30 @@ Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert
 
 ✨ Features
 
-Netflix automatisches überspringen:
+Auf Netflix und Prime Video wird automatisch:
 
 <ul>
-<li>Intros</li>
-<li>Zusammenfassungen</li>
-<li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Geht automatisch zur nächsten Folge</li>
+<li>Intros übersprungen</li>
+<li>Abspann übersprungen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Geht automatisch zur nächsten Folge</li>
+<li>Werbung übersprungen</li>
+<li>Abgespielt, wenn Vollbildschirm geöffnet wird</li>
+</ul>
+
+Auf Netflix wird automatisch:
+
+<ul>
+<li>Zusammenfassungen übersprungen</li>
 <li>Inaktivitätswarnung&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Video wird automatisch fortgesetzt</li>
-<li>Werbung der Basisstufe</li>
-<li>Automatisch zuletzt verwendetes Profil auswählen</li>
+<li>Automatisch zuletzt verwendetes Profil ausgewählt</li>
 </ul>
 
-Amazon Prime-Video Automatisches Überspringen:
+Amazon Prime-Video wird automatisch:
 
 <ul>
-<li>Intros</li>
-<li>Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Geht automatisch zur nächsten Folge</li>
-<li>Freevee Werbung</li>
-<li>Eigenwerbung</li>
-</ul>
-
-Amazon Prime video andere Funktionen:
-
-<ul>
-<li>Filterung kostenpflichtiger Inhalte (Filme, Serien)</li>
-<li>Wiedergabegeschwindigkeitskontrolle</li>
-<li>Entfernen der lästigen dunklen Unschärfe, wenn das overlay angezeigt wird</li>
+<li>Eigenwerbung übersprungen</li>
+<li>Kostenpflichtige Inhalte gefiltert</li>
+<li>Wiedergabegeschwindigkeitskontrolle hinzugefügt</li>
+<li>Die lästige Unschärfe, wenn das overlay angezeigt wird entfernt</li>
 </ul>
 
 ☔ Sicher
