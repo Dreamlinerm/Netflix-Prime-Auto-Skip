@@ -3,7 +3,7 @@
 Recap:
 Automatisch Werbung, Intros, Rekapitulationen, Abspanne auf Netflix und Prime video überspringen.
 --------------------------------------------
-Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert werden soll.
+Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert werden sollen.
 
 ✨ Features
 
@@ -16,7 +16,7 @@ Auf Netflix und Prime Video wird automatisch:
 <li>Abgespielt, wenn Vollbildschirm geöffnet wird</li>
 </ul>
 
-Auf Netflix wird automatisch:
+Auf Netflix wird auch automatisch:
 
 <ul>
 <li>Zusammenfassungen übersprungen</li>
@@ -24,7 +24,7 @@ Auf Netflix wird automatisch:
 <li>Automatisch zuletzt verwendetes Profil ausgewählt</li>
 </ul>
 
-Amazon Prime-Video wird automatisch:
+Amazon Prime-Video wird auch automatisch:
 
 <ul>
 <li>Eigenwerbung übersprungen</li>
