@@ -34,6 +34,7 @@ It automatically skips Ads, intros, Credits, recaps, and anything else you don't
 ## ✨ Features
 
 On Netflix and Prime Video it automatically:
+
 <ul>
 <li>Skips Intros</li>
 <li>Skips Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
@@ -41,7 +42,7 @@ On Netflix and Prime Video it automatically:
 <li>Plays on Fullscreen</li>
 </ul>
 
-On Netflix it automatically:
+On Netflix it also:
 
 <ul>
 <li>Skips Recaps</li>
@@ -49,7 +50,7 @@ On Netflix it automatically:
 <li>Picks last used profile</li>
 </ul>
 
-On Amazon Prime Video it automatically:
+On Amazon Prime Video it also:
 
 <ul>
 <li>Skips Self promoting ads</li>
