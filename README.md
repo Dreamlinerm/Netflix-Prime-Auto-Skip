@@ -32,26 +32,31 @@ It automatically skips Ads, intros, Credits, recaps, and anything else you don't
 
 
 ## ✨ Features
-Automatically skipping:
-* Intros
-* Recaps
-* Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode
-* Ads
-* Play on Fullscreen
-  
-Netflix:
 
-* Recaps
-* Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video
-* Basic tier Ads
-* Automatically pick last used profile
+On Netflix and Prime Video it automatically:
+<ul>
+<li>Skips Intros</li>
+<li>Skips Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
+<li>Skips Ads</li>
+<li>Plays on Fullscreen</li>
+</ul>
 
-Prime video:
-* Self promoting ads
-* Freevee Ads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Watch series for free without ads
-* Adding playback speed control to UI
-* Filtering paid content (movies, series)
-* Remove annoying blur when hovering over video (same option as add playback speed slider)
+On Netflix it automatically:
+
+<ul>
+<li>Skips Recaps</li>
+<li>Blocks Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video</li>
+<li>Picks last used profile</li>
+</ul>
+
+On Amazon Prime Video it automatically:
+
+<ul>
+<li>Skips Self promoting ads</li>
+<li>Filters paid content (movies, series)</li>
+<li>Adds playback speed control to UI</li>
+<li>Removes annoying blur when hovering over video</li>
+</ul>
 
 ## Contributing
 
