@@ -23,7 +23,7 @@ On Netflix it also automatically:
 On Amazon Prime Video it also automatically:
 
 <ul>
-<li>Skips Self promoting ads</li>
+<li>Skips Self promoting ads (Ads for prime video productions)</li>
 <li>Filters paid content (movies, series)</li>
 <li>Adds playback speed control to UI</li>
 <li>Removes annoying blur when hovering over video</li>
@@ -62,7 +62,7 @@ On Netflix it also automatically:
 
 On Amazon Prime Video it also automatically:
 
-• Skips Self promoting ads
+• Skips Self promoting ads (Ads for prime video productions)
 • Filters paid content (movies, series)
 • Adds playback speed control to UI
 • Removes annoying blur when hovering over video
