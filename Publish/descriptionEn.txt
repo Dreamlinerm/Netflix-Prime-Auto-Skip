@@ -50,14 +50,14 @@ You can configure which Feature to enable in the Settings Page.
 On Netflix and Prime Video it automatically:
 
 • Skips Intros
-• Skips Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode
+• Skips Credits                   : automatically goes to the next episode
 • Skips Ads
 • Plays on Fullscreen
 
 On Netflix it also automatically:
 
 • Skips Recaps
-• Blocks Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video
+• Blocks Inactivity Warning      : automatically resuming the video
 • Picks last used profile
 
 On Amazon Prime Video it also automatically:
