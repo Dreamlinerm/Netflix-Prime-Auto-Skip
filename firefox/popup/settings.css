@@ -317,4 +317,24 @@ input:checked + .slider:before {
     margin: 0 15px 0 15px;
     width: calc(100% - 30px);
   }
+  .icon {
+    margin: 0 5px !important;
+  }
 }
+
+.icon {
+  width: 1.4em;
+  height: 1.4em;
+  margin: 0 10px;
+  background-color: transparent;
+  fill: white;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* .icon path {
+  fill: white;
+} */
