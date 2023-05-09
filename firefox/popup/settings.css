@@ -29,6 +29,9 @@ body,
   /* width: 400px; */
   background-color: #212121;
 }
+body {
+  margin: unset;
+}
 .content {
   min-width: 400px;
 }
@@ -224,7 +227,7 @@ input:checked + .slider:before {
 
 /* The side navigation menu */
 .sidenav {
-  /* height: 100vh; */
+  height: 97vh;
   background-color: #111;
   /* margin-right: 5px;
   position: fixed; 
