@@ -21,7 +21,7 @@ Chrome:
 
 Download the extension here for [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/) or [Chrome](https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle).
 <br>
-Android: Download [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the chrome addon
+Android: Download [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the chrome addon. But only Amazon prime can be watched on android in the Browser.
 
 It will work with other skippers, but it may behave unexpectedly.
 
