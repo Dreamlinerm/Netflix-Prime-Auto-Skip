@@ -257,8 +257,11 @@ input:checked + .slider:before {
 
 .description {
   font-size: 17px;
-  padding: 10px 0 20px 20px;
+  padding: 10px 80px 20px 20px;
   color: #cccccc;
+}
+hr {
+  margin: 0 5px;
 }
 .IconBox {
   padding: 20px 20px;
