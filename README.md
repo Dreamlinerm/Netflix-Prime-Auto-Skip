@@ -15,12 +15,13 @@ Chrome:
 <img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
 <img src="https://img.shields.io/badge/installs-295-informational" >
 <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" >
-
 </div>
 
 ## Installation
 
 Download the extension here for [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/) or [Chrome](https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle).
+<br>
+Android: Download [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the chrome addon
 
 It will work with other skippers, but it may behave unexpectedly.
 
