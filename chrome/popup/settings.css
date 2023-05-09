@@ -29,6 +29,9 @@ body,
   /* width: 400px; */
   background-color: #212121;
 }
+body {
+  margin: unset;
+}
 .content {
   min-width: 400px;
 }
@@ -224,15 +227,16 @@ input:checked + .slider:before {
 
 /* The side navigation menu */
 .sidenav {
-  /* height: 100vh; */
+  height: 100vh;
   background-color: #111;
   /* margin-right: 5px;
    position: fixed; 
    z-index: 1; 
    top: 0; 
    left: 0; */
-  border-radius: 15px;
-  margin: 15px;
+  /* border-radius: 15px; */
+  /* margin: 15px; */
+  padding: 0 10px;
   gap: 20px;
   text-align: center;
 }
@@ -257,8 +261,11 @@ input:checked + .slider:before {
 
 .description {
   font-size: 17px;
-  padding: 10px 0 20px 20px;
+  padding: 10px 80px 20px 20px;
   color: #cccccc;
+}
+hr {
+  margin: 0 5px;
 }
 .IconBox {
   padding: 20px 20px;
@@ -303,6 +310,9 @@ input:checked + .slider:before {
     margin: 5px;
     padding: 5px 10px;
   }
+  .blueButtons {
+    margin: 0 5px !important;
+  }
   body {
     flex-direction: column;
   }
@@ -317,4 +327,32 @@ input:checked + .slider:before {
     margin: 0 15px 0 15px;
     width: calc(100% - 30px);
   }
+  .icon {
+    margin: 0 5px !important;
+  }
+  .sidenav {
+    height: auto;
+  }
 }
+@media only screen and (max-width: 600px) {
+  .menuButton,
+  .blueButtons {
+    font-size: 1em;
+  }
+}
+.icon {
+  width: 1.4em;
+  height: 1.4em;
+  margin: 0 10px;
+  background-color: transparent;
+  fill: white;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* .icon path {
+   fill: white;
+ } */
