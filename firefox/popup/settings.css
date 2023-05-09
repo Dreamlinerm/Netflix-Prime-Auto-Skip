@@ -227,15 +227,16 @@ input:checked + .slider:before {
 
 /* The side navigation menu */
 .sidenav {
-  height: 97vh;
+  height: 100vh;
   background-color: #111;
   /* margin-right: 5px;
   position: fixed; 
   z-index: 1; 
   top: 0; 
   left: 0; */
-  border-radius: 15px;
-  margin: 15px;
+  /* border-radius: 15px; */
+  /* margin: 15px; */
+  padding: 0 10px;
   gap: 20px;
   text-align: center;
 }
@@ -309,6 +310,9 @@ hr {
     margin: 5px;
     padding: 5px 10px;
   }
+  .blueButtons {
+    margin: 0 5px !important;
+  }
   body {
     flex-direction: column;
   }
@@ -326,8 +330,16 @@ hr {
   .icon {
     margin: 0 5px !important;
   }
+  .sidenav {
+    height: auto;
+  }
 }
-
+@media only screen and (max-width: 600px) {
+  .menuButton,
+  .blueButtons {
+    font-size: 1em;
+  }
+}
 .icon {
   width: 1.4em;
   height: 1.4em;
