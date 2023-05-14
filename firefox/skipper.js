@@ -285,7 +285,7 @@ if (isVideo || isNetflix) {
           slider.id = "videoSpeedSlider";
           slider.type = "range";
           slider.min = "5";
-          slider.max = "15";
+          slider.max = "20";
           slider.value = "10";
           slider.step = "1";
           // slider.setAttribute("list", "markers");
@@ -654,7 +654,7 @@ if (isVideo || isNetflix) {
             slider.id = "videoSpeedSlider";
             slider.type = "range";
             slider.min = "5";
-            slider.max = "15";
+            slider.max = "20";
             slider.value = "10";
             slider.step = "1";
             // slider.setAttribute("list", "markers");
