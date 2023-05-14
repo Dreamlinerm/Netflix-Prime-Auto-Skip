@@ -17,7 +17,7 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
-const version = "1.0.42";
+const version = "1.0.43";
 
 if (isVideo || isNetflix) {
   // global variables in localStorage
@@ -285,7 +285,7 @@ if (isVideo || isNetflix) {
           slider.id = "videoSpeedSlider";
           slider.type = "range";
           slider.min = "5";
-          slider.max = "15";
+          slider.max = "20";
           slider.value = "10";
           slider.step = "1";
           // slider.setAttribute("list", "markers");
@@ -654,7 +654,7 @@ if (isVideo || isNetflix) {
             slider.id = "videoSpeedSlider";
             slider.type = "range";
             slider.min = "5";
-            slider.max = "15";
+            slider.max = "20";
             slider.value = "10";
             slider.step = "1";
             // slider.setAttribute("list", "markers");
