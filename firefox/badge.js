@@ -50,7 +50,7 @@ browser.runtime.onInstalled.addListener((details) => {
   // details.reason === "update" ||
   if (details.reason === "install") {
     browser.tabs.create({
-      url: "popup/settings.html",
+      url: "popup/settings.html#Default",
     });
   }
 });

@@ -106,6 +106,10 @@ function setCheckboxesToSettings() {
   button = document.querySelector("#VideoFullScreen");
   if (button) button.checked = settings?.Video.playOnFullScreen;
 
+  //  -------------      Default        ---------------------------------------
+  button = document.querySelector("#DefaultSkips");
+  if (button) button.checked = settings?.Amazon.filterPaid;
+
   //  -------------      Amazon        ---------------------------------------
   button = document.querySelector("#AmazonSkips");
   if (button) button.checked = settings?.Amazon.skipAd && settings?.Amazon.speedSlider && settings?.Amazon.filterPaid;
@@ -119,8 +123,11 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.blockFreevee;
   button = document.querySelector("#AmazonSpeedSlider");
   if (button) button.checked = settings?.Amazon.speedSlider;
-  button = document.querySelector("#AmazonfilterPaid");
-  if (button) button.checked = settings?.Amazon.filterPaid;
+  button = document.querySelectorAll("#AmazonfilterPaid");
+  for (const b of button) {
+    b.checked = settings?.Amazon.filterPaid;
+  }
+
   //  -------------      Netflix        ---------------------------------------
   button = document.querySelector("#NetflixSkips");
   if (button) button.checked = settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile;
@@ -176,13 +183,14 @@ function openIndividualSettings(setting) {
   document.getElementsByClassName(setting + "UpArrow")[0].style.display = open ? "block" : "none";
 }
 function Menu(setting) {
-  const Pages = ["Video", "Amazon", "Netflix", "Statistics", "Other", "Changelog"];
+  const Pages = ["Video", "Amazon", "Netflix", "Statistics", "Other", "Changelog", "Default"];
+  const noButton = ["Default"];
   for (const page of Pages) {
     document.getElementById(page + "Settings").style.display = "none";
-    document.getElementById("Menu" + page).style.setProperty("background-color", "");
+    if (!noButton.includes(page)) document.getElementById("Menu" + page).style.setProperty("background-color", "");
   }
   document.getElementById(setting + "Settings").style.display = "block";
-  document.getElementById("Menu" + setting).style.setProperty("background-color", "#e60010");
+  if (!noButton.includes(setting)) document.getElementById("Menu" + setting).style.setProperty("background-color", "#e60010");
 }
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
@@ -258,6 +266,13 @@ function listenForClicks() {
     } else if (e.target.id === "VideoFullScreen") {
       settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
       setSettings("playOnFullScreen");
+    }
+
+    // -------------      Default        ---------------------------------------
+    else if (e.target.id === "DefaultSkips") {
+      const DefaultSkips = !settings?.Amazon.filterPaid;
+      settings.Amazon.filterPaid = DefaultSkips;
+      setSettings("All DefaultSkips");
     }
     //  -------------      Amazon        ---------------------------------------
     else if (e.target.id === "AmazonSkips") {

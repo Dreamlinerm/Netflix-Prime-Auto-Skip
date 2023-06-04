@@ -72,7 +72,7 @@
               d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
             />
           </svg>
-          Other
+          Backup/Reset
         </a>
         <a id="MenuStatistics" href="#Statistics" class="menuButton flex">
           <svg id="MenuStatistics" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon"><path id="MenuStatistics" d="M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z" /></svg>
@@ -111,6 +111,25 @@
     </div>
     <div class="content flex flex-col" style="height: 100vh; overflow-y: auto; flex-basis: 80%; min-height: 450px">
       <div class="page">
+        <div id="DefaultSettings" class="hidden">
+          <div class="line flex">
+            <h1>All turned off Features by default</h1>
+            <label class="switch">
+              <input type="checkbox" id="DefaultSkips" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <p class="description">Every feature which is turned off by default either because they are confusing if they were turned on or they are in beta</p>
+          <hr />
+          <div class="line flex">
+            <p>Remove paid content:</p>
+            <label class="switch">
+              <input type="checkbox" id="AmazonfilterPaid" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <p class="description">Removing every paid movie/film category from Amazon prime</p>
+        </div>
         <div class="categoryVideo" id="VideoSettings" style="background-color: unset">
           <div class="flex flex-between" style="padding: 5px 5px">
             <h2>Shared Video features</h2>
@@ -292,21 +311,25 @@
             <p id="AmazonAdTime">0s</p>
           </div>
           <p class="description">Time of skipped FreeVee Ads + Prime Video Self Ads</p>
+          <hr />
           <div class="line flex flex-between">
             <p>Netflix Ad:</p>
             <p id="NetflixAdTime">0s</p>
           </div>
           <p class="description">Time of skipped Netflix Ads</p>
+          <hr />
           <div class="line flex flex-between">
             <p>Intro:</p>
             <p id="IntroTimeSkipped">0s</p>
           </div>
           <p class="description">Time of skipped Intros on Netflix and Amazon</p>
+          <hr />
           <div class="line flex flex-between">
             <p>Recap:</p>
             <p id="RecapTimeSkipped">0s</p>
           </div>
           <p class="description">Time of skipped Recaps on Netflix and Amazon</p>
+          <hr />
           <div class="line flex flex-between" style="padding-left: 0">
             <p>Segments Skipped:</p>
             <p id="SegmentsSkipped">0</p>
