@@ -1,0 +1,50 @@
+<head>
+  <meta charset="utf-8" />
+  <title>Chart.js demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="downloads.js"></script>
+  <script src="users.js"></script>
+</head>
+<div>
+  <!-- https://www.chartjs.org/ -->
+  <canvas id="users"></canvas>
+  <canvas id="downloads"></canvas>
+</div>
+
+<script>
+  const cUsers = document.getElementById("users");
+  const cDownloads = document.getElementById("downloads");
+  new Chart(cUsers, {
+    type: "line",
+    data: {
+      labels: downloads.map((point) => point.date).reverse(),
+      datasets: [
+        {
+          label: "Daily users",
+          data: users.map((point) => point.count).reverse(),
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      pointRadius: 1,
+    },
+  });
+
+  new Chart(cDownloads, {
+    type: "line",
+    data: {
+      labels: downloads.map((point) => point.date).reverse(),
+      datasets: [
+        {
+          label: "Downloads per Day",
+          data: downloads.map((point) => point.count).reverse(),
+          borderWidth: 2,
+        },
+      ],
+    },
+    options: {
+      pointRadius: 3,
+    },
+  });
+</script>
