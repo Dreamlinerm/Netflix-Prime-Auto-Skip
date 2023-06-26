@@ -269,8 +269,8 @@ if (isPrimeVideo || isNetflix || isDisney) {
     }
   }
 
-  const NetflixSkipIntroObserver = new MutationObserver(Netflix_intro);
-  function Netflix_intro(mutations, observer) {
+  const NetflixSkipIntroObserver = new MutationObserver(Netflix_Intro);
+  function Netflix_Intro(mutations, observer) {
     let button = document.querySelector('[data-uia="player-skip-intro"]');
     if (button) {
       let video = document.querySelector("video");
