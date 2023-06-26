@@ -17,14 +17,16 @@ let url = window.location.href;
 let isAmazon = /amazon|primevideo/i.test(hostname);
 let isVideo = /video/i.test(title) || /video/i.test(url);
 let isNetflix = /netflix/i.test(hostname);
+let isDisney = /disneyplus/i.test(hostname);
 const version = "1.0.45";
 
-if (isVideo || isNetflix) {
+if (isVideo || isNetflix || isDisney) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, profile: true },
+      Disney: { skipIntro: true, skipRecap: true, skipCredits: true, speedSlider: true },
       Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null },
@@ -39,7 +41,8 @@ if (isVideo || isNetflix) {
     console.log("version:", version);
     console.log("Settings", settings);
     if (isNetflix) console.log("Page %cNetflix", "color: #e60010;");
-    else console.log("Page %cAmazon", "color: #00aeef;");
+    else if (isVideo) console.log("Page %cAmazon", "color: #00aeef;");
+    else if (isDisney) console.log("Page %cDisney", "color: #0682f0;");
     if (typeof settings !== "object") {
       browser.storage.sync.set(defaultSettings);
     } else {
@@ -51,7 +54,7 @@ if (isVideo || isNetflix) {
         if (settings.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
         if (settings.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
         if (settings.Netflix?.NetflixAds) startNetflixAdTimeout();
-      } else {
+      } else if (isVideo) {
         if (settings.Amazon?.skipIntro) startAmazonSkipIntroObserver();
         if (settings.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
         if (settings.Amazon?.skipAd) startAmazonSkipAdObserver();
@@ -101,7 +104,7 @@ if (isVideo || isNetflix) {
           if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
           if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
           if (oldValue === undefined || newValue.Netflix.NetflixAds !== oldValue.Netflix?.NetflixAds) startNetflixAdTimeout();
-        } else {
+        } else if (isVideo) {
           if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon?.skipIntro) startAmazonSkipIntroObserver();
           if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
           if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon?.skipAd) startAmazonSkipAdObserver();
