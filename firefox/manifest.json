@@ -25,7 +25,8 @@
         "*://*.netflix.com/*",
         "*://*.netflix.ca/*",
         "*://*.netflix.com.au/*",
-        "*://*.disneyplus.com/*"
+        "*://*.disneyplus.com/*",
+        "*://*.hotstar.com/*"
       ],
       "js": ["skipper.js"]
     }
