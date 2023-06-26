@@ -578,16 +578,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
   async function startDisneySkipRecapObserver() {
     if (settings.Disney?.skipRecap === undefined || settings.Disney.skipRecap) {
       log("started observing| Recap");
-      let button = document.querySelector(".skip__button");
-      if (button) {
-        let video = document.querySelectorAll("video");
-        const time = video.currentTime;
-        button.click();
-        log("Recap skipped", button);
-        setTimeout(function () {
-          addRecapTimeSkipped(time, video.currentTime);
-        }, 600);
-      }
+      Disney_Recap();
       DisneySkipRecapObserver.observe(document, config);
     } else {
       log("stopped observing| Recap");
@@ -598,17 +589,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
   async function startDisneySkipCreditsObserver() {
     if (settings.Netflix?.skipCredits === undefined || settings.Netflix.skipCredits) {
       log("started observing| Credits");
-      let button = document.querySelector('[data-gv2elementkey="playNext"]');
-      if (button) {
-        let time = button.textContent.match(/\d+/)?.[0];
-        if (time && lastAdTimeText != time) {
-          button.click();
-          lastAdTimeText = time;
-          log("Credits skipped", button);
-          increaseBadge();
-          resetLastATimeText();
-        }
-      }
+      Disney_Credits();
       DisneySkipCreditsObserver.observe(document, config);
     } else {
       log("stopped observing| Credits");
