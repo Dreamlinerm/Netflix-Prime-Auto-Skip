@@ -156,11 +156,13 @@ function setCheckboxesToSettings() {
 
   //  -------------      Disney        ---------------------------------------
   button = document.querySelector("#DisneySkips");
-  if (button) button.checked = settings?.Disney.skipRecap;
+  if (button) button.checked = settings?.Disney.skipRecap && settings?.Disney.speedSlider;
   button = document.querySelector("#DisneyRecap");
   if (button) button.checked = settings?.Disney.skipRecap;
   button = document.querySelector("#DisneyCredits");
   if (button) button.checked = settings?.Disney.skipCredits;
+  button = document.querySelector("#DisneySpeedSlider");
+  if (button) button.checked = settings?.Disney.speedSlider;
 
   // general video settings
   button = document.querySelector("#playOnFullScreen");
@@ -345,8 +347,9 @@ function listenForClicks() {
     }
     //  -------------      Disney        ---------------------------------------
     else if (e.target.id === "DisneySkips") {
-      const NetflixSkips = !settings?.Disney.skipRecap;
-      settings.Disney.skipRecap = NetflixSkips;
+      const NetflixSkips = !(settings?.Disney.skipRecap && settings?.Disney.speedSlider);
+      settings.Disney.skipRecap;
+      settings.Disney.speedSlider = NetflixSkips;
       setSettings("All DisneySkips");
     } else if (e.target.id === "DisneyRecap") {
       settings.Disney.skipRecap = !settings.Disney.skipRecap;

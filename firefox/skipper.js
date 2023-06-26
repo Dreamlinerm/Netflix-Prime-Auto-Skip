@@ -116,7 +116,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-        } else if (isNetflix) {
+        } else if (isDisney) {
           // if value is changed then check if it is enabled or disabled
           if (oldValue === undefined || newValue.Disney.skipRecap !== oldValue.Disney?.skipRecap) startDisneySkipRecapObserver();
           if (oldValue === undefined || newValue.Disney.skipCredits !== oldValue.Disney?.skipCredits) startDisneySkipCreditsObserver();
