@@ -193,20 +193,6 @@ if (isPrimeVideo || isNetflix || isDisney) {
         // infobar position for the slider to be added
         let position = document.querySelector(".controls__right");
         if (position) {
-          let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-          svg.setAttribute("style", "width:1.2vw;height:1.2vw");
-          svg.setAttribute("viewBox", "0 0 24 24");
-          svg.setAttribute("id", "speedbutton");
-          let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          path.setAttribute(
-            "d",
-            "M17.6427 7.43779C14.5215 4.1874 9.47851 4.1874 6.35734 7.43779C3.21422 10.711 3.21422 16.0341 6.35734 19.3074L4.91474 20.6926C1.02842 16.6454 1.02842 10.0997 4.91474 6.05254C8.823 1.98249 15.177 1.98249 19.0853 6.05254C22.9716 10.0997 22.9716 16.6454 19.0853 20.6926L17.6427 19.3074C20.7858 16.0341 20.7858 10.711 17.6427 7.43779ZM14 14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14C10 12.8954 10.8954 12 12 12C12.1792 12 12.3528 12.0236 12.518 12.0677L15.7929 8.79289L17.2071 10.2071L13.9323 13.482C13.9764 13.6472 14 13.8208 14 14Z"
-          );
-          path.setAttribute("fill", "rgb(221, 221, 221)");
-          svg.setAttribute("fill", "rgb(221, 221, 221)");
-          svg.appendChild(path);
-          position.insertBefore(svg, position.firstChild);
-
           let slider = document.createElement("input");
           slider.id = "videoSpeedSlider";
           slider.type = "range";
@@ -216,16 +202,17 @@ if (isPrimeVideo || isNetflix || isDisney) {
           slider.step = "1";
           // slider.setAttribute("list", "markers");
           slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;";
+          // makes the button clickable
+          // slider.setAttribute("class", "control-icon-btn");
+          slider.setAttribute("style", "height:10px;pointer-events: auto;");
           position.insertBefore(slider, position.firstChild);
-
-          svg.onclick = function () {
-            if (slider.style.display === "block") slider.style.display = "none";
-            else slider.style.display = "block";
-          };
 
           let speed = document.createElement("p");
           speed.id = "videoSpeed";
           speed.textContent = "1.0x";
+          // makes the button clickable
+          // speed.setAttribute("class", "control-icon-btn");
+          speed.setAttribute("style", "height:10px;color:white;pointer-events: auto;");
           position.insertBefore(speed, position.firstChild);
           speed.onclick = function () {
             if (slider.style.display === "block") slider.style.display = "none";
@@ -671,6 +658,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
   async function startDisneySpeedSliderObserver() {
     if (settings.Disney?.speedSlider === undefined || settings.Disney.speedSlider) {
       log("started adding   | SpeedSlider");
+      Disney_SpeedSlider();
       DisneySpeedSliderObserver.observe(document, DisneySpeedSliderConfig);
     } else {
       log("stopped adding   | SpeedSlider");
