@@ -95,13 +95,14 @@ function setCheckboxesToSettings() {
       settings?.Netflix.skipIntro &&
       settings?.Amazon.skipCredits &&
       settings?.Netflix.skipCredits &&
+      settings?.Disney.skipCredits &&
       settings?.Amazon.blockFreevee &&
       settings?.Netflix.NetflixAds &&
       settings?.Video.playOnFullScreen;
   button = document.querySelector("#VideoIntro");
   if (button) button.checked = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro;
   button = document.querySelector("#VideoCredits");
-  if (button) button.checked = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits;
+  if (button) button.checked = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits && settings?.Disney.skipCredits;
   button = document.querySelector("#VideoAds");
   if (button) button.checked = settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds;
   button = document.querySelector("#VideoFullScreen");
@@ -158,6 +159,8 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Disney.skipRecap;
   button = document.querySelector("#DisneyRecap");
   if (button) button.checked = settings?.Disney.skipRecap;
+  button = document.querySelector("#DisneyCredits");
+  if (button) button.checked = settings?.Disney.skipCredits;
 
   // general video settings
   button = document.querySelector("#playOnFullScreen");
@@ -250,17 +253,20 @@ function listenForClicks() {
         settings?.Netflix.skipIntro &&
         settings?.Amazon.skipCredits &&
         settings?.Netflix.skipCredits &&
+        settings?.Disney.skipCredits &&
         settings?.Amazon.blockFreevee &&
         settings?.Netflix.NetflixAds &&
         settings?.Video.playOnFullScreen
       );
-      settings.Amazon.skipIntro = VideoSkips;
-      settings.Netflix.skipIntro = VideoSkips;
-      settings.Amazon.skipCredits = VideoSkips;
-      settings.Netflix.skipCredits = VideoSkips;
-      settings.Amazon.blockFreevee = VideoSkips;
-      settings.Netflix.NetflixAds = VideoSkips;
-      settings.Video.playOnFullScreen = VideoSkips;
+      settings.Amazon.skipIntro =
+        settings.Netflix.skipIntro =
+        settings.Amazon.skipCredits =
+        settings.Netflix.skipCredits =
+        settings.Disney.skipCredits =
+        settings.Amazon.blockFreevee =
+        settings.Netflix.NetflixAds =
+        settings.Video.playOnFullScreen =
+          VideoSkips;
       setSettings("All VideoSkips");
     } else if (e.target.id === "VideoIntro") {
       settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
@@ -345,6 +351,9 @@ function listenForClicks() {
     } else if (e.target.id === "DisneyRecap") {
       settings.Disney.skipRecap = !settings.Disney.skipRecap;
       setSettings("DisneyRecap");
+    } else if (e.target.id === "DisneyCredits") {
+      settings.Disney.skipCredits = !settings.Disney.skipCredits;
+      setSettings("DisneyCredits");
     }
     //  -------------      Video        ---------------------------------------
     else if (e.target.id === "playOnFullScreen") {
