@@ -191,7 +191,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
     if (video) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
-        let position = document.querySelector(".controls__right")?.firstChild;
+        let position = document.querySelector(".controls__right");
         if (position) {
           let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
           svg.setAttribute("style", "width:1.2vw;height:1.2vw");
