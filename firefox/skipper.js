@@ -200,11 +200,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
           slider.max = "20";
           slider.value = "10";
           slider.step = "1";
-          // slider.setAttribute("list", "markers");
-          slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;";
-          // makes the button clickable
-          // slider.setAttribute("class", "control-icon-btn");
-          slider.setAttribute("style", "height:10px;pointer-events: auto;");
+          slider.style = "pointer-events: auto;background: rgb(221, 221, 221);display: none;";
           position.insertBefore(slider, position.firstChild);
 
           let speed = document.createElement("p");
@@ -212,7 +208,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
           speed.textContent = "1.0x";
           // makes the button clickable
           // speed.setAttribute("class", "control-icon-btn");
-          speed.setAttribute("style", "height:10px;color:white;pointer-events: auto;");
+          speed.style = "height:10px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
           position.insertBefore(speed, position.firstChild);
           speed.onclick = function () {
             if (slider.style.display === "block") slider.style.display = "none";
