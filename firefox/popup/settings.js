@@ -153,6 +153,12 @@ function setCheckboxesToSettings() {
     button.style.display = "block";
   }
 
+  //  -------------      Disney        ---------------------------------------
+  button = document.querySelector("#DisneySkips");
+  if (button) button.checked = settings?.Disney.skipRecap;
+  button = document.querySelector("#DisneyRecap");
+  if (button) button.checked = settings?.Disney.skipRecap;
+
   // general video settings
   button = document.querySelector("#playOnFullScreen");
   if (button) button.checked = settings?.Video.playOnFullScreen;
@@ -184,7 +190,7 @@ function openIndividualSettings(setting) {
   document.getElementsByClassName(setting + "UpArrow")[0].style.display = open ? "block" : "none";
 }
 function Menu(setting) {
-  const Pages = ["Video", "Amazon", "Netflix", "Statistics", "Other", "Changelog", "Default"];
+  const Pages = ["Video", "Amazon", "Netflix", "Disney", "Statistics", "Other", "Changelog", "Default"];
   const noButton = ["Default"];
   for (const page of Pages) {
     document.getElementById(page + "Settings").style.display = "none";
@@ -216,6 +222,8 @@ function listenForClicks() {
       Menu("Amazon");
     } else if (e.target.id === "MenuNetflix") {
       Menu("Netflix");
+    } else if (e.target.id === "MenuDisney") {
+      Menu("Disney");
     } else if (e.target.id === "MenuStatistics") {
       Menu("Statistics");
     } else if (e.target.id === "MenuOther") {
@@ -230,6 +238,8 @@ function listenForClicks() {
       openIndividualSettings("Amazon");
     } else if (e.target.id === "openNetflixSettings") {
       openIndividualSettings("Netflix");
+    } else if (e.target.id === "openDisneySettings") {
+      openIndividualSettings("Disney");
     } else if (e.target.id === "openStatistics") {
       openIndividualSettings("Statistics");
     }
@@ -326,6 +336,15 @@ function listenForClicks() {
     } else if (e.target.id === "NetflixProfile") {
       settings.Netflix.profile = !settings.Netflix.profile;
       setSettings("profile");
+    }
+    //  -------------      Disney        ---------------------------------------
+    else if (e.target.id === "DisneySkips") {
+      const NetflixSkips = !settings?.Disney.skipRecap;
+      settings.Disney.skipRecap = NetflixSkips;
+      setSettings("All DisneySkips");
+    } else if (e.target.id === "DisneyRecap") {
+      settings.Disney.skipRecap = !settings.Disney.skipRecap;
+      setSettings("DisneyRecap");
     }
     //  -------------      Video        ---------------------------------------
     else if (e.target.id === "playOnFullScreen") {
