@@ -341,13 +341,15 @@ if (isPrimeVideo || isNetflix || isDisney) {
       }
     }, 100);
   }
-  // only add speed slider on lowest subscription tier
+
   const NetflixSpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
   const NetflixSpeedSliderObserver = new MutationObserver(Netflix_SpeedSlider);
   function Netflix_SpeedSlider(mutations, observer) {
     let video = document.querySelector("video");
     let alreadySlider = document.querySelector("#videoSpeedSlider");
-    if (video && !document.querySelector('[data-uia="control-speed"]')) {
+    // only add speed slider on lowest subscription tier
+    // && !document.querySelector('[data-uia="control-speed"]')
+    if (video) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
         let p = document.querySelector('[data-uia="controls-standard"]')?.firstChild.children;
