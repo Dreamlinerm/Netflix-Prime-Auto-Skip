@@ -205,7 +205,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
 
           let speed = document.createElement("p");
           speed.id = "videoSpeed";
-          speed.textContent = "1.0x";
+          speed.textContent = "1x";
           // makes the button clickable
           // speed.setAttribute("class", "control-icon-btn");
           speed.style = "height:10px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
@@ -362,20 +362,6 @@ if (isPrimeVideo || isNetflix || isDisney) {
         // infobar position for the slider to be added
         let position = document.querySelector("[class*=infobar-container]")?.firstChild?.children[2];
         if (position) {
-          let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-          svg.setAttribute("style", "width:1.2vw;height:1.2vw");
-          svg.setAttribute("viewBox", "0 0 24 24");
-          svg.setAttribute("id", "speedbutton");
-          let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-          path.setAttribute(
-            "d",
-            "M17.6427 7.43779C14.5215 4.1874 9.47851 4.1874 6.35734 7.43779C3.21422 10.711 3.21422 16.0341 6.35734 19.3074L4.91474 20.6926C1.02842 16.6454 1.02842 10.0997 4.91474 6.05254C8.823 1.98249 15.177 1.98249 19.0853 6.05254C22.9716 10.0997 22.9716 16.6454 19.0853 20.6926L17.6427 19.3074C20.7858 16.0341 20.7858 10.711 17.6427 7.43779ZM14 14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14C10 12.8954 10.8954 12 12 12C12.1792 12 12.3528 12.0236 12.518 12.0677L15.7929 8.79289L17.2071 10.2071L13.9323 13.482C13.9764 13.6472 14 13.8208 14 14Z"
-          );
-          path.setAttribute("fill", "rgb(221, 221, 221)");
-          svg.setAttribute("fill", "rgb(221, 221, 221)");
-          svg.appendChild(path);
-          position.insertBefore(svg, position.firstChild);
-
           let slider = document.createElement("input");
           slider.id = "videoSpeedSlider";
           slider.type = "range";
@@ -387,14 +373,9 @@ if (isPrimeVideo || isNetflix || isDisney) {
           slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;";
           position.insertBefore(slider, position.firstChild);
 
-          svg.onclick = function () {
-            if (slider.style.display === "block") slider.style.display = "none";
-            else slider.style.display = "block";
-          };
-
           let speed = document.createElement("p");
           speed.id = "videoSpeed";
-          speed.textContent = "1.0x";
+          speed.textContent = "1x";
           position.insertBefore(speed, position.firstChild);
           speed.onclick = function () {
             if (slider.style.display === "block") slider.style.display = "none";
@@ -653,23 +634,22 @@ if (isPrimeVideo || isNetflix || isDisney) {
   }
   async function startDisneySpeedSliderObserver() {
     if (settings.Disney?.speedSlider === undefined || settings.Disney.speedSlider) {
-      log("started adding   | SpeedSlider");
       Disney_SpeedSlider();
+      log("started adding   | SpeedSlider");
       DisneySpeedSliderObserver.observe(document, DisneySpeedSliderConfig);
     } else {
       log("stopped adding   | SpeedSlider");
       DisneySpeedSliderObserver.disconnect();
       document.querySelector("#videoSpeed")?.remove();
       document.querySelector("#videoSpeedSlider")?.remove();
-      document.querySelector("#speedbutton")?.remove();
     }
   }
 
   // Netflix
   async function startNetflixProfileObserver() {
     if (settings.Netflix?.profile === undefined || settings.Netflix.profile) {
-      log("started observing| Profile");
       AutoPickProfile();
+      log("started observing| Profile");
       NetflixProfileObserver.observe(document, config);
     } else {
       log("stopped observing| Profile");
@@ -679,17 +659,8 @@ if (isPrimeVideo || isNetflix || isDisney) {
 
   async function startNetflixSkipIntroObserver() {
     if (settings.Netflix?.skipIntro === undefined || settings.Netflix.skipIntro) {
+      Netflix_Intro();
       log("started observing| Intro");
-      let button = document.querySelector('[data-uia="player-skip-intro"]');
-      if (button) {
-        let video = document.querySelectorAll("video")[0];
-        const time = video.currentTime;
-        button.click();
-        log("intro skipped", button);
-        setTimeout(function () {
-          addIntroTimeSkipped(time, video.currentTime);
-        }, 600);
-      }
       NetflixSkipIntroObserver.observe(document, NetflixConfig);
     } else {
       log("stopped observing| Intro");
@@ -698,17 +669,8 @@ if (isPrimeVideo || isNetflix || isDisney) {
   }
   async function startNetflixSkipRecapObserver() {
     if (settings.Netflix?.skipRecap === undefined || settings.Netflix.skipRecap) {
+      Netflix_Recap();
       log("started observing| Recap");
-      let button = document.querySelector('[data-uia="player-skip-recap"]') || document.querySelector('[data-uia="player-skip-preplay"]');
-      if (button) {
-        let video = document.querySelectorAll("video")[0];
-        const time = video.currentTime;
-        button.click();
-        log("Recap skipped", button);
-        setTimeout(function () {
-          addRecapTimeSkipped(time, video.currentTime);
-        }, 600);
-      }
       NetflixSkipRecapObserver.observe(document, NetflixConfig);
     } else {
       log("stopped observing| Recap");
@@ -717,12 +679,8 @@ if (isPrimeVideo || isNetflix || isDisney) {
   }
   async function startNetflixSkipCreditsObserver() {
     if (settings.Netflix?.skipCredits === undefined || settings.Netflix.skipCredits) {
+      Netflix_Credits();
       log("started observing| Credits");
-      let button = document.querySelector('[data-uia="next-episode-seamless-button"]');
-      if (button) {
-        button.click();
-        log("Credits skipped", button);
-      }
       NetflixSkipCreditsObserver.observe(document, NetflixConfig);
     } else {
       log("stopped observing| Credits");
@@ -731,12 +689,8 @@ if (isPrimeVideo || isNetflix || isDisney) {
   }
   async function startNetflixSkipBlockedObserver() {
     if (settings.Netflix?.skipBlocked === undefined || settings.Netflix.skipBlocked) {
+      Netflix_Blocked();
       log("started observing| Blocked");
-      let button = document.querySelector('[data-uia="interrupt-autoplay-continue"]');
-      if (button) {
-        button.click();
-        log("Blocked skipped", button);
-      }
       NetflixSkipBlockedObserver.observe(document, NetflixConfig);
     } else {
       log("stopped observing| Blocked");
@@ -749,82 +703,23 @@ if (isPrimeVideo || isNetflix || isDisney) {
       Netflix_SkipAdInterval();
     }
   }
-
+  // -------------  Amazon -------------
   async function startAmazonSpeedSliderObserver() {
     if (settings.Amazon?.speedSlider === undefined || settings.Amazon.speedSlider) {
-      let video = document.querySelector(AmazonVideoClass);
-      let alreadySlider = document.querySelector("#videoSpeedSlider");
-
-      // remove bad background document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
-      let b = document.querySelector(".fkpovp9.f8hspre");
-      if (b && b.style.background != "rgba(0, 0, 0, 0.25)") {
-        b.style.background = "rgba(0, 0, 0, 0.25)";
-      }
-
-      if (video) {
-        if (!alreadySlider) {
-          // infobar position for the slider to be added
-          let position = document.querySelector("[class*=infobar-container]")?.firstChild?.children[2];
-          if (position) {
-            let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            svg.setAttribute("style", "width:1.2vw;height:1.2vw");
-            svg.setAttribute("viewBox", "0 0 24 24");
-            svg.setAttribute("id", "speedbutton");
-            let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-            path.setAttribute(
-              "d",
-              "M17.6427 7.43779C14.5215 4.1874 9.47851 4.1874 6.35734 7.43779C3.21422 10.711 3.21422 16.0341 6.35734 19.3074L4.91474 20.6926C1.02842 16.6454 1.02842 10.0997 4.91474 6.05254C8.823 1.98249 15.177 1.98249 19.0853 6.05254C22.9716 10.0997 22.9716 16.6454 19.0853 20.6926L17.6427 19.3074C20.7858 16.0341 20.7858 10.711 17.6427 7.43779ZM14 14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14C10 12.8954 10.8954 12 12 12C12.1792 12 12.3528 12.0236 12.518 12.0677L15.7929 8.79289L17.2071 10.2071L13.9323 13.482C13.9764 13.6472 14 13.8208 14 14Z"
-            );
-            path.setAttribute("fill", "rgb(221, 221, 221)");
-            svg.setAttribute("fill", "rgb(221, 221, 221)");
-            svg.appendChild(path);
-            position.insertBefore(svg, position.firstChild);
-
-            let slider = document.createElement("input");
-            slider.id = "videoSpeedSlider";
-            slider.type = "range";
-            slider.min = "5";
-            slider.max = "20";
-            slider.value = "10";
-            slider.step = "1";
-            // slider.setAttribute("list", "markers");
-            slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;";
-            position.insertBefore(slider, position.firstChild);
-
-            svg.onclick = function () {
-              if (slider.style.display === "block") slider.style.display = "none";
-              else slider.style.display = "block";
-            };
-
-            let speed = document.createElement("p");
-            speed.id = "videoSpeed";
-            speed.textContent = "1.0x";
-            position.insertBefore(speed, position.firstChild);
-            speed.onclick = function () {
-              if (slider.style.display === "block") slider.style.display = "none";
-              else slider.style.display = "block";
-            };
-            slider.oninput = function () {
-              speed.textContent = this.value / 10 + "x";
-              video.playbackRate = this.value / 10;
-            };
-          }
-        }
-      }
       log("started adding   | SpeedSlider");
+      Amazon_SpeedSlider();
       AmazonSpeedSliderObserver.observe(document, AmazonSpeedSliderConfig);
     } else {
       log("stopped adding   | SpeedSlider");
       AmazonSpeedSliderObserver.disconnect();
       document.querySelector("#videoSpeed")?.remove();
       document.querySelector("#videoSpeedSlider")?.remove();
-      document.querySelector("#speedbutton")?.remove();
     }
   }
   async function startAmazonFilterPaidObserver() {
     if (settings.Amazon?.filterPaid === undefined || settings.Amazon.filterPaid) {
       log("started filtering| Paid films");
-
+      Amazon_FilterPaid();
       AmazonFilterPaidObserver.observe(document, AmazonFilterPaidConfig);
     } else {
       log("stopped filtering| Paid films");
@@ -835,17 +730,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
   async function startAmazonSkipIntroObserver() {
     if (settings.Amazon?.skipIntro === undefined || settings.Amazon.skipIntro) {
       log("started observing| Intro");
-      let button = document.querySelector("[class*=skipelement]");
-      if (button) {
-        let video = document.querySelector(AmazonVideoClass);
-        const time = video.currentTime;
-        button.click();
-        log("Intro skipped", button);
-        //delay where the video is loaded
-        setTimeout(function () {
-          addIntroTimeSkipped(time, video.currentTime);
-        }, 50);
-      }
+      Amazon_Intro();
       AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
     } else {
       log("stopped observing| Intro");
@@ -873,8 +758,8 @@ if (isPrimeVideo || isNetflix || isDisney) {
   }
   async function startAmazonSkipAdObserver() {
     if (settings.Amazon?.skipAd === undefined || settings.Amazon.skipAd) {
-      log("started observing| Self Ad");
       Amazon_AdTimeout();
+      log("started observing| Self Ad");
     }
   }
   async function startAmazonBlockFreeveeObserver() {
