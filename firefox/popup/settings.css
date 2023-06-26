@@ -127,15 +127,24 @@ p {
 .categoryVideo {
   background-color: #636363;
   border-radius: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .categoryPrime {
-  margin-top: 5px;
   background-color: #00aeef;
-  border-radius: 10px;
 }
 .categoryNetflix {
-  margin-top: 5px;
   background-color: #e60010;
+}
+.categoryDisney {
+  background-color: #000c7d;
+}
+.categoryPrime,
+.categoryNetflix,
+.categoryDisney {
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
   border-radius: 10px;
 }
 

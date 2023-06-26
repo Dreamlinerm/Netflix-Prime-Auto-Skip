@@ -28,6 +28,7 @@ const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, profile: true },
+    Disney: { skipRecap: true, skipCredits: true, speedSlider: true },
     Video: { playOnFullScreen: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null },
