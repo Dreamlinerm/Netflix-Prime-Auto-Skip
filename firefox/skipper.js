@@ -69,7 +69,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
       } else if (isDisney) {
         // if (settings.Disney?.skipIntro) startDisneySkipIntroObserver();
         if (settings.Disney?.skipRecap) startDisneySkipRecapObserver();
-        // if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
+        if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
         // if (settings.Disney?.speedSlider) startDisneySpeedSliderObserver();
       }
       if (settings.Video.playOnFullScreen) startPlayOnFullScreen(isNetflix);
@@ -147,6 +147,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
   // default Options for the observer (which mutations to observe)
   const config = { attributes: true, childList: true, subtree: true };
 
+  // Disney Observers
   const DisneySkipRecapObserver = new MutationObserver(Disney_Recap);
   function Disney_Recap(mutations, observer) {
     let button = document.querySelector(".skip__button");
@@ -158,6 +159,22 @@ if (isPrimeVideo || isNetflix || isDisney) {
       setTimeout(function () {
         addRecapTimeSkipped(time, video.currentTime);
       }, 600);
+    }
+  }
+
+  const DisneySkipCreditsObserver = new MutationObserver(Disney_Credits);
+  function Disney_Credits(mutations, observer) {
+    let button = document.querySelector('[data-gv2elementkey="playNext"]');
+    if (button) {
+      // only skip if the next video is the next episode of a series (there is a timer)
+      let time = button.textContent.match(/\d+/)?.[0];
+      if (time && lastAdTimeText != time) {
+        button.click();
+        lastAdTimeText = time;
+        log("Credits skipped", button);
+        increaseBadge();
+        resetLastATimeText();
+      }
     }
   }
 
@@ -575,6 +592,27 @@ if (isPrimeVideo || isNetflix || isDisney) {
     } else {
       log("stopped observing| Recap");
       DisneySkipRecapObserver.disconnect();
+    }
+  }
+
+  async function startDisneySkipCreditsObserver() {
+    if (settings.Netflix?.skipCredits === undefined || settings.Netflix.skipCredits) {
+      log("started observing| Credits");
+      let button = document.querySelector('[data-gv2elementkey="playNext"]');
+      if (button) {
+        let time = button.textContent.match(/\d+/)?.[0];
+        if (time && lastAdTimeText != time) {
+          button.click();
+          lastAdTimeText = time;
+          log("Credits skipped", button);
+          increaseBadge();
+          resetLastATimeText();
+        }
+      }
+      DisneySkipCreditsObserver.observe(document, config);
+    } else {
+      log("stopped observing| Credits");
+      DisneySkipCreditsObserver.disconnect();
     }
   }
 
