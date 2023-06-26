@@ -25,7 +25,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
   const defaultSettings = {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
-      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, profile: true },
+      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true },
       Disney: { skipRecap: true, skipCredits: true, speedSlider: true },
       Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
@@ -54,6 +54,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
         if (settings.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
         if (settings.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
         if (settings.Netflix?.NetflixAds) startNetflixAdTimeout();
+        if (settings.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
       } else if (isPrimeVideo) {
         if (settings.Amazon?.skipIntro) startAmazonSkipIntroObserver();
         if (settings.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -67,7 +68,6 @@ if (isPrimeVideo || isNetflix || isDisney) {
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
       } else if (isDisney) {
-        // if (settings.Disney?.skipIntro) startDisneySkipIntroObserver();
         if (settings.Disney?.skipRecap) startDisneySkipRecapObserver();
         if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
         if (settings.Disney?.speedSlider) startDisneySpeedSliderObserver();
@@ -109,6 +109,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
           if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
           if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
           if (oldValue === undefined || newValue.Netflix.NetflixAds !== oldValue.Netflix?.NetflixAds) startNetflixAdTimeout();
+          if (oldValue === undefined || newValue.Netflix.speedSlider !== oldValue.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
         } else if (isPrimeVideo) {
           if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon?.skipIntro) startAmazonSkipIntroObserver();
           if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -200,7 +201,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
           slider.max = "20";
           slider.value = "10";
           slider.step = "1";
-          slider.style = "pointer-events: auto;background: rgb(221, 221, 221);display: none;";
+          slider.style = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;";
           position.insertBefore(slider, position.firstChild);
 
           let speed = document.createElement("p");
@@ -340,6 +341,58 @@ if (isPrimeVideo || isNetflix || isDisney) {
       }
     }, 100);
   }
+  // only add speed slider on lowest subscription tier
+  const NetflixSpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
+  const NetflixSpeedSliderObserver = new MutationObserver(Netflix_SpeedSlider);
+  function Netflix_SpeedSlider(mutations, observer) {
+    let video = document.querySelector("video");
+    let alreadySlider = document.querySelector("#videoSpeedSlider");
+    if (video && !document.querySelector('[data-uia="control-speed"]')) {
+      if (!alreadySlider) {
+        // infobar position for the slider to be added
+        let p = document.querySelector('[data-uia="controls-standard"]')?.firstChild.children;
+        let position;
+        if (p) position = p[p.length - 2].firstChild.lastChild;
+        if (position) {
+          let slider = document.createElement("input");
+          slider.id = "videoSpeedSlider";
+          slider.type = "range";
+          slider.min = "5";
+          slider.max = "20";
+          slider.value = "10";
+          slider.step = "1";
+          slider.style = "position:relative;bottom:20px;display: none;width:200px;";
+          position.insertBefore(slider, position.firstChild);
+
+          let speed = document.createElement("p");
+          speed.id = "videoSpeed";
+          speed.textContent = "1x";
+          // makes the button clickable
+          // speed.setAttribute("class", "control-icon-btn");
+          speed.style = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
+          position.insertBefore(speed, position.firstChild);
+          speed.onclick = function () {
+            if (slider.style.display === "block") slider.style.display = "none";
+            else slider.style.display = "block";
+          };
+          slider.oninput = function () {
+            speed.textContent = this.value / 10 + "x";
+            video.playbackRate = this.value / 10;
+          };
+        }
+      } else {
+        // need to resync the slider with the video sometimes
+        speed = document.querySelector("#videoSpeed");
+        if (video.playbackRate != alreadySlider.value / 10) {
+          video.playbackRate = alreadySlider.value / 10;
+        }
+        alreadySlider.oninput = function () {
+          speed.textContent = this.value / 10 + "x";
+          video.playbackRate = this.value / 10;
+        };
+      }
+    }
+  }
 
   // Amazon Observers
   const AmazonVideoClass = "#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video";
@@ -370,7 +423,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
           slider.value = "10";
           slider.step = "1";
           // slider.setAttribute("list", "markers");
-          slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;";
+          slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;width:200px;";
           position.insertBefore(slider, position.firstChild);
 
           let speed = document.createElement("p");
@@ -701,6 +754,18 @@ if (isPrimeVideo || isNetflix || isDisney) {
     if (settings.Netflix?.NetflixAds === undefined || settings.Netflix.NetflixAds) {
       log("started observing| Ad");
       Netflix_SkipAdInterval();
+    }
+  }
+  async function startNetflixSpeedSliderObserver() {
+    if (settings.Netflix?.speedSlider === undefined || settings.Netflix.speedSlider) {
+      Netflix_SpeedSlider();
+      log("started adding   | SpeedSlider");
+      NetflixSpeedSliderObserver.observe(document, NetflixSpeedSliderConfig);
+    } else {
+      log("stopped adding   | SpeedSlider");
+      NetflixSpeedSliderObserver.disconnect();
+      document.querySelector("#videoSpeed")?.remove();
+      document.querySelector("#videoSpeedSlider")?.remove();
     }
   }
   // -------------  Amazon -------------
