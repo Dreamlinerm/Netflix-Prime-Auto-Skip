@@ -497,8 +497,8 @@ if (isPrimeVideo || isNetflix || isDisney) {
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
   function Amazon_Intro(mutations, observer) {
     // skips intro and recap
-    // intro sword art online season 1 episode 2
     // recap on lucifer season 3 episode 3
+    // intro lucifer season 3 episode 4
     let button = document.querySelector("[class*=skipelement]");
     if (button) {
       let video = document.querySelector(AmazonVideoClass);
@@ -568,6 +568,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
   }
 
   function skipAd(video) {
+    // Series grimm
     let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
     if (adTimeText) {
       const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);

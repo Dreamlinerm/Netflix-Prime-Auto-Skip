@@ -3,7 +3,7 @@ You can configure which Feature to enable in the Settings Page.
 
 ✨ Features
 
-On Netflix and Prime Video it automatically:
+On Netflix, Prime Video and Disney+ it automatically:
 
 <ul>
 <li>Skips Intros</li>
@@ -47,7 +47,7 @@ You can configure which Feature to enable in the Settings Page.
 
 ✨ Features
 
-On Netflix and Prime Video it automatically:
+On Netflix, Prime Video and Disney+ it automatically:
 
 • Skips Intros
 • Skips Credits                   : automatically goes to the next episode
