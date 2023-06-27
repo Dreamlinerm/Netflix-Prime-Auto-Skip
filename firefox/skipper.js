@@ -18,6 +18,7 @@ let url = window.location.href;
 let isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
 let isNetflix = /netflix/i.test(hostname);
 let isDisney = /disneyplus/i.test(hostname);
+let isHotstar = /hotstar/i.test(hostname);
 const version = "1.0.46";
 
 if (isPrimeVideo || isNetflix || isDisney) {
@@ -194,7 +195,11 @@ if (isPrimeVideo || isNetflix || isDisney) {
     if (video) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
-        let position = document.querySelector(".controls__right");
+
+        let position;
+        if (isDisney) position = document.querySelector(".controls__right");
+        else position = document.querySelector(".icon-player-landscape").parentElement.parentElement.parentElement.parentElement;
+
         if (position) {
           let slider = document.createElement("input");
           slider.id = "videoSpeedSlider";
