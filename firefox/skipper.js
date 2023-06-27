@@ -18,7 +18,7 @@ let url = window.location.href;
 let isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
 let isNetflix = /netflix/i.test(hostname);
 let isDisney = /disneyplus/i.test(hostname);
-const version = "1.0.45";
+const version = "1.0.46";
 
 if (isPrimeVideo || isNetflix || isDisney) {
   // global variables in localStorage

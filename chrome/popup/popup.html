@@ -29,7 +29,7 @@
           <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" />
           <div class="flex-center flex-col">
             <h2 class="title">Auto-skip</h2>
-            <p style="color: grey; font-size: 1em">v.1.0.45</p>
+            <p style="color: grey; font-size: 1em">v.1.0.46</p>
           </div>
         </div>
         <a
@@ -54,26 +54,27 @@
         </a>
       </div>
       <div class="categoryVideo">
-        <div class="flex flex-between" style="padding: 5px 5px">
-          <h2>Shared Video features</h2>
-          <label class="switch">
-            <input type="checkbox" id="VideoSkips" />
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <div class="line flex-end flex-align" id="openVideoSettings">
-          <p id="openVideoSettings">Individual settings</p>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoDownArrow">
-            <path d="M0 0 40 0 20 20 0 0" fill="white" id="openVideoSettings" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoUpArrow hidden">
-            <path d="M20 0 40 20 0 20 20 0" fill="white" id="openVideoSettings" />
-          </svg>
+        <div id="openVideoSettings" class="flex flex-between" style="padding: 5px 5px">
+          <h2 id="openVideoSettings">Shared Video features</h2>
+          <div class="flex">
+            <div class="line flex-align">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoDownArrow">
+                <path d="M0 0 40 0 20 20 0 0" fill="white" id="openVideoSettings" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoUpArrow hidden">
+                <path d="M20 0 40 20 0 20 20 0" fill="white" id="openVideoSettings" />
+              </svg>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="VideoSkips" />
+              <span class="slider round"></span>
+            </label>
+          </div>
         </div>
         <!-- show on click -->
         <div id="VideoSettings" style="display: none">
           <div class="line flex">
-            <p>Skip Intro:</p>
+            <p>Skip Intro & Recap:</p>
             <label class="switch">
               <input type="checkbox" id="VideoIntro" />
               <span class="slider round"></span>
@@ -94,6 +95,13 @@
             </label>
           </div>
           <div class="line flex">
+            <p>Add Speed Slider:</p>
+            <label class="switch">
+              <input type="checkbox" id="VideoSpeedSlider" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
             <p>Play on Fullscreen:</p>
             <label class="switch">
               <input type="checkbox" id="VideoFullScreen" />
@@ -103,35 +111,30 @@
         </div>
       </div>
       <div class="categoryPrime">
-        <div class="flex flex-between" style="padding: 5px 5px">
-          <h2>Prime Video specific</h2>
-          <label class="switch">
-            <input type="checkbox" id="AmazonSkips" />
-            <span class="slider round"></span>
-          </label>
+        <div id="openAmazonSettings" class="flex flex-between" style="padding: 5px 5px">
+          <h2 id="openAmazonSettings">Prime Video specific</h2>
+          <div class="flex">
+            <div class="line flex-align" id="openAmazonSettings">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAmazonSettings" class="AmazonDownArrow">
+                <path d="M0 0 40 0 20 20 0 0" fill="white" id="openAmazonSettings" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAmazonSettings" class="AmazonUpArrow hidden">
+                <path d="M20 0 40 20 0 20 20 0" fill="white" id="openAmazonSettings" />
+              </svg>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="AmazonSkips" />
+              <span class="slider round"></span>
+            </label>
+          </div>
         </div>
-        <div class="line flex-end flex-align" id="openAmazonSettings">
-          <p id="openAmazonSettings">Individual settings</p>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAmazonSettings" class="AmazonDownArrow">
-            <path d="M0 0 40 0 20 20 0 0" fill="white" id="openAmazonSettings" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAmazonSettings" class="AmazonUpArrow hidden">
-            <path d="M20 0 40 20 0 20 20 0" fill="white" id="openAmazonSettings" />
-          </svg>
-        </div>
+
         <!-- show on click -->
         <div id="AmazonSettings" style="display: none">
           <div class="line flex">
             <p>Skip Self Ads:</p>
             <label class="switch">
               <input type="checkbox" id="AmazonAds" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <div class="line flex">
-            <p>Add Speed Slider:</p>
-            <label class="switch">
-              <input type="checkbox" id="AmazonSpeedSlider" />
               <span class="slider round"></span>
             </label>
           </div>
@@ -146,22 +149,24 @@
       </div>
 
       <div class="categoryNetflix">
-        <div class="flex flex-between" style="padding: 5px 5px">
-          <h2>Netflix specific</h2>
-          <label class="switch">
-            <input type="checkbox" id="NetflixSkips" />
-            <span class="slider round"></span>
-          </label>
+        <div id="openNetflixSettings" class="flex flex-between" style="padding: 5px 5px">
+          <h2 id="openNetflixSettings">Netflix specific</h2>
+          <div class="flex">
+            <div class="line flex-align" id="openNetflixSettings">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openNetflixSettings" class="NetflixDownArrow">
+                <path d="M0 0 40 0 20 20 0 0" fill="white" id="openNetflixSettings" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openNetflixSettings" class="NetflixUpArrow hidden">
+                <path d="M20 0 40 20 0 20 20 0" fill="white" id="openNetflixSettings" />
+              </svg>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="NetflixSkips" />
+              <span class="slider round"></span>
+            </label>
+          </div>
         </div>
-        <div class="line flex-end flex-align" id="openNetflixSettings">
-          <p id="openNetflixSettings">Individual settings</p>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openNetflixSettings" class="NetflixDownArrow">
-            <path d="M0 0 40 0 20 20 0 0" fill="white" id="openNetflixSettings" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openNetflixSettings" class="NetflixUpArrow hidden">
-            <path d="M20 0 40 20 0 20 20 0" fill="white" id="openNetflixSettings" />
-          </svg>
-        </div>
+
         <!-- show on click -->
         <div id="NetflixSettings" style="display: none">
           <div class="line flex">
@@ -192,14 +197,37 @@
           </div>
         </div>
       </div>
-      <div class="line flex-end flex-align" id="openStatistics">
-        <p id="openStatistics">Statistics</p>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openStatistics" class="StatisticsDownArrow">
-          <path d="M0 0 40 0 20 20 0 0" fill="white" id="openStatistics" />
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openStatistics" class="StatisticsUpArrow hidden">
-          <path d="M20 0 40 20 0 20 20 0" fill="white" id="openStatistics" />
-        </svg>
+      <div class="categoryDisney">
+        <div class="flex flex-between" id="openDisneySettings" style="padding: 5px 5px">
+          <h2 id="openDisneySettings">Disney+ specific</h2>
+          <div class="flex">
+            <!-- <div class="line flex-align" id="openDisneySettings">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openDisneySettings" class="DisneyDownArrow">
+                  <path d="M0 0 40 0 20 20 0 0" fill="white" id="openDisneySettings" />
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openDisneySettings" class="DisneyUpArrow hidden">
+                  <path d="M20 0 40 20 0 20 20 0" fill="white" id="openDisneySettings" />
+                </svg>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="DisneySkips" />
+                <span class="slider round"></span>
+              </label> -->
+          </div>
+        </div>
+        <!-- show on click -->
+        <div id="DisneySettings" style="display: none"></div>
+      </div>
+      <div class="flex flex-between flex-align" id="openStatistics">
+        <h2 id="openStatistics" style="margin-left: 10px">Statistics</h2>
+        <div class="flex" style="margin-right: 75px">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openStatistics" class="StatisticsDownArrow">
+            <path d="M0 0 40 0 20 20 0 0" fill="white" id="openStatistics" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openStatistics" class="StatisticsUpArrow hidden">
+            <path d="M20 0 40 20 0 20 20 0" fill="white" id="openStatistics" />
+          </svg>
+        </div>
       </div>
       <!-- show on click -->
       <div id="StatisticsSettings" style="display: none">
