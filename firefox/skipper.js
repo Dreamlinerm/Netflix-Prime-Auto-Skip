@@ -20,8 +20,7 @@ let isNetflix = /netflix/i.test(hostname);
 let isDisney = /disneyplus/i.test(hostname);
 let isHotstar = /hotstar/i.test(hostname);
 const version = "1.0.47";
-
-if (isPrimeVideo || isNetflix || isDisney) {
+if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
@@ -44,6 +43,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
     if (isNetflix) console.log("Page %cNetflix", "color: #e60010;");
     else if (isPrimeVideo) console.log("Page %cAmazon", "color: #00aeef;");
     else if (isDisney) console.log("Page %cDisney", "color: #0682f0;");
+    else if (isHotstar) console.log("Page %cHotstar", "color: #0682f0;");
     if (typeof settings !== "object") {
       browser.storage.sync.set(defaultSettings);
     } else {
@@ -68,7 +68,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
         }
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-      } else if (isDisney) {
+      } else if (isDisney || isHotstar) {
         if (settings.Disney?.skipIntro) startDisneySkipIntroObserver();
         if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
         if (settings.Disney?.speedSlider) startDisneySpeedSliderObserver();
@@ -118,7 +118,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-        } else if (isDisney) {
+        } else if (isDisney || isHotstar) {
           // if value is changed then check if it is enabled or disabled
           if (oldValue === undefined || newValue.Disney.skipIntro !== oldValue.Disney?.skipIntro) startDisneySkipIntroObserver();
           if (oldValue === undefined || newValue.Disney.skipCredits !== oldValue.Disney?.skipCredits) startDisneySkipCreditsObserver();
@@ -669,7 +669,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
       log("started observing| PlayOnFullScreen");
       function OnFullScreenChange() {
         let video;
-        if (isNetflix || isDisney) video = document.querySelector("video");
+        if (isNetflix || isDisney || isHotstar) video = document.querySelector("video");
         else video = document.querySelector(AmazonVideoClass);
         if (window.fullScreen && video) {
           video.play();
@@ -686,11 +686,11 @@ if (isPrimeVideo || isNetflix || isDisney) {
   // Disney
   async function startDisneySkipIntroObserver() {
     if (settings.Disney?.skipIntro === undefined || settings.Disney.skipIntro) {
-      log("started observing| Recap");
+      log("started observing| Intro");
       Disney_Intro();
       DisneySkipIntroObserver.observe(document, config);
     } else {
-      log("stopped observing| Recap");
+      log("stopped observing| Intro");
       DisneySkipIntroObserver.disconnect();
     }
   }
