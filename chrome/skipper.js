@@ -34,6 +34,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   };
   let settings = defaultSettings.settings;
   let lastAdTimeText = "";
+  let videoSpeed;
+  async function setVideoSpeed(speed) {
+    videoSpeed = speed;
+  }
   resetBadge();
   chrome.storage.sync.get("settings", function (result) {
     settings = result.settings;
@@ -206,23 +210,27 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         else position = document.querySelector(".icon-player-landscape").parentElement.parentElement.parentElement.parentElement;
 
         if (position) {
+          videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
+
           let slider = document.createElement("input");
           slider.id = "videoSpeedSlider";
           slider.type = "range";
           slider.min = "5";
           slider.max = "20";
-          slider.value = "10";
+          slider.value = videoSpeed * 10;
           slider.step = "1";
           slider.style = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;";
           position.insertBefore(slider, position.firstChild);
 
           let speed = document.createElement("p");
           speed.id = "videoSpeed";
-          speed.textContent = "1x";
+          speed.textContent = videoSpeed ? videoSpeed + "x" : "1x";
           // makes the button clickable
           // speed.setAttribute("class", "control-icon-btn");
           speed.style = "height:10px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
           position.insertBefore(speed, position.firstChild);
+
+          if (videoSpeed) video.playbackRate = videoSpeed;
           speed.onclick = function () {
             if (slider.style.display === "block") slider.style.display = "none";
             else slider.style.display = "block";
@@ -230,6 +238,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           slider.oninput = function () {
             speed.textContent = this.value / 10 + "x";
             video.playbackRate = this.value / 10;
+            setVideoSpeed(this.value / 10);
           };
         }
       } else {
@@ -241,6 +250,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         alreadySlider.oninput = function () {
           speed.textContent = this.value / 10 + "x";
           video.playbackRate = this.value / 10;
+          setVideoSpeed(this.value / 10);
         };
       }
     }
@@ -364,48 +374,45 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     // only add speed slider on lowest subscription tier
     // && !document.querySelector('[data-uia="control-speed"]')
     if (video) {
-      if (!alreadySlider) {
-        // infobar position for the slider to be added
-        let p = document.querySelector('[data-uia="controls-standard"]')?.firstChild.children;
-        let position;
-        if (p) position = p[p.length - 2].firstChild.lastChild;
-        if (position) {
-          let slider = document.createElement("input");
-          slider.id = "videoSpeedSlider";
-          slider.type = "range";
-          slider.min = "5";
-          slider.max = "20";
-          slider.value = "10";
-          slider.step = "1";
-          slider.style = "position:relative;bottom:20px;display: none;width:200px;";
-          position.insertBefore(slider, position.firstChild);
+      let p = document.querySelector('[data-uia="controls-standard"]')?.firstChild.children;
+      if (p) {
+        if (!alreadySlider) {
+          // infobar position for the slider to be added
+          let position;
+          if (p) position = p[p.length - 2].firstChild.lastChild;
+          if (position) {
+            videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
+            let slider = document.createElement("input");
+            slider.id = "videoSpeedSlider";
+            slider.type = "range";
+            slider.min = "5";
+            slider.max = "20";
+            slider.value = videoSpeed * 10;
+            slider.step = "1";
+            slider.style = "position:relative;bottom:20px;display: none;width:200px;";
+            position.insertBefore(slider, position.firstChild);
 
-          let speed = document.createElement("p");
-          speed.id = "videoSpeed";
-          speed.textContent = "1x";
-          // makes the button clickable
-          // speed.setAttribute("class", "control-icon-btn");
-          speed.style = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
-          position.insertBefore(speed, position.firstChild);
-          speed.onclick = function () {
-            if (slider.style.display === "block") slider.style.display = "none";
-            else slider.style.display = "block";
-          };
-          slider.oninput = function () {
-            speed.textContent = this.value / 10 + "x";
-            video.playbackRate = this.value / 10;
-          };
+            let speed = document.createElement("p");
+            speed.id = "videoSpeed";
+            speed.textContent = videoSpeed ? videoSpeed + "x" : "1x";
+            // makes the button clickable
+            // speed.setAttribute("class", "control-icon-btn");
+            speed.style = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
+            position.insertBefore(speed, position.firstChild);
+
+            if (videoSpeed) video.playbackRate = videoSpeed;
+            speed.onclick = function () {
+              if (slider.style.display === "block") slider.style.display = "none";
+              else slider.style.display = "block";
+            };
+            slider.oninput = function () {
+              speed.textContent = this.value / 10 + "x";
+              video.playbackRate = this.value / 10;
+              setVideoSpeed(this.value / 10);
+              console.log("videoSpeed1", videoSpeed);
+            };
+          }
         }
-      } else {
-        // need to resync the slider with the video sometimes
-        speed = document.querySelector("#videoSpeed");
-        if (video.playbackRate != alreadySlider.value / 10) {
-          video.playbackRate = alreadySlider.value / 10;
-        }
-        alreadySlider.oninput = function () {
-          speed.textContent = this.value / 10 + "x";
-          video.playbackRate = this.value / 10;
-        };
       }
     }
   }
