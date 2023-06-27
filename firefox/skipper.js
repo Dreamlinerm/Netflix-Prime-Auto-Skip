@@ -18,9 +18,9 @@ let url = window.location.href;
 let isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
 let isNetflix = /netflix/i.test(hostname);
 let isDisney = /disneyplus/i.test(hostname);
-const version = "1.0.46";
-
-if (isPrimeVideo || isNetflix || isDisney) {
+let isHotstar = /hotstar/i.test(hostname);
+const version = "1.0.47";
+if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
@@ -34,6 +34,10 @@ if (isPrimeVideo || isNetflix || isDisney) {
   };
   let settings = defaultSettings.settings;
   let lastAdTimeText = "";
+  let videoSpeed;
+  async function setVideoSpeed(speed) {
+    videoSpeed = speed;
+  }
   resetBadge();
   browser.storage.sync.get("settings", function (result) {
     settings = result.settings;
@@ -43,6 +47,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
     if (isNetflix) console.log("Page %cNetflix", "color: #e60010;");
     else if (isPrimeVideo) console.log("Page %cAmazon", "color: #00aeef;");
     else if (isDisney) console.log("Page %cDisney", "color: #0682f0;");
+    else if (isHotstar) console.log("Page %cHotstar", "color: #0682f0;");
     if (typeof settings !== "object") {
       browser.storage.sync.set(defaultSettings);
     } else {
@@ -67,7 +72,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
         }
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-      } else if (isDisney) {
+      } else if (isDisney || isHotstar) {
         if (settings.Disney?.skipIntro) startDisneySkipIntroObserver();
         if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
         if (settings.Disney?.speedSlider) startDisneySpeedSliderObserver();
@@ -117,7 +122,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-        } else if (isDisney) {
+        } else if (isDisney || isHotstar) {
           // if value is changed then check if it is enabled or disabled
           if (oldValue === undefined || newValue.Disney.skipIntro !== oldValue.Disney?.skipIntro) startDisneySkipIntroObserver();
           if (oldValue === undefined || newValue.Disney.skipCredits !== oldValue.Disney?.skipCredits) startDisneySkipCreditsObserver();
@@ -158,7 +163,9 @@ if (isPrimeVideo || isNetflix || isDisney) {
   function Disney_Intro(mutations, observer) {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
-    let button = document.querySelector(".skip__button");
+    let button;
+    if (isDisney) button = document.querySelector(".skip__button");
+    else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null).iterateNext().parentElement;
     if (button) {
       let video = document.querySelector("video");
       const time = video.currentTime;
@@ -172,11 +179,14 @@ if (isPrimeVideo || isNetflix || isDisney) {
 
   const DisneySkipCreditsObserver = new MutationObserver(Disney_Credits);
   function Disney_Credits(mutations, observer) {
-    let button = document.querySelector('[data-gv2elementkey="playNext"]');
+    let button;
+    if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
+    else button = document.evaluate("//span[contains(., 'Next')]", document, null, XPathResult.ANY_TYPE, null).iterateNext().parentElement;
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
-      let time = button.textContent.match(/\d+/)?.[0];
-      if (time && lastAdTimeText != time) {
+      let time;
+      if (isDisney) time = button.textContent.match(/\d+/)?.[0];
+      if (isHotstar || (time && lastAdTimeText != time)) {
         button.click();
         lastAdTimeText = time;
         log("Credits skipped", button);
@@ -194,25 +204,33 @@ if (isPrimeVideo || isNetflix || isDisney) {
     if (video) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
-        let position = document.querySelector(".controls__right");
+
+        let position;
+        if (isDisney) position = document.querySelector(".controls__right");
+        else position = document.querySelector(".icon-player-landscape").parentElement.parentElement.parentElement.parentElement;
+
         if (position) {
+          videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
+
           let slider = document.createElement("input");
           slider.id = "videoSpeedSlider";
           slider.type = "range";
           slider.min = "5";
           slider.max = "20";
-          slider.value = "10";
+          slider.value = videoSpeed * 10;
           slider.step = "1";
           slider.style = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;";
           position.insertBefore(slider, position.firstChild);
 
           let speed = document.createElement("p");
           speed.id = "videoSpeed";
-          speed.textContent = "1x";
+          speed.textContent = videoSpeed ? videoSpeed + "x" : "1x";
           // makes the button clickable
           // speed.setAttribute("class", "control-icon-btn");
           speed.style = "height:10px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
           position.insertBefore(speed, position.firstChild);
+
+          if (videoSpeed) video.playbackRate = videoSpeed;
           speed.onclick = function () {
             if (slider.style.display === "block") slider.style.display = "none";
             else slider.style.display = "block";
@@ -220,6 +238,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
           slider.oninput = function () {
             speed.textContent = this.value / 10 + "x";
             video.playbackRate = this.value / 10;
+            setVideoSpeed(this.value / 10);
           };
         }
       } else {
@@ -231,6 +250,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
         alreadySlider.oninput = function () {
           speed.textContent = this.value / 10 + "x";
           video.playbackRate = this.value / 10;
+          setVideoSpeed(this.value / 10);
         };
       }
     }
@@ -354,48 +374,45 @@ if (isPrimeVideo || isNetflix || isDisney) {
     // only add speed slider on lowest subscription tier
     // && !document.querySelector('[data-uia="control-speed"]')
     if (video) {
-      if (!alreadySlider) {
-        // infobar position for the slider to be added
-        let p = document.querySelector('[data-uia="controls-standard"]')?.firstChild.children;
-        let position;
-        if (p) position = p[p.length - 2].firstChild.lastChild;
-        if (position) {
-          let slider = document.createElement("input");
-          slider.id = "videoSpeedSlider";
-          slider.type = "range";
-          slider.min = "5";
-          slider.max = "20";
-          slider.value = "10";
-          slider.step = "1";
-          slider.style = "position:relative;bottom:20px;display: none;width:200px;";
-          position.insertBefore(slider, position.firstChild);
+      let p = document.querySelector('[data-uia="controls-standard"]')?.firstChild.children;
+      if (p) {
+        if (!alreadySlider) {
+          // infobar position for the slider to be added
+          let position;
+          if (p) position = p[p.length - 2].firstChild.lastChild;
+          if (position) {
+            videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
+            let slider = document.createElement("input");
+            slider.id = "videoSpeedSlider";
+            slider.type = "range";
+            slider.min = "5";
+            slider.max = "20";
+            slider.value = videoSpeed * 10;
+            slider.step = "1";
+            slider.style = "position:relative;bottom:20px;display: none;width:200px;";
+            position.insertBefore(slider, position.firstChild);
 
-          let speed = document.createElement("p");
-          speed.id = "videoSpeed";
-          speed.textContent = "1x";
-          // makes the button clickable
-          // speed.setAttribute("class", "control-icon-btn");
-          speed.style = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
-          position.insertBefore(speed, position.firstChild);
-          speed.onclick = function () {
-            if (slider.style.display === "block") slider.style.display = "none";
-            else slider.style.display = "block";
-          };
-          slider.oninput = function () {
-            speed.textContent = this.value / 10 + "x";
-            video.playbackRate = this.value / 10;
-          };
+            let speed = document.createElement("p");
+            speed.id = "videoSpeed";
+            speed.textContent = videoSpeed ? videoSpeed + "x" : "1x";
+            // makes the button clickable
+            // speed.setAttribute("class", "control-icon-btn");
+            speed.style = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
+            position.insertBefore(speed, position.firstChild);
+
+            if (videoSpeed) video.playbackRate = videoSpeed;
+            speed.onclick = function () {
+              if (slider.style.display === "block") slider.style.display = "none";
+              else slider.style.display = "block";
+            };
+            slider.oninput = function () {
+              speed.textContent = this.value / 10 + "x";
+              video.playbackRate = this.value / 10;
+              setVideoSpeed(this.value / 10);
+              console.log("videoSpeed1", videoSpeed);
+            };
+          }
         }
-      } else {
-        // need to resync the slider with the video sometimes
-        speed = document.querySelector("#videoSpeed");
-        if (video.playbackRate != alreadySlider.value / 10) {
-          video.playbackRate = alreadySlider.value / 10;
-        }
-        alreadySlider.oninput = function () {
-          speed.textContent = this.value / 10 + "x";
-          video.playbackRate = this.value / 10;
-        };
       }
     }
   }
@@ -659,7 +676,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
       log("started observing| PlayOnFullScreen");
       function OnFullScreenChange() {
         let video;
-        if (isNetflix || isDisney) video = document.querySelector("video");
+        if (isNetflix || isDisney || isHotstar) video = document.querySelector("video");
         else video = document.querySelector(AmazonVideoClass);
         if (window.fullScreen && video) {
           video.play();
@@ -676,11 +693,11 @@ if (isPrimeVideo || isNetflix || isDisney) {
   // Disney
   async function startDisneySkipIntroObserver() {
     if (settings.Disney?.skipIntro === undefined || settings.Disney.skipIntro) {
-      log("started observing| Recap");
+      log("started observing| Intro");
       Disney_Intro();
       DisneySkipIntroObserver.observe(document, config);
     } else {
-      log("stopped observing| Recap");
+      log("stopped observing| Intro");
       DisneySkipIntroObserver.disconnect();
     }
   }
