@@ -173,11 +173,14 @@ if (isPrimeVideo || isNetflix || isDisney) {
 
   const DisneySkipCreditsObserver = new MutationObserver(Disney_Credits);
   function Disney_Credits(mutations, observer) {
-    let button = document.querySelector('[data-gv2elementkey="playNext"]');
+    let button;
+    if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
+    else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null).iterateNext().parentElement;
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
-      let time = button.textContent.match(/\d+/)?.[0];
-      if (time && lastAdTimeText != time) {
+      let time;
+      if (isDisney) time = button.textContent.match(/\d+/)?.[0];
+      if (isHotstar || (time && lastAdTimeText != time)) {
         button.click();
         lastAdTimeText = time;
         log("Credits skipped", button);
