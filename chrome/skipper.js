@@ -18,7 +18,8 @@ let url = window.location.href;
 let isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
 let isNetflix = /netflix/i.test(hostname);
 let isDisney = /disneyplus/i.test(hostname);
-const version = "1.0.46";
+let isHotstar = /hotstar/i.test(hostname);
+const version = "1.0.47";
 
 if (isPrimeVideo || isNetflix || isDisney) {
   // global variables in localStorage
@@ -158,7 +159,9 @@ if (isPrimeVideo || isNetflix || isDisney) {
   function Disney_Intro(mutations, observer) {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
-    let button = document.querySelector(".skip__button");
+    let button;
+    if (isDisney) button = document.querySelector(".skip__button");
+    else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null).iterateNext().parentElement;
     if (button) {
       let video = document.querySelector("video");
       const time = video.currentTime;
@@ -172,11 +175,14 @@ if (isPrimeVideo || isNetflix || isDisney) {
 
   const DisneySkipCreditsObserver = new MutationObserver(Disney_Credits);
   function Disney_Credits(mutations, observer) {
-    let button = document.querySelector('[data-gv2elementkey="playNext"]');
+    let button;
+    if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
+    else button = document.evaluate("//span[contains(., 'Next')]", document, null, XPathResult.ANY_TYPE, null).iterateNext().parentElement;
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
-      let time = button.textContent.match(/\d+/)?.[0];
-      if (time && lastAdTimeText != time) {
+      let time;
+      if (isDisney) time = button.textContent.match(/\d+/)?.[0];
+      if (isHotstar || (time && lastAdTimeText != time)) {
         button.click();
         lastAdTimeText = time;
         log("Credits skipped", button);
@@ -194,7 +200,11 @@ if (isPrimeVideo || isNetflix || isDisney) {
     if (video) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
-        let position = document.querySelector(".controls__right");
+
+        let position;
+        if (isDisney) position = document.querySelector(".controls__right");
+        else position = document.querySelector(".icon-player-landscape").parentElement.parentElement.parentElement.parentElement;
+
         if (position) {
           let slider = document.createElement("input");
           slider.id = "videoSpeedSlider";
@@ -497,8 +507,8 @@ if (isPrimeVideo || isNetflix || isDisney) {
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
   function Amazon_Intro(mutations, observer) {
     // skips intro and recap
-    // intro sword art online season 1 episode 2
     // recap on lucifer season 3 episode 3
+    // intro lucifer season 3 episode 4
     let button = document.querySelector("[class*=skipelement]");
     if (button) {
       let video = document.querySelector(AmazonVideoClass);
@@ -568,6 +578,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
   }
 
   function skipAd(video) {
+    // Series grimm
     let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
     if (adTimeText) {
       const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
