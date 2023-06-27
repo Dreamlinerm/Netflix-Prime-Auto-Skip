@@ -28,7 +28,7 @@ const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true },
-    Disney: { skipRecap: true, skipCredits: true, speedSlider: true },
+    Disney: { skipIntro: true, skipCredits: true, speedSlider: true },
     Video: { playOnFullScreen: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null },
@@ -94,6 +94,7 @@ function setCheckboxesToSettings() {
       // intro
       settings?.Amazon.skipIntro &&
       settings?.Netflix.skipIntro &&
+      settings?.Disney.skipIntro &&
       // Credits
       settings?.Amazon.skipCredits &&
       settings?.Netflix.skipCredits &&
@@ -108,7 +109,7 @@ function setCheckboxesToSettings() {
       // playOnFullScreen
       settings?.Video.playOnFullScreen;
   button = document.querySelector("#VideoIntro");
-  if (button) button.checked = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro;
+  if (button) button.checked = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro && settings?.Disney.skipIntro;
   button = document.querySelector("#VideoCredits");
   if (button) button.checked = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits && settings?.Disney.skipCredits;
   button = document.querySelector("#VideoAds");
@@ -168,9 +169,9 @@ function setCheckboxesToSettings() {
 
   //  -------------      Disney        ---------------------------------------
   button = document.querySelector("#DisneySkips");
-  if (button) button.checked = settings?.Disney.skipRecap;
-  button = document.querySelector("#DisneyRecap");
-  if (button) button.checked = settings?.Disney.skipRecap;
+  if (button) button.checked = settings?.Disney.skipIntro;
+  button = document.querySelector("#DisneyIntro");
+  if (button) button.checked = settings?.Disney.skipIntro;
   button = document.querySelector("#DisneyCredits");
   if (button) button.checked = settings?.Disney.skipCredits;
   button = document.querySelector("#DisneySpeedSlider");
@@ -265,6 +266,7 @@ function listenForClicks() {
       const VideoSkips = !(
         settings?.Amazon.skipIntro &&
         settings?.Netflix.skipIntro &&
+        settings?.Disney.skipIntro &&
         // Credits
         settings?.Amazon.skipCredits &&
         settings?.Netflix.skipCredits &&
@@ -281,6 +283,7 @@ function listenForClicks() {
       );
       settings.Amazon.skipIntro =
         settings.Netflix.skipIntro =
+        settings.Disney.skipIntro =
         // Credits
         settings.Amazon.skipCredits =
         settings.Netflix.skipCredits =
@@ -299,6 +302,7 @@ function listenForClicks() {
     } else if (e.target.id === "VideoIntro") {
       settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
       settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
+      settings.Disney.skipIntro = !settings.Disney.skipIntro;
       setSettings("VideoIntro");
     } else if (e.target.id === "VideoCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
@@ -379,12 +383,12 @@ function listenForClicks() {
     }
     //  -------------      Disney        ---------------------------------------
     else if (e.target.id === "DisneySkips") {
-      const NetflixSkips = !settings?.Disney.skipRecap;
-      settings.Disney.skipRecap = NetflixSkips;
+      const DisneySkips = !settings?.Disney.skipIntro;
+      settings.Disney.skipIntro = DisneySkips;
       setSettings("All DisneySkips");
-    } else if (e.target.id === "DisneyRecap") {
-      settings.Disney.skipRecap = !settings.Disney.skipRecap;
-      setSettings("DisneyRecap");
+    } else if (e.target.id === "DisneyIntro") {
+      settings.Disney.skipIntro = !settings.Disney.skipIntro;
+      setSettings("DisneyIntro");
     } else if (e.target.id === "DisneyCredits") {
       settings.Disney.skipCredits = !settings.Disney.skipCredits;
       setSettings("DisneyCredits");

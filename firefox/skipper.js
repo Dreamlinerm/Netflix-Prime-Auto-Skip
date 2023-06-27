@@ -26,7 +26,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true },
-      Disney: { skipRecap: true, skipCredits: true, speedSlider: true },
+      Disney: { skipIntro: true, skipCredits: true, speedSlider: true },
       Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null },
@@ -68,7 +68,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
       } else if (isDisney) {
-        if (settings.Disney?.skipRecap) startDisneySkipRecapObserver();
+        if (settings.Disney?.skipIntro) startDisneySkipIntroObserver();
         if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
         if (settings.Disney?.speedSlider) startDisneySpeedSliderObserver();
       }
@@ -119,7 +119,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
         } else if (isDisney) {
           // if value is changed then check if it is enabled or disabled
-          if (oldValue === undefined || newValue.Disney.skipRecap !== oldValue.Disney?.skipRecap) startDisneySkipRecapObserver();
+          if (oldValue === undefined || newValue.Disney.skipIntro !== oldValue.Disney?.skipIntro) startDisneySkipIntroObserver();
           if (oldValue === undefined || newValue.Disney.skipCredits !== oldValue.Disney?.skipCredits) startDisneySkipCreditsObserver();
           if (oldValue === undefined || newValue.Disney.speedSlider !== oldValue.Disney?.speedSlider) startDisneySpeedSliderObserver();
         }
@@ -154,8 +154,10 @@ if (isPrimeVideo || isNetflix || isDisney) {
   const config = { attributes: true, childList: true, subtree: true };
 
   // Disney Observers
-  const DisneySkipRecapObserver = new MutationObserver(Disney_Recap);
-  function Disney_Recap(mutations, observer) {
+  const DisneySkipIntroObserver = new MutationObserver(Disney_Intro);
+  function Disney_Intro(mutations, observer) {
+    // intro star wars andor Season 1 episode 2
+    // Recap Criminal Minds Season 1 Episode 2
     let button = document.querySelector(".skip__button");
     if (button) {
       let video = document.querySelector("video");
@@ -272,6 +274,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
 
   const NetflixSkipIntroObserver = new MutationObserver(Netflix_Intro);
   function Netflix_Intro(mutations, observer) {
+    // brooklyn nine nine season 1 episode 4
     let button = document.querySelector('[data-uia="player-skip-intro"]');
     if (button) {
       let video = document.querySelector("video");
@@ -286,6 +289,7 @@ if (isPrimeVideo || isNetflix || isDisney) {
 
   const NetflixSkipRecapObserver = new MutationObserver(Netflix_Recap);
   function Netflix_Recap(mutations, observer) {
+    // Outer Banks season 2 episode 1
     let button = document.querySelector('[data-uia="player-skip-recap"]') || document.querySelector('[data-uia="player-skip-preplay"]');
     if (button) {
       let video = document.querySelector("video");
@@ -492,6 +496,9 @@ if (isPrimeVideo || isNetflix || isDisney) {
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
   function Amazon_Intro(mutations, observer) {
+    // skips intro and recap
+    // intro sword art online season 1 episode 2
+    // recap on lucifer season 3 episode 3
     let button = document.querySelector("[class*=skipelement]");
     if (button) {
       let video = document.querySelector(AmazonVideoClass);
@@ -666,14 +673,14 @@ if (isPrimeVideo || isNetflix || isDisney) {
     }
   }
   // Disney
-  async function startDisneySkipRecapObserver() {
-    if (settings.Disney?.skipRecap === undefined || settings.Disney.skipRecap) {
+  async function startDisneySkipIntroObserver() {
+    if (settings.Disney?.skipIntro === undefined || settings.Disney.skipIntro) {
       log("started observing| Recap");
-      Disney_Recap();
-      DisneySkipRecapObserver.observe(document, config);
+      Disney_Intro();
+      DisneySkipIntroObserver.observe(document, config);
     } else {
       log("stopped observing| Recap");
-      DisneySkipRecapObserver.disconnect();
+      DisneySkipIntroObserver.disconnect();
     }
   }
 
