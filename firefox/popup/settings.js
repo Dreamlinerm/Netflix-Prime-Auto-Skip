@@ -19,6 +19,28 @@
 //   // Statistics();
 //   document.querySelector("#Export").style.display = "block";
 // }
+
+/**
+ * Localize by replacing __MSG_***__ meta tags
+ * @returns {void}
+ */
+function localizeHtmlPage() {
+  // https://stackoverflow.com/questions/25467009/internationalization-of-html-pages-for-my-google-chrome-extension
+  let objects = document.getElementsByTagName("html");
+  for (obj of objects) {
+    let valStrH = obj.innerHTML.toString();
+    let valNewH = valStrH.replace(/__MSG_(\w+)__/g, function (match, v1) {
+      return v1 ? browser.i18n.getMessage(v1) : "";
+    });
+
+    if (valNewH != valStrH) {
+      obj.innerHTML = valNewH;
+    }
+  }
+}
+
+localizeHtmlPage();
+
 // remove everything before # in window.location
 let url = window.location.href;
 if (url.includes("#")) Menu(url.split("#")[1]);

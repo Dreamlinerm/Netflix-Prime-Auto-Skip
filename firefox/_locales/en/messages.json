@@ -1,0 +1,125 @@
+{
+  "extensionName": {
+    "message": "Netflix/Prime Auto-Skip",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video and Disney+.",
+    "description": "Description of the extension"
+  },
+
+  "settingsTitle": {
+    "message": "Settings - skipper",
+    "description": "Title of the Settings Tab"
+  },
+  "pageTitle": {
+    "message": "Auto-skip",
+    "description": "Title of the Settings Page"
+  },
+  "rateNow": {
+    "message": "Rate now!"
+  },
+  "sharedSettings": {
+    "message": "Shared Settings"
+  },
+  "backup": {
+    "message": "Backup/Reset"
+  },
+  "statistics": {
+    "message": "Statistics"
+  },
+  "changelog": {
+    "message": "Changelog"
+  },
+  "donate": {
+    "message": "Donate"
+  },
+
+  "defaultPageTitle": {
+    "message": "All turned off Features by default"
+  },
+  "defaultPageDescription": {
+    "message": "Every feature which is turned off by default either because they are confusing if they were turned on or they are in beta"
+  },
+
+  "SharedPageTitle": {
+    "message": "Shared Video features"
+  },
+  "SharedPageDescription": {
+    "message": "These options will only enable/disable the settings for both Prime Video and Netflix. If you want to only disable it specifically for one you have to go to its Individual settings."
+  },
+  "IntroSwitch": {
+    "message": "Skip Intro & Recap:"
+  },
+  "SharedIntroDescription": {
+    "message": "Skipping the intros and recaps of any series. Except Netflix since there Recaps cannot be watched again."
+  },
+  "CreditsSwitch": {
+    "message": "Skip Credits:"
+  },
+  "CreditsSwitchDescription": {
+    "message": "Skipping to the next episode of every series as fast as possible"
+  },
+  "AdsSwitch": {
+    "message": "Skip Ads:"
+  },
+  "AdsSwitchDescription": {
+    "message": "Skipping freevee ads for amazon and all of the ads in the basic Netflix tier"
+  },
+  "SliderSwitch": {
+    "message": "Add Speed Slider:",
+    "description": "Add a speed slider feature switch"
+  },
+  "SliderSwitchDescription": {
+    "message": "Adding a speed adjustment slider to every video"
+  },
+  "FullscreenSwitch": {
+    "message": "Play on Fullscreen:"
+  },
+  "FullscreenSwitchDescription": {
+    "message": "If a video is put on fullscreen, the video will play automatically"
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+
+  "AmazonPaidContentSwitch": {
+    "message": "Remove paid content:",
+    "description": "Remove paid content feature switch"
+  },
+  "AmazonPaidContentDescription": {
+    "message": "Removing every paid movie/film category from Amazon prime"
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+
+  "example": {
+    "message": "You clicked $URL$.",
+    "description": "Tells the user which link they clicked.",
+    "placeholders": {
+      "url": {
+        "content": "$1",
+        "example": "https://developer.mozilla.org"
+      }
+    }
+  }
+}
