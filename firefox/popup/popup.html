@@ -28,12 +28,12 @@
         <div class="flex-center flex-row">
           <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" />
           <div class="flex-center flex-col">
-            <h2 class="title">__MSG_pageTitle__</h2>
+            <h2 class="title"><i18n>pageTitle</i18n></h2>
             <p style="color: grey; font-size: 1em">v.1.0.48</p>
           </div>
         </div>
         <a target="_blank" class="flex-center flex-col" style="text-align: center; text-decoration: none" href="https://addons.mozilla.org/de/firefox/addon/netflix-prime-auto-skip/">
-          <p style="font-size: 1em">__MSG_rateNow__</p>
+          <p style="font-size: 1em"><i18n>rateNow</i18n></p>
           <img src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010" />
         </a>
         <a href="settings.html" target="_blank">
@@ -50,7 +50,7 @@
       </div>
       <div class="categoryVideo">
         <div id="openVideoSettings" class="flex flex-between" style="padding: 5px 5px">
-          <h2 id="openVideoSettings">__MSG_SharedPageTitle__</h2>
+          <h2 id="openVideoSettings" i18n>SharedPageTitle</h2>
           <div class="flex">
             <div class="line flex-align">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openVideoSettings" class="VideoDownArrow">
@@ -69,35 +69,35 @@
         <!-- show on click -->
         <div id="VideoSettings" style="display: none">
           <div class="line flex">
-            <p>__MSG_IntroSwitch__</p>
+            <p><i18n>IntroSwitch</i18n></p>
             <label class="switch">
               <input type="checkbox" id="VideoIntro" />
               <span class="slider round"></span>
             </label>
           </div>
           <div class="line flex">
-            <p>__MSG_CreditsSwitch__</p>
+            <p><i18n>CreditsSwitch</i18n></p>
             <label class="switch">
               <input type="checkbox" id="VideoCredits" />
               <span class="slider round"></span>
             </label>
           </div>
           <div class="line flex">
-            <p>__MSG_AdsSwitch__</p>
+            <p><i18n>AdsSwitch</i18n></p>
             <label class="switch">
               <input type="checkbox" id="VideoAds" />
               <span class="slider round"></span>
             </label>
           </div>
           <div class="line flex">
-            <p>__MSG_SliderSwitch__</p>
+            <p><i18n>SliderSwitch</i18n></p>
             <label class="switch">
               <input type="checkbox" id="VideoSpeedSlider" />
               <span class="slider round"></span>
             </label>
           </div>
           <div class="line flex">
-            <p>__MSG_FullscreenSwitch__</p>
+            <p><i18n>FullscreenSwitch</i18n></p>
             <label class="switch">
               <input type="checkbox" id="VideoFullScreen" />
               <span class="slider round"></span>
@@ -107,7 +107,7 @@
       </div>
       <div class="categoryPrime">
         <div id="openAmazonSettings" class="flex flex-between" style="padding: 5px 5px">
-          <h2 id="openAmazonSettings">__MSG_PageSpecificTitle;Prime Video__</h2>
+          <h2 id="openAmazonSettings" i18n>PageSpecificTitle;Prime Video</h2>
           <div class="flex">
             <div class="line flex-align" id="openAmazonSettings">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openAmazonSettings" class="AmazonDownArrow">
@@ -127,14 +127,14 @@
         <!-- show on click -->
         <div id="AmazonSettings" style="display: none">
           <div class="line flex">
-            <p>__MSG_SelfAdsSwitch__</p>
+            <p><i18n>SelfAdsSwitch</i18n></p>
             <label class="switch">
               <input type="checkbox" id="AmazonAds" />
               <span class="slider round"></span>
             </label>
           </div>
           <div class="line flex">
-            <p>__MSG_PaidContentSwitch__</p>
+            <p><i18n>PaidContentSwitch</i18n></p>
             <label class="switch">
               <input type="checkbox" id="AmazonfilterPaid" />
               <span class="slider round"></span>
@@ -145,7 +145,7 @@
 
       <div class="categoryNetflix">
         <div id="openNetflixSettings" class="flex flex-between" style="padding: 5px 5px">
-          <h2 id="openNetflixSettings">__MSG_PageSpecificTitle;Netflix__</h2>
+          <h2 id="openNetflixSettings" i18n>PageSpecificTitle;Netflix</h2>
           <div class="flex">
             <div class="line flex-align" id="openNetflixSettings">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openNetflixSettings" class="NetflixDownArrow">
@@ -165,28 +165,28 @@
         <!-- show on click -->
         <div id="NetflixSettings" style="display: none">
           <div class="line flex">
-            <p>__MSG_RecapSwitch__</p>
+            <p><i18n>RecapSwitch</i18n></p>
             <label class="switch">
               <input type="checkbox" id="NetflixRecap" />
               <span class="slider round"></span>
             </label>
           </div>
           <div class="line flex">
-            <p>__MSG_InactivitySwitch__</p>
+            <p><i18n>InactivitySwitch</i18n></p>
             <label class="switch">
               <input type="checkbox" id="NetflixBlocked" />
               <span class="slider round"></span>
             </label>
           </div>
           <div class="line flex">
-            <p>__MSG_ProfileSwitch__</p>
+            <p><i18n>ProfileSwitch</i18n></p>
             <label class="switch">
               <input type="checkbox" id="NetflixProfile" />
               <span class="slider round"></span>
             </label>
           </div>
           <div class="line flex">
-            <p>__MSG_User__</p>
+            <p><i18n>User</i18n></p>
             <p id="profileName" style="text-transform: capitalize"></p>
             <img id="profilePicture" class="hidden" style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px" />
           </div>
@@ -194,7 +194,7 @@
       </div>
       <div class="categoryDisney">
         <div class="flex flex-between" id="openDisneySettings" style="padding: 5px 5px">
-          <h2 id="openDisneySettings">__MSG_PageSpecificTitle;Disney+__</h2>
+          <h2 id="openDisneySettings" i18n>PageSpecificTitle;Disney+</h2>
           <div class="flex">
             <!-- <div class="line flex-align" id="openDisneySettings">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openDisneySettings" class="DisneyDownArrow">
@@ -214,7 +214,7 @@
         <div id="DisneySettings" style="display: none"></div>
       </div>
       <div class="flex flex-between flex-align" id="openStatistics">
-        <h2 id="openStatistics" style="margin-left: 10px">__MSG_StatisticPageTitle__</h2>
+        <h2 id="openStatistics" style="margin-left: 10px"><i18n>StatisticPageTitle</i18n></h2>
         <div class="flex" style="margin-right: 75px">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openStatistics" class="StatisticsDownArrow">
             <path d="M0 0 40 0 20 20 0 0" fill="white" id="openStatistics" />
@@ -226,25 +226,25 @@
       </div>
       <!-- show on click -->
       <div id="StatisticsSettings" style="display: none">
-        <h2>__MSG_SkippedTime__</h2>
+        <h2><i18n>SkippedTime</i18n></h2>
         <div class="line flex flex-between">
-          <p>__MSG_StatisticAd;Amazon__</p>
+          <p><i18n>StatisticAd;Amazon</i18n></p>
           <p id="AmazonAdTime">0s</p>
         </div>
         <div class="line flex flex-between">
-          <p>__MSG_StatisticAd;Netflix__</p>
+          <p><i18n>StatisticAd;Netflix</i18n></p>
           <p id="NetflixAdTime">0s</p>
         </div>
         <div class="line flex flex-between">
-          <p>__MSG_StatisticIntro__</p>
+          <p><i18n>StatisticIntro</i18n></p>
           <p id="IntroTimeSkipped">0s</p>
         </div>
         <div class="line flex flex-between">
-          <p>__MSG_StatisticRecap__</p>
+          <p><i18n>StatisticRecap</i18n></p>
           <p id="RecapTimeSkipped">0s</p>
         </div>
         <div class="line flex flex-between" style="padding-left: 0">
-          <p>__MSG_StatisticSegments__</p>
+          <p><i18n>StatisticSegments</i18n></p>
           <p id="SegmentsSkipped">0</p>
         </div>
       </div>
@@ -263,7 +263,7 @@
               d="M9.06,1.93C7.17,1.92 5.33,3.74 6.17,6H3A2,2 0 0,0 1,8V10A1,1 0 0,0 2,11H11V8H13V11H22A1,1 0 0,0 23,10V8A2,2 0 0,0 21,6H17.83C19,2.73 14.6,0.42 12.57,3.24L12,4L11.43,3.22C10.8,2.33 9.93,1.94 9.06,1.93M9,4C9.89,4 10.34,5.08 9.71,5.71C9.08,6.34 8,5.89 8,5A1,1 0 0,1 9,4M15,4C15.89,4 16.34,5.08 15.71,5.71C15.08,6.34 14,5.89 14,5A1,1 0 0,1 15,4M2,12V20A2,2 0 0,0 4,22H20A2,2 0 0,0 22,20V12H13V20H11V12H2Z"
             />
           </svg>
-          __MSG_Donate__
+          <i18n>Donate</i18n>
         </a>
       </div>
       <div id="error-content" class="hidden">
