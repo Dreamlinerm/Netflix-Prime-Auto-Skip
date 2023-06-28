@@ -1,7 +1,7 @@
 -------------------------------------------- firefox:
 --------------------------------------------
 Recap:
-Automatisch Werbung, Intros, Rekapitulationen, Abspanne auf Netflix, Prime video und Disney+ & Hotstar überspringen.
+Automatisch Werbung, Intros, Rückblicke, Abspänne usw. auf Netflix, Prime video und Disney+ überspringen.
 --------------------------------------------
 Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert werden sollen.
 
@@ -13,14 +13,14 @@ Auf Netflix, Prime Video und Disney+ & Hotstar wird automatisch:
 <li>Intros übersprungen</li>
 <li>Abspann übersprungen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Geht automatisch zur nächsten Folge</li>
 <li>Werbung übersprungen</li>
-<li>Wiedergabegeschwindigkeitskontrolle hinzugefügt</li>
+<li>Geschwindigkeitsregler hinzugefügt</li>
 <li>Abgespielt, wenn Vollbildschirm geöffnet wird</li>
 </ul>
 
 Auf Netflix wird auch automatisch:
 
 <ul>
-<li>Zusammenfassungen übersprungen</li>
+<li>Rückblick übersprungen</li>
 <li>Inaktivitätswarnung&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Video wird automatisch fortgesetzt</li>
 <li>Automatisch zuletzt verwendetes Profil ausgewählt</li>
 </ul>
@@ -45,4 +45,4 @@ Kaufen Sie mir einen <a href="https://paypal.me/MarvinKrebber" target="_blank">K
 
 Haftungsausschluss
 
-Netflix und Amazon Prime-Videos sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
+Netflix, Amazon Prime-Video and Disney+ sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.

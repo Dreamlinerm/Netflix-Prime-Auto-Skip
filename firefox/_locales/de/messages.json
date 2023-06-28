@@ -1,0 +1,195 @@
+{
+  "extensionName": {
+    "message": "Streaming enhanced",
+    "description": "Name der Erweiterung"
+  },
+  "extensionDescription": {
+    "message": "Automatisch Werbung, Intros, Rückblicke, Abspänne usw. auf Netflix, Prime video und Disney+ überspringen.",
+    "description": "Beschreibung der Erweiterung"
+  },
+
+  "settingsTitle": {
+    "message": "Einstellungen - Skipper",
+    "description": "Titel der Registerkarte 'Einstellungen'"
+  },
+  "pageTitle": {
+    "message": "enhanced",
+    "description": "Titel der Einstellungsseite"
+  },
+  "rateNow": {
+    "message": "Jetzt bewerten!"
+  },
+  "sharedSettings": {
+    "message": "Gemeinsame Einstellungen"
+  },
+  "sharedSettingsDescription": {
+    "message": "Mit diesen Optionen wird nur der $service$-Teil der gemeinsamen Einstellung aktiviert/deaktiviert",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "backup": {
+    "message": "Sichern/Zurücksetzen"
+  },
+  "statistics": {
+    "message": "Statistik"
+  },
+  "changelog": {
+    "message": "Changelog"
+  },
+  "donate": {
+    "message": "Spende"
+  },
+
+  "PageSpecificTitle": {
+    "message": "$service$ spezifisch",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+
+  "defaultPageTitle": {
+    "message": "Alle standardmäßig ausgeschalteten Funktionen"
+  },
+  "defaultPageDescription": {
+    "message": "Alle Funktionen, die standardmäßig ausgeschaltet sind, entweder weil sie verwirrend sind, wenn sie eingeschaltet wären, oder weil sie in der Beta-Phase sind"
+  },
+  "DefaultPaidContentDescription": {
+    "message": "Entfernen aller kostenpflichtigen Filme/Serien kategorien von Amazon Prime"
+  },
+
+  "SharedPageTitle": {
+    "message": "Gemeinsame Videofunktionen"
+  },
+  "SharedPageDescription": {
+    "message": "Alle Optionen aktivieren/deaktivieren die Einstellungen für alle Streaming-Dienste. Wenn Sie sie nur für einen bestimmten Dienst deaktivieren möchten, müssen Sie zu dessen individuellen Einstellungen gehen."
+  },
+  "IntroSwitch": {
+    "message": "Intros & Rückblicke überspringen:"
+  },
+  "SharedIntroDescription": {
+    "message": "Überspringen der Intros und Rückblicke beliebiger Serien. Außer Netflix, da dort Rückblicke nicht noch einmal angesehen werden können."
+  },
+  "CreditsSwitch": {
+    "message": "Abspann überspringen:"
+  },
+  "CreditsSwitchDescription": {
+    "message": "Springt so schnell wie möglich zur nächsten Episode jeder Serie"
+  },
+  "AdsSwitch": {
+    "message": "Werbung überspringen:"
+  },
+  "AdsSwitchDescription": {
+    "message": "Überspringen der Freevee-Werbung für Amazon und Werbung in der Netflix-Basisstufe"
+  },
+  "SliderSwitch": {
+    "message": "Geschwindigkeitsregler:",
+    "description": "Add a speed slider feature switch"
+  },
+  "SliderSwitchDescription": {
+    "message": "Hinzufügen eines Schiebereglers zur Geschwindigkeitsanpassung zu jedem Video"
+  },
+  "FullscreenSwitch": {
+    "message": "Im Vollbildmodus abspielen:"
+  },
+  "FullscreenSwitchDescription": {
+    "message": "Wenn ein Video auf Vollbild umgeschaltet wird, wird das Video automatisch abgespielt"
+  },
+
+  "SelfAdsSwitch": {
+    "message": "Eigenwerbung überspringen:"
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "Überspringen der Prime-Show-Vorschauen, die vor jedem Video angezeigt werden"
+  },
+  "PaidContentSwitch": {
+    "message": "Bezahlte Inhalte entfernen:",
+    "description": "Schalter für bezahlte Inhalte entfernen"
+  },
+  "PaidContentDescription": {
+    "message": "Entfernen aller bezahlten Serien/Filmkategorien"
+  },
+  "FreeveeSwitch": {
+    "message": "Freevee-Werbungen überspringen:"
+  },
+
+  "RecapSwitch": {
+    "message": "Rückblicke überspringen:"
+  },
+  "RecapSwitchDescription": {
+    "message": "Überspringt Rückblicke jeder Sendung"
+  },
+  "InactivitySwitch": {
+    "message": "Inaktivitätswarnung blocken:"
+  },
+  "InactivitySwitchDescription": {
+    "message": "Setzt das Video fort, wenn die Aufforderung 'Sehen Sie noch zu' angezeigt wird"
+  },
+  "ProfileSwitch": {
+    "message": "Automatisch das letzte Profil auswählen:"
+  },
+  "ProfileSwitchDescription": {
+    "message": "Das zuletzt verwendete Netflix-Profil wird direkt beim Start der Seite ausgewählt"
+  },
+  "User": {
+    "message": "Benutzer:"
+  },
+
+  "StatisticPageTitle": {
+    "message": "Statistik"
+  },
+  "SkippedTime": {
+    "message": "Übersprungene Zeit:"
+  },
+  "AmazonAdDescription": {
+    "message": "Zeit der übersprungenen FreeVee Werbung + Prime Video Eigenwerbung"
+  },
+  "StatisticAd": {
+    "message": "$service$ Werbung:",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "NetflixAdDescription": {
+    "message": "Zeit der übersprungenen Netflix-Werbung"
+  },
+  "StatisticIntro": {
+    "message": "Intro:"
+  },
+  "StatisticIntroDescription": {
+    "message": "Zeit der übersprungenen Intros auf Netflix, Amazon und Disney+"
+  },
+  "StatisticRecap": {
+    "message": "Rückblicke:"
+  },
+  "StatisticRecapDescription": {
+    "message": "Zeit der übersprungenen Rückblicke auf Netflix, Amazon und Disney+"
+  },
+  "StatisticSegments": {
+    "message": "Übersprungene Segmente:"
+  },
+  "StatisticSegmentsDescription": {
+    "message": "Anzahl der übersprungenen einzelnen Segmente wie ein Intro oder eine Werbung für Netflix, Amazon und Disney+"
+  },
+  "ImportSettings": {
+    "message": "Alle Einstellungen importieren/exportieren"
+  },
+  "SaveSettings": {
+    "message": "Einstellungen als Datei speichern"
+  },
+  "UploadSettings": {
+    "message": "Einstellungen hochladen"
+  },
+  "ResetAddon": {
+    "message": "Addon auf Standard zurücksetzen"
+  }
+}

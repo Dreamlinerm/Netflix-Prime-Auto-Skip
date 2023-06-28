@@ -34,16 +34,17 @@ It automatically skips Ads, intros, Credits, recaps, and anything else you don't
 
 ## ✨ Features
 
-On Netflix and Prime Video it automatically:
+On Netflix, Prime Video and Disney+ & Hotstar it automatically:
 
 <ul>
 <li>Skips Intros</li>
 <li>Skips Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
 <li>Skips Ads</li>
+<li>Adds playback speed control to UI</li>
 <li>Plays on Fullscreen</li>
 </ul>
 
-On Netflix it also:
+On Netflix it also automatically:
 
 <ul>
 <li>Skips Recaps</li>
@@ -51,12 +52,11 @@ On Netflix it also:
 <li>Picks last used profile</li>
 </ul>
 
-On Amazon Prime Video it also:
+On Amazon Prime Video it also automatically:
 
 <ul>
-<li>Skips Self promoting ads</li>
+<li>Skips Self promoting ads (Ads for prime video productions)</li>
 <li>Filters paid content (movies, series)</li>
-<li>Adds playback speed control to UI</li>
 <li>Removes annoying blur when hovering over video</li>
 </ul>
 
@@ -66,8 +66,14 @@ Everyone is welcome to contribute!
 
 If you have any suggestions or Bugs, please open an issue.
 
+## 💕 Enjoying Netflix/Prime Auto-Skip?
+
 Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
 
+
+Disclaimer
+
+Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
 
 ## Settings
 
