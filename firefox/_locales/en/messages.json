@@ -137,8 +137,14 @@
   "ProfileSwitchDescription": {
     "message": "The last used Netflix profile is directly chosen when the page is launched"
   },
+  "User": {
+    "message": "User:"
+  },
 
   "StatisticPageTitle": {
+    "message": "Statistics"
+  },
+  "SkippedTime": {
     "message": "Skipped time:"
   },
   "AmazonAdDescription": {
@@ -188,11 +194,5 @@
   },
   "ResetAddon": {
     "message": "Reset Addon to default"
-  },
-  "": {
-    "message": ""
-  },
-  "": {
-    "message": ""
   }
 }
