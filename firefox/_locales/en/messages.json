@@ -22,6 +22,15 @@
   "sharedSettings": {
     "message": "Shared Settings"
   },
+  "sharedSettingsDescription": {
+    "message": "These options will only enable/disable the $service$ part of the shared setting",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
   "backup": {
     "message": "Backup/Reset"
   },
@@ -41,12 +50,15 @@
   "defaultPageDescription": {
     "message": "Every feature which is turned off by default either because they are confusing if they were turned on or they are in beta"
   },
+  "DefaultPaidContentDescription": {
+    "message": "Removing every paid movie/film category from Amazon prime"
+  },
 
   "SharedPageTitle": {
     "message": "Shared Video features"
   },
   "SharedPageDescription": {
-    "message": "These options will only enable/disable the settings for both Prime Video and Netflix. If you want to only disable it specifically for one you have to go to its Individual settings."
+    "message": "These options will only enable/disable the settings for all streaming services. If you want to only disable it specifically for one you have to go to its Individual settings."
   },
   "IntroSwitch": {
     "message": "Skip Intro & Recap:"
@@ -79,22 +91,22 @@
   "FullscreenSwitchDescription": {
     "message": "If a video is put on fullscreen, the video will play automatically"
   },
-  "": {
-    "message": ""
-  },
-  "": {
-    "message": ""
-  },
-  "": {
-    "message": ""
-  },
 
-  "AmazonPaidContentSwitch": {
+  "PrimePageTitle": {
+    "message": "Prime Video specific"
+  },
+  "SelfAdsSwitch": {
+    "message": "Skip Self Ads:"
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "Skipping the prime show previews which are shown before any video"
+  },
+  "PaidContentSwitch": {
     "message": "Remove paid content:",
     "description": "Remove paid content feature switch"
   },
-  "AmazonPaidContentDescription": {
-    "message": "Removing every paid movie/film category from Amazon prime"
+  "PaidContentDescription": {
+    "message": "Removing every paid movie/film category"
   },
   "": {
     "message": ""
@@ -111,7 +123,30 @@
   "": {
     "message": ""
   },
-
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
+  "": {
+    "message": ""
+  },
   "example": {
     "message": "You clicked $URL$.",
     "description": "Tells the user which link they clicked.",

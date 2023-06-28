@@ -29,8 +29,9 @@ function localizeHtmlPage() {
   let objects = document.getElementsByTagName("html");
   for (obj of objects) {
     let valStrH = obj.innerHTML.toString();
-    let valNewH = valStrH.replace(/__MSG_(\w+)__/g, function (match, v1) {
-      return v1 ? browser.i18n.getMessage(v1) : "";
+    let valNewH = valStrH.replace(/__MSG_((?!\_).*)__/g, function (match, v1) {
+      let messages = v1.split(";");
+      return messages ? browser.i18n.getMessage.apply(null, messages) : "";
     });
 
     if (valNewH != valStrH) {
