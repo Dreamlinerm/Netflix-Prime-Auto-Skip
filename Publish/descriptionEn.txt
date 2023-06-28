@@ -9,6 +9,7 @@ On Netflix, Prime Video and Disney+ & Hotstar it automatically:
 <li>Skips Intros</li>
 <li>Skips Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
 <li>Skips Ads</li>
+<li>Adds playback speed control to UI</li>
 <li>Plays on Fullscreen</li>
 </ul>
 
@@ -25,7 +26,6 @@ On Amazon Prime Video it also automatically:
 <ul>
 <li>Skips Self promoting ads (Ads for prime video productions)</li>
 <li>Filters paid content (movies, series)</li>
-<li>Adds playback speed control to UI</li>
 <li>Removes annoying blur when hovering over video</li>
 </ul>
 
@@ -41,7 +41,7 @@ Buy me a <a href="https://paypal.me/MarvinKrebber" target="_blank">coffee</a>.
 
 Disclaimer
 
-Netflix and Amazon Prime videos are trademarks and the author of this addon is not affiliated with these companies.
+Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
 --------------------------------------------  chrome:
 You can configure which Feature to enable in the Settings Page.
 
@@ -52,6 +52,7 @@ On Netflix, Prime Video and Disney+ & Hotstar it automatically:
 • Skips Intros
 • Skips Credits                   : automatically goes to the next episode
 • Skips Ads
+• Adds playback speed control to UI
 • Plays on Fullscreen
 
 On Netflix it also automatically:
@@ -64,7 +65,6 @@ On Amazon Prime Video it also automatically:
 
 • Skips Self promoting ads (Ads for prime video productions)
 • Filters paid content (movies, series)
-• Adds playback speed control to UI
 • Removes annoying blur when hovering over video
 
 ☔ Safe
@@ -79,4 +79,4 @@ Buy me a coffee (https://paypal.me/MarvinKrebber).
 
 Disclaimer
 
-Netflix and Amazon Prime videos are trademarks and the author of this addon is not affiliated with these companies.
+Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.

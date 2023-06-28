@@ -13,6 +13,7 @@ Auf Netflix, Prime Video und Disney+ & Hotstar wird automatisch:
 <li>Intros übersprungen</li>
 <li>Abspann übersprungen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Geht automatisch zur nächsten Folge</li>
 <li>Werbung übersprungen</li>
+<li>Wiedergabegeschwindigkeitskontrolle hinzugefügt</li>
 <li>Abgespielt, wenn Vollbildschirm geöffnet wird</li>
 </ul>
 
@@ -29,7 +30,6 @@ Amazon Prime-Video wird auch automatisch:
 <ul>
 <li>Eigenwerbung übersprungen</li>
 <li>Kostenpflichtige Inhalte gefiltert</li>
-<li>Wiedergabegeschwindigkeitskontrolle hinzugefügt</li>
 <li>Die lästige Unschärfe, wenn das overlay angezeigt wird entfernt</li>
 </ul>
 
