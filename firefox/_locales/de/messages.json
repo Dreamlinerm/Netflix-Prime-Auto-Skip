@@ -1,0 +1,198 @@
+{
+  "extensionName": {
+    "message": "Netflix/Prime Auto-Skip",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video and Disney+.",
+    "description": "Description of the extension"
+  },
+
+  "settingsTitle": {
+    "message": "Settings - skipper",
+    "description": "Title of the Settings Tab"
+  },
+  "pageTitle": {
+    "message": "Auto-skip",
+    "description": "Title of the Settings Page"
+  },
+  "rateNow": {
+    "message": "Rate now!"
+  },
+  "sharedSettings": {
+    "message": "Shared Settings"
+  },
+  "sharedSettingsDescription": {
+    "message": "These options will only enable/disable the $service$ part of the shared setting",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "backup": {
+    "message": "Backup/Reset"
+  },
+  "statistics": {
+    "message": "Statistics"
+  },
+  "changelog": {
+    "message": "Changelog"
+  },
+  "donate": {
+    "message": "Donate"
+  },
+
+  "PageSpecificTitle": {
+    "message": "$service$ specific",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+
+  "defaultPageTitle": {
+    "message": "All turned off Features by default"
+  },
+  "defaultPageDescription": {
+    "message": "Every feature which is turned off by default either because they are confusing if they were turned on or they are in beta"
+  },
+  "DefaultPaidContentDescription": {
+    "message": "Removing every paid movie/film category from Amazon prime"
+  },
+
+  "SharedPageTitle": {
+    "message": "Shared Video features"
+  },
+  "SharedPageDescription": {
+    "message": "These options will only enable/disable the settings for all streaming services. If you want to only disable it specifically for one you have to go to its Individual settings."
+  },
+  "IntroSwitch": {
+    "message": "Skip Intro & Recap:"
+  },
+  "SharedIntroDescription": {
+    "message": "Skipping the intros and recaps of any series. Except Netflix since there Recaps cannot be watched again."
+  },
+  "CreditsSwitch": {
+    "message": "Skip Credits:"
+  },
+  "CreditsSwitchDescription": {
+    "message": "Skipping to the next episode of every series as fast as possible"
+  },
+  "AdsSwitch": {
+    "message": "Skip Ads:"
+  },
+  "AdsSwitchDescription": {
+    "message": "Skipping freevee ads for amazon and all of the ads in the basic Netflix tier"
+  },
+  "SliderSwitch": {
+    "message": "Add Speed Slider:",
+    "description": "Add a speed slider feature switch"
+  },
+  "SliderSwitchDescription": {
+    "message": "Adding a speed adjustment slider to every video"
+  },
+  "FullscreenSwitch": {
+    "message": "Play on Fullscreen:"
+  },
+  "FullscreenSwitchDescription": {
+    "message": "If a video is put on fullscreen, the video will play automatically"
+  },
+
+  "SelfAdsSwitch": {
+    "message": "Skip Self Ads:"
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "Skipping the prime show previews which are shown before any video"
+  },
+  "PaidContentSwitch": {
+    "message": "Remove paid content:",
+    "description": "Remove paid content feature switch"
+  },
+  "PaidContentDescription": {
+    "message": "Removing every paid movie/film category"
+  },
+  "FreeveeSwitch": {
+    "message": "Skip Freevee Ads:"
+  },
+
+  "RecapSwitch": {
+    "message": "Skip Recaps:"
+  },
+  "RecapSwitchDescription": {
+    "message": "Skips recapitulations of every show"
+  },
+  "InactivitySwitch": {
+    "message": "Resume inactivity warning:"
+  },
+  "InactivitySwitchDescription": {
+    "message": "Resumes the video if the 'Are you still watching' prompt is shown"
+  },
+  "ProfileSwitch": {
+    "message": "Auto pick last profile:"
+  },
+  "ProfileSwitchDescription": {
+    "message": "The last used Netflix profile is directly chosen when the page is launched"
+  },
+  "User": {
+    "message": "User:"
+  },
+
+  "StatisticPageTitle": {
+    "message": "Statistics"
+  },
+  "SkippedTime": {
+    "message": "Skipped time:"
+  },
+  "AmazonAdDescription": {
+    "message": "Time of skipped FreeVee Ads + Prime Video Self Ads"
+  },
+  "StatisticAd": {
+    "message": "$service$ Ad:",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "NetflixAdDescription": {
+    "message": "Time of skipped Netflix Ads"
+  },
+  "StatisticIntro": {
+    "message": "Intro:"
+  },
+  "StatisticIntroDescription": {
+    "message": "Time of skipped Intros on Netflix, Amazon and Disney+"
+  },
+  "StatisticRecap": {
+    "message": "Recap:"
+  },
+  "StatisticRecapDescription": {
+    "message": "Time of skipped Recaps on Netflix, Amazon and Disney+"
+  },
+  "StatisticSegments": {
+    "message": "Segments Skipped:"
+  },
+  "StatisticSegmentsDescription": {
+    "message": "Amount of Individual Segments Skipped like an Intro or an Ad for Netflix, Amazon and Disney+"
+  },
+  "OtherPageTitle": {
+    "message": ""
+  },
+  "ImportSettings": {
+    "message": "Import/Export all Settings"
+  },
+  "SaveSettings": {
+    "message": "Save Settings as file"
+  },
+  "UploadSettings": {
+    "message": "Upload settings"
+  },
+  "ResetAddon": {
+    "message": "Reset Addon to default"
+  }
+}
