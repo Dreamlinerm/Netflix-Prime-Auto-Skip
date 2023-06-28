@@ -61,7 +61,7 @@
     "message": "Every feature which is turned off by default either because they are confusing if they were turned on or they are in beta"
   },
   "DefaultPaidContentDescription": {
-    "message": "Removing every paid movie/film category from Amazon prime"
+    "message": "Removing every paid movie/series category from Amazon prime"
   },
 
   "SharedPageTitle": {
@@ -113,7 +113,7 @@
     "description": "Remove paid content feature switch"
   },
   "PaidContentDescription": {
-    "message": "Removing every paid movie/film category"
+    "message": "Removing every paid movie/series category"
   },
   "FreeveeSwitch": {
     "message": "Skip Freevee Ads:"
@@ -179,9 +179,6 @@
   },
   "StatisticSegmentsDescription": {
     "message": "Amount of Individual Segments Skipped like an Intro or an Ad for Netflix, Amazon and Disney+"
-  },
-  "OtherPageTitle": {
-    "message": ""
   },
   "ImportSettings": {
     "message": "Import/Export all Settings"
