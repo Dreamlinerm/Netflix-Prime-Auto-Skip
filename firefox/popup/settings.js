@@ -72,7 +72,6 @@ const defaultSettings = {
     General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
   },
 };
-let sliderValue = 1;
 let settings = defaultSettings.settings;
 browser.storage.sync.get("settings", function (result) {
   settings = result.settings;
@@ -112,6 +111,7 @@ browser.storage.sync.onChanged.addListener(function (changes, namespace) {
     }
   }
 });
+let sliderValue = settings.General.sliderMax;
 function getTimeFormatted(sec = 0) {
   if (typeof sec !== "number") return "0s";
   let days = Math.floor(sec / 86400);

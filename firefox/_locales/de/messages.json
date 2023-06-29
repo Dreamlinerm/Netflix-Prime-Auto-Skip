@@ -95,6 +95,21 @@
   "SliderSwitchDescription": {
     "message": "Hinzufügen eines Schiebereglers zur Geschwindigkeitsanpassung zu jedem Video"
   },
+  "SliderOptions": {
+    "message": "Slider-Optionen: geschwindigkeit = Schrittgröße /10"
+  },
+  "SliderStepSize": {
+    "message": "Slider Schrittgröße:"
+  },
+  "SliderMin": {
+    "message": "Slider minimum:"
+  },
+  "SliderMax": {
+    "message": "Slider maximum:"
+  },
+  "SliderPreview": {
+    "message": "Slider Vorschau:"
+  },
   "FullscreenSwitch": {
     "message": "Im Vollbildmodus abspielen:"
   },
