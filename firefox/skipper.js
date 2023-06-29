@@ -19,7 +19,7 @@ let isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) 
 let isNetflix = /netflix/i.test(hostname);
 let isDisney = /disneyplus/i.test(hostname);
 let isHotstar = /hotstar/i.test(hostname);
-const version = "1.0.48";
+const version = "1.0.49";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
