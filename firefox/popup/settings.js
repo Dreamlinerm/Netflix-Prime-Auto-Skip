@@ -69,9 +69,10 @@ const defaultSettings = {
     Disney: { skipIntro: true, skipCredits: true, speedSlider: true },
     Video: { playOnFullScreen: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
-    General: { profileName: null, profilePicture: null },
+    General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
   },
 };
+let sliderValue = 1;
 let settings = defaultSettings.settings;
 browser.storage.sync.get("settings", function (result) {
   settings = result.settings;
@@ -219,6 +220,22 @@ function setCheckboxesToSettings() {
   button = document.querySelector("#playOnFullScreen");
   if (button) button.checked = settings?.Video.playOnFullScreen;
 
+  //  -------------      Slider Options        ---------------------------------------
+  button = document.querySelector("#SliderSteps");
+  if (button) button.value = settings?.General.sliderSteps;
+  button = document.querySelector("#SliderMin");
+  if (button) button.value = settings?.General.sliderMin;
+  button = document.querySelector("#SliderMax");
+  if (button) button.value = settings?.General.sliderMax;
+  button = document.querySelector("#SliderPreview");
+  if (button) {
+    button.step = settings?.General.sliderSteps;
+    button.min = settings?.General.sliderMin;
+    button.max = settings?.General.sliderMax;
+  }
+  button = document.querySelector("#SliderValue");
+  if (button) button.textContent = sliderValue / 10 + "x";
+
   // Statistics
   button = document.querySelector("#AmazonAdTime");
   if (button) button.textContent = getTimeFormatted(settings?.Statistics.AmazonAdTimeSkipped);
@@ -230,6 +247,7 @@ function setCheckboxesToSettings() {
   if (button) button.textContent = getTimeFormatted(settings?.Statistics.RecapTimeSkipped);
   button = document.querySelector("#SegmentsSkipped");
   if (button) button.textContent = settings?.Statistics.SegmentsSkipped;
+
   // import/export buttons
   button = document.querySelector("#save");
   if (button) {
@@ -474,6 +492,29 @@ function listenForClicks() {
   });
 }
 
+function listenForInput() {
+  document.addEventListener("input", (e) => {
+    if (e.target.id === "SliderSteps") {
+      settings.General.sliderSteps = Number(e.target.value);
+      setCheckboxesToSettings();
+      setSettings("SliderSteps");
+    } else if (e.target.id === "SliderMin") {
+      settings.General.sliderMin = Number(e.target.value);
+      sliderValue = settings.General.sliderMin;
+      setCheckboxesToSettings();
+      setSettings("SliderMin");
+    } else if (e.target.id === "SliderMax") {
+      settings.General.sliderMax = Number(e.target.value);
+      sliderValue = settings.General.sliderMax;
+      setCheckboxesToSettings();
+      setSettings("SliderMax");
+    } else if (e.target.id === "SliderPreview") {
+      sliderValue = Number(e.target.value);
+      setCheckboxesToSettings();
+    }
+  });
+}
+
 /**
  * There was an error executing the script.
  * Display the popup's error message, and hide the normal UI.
@@ -490,6 +531,7 @@ function reportExecuteScriptError(error) {
  */
 try {
   listenForClicks();
+  listenForInput();
 } catch (e) {
   reportExecuteScriptError(e);
 }

@@ -29,7 +29,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       Disney: { skipIntro: true, skipCredits: true, speedSlider: true },
       Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
-      General: { profileName: null, profilePicture: null, sliderSteps: "1", sliderMin: "5", sliderMax: "20" },
+      General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
     },
   };
   let settings = defaultSettings.settings;
