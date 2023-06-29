@@ -2,7 +2,7 @@
 
 <img src="firefox/icons/NetflixAmazon%20Auto-Skip.svg" width="10%">
 
-# Netflix/Prime Auto-Skip
+# Streaming enhanced: Netflix Disney+ Prime Video
 
 Automatically skip Ads, intros, Credits, etc. on Prime video and Netflix.
 
