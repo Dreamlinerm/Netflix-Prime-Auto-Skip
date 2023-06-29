@@ -1,0 +1,195 @@
+{
+  "extensionName": {
+    "message": "Подобрен стриминг",
+    "description": "Име на наставката"
+  },
+  "extensionDescription": {
+    "message": "Автоматски прескокнете ги рекламите, воведот, резимето на филмовите/сериите на Netflix, Disney+, Prime.",
+    "description": "Опис на наставката"
+  },
+
+  "settingsTitle": {
+    "message": "Поставки - skipper",
+    "description": "Името на Поставки јазичето"
+  },
+  "pageTitle": {
+    "message": "enhanced",
+    "description": "Името на Поставки страницата"
+  },
+  "rateNow": {
+    "message": "Оцценете нè!"
+  },
+  "sharedSettings": {
+    "message": "Споделени Поставки/Опции"
+  },
+  "sharedSettingsDescription": {
+    "message": "Овие опции само ќе овозможат/оневозможат дел од споделените поставки од $service$",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "backup": {
+    "message": "Правење резервна копија и ресетирање"
+  },
+  "statistics": {
+    "message": "Статистика"
+  },
+  "changelog": {
+    "message": "Дневник на измени и ажурирања"
+  },
+  "donate": {
+    "message": "Донирајте"
+  },
+
+  "PageSpecificTitle": {
+    "message": "$service$ подесувања",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+
+  "defaultPageTitle": {
+    "message": "Функции и опции кои се исклучени/оневозможени од почетокот на инсталацијата"
+  },
+  "defaultPageDescription": {
+    "message": "Секоја од функциите која е исклучена од почетокот е затоа што се во beta издание или се збунувачки за корисникот"
+  },
+  "DefaultPaidContentDescription": {
+    "message": "Отстранување на категоријата за купување на филмови и ТВ-серии на Amazon Prime"
+  },
+
+  "SharedPageTitle": {
+    "message": "Комбинирани подесувања"
+  },
+  "SharedPageDescription": {
+    "message": "Овие опции ќе ги овозможат/оневозможат поставките за сите стриминг платформи. Ако сакате да подесите опција само за една стриминг платформа, мора да отидете во индивидуалните поставки за таа платформа."
+  },
+  "IntroSwitch": {
+    "message": "Прескокни вовед и резиме:"
+  },
+  "SharedIntroDescription": {
+    "message": "Прескокнување на воведот и резимето на сериите на поддржаните платформи освен на Netflix"
+  },
+  "CreditsSwitch": {
+    "message": "Прескокни благодаренија:"
+  },
+  "CreditsSwitchDescription": {
+    "message": "Прескокнување кон следната епизода што е можно побрзо"
+  },
+  "AdsSwitch": {
+    "message": "Прескокни реклами:"
+  },
+  "AdsSwitchDescription": {
+    "message": "Прескокнување на рекламите на Amazon Prime & Netflix претплати кои имаат реклами врз видеата"
+  },
+  "SliderSwitch": {
+    "message": "Додадете  лизгач за брзина:",
+    "description": "Опција за додавање на лизгачот за опција врз видеата"
+  },
+  "SliderSwitchDescription": {
+    "message": "Додавање лизгач за прилагодување на брзината на секое видео"
+  },
+  "FullscreenSwitch": {
+    "message": "Гледање на цел екран:"
+  },
+  "FullscreenSwitchDescription": {
+    "message": "Ако видеото е поставено низ цел екран, тогаш ќе се пуште автоматски"
+  },
+
+  "SelfAdsSwitch": {
+    "message": "Прескокни реклами:"
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "Прескокнување на краткиот преглед на шоуто што се прикажуваат пред секое отварање на видеото"
+  },
+  "PaidContentSwitch": {
+    "message": "Отстранете ја содржината која се плаќа:",
+    "description": "Копче за отстранување/додавање на содржина која се плаќа"
+  },
+  "PaidContentDescription": {
+    "message": "Отстранување на секоја ТВ-серија/филм кој треба да се купи за да се гледа"
+  },
+  "FreeveeSwitch": {
+    "message": "Прескокнете ги рекламите:"
+  },
+
+  "RecapSwitch": {
+    "message": "Прескокни го резимето:"
+  },
+  "RecapSwitchDescription": {
+    "message": "Го прескокнува резимето на секоја ТВ-серија"
+  },
+  "InactivitySwitch": {
+    "message": "Прескокни го предупредувањето за дали сè уште гледате:"
+  },
+  "InactivitySwitchDescription": {
+    "message": "Го продолжува видеото ако се прикаже известувањето „Дали сè уште гледате“."
+  },
+  "ProfileSwitch": {
+    "message": "Автоматски избирање на последниот одберен профил на Netflix:"
+  },
+  "ProfileSwitchDescription": {
+    "message": "Последниот користен профил на Netflix автоматски се избира кога ќе се одбере прв пат на Netflix"
+  },
+  "User": {
+    "message": "Профил:"
+  },
+
+  "StatisticPageTitle": {
+    "message": "Статистика"
+  },
+  "SkippedTime": {
+    "message": "Време заштедено:"
+  },
+  "AmazonAdDescription": {
+    "message": "Време заштедено од FreeVee реклами + Prime Video реклами"
+  },
+  "StatisticAd": {
+    "message": "$service$ реклами:",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "NetflixAdDescription": {
+    "message": "Време заштедено од Netflix реклами"
+  },
+  "StatisticIntro": {
+    "message": "Вовед:"
+  },
+  "StatisticIntroDescription": {
+    "message": "Време заштедено за вовед од Netflix, Amazon and Disney+"
+  },
+  "StatisticRecap": {
+    "message": "Резиме:"
+  },
+  "StatisticRecapDescription": {
+    "message": "Време заштедено за резиме од Netflix, Amazon and Disney+"
+  },
+  "StatisticSegments": {
+    "message": "Прескокнати сегменти:"
+  },
+  "StatisticSegmentsDescription": {
+    "message": "Количина на поединечни прескокнати сегменти како вовед или реклами од Netflix, Amazon and Disney+"
+  },
+  "ImportSettings": {
+    "message": "Целосно зачувување и прикачување на поставките"
+  },
+  "SaveSettings": {
+    "message": "Зачувај промени во датотека"
+  },
+  "UploadSettings": {
+    "message": "Прикачете претходно зачуваани промени од датотека"
+  },
+  "ResetAddon": {
+    "message": "Ресетирај алатка ( Фабрички ресет )"
+  }
+}
