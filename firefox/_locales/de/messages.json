@@ -206,5 +206,8 @@
   },
   "ResetAddon": {
     "message": "Addon auf Standard zurücksetzen"
+  },
+  "noWrap": {
+    "message": "unset"
   }
 }

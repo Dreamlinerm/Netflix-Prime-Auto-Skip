@@ -206,5 +206,8 @@
   },
   "ResetAddon": {
     "message": "Ресетирај алатка ( Фабрички ресет )"
+  },
+  "noWrap": {
+    "message": "unset"
   }
 }

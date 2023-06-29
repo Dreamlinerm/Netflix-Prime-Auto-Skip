@@ -255,9 +255,10 @@ input:checked + .slider:before {
   border-radius: 15px;
   margin: 5px 15px;
   padding: 13px 20px;
+  max-width: 400px;
   background-color: #242424;
   text-decoration: none;
-  white-space: nowrap;
+  white-space: __MSG_noWrap__;
   cursor: pointer;
   color: white;
   font-size: 1.5em;
