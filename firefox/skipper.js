@@ -29,7 +29,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       Disney: { skipIntro: true, skipCredits: true, speedSlider: true },
       Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
-      General: { profileName: null, profilePicture: null },
+      General: { profileName: null, profilePicture: null, sliderSteps: "1", sliderMin: "5", sliderMax: "20" },
     },
   };
   let settings = defaultSettings.settings;
@@ -215,10 +215,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           let slider = document.createElement("input");
           slider.id = "videoSpeedSlider";
           slider.type = "range";
-          slider.min = "5";
-          slider.max = "20";
+          slider.min = settings.General.sliderMin;
+          slider.max = settings.General.sliderMax;
           slider.value = videoSpeed * 10;
-          slider.step = "1";
+          slider.step = settings.General.sliderSteps;
           slider.style = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;";
           position.insertBefore(slider, position.firstChild);
 
@@ -385,10 +385,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
             let slider = document.createElement("input");
             slider.id = "videoSpeedSlider";
             slider.type = "range";
-            slider.min = "5";
-            slider.max = "20";
+            slider.min = settings.General.sliderMin;
+            slider.max = settings.General.sliderMax;
             slider.value = videoSpeed * 10;
-            slider.step = "1";
+            slider.step = settings.General.sliderSteps;
             slider.style = "position:relative;bottom:20px;display: none;width:200px;";
             position.insertBefore(slider, position.firstChild);
 
@@ -441,10 +441,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           let slider = document.createElement("input");
           slider.id = "videoSpeedSlider";
           slider.type = "range";
-          slider.min = "5";
-          slider.max = "20";
+          slider.min = settings.General.sliderMin;
+          slider.max = settings.General.sliderMax;
           slider.value = "10";
-          slider.step = "1";
+          slider.step = settings.General.sliderSteps;
           // slider.setAttribute("list", "markers");
           slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;width:200px;";
           position.insertBefore(slider, position.firstChild);
