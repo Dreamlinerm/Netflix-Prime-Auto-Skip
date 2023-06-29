@@ -165,7 +165,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     // Recap Criminal Minds Season 1 Episode 2
     let button;
     if (isDisney) button = document.querySelector(".skip__button");
-    else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null).iterateNext().parentElement;
+    else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       let video = document.querySelector("video");
       const time = video.currentTime;
@@ -181,7 +181,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   function Disney_Credits(mutations, observer) {
     let button;
     if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
-    else button = document.evaluate("//span[contains(., 'Next')]", document, null, XPathResult.ANY_TYPE, null).iterateNext().parentElement;
+    else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
       let time;
