@@ -70,11 +70,6 @@ If you have any suggestions or Bugs, please open an issue.
 
 Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
 
-
-Disclaimer
-
-Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
-
 ## Settings
 
 Configure what is skipped in the settings Page.
@@ -123,4 +118,35 @@ copy firefox files to chrome and replace "browser" with "chrome"
 
 ## Disclaimer
 
-Netflix and Amazon Prime videos are trademarks and the author of this addon is not affiliated with these companies.
+Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
+
+## Contributors ✨
+
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%">
+        <a href="www.makre.de"
+          >
+          <img
+            src="https://avatars.githubusercontent.com/u/90410608?s=96&v=4"
+            width="100px;"
+            alt="Marvin Krebber"
+          />
+          <br /><sub><b>Marvin Krebber</b></sub>
+          </a>
+      </td>
+      <td align="center" valign="top" width="14.28%">
+        <a href="https://github.com/jakche"
+          >
+          <img
+            src="https://avatars.githubusercontent.com/u/70672583?v=4"
+            width="100px;"
+            alt="Jakche"
+          />
+          <br /><sub><b>Jakche</b></sub>
+          </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
