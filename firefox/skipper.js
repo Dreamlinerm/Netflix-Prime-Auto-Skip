@@ -186,7 +186,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // only skip if the next video is the next episode of a series (there is a timer)
       let time;
       if (isDisney) time = button.textContent.match(/\d+/)?.[0];
-      if (isHotstar || (time && lastAdTimeText != time)) {
+      if ((!isHotstar && url.includes("watch")) || (time && lastAdTimeText != time)) {
         button.click();
         lastAdTimeText = time;
         log("Credits skipped", button);
