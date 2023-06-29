@@ -33,14 +33,9 @@
             <p style="font-size: 1em">v.1.0.48</p>
           </div>
         </div>
-        <a
-          target="_blank"
-          class="flex-center flex-col"
-          style="text-align: center; text-decoration: none"
-          href="https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle"
-        >
+        <a target="_blank" class="flex-center flex-col" style="text-align: center; text-decoration: none" href="https://addons.mozilla.org/de/firefox/addon/netflix-prime-auto-skip/">
           <p style="font-size: 1em" i18n>rateNow</p>
-          <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" />
+          <img src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010" />
         </a>
       </div>
       <div class="flex flex-col MenuButtons" style="flex-wrap: wrap">
@@ -186,6 +181,24 @@
             </label>
           </div>
           <p class="description" i18n>SliderSwitchDescription</p>
+          <p i18n>SliderOptions</p>
+          <div class="flex">
+            <p i18n>SliderStepSize</p>
+            <input type="number" id="SliderSteps" />
+          </div>
+          <div class="flex">
+            <p i18n>SliderMin</p>
+            <input type="number" id="SliderMin" />
+          </div>
+          <div class="flex">
+            <p i18n>SliderMax</p>
+            <input type="number" id="SliderMax" />
+          </div>
+          <div class="flex">
+            <p i18n>SliderPreview</p>
+            <input type="range" id="SliderPreview" min="5" max="20" value="1" step="1" style="background: rgb(221, 221, 221); width: 200px" />
+            <p id="SliderValue">1x</p>
+          </div>
           <hr />
           <div class="line flex">
             <p i18n>FullscreenSwitch</p>
@@ -412,7 +425,14 @@
           <h2>Changelog</h2>
           <div>
             <div class="line flex">
-              <h2>1.0.48</h2>
+              <h2>1.0.49</h2>
+              <ul>
+                <li>Added Speedslider min,max,step options</li>
+                <li>Added Language: Macedonian</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.48</p>
               <ul>
                 <li>Changed name to Streaming enhanced</li>
                 <li>Added German Locale</li>
