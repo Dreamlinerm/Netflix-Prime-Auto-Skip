@@ -95,6 +95,21 @@
   "SliderSwitchDescription": {
     "message": "Adding a speed adjustment slider to every video"
   },
+  "SliderOptions": {
+    "message": "Slider options: speed = stepsize /10"
+  },
+  "SliderStepSize": {
+    "message": "Slider stepsize:"
+  },
+  "SliderMin": {
+    "message": "Slider minimum:"
+  },
+  "SliderMax": {
+    "message": "Slider maximum:"
+  },
+  "SliderPreview": {
+    "message": "Slider preview:"
+  },
   "FullscreenSwitch": {
     "message": "Play on Fullscreen:"
   },
