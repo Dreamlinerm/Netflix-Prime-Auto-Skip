@@ -1,10 +1,10 @@
 {
   "extensionName": {
-    "message": "Streaming enhanced",
+    "message": "Streaming enhanced: Netflix Disney+ Prime Video",
     "description": "Name of the extension"
   },
   "extensionDescription": {
-    "message": "Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video and Disney+.",
+    "message": "Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video and Disney+ & Hotstar.",
     "description": "Description of the extension"
   },
 
