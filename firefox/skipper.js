@@ -14,11 +14,15 @@
 let hostname = window.location.hostname;
 let title = document.title;
 let url = window.location.href;
+let ua = window.navigator.userAgent;
 // only on prime video pages
 let isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
 let isNetflix = /netflix/i.test(hostname);
 let isDisney = /disneyplus/i.test(hostname);
 let isHotstar = /hotstar/i.test(hostname);
+
+let isEdge = /edg/i.test(ua);
+let isFirefox = /firefox/i.test(ua);
 const version = "1.0.49";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
@@ -352,14 +356,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       const video = document.querySelector("video");
       const adLength = Number(document.querySelector(".ltr-puk2kp")?.textContent);
       if (video) {
-        if (adLength && video.playbackRate != 16) {
+        let playBackRate = 16;
+        if (isEdge) playBackRate = 3;
+        if (adLength && video.playbackRate != playBackRate) {
           log("Ad skipped, length:", adLength, "s");
           settings.Statistics.NetflixAdTimeSkipped += adLength;
           increaseBadge();
-          video.playbackRate = 16;
+          video.playbackRate = playBackRate;
         } else if (adLength && video.paused) {
           video.play();
-        } else if (video.playbackRate == 16 && !adLength) {
+        } else if (video.playbackRate == playBackRate && !adLength) {
           video.playbackRate = 1;
         }
       }
