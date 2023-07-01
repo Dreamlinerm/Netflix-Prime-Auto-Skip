@@ -21,18 +21,16 @@
 <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" >
 </div>
 
-## Installation
-
-Download on PC:
+## Install in Browser
 <a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
-<img src="Logos/chrome.svg" width="8%">
+<img src="Logos/chrome.svg" width="8%" alt="chrome">
 </a>
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
-<img src="Logos/firefox.svg" width="8%">
+<img src="Logos/firefox.svg" width="8%" alt="firefox">
 </a>
-<br>
-Android: <br>
-<div style="display:flex;flex-direction:col">
+
+## Install on Android
+<div style="display:flex;flex-direction:column">
         <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
           <img src="Logos/kiwi.webp" width="8%">
           <br /><b>Kiwi Browser</b>
