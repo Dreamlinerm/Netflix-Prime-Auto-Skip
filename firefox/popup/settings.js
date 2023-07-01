@@ -1,5 +1,5 @@
 /*
- * Netflix/Prime Auto-Skip
+ * Streaming enhanced
  * Copyright (c) 2022 Marvin Krebber
  *
  * This program is free software: you can redistribute it and/or modify
@@ -12,7 +12,7 @@
  */
 
 // find out if on settings page or on popup page
-// if document.title is "Netflix/Prime Auto-Skip" then it is not the popup page
+// if document.title is "Streaming enhanced" then it is not the popup page
 // if (window?.outerWidth > 400) {
 //   AmazonSettings();
 //   NetflixSettings();

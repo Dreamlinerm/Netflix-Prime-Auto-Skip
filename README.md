@@ -116,6 +116,7 @@ If you have any suggestions or Bugs, please open an issue.
             alt="Marvin Krebber"
           />
           <br /><sub><b>Marvin Krebber</b></sub>
+          <br /><sub>Owner & Main Dev</sub>
           </a>
       </td>
       <td align="center" valign="top" width="14.28%">
@@ -127,13 +128,14 @@ If you have any suggestions or Bugs, please open an issue.
             alt="Jakche"
           />
           <br /><sub><b>Jakche</b></sub>
+          <br /><sub>Dev & Translator</sub>
           </a>
       </td>
     </tr>
   </tbody>
 </table>
 
-## 💕 Enjoying Netflix/Prime Auto-Skip?
+## 💕 Enjoying Streaming enhanced?
 
 Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
 
