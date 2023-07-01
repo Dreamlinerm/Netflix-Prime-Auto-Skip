@@ -22,12 +22,17 @@
 </div>
 
 ## Install in Browser
-<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
-<img src="Logos/chrome.svg" width="8%" alt="chrome">
-</a>
+
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
 <img src="Logos/firefox.svg" width="8%" alt="firefox">
 </a>
+<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
+<img src="Logos/chrome.svg" width="8%" alt="chrome">
+</a>
+<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
+<img src="Logos/microsoft-edge-1.svg" width="8%" alt="chrome">
+</a>
+
 
 ## Install on Android
 <div style="display:flex;flex-direction:column">
