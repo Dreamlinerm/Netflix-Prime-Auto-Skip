@@ -50,10 +50,17 @@ It will work together with other skippers, but it may behave unexpectedly.
 
 ## Supported Streaming Services
 
-<img src="Logos/Netflix.png" width="20%">
-<img src="Logos/prime%20video.png" width="20%">
-<img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
-<img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
+<table>
+    <tr>
+      <td align="center" valign="top" width="14.28%">
+        <img src="Logos/Netflix.png" width="20%">
+        <img src="Logos/prime%20video.png" width="20%">
+        <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
+        <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
+      </td>
+    </tr>
+</table>
+
 
 
 ## What it does
