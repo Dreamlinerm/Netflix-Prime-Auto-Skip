@@ -32,16 +32,12 @@ Download on PC:
 </a>
 <br>
 Android: <br>
-<table>
-    <tr>
-      <td align="center" valign="top" width="14.28%">
+<div style="display:flex;flex-direction:col">
         <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
           <img src="Logos/kiwi.webp" width="8%">
           <br /><b>Kiwi Browser</b>
           </a>
-      </td>
-    </tr>
-</table>
+</div>
 
 Download [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the chrome addon. But Netflix cannot be watched on android.
 
