@@ -2,7 +2,7 @@
 
 <img src="firefox/icons/NetflixAmazon%20Auto-Skip.svg" width="10%">
 
-# Streaming enhanced: Netflix Disney+ Prime Video
+# Streaming enhanced
 
 ## Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video and Disney+ & Hotstar.
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
