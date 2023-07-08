@@ -1,4 +1,8 @@
 -------------------------------------------- firefox:
+To use on Android Phone Download
+<a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser" target="_blank">Kiwi Browser</a>
+or a similar App to be able to install the chrome addon.
+
 You can configure which Feature to enable in the Settings Page.
 
 ✨ Features
@@ -43,6 +47,8 @@ Disclaimer
 
 Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
 --------------------------------------------  chrome:
+To use on Android Phone Download [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or a similar App to be able to install the chrome addon.
+
 You can configure which Feature to enable in the Settings Page.
 
 ✨ Features

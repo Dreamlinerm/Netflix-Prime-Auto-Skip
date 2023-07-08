@@ -3,6 +3,10 @@
 Recap:
 Automatisch Werbung, Intros, Rückblicke, Abspänne usw. auf Netflix, Prime video und Disney+ überspringen.
 --------------------------------------------
+Zur Verwendung auf einem Android Handy Laden Sie 
+<a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser" target="_blank">Kiwi Browser</a>
+oder eine ähnliche App herunter, um das Chrome-Addon installieren zu können.
+
 Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert werden sollen.
 
 ✨ Features
@@ -48,6 +52,8 @@ Haftungsausschluss
 Netflix, Amazon Prime-Video and Disney+ sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
 
 --------------------------------------------  chrome:
+Zur Verwendung auf einem Android Handy Laden Sie [Kiwi Browser] (https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) oder eine ähnliche App herunter, um das Chrome-Addon installieren zu können.
+
 Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert werden sollen.
 
 ✨ Features
