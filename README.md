@@ -19,6 +19,10 @@
 <img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
 <img src="https://img.shields.io/badge/installs-620-informational" >
 <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" >
+<br>
+<a href="https://paypal.me/MarvinKrebber">
+<img src="https://img.shields.io/badge/Donate-PayPal-blue.svg?style=flat&logo=paypal">
+</a>
 </div>
 
 ## Install in Browser
