@@ -5,6 +5,7 @@
   "scripts": {
     "start": "web-ext run --source-dir ./firefox/",
     "profile": "web-ext run --source-dir ./firefox/ --firefox-profile=test",
+    "build": "web-ext build --source-dir ./firefox/ --overwrite-dest && web-ext build --source-dir ./chrome/ --overwrite-dest",
     "lint": "web-ext lint --source-dir ./firefox/"
   },
   "repository": {
