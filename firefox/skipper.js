@@ -442,7 +442,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     if (video) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
-        let position = document.querySelector("[class*=infobar-container]")?.firstChild?.children[2];
+        let position = document.querySelector("[class*=infobar-container]")?.firstChild?.lastChild;
         if (position) {
           let slider = document.createElement("input");
           slider.id = "videoSpeedSlider";
