@@ -23,7 +23,7 @@ let isHotstar = /hotstar/i.test(hostname);
 
 let isEdge = /edg/i.test(ua);
 let isFirefox = /firefox/i.test(ua);
-const version = "1.0.49";
+const version = "1.0.50";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
@@ -442,7 +442,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     if (video) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
-        let position = document.querySelector("[class*=infobar-container]")?.firstChild?.children[2];
+        let position = document.querySelector("[class*=infobar-container]")?.firstChild?.lastChild;
         if (position) {
           let slider = document.createElement("input");
           slider.id = "videoSpeedSlider";
@@ -601,7 +601,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         resetLastATimeText();
         if (typeof adTime === "number" && adTime > 1) {
           // getting stuck loading when skipping ad longer than 100 seconds i think
-          let skipTime = adTime < 20 ? adTime - 0.1 : 20;
+          let skipTime = adTime <= 20 ? adTime - 0.1 : 20;
           video.currentTime += skipTime;
           log("FreeVee Ad skipped, length:", skipTime, "s");
           settings.Statistics.AmazonAdTimeSkipped += skipTime;
