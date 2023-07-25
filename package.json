@@ -4,6 +4,7 @@
   "description": "Streaming enhanced: Netflix Disney+ Prime Video",
   "scripts": {
     "start": "web-ext run --source-dir ./firefox/",
+    "profile": "web-ext run --source-dir ./firefox/ --firefox-profile=test",
     "lint": "web-ext lint --source-dir ./firefox/"
   },
   "repository": {
