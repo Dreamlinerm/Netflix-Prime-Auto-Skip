@@ -179,6 +179,9 @@ The freevee ad text contains the ad length which is matched by
 and then skipped by forwarding by the ad length -1 second which will fix a lot of issues.
 
 ## Run the Extension
+
+## Firefox 
+
 ### Install web-ext and Firefox
 ```npm install --global web-ext```
 ## Run
@@ -196,6 +199,11 @@ and then skipped by forwarding by the ad length -1 second which will fix a lot o
 Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then you can login into Netflix and Prime video in the profile and then every time you run the command you dont have to login again.
 
 ```npm run profile```
+
+## Chrome
+
+To run the extension in chrome you can just load the ``dist`` folder as an unpacked extension. But every time you modify the code you have to reload the extension.
+I primarily just develop in firefox and then copy the code into chrome and replace ``browser`` with ``chrome`` in the code.
 
 ## Disclaimer
 
