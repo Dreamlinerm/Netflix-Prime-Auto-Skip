@@ -1,0 +1,19 @@
+{
+  "name": "NetflixPrime@Autoskip.io",
+  "version": "1.0.50",
+  "description": "Streaming enhanced: Netflix Disney+ Prime Video",
+  "scripts": {
+    "start": "web-ext run --source-dir ./firefox/",
+    "lint": "web-ext lint --source-dir ./firefox/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip.git"
+  },
+  "author": "Marvin Krebber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues"
+  },
+  "homepage": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip#readme"
+}
