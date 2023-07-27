@@ -10,14 +10,14 @@
 </a>
 <img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
 <img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
-<img src="https://img.shields.io/badge/installs-1253-informational" >
+<img src="https://img.shields.io/badge/installs-1642-informational" >
 <img src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010" >
 <br>
 <a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
 <img src="Logos/chrome.svg" width="20px">
 </a>
 <img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
-<img src="https://img.shields.io/badge/installs-620-informational" >
+<img src="https://img.shields.io/badge/installs-748-informational" >
 <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" >
 <br>
 <a href="https://paypal.me/MarvinKrebber">
