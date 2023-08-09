@@ -9,6 +9,7 @@ assignees: Dreamlinerm
 
 **Describe the bug**
 A clear and concise description of what the bug is.
+What feature is the bug regardig? e.g. Ad skip
 
 **To Reproduce**
 Steps to reproduce the behavior:
