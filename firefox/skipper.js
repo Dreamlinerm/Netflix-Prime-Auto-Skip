@@ -23,7 +23,7 @@ let isHotstar = /hotstar/i.test(hostname);
 
 let isEdge = /edg/i.test(ua);
 let isFirefox = /firefox/i.test(ua);
-const version = "1.0.50";
+const version = "1.0.51";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
@@ -354,7 +354,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         return;
       }
       const video = document.querySelector("video");
-      const adLength = Number(document.querySelector(".ltr-puk2kp")?.textContent);
+      const adLength = Number(document.querySelector(".ltr-mmvz9h")?.textContent);
       if (video) {
         let playBackRate = 16;
         if (isEdge) playBackRate = 3;
@@ -415,7 +415,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
               speed.textContent = this.value / 10 + "x";
               video.playbackRate = this.value / 10;
               setVideoSpeed(this.value / 10);
-              console.log("videoSpeed1", videoSpeed);
             };
           }
         }
