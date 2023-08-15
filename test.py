@@ -29,26 +29,64 @@
 # test_eight_components()
 
 
+# from selenium import webdriver
+
+# url = "https://mail.google.com"
+# options = webdriver.FirefoxOptions()
+
+# # Create a new Firefox profile
+# profile = webdriver.FirefoxProfile(
+#     "/Users/Marvin/AppData/Roaming/Mozilla/Firefox/Profiles/3sifm4wj.UnitTest"
+# )
+
+# # Set preferences for the profile (example)
+# profile.set_preference("network.proxy.type", 1)
+# profile.set_preference("network.proxy.http", "proxy.example.com")
+# profile.set_preference("network.proxy.http_port", 8080)
+
+# # Install add-ons if needed
+# # profile.install_addon("/path/to/your/addon.xpi")
+
+# options.profile = profile
+
+# driver = webdriver.Firefox(options=options)
+# driver.get(url)
+# driver.implicitly_wait(5)
+# driver.quit()
+
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
 
-url = "https://mail.google.com"
-options = webdriver.FirefoxOptions()
+try:
+    # Fire a remote Firefox instance using geckodriver.
+    # You need to have Geckodriver in the same directory as the automation testing script OR
+    # you need to add it in the "path" environment variable OR
+    # you need to know the full path to the geckodriver executable file and use it as:
+    # driver = webdriver.Firefox(executable_path=r'your\path\geckodriver.exe')
 
-# Create a new Firefox profile
-profile = webdriver.FirefoxProfile(
-    "/Users/Marvin/AppData/Roaming/Mozilla/Firefox/Profiles/fd74ra9i.test"
-)
+    driver = webdriver.Firefox()
 
-# Set preferences for the profile (example)
-profile.set_preference("network.proxy.type", 1)
-profile.set_preference("network.proxy.http", "proxy.example.com")
-profile.set_preference("network.proxy.http_port", 8080)
+    # path to your downloaded Firefox addon extension XPI file
 
-# Install add-ons if needed
-# profile.install_addon("/path/to/your/addon.xpi")
+    extension_path = "NetflixPrime@Autoskip.io.xpi"
 
-options.profile = profile
+    # using webdriver's install_addon API to install the downloaded Firefox extension
 
-driver = webdriver.Firefox(options=options)
-driver.get(url)
-driver.quit()
+    driver.install_addon(extension_path, temporary=True)
+
+    # Opening the Firefox support page to verify that addon is installed
+
+    driver.get("about:addons")
+
+    # xpath to the section on the support page that lists installed extension
+    driver.implicitly_wait(500)
+except Exception as E:
+    print(E)
+
+finally:
+    # exiting the fired Mozilla Firefox selenium webdriver instance
+
+    driver.quit()
+
+    # End Of Script
