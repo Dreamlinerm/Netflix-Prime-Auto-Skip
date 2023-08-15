@@ -205,6 +205,23 @@ Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then 
 To run the extension in chrome you can just load the ``dist`` folder as an unpacked extension. But every time you modify the code you have to reload the extension.
 I primarily just develop in firefox and then copy the code into chrome and replace ``browser`` with ``chrome`` in the code.
 
+## Test the Extension
+
+Table of test cases for each feature. S=season, E=episode of the show.
+
+| Feature | Netflix | Prime Video | Disney+ & Hotstar |
+| --- | --- | --- | --- |
+| Intro | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>| ✅  <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>| ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> |
+| Recaps | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>| ✅<a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a> | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>|
+| Credits | ✅ | ✅ | ✅ |
+| Ads | ✅ | ✅ <a href="https://www.amazon.de/Es-war-einmal/dp/B00GNWD4H0">Grimm</a> | ❌ |
+| Add Speed Slider | ✅ | ✅ | ✅ |
+| Play on Fullscreen | ✅ | ✅ | ✅ |
+| Skip Self Ads | ❌ | ✅ | ❌ |
+| Paid Content | ❌ | ✅ | ❌ |
+| Inactivity Warning | ✅ | ❌ | ❌ |
+| Auto pick last profile | ✅ | ❌ | ❌ |
+
 ## Disclaimer
 
 Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
