@@ -140,15 +140,7 @@ def Amazon_Prime():
     script = "document.querySelector('" + AmazonVideoClass + "').currentTime = 2463"
     driver.execute_script(script)
 
-    driver.implicitly_wait(3)
-    try:
-        adPanel = driver.find_element(
-            by=By.CSS_SELECTOR, value=".atvwebplayersdk-nextupcard-button"
-        )
-    except:
-        print("no Adpanel found")
-
-    wait = WebDriverWait(driver, timeout=2)
+    wait = WebDriverWait(driver, timeout=5)
     try:
         wait.until(lambda driver: video.get_property("currentTime") < 10)
         print("✅: Skip Credits")
@@ -168,15 +160,8 @@ def Amazon_Prime():
 
     # Skip Recap Test
     wait = WebDriverWait(driver, timeout=5)
-    wait.until(lambda driver: video.get_property("currentTime") > 0)
-
-    RecapSkipButton = driver.find_element(
-        by=By.CSS_SELECTOR, value=".atvwebplayersdk-skipelement-button"
-    )
-    time = video.get_property("currentTime")
-
     try:
-        assert time >= 37
+        wait.until(lambda driver: video.get_property("currentTime") >= 37)
         print("✅: Skip Recap")
         output[2][2] = "✅"
     except Exception as e:
