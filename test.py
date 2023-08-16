@@ -323,8 +323,8 @@ x = input()
 if x == "p" or x == "":
     print("Amazon Prime:")
     Amazon_Ad()
-    # Amazon_Prime()
-    # Amazon_PaidContent()
+    Amazon_Prime()
+    Amazon_PaidContent()
 
 if x == "n" or x == "":
     print("Netflix:")
@@ -340,4 +340,4 @@ format_row = "{:>15}" * len(output[0])
 for row in output:
     print(format_row.format(*row))
 
-# driver.quit()
+driver.quit()
