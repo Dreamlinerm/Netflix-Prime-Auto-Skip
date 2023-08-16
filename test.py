@@ -48,6 +48,7 @@ def Amazon_Prime():
     try:
         assert len(t) == 1
         print("✅: Speed Slider")
+        output[5][2] = "✅"
     except Exception as e:
         print("❌: Speed Slider")
         print(e)
@@ -58,6 +59,7 @@ def Amazon_Prime():
     try:
         assert time >= 16
         print("✅: Skip Intro")
+        output[1][2] = "✅"
     except Exception as e:
         print("❌: Skip Intro")
         print("time: " + str(time))
@@ -78,6 +80,7 @@ def Amazon_Prime():
     try:
         wait.until(lambda driver: video.get_property("currentTime") < 10)
         print("✅: Skip Credits")
+        output[3][2] = "✅"
     except Exception as e:
         print("❌: Skip Credits")
         time = video.get_property("currentTime")
@@ -103,6 +106,7 @@ def Amazon_Prime():
     try:
         assert time >= 37
         print("✅: Skip Recap")
+        output[2][2] = "✅"
     except Exception as e:
         print("❌: Skip Recap")
         print("time: " + str(time))
@@ -130,6 +134,7 @@ def Amazon_Ad():
     try:
         wait.until(lambda driver: video.get_property("currentTime") > time)
         print("✅: Skip Ad")
+        output[4][2] = "✅"
     except Exception as e:
         print("❌: Skip Ad")
         print(e)
@@ -144,6 +149,7 @@ def Amazon_PaidContent():
     try:
         assert len(t) == 0
         print("✅: No paid content")
+        output[6][2] = "✅"
     except Exception as e:
         print("❌: Paid content with length" + str(len(t)))
         print(e)
@@ -189,6 +195,8 @@ def Disney_Intro():
     try:
         wait.until(lambda driver: video.get_property("currentTime") >= 106)
         print("✅: Skip Intro/Recap")
+        output[1][3] = "✅"
+        output[2][3] = "✅"
     except Exception as e:
         print("❌: Skip Intro/Recap")
         print("time: " + str(time))
@@ -230,15 +238,26 @@ def Disney_Credits():
     try:
         assert t < 5
         print("✅: Skip Credits")
+        output[3][3] = "✅"
     except Exception as e:
         print("❌: Skip Credits")
         print("time: " + str(t))
         print(e)
 
 
+output = [
+    ["", "Netflix", "Prime Video", "Disney+"],
+    ["Intro", "❌", "❌", "❌"],
+    ["Recaps", "❌", "❌", "❌"],
+    ["Credits", "❌", "❌", "❌"],
+    ["Ads", "❌", "❌", ""],
+    ["Speed Slider", "❌", "❌", "❌"],
+    ["Paid Content", "", "❌", ""],
+]
+
 print("Amazon Prime:")
-# Amazon_Prime()
-# Amazon_PaidContent()
+Amazon_Prime()
+Amazon_PaidContent()
 # Amazon_Ad()
 
 print("Netflix:")
@@ -247,5 +266,9 @@ print("Netflix:")
 print("Disney:")
 Disney_Intro()
 Disney_Credits()
+
+format_row = "{:>12}" * len(output[0])
+for row in output:
+    print(format_row.format(*row))
 
 # driver.quit()
