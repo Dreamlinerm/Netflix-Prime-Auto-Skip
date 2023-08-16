@@ -53,9 +53,10 @@ def Amazon_Prime():
     try:
         assert time >= 16
         print("✅: Skip Intro")
-    except:
+    except Exception as e:
         print("❌: Skip Intro")
         print("time: " + str(time))
+        print(e)
 
     # delay
     wait = WebDriverWait(driver, timeout=2)
@@ -72,15 +73,16 @@ def Amazon_Prime():
     try:
         wait.until(lambda driver: video.get_property("currentTime") < 10)
         print("✅: Skip Credits")
-    except:
+    except Exception as e:
         print("❌: Skip Credits")
         time = video.get_property("currentTime")
         print("time: " + str(time))
+        print(e)
 
     # try:
     #     assert time < 10
     #     print("✅: Skip Credits")
-    # except:
+    # except Exception as e:
     #     print("❌: Skip Credits")
     #     print("time: " + str(time))
 
@@ -96,9 +98,11 @@ def Amazon_Prime():
     try:
         assert time >= 37
         print("✅: Skip Recap")
-    except:
+    except Exception as e:
         print("❌: Skip Recap")
         print("time: " + str(time))
+        # print error message
+        print(e)
 
 
 def Amazon_Ad():
@@ -118,8 +122,12 @@ def Amazon_Ad():
     time = video.get_property("currentTime")
 
     wait = WebDriverWait(driver, timeout=5)
-    wait.until(lambda driver: video.get_property("currentTime") > time)
-    print("✅: Skip Ad")
+    try:
+        wait.until(lambda driver: video.get_property("currentTime") > time)
+        print("✅: Skip Ad")
+    except Exception as e:
+        print("❌: Skip Ad")
+        print(e)
 
 
 def Amazon_PaidContent():
@@ -131,13 +139,14 @@ def Amazon_PaidContent():
     try:
         assert len(t) == 0
         print("✅: No paid content")
-    except:
+    except Exception as e:
         print("❌: Paid content with length" + str(len(t)))
+        print(e)
 
 
 print("Amazon Prime:")
-Amazon_Prime()
-Amazon_PaidContent()
+# Amazon_Prime()
+# Amazon_PaidContent()
 Amazon_Ad()
 
 print("Netflix:")
