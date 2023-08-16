@@ -23,7 +23,7 @@ let isHotstar = /hotstar/i.test(hostname);
 
 let isEdge = /edg/i.test(ua);
 let isFirefox = /firefox/i.test(ua);
-const version = "1.0.51";
+const version = "1.0.52";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
@@ -525,13 +525,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     if (button) {
       let video = document.querySelector(AmazonVideoClass);
       const time = video.currentTime;
-      button.click();
-      log("Intro skipped", button);
-      //delay where the video is loaded
-      setTimeout(function () {
-        AmazonGobackbutton(video, time, video.currentTime);
-        addIntroTimeSkipped(time, video.currentTime);
-      }, 50);
+      if (time) {
+        button.click();
+        log("Intro skipped", button);
+        //delay where the video is loaded
+        setTimeout(function () {
+          AmazonGobackbutton(video, time, video.currentTime);
+          addIntroTimeSkipped(time, video.currentTime);
+        }, 50);
+      }
     }
   }
   reverseButton = false;
@@ -567,24 +569,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
 
   const AmazonSkipCreditsConfig = { attributes: true, attributeFilter: [".nextupcard"], subtree: true, childList: true, attributeOldValue: false };
-  const AmazonSkipCredits = new RegExp("nextupcard", "i");
-  const AmazonSkipCredits2 = new RegExp("nextupcard-button", "i");
   const AmazonSkipCreditsObserver = new MutationObserver(Amazon_Credits);
   function Amazon_Credits(mutations, observer) {
-    for (let mutation of mutations) {
-      if (AmazonSkipCredits.test(mutation.target.classList.toString())) {
-        for (let button of mutation?.target?.firstChild?.childNodes) {
-          if (button && AmazonSkipCredits2.test(button.classList.toString())) {
-            // only skipping to next episode not an entirely new series
-            let newEpNumber = document.querySelector("[class*=nextupcard-episode]");
-            if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
-              button.click();
-              increaseBadge();
-              log("skipped Credits", button);
-            }
-            return;
-          }
-        }
+    let button = document.querySelector("[class*=nextupcard-button]");
+    if (button) {
+      // only skipping to next episode not an entirely new series
+      let newEpNumber = document.querySelector("[class*=nextupcard-episode]");
+      if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
+        button.click();
+        increaseBadge();
+        log("skipped Credits", button);
       }
     }
   }
@@ -600,7 +594,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         resetLastATimeText();
         if (typeof adTime === "number" && adTime > 1) {
           // getting stuck loading when skipping ad longer than 100 seconds i think
-          let skipTime = adTime <= 20 ? adTime - 0.1 : 20;
+          let skipTime = adTime <= 20 ? adTime - 1 : 20;
           video.currentTime += skipTime;
           log("FreeVee Ad skipped, length:", skipTime, "s");
           settings.Statistics.AmazonAdTimeSkipped += skipTime;
