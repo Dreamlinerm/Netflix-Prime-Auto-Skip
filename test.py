@@ -179,7 +179,7 @@ def Disney_Intro():
         driver.execute_script(
             "document.querySelector('.control-icon-btn.rwd-10sec-icon').click()"
         )
-        time.sleep(1)
+        time.sleep(0.5)
         print("revert")
     print("time " + str(video.get_property("currentTime")))
     wait = WebDriverWait(driver, timeout=20)
@@ -188,10 +188,51 @@ def Disney_Intro():
     wait = WebDriverWait(driver, timeout=5)
     try:
         wait.until(lambda driver: video.get_property("currentTime") >= 106)
-        print("✅: Skip Intro")
+        print("✅: Skip Intro/Recap")
     except Exception as e:
-        print("❌: Skip Intro")
+        print("❌: Skip Intro/Recap")
         print("time: " + str(time))
+        print(e)
+
+
+def Disney_Credits():
+    # Skip Credits Test
+    # mickey mouse 5 min
+    driver.get(
+        "https://www.disneyplus.com/en-gb/video/f0a6ddaf-d754-45e2-ab19-86e678047a17"
+    )
+
+    # play video
+    driver.implicitly_wait(5)
+    playButton = driver.find_elements(
+        by=By.XPATH, value="//div[@data-testid='episode-s1-e2']"
+    )
+    if len(playButton) > 0:
+        playButton[0].click()
+        print("clicked play Button")
+    else:
+        print("no play button found")
+    video = driver.find_element(by=By.TAG_NAME, value="video")
+    while video.get_property("currentTime") < 220:
+        driver.execute_script(
+            "document.querySelector('.control-icon-btn.ff-10sec-icon').click()"
+        )
+        time.sleep(0.2)
+    driver.implicitly_wait(100)
+    nextEpisodeButton = driver.find_element(
+        by=By.XPATH, value="//button[@data-gv2elementkey='playNext']"
+    )
+    print("found playNext")
+    # driver.execute_script("document.querySelector('video').playbackRate = 1")
+    time.sleep(1)
+    video = driver.find_element(by=By.TAG_NAME, value="video")
+    t = video.get_property("currentTime")
+    try:
+        assert t < 5
+        print("✅: Skip Credits")
+    except Exception as e:
+        print("❌: Skip Credits")
+        print("time: " + str(t))
         print(e)
 
 
@@ -205,4 +246,6 @@ print("Netflix:")
 
 print("Disney:")
 Disney_Intro()
+Disney_Credits()
+
 # driver.quit()
