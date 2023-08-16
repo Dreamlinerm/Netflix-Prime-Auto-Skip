@@ -184,7 +184,6 @@ def Amazon_Ad():
     playButton.click()
 
     v = "//video[not(@preload='auto')]"
-    print(v)
     video = driver.find_element(by=By.XPATH, value=v)
 
     script = "document.querySelector('" + AmazonVideoClass + "').currentTime = 719"
@@ -237,6 +236,7 @@ def Disney_Intro():
     try:
         assert len(t) == 1
         print("✅: Speed Slider")
+        output[5][3] = "✅"
     except Exception as e:
         print("❌: Speed Slider")
         print(e)
@@ -318,20 +318,20 @@ output = [
 ]
 
 print("Amazon Prime:")
-# Amazon_Prime()
-# Amazon_PaidContent()
-# Amazon_Ad()
+Amazon_Ad()
+Amazon_Prime()
+Amazon_PaidContent()
 
 print("Netflix:")
-# Netflix_Profile()
+Netflix_Profile()
 Netflix_intro()
 
 print("Disney:")
-# Disney_Intro()
-# Disney_Credits()
+Disney_Intro()
+Disney_Credits()
 
 format_row = "{:>15}" * len(output[0])
 for row in output:
     print(format_row.format(*row))
 
-# driver.quit()
+driver.quit()
