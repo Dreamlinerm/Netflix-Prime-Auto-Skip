@@ -525,13 +525,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     if (button) {
       let video = document.querySelector(AmazonVideoClass);
       const time = video.currentTime;
-      button.click();
-      log("Intro skipped", button);
-      //delay where the video is loaded
-      setTimeout(function () {
-        AmazonGobackbutton(video, time, video.currentTime);
-        addIntroTimeSkipped(time, video.currentTime);
-      }, 50);
+      if (time) {
+        button.click();
+        log("Intro skipped", button);
+        //delay where the video is loaded
+        setTimeout(function () {
+          AmazonGobackbutton(video, time, video.currentTime);
+          addIntroTimeSkipped(time, video.currentTime);
+        }, 50);
+      }
     }
   }
   reverseButton = false;
