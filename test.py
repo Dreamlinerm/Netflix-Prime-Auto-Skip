@@ -15,16 +15,52 @@ extension_path = "NetflixPrime@Autoskip.io.xpi"
 driver.install_addon(extension_path, temporary=True)
 driver.implicitly_wait(500)
 
-# ## Netflix tests
-# driver.get("https://www.netflix.com/watch/80011385")
-# # click on profile-icon class
-# # driver.find_element(by=By.CLASS_NAME, value="profile-icon").click()
-# # click on video element
-# driver.find_element(by=By.CLASS_NAME, value="watch-video--autoplay-blocked").click()
 
-# video = driver.find_element(by=By.TAG_NAME, value="video")
-# print(video)
-# video.currentTime = 33  # does not work on netflix
+# ## Netflix tests
+def Netflix_intro():
+    driver.get("https://www.netflix.com/watch/80011385?trackId=14277283")
+    # click on profile-icon class
+    # driver.find_element(by=By.CLASS_NAME, value="profile-icon").click()
+    # click on video element
+    driver.find_element(by=By.CLASS_NAME, value="watch-video--autoplay-blocked").click()
+
+    # profile auto pick
+    time.sleep(1)
+    driver.implicitly_wait(1)
+    profileNames = driver.find_elements(by=By.CSS_SELECTOR, value=".profile-name")
+    try:
+        assert len(profileNames) == 0
+        print("✅: Profile Auto Pick")
+        output[7][1] = "✅"
+    except Exception as e:
+        print("❌: Profile Auto Pick")
+        print(e)
+
+    video = driver.find_element(by=By.TAG_NAME, value="video")
+    # video.currentTime = 33  # does not work on netflix
+    driver.implicitly_wait(2)
+    forwardButton = driver.find_element(
+        by=By.XPATH, value="//button[@data-uia='control-forward10']"
+    )
+    backwardButton = driver.find_element(
+        by=By.XPATH, value="//button[@data-uia='control-back10']"
+    )
+    while video.get_property("currentTime") <= 32:
+        forwardButton.click()
+        time.sleep(0.3)
+
+    while video.get_property("currentTime") >= 62:
+        backwardButton.click()
+        time.sleep(0.3)
+    t = video.get_property("currentTime")
+    time.sleep(1)
+    try:
+        assert t >= 62
+        print("✅: Skip Intro")
+        output[1][1] = "✅"
+    except Exception as e:
+        print("❌: Skip Intro")
+        print(e)
 
 
 ## Amazon Prime tests
@@ -185,8 +221,7 @@ def Disney_Intro():
         driver.execute_script(
             "document.querySelector('.control-icon-btn.rwd-10sec-icon').click()"
         )
-        time.sleep(0.5)
-        print("revert")
+        time.sleep(0.3)
     print("time " + str(video.get_property("currentTime")))
     wait = WebDriverWait(driver, timeout=20)
     wait.until(lambda driver: video.get_property("currentTime") >= 80)
@@ -250,24 +285,25 @@ output = [
     ["Intro", "❌", "❌", "❌"],
     ["Recaps", "❌", "❌", "❌"],
     ["Credits", "❌", "❌", "❌"],
-    ["Ads", "❌", "❌", ""],
+    ["Ads", "❕", "❌", "➖"],
     ["Speed Slider", "❌", "❌", "❌"],
-    ["Paid Content", "", "❌", ""],
+    ["Paid Content", "➖", "❌", "➖"],
+    ["Profile", "❌", "➖", "➖"],
 ]
 
 print("Amazon Prime:")
-Amazon_Prime()
-Amazon_PaidContent()
+# Amazon_Prime()
+# Amazon_PaidContent()
 # Amazon_Ad()
 
 print("Netflix:")
-
+Netflix_intro()
 
 print("Disney:")
-Disney_Intro()
-Disney_Credits()
+# Disney_Intro()
+# Disney_Credits()
 
-format_row = "{:>12}" * len(output[0])
+format_row = "{:>15}" * len(output[0])
 for row in output:
     print(format_row.format(*row))
 
