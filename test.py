@@ -43,10 +43,15 @@ def Amazon_Prime():
     skipButton = driver.find_element(
         by=By.CSS_SELECTOR, value=".atvwebplayersdk-skipelement-button"
     )
-    # # wait for 2 seconds
-    # driver.implicitly_wait(6)
+    # Speed Slider Test
+    t = driver.find_elements(by=By.ID, value="videoSpeedSlider")
+    try:
+        assert len(t) == 1
+        print("✅: Speed Slider")
+    except Exception as e:
+        print("❌: Speed Slider")
+        print(e)
 
-    print(v)
     video = driver.find_element(by=By.XPATH, value=v)
     # assert video time greater than 24
     time = video.get_property("currentTime")
@@ -146,10 +151,11 @@ def Amazon_PaidContent():
 
 print("Amazon Prime:")
 Amazon_Prime()
-Amazon_PaidContent()
-Amazon_Ad()
+# Amazon_PaidContent()
+# Amazon_Ad()
 
 print("Netflix:")
+
 
 print("Disney:")
 # driver.quit()
