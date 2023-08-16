@@ -22,7 +22,7 @@ def Netflix_intro():
     # click on profile-icon class
     # driver.find_element(by=By.CLASS_NAME, value="profile-icon").click()
     # click on video element
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(4)
     driver.find_element(by=By.CLASS_NAME, value="watch-video--autoplay-blocked").click()
 
     # profile auto pick
