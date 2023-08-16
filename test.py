@@ -317,18 +317,24 @@ output = [
     ["Profile", "❌", "➖", "➖"],
 ]
 
+print("What do you wanna Test? Netflix, Disney, Prime, all(N,P,D,A,'')")
+x = input()
+
 print("Amazon Prime:")
-Amazon_Ad()
-Amazon_Prime()
-Amazon_PaidContent()
+if x == "P" or x == "A" or x == "":
+    Amazon_Ad()
+    Amazon_Prime()
+    Amazon_PaidContent()
 
 print("Netflix:")
-Netflix_Profile()
-Netflix_intro()
+if x == "N" or x == "A" or x == "":
+    Netflix_Profile()
+    Netflix_intro()
 
 print("Disney:")
-Disney_Intro()
-Disney_Credits()
+if x == "D":
+    Disney_Intro()
+    Disney_Credits()
 
 format_row = "{:>15}" * len(output[0])
 for row in output:
