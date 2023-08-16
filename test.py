@@ -145,8 +145,8 @@ def Amazon_PaidContent():
 
 
 print("Amazon Prime:")
-# Amazon_Prime()
-# Amazon_PaidContent()
+Amazon_Prime()
+Amazon_PaidContent()
 Amazon_Ad()
 
 print("Netflix:")
