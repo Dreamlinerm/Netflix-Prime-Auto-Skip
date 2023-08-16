@@ -52,14 +52,15 @@ def Netflix_intro():
     while video.get_property("currentTime") >= 62:
         backwardButton.click()
         time.sleep(0.3)
-    t = video.get_property("currentTime")
     time.sleep(1)
+    t = video.get_property("currentTime")
     try:
-        assert t >= 58
+        assert t >= 62
         print("✅: Skip Intro")
         output[1][1] = "✅"
     except Exception as e:
         print("❌: Skip Intro")
+        print("time: " + str(t))
         print(e)
 
     # Speed Slider Test
