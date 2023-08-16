@@ -3,6 +3,7 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 import time
+import sys
 
 ffOptions = Options()
 
@@ -311,21 +312,18 @@ output = [
     ["Profile", "❌", "➖", "➖"],
 ]
 
-print("What do you wanna Test? Netflix, Disney, Prime, all(n,p,d,'')")
-x = input()
-
-if x == "p" or x == "":
+if len(sys.argv) == 0 or "p" in sys.argv:
     print("Amazon Prime:")
     Amazon_Ad()
     Amazon_Prime()
     Amazon_PaidContent()
 
-if x == "n" or x == "":
+if len(sys.argv) == 0 or "n" in sys.argv:
     print("Netflix:")
     Netflix_Profile()
     Netflix_intro()
 
-if x == "d" or x == "":
+if len(sys.argv) == 0 or "d" in sys.argv:
     print("Disney:")
     Disney_Intro()
     Disney_Credits()

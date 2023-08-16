@@ -211,6 +211,14 @@ To run the automated tests run:
 1. ```npm run build```
 2. copy the web-ext artifact into the normal folder and rename it to NetflixPrime@Autoskip.io.xpi
 3. ```npm run test```
+
+Cli ARGS:
+- none : all tests
+- 'n': Netflix tests
+- 'p': Prime Video tests
+- 'd': Disney tests
+
+```python test.py n p d```
 ### setup
 
 - insert your own firefox profile name to be logged into every platform in the ``test.js`` file.
