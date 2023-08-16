@@ -154,15 +154,25 @@ def Disney_Intro():
         "https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6"
     )
     # play video
-    driver.implicitly_wait(1)
-    playButton = driver.find_elements(by=By.CLASS_NAME, value="button--play")
+    driver.implicitly_wait(5)
+    playButton = driver.find_elements(by=By.CLASS_NAME, value="slick-slide")
     if len(playButton) > 0:
-        playButton[0].click()
+        playButton[1].click()
         print("clicked play Button")
+    else:
+        print("no play button found")
 
     video = driver.find_element(by=By.TAG_NAME, value="video")
-    script = "document.querySelector('video').currentTime = 80"
-    driver.execute_script(script)
+    while video.get_property("currentTime") > 80:
+        driver.execute_script(
+            "document.querySelector('.control-icon-btn.rwd-10sec-icon').click()"
+        )
+        time.sleep(1)
+        print("revert")
+    print("time " + str(video.get_property("currentTime")))
+    wait = WebDriverWait(driver, timeout=20)
+    wait.until(lambda driver: video.get_property("currentTime") >= 80)
+
     wait = WebDriverWait(driver, timeout=5)
     try:
         wait.until(lambda driver: video.get_property("currentTime") >= 106)
