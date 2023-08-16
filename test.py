@@ -328,7 +328,7 @@ if len(sys.argv) == 0 or "d" in sys.argv:
     Disney_Intro()
     Disney_Credits()
 
-format_row = "{:>15}" * len(output[0])
+format_row = "{:>12}" + "{:^12}" * (len(output[0]) - 1)
 for row in output:
     print(format_row.format(*row))
 
