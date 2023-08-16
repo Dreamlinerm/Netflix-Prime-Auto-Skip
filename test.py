@@ -107,6 +107,7 @@ def Amazon_Prime():
         by=By.CSS_SELECTOR, value=".atvwebplayersdk-skipelement-button"
     )
     # Speed Slider Test
+    driver.implicitly_wait(3)
     t = driver.find_elements(by=By.ID, value="videoSpeedSlider")
     try:
         assert len(t) == 1
@@ -136,6 +137,7 @@ def Amazon_Prime():
     script = "document.querySelector('" + AmazonVideoClass + "').currentTime = 2463"
     driver.execute_script(script)
 
+    driver.implicitly_wait(10)
     adPanel = driver.find_element(
         by=By.CSS_SELECTOR, value=".atvwebplayersdk-nextupcard-button"
     )
