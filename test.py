@@ -155,13 +155,25 @@ def Disney_Intro():
     )
     # play video
     driver.implicitly_wait(5)
-    playButton = driver.find_elements(by=By.CLASS_NAME, value="slick-slide")
+    playButton = driver.find_elements(
+        by=By.XPATH, value="//div[@data-testid='episode-s1-e2']"
+    )
     if len(playButton) > 0:
-        playButton[1].click()
+        playButton[0].click()
         print("clicked play Button")
     else:
         print("no play button found")
 
+    # Speed Slider Test
+    t = driver.find_elements(by=By.ID, value="videoSpeedSlider")
+    try:
+        assert len(t) == 1
+        print("✅: Speed Slider")
+    except Exception as e:
+        print("❌: Speed Slider")
+        print(e)
+
+    # Skip Intro Test
     video = driver.find_element(by=By.TAG_NAME, value="video")
     while video.get_property("currentTime") > 80:
         driver.execute_script(
