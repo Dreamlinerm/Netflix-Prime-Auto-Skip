@@ -68,18 +68,21 @@ def Netflix_intro():
     Speed_Slider(1)
 
 
-def Speed_Slider(position):
+def Speed_Slider(position, isPrime=False):
     # Speed Slider Test
+    driver.implicitly_wait(3)
     t = driver.find_elements(by=By.ID, value="videoSpeedSlider")
     # set value to 20
     script = "document.querySelector('#videoSpeedSlider').value = 20"
     driver.execute_script(script)
 
     # create oninput event
-
     inputEvent = "document.querySelector('#videoSpeedSlider').dispatchEvent(new Event('input', { bubbles: true,cancelable: true,}));"
     driver.execute_script(inputEvent)
-    video = driver.find_element(by=By.TAG_NAME, value="video")
+    if isPrime:
+        video = driver.find_element(by=By.XPATH, value=v)
+    else:
+        video = driver.find_element(by=By.TAG_NAME, value="video")
 
     try:
         assert len(t) == 1
@@ -88,6 +91,8 @@ def Speed_Slider(position):
         output[5][position] = "✅"
     except Exception as e:
         print("❌: Speed Slider")
+        print("playbackRate: " + str(video.get_property("playbackRate")))
+        print("len(t): " + str(len(t)))
         print(e)
 
     script = 'document.querySelector("#videoSpeedSlider").value = 10'
@@ -120,29 +125,28 @@ def Amazon_Prime():
     driver.get(
         "https://www.amazon.de/gp/video/detail/B07FMF18GN/ref=atv_dp_btf_el_prime_sd_tv_resume_t1ALAAAAAA0wr0?autoplay=1&t=0"
     )
-    # driver.find_element(by=By.XPATH, value="//span[text()='S3 F3']").click()
+    video = driver.find_element(by=By.XPATH, value=v)
+
     playButton = driver.find_element(by=By.XPATH, value="//button[@aria-label='Play']")
     playButton.click()
     skipButton = driver.find_element(
         by=By.CSS_SELECTOR, value=".atvwebplayersdk-skipelement-button"
     )
     # Speed Slider Test
-    driver.implicitly_wait(3)
-    Speed_Slider(2)
+    Speed_Slider(2, True)
 
-    video = driver.find_element(by=By.XPATH, value=v)
     # delay
     wait = WebDriverWait(driver, timeout=5)
     wait.until(lambda driver: video.get_property("currentTime") > 4)
     # assert video time greater than 24
-    time = video.get_property("currentTime")
+    t = video.get_property("currentTime")
     try:
-        assert time >= 16
+        assert t >= 16
         print("✅: Skip Intro")
         output[1][2] = "✅"
     except Exception as e:
         print("❌: Skip Intro")
-        print("time: " + str(time))
+        print("time: " + str(t))
         print(e)
 
     # delay
@@ -160,8 +164,7 @@ def Amazon_Prime():
         output[3][2] = "✅"
     except Exception as e:
         print("❌: Skip Credits")
-        time = video.get_property("currentTime")
-        print("time: " + str(time))
+        print("time: " + str(video.get_property("currentTime")))
         print(e)
 
     # Skip Recap Test
@@ -181,11 +184,10 @@ def Amazon_Ad():
     driver.get(
         "https://www.amazon.de/gp/video/detail/B00IAJMINK/ref=atv_dp_btf_el_3p_sd_tv_resume_t1AKAAAAAA0wr0?autoplay=1&t=43"
     )
+    video = driver.find_element(by=By.XPATH, value=v)
+
     playButton = driver.find_element(by=By.XPATH, value="//button[@aria-label='Play']")
     playButton.click()
-
-    v = "//video[not(@preload='auto')]"
-    video = driver.find_element(by=By.XPATH, value=v)
 
     script = "document.querySelector('" + AmazonVideoClass + "').currentTime = 719"
     driver.execute_script(script)
