@@ -4,5 +4,9 @@
     "Freevee"
   ],
   "editor.stickyScroll.enabled": true,
-  "task.allowAutomaticTasks": "on"
+  "task.allowAutomaticTasks": "on",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.formatting.provider": "none"
 }
