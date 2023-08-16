@@ -26,15 +26,15 @@ def Netflix_intro():
 
     # profile auto pick
     time.sleep(1)
-    driver.implicitly_wait(1)
-    profileNames = driver.find_elements(by=By.CSS_SELECTOR, value=".profile-name")
-    try:
-        assert len(profileNames) == 0
-        print("✅: Profile Auto Pick")
-        output[7][1] = "✅"
-    except Exception as e:
-        print("❌: Profile Auto Pick")
-        print(e)
+    # driver.implicitly_wait(1)
+    # profileNames = driver.find_elements(by=By.CSS_SELECTOR, value=".profile-name")
+    # try:
+    #     assert len(profileNames) == 0
+    #     print("✅: Profile Auto Pick")
+    #     output[7][1] = "✅"
+    # except Exception as e:
+    #     print("❌: Profile Auto Pick")
+    #     print(e)
 
     video = driver.find_element(by=By.TAG_NAME, value="video")
     # video.currentTime = 33  # does not work on netflix
@@ -60,6 +60,21 @@ def Netflix_intro():
         output[1][1] = "✅"
     except Exception as e:
         print("❌: Skip Intro")
+        print(e)
+
+
+def Netflix_Profile():
+    driver.get("https://www.netflix.com/profiles/manage")
+    driver.implicitly_wait(2)
+    driver.find_element(by=By.CLASS_NAME, value="profile-button").click()
+    time.sleep(1)
+    profileNames = driver.find_elements(by=By.CSS_SELECTOR, value=".profile-name")
+    try:
+        assert len(profileNames) == 0
+        print("✅: Profile Auto Pick")
+        output[7][1] = "✅"
+    except Exception as e:
+        print("❌: Profile Auto Pick")
         print(e)
 
 
@@ -297,7 +312,8 @@ print("Amazon Prime:")
 # Amazon_Ad()
 
 print("Netflix:")
-Netflix_intro()
+Netflix_Profile()
+# Netflix_intro()
 
 print("Disney:")
 # Disney_Intro()
