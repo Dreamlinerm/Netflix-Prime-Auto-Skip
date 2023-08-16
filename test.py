@@ -151,7 +151,7 @@ def Amazon_Prime():
 
     # delay
     wait = WebDriverWait(driver, timeout=2)
-    wait.until(lambda driver: video.get_property("currentTime") > time)
+    wait.until(lambda driver: video.get_property("currentTime") > t)
     # Skip Credits test
 
     script = "document.querySelector('" + AmazonVideoClass + "').currentTime = 2463"
