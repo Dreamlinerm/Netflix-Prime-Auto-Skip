@@ -22,6 +22,7 @@ def Netflix_intro():
     # click on profile-icon class
     # driver.find_element(by=By.CLASS_NAME, value="profile-icon").click()
     # click on video element
+    driver.implicitly_wait(2)
     driver.find_element(by=By.CLASS_NAME, value="watch-video--autoplay-blocked").click()
 
     # profile auto pick
@@ -49,7 +50,7 @@ def Netflix_intro():
         forwardButton.click()
         time.sleep(0.3)
 
-    while video.get_property("currentTime") >= 62:
+    while video.get_property("currentTime") >= 64:
         backwardButton.click()
         time.sleep(0.3)
     time.sleep(1)
@@ -317,22 +318,22 @@ output = [
     ["Profile", "❌", "➖", "➖"],
 ]
 
-print("What do you wanna Test? Netflix, Disney, Prime, all(N,P,D,A,'')")
+print("What do you wanna Test? Netflix, Disney, Prime, all(n,p,d,'')")
 x = input()
 
-print("Amazon Prime:")
-if x == "P" or x == "A" or x == "":
+if x == "p" or x == "":
+    print("Amazon Prime:")
     Amazon_Ad()
     Amazon_Prime()
     Amazon_PaidContent()
 
-print("Netflix:")
-if x == "N" or x == "A" or x == "":
+if x == "n" or x == "":
+    print("Netflix:")
     Netflix_Profile()
     Netflix_intro()
 
-print("Disney:")
-if x == "D":
+if x == "d" or x == "":
+    print("Disney:")
     Disney_Intro()
     Disney_Credits()
 
