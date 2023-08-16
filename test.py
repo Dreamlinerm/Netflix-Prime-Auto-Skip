@@ -221,16 +221,30 @@ def Disney_Intro():
 
     # Speed Slider Test
     t = driver.find_elements(by=By.ID, value="videoSpeedSlider")
+    # set value to 20
+    script = 'document.querySelector("#videoSpeedSlider")?.value = 20'
+    driver.execute_script(script)
+
+    # create oninput event
+
+    inputEvent = "document.querySelector('#videoSpeedSlider').dispatchEvent(new Event('input', { bubbles: true,cancelable: true,}));"
+    driver.execute_script(inputEvent)
+    video = driver.find_element(by=By.TAG_NAME, value="video")
+
     try:
         assert len(t) == 1
+        assert video.get_property("playbackRate") == 2
         print("✅: Speed Slider")
         output[5][3] = "✅"
     except Exception as e:
         print("❌: Speed Slider")
         print(e)
 
+    script = 'document.querySelector("#videoSpeedSlider")?.value = 10'
+    driver.execute_script(script)
+    driver.execute_script(inputEvent)
+
     # Skip Intro Test
-    video = driver.find_element(by=By.TAG_NAME, value="video")
     while video.get_property("currentTime") > 80:
         driver.execute_script(
             "document.querySelector('.control-icon-btn.rwd-10sec-icon').click()"
