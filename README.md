@@ -210,7 +210,7 @@ I primarily just develop in firefox and then copy the code into chrome and repla
 To run the automated tests run:
 1. ```npm run build```
 2. copy the web-ext artifact into the normal folder and rename it to NetflixPrime@Autoskip.io.xpi
-3. ```npm run test```
+3. ```npm test```
 
 Cli ARGS:
 - none : all tests
@@ -218,7 +218,7 @@ Cli ARGS:
 - 'p': Prime Video tests
 - 'd': Disney tests
 
-```npm run test n p d```
+```npm test n p d```
 ### setup
 
 - insert your own firefox profile name to be logged into every platform in the ``test.js`` file.
