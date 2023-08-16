@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-
+import time
 
 ffOptions = Options()
 
@@ -50,9 +50,12 @@ def Amazon_Prime():
     video = driver.find_element(by=By.XPATH, value=v)
     # assert video time greater than 24
     time = video.get_property("currentTime")
-    print("time: " + str(time))
-    assert time >= 16
-    print("Test passed: Skip Intro")
+    try:
+        assert time >= 16
+        print("✅: Skip Intro")
+    except:
+        print("❌: Skip Intro")
+        print("time: " + str(time))
 
     # delay
     wait = WebDriverWait(driver, timeout=2)
@@ -66,12 +69,20 @@ def Amazon_Prime():
         by=By.CSS_SELECTOR, value=".atvwebplayersdk-nextupcard-button"
     )
     wait = WebDriverWait(driver, timeout=2)
-    wait.until(lambda driver: video.get_property("currentTime") < 10)
+    try:
+        wait.until(lambda driver: video.get_property("currentTime") < 10)
+        print("✅: Skip Credits")
+    except:
+        print("❌: Skip Credits")
+        time = video.get_property("currentTime")
+        print("time: " + str(time))
 
-    time = video.get_property("currentTime")
-    print("time: " + str(time))
-    assert time < 10
-    print("Test passed: Skip Credits")
+    # try:
+    #     assert time < 10
+    #     print("✅: Skip Credits")
+    # except:
+    #     print("❌: Skip Credits")
+    #     print("time: " + str(time))
 
     # Skip Recap Test
     wait = WebDriverWait(driver, timeout=5)
@@ -81,10 +92,13 @@ def Amazon_Prime():
         by=By.CSS_SELECTOR, value=".atvwebplayersdk-skipelement-button"
     )
     time = video.get_property("currentTime")
-    print("time: " + str(time))
-    assert time >= 37
-    print("Test passed: Skip Recap")
-    driver.close()
+
+    try:
+        assert time >= 37
+        print("✅: Skip Recap")
+    except:
+        print("❌: Skip Recap")
+        print("time: " + str(time))
 
 
 def Amazon_Ad():
@@ -105,10 +119,28 @@ def Amazon_Ad():
 
     wait = WebDriverWait(driver, timeout=5)
     wait.until(lambda driver: video.get_property("currentTime") > time)
-    print("Test passed: Skip Ad")
-    driver.close()
+    print("✅: Skip Ad")
 
 
-# Amazon_Prime()
+def Amazon_PaidContent():
+    driver.get("https://www.amazon.de/gp/video/storefront")
+    time.sleep(1)  # Sleep for 1seconds
+    # timeout =1
+    driver.implicitly_wait(1)
+    t = driver.find_elements(by=By.CSS_SELECTOR, value=".o86fri")
+    try:
+        assert len(t) == 0
+        print("✅: No paid content")
+    except:
+        print("❌: Paid content with length" + str(len(t)))
+
+
+print("Amazon Prime:")
+Amazon_Prime()
+Amazon_PaidContent()
 Amazon_Ad()
+
+print("Netflix:")
+
+print("Disney:")
 # driver.quit()
