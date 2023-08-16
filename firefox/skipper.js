@@ -567,24 +567,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
 
   const AmazonSkipCreditsConfig = { attributes: true, attributeFilter: [".nextupcard"], subtree: true, childList: true, attributeOldValue: false };
-  const AmazonSkipCredits = new RegExp("nextupcard", "i");
-  const AmazonSkipCredits2 = new RegExp("nextupcard-button", "i");
   const AmazonSkipCreditsObserver = new MutationObserver(Amazon_Credits);
   function Amazon_Credits(mutations, observer) {
-    for (let mutation of mutations) {
-      if (AmazonSkipCredits.test(mutation.target.classList.toString())) {
-        for (let button of mutation?.target?.firstChild?.childNodes) {
-          if (button && AmazonSkipCredits2.test(button.classList.toString())) {
-            // only skipping to next episode not an entirely new series
-            let newEpNumber = document.querySelector("[class*=nextupcard-episode]");
-            if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
-              button.click();
-              increaseBadge();
-              log("skipped Credits", button);
-            }
-            return;
-          }
-        }
+    let button = document.querySelector("[class*=nextupcard-button]");
+    if (button) {
+      // only skipping to next episode not an entirely new series
+      let newEpNumber = document.querySelector("[class*=nextupcard-episode]");
+      if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
+        button.click();
+        increaseBadge();
+        log("skipped Credits", button);
       }
     }
   }
