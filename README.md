@@ -218,7 +218,7 @@ Cli ARGS:
 - 'p': Prime Video tests
 - 'd': Disney tests
 
-```python test.py n p d```
+```npm run test n p d```
 ### setup
 
 - insert your own firefox profile name to be logged into every platform in the ``test.js`` file.
