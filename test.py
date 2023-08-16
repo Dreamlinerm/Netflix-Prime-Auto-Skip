@@ -149,8 +149,32 @@ def Amazon_PaidContent():
         print(e)
 
 
+def Disney_Intro():
+    driver.get(
+        "https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6"
+    )
+    # play video
+    driver.implicitly_wait(1)
+    playButton = driver.find_elements(by=By.CLASS_NAME, value="button--play")
+    if len(playButton) > 0:
+        playButton[0].click()
+        print("clicked play Button")
+
+    video = driver.find_element(by=By.TAG_NAME, value="video")
+    script = "document.querySelector('video').currentTime = 80"
+    driver.execute_script(script)
+    wait = WebDriverWait(driver, timeout=5)
+    try:
+        wait.until(lambda driver: video.get_property("currentTime") >= 106)
+        print("✅: Skip Intro")
+    except Exception as e:
+        print("❌: Skip Intro")
+        print("time: " + str(time))
+        print(e)
+
+
 print("Amazon Prime:")
-Amazon_Prime()
+# Amazon_Prime()
 # Amazon_PaidContent()
 # Amazon_Ad()
 
@@ -158,4 +182,5 @@ print("Netflix:")
 
 
 print("Disney:")
+Disney_Intro()
 # driver.quit()
