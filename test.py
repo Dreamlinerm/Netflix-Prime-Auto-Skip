@@ -190,15 +190,14 @@ def Amazon_Ad():
     script = "document.querySelector('" + AmazonVideoClass + "').currentTime = 719"
     driver.execute_script(script)
 
-    time = video.get_property("currentTime")
-
     wait = WebDriverWait(driver, timeout=5)
     try:
-        wait.until(lambda driver: video.get_property("currentTime") > time)
+        wait.until(lambda driver: video.get_property("currentTime") > 719)
         print("✅: Skip Ad")
         output[4][2] = "✅"
     except Exception as e:
         print("❌: Skip Ad")
+        print("time: " + str(video.get_property("currentTime")))
         print(e)
 
 
@@ -324,8 +323,8 @@ x = input()
 if x == "p" or x == "":
     print("Amazon Prime:")
     Amazon_Ad()
-    Amazon_Prime()
-    Amazon_PaidContent()
+    # Amazon_Prime()
+    # Amazon_PaidContent()
 
 if x == "n" or x == "":
     print("Netflix:")
@@ -341,4 +340,4 @@ format_row = "{:>15}" * len(output[0])
 for row in output:
     print(format_row.format(*row))
 
-driver.quit()
+# driver.quit()
