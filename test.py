@@ -118,6 +118,9 @@ def Amazon_Prime():
         print(e)
 
     video = driver.find_element(by=By.XPATH, value=v)
+    # delay
+    wait = WebDriverWait(driver, timeout=5)
+    wait.until(lambda driver: video.get_property("currentTime") > 4)
     # assert video time greater than 24
     time = video.get_property("currentTime")
     try:
