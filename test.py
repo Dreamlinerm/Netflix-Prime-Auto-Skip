@@ -140,10 +140,14 @@ def Amazon_Prime():
     script = "document.querySelector('" + AmazonVideoClass + "').currentTime = 2463"
     driver.execute_script(script)
 
-    driver.implicitly_wait(10)
-    adPanel = driver.find_element(
-        by=By.CSS_SELECTOR, value=".atvwebplayersdk-nextupcard-button"
-    )
+    driver.implicitly_wait(3)
+    try:
+        adPanel = driver.find_element(
+            by=By.CSS_SELECTOR, value=".atvwebplayersdk-nextupcard-button"
+        )
+    except:
+        print("no Adpanel found")
+
     wait = WebDriverWait(driver, timeout=2)
     try:
         wait.until(lambda driver: video.get_property("currentTime") < 10)
