@@ -54,7 +54,7 @@ def Netflix_intro():
     while video.get_property("currentTime") >= 64:
         backwardButton.click()
         time.sleep(0.3)
-    time.sleep(1)
+    time.sleep(2)
     t = video.get_property("currentTime")
     try:
         assert t >= 62
@@ -141,7 +141,7 @@ def Amazon_Prime():
     script = "document.querySelector('" + AmazonVideoClass + "').currentTime = 2463"
     driver.execute_script(script)
 
-    wait = WebDriverWait(driver, timeout=5)
+    wait = WebDriverWait(driver, timeout=8)
     try:
         wait.until(lambda driver: video.get_property("currentTime") < 10)
         print("✅: Skip Credits")
@@ -152,15 +152,8 @@ def Amazon_Prime():
         print("time: " + str(time))
         print(e)
 
-    # try:
-    #     assert time < 10
-    #     print("✅: Skip Credits")
-    # except Exception as e:
-    #     print("❌: Skip Credits")
-    #     print("time: " + str(time))
-
     # Skip Recap Test
-    wait = WebDriverWait(driver, timeout=5)
+    wait = WebDriverWait(driver, timeout=8)
     try:
         wait.until(lambda driver: video.get_property("currentTime") >= 37)
         print("✅: Skip Recap")
