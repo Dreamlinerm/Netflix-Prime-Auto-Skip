@@ -196,7 +196,7 @@ and then skipped by forwarding by the ad length -0.1 seconds which will fix a lo
 
 ## debug
 
-Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then you can login into Netflix and Prime video in the profile and then every time you run the command you dont have to login again.
+Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then you can login into Netflix and Prime video in the profile and then every time you run the command you don't have to login again.
 
 ```npm run profile```
 
@@ -206,6 +206,17 @@ To run the extension in chrome you can just load the ``dist`` folder as an unpac
 I primarily just develop in firefox and then copy the code into chrome and replace ``browser`` with ``chrome`` in the code.
 
 ## Test the Extension
+
+To run the automated tests run:
+1. ```npm run build```
+2. copy the web-ext artifact into the normal folder and rename it to NetflixPrime@Autoskip.io.xpi
+3. ```npm run test```
+### setup
+
+- insert your own firefox profile name to be logged into every platform in the ``test.js`` file.
+- install Python
+- install selenium ``pip install -U selenium``
+- ``npm i``
 
 Table of test cases for each feature. S=season, E=episode of the show.
 
@@ -221,7 +232,6 @@ Table of test cases for each feature. S=season, E=episode of the show.
 | Paid Content | ❌ | ✅ | ❌ |
 | Inactivity Warning | ✅ | ❌ | ❌ |
 | Auto pick last profile | ✅ | ❌ | ❌ |
-
 ## Disclaimer
 
 Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
