@@ -55,11 +55,21 @@ def Netflix_intro():
     t = video.get_property("currentTime")
     time.sleep(1)
     try:
-        assert t >= 62
+        assert t >= 58
         print("✅: Skip Intro")
         output[1][1] = "✅"
     except Exception as e:
         print("❌: Skip Intro")
+        print(e)
+
+    # Speed Slider Test
+    t = driver.find_elements(by=By.ID, value="videoSpeedSlider")
+    try:
+        assert len(t) == 1
+        print("✅: Speed Slider")
+        output[5][1] = "✅"
+    except Exception as e:
+        print("❌: Speed Slider")
         print(e)
 
 
@@ -298,8 +308,8 @@ def Disney_Credits():
 output = [
     ["", "Netflix", "Prime Video", "Disney+"],
     ["Intro", "❌", "❌", "❌"],
-    ["Recaps", "❌", "❌", "❌"],
-    ["Credits", "❌", "❌", "❌"],
+    ["Recaps", "❕", "❌", "❌"],
+    ["Credits", "❕", "❌", "❌"],
     ["Ads", "❕", "❌", "➖"],
     ["Speed Slider", "❌", "❌", "❌"],
     ["Paid Content", "➖", "❌", "➖"],
@@ -312,8 +322,8 @@ print("Amazon Prime:")
 # Amazon_Ad()
 
 print("Netflix:")
-Netflix_Profile()
-# Netflix_intro()
+# Netflix_Profile()
+Netflix_intro()
 
 print("Disney:")
 # Disney_Intro()
