@@ -65,15 +65,34 @@ def Netflix_intro():
         print("time: " + str(t))
         print(e)
 
+    Speed_Slider(1)
+
+
+def Speed_Slider(position):
     # Speed Slider Test
     t = driver.find_elements(by=By.ID, value="videoSpeedSlider")
+    # set value to 20
+    script = "document.querySelector('#videoSpeedSlider').value = 20"
+    driver.execute_script(script)
+
+    # create oninput event
+
+    inputEvent = "document.querySelector('#videoSpeedSlider').dispatchEvent(new Event('input', { bubbles: true,cancelable: true,}));"
+    driver.execute_script(inputEvent)
+    video = driver.find_element(by=By.TAG_NAME, value="video")
+
     try:
         assert len(t) == 1
+        assert video.get_property("playbackRate") == 2
         print("✅: Speed Slider")
-        output[5][1] = "✅"
+        output[5][position] = "✅"
     except Exception as e:
         print("❌: Speed Slider")
         print(e)
+
+    script = 'document.querySelector("#videoSpeedSlider").value = 10'
+    driver.execute_script(script)
+    driver.execute_script(inputEvent)
 
 
 def Netflix_Profile():
@@ -109,14 +128,7 @@ def Amazon_Prime():
     )
     # Speed Slider Test
     driver.implicitly_wait(3)
-    t = driver.find_elements(by=By.ID, value="videoSpeedSlider")
-    try:
-        assert len(t) == 1
-        print("✅: Speed Slider")
-        output[5][2] = "✅"
-    except Exception as e:
-        print("❌: Speed Slider")
-        print(e)
+    Speed_Slider(2)
 
     video = driver.find_element(by=By.XPATH, value=v)
     # delay
@@ -219,30 +231,8 @@ def Disney_Intro():
     else:
         print("no play button found")
 
-    # Speed Slider Test
-    t = driver.find_elements(by=By.ID, value="videoSpeedSlider")
-    # set value to 20
-    script = 'document.querySelector("#videoSpeedSlider")?.value = 20'
-    driver.execute_script(script)
-
-    # create oninput event
-
-    inputEvent = "document.querySelector('#videoSpeedSlider').dispatchEvent(new Event('input', { bubbles: true,cancelable: true,}));"
-    driver.execute_script(inputEvent)
-    video = driver.find_element(by=By.TAG_NAME, value="video")
-
-    try:
-        assert len(t) == 1
-        assert video.get_property("playbackRate") == 2
-        print("✅: Speed Slider")
-        output[5][3] = "✅"
-    except Exception as e:
-        print("❌: Speed Slider")
-        print(e)
-
-    script = 'document.querySelector("#videoSpeedSlider")?.value = 10'
-    driver.execute_script(script)
-    driver.execute_script(inputEvent)
+    Speed_Slider(3)
+    video = driver.find_element(by=By.XPATH, value=v)
 
     # Skip Intro Test
     while video.get_property("currentTime") > 80:
