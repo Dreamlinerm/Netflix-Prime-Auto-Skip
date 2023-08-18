@@ -243,7 +243,7 @@ Table of test cases for each feature. S=season, E=episode of the show.
 
 ## Changelog
 
-You can see the [Changelog](README.md) here or in the published versions.
+You can see the [Changelog](Changelog.md) here or in the published versions.
 ## Disclaimer
 
 Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
