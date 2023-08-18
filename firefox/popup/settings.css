@@ -26,7 +26,7 @@ h6 {
 html,
 body,
 .content {
-  /* width: 400px; */
+  min-width: 400px;
   background-color: #212121;
 }
 body {
