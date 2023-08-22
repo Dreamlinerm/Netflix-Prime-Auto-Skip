@@ -23,14 +23,14 @@ let isHotstar = /hotstar/i.test(hostname);
 
 let isEdge = /edg/i.test(ua);
 let isFirefox = /firefox/i.test(ua);
-const version = "1.0.54";
+const version = "1.0.55";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
-      Amazon: { skipIntro: true, skipCredits: true, watchCredits: true, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
-      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: true, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: true, speedSlider: true },
+      Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
+      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true },
       Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
