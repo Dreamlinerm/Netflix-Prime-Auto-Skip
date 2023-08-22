@@ -30,7 +30,7 @@
           <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" />
           <div class="flex-center flex-col">
             <h2 class="title" i18n>pageTitle</h2>
-            <p style="font-size: 1em">v.1.0.53</p>
+            <p style="font-size: 1em">v.1.0.54</p>
           </div>
         </div>
         <a
@@ -170,6 +170,15 @@
           <p class="description" i18n>CreditsSwitchDescription</p>
           <hr />
           <div class="line flex">
+            <p i18n>WatchCreditsSwitch</p>
+            <label class="switch">
+              <input type="checkbox" id="VideoWatchCredits" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <p class="description" i18n>WatchCreditsSwitchDescription</p>
+          <hr />
+          <div class="line flex">
             <p i18n>AdsSwitch</p>
             <label class="switch">
               <input type="checkbox" id="VideoAds" />
@@ -260,6 +269,13 @@
             </label>
           </div>
           <div class="line flex">
+            <p i18n>WatchCreditsSwitch</p>
+            <label class="switch">
+              <input type="checkbox" id="AmazonWatchCredits" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
             <p i18n>FreeveeSwitch</p>
             <label class="switch">
               <input type="checkbox" id="AmazonFreevee" />
@@ -333,6 +349,13 @@
             </label>
           </div>
           <div class="line flex">
+            <p i18n>WatchCreditsSwitch</p>
+            <label class="switch">
+              <input type="checkbox" id="NetflixWatchCredits" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
             <p i18n>AdsSwitch</p>
             <label class="switch">
               <input type="checkbox" id="NetflixAds" />
@@ -370,6 +393,13 @@
             <p i18n>CreditsSwitch</p>
             <label class="switch">
               <input type="checkbox" id="DisneyCredits" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p i18n>WatchCreditsSwitch</p>
+            <label class="switch">
+              <input type="checkbox" id="DisneyWatchCredits" />
               <span class="slider round"></span>
             </label>
           </div>
@@ -430,13 +460,32 @@
           <h2>Changelog</h2>
           <div>
             <div class="line flex">
-              <h2>1.0.53</h2>
+              <h2>1.0.54</h2>
+              <ul>
+                <li>added Allways Watch Credits feature</li>
+                <li>fixed Shared Features Switches</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.53</p>
+              <ul>
+                <li>Fixed chrome pop-up wrong width</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.52</p>
+              <ul>
+                <li>Fixed Amazon Prime skip Credits</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.51</p>
               <ul>
                 <li>Fixed Netflix Ad skip due to changed css classes of Netflix</li>
               </ul>
             </div>
             <div class="line flex">
-              <h2>1.0.50</h2>
+              <p>1.0.50</p>
               <ul>
                 <li>Fixed amazon speedslider due to changed layout of amazon</li>
                 <li>Fixed Amazon Freevee ad skip bug if ad length divisible by 20</li>

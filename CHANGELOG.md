@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 <div>
   <div class="line flex">
-    <h2>1.0.53</h2>
+    <h2>1.0.54</h2>
     <ul>
       <li>Fixed chrome pop-up wrong width</li>
     </ul>
