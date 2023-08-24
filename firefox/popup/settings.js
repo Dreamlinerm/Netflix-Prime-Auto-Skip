@@ -151,8 +151,10 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro && settings?.Disney.skipIntro;
   button = document.querySelector("#VideoCredits");
   if (button) button.checked = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits && settings?.Disney.skipCredits;
-  button = document.querySelector("#VideoWatchCredits");
-  if (button) button.checked = settings?.Amazon.watchCredits && settings?.Netflix.watchCredits && settings?.Disney.watchCredits;
+  button = document.querySelectorAll("#VideoWatchCredits");
+  for (const b of button) {
+    b.checked = settings?.Amazon.watchCredits && settings?.Netflix.watchCredits && settings?.Disney.watchCredits;
+  }
   button = document.querySelector("#VideoAds");
   if (button) button.checked = settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds;
   button = document.querySelector("#VideoSpeedSlider");

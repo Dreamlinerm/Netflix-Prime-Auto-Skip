@@ -222,5 +222,8 @@
   },
   "extendedSettings": {
     "message": "extended Settings"
+  },
+  "conflictingTitle": {
+    "message": "All conflicting Features"
   }
 }
