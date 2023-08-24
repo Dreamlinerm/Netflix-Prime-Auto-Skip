@@ -22,7 +22,6 @@
     <title i18n>settingsTitle</title>
     <link rel="icon" type="image/x-icon" href="/icons/NetflixAmazon Auto-Skip.svg" />
   </head>
-
   <body class="flex">
     <div class="sidenav flex flex-col">
       <div class="flex-center flex-col IconBox">
@@ -82,7 +81,7 @@
         </a>
         <a id="MenuStatistics" href="#Statistics" class="menuButton flex">
           <svg id="MenuStatistics" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon"><path id="MenuStatistics" d="M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z" /></svg>
-          <i18n>statistics</i18n>
+          <i18n id="MenuStatistics">statistics</i18n>
         </a>
         <a id="MenuChangelog" href="#Changelog" class="menuButton flex">
           <svg id="MenuChangelog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
@@ -159,70 +158,212 @@
           <hr />
           <div class="line flex">
             <p i18n>IntroSwitch</p>
-            <label class="switch">
+            <label class="switch" style="margin-left: 5px">
               <input type="checkbox" id="VideoIntro" />
               <span class="slider round"></span>
             </label>
           </div>
+          <table style="border: 1px solid white">
+            <tr>
+              <th>Netflix</th>
+              <th>Prime</th>
+              <th>Disney+</th>
+            </tr>
+            <tr>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="NetflixIntro" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="AmazonIntro" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="DisneyIntro" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+          </table>
           <p class="description" i18n>SharedIntroDescription</p>
           <hr />
           <div class="line flex">
             <p i18n>CreditsSwitch</p>
-            <label class="switch">
+            <label class="switch" style="margin-left: 5px">
               <input type="checkbox" id="VideoCredits" />
               <span class="slider round"></span>
             </label>
           </div>
+          <table style="border: 1px solid white">
+            <tr>
+              <th>Netflix</th>
+              <th>Prime</th>
+              <th>Disney+</th>
+            </tr>
+            <tr>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="NetflixCredits" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="AmazonCredits" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="DisneyCredits" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+          </table>
           <p class="description" i18n>CreditsSwitchDescription</p>
           <hr />
           <div class="line flex">
             <p i18n>WatchCreditsSwitch</p>
-            <label class="switch">
+            <label class="switch" style="margin-left: 5px">
               <input type="checkbox" id="VideoWatchCredits" />
               <span class="slider round"></span>
             </label>
           </div>
+          <table style="border: 1px solid white">
+            <tr>
+              <th>Netflix</th>
+              <th>Prime</th>
+              <th>Disney+</th>
+            </tr>
+            <tr>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="NetflixWatchCredits" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="AmazonWatchCredits" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="DisneyWatchCredits" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+          </table>
           <p class="description" i18n>WatchCreditsSwitchDescription</p>
           <hr />
           <div class="line flex">
             <p i18n>AdsSwitch</p>
-            <label class="switch">
+            <label class="switch" style="margin-left: 5px">
               <input type="checkbox" id="VideoAds" />
               <span class="slider round"></span>
             </label>
           </div>
+          <table style="border: 1px solid white">
+            <tr>
+              <th>Netflix</th>
+              <th>Prime</th>
+            </tr>
+            <tr>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="NetflixAds" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="AmazonFreevee" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+          </table>
           <p class="description" i18n>AdsSwitchDescription</p>
           <hr />
           <div class="line flex">
             <p i18n>SliderSwitch</p>
-            <label class="switch">
+            <label class="switch" style="margin-left: 5px">
               <input type="checkbox" id="VideoSpeedSlider" />
               <span class="slider round"></span>
             </label>
           </div>
+          <table style="border: 1px solid white">
+            <tr>
+              <th>Netflix</th>
+              <th>Prime</th>
+              <th>Disney+</th>
+            </tr>
+            <tr>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="NetflixSpeedSlider" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="AmazonSpeedSlider" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="DisneySpeedSlider" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </tr>
+          </table>
           <p class="description" i18n>SliderSwitchDescription</p>
           <p i18n>SliderOptions</p>
-          <div class="flex">
-            <p i18n>SliderStepSize</p>
-            <input type="number" id="SliderSteps" />
-          </div>
-          <div class="flex">
-            <p i18n>SliderMin</p>
-            <input type="number" id="SliderMin" />
-          </div>
-          <div class="flex">
-            <p i18n>SliderMax</p>
-            <input type="number" id="SliderMax" />
-          </div>
-          <div class="flex">
-            <p i18n>SliderPreview</p>
-            <input type="range" id="SliderPreview" min="5" max="20" value="1" step="1" style="background: rgb(221, 221, 221); width: 200px" />
-            <p id="SliderValue">1x</p>
-          </div>
+          <table>
+            <tr>
+              <td><p i18n>SliderStepSize</p></td>
+              <td><input type="number" id="SliderSteps" /></td>
+            </tr>
+            <tr>
+              <td>
+                <p i18n>SliderMin</p>
+              </td>
+              <td>
+                <input type="number" id="SliderMin" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p i18n>SliderMax</p>
+              </td>
+              <td>
+                <input type="number" id="SliderMax" />
+              </td>
+            </tr>
+            <tr>
+              <td><p i18n>SliderPreview</p></td>
+              <td>
+                <div class="flex">
+                  <input type="range" id="SliderPreview" min="5" max="20" value="1" step="1" style="background: rgb(221, 221, 221); width: 200px" />
+                  <p id="SliderValue">1x</p>
+                </div>
+              </td>
+            </tr>
+          </table>
           <hr />
           <div class="line flex">
             <p i18n>FullscreenSwitch</p>
-            <label class="switch">
+            <label class="switch" style="margin-left: 5px">
               <input type="checkbox" id="VideoFullScreen" />
               <span class="slider round"></span>
             </label>
@@ -258,7 +399,7 @@
           <p class="description" i18n>PaidContentDescription</p>
           <hr />
 
-          <h2 i18n>sharedSettings</h2>
+          <!-- <h2 i18n>sharedSettings</h2>
           <p class="description" i18n>sharedSettingsDescription;Prime Video</p>
           <div class="line flex">
             <p i18n>IntroSwitch</p>
@@ -294,7 +435,7 @@
               <input type="checkbox" id="AmazonSpeedSlider" />
               <span class="slider round"></span>
             </label>
-          </div>
+          </div> -->
         </div>
         <div class="categoryNetflix hidden" style="margin-top: 0; background-color: unset" id="NetflixSettings">
           <div class="flex flex-between" style="padding: 5px 5px; color: #e60010">
@@ -338,7 +479,7 @@
             <img id="profilePicture" class="hidden" style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px" />
           </div>
           <hr />
-          <h2 i18n>sharedSettings</h2>
+          <!-- <h2 i18n>sharedSettings</h2>
           <p class="description" i18n>sharedSettingsDescription;Netflix</p>
           <div class="line flex">
             <p i18n>IntroSwitch</p>
@@ -374,7 +515,7 @@
               <input type="checkbox" id="NetflixSpeedSlider" />
               <span class="slider round"></span>
             </label>
-          </div>
+          </div> -->
         </div>
         <div class="categoryDisney hidden" style="margin-top: 0; background-color: unset" id="DisneySettings">
           <div class="flex flex-between" style="padding: 5px 5px; color: #1d1fff">
@@ -386,7 +527,7 @@
           </div>
           <hr />
 
-          <h2 i18n>sharedSettings</h2>
+          <!-- <h2 i18n>sharedSettings</h2>
           <p class="description" i18n>sharedSettingsDescription;Disney+</p>
           <div class="line flex">
             <p i18n>IntroSwitch</p>
@@ -415,7 +556,7 @@
               <input type="checkbox" id="DisneySpeedSlider" />
               <span class="slider round"></span>
             </label>
-          </div>
+          </div> -->
         </div>
         <div id="StatisticsSettings" class="hidden">
           <h2 i18n>SkippedTime</h2>

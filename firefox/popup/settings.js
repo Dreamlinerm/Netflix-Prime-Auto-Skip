@@ -475,9 +475,9 @@ function listenForClicks() {
     }
     //  -------------      Disney        ---------------------------------------
     else if (e.target.id === "DisneySkips") {
-      const DisneySkips = !settings?.Disney.skipIntro;
-      settings.Disney.skipIntro = DisneySkips;
-      setSettings("All DisneySkips");
+      // const DisneySkips = !settings?.Disney.skipIntro;
+      // settings.Disney.skipIntro = DisneySkips;
+      // setSettings("All DisneySkips");
     } else if (e.target.id === "DisneyIntro") {
       settings.Disney.skipIntro = !settings.Disney.skipIntro;
       setSettings("DisneyIntro");
