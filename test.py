@@ -157,7 +157,7 @@ def Amazon_Prime():
     script = "document.querySelector('" + AmazonVideoClass + "').currentTime = 2463"
     driver.execute_script(script)
 
-    wait = WebDriverWait(driver, timeout=8)
+    wait = WebDriverWait(driver, timeout=10)
     try:
         wait.until(lambda driver: video.get_property("currentTime") < 10)
         print("✅: Skip Credits")
@@ -192,7 +192,7 @@ def Amazon_Ad():
     script = "document.querySelector('" + AmazonVideoClass + "').currentTime = 719"
     driver.execute_script(script)
 
-    wait = WebDriverWait(driver, timeout=5)
+    wait = WebDriverWait(driver, timeout=10)
     try:
         wait.until(lambda driver: video.get_property("currentTime") > 719)
         print("✅: Skip Ad")
