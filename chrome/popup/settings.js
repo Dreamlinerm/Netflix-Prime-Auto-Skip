@@ -151,8 +151,10 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro && settings?.Disney.skipIntro;
   button = document.querySelector("#VideoCredits");
   if (button) button.checked = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits && settings?.Disney.skipCredits;
-  button = document.querySelector("#VideoWatchCredits");
-  if (button) button.checked = settings?.Amazon.watchCredits && settings?.Netflix.watchCredits && settings?.Disney.watchCredits;
+  button = document.querySelectorAll("#VideoWatchCredits");
+  for (const b of button) {
+    b.checked = settings?.Amazon.watchCredits && settings?.Netflix.watchCredits && settings?.Disney.watchCredits;
+  }
   button = document.querySelector("#VideoAds");
   if (button) button.checked = settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds;
   button = document.querySelector("#VideoSpeedSlider");
@@ -362,6 +364,7 @@ function listenForClicks() {
         // playOnFullScreen
         settings.Video.playOnFullScreen =
           VideoSkips;
+      if (VideoSkips) settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
       setSettings("All VideoSkips");
     } else if (e.target.id === "VideoIntro") {
       const skipIntro = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro && settings?.Disney.skipIntro;
@@ -370,10 +373,16 @@ function listenForClicks() {
     } else if (e.target.id === "VideoCredits") {
       const skipCredits = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits && settings?.Disney.skipCredits;
       settings.Amazon.skipCredits = settings.Netflix.skipCredits = settings.Disney.skipCredits = !skipCredits;
+      if (!skipCredits) {
+        settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
+      }
       setSettings("VideoCredits");
     } else if (e.target.id === "VideoWatchCredits") {
       const watchCredits = settings?.Amazon.watchCredits && settings?.Netflix.watchCredits && settings?.Disney.watchCredits;
       settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = !watchCredits;
+      if (!watchCredits) {
+        settings.Amazon.skipCredits = settings.Netflix.skipCredits = settings.Disney.skipCredits = false;
+      }
       setSettings("VideoWatchCredits");
     } else if (e.target.id === "VideoAds") {
       const skipAd = settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds;
@@ -402,9 +411,15 @@ function listenForClicks() {
       setSettings("All AmazonSkips");
     } else if (e.target.id === "AmazonCredits") {
       settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
+      if (settings.Amazon.skipCredits) {
+        settings.Amazon.watchCredits = false;
+      }
       setSettings("AmazonCredits");
     } else if (e.target.id === "AmazonWatchCredits") {
       settings.Amazon.watchCredits = !settings.Amazon.watchCredits;
+      if (settings.Amazon.watchCredits) {
+        settings.Amazon.skipCredits = false;
+      }
       setSettings("AmazonWatchCredits");
     } else if (e.target.id === "AmazonIntro") {
       settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
@@ -435,11 +450,17 @@ function listenForClicks() {
       setSettings("NetflixRecap");
     } else if (e.target.id === "NetflixCredits") {
       settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
+      if (settings.Netflix.skipCredits) {
+        settings.Netflix.watchCredits = false;
+      }
       setSettings("NetflixCredits");
     } else if (e.target.id === "NetflixWatchCredits") {
       settings.Netflix.watchCredits = !settings.Netflix.watchCredits;
+      if (settings.Netflix.watchCredits) {
+        settings.Netflix.skipCredits = false;
+      }
       setSettings("NetflixWatchCredits");
-    } else if (e.target.id === "NetflixWatchCredits") {
+    } else if (e.target.id === "NetflixBlocked") {
       settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
       setSettings("NetflixBlocked");
     } else if (e.target.id === "NetflixAds") {
@@ -454,17 +475,23 @@ function listenForClicks() {
     }
     //  -------------      Disney        ---------------------------------------
     else if (e.target.id === "DisneySkips") {
-      const DisneySkips = !settings?.Disney.skipIntro;
-      settings.Disney.skipIntro = DisneySkips;
-      setSettings("All DisneySkips");
+      // const DisneySkips = !settings?.Disney.skipIntro;
+      // settings.Disney.skipIntro = DisneySkips;
+      // setSettings("All DisneySkips");
     } else if (e.target.id === "DisneyIntro") {
       settings.Disney.skipIntro = !settings.Disney.skipIntro;
       setSettings("DisneyIntro");
     } else if (e.target.id === "DisneyCredits") {
       settings.Disney.skipCredits = !settings.Disney.skipCredits;
+      if (settings.Disney.skipCredits) {
+        settings.Disney.watchCredits = false;
+      }
       setSettings("DisneyCredits");
     } else if (e.target.id === "DisneyWatchCredits") {
       settings.Disney.watchCredits = !settings.Disney.watchCredits;
+      if (settings.Disney.watchCredits) {
+        settings.Disney.skipCredits = false;
+      }
       setSettings("DisneyWatchCredits");
     } else if (e.target.id === "DisneySpeedSlider") {
       settings.Disney.speedSlider = !settings.Disney.speedSlider;

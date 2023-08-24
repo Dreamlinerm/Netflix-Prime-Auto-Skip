@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Streaming enhanced Netflix Disney Prime Video",
+    "message": "Streaming enhanced: Netflix Disney+ Prime Video",
     "description": "Name der Erweiterung"
   },
   "extensionDescription": {
@@ -209,5 +209,21 @@
   },
   "noWrap": {
     "message": "unset"
+  },
+
+  "WatchCreditsSwitch": {
+    "message": "Credits ansehen:"
+  },
+  "WatchCreditsSwitchDescription": {
+    "message": "Sich immer den Abspann jeder Serie ansehen"
+  },
+  "gotoIndividual": {
+    "message": "Für die individuellen Streaming-Dienst Einstellungen gehen Sie auf die "
+  },
+  "extendedSettings": {
+    "message": "erweiterte Einstellungen"
+  },
+  "conflictingTitle": {
+    "message": "Alle widersprüchlichen Funktionen"
   }
 }

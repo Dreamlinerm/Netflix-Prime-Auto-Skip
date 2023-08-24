@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Streaming enhanced Netflix Disney Prime Video",
+    "message": "Streaming enhanced: Netflix Disney+ Prime Video",
     "description": "Name of the extension"
   },
   "extensionDescription": {
@@ -222,5 +222,8 @@
   },
   "extendedSettings": {
     "message": "extended Settings"
+  },
+  "conflictingTitle": {
+    "message": "All conflicting Features"
   }
 }

@@ -76,9 +76,6 @@ div {
 .flex {
   display: flex;
 }
-.flex {
-  display: flex;
-}
 .flex-center {
   display: flex;
   justify-content: center;
@@ -102,6 +99,10 @@ div {
 .flex-end {
   display: flex;
   justify-content: flex-end;
+}
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
 }
 .line,
 h1,
@@ -129,6 +130,15 @@ p {
   border-radius: 10px;
   margin-left: 5px;
   margin-right: 5px;
+}
+.Prime {
+  color: #00aeef;
+}
+.Netflix {
+  color: #e60010;
+}
+.Disney {
+  color: #000c7d;
 }
 .categoryPrime {
   background-color: #00aeef;
