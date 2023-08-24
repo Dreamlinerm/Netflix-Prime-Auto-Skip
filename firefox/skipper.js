@@ -23,7 +23,7 @@ let isHotstar = /hotstar/i.test(hostname);
 
 let isEdge = /edg/i.test(ua);
 let isFirefox = /firefox/i.test(ua);
-const version = "1.0.56";
+const version = "1.0.57";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
@@ -642,7 +642,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         resetLastATimeText();
         if (typeof adTime === "number" && adTime > 1) {
           // getting stuck loading when skipping ad longer than 100 seconds i think
-          let skipTime = adTime <= 20 ? adTime - 1 : 20;
+          // let skipTime = adTime <= 20 ? adTime - 1 : 20;
+          let skipTime = adTime - 1;
           video.currentTime += skipTime;
           log("FreeVee Ad skipped, length:", skipTime, "s");
           settings.Statistics.AmazonAdTimeSkipped += skipTime;
