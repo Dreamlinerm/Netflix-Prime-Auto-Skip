@@ -1,8 +1,4 @@
 -------------------------------------------- firefox:
---------------------------------------------
-Recap:
-Automatisch Werbung, Intros, Rückblicke, Abspänne usw. auf Netflix, Prime video und Disney+ überspringen.
---------------------------------------------
 Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert werden sollen.
 
 ✨ Features
