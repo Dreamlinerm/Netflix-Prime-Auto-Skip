@@ -145,6 +145,9 @@ Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
 
 # Donation Comments
 
+Some are in German and therefore are translated to english.
+
+If you want you first name or full name on here write FULLName or Firstname in the Donation or open an issue.
 <table>
   <tbody>
     <tr>
@@ -157,10 +160,10 @@ Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
     </tr>
 <tr>
       <td align="center" valign="top">
-       21.02.2023 
+       17.03.2023
       </td>
       <td align="center" valign="top" >
-       Fast response on github, you earned your cofee sir !
+       for the prime freevee skipping app
       </td>
     </tr>
           <tr>
@@ -168,7 +171,7 @@ Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
       26.03.2023
       </td>
       <td align="center" valign="top">
-      NP Auto-Skip Firefox Add-on (Funktioniert Super!) Danke!
+      NP Auto-Skip Firefox Add-on (Works great!) Thank you!
       </td>
     </tr>
      <tr>
@@ -216,7 +219,7 @@ Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
       23.08.2023   
       </td>
       <td align="center" valign="top" >
-      Für eines der besten Addons, mit dem man Prime überhaupt noch nutzen kann. Würde mich freuen wenn das noch lange funktional erhalten bleibt, solange Amazon nicht irgendeine Keule rausholt :)
+      For one of the best addons with which you can still use Prime at all. I would be happy if it remains functional for a long time, as long as Amazon doesn't bring out some kind of club :)
       </td>
     </tr>
           <tr>
