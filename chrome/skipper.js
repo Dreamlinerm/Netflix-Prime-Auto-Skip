@@ -37,7 +37,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     },
   };
   let settings = defaultSettings.settings;
-  let lastAdTimeText = "";
+  let lastAdTimeText = 0;
   let videoSpeed;
   async function setVideoSpeed(speed) {
     videoSpeed = speed;
@@ -159,9 +159,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       increaseBadge();
     }
   }
-  function log(a1, a2 = " ", a3 = " ", a4 = " ", a5 = " ") {
+  // ...args
+  function log(...args) {
     const date = new Date();
-    console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), a1, a2, a3, a4, a5);
+    console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), ...args);
   }
 
   // Observers
@@ -638,17 +639,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
       // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
       // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
-      if (!document.querySelector(".fu4rd6c.f1cw2swo") && lastAdTimeText != adTime) {
-        resetLastATimeText();
-        if (typeof adTime === "number" && adTime > 1) {
-          // getting stuck loading when skipping ad longer than 100 seconds i think
-          // let skipTime = adTime <= 20 ? adTime - 1 : 20;
-          let skipTime = adTime - 1;
-          video.currentTime += skipTime;
-          log("FreeVee Ad skipped, length:", skipTime, "s");
-          settings.Statistics.AmazonAdTimeSkipped += skipTime;
-          increaseBadge();
-          // video.removeEventListener("playing", skipAd);
+      if (!document.querySelector(".fu4rd6c.f1cw2swo")) {
+        if (adTime > (lastAdTimeText || 0)) {
+          if (typeof adTime === "number" && adTime > 1) {
+            lastAdTimeText = adTime;
+            resetLastATimeText();
+            // getting stuck loading when skipping ad longer than 100 seconds i think
+            // let skipTime = adTime <= 20 ? adTime - 1 : 20;
+            let skipTime = adTime - 1;
+            video.currentTime += skipTime;
+            log("FreeVee Ad skipped, length:", skipTime, "s");
+            settings.Statistics.AmazonAdTimeSkipped += skipTime;
+            increaseBadge();
+            // video.removeEventListener("playing", skipAd);
+          }
         }
       }
     }
@@ -673,7 +677,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   async function resetLastATimeText(time = 1000) {
     // timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
     setTimeout(() => {
-      lastAdTimeText = "";
+      lastAdTimeText = 0;
     }, time);
   }
 
