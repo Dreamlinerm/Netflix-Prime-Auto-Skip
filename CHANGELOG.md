@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 <div>
             <div class="line flex">
-              <h2>1.0.57</h2>
+              <h2>1.0.58</h2>
               <ul>
                 <li>Improved shared settings</li>
                 <li>Made Watch Credits inverse of Skip Credits</li>
@@ -352,7 +352,7 @@ All notable changes to this project will be documented in this file.
             </div>
           </div>
   <div class="line flex">
-    <h2>1.0.57</h2>
+    <h2>1.0.58</h2>
     <ul>
       <li>Fixed chrome pop-up wrong width</li>
     </ul>
