@@ -143,6 +143,96 @@ If you have any suggestions or Bugs, please open an issue.
 
 Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
 
+# Donation Comments
+
+Some are in German and therefore are translated to english.
+
+If you want you first name or full name on here write FULLName or Firstname in the Donation or open an issue.
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top">
+       21.02.2023
+      </td>
+      <td align="center" valign="top" >
+        Fast response on github, you earned your cofee sir !
+      </td>
+    </tr>
+<tr>
+      <td align="center" valign="top">
+       17.03.2023
+      </td>
+      <td align="center" valign="top" >
+       for the prime freevee skipping app
+      </td>
+    </tr>
+          <tr>
+      <td align="center" valign="top">
+      26.03.2023
+      </td>
+      <td align="center" valign="top">
+      NP Auto-Skip Firefox Add-on (Works great!) Thank you!
+      </td>
+    </tr>
+     <tr>
+      <td align="center" valign="top" >
+      16.04.2023
+      </td>
+      <td align="center" valign="top" >
+      Thanks for the Auto Skip Addon!
+      </td>
+    </tr>
+     <tr>
+      <td align="center" valign="top">
+      08.05.2023
+      </td>
+      <td align="center" valign="top" >
+      Donate
+      </td>
+    </tr>
+     <tr>
+      <td align="center" valign="top">
+      04.06.2023
+      </td>
+      <td align="center" valign="top" >
+      For creating a nice freakin' awesome plugin! Thank you! PLEASE expand to other streaming services!
+      </td>
+    </tr>
+     <tr>
+      <td align="center" valign="top">
+      20.06.2023      
+      </td>
+      <td align="center" valign="top" >
+      Hi, I am the Contributor. I'm eager to contribute to the project, even with limited financial resources. I plan to dedicate my time and coding skills to support the project, maybe by the end of the year. I just started to learn to code. Best of luck!
+      </td>
+    </tr>
+          <tr>
+      <td align="center" valign="top" >
+      01.07.2023     
+      </td>
+      <td align="center" valign="top" >
+      NP Firefox Add-On. Danke! 😊
+      </td>
+    </tr>
+          <tr>
+      <td align="center" valign="top" >
+      23.08.2023   
+      </td>
+      <td align="center" valign="top" >
+      For one of the best addons with which you can still use Prime at all. I would be happy if it remains functional for a long time, as long as Amazon doesn't bring out some kind of club :)
+      </td>
+    </tr>
+          <tr>
+      <td align="center" valign="top" >
+      01.09.2023   
+      </td>
+      <td align="center" valign="top">
+      Your extension is the most useful extension I have ever used. Thanks for creating it!
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ## Settings
 
 Configure what is skipped in the settings Page.
