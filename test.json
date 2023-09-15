@@ -1,15 +1,56 @@
-[
-  { "provider_type": "imdb:score", "value": 7 },
-  { "provider_type": "tmdb:id", "value": 976573 },
-  { "provider_type": "tmdb:votes", "value": 1963 },
-  { "provider_type": "jw:trending_7_day", "value": 577.31 },
-  { "provider_type": "tmdb:popularity", "value": 1153.497 },
-  { "provider_type": "imdb:multiplied", "value": 354137 },
-  { "provider_type": "jw:popular_7_day", "value": 577.19 },
-  { "provider_type": "jw:popular_180_day", "value": 257.07 },
-  { "provider_type": "jw:viral", "value": 0.17 },
-  { "provider_type": "jw:popular_30_day", "value": 608.47 },
-  { "provider_type": "jw:popular_1_day", "value": 772.15 },
-  { "provider_type": "tmdb:score", "value": 7.788 },
-  { "provider_type": "imdb:votes", "value": 50591 }
-]
+{
+  "justWatchURL": "https://www.justwatch.com/us/tv-show/suits",
+  "scoring": { "provider_type": "imdb:score", "value": 8.4 },
+  "streamingLinks": [
+    {
+      "jw_entity_id": "ts22277",
+      "type": "aggregated",
+      "monetization_type": "flatrate",
+      "provider_id": 8,
+      "package_short_name": "nfx",
+      "currency": "USD",
+      "urls": {
+        "standard_web": "http://www.netflix.com/title/70195800",
+        "deeplink_web": "http://www.netflix.com/watch/70195800",
+        "deeplink_android_tv": "intent://www.netflix.com/watch/70195800#Intent;launchFlags=0x00800000;scheme=https;package=com.netflix.ninja;S.source=30;end",
+        "deeplink_fire_tv": "intent://www.netflix.com/watch/70195800#Intent;launchFlags=0x00800000;scheme=https;package=com.netflix.ninja;S.source=30;end",
+        "deeplink_tvos": "nflx://www.netflix.com/watch/70195800?source=topshelf",
+        "deeplink_tizenos": "{\"id\":\"org.tizen.netflix-app\",\"action_data\":\"\"}",
+        "deeplink_webos": "{ \"id\" : \"netflix\", \"params\" : { \"contentTarget\":\"-Q m=http%3A%2F%2Fapi-global.netflix.com%2Fcatalog%2Ftitles%2Fmovies%2F70195800\"}}",
+        "deeplink_xbox": "netflix:/app?m=70195800",
+        "deeplink_rokuos": "launch/12?contentID=70195800&MediaType=show"
+      },
+      "available_from": "0001-01-01T00:00:00Z",
+      "available_to": "0001-01-01T00:00:00Z",
+      "presentation_type": "hd",
+      "element_count": 8,
+      "new_element_count": 8,
+      "country": "US"
+    },
+    {
+      "jw_entity_id": "ts22277",
+      "type": "aggregated",
+      "monetization_type": "flatrate",
+      "provider_id": 9,
+      "package_short_name": "amp",
+      "currency": "USD",
+      "urls": {
+        "standard_web": "https://watch.amazon.com/detail?gti=amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c",
+        "deeplink_web": "https://watch.amazon.com/watch?gti=amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c",
+        "deeplink_android_tv": "intent://watch.amazon.com/watch?asin=B07VGMK2P3&time=0&territory=US#Intent;package=com.amazon.amazonvideo.livingroom;scheme=https;end",
+        "deeplink_fire_tv": "intent://com.amazon.tv.launcher/detail?provider=aiv&providerId=B07VGMK2P3#Intent;package=com.amazon.tv.launcher;scheme=amzn;end",
+        "deeplink_tvos": "aiv://aiv/watch?gti=amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c&territory=US&time=auto",
+        "deeplink_tizenos": "{\"id\":\"org.tizen.primevideo\",\"action_data\":\"amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c\"}",
+        "deeplink_webos": "{ \"id\": \"amazon\", \"params\": { \"contentTarget\": \"amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c\" }}",
+        "deeplink_xbox": "https://watch.amazon.com/detail?gti=amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c",
+        "deeplink_rokuos": "launch/13?contentID=B07VGMK2P3&MediaType=episode"
+      },
+      "available_from": "2020-07-01T04:00:00Z",
+      "available_to": "0001-01-01T00:00:00Z",
+      "presentation_type": "hd",
+      "element_count": 1,
+      "new_element_count": 1,
+      "country": "US"
+    }
+  ]
+}
