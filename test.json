@@ -1,0 +1,68 @@
+[
+  {
+    jw_entity_id: 'tm912189',
+    monetization_type: 'flatrate',
+    provider_id: 337,
+    package_short_name: 'dnp',
+    currency: 'USD',
+    urls: {
+      standard_web: 'https://disneyplus.bn5x.net/c/1206980/705874/9358?u=https%3A%2F%2Fwww.disneyplus.com%2Fmovies%2Felemental%2F1B2ZQ9GF35W5&subId3=justappsvod',
+      deeplink_web: 'https://www.disneyplus.com/video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
+      deeplink_android_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
+      deeplink_fire_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
+      deeplink_tvos: 'disneyplus://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5',
+      deeplink_tizenos: '{"id":"MCmYXNxgcu.DisneyPlus","action_data":"{\\"page\\": \\"movie_details\\", \\"type\\": \\"movies\\", \\"id\\": \\"1B2ZQ9GF35W5\\", \\"pid\\": \\"SmartHubPub\\"}"}',
+      deeplink_webos: '{ "id": "com.disney.disneyplus-prod", "params": { "contentTarget": "" }}',
+      deeplink_xbox: 'disneyplus://video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
+      deeplink_rokuos: 'launch/291097?contentID=e3895d1d-a979-4c1a-ba66-1bf706e145ab&MediaType=movie'
+    },
+    available_from: '0001-01-01T00:00:00Z',
+    available_to: '0001-01-01T00:00:00Z',
+    presentation_type: '4k',
+    country: 'US'
+  },
+  {
+    jw_entity_id: 'tm912189',
+    monetization_type: 'flatrate',
+    provider_id: 337,
+    package_short_name: 'dnp',
+    currency: 'USD',
+    urls: {
+      standard_web: 'https://disneyplus.bn5x.net/c/1206980/705874/9358?u=https%3A%2F%2Fwww.disneyplus.com%2Fmovies%2Felemental%2F1B2ZQ9GF35W5&subId3=justappsvod',
+      deeplink_web: 'https://www.disneyplus.com/video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
+      deeplink_android_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
+      deeplink_fire_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
+      deeplink_tvos: 'disneyplus://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5',
+      deeplink_tizenos: '{"id":"MCmYXNxgcu.DisneyPlus","action_data":"{\\"page\\": \\"movie_details\\", \\"type\\": \\"movies\\", \\"id\\": \\"1B2ZQ9GF35W5\\", \\"pid\\": \\"SmartHubPub\\"}"}',
+      deeplink_webos: '{ "id": "com.disney.disneyplus-prod", "params": { "contentTarget": "" }}',
+      deeplink_xbox: 'disneyplus://video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
+      deeplink_rokuos: 'launch/291097?contentID=e3895d1d-a979-4c1a-ba66-1bf706e145ab&MediaType=movie'
+    },
+    available_from: '0001-01-01T00:00:00Z',
+    available_to: '0001-01-01T00:00:00Z',
+    presentation_type: 'hd',
+    country: 'US'
+  },
+  {
+    jw_entity_id: 'tm912189',
+    monetization_type: 'flatrate',
+    provider_id: 337,
+    package_short_name: 'dnp',
+    currency: 'USD',
+    urls: {
+      standard_web: 'https://disneyplus.bn5x.net/c/1206980/705874/9358?u=https%3A%2F%2Fwww.disneyplus.com%2Fmovies%2Felemental%2F1B2ZQ9GF35W5&subId3=justappsvod',
+      deeplink_web: 'https://www.disneyplus.com/video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
+      deeplink_android_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
+      deeplink_fire_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
+      deeplink_tvos: 'disneyplus://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5',
+      deeplink_tizenos: '{"id":"MCmYXNxgcu.DisneyPlus","action_data":"{\\"page\\": \\"movie_details\\", \\"type\\": \\"movies\\", \\"id\\": \\"1B2ZQ9GF35W5\\", \\"pid\\": \\"SmartHubPub\\"}"}',
+      deeplink_webos: '{ "id": "com.disney.disneyplus-prod", "params": { "contentTarget": "" }}',
+      deeplink_xbox: 'disneyplus://video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
+      deeplink_rokuos: 'launch/291097?contentID=e3895d1d-a979-4c1a-ba66-1bf706e145ab&MediaType=movie'
+    },
+    available_from: '0001-01-01T00:00:00Z',
+    available_to: '0001-01-01T00:00:00Z',
+    presentation_type: 'sd',
+    country: 'US'
+  }
+]
