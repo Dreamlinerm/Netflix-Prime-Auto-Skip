@@ -1,30 +1,57 @@
 {
-  "ONE PIECE": { "jWURL": "/us/tv-show/one-piece", "score": 8.9, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80107103" }] },
-  "Liebes Kind": { "jWURL": "/us/tv-show/dear-child", "score": 7.5, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/81513233" }] },
-  "The Blacklist": { "jWURL": "/us/tv-show/the-blacklist", "score": 8, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/70281312" }] },
-  "The Rookie": { "jWURL": "/us/tv-show/the-rookie", "score": 8, "streamLinks": [] },
-  "Vampire Diaries": { "jWURL": "/us/tv-show/the-vampire-diaries", "score": 7.7, "streamLinks": [] },
-  "Ragnarök": { "jWURL": "/us/tv-show/ragnarok", "score": 7.4, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80232926" }] },
-  "Gossip Girl": { "jWURL": "/us/tv-show/gossip-girl", "score": 7.4, "streamLinks": [] },
-  "Peaky Blinders – Gangs of Birmingham": {
-    "jWURL": "/us/tv-show/peaky-blinders",
-    "score": 8.8,
-    "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80002479" }]
-  },
-  "The Witcher": { "jWURL": "/us/tv-show/the-witcher", "score": 8, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80189685" }] },
-  "Top Boy": { "jWURL": "/us/tv-show/top-boy-2019", "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80217669" }] },
-  "The Night Agent": { "jWURL": "/us/tv-show/the-night-agent", "score": 7.5, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/81450827" }] },
-  "Black Mirror": { "jWURL": "/us/tv-show/black-mirror", "score": 8.7, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/70264888" }] },
-  "The Big Bang Theory": { "jWURL": "/us/tv-show/the-big-bang-theory", "score": 8.2, "streamLinks": [] },
-  "Friends": { "jWURL": "/us/tv-show/friends", "score": 8.9, "streamLinks": [] },
-  "The Good Doctor": { "jWURL": "/us/tv-show/the-good-doctor", "score": 8, "streamLinks": [] },
-  "Das Büro": { "jWURL": "/us/tv-show/the-office-2005", "score": 9, "streamLinks": [] },
-  "Unser Planet": { "jWURL": "/us/tv-show/our-planet", "score": 9.3, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80049832" }] },
-  "Türkisch für Anfänger": { "jWURL": "/us/tv-show/turkisch-fur-anfanger", "score": 7.5 },
-  "Wie wird man 100 Jahre alt? – Die Geheimnisse der Blauen Zonen": {
-    "jWURL": "/us/tv-show/live-to-100-secrets-of-the-blue-zones",
+  "Tom Clancy's Jack Ryan – Staffel 4": {
+    "jWURL": "/us/tv-show/tom-clancys-jack-ryan",
     "score": 8,
-    "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/81214929" }]
+    "streamLinks": [{ "country": "US", "package_short_name": "amp", "url": "https://watch.amazon.com/detail?gti=amzn1.dv.gti.56b2af4a-833b-5d9e-32be-368db8e46fab" }]
   },
-  "Stromberg": { "jWURL": "/us/tv-show/stromberg", "score": 8.4 }
+  "X-Factor": {
+    "jWURL": "/us/tv-show/beyond-belief-fact-or-fiction",
+    "score": 7.9,
+    "streamLinks": [{ "country": "US", "package_short_name": "amp", "url": "https://watch.amazon.com/detail?gti=amzn1.dv.gti.68b09093-1e7c-3fa2-fe27-6b4a00a60a0a" }]
+  },
+  "The Big Bang Theory": { "jWURL": "/us/tv-show/the-big-bang-theory", "score": 8.2, "streamLinks": [] },
+  "Best of Europe": { "jWURL": "/us/movie/the-best-of-me", "score": 6.6, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/70303290" }] },
+  "Läuft jetzt": {
+    "jWURL": "/us/movie/triggered-2020",
+    "streamLinks": [{ "country": "US", "package_short_name": "amp", "url": "https://watch.amazon.com/detail?gti=amzn1.dv.gti.26bab2f1-b941-5ddb-5f05-7ab4facb22e4" }]
+  },
+  "Drama": { "jWURL": "/us/movie/drama-2018", "score": 4.3, "streamLinks": [] },
+  "Dokumentation": { "jWURL": "/us/movie/das-zeugenhaus", "score": 6.9 },
+  "Action und Abenteuer": {
+    "jWURL": "/us/tv-show/justice-league-action",
+    "score": 7.5,
+    "streamLinks": [{ "country": "US", "package_short_name": "amp", "url": "https://watch.amazon.com/detail?gti=amzn1.dv.gti.58ac84e5-561d-7bbc-29db-fa4cb52278d8" }]
+  },
+  "Kinder und Familie": { "jWURL": "/us/tv-show/girls-und-panzer", "score": 7.4, "streamLinks": [] },
+  "Science-Fiction": { "jWURL": "/us/movie/science-fiction-volume-one-the-osiris-child", "score": 5.5, "streamLinks": [] },
+  "Fantasy": { "jWURL": "/us/movie/fantasy", "score": 5.8, "streamLinks": [] },
+  "Komödien": { "jWURL": "/us/movie/charlie-chaplin-city-lights", "score": 8.5, "streamLinks": [] },
+  "Thriller": { "jWURL": "/us/movie/thriller-2018", "score": 3.6, "streamLinks": [] },
+  "Romantik": { "jWURL": "/us/movie/romance-1999", "score": 5.2, "streamLinks": [] },
+  "Meine kleine Bäckerei der Träume": { "jWURL": "/us/movie/love-is-a-piece-of-cake", "score": 6.1, "streamLinks": [] },
+  "Push": { "jWURL": "/us/movie/push", "score": 6.1, "streamLinks": [] },
+  "Rebellion der Magier [dt./OV]": { "jWURL": "/us/movie/abigail", "score": 4.8, "streamLinks": [] },
+  "Love Accidentally": { "jWURL": "/us/movie/love-accidentally", "score": 5.3, "streamLinks": [] },
+  "Lucifer": { "jWURL": "/us/tv-show/lucifer", "score": 8.1, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80057918" }] },
+  "Preacher ": { "jWURL": "/us/tv-show/preacher", "score": 7.9, "streamLinks": [] },
+  "Supernatural": { "jWURL": "/us/tv-show/supernatural", "score": 8.4, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/70143825" }] },
+  "Sherlock": { "jWURL": "/us/tv-show/sherlock", "score": 9.1, "streamLinks": [] },
+  "Grimm": {
+    "jWURL": "/us/tv-show/grimm",
+    "score": 7.9,
+    "streamLinks": [{ "country": "US", "package_short_name": "amp", "url": "https://watch.amazon.com/detail?gti=amzn1.dv.gti.84a9f7a1-6079-ffa4-9cf7-f7ff6bf2f9f2" }]
+  },
+  "The Originals": { "jWURL": "/us/tv-show/the-originals", "score": 8.3, "streamLinks": [] },
+  "The Magicians": { "jWURL": "/us/tv-show/the-magicians-2015", "score": 7.6, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80092801" }] },
+  "The Vampire Diaries": { "jWURL": "/us/tv-show/the-vampire-diaries", "score": 7.7, "streamLinks": [] },
+  "Clarkson's Farm": {
+    "jWURL": "/us/tv-show/jeremy-clarkson-i-bought-the-farm",
+    "score": 9,
+    "streamLinks": [{ "country": "US", "package_short_name": "amp", "url": "https://watch.amazon.com/detail?gti=amzn1.dv.gti.7a1b91e4-dc7a-4437-af84-e66937991dd6" }]
+  },
+  "Young Sheldon": { "jWURL": "/us/tv-show/young-sheldon", "score": 7.6, "streamLinks": [] },
+  "2 Broke Girls": { "jWURL": "/us/tv-show/2-broke-girls", "score": 6.6, "streamLinks": [] },
+  "King of Queens": { "jWURL": "/us/tv-show/the-king-of-queens", "score": 7.4, "streamLinks": [] },
+  "Star Trek: Picard": { "jWURL": "/us/tv-show/star-trek-picard", "score": 7.5, "streamLinks": [] },
+  "Parks and Recreation": { "jWURL": "/us/tv-show/parks-and-recreation", "score": 8.6, "streamLinks": [] }
 }
