@@ -150,7 +150,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     DBCache = result?.DBCache;
     if (typeof DBCache !== "object") {
       console.log("DBCache not found, creating new one", DBCache);
-      browser.storage.local.set({});
+      browser.storage.local.set({ DBCache: {} });
+      DBCache = {};
     }
   });
   function addIntroTimeSkipped(startTime, endTime) {
@@ -499,7 +500,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     titleCards.forEach((card) => {
       // let card = document.querySelector(".title-card .boxart-container");
       let title = card.children?.[1]?.firstChild?.textContent;
-      if (title) {
+      if (title && !title.includes("Netflix")) {
         if (!DBCache[title]) {
           getMovieInfo(title).then((data) => {
             DBCache[title] = data;
@@ -512,22 +513,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     });
   }
   async function setRatingOnCard(card, data) {
+    card.classList.add("imdb");
+
+    let div = document.createElement("div");
+    div.style = "position: absolute;top: 0;right: 1.5vw;z-index: 9999;color: black;background: #f5c518;border-radius: 5px;font-size: 1vw;padding: 0 2px 0 2px;";
+
     if (data?.score) {
-      card.classList.add("imdb");
-      let div = document.createElement("div");
-      div.style = "position: absolute;top: 0;right: 1.5vw;z-index: 9999;color: black;background: #f5c518;border-radius: 5px;font-size: 1vw;padding: 0 2px 0 2px;";
       div.textContent = data.score?.toFixed(1);
       // div.textContent = title;
-      card.appendChild(div);
     } else {
-      console.log("no scoring", title);
-      card.classList.add("imdb");
+      div.textContent = "?";
+      console.log("no Score found", title);
     }
+    card.appendChild(div);
   }
   // NetflixJustWatchObserver.observe(document, config);
-  // setTimeout(function () {
-  //   Netflix_JustWatch();
-  // }, 1000);
+  Netflix_JustWatch();
+  setInterval(function () {
+    Netflix_JustWatch();
+  }, 1000);
   setInterval(function () {
     const size = new TextEncoder().encode(JSON.stringify(DBCache)).length;
     const kiloBytes = size / 1024;
