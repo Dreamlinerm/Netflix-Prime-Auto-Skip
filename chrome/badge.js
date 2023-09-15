@@ -40,28 +40,29 @@ async function setBadgeText(text, tabId = null) {
 
 // receive message from content script with the badgeText and set it in the badge
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-  chrome.storage.local.get("Badges", function (result) {
-    Badges = result.Badges;
-    if (Badges === undefined) {
-      Badges = {};
-    }
-    if (message.type === "setBadgeText") {
-      setBadgeText(message.content, sender.tab.id);
-    } else if (message.type === "increaseBadge") {
-      increaseBadge(sender.tab.id);
-    } else if (message.type === "resetBadge") {
-      delete Badges[sender.tab.id];
-      chrome.storage.local.set({ Badges });
-      chrome.action.setBadgeText({ text: "", tabId: sender.tab.id });
-    }
-    // else if (message.url) {
-    //   fetch(message.url)
-    //     .then((response) => response.json())
-    //     .then((data) => sendResponse(data))
-    //     .catch((error) => console.error(error));
-    //   return true; // Indicates that sendResponse will be called asynchronously
-    // }
-  });
+  if (message.url) {
+    fetch(message.url)
+      .then((response) => response.json())
+      .then((data) => sendResponse(data))
+      .catch((error) => console.error(error));
+    return true; // Indicates that sendResponse will be called asynchronously
+  } else {
+    chrome.storage.local.get("Badges", function (result) {
+      Badges = result.Badges;
+      if (Badges === undefined) {
+        Badges = {};
+      }
+      if (message.type === "setBadgeText") {
+        setBadgeText(message.content, sender.tab.id);
+      } else if (message.type === "increaseBadge") {
+        increaseBadge(sender.tab.id);
+      } else if (message.type === "resetBadge") {
+        delete Badges[sender.tab.id];
+        chrome.storage.local.set({ Badges });
+        chrome.action.setBadgeText({ text: "", tabId: sender.tab.id });
+      }
+    });
+  }
 });
 
 chrome.runtime.onInstalled.addListener((details) => {
