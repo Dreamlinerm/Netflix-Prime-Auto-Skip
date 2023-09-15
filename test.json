@@ -1,68 +1,15 @@
 [
-  {
-    jw_entity_id: 'tm912189',
-    monetization_type: 'flatrate',
-    provider_id: 337,
-    package_short_name: 'dnp',
-    currency: 'USD',
-    urls: {
-      standard_web: 'https://disneyplus.bn5x.net/c/1206980/705874/9358?u=https%3A%2F%2Fwww.disneyplus.com%2Fmovies%2Felemental%2F1B2ZQ9GF35W5&subId3=justappsvod',
-      deeplink_web: 'https://www.disneyplus.com/video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
-      deeplink_android_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
-      deeplink_fire_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
-      deeplink_tvos: 'disneyplus://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5',
-      deeplink_tizenos: '{"id":"MCmYXNxgcu.DisneyPlus","action_data":"{\\"page\\": \\"movie_details\\", \\"type\\": \\"movies\\", \\"id\\": \\"1B2ZQ9GF35W5\\", \\"pid\\": \\"SmartHubPub\\"}"}',
-      deeplink_webos: '{ "id": "com.disney.disneyplus-prod", "params": { "contentTarget": "" }}',
-      deeplink_xbox: 'disneyplus://video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
-      deeplink_rokuos: 'launch/291097?contentID=e3895d1d-a979-4c1a-ba66-1bf706e145ab&MediaType=movie'
-    },
-    available_from: '0001-01-01T00:00:00Z',
-    available_to: '0001-01-01T00:00:00Z',
-    presentation_type: '4k',
-    country: 'US'
-  },
-  {
-    jw_entity_id: 'tm912189',
-    monetization_type: 'flatrate',
-    provider_id: 337,
-    package_short_name: 'dnp',
-    currency: 'USD',
-    urls: {
-      standard_web: 'https://disneyplus.bn5x.net/c/1206980/705874/9358?u=https%3A%2F%2Fwww.disneyplus.com%2Fmovies%2Felemental%2F1B2ZQ9GF35W5&subId3=justappsvod',
-      deeplink_web: 'https://www.disneyplus.com/video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
-      deeplink_android_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
-      deeplink_fire_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
-      deeplink_tvos: 'disneyplus://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5',
-      deeplink_tizenos: '{"id":"MCmYXNxgcu.DisneyPlus","action_data":"{\\"page\\": \\"movie_details\\", \\"type\\": \\"movies\\", \\"id\\": \\"1B2ZQ9GF35W5\\", \\"pid\\": \\"SmartHubPub\\"}"}',
-      deeplink_webos: '{ "id": "com.disney.disneyplus-prod", "params": { "contentTarget": "" }}',
-      deeplink_xbox: 'disneyplus://video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
-      deeplink_rokuos: 'launch/291097?contentID=e3895d1d-a979-4c1a-ba66-1bf706e145ab&MediaType=movie'
-    },
-    available_from: '0001-01-01T00:00:00Z',
-    available_to: '0001-01-01T00:00:00Z',
-    presentation_type: 'hd',
-    country: 'US'
-  },
-  {
-    jw_entity_id: 'tm912189',
-    monetization_type: 'flatrate',
-    provider_id: 337,
-    package_short_name: 'dnp',
-    currency: 'USD',
-    urls: {
-      standard_web: 'https://disneyplus.bn5x.net/c/1206980/705874/9358?u=https%3A%2F%2Fwww.disneyplus.com%2Fmovies%2Felemental%2F1B2ZQ9GF35W5&subId3=justappsvod',
-      deeplink_web: 'https://www.disneyplus.com/video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
-      deeplink_android_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
-      deeplink_fire_tv: 'intent://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5#Intent;launchFlags=0x00800000;scheme=https;end',
-      deeplink_tvos: 'disneyplus://www.disneyplus.com/movies/elemental/1B2ZQ9GF35W5',
-      deeplink_tizenos: '{"id":"MCmYXNxgcu.DisneyPlus","action_data":"{\\"page\\": \\"movie_details\\", \\"type\\": \\"movies\\", \\"id\\": \\"1B2ZQ9GF35W5\\", \\"pid\\": \\"SmartHubPub\\"}"}',
-      deeplink_webos: '{ "id": "com.disney.disneyplus-prod", "params": { "contentTarget": "" }}',
-      deeplink_xbox: 'disneyplus://video/e3895d1d-a979-4c1a-ba66-1bf706e145ab',
-      deeplink_rokuos: 'launch/291097?contentID=e3895d1d-a979-4c1a-ba66-1bf706e145ab&MediaType=movie'
-    },
-    available_from: '0001-01-01T00:00:00Z',
-    available_to: '0001-01-01T00:00:00Z',
-    presentation_type: 'sd',
-    country: 'US'
-  }
+  { "provider_type": "imdb:score", "value": 7 },
+  { "provider_type": "tmdb:id", "value": 976573 },
+  { "provider_type": "tmdb:votes", "value": 1963 },
+  { "provider_type": "jw:trending_7_day", "value": 577.31 },
+  { "provider_type": "tmdb:popularity", "value": 1153.497 },
+  { "provider_type": "imdb:multiplied", "value": 354137 },
+  { "provider_type": "jw:popular_7_day", "value": 577.19 },
+  { "provider_type": "jw:popular_180_day", "value": 257.07 },
+  { "provider_type": "jw:viral", "value": 0.17 },
+  { "provider_type": "jw:popular_30_day", "value": 608.47 },
+  { "provider_type": "jw:popular_1_day", "value": 772.15 },
+  { "provider_type": "tmdb:score", "value": 7.788 },
+  { "provider_type": "imdb:votes", "value": 50591 }
 ]
