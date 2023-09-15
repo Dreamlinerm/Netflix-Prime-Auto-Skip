@@ -30,7 +30,7 @@
       "js": ["skipper.js"]
     }
   ],
-  "permissions": ["storage"],
+  "permissions": ["storage", "*://apis.justwatch.com/*"],
   "browser_action": {
     "default_icon": "icons/NetflixAmazon Auto-Skip.svg",
     "default_title": "__MSG_extensionName__",
