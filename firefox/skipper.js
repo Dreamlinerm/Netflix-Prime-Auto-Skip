@@ -180,7 +180,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     const response = await fetch(encodeURI(url));
     const data = await response.json();
     // "https://www.justwatch.com" + data.items[0].full_path;
-    const justWatchURL = data?.items?.[0].full_path;
+    const justWatchURL = data?.items?.[0]?.full_path;
     // flatrate = free with subscription (netflix, amazon prime, disney+)
     let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
     // get the first offer of each provider
@@ -490,16 +490,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     }
   }
 
-  const NetflixJustWatchObserver = new MutationObserver(Netflix_JustWatch);
-
-  // getMovieInfo("Lucifer").then((data) => {
-  //   console.log(data);
-  // });
-  async function Netflix_JustWatch() {
-    let titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
+  const JustWatchObserver = new MutationObserver(JustWatch);
+  async function JustWatch() {
+    let titleCards;
+    if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
+    else titleCards = document.querySelectorAll("[data-card-title]:not(.imdb)");
     titleCards.forEach((card) => {
       // let card = document.querySelector(".title-card .boxart-container");
-      let title = card.children?.[1]?.firstChild?.textContent;
+      let title;
+      if (isNetflix) title = card.children?.[1]?.firstChild?.textContent;
+      else title = card.getAttribute("data-card-title"); //Amazon
       if (title && !title.includes("Netflix")) {
         if (!DBCache[title]) {
           getMovieInfo(title).then((data) => {
@@ -527,26 +527,29 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     }
     card.appendChild(div);
   }
-  // NetflixJustWatchObserver.observe(document, config);
-  Netflix_JustWatch();
+  JustWatchObserver.observe(document, config);
+  // JustWatch();
   setInterval(function () {
-    Netflix_JustWatch();
+    JustWatch();
   }, 1000);
-  setInterval(function () {
+
+  function setDBCache() {
     const size = new TextEncoder().encode(JSON.stringify(DBCache)).length;
     const kiloBytes = size / 1024;
     const megaBytes = kiloBytes / 1024;
-    if (megaBytes < 5) {
+    if (megaBytes < 2) {
       browser.storage.local.set({ DBCache });
     } else {
       DBCache = {};
       browser.storage.local.set({ DBCache });
     }
-
     // browser.storage.local.set({ DBCache: {} });
     console.log(megaBytes);
     // console.log(megaBytes, JSON.stringify(DBCache));
-  }, 3000);
+  }
+  setInterval(function () {
+    setDBCache();
+  }, 5000);
 
   // Amazon Observers
   const AmazonVideoClass = "#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video";
