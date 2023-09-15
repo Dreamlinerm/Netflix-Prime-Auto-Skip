@@ -183,11 +183,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     if (megaBytes < 2) {
       browser.storage.local.set({ DBCache });
     } else {
-      console.log("DBCache cleared", megaBytes);
+      log("DBCache cleared", megaBytes);
       DBCache = {};
       browser.storage.local.set({ DBCache });
     }
-    console.log(megaBytes);
+    // log(megaBytes);
     // browser.storage.local.get("DBCache", function (result) {
     //   console.log(JSON.stringify(result?.DBCache));
     // });
@@ -835,19 +835,21 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     }
   }
   async function startShowRatingInterval() {
-    if (!settings.Video?.showRating) {
-      log("stopped observing| ShowRating");
-      clearInterval(JustWatchInterval);
-      clearInterval(DBCacheInterval);
-      return;
+    if (settings.Video?.showRating) {
+      log("started observing| ShowRating");
+      let JustWatchInterval = setInterval(function () {
+        if (!settings.Video?.showRating) {
+          clearInterval(JustWatchInterval);
+          log("stopped observing| ShowRating");
+        } else {
+          JustWatch();
+        }
+      }, 1000);
+      let DBCacheInterval = setInterval(function () {
+        if (!settings.Video?.showRating) clearInterval(DBCacheInterval);
+        else setDBCache();
+      }, 5000);
     }
-    log("started observing| ShowRating");
-    let JustWatchInterval = setInterval(function () {
-      JustWatch();
-    }, 1000);
-    let DBCacheInterval = setInterval(function () {
-      setDBCache();
-    }, 5000);
   }
   // Disney
   async function startDisneySkipIntroObserver() {

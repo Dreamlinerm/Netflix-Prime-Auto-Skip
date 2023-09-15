@@ -225,5 +225,11 @@
   },
   "conflictingTitle": {
     "message": "All conflicting Features"
+  },
+  "RatingSwitch": {
+    "message": "IMDB Rating:"
+  },
+  "RatingSwitchDescription": {
+    "message": "Adding the IMDB rating to every movie and series"
   }
 }

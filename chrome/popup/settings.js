@@ -67,7 +67,7 @@ const defaultSettings = {
     Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true },
-    Video: { playOnFullScreen: true },
+    Video: { playOnFullScreen: true, showRating: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
   },
@@ -146,7 +146,9 @@ function setCheckboxesToSettings() {
       settings?.Netflix.speedSlider &&
       settings?.Disney.speedSlider &&
       // playOnFullScreen
-      settings?.Video.playOnFullScreen;
+      settings?.Video.playOnFullScreen &&
+      // showRating
+      settings?.Video.showRating;
   button = document.querySelector("#VideoIntro");
   if (button) button.checked = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro && settings?.Disney.skipIntro;
   button = document.querySelector("#VideoCredits");
@@ -161,6 +163,8 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Amazon.speedSlider && settings?.Netflix.speedSlider && settings?.Disney.speedSlider;
   button = document.querySelector("#VideoFullScreen");
   if (button) button.checked = settings?.Video.playOnFullScreen;
+  button = document.querySelector("#VideoShowRating");
+  if (button) button.checked = settings?.Video.showRating;
 
   //  -------------      Default        ---------------------------------------
   button = document.querySelector("#DefaultSkips");
@@ -225,10 +229,6 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Disney.watchCredits;
   button = document.querySelector("#DisneySpeedSlider");
   if (button) button.checked = settings?.Disney.speedSlider;
-
-  // general video settings
-  button = document.querySelector("#playOnFullScreen");
-  if (button) button.checked = settings?.Video.playOnFullScreen;
 
   //  -------------      Slider Options        ---------------------------------------
   button = document.querySelector("#SliderSteps");
@@ -345,7 +345,9 @@ function listenForClicks() {
         settings?.Netflix.speedSlider &&
         settings?.Disney.speedSlider &&
         // playOnFullScreen
-        settings?.Video.playOnFullScreen
+        settings?.Video.playOnFullScreen &&
+        // showRating
+        settings?.Video.showRating
       );
       settings.Amazon.skipIntro =
         settings.Netflix.skipIntro =
@@ -363,6 +365,8 @@ function listenForClicks() {
         settings.Disney.speedSlider =
         // playOnFullScreen
         settings.Video.playOnFullScreen =
+        // showRating
+        settings.Video.showRating =
           VideoSkips;
       if (VideoSkips) settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
       setSettings("All VideoSkips");
@@ -395,6 +399,9 @@ function listenForClicks() {
     } else if (e.target.id === "VideoFullScreen") {
       settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
       setSettings("playOnFullScreen");
+    } else if (e.target.id === "VideoShowRating") {
+      settings.Video.showRating = !settings.Video.showRating;
+      setSettings("showRating");
     }
 
     // -------------      Default        ---------------------------------------
@@ -496,11 +503,6 @@ function listenForClicks() {
     } else if (e.target.id === "DisneySpeedSlider") {
       settings.Disney.speedSlider = !settings.Disney.speedSlider;
       setSettings("DisneySpeedSlider");
-    }
-    //  -------------      Video        ---------------------------------------
-    else if (e.target.id === "playOnFullScreen") {
-      settings.video.playOnFullScreen = !settings.video.playOnFullScreen;
-      setSettings("playOnFullScreen");
     }
     //  -------------      Statistics        ---------------------------------------
     else if (e.target.id === "upload") {

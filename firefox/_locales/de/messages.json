@@ -225,5 +225,11 @@
   },
   "conflictingTitle": {
     "message": "Alle widersprüchlichen Funktionen"
+  },
+  "RatingSwitch": {
+    "message": "IMDB Bewertung:"
+  },
+  "RatingSwitchDescription": {
+    "message": "Zeigt die IMDB Bewertung für jeden film/serie an"
   }
 }

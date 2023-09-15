@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Streaming enhanced Netflix Disney Prime Video",
+    "message": "Streaming enhanced: Netflix Disney+ Prime Video",
     "description": "Name der Erweiterung"
   },
   "extensionDescription": {
@@ -225,5 +225,11 @@
   },
   "conflictingTitle": {
     "message": "Alle widersprüchlichen Funktionen"
+  },
+  "RatingSwitch": {
+    "message": "IMDB Bewertung:"
+  },
+  "RatingSwitchDescription": {
+    "message": "Zeigt die IMDB Bewertung für jeden film/serie an"
   }
 }

@@ -31,7 +31,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true },
-      Video: { playOnFullScreen: true },
+      Video: { playOnFullScreen: true, showRating: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
     },
@@ -85,6 +85,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         if (settings.Disney?.speedSlider) startDisneySpeedSliderObserver();
       }
       if (settings.Video.playOnFullScreen) startPlayOnFullScreen(isNetflix);
+      if (settings.Video?.showRating) startShowRatingInterval();
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
       for (const key in defaultSettings.settings) {
@@ -139,10 +140,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Disney.speedSlider !== oldValue.Disney?.speedSlider) startDisneySpeedSliderObserver();
         }
         if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
+        if (oldValue === undefined || newValue.Video.showRating !== oldValue.Video?.showRating) startShowRatingInterval();
         if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
           resetBadge();
         }
       }
+    }
+  });
+  let DBCache = {};
+  chrome.storage.local.get("DBCache", function (result) {
+    DBCache = result?.DBCache;
+    if (typeof DBCache !== "object") {
+      console.log("DBCache not found, creating new one", DBCache);
+      chrome.storage.local.set({ DBCache: {} });
+      DBCache = {};
     }
   });
   function addIntroTimeSkipped(startTime, endTime) {
@@ -164,10 +175,93 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     const date = new Date();
     console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), ...args);
   }
+  // set DB Cache if cache size under 2MB
+  function setDBCache() {
+    const size = new TextEncoder().encode(JSON.stringify(DBCache)).length;
+    const kiloBytes = size / 1024;
+    const megaBytes = kiloBytes / 1024;
+    if (megaBytes < 2) {
+      chrome.storage.local.set({ DBCache });
+    } else {
+      log("DBCache cleared", megaBytes);
+      DBCache = {};
+      chrome.storage.local.set({ DBCache });
+    }
+    // log(megaBytes);
+    // chrome.storage.local.get("DBCache", function (result) {
+    //   console.log(JSON.stringify(result?.DBCache));
+    // });
+    // console.log(JSON.stringify(DBCache));
+  }
+  // justWatchAPI
+  async function getMovieInfo(movieTitle, locale = "en_US") {
+    // console.log("getMovieInfo", movieTitle);
+    const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${movieTitle}","content_types":["show","movie"]}`;
+    const response = await fetch(encodeURI(url));
+    const data = await response.json();
+    if (data) {
+      // "https://www.justwatch.com" + data.items[0].full_path;
+      const justWatchURL = data?.items?.[0]?.full_path;
+      // flatrate = free with subscription (netflix, amazon prime, disney+)
+      let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
+      // get the first offer of each provider
+      offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
+      // map offers to only package_short_name, country and standard_web url
+      offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
+      return {
+        jWURL: justWatchURL,
+        score: data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value,
+        streamLinks: offers,
+      };
+    }
+    return null;
+  }
 
   // Observers
   // default Options for the observer (which mutations to observe)
   const config = { attributes: true, childList: true, subtree: true };
+
+  // shared functions
+  async function JustWatch() {
+    let titleCards;
+    if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
+    else titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
+    titleCards.forEach((card) => {
+      // let card = document.querySelector(".title-card .boxart-container");
+      let title;
+      if (isNetflix) title = card.children?.[1]?.firstChild?.textContent;
+      // remove everything after - in the title
+      else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
+      if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
+        if (!DBCache[title]) {
+          getMovieInfo(title).then((data) => {
+            if (data) DBCache[title] = data;
+            setRatingOnCard(card, data);
+          });
+        } else {
+          setRatingOnCard(card, DBCache[title]);
+        }
+      }
+    });
+  }
+  async function setRatingOnCard(card, data) {
+    if (isNetflix) card.classList.add("imdb");
+    else card.parentElement.classList.add("imdb");
+
+    let div = document.createElement("div");
+    // right: 1.5vw;
+    div.style = "position: absolute;bottom: 0;right:0;z-index: 9999;color: black;background: #f5c518;border-radius: 5px;font-size: 1vw;padding: 0 2px 0 2px;";
+    // div.id = "imdb";
+    if (data?.score) {
+      div.textContent = data.score?.toFixed(1);
+      // div.textContent = title;
+    } else {
+      div.textContent = "?";
+      console.log("no Score found", title);
+    }
+    if (isNetflix) card.appendChild(div);
+    else card.firstChild.firstChild.appendChild(div);
+  }
 
   // Disney Observers
   const DisneySkipIntroObserver = new MutationObserver(Disney_Intro);
@@ -738,6 +832,23 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     } else {
       log("stopped observing| PlayOnFullScreen");
       removeEventListener("fullscreenchange", OnFullScreenChange);
+    }
+  }
+  async function startShowRatingInterval() {
+    if (settings.Video?.showRating) {
+      log("started observing| ShowRating");
+      let JustWatchInterval = setInterval(function () {
+        if (!settings.Video?.showRating) {
+          clearInterval(JustWatchInterval);
+          log("stopped observing| ShowRating");
+        } else {
+          JustWatch();
+        }
+      }, 1000);
+      let DBCacheInterval = setInterval(function () {
+        if (!settings.Video?.showRating) clearInterval(DBCacheInterval);
+        else setDBCache();
+      }, 5000);
     }
   }
   // Disney
