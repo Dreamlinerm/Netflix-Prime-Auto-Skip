@@ -478,27 +478,31 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     }
   }
 
+  const NetflixJustWatchObserver = new MutationObserver(Netflix_JustWatch);
+
   // getMovieInfo("Lucifer").then((data) => {
   //   console.log(data);
   // });
   async function Netflix_JustWatch() {
-    console.log("JustWatch");
-    let titleCards = document.querySelectorAll(".title-card .boxart-container");
+    let titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
     titleCards.forEach((card) => {
       // let card = document.querySelector(".title-card .boxart-container");
       let title = card.children?.[1]?.firstChild.textContent;
       if (title) {
         getMovieInfo(title).then((data) => {
           if (data.scoring?.value) {
+            console.log("title", title);
+            card.classList.add("imdb");
             let div = document.createElement("div");
             div.style = "position: absolute;top: 0;right: 30px;z-index: 9999;color: black;background: #f5c518;height: 25px;width: 25px;border-radius: 50%;";
-            div.id = "justWatch";
             let div2 = document.createElement("div");
             div2.style = "top: 4px;position: absolute;right: 2px;";
             div.appendChild(div2);
             div2.textContent = data.scoring?.value.toFixed(1);
             // div.textContent = title;
             card.appendChild(div);
+          } else {
+            console.log("no scoring", title);
           }
         });
       }
