@@ -24,8 +24,7 @@
         "*://*.netflix.ca/*",
         "*://*.netflix.com.au/*",
         "*://*.disneyplus.com/*",
-        "*://*.hotstar.com/*",
-        "https://apis.justwatch.com/*"
+        "*://*.hotstar.com/*"
       ],
       "js": ["skipper.js"]
     }
