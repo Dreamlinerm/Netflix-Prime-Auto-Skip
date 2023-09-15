@@ -485,15 +485,21 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     console.log("JustWatch");
     let titleCards = document.querySelectorAll(".title-card .boxart-container");
     titleCards.forEach((card) => {
+      // let card = document.querySelector(".title-card .boxart-container");
       let title = card.children?.[1]?.firstChild.textContent;
       if (title) {
         getMovieInfo(title).then((data) => {
-          let div = document.createElement("div");
-          div.style = "position: absolute;top: 0;left: 50px;z-index: 9999;color: black;background: grey;";
-          div.id = "justWatch";
-          div.textContent = title + " " + data.scoring?.value;
-          // div.textContent = title;
-          card.appendChild(div);
+          if (data.scoring?.value) {
+            let div = document.createElement("div");
+            div.style = "position: absolute;top: 0;right: 30px;z-index: 9999;color: black;background: #f5c518;height: 25px;width: 25px;border-radius: 50%;";
+            div.id = "justWatch";
+            let div2 = document.createElement("div");
+            div2.style = "top: 4px;position: absolute;right: 2px;";
+            div.appendChild(div2);
+            div2.textContent = data.scoring?.value.toFixed(1);
+            // div.textContent = title;
+            card.appendChild(div);
+          }
         });
       }
     });
