@@ -166,13 +166,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
   // justWatchAPI
   async function getMovieInfo(movieTitle, locale = "en_US") {
-    console.log("getMovieInfo", movieTitle);
+    // console.log("getMovieInfo", movieTitle);
     const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${movieTitle}","content_types":["show","movie"]}`;
     const response = await fetch(encodeURI(url));
     const data = await response.json();
-    const justWatchURL = "https://www.justwatch.com" + data.items[0].full_path;
+    const justWatchURL = "https://www.justwatch.com" + data?.items?.[0].full_path;
     // flatrate = free with subscription (netflix, amazon prime, disney+)
-    let offers = data.items[0].offers.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
+    let offers = data?.items?.[0].offers.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
     // get the first offer of each provider
     offers = offers.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
     return {
@@ -487,7 +487,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     let titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
     titleCards.forEach((card) => {
       // let card = document.querySelector(".title-card .boxart-container");
-      let title = card.children?.[1]?.firstChild.textContent;
+      let title = card.children?.[1]?.firstChild?.textContent;
       if (title) {
         getMovieInfo(title).then((data) => {
           if (data.scoring?.value) {
@@ -503,11 +503,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
             card.appendChild(div);
           } else {
             console.log("no scoring", title);
+            card.classList.add("imdb");
           }
         });
       }
     });
   }
+  // NetflixJustWatchObserver.observe(document, config);
   // setTimeout(function () {
   Netflix_JustWatch();
   // }, 1000);
