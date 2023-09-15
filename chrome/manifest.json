@@ -24,12 +24,14 @@
         "*://*.netflix.ca/*",
         "*://*.netflix.com.au/*",
         "*://*.disneyplus.com/*",
-        "*://*.hotstar.com/*"
+        "*://*.hotstar.com/*",
+        "https://apis.justwatch.com/*"
       ],
       "js": ["skipper.js"]
     }
   ],
-  "permissions": ["storage", "*://apis.justwatch.com/*"],
+  "permissions": ["storage"],
+  "host_permissions": ["https://apis.justwatch.com/*"],
   "action": {
     "default_icon": {
       "16": "icons/NetflixAmazon Auto-Skip--16.png",

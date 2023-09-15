@@ -144,6 +144,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
           resetBadge();
         }
+      } else if (key == "DBCache") {
+        DBCache = newValue;
       }
     }
   });
@@ -227,19 +229,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
     else titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
     titleCards.forEach((card) => {
-      // let card = document.querySelector(".title-card .boxart-container");
+      // let card = document.querySelector("li:not(.imdb) [data-card-title]");
+      let card = document.querySelector(".title-card .boxart-container:not(.imdb)");
       let title;
-      if (isNetflix) title = card.children?.[1]?.firstChild?.textContent;
+      if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent;
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
       if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         if (!DBCache[title]) {
           getMovieInfo(title).then((data) => {
             if (data) DBCache[title] = data;
-            setRatingOnCard(card, data);
+            setRatingOnCard(card, data, title);
           });
         } else {
-          setRatingOnCard(card, DBCache[title]);
+          setRatingOnCard(card, DBCache[title], title);
         }
       }
     });
