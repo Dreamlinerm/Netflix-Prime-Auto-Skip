@@ -1,56 +1,30 @@
 {
-  "justWatchURL": "https://www.justwatch.com/us/tv-show/suits",
-  "scoring": { "provider_type": "imdb:score", "value": 8.4 },
-  "streamingLinks": [
-    {
-      "jw_entity_id": "ts22277",
-      "type": "aggregated",
-      "monetization_type": "flatrate",
-      "provider_id": 8,
-      "package_short_name": "nfx",
-      "currency": "USD",
-      "urls": {
-        "standard_web": "http://www.netflix.com/title/70195800",
-        "deeplink_web": "http://www.netflix.com/watch/70195800",
-        "deeplink_android_tv": "intent://www.netflix.com/watch/70195800#Intent;launchFlags=0x00800000;scheme=https;package=com.netflix.ninja;S.source=30;end",
-        "deeplink_fire_tv": "intent://www.netflix.com/watch/70195800#Intent;launchFlags=0x00800000;scheme=https;package=com.netflix.ninja;S.source=30;end",
-        "deeplink_tvos": "nflx://www.netflix.com/watch/70195800?source=topshelf",
-        "deeplink_tizenos": "{\"id\":\"org.tizen.netflix-app\",\"action_data\":\"\"}",
-        "deeplink_webos": "{ \"id\" : \"netflix\", \"params\" : { \"contentTarget\":\"-Q m=http%3A%2F%2Fapi-global.netflix.com%2Fcatalog%2Ftitles%2Fmovies%2F70195800\"}}",
-        "deeplink_xbox": "netflix:/app?m=70195800",
-        "deeplink_rokuos": "launch/12?contentID=70195800&MediaType=show"
-      },
-      "available_from": "0001-01-01T00:00:00Z",
-      "available_to": "0001-01-01T00:00:00Z",
-      "presentation_type": "hd",
-      "element_count": 8,
-      "new_element_count": 8,
-      "country": "US"
-    },
-    {
-      "jw_entity_id": "ts22277",
-      "type": "aggregated",
-      "monetization_type": "flatrate",
-      "provider_id": 9,
-      "package_short_name": "amp",
-      "currency": "USD",
-      "urls": {
-        "standard_web": "https://watch.amazon.com/detail?gti=amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c",
-        "deeplink_web": "https://watch.amazon.com/watch?gti=amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c",
-        "deeplink_android_tv": "intent://watch.amazon.com/watch?asin=B07VGMK2P3&time=0&territory=US#Intent;package=com.amazon.amazonvideo.livingroom;scheme=https;end",
-        "deeplink_fire_tv": "intent://com.amazon.tv.launcher/detail?provider=aiv&providerId=B07VGMK2P3#Intent;package=com.amazon.tv.launcher;scheme=amzn;end",
-        "deeplink_tvos": "aiv://aiv/watch?gti=amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c&territory=US&time=auto",
-        "deeplink_tizenos": "{\"id\":\"org.tizen.primevideo\",\"action_data\":\"amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c\"}",
-        "deeplink_webos": "{ \"id\": \"amazon\", \"params\": { \"contentTarget\": \"amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c\" }}",
-        "deeplink_xbox": "https://watch.amazon.com/detail?gti=amzn1.dv.gti.b8b6000b-86e1-5d68-3304-a439ea729e8c",
-        "deeplink_rokuos": "launch/13?contentID=B07VGMK2P3&MediaType=episode"
-      },
-      "available_from": "2020-07-01T04:00:00Z",
-      "available_to": "0001-01-01T00:00:00Z",
-      "presentation_type": "hd",
-      "element_count": 1,
-      "new_element_count": 1,
-      "country": "US"
-    }
-  ]
+  "ONE PIECE": { "jWURL": "/us/tv-show/one-piece", "score": 8.9, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80107103" }] },
+  "Liebes Kind": { "jWURL": "/us/tv-show/dear-child", "score": 7.5, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/81513233" }] },
+  "The Blacklist": { "jWURL": "/us/tv-show/the-blacklist", "score": 8, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/70281312" }] },
+  "The Rookie": { "jWURL": "/us/tv-show/the-rookie", "score": 8, "streamLinks": [] },
+  "Vampire Diaries": { "jWURL": "/us/tv-show/the-vampire-diaries", "score": 7.7, "streamLinks": [] },
+  "Ragnarök": { "jWURL": "/us/tv-show/ragnarok", "score": 7.4, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80232926" }] },
+  "Gossip Girl": { "jWURL": "/us/tv-show/gossip-girl", "score": 7.4, "streamLinks": [] },
+  "Peaky Blinders – Gangs of Birmingham": {
+    "jWURL": "/us/tv-show/peaky-blinders",
+    "score": 8.8,
+    "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80002479" }]
+  },
+  "The Witcher": { "jWURL": "/us/tv-show/the-witcher", "score": 8, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80189685" }] },
+  "Top Boy": { "jWURL": "/us/tv-show/top-boy-2019", "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80217669" }] },
+  "The Night Agent": { "jWURL": "/us/tv-show/the-night-agent", "score": 7.5, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/81450827" }] },
+  "Black Mirror": { "jWURL": "/us/tv-show/black-mirror", "score": 8.7, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/70264888" }] },
+  "The Big Bang Theory": { "jWURL": "/us/tv-show/the-big-bang-theory", "score": 8.2, "streamLinks": [] },
+  "Friends": { "jWURL": "/us/tv-show/friends", "score": 8.9, "streamLinks": [] },
+  "The Good Doctor": { "jWURL": "/us/tv-show/the-good-doctor", "score": 8, "streamLinks": [] },
+  "Das Büro": { "jWURL": "/us/tv-show/the-office-2005", "score": 9, "streamLinks": [] },
+  "Unser Planet": { "jWURL": "/us/tv-show/our-planet", "score": 9.3, "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/80049832" }] },
+  "Türkisch für Anfänger": { "jWURL": "/us/tv-show/turkisch-fur-anfanger", "score": 7.5 },
+  "Wie wird man 100 Jahre alt? – Die Geheimnisse der Blauen Zonen": {
+    "jWURL": "/us/tv-show/live-to-100-secrets-of-the-blue-zones",
+    "score": 8,
+    "streamLinks": [{ "country": "US", "package_short_name": "nfx", "url": "http://www.netflix.com/title/81214929" }]
+  },
+  "Stromberg": { "jWURL": "/us/tv-show/stromberg", "score": 8.4 }
 }

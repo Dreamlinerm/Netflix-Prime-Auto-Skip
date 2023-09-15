@@ -145,6 +145,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   });
+  let DBCache = {};
+  browser.storage.local.get("DBCache", function (result) {
+    DBCache = result?.DBCache;
+    if (typeof DBCache !== "object") {
+      console.log("DBCache not found, creating new one", DBCache);
+      browser.storage.local.set({});
+    }
+  });
   function addIntroTimeSkipped(startTime, endTime) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       log("Intro Time skipped", endTime - startTime);
@@ -170,15 +178,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${movieTitle}","content_types":["show","movie"]}`;
     const response = await fetch(encodeURI(url));
     const data = await response.json();
-    const justWatchURL = "https://www.justwatch.com" + data?.items?.[0].full_path;
+    // "https://www.justwatch.com" + data.items[0].full_path;
+    const justWatchURL = data?.items?.[0].full_path;
     // flatrate = free with subscription (netflix, amazon prime, disney+)
-    let offers = data?.items?.[0].offers.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
+    let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
     // get the first offer of each provider
-    offers = offers.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
+    offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
+    // map offers to only package_short_name, country and standard_web url
+    offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
     return {
-      justWatchURL: justWatchURL,
-      scoring: data.items[0].scoring.filter((x) => x.provider_type == "imdb:score")?.[0],
-      streamingLinks: offers,
+      jWURL: justWatchURL,
+      score: data.items[0].scoring.filter((x) => x.provider_type == "imdb:score")?.[0]?.value,
+      streamLinks: offers,
     };
   }
 
@@ -489,30 +500,49 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // let card = document.querySelector(".title-card .boxart-container");
       let title = card.children?.[1]?.firstChild?.textContent;
       if (title) {
-        getMovieInfo(title).then((data) => {
-          if (data.scoring?.value) {
-            console.log("title", title);
-            card.classList.add("imdb");
-            let div = document.createElement("div");
-            div.style = "position: absolute;top: 0;right: 30px;z-index: 9999;color: black;background: #f5c518;height: 25px;width: 25px;border-radius: 50%;";
-            let div2 = document.createElement("div");
-            div2.style = "top: 4px;position: absolute;right: 2px;";
-            div.appendChild(div2);
-            div2.textContent = data.scoring?.value.toFixed(1);
-            // div.textContent = title;
-            card.appendChild(div);
-          } else {
-            console.log("no scoring", title);
-            card.classList.add("imdb");
-          }
-        });
+        if (!DBCache[title]) {
+          getMovieInfo(title).then((data) => {
+            DBCache[title] = data;
+            setRatingOnCard(card, data);
+          });
+        } else {
+          setRatingOnCard(card, DBCache[title]);
+        }
       }
     });
   }
+  async function setRatingOnCard(card, data) {
+    if (data?.score) {
+      card.classList.add("imdb");
+      let div = document.createElement("div");
+      div.style = "position: absolute;top: 0;right: 1.5vw;z-index: 9999;color: black;background: #f5c518;border-radius: 5px;font-size: 1vw;padding: 0 2px 0 2px;";
+      div.textContent = data.score?.toFixed(1);
+      // div.textContent = title;
+      card.appendChild(div);
+    } else {
+      console.log("no scoring", title);
+      card.classList.add("imdb");
+    }
+  }
   // NetflixJustWatchObserver.observe(document, config);
   // setTimeout(function () {
-  Netflix_JustWatch();
+  //   Netflix_JustWatch();
   // }, 1000);
+  setInterval(function () {
+    const size = new TextEncoder().encode(JSON.stringify(DBCache)).length;
+    const kiloBytes = size / 1024;
+    const megaBytes = kiloBytes / 1024;
+    if (megaBytes < 5) {
+      browser.storage.local.set({ DBCache });
+    } else {
+      DBCache = {};
+      browser.storage.local.set({ DBCache });
+    }
+
+    // browser.storage.local.set({ DBCache: {} });
+    console.log(megaBytes);
+    // console.log(megaBytes, JSON.stringify(DBCache));
+  }, 3000);
 
   // Amazon Observers
   const AmazonVideoClass = "#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video";
