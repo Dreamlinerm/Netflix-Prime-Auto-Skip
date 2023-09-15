@@ -166,9 +166,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
   // justWatchAPI
   async function getMovieInfo(movieTitle, locale = "en_US") {
+    console.log("getMovieInfo", movieTitle);
     const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${movieTitle}","content_types":["show","movie"]}`;
     const response = await fetch(encodeURI(url));
     const data = await response.json();
+    console.log(data);
     const justWatchURL = "https://www.justwatch.com" + data.items[0].full_path;
     // flatrate = free with subscription (netflix, amazon prime, disney+)
     let offers = data.items[0].offers.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
@@ -476,6 +478,30 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   }
+
+  getMovieInfo("Lucifer").then((data) => {
+    console.log(data);
+  });
+  async function Netflix_JustWatch() {
+    console.log("JustWatch");
+    let titleCards = document.querySelectorAll(".title-card .boxart-container");
+    titleCards.forEach((card) => {
+      let title = card.children?.[1]?.firstChild.textContent;
+      if (title) {
+        // getMovieInfo(title).then((data) => {
+        let div = document.createElement("div");
+        div.style = "position: absolute;top: 0;left: 50px;z-index: 9999;color: black;background: grey;";
+        div.id = "justWatch";
+        // div.textContent = title + " " + data.scoring?.value;
+        div.textContent = title;
+        card.appendChild(div);
+        // });
+      }
+    });
+  }
+  // setTimeout(function () {
+  Netflix_JustWatch();
+  // }, 1000);
 
   // Amazon Observers
   const AmazonVideoClass = "#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video";
