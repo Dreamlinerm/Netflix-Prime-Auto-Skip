@@ -214,8 +214,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       if (data != undefined && data != "") {
         // "https://www.justwatch.com" + data.items[0].full_path;
         const jWURL = data?.items?.[0]?.full_path;
-        // flatrate = free with subscription (netflix, amazon prime, disney+)
-        let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
+        // flatrate = free with subscription
+        // (netflix, amazon prime, disney+) (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp")
+        let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate");
         // get the first offer of each provider
         offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
         // map offers to only package_short_name, country and standard_web url
