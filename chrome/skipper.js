@@ -216,9 +216,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         const jWURL = data?.items?.[0]?.full_path;
         // flatrate = free with subscription
         // (netflix, amazon prime, disney+) (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp")
+        // fuv and drv are both hulu
         let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate");
+        offers = offers?.filter((x) => x.package_short_name != "fuv" && x.package_short_name != "drv");
         // get the first offer of each provider
         offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
+
         // map offers to only package_short_name, country and standard_web url
         offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
         const score = data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value;
@@ -304,6 +307,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           img.src = "https://images.justwatch.com/icon/147638351/s100/disneyplus.jpg";
           img.alt = "Prime icon";
           p.textContent = "Disney (US)";
+        } else if (link.package_short_name == "hlu") {
+          img.src = "https://images.justwatch.com/icon/116305230/s100/hulu.jpg";
+          img.alt = "Hulu icon";
+          p.textContent = "Hulu (US)";
+        } else {
+          img.alt = link.package_short_name;
+          p.textContent = link.package_short_name;
         }
         img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4em;height: auto;";
         a.appendChild(img);
