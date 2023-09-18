@@ -942,7 +942,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     let title = document.querySelector("h1[data-automation-id='title']")?.textContent?.split(" [")[0];
     if (title) {
       // if not already free blue in prime icon
-      if (document.querySelector("._1sIAAm")) {
+      if (!document.querySelector(".fbl-icon._3UMk3x._1a_Ljt._3H1cN4")) {
         let card = document.querySelector("div#dv-action-box");
         if (!DBCache[title]) {
           getMovieInfo(title, card, false);
