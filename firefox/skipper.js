@@ -910,6 +910,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
 
   async function addStreamLinks() {
+    console.log("adding stream links");
     let title = document.querySelector("h1[data-automation-id='title']")?.textContent?.split(" [")[0];
     if (title) {
       let card = document.querySelector("div#dv-action-box");

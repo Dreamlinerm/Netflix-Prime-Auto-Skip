@@ -35,7 +35,7 @@ async function setBadgeText(text, tabId = null) {
 }
 
 // receive message from content script with the badgeText and set it in the badge
-browser.runtime.onMessage.addListener(function (message, sender) {
+browser.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.url) {
     fetch(message.url, {
       method: "GET",
