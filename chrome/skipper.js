@@ -220,18 +220,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           const compiledData = { jWURL, score, streamLinks: offers };
           DBCache[title] = compiledData;
           setRatingOnCard(card, compiledData, title);
-          return {
-            jWURL,
-            score,
-            streamLinks: offers,
-          };
         }
         callback(data);
       } else {
         callback(null);
       }
     });
-    return null;
   }
 
   // Observers

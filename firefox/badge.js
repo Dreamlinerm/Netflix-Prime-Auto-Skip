@@ -36,7 +36,18 @@ async function setBadgeText(text, tabId = null) {
 
 // receive message from content script with the badgeText and set it in the badge
 browser.runtime.onMessage.addListener(function (message, sender) {
-  if (message.type === "setBadgeText") {
+  if (message.url) {
+    fetch(message.url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => sendResponse(data))
+      .catch((error) => console.error(error));
+    return true; // Indicates that sendResponse will be called asynchronously
+  } else if (message.type === "setBadgeText") {
     setBadgeText(message.content, sender.tab.id);
   } else if (message.type === "increaseBadge") {
     increaseBadge(sender.tab.id);
