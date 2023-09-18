@@ -231,5 +231,11 @@
   },
   "RatingSwitchDescription": {
     "message": "Adding the IMDB rating to every movie and series"
+  },
+  "StreamLinksSwitch": {
+    "message": "Streaming links:"
+  },
+  "StreamLinksDescription": {
+    "message": "Zeigt streaming links für filme an, die auf anderen plaformen oder anderen ländern verfügbar sind"
   }
 }
