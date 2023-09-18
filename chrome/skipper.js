@@ -295,22 +295,22 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         let p = document.createElement("p");
         p.style = "margin: 0 0 0 5px;font-size: 14px;";
         if (link.package_short_name == "amp") {
-          img.src = "https://images.justwatch.com/icon/430993/s100/image.png";
+          img.src = "https://images.justwatch.com/icon/430993/s100/";
           img.alt = "Prime icon";
           p.textContent = "Prime (US VPN)";
         } else if (link.package_short_name == "nfx") {
-          img.src = "https://images.justwatch.com/icon/207360008/s100/image.png";
+          img.src = "https://images.justwatch.com/icon/207360008/s100/";
           img.alt = "Netflix icon";
           p.textContent = "Netflix (US)";
         } else if (link.package_short_name == "dnp") {
-          img.src = "https://images.justwatch.com/icon/147638351/s100/disneyplus.jpg";
+          img.src = "https://images.justwatch.com/icon/147638351/s100/";
           img.alt = "Prime icon";
           p.textContent = "Disney (US)";
         } else if (link.package_short_name == "hlu") {
-          img.src = "https://images.justwatch.com/icon/116305230/s100/hulu.jpg";
+          img.src = "https://images.justwatch.com/icon/116305230/s100/";
           img.alt = "Hulu icon";
           p.textContent = "Hulu (US)";
-        } else if (link.package_short_name == "hbo") {
+        } else if (link.package_short_name == "mxx") {
           img.src = "https://images.justwatch.com/icon/305458112/s100";
           img.alt = "HBO icon";
           p.textContent = "HBO (US)";
