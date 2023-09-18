@@ -265,22 +265,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       let a = document.createElement("a");
       a.href = "https://www.justwatch.com" + data.jWURL;
       a.target = "_blank";
-      a.rel = "noopener noreferrer";
+      a.style = "color:white";
+
       let img = document.createElement("img");
       img.src = "https://www.justwatch.com/appassets/img/home/logo.svg";
       img.alt = "Just Watch icon";
       img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4em;height: auto;";
 
-      a.appendChild(img);
-
-      let Idiv = document.createElement("div");
       let p = document.createElement("p");
       p.textContent = "Just Watch";
-      p.style = "margin: 0 0 0 5px;";
-      Idiv.appendChild(a);
-      Idiv.appendChild(p);
+      p.style = "margin: 0 0 0 5px;font-size: 14px;";
 
-      div.appendChild(Idiv);
+      a.appendChild(img);
+      a.appendChild(p);
+      div.appendChild(a);
     }
     if (data?.streamLinks) {
       // netflix icon
@@ -288,10 +286,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         let a = document.createElement("a");
         a.href = data.streamLinks[0].url;
         a.target = "_blank";
-        a.rel = "noopener noreferrer";
+        a.style = "color:white";
+
         let img = document.createElement("img");
         let p = document.createElement("p");
-        p.style = "margin: 0 0 0 5px;";
+        p.style = "margin: 0 0 0 5px;font-size: 14px;";
         if (link.package_short_name == "amp") {
           img.src = "https://images.justwatch.com/icon/430993/s100/image.png";
           img.alt = "Prime icon";
@@ -305,13 +304,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           img.alt = "Prime icon";
           p.textContent = "Disney (US)";
         }
-        img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4.5em;height: auto;";
+        img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4em;height: auto;";
         a.appendChild(img);
-
-        let Idiv = document.createElement("div");
-        Idiv.appendChild(a);
-        Idiv.appendChild(p);
-        div.appendChild(Idiv);
+        a.appendChild(p);
+        div.appendChild(a);
       });
     }
     card.insertBefore(div, card.firstChild);
@@ -924,6 +920,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   async function startShowRatingInterval() {
     if (settings.Netflix?.showRating) {
       log("started observing| ShowRating");
+      JustWatch();
       let JustWatchInterval = setInterval(function () {
         if (!settings.Netflix?.showRating) {
           clearInterval(JustWatchInterval);
