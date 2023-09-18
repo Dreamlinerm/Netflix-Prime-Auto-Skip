@@ -199,26 +199,38 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     // console.log(JSON.stringify(DBCache));
   }
   // justWatchAPI
-  async function getMovieInfo(movieTitle, locale = "en_US") {
+  async function getMovieInfo(movieTitle, card, locale = "en_US") {
     // console.log("getMovieInfo", movieTitle);
     const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${movieTitle}","content_types":["show","movie"]}`;
-    const response = await fetch(encodeURI(url));
-    const data = await response.json();
-    if (data) {
-      // "https://www.justwatch.com" + data.items[0].full_path;
-      const justWatchURL = data?.items?.[0]?.full_path;
-      // flatrate = free with subscription (netflix, amazon prime, disney+)
-      let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
-      // get the first offer of each provider
-      offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
-      // map offers to only package_short_name, country and standard_web url
-      offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
-      return {
-        jWURL: justWatchURL,
-        score: data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value,
-        streamLinks: offers,
-      };
-    }
+    // const response = await fetch(encodeURI(url));
+    // const data = await response.json();
+
+    chrome.runtime.sendMessage({ url }, function (data) {
+      if (data != undefined && data != "") {
+        if (data) {
+          // "https://www.justwatch.com" + data.items[0].full_path;
+          const jWURL = data?.items?.[0]?.full_path;
+          // flatrate = free with subscription (netflix, amazon prime, disney+)
+          let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
+          // get the first offer of each provider
+          offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
+          // map offers to only package_short_name, country and standard_web url
+          offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
+          const score = data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value;
+          const compiledData = { jWURL, score, streamLinks: offers };
+          DBCache[title] = compiledData;
+          setRatingOnCard(card, compiledData, title);
+          return {
+            jWURL,
+            score,
+            streamLinks: offers,
+          };
+        }
+        callback(data);
+      } else {
+        callback(null);
+      }
+    });
     return null;
   }
 
@@ -233,17 +245,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     else titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
     titleCards.forEach((card) => {
       // let card = document.querySelector("li:not(.imdb) [data-card-title]");
-      let card = document.querySelector(".title-card .boxart-container:not(.imdb)");
+      // let card = document.querySelector(".title-card .boxart-container:not(.imdb)");
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent;
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
       if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         if (!DBCache[title]) {
-          getMovieInfo(title).then((data) => {
-            if (data) DBCache[title] = data;
-            setRatingOnCard(card, data, title);
-          });
+          getMovieInfo(title, card);
         } else {
           setRatingOnCard(card, DBCache[title], title);
         }

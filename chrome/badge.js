@@ -41,7 +41,12 @@ async function setBadgeText(text, tabId = null) {
 // receive message from content script with the badgeText and set it in the badge
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.url) {
-    fetch(message.url)
+    fetch(message.url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((data) => sendResponse(data))
       .catch((error) => console.error(error));
