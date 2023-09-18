@@ -910,11 +910,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     console.log("adding stream links");
     let title = document.querySelector("h1[data-automation-id='title']")?.textContent?.split(" [")[0];
     if (title) {
-      let card = document.querySelector("div#dv-action-box");
-      if (!DBCache[title]) {
-        getMovieInfo(title, card, false);
-      } else {
-        setJustWatchOnCard(card, DBCache[title], title);
+      // if not already free blue in prime icon
+      if (document.querySelector("._1sIAAm")) {
+        let card = document.querySelector("div#dv-action-box");
+        if (!DBCache[title]) {
+          getMovieInfo(title, card, false);
+        } else {
+          setJustWatchOnCard(card, DBCache[title], title);
+        }
       }
     }
   }
