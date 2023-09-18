@@ -81,7 +81,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
 
-        if (settings.Video?.showRating) startShowRatingInterval();
+        // if (settings.Video?.showRating) startShowRatingInterval();
       } else if (isDisney || isHotstar) {
         if (settings.Disney?.skipIntro) startDisneySkipIntroObserver();
         if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
@@ -199,7 +199,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     // console.log(JSON.stringify(DBCache));
   }
   // justWatchAPI
-  async function getMovieInfo(movieTitle, card, locale = "en_US", Rating = true) {
+  async function getMovieInfo(movieTitle, card, Rating = true, locale = "en_US") {
     // console.log("getMovieInfo", movieTitle);
     const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${movieTitle}","content_types":["show","movie"]}`;
     // const response = await fetch(encodeURI(url));
@@ -219,9 +219,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         const compiledData = { jWURL, score, streamLinks: offers };
         DBCache[title] = compiledData;
         if (Rating) setRatingOnCard(card, compiledData, title);
-        callback(data);
-      } else {
-        callback(null);
+        else setAlternativesOnCard(card, compiledData, title);
       }
     });
   }
@@ -251,7 +249,59 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     });
   }
-  async function setRatingOnCard(card, data) {
+  let title = document.querySelector("h1[data-automation-id='title']")?.textContent.split(" [")[0];
+  if (title) {
+    let card = document.querySelector("div#dv-action-box");
+    if (!DBCache[title]) {
+      getMovieInfo(title, card, false);
+    } else {
+      setJustWatchOnCard(card, DBCache[title], title);
+    }
+  }
+  async function setAlternativesOnCard(card, data) {
+    let div = document.createElement("div");
+    if (data?.jWURL) {
+      // add Just watch Link,
+      // https://www.justwatch.com/appassets/img/home/logo.svg
+      let a = document.createElement("a");
+      a.href = "https://www.justwatch.com" + data.jWURL;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      let img = document.createElement("img");
+      img.src = "https://www.justwatch.com/appassets/img/home/logo.svg";
+      img.alt = "Just Watch icon";
+      img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4.5em;height: auto;";
+
+      a.appendChild(img);
+      div.appendChild(a);
+    }
+    if (data?.streamLinks) {
+      // netflix icon
+      data.streamLinks.forEach((link) => {
+        let a = document.createElement("a");
+        a.href = data.streamLinks[0].url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        let img = document.createElement("img");
+        if (link.package_short_name == "amp") {
+          img.src = "https://images.justwatch.com/icon/430993/s100/image.png";
+          img.alt = "Prime icon";
+        } else if (link.package_short_name == "nfx") {
+          img.src = "https://images.justwatch.com/icon/207360008/s100/image.png";
+          img.alt = "Netflix icon";
+        } else if (link.package_short_name == "dnp") {
+          img.src = "https://images.justwatch.com/icon/147638351/s100/disneyplus.jpg";
+          img.alt = "Prime icon";
+        }
+        img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4.5em;height: auto;";
+        a.appendChild(img);
+        div.appendChild(a);
+      });
+    }
+    card.appendChild(div);
+  }
+
+  async function setRatingOnCard(card, data, title) {
     if (isNetflix) card.classList.add("imdb");
     else card.parentElement.classList.add("imdb");
 
