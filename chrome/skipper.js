@@ -204,9 +204,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     // console.log(JSON.stringify(DBCache));
   }
   // justWatchAPI
-  async function getMovieInfo(movieTitle, card, Rating = true, locale = "en_US") {
+  async function getMovieInfo(title, card, Rating = true, locale = "en_US") {
     // console.log("getMovieInfo", movieTitle);
-    const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${movieTitle}","content_types":["show","movie"]}`;
+    const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
     // const response = await fetch(encodeURI(url));
     // const data = await response.json();
 
@@ -220,14 +220,17 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate");
         // get the first offer of each provider
         offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
-
         // map offers to only package_short_name, country and standard_web url
         offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
         const score = data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value;
         const compiledData = { jWURL, score, streamLinks: offers };
         DBCache[title] = compiledData;
+        console.log("DBCache", DBCache);
         if (Rating) setRatingOnCard(card, compiledData, title);
-        else setAlternativesOnCard(card, compiledData, title);
+        else {
+          setAlternativesOnCard(card, compiledData, title);
+          setDBCache();
+        }
       }
     });
   }
@@ -942,6 +945,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         let card = document.querySelector("div#dv-action-box");
         if (!DBCache[title]) {
           getMovieInfo(title, card, false);
+          console.log("no info in cache", DBCache);
         } else {
           setJustWatchOnCard(card, DBCache[title], title);
         }
