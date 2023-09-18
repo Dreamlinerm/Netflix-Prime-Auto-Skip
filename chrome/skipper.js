@@ -31,7 +31,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true },
-      Video: { playOnFullScreen: true, showRating: true },
+      Video: { playOnFullScreen: true, showRating: true, streamLinks: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
     },
@@ -76,10 +76,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
           setTimeout(function () {
             startAmazonBlockFreeveeObserver();
-          }, 200);
+          }, 1000);
         }
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
+        if (settings.Video?.streamLinks) addStreamLinks();
 
         // if (settings.Video?.showRating) startShowRatingInterval();
       } else if (isDisney || isHotstar) {
@@ -127,6 +128,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
           if (oldValue === undefined || newValue.Netflix.NetflixAds !== oldValue.Netflix?.NetflixAds) startNetflixAdTimeout();
           if (oldValue === undefined || newValue.Netflix.speedSlider !== oldValue.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
+
+          if (oldValue === undefined || newValue.Video.showRating !== oldValue.Video?.showRating) startShowRatingInterval();
         } else if (isPrimeVideo) {
           if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon?.skipIntro) startAmazonSkipIntroObserver();
           if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -135,6 +138,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
+          if (oldValue === undefined || newValue.Video.streamLinks !== oldValue.Video?.streamLinks) addStreamLinks();
+
+          if (oldValue === undefined || newValue.Video.showRating !== oldValue.Video?.showRating) startShowRatingInterval();
         } else if (isDisney || isHotstar) {
           // if value is changed then check if it is enabled or disabled
           if (oldValue === undefined || newValue.Disney.skipIntro !== oldValue.Disney?.skipIntro) startDisneySkipIntroObserver();
@@ -143,7 +149,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Disney.speedSlider !== oldValue.Disney?.speedSlider) startDisneySpeedSliderObserver();
         }
         if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
-        if (oldValue === undefined || newValue.Video.showRating !== oldValue.Video?.showRating) startShowRatingInterval();
         if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
           resetBadge();
         }
@@ -248,15 +253,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         }
       }
     });
-  }
-  let title = document.querySelector("h1[data-automation-id='title']")?.textContent.split(" [")[0];
-  if (title) {
-    let card = document.querySelector("div#dv-action-box");
-    if (!DBCache[title]) {
-      getMovieInfo(title, card, false);
-    } else {
-      setJustWatchOnCard(card, DBCache[title], title);
-    }
   }
   async function setAlternativesOnCard(card, data) {
     let div = document.createElement("div");
@@ -910,6 +906,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     } else {
       log("stopped observing| PlayOnFullScreen");
       removeEventListener("fullscreenchange", OnFullScreenChange);
+    }
+  }
+
+  async function addStreamLinks() {
+    let title = document.querySelector("h1[data-automation-id='title']")?.textContent?.split(" [")[0];
+    if (title) {
+      let card = document.querySelector("div#dv-action-box");
+      if (!DBCache[title]) {
+        getMovieInfo(title, card, false);
+      } else {
+        setJustWatchOnCard(card, DBCache[title], title);
+      }
     }
   }
   async function startShowRatingInterval() {
