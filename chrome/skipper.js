@@ -294,38 +294,48 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         let img = document.createElement("img");
         let p = document.createElement("p");
         p.style = "margin: 0 0 0 5px;font-size: 14px;";
-        if (link.package_short_name == "amp") {
-          img.src = "https://images.justwatch.com/icon/430993/s100/";
-          img.alt = "Prime icon";
-          p.textContent = "Prime (US VPN)";
-        } else if (link.package_short_name == "nfx") {
-          img.src = "https://images.justwatch.com/icon/207360008/s100/";
-          img.alt = "Netflix icon";
-          p.textContent = "Netflix (US)";
-        } else if (link.package_short_name == "dnp") {
-          img.src = "https://images.justwatch.com/icon/147638351/s100/";
-          img.alt = "Prime icon";
-          p.textContent = "Disney (US)";
-        } else if (link.package_short_name == "hlu") {
-          img.src = "https://images.justwatch.com/icon/116305230/s100/";
-          img.alt = "Hulu icon";
-          p.textContent = "Hulu (US)";
-        } else if (link.package_short_name == "mxx") {
-          img.src = "https://images.justwatch.com/icon/305458112/s100";
-          img.alt = "HBO icon";
-          p.textContent = "HBO (US)";
-        } else if (link.package_short_name == "cru") {
-          img.src = "https://images.justwatch.com/icon/127445869/s100";
-          img.alt = "Crunchyroll icon";
-          p.textContent = "Crunchyroll (US)";
-        } else {
-          img.alt = link.package_short_name;
-          p.textContent = link.package_short_name;
+        let text = "";
+        switch (link.package_short_name) {
+          case "amp":
+            img.src = "https://images.justwatch.com/icon/430993/s100/";
+            text = "Prime";
+            break;
+          case "aat":
+            img.src = "https://www.justwatch.com/images/icon/190848813/s100";
+            text = "Prime";
+            break;
+          case "nfx":
+            img.src = "https://images.justwatch.com/icon/207360008/s100/";
+            text = "Netflix";
+            break;
+          case "dnp":
+            img.src = "https://images.justwatch.com/icon/147638351/s100/";
+            text = "Disney+";
+            break;
+          case "hlu":
+            img.src = "https://images.justwatch.com/icon/116305230/s100/";
+            text = "Hulu";
+            break;
+          case "mxx":
+            img.src = "https://images.justwatch.com/icon/305458112/s100";
+            text = "Max";
+            break;
+          case "cru":
+            img.src = "https://images.justwatch.com/icon/127445869/s100";
+            text = "Crunchyroll";
+            break;
+          default:
+            text = link.package_short_name;
+            break;
         }
-        img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4em;height: auto;";
-        a.appendChild(img);
-        a.appendChild(p);
-        div.appendChild(a);
+        if (img.src) {
+          img.alt = text;
+          p.textContent = text + " (US)";
+          img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4em;height: auto;";
+          a.appendChild(img);
+          a.appendChild(p);
+          div.appendChild(a);
+        }
       });
     }
     card.insertBefore(div, card.firstChild);
