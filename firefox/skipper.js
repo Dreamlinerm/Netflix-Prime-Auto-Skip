@@ -269,7 +269,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       let img = document.createElement("img");
       img.src = "https://www.justwatch.com/appassets/img/home/logo.svg";
       img.alt = "Just Watch icon";
-      img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4.5em;height: auto;";
+      img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4em;height: auto;";
 
       a.appendChild(img);
 
