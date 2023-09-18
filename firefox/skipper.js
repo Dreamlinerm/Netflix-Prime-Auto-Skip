@@ -28,10 +28,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
-      Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
-      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true },
+      Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false, showRating: true, streamLinks: true },
+      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true, showRating: true },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true },
-      Video: { playOnFullScreen: true, showRating: true },
+      Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
     },
@@ -66,7 +66,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         if (settings.Netflix?.NetflixAds) startNetflixAdTimeout();
         if (settings.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
 
-        if (settings.Video?.showRating) startShowRatingInterval();
+        if (settings.Netflix?.showRating) startShowRatingInterval();
       } else if (isPrimeVideo) {
         if (settings.Amazon?.skipIntro) startAmazonSkipIntroObserver();
         if (settings.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -76,12 +76,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
           setTimeout(function () {
             startAmazonBlockFreeveeObserver();
-          }, 200);
+          }, 1000);
         }
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
+        if (settings.Amazon?.streamLinks) addStreamLinks();
 
-        if (settings.Video?.showRating) startShowRatingInterval();
+        // if (settings.Amazon?.showRating) startShowRatingInterval();
       } else if (isDisney || isHotstar) {
         if (settings.Disney?.skipIntro) startDisneySkipIntroObserver();
         if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
@@ -127,6 +128,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
           if (oldValue === undefined || newValue.Netflix.NetflixAds !== oldValue.Netflix?.NetflixAds) startNetflixAdTimeout();
           if (oldValue === undefined || newValue.Netflix.speedSlider !== oldValue.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
+
+          if (oldValue === undefined || newValue.Video.showRating !== oldValue.Netflix?.showRating) startShowRatingInterval();
         } else if (isPrimeVideo) {
           if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon?.skipIntro) startAmazonSkipIntroObserver();
           if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -135,6 +138,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
+          if (oldValue === undefined || newValue.Video.streamLinks !== oldValue.Amazon?.streamLinks) addStreamLinks();
+
+          // if (oldValue === undefined || newValue.Video.showRating !== oldValue.Amazon?.showRating) startShowRatingInterval();
         } else if (isDisney || isHotstar) {
           // if value is changed then check if it is enabled or disabled
           if (oldValue === undefined || newValue.Disney.skipIntro !== oldValue.Disney?.skipIntro) startDisneySkipIntroObserver();
@@ -143,7 +149,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Disney.speedSlider !== oldValue.Disney?.speedSlider) startDisneySpeedSliderObserver();
         }
         if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
-        if (oldValue === undefined || newValue.Video.showRating !== oldValue.Video?.showRating) startShowRatingInterval();
         if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
           resetBadge();
         }
@@ -199,27 +204,29 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     // console.log(JSON.stringify(DBCache));
   }
   // justWatchAPI
-  async function getMovieInfo(movieTitle, locale = "en_US") {
+  async function getMovieInfo(movieTitle, card, Rating = true, locale = "en_US") {
     // console.log("getMovieInfo", movieTitle);
     const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${movieTitle}","content_types":["show","movie"]}`;
-    const response = await fetch(encodeURI(url));
-    const data = await response.json();
-    if (data) {
-      // "https://www.justwatch.com" + data.items[0].full_path;
-      const justWatchURL = data?.items?.[0]?.full_path;
-      // flatrate = free with subscription (netflix, amazon prime, disney+)
-      let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
-      // get the first offer of each provider
-      offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
-      // map offers to only package_short_name, country and standard_web url
-      offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
-      return {
-        jWURL: justWatchURL,
-        score: data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value,
-        streamLinks: offers,
-      };
-    }
-    return null;
+    // const response = await fetch(encodeURI(url));
+    // const data = await response.json();
+
+    browser.runtime.sendMessage({ url }, function (data) {
+      if (data != undefined && data != "") {
+        // "https://www.justwatch.com" + data.items[0].full_path;
+        const jWURL = data?.items?.[0]?.full_path;
+        // flatrate = free with subscription (netflix, amazon prime, disney+)
+        let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
+        // get the first offer of each provider
+        offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
+        // map offers to only package_short_name, country and standard_web url
+        offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
+        const score = data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value;
+        const compiledData = { jWURL, score, streamLinks: offers };
+        DBCache[title] = compiledData;
+        if (Rating) setRatingOnCard(card, compiledData, title);
+        else setAlternativesOnCard(card, compiledData, title);
+      }
+    });
   }
 
   // Observers
@@ -233,24 +240,85 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     else titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
     titleCards.forEach((card) => {
       // let card = document.querySelector("li:not(.imdb) [data-card-title]");
-      let card = document.querySelector(".title-card .boxart-container:not(.imdb)");
+      // let card = document.querySelector(".title-card .boxart-container:not(.imdb)");
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent;
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
       if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         if (!DBCache[title]) {
-          getMovieInfo(title).then((data) => {
-            if (data) DBCache[title] = data;
-            setRatingOnCard(card, data, title);
-          });
+          getMovieInfo(title, card);
         } else {
           setRatingOnCard(card, DBCache[title], title);
         }
       }
     });
   }
-  async function setRatingOnCard(card, data) {
+  async function setAlternativesOnCard(card, data) {
+    let div = document.createElement("div");
+    div.style = "display:flex;";
+    let h1 = document.createElement("h1");
+    if (data?.jWURL) {
+      h1.textContent = "Watch for free?";
+      // add Just watch Link,
+      // https://www.justwatch.com/appassets/img/home/logo.svg
+      let a = document.createElement("a");
+      a.href = "https://www.justwatch.com" + data.jWURL;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      let img = document.createElement("img");
+      img.src = "https://www.justwatch.com/appassets/img/home/logo.svg";
+      img.alt = "Just Watch icon";
+      img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4.5em;height: auto;";
+
+      a.appendChild(img);
+
+      let Idiv = document.createElement("div");
+      let p = document.createElement("p");
+      p.textContent = "Just Watch";
+      p.style = "margin: 0 0 0 5px;";
+      Idiv.appendChild(a);
+      Idiv.appendChild(p);
+
+      div.appendChild(Idiv);
+    }
+    if (data?.streamLinks) {
+      // netflix icon
+      data.streamLinks.forEach((link) => {
+        let a = document.createElement("a");
+        a.href = data.streamLinks[0].url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        let img = document.createElement("img");
+        let p = document.createElement("p");
+        p.style = "margin: 0 0 0 5px;";
+        if (link.package_short_name == "amp") {
+          img.src = "https://images.justwatch.com/icon/430993/s100/image.png";
+          img.alt = "Prime icon";
+          p.textContent = "Prime (US VPN)";
+        } else if (link.package_short_name == "nfx") {
+          img.src = "https://images.justwatch.com/icon/207360008/s100/image.png";
+          img.alt = "Netflix icon";
+          p.textContent = "Netflix (US)";
+        } else if (link.package_short_name == "dnp") {
+          img.src = "https://images.justwatch.com/icon/147638351/s100/disneyplus.jpg";
+          img.alt = "Prime icon";
+          p.textContent = "Disney (US)";
+        }
+        img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4.5em;height: auto;";
+        a.appendChild(img);
+
+        let Idiv = document.createElement("div");
+        Idiv.appendChild(a);
+        Idiv.appendChild(p);
+        div.appendChild(Idiv);
+      });
+    }
+    card.insertBefore(div, card.firstChild);
+    card.insertBefore(h1, card.firstChild);
+  }
+
+  async function setRatingOnCard(card, data, title) {
     if (isNetflix) card.classList.add("imdb");
     else card.parentElement.classList.add("imdb");
 
@@ -840,11 +908,23 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       removeEventListener("fullscreenchange", OnFullScreenChange);
     }
   }
+
+  async function addStreamLinks() {
+    let title = document.querySelector("h1[data-automation-id='title']")?.textContent?.split(" [")[0];
+    if (title) {
+      let card = document.querySelector("div#dv-action-box");
+      if (!DBCache[title]) {
+        getMovieInfo(title, card, false);
+      } else {
+        setJustWatchOnCard(card, DBCache[title], title);
+      }
+    }
+  }
   async function startShowRatingInterval() {
-    if (settings.Video?.showRating) {
+    if (settings.Netflix?.showRating) {
       log("started observing| ShowRating");
       let JustWatchInterval = setInterval(function () {
-        if (!settings.Video?.showRating) {
+        if (!settings.Netflix?.showRating) {
           clearInterval(JustWatchInterval);
           log("stopped observing| ShowRating");
         } else {
@@ -852,7 +932,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         }
       }, 1000);
       let DBCacheInterval = setInterval(function () {
-        if (!settings.Video?.showRating) clearInterval(DBCacheInterval);
+        if (!settings.Netflix?.showRating) clearInterval(DBCacheInterval);
         else setDBCache();
       }, 5000);
     }
