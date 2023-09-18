@@ -199,7 +199,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     // console.log(JSON.stringify(DBCache));
   }
   // justWatchAPI
-  async function getMovieInfo(movieTitle, card, locale = "en_US") {
+  async function getMovieInfo(movieTitle, card, locale = "en_US", Rating = true) {
     // console.log("getMovieInfo", movieTitle);
     const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${movieTitle}","content_types":["show","movie"]}`;
     // const response = await fetch(encodeURI(url));
@@ -207,20 +207,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
 
     chrome.runtime.sendMessage({ url }, function (data) {
       if (data != undefined && data != "") {
-        if (data) {
-          // "https://www.justwatch.com" + data.items[0].full_path;
-          const jWURL = data?.items?.[0]?.full_path;
-          // flatrate = free with subscription (netflix, amazon prime, disney+)
-          let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
-          // get the first offer of each provider
-          offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
-          // map offers to only package_short_name, country and standard_web url
-          offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
-          const score = data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value;
-          const compiledData = { jWURL, score, streamLinks: offers };
-          DBCache[title] = compiledData;
-          setRatingOnCard(card, compiledData, title);
-        }
+        // "https://www.justwatch.com" + data.items[0].full_path;
+        const jWURL = data?.items?.[0]?.full_path;
+        // flatrate = free with subscription (netflix, amazon prime, disney+)
+        let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate" && (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp"));
+        // get the first offer of each provider
+        offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
+        // map offers to only package_short_name, country and standard_web url
+        offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
+        const score = data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value;
+        const compiledData = { jWURL, score, streamLinks: offers };
+        DBCache[title] = compiledData;
+        if (Rating) setRatingOnCard(card, compiledData, title);
         callback(data);
       } else {
         callback(null);
