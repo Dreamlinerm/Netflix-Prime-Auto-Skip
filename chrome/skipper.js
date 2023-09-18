@@ -205,11 +205,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       DBCache = {};
       chrome.storage.local.set({ DBCache });
     }
-    // log(megaBytes);
-    // chrome.storage.local.get("DBCache", function (result) {
-    //   console.log(JSON.stringify(result?.DBCache));
-    // });
-    // console.log(JSON.stringify(DBCache));
   }
   // justWatchAPI
   async function getMovieInfo(title, card, Rating = true, locale = "en_US") {
@@ -233,7 +228,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         const score = data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value;
         const compiledData = { jWURL, score, streamLinks: offers };
         DBCache[title] = compiledData;
-        console.log("DBCache", DBCache);
         if (Rating) setRatingOnCard(card, compiledData, title);
         else {
           setAlternativesOnCard(card, compiledData, title);
@@ -262,6 +256,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         if (!DBCache[title]) {
           getMovieInfo(title, card);
+          log("no info in DBcache", title);
         } else {
           setRatingOnCard(card, DBCache[title], title);
         }
@@ -953,7 +948,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         let card = document.querySelector("div#dv-action-box");
         if (!DBCache[title]) {
           getMovieInfo(title, card, false);
-          console.log("no info in cache", DBCache);
+          log("no info in DBcache", title);
         } else {
           setAlternativesOnCard(card, DBCache[title], title);
         }
