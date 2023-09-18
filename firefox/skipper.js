@@ -65,6 +65,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         if (settings.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
         if (settings.Netflix?.NetflixAds) startNetflixAdTimeout();
         if (settings.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
+
+        if (settings.Video?.showRating) startShowRatingInterval();
       } else if (isPrimeVideo) {
         if (settings.Amazon?.skipIntro) startAmazonSkipIntroObserver();
         if (settings.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -78,6 +80,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         }
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
+
+        if (settings.Video?.showRating) startShowRatingInterval();
       } else if (isDisney || isHotstar) {
         if (settings.Disney?.skipIntro) startDisneySkipIntroObserver();
         if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
@@ -85,7 +89,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         if (settings.Disney?.speedSlider) startDisneySpeedSliderObserver();
       }
       if (settings.Video.playOnFullScreen) startPlayOnFullScreen(isNetflix);
-      if (settings.Video?.showRating) startShowRatingInterval();
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
       for (const key in defaultSettings.settings) {
