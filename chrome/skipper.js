@@ -37,6 +37,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     },
   };
   let settings = defaultSettings.settings;
+  let DBCache = {};
   let lastAdTimeText = 0;
   let videoSpeed;
   async function setVideoSpeed(speed) {
@@ -65,8 +66,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         if (settings.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
         if (settings.Netflix?.NetflixAds) startNetflixAdTimeout();
         if (settings.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
-
-        if (settings.Netflix?.showRating) startShowRatingInterval();
       } else if (isPrimeVideo) {
         if (settings.Amazon?.skipIntro) startAmazonSkipIntroObserver();
         if (settings.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -80,7 +79,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         }
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-        if (settings.Amazon?.streamLinks) addStreamLinks();
 
         // if (settings.Amazon?.showRating) startShowRatingInterval();
       } else if (isDisney || isHotstar) {
@@ -111,8 +109,29 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         chrome.storage.sync.set({ settings });
       }
     }
-  });
 
+    chrome.storage.local.get("DBCache", function (result) {
+      DBCache = result?.DBCache;
+      if (typeof DBCache !== "object") {
+        console.log("DBCache not found, creating new one", DBCache);
+        chrome.storage.local.set({ DBCache: {} });
+        DBCache = {};
+      }
+      if (isNetflix) {
+        if (settings.Netflix?.showRating) startShowRatingInterval();
+      } else if (isPrimeVideo) {
+        if (settings.Amazon?.streamLinks) addStreamLinks();
+      } else if (isDisney || isHotstar) {
+      }
+    });
+  });
+  chrome.storage.local.onChanged.addListener(function (changes, namespace) {
+    for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+      if (key == "DBCache") {
+        DBCache = newValue;
+      }
+    }
+  });
   chrome.storage.sync.onChanged.addListener(function (changes, namespace) {
     for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
       if (key == "settings") {
@@ -152,18 +171,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
           resetBadge();
         }
-      } else if (key == "DBCache") {
-        DBCache = newValue;
       }
-    }
-  });
-  let DBCache = {};
-  chrome.storage.local.get("DBCache", function (result) {
-    DBCache = result?.DBCache;
-    if (typeof DBCache !== "object") {
-      console.log("DBCache not found, creating new one", DBCache);
-      chrome.storage.local.set({ DBCache: {} });
-      DBCache = {};
     }
   });
   function addIntroTimeSkipped(startTime, endTime) {
@@ -947,7 +955,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           getMovieInfo(title, card, false);
           console.log("no info in cache", DBCache);
         } else {
-          setJustWatchOnCard(card, DBCache[title], title);
+          setAlternativesOnCard(card, DBCache[title], title);
         }
       }
     }
