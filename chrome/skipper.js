@@ -260,7 +260,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
   async function setAlternativesOnCard(card, data) {
     let div = document.createElement("div");
+    div.style = "display:flex;";
+    let h1 = document.createElement("h1");
     if (data?.jWURL) {
+      h1.textContent = "Where to Watch it? (VPN?)";
       // add Just watch Link,
       // https://www.justwatch.com/appassets/img/home/logo.svg
       let a = document.createElement("a");
@@ -273,7 +276,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4.5em;height: auto;";
 
       a.appendChild(img);
-      div.appendChild(a);
+
+      let Idiv = document.createElement("div");
+      let p = document.createElement("p");
+      p.textContent = "Just Watch";
+      p.style = "margin: 0 0 0 5px;";
+      Idiv.appendChild(a);
+      Idiv.appendChild(p);
+
+      div.appendChild(Idiv);
     }
     if (data?.streamLinks) {
       // netflix icon
@@ -283,22 +294,32 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         let img = document.createElement("img");
+        let p = document.createElement("p");
+        p.style = "margin: 0 0 0 5px;";
         if (link.package_short_name == "amp") {
           img.src = "https://images.justwatch.com/icon/430993/s100/image.png";
           img.alt = "Prime icon";
+          p.textContent = "Prime (US)";
         } else if (link.package_short_name == "nfx") {
           img.src = "https://images.justwatch.com/icon/207360008/s100/image.png";
           img.alt = "Netflix icon";
+          p.textContent = "Netflix (US)";
         } else if (link.package_short_name == "dnp") {
           img.src = "https://images.justwatch.com/icon/147638351/s100/disneyplus.jpg";
           img.alt = "Prime icon";
+          p.textContent = "Disney (US)";
         }
         img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4.5em;height: auto;";
         a.appendChild(img);
-        div.appendChild(a);
+
+        let Idiv = document.createElement("div");
+        Idiv.appendChild(a);
+        Idiv.appendChild(p);
+        div.appendChild(Idiv);
       });
     }
-    card.appendChild(div);
+    card.insertBefore(div, card.firstChild);
+    card.insertBefore(h1, card.firstChild);
   }
 
   async function setRatingOnCard(card, data, title) {
