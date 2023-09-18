@@ -28,10 +28,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
-      Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false },
-      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true },
+      Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false, showRating: true, streamLinks: true },
+      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true, showRating: true },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true },
-      Video: { playOnFullScreen: true, showRating: true, streamLinks: true },
+      Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
     },
@@ -66,7 +66,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         if (settings.Netflix?.NetflixAds) startNetflixAdTimeout();
         if (settings.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
 
-        if (settings.Video?.showRating) startShowRatingInterval();
+        if (settings.Netflix?.showRating) startShowRatingInterval();
       } else if (isPrimeVideo) {
         if (settings.Amazon?.skipIntro) startAmazonSkipIntroObserver();
         if (settings.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -80,9 +80,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         }
         if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
         if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-        if (settings.Video?.streamLinks) addStreamLinks();
+        if (settings.Amazon?.streamLinks) addStreamLinks();
 
-        // if (settings.Video?.showRating) startShowRatingInterval();
+        // if (settings.Amazon?.showRating) startShowRatingInterval();
       } else if (isDisney || isHotstar) {
         if (settings.Disney?.skipIntro) startDisneySkipIntroObserver();
         if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
@@ -129,7 +129,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Netflix.NetflixAds !== oldValue.Netflix?.NetflixAds) startNetflixAdTimeout();
           if (oldValue === undefined || newValue.Netflix.speedSlider !== oldValue.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
 
-          if (oldValue === undefined || newValue.Video.showRating !== oldValue.Video?.showRating) startShowRatingInterval();
+          if (oldValue === undefined || newValue.Video.showRating !== oldValue.Netflix?.showRating) startShowRatingInterval();
         } else if (isPrimeVideo) {
           if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon?.skipIntro) startAmazonSkipIntroObserver();
           if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -138,9 +138,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-          if (oldValue === undefined || newValue.Video.streamLinks !== oldValue.Video?.streamLinks) addStreamLinks();
+          if (oldValue === undefined || newValue.Video.streamLinks !== oldValue.Amazon?.streamLinks) addStreamLinks();
 
-          if (oldValue === undefined || newValue.Video.showRating !== oldValue.Video?.showRating) startShowRatingInterval();
+          // if (oldValue === undefined || newValue.Video.showRating !== oldValue.Amazon?.showRating) startShowRatingInterval();
         } else if (isDisney || isHotstar) {
           // if value is changed then check if it is enabled or disabled
           if (oldValue === undefined || newValue.Disney.skipIntro !== oldValue.Disney?.skipIntro) startDisneySkipIntroObserver();
@@ -259,7 +259,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     div.style = "display:flex;";
     let h1 = document.createElement("h1");
     if (data?.jWURL) {
-      h1.textContent = "Where to Watch it? (VPN?)";
+      h1.textContent = "Watch for free?";
       // add Just watch Link,
       // https://www.justwatch.com/appassets/img/home/logo.svg
       let a = document.createElement("a");
@@ -295,7 +295,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         if (link.package_short_name == "amp") {
           img.src = "https://images.justwatch.com/icon/430993/s100/image.png";
           img.alt = "Prime icon";
-          p.textContent = "Prime (US)";
+          p.textContent = "Prime (US VPN)";
         } else if (link.package_short_name == "nfx") {
           img.src = "https://images.justwatch.com/icon/207360008/s100/image.png";
           img.alt = "Netflix icon";
@@ -921,10 +921,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     }
   }
   async function startShowRatingInterval() {
-    if (settings.Video?.showRating) {
+    if (settings.Netflix?.showRating) {
       log("started observing| ShowRating");
       let JustWatchInterval = setInterval(function () {
-        if (!settings.Video?.showRating) {
+        if (!settings.Netflix?.showRating) {
           clearInterval(JustWatchInterval);
           log("stopped observing| ShowRating");
         } else {
@@ -932,7 +932,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         }
       }, 1000);
       let DBCacheInterval = setInterval(function () {
-        if (!settings.Video?.showRating) clearInterval(DBCacheInterval);
+        if (!settings.Netflix?.showRating) clearInterval(DBCacheInterval);
         else setDBCache();
       }, 5000);
     }
