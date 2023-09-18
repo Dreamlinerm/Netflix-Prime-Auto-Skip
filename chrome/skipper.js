@@ -218,7 +218,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         // (netflix, amazon prime, disney+) (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp")
         // fuv and drv are both hulu
         let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate");
-        offers = offers?.filter((x) => x.package_short_name != "fuv" && x.package_short_name != "drv");
         // get the first offer of each provider
         offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
 
@@ -288,7 +287,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // netflix icon
       data.streamLinks.forEach((link) => {
         let a = document.createElement("a");
-        a.href = data.streamLinks[0].url;
+        a.href = link.url;
         a.target = "_blank";
         a.style = "color:white";
 
@@ -311,6 +310,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           img.src = "https://images.justwatch.com/icon/116305230/s100/hulu.jpg";
           img.alt = "Hulu icon";
           p.textContent = "Hulu (US)";
+        } else if (link.package_short_name == "hbo") {
+          img.src = "https://images.justwatch.com/icon/305458112/s100";
+          img.alt = "HBO icon";
+          p.textContent = "HBO (US)";
+        } else if (link.package_short_name == "cru") {
+          img.src = "https://images.justwatch.com/icon/127445869/s100";
+          img.alt = "Crunchyroll icon";
+          p.textContent = "Crunchyroll (US)";
         } else {
           img.alt = link.package_short_name;
           p.textContent = link.package_short_name;
