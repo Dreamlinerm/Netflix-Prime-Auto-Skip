@@ -11,6 +11,7 @@ Auf Netflix, Prime Video und Disney+ & Hotstar wird automatisch:
 <li>Werbung übersprungen</li>
 <li>Geschwindigkeitsregler hinzugefügt</li>
 <li>Abgespielt, wenn Vollbildschirm geöffnet wird</li>
+<li>Zeigt IMDB-Bewertung</li>
 </ul>
 
 Auf Netflix wird auch automatisch:
@@ -27,6 +28,7 @@ Amazon Prime-Video wird auch automatisch:
 <li>Eigenwerbung übersprungen</li>
 <li>Kostenpflichtige Inhalte gefiltert</li>
 <li>Die lästige Unschärfe, wenn das overlay angezeigt wird entfernt</li>
+<li>Potentielle gratis Streaming-Links zu kostenpflichtigen Sendungen hinzugefügt</li>
 </ul>
 
 Android: 
@@ -61,6 +63,7 @@ Auf Netflix, Prime Video und Disney+ & Hotstar wird automatisch:
 • Werbung übersprungen
 • Geschwindigkeitsregler hinzugefügt
 • Abgespielt, wenn Vollbildschirm geöffnet wird
+• Zeigt IMDB-Bewertung
 
 Auf Netflix wird auch automatisch:
 
@@ -73,6 +76,7 @@ Amazon Prime-Video wird auch automatisch:
 • Eigenwerbung übersprungen
 • Kostenpflichtige Inhalte gefiltert
 • Die lästige Unschärfe, wenn das overlay angezeigt wird entfernt
+• Potentielle gratis Streaming-Links zu kostenpflichtigen Sendungen hinzugefügt
 
 Android: 
 Prime Video und Disney+ (im Desktop-Modus) werden auf Android unterstützt. Netflix funktioniert nicht auf Android.

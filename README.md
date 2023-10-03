@@ -100,7 +100,7 @@ On Amazon Prime Video it also automatically:
 <li>Skips Self promoting ads (Ads for prime video productions)</li>
 <li>Filters paid content (movies, series)</li>
 <li>Removes annoying blur when hovering over video</li>
-<li>Adds streaming links to paid/ad shows</li>
+<li>Adds potentially free streaming links to paid/ad shows</li>
 </ul>
 
 ## Contributing
