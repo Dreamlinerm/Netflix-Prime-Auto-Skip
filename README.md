@@ -25,7 +25,7 @@
 </a>
 </div>
 
-## Install in Browser
+## Install in Browser (click on image)
 
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
 <img src="Logos/firefox.svg" width="8%" alt="firefox">
