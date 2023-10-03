@@ -91,6 +91,7 @@ On Netflix it also automatically:
 <li>Skips Recaps</li>
 <li>Blocks Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video</li>
 <li>Picks last used profile</li>
+<li>Shows IMDB Rating</li>
 </ul>
 
 On Amazon Prime Video it also automatically:
@@ -99,6 +100,7 @@ On Amazon Prime Video it also automatically:
 <li>Skips Self promoting ads (Ads for prime video productions)</li>
 <li>Filters paid content (movies, series)</li>
 <li>Removes annoying blur when hovering over video</li>
+<li>Adds streaming links to paid/ad shows</li>
 </ul>
 
 ## Contributing
@@ -132,7 +134,7 @@ If you have any suggestions or Bugs, please open an issue.
             alt="Jakche"
           />
           <br /><sub><b>Jakche</b></sub>
-          <br /><sub>Dev & Translator</sub>
+          <br /><sub>Translated to macedonian</sub>
           </a>
       </td>
     </tr>
@@ -239,7 +241,7 @@ Configure what is skipped in the settings Page.
 
 Import and Export all Settings.
 
-See Statistics.
+See Statistics. All statistics and settings are not shared but are synchronized with your browser account.
   
 ![Settings.png](Publish/Screenshots/settings.png?raw=true)
 
@@ -330,6 +332,8 @@ Table of test cases for each feature. S=season, E=episode of the show.
 | Paid Content | ❌ | ✅ | ❌ |
 | Inactivity Warning | ✅ | ❌ | ❌ |
 | Auto pick last profile | ✅ | ❌ | ❌ |
+| IMDB Rating | ✅ | ✅ | ❌ |
+| Streaming links | ❌ | ✅ | ❌ |
 
 ## Changelog
 
