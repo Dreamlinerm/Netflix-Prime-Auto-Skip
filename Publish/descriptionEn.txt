@@ -11,6 +11,7 @@ On Netflix, Prime Video and Disney+ & Hotstar it automatically:
 <li>Skips Ads</li>
 <li>Adds playback speed control to UI</li>
 <li>Plays on Fullscreen</li>
+<li>Shows IMDB Rating</li>
 </ul>
 
 On Netflix it also automatically:
@@ -27,6 +28,7 @@ On Amazon Prime Video it also automatically:
 <li>Skips Self promoting ads (Ads for prime video productions)</li>
 <li>Filters paid content (movies, series)</li>
 <li>Removes annoying blur when hovering over video</li>
+<li>Adds streaming links to paid/ad shows</li>
 </ul>
 
 Android: 
@@ -61,6 +63,7 @@ On Netflix, Prime Video and Disney+ & Hotstar it automatically:
 • Skips Ads
 • Adds playback speed control to UI
 • Plays on Fullscreen
+• Shows IMDB Rating
 
 On Netflix it also automatically:
 
@@ -73,6 +76,7 @@ On Amazon Prime Video it also automatically:
 • Skips Self promoting ads (Ads for prime video productions)
 • Filters paid content (movies, series)
 • Removes annoying blur when hovering over video
+• Adds streaming links to paid/ad shows
 
 Android: 
 Prime Video and Disney+(in Desktop mode) are supported on Android. Netflix does not work on Android.
