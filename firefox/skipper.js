@@ -120,6 +120,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       } else if (isPrimeVideo) {
         if (settings.Amazon?.streamLinks) addStreamLinks();
       } else if (isDisney || isHotstar) {
+        // startShowRatingInterval();
       }
     });
   });
@@ -210,7 +211,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
     // const response = await fetch(encodeURI(url));
     // const data = await response.json();
-
     browser.runtime.sendMessage({ url }, function (data) {
       if (data != undefined && data != "") {
         // "https://www.justwatch.com" + data.items[0].full_path;
@@ -243,23 +243,26 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   async function JustWatch() {
     let titleCards;
     if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
+    else if (isDisney) titleCards = document.querySelectorAll(".basic-card div div img:not(.imdb)");
+    // amazon
     else titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
-    titleCards.forEach((card) => {
-      // let card = document.querySelector("li:not(.imdb) [data-card-title]");
-      // let card = document.querySelector(".title-card .boxart-container:not(.imdb)");
-      let title;
-      if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent;
-      // remove everything after - in the title
-      else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
-      if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
-        if (!DBCache[title]) {
-          getMovieInfo(title, card);
-          log("no info in DBcache", title);
-        } else {
-          setRatingOnCard(card, DBCache[title], title);
-        }
+    // titleCards.forEach((card) => {
+    let card = document.querySelector(".basic-card div div img:not(.imdb)");
+    let title;
+    if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent;
+    else if (isDisney) title = card?.getAttribute("alt");
+    // amazon
+    // remove everything after - in the title
+    else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
+    if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
+      if (!DBCache[title]) {
+        getMovieInfo(title, card);
+        log("no info in DBcache", title);
+      } else {
+        setRatingOnCard(card, DBCache[title], title);
       }
-    });
+    }
+    // });
   }
   async function setAlternativesOnCard(card, data) {
     let div = document.createElement("div");
@@ -347,7 +350,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
 
   async function setRatingOnCard(card, data, title) {
-    if (isNetflix) card.classList.add("imdb");
+    if (isNetflix || isDisney) card.classList.add("imdb");
     else card.parentElement.classList.add("imdb");
 
     let div = document.createElement("div");
@@ -362,6 +365,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       console.log("no Score found", title);
     }
     if (isNetflix) card.appendChild(div);
+    else if (isDisney) card.parentElement.appendChild(div);
     else card.firstChild.firstChild.appendChild(div);
   }
 
