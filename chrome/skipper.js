@@ -590,17 +590,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
       const video = document.querySelector("video");
       const adLength = Number(document.querySelector(".ltr-mmvz9h")?.textContent);
+      // 16 max but too fast
       if (video) {
-        let playBackRate = 16;
+        let playBackRate = 8;
         if (isEdge) playBackRate = 3;
-        if (adLength && video.playbackRate != playBackRate) {
+        if (adLength > 8 && video.playbackRate != playBackRate) {
           log("Ad skipped, length:", adLength, "s");
           settings.Statistics.NetflixAdTimeSkipped += adLength;
           increaseBadge();
           video.playbackRate = playBackRate;
+        } else if (adLength > 2 && video.playbackRate < 2) {
+          video.playbackRate = adLength / 2;
         } else if (adLength && video.paused) {
           video.play();
-        } else if (video.playbackRate == playBackRate && !adLength) {
+        } else if (adLength <= 2 || !adLength) {
           video.playbackRate = 1;
         }
       }
