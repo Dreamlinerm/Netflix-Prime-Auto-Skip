@@ -111,7 +111,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     browser.storage.local.get("DBCache", function (result) {
       DBCache = result?.DBCache;
       if (typeof DBCache !== "object") {
-        console.log("DBCache not found, creating new one", DBCache);
+        log("DBCache not found, creating new one", DBCache);
         browser.storage.local.set({ DBCache: {} });
         DBCache = {};
       }
@@ -122,7 +122,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       //   if (settings.Amazon?.streamLinks) addStreamLinks();
       // }
       else if (isDisney || isHotstar) {
-        // startShowRatingInterval();
+        startShowRatingInterval();
       }
     });
   });
@@ -207,11 +207,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       browser.storage.local.set({ DBCache });
     }
   }
+  // browser.storage.local.set({ DBCache: {} });
   // justWatchAPI
-  async function getMovieInfo(title, card, Rating = true, locale = "en-US") {
-    // console.log("getMovieInfo", movieTitle);
+  async function getMovieInfo(title, card, Rating = true) {
     // justwatch api
     // const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
+    let locale = "en-US";
+    if (navigator?.language) {
+      locale = navigator?.language;
+    }
     // use the url for themoviedb.org now
     const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURI(title)}&include_adult=true&language=${locale}&page=1`;
     // const response = await fetch(encodeURI(url));
@@ -233,9 +237,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         // const compiledData = { jWURL, score, streamLinks: offers };
 
         // themoviedb
-        if (!data?.results?.[0]) {
-          console.log("no data found", data);
-        }
         const compiledData = { score: data?.results?.[0]?.vote_average };
         DBCache[title] = compiledData;
         if (Rating) setRatingOnCard(card, compiledData, title);
@@ -269,7 +270,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         if (!DBCache[title]) {
           getMovieInfo(title, card);
-          log("no info in DBcache", title);
+          // log("no info in DBcache", title);
         } else {
           setRatingOnCard(card, DBCache[title], title);
         }
@@ -375,7 +376,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // div.textContent = title;
     } else {
       div.textContent = "?";
-      console.log("no Score found", title, data);
+      log("no Score found", title, data);
     }
     if (isNetflix) card.appendChild(div);
     else if (isDisney) card.parentElement.appendChild(div);
@@ -946,7 +947,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         else video = document.querySelector(AmazonVideoClass);
         if (window.fullScreen && video) {
           video.play();
-          console.log("auto-played on fullscreen");
+          log("auto-played on fullscreen");
           increaseBadge();
         }
       }
@@ -958,7 +959,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
   // deprecated
   async function addStreamLinks() {
-    console.log("adding stream links");
+    log("adding stream links");
     let title = document.querySelector("h1[data-automation-id='title']")?.textContent?.split(" [")[0];
     if (title) {
       // if not already free blue in prime icon
