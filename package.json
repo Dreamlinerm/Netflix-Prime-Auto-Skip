@@ -1,6 +1,6 @@
 {
   "name": "streaming-enhanced",
-  "version": "1.0.59",
+  "version": "1.0.60",
   "description": "Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video and Disney+ & Hotstar.",
   "scripts": {
     "start": "web-ext run --source-dir ./firefox/",
