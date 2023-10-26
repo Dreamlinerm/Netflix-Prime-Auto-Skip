@@ -117,9 +117,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
       if (isNetflix) {
         if (settings.Netflix?.showRating) startShowRatingInterval();
-      } else if (isPrimeVideo) {
-        if (settings.Amazon?.streamLinks) addStreamLinks();
-      } else if (isDisney || isHotstar) {
+      }
+      // else if (isPrimeVideo) {
+      //   if (settings.Amazon?.streamLinks) addStreamLinks();
+      // }
+      else if (isDisney || isHotstar) {
         // startShowRatingInterval();
       }
     });
@@ -156,7 +158,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-          if (oldValue === undefined || newValue.Video.streamLinks !== oldValue.Amazon?.streamLinks) addStreamLinks();
+          // if (oldValue === undefined || newValue.Video.streamLinks !== oldValue.Amazon?.streamLinks) addStreamLinks();
 
           // if (oldValue === undefined || newValue.Video.showRating !== oldValue.Amazon?.showRating) startShowRatingInterval();
         } else if (isDisney || isHotstar) {
@@ -250,7 +252,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   const config = { attributes: true, childList: true, subtree: true };
 
   // shared functions
-  async function JustWatch() {
+  async function addRating() {
     let titleCards;
     if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
     else if (isDisney) titleCards = document.querySelectorAll(".basic-card div div img:not(.imdb)");
@@ -954,7 +956,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       removeEventListener("fullscreenchange", OnFullScreenChange);
     }
   }
-
+  // deprecated
   async function addStreamLinks() {
     console.log("adding stream links");
     let title = document.querySelector("h1[data-automation-id='title']")?.textContent?.split(" [")[0];
@@ -974,13 +976,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   async function startShowRatingInterval() {
     if (settings.Netflix?.showRating) {
       log("started observing| ShowRating");
-      JustWatch();
-      let JustWatchInterval = setInterval(function () {
+      addRating();
+      let RatingInterval = setInterval(function () {
         if (!settings.Netflix?.showRating) {
-          clearInterval(JustWatchInterval);
+          clearInterval(RatingInterval);
           log("stopped observing| ShowRating");
         } else {
-          JustWatch();
+          addRating();
         }
       }, 1000);
       let DBCacheInterval = setInterval(function () {
