@@ -30,7 +30,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false, showRating: true, streamLinks: true },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true, showRating: true },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
@@ -111,16 +111,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     chrome.storage.local.get("DBCache", function (result) {
       DBCache = result?.DBCache;
       if (typeof DBCache !== "object") {
-        console.log("DBCache not found, creating new one", DBCache);
+        log("DBCache not found, creating new one", DBCache);
         chrome.storage.local.set({ DBCache: {} });
         DBCache = {};
       }
       if (isNetflix) {
         if (settings.Netflix?.showRating) startShowRatingInterval();
-      } else if (isPrimeVideo) {
-        if (settings.Amazon?.streamLinks) addStreamLinks();
-      } else if (isDisney || isHotstar) {
-        // startShowRatingInterval();
+      }
+      // else if (isPrimeVideo) {
+      //   if (settings.Amazon?.streamLinks) addStreamLinks();
+      // }
+      else if (isDisney || isHotstar) {
+        if (settings.Disney?.showRating) startShowRatingInterval();
       }
     });
   });
@@ -156,7 +158,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-          if (oldValue === undefined || newValue.Video.streamLinks !== oldValue.Amazon?.streamLinks) addStreamLinks();
+          // if (oldValue === undefined || newValue.Video.streamLinks !== oldValue.Amazon?.streamLinks) addStreamLinks();
 
           // if (oldValue === undefined || newValue.Video.showRating !== oldValue.Amazon?.showRating) startShowRatingInterval();
         } else if (isDisney || isHotstar) {
@@ -205,11 +207,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       chrome.storage.local.set({ DBCache });
     }
   }
+  // chrome.storage.local.set({ DBCache: {} });
   // justWatchAPI
-  async function getMovieInfo(title, card, Rating = true, locale = "en-US") {
-    // console.log("getMovieInfo", movieTitle);
+  async function getMovieInfo(title, card, Rating = true) {
     // justwatch api
     // const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
+    let locale = "en-US";
+    if (navigator?.language) {
+      locale = navigator?.language;
+    }
     // use the url for themoviedb.org now
     const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURI(title)}&include_adult=true&language=${locale}&page=1`;
     // const response = await fetch(encodeURI(url));
@@ -231,9 +237,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         // const compiledData = { jWURL, score, streamLinks: offers };
 
         // themoviedb
-        if (!data?.results?.[0]) {
-          console.log("no data found", data);
-        }
         const compiledData = { score: data?.results?.[0]?.vote_average };
         DBCache[title] = compiledData;
         if (Rating) setRatingOnCard(card, compiledData, title);
@@ -250,7 +253,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   const config = { attributes: true, childList: true, subtree: true };
 
   // shared functions
-  async function JustWatch() {
+  async function addRating() {
     let titleCards;
     if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
     else if (isDisney) titleCards = document.querySelectorAll(".basic-card div div img:not(.imdb)");
@@ -259,7 +262,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     titleCards.forEach((card) => {
       // let card = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
       let title;
-      if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent;
+      if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
       else if (isDisney) title = card?.getAttribute("alt");
       // amazon
       // remove everything after - in the title
@@ -267,13 +270,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         if (!DBCache[title]) {
           getMovieInfo(title, card);
-          log("no info in DBcache", title);
+          // log("no info in DBcache", title);
         } else {
           setRatingOnCard(card, DBCache[title], title);
         }
       }
     });
   }
+  // deprecated justwatch api
   async function setAlternativesOnCard(card, data) {
     let div = document.createElement("div");
     div.style = "display:flex;";
@@ -372,7 +376,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // div.textContent = title;
     } else {
       div.textContent = "?";
-      console.log("no Score found", title, data);
+      log("no Score found", title, data);
     }
     if (isNetflix) card.appendChild(div);
     else if (isDisney) card.parentElement.appendChild(div);
@@ -943,7 +947,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         else video = document.querySelector(AmazonVideoClass);
         if (window.fullScreen && video) {
           video.play();
-          console.log("auto-played on fullscreen");
+          log("auto-played on fullscreen");
           increaseBadge();
         }
       }
@@ -953,9 +957,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       removeEventListener("fullscreenchange", OnFullScreenChange);
     }
   }
-
+  // deprecated
   async function addStreamLinks() {
-    console.log("adding stream links");
+    log("adding stream links");
     let title = document.querySelector("h1[data-automation-id='title']")?.textContent?.split(" [")[0];
     if (title) {
       // if not already free blue in prime icon
@@ -973,13 +977,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   async function startShowRatingInterval() {
     if (settings.Netflix?.showRating) {
       log("started observing| ShowRating");
-      JustWatch();
-      let JustWatchInterval = setInterval(function () {
+      addRating();
+      let RatingInterval = setInterval(function () {
         if (!settings.Netflix?.showRating) {
-          clearInterval(JustWatchInterval);
+          clearInterval(RatingInterval);
           log("stopped observing| ShowRating");
         } else {
-          JustWatch();
+          addRating();
         }
       }, 1000);
       let DBCacheInterval = setInterval(function () {
