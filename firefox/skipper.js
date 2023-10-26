@@ -259,7 +259,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     titleCards.forEach((card) => {
       // let card = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
       let title;
-      if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent;
+      if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
       else if (isDisney) title = card?.getAttribute("alt");
       // amazon
       // remove everything after - in the title
@@ -274,6 +274,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     });
   }
+  // deprecated justwatch api
   async function setAlternativesOnCard(card, data) {
     let div = document.createElement("div");
     div.style = "display:flex;";
