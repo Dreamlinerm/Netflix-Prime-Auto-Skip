@@ -120,6 +120,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       } else if (isPrimeVideo) {
         if (settings.Amazon?.streamLinks) addStreamLinks();
       } else if (isDisney || isHotstar) {
+        // startShowRatingInterval();
       }
     });
   });
@@ -205,26 +206,35 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     }
   }
   // justWatchAPI
-  async function getMovieInfo(title, card, Rating = true, locale = "en_US") {
+  async function getMovieInfo(title, card, Rating = true, locale = "en-US") {
     // console.log("getMovieInfo", movieTitle);
-    const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
+    // justwatch api
+    // const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
+    // use the url for themoviedb.org now
+    const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURI(title)}&include_adult=true&language=${locale}&page=1`;
     // const response = await fetch(encodeURI(url));
     // const data = await response.json();
-
     chrome.runtime.sendMessage({ url }, function (data) {
       if (data != undefined && data != "") {
-        // "https://www.justwatch.com" + data.items[0].full_path;
-        const jWURL = data?.items?.[0]?.full_path;
-        // flatrate = free with subscription
-        // (netflix, amazon prime, disney+) (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp")
-        // fuv and drv are both hulu
-        let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate");
-        // get the first offer of each provider
-        offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
-        // map offers to only package_short_name, country and standard_web url
-        offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
-        const score = data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value;
-        const compiledData = { jWURL, score, streamLinks: offers };
+        // // justwatch
+        // // "https://www.justwatch.com" + data.items[0].full_path;
+        // const jWURL = data?.items?.[0]?.full_path;
+        // // flatrate = free with subscription
+        // // (netflix, amazon prime, disney+) (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp")
+        // // fuv and drv are both hulu
+        // let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate");
+        // // get the first offer of each provider
+        // offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
+        // // map offers to only package_short_name, country and standard_web url
+        // offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
+        // const score = data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value;
+        // const compiledData = { jWURL, score, streamLinks: offers };
+
+        // themoviedb
+        if (!data?.results?.[0]) {
+          console.log("no data found", data);
+        }
+        const compiledData = { score: data?.results?.[0]?.vote_average };
         DBCache[title] = compiledData;
         if (Rating) setRatingOnCard(card, compiledData, title);
         else {
@@ -243,12 +253,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   async function JustWatch() {
     let titleCards;
     if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
+    else if (isDisney) titleCards = document.querySelectorAll(".basic-card div div img:not(.imdb)");
+    // amazon
     else titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
     titleCards.forEach((card) => {
-      // let card = document.querySelector("li:not(.imdb) [data-card-title]");
-      // let card = document.querySelector(".title-card .boxart-container:not(.imdb)");
+      // let card = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent;
+      else if (isDisney) title = card?.getAttribute("alt");
+      // amazon
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
       if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
@@ -347,7 +360,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
 
   async function setRatingOnCard(card, data, title) {
-    if (isNetflix) card.classList.add("imdb");
+    if (isNetflix || isDisney) card.classList.add("imdb");
     else card.parentElement.classList.add("imdb");
 
     let div = document.createElement("div");
@@ -359,9 +372,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // div.textContent = title;
     } else {
       div.textContent = "?";
-      console.log("no Score found", title);
+      console.log("no Score found", title, data);
     }
     if (isNetflix) card.appendChild(div);
+    else if (isDisney) card.parentElement.appendChild(div);
     else card.firstChild.firstChild.appendChild(div);
   }
 

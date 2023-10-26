@@ -40,7 +40,10 @@ browser.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     fetch(message.url, {
       method: "GET",
       headers: {
-        Accept: "application/json",
+        accept: "application/json",
+        // api key for themoviedb
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OWQyMWUxMmYzNjU1MjM4NzdhNTAwODVhMmVjYThiZiIsInN1YiI6IjY1M2E3Mjg3MjgxMWExMDBlYTA4NjI5OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.x_EaVXQkg1_plk0NVSBnoNUl4QlGytdeO613nXIsP3w",
       },
     })
       .then((response) => response.json())
