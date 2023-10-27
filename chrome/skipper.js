@@ -23,7 +23,7 @@ let isHotstar = /hotstar/i.test(hostname);
 
 let isEdge = /edg/i.test(ua);
 let isFirefox = /firefox/i.test(ua);
-const version = "1.0.61";
+const version = "1.0.62";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
@@ -190,8 +190,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     }
   }
   // ...args
+  const date = new Date();
   function log(...args) {
-    const date = new Date();
     console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), ...args);
   }
   // set DB Cache if cache size under 2MB
@@ -209,6 +209,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
   // chrome.storage.local.set({ DBCache: {} });
   // justWatchAPI
+  const today = date.toISOString().split("T")[0];
   async function getMovieInfo(title, card, Rating = true) {
     // justwatch api
     // const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
@@ -237,9 +238,22 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         // const compiledData = { jWURL, score, streamLinks: offers };
 
         // themoviedb
-        const compiledData = { score: data?.results?.[0]?.vote_average };
+        let compiledData = {};
+        // for (movie of data?.results) {
+        //   if (movie.title.toLowerCase().includes(title.toLowerCase())) {
+        //     compiledData = { score: movie?.vote_average, release_date: movie?.release_date, date: today, db: "tmdb" };
+        //     break;
+        //   }
+        // }
+        const movie = data?.results?.[0];
+        compiledData = { score: movie?.vote_average, release_date: movie?.release_date, title: movie?.title, date: today, db: "tmdb" };
         DBCache[title] = compiledData;
-        if (!compiledData?.score) log("no Score found", title, data);
+        if (!compiledData?.score) {
+          log("no Score found", title, data);
+        }
+        // else {
+        //   log("Score found", title);
+        // }
         if (Rating) setRatingOnCard(card, compiledData, title);
         else {
           setAlternativesOnCard(card, compiledData, title);
@@ -265,7 +279,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // let card = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
-      else if (isDisney) title = card?.getAttribute("alt");
+      // S2: E3 remove this part
+      else if (isDisney) title = card?.getAttribute("alt").replace(/(S\d+:\sE\d+\s)/g, "");
       // amazon
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
@@ -279,7 +294,26 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           getMovieInfo(title, card);
           // log("no info in DBcache", title);
         } else {
-          setRatingOnCard(card, DBCache[title], title);
+          if (!DBCache[title]?.date) {
+            DBCache[title].date = today;
+          }
+          // if DBCache[title]?.date is older than 30 days
+          function getDiffinDays(firstDate, secondDate) {
+            const date1 = new Date(firstDate);
+            const date2 = new Date(secondDate);
+            const diffInDays = Math.round(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
+            return diffInDays;
+          }
+          let diffinReleaseDate = false;
+          if (DBCache[title]?.release_date) diffinReleaseDate = getDiffinDays(new Date(DBCache[title]?.release_date), date) <= 30;
+          if (getDiffinDays(new Date(DBCache[title]?.date), date) >= 30 || diffinReleaseDate) {
+            if (diffinReleaseDate) log("update rating", title, DBCache[title]?.release_date, getDiffinDays(new Date(DBCache[title]?.release_date), date));
+            else log("update rating", title, DBCache[title]?.date, getDiffinDays(date, new Date(DBCache[title]?.date)));
+            getMovieInfo(title, card);
+            // log("no info today", title);
+          } else {
+            setRatingOnCard(card, DBCache[title], title);
+          }
         }
       }
     });
