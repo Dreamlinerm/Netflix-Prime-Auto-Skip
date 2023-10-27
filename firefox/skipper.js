@@ -246,7 +246,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         //   }
         // }
         const movie = data?.results?.[0];
-        compiledData = { score: movie?.vote_average, release_date: movie?.release_date, date: today, db: "tmdb" };
+        compiledData = { score: movie?.vote_average, release_date: movie?.release_date, title: movie?.title, date: today, db: "tmdb" };
         DBCache[title] = compiledData;
         if (!compiledData?.score) {
           log("no Score found", title, data);
