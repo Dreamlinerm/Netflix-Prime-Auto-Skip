@@ -259,6 +259,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     else if (isDisney) titleCards = document.querySelectorAll(".basic-card div div img:not(.imdb)");
     // amazon
     else titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
+    let lastTitle = "";
     titleCards.forEach((card) => {
       // let card = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
       let title;
@@ -267,7 +268,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // amazon
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
-      if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
+      if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
+        // sometimes more than one image is loaded for the same title
+        lastTitle = title;
         if (!DBCache[title]) {
           getMovieInfo(title, card);
           // log("no info in DBcache", title);
