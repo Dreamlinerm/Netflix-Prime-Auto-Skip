@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
           <h2>Changelog</h2>
           <div>
             <div class="line flex">
-              <h2>1.0.60</h2>
+              <h2>1.0.61</h2>
               <ul>
                 <li>fixed Netflix ad skip: skips too far</li>
                 <li>added IMDB rating to Disney</li>

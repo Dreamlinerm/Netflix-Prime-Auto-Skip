@@ -23,7 +23,7 @@ let isHotstar = /hotstar/i.test(hostname);
 
 let isEdge = /edg/i.test(ua);
 let isFirefox = /firefox/i.test(ua);
-const version = "1.0.60";
+const version = "1.0.61";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
