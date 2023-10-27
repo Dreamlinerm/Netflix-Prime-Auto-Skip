@@ -269,6 +269,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // amazon
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
+      // add seeen class
+      if (isNetflix || isDisney) card.classList.add("imdb");
+      else card.parentElement.classList.add("imdb");
       if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         // sometimes more than one image is loaded for the same title
         lastTitle = title;
@@ -368,9 +371,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
 
   async function setRatingOnCard(card, data, title) {
-    if (isNetflix || isDisney) card.classList.add("imdb");
-    else card.parentElement.classList.add("imdb");
-
     let div = document.createElement("div");
     // right: 1.5vw;
     div.style = "position: absolute;bottom: 0;right:0;z-index: 9999;color: black;background: #f5c518;border-radius: 5px;font-size: 1vw;padding: 0 2px 0 2px;";
