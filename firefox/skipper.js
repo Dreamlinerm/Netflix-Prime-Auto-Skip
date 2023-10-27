@@ -294,7 +294,26 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           getMovieInfo(title, card);
           // log("no info in DBcache", title);
         } else {
-          setRatingOnCard(card, DBCache[title], title);
+          if (!DBCache[title]?.date) {
+            DBCache[title].date = today;
+          }
+          // if DBCache[title]?.date is older than 30 days
+          function getDiffinDays(firstDate, secondDate) {
+            const date1 = new Date(firstDate);
+            const date2 = new Date(secondDate);
+            const diffInDays = Math.round(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
+            return diffInDays;
+          }
+          let diffinReleaseDate = false;
+          if (DBCache[title]?.release_date) diffinReleaseDate = getDiffinDays(new Date(DBCache[title]?.release_date), date) <= 30;
+          if (getDiffinDays(new Date(DBCache[title]?.date), date) >= 30 || diffinReleaseDate) {
+            if (diffinReleaseDate) log("update rating", title, DBCache[title]?.release_date, getDiffinDays(new Date(DBCache[title]?.release_date), date));
+            else log("update rating", title, DBCache[title]?.date, getDiffinDays(date, new Date(DBCache[title]?.date)));
+            getMovieInfo(title, card);
+            // log("no info today", title);
+          } else {
+            setRatingOnCard(card, DBCache[title], title);
+          }
         }
       }
     });
