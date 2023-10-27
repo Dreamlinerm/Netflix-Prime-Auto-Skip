@@ -239,6 +239,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         // themoviedb
         const compiledData = { score: data?.results?.[0]?.vote_average };
         DBCache[title] = compiledData;
+        if (!compiledData?.score) log("no Score found", title, data);
         if (Rating) setRatingOnCard(card, compiledData, title);
         else {
           setAlternativesOnCard(card, compiledData, title);
@@ -271,7 +272,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         // sometimes more than one image is loaded for the same title
         lastTitle = title;
-        if (!DBCache[title]) {
+        if (!DBCache[title]?.score) {
           getMovieInfo(title, card);
           // log("no info in DBcache", title);
         } else {
@@ -379,7 +380,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // div.textContent = title;
     } else {
       div.textContent = "?";
-      log("no Score found", title, data);
     }
     if (isNetflix) card.appendChild(div);
     else if (isDisney) card.parentElement.appendChild(div);
