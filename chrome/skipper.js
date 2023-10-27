@@ -239,6 +239,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         // themoviedb
         const compiledData = { score: data?.results?.[0]?.vote_average };
         DBCache[title] = compiledData;
+        if (!compiledData?.score) log("no Score found", title, data);
         if (Rating) setRatingOnCard(card, compiledData, title);
         else {
           setAlternativesOnCard(card, compiledData, title);
@@ -259,6 +260,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     else if (isDisney) titleCards = document.querySelectorAll(".basic-card div div img:not(.imdb)");
     // amazon
     else titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
+    let lastTitle = "";
     titleCards.forEach((card) => {
       // let card = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
       let title;
@@ -267,8 +269,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // amazon
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
-      if (title && !title.includes("Netflix") && !title.includes("Prime Video")) {
-        if (!DBCache[title]) {
+      // add seeen class
+      if (isNetflix || isDisney) card.classList.add("imdb");
+      else card.parentElement.classList.add("imdb");
+      if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
+        // sometimes more than one image is loaded for the same title
+        lastTitle = title;
+        if (!DBCache[title]?.score) {
           getMovieInfo(title, card);
           // log("no info in DBcache", title);
         } else {
@@ -364,9 +371,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
 
   async function setRatingOnCard(card, data, title) {
-    if (isNetflix || isDisney) card.classList.add("imdb");
-    else card.parentElement.classList.add("imdb");
-
     let div = document.createElement("div");
     // right: 1.5vw;
     div.style = "position: absolute;bottom: 0;right:0;z-index: 9999;color: black;background: #f5c518;border-radius: 5px;font-size: 1vw;padding: 0 2px 0 2px;";
@@ -376,7 +380,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       // div.textContent = title;
     } else {
       div.textContent = "?";
-      log("no Score found", title, data);
     }
     if (isNetflix) card.appendChild(div);
     else if (isDisney) card.parentElement.appendChild(div);
