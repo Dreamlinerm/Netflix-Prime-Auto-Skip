@@ -274,8 +274,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     else if (isDisney) titleCards = document.querySelectorAll(".basic-card div div img:not(.imdb)");
     // amazon
     else titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
+    // on disney there are multiple images for the same title so only use the first one
     let lastTitle = "";
-    titleCards.forEach((card) => {
+    // for each is not going in order on chrome
+    for (let i = 0; i < titleCards.length; i++) {
+      let card = titleCards[i];
+      // add seeen class
+      if (isNetflix || isDisney) card.classList.add("imdb");
+      //Amazon
+      else card.parentElement.classList.add("imdb");
       // let card = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
@@ -283,10 +290,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       else if (isDisney) title = card?.getAttribute("alt").replace(/(S\d+:\sE\d+\s)/g, "");
       // amazon
       // remove everything after - in the title
-      else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0]; //Amazon
-      // add seeen class
-      if (isNetflix || isDisney) card.classList.add("imdb");
-      else card.parentElement.classList.add("imdb");
+      else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0];
       if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         // sometimes more than one image is loaded for the same title
         lastTitle = title;
@@ -316,7 +320,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           }
         }
       }
-    });
+    }
   }
   // deprecated justwatch api
   async function setAlternativesOnCard(card, data) {
