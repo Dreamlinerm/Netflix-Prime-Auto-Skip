@@ -227,10 +227,10 @@
     "message": "All conflicting Features"
   },
   "RatingSwitch": {
-    "message": "IMDB Rating:"
+    "message": "TMDB Rating:"
   },
   "RatingSwitchDescription": {
-    "message": "Adding the IMDB rating to every movie and series"
+    "message": "Adding the TMDB rating to every movie and series"
   },
   "StreamLinksSwitch": {
     "message": "Streaming links:"
