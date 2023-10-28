@@ -272,6 +272,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     let titleCards;
     if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
     else if (isDisney) titleCards = document.querySelectorAll(".basic-card div div img:not(.imdb)");
+    else if (isHotstar) titleCards = document.querySelectorAll(".swiper-slide img:not(.imdb)");
     // amazon
     else titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
     // on disney there are multiple images for the same title so only use the first one
@@ -280,7 +281,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     for (let i = 0; i < titleCards.length; i++) {
       let card = titleCards[i];
       // add seeen class
-      if (isNetflix || isDisney) card.classList.add("imdb");
+      if (isNetflix || isDisney || isHotstar) card.classList.add("imdb");
       //Amazon
       else card.parentElement.classList.add("imdb");
       // let card = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
@@ -288,6 +289,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
       // S2: E3 remove this part
       else if (isDisney) title = card?.getAttribute("alt").replace(/(S\d+:\sE\d+\s)/g, "");
+      else if (isHotstar) title = card?.getAttribute("alt").replace(/(S\d+\sE\d+)/g, "");
       // amazon
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0];
