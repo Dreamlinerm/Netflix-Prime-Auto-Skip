@@ -1,0 +1,241 @@
+{
+  "extensionName": {
+    "message": "Streaming enhanced: Netflix Disney+ Prime Video",
+    "description": "Nome da extensão"
+  },
+  "extensionDescription": {
+    "message": "Pula automaticamente, Introduções, Recaptulações, Créditos e tem controle da velocidade, etc. na Netflix, Prime video e Disney+ & Hotstar.",
+    "description": "Descrição da extensão"
+  },
+
+  "settingsTitle": {
+    "message": "Configurações - aprimoramento de serviços de streaming",
+    "description": "Título da guia Configurações"
+  },
+  "pageTitle": {
+    "message": "enhanced",
+    "description": "Título da página de configurações"
+  },
+  "rateNow": {
+    "message": "Avalie agora!"
+  },
+  "sharedSettings": {
+    "message": "Configurações compartilhadas"
+  },
+  "sharedSettingsDescription": {
+    "message": "Essas opções só serão ativadas/desativas a partir de $service$ da configuração compartilhada",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "backup": {
+    "message": "Cópia de segurança/Redefinir"
+  },
+  "statistics": {
+    "message": "Estatísticas"
+  },
+  "changelog": {
+    "message": "Registro de mudanças"
+  },
+  "donate": {
+    "message": "Doar"
+  },
+
+  "PageSpecificTitle": {
+    "message": "$service$ específico",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+
+  "defaultPageTitle": {
+    "message": "Todos as funcionalidades desativadas por padrão"
+  },
+  "defaultPageDescription": {
+    "message": "Todos as funcionalidades estão desativados por padrão, não funcionam corretamente ou estão em sua versão beta"
+  },
+  "DefaultPaidContentDescription": {
+    "message": "Remove todas as categorias de filmes/séries pagos do Amazon Prime"
+  },
+
+  "SharedPageTitle": {
+    "message": "Recursos de vídeo compartilhado"
+  },
+  "SharedPageDescription": {
+    "message": "Essas opções só ativam/desativam as configurações de todos os serviços de uma vez. Se você quiser desativá-las especificamente para um serviço, deverá acessar suas configurações individuais."
+  },
+  "IntroSwitch": {
+    "message": "Pular a introdução e recapitulação:"
+  },
+  "SharedIntroDescription": {
+    "message": "Pular as introduções e recapitulações de qualquer série. Exceto na Netflix, pois as recapitulações não podem ser assistidas novamente."
+  },
+  "CreditsSwitch": {
+    "message": "Ignorar créditos:"
+  },
+  "CreditsSwitchDescription": {
+    "message": "Pular para o próximo episódio de cada série o mais rápido possível"
+  },
+  "AdsSwitch": {
+    "message": "Ignorar anúncios:"
+  },
+  "AdsSwitchDescription": {
+    "message": "Ignorando os anúncios da Amazon e todos os anúncios no nível básico da Netflix"
+  },
+  "SliderSwitch": {
+    "message": "Adicionar controle deslizante de velocidade:",
+    "description": "Adicionar um interruptor de recurso de controle deslizante de velocidade"
+  },
+  "SliderSwitchDescription": {
+    "message": "Adição de um controle deslizante de ajuste de velocidade a cada vídeo"
+  },
+  "SliderOptions": {
+    "message": "Opções do controle deslizante: velocidade = quadro a quadro /10"
+  },
+  "SliderStepSize": {
+    "message": "Quantidade de quadros:"
+  },
+  "SliderMin": {
+    "message": "Controle mínimo:"
+  },
+  "SliderMax": {
+    "message": "Controle máximo:"
+  },
+  "SliderPreview": {
+    "message": "Visualização do controle deslizante:"
+  },
+  "FullscreenSwitch": {
+    "message": "Reproduzir em tela cheia:"
+  },
+  "FullscreenSwitchDescription": {
+    "message": "Se um vídeo for colocado em tela cheia, ele será reproduzido automaticamente"
+  },
+
+  "SelfAdsSwitch": {
+    "message": "Ignorar anúncios pessoais:"
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "Ignorar as prévias do programa principal que são exibidas antes de qualquer vídeo"
+  },
+  "PaidContentSwitch": {
+    "message": "Remover conteúdo pago:",
+    "description": "Remover o interruptor do recurso de conteúdo pago"
+  },
+  "PaidContentDescription": {
+    "message": "Remoção de todas as categorias de filmes/séries pagos"
+  },
+  "FreeveeSwitch": {
+    "message": "Ignorar anúncios:"
+  },
+
+  "RecapSwitch": {
+    "message": "Ignorar recapitulações:"
+  },
+  "RecapSwitchDescription": {
+    "message": "Pula as recapitulações de todos os programas"
+  },
+  "InactivitySwitch": {
+    "message": "Aviso de retorno por inatividade:"
+  },
+  "InactivitySwitchDescription": {
+    "message": "Reiniciar o vídeo se a mensagem (Você ainda está assistindo) for exibida"
+  },
+  "ProfileSwitch": {
+    "message": "Seleção automática do último perfil:"
+  },
+  "ProfileSwitchDescription": {
+    "message": "O último perfil da Netflix usado é escolhido diretamente quando a página é iniciada"
+  },
+  "User": {
+    "message": "Usuário:"
+  },
+
+  "StatisticPageTitle": {
+    "message": "Estatísticas"
+  },
+  "SkippedTime": {
+    "message": "Tempo ignorado:"
+  },
+  "AmazonAdDescription": {
+    "message": "Tempo de anúncios pulados + anúncios próprios do Prime Video"
+  },
+  "StatisticAd": {
+    "message": "$service$ Ad:",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "NetflixAdDescription": {
+    "message": "Tempo de anúncios ignorados da Netflix"
+  },
+  "StatisticIntro": {
+    "message": "Introdução:"
+  },
+  "StatisticIntroDescription": {
+    "message": "Tempo de introduções puladas na Netflix, Amazon e Disney+"
+  },
+  "StatisticRecap": {
+    "message": "Recapitulação:"
+  },
+  "StatisticRecapDescription": {
+    "message": "Tempo de recapitulações puladas na Netflix, Amazon e Disney+"
+  },
+  "StatisticSegments": {
+    "message": "Segmentos ignorados:"
+  },
+  "StatisticSegmentsDescription": {
+    "message": "Quantidade de segmentos individuais ignorados como introdução ou um anúncio da Netflix, Amazon e Disney+"
+  },
+  "ImportSettings": {
+    "message": "Importar/Exportar todas as configurações"
+  },
+  "SaveSettings": {
+    "message": "Salvar configurações como arquivo"
+  },
+  "UploadSettings": {
+    "message": "Configurações de upload"
+  },
+  "ResetAddon": {
+    "message": "Redefinir o Addon para o padrão"
+  },
+  "noWrap": {
+    "message": "nowrap"
+  },
+
+  "WatchCreditsSwitch": {
+    "message": "Assista os créditos:"
+  },
+  "WatchCreditsSwitchDescription": {
+    "message": "Sempre assista aos créditos de todas as séries"
+  },
+  "gotoIndividual": {
+    "message": "Para obter as configurações individuais dos serviços de streaming, vá para a seção "
+  },
+  "extendedSettings": {
+    "message": "Configurações extendidas"
+  },
+  "conflictingTitle": {
+    "message": "Todos os recursos conflitantes"
+  },
+  "RatingSwitch": {
+    "message": "Classificações TMDB:"
+  },
+  "RatingSwitchDescription": {
+    "message": "Adiciona a classificação do TMDB a todos os filmes e séries"
+  },
+  "StreamLinksSwitch": {
+    "message": "Links para streaming:"
+  },
+  "StreamLinksDescription": {
+    "message": "Exibe links de streaming para filmes que estão disponíveis em outras plataformas ou em outros países."
+  }
+}
