@@ -1,5 +1,5 @@
 -------------------------------------------- firefox:
-You can configure which Feature to enable in the Settings Page.
+You can configure which feature to enable in the Settings Page.
 
 ✨ Features
 
@@ -11,7 +11,7 @@ On Netflix, Prime Video and Disney+ & Hotstar it automatically:
 <li>Skips Ads</li>
 <li>Adds playback speed control to UI</li>
 <li>Plays on Fullscreen</li>
-<li>Shows IMDB Rating</li>
+<li>Shows TMDB Rating</li>
 </ul>
 
 On Netflix it also automatically:
@@ -52,7 +52,7 @@ Disclaimer
 
 Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
 --------------------------------------------  chrome:
-You can configure which Feature to enable in the Settings Page.
+You can configure which feature to enable in the Settings Page.
 
 ✨ Features
 
@@ -63,7 +63,7 @@ On Netflix, Prime Video and Disney+ & Hotstar it automatically:
 • Skips Ads
 • Adds playback speed control to UI
 • Plays on Fullscreen
-• Shows IMDB Rating
+• Shows TMDB Rating
 
 On Netflix it also automatically:
 

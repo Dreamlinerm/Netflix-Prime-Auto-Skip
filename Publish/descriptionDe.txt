@@ -11,7 +11,7 @@ Auf Netflix, Prime Video und Disney+ & Hotstar wird automatisch:
 <li>Werbung übersprungen</li>
 <li>Geschwindigkeitsregler hinzugefügt</li>
 <li>Abgespielt, wenn Vollbildschirm geöffnet wird</li>
-<li>Zeigt IMDB-Bewertung</li>
+<li>Zeigt TMDB-Bewertung</li>
 </ul>
 
 Auf Netflix wird auch automatisch:
@@ -63,7 +63,7 @@ Auf Netflix, Prime Video und Disney+ & Hotstar wird automatisch:
 • Werbung übersprungen
 • Geschwindigkeitsregler hinzugefügt
 • Abgespielt, wenn Vollbildschirm geöffnet wird
-• Zeigt IMDB-Bewertung
+• Zeigt TMDB-Bewertung
 
 Auf Netflix wird auch automatisch:
 
