@@ -3,7 +3,7 @@ Você pode configurar o recurso a ser ativado na página de configurações.
 
 ✨ Recursos
 
-No Netflix, Prime Video e Disney+ e Hotstar, ele é ativado automaticamente:
+Na Netflix, Prime Video e Disney+ e Hotstar, será ativado automaticamente:
 
 • Pula as introduções
 • Pula os créditos: passa automaticamente para o próximo episódio
@@ -12,34 +12,35 @@ No Netflix, Prime Video e Disney+ e Hotstar, ele é ativado automaticamente:
 • Reproduz em tela cheia
 • Mostra a classificação TMDB
 
-Na Netflix, também automaticamente:
+Na Netflix:
 
 • Ignora recapitulações
 • Bloqueia o aviso de inatividade: retoma automaticamente o vídeo
 • Escolhe o último perfil usado
 
-No Amazon Prime Video, ele também automaticamente:
+Na Amazon Prime Video:
 
-• Pula anúncios de autopromoção (anúncios para produções de vídeo de primeira linha)
+• Pula anúncios de autopromoção (anúncios de produções próprias/originais)
 • Filtra conteúdo pago (filmes, séries)
-• Remove o desfoque irritante ao passar o mouse sobre o vídeo
+• Remove o desfoque de movimento ao passar o ponteiro do mouse sobre o vídeo
 • Adiciona links de streaming potencialmente gratuitos para programas pagos/anúncios
 
 Android: 
-O Prime Video e o Disney+ (no modo Desktop) são compatíveis com o Android. O Netflix não funciona no Android.
+O Prime Video e o Disney+ (no modo Desktop) são compatíveis com o Android. 
+Não funcionará na Netflix dentro do Android.
 
-Para usar no telefone Android, faça o download do [Kiwi Browser] (https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) 
+Para usar no Android, faça o download do [Kiwi Browser] (https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) 
 ou um aplicativo semelhante para poder instalar o complemento do Chrome.
 
 ☔ Seguro
 
-A extensão é de código aberto! Confira (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip) se você quiser contribuir.
+A extensão é de código aberto! Confira (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip) se quiser contribuir.
 
 💕 Está gostando do streaming aprimorado?
 
 Deixe uma avaliação 5 estrelas! As avaliações ajudam a criar confiança e a atrair novos usuários!
 
-Compre um café para mim (https://paypal.me/MarvinKrebber).
+Me pague um café em: (https://paypal.me/MarvinKrebber).
 
 Isenção de responsabilidade
 
