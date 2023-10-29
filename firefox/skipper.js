@@ -23,7 +23,7 @@ let isHotstar = /hotstar/i.test(hostname);
 
 let isEdge = /edg/i.test(ua);
 let isFirefox = /firefox/i.test(ua);
-const version = "1.0.63";
+const version = "1.0.64";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   // global variables in localStorage
   const defaultSettings = {
@@ -288,8 +288,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
       // S2: E3 remove this part
-      else if (isDisney) title = card?.getAttribute("alt").replace(/(S\d+:\sE\d+\s)/g, "");
-      else if (isHotstar) title = card?.getAttribute("alt").replace(/(S\d+\sE\d+)/g, "");
+      else if (isDisney) title = card?.getAttribute("alt")?.replace(/(S\d+:\sE\d+\s)/g, "");
+      else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
       // amazon
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0];
@@ -422,7 +422,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       div.textContent = "?";
     }
     if (isNetflix) card.appendChild(div);
-    else if (isDisney) card.parentElement.appendChild(div);
+    else if (isDisney || isHotstar) card.parentElement?.appendChild(div);
     else card.firstChild.firstChild.appendChild(div);
   }
 
