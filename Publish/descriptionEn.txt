@@ -14,7 +14,7 @@ On Netflix, Prime Video and Disney+ & Hotstar it automatically:
 <li>Shows TMDB Rating</li>
 </ul>
 
-On Netflix it also automatically:
+On Netflix, it also automatically:
 
 <ul>
 <li>Skips Recaps</li>
@@ -22,10 +22,10 @@ On Netflix it also automatically:
 <li>Picks last used profile</li>
 </ul>
 
-On Amazon Prime Video it also automatically:
+On Amazon Prime Video, it also automatically:
 
 <ul>
-<li>Skips Self promoting ads (Ads for prime video productions)</li>
+<li>Skips Self-promoting ads (Ads for prime video productions)</li>
 <li>Filters paid content (movies, series)</li>
 <li>Removes annoying blur when hovering over video</li>
 <li>Adds potentially free streaming links to paid/ad shows</li>
@@ -40,7 +40,7 @@ or a similar App to be able to install the chrome addon.
 
 ☔ Safe
 
-The extension is open sourced! Check <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> out if you want to contribute.
+The extension is open-sourced! Check <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> out if you want to contribute.
 
 💕 Enjoying Streaming enhanced?
 
@@ -65,28 +65,28 @@ On Netflix, Prime Video and Disney+ & Hotstar it automatically:
 • Plays on Fullscreen
 • Shows TMDB Rating
 
-On Netflix it also automatically:
+On Netflix, it also automatically:
 
 • Skips Recaps
 • Blocks Inactivity Warning      : automatically resuming the video
 • Picks last used profile
 
-On Amazon Prime Video it also automatically:
+On Amazon Prime Video, it also automatically:
 
-• Skips Self promoting ads (Ads for prime video productions)
+• Skips Self-promoting ads (Ads for prime video productions)
 • Filters paid content (movies, series)
 • Removes annoying blur when hovering over video
 • Adds potentially free streaming links to paid/ad shows
 
-Android: 
+Android:
 Prime Video and Disney+(in Desktop mode) are supported on Android. Netflix does not work on Android.
 
-To use on Android Phone Download [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) 
+To use on Android Phone. Download [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser)
 or a similar App to be able to install the chrome addon.
 
 ☔ Safe
 
-The extension is open sourced! Check (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip) out if you want to contribute.
+The extension is open-sourced! Check (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip) out if you want to contribute.
 
 💕 Enjoying Streaming enhanced?
 
