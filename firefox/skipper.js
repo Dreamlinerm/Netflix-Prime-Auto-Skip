@@ -960,11 +960,38 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   function Crunchyroll_ReleaseCalendar() {
     if (settings.Crunchyroll?.releaseCalendar && window.location.href.includes("simulcastcalendar")) {
-      log("test2");
       let list = document.querySelectorAll("div.queue-flag:not(.queued)");
       list.forEach((element) => {
         element.parentElement.parentElement.parentElement.style.display = "none";
       });
+      const label = document.createElement("label");
+      label.classList.add("filter-toggle");
+      const span = document.createElement("span");
+      span.classList.add("content");
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.checked = true;
+      input.onclick = function () {
+        let list = document.querySelectorAll("div.queue-flag:not(.queued)");
+        if (this.checked) {
+          list.forEach((element) => {
+            element.parentElement.parentElement.parentElement.style.display = "none";
+          });
+        } else {
+          list.forEach((element) => {
+            element.parentElement.parentElement.parentElement.style.display = "block";
+          });
+        }
+      };
+      const spanText = document.createElement("span");
+      spanText.classList.add("label-text");
+      spanText.textContent = "Hide queued";
+      label.appendChild(span);
+      span.appendChild(input);
+      span.appendChild(spanText);
+      const toggleForm = document.querySelector("#filter_toggle_form");
+      toggleForm.style.display = "flex";
+      toggleForm.firstElementChild.appendChild(label);
     }
   }
   Crunchyroll_ReleaseCalendar();
