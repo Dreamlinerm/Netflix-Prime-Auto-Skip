@@ -62,6 +62,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         if (settings.Netflix?.NetflixAds) Netflix_SkipAdInterval();
         NetflixObserver.observe(document, config);
       } else if (isPrimeVideo) {
+        AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
         AmazonObserver.observe(document, config);
         if (settings.Amazon?.skipAd) Amazon_AdTimeout();
         if (settings.Amazon?.blockFreevee) {
@@ -448,7 +449,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       let video = document.querySelector("video");
-      const time = video.currentTime;
+      const time = video?.currentTime;
       button.click();
       log("Recap skipped", button);
       setTimeout(function () {
@@ -698,27 +699,32 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   const AmazonObserver = new MutationObserver(Amazon);
   function Amazon() {
     const video = document.querySelector(AmazonVideoClass);
-    const time = video.currentTime;
-    if (settings.Amazon?.skipIntro === undefined || settings.Amazon?.skipIntro) Amazon_Intro(video, time);
     if (settings.Amazon?.skipCredits === undefined || settings.Amazon?.skipCredits) Amazon_Credits();
     if (settings.Amazon?.watchCredits === undefined || settings.Amazon?.watchCredits) Amazon_Watch_Credits();
     if (settings.Amazon?.speedSlider === undefined || settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
     if (settings.Amazon?.filterPaid === undefined || settings.Amazon?.filterPaid) Amazon_FilterPaid();
   }
-  function Amazon_Intro(video, time) {
-    // skips intro and recap
-    // recap on lucifer season 3 episode 3
-    // intro lucifer season 3 episode 4
-    let button = document.querySelector("[class*=skipelement]");
-    if (button) {
-      button.click();
-      log("Intro skipped", button);
-      if (time) {
-        //delay where the video is loaded
-        setTimeout(function () {
-          AmazonGobackbutton(video, time, video.currentTime);
-          addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
-        }, 50);
+  const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
+  // const AmazonSkipIntro = new RegExp("skipelement", "i");
+  const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
+  function Amazon_Intro(mutations, observer) {
+    if (settings.Amazon?.skipIntro === undefined || settings.Amazon?.skipIntro) {
+      // skips intro and recap
+      // recap on lucifer season 3 episode 3
+      // intro lucifer season 3 episode 4
+      let button = document.querySelector("[class*=skipelement]");
+      if (button) {
+        let video = document.querySelector(AmazonVideoClass);
+        const time = video.currentTime;
+        if (time) {
+          button.click();
+          log("Intro skipped", button);
+          //delay where the video is loaded
+          setTimeout(function () {
+            AmazonGobackbutton(video, time, video.currentTime);
+            addSkippedTime(time, video.currentTime, "IntroTimeSkipped");
+          }, 50);
+        }
       }
     }
   }
