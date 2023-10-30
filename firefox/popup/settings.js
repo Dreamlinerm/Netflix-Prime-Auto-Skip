@@ -279,7 +279,6 @@ function setSettings(log) {
   console.log(log, settings);
   browser.storage.sync.set({ settings });
 }
-
 function listenForClicks() {
   let listener = document.addEventListener("click", (e) => {
     if (e.target.classList.contains("reset")) {
