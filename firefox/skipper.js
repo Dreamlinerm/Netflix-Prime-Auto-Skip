@@ -59,7 +59,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       if (isNetflix) {
         // start Observers depending on the settings
         if (settings.Netflix?.profile) AutoPickProfile();
-        if (settings.Netflix?.NetflixAds) startNetflixAdTimeout();
+        if (settings.Netflix?.NetflixAds) Netflix_SkipAdInterval();
         NetflixObserver.observe(document, config);
       } else if (isPrimeVideo) {
         AmazonObserver.observe(document, config);
@@ -557,17 +557,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     const time = video?.currentTime;
     if (settings.Netflix?.profile === undefined || settings.Netflix?.profile) Netflix_profile();
     if (settings.Netflix?.skipIntro === undefined || settings.Netflix?.skipIntro) {
-      Netflix_General('[data-uia="player-skip-intro"]');
-      setTimeout(function () {
-        addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
-      }, 600);
+      if (Netflix_General('[data-uia="player-skip-intro"]')) {
+        setTimeout(function () {
+          addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
+        }, 600);
+      }
     }
     if (settings.Netflix?.skipRecap === undefined || settings.Netflix?.skipRecap) {
-      Netflix_General('[data-uia="player-skip-recap"]');
-      Netflix_General('[data-uia="player-skip-preplay"]');
-      setTimeout(function () {
-        addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
-      }, 600);
+      if (Netflix_General('[data-uia="player-skip-recap"]') || Netflix_General('[data-uia="player-skip-preplay"]')) {
+        setTimeout(function () {
+          addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
+        }, 600);
+      }
     }
     if (settings.Netflix?.skipCredits === undefined || settings.Netflix?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]');
     if (settings.Netflix?.watchCredits === undefined || settings.Netflix?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]');
@@ -611,9 +612,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     if (button) {
       button.click();
       increaseBadge();
+      return true;
     }
+    return false;
   }
-
   function Netflix_SkipAdInterval() {
     let AdInterval = setInterval(() => {
       if (!settings.Netflix?.NetflixAds) {
