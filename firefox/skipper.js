@@ -760,10 +760,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     }
   }
   async function Amazon_Credits() {
-    let button = document.querySelector("[class*=nextupcard-button]");
+    const button = document.querySelector("[class*=nextupcard-button]");
     if (button) {
       // only skipping to next episode not an entirely new series
-      let newEpNumber = document.querySelector("[class*=nextupcard-episode]");
+      const newEpNumber = document.querySelector("[class*=nextupcard-episode]");
       if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
         button.click();
         increaseBadge();
