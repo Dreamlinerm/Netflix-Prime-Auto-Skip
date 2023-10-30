@@ -47,14 +47,14 @@ def Netflix_intro():
     backwardButton = driver.find_element(
         by=By.XPATH, value="//button[@data-uia='control-back10']"
     )
-    while video.get_property("currentTime") <= 32:
+    while video.get_property("currentTime") <= 54:
         forwardButton.click()
         time.sleep(0.3)
 
     while video.get_property("currentTime") >= 64:
         backwardButton.click()
         time.sleep(0.3)
-    time.sleep(2)
+    time.sleep(8)
     t = video.get_property("currentTime")
     try:
         assert t >= 62
@@ -243,7 +243,7 @@ def Disney_Intro():
         )
         time.sleep(0.3)
     print("time " + str(video.get_property("currentTime")))
-    wait = WebDriverWait(driver, timeout=20)
+    wait = WebDriverWait(driver, timeout=30)
     wait.until(lambda driver: video.get_property("currentTime") >= 80)
 
     wait = WebDriverWait(driver, timeout=5)

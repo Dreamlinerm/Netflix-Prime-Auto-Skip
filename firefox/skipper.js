@@ -39,7 +39,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   let settings = defaultSettings.settings;
   let DBCache = {};
   let lastAdTimeText = 0;
-  let videoSpeed;
+  let videoSpeed = 1;
   async function setVideoSpeed(speed) {
     videoSpeed = speed;
   }
@@ -58,33 +58,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     } else {
       if (isNetflix) {
         // start Observers depending on the settings
-        if (settings.Netflix?.profile) startNetflixProfileObserver();
-        if (settings.Netflix?.skipIntro) startNetflixSkipIntroObserver();
-        if (settings.Netflix?.skipRecap) startNetflixSkipRecapObserver();
-        if (settings.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
-        if (settings.Netflix?.watchCredits) startNetflixWatchCreditsObserver();
-        if (settings.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
-        if (settings.Netflix?.NetflixAds) startNetflixAdTimeout();
-        if (settings.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
+        if (settings.Netflix?.profile) AutoPickProfile();
+        if (settings.Netflix?.NetflixAds) Netflix_SkipAdInterval();
+        NetflixObserver.observe(document, config);
       } else if (isPrimeVideo) {
-        if (settings.Amazon?.skipIntro) startAmazonSkipIntroObserver();
-        if (settings.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
-        if (settings.Amazon?.watchCredits) startAmazonWatchCreditsObserver();
-        if (settings.Amazon?.skipAd) startAmazonSkipAdObserver();
+        AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
+        AmazonObserver.observe(document, config);
+        if (settings.Amazon?.skipAd) Amazon_AdTimeout();
         if (settings.Amazon?.blockFreevee) {
           // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
           setTimeout(function () {
-            startAmazonBlockFreeveeObserver();
+            Amazon_FreeveeTimeout();
           }, 1000);
         }
-        if (settings.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
-        if (settings.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-      } else if (isDisney || isHotstar) {
-        if (settings.Disney?.skipIntro) startDisneySkipIntroObserver();
-        if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
-        if (settings.Disney?.watchCredits) startDisneyWatchCreditsObserver();
-        if (settings.Disney?.speedSlider) startDisneySpeedSliderObserver();
-      }
+      } else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
       if (settings.Video.playOnFullScreen) startPlayOnFullScreen(isNetflix);
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
@@ -107,7 +94,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         browser.storage.sync.set({ settings });
       }
     }
-
     browser.storage.local.get("DBCache", function (result) {
       DBCache = result?.DBCache;
       if (typeof DBCache !== "object") {
@@ -116,7 +102,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         DBCache = {};
       }
       if (isNetflix) {
-        if (settings.Netflix?.showRating) startShowRatingInterval();
+        if (settings.Netflix?.showRating) {
+          startShowRatingInterval();
+        }
       }
       // else if (isPrimeVideo) {
       //   if (settings.Amazon?.streamLinks) addStreamLinks();
@@ -140,52 +128,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         log(key, "Old value:", oldValue, ", new value:", newValue);
         if (isNetflix) {
           // if value is changed then check if it is enabled or disabled
-          if (oldValue === undefined || newValue.Netflix.profile !== oldValue.Netflix?.profile) startNetflixProfileObserver();
-          if (oldValue === undefined || newValue.Netflix.skipIntro !== oldValue.Netflix?.skipIntro) startNetflixSkipIntroObserver();
-          if (oldValue === undefined || newValue.Netflix.skipRecap !== oldValue.Netflix?.skipRecap) startNetflixSkipRecapObserver();
-          if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
-          if (oldValue === undefined || newValue.Netflix.watchCredits !== oldValue.Netflix?.watchCredits) startNetflixWatchCreditsObserver();
-          if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
-          if (oldValue === undefined || newValue.Netflix.NetflixAds !== oldValue.Netflix?.NetflixAds) startNetflixAdTimeout();
-          if (oldValue === undefined || newValue.Netflix.speedSlider !== oldValue.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
-
-          if (oldValue === undefined || newValue.Video.showRating !== oldValue.Netflix?.showRating) startShowRatingInterval();
+          if (oldValue === undefined || (newValue.Netflix.NetflixAds !== oldValue?.Netflix?.NetflixAds && newValue.Netflix.NetflixAds)) Netflix_SkipAdInterval();
         } else if (isPrimeVideo) {
-          if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon?.skipIntro) startAmazonSkipIntroObserver();
-          if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
-          if (oldValue === undefined || newValue.Amazon.watchCredits !== oldValue.Amazon?.watchCredits) startAmazonWatchCreditsObserver();
-          if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon?.skipAd) startAmazonSkipAdObserver();
-          if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
-          if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
-          if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-          // if (oldValue === undefined || newValue.Video.streamLinks !== oldValue.Amazon?.streamLinks) addStreamLinks();
-
-          // if (oldValue === undefined || newValue.Video.showRating !== oldValue.Amazon?.showRating) startShowRatingInterval();
-        } else if (isDisney || isHotstar) {
-          // if value is changed then check if it is enabled or disabled
-          if (oldValue === undefined || newValue.Disney.skipIntro !== oldValue.Disney?.skipIntro) startDisneySkipIntroObserver();
-          if (oldValue === undefined || newValue.Disney.skipCredits !== oldValue.Disney?.skipCredits) startDisneySkipCreditsObserver();
-          if (oldValue === undefined || newValue.Disney.watchCredits !== oldValue.Disney?.watchCredits) startDisneyWatchCreditsObserver();
-          if (oldValue === undefined || newValue.Disney.speedSlider !== oldValue.Disney?.speedSlider) startDisneySpeedSliderObserver();
+          if (oldValue === undefined || (newValue.Amazon.skipAd !== oldValue?.Amazon?.skipAd && newValue.Amazon.skipAd)) Amazon_AdTimeout();
+          if (oldValue === undefined || (newValue.Amazon.blockFreevee !== oldValue?.Amazon?.blockFreevee && newValue.Amazon.blockFreevee)) Amazon_FreeveeTimeout();
         }
-        if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
-        if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
-          resetBadge();
-        }
+        if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
+        if (oldValue === undefined || (newValue.Netflix.showRating !== oldValue?.Netflix?.showRating && newValue.Netflix.showRating)) startShowRatingInterval();
       }
     }
   });
-  function addIntroTimeSkipped(startTime, endTime) {
+  async function addSkippedTime(startTime, endTime, key) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
-      log("Intro Time skipped", endTime - startTime);
-      settings.Statistics.IntroTimeSkipped += endTime - startTime;
-      increaseBadge();
-    }
-  }
-  function addRecapTimeSkipped(startTime, endTime) {
-    if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
-      log("Recap Time skipped", endTime - startTime);
-      settings.Statistics.RecapTimeSkipped += endTime - startTime;
+      log(key, endTime - startTime);
+      settings.Statistics[key] += endTime - startTime;
       increaseBadge();
     }
   }
@@ -268,6 +224,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   const config = { attributes: true, childList: true, subtree: true };
 
   // shared functions
+  async function startShowRatingInterval() {
+    addRating();
+    let RatingInterval = setInterval(function () {
+      if ((isNetflix && !settings.Netflix?.NetflixAds) || (isPrimeVideo && !settings.Amazon?.skipAd) || ((isDisney || isHotstar) && !settings.Disney?.skipCredits)) {
+        log("stopped adding Rating");
+        clearInterval(RatingInterval);
+        return;
+      }
+      addRating();
+    }, 1000);
+    let DBCacheInterval = setInterval(function () {
+      if ((isNetflix && !settings.Netflix?.NetflixAds) || (isPrimeVideo && !settings.Amazon?.skipAd) || ((isDisney || isHotstar) && !settings.Disney?.skipCredits)) {
+        log("stopped DBCacheInterval");
+        clearInterval(DBCacheInterval);
+        return;
+      }
+      setDBCache();
+    }, 5000);
+  }
   async function addRating() {
     let titleCards;
     if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
@@ -425,10 +400,52 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     else if (isDisney || isHotstar) card.parentElement?.appendChild(div);
     else card.firstChild.firstChild.appendChild(div);
   }
+  async function startPlayOnFullScreen(isNetflix) {
+    if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
+      log("started observing| PlayOnFullScreen");
+      function OnFullScreenChange() {
+        let video;
+        if (isNetflix || isDisney || isHotstar) video = document.querySelector("video");
+        else video = document.querySelector(AmazonVideoClass);
+        if (window.fullScreen && video) {
+          video.play();
+          log("auto-played on fullscreen");
+          increaseBadge();
+        }
+      }
+      addEventListener("fullscreenchange", OnFullScreenChange);
+    } else {
+      log("stopped observing| PlayOnFullScreen");
+      removeEventListener("fullscreenchange", OnFullScreenChange);
+    }
+  }
+  // deprecated
+  async function addStreamLinks() {
+    log("adding stream links");
+    let title = document.querySelector("h1[data-automation-id='title']")?.textContent?.split(" [")[0];
+    if (title) {
+      // if not already free blue in prime icon
+      if (!document.querySelector(".fbl-icon._3UMk3x._1a_Ljt._3H1cN4")) {
+        let card = document.querySelector("div#dv-action-box");
+        if (!DBCache[title]) {
+          getMovieInfo(title, card, false);
+          log("no info in DBcache", title);
+        } else {
+          setAlternativesOnCard(card, DBCache[title], title);
+        }
+      }
+    }
+  }
 
   // Disney Observers
-  const DisneySkipIntroObserver = new MutationObserver(Disney_Intro);
-  function Disney_Intro(mutations, observer) {
+  const DisneyObserver = new MutationObserver(Disney);
+  function Disney() {
+    if (settings.Disney?.skipIntro) Disney_Intro();
+    if (settings.Disney?.skipCredits) Disney_Credits();
+    if (settings.Disney?.watchCredits) Disney_Watch_Credits();
+    if (settings.Disney?.speedSlider) Disney_SpeedSlider();
+  }
+  function Disney_Intro() {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
     let button;
@@ -436,17 +453,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       let video = document.querySelector("video");
-      const time = video.currentTime;
+      const time = video?.currentTime;
       button.click();
       log("Recap skipped", button);
       setTimeout(function () {
-        addRecapTimeSkipped(time, video.currentTime);
+        addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
       }, 600);
     }
   }
-
-  const DisneySkipCreditsObserver = new MutationObserver(Disney_Credits);
-  function Disney_Credits(mutations, observer) {
+  function Disney_Credits() {
     let button;
     if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
     else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
@@ -463,9 +478,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   }
-
-  const DisneyWatchCreditsObserver = new MutationObserver(Disney_Watch_Credits);
-  function Disney_Watch_Credits(mutations, observer) {
+  function Disney_Watch_Credits() {
     let button;
     if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
     else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
@@ -485,10 +498,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   }
-
-  const DisneySpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
-  const DisneySpeedSliderObserver = new MutationObserver(Disney_SpeedSlider);
-  function Disney_SpeedSlider(mutations, observer) {
+  function Disney_SpeedSlider() {
     let video = document.querySelector("video");
     let alreadySlider = document.querySelector("#videoSpeedSlider");
     if (video) {
@@ -545,12 +555,33 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   }
+  // Netflix Observer
+  const NetflixObserver = new MutationObserver(Netflix);
+  function Netflix() {
+    const video = document.querySelector("video");
+    const time = video?.currentTime;
+    if (settings.Netflix?.profile === undefined || settings.Netflix?.profile) Netflix_profile();
+    if (settings.Netflix?.skipIntro === undefined || settings.Netflix?.skipIntro) {
+      if (Netflix_General('[data-uia="player-skip-intro"]', "Intro skipped", false)) {
+        setTimeout(function () {
+          addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
+        }, 600);
+      }
+    }
+    if (settings.Netflix?.skipRecap === undefined || settings.Netflix?.skipRecap) {
+      if (Netflix_General('[data-uia="player-skip-recap"]', "Recap skipped", false) || Netflix_General('[data-uia="player-skip-preplay"]', "Recap skipped", false)) {
+        setTimeout(function () {
+          addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
+        }, 600);
+      }
+    }
+    if (settings.Netflix?.skipCredits === undefined || settings.Netflix?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]', "Credits skipped");
+    if (settings.Netflix?.watchCredits === undefined || settings.Netflix?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched");
+    if (settings.Netflix?.skipBlocked === undefined || settings.Netflix?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
+    if (settings.Netflix?.speedSlider === undefined || settings.Netflix?.speedSlider) Netflix_SpeedSlider(video);
+  }
 
-  // Netflix Observers
-  const NetflixConfig = { attributes: true, attributeFilter: ["data-uia"], subtree: true, childList: true, attributeOldValue: false };
-
-  const NetflixProfileObserver = new MutationObserver(Netflix_profile);
-  function Netflix_profile(mutations, observer) {
+  function Netflix_profile() {
     // AutoPickProfile();
     let currentProfile = document.querySelector("[href*='/YourAccount']");
     if (currentProfile) {
@@ -581,67 +612,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       });
     }
   }
-
-  const NetflixSkipIntroObserver = new MutationObserver(Netflix_Intro);
-  function Netflix_Intro(mutations, observer) {
-    // brooklyn nine nine season 1 episode 4
-    let button = document.querySelector('[data-uia="player-skip-intro"]');
+  function Netflix_General(selector, name, incBadge = true) {
+    const button = document.querySelector(selector);
     if (button) {
-      let video = document.querySelector("video");
-      const time = video.currentTime;
+      log(name, button);
       button.click();
-      log("intro skipped", button);
-      setTimeout(function () {
-        addIntroTimeSkipped(time, video.currentTime);
-      }, 600);
+      if (incBadge) increaseBadge();
+      return true;
     }
+    return false;
   }
-
-  const NetflixSkipRecapObserver = new MutationObserver(Netflix_Recap);
-  function Netflix_Recap(mutations, observer) {
-    // Outer Banks season 2 episode 1
-    let button = document.querySelector('[data-uia="player-skip-recap"]') || document.querySelector('[data-uia="player-skip-preplay"]');
-    if (button) {
-      let video = document.querySelector("video");
-      const time = video.currentTime;
-      button.click();
-      log("Recap skipped", button);
-      setTimeout(function () {
-        addRecapTimeSkipped(time, video.currentTime);
-      }, 600);
-    }
-  }
-
-  const NetflixSkipCreditsObserver = new MutationObserver(Netflix_Credits);
-  function Netflix_Credits(mutations, observer) {
-    let button = document.querySelector('[data-uia="next-episode-seamless-button"]');
-    if (button) {
-      button.click();
-      log("Credits skipped", button);
-      increaseBadge();
-    }
-  }
-
-  const NetflixWatchCreditsObserver = new MutationObserver(Netflix_Watch_Credits);
-  function Netflix_Watch_Credits(mutations, observer) {
-    let button = document.querySelector('[data-uia="watch-credits-seamless-button"]');
-    if (button) {
-      button.click();
-      log("Credits watched", button);
-      increaseBadge();
-    }
-  }
-
-  const NetflixSkipBlockedObserver = new MutationObserver(Netflix_Blocked);
-  function Netflix_Blocked(mutations, observer) {
-    let button = document.querySelector('[data-uia="interrupt-autoplay-continue"]');
-    if (button) {
-      button.click();
-      log("Blocked skipped", button);
-      increaseBadge();
-    }
-  }
-
   function Netflix_SkipAdInterval() {
     let AdInterval = setInterval(() => {
       if (!settings.Netflix?.NetflixAds) {
@@ -665,16 +645,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         } else if (adLength && video.paused) {
           video.play();
         } else if (adLength <= 2 || !adLength) {
-          video.playbackRate = 1;
+          // videospeed is speedSlider value
+          video.playbackRate = videoSpeed;
         }
       }
     }, 100);
   }
-
-  const NetflixSpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
-  const NetflixSpeedSliderObserver = new MutationObserver(Netflix_SpeedSlider);
-  function Netflix_SpeedSlider(mutations, observer) {
-    let video = document.querySelector("video");
+  function Netflix_SpeedSlider(video) {
     let alreadySlider = document.querySelector("#videoSpeedSlider");
     // only add speed slider on lowest subscription tier
     // && !document.querySelector('[data-uia="control-speed"]')
@@ -723,120 +700,40 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
 
   // Amazon Observers
   const AmazonVideoClass = "#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video";
-
-  const AmazonSpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
-  const AmazonSpeedSliderObserver = new MutationObserver(Amazon_SpeedSlider);
-  function Amazon_SpeedSlider(mutations, observer) {
-    let video = document.querySelector(AmazonVideoClass);
-    let alreadySlider = document.querySelector("#videoSpeedSlider");
-
-    // remove bad background hue which is annoying
-    //document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
-    let b = document.querySelector(".fkpovp9.f8hspre");
-    if (b && b.style.background != "rgba(0, 0, 0, 0.25)") {
-      b.style.background = "rgba(0, 0, 0, 0.25)";
-    }
-
-    if (video) {
-      if (!alreadySlider) {
-        // infobar position for the slider to be added
-        let position = document.querySelector("[class*=infobar-container]")?.firstChild?.lastChild;
-        if (position) {
-          let slider = document.createElement("input");
-          slider.id = "videoSpeedSlider";
-          slider.type = "range";
-          slider.min = settings.General.sliderMin;
-          slider.max = settings.General.sliderMax;
-          slider.value = "10";
-          slider.step = settings.General.sliderSteps;
-          // slider.setAttribute("list", "markers");
-          slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;width:200px;";
-          position.insertBefore(slider, position.firstChild);
-
-          let speed = document.createElement("p");
-          speed.id = "videoSpeed";
-          speed.textContent = "1x";
-          position.insertBefore(speed, position.firstChild);
-          speed.onclick = function () {
-            if (slider.style.display === "block") slider.style.display = "none";
-            else slider.style.display = "block";
-          };
-          slider.oninput = function () {
-            speed.textContent = this.value / 10 + "x";
-            video.playbackRate = this.value / 10;
-          };
-        }
-      } else {
-        // need to resync the slider with the video sometimes
-        speed = document.querySelector("#videoSpeed");
-        if (video.playbackRate != alreadySlider.value / 10) {
-          video.playbackRate = alreadySlider.value / 10;
-        }
-        alreadySlider.oninput = function () {
-          speed.textContent = this.value / 10 + "x";
-          video.playbackRate = this.value / 10;
-        };
-      }
-    }
+  const AmazonObserver = new MutationObserver(Amazon);
+  function Amazon() {
+    const video = document.querySelector(AmazonVideoClass);
+    if (settings.Amazon?.skipCredits === undefined || settings.Amazon?.skipCredits) Amazon_Credits();
+    if (settings.Amazon?.watchCredits === undefined || settings.Amazon?.watchCredits) Amazon_Watch_Credits();
+    if (settings.Amazon?.speedSlider === undefined || settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
+    if (settings.Amazon?.filterPaid === undefined || settings.Amazon?.filterPaid) Amazon_FilterPaid();
   }
-  const AmazonFilterPaidConfig = { attributes: true, attributeFilter: [".o86fri"], subtree: true, childList: true, attributeOldValue: false };
-  const AmazonFilterPaidObserver = new MutationObserver(Amazon_FilterPaid);
-  async function deletePaidCategory(a) {
-    // don't iterate too long too much performance impact
-    let maxSectionDepth = 10;
-    let SectionCount = 0;
-    while (a?.parentElement && SectionCount < 2 && maxSectionDepth > 0) {
-      a = a.parentElement;
-      maxSectionDepth--;
-      if (a.tagName == "SECTION") {
-        SectionCount++;
-      }
-    }
-    // fixes if no 2. section is found it will remove the hole page
-    if (a.tagName == "SECTION") {
-      log("Filtered paid Element", a.parentElement);
-      a.remove();
-      increaseBadge();
-    }
-  }
-  function Amazon_FilterPaid(mutations, observer) {
-    // if not on the shop page or homepremiere
-    if (!window.location.href.includes("contentId=store") && !window.location.href.includes("contentId=homepremiere")) {
-      // yellow headline is not everywhere the same
-      document.querySelectorAll(".o86fri").forEach((a) => {
-        deletePaidCategory(a);
-      });
-      // Mehr > is .GnSDwP //if (getComputedStyle(a).color == "rgb(255, 204, 0)")
-      document.querySelectorAll(".c3svnh a.Xa7aAK, .c3svnh a.Xa7aAK:link, .c3svnh a.Xa7aAK:visited").forEach((a) => {
-        deletePaidCategory(a);
-      });
-    }
-  }
-
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
   function Amazon_Intro(mutations, observer) {
-    // skips intro and recap
-    // recap on lucifer season 3 episode 3
-    // intro lucifer season 3 episode 4
-    let button = document.querySelector("[class*=skipelement]");
-    if (button) {
-      let video = document.querySelector(AmazonVideoClass);
-      const time = video.currentTime;
-      if (time) {
-        button.click();
-        log("Intro skipped", button);
-        //delay where the video is loaded
-        setTimeout(function () {
-          AmazonGobackbutton(video, time, video.currentTime);
-          addIntroTimeSkipped(time, video.currentTime);
-        }, 50);
+    if (settings.Amazon?.skipIntro === undefined || settings.Amazon?.skipIntro) {
+      // skips intro and recap
+      // recap on lucifer season 3 episode 3
+      // intro lucifer season 3 episode 4
+      let button = document.querySelector("[class*=skipelement]");
+      if (button) {
+        let video = document.querySelector(AmazonVideoClass);
+        const time = video.currentTime;
+        if (time) {
+          button.click();
+          log("Intro skipped", button);
+          //delay where the video is loaded
+          setTimeout(function () {
+            AmazonGobackbutton(video, time, video.currentTime);
+            addSkippedTime(time, video.currentTime, "IntroTimeSkipped");
+          }, 50);
+        }
       }
     }
   }
   reverseButton = false;
-  function AmazonGobackbutton(video, startTime, endTime) {
+  async function AmazonGobackbutton(video, startTime, endTime) {
     if (!reverseButton) {
       reverseButton = true;
       // go back button
@@ -866,14 +763,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }, 5000);
     }
   }
-
-  const AmazonSkipCreditsConfig = { attributes: true, attributeFilter: [".nextupcard"], subtree: true, childList: true, attributeOldValue: false };
-  const AmazonSkipCreditsObserver = new MutationObserver(Amazon_Credits);
-  function Amazon_Credits(mutations, observer) {
-    let button = document.querySelector("[class*=nextupcard-button]");
+  async function Amazon_Credits() {
+    const button = document.querySelector("[class*=nextupcard-button]");
     if (button) {
       // only skipping to next episode not an entirely new series
-      let newEpNumber = document.querySelector("[class*=nextupcard-episode]");
+      const newEpNumber = document.querySelector("[class*=nextupcard-episode]");
       if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
         button.click();
         increaseBadge();
@@ -881,9 +775,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   }
-
-  const AmazonWatchCreditsObserver = new MutationObserver(Amazon_Watch_Credits);
-  function Amazon_Watch_Credits(mutations, observer) {
+  async function Amazon_Watch_Credits() {
     let button = document.querySelector("[class*=nextupcardhide-button]");
     if (button) {
       button.click();
@@ -891,8 +783,105 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       log("Watched Credits", button);
     }
   }
+  async function Amazon_SpeedSlider(video) {
+    let alreadySlider = document.querySelector("#videoSpeedSlider");
 
-  function skipAd(video) {
+    // remove bad background hue which is annoying
+    //document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
+    let b = document.querySelector(".fkpovp9.f8hspre");
+    if (b && b.style.background != "rgba(0, 0, 0, 0.25)") {
+      b.style.background = "rgba(0, 0, 0, 0.25)";
+    }
+
+    if (video) {
+      if (!alreadySlider) {
+        // infobar position for the slider to be added
+        let position = document.querySelector("[class*=infobar-container]")?.firstChild?.lastChild;
+        if (position) {
+          let slider = document.createElement("input");
+          slider.id = "videoSpeedSlider";
+          slider.type = "range";
+          slider.min = settings.General.sliderMin;
+          slider.max = settings.General.sliderMax;
+          slider.value = "10";
+          slider.step = settings.General.sliderSteps;
+          // slider.setAttribute("list", "markers");
+          slider.style = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;";
+          position.insertBefore(slider, position.firstChild);
+
+          let speed = document.createElement("p");
+          speed.id = "videoSpeed";
+          speed.textContent = "1x";
+          position.insertBefore(speed, position.firstChild);
+          speed.onclick = function () {
+            if (slider.style.display === "block") slider.style.display = "none";
+            else slider.style.display = "block";
+          };
+          slider.oninput = function () {
+            speed.textContent = this.value / 10 + "x";
+            video.playbackRate = this.value / 10;
+          };
+        }
+      } else {
+        // need to resync the slider with the video sometimes
+        speed = document.querySelector("#videoSpeed");
+        if (video.playbackRate != alreadySlider.value / 10) {
+          video.playbackRate = alreadySlider.value / 10;
+        }
+        alreadySlider.oninput = function () {
+          speed.textContent = this.value / 10 + "x";
+          video.playbackRate = this.value / 10;
+        };
+      }
+    }
+  }
+  async function Amazon_FilterPaid() {
+    // if not on the shop page or homepremiere
+    if (!window.location.href.includes("contentId=store") && !window.location.href.includes("contentId=homepremiere")) {
+      // yellow headline is not everywhere the same
+      document.querySelectorAll(".o86fri").forEach((a) => {
+        deletePaidCategory(a);
+      });
+      // Mehr > is .GnSDwP //if (getComputedStyle(a).color == "rgb(255, 204, 0)")
+      document.querySelectorAll(".c3svnh a.Xa7aAK, .c3svnh a.Xa7aAK:link, .c3svnh a.Xa7aAK:visited").forEach((a) => {
+        deletePaidCategory(a);
+      });
+    }
+  }
+  async function deletePaidCategory(a) {
+    // don't iterate too long too much performance impact
+    let maxSectionDepth = 10;
+    let SectionCount = 0;
+    while (a?.parentElement && SectionCount < 2 && maxSectionDepth > 0) {
+      a = a.parentElement;
+      maxSectionDepth--;
+      if (a.tagName == "SECTION") {
+        SectionCount++;
+      }
+    }
+    // fixes if no 2. section is found it will remove the hole page
+    if (a.tagName == "SECTION") {
+      log("Filtered paid Element", a.parentElement);
+      a.remove();
+      increaseBadge();
+    }
+  }
+  function Amazon_FreeveeTimeout() {
+    // set loop every 1 sec and check if ad is there
+    let AdInterval = setInterval(function () {
+      if (!settings.Amazon.blockFreevee) {
+        log("stopped observing| FreeVee Ad");
+        clearInterval(AdInterval);
+        return;
+      }
+      let video = document.querySelector(AmazonVideoClass);
+      if (video && !video.paused && video.currentTime > 0) {
+        // && !video.paused
+        skipAd(video);
+      }
+    }, 100);
+  }
+  async function skipAd(video) {
     // Series grimm
     let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
     if (adTimeText) {
@@ -915,30 +904,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   }
-
-  async function Amazon_FreeveeTimeout() {
-    // set loop every 1 sec and check if ad is there
-    let AdInterval = setInterval(function () {
-      if (!settings.Amazon.blockFreevee) {
-        log("stopped observing| FreeVee Ad");
-        clearInterval(AdInterval);
-        return;
-      }
-      let video = document.querySelector(AmazonVideoClass);
-      if (video && !video.paused && video.currentTime > 0) {
-        // && !video.paused
-        skipAd(video);
-      }
-    }, 100);
-  }
-
   async function resetLastATimeText(time = 1000) {
     // timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
     setTimeout(() => {
       lastAdTimeText = 0;
     }, time);
   }
-
   async function Amazon_AdTimeout() {
     // set loop every 1 sec and check if ad is there
     let AdInterval = setInterval(function () {
@@ -977,258 +948,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }, 100);
   }
-
-  // start/stop the observers depending on settings
-
-  // Common functions
-  async function startPlayOnFullScreen(isNetflix) {
-    if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
-      log("started observing| PlayOnFullScreen");
-      function OnFullScreenChange() {
-        let video;
-        if (isNetflix || isDisney || isHotstar) video = document.querySelector("video");
-        else video = document.querySelector(AmazonVideoClass);
-        if (window.fullScreen && video) {
-          video.play();
-          log("auto-played on fullscreen");
-          increaseBadge();
-        }
-      }
-      addEventListener("fullscreenchange", OnFullScreenChange);
-    } else {
-      log("stopped observing| PlayOnFullScreen");
-      removeEventListener("fullscreenchange", OnFullScreenChange);
-    }
-  }
-  // deprecated
-  async function addStreamLinks() {
-    log("adding stream links");
-    let title = document.querySelector("h1[data-automation-id='title']")?.textContent?.split(" [")[0];
-    if (title) {
-      // if not already free blue in prime icon
-      if (!document.querySelector(".fbl-icon._3UMk3x._1a_Ljt._3H1cN4")) {
-        let card = document.querySelector("div#dv-action-box");
-        if (!DBCache[title]) {
-          getMovieInfo(title, card, false);
-          log("no info in DBcache", title);
-        } else {
-          setAlternativesOnCard(card, DBCache[title], title);
-        }
-      }
-    }
-  }
-  async function startShowRatingInterval() {
-    if (settings.Netflix?.showRating) {
-      log("started observing| ShowRating");
-      addRating();
-      let RatingInterval = setInterval(function () {
-        if (!settings.Netflix?.showRating) {
-          clearInterval(RatingInterval);
-          log("stopped observing| ShowRating");
-        } else {
-          addRating();
-        }
-      }, 1000);
-      let DBCacheInterval = setInterval(function () {
-        if (!settings.Netflix?.showRating) clearInterval(DBCacheInterval);
-        else setDBCache();
-      }, 5000);
-    }
-  }
-  // Disney
-  async function startDisneySkipIntroObserver() {
-    if (settings.Disney?.skipIntro === undefined || settings.Disney.skipIntro) {
-      log("started observing| Intro");
-      Disney_Intro();
-      DisneySkipIntroObserver.observe(document, config);
-    } else {
-      log("stopped observing| Intro");
-      DisneySkipIntroObserver.disconnect();
-    }
-  }
-
-  async function startDisneySkipCreditsObserver() {
-    if (settings.Netflix?.skipCredits === undefined || settings.Netflix.skipCredits) {
-      log("started observing| Credits");
-      Disney_Credits();
-      DisneySkipCreditsObserver.observe(document, config);
-    } else {
-      log("stopped observing| Credits");
-      DisneySkipCreditsObserver.disconnect();
-    }
-  }
-  async function startDisneyWatchCreditsObserver() {
-    if (settings.Netflix?.watchCredits === undefined || settings.Netflix.watchCredits) {
-      log("started observing| Credits");
-      Disney_Watch_Credits();
-      DisneyWatchCreditsObserver.observe(document, config);
-    } else {
-      log("stopped observing| Credits");
-      DisneyWatchCreditsObserver.disconnect();
-    }
-  }
-
-  async function startDisneySpeedSliderObserver() {
-    if (settings.Disney?.speedSlider === undefined || settings.Disney.speedSlider) {
-      Disney_SpeedSlider();
-      log("started adding   | SpeedSlider");
-      DisneySpeedSliderObserver.observe(document, DisneySpeedSliderConfig);
-    } else {
-      log("stopped adding   | SpeedSlider");
-      DisneySpeedSliderObserver.disconnect();
-      document.querySelector("#videoSpeed")?.remove();
-      document.querySelector("#videoSpeedSlider")?.remove();
-    }
-  }
-
-  // Netflix
-  async function startNetflixProfileObserver() {
-    if (settings.Netflix?.profile === undefined || settings.Netflix.profile) {
-      AutoPickProfile();
-      log("started observing| Profile");
-      NetflixProfileObserver.observe(document, config);
-    } else {
-      log("stopped observing| Profile");
-      NetflixProfileObserver.disconnect();
-    }
-  }
-
-  async function startNetflixSkipIntroObserver() {
-    if (settings.Netflix?.skipIntro === undefined || settings.Netflix.skipIntro) {
-      Netflix_Intro();
-      log("started observing| Intro");
-      NetflixSkipIntroObserver.observe(document, NetflixConfig);
-    } else {
-      log("stopped observing| Intro");
-      NetflixSkipIntroObserver.disconnect();
-    }
-  }
-  async function startNetflixSkipRecapObserver() {
-    if (settings.Netflix?.skipRecap === undefined || settings.Netflix.skipRecap) {
-      Netflix_Recap();
-      log("started observing| Recap");
-      NetflixSkipRecapObserver.observe(document, NetflixConfig);
-    } else {
-      log("stopped observing| Recap");
-      NetflixSkipRecapObserver.disconnect();
-    }
-  }
-  async function startNetflixSkipCreditsObserver() {
-    if (settings.Netflix?.skipCredits === undefined || settings.Netflix.skipCredits) {
-      Netflix_Credits();
-      log("started observing| Credits");
-      NetflixSkipCreditsObserver.observe(document, NetflixConfig);
-    } else {
-      log("stopped observing| Credits");
-      NetflixSkipCreditsObserver.disconnect();
-    }
-  }
-  async function startNetflixWatchCreditsObserver() {
-    if (settings.Netflix?.watchCredits === undefined || settings.Netflix.watchCredits) {
-      Netflix_Watch_Credits();
-      log("started observing| Credits");
-      NetflixWatchCreditsObserver.observe(document, NetflixConfig);
-    } else {
-      log("stopped observing| Credits");
-      NetflixWatchCreditsObserver.disconnect();
-    }
-  }
-  async function startNetflixSkipBlockedObserver() {
-    if (settings.Netflix?.skipBlocked === undefined || settings.Netflix.skipBlocked) {
-      Netflix_Blocked();
-      log("started observing| Blocked");
-      NetflixSkipBlockedObserver.observe(document, NetflixConfig);
-    } else {
-      log("stopped observing| Blocked");
-      NetflixSkipBlockedObserver.disconnect();
-    }
-  }
-  async function startNetflixAdTimeout() {
-    if (settings.Netflix?.NetflixAds === undefined || settings.Netflix.NetflixAds) {
-      log("started observing| Ad");
-      Netflix_SkipAdInterval();
-    }
-  }
-  async function startNetflixSpeedSliderObserver() {
-    if (settings.Netflix?.speedSlider === undefined || settings.Netflix.speedSlider) {
-      Netflix_SpeedSlider();
-      log("started adding   | SpeedSlider");
-      NetflixSpeedSliderObserver.observe(document, NetflixSpeedSliderConfig);
-    } else {
-      log("stopped adding   | SpeedSlider");
-      NetflixSpeedSliderObserver.disconnect();
-      document.querySelector("#videoSpeed")?.remove();
-      document.querySelector("#videoSpeedSlider")?.remove();
-    }
-  }
-  // -------------  Amazon -------------
-  async function startAmazonSpeedSliderObserver() {
-    if (settings.Amazon?.speedSlider === undefined || settings.Amazon.speedSlider) {
-      log("started adding   | SpeedSlider");
-      Amazon_SpeedSlider();
-      AmazonSpeedSliderObserver.observe(document, AmazonSpeedSliderConfig);
-    } else {
-      log("stopped adding   | SpeedSlider");
-      AmazonSpeedSliderObserver.disconnect();
-      document.querySelector("#videoSpeed")?.remove();
-      document.querySelector("#videoSpeedSlider")?.remove();
-    }
-  }
-  async function startAmazonFilterPaidObserver() {
-    if (settings.Amazon?.filterPaid === undefined || settings.Amazon.filterPaid) {
-      log("started filtering| Paid films");
-      Amazon_FilterPaid();
-      AmazonFilterPaidObserver.observe(document, AmazonFilterPaidConfig);
-    } else {
-      log("stopped filtering| Paid films");
-      AmazonFilterPaidObserver.disconnect();
-    }
-  }
-
-  async function startAmazonSkipIntroObserver() {
-    if (settings.Amazon?.skipIntro === undefined || settings.Amazon.skipIntro) {
-      log("started observing| Intro");
-      Amazon_Intro();
-      AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
-    } else {
-      log("stopped observing| Intro");
-      AmazonSkipIntroObserver.disconnect();
-    }
-  }
-  async function startAmazonSkipCreditsObserver() {
-    if (settings.Amazon?.skipCredits === undefined || settings.Amazon.skipCredits) {
-      log("started observing| Credits");
-      Amazon_Credits();
-      AmazonSkipCreditsObserver.observe(document, AmazonSkipCreditsConfig);
-    } else {
-      log("stopped observing| Credits");
-      AmazonSkipCreditsObserver.disconnect();
-    }
-  }
-  async function startAmazonWatchCreditsObserver() {
-    if (settings.Amazon?.watchCredits === undefined || settings.Amazon.watchCredits) {
-      log("started observing| Credits");
-      Amazon_Watch_Credits();
-      AmazonWatchCreditsObserver.observe(document, AmazonSkipCreditsConfig);
-    } else {
-      log("stopped observing| Credits");
-      AmazonWatchCreditsObserver.disconnect();
-    }
-  }
-  async function startAmazonSkipAdObserver() {
-    if (settings.Amazon?.skipAd === undefined || settings.Amazon.skipAd) {
-      Amazon_AdTimeout();
-      log("started observing| Self Ad");
-    }
-  }
-  async function startAmazonBlockFreeveeObserver() {
-    if (settings.Amazon?.blockFreevee === undefined || settings.Amazon.blockFreevee) {
-      log("started observing| FreeVee Ad");
-      // AmazonFreeVeeObserver.observe(document, FreeVeeConfig);
-      Amazon_FreeveeTimeout();
-    }
-  }
-
   // Badge functions
   function setBadgeText(text) {
     browser.runtime.sendMessage({
