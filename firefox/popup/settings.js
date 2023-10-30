@@ -352,7 +352,6 @@ function listenForClicks() {
       if (VideoSkips) settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
       setSettings("All VideoSkips");
     } else if (e.target.id === "VideoIntro") {
-      const skipIntro = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro && settings?.Disney.skipIntro;
       settings.Amazon.skipIntro = settings.Netflix.skipIntro = settings.Disney.skipIntro = !getBooleanOfCategory("skipIntro");
       setSettings("VideoIntro");
     } else if (e.target.id === "VideoCredits") {
