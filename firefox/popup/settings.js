@@ -124,7 +124,10 @@ function setCheckboxesOfService(service) {
     const buttons = document.querySelectorAll("#" + service + capitalizeFirstLetter(key));
     // console.log(service + capitalizeFirstLetter(key), buttons);
     buttons.forEach((button) => {
-      button.checked = settings[service][key];
+      if (service === "Statistics") {
+        if (key != "SegmentsSkipped") button.textContent = getTimeFormatted(settings[service][key]);
+        else button.textContent = settings[service][key];
+      } else button.checked = settings[service][key];
     });
   });
 }
