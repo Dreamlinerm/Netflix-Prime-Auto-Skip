@@ -967,13 +967,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         });
       }
       filterQueued("none");
+      function filterDub(display) {
+        // itemprop="name"
+        let list = document.querySelectorAll("cite[itemprop='name']");
+        list.forEach((element) => {
+          if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
+        });
+      }
+      filterDub("none");
+      // Show playlist only
       const label = document.createElement("label");
-      // label.classList.add("filter-toggle");
       const span = document.createElement("span");
       span.style = "display: flex;align-items: center;";
       const input = document.createElement("input");
       input.type = "checkbox";
-
       input.checked = true;
       input.onclick = function () {
         filterQueued(this.checked ? "none" : "block");
@@ -984,9 +991,27 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       label.appendChild(span);
       span.appendChild(input);
       span.appendChild(p);
+      // Filter Dub
+      const label2 = document.createElement("label");
+      const span2 = document.createElement("span");
+      span2.style = "display: flex;align-items: center;";
+      const input2 = document.createElement("input");
+      input2.type = "checkbox";
+      input2.checked = true;
+      input2.onclick = function () {
+        filterDub(this.checked ? "none" : "block");
+      };
+      const p2 = document.createElement("p");
+      p2.style = "width: 100px;";
+      p2.textContent = "Filter Dub";
+      label2.appendChild(span2);
+      span2.appendChild(input2);
+      span2.appendChild(p2);
+
       const toggleForm = document.querySelector("#filter_toggle_form");
       toggleForm.style.display = "flex";
       toggleForm.firstElementChild.appendChild(label);
+      toggleForm.firstElementChild.appendChild(label2);
     }
   }
   Crunchyroll_ReleaseCalendar();
