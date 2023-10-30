@@ -26,21 +26,7 @@
  */
 function localizeHtmlPage() {
   // https://stackoverflow.com/questions/25467009/internationalization-of-html-pages-for-my-google-chrome-extension
-  // let objects = document.getElementsByTagName("html");
-  // for (obj of objects) {
-  //   let valStrH = obj.innerHTML.toString();
-  //   let valNewH = valStrH.replace(/__MSG_((?!\_).*)__/g, function (match, v1) {
-  //     let messages = v1.split(";");
-  //     return messages ? browser.i18n.getMessage.apply(null, messages) : "";
-  //   });
-
-  //   if (valNewH != valStrH) {
-  //     obj.innerHTML = valNewH;
-  //   }
-  // }
-
-  //innerHTML triggers warnings so changed functions
-
+  // innerHTML triggers warnings so changed functions
   // i18n tag
   let translations = document.getElementsByTagName("i18n");
   for (trans of translations) {
