@@ -170,11 +170,12 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile;
   button = document.querySelector("#DisneySkips");
   if (button) button.checked = settings?.Disney.skipIntro;
-  //  -------------      Amazon        ---------------------------------------
+  //  -------------      Individual Checkboxes        ---------------------------------------
   setCheckboxesOfService("Amazon");
-  //  -------------      Netflix        ---------------------------------------
   setCheckboxesOfService("Netflix");
-
+  setCheckboxesOfService("Disney");
+  setCheckboxesOfService("Statistics");
+  //  -------------      Netflix other        ---------------------------------------
   button = document.querySelector("#profileName");
   if (button) button.textContent = settings?.General.profileName;
   button = document.querySelector("#profilePicture");
@@ -182,10 +183,6 @@ function setCheckboxesToSettings() {
     button.setAttribute("src", settings?.General.profilePicture);
     button.style.display = "block";
   }
-  //  -------------      Disney        ---------------------------------------
-  setCheckboxesOfService("Disney");
-  button = document.querySelector("#DisneySkipIntro");
-  if (button) button.checked = settings?.Disney.skipIntro;
   //  -------------      Slider Options        ---------------------------------------
   button = document.querySelector("#SliderSteps");
   if (button) button.value = settings?.General.sliderSteps;
@@ -202,8 +199,6 @@ function setCheckboxesToSettings() {
   button = document.querySelector("#SliderValue");
   if (button) button.textContent = sliderValue / 10 + "x";
 
-  // Statistics
-  setCheckboxesOfService("Statistics");
   // import/export buttons
   button = document.querySelector("#save");
   if (button) {
@@ -364,7 +359,7 @@ function listenForClicks() {
         settings.Netflix.watchCredits = !settings.Netflix.watchCredits;
         if (settings.Netflix.watchCredits) settings.Netflix.skipCredits = false;
       } else if (e.target.id === "NetflixSkipBlocked") settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
-      else if (e.target.id === "NetflixAds") settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
+      else if (e.target.id === "NetflixNetflixAds") settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
       else if (e.target.id === "NetflixSpeedSlider") settings.Netflix.speedSlider = !settings.Netflix.speedSlider;
       else if (e.target.id === "NetflixProfile") settings.Netflix.profile = !settings.Netflix.profile;
       else if (e.target.id === "NetflixShowRating") settings.Netflix.showRating = !settings.Netflix.showRating;
