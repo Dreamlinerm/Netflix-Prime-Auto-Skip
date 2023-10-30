@@ -124,7 +124,10 @@ function setCheckboxesOfService(service) {
     const buttons = document.querySelectorAll("#" + service + capitalizeFirstLetter(key));
     // console.log(service + capitalizeFirstLetter(key), buttons);
     buttons.forEach((button) => {
-      button.checked = settings[service][key];
+      if (service === "Statistics") {
+        if (key != "SegmentsSkipped") button.textContent = getTimeFormatted(settings[service][key]);
+        else button.textContent = settings[service][key];
+      } else button.checked = settings[service][key];
     });
   });
 }
@@ -279,6 +282,7 @@ function listenForClicks() {
     // all buttons changing settings
     else {
       //  -------------      Video        ---------------------------------------
+      const currentSettings = { ...settings };
       if (e.target.id === "VideoSkips") {
         const VideoSkips = !(
           getBooleanOfCategory("skipIntro") &&
@@ -378,7 +382,10 @@ function listenForClicks() {
         if (settings.Disney.watchCredits) settings.Disney.skipCredits = false;
       } else if (e.target.id === "DisneySpeedSlider") settings.Disney.speedSlider = !settings.Disney.speedSlider;
       else if (e.target.id === "DisneyShowRating") settings.Disney.showRating = !settings.Disney.showRating;
-      setSettings(e.target.id);
+      // check if settings changed
+      if (JSON.stringify(settings) !== JSON.stringify(currentSettings)) {
+        setSettings(e.target.id);
+      }
     }
   });
 }
