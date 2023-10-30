@@ -143,7 +143,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   });
-  function addSkippedTime(startTime, endTime, key) {
+  async function addSkippedTime(startTime, endTime, key) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       log("Intro Time skipped", endTime - startTime);
       settings.Statistics[key] += endTime - startTime;
@@ -557,14 +557,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     const time = video?.currentTime;
     if (settings.Netflix?.profile === undefined || settings.Netflix?.profile) Netflix_profile();
     if (settings.Netflix?.skipIntro === undefined || settings.Netflix?.skipIntro) {
-      if (Netflix_General('[data-uia="player-skip-intro"]')) {
+      if (Netflix_General('[data-uia="player-skip-intro"]', false)) {
         setTimeout(function () {
           addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
         }, 600);
       }
     }
     if (settings.Netflix?.skipRecap === undefined || settings.Netflix?.skipRecap) {
-      if (Netflix_General('[data-uia="player-skip-recap"]') || Netflix_General('[data-uia="player-skip-preplay"]')) {
+      if (Netflix_General('[data-uia="player-skip-recap"]', false) || Netflix_General('[data-uia="player-skip-preplay"]', false)) {
         setTimeout(function () {
           addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
         }, 600);
@@ -607,11 +607,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       });
     }
   }
-  function Netflix_General(selector) {
+  function Netflix_General(selector, incBadge = true) {
     const button = document.querySelector(selector);
     if (button) {
       button.click();
-      increaseBadge();
+      if (incBadge) increaseBadge();
       return true;
     }
     return false;
