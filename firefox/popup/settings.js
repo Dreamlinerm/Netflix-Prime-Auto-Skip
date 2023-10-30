@@ -40,7 +40,6 @@ function localizeHtmlPage() {
     trans.textContent = Translated;
   }
 }
-
 localizeHtmlPage();
 
 // remove everything before # in window.location
@@ -97,7 +96,9 @@ browser.storage.sync.onChanged.addListener(function (changes, namespace) {
     }
   }
 });
+//global variables
 let sliderValue = settings.General.sliderMax;
+// ------------------- functions --------------------
 function getTimeFormatted(sec = 0) {
   if (typeof sec !== "number") return "0s";
   let days = Math.floor(sec / 86400);
@@ -111,29 +112,23 @@ function getTimeFormatted(sec = 0) {
   else text = `${seconds}s`;
   return text;
 }
+// for all services get the shared boolean of the category
+function getBooleanOfCategory(category) {
+  return settings?.Amazon[category] && settings?.Netflix[category] && settings?.Disney[category];
+}
+
 function setCheckboxesToSettings() {
   let button;
   button = document.querySelector("#VideoSkips");
   if (button)
     button.checked =
-      // intro
-      settings?.Amazon.skipIntro &&
-      settings?.Netflix.skipIntro &&
-      settings?.Disney.skipIntro &&
-      // Credits
-      settings?.Amazon.skipCredits &&
-      settings?.Netflix.skipCredits &&
-      settings?.Disney.skipCredits &&
+      getBooleanOfCategory("skipIntro") &&
+      getBooleanOfCategory("skipCredits") &&
       // Ads
       settings?.Amazon.blockFreevee &&
       settings?.Netflix.NetflixAds &&
-      // showRating
-      settings?.Netflix.showRating &&
-      settings?.Disney.showRating &&
-      // SpeedSlider
-      settings?.Amazon.speedSlider &&
-      settings?.Netflix.speedSlider &&
-      settings?.Disney.speedSlider &&
+      getBooleanOfCategory("showRating") &&
+      getBooleanOfCategory("speedSlider") &&
       // playOnFullScreen
       settings?.Video.playOnFullScreen;
   button = document.querySelector("#VideoIntro");
@@ -284,10 +279,6 @@ function setSettings(log) {
   console.log(log, settings);
   browser.storage.sync.set({ settings });
 }
-// for all services get the shared boolean of the category
-function getBooleanOfCategory(category) {
-  return settings?.Amazon[category] && settings?.Netflix[category] && settings?.Disney[category];
-}
 
 function listenForClicks() {
   let listener = document.addEventListener("click", (e) => {
@@ -426,7 +417,8 @@ function listenForClicks() {
         // settings.Disney.skipIntro = DisneySkips;
         //       } else if (e.target.id === "DisneyIntro") {
         // settings.Disney.skipIntro = !settings.Disney.skipIntro;
-      } else if (e.target.id === "DisneyCredits") {
+      } else if (e.target.id === "DisneyIntro") settings.Disney.skipIntro = !settings.Disney.skipIntro;
+      else if (e.target.id === "DisneyCredits") {
         settings.Disney.skipCredits = !settings.Disney.skipCredits;
         if (settings.Disney.skipCredits) settings.Disney.watchCredits = false;
       } else if (e.target.id === "DisneyWatchCredits") {
