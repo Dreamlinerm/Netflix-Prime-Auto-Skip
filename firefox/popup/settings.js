@@ -122,7 +122,7 @@ function capitalizeFirstLetter(str) {
 function setCheckboxesOfService(service) {
   Object.keys(settings[service]).forEach((key) => {
     const buttons = document.querySelectorAll("#" + service + capitalizeFirstLetter(key));
-    console.log(service + capitalizeFirstLetter(key), buttons);
+    // console.log(service + capitalizeFirstLetter(key), buttons);
     buttons.forEach((button) => {
       button.checked = settings[service][key];
     });
