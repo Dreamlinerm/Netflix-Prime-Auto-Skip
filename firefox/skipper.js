@@ -146,7 +146,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   });
   async function addSkippedTime(startTime, endTime, key) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
-      log("Intro Time skipped", endTime - startTime);
+      log(key, endTime - startTime);
       settings.Statistics[key] += endTime - startTime;
       increaseBadge();
     }
