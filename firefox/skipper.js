@@ -802,7 +802,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           slider.value = "10";
           slider.step = settings.General.sliderSteps;
           // slider.setAttribute("list", "markers");
-          slider.style = "height: 0.1875vw;background: rgb(221, 221, 221);display: none;width:200px;";
+          slider.style = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;";
           position.insertBefore(slider, position.firstChild);
 
           let speed = document.createElement("p");
