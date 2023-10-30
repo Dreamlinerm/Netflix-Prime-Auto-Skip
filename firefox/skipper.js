@@ -434,7 +434,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
 
   // Disney Observers
   const DisneyObserver = new MutationObserver(Disney);
-  function Disney(mutations, observer) {
+  function Disney() {
     if (settings.Disney?.skipIntro) Disney_Intro();
     if (settings.Disney?.skipCredits) Disney_Credits();
     if (settings.Disney?.watchCredits) Disney_Watch_Credits();
@@ -456,7 +456,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }, 600);
     }
   }
-  function Disney_Credits(mutations, observer) {
+  function Disney_Credits() {
     let button;
     if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
     else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
@@ -473,7 +473,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   }
-  function Disney_Watch_Credits(mutations, observer) {
+  function Disney_Watch_Credits() {
     let button;
     if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
     else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
@@ -493,7 +493,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   }
-  function Disney_SpeedSlider(mutations, observer) {
+  function Disney_SpeedSlider() {
     let video = document.querySelector("video");
     let alreadySlider = document.querySelector("#videoSpeedSlider");
     if (video) {
@@ -550,10 +550,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   }
-
   // Netflix Observer
   const NetflixObserver = new MutationObserver(Netflix);
-  function Netflix(mutations, observer) {
+  function Netflix() {
     const video = document.querySelector("video");
     const time = video?.currentTime;
     if (settings.Netflix?.profile === undefined || settings.Netflix?.profile) Netflix_profile();
@@ -935,53 +934,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         };
       }
     }, 100);
-  }
-
-  // start/stop the observers depending on settings
-  // Disney
-  async function startDisneySkipIntroObserver() {
-    if (settings.Disney?.skipIntro === undefined || settings.Disney.skipIntro) {
-      log("started observing| Intro");
-      Disney_Intro();
-      DisneySkipIntroObserver.observe(document, config);
-    } else {
-      log("stopped observing| Intro");
-      DisneySkipIntroObserver.disconnect();
-    }
-  }
-
-  async function startDisneySkipCreditsObserver() {
-    if (settings.Disney?.skipCredits === undefined || settings.Disney.skipCredits) {
-      log("started observing| Credits");
-      Disney_Credits();
-      DisneySkipCreditsObserver.observe(document, config);
-    } else {
-      log("stopped observing| Credits");
-      DisneySkipCreditsObserver.disconnect();
-    }
-  }
-  async function startDisneyWatchCreditsObserver() {
-    if (settings.Disney?.watchCredits === undefined || settings.Disney.watchCredits) {
-      log("started observing| Credits");
-      Disney_Watch_Credits();
-      DisneyWatchCreditsObserver.observe(document, config);
-    } else {
-      log("stopped observing| Credits");
-      DisneyWatchCreditsObserver.disconnect();
-    }
-  }
-
-  async function startDisneySpeedSliderObserver() {
-    if (settings.Disney?.speedSlider === undefined || settings.Disney.speedSlider) {
-      Disney_SpeedSlider();
-      log("started adding   | SpeedSlider");
-      DisneySpeedSliderObserver.observe(document, DisneySpeedSliderConfig);
-    } else {
-      log("stopped adding   | SpeedSlider");
-      DisneySpeedSliderObserver.disconnect();
-      document.querySelector("#videoSpeed")?.remove();
-      document.querySelector("#videoSpeedSlider")?.remove();
-    }
   }
   // Badge functions
   function setBadgeText(text) {
