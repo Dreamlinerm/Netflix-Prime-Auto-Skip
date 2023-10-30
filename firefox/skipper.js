@@ -35,7 +35,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       Crunchyroll: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, releaseCalendar: true },
       Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
-      General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
+      General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
     },
   };
   let settings = defaultSettings.settings;
@@ -74,6 +74,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           }, 1000);
         }
       } else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
+      else if (isCrunchyroll) {
+        CrunchyrollObserver.observe(document, config);
+        Crunchyroll_ReleaseCalendar();
+      }
       if (settings.Video.playOnFullScreen) startPlayOnFullScreen(isNetflix);
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
@@ -966,7 +970,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           element.parentElement.parentElement.parentElement.style.display = display;
         });
       }
-      filterQueued("none");
+      filterQueued(settings.General.filterQueued ? "none" : "block");
       function filterDub(display) {
         // itemprop="name"
         let list = document.querySelectorAll("cite[itemprop='name']");
@@ -981,9 +985,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       span.style = "display: flex;align-items: center;";
       const input = document.createElement("input");
       input.type = "checkbox";
-      input.checked = true;
+      input.checked = settings.General.filterQueued;
       input.onclick = function () {
         filterQueued(this.checked ? "none" : "block");
+        settings.General.filterQueued = this.checked;
+        browser.storage.sync.set({ settings });
       };
       const p = document.createElement("p");
       p.style = "width: 100px;";
@@ -997,9 +1003,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       span2.style = "display: flex;align-items: center;";
       const input2 = document.createElement("input");
       input2.type = "checkbox";
-      input2.checked = true;
+      input2.checked = settings.General.filterDub;
       input2.onclick = function () {
         filterDub(this.checked ? "none" : "block");
+        settings.General.filterDub = this.checked;
+        browser.storage.sync.set({ settings });
       };
       const p2 = document.createElement("p");
       p2.style = "width: 100px;";
@@ -1014,7 +1022,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       toggleForm.firstElementChild.appendChild(label2);
     }
   }
-  Crunchyroll_ReleaseCalendar();
   // Badge functions
   function setBadgeText(text) {
     browser.runtime.sendMessage({
