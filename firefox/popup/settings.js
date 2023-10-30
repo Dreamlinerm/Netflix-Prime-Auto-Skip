@@ -203,17 +203,7 @@ function setCheckboxesToSettings() {
   if (button) button.textContent = sliderValue / 10 + "x";
 
   // Statistics
-  button = document.querySelector("#AmazonAdTime");
-  if (button) button.textContent = getTimeFormatted(settings?.Statistics.AmazonAdTimeSkipped);
-  button = document.querySelector("#NetflixAdTime");
-  if (button) button.textContent = getTimeFormatted(settings?.Statistics.NetflixAdTimeSkipped);
-  button = document.querySelector("#IntroTimeSkipped");
-  if (button) button.textContent = getTimeFormatted(settings?.Statistics.IntroTimeSkipped);
-  button = document.querySelector("#RecapTimeSkipped");
-  if (button) button.textContent = getTimeFormatted(settings?.Statistics.RecapTimeSkipped);
-  button = document.querySelector("#SegmentsSkipped");
-  if (button) button.textContent = settings?.Statistics.SegmentsSkipped;
-
+  setCheckboxesOfService("Statistics");
   // import/export buttons
   button = document.querySelector("#save");
   if (button) {

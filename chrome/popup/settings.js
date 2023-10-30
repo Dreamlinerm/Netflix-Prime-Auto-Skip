@@ -174,8 +174,6 @@ function setCheckboxesToSettings() {
   setCheckboxesOfService("Amazon");
   //  -------------      Netflix        ---------------------------------------
   setCheckboxesOfService("Netflix");
-  button = document.querySelector("#NetflixAds");
-  if (button) button.checked = settings?.Netflix.NetflixAds;
 
   button = document.querySelector("#profileName");
   if (button) button.textContent = settings?.General.profileName;
@@ -185,17 +183,9 @@ function setCheckboxesToSettings() {
     button.style.display = "block";
   }
   //  -------------      Disney        ---------------------------------------
+  setCheckboxesOfService("Disney");
   button = document.querySelector("#DisneySkipIntro");
   if (button) button.checked = settings?.Disney.skipIntro;
-  button = document.querySelector("#DisneySkipCredits");
-  if (button) button.checked = settings?.Disney.skipCredits;
-  button = document.querySelector("#DisneyWatchCredits");
-  if (button) button.checked = settings?.Disney.watchCredits;
-  button = document.querySelector("#DisneySpeedSlider");
-  if (button) button.checked = settings?.Disney.speedSlider;
-  button = document.querySelector("#DisneyShowRating");
-  if (button) button.checked = settings?.Disney.showRating;
-
   //  -------------      Slider Options        ---------------------------------------
   button = document.querySelector("#SliderSteps");
   if (button) button.value = settings?.General.sliderSteps;
@@ -213,17 +203,7 @@ function setCheckboxesToSettings() {
   if (button) button.textContent = sliderValue / 10 + "x";
 
   // Statistics
-  button = document.querySelector("#AmazonAdTime");
-  if (button) button.textContent = getTimeFormatted(settings?.Statistics.AmazonAdTimeSkipped);
-  button = document.querySelector("#NetflixAdTime");
-  if (button) button.textContent = getTimeFormatted(settings?.Statistics.NetflixAdTimeSkipped);
-  button = document.querySelector("#IntroTimeSkipped");
-  if (button) button.textContent = getTimeFormatted(settings?.Statistics.IntroTimeSkipped);
-  button = document.querySelector("#RecapTimeSkipped");
-  if (button) button.textContent = getTimeFormatted(settings?.Statistics.RecapTimeSkipped);
-  button = document.querySelector("#SegmentsSkipped");
-  if (button) button.textContent = settings?.Statistics.SegmentsSkipped;
-
+  setCheckboxesOfService("Statistics");
   // import/export buttons
   button = document.querySelector("#save");
   if (button) {
