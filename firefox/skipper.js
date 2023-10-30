@@ -77,6 +77,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       else if (isCrunchyroll) {
         CrunchyrollObserver.observe(document, config);
         Crunchyroll_ReleaseCalendar();
+        if (settings.Crunchyroll?.skipIntro) Crunchyroll_IntroInterval();
       }
       if (settings.Video.playOnFullScreen) startPlayOnFullScreen(isNetflix);
       // if there is an undefined setting, set it to the default
@@ -962,7 +963,34 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     // if (settings.Crunchyroll?.watchCredits) Crunchyroll_Watch_Credits();
     // if (settings.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider();
   }
-  function Crunchyroll_ReleaseCalendar() {
+  async function Crunchyroll_IntroInterval() {
+    Crunchyroll_Intro();
+    let IntroInterval = setInterval(function () {
+      if (!settings.Crunchyroll?.skipIntro) {
+        log("stopped watching Intro");
+        clearInterval(IntroInterval);
+        return;
+      }
+      Crunchyroll_Intro();
+    }, 10000);
+  }
+  async function Crunchyroll_Intro() {
+    // the line below in xpath
+    // //div[contains(@class, 'SkipContainer')]//button[contains(@class, 'Button') and contains(@class, 'skip')]
+    // let button = document.evaluate('//div[@data-testid="skipIntroText"]', document, null, XPathResult.ANY_TYPE, null)?.iterateNext();
+    const button = document.querySelector('[data-testid="skipIntroText"]');
+    console.log(button, document.querySelector("iframe"));
+    if (button) {
+      let video = document.querySelector("video");
+      const time = video?.currentTime;
+      button?.click();
+      log("Intro skipped", button);
+      setTimeout(function () {
+        addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
+      }, 600);
+    }
+  }
+  async function Crunchyroll_ReleaseCalendar() {
     if (settings.Crunchyroll?.releaseCalendar && window.location.href.includes("simulcastcalendar")) {
       function filterQueued(display) {
         let list = document.querySelectorAll("div.queue-flag:not(.queued)");
