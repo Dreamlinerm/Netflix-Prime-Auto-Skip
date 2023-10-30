@@ -94,7 +94,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         browser.storage.sync.set({ settings });
       }
     }
-
+    async function startShowRatingInterval() {
+      addRating();
+      let RatingInterval = setInterval(function () {
+        if ((isNetflix && !settings.Netflix?.NetflixAds) || (isPrimeVideo && !settings.Amazon?.skipAd) || ((isDisney || isHotstar) && !settings.Disney?.skipCredits)) {
+          log("stopped adding Rating");
+          clearInterval(RatingInterval);
+          return;
+        }
+        addRating();
+      }, 1000);
+      let DBCacheInterval = setInterval(function () {
+        if ((isNetflix && !settings.Netflix?.NetflixAds) || (isPrimeVideo && !settings.Amazon?.skipAd) || ((isDisney || isHotstar) && !settings.Disney?.skipCredits)) {
+          log("stopped DBCacheInterval");
+          clearInterval(DBCacheInterval);
+          return;
+        }
+        setDBCache();
+      }, 5000);
+    }
     browser.storage.local.get("DBCache", function (result) {
       DBCache = result?.DBCache;
       if (typeof DBCache !== "object") {
@@ -103,7 +121,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         DBCache = {};
       }
       if (isNetflix) {
-        if (settings.Netflix?.showRating) startShowRatingInterval();
+        if (settings.Netflix?.showRating) {
+          startShowRatingInterval();
+        }
       }
       // else if (isPrimeVideo) {
       //   if (settings.Amazon?.streamLinks) addStreamLinks();
@@ -422,15 +442,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         }
       }
     }
-  }
-  async function startShowRatingInterval() {
-    addRating();
-    let RatingInterval = setInterval(function () {
-      addRating();
-    }, 1000);
-    let DBCacheInterval = setInterval(function () {
-      setDBCache();
-    }, 5000);
   }
 
   // Disney Observers
