@@ -960,10 +960,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   function Crunchyroll_ReleaseCalendar() {
     if (settings.Crunchyroll?.releaseCalendar && window.location.href.includes("simulcastcalendar")) {
-      let list = document.querySelectorAll("div.queue-flag:not(.queued)");
-      list.forEach((element) => {
-        element.parentElement.parentElement.parentElement.style.display = "none";
-      });
+      function filterQueued(display) {
+        let list = document.querySelectorAll("div.queue-flag:not(.queued)");
+        list.forEach((element) => {
+          element.parentElement.parentElement.parentElement.style.display = display;
+        });
+      }
+      filterQueued("none");
       const label = document.createElement("label");
       // label.classList.add("filter-toggle");
       const span = document.createElement("span");
@@ -973,11 +976,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
 
       input.checked = true;
       input.onclick = function () {
-        let list = document.querySelectorAll("div.queue-flag:not(.queued)");
-        const display = this.checked ? "none" : "block";
-        list.forEach((element) => {
-          element.parentElement.parentElement.parentElement.style.display = display;
-        });
+        filterQueued(this.checked ? "none" : "block");
       };
       const p = document.createElement("p");
       p.style = "width: 100px;";
