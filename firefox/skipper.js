@@ -70,12 +70,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
             Amazon_FreeveeTimeout();
           }, 1000);
         }
-      } else if (isDisney || isHotstar) {
-        if (settings.Disney?.skipIntro) startDisneySkipIntroObserver();
-        if (settings.Disney?.skipCredits) startDisneySkipCreditsObserver();
-        if (settings.Disney?.watchCredits) startDisneyWatchCreditsObserver();
-        if (settings.Disney?.speedSlider) startDisneySpeedSliderObserver();
-      }
+      } else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
       if (settings.Video.playOnFullScreen) startPlayOnFullScreen(isNetflix);
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
@@ -140,13 +135,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
           if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
           if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
-          // if (oldValue === undefined || newValue.Video.streamLinks !== oldValue.Amazon?.streamLinks) addStreamLinks();
-        } else if (isDisney || isHotstar) {
-          // if value is changed then check if it is enabled or disabled
-          if (oldValue === undefined || newValue.Disney.skipIntro !== oldValue.Disney?.skipIntro) startDisneySkipIntroObserver();
-          if (oldValue === undefined || newValue.Disney.skipCredits !== oldValue.Disney?.skipCredits) startDisneySkipCreditsObserver();
-          if (oldValue === undefined || newValue.Disney.watchCredits !== oldValue.Disney?.watchCredits) startDisneyWatchCreditsObserver();
-          if (oldValue === undefined || newValue.Disney.speedSlider !== oldValue.Disney?.speedSlider) startDisneySpeedSliderObserver();
         }
         if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
         if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
@@ -155,17 +143,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   });
-  function addIntroTimeSkipped(startTime, endTime) {
+  function addSkippedTime(startTime, endTime, key) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       log("Intro Time skipped", endTime - startTime);
-      settings.Statistics.IntroTimeSkipped += endTime - startTime;
-      increaseBadge();
-    }
-  }
-  function addRecapTimeSkipped(startTime, endTime) {
-    if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
-      log("Recap Time skipped", endTime - startTime);
-      settings.Statistics.RecapTimeSkipped += endTime - startTime;
+      settings.Statistics[key] += endTime - startTime;
       increaseBadge();
     }
   }
@@ -452,8 +433,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
 
   // Disney Observers
-  const DisneySkipIntroObserver = new MutationObserver(Disney_Intro);
-  function Disney_Intro(mutations, observer) {
+  const DisneyObserver = new MutationObserver(Disney);
+  function Disney(mutations, observer) {
+    if (settings.Disney?.skipIntro) Disney_Intro();
+    if (settings.Disney?.skipCredits) Disney_Credits();
+    if (settings.Disney?.watchCredits) Disney_Watch_Credits();
+    if (settings.Disney?.speedSlider) Disney_SpeedSlider();
+  }
+  function Disney_Intro() {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
     let button;
@@ -465,12 +452,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       button.click();
       log("Recap skipped", button);
       setTimeout(function () {
-        addRecapTimeSkipped(time, video.currentTime);
+        addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
       }, 600);
     }
   }
-
-  const DisneySkipCreditsObserver = new MutationObserver(Disney_Credits);
   function Disney_Credits(mutations, observer) {
     let button;
     if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
@@ -488,8 +473,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   }
-
-  const DisneyWatchCreditsObserver = new MutationObserver(Disney_Watch_Credits);
   function Disney_Watch_Credits(mutations, observer) {
     let button;
     if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
@@ -510,9 +493,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
   }
-
-  const DisneySpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
-  const DisneySpeedSliderObserver = new MutationObserver(Disney_SpeedSlider);
   function Disney_SpeedSlider(mutations, observer) {
     let video = document.querySelector("video");
     let alreadySlider = document.querySelector("#videoSpeedSlider");
@@ -580,14 +560,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     if (settings.Netflix?.skipIntro === undefined || settings.Netflix?.skipIntro) {
       Netflix_General('[data-uia="player-skip-intro"]');
       setTimeout(function () {
-        addIntroTimeSkipped(time, video?.currentTime);
+        addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
       }, 600);
     }
     if (settings.Netflix?.skipRecap === undefined || settings.Netflix?.skipRecap) {
       Netflix_General('[data-uia="player-skip-recap"]');
       Netflix_General('[data-uia="player-skip-preplay"]');
       setTimeout(function () {
-        addRecapTimeSkipped(time, video?.currentTime);
+        addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
       }, 600);
     }
     if (settings.Netflix?.skipCredits === undefined || settings.Netflix?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]');
@@ -735,7 +715,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         //delay where the video is loaded
         setTimeout(function () {
           AmazonGobackbutton(video, time, video.currentTime);
-          addIntroTimeSkipped(time, video.currentTime);
+          addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
         }, 50);
       }
     }
