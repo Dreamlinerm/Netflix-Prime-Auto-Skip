@@ -128,20 +128,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         log(key, "Old value:", oldValue, ", new value:", newValue);
         if (isNetflix) {
           // if value is changed then check if it is enabled or disabled
-          if (oldValue === undefined || (newValue.Netflix.NetflixAds !== oldValue.Netflix?.NetflixAds && newValue.Netflix.NetflixAds)) Netflix_SkipAdInterval();
+          if (oldValue === undefined || (newValue.Netflix.NetflixAds !== oldValue?.Netflix?.NetflixAds && newValue.Netflix.NetflixAds)) Netflix_SkipAdInterval();
         } else if (isPrimeVideo) {
-          if (oldValue === undefined || (newValue.Amazon.skipAd !== oldValue.Amazon?.skipAd && newValue.Amazon.skipAd)) Amazon_AdTimeout();
-          if (oldValue === undefined || (newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee && newValue.Amazon.blockFreevee)) {
-            // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
-            setTimeout(function () {
-              Amazon_FreeveeTimeout();
-            }, 1000);
-          }
+          if (oldValue === undefined || (newValue.Amazon.skipAd !== oldValue?.Amazon?.skipAd && newValue.Amazon.skipAd)) Amazon_AdTimeout();
+          if (oldValue === undefined || (newValue.Amazon.blockFreevee !== oldValue?.Amazon?.blockFreevee && newValue.Amazon.blockFreevee)) Amazon_FreeveeTimeout();
         }
-        if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
-        if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
-          resetBadge();
-        }
+        if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
+        if (oldValue === undefined || (newValue.Netflix.showRating !== oldValue?.Netflix?.showRating && newValue.Netflix.showRating)) startShowRatingInterval();
       }
     }
   });
