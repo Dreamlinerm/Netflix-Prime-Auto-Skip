@@ -965,30 +965,26 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         element.parentElement.parentElement.parentElement.style.display = "none";
       });
       const label = document.createElement("label");
-      label.classList.add("filter-toggle");
+      // label.classList.add("filter-toggle");
       const span = document.createElement("span");
-      span.classList.add("content");
+      span.style = "display: flex;align-items: center;";
       const input = document.createElement("input");
       input.type = "checkbox";
+
       input.checked = true;
       input.onclick = function () {
         let list = document.querySelectorAll("div.queue-flag:not(.queued)");
-        if (this.checked) {
-          list.forEach((element) => {
-            element.parentElement.parentElement.parentElement.style.display = "none";
-          });
-        } else {
-          list.forEach((element) => {
-            element.parentElement.parentElement.parentElement.style.display = "block";
-          });
-        }
+        const display = this.checked ? "none" : "block";
+        list.forEach((element) => {
+          element.parentElement.parentElement.parentElement.style.display = display;
+        });
       };
-      const spanText = document.createElement("span");
-      spanText.classList.add("label-text");
-      spanText.textContent = "Hide queued";
+      const p = document.createElement("p");
+      p.style = "width: 100px;";
+      p.textContent = "Show Playlist only";
       label.appendChild(span);
       span.appendChild(input);
-      span.appendChild(spanText);
+      span.appendChild(p);
       const toggleForm = document.querySelector("#filter_toggle_form");
       toggleForm.style.display = "flex";
       toggleForm.firstElementChild.appendChild(label);
