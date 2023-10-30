@@ -307,33 +307,19 @@ function listenForClicks() {
       }
     }
     //  -------------      Menu        ---------------------------------------
-    else if (e.target.id === "MenuVideo") {
-      Menu("Video");
-    } else if (e.target.id === "MenuAmazon") {
-      Menu("Amazon");
-    } else if (e.target.id === "MenuNetflix") {
-      Menu("Netflix");
-    } else if (e.target.id === "MenuDisney") {
-      Menu("Disney");
-    } else if (e.target.id === "MenuStatistics") {
-      Menu("Statistics");
-    } else if (e.target.id === "MenuOther") {
-      Menu("Other");
-    } else if (e.target.id === "MenuChangelog") {
-      Menu("Changelog");
-    }
+    else if (e.target.id === "MenuVideo") Menu("Video");
+    else if (e.target.id === "MenuAmazon") Menu("Amazon");
+    else if (e.target.id === "MenuNetflix") Menu("Netflix");
+    else if (e.target.id === "MenuDisney") Menu("Disney");
+    else if (e.target.id === "MenuStatistics") Menu("Statistics");
+    else if (e.target.id === "MenuOther") Menu("Other");
+    else if (e.target.id === "MenuChangelog") Menu("Changelog");
     //  -------------      openSettings        ---------------------------------------
-    else if (e.target.id === "openVideoSettings") {
-      openIndividualSettings("Video");
-    } else if (e.target.id === "openAmazonSettings") {
-      openIndividualSettings("Amazon");
-    } else if (e.target.id === "openNetflixSettings") {
-      openIndividualSettings("Netflix");
-    } else if (e.target.id === "openDisneySettings") {
-      openIndividualSettings("Disney");
-    } else if (e.target.id === "openStatistics") {
-      openIndividualSettings("Statistics");
-    }
+    else if (e.target.id === "openVideoSettings") openIndividualSettings("Video");
+    else if (e.target.id === "openAmazonSettings") openIndividualSettings("Amazon");
+    else if (e.target.id === "openNetflixSettings") openIndividualSettings("Netflix");
+    else if (e.target.id === "openDisneySettings") openIndividualSettings("Disney");
+    else if (e.target.id === "openStatistics") openIndividualSettings("Statistics");
     //  -------------      Video        ---------------------------------------
     else if (e.target.id === "VideoSkips") {
       const VideoSkips = !(
