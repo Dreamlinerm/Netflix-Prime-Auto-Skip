@@ -58,14 +58,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     } else {
       if (isNetflix) {
         // start Observers depending on the settings
-        if (settings.Netflix?.profile) startNetflixProfileObserver();
-        if (settings.Netflix?.skipIntro) startNetflixSkipIntroObserver();
-        if (settings.Netflix?.skipRecap) startNetflixSkipRecapObserver();
-        if (settings.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
-        if (settings.Netflix?.watchCredits) startNetflixWatchCreditsObserver();
-        if (settings.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
+        if (settings.Netflix?.profile === undefined || settings.Netflix?.profile) AutoPickProfile();
         if (settings.Netflix?.NetflixAds) startNetflixAdTimeout();
-        if (settings.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
+        NetflixObserver.observe(document, config);
       } else if (isPrimeVideo) {
         if (settings.Amazon?.skipIntro) startAmazonSkipIntroObserver();
         if (settings.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -140,16 +135,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         log(key, "Old value:", oldValue, ", new value:", newValue);
         if (isNetflix) {
           // if value is changed then check if it is enabled or disabled
-          if (oldValue === undefined || newValue.Netflix.profile !== oldValue.Netflix?.profile) startNetflixProfileObserver();
-          if (oldValue === undefined || newValue.Netflix.skipIntro !== oldValue.Netflix?.skipIntro) startNetflixSkipIntroObserver();
-          if (oldValue === undefined || newValue.Netflix.skipRecap !== oldValue.Netflix?.skipRecap) startNetflixSkipRecapObserver();
-          if (oldValue === undefined || newValue.Netflix.skipCredits !== oldValue.Netflix?.skipCredits) startNetflixSkipCreditsObserver();
-          if (oldValue === undefined || newValue.Netflix.watchCredits !== oldValue.Netflix?.watchCredits) startNetflixWatchCreditsObserver();
-          if (oldValue === undefined || newValue.Netflix.skipBlocked !== oldValue.Netflix?.skipBlocked) startNetflixSkipBlockedObserver();
-          if (oldValue === undefined || newValue.Netflix.NetflixAds !== oldValue.Netflix?.NetflixAds) startNetflixAdTimeout();
-          if (oldValue === undefined || newValue.Netflix.speedSlider !== oldValue.Netflix?.speedSlider) startNetflixSpeedSliderObserver();
-
-          if (oldValue === undefined || newValue.Video.showRating !== oldValue.Netflix?.showRating) startShowRatingInterval();
+          if (oldValue === undefined || (newValue.Netflix.NetflixAds !== oldValue.Netflix?.NetflixAds && newValue.Netflix.NetflixAds)) Netflix_SkipAdInterval();
         } else if (isPrimeVideo) {
           if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon?.skipIntro) startAmazonSkipIntroObserver();
           if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
@@ -168,6 +154,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           if (oldValue === undefined || newValue.Disney.watchCredits !== oldValue.Disney?.watchCredits) startDisneyWatchCreditsObserver();
           if (oldValue === undefined || newValue.Disney.speedSlider !== oldValue.Disney?.speedSlider) startDisneySpeedSliderObserver();
         }
+        if (oldValue === undefined || newValue.Video.showRating !== oldValue.Netflix?.showRating) startShowRatingInterval();
         if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
         if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
           resetBadge();
@@ -547,10 +534,33 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
 
   // Netflix Observers
-  const NetflixConfig = { attributes: true, attributeFilter: ["data-uia"], subtree: true, childList: true, attributeOldValue: false };
+  const NetflixObserver = new MutationObserver(Netflix);
+  function Netflix(mutations, observer) {
+    const video = document.querySelector("video");
+    const time = video?.currentTime;
+    if (settings.Netflix?.profile === undefined || settings.Netflix?.profile) Netflix_profile();
+    if (settings.Netflix?.skipIntro === undefined || settings.Netflix?.skipIntro) {
+      Netflix_General('[data-uia="player-skip-intro"]');
+      setTimeout(function () {
+        addIntroTimeSkipped(time, video?.currentTime);
+      }, 600);
+    }
+    if (settings.Netflix?.skipRecap === undefined || settings.Netflix?.skipRecap) {
+      Netflix_General('[data-uia="player-skip-recap"]');
+      Netflix_General('[data-uia="player-skip-preplay"]');
+      setTimeout(function () {
+        addRecapTimeSkipped(time, video?.currentTime);
+      }, 600);
+    }
+    if (settings.Netflix?.skipCredits === undefined || settings.Netflix?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]');
+    if (settings.Netflix?.watchCredits === undefined || settings.Netflix?.watchCredits) Netflix_Watch_Credits('[data-uia="watch-credits-seamless-button"]');
+    if (settings.Netflix?.skipBlocked === undefined || settings.Netflix?.skipBlocked) Netflix_Blocked('[data-uia="interrupt-autoplay-continue"]');
+    // it's a interval
+    // if (settings.Netflix?.NetflixAds === undefined || settings.Netflix?.NetflixAds)
+    if (settings.Netflix?.speedSlider === undefined || settings.Netflix?.speedSlider) Netflix_SpeedSlider();
+  }
 
-  const NetflixProfileObserver = new MutationObserver(Netflix_profile);
-  function Netflix_profile(mutations, observer) {
+  function Netflix_profile() {
     // AutoPickProfile();
     let currentProfile = document.querySelector("[href*='/YourAccount']");
     if (currentProfile) {
@@ -581,63 +591,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       });
     }
   }
-
-  const NetflixSkipIntroObserver = new MutationObserver(Netflix_Intro);
-  function Netflix_Intro(mutations, observer) {
-    // brooklyn nine nine season 1 episode 4
-    let button = document.querySelector('[data-uia="player-skip-intro"]');
-    if (button) {
-      let video = document.querySelector("video");
-      const time = video.currentTime;
-      button.click();
-      log("intro skipped", button);
-      setTimeout(function () {
-        addIntroTimeSkipped(time, video.currentTime);
-      }, 600);
-    }
-  }
-
-  const NetflixSkipRecapObserver = new MutationObserver(Netflix_Recap);
-  function Netflix_Recap(mutations, observer) {
-    // Outer Banks season 2 episode 1
-    let button = document.querySelector('[data-uia="player-skip-recap"]') || document.querySelector('[data-uia="player-skip-preplay"]');
-    if (button) {
-      let video = document.querySelector("video");
-      const time = video.currentTime;
-      button.click();
-      log("Recap skipped", button);
-      setTimeout(function () {
-        addRecapTimeSkipped(time, video.currentTime);
-      }, 600);
-    }
-  }
-
-  const NetflixSkipCreditsObserver = new MutationObserver(Netflix_Credits);
-  function Netflix_Credits(mutations, observer) {
-    let button = document.querySelector('[data-uia="next-episode-seamless-button"]');
+  function Netflix_General(selector) {
+    const button = document.querySelector(selector);
     if (button) {
       button.click();
-      log("Credits skipped", button);
-      increaseBadge();
-    }
-  }
-
-  const NetflixWatchCreditsObserver = new MutationObserver(Netflix_Watch_Credits);
-  function Netflix_Watch_Credits(mutations, observer) {
-    let button = document.querySelector('[data-uia="watch-credits-seamless-button"]');
-    if (button) {
-      button.click();
-      log("Credits watched", button);
-      increaseBadge();
-    }
-  }
-
-  const NetflixSkipBlockedObserver = new MutationObserver(Netflix_Blocked);
-  function Netflix_Blocked(mutations, observer) {
-    let button = document.querySelector('[data-uia="interrupt-autoplay-continue"]');
-    if (button) {
-      button.click();
-      log("Blocked skipped", button);
       increaseBadge();
     }
   }
@@ -670,10 +627,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }, 100);
   }
-
-  const NetflixSpeedSliderConfig = { attributes: true, attributeFilter: ["video"], subtree: true, childList: true, attributeOldValue: false };
-  const NetflixSpeedSliderObserver = new MutationObserver(Netflix_SpeedSlider);
-  function Netflix_SpeedSlider(mutations, observer) {
+  function Netflix_SpeedSlider() {
     let video = document.querySelector("video");
     let alreadySlider = document.querySelector("#videoSpeedSlider");
     // only add speed slider on lowest subscription tier
@@ -1048,7 +1002,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   }
 
   async function startDisneySkipCreditsObserver() {
-    if (settings.Netflix?.skipCredits === undefined || settings.Netflix.skipCredits) {
+    if (settings.Disney?.skipCredits === undefined || settings.Disney.skipCredits) {
       log("started observing| Credits");
       Disney_Credits();
       DisneySkipCreditsObserver.observe(document, config);
@@ -1058,7 +1012,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     }
   }
   async function startDisneyWatchCreditsObserver() {
-    if (settings.Netflix?.watchCredits === undefined || settings.Netflix.watchCredits) {
+    if (settings.Disney?.watchCredits === undefined || settings.Disney.watchCredits) {
       log("started observing| Credits");
       Disney_Watch_Credits();
       DisneyWatchCreditsObserver.observe(document, config);
@@ -1076,87 +1030,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     } else {
       log("stopped adding   | SpeedSlider");
       DisneySpeedSliderObserver.disconnect();
-      document.querySelector("#videoSpeed")?.remove();
-      document.querySelector("#videoSpeedSlider")?.remove();
-    }
-  }
-
-  // Netflix
-  async function startNetflixProfileObserver() {
-    if (settings.Netflix?.profile === undefined || settings.Netflix.profile) {
-      AutoPickProfile();
-      log("started observing| Profile");
-      NetflixProfileObserver.observe(document, config);
-    } else {
-      log("stopped observing| Profile");
-      NetflixProfileObserver.disconnect();
-    }
-  }
-
-  async function startNetflixSkipIntroObserver() {
-    if (settings.Netflix?.skipIntro === undefined || settings.Netflix.skipIntro) {
-      Netflix_Intro();
-      log("started observing| Intro");
-      NetflixSkipIntroObserver.observe(document, NetflixConfig);
-    } else {
-      log("stopped observing| Intro");
-      NetflixSkipIntroObserver.disconnect();
-    }
-  }
-  async function startNetflixSkipRecapObserver() {
-    if (settings.Netflix?.skipRecap === undefined || settings.Netflix.skipRecap) {
-      Netflix_Recap();
-      log("started observing| Recap");
-      NetflixSkipRecapObserver.observe(document, NetflixConfig);
-    } else {
-      log("stopped observing| Recap");
-      NetflixSkipRecapObserver.disconnect();
-    }
-  }
-  async function startNetflixSkipCreditsObserver() {
-    if (settings.Netflix?.skipCredits === undefined || settings.Netflix.skipCredits) {
-      Netflix_Credits();
-      log("started observing| Credits");
-      NetflixSkipCreditsObserver.observe(document, NetflixConfig);
-    } else {
-      log("stopped observing| Credits");
-      NetflixSkipCreditsObserver.disconnect();
-    }
-  }
-  async function startNetflixWatchCreditsObserver() {
-    if (settings.Netflix?.watchCredits === undefined || settings.Netflix.watchCredits) {
-      Netflix_Watch_Credits();
-      log("started observing| Credits");
-      NetflixWatchCreditsObserver.observe(document, NetflixConfig);
-    } else {
-      log("stopped observing| Credits");
-      NetflixWatchCreditsObserver.disconnect();
-    }
-  }
-  async function startNetflixSkipBlockedObserver() {
-    if (settings.Netflix?.skipBlocked === undefined || settings.Netflix.skipBlocked) {
-      Netflix_Blocked();
-      log("started observing| Blocked");
-      NetflixSkipBlockedObserver.observe(document, NetflixConfig);
-    } else {
-      log("stopped observing| Blocked");
-      NetflixSkipBlockedObserver.disconnect();
-    }
-  }
-  async function startNetflixAdTimeout() {
-    if (settings.Netflix?.NetflixAds === undefined || settings.Netflix.NetflixAds) {
-      log("started observing| Ad");
-      Netflix_SkipAdInterval();
-    }
-  }
-  async function startNetflixSpeedSliderObserver() {
-    if (settings.Netflix?.speedSlider === undefined || settings.Netflix.speedSlider) {
-      Netflix_SpeedSlider();
-      log("started adding   | SpeedSlider");
-      NetflixSpeedSliderObserver.observe(document, NetflixSpeedSliderConfig);
-    } else {
-      log("stopped adding   | SpeedSlider");
-      NetflixSpeedSliderObserver.disconnect();
       document.querySelector("#videoSpeed")?.remove();
       document.querySelector("#videoSpeedSlider")?.remove();
     }
