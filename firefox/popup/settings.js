@@ -481,30 +481,27 @@ function listenForClicks() {
       } else if (e.target.id === "DisneyShowRating") {
         settings.Disney.showRating = !settings.Disney.showRating;
       }
-      setSettings("Changed setting");
+      setSettings(e.target.id);
     }
   });
 }
 
 function listenForInput() {
   document.addEventListener("input", (e) => {
-    if (e.target.id === "SliderSteps") {
-      settings.General.sliderSteps = Number(e.target.value);
-      setCheckboxesToSettings();
-      setSettings("SliderSteps");
-    } else if (e.target.id === "SliderMin") {
-      settings.General.sliderMin = Number(e.target.value);
-      sliderValue = settings.General.sliderMin;
-      setCheckboxesToSettings();
-      setSettings("SliderMin");
-    } else if (e.target.id === "SliderMax") {
-      settings.General.sliderMax = Number(e.target.value);
-      sliderValue = settings.General.sliderMax;
-      setCheckboxesToSettings();
-      setSettings("SliderMax");
-    } else if (e.target.id === "SliderPreview") {
+    if (e.target.id === "SliderPreview") {
       sliderValue = Number(e.target.value);
       setCheckboxesToSettings();
+    } else {
+      if (e.target.id === "SliderSteps") settings.General.sliderSteps = Number(e.target.value);
+      else if (e.target.id === "SliderMin") {
+        settings.General.sliderMin = Number(e.target.value);
+        sliderValue = settings.General.sliderMin;
+      } else if (e.target.id === "SliderMax") {
+        settings.General.sliderMax = Number(e.target.value);
+        sliderValue = settings.General.sliderMax;
+      }
+      setCheckboxesToSettings();
+      setSettings(e.target.id);
     }
   });
 }
