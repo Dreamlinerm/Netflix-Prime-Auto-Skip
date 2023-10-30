@@ -11,26 +11,28 @@
  * GNU General Public License v3.0 for more details.
  */
 // matches all amazon urls under https://en.wikipedia.org/wiki/Amazon_(company)#Website
-let hostname = window.location.hostname;
-let title = document.title;
-let url = window.location.href;
-let ua = window.navigator.userAgent;
+const hostname = window.location.hostname;
+const title = document.title;
+const url = window.location.href;
+const ua = window.navigator.userAgent;
 // only on prime video pages
-let isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
-let isNetflix = /netflix/i.test(hostname);
-let isDisney = /disneyplus/i.test(hostname);
-let isHotstar = /hotstar/i.test(hostname);
+const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
+const isNetflix = /netflix/i.test(hostname);
+const isDisney = /disneyplus/i.test(hostname);
+const isHotstar = /hotstar/i.test(hostname);
+const isCrunchyroll = /crunchyroll/i.test(hostname);
 
-let isEdge = /edg/i.test(ua);
-let isFirefox = /firefox/i.test(ua);
+const isEdge = /edg/i.test(ua);
+const isFirefox = /firefox/i.test(ua);
 const version = "1.0.64";
-if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
+if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   // global variables in localStorage
   const defaultSettings = {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false, showRating: true, streamLinks: true },
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true, showRating: true },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
+      Crunchyroll: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, releaseCalendar: true },
       Video: { playOnFullScreen: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
@@ -948,6 +950,24 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }, 100);
   }
+  // Crunchyroll Observers
+  const CrunchyrollObserver = new MutationObserver(Crunchyroll);
+  function Crunchyroll() {
+    // if (settings.Crunchyroll?.skipIntro) Crunchyroll_Intro();
+    // if (settings.Crunchyroll?.skipCredits) Crunchyroll_Credits();
+    // if (settings.Crunchyroll?.watchCredits) Crunchyroll_Watch_Credits();
+    // if (settings.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider();
+  }
+  function Crunchyroll_ReleaseCalendar() {
+    if (settings.Crunchyroll?.releaseCalendar && window.location.href.includes("simulcastcalendar")) {
+      log("test2");
+      let list = document.querySelectorAll("div.queue-flag:not(.queued)");
+      list.forEach((element) => {
+        element.parentElement.parentElement.parentElement.style.display = "none";
+      });
+    }
+  }
+  Crunchyroll_ReleaseCalendar();
   // Badge functions
   function setBadgeText(text) {
     browser.runtime.sendMessage({
