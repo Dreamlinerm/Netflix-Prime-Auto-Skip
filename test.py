@@ -123,12 +123,11 @@ AmazonVideoClass = "#dv-web-player > div > div:nth-child(1) > div > div > div.sc
 def Amazon_Prime():
     # Intro test
     driver.get(
-        "https://www.amazon.de/gp/video/detail/B07FMF18GN/ref=atv_dp_btf_el_prime_sd_tv_resume_t1ALAAAAAA0wr0?autoplay=1&t=0"
+        "https://www.amazon.de/gp/video/detail/B07FMF18GN/ref=atv_dp_btf_el_prime_sd_tv_resume_t1ALAAAAAA0wr0?autoplay=1&t=1"
     )
     video = driver.find_element(by=By.XPATH, value=v)
-
-    playButton = driver.find_element(by=By.XPATH, value="//button[@aria-label='Play']")
-    playButton.click()
+    # sleep for 3 seconds
+    time.sleep(3)
     skipButton = driver.find_element(
         by=By.CSS_SELECTOR, value=".atvwebplayersdk-skipelement-button"
     )
@@ -150,7 +149,7 @@ def Amazon_Prime():
         print(e)
 
     # delay
-    wait = WebDriverWait(driver, timeout=2)
+    wait = WebDriverWait(driver, timeout=5)
     wait.until(lambda driver: video.get_property("currentTime") > t)
     # Skip Credits test
 
@@ -185,16 +184,9 @@ def Amazon_Ad():
         "https://www.amazon.de/gp/video/detail/B00IAJMINK/ref=atv_dp_btf_el_3p_sd_tv_resume_t1AKAAAAAA0wr0?autoplay=1&t=43"
     )
     video = driver.find_element(by=By.XPATH, value=v)
-
-    playButton = driver.find_element(by=By.XPATH, value="//button[@aria-label='Play']")
-    playButton.click()
-
-    script = "document.querySelector('" + AmazonVideoClass + "').currentTime = 719"
-    driver.execute_script(script)
-
-    wait = WebDriverWait(driver, timeout=10)
+    wait = WebDriverWait(driver, timeout=20)
     try:
-        wait.until(lambda driver: video.get_property("currentTime") > 719)
+        wait.until(lambda driver: video.get_property("currentTime") > 10)
         print("✅: Skip Ad")
         output[4][2] = "✅"
     except Exception as e:
