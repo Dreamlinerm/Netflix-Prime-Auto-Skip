@@ -311,188 +311,8 @@ function listenForClicks() {
         browser.storage.sync.set(defaultSettings);
       }
     }
-    //  -------------      Menu        ---------------------------------------
-    else if (e.target.id.startsWith("Menu")) Menu(e.target.id.replace("Menu", ""));
-    //  -------------      openSettings        ---------------------------------------
-    else if (e.target.id.startsWith("open")) openIndividualSettings(e.target.id.replace("open", "").replace("Settings", ""));
-    //  -------------      Video        ---------------------------------------
-    else if (e.target.id === "VideoSkips") {
-      const VideoSkips = !(
-        getBooleanOfCategory("skipIntro") &&
-        getBooleanOfCategory("skipCredits") &&
-        // Ads
-        settings?.Amazon.blockFreevee &&
-        settings?.Netflix.NetflixAds &&
-        getBooleanOfCategory("showRating") &&
-        getBooleanOfCategory("speedSlider") &&
-        // playOnFullScreen
-        settings?.Video.playOnFullScreen
-      );
-      settings.Amazon.skipIntro =
-        settings.Netflix.skipIntro =
-        settings.Disney.skipIntro =
-        // Credits
-        settings.Amazon.skipCredits =
-        settings.Netflix.skipCredits =
-        settings.Disney.skipCredits =
-        // Ads
-        settings.Amazon.blockFreevee =
-        settings.Netflix.NetflixAds =
-        // showRating
-        settings.Amazon.showRating =
-        settings.Netflix.showRating =
-        settings.Disney.showRating =
-        // SpeedSlider
-        settings.Amazon.speedSlider =
-        settings.Netflix.speedSlider =
-        settings.Disney.speedSlider =
-        // playOnFullScreen
-        settings.Video.playOnFullScreen =
-          VideoSkips;
-      if (VideoSkips) settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
-      setSettings("All VideoSkips");
-    } else if (e.target.id === "VideoIntro") {
-      settings.Amazon.skipIntro = settings.Netflix.skipIntro = settings.Disney.skipIntro = !getBooleanOfCategory("skipIntro");
-      setSettings("VideoIntro");
-    } else if (e.target.id === "VideoCredits") {
-      const skipCredits = getBooleanOfCategory("skipCredits");
-      settings.Amazon.skipCredits = settings.Netflix.skipCredits = settings.Disney.skipCredits = !skipCredits;
-      if (!skipCredits) {
-        settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
-      }
-      setSettings("VideoCredits");
-    } else if (e.target.id === "VideoWatchCredits") {
-      const watchCredits = getBooleanOfCategory("watchCredits");
-      settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = !watchCredits;
-      if (!watchCredits) {
-        settings.Amazon.skipCredits = settings.Netflix.skipCredits = settings.Disney.skipCredits = false;
-      }
-      setSettings("VideoWatchCredits");
-    } else if (e.target.id === "VideoAds") {
-      const skipAd = settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds;
-      settings.Amazon.blockFreevee = settings.Netflix.NetflixAds = !skipAd;
-      setSettings("VideoAd");
-    } else if (e.target.id === "VideoShowRating") {
-      settings.Amazon.showRating = settings.Netflix.showRating = settings.Disney.showRating = !getBooleanOfCategory("showRating");
-      setSettings("VideoSpeedSlider");
-    } else if (e.target.id === "VideoSpeedSlider") {
-      settings.Amazon.speedSlider = settings.Netflix.speedSlider = settings.Disney.speedSlider = !getBooleanOfCategory("speedSlider");
-      setSettings("VideoSpeedSlider");
-    } else if (e.target.id === "VideoFullScreen") {
-      settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
-      setSettings("playOnFullScreen");
-    }
-
-    // -------------      Default        ---------------------------------------
-    else if (e.target.id === "DefaultSkips") {
-      const DefaultSkips = !settings?.Amazon.filterPaid;
-      settings.Amazon.filterPaid = DefaultSkips;
-      setSettings("All DefaultSkips");
-    }
-    //  -------------      Amazon        ---------------------------------------
-    else if (e.target.id === "AmazonSkips") {
-      const AmazonSkips = !(settings.Amazon.skipAd && settings.Amazon.filterPaid && settings.Amazon.streamLinks);
-      settings.Amazon.skipAd = settings.Amazon.filterPaid = settings.Amazon.streamLinks = AmazonSkips;
-      setSettings("All AmazonSkips");
-    } else if (e.target.id === "AmazonCredits") {
-      settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
-      if (settings.Amazon.skipCredits) {
-        settings.Amazon.watchCredits = false;
-      }
-      setSettings("AmazonCredits");
-    } else if (e.target.id === "AmazonWatchCredits") {
-      settings.Amazon.watchCredits = !settings.Amazon.watchCredits;
-      if (settings.Amazon.watchCredits) {
-        settings.Amazon.skipCredits = false;
-      }
-      setSettings("AmazonWatchCredits");
-    } else if (e.target.id === "AmazonIntro") {
-      settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
-      setSettings("AmazonIntro");
-    } else if (e.target.id === "AmazonAds") {
-      settings.Amazon.skipAd = !settings.Amazon.skipAd;
-      setSettings("AmazonAd");
-    } else if (e.target.id === "AmazonFreevee") {
-      settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
-      setSettings("blockFreevee");
-    } else if (e.target.id === "AmazonSpeedSlider") {
-      settings.Amazon.speedSlider = !settings.Amazon.speedSlider;
-      setSettings("AmazonSpeedSlider");
-    } else if (e.target.id === "AmazonfilterPaid") {
-      settings.Amazon.filterPaid = !settings.Amazon.filterPaid;
-      setSettings("filterPaid");
-    } else if (e.target.id === "AmazonStreamLinks") {
-      settings.Amazon.streamLinks = !settings.Amazon.streamLinks;
-      setSettings("streamLinks");
-    }
-    //  -------------      Netflix        ---------------------------------------
-    else if (e.target.id === "NetflixSkips") {
-      const NetflixSkips = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
-      settings.Netflix.skipRecap = settings.Netflix.skipBlocked = settings.Netflix.profile = NetflixSkips;
-      setSettings("All NetflixSkips");
-    } else if (e.target.id === "NetflixIntro") {
-      settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
-      setSettings("NetflixIntro");
-    } else if (e.target.id === "NetflixRecap") {
-      settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
-      setSettings("NetflixRecap");
-    } else if (e.target.id === "NetflixCredits") {
-      settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
-      if (settings.Netflix.skipCredits) {
-        settings.Netflix.watchCredits = false;
-      }
-      setSettings("NetflixCredits");
-    } else if (e.target.id === "NetflixWatchCredits") {
-      settings.Netflix.watchCredits = !settings.Netflix.watchCredits;
-      if (settings.Netflix.watchCredits) {
-        settings.Netflix.skipCredits = false;
-      }
-      setSettings("NetflixWatchCredits");
-    } else if (e.target.id === "NetflixBlocked") {
-      settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
-      setSettings("NetflixBlocked");
-    } else if (e.target.id === "NetflixAds") {
-      settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
-      setSettings("NetflixAds");
-    } else if (e.target.id === "NetflixSpeedSlider") {
-      settings.Netflix.speedSlider = !settings.Netflix.speedSlider;
-      setSettings("NetflixSpeedSlider");
-    } else if (e.target.id === "NetflixProfile") {
-      settings.Netflix.profile = !settings.Netflix.profile;
-      setSettings("profile");
-    } else if (e.target.id === "NetflixShowRating") {
-      settings.Netflix.showRating = !settings.Netflix.showRating;
-      setSettings("showRating");
-    }
-    //  -------------      Disney        ---------------------------------------
-    else if (e.target.id === "DisneySkips") {
-      // const DisneySkips = !settings?.Disney.skipIntro;
-      // settings.Disney.skipIntro = DisneySkips;
-      // setSettings("All DisneySkips");
-    } else if (e.target.id === "DisneyIntro") {
-      settings.Disney.skipIntro = !settings.Disney.skipIntro;
-      setSettings("DisneyIntro");
-    } else if (e.target.id === "DisneyCredits") {
-      settings.Disney.skipCredits = !settings.Disney.skipCredits;
-      if (settings.Disney.skipCredits) {
-        settings.Disney.watchCredits = false;
-      }
-      setSettings("DisneyCredits");
-    } else if (e.target.id === "DisneyWatchCredits") {
-      settings.Disney.watchCredits = !settings.Disney.watchCredits;
-      if (settings.Disney.watchCredits) {
-        settings.Disney.skipCredits = false;
-      }
-      setSettings("DisneyWatchCredits");
-    } else if (e.target.id === "DisneySpeedSlider") {
-      settings.Disney.speedSlider = !settings.Disney.speedSlider;
-      setSettings("DisneySpeedSlider");
-    } else if (e.target.id === "DisneyShowRating") {
-      settings.Disney.showRating = !settings.Disney.showRating;
-      setSettings("DisneyShowRating");
-    }
     //  -------------      Statistics        ---------------------------------------
-    if (e.target.id === "upload") {
+    else if (e.target.id === "upload") {
       // get the file from #file and console.log it
       const file = document.getElementById("file").files[0];
       if (file !== undefined && "application/json" === file.type) {
@@ -522,6 +342,146 @@ function listenForClicks() {
         alert("The file you uploaded is not a valid JSON file.");
         return;
       }
+    }
+    //  -------------      Menu        ---------------------------------------
+    else if (e.target.id.startsWith("Menu")) Menu(e.target.id.replace("Menu", ""));
+    //  -------------      openSettings        ---------------------------------------
+    else if (e.target.id.startsWith("open")) openIndividualSettings(e.target.id.replace("open", "").replace("Settings", ""));
+    // all buttons changing settings
+    else {
+      //  -------------      Video        ---------------------------------------
+      if (e.target.id === "VideoSkips") {
+        const VideoSkips = !(
+          getBooleanOfCategory("skipIntro") &&
+          getBooleanOfCategory("skipCredits") &&
+          // Ads
+          settings?.Amazon.blockFreevee &&
+          settings?.Netflix.NetflixAds &&
+          getBooleanOfCategory("showRating") &&
+          getBooleanOfCategory("speedSlider") &&
+          // playOnFullScreen
+          settings?.Video.playOnFullScreen
+        );
+        settings.Amazon.skipIntro =
+          settings.Netflix.skipIntro =
+          settings.Disney.skipIntro =
+          // Credits
+          settings.Amazon.skipCredits =
+          settings.Netflix.skipCredits =
+          settings.Disney.skipCredits =
+          // Ads
+          settings.Amazon.blockFreevee =
+          settings.Netflix.NetflixAds =
+          // showRating
+          settings.Amazon.showRating =
+          settings.Netflix.showRating =
+          settings.Disney.showRating =
+          // SpeedSlider
+          settings.Amazon.speedSlider =
+          settings.Netflix.speedSlider =
+          settings.Disney.speedSlider =
+          // playOnFullScreen
+          settings.Video.playOnFullScreen =
+            VideoSkips;
+        if (VideoSkips) settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
+      } else if (e.target.id === "VideoIntro") {
+        settings.Amazon.skipIntro = settings.Netflix.skipIntro = settings.Disney.skipIntro = !getBooleanOfCategory("skipIntro");
+      } else if (e.target.id === "VideoCredits") {
+        const skipCredits = getBooleanOfCategory("skipCredits");
+        settings.Amazon.skipCredits = settings.Netflix.skipCredits = settings.Disney.skipCredits = !skipCredits;
+        if (!skipCredits) {
+          settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
+        }
+      } else if (e.target.id === "VideoWatchCredits") {
+        const watchCredits = getBooleanOfCategory("watchCredits");
+        settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = !watchCredits;
+        if (!watchCredits) {
+          settings.Amazon.skipCredits = settings.Netflix.skipCredits = settings.Disney.skipCredits = false;
+        }
+      } else if (e.target.id === "VideoAds") settings.Amazon.blockFreevee = settings.Netflix.NetflixAds = !(settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds);
+      else if (e.target.id === "VideoShowRating") settings.Amazon.showRating = settings.Netflix.showRating = settings.Disney.showRating = !getBooleanOfCategory("showRating");
+      else if (e.target.id === "VideoSpeedSlider") settings.Amazon.speedSlider = settings.Netflix.speedSlider = settings.Disney.speedSlider = !getBooleanOfCategory("speedSlider");
+      else if (e.target.id === "VideoFullScreen") settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
+      // -------------      Default        ---------------------------------------
+      else if (e.target.id === "DefaultSkips") settings.Amazon.filterPaid = !settings?.Amazon.filterPaid;
+      //  -------------      Amazon        ---------------------------------------
+      else if (e.target.id === "AmazonSkips") {
+        const AmazonSkips = !(settings.Amazon.skipAd && settings.Amazon.filterPaid && settings.Amazon.streamLinks);
+        settings.Amazon.skipAd = settings.Amazon.filterPaid = settings.Amazon.streamLinks = AmazonSkips;
+      } else if (e.target.id === "AmazonCredits") {
+        settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
+        if (settings.Amazon.skipCredits) {
+          settings.Amazon.watchCredits = false;
+        }
+      } else if (e.target.id === "AmazonWatchCredits") {
+        settings.Amazon.watchCredits = !settings.Amazon.watchCredits;
+        if (settings.Amazon.watchCredits) {
+          settings.Amazon.skipCredits = false;
+        }
+      } else if (e.target.id === "AmazonIntro") {
+        settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
+      } else if (e.target.id === "AmazonAds") {
+        settings.Amazon.skipAd = !settings.Amazon.skipAd;
+      } else if (e.target.id === "AmazonFreevee") {
+        settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
+      } else if (e.target.id === "AmazonSpeedSlider") {
+        settings.Amazon.speedSlider = !settings.Amazon.speedSlider;
+      } else if (e.target.id === "AmazonfilterPaid") {
+        settings.Amazon.filterPaid = !settings.Amazon.filterPaid;
+      } else if (e.target.id === "AmazonStreamLinks") {
+        settings.Amazon.streamLinks = !settings.Amazon.streamLinks;
+      }
+      //  -------------      Netflix        ---------------------------------------
+      else if (e.target.id === "NetflixSkips") {
+        const NetflixSkips = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
+        settings.Netflix.skipRecap = settings.Netflix.skipBlocked = settings.Netflix.profile = NetflixSkips;
+      } else if (e.target.id === "NetflixIntro") {
+        settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
+      } else if (e.target.id === "NetflixRecap") {
+        settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
+      } else if (e.target.id === "NetflixCredits") {
+        settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
+        if (settings.Netflix.skipCredits) {
+          settings.Netflix.watchCredits = false;
+        }
+      } else if (e.target.id === "NetflixWatchCredits") {
+        settings.Netflix.watchCredits = !settings.Netflix.watchCredits;
+        if (settings.Netflix.watchCredits) {
+          settings.Netflix.skipCredits = false;
+        }
+      } else if (e.target.id === "NetflixBlocked") {
+        settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
+      } else if (e.target.id === "NetflixAds") {
+        settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
+      } else if (e.target.id === "NetflixSpeedSlider") {
+        settings.Netflix.speedSlider = !settings.Netflix.speedSlider;
+      } else if (e.target.id === "NetflixProfile") {
+        settings.Netflix.profile = !settings.Netflix.profile;
+      } else if (e.target.id === "NetflixShowRating") {
+        settings.Netflix.showRating = !settings.Netflix.showRating;
+      }
+      //  -------------      Disney        ---------------------------------------
+      else if (e.target.id === "DisneySkips") {
+        // const DisneySkips = !settings?.Disney.skipIntro;
+        // settings.Disney.skipIntro = DisneySkips;
+        //       } else if (e.target.id === "DisneyIntro") {
+        // settings.Disney.skipIntro = !settings.Disney.skipIntro;
+      } else if (e.target.id === "DisneyCredits") {
+        settings.Disney.skipCredits = !settings.Disney.skipCredits;
+        if (settings.Disney.skipCredits) {
+          settings.Disney.watchCredits = false;
+        }
+      } else if (e.target.id === "DisneyWatchCredits") {
+        settings.Disney.watchCredits = !settings.Disney.watchCredits;
+        if (settings.Disney.watchCredits) {
+          settings.Disney.skipCredits = false;
+        }
+      } else if (e.target.id === "DisneySpeedSlider") {
+        settings.Disney.speedSlider = !settings.Disney.speedSlider;
+      } else if (e.target.id === "DisneyShowRating") {
+        settings.Disney.showRating = !settings.Disney.showRating;
+      }
+      setSettings("Changed setting");
     }
   });
 }
