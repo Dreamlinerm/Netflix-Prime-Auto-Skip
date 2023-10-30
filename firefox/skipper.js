@@ -565,7 +565,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       }
     }
     if (settings.Netflix?.skipRecap === undefined || settings.Netflix?.skipRecap) {
-      if (Netflix_General('[data-uia="player-skip-recap"]', "Recap skipped", false) || Netflix_General('[data-uia="player-skip-preplay"]', false)) {
+      if (Netflix_General('[data-uia="player-skip-recap"]', "Recap skipped", false) || Netflix_General('[data-uia="player-skip-preplay"]', "Recap skipped", false)) {
         setTimeout(function () {
           addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
         }, 600);
