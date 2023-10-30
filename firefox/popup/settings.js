@@ -298,6 +298,11 @@ function setSettings(log) {
   console.log(log, settings);
   browser.storage.sync.set({ settings });
 }
+// for all services get the shared boolean of the category
+function getBooleanOfCategory(category) {
+  return settings?.Amazon[category] && settings?.Netflix[category] && settings?.Disney[category];
+}
+
 function listenForClicks() {
   let listener = document.addEventListener("click", (e) => {
     if (e.target.classList.contains("reset")) {
@@ -313,23 +318,13 @@ function listenForClicks() {
     //  -------------      Video        ---------------------------------------
     else if (e.target.id === "VideoSkips") {
       const VideoSkips = !(
-        settings?.Amazon.skipIntro &&
-        settings?.Netflix.skipIntro &&
-        settings?.Disney.skipIntro &&
-        // Credits
-        settings?.Amazon.skipCredits &&
-        settings?.Netflix.skipCredits &&
-        settings?.Disney.skipCredits &&
+        getBooleanOfCategory("skipIntro") &&
+        getBooleanOfCategory("skipCredits") &&
         // Ads
         settings?.Amazon.blockFreevee &&
         settings?.Netflix.NetflixAds &&
-        // showRating
-        settings?.Netflix.showRating &&
-        settings?.Disney.showRating &&
-        // SpeedSlider
-        settings?.Amazon.speedSlider &&
-        settings?.Netflix.speedSlider &&
-        settings?.Disney.speedSlider &&
+        getBooleanOfCategory("showRating") &&
+        getBooleanOfCategory("speedSlider") &&
         // playOnFullScreen
         settings?.Video.playOnFullScreen
       );
@@ -344,6 +339,7 @@ function listenForClicks() {
         settings.Amazon.blockFreevee =
         settings.Netflix.NetflixAds =
         // showRating
+        settings.Amazon.showRating =
         settings.Netflix.showRating =
         settings.Disney.showRating =
         // SpeedSlider
@@ -357,17 +353,17 @@ function listenForClicks() {
       setSettings("All VideoSkips");
     } else if (e.target.id === "VideoIntro") {
       const skipIntro = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro && settings?.Disney.skipIntro;
-      settings.Amazon.skipIntro = settings.Netflix.skipIntro = settings.Disney.skipIntro = !skipIntro;
+      settings.Amazon.skipIntro = settings.Netflix.skipIntro = settings.Disney.skipIntro = !getBooleanOfCategory("skipIntro");
       setSettings("VideoIntro");
     } else if (e.target.id === "VideoCredits") {
-      const skipCredits = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits && settings?.Disney.skipCredits;
+      const skipCredits = getBooleanOfCategory("skipCredits");
       settings.Amazon.skipCredits = settings.Netflix.skipCredits = settings.Disney.skipCredits = !skipCredits;
       if (!skipCredits) {
         settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
       }
       setSettings("VideoCredits");
     } else if (e.target.id === "VideoWatchCredits") {
-      const watchCredits = settings?.Amazon.watchCredits && settings?.Netflix.watchCredits && settings?.Disney.watchCredits;
+      const watchCredits = getBooleanOfCategory("watchCredits");
       settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = !watchCredits;
       if (!watchCredits) {
         settings.Amazon.skipCredits = settings.Netflix.skipCredits = settings.Disney.skipCredits = false;
@@ -378,12 +374,10 @@ function listenForClicks() {
       settings.Amazon.blockFreevee = settings.Netflix.NetflixAds = !skipAd;
       setSettings("VideoAd");
     } else if (e.target.id === "VideoShowRating") {
-      const showRating = settings?.Netflix.showRating && settings?.Disney.showRating;
-      settings.Netflix.showRating = settings.Disney.showRating = !showRating;
+      settings.Amazon.showRating = settings.Netflix.showRating = settings.Disney.showRating = !getBooleanOfCategory("showRating");
       setSettings("VideoSpeedSlider");
     } else if (e.target.id === "VideoSpeedSlider") {
-      const speedSlider = settings?.Amazon.speedSlider && settings?.Netflix.speedSlider && settings?.Disney.speedSlider;
-      settings.Amazon.speedSlider = settings.Netflix.speedSlider = settings.Disney.speedSlider = !speedSlider;
+      settings.Amazon.speedSlider = settings.Netflix.speedSlider = settings.Disney.speedSlider = !getBooleanOfCategory("speedSlider");
       setSettings("VideoSpeedSlider");
     } else if (e.target.id === "VideoFullScreen") {
       settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
@@ -499,7 +493,7 @@ function listenForClicks() {
       setSettings("DisneyShowRating");
     }
     //  -------------      Statistics        ---------------------------------------
-    else if (e.target.id === "upload") {
+    if (e.target.id === "upload") {
       // get the file from #file and console.log it
       const file = document.getElementById("file").files[0];
       if (file !== undefined && "application/json" === file.type) {
