@@ -116,6 +116,18 @@ function getTimeFormatted(sec = 0) {
 function getBooleanOfCategory(category) {
   return settings?.Amazon[category] && settings?.Netflix[category] && settings?.Disney[category];
 }
+function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+function setCheckboxesOfService(service) {
+  Object.keys(settings[service]).forEach((key) => {
+    const buttons = document.querySelectorAll("#" + service + capitalizeFirstLetter(key));
+    console.log(service + capitalizeFirstLetter(key), buttons);
+    buttons.forEach((button) => {
+      button.checked = settings[service][key];
+    });
+  });
+}
 
 function setCheckboxesToSettings() {
   let button;
@@ -151,32 +163,17 @@ function setCheckboxesToSettings() {
   //  -------------      Default        ---------------------------------------
   button = document.querySelector("#DefaultSkips");
   if (button) button.checked = settings?.Amazon.filterPaid;
-
-  //  -------------      Amazon        ---------------------------------------
+  // -------------      global buttons        ---------------------------------------
   button = document.querySelector("#AmazonSkips");
   if (button) button.checked = settings?.Amazon.skipAd && settings?.Amazon.filterPaid && settings?.Amazon.streamLinks;
-  button = document.querySelector("#AmazonIntro");
-  if (button) button.checked = settings?.Amazon.skipIntro;
-  button = document.querySelector("#AmazonCredits");
-  if (button) button.checked = settings?.Amazon.skipCredits;
-  button = document.querySelector("#AmazonWatchCredits");
-  if (button) button.checked = settings?.Amazon.watchCredits;
-  button = document.querySelector("#AmazonAds");
-  if (button) button.checked = settings?.Amazon.skipAd;
-  button = document.querySelector("#AmazonFreevee");
-  if (button) button.checked = settings?.Amazon.blockFreevee;
-  button = document.querySelector("#AmazonSpeedSlider");
-  if (button) button.checked = settings?.Amazon.speedSlider;
-  button = document.querySelectorAll("#AmazonfilterPaid");
-  for (const b of button) {
-    b.checked = settings?.Amazon.filterPaid;
-  }
-  button = document.querySelector("#AmazonStreamLinks");
-  if (button) button.checked = settings?.Amazon.streamLinks;
-
-  //  -------------      Netflix        ---------------------------------------
   button = document.querySelector("#NetflixSkips");
   if (button) button.checked = settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile;
+  button = document.querySelector("#DisneySkips");
+  if (button) button.checked = settings?.Disney.skipIntro;
+  //  -------------      Amazon        ---------------------------------------
+  setCheckboxesOfService("Amazon");
+  //  -------------      Netflix        ---------------------------------------
+  // setCheckboxesOfService("Netflix");
   button = document.querySelector("#NetflixIntro");
   if (button) button.checked = settings?.Netflix.skipIntro;
   button = document.querySelector("#NetflixRecap");
@@ -203,10 +200,7 @@ function setCheckboxesToSettings() {
     button.setAttribute("src", settings?.General.profilePicture);
     button.style.display = "block";
   }
-
   //  -------------      Disney        ---------------------------------------
-  button = document.querySelector("#DisneySkips");
-  if (button) button.checked = settings?.Disney.skipIntro;
   button = document.querySelector("#DisneyIntro");
   if (button) button.checked = settings?.Disney.skipIntro;
   button = document.querySelector("#DisneyCredits");
@@ -382,17 +376,17 @@ function listenForClicks() {
       //  -------------      Amazon        ---------------------------------------
       else if (e.target.id === "AmazonSkips")
         settings.Amazon.skipAd = settings.Amazon.filterPaid = settings.Amazon.streamLinks = !(settings.Amazon.skipAd && settings.Amazon.filterPaid && settings.Amazon.streamLinks);
-      else if (e.target.id === "AmazonCredits") {
+      else if (e.target.id === "AmazonSkipCredits") {
         settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
         if (settings.Amazon.skipCredits) settings.Amazon.watchCredits = false;
       } else if (e.target.id === "AmazonWatchCredits") {
         settings.Amazon.watchCredits = !settings.Amazon.watchCredits;
         if (settings.Amazon.watchCredits) settings.Amazon.skipCredits = false;
-      } else if (e.target.id === "AmazonIntro") settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
-      else if (e.target.id === "AmazonAds") settings.Amazon.skipAd = !settings.Amazon.skipAd;
-      else if (e.target.id === "AmazonFreevee") settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
+      } else if (e.target.id === "AmazonSkipIntro") settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
+      else if (e.target.id === "AmazonSkipAd") settings.Amazon.skipAd = !settings.Amazon.skipAd;
+      else if (e.target.id === "AmazonBlockFreevee") settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
       else if (e.target.id === "AmazonSpeedSlider") settings.Amazon.speedSlider = !settings.Amazon.speedSlider;
-      else if (e.target.id === "AmazonfilterPaid") settings.Amazon.filterPaid = !settings.Amazon.filterPaid;
+      else if (e.target.id === "AmazonFilterPaid") settings.Amazon.filterPaid = !settings.Amazon.filterPaid;
       else if (e.target.id === "AmazonStreamLinks") settings.Amazon.streamLinks = !settings.Amazon.streamLinks;
       //  -------------      Netflix        ---------------------------------------
       else if (e.target.id === "NetflixSkips")
