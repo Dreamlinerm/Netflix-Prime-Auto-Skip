@@ -243,7 +243,7 @@ def Disney_Intro():
         )
         time.sleep(0.3)
     print("time " + str(video.get_property("currentTime")))
-    wait = WebDriverWait(driver, timeout=20)
+    wait = WebDriverWait(driver, timeout=30)
     wait.until(lambda driver: video.get_property("currentTime") >= 80)
 
     wait = WebDriverWait(driver, timeout=5)
