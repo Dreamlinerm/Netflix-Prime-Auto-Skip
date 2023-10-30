@@ -129,13 +129,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
           // if value is changed then check if it is enabled or disabled
           if (oldValue === undefined || (newValue.Netflix.NetflixAds !== oldValue.Netflix?.NetflixAds && newValue.Netflix.NetflixAds)) Netflix_SkipAdInterval();
         } else if (isPrimeVideo) {
-          if (oldValue === undefined || newValue.Amazon.skipIntro !== oldValue.Amazon?.skipIntro) startAmazonSkipIntroObserver();
-          if (oldValue === undefined || newValue.Amazon.skipCredits !== oldValue.Amazon?.skipCredits) startAmazonSkipCreditsObserver();
-          if (oldValue === undefined || newValue.Amazon.watchCredits !== oldValue.Amazon?.watchCredits) startAmazonWatchCreditsObserver();
-          if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon?.skipAd) startAmazonSkipAdObserver();
-          if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) startAmazonBlockFreeveeObserver();
-          if (oldValue === undefined || newValue.Amazon.speedSlider !== oldValue.Amazon?.speedSlider) startAmazonSpeedSliderObserver();
-          if (oldValue === undefined || newValue.Amazon.filterPaid !== oldValue.Amazon?.filterPaid) startAmazonFilterPaidObserver();
+          if (oldValue === undefined || newValue.Amazon.skipAd !== oldValue.Amazon?.skipAd) Amazon_AdTimeout();
+          if (oldValue === undefined || newValue.Amazon.blockFreevee !== oldValue.Amazon?.blockFreevee) {
+            // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
+            setTimeout(function () {
+              Amazon_FreeveeTimeout();
+            }, 1000);
+          }
         }
         if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
         if (oldValue === undefined || settings.Statistics.SegmentsSkipped === 0) {
