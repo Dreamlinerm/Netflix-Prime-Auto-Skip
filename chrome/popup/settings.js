@@ -185,9 +185,9 @@ function setCheckboxesToSettings() {
     button.style.display = "block";
   }
   //  -------------      Disney        ---------------------------------------
-  button = document.querySelector("#DisneyIntro");
+  button = document.querySelector("#DisneySkipIntro");
   if (button) button.checked = settings?.Disney.skipIntro;
-  button = document.querySelector("#DisneyCredits");
+  button = document.querySelector("#DisneySkipCredits");
   if (button) button.checked = settings?.Disney.skipCredits;
   button = document.querySelector("#DisneyWatchCredits");
   if (button) button.checked = settings?.Disney.watchCredits;
@@ -392,10 +392,10 @@ function listenForClicks() {
       else if (e.target.id === "DisneySkips") {
         // const DisneySkips = !settings?.Disney.skipIntro;
         // settings.Disney.skipIntro = DisneySkips;
-        //       } else if (e.target.id === "DisneyIntro") {
+        //       } else if (e.target.id === "DisneySkipIntro") {
         // settings.Disney.skipIntro = !settings.Disney.skipIntro;
-      } else if (e.target.id === "DisneyIntro") settings.Disney.skipIntro = !settings.Disney.skipIntro;
-      else if (e.target.id === "DisneyCredits") {
+      } else if (e.target.id === "DisneySkipIntro") settings.Disney.skipIntro = !settings.Disney.skipIntro;
+      else if (e.target.id === "DisneySkipCredits") {
         settings.Disney.skipCredits = !settings.Disney.skipCredits;
         if (settings.Disney.skipCredits) settings.Disney.watchCredits = false;
       } else if (e.target.id === "DisneyWatchCredits") {
