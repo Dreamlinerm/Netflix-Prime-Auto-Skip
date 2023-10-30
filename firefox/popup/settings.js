@@ -405,10 +405,9 @@ function listenForClicks() {
       // -------------      Default        ---------------------------------------
       else if (e.target.id === "DefaultSkips") settings.Amazon.filterPaid = !settings?.Amazon.filterPaid;
       //  -------------      Amazon        ---------------------------------------
-      else if (e.target.id === "AmazonSkips") {
-        const AmazonSkips = !(settings.Amazon.skipAd && settings.Amazon.filterPaid && settings.Amazon.streamLinks);
-        settings.Amazon.skipAd = settings.Amazon.filterPaid = settings.Amazon.streamLinks = AmazonSkips;
-      } else if (e.target.id === "AmazonCredits") {
+      else if (e.target.id === "AmazonSkips")
+        settings.Amazon.skipAd = settings.Amazon.filterPaid = settings.Amazon.streamLinks = !(settings.Amazon.skipAd && settings.Amazon.filterPaid && settings.Amazon.streamLinks);
+      else if (e.target.id === "AmazonCredits") {
         settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
         if (settings.Amazon.skipCredits) {
           settings.Amazon.watchCredits = false;
@@ -418,28 +417,18 @@ function listenForClicks() {
         if (settings.Amazon.watchCredits) {
           settings.Amazon.skipCredits = false;
         }
-      } else if (e.target.id === "AmazonIntro") {
-        settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
-      } else if (e.target.id === "AmazonAds") {
-        settings.Amazon.skipAd = !settings.Amazon.skipAd;
-      } else if (e.target.id === "AmazonFreevee") {
-        settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
-      } else if (e.target.id === "AmazonSpeedSlider") {
-        settings.Amazon.speedSlider = !settings.Amazon.speedSlider;
-      } else if (e.target.id === "AmazonfilterPaid") {
-        settings.Amazon.filterPaid = !settings.Amazon.filterPaid;
-      } else if (e.target.id === "AmazonStreamLinks") {
-        settings.Amazon.streamLinks = !settings.Amazon.streamLinks;
-      }
+      } else if (e.target.id === "AmazonIntro") settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
+      else if (e.target.id === "AmazonAds") settings.Amazon.skipAd = !settings.Amazon.skipAd;
+      else if (e.target.id === "AmazonFreevee") settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
+      else if (e.target.id === "AmazonSpeedSlider") settings.Amazon.speedSlider = !settings.Amazon.speedSlider;
+      else if (e.target.id === "AmazonfilterPaid") settings.Amazon.filterPaid = !settings.Amazon.filterPaid;
+      else if (e.target.id === "AmazonStreamLinks") settings.Amazon.streamLinks = !settings.Amazon.streamLinks;
       //  -------------      Netflix        ---------------------------------------
-      else if (e.target.id === "NetflixSkips") {
-        const NetflixSkips = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
-        settings.Netflix.skipRecap = settings.Netflix.skipBlocked = settings.Netflix.profile = NetflixSkips;
-      } else if (e.target.id === "NetflixIntro") {
-        settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
-      } else if (e.target.id === "NetflixRecap") {
-        settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
-      } else if (e.target.id === "NetflixCredits") {
+      else if (e.target.id === "NetflixSkips")
+        settings.Netflix.skipRecap = settings.Netflix.skipBlocked = settings.Netflix.profile = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
+      else if (e.target.id === "NetflixIntro") settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
+      else if (e.target.id === "NetflixRecap") settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
+      else if (e.target.id === "NetflixCredits") {
         settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
         if (settings.Netflix.skipCredits) {
           settings.Netflix.watchCredits = false;
@@ -449,17 +438,11 @@ function listenForClicks() {
         if (settings.Netflix.watchCredits) {
           settings.Netflix.skipCredits = false;
         }
-      } else if (e.target.id === "NetflixBlocked") {
-        settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
-      } else if (e.target.id === "NetflixAds") {
-        settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
-      } else if (e.target.id === "NetflixSpeedSlider") {
-        settings.Netflix.speedSlider = !settings.Netflix.speedSlider;
-      } else if (e.target.id === "NetflixProfile") {
-        settings.Netflix.profile = !settings.Netflix.profile;
-      } else if (e.target.id === "NetflixShowRating") {
-        settings.Netflix.showRating = !settings.Netflix.showRating;
-      }
+      } else if (e.target.id === "NetflixBlocked") settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
+      else if (e.target.id === "NetflixAds") settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
+      else if (e.target.id === "NetflixSpeedSlider") settings.Netflix.speedSlider = !settings.Netflix.speedSlider;
+      else if (e.target.id === "NetflixProfile") settings.Netflix.profile = !settings.Netflix.profile;
+      else if (e.target.id === "NetflixShowRating") settings.Netflix.showRating = !settings.Netflix.showRating;
       //  -------------      Disney        ---------------------------------------
       else if (e.target.id === "DisneySkips") {
         // const DisneySkips = !settings?.Disney.skipIntro;
@@ -475,11 +458,8 @@ function listenForClicks() {
         settings.Disney.watchCredits = !settings.Disney.watchCredits;
         if (settings.Disney.watchCredits) {
           settings.Disney.skipCredits = false;
-        }
-      } else if (e.target.id === "DisneySpeedSlider") {
-        settings.Disney.speedSlider = !settings.Disney.speedSlider;
-      } else if (e.target.id === "DisneyShowRating") {
-        settings.Disney.showRating = !settings.Disney.showRating;
+        } else if (e.target.id === "DisneySpeedSlider") settings.Disney.speedSlider = !settings.Disney.speedSlider;
+        else if (e.target.id === "DisneyShowRating") settings.Disney.showRating = !settings.Disney.showRating;
       }
       setSettings(e.target.id);
     }
