@@ -384,9 +384,8 @@ function listenForClicks() {
           settings.Video.playOnFullScreen =
             VideoSkips;
         if (VideoSkips) settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
-      } else if (e.target.id === "VideoIntro") {
-        settings.Amazon.skipIntro = settings.Netflix.skipIntro = settings.Disney.skipIntro = !getBooleanOfCategory("skipIntro");
-      } else if (e.target.id === "VideoCredits") {
+      } else if (e.target.id === "VideoIntro") settings.Amazon.skipIntro = settings.Netflix.skipIntro = settings.Disney.skipIntro = !getBooleanOfCategory("skipIntro");
+      else if (e.target.id === "VideoCredits") {
         const skipCredits = getBooleanOfCategory("skipCredits");
         settings.Amazon.skipCredits = settings.Netflix.skipCredits = settings.Disney.skipCredits = !skipCredits;
         if (!skipCredits) {
@@ -409,14 +408,10 @@ function listenForClicks() {
         settings.Amazon.skipAd = settings.Amazon.filterPaid = settings.Amazon.streamLinks = !(settings.Amazon.skipAd && settings.Amazon.filterPaid && settings.Amazon.streamLinks);
       else if (e.target.id === "AmazonCredits") {
         settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
-        if (settings.Amazon.skipCredits) {
-          settings.Amazon.watchCredits = false;
-        }
+        if (settings.Amazon.skipCredits) settings.Amazon.watchCredits = false;
       } else if (e.target.id === "AmazonWatchCredits") {
         settings.Amazon.watchCredits = !settings.Amazon.watchCredits;
-        if (settings.Amazon.watchCredits) {
-          settings.Amazon.skipCredits = false;
-        }
+        if (settings.Amazon.watchCredits) settings.Amazon.skipCredits = false;
       } else if (e.target.id === "AmazonIntro") settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
       else if (e.target.id === "AmazonAds") settings.Amazon.skipAd = !settings.Amazon.skipAd;
       else if (e.target.id === "AmazonFreevee") settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
@@ -430,14 +425,10 @@ function listenForClicks() {
       else if (e.target.id === "NetflixRecap") settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
       else if (e.target.id === "NetflixCredits") {
         settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
-        if (settings.Netflix.skipCredits) {
-          settings.Netflix.watchCredits = false;
-        }
+        if (settings.Netflix.skipCredits) settings.Netflix.watchCredits = false;
       } else if (e.target.id === "NetflixWatchCredits") {
         settings.Netflix.watchCredits = !settings.Netflix.watchCredits;
-        if (settings.Netflix.watchCredits) {
-          settings.Netflix.skipCredits = false;
-        }
+        if (settings.Netflix.watchCredits) settings.Netflix.skipCredits = false;
       } else if (e.target.id === "NetflixBlocked") settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
       else if (e.target.id === "NetflixAds") settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
       else if (e.target.id === "NetflixSpeedSlider") settings.Netflix.speedSlider = !settings.Netflix.speedSlider;
@@ -451,16 +442,12 @@ function listenForClicks() {
         // settings.Disney.skipIntro = !settings.Disney.skipIntro;
       } else if (e.target.id === "DisneyCredits") {
         settings.Disney.skipCredits = !settings.Disney.skipCredits;
-        if (settings.Disney.skipCredits) {
-          settings.Disney.watchCredits = false;
-        }
+        if (settings.Disney.skipCredits) settings.Disney.watchCredits = false;
       } else if (e.target.id === "DisneyWatchCredits") {
         settings.Disney.watchCredits = !settings.Disney.watchCredits;
-        if (settings.Disney.watchCredits) {
-          settings.Disney.skipCredits = false;
-        } else if (e.target.id === "DisneySpeedSlider") settings.Disney.speedSlider = !settings.Disney.speedSlider;
-        else if (e.target.id === "DisneyShowRating") settings.Disney.showRating = !settings.Disney.showRating;
-      }
+        if (settings.Disney.watchCredits) settings.Disney.skipCredits = false;
+      } else if (e.target.id === "DisneySpeedSlider") settings.Disney.speedSlider = !settings.Disney.speedSlider;
+      else if (e.target.id === "DisneyShowRating") settings.Disney.showRating = !settings.Disney.showRating;
       setSettings(e.target.id);
     }
   });
