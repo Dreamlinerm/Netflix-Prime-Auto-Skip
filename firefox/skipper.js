@@ -39,7 +39,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
   let settings = defaultSettings.settings;
   let DBCache = {};
   let lastAdTimeText = 0;
-  let videoSpeed;
+  let videoSpeed = 1;
   async function setVideoSpeed(speed) {
     videoSpeed = speed;
   }
@@ -573,7 +573,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     if (settings.Netflix?.skipCredits === undefined || settings.Netflix?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]', "Credits skipped");
     if (settings.Netflix?.watchCredits === undefined || settings.Netflix?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched");
     if (settings.Netflix?.skipBlocked === undefined || settings.Netflix?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
-    if (settings.Netflix?.speedSlider === undefined || settings.Netflix?.speedSlider) Netflix_SpeedSlider();
+    if (settings.Netflix?.speedSlider === undefined || settings.Netflix?.speedSlider) Netflix_SpeedSlider(video);
   }
 
   function Netflix_profile() {
@@ -640,13 +640,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
         } else if (adLength && video.paused) {
           video.play();
         } else if (adLength <= 2 || !adLength) {
-          video.playbackRate = 1;
+          // videospeed is speedSlider value
+          video.playbackRate = videoSpeed;
         }
       }
     }, 100);
   }
-  function Netflix_SpeedSlider() {
-    let video = document.querySelector("video");
+  function Netflix_SpeedSlider(video) {
     let alreadySlider = document.querySelector("#videoSpeedSlider");
     // only add speed slider on lowest subscription tier
     // && !document.querySelector('[data-uia="control-speed"]')
