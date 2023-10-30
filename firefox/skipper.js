@@ -557,22 +557,22 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
     const time = video?.currentTime;
     if (settings.Netflix?.profile === undefined || settings.Netflix?.profile) Netflix_profile();
     if (settings.Netflix?.skipIntro === undefined || settings.Netflix?.skipIntro) {
-      if (Netflix_General('[data-uia="player-skip-intro"]', false)) {
+      if (Netflix_General('[data-uia="player-skip-intro"]', "Intro skipped", false)) {
         setTimeout(function () {
           addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
         }, 600);
       }
     }
     if (settings.Netflix?.skipRecap === undefined || settings.Netflix?.skipRecap) {
-      if (Netflix_General('[data-uia="player-skip-recap"]', false) || Netflix_General('[data-uia="player-skip-preplay"]', false)) {
+      if (Netflix_General('[data-uia="player-skip-recap"]', "Recap skipped", false) || Netflix_General('[data-uia="player-skip-preplay"]', false)) {
         setTimeout(function () {
           addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
         }, 600);
       }
     }
-    if (settings.Netflix?.skipCredits === undefined || settings.Netflix?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]');
-    if (settings.Netflix?.watchCredits === undefined || settings.Netflix?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]');
-    if (settings.Netflix?.skipBlocked === undefined || settings.Netflix?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]');
+    if (settings.Netflix?.skipCredits === undefined || settings.Netflix?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]', "Credits skipped");
+    if (settings.Netflix?.watchCredits === undefined || settings.Netflix?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched");
+    if (settings.Netflix?.skipBlocked === undefined || settings.Netflix?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
     if (settings.Netflix?.speedSlider === undefined || settings.Netflix?.speedSlider) Netflix_SpeedSlider();
   }
 
@@ -607,9 +607,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar) {
       });
     }
   }
-  function Netflix_General(selector, incBadge = true) {
+  function Netflix_General(selector, name, incBadge = true) {
     const button = document.querySelector(selector);
     if (button) {
+      log(name, button);
       button.click();
       if (incBadge) increaseBadge();
       return true;
