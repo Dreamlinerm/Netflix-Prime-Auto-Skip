@@ -173,25 +173,7 @@ function setCheckboxesToSettings() {
   //  -------------      Amazon        ---------------------------------------
   setCheckboxesOfService("Amazon");
   //  -------------      Netflix        ---------------------------------------
-  // setCheckboxesOfService("Netflix");
-  button = document.querySelector("#NetflixIntro");
-  if (button) button.checked = settings?.Netflix.skipIntro;
-  button = document.querySelector("#NetflixRecap");
-  if (button) button.checked = settings?.Netflix.skipRecap;
-  button = document.querySelector("#NetflixCredits");
-  if (button) button.checked = settings?.Netflix.skipCredits;
-  button = document.querySelector("#NetflixWatchCredits");
-  if (button) button.checked = settings?.Netflix.watchCredits;
-  button = document.querySelector("#NetflixBlocked");
-  if (button) button.checked = settings?.Netflix.skipBlocked;
-  button = document.querySelector("#NetflixAds");
-  if (button) button.checked = settings?.Netflix.NetflixAds;
-  button = document.querySelector("#NetflixSpeedSlider");
-  if (button) button.checked = settings?.Netflix.speedSlider;
-  button = document.querySelector("#NetflixProfile");
-  if (button) button.checked = settings?.Netflix.profile;
-  button = document.querySelector("#NetflixShowRating");
-  if (button) button.checked = settings?.Netflix.showRating;
+  setCheckboxesOfService("Netflix");
 
   button = document.querySelector("#profileName");
   if (button) button.textContent = settings?.General.profileName;
@@ -391,15 +373,15 @@ function listenForClicks() {
       //  -------------      Netflix        ---------------------------------------
       else if (e.target.id === "NetflixSkips")
         settings.Netflix.skipRecap = settings.Netflix.skipBlocked = settings.Netflix.profile = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
-      else if (e.target.id === "NetflixIntro") settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
-      else if (e.target.id === "NetflixRecap") settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
-      else if (e.target.id === "NetflixCredits") {
+      else if (e.target.id === "NetflixSkipIntro") settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
+      else if (e.target.id === "NetflixSkipRecap") settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
+      else if (e.target.id === "NetflixSkipCredits") {
         settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
         if (settings.Netflix.skipCredits) settings.Netflix.watchCredits = false;
       } else if (e.target.id === "NetflixWatchCredits") {
         settings.Netflix.watchCredits = !settings.Netflix.watchCredits;
         if (settings.Netflix.watchCredits) settings.Netflix.skipCredits = false;
-      } else if (e.target.id === "NetflixBlocked") settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
+      } else if (e.target.id === "NetflixSkipBlocked") settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
       else if (e.target.id === "NetflixAds") settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
       else if (e.target.id === "NetflixSpeedSlider") settings.Netflix.speedSlider = !settings.Netflix.speedSlider;
       else if (e.target.id === "NetflixProfile") settings.Netflix.profile = !settings.Netflix.profile;

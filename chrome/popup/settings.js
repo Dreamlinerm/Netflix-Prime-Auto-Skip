@@ -119,6 +119,16 @@ function getBooleanOfCategory(category) {
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+function setCheckboxesOfService(service) {
+  Object.keys(settings[service]).forEach((key) => {
+    const buttons = document.querySelectorAll("#" + service + capitalizeFirstLetter(key));
+    console.log(service + capitalizeFirstLetter(key), buttons);
+    buttons.forEach((button) => {
+      button.checked = settings[service][key];
+    });
+  });
+}
+
 function setCheckboxesToSettings() {
   let button;
   button = document.querySelector("#VideoSkips");
@@ -153,50 +163,19 @@ function setCheckboxesToSettings() {
   //  -------------      Default        ---------------------------------------
   button = document.querySelector("#DefaultSkips");
   if (button) button.checked = settings?.Amazon.filterPaid;
-
-  //  -------------      Amazon        ---------------------------------------
+  // -------------      global buttons        ---------------------------------------
   button = document.querySelector("#AmazonSkips");
   if (button) button.checked = settings?.Amazon.skipAd && settings?.Amazon.filterPaid && settings?.Amazon.streamLinks;
-  button = document.querySelector("#AmazonSkipIntro");
-  if (button) button.checked = settings?.Amazon.skipIntro;
-  button = document.querySelector("#AmazonSkipCredits");
-  if (button) button.checked = settings?.Amazon.skipCredits;
-  button = document.querySelector("#AmazonWatchCredits");
-  if (button) button.checked = settings?.Amazon.watchCredits;
-  button = document.querySelector("#AmazonSkipAd");
-  if (button) button.checked = settings?.Amazon.skipAd;
-  button = document.querySelector("#AmazonBlockFreevee");
-  if (button) button.checked = settings?.Amazon.blockFreevee;
-  button = document.querySelector("#AmazonSpeedSlider");
-  if (button) button.checked = settings?.Amazon.speedSlider;
-  button = document.querySelectorAll("#AmazonFilterPaid");
-  for (const b of button) {
-    b.checked = settings?.Amazon.filterPaid;
-  }
-  button = document.querySelector("#AmazonStreamLinks");
-  if (button) button.checked = settings?.Amazon.streamLinks;
-
-  //  -------------      Netflix        ---------------------------------------
   button = document.querySelector("#NetflixSkips");
   if (button) button.checked = settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile;
-  button = document.querySelector("#NetflixIntro");
-  if (button) button.checked = settings?.Netflix.skipIntro;
-  button = document.querySelector("#NetflixRecap");
-  if (button) button.checked = settings?.Netflix.skipRecap;
-  button = document.querySelector("#NetflixCredits");
-  if (button) button.checked = settings?.Netflix.skipCredits;
-  button = document.querySelector("#NetflixWatchCredits");
-  if (button) button.checked = settings?.Netflix.watchCredits;
-  button = document.querySelector("#NetflixBlocked");
-  if (button) button.checked = settings?.Netflix.skipBlocked;
+  button = document.querySelector("#DisneySkips");
+  if (button) button.checked = settings?.Disney.skipIntro;
+  //  -------------      Amazon        ---------------------------------------
+  setCheckboxesOfService("Amazon");
+  //  -------------      Netflix        ---------------------------------------
+  setCheckboxesOfService("Netflix");
   button = document.querySelector("#NetflixAds");
   if (button) button.checked = settings?.Netflix.NetflixAds;
-  button = document.querySelector("#NetflixSpeedSlider");
-  if (button) button.checked = settings?.Netflix.speedSlider;
-  button = document.querySelector("#NetflixProfile");
-  if (button) button.checked = settings?.Netflix.profile;
-  button = document.querySelector("#NetflixShowRating");
-  if (button) button.checked = settings?.Netflix.showRating;
 
   button = document.querySelector("#profileName");
   if (button) button.textContent = settings?.General.profileName;
@@ -205,10 +184,7 @@ function setCheckboxesToSettings() {
     button.setAttribute("src", settings?.General.profilePicture);
     button.style.display = "block";
   }
-
   //  -------------      Disney        ---------------------------------------
-  button = document.querySelector("#DisneySkips");
-  if (button) button.checked = settings?.Disney.skipIntro;
   button = document.querySelector("#DisneyIntro");
   if (button) button.checked = settings?.Disney.skipIntro;
   button = document.querySelector("#DisneyCredits");
@@ -399,15 +375,15 @@ function listenForClicks() {
       //  -------------      Netflix        ---------------------------------------
       else if (e.target.id === "NetflixSkips")
         settings.Netflix.skipRecap = settings.Netflix.skipBlocked = settings.Netflix.profile = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
-      else if (e.target.id === "NetflixIntro") settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
-      else if (e.target.id === "NetflixRecap") settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
-      else if (e.target.id === "NetflixCredits") {
+      else if (e.target.id === "NetflixSkipIntro") settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
+      else if (e.target.id === "NetflixSkipRecap") settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
+      else if (e.target.id === "NetflixSkipCredits") {
         settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
         if (settings.Netflix.skipCredits) settings.Netflix.watchCredits = false;
       } else if (e.target.id === "NetflixWatchCredits") {
         settings.Netflix.watchCredits = !settings.Netflix.watchCredits;
         if (settings.Netflix.watchCredits) settings.Netflix.skipCredits = false;
-      } else if (e.target.id === "NetflixBlocked") settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
+      } else if (e.target.id === "NetflixSkipBlocked") settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
       else if (e.target.id === "NetflixAds") settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
       else if (e.target.id === "NetflixSpeedSlider") settings.Netflix.speedSlider = !settings.Netflix.speedSlider;
       else if (e.target.id === "NetflixProfile") settings.Netflix.profile = !settings.Netflix.profile;
