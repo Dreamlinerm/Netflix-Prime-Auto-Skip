@@ -332,7 +332,7 @@ Table of test cases for each feature. S=season, E=episode of the show.
 | Paid Content | ❌ | ✅ | ❌ |
 | Inactivity Warning | ✅ | ❌ | ❌ |
 | Auto pick last profile | ✅ | ❌ | ❌ |
-| IMDB Rating | ✅ | ✅ | ❌ |
+| TMDB Rating | ✅ | ✅(default on amazon) | ✅ |
 | Streaming links | ❌ | ✅ | ❌ |
 
 ## Changelog
