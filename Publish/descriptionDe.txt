@@ -3,7 +3,7 @@ Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert
 
 ✨ Features
 
-Auf Netflix, Prime Video und Disney+ & Hotstar wird automatisch:
+Auf Netflix, Prime Video, Disney+ & Hotstar und Crunchyroll wird automatisch:
 
 <ul>
 <li>Intros übersprungen</li>
@@ -22,13 +22,19 @@ Auf Netflix wird auch automatisch:
 <li>Automatisch zuletzt verwendetes Profil ausgewählt</li>
 </ul>
 
-Amazon Prime-Video wird auch automatisch:
+Auf Amazon Prime-Video wird auch automatisch:
 
 <ul>
 <li>Eigenwerbung übersprungen</li>
 <li>Kostenpflichtige Inhalte gefiltert</li>
 <li>Die lästige Unschärfe, wenn das overlay angezeigt wird entfernt</li>
 <li>Potentielle gratis Streaming-Links zu kostenpflichtigen Sendungen hinzugefügt</li>
+</ul>
+
+Auf Crunchyroll wird auch automatisch:
+
+<ul>
+<li>Filter zum Release Kalender hinzugefügt</li>
 </ul>
 
 Android: 
@@ -55,8 +61,7 @@ Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert
 
 ✨ Features
 
-Auf Netflix, Prime Video und Disney+ & Hotstar wird automatisch:
-
+Auf Netflix, Prime Video, Disney+ & Hotstar und Crunchyroll wird automatisch:
 
 • Intros übersprungen
 • Abspann übersprungen                             : Geht automatisch zur nächsten Folge
@@ -71,12 +76,16 @@ Auf Netflix wird auch automatisch:
 • Inaktivitätswarnung      : Video wird automatisch fortgesetzt
 • Automatisch zuletzt verwendetes Profil ausgewählt
 
-Amazon Prime-Video wird auch automatisch:
+Auf Amazon Prime-Video wird auch automatisch:
 
 • Eigenwerbung übersprungen
 • Kostenpflichtige Inhalte gefiltert
 • Die lästige Unschärfe, wenn das overlay angezeigt wird entfernt
 • Potentielle gratis Streaming-Links zu kostenpflichtigen Sendungen hinzugefügt
+
+Auf Crunchyroll wird auch automatisch:
+
+• Filter zum Release Kalender hinzugefügt
 
 Android: 
 Prime Video und Disney+ (im Desktop-Modus) werden auf Android unterstützt. Netflix funktioniert nicht auf Android.
