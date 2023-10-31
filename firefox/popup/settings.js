@@ -250,6 +250,15 @@ function setSettings(log) {
   console.log(log, settings);
   browser.storage.sync.set({ settings });
 }
+/**
+ * for inverse Settings
+ * @param {*} setting  the setting that should be set
+ * @param {*} target   the setting that should be unset if setting is set
+ */
+function toggleSetting(service, target, setting) {
+  settings[service][setting] = !settings[service]?.[setting];
+  if (settings[service][setting]) settings[service][target] = false;
+}
 function listenForClicks() {
   let listener = document.addEventListener("click", (e) => {
     if (e.target.classList.contains("reset")) {
@@ -334,54 +343,21 @@ function listenForClicks() {
       //  -------------      Amazon        ---------------------------------------
       else if (e.target.id === "AmazonSkips")
         settings.Amazon.skipAd = settings.Amazon.filterPaid = settings.Amazon.streamLinks = !(settings.Amazon.skipAd && settings.Amazon.filterPaid && settings.Amazon.streamLinks);
-      else if (e.target.id === "AmazonSkipCredits") {
-        settings.Amazon.skipCredits = !settings.Amazon.skipCredits;
-        if (settings.Amazon.skipCredits) settings.Amazon.watchCredits = false;
-      } else if (e.target.id === "AmazonWatchCredits") {
-        settings.Amazon.watchCredits = !settings.Amazon.watchCredits;
-        if (settings.Amazon.watchCredits) settings.Amazon.skipCredits = false;
-      } else if (e.target.id.startsWith("Amazon")) {
-        let key = e.target.id.replace("Amazon", "");
-        key = key.charAt(0).toLowerCase() + key.slice(1);
-        settings.Amazon[key] = !settings.Amazon?.[key];
-      }
-      //  -------------      Netflix        ---------------------------------------
       else if (e.target.id === "NetflixSkips")
         settings.Netflix.skipRecap = settings.Netflix.skipBlocked = settings.Netflix.profile = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
-      else if (e.target.id === "NetflixSkipCredits") {
-        settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
-        if (settings.Netflix.skipCredits) settings.Netflix.watchCredits = false;
-      } else if (e.target.id === "NetflixWatchCredits") {
-        settings.Netflix.watchCredits = !settings.Netflix.watchCredits;
-        if (settings.Netflix.watchCredits) settings.Netflix.skipCredits = false;
-      } else if (e.target.id.startsWith("Netflix")) {
-        let key = e.target.id.replace("Netflix", "");
-        key = key.charAt(0).toLowerCase() + key.slice(1);
-        settings.Netflix[key] = !settings.Netflix?.[key];
-      }
-      //  -------------      Disney        ---------------------------------------
-      else if (e.target.id === "DisneySkips") {
-        // const DisneySkips = !settings?.Disney.skipIntro;
-        // settings.Disney.skipIntro = DisneySkips;
-        //       } else if (e.target.id === "DisneySkipIntro") {
-        // settings.Disney.skipIntro = !settings.Disney.skipIntro;
-      } else if (e.target.id === "DisneySkipCredits") {
-        settings.Disney.skipCredits = !settings.Disney.skipCredits;
-        if (settings.Disney.skipCredits) settings.Disney.watchCredits = false;
-      } else if (e.target.id === "DisneyWatchCredits") {
-        settings.Disney.watchCredits = !settings.Disney.watchCredits;
-        if (settings.Disney.watchCredits) settings.Disney.skipCredits = false;
-      } else if (e.target.id.startsWith("Disney")) {
-        let key = e.target.id.replace("Disney", "");
-        key = key.charAt(0).toLowerCase() + key.slice(1);
-        settings.Disney[key] = !settings.Disney?.[key];
-      }
-      //  -------------      Crunchyroll        ---------------------------------------
+      // else if (e.target.id === "DisneySkips") settings.Disney.skipIntro = !settings?.Disney.skipIntro
       else if (e.target.id === "CrunchyrollSkips") settings.Crunchyroll.skipIntro = settings.Crunchyroll.releaseCalendar = !(settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar);
-      else if (e.target.id.startsWith("Crunchyroll")) {
-        let key = e.target.id.replace("Crunchyroll", "");
-        key = key.charAt(0).toLowerCase() + key.slice(1);
-        settings.Crunchyroll[key] = !settings.Crunchyroll?.[key];
+      const services = ["Amazon", "Netflix", "Disney", "Crunchyroll"];
+      for (const service of services) {
+        if (e.target.id.startsWith(service)) {
+          let key = e.target.id.replace(service, "");
+          key = key.charAt(0).toLowerCase() + key.slice(1);
+          if (key === "skipCredits" || key === "watchCredits") {
+            toggleSetting(service, key === "skipCredits" ? "watchCredits" : "skipCredits", key);
+          } else {
+            settings[service][key] = !settings[service]?.[key];
+          }
+        }
       }
       // check if settings changed
       if (JSON.stringify(settings) !== JSON.stringify(currentSettings)) {
