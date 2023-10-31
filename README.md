@@ -75,7 +75,7 @@ It automatically skips Ads, intros, Credits, recaps, and anything else you don't
 
 ## ✨ Features
 
-On Netflix, Prime Video and Disney+ & Hotstar it automatically:
+On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
 
 <ul>
 <li>Skips Intros</li>
@@ -102,6 +102,13 @@ On Amazon Prime Video it also automatically:
 <li>Removes annoying blur when hovering over video</li>
 <li>Adds potentially free streaming links to paid/ad shows</li>
 </ul>
+
+On Crunchyroll it automatically:
+<ul>
+<li>adds Filters to Release Calendar</li>
+</ul>
+
+If you want to see what is implemented go [here](#implemented-feature-overview):
 
 ## Contributing
 
@@ -318,6 +325,8 @@ Cli ARGS:
 - install selenium ``pip install -U selenium``
 - ``npm i``
 
+# Implemented Feature Overview
+
 Table of test cases for each feature. S=season, E=episode of the show.
 
 | Feature | Netflix | Prime Video | Disney+ & Hotstar | Crunchyroll |
@@ -328,12 +337,10 @@ Table of test cases for each feature. S=season, E=episode of the show.
 | Ads | ✅ | ✅ <a href="https://www.amazon.de/Es-war-einmal/dp/B00GNWD4H0">Grimm</a> | ➖ | ❌(Ublock can do it) |
 | Add Speed Slider | ✅ | ✅ | ✅ | ✅ |
 | Play on Fullscreen | ✅ | ✅ | ✅ | ✅ |
-| Skip Self Ads | ➖ | ✅ | ➖ | ➖ |
-| Paid Content | ➖ | ✅ | ➖ | ➖ |
-| Inactivity Warning | ✅ | ➖ | ➖ | ➖ |
-| Auto pick last profile | ✅ | ➖ | ➖ | ➖ |
 | TMDB Rating | ✅ | ➖(amazon has IMDB) | ✅ | ❌ |
-| CR Release Calendar Filters | ➖ | ➖ | ➖ | ✅ |
+| Individual Features | --- | --- | --- | --- |
+|  | Inactivity Warning | Skip Self Ads | ➖ | Release Calendar Filters |
+|  | Auto pick last profile | Paid Content filter | ➖ | ➖ |
 
 ## Changelog
 
