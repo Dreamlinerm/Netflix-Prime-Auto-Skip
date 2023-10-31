@@ -75,7 +75,7 @@ It automatically skips Ads, intros, Credits, recaps, and anything else you don't
 
 ## ✨ Features
 
-On Netflix, Prime Video and Disney+ & Hotstar it automatically:
+On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
 
 <ul>
 <li>Skips Intros</li>
@@ -102,6 +102,13 @@ On Amazon Prime Video it also automatically:
 <li>Removes annoying blur when hovering over video</li>
 <li>Adds potentially free streaming links to paid/ad shows</li>
 </ul>
+
+On Crunchyroll it automatically:
+<ul>
+<li>adds Filters to Release Calendar</li>
+</ul>
+
+If you want to see what is implemented go [here](#implemented-feature-overview):
 
 ## Contributing
 
@@ -318,22 +325,22 @@ Cli ARGS:
 - install selenium ``pip install -U selenium``
 - ``npm i``
 
+# Implemented Feature Overview
+
 Table of test cases for each feature. S=season, E=episode of the show.
 
-| Feature | Netflix | Prime Video | Disney+ & Hotstar |
-| --- | --- | --- | --- |
-| Intro | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>| ✅  <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>| ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> |
-| Recaps | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>| ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a> | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>|
-| Credits | ✅ | ✅ | ✅ |
-| Ads | ✅ | ✅ <a href="https://www.amazon.de/Es-war-einmal/dp/B00GNWD4H0">Grimm</a> | ❌ |
-| Add Speed Slider | ✅ | ✅ | ✅ |
-| Play on Fullscreen | ✅ | ✅ | ✅ |
-| Skip Self Ads | ❌ | ✅ | ❌ |
-| Paid Content | ❌ | ✅ | ❌ |
-| Inactivity Warning | ✅ | ❌ | ❌ |
-| Auto pick last profile | ✅ | ❌ | ❌ |
-| TMDB Rating | ✅ | ✅(default on amazon) | ✅ |
-| Streaming links | ❌ | ✅ | ❌ |
+| Feature | Netflix | Prime Video | Disney+ & Hotstar | Crunchyroll |
+| --- | --- | --- | --- | --- |
+| Intro | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>| ✅  <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>| ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> | ✅ |
+| Recaps | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>| ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a> | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>| ? |
+| Credits | ✅ | ✅ | ✅ | ❌ |
+| Ads | ✅ | ✅ <a href="https://www.amazon.de/Es-war-einmal/dp/B00GNWD4H0">Grimm</a> | ➖ | ❌(Ublock can do it) |
+| Add Speed Slider | ✅ | ✅ | ✅ | ✅ |
+| Play on Fullscreen | ✅ | ✅ | ✅ | ✅ |
+| TMDB Rating | ✅ | ➖(amazon has IMDB) | ✅ | ❌ |
+| Individual Features | --- | --- | --- | --- |
+|  | Inactivity Warning | Skip Self Ads | ➖ | Release Calendar Filters |
+|  | Auto pick last profile | Paid Content filter | ➖ | ➖ |
 
 ## Changelog
 
