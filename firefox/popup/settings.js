@@ -131,6 +131,9 @@ function setCategoryToBoolean(category, bool) {
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+function lowerCaseFirstLetter(str) {
+  return str.charAt(0).toLowerCase() + str.slice(1);
+}
 function setCheckboxesOfService(service) {
   Object.keys(settings[service]).forEach((key) => {
     const buttons = document.querySelectorAll("#" + service + capitalizeFirstLetter(key));
@@ -248,6 +251,11 @@ function toggleSetting(service, target, setting) {
   settings[service][setting] = !settings[service]?.[setting];
   if (settings[service][setting]) settings[service][target] = false;
 }
+function toggleCategoryBoolean(target, setting) {
+  const value = getBooleanOfCategory(setting);
+  setCategoryToBoolean(setting, !value);
+  if (!value) setCategoryToBoolean(target, false);
+}
 function listenForClicks() {
   let listener = document.addEventListener("click", (e) => {
     if (e.target.classList.contains("reset")) {
@@ -314,19 +322,16 @@ function listenForClicks() {
         });
         settings.Amazon.blockFreevee = settings.Netflix.skipAd = settings.Video.playOnFullScreen = VideoSkips;
         if (VideoSkips) setCategoryToBoolean("watchCredits", false);
-      } else if (e.target.id === "VideoSkipIntro") setCategoryToBoolean("skipIntro", !getBooleanOfCategory("skipIntro"));
-      else if (e.target.id === "VideoSkipCredits") {
-        const skipCredits = getBooleanOfCategory("skipCredits");
-        setCategoryToBoolean("skipCredits", !skipCredits);
-        if (!skipCredits) setCategoryToBoolean("watchCredits", false);
-      } else if (e.target.id === "VideoWatchCredits") {
-        const watchCredits = getBooleanOfCategory("watchCredits");
-        setCategoryToBoolean("watchCredits", !watchCredits);
-        if (!watchCredits) setCategoryToBoolean("skipCredits", false);
       } else if (e.target.id === "VideoAds") settings.Amazon.blockFreevee = settings.Netflix.skipAd = !(settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
-      else if (e.target.id === "VideoShowRating") setCategoryToBoolean("showRating", !getBooleanOfCategory("showRating"));
-      else if (e.target.id === "VideoSpeedSlider") setCategoryToBoolean("speedSlider", !getBooleanOfCategory("speedSlider"));
       else if (e.target.id === "VideoFullScreen") settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
+      else if (e.target.id.startsWith("Video")) {
+        let key = lowerCaseFirstLetter(e.target.id.replace("Video", ""));
+        if (key === "skipCredits" || key === "watchCredits") {
+          toggleCategoryBoolean(key === "skipCredits" ? "watchCredits" : "skipCredits", key);
+        } else {
+          setCategoryToBoolean(key, !getBooleanOfCategory(key));
+        }
+      }
       // -------------      Default        ---------------------------------------
       else if (e.target.id === "DefaultSkips") settings.Amazon.filterPaid = !settings?.Amazon.filterPaid;
       //  -------------      Amazon        ---------------------------------------
@@ -339,8 +344,7 @@ function listenForClicks() {
       const services = ["Amazon", "Netflix", "Disney", "Crunchyroll"];
       for (const service of services) {
         if (e.target.id.startsWith(service)) {
-          let key = e.target.id.replace(service, "");
-          key = key.charAt(0).toLowerCase() + key.slice(1);
+          let key = lowerCaseFirstLetter(e.target.id.replace(service, ""));
           if (key === "skipCredits" || key === "watchCredits") {
             toggleSetting(service, key === "skipCredits" ? "watchCredits" : "skipCredits", key);
           } else {
