@@ -159,6 +159,7 @@ function setCheckboxesOfService(service) {
 function setButtonChecked(id, condition) {
   const buttons = document.querySelectorAll(`#${id}`);
   buttons.forEach((button) => {
+    // console.log(button, condition);
     button.checked = condition;
   });
 }
@@ -350,14 +351,16 @@ function listenForClicks() {
         settings.Netflix.skipRecap = settings.Netflix.skipBlocked = settings.Netflix.profile = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
       // else if (e.target.id === "DisneySkips") settings.Disney.skipIntro = !settings?.Disney.skipIntro
       else if (e.target.id === "CrunchyrollSkips") settings.Crunchyroll.skipIntro = settings.Crunchyroll.releaseCalendar = !(settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar);
-      const services = ["Amazon", "Netflix", "Disney", "Crunchyroll"];
-      for (const service of services) {
-        if (e.target.id.startsWith(service)) {
-          let key = lowerCaseFirstLetter(e.target.id.replace(service, ""));
-          if (key === "skipCredits" || key === "watchCredits") {
-            toggleSetting(service, key === "skipCredits" ? "watchCredits" : "skipCredits", key);
-          } else {
-            settings[service][key] = !settings[service]?.[key];
+      else {
+        const services = ["Amazon", "Netflix", "Disney", "Crunchyroll"];
+        for (const service of services) {
+          if (e.target.id.startsWith(service)) {
+            let key = lowerCaseFirstLetter(e.target.id.replace(service, ""));
+            if (key === "skipCredits" || key === "watchCredits") {
+              toggleSetting(service, key === "skipCredits" ? "watchCredits" : "skipCredits", key);
+            } else {
+              settings[service][key] = !settings[service]?.[key];
+            }
           }
         }
       }
