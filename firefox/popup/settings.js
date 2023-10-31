@@ -115,7 +115,12 @@ function getTimeFormatted(sec = 0) {
 }
 // for all services get the shared boolean of the category
 function getBooleanOfCategory(category) {
-  return settings?.Amazon[category] && settings?.Netflix[category] && settings?.Disney[category];
+  let bool = true;
+  if (settings?.Amazon?.[category] !== undefined) bool &= settings?.Amazon[category];
+  if (settings?.Netflix?.[category] !== undefined) bool &= settings?.Netflix[category];
+  if (settings?.Disney?.[category] !== undefined) bool &= settings?.Disney[category];
+  if (settings?.Crunchyroll?.[category] !== undefined) bool &= settings?.Crunchyroll[category];
+  return bool;
 }
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -148,19 +153,19 @@ function setCheckboxesToSettings() {
       // playOnFullScreen
       settings?.Video.playOnFullScreen;
   button = document.querySelector("#VideoIntro");
-  if (button) button.checked = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro && settings?.Disney.skipIntro;
+  if (button) button.checked = getBooleanOfCategory("skipIntro");
   button = document.querySelector("#VideoCredits");
-  if (button) button.checked = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits && settings?.Disney.skipCredits;
+  if (button) button.checked = getBooleanOfCategory("skipCredits");
   button = document.querySelectorAll("#VideoWatchCredits");
   for (const b of button) {
-    b.checked = settings?.Amazon.watchCredits && settings?.Netflix.watchCredits && settings?.Disney.watchCredits;
+    b.checked = getBooleanOfCategory("watchCredits");
   }
   button = document.querySelector("#VideoAds");
   if (button) button.checked = settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds;
   button = document.querySelector("#VideoShowRating");
-  if (button) button.checked = settings?.Netflix.showRating && settings?.Disney.showRating;
+  if (button) button.checked = getBooleanOfCategory("showRating");
   button = document.querySelector("#VideoSpeedSlider");
-  if (button) button.checked = settings?.Amazon.speedSlider && settings?.Netflix.speedSlider && settings?.Disney.speedSlider;
+  if (button) button.checked = getBooleanOfCategory("speedSlider");
   button = document.querySelector("#VideoFullScreen");
   if (button) button.checked = settings?.Video.playOnFullScreen;
 
@@ -174,11 +179,14 @@ function setCheckboxesToSettings() {
   if (button) button.checked = settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile;
   button = document.querySelector("#DisneySkips");
   if (button) button.checked = settings?.Disney.skipIntro;
+  button = document.querySelector("#CrunchyrollSkips");
+  if (button) button.checked = settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar;
   //  -------------      Individual Checkboxes        ---------------------------------------
   setCheckboxesOfService("Amazon");
   setCheckboxesOfService("Netflix");
   setCheckboxesOfService("Disney");
   setCheckboxesOfService("Statistics");
+  setCheckboxesOfService("Crunchyroll");
   //  -------------      Netflix other        ---------------------------------------
   button = document.querySelector("#profileName");
   if (button) button.textContent = settings?.General.profileName;
@@ -299,6 +307,7 @@ function listenForClicks() {
         settings.Amazon.skipIntro =
           settings.Netflix.skipIntro =
           settings.Disney.skipIntro =
+          settings.Crunchyroll.skipIntro =
           // Credits
           settings.Amazon.skipCredits =
           settings.Netflix.skipCredits =
@@ -314,6 +323,7 @@ function listenForClicks() {
           settings.Amazon.speedSlider =
           settings.Netflix.speedSlider =
           settings.Disney.speedSlider =
+          settings.Crunchyroll.speedSlider =
           // playOnFullScreen
           settings.Video.playOnFullScreen =
             VideoSkips;
@@ -383,6 +393,11 @@ function listenForClicks() {
         if (settings.Disney.watchCredits) settings.Disney.skipCredits = false;
       } else if (e.target.id === "DisneySpeedSlider") settings.Disney.speedSlider = !settings.Disney.speedSlider;
       else if (e.target.id === "DisneyShowRating") settings.Disney.showRating = !settings.Disney.showRating;
+      //  -------------      Crunchyroll        ---------------------------------------
+      else if (e.target.id === "CrunchyrollSkips") settings.Crunchyroll.skipIntro = settings.Crunchyroll.releaseCalendar = !(settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar);
+      else if (e.target.id === "CrunchyrollSkipIntro") settings.Crunchyroll.skipIntro = !settings.Crunchyroll.skipIntro;
+      else if (e.target.id === "CrunchyrollSpeedSlider") settings.Crunchyroll.speedSlider = !settings.Crunchyroll.speedSlider;
+      else if (e.target.id === "CrunchyrollReleaseCalendar") settings.Crunchyroll.releaseCalendar = !settings.Crunchyroll.releaseCalendar;
       // check if settings changed
       if (JSON.stringify(settings) !== JSON.stringify(currentSettings)) {
         setSettings(e.target.id);
