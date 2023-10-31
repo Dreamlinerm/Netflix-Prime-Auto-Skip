@@ -71,7 +71,7 @@
           <div class="line flex">
             <p i18n>IntroSwitch</p>
             <label class="switch">
-              <input type="checkbox" id="VideoIntro" />
+              <input type="checkbox" id="VideoSkipIntro" />
               <span class="slider round"></span>
             </label>
           </div>
@@ -79,7 +79,7 @@
           <div class="line flex">
             <p i18n>CreditsSwitch</p>
             <label class="switch">
-              <input type="checkbox" id="VideoCredits" />
+              <input type="checkbox" id="VideoSkipCredits" />
               <span class="slider round"></span>
             </label>
           </div>
@@ -261,6 +261,43 @@
         </div>
         <!-- show on click -->
         <div id="DisneySettings" style="display: none"></div>
+      </div>
+      <div class="categoryCrunchyroll">
+        <div id="openCrunchyrollSettings" class="flex flex-between" style="padding: 5px 5px">
+          <h2 id="openCrunchyrollSettings" i18n>PageSpecificTitle;Crunchyroll</h2>
+          <div class="flex">
+            <div class="line flex-align" id="openCrunchyrollSettings">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openCrunchyrollSettings" class="CrunchyrollDownArrow">
+                <path d="M0 0 40 0 20 20 0 0" fill="white" id="openCrunchyrollSettings" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 20" height="1em" id="openCrunchyrollSettings" class="CrunchyrollUpArrow hidden">
+                <path d="M20 0 40 20 0 20 20 0" fill="white" id="openCrunchyrollSettings" />
+              </svg>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="CrunchyrollSkips" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- show on click -->
+        <div id="CrunchyrollSettings" style="display: none">
+          <div class="line flex">
+            <p i18n>IntroSwitch</p>
+            <label class="switch">
+              <input type="checkbox" id="CrunchyrollSkipIntro" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="line flex">
+            <p i18n>ReleaseCalendarSwitch</p>
+            <label class="switch">
+              <input type="checkbox" id="CrunchyrollReleaseCalendar" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
       </div>
       <div class="flex flex-between flex-align" id="openStatistics">
         <h2 id="openStatistics" style="margin-left: 10px" i18n>StatisticPageTitle</h2>

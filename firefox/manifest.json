@@ -25,9 +25,15 @@
         "*://*.netflix.ca/*",
         "*://*.netflix.com.au/*",
         "*://*.disneyplus.com/*",
-        "*://*.hotstar.com/*"
+        "*://*.hotstar.com/*",
+        "*://*.crunchyroll.com/*"
       ],
       "js": ["skipper.js"]
+    },
+    {
+      "all_frames": true,
+      "js": ["cr.js"],
+      "matches": ["https://static.crunchyroll.com/vilos-v2/web/vilos/player.html*"]
     }
   ],
   "permissions": ["storage", "*://apis.justwatch.com/*"],
