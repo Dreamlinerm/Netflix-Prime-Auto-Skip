@@ -211,9 +211,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         if (!compiledData?.score) {
           log("no Score found", title, data);
         }
-        // else {
-        //   log("Score found", title);
-        // }
         if (Rating) setRatingOnCard(card, compiledData, title);
         else {
           setAlternativesOnCard(card, compiledData, title);
@@ -303,92 +300,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }
   }
-  // deprecated justwatch api
-  async function setAlternativesOnCard(card, data) {
-    let div = document.createElement("div");
-    div.style = "display:flex;";
-    let h1 = document.createElement("h1");
-    if (data?.jWURL) {
-      h1.textContent = "Watch for free?";
-      // add Just watch Link,
-      // https://www.justwatch.com/appassets/img/home/logo.svg
-      let a = document.createElement("a");
-      a.href = "https://www.justwatch.com" + data.jWURL;
-      a.target = "_blank";
-      a.style = "color:white";
-
-      let img = document.createElement("img");
-      img.src = "https://www.justwatch.com/appassets/img/home/logo.svg";
-      img.alt = "Just Watch icon";
-      img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4em;height: auto;";
-
-      let p = document.createElement("p");
-      p.textContent = "Just Watch";
-      p.style = "margin: 0 0 0 5px;font-size: 14px;";
-
-      a.appendChild(img);
-      a.appendChild(p);
-      div.appendChild(a);
-    }
-    if (data?.streamLinks) {
-      // netflix icon
-      data.streamLinks.forEach((link) => {
-        let a = document.createElement("a");
-        a.href = link.url;
-        a.target = "_blank";
-        a.style = "color:white";
-
-        let img = document.createElement("img");
-        let p = document.createElement("p");
-        p.style = "margin: 0 0 0 5px;font-size: 14px;";
-        let text = "";
-        switch (link.package_short_name) {
-          case "amp":
-            img.src = "https://images.justwatch.com/icon/430993/s100/";
-            text = "Prime";
-            break;
-          case "aat":
-            img.src = "https://www.justwatch.com/images/icon/190848813/s100";
-            text = "Prime";
-            break;
-          case "nfx":
-            img.src = "https://images.justwatch.com/icon/207360008/s100/";
-            text = "Netflix";
-            break;
-          case "dnp":
-            img.src = "https://images.justwatch.com/icon/147638351/s100/";
-            text = "Disney+";
-            break;
-          case "hlu":
-            img.src = "https://images.justwatch.com/icon/116305230/s100/";
-            text = "Hulu";
-            break;
-          case "mxx":
-            img.src = "https://images.justwatch.com/icon/305458112/s100";
-            text = "Max";
-            break;
-          case "cru":
-            img.src = "https://images.justwatch.com/icon/127445869/s100";
-            text = "Crunchyroll";
-            break;
-          default:
-            text = link.package_short_name;
-            break;
-        }
-        if (img.src) {
-          img.alt = text;
-          p.textContent = text + " (US)";
-          img.style = "border: 1px solid transparent;border-radius: 1.1em;width: 4em;height: auto;";
-          a.appendChild(img);
-          a.appendChild(p);
-          div.appendChild(a);
-        }
-      });
-    }
-    card.insertBefore(div, card.firstChild);
-    card.insertBefore(h1, card.firstChild);
-  }
-
   async function setRatingOnCard(card, data, title) {
     let div = document.createElement("div");
     // right: 1.5vw;
@@ -421,23 +332,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     } else {
       log("stopped observing| PlayOnFullScreen");
       removeEventListener("fullscreenchange", OnFullScreenChange);
-    }
-  }
-  // deprecated
-  async function addStreamLinks() {
-    log("adding stream links");
-    let title = document.querySelector("h1[data-automation-id='title']")?.textContent?.split(" [")[0];
-    if (title) {
-      // if not already free blue in prime icon
-      if (!document.querySelector(".fbl-icon._3UMk3x._1a_Ljt._3H1cN4")) {
-        let card = document.querySelector("div#dv-action-box");
-        if (!DBCache[title]) {
-          getMovieInfo(title, card, false);
-          log("no info in DBcache", title);
-        } else {
-          setAlternativesOnCard(card, DBCache[title], title);
-        }
-      }
     }
   }
 
