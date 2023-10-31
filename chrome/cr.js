@@ -19,6 +19,7 @@ chrome.storage.sync.get("settings", function (result) {
     chrome.storage.sync.set(defaultSettings);
   } else {
     CrunchyrollObserver.observe(document, config);
+    startPlayOnFullScreen();
 
     let changedSettings = false;
     for (const key in defaultSettings.settings) {
@@ -45,6 +46,7 @@ chrome.storage.sync.onChanged.addListener(function (changes, namespace) {
   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
     if (key == "settings") {
       settings = newValue;
+      if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
     }
   }
 });
@@ -65,6 +67,23 @@ async function addSkippedTime(startTime, endTime, key) {
     log(key, endTime - startTime);
     settings.Statistics[key] += endTime - startTime;
     increaseBadge();
+  }
+}
+async function startPlayOnFullScreen() {
+  if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
+    log("started observing| PlayOnFullScreen");
+    function OnFullScreenChange() {
+      let video = document.querySelector("video");
+      if (window.fullScreen && video) {
+        video.play();
+        log("auto-played on fullscreen");
+        increaseBadge();
+      }
+    }
+    addEventListener("fullscreenchange", OnFullScreenChange);
+  } else {
+    log("stopped observing| PlayOnFullScreen");
+    removeEventListener("fullscreenchange", OnFullScreenChange);
   }
 }
 async function Crunchyroll_Intro(video, time) {
