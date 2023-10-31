@@ -39,6 +39,7 @@
 
 
 ## Install on Android
+
 <div style="display:flex;flex-direction:column">
         <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
           <img src="Logos/kiwi.webp" width="8%">
@@ -59,17 +60,11 @@ It will work together with other skippers, but it may behave unexpectedly.
         <img src="Logos/Netflix.png" width="20%">
         <img src="Logos/prime%20video.png" width="20%">
         <img src="Logos/crunchyroll.avif" width="20%">
-      </td>
-    </tr>
-    <tr>
-      <td align="center" valign="top" width="14.28%">        
         <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
         <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
       </td>
     </tr>
 </table>
-
-
 
 ## What it does
 
