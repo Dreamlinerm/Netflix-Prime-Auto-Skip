@@ -969,7 +969,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
         });
       }
-      filterDub("none");
+      filterDub(settings.General.filterDub ? "none" : "block");
       // Show playlist only
       const label = document.createElement("label");
       const span = document.createElement("span");
