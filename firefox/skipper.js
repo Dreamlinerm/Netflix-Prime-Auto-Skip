@@ -76,7 +76,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       } else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
       else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
 
-      if (settings.Video.playOnFullScreen) startPlayOnFullScreen(isNetflix);
+      if (settings.Video.playOnFullScreen) startPlayOnFullScreen();
       // if there is an undefined setting, set it to the default
       let changedSettings = false;
       for (const key in defaultSettings.settings) {
@@ -137,7 +137,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           if (oldValue === undefined || (newValue.Amazon.skipAd !== oldValue?.Amazon?.skipAd && newValue.Amazon.skipAd)) Amazon_AdTimeout();
           if (oldValue === undefined || (newValue.Amazon.blockFreevee !== oldValue?.Amazon?.blockFreevee && newValue.Amazon.blockFreevee)) Amazon_FreeveeTimeout();
         }
-        if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen(isNetflix);
+        if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
         if (oldValue === undefined || (newValue.Netflix.showRating !== oldValue?.Netflix?.showRating && newValue.Netflix.showRating)) startShowRatingInterval();
       }
     }
@@ -315,7 +315,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     else if (isDisney || isHotstar) card.parentElement?.appendChild(div);
     else card.firstChild.firstChild.appendChild(div);
   }
-  async function startPlayOnFullScreen(isNetflix) {
+  async function startPlayOnFullScreen() {
     if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
       log("started observing| PlayOnFullScreen");
       function OnFullScreenChange() {
