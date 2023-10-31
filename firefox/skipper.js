@@ -528,7 +528,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
 
           let speed = document.createElement("p");
           speed.id = "videoSpeed";
-          speed.textContent = videoSpeed ? videoSpeed + "x" : "1x";
+          speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1x";
           // makes the button clickable
           // speed.setAttribute("class", "control-icon-btn");
           speed.style = "height:10px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
@@ -540,7 +540,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
             else slider.style.display = "block";
           };
           slider.oninput = function () {
-            speed.textContent = this.value / 10 + "x";
+            speed.textContent = (this.value / 10).toFixed(1) + "x";
             video.playbackRate = this.value / 10;
             setVideoSpeed(this.value / 10);
           };
@@ -680,7 +680,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
 
             let speed = document.createElement("p");
             speed.id = "videoSpeed";
-            speed.textContent = videoSpeed ? videoSpeed + "x" : "1x";
+            speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1x";
             // makes the button clickable
             // speed.setAttribute("class", "control-icon-btn");
             speed.style = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
@@ -692,7 +692,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
               else slider.style.display = "block";
             };
             slider.oninput = function () {
-              speed.textContent = this.value / 10 + "x";
+              speed.textContent = (this.value / 10).toFixed(1) + "x";
               video.playbackRate = this.value / 10;
               setVideoSpeed(this.value / 10);
             };
@@ -815,14 +815,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
 
           let speed = document.createElement("p");
           speed.id = "videoSpeed";
-          speed.textContent = "1x";
+          speed.textContent = "1.0x";
           position.insertBefore(speed, position.firstChild);
           speed.onclick = function () {
             if (slider.style.display === "block") slider.style.display = "none";
             else slider.style.display = "block";
           };
           slider.oninput = function () {
-            speed.textContent = this.value / 10 + "x";
+            speed.textContent = (this.value / 10).toFixed(1) + "x";
             video.playbackRate = this.value / 10;
           };
         }
@@ -833,7 +833,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           video.playbackRate = alreadySlider.value / 10;
         }
         alreadySlider.oninput = function () {
-          speed.textContent = this.value / 10 + "x";
+          speed.textContent = (this.value / 10).toFixed(1) + "x";
           video.playbackRate = this.value / 10;
         };
       }
