@@ -82,7 +82,6 @@ async function Crunchyroll_SpeedSlider() {
       slider.value = videoSpeed * 10;
       slider.step = settings.General.sliderSteps;
       slider.style = "display: none;width:200px;";
-      position.insertBefore(slider, position.firstChild);
 
       let speed = document.createElement("p");
       speed.id = "videoSpeed";
@@ -91,6 +90,7 @@ async function Crunchyroll_SpeedSlider() {
       // speed.setAttribute("class", "control-icon-btn");
       speed.style = "color:white;margin: auto;padding: 0 5px;";
       position.insertBefore(speed, position.firstChild);
+      position.insertBefore(slider, position.firstChild);
 
       if (videoSpeed) video.playbackRate = videoSpeed;
       speed.onclick = function (event) {
