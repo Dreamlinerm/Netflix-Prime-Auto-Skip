@@ -82,6 +82,16 @@ browser.storage.sync.get("settings", function (result) {
         }
       }
     }
+    // delete every setting that is not in defaultSettings
+    for (const key in settings) {
+      for (const subkey in settings[key]) {
+        if (typeof defaultSettings.settings[key][subkey] === "undefined") {
+          console.log("delete Setting:", key, subkey);
+          changedSettings = true;
+          delete settings[key][subkey];
+        }
+      }
+    }
     setCheckboxesToSettings();
     if (changedSettings) {
       browser.storage.sync.set({ settings });

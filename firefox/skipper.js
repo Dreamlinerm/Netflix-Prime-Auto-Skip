@@ -30,7 +30,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   const defaultSettings = {
     settings: {
       Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false, showRating: true, streamLinks: true },
-      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true, showRating: true },
+      Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, skipAd: true, speedSlider: true, profile: true, showRating: true },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true },
       Video: { playOnFullScreen: true },
@@ -61,7 +61,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (isNetflix) {
         // start Observers depending on the settings
         if (settings.Netflix?.profile) AutoPickProfile();
-        if (settings.Netflix?.NetflixAds) Netflix_SkipAdInterval();
+        if (settings.Netflix?.skipAd) Netflix_SkipAdInterval();
         NetflixObserver.observe(document, config);
       } else if (isPrimeVideo) {
         AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
@@ -132,7 +132,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         log(key, "Old value:", oldValue, ", new value:", newValue);
         if (isNetflix) {
           // if value is changed then check if it is enabled or disabled
-          if (oldValue === undefined || (newValue.Netflix.NetflixAds !== oldValue?.Netflix?.NetflixAds && newValue.Netflix.NetflixAds)) Netflix_SkipAdInterval();
+          if (oldValue === undefined || (newValue.Netflix.skipAd !== oldValue?.Netflix?.skipAd && newValue.Netflix.skipAd)) Netflix_SkipAdInterval();
         } else if (isPrimeVideo) {
           if (oldValue === undefined || (newValue.Amazon.skipAd !== oldValue?.Amazon?.skipAd && newValue.Amazon.skipAd)) Amazon_AdTimeout();
           if (oldValue === undefined || (newValue.Amazon.blockFreevee !== oldValue?.Amazon?.blockFreevee && newValue.Amazon.blockFreevee)) Amazon_FreeveeTimeout();
@@ -231,7 +231,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   async function startShowRatingInterval() {
     addRating();
     let RatingInterval = setInterval(function () {
-      if ((isNetflix && !settings.Netflix?.NetflixAds) || (isPrimeVideo && !settings.Amazon?.skipAd) || ((isDisney || isHotstar) && !settings.Disney?.skipCredits)) {
+      if ((isNetflix && !settings.Netflix?.showRating) || (isPrimeVideo && !settings.Amazon?.showRating) || ((isDisney || isHotstar) && !settings.Disney?.showRating)) {
         log("stopped adding Rating");
         clearInterval(RatingInterval);
         return;
@@ -239,7 +239,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       addRating();
     }, 1000);
     let DBCacheInterval = setInterval(function () {
-      if ((isNetflix && !settings.Netflix?.NetflixAds) || (isPrimeVideo && !settings.Amazon?.skipAd) || ((isDisney || isHotstar) && !settings.Disney?.skipCredits)) {
+      if ((isNetflix && !settings.Netflix?.showRating) || (isPrimeVideo && !settings.Amazon?.showRating) || ((isDisney || isHotstar) && !settings.Disney?.showRating)) {
         log("stopped DBCacheInterval");
         clearInterval(DBCacheInterval);
         return;
@@ -628,7 +628,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   function Netflix_SkipAdInterval() {
     let AdInterval = setInterval(() => {
-      if (!settings.Netflix?.NetflixAds) {
+      if (!settings.Netflix?.skipAd) {
         log("stopped observing| Ad");
         clearInterval(AdInterval);
         return;
