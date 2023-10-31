@@ -50,7 +50,7 @@ if (url.includes("#")) Menu(url.split("#")[1]);
 const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false, showRating: true, streamLinks: true },
-    Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, NetflixAds: true, speedSlider: true, profile: true, showRating: true },
+    Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, skipAd: true, speedSlider: true, profile: true, showRating: true },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true },
     Video: { playOnFullScreen: true },
@@ -153,7 +153,7 @@ function setCheckboxesToSettings() {
       getBooleanOfCategory("skipCredits") &&
       // Ads
       settings?.Amazon.blockFreevee &&
-      settings?.Netflix.NetflixAds &&
+      settings?.Netflix.skipAd &&
       getBooleanOfCategory("showRating") &&
       getBooleanOfCategory("speedSlider") &&
       // playOnFullScreen
@@ -167,7 +167,7 @@ function setCheckboxesToSettings() {
     b.checked = getBooleanOfCategory("watchCredits");
   }
   button = document.querySelector("#VideoAds");
-  if (button) button.checked = settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds;
+  if (button) button.checked = settings?.Amazon.blockFreevee && settings?.Netflix.skipAd;
   button = document.querySelector("#VideoShowRating");
   if (button) button.checked = getBooleanOfCategory("showRating");
   button = document.querySelector("#VideoSpeedSlider");
@@ -304,7 +304,7 @@ function listenForClicks() {
           getBooleanOfCategory("skipCredits") &&
           // Ads
           settings?.Amazon.blockFreevee &&
-          settings?.Netflix.NetflixAds &&
+          settings?.Netflix.skipAd &&
           getBooleanOfCategory("showRating") &&
           getBooleanOfCategory("speedSlider") &&
           // playOnFullScreen
@@ -314,7 +314,7 @@ function listenForClicks() {
         setCategoryToBoolean("skipCredits", VideoSkips);
         setCategoryToBoolean("showRating", VideoSkips);
         setCategoryToBoolean("speedSlider", VideoSkips);
-        settings.Amazon.blockFreevee = settings.Netflix.NetflixAds = settings.Video.playOnFullScreen = VideoSkips;
+        settings.Amazon.blockFreevee = settings.Netflix.skipAd = settings.Video.playOnFullScreen = VideoSkips;
         if (VideoSkips) setCategoryToBoolean("watchCredits", false);
       } else if (e.target.id === "VideoIntro") setCategoryToBoolean("skipIntro", !getBooleanOfCategory("skipIntro"));
       else if (e.target.id === "VideoCredits") {
@@ -325,7 +325,7 @@ function listenForClicks() {
         const watchCredits = getBooleanOfCategory("watchCredits");
         setCategoryToBoolean("watchCredits", !watchCredits);
         if (!watchCredits) setCategoryToBoolean("skipCredits", false);
-      } else if (e.target.id === "VideoAds") settings.Amazon.blockFreevee = settings.Netflix.NetflixAds = !(settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds);
+      } else if (e.target.id === "VideoAds") settings.Amazon.blockFreevee = settings.Netflix.skipAd = !(settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
       else if (e.target.id === "VideoShowRating") setCategoryToBoolean("showRating", !getBooleanOfCategory("showRating"));
       else if (e.target.id === "VideoSpeedSlider") setCategoryToBoolean("speedSlider", !getBooleanOfCategory("speedSlider"));
       else if (e.target.id === "VideoFullScreen") settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
@@ -348,19 +348,17 @@ function listenForClicks() {
       //  -------------      Netflix        ---------------------------------------
       else if (e.target.id === "NetflixSkips")
         settings.Netflix.skipRecap = settings.Netflix.skipBlocked = settings.Netflix.profile = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
-      else if (e.target.id === "NetflixSkipIntro") settings.Netflix.skipIntro = !settings.Netflix.skipIntro;
-      else if (e.target.id === "NetflixSkipRecap") settings.Netflix.skipRecap = !settings.Netflix.skipRecap;
       else if (e.target.id === "NetflixSkipCredits") {
         settings.Netflix.skipCredits = !settings.Netflix.skipCredits;
         if (settings.Netflix.skipCredits) settings.Netflix.watchCredits = false;
       } else if (e.target.id === "NetflixWatchCredits") {
         settings.Netflix.watchCredits = !settings.Netflix.watchCredits;
         if (settings.Netflix.watchCredits) settings.Netflix.skipCredits = false;
-      } else if (e.target.id === "NetflixSkipBlocked") settings.Netflix.skipBlocked = !settings.Netflix.skipBlocked;
-      else if (e.target.id === "NetflixNetflixAds") settings.Netflix.NetflixAds = !settings.Netflix.NetflixAds;
-      else if (e.target.id === "NetflixSpeedSlider") settings.Netflix.speedSlider = !settings.Netflix.speedSlider;
-      else if (e.target.id === "NetflixProfile") settings.Netflix.profile = !settings.Netflix.profile;
-      else if (e.target.id === "NetflixShowRating") settings.Netflix.showRating = !settings.Netflix.showRating;
+      } else if (e.target.id.startsWith("Netflix")) {
+        let key = e.target.id.replace("Netflix", "");
+        key = key.charAt(0).toLowerCase() + key.slice(1);
+        settings.Netflix[key] = !settings.Netflix?.[key];
+      }
       //  -------------      Disney        ---------------------------------------
       else if (e.target.id === "DisneySkips") {
         // const DisneySkips = !settings?.Disney.skipIntro;
