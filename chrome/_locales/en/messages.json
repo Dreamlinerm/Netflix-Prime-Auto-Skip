@@ -236,6 +236,12 @@
     "message": "Streaming links:"
   },
   "StreamLinksDescription": {
-    "message": "Zeigt streaming links für filme an, die auf anderen plaformen oder anderen ländern verfügbar sind"
+    "message": "Displays streaming links for films that are available on other platforms or in other countries."
+  },
+  "ReleaseCalendarSwitch": {
+    "message": "Add Release Calendar options:"
+  },
+  "ReleaseCalendarDescription": {
+    "message": "Adds the checkboxes 'Show Playlists only' and 'Filter DUB' to the release calendar"
   }
 }
