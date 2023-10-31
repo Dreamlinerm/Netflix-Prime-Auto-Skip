@@ -3,7 +3,7 @@ Você pode configurar o recurso a ser ativado na página de configurações.
 
 ✨ Recursos
 
-Na Netflix, Prime Video e Disney+ e Hotstar, será ativado automaticamente:
+Na Netflix, Prime Video, Disney+ & Hotstar e Crunchyroll, será ativado automaticamente:
 
 • Pula as introduções
 • Pula os créditos: passa automaticamente para o próximo episódio
@@ -24,6 +24,10 @@ Na Amazon Prime Video:
 • Filtra conteúdo pago (filmes, séries)
 • Remove o desfoque de movimento ao passar o ponteiro do mouse sobre o vídeo
 • Adiciona links de streaming potencialmente gratuitos para programas pagos/anúncios
+
+Na Crunchyroll:
+
+• Adiciona filtros ao calendário de lançamentos
 
 Android: 
 O Prime Video e o Disney+ (no modo Desktop) são compatíveis com o Android. 
