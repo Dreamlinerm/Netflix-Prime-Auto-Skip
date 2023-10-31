@@ -103,7 +103,7 @@ async function Crunchyroll_SpeedSlider() {
       };
       slider.oninput = function (event) {
         event.stopPropagation();
-        speed.textContent = this.value / 10 + "x";
+        speed.textContent = (this.value / 10).toFixed(1) + "x";
         video.playbackRate = this.value / 10;
         setVideoSpeed(this.value / 10);
       };
