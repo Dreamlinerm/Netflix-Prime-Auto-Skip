@@ -56,6 +56,17 @@ function Crunchyroll() {
   // if (settings.Crunchyroll?.watchCredits) Crunchyroll_Watch_Credits();
   if (settings.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider();
 }
+const date = new Date();
+function log(...args) {
+  console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), ...args);
+}
+async function addSkippedTime(startTime, endTime, key) {
+  if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+    log(key, endTime - startTime);
+    settings.Statistics[key] += endTime - startTime;
+    increaseBadge();
+  }
+}
 async function Crunchyroll_Intro() {
   const button = document.querySelector('[data-testid="skipIntroText"]');
   if (button) {
@@ -116,4 +127,12 @@ async function Crunchyroll_SpeedSlider() {
       };
     }
   }
+}
+// Badge Functions
+function increaseBadge() {
+  settings.Statistics.SegmentsSkipped++;
+  browser.storage.sync.set({ settings });
+  browser.runtime.sendMessage({
+    type: "increaseBadge",
+  });
 }
