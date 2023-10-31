@@ -41,6 +41,13 @@ browser.storage.sync.get("settings", function (result) {
     }
   }
 });
+browser.storage.sync.onChanged.addListener(function (changes, namespace) {
+  for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
+    if (key == "settings") {
+      settings = newValue;
+    }
+  }
+});
 const config = { attributes: true, childList: true, subtree: true };
 const CrunchyrollObserver = new MutationObserver(Crunchyroll);
 function Crunchyroll() {
