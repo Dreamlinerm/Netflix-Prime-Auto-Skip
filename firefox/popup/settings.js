@@ -143,7 +143,10 @@ function setCheckboxesOfService(service) {
     });
   });
 }
-
+function setButtonChecked(id, condition) {
+  const button = document.querySelector(`#${id}`);
+  if (button) button.checked = condition;
+}
 function setCheckboxesToSettings() {
   let button;
   button = document.querySelector("#VideoSkips");
@@ -158,35 +161,23 @@ function setCheckboxesToSettings() {
       getBooleanOfCategory("speedSlider") &&
       // playOnFullScreen
       settings?.Video.playOnFullScreen;
-  button = document.querySelector("#VideoIntro");
-  if (button) button.checked = getBooleanOfCategory("skipIntro");
-  button = document.querySelector("#VideoCredits");
-  if (button) button.checked = getBooleanOfCategory("skipCredits");
+  setButtonChecked("VideoIntro", getBooleanOfCategory("skipIntro"));
+  setButtonChecked("VideoCredits", getBooleanOfCategory("skipCredits"));
   button = document.querySelectorAll("#VideoWatchCredits");
   for (const b of button) {
     b.checked = getBooleanOfCategory("watchCredits");
   }
-  button = document.querySelector("#VideoAds");
-  if (button) button.checked = settings?.Amazon.blockFreevee && settings?.Netflix.skipAd;
-  button = document.querySelector("#VideoShowRating");
-  if (button) button.checked = getBooleanOfCategory("showRating");
-  button = document.querySelector("#VideoSpeedSlider");
-  if (button) button.checked = getBooleanOfCategory("speedSlider");
-  button = document.querySelector("#VideoFullScreen");
-  if (button) button.checked = settings?.Video.playOnFullScreen;
-
+  setButtonChecked("VideoAds", settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
+  setButtonChecked("VideoShowRating", getBooleanOfCategory("showRating"));
+  setButtonChecked("VideoSpeedSlider", getBooleanOfCategory("speedSlider"));
+  setButtonChecked("VideoFullScreen", settings?.Video.playOnFullScreen);
   //  -------------      Default        ---------------------------------------
-  button = document.querySelector("#DefaultSkips");
-  if (button) button.checked = settings?.Amazon.filterPaid;
+  setButtonChecked("DefaultSkips", settings?.Amazon.filterPaid);
   // -------------      global buttons        ---------------------------------------
-  button = document.querySelector("#AmazonSkips");
-  if (button) button.checked = settings?.Amazon.skipAd && settings?.Amazon.filterPaid && settings?.Amazon.streamLinks;
-  button = document.querySelector("#NetflixSkips");
-  if (button) button.checked = settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile;
-  button = document.querySelector("#DisneySkips");
-  if (button) button.checked = settings?.Disney.skipIntro;
-  button = document.querySelector("#CrunchyrollSkips");
-  if (button) button.checked = settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar;
+  setButtonChecked("AmazonSkips", settings?.Amazon.skipAd && settings?.Amazon.filterPaid && settings?.Amazon.streamLinks);
+  setButtonChecked("NetflixSkips", settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
+  setButtonChecked("DisneySkips", settings?.Disney.skipIntro);
+  setButtonChecked("CrunchyrollSkips", settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar);
   //  -------------      Individual Checkboxes        ---------------------------------------
   setCheckboxesOfService("Amazon");
   setCheckboxesOfService("Netflix");
