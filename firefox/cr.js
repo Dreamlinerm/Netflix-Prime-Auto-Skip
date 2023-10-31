@@ -81,7 +81,7 @@ async function Crunchyroll_SpeedSlider() {
       slider.max = settings.General.sliderMax;
       slider.value = videoSpeed * 10;
       slider.step = settings.General.sliderSteps;
-      slider.style = "position:relative;bottom:20px;display: none;width:200px;";
+      slider.style = "display: none;width:200px;";
       position.insertBefore(slider, position.firstChild);
 
       let speed = document.createElement("p");
@@ -93,11 +93,16 @@ async function Crunchyroll_SpeedSlider() {
       position.insertBefore(speed, position.firstChild);
 
       if (videoSpeed) video.playbackRate = videoSpeed;
-      speed.onclick = function () {
+      speed.onclick = function (event) {
+        event.stopPropagation();
         if (slider.style.display === "block") slider.style.display = "none";
         else slider.style.display = "block";
       };
-      slider.oninput = function () {
+      slider.onclick = function (event) {
+        event.stopPropagation();
+      };
+      slider.oninput = function (event) {
+        event.stopPropagation();
         speed.textContent = this.value / 10 + "x";
         video.playbackRate = this.value / 10;
         setVideoSpeed(this.value / 10);
