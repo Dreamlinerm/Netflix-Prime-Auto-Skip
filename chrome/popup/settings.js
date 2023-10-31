@@ -147,9 +147,9 @@ function setCheckboxesToSettings() {
       getBooleanOfCategory("speedSlider") &&
       // playOnFullScreen
       settings?.Video.playOnFullScreen;
-  button = document.querySelector("#VideoIntro");
+  button = document.querySelector("#VideoSkipIntro");
   if (button) button.checked = settings?.Amazon.skipIntro && settings?.Netflix.skipIntro && settings?.Disney.skipIntro;
-  button = document.querySelector("#VideoCredits");
+  button = document.querySelector("#VideoSkipCredits");
   if (button) button.checked = settings?.Amazon.skipCredits && settings?.Netflix.skipCredits && settings?.Disney.skipCredits;
   button = document.querySelectorAll("#VideoWatchCredits");
   for (const b of button) {
@@ -318,8 +318,8 @@ function listenForClicks() {
           settings.Video.playOnFullScreen =
             VideoSkips;
         if (VideoSkips) settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
-      } else if (e.target.id === "VideoIntro") settings.Amazon.skipIntro = settings.Netflix.skipIntro = settings.Disney.skipIntro = !getBooleanOfCategory("skipIntro");
-      else if (e.target.id === "VideoCredits") {
+      } else if (e.target.id === "VideoSkipIntro") settings.Amazon.skipIntro = settings.Netflix.skipIntro = settings.Disney.skipIntro = !getBooleanOfCategory("skipIntro");
+      else if (e.target.id === "VideoSkipCredits") {
         const skipCredits = getBooleanOfCategory("skipCredits");
         settings.Amazon.skipCredits = settings.Netflix.skipCredits = settings.Disney.skipCredits = !skipCredits;
         if (!skipCredits) {

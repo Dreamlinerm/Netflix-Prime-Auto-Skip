@@ -144,8 +144,10 @@ function setCheckboxesOfService(service) {
   });
 }
 function setButtonChecked(id, condition) {
-  const button = document.querySelector(`#${id}`);
-  if (button) button.checked = condition;
+  const buttons = document.querySelectorAll(`#${id}`);
+  buttons.forEach((button) => {
+    button.checked = condition;
+  });
 }
 function setCheckboxesToSettings() {
   let button;
@@ -161,15 +163,11 @@ function setCheckboxesToSettings() {
       getBooleanOfCategory("speedSlider") &&
       // playOnFullScreen
       settings?.Video.playOnFullScreen;
-  setButtonChecked("VideoIntro", getBooleanOfCategory("skipIntro"));
-  setButtonChecked("VideoCredits", getBooleanOfCategory("skipCredits"));
-  button = document.querySelectorAll("#VideoWatchCredits");
-  for (const b of button) {
-    b.checked = getBooleanOfCategory("watchCredits");
-  }
+  let VideoCheckboxes = ["skipIntro", "skipCredits", "watchCredits", "showRating", "speedSlider"];
+  VideoCheckboxes.forEach((key) => {
+    setButtonChecked("Video" + capitalizeFirstLetter(key), getBooleanOfCategory(key));
+  });
   setButtonChecked("VideoAds", settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
-  setButtonChecked("VideoShowRating", getBooleanOfCategory("showRating"));
-  setButtonChecked("VideoSpeedSlider", getBooleanOfCategory("speedSlider"));
   setButtonChecked("VideoFullScreen", settings?.Video.playOnFullScreen);
   //  -------------      Default        ---------------------------------------
   setButtonChecked("DefaultSkips", settings?.Amazon.filterPaid);
@@ -310,14 +308,14 @@ function listenForClicks() {
           // playOnFullScreen
           settings?.Video.playOnFullScreen
         );
-        setCategoryToBoolean("skipIntro", VideoSkips);
-        setCategoryToBoolean("skipCredits", VideoSkips);
-        setCategoryToBoolean("showRating", VideoSkips);
-        setCategoryToBoolean("speedSlider", VideoSkips);
+        let VideoSkipTypes = ["skipIntro", "skipCredits", "showRating", "speedSlider"];
+        VideoSkipTypes.forEach((key) => {
+          setCategoryToBoolean(key, VideoSkips);
+        });
         settings.Amazon.blockFreevee = settings.Netflix.skipAd = settings.Video.playOnFullScreen = VideoSkips;
         if (VideoSkips) setCategoryToBoolean("watchCredits", false);
-      } else if (e.target.id === "VideoIntro") setCategoryToBoolean("skipIntro", !getBooleanOfCategory("skipIntro"));
-      else if (e.target.id === "VideoCredits") {
+      } else if (e.target.id === "VideoSkipIntro") setCategoryToBoolean("skipIntro", !getBooleanOfCategory("skipIntro"));
+      else if (e.target.id === "VideoSkipCredits") {
         const skipCredits = getBooleanOfCategory("skipCredits");
         setCategoryToBoolean("skipCredits", !skipCredits);
         if (!skipCredits) setCategoryToBoolean("watchCredits", false);
