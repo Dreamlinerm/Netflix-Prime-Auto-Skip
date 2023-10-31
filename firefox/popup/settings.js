@@ -328,7 +328,7 @@ function listenForClicks() {
           settings.Video.playOnFullScreen =
             VideoSkips;
         if (VideoSkips) settings.Amazon.watchCredits = settings.Netflix.watchCredits = settings.Disney.watchCredits = false;
-      } else if (e.target.id === "VideoIntro") settings.Amazon.skipIntro = settings.Netflix.skipIntro = settings.Disney.skipIntro = !getBooleanOfCategory("skipIntro");
+      } else if (e.target.id === "VideoIntro") settings.Amazon.skipIntro = settings.Netflix.skipIntro = settings.Disney.skipIntro = settings.Crunchyroll.skipIntro = !getBooleanOfCategory("skipIntro");
       else if (e.target.id === "VideoCredits") {
         const skipCredits = getBooleanOfCategory("skipCredits");
         settings.Amazon.skipCredits = settings.Netflix.skipCredits = settings.Disney.skipCredits = !skipCredits;
@@ -343,7 +343,8 @@ function listenForClicks() {
         }
       } else if (e.target.id === "VideoAds") settings.Amazon.blockFreevee = settings.Netflix.NetflixAds = !(settings?.Amazon.blockFreevee && settings?.Netflix.NetflixAds);
       else if (e.target.id === "VideoShowRating") settings.Amazon.showRating = settings.Netflix.showRating = settings.Disney.showRating = !getBooleanOfCategory("showRating");
-      else if (e.target.id === "VideoSpeedSlider") settings.Amazon.speedSlider = settings.Netflix.speedSlider = settings.Disney.speedSlider = !getBooleanOfCategory("speedSlider");
+      else if (e.target.id === "VideoSpeedSlider")
+        settings.Amazon.speedSlider = settings.Netflix.speedSlider = settings.Disney.speedSlider = settings.Crunchyroll.speedSlider = !getBooleanOfCategory("speedSlider");
       else if (e.target.id === "VideoFullScreen") settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
       // -------------      Default        ---------------------------------------
       else if (e.target.id === "DefaultSkips") settings.Amazon.filterPaid = !settings?.Amazon.filterPaid;
