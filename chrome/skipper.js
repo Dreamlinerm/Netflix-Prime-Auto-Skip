@@ -24,7 +24,7 @@ const isCrunchyroll = /crunchyroll/i.test(hostname);
 
 const isEdge = /edg/i.test(ua);
 const isFirefox = /firefox/i.test(ua);
-const version = "1.0.64";
+const version = "1.0.67";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   // global variables in localStorage
   const defaultSettings = {
