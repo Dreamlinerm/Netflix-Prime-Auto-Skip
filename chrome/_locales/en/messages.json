@@ -4,7 +4,7 @@
     "description": "Name of the extension"
   },
   "extensionDescription": {
-    "message": "Automatically skip Ads, Intros, Recaps, Credits and add Speed Control, etc. on Netflix, Prime video and Disney+ & Hotstar.",
+    "message": "Automatically skip Ads, Intros, Recaps, Credits and add Speed Control, etc. on Netflix, Prime video, Disney+ & Hotstar and Crunchyroll.",
     "description": "Description of the extension"
   },
 
@@ -227,10 +227,10 @@
     "message": "All conflicting Features"
   },
   "RatingSwitch": {
-    "message": "IMDB Rating:"
+    "message": "TMDB Rating:"
   },
   "RatingSwitchDescription": {
-    "message": "Adding the IMDB rating to every movie and series"
+    "message": "Adding the TMDB rating to every movie and series"
   },
   "StreamLinksSwitch": {
     "message": "Streaming links:"

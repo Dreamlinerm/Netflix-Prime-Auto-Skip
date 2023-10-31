@@ -4,7 +4,7 @@
     "description": "Name der Erweiterung"
   },
   "extensionDescription": {
-    "message": "Automatisch Werbung, Intros, Rückblicke, Abspänne usw. auf Netflix, Prime video und Disney+ überspringen.",
+    "message": "Automatisch Werbung, Intros, Rückblicke, Abspänne usw. auf Netflix, Prime video, Disney+ und Crunchyroll überspringen.",
     "description": "Beschreibung der Erweiterung"
   },
 
@@ -227,10 +227,10 @@
     "message": "Alle widersprüchlichen Funktionen"
   },
   "RatingSwitch": {
-    "message": "IMDB Bewertung:"
+    "message": "TMDB Bewertung:"
   },
   "RatingSwitchDescription": {
-    "message": "Zeigt die IMDB Bewertung für jeden film/serie an"
+    "message": "Zeigt die TMDB Bewertung für jeden film/serie an"
   },
   "StreamLinksSwitch": {
     "message": "Streaming links:"
