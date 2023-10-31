@@ -55,7 +55,7 @@ const defaultSettings = {
     Crunchyroll: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, releaseCalendar: true },
     Video: { playOnFullScreen: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
-    General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20 },
+    General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
   },
 };
 let settings = defaultSettings.settings;

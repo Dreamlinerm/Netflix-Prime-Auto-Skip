@@ -10,13 +10,15 @@ const defaultSettings = {
   },
 };
 let settings = defaultSettings.settings;
+const version = "1.0.64";
 browser.storage.sync.get("settings", function (result) {
+  console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
+  console.log("version:", version);
   settings = result.settings;
   if (typeof settings !== "object") {
     browser.storage.sync.set(defaultSettings);
   } else {
     CrunchyrollObserver.observe(document, config);
-    Crunchyroll_ReleaseCalendar();
 
     let changedSettings = false;
     for (const key in defaultSettings.settings) {
@@ -39,19 +41,16 @@ browser.storage.sync.get("settings", function (result) {
     }
   }
 });
+const config = { attributes: true, childList: true, subtree: true };
 const CrunchyrollObserver = new MutationObserver(Crunchyroll);
 function Crunchyroll() {
-  // if (settings.Crunchyroll?.skipIntro) Crunchyroll_Intro();
+  if (settings.Crunchyroll?.skipIntro) Crunchyroll_Intro();
   // if (settings.Crunchyroll?.skipCredits) Crunchyroll_Credits();
   // if (settings.Crunchyroll?.watchCredits) Crunchyroll_Watch_Credits();
   // if (settings.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider();
 }
 async function Crunchyroll_Intro() {
-  // the line below in xpath
-  // //div[contains(@class, 'SkipContainer')]//button[contains(@class, 'Button') and contains(@class, 'skip')]
-  // let button = document.evaluate('//div[@data-testid="skipIntroText"]', document, null, XPathResult.ANY_TYPE, null)?.iterateNext();
   const button = document.querySelector('[data-testid="skipIntroText"]');
-  console.log(button, document.querySelector("iframe"));
   if (button) {
     let video = document.querySelector("video");
     const time = video?.currentTime;
