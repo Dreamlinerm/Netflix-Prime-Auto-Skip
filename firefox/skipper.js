@@ -280,17 +280,17 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
             DBCache[title].date = today;
           }
           // if DBCache[title]?.date is older than 30 days
-          function getDiffinDays(firstDate, secondDate) {
+          function getDiffInDays(firstDate, secondDate) {
             const date1 = new Date(firstDate);
             const date2 = new Date(secondDate);
             const diffInDays = Math.round(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
             return diffInDays;
           }
-          let diffinReleaseDate = false;
-          if (DBCache[title]?.release_date) diffinReleaseDate = getDiffinDays(new Date(DBCache[title]?.release_date), date) <= 30;
-          if (getDiffinDays(new Date(DBCache[title]?.date), date) >= 30 || diffinReleaseDate) {
-            if (diffinReleaseDate) log("update rating", title, DBCache[title]?.release_date, getDiffinDays(new Date(DBCache[title]?.release_date), date));
-            else log("update rating", title, DBCache[title]?.date, getDiffinDays(date, new Date(DBCache[title]?.date)));
+          let diffInReleaseDate = false;
+          if (DBCache[title]?.release_date) diffInReleaseDate = getDiffInDays(new Date(DBCache[title]?.release_date), date) <= 30;
+          if (getDiffInDays(new Date(DBCache[title]?.date), date) >= 30 || diffInReleaseDate) {
+            if (diffInReleaseDate) log("update rating", title, DBCache[title]?.release_date, getDiffInDays(new Date(DBCache[title]?.release_date), date));
+            else log("update rating", title, DBCache[title]?.date, getDiffInDays(date, new Date(DBCache[title]?.date)));
             getMovieInfo(title, card);
             // log("no info today", title);
           } else {
@@ -398,15 +398,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   function Disney_SpeedSlider() {
     let video = document.querySelector("video");
-    let alreadySlider = document.querySelector("#videoSpeedSlider");
     if (video) {
+      let alreadySlider = document.querySelector("#videoSpeedSlider");
       if (!alreadySlider) {
         // infobar position for the slider to be added
-
         let position;
         if (isDisney) position = document.querySelector(".controls__right");
         else position = document.querySelector(".icon-player-landscape").parentElement.parentElement.parentElement.parentElement;
-
         if (position) {
           videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
 
@@ -550,16 +548,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }, 100);
   }
   function Netflix_SpeedSlider(video) {
-    let alreadySlider = document.querySelector("#videoSpeedSlider");
     // only add speed slider on lowest subscription tier
     // && !document.querySelector('[data-uia="control-speed"]')
     if (video) {
-      let p = document.querySelector('[data-uia="controls-standard"]')?.firstChild.children;
-      if (p) {
-        if (!alreadySlider) {
+      let alreadySlider = document.querySelector("#videoSpeedSlider");
+      if (!alreadySlider) {
+        let p = document.querySelector('[data-uia="controls-standard"]')?.firstChild?.children;
+        if (p) {
           // infobar position for the slider to be added
           let position;
-          if (p) position = p[p.length - 2].firstChild.lastChild;
+          if (p) position = p[p.length - 2]?.firstChild?.lastChild;
           if (position) {
             videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
             let slider = document.createElement("input");
@@ -617,7 +615,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       let button = document.querySelector("[class*=skipelement]");
       if (button) {
         let video = document.querySelector(AmazonVideoClass);
-        const time = video.currentTime;
+        const time = video?.currentTime;
         if (time) {
           button.click();
           log("Intro skipped", button);
@@ -630,7 +628,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }
   }
-  reverseButton = false;
+  let reverseButton = false;
   async function AmazonGobackbutton(video, startTime, endTime) {
     if (!reverseButton) {
       reverseButton = true;
@@ -682,16 +680,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function Amazon_SpeedSlider(video) {
-    let alreadySlider = document.querySelector("#videoSpeedSlider");
-
     // remove bad background hue which is annoying
     //document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
     let b = document.querySelector(".fkpovp9.f8hspre");
     if (b && b.style.background != "rgba(0, 0, 0, 0.25)") {
       b.style.background = "rgba(0, 0, 0, 0.25)";
     }
-
     if (video) {
+      let alreadySlider = document.querySelector("#videoSpeedSlider");
       if (!alreadySlider) {
         // infobar position for the slider to be added
         let position = document.querySelector("[class*=infobar-container]")?.firstChild?.lastChild;
@@ -819,7 +815,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       let video = document.querySelector(AmazonVideoClass);
       if (video) {
         video.onplay = function () {
-          //log("started playing video");
           // if video is playing
           if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
             let button = document.querySelector(".fu4rd6c.f1cw2swo");
@@ -857,7 +852,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
       filterQueued(settings.General.filterQueued ? "none" : "block");
       function filterDub(display) {
-        // itemprop="name"
         let list = document.querySelectorAll("cite[itemprop='name']");
         list.forEach((element) => {
           if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;

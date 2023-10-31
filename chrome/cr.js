@@ -51,8 +51,10 @@ chrome.storage.sync.onChanged.addListener(function (changes, namespace) {
 const config = { attributes: true, childList: true, subtree: true };
 const CrunchyrollObserver = new MutationObserver(Crunchyroll);
 function Crunchyroll() {
-  if (settings.Crunchyroll?.skipIntro) Crunchyroll_Intro();
-  if (settings.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider();
+  let video = document.querySelector("video");
+  const time = video?.currentTime;
+  if (settings.Crunchyroll?.skipIntro) Crunchyroll_Intro(video, time);
+  if (settings.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider(video);
 }
 const date = new Date();
 function log(...args) {
@@ -65,11 +67,9 @@ async function addSkippedTime(startTime, endTime, key) {
     increaseBadge();
   }
 }
-async function Crunchyroll_Intro() {
+async function Crunchyroll_Intro(video, time) {
   const button = document.querySelector('[data-testid="skipIntroText"]');
   if (button) {
-    let video = document.querySelector("video");
-    const time = video?.currentTime;
     button?.click();
     log("Intro skipped", button);
     setTimeout(function () {
@@ -81,48 +81,49 @@ let videoSpeed;
 async function setVideoSpeed(speed) {
   videoSpeed = speed;
 }
-async function Crunchyroll_SpeedSlider() {
-  let alreadySlider = document.querySelector("#videoSpeedSlider");
-  let video = document.querySelector("video");
-  if (video && !alreadySlider) {
-    // infobar position for the slider to be added
-    // console.log(document.querySelector("#settingsControl"));
-    const position = document.querySelector("#settingsControl")?.parentElement;
-    if (position) {
-      videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
-      let slider = document.createElement("input");
-      slider.id = "videoSpeedSlider";
-      slider.type = "range";
-      slider.min = settings.General.sliderMin;
-      slider.max = settings.General.sliderMax;
-      slider.value = videoSpeed * 10;
-      slider.step = settings.General.sliderSteps;
-      slider.style = "display: none;width:200px;";
+async function Crunchyroll_SpeedSlider(video) {
+  if (video) {
+    let alreadySlider = document.querySelector("#videoSpeedSlider");
+    if (!alreadySlider) {
+      // infobar position for the slider to be added
+      // console.log(document.querySelector("#settingsControl"));
+      const position = document.querySelector("#settingsControl")?.parentElement;
+      if (position) {
+        videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
+        let slider = document.createElement("input");
+        slider.id = "videoSpeedSlider";
+        slider.type = "range";
+        slider.min = settings.General.sliderMin;
+        slider.max = settings.General.sliderMax;
+        slider.value = videoSpeed * 10;
+        slider.step = settings.General.sliderSteps;
+        slider.style = "display: none;width:200px;";
 
-      let speed = document.createElement("p");
-      speed.id = "videoSpeed";
-      speed.textContent = videoSpeed ? videoSpeed + "x" : "1x";
-      // makes the button clickable
-      // speed.setAttribute("class", "control-icon-btn");
-      speed.style = "color:white;margin: auto;padding: 0 5px;";
-      position.insertBefore(speed, position.firstChild);
-      position.insertBefore(slider, position.firstChild);
+        let speed = document.createElement("p");
+        speed.id = "videoSpeed";
+        speed.textContent = videoSpeed ? videoSpeed + "x" : "1x";
+        // makes the button clickable
+        // speed.setAttribute("class", "control-icon-btn");
+        speed.style = "color:white;margin: auto;padding: 0 5px;";
+        position.insertBefore(speed, position.firstChild);
+        position.insertBefore(slider, position.firstChild);
 
-      if (videoSpeed) video.playbackRate = videoSpeed;
-      speed.onclick = function (event) {
-        event.stopPropagation();
-        if (slider.style.display === "block") slider.style.display = "none";
-        else slider.style.display = "block";
-      };
-      slider.onclick = function (event) {
-        event.stopPropagation();
-      };
-      slider.oninput = function (event) {
-        event.stopPropagation();
-        speed.textContent = (this.value / 10).toFixed(1) + "x";
-        video.playbackRate = this.value / 10;
-        setVideoSpeed(this.value / 10);
-      };
+        if (videoSpeed) video.playbackRate = videoSpeed;
+        speed.onclick = function (event) {
+          event.stopPropagation();
+          if (slider.style.display === "block") slider.style.display = "none";
+          else slider.style.display = "block";
+        };
+        slider.onclick = function (event) {
+          event.stopPropagation();
+        };
+        slider.oninput = function (event) {
+          event.stopPropagation();
+          speed.textContent = (this.value / 10).toFixed(1) + "x";
+          video.playbackRate = this.value / 10;
+          setVideoSpeed(this.value / 10);
+        };
+      }
     }
   }
 }
