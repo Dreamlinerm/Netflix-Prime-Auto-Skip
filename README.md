@@ -4,7 +4,8 @@
 
 # Streaming enhanced
 
-## Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video and Disney+ & Hotstar.
+## Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video, Disney+ & Hotstar and Crunchyroll
+
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
 <img src="Logos/firefox.svg" width="20px">
 </a>
@@ -287,15 +288,15 @@ I primarily just develop in firefox and then copy the code into chrome and repla
 ## Firefox 
 
 ### Install web-ext and Firefox
+
 ```npm install --global web-ext```
-## Run
+
+## Commands
+
 ```npm run start```
-## Build
 
-```npm run build```
+```npm run build```  
 
-## lint
-  
 ```npm run lint```
 
 ## debug
@@ -306,7 +307,17 @@ Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then 
 
 ## Test the Extension
 
+### setup
+
+- insert your own firefox profile name to be logged into every platform in the ``test.js`` file.
+- install Python
+- install selenium ``pip install -U selenium``
+- ``npm i``
+
+### run
+
 To run the automated tests run:
+
 1. ```npm run build```
 2. copy the web-ext artifact into the normal folder and rename it to NetflixPrime@Autoskip.io.xpi
 3. ```npm test```
@@ -318,12 +329,6 @@ Cli ARGS:
 - 'd': Disney tests
 
 ```npm test n p d```
-### setup
-
-- insert your own firefox profile name to be logged into every platform in the ``test.js`` file.
-- install Python
-- install selenium ``pip install -U selenium``
-- ``npm i``
 
 # Implemented Feature Overview
 
