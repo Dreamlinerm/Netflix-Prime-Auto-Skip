@@ -279,6 +279,11 @@ and then skipped by forwarding by the ad length -0.1 seconds which will fix a lo
 
 ## Run the Extension
 
+## Chrome
+
+To run the extension in chrome you can just load the ``chrome`` folder as an unpacked extension. But every time you modify the code you have to reload the extension on the extension page manually.
+I primarily just develop in firefox and then copy the code into chrome and replace ``browser`` with ``chrome`` in the code.
+
 ## Firefox 
 
 ### Install web-ext and Firefox
@@ -298,11 +303,6 @@ and then skipped by forwarding by the ad length -0.1 seconds which will fix a lo
 Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then you can login into Netflix and Prime video in the profile and then every time you run the command you don't have to login again.
 
 ```npm run profile```
-
-## Chrome
-
-To run the extension in chrome you can just load the ``dist`` folder as an unpacked extension. But every time you modify the code you have to reload the extension.
-I primarily just develop in firefox and then copy the code into chrome and replace ``browser`` with ``chrome`` in the code.
 
 ## Test the Extension
 
