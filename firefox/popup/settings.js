@@ -340,12 +340,11 @@ function listenForClicks() {
       } else if (e.target.id === "AmazonWatchCredits") {
         settings.Amazon.watchCredits = !settings.Amazon.watchCredits;
         if (settings.Amazon.watchCredits) settings.Amazon.skipCredits = false;
-      } else if (e.target.id === "AmazonSkipIntro") settings.Amazon.skipIntro = !settings.Amazon.skipIntro;
-      else if (e.target.id === "AmazonSkipAd") settings.Amazon.skipAd = !settings.Amazon.skipAd;
-      else if (e.target.id === "AmazonBlockFreevee") settings.Amazon.blockFreevee = !settings.Amazon.blockFreevee;
-      else if (e.target.id === "AmazonSpeedSlider") settings.Amazon.speedSlider = !settings.Amazon.speedSlider;
-      else if (e.target.id === "AmazonFilterPaid") settings.Amazon.filterPaid = !settings.Amazon.filterPaid;
-      else if (e.target.id === "AmazonStreamLinks") settings.Amazon.streamLinks = !settings.Amazon.streamLinks;
+      } else if (e.target.id.startsWith("Amazon")) {
+        let key = e.target.id.replace("Amazon", "");
+        key = key.charAt(0).toLowerCase() + key.slice(1);
+        settings.Amazon[key] = !settings.Amazon?.[key];
+      }
       //  -------------      Netflix        ---------------------------------------
       else if (e.target.id === "NetflixSkips")
         settings.Netflix.skipRecap = settings.Netflix.skipBlocked = settings.Netflix.profile = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
