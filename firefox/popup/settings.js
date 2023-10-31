@@ -365,20 +365,24 @@ function listenForClicks() {
         // settings.Disney.skipIntro = DisneySkips;
         //       } else if (e.target.id === "DisneySkipIntro") {
         // settings.Disney.skipIntro = !settings.Disney.skipIntro;
-      } else if (e.target.id === "DisneySkipIntro") settings.Disney.skipIntro = !settings.Disney.skipIntro;
-      else if (e.target.id === "DisneySkipCredits") {
+      } else if (e.target.id === "DisneySkipCredits") {
         settings.Disney.skipCredits = !settings.Disney.skipCredits;
         if (settings.Disney.skipCredits) settings.Disney.watchCredits = false;
       } else if (e.target.id === "DisneyWatchCredits") {
         settings.Disney.watchCredits = !settings.Disney.watchCredits;
         if (settings.Disney.watchCredits) settings.Disney.skipCredits = false;
-      } else if (e.target.id === "DisneySpeedSlider") settings.Disney.speedSlider = !settings.Disney.speedSlider;
-      else if (e.target.id === "DisneyShowRating") settings.Disney.showRating = !settings.Disney.showRating;
+      } else if (e.target.id.startsWith("Disney")) {
+        let key = e.target.id.replace("Disney", "");
+        key = key.charAt(0).toLowerCase() + key.slice(1);
+        settings.Disney[key] = !settings.Disney?.[key];
+      }
       //  -------------      Crunchyroll        ---------------------------------------
       else if (e.target.id === "CrunchyrollSkips") settings.Crunchyroll.skipIntro = settings.Crunchyroll.releaseCalendar = !(settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar);
-      else if (e.target.id === "CrunchyrollSkipIntro") settings.Crunchyroll.skipIntro = !settings.Crunchyroll.skipIntro;
-      else if (e.target.id === "CrunchyrollSpeedSlider") settings.Crunchyroll.speedSlider = !settings.Crunchyroll.speedSlider;
-      else if (e.target.id === "CrunchyrollReleaseCalendar") settings.Crunchyroll.releaseCalendar = !settings.Crunchyroll.releaseCalendar;
+      else if (e.target.id.startsWith("Crunchyroll")) {
+        let key = e.target.id.replace("Crunchyroll", "");
+        key = key.charAt(0).toLowerCase() + key.slice(1);
+        settings.Crunchyroll[key] = !settings.Crunchyroll?.[key];
+      }
       // check if settings changed
       if (JSON.stringify(settings) !== JSON.stringify(currentSettings)) {
         setSettings(e.target.id);
