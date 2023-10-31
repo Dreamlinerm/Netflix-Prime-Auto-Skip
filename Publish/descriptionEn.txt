@@ -3,7 +3,7 @@ You can configure which feature to enable in the Settings Page.
 
 ✨ Features
 
-On Netflix, Prime Video and Disney+ & Hotstar it automatically:
+On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
 
 <ul>
 <li>Skips Intros</li>
@@ -31,6 +31,12 @@ On Amazon Prime Video, it also automatically:
 <li>Adds potentially free streaming links to paid/ad shows</li>
 </ul>
 
+On Crunchyroll it automatically:
+
+<ul>
+<li>adds Filters to Release Calendar</li>
+</ul>
+
 Android: 
 Prime Video and Disney+(in Desktop mode) are supported on Android. Netflix does not work on Android.
 
@@ -56,7 +62,7 @@ You can configure which feature to enable in the Settings Page.
 
 ✨ Features
 
-On Netflix, Prime Video and Disney+ & Hotstar it automatically:
+On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
 
 • Skips Intros
 • Skips Credits                   : automatically goes to the next episode
@@ -79,6 +85,7 @@ On Amazon Prime Video, it also automatically:
 • Adds potentially free streaming links to paid/ad shows
 
 On Crunchyroll it automatically:
+
 • adds Filters to Release Calendar
 
 Android:
