@@ -338,20 +338,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   // Disney Observers
   const DisneyObserver = new MutationObserver(Disney);
   function Disney() {
-    if (settings.Disney?.skipIntro) Disney_Intro();
+    let video = document.querySelector("video");
+    const time = video?.currentTime;
+    if (settings.Disney?.skipIntro) Disney_Intro(video, time);
     if (settings.Disney?.skipCredits) Disney_Credits();
     if (settings.Disney?.watchCredits) Disney_Watch_Credits();
-    if (settings.Disney?.speedSlider) Disney_SpeedSlider();
+    if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
   }
-  function Disney_Intro() {
+  function Disney_Intro(video, time) {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
     let button;
     if (isDisney) button = document.querySelector(".skip__button");
     else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
-      let video = document.querySelector("video");
-      const time = video?.currentTime;
       button.click();
       log("Recap skipped", button);
       setTimeout(function () {
@@ -396,8 +396,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }
   }
-  function Disney_SpeedSlider() {
-    let video = document.querySelector("video");
+  function Disney_SpeedSlider(video) {
     if (video) {
       let alreadySlider = document.querySelector("#videoSpeedSlider");
       if (!alreadySlider) {
@@ -420,7 +419,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
 
           let speed = document.createElement("p");
           speed.id = "videoSpeed";
-          speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1x";
+          speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
           // makes the button clickable
           // speed.setAttribute("class", "control-icon-btn");
           speed.style = "height:10px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
@@ -444,7 +443,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           video.playbackRate = alreadySlider.value / 10;
         }
         alreadySlider.oninput = function () {
-          speed.textContent = this.value / 10 + "x";
+          speed.textContent = (this.value / 10).toFixed(1) + "x";
           video.playbackRate = this.value / 10;
           setVideoSpeed(this.value / 10);
         };
@@ -572,7 +571,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
 
             let speed = document.createElement("p");
             speed.id = "videoSpeed";
-            speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1x";
+            speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
             // makes the button clickable
             // speed.setAttribute("class", "control-icon-btn");
             speed.style = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
