@@ -4,7 +4,7 @@
     "description": "Nome da extensão"
   },
   "extensionDescription": {
-    "message": "Pula automaticamente, Introduções, Recaptulações, Créditos e tem controle da velocidade, etc. na Netflix, Prime video, Disney+ e Crunchyroll.",
+    "message": "Pula automaticamente, introduções, recapitulações, créditos e tem controle da velocidade, etc. na Netflix, Prime video, Disney+ e Crunchyroll.",
     "description": "Descrição da extensão"
   },
 
@@ -32,7 +32,7 @@
     }
   },
   "backup": {
-    "message": "Cópia de segurança/Redefinir"
+    "message": "Cópia de segurança/redefinir"
   },
   "statistics": {
     "message": "Estatísticas"
@@ -45,7 +45,7 @@
   },
 
   "PageSpecificTitle": {
-    "message": "$service$ específico",
+    "message": "$service$",
     "placeholders": {
       "service": {
         "content": "$1",
@@ -125,7 +125,7 @@
   },
   "PaidContentSwitch": {
     "message": "Remover conteúdo pago:",
-    "description": "Remover o interruptor do recurso de conteúdo pago"
+    "description": "Remover o botão de recurso de conteúdo pago"
   },
   "PaidContentDescription": {
     "message": "Remoção de todas as categorias de filmes/séries pagos"
@@ -163,7 +163,7 @@
     "message": "Tempo ignorado:"
   },
   "AmazonAdDescription": {
-    "message": "Tempo de anúncios pulados + anúncios próprios do Prime Video"
+    "message": "Tempo de anúncios pulados + auto promoções do Prime Video"
   },
   "StatisticAd": {
     "message": "$service$ Ad:",
@@ -196,13 +196,13 @@
     "message": "Quantidade de segmentos individuais ignorados como introdução ou um anúncio da Netflix, Amazon e Disney+"
   },
   "ImportSettings": {
-    "message": "Importar/Exportar todas as configurações"
+    "message": "Importar/exportar todas as configurações"
   },
   "SaveSettings": {
-    "message": "Salvar configurações como arquivo"
+    "message": "Salvar configurações em arquivo"
   },
   "UploadSettings": {
-    "message": "Configurações de upload"
+    "message": "Carregar configurações"
   },
   "ResetAddon": {
     "message": "Redefinir o Addon para o padrão"
@@ -215,7 +215,7 @@
     "message": "Assista os créditos:"
   },
   "WatchCreditsSwitchDescription": {
-    "message": "Sempre assista aos créditos de todas as séries"
+    "message": "Sempre assistir aos créditos de todas as séries"
   },
   "gotoIndividual": {
     "message": "Para obter as configurações individuais dos serviços de streaming, vá para a seção "
@@ -238,4 +238,3 @@
   "StreamLinksDescription": {
     "message": "Exibe links de streaming para filmes que estão disponíveis em outras plataformas ou em outros países."
   }
-}
