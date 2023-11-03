@@ -10,6 +10,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License v3.0 for more details.
  */
+/* global browser */
 
 // find out if on settings page or on popup page
 // if document.title is "Streaming enhanced" then it is not the popup page
@@ -29,13 +30,13 @@ function localizeHtmlPage() {
   // innerHTML triggers warnings so changed functions
   // i18n tag
   let translations = document.getElementsByTagName("i18n");
-  for (trans of translations) {
+  for (let trans of translations) {
     let Translated = browser.i18n.getMessage.apply(null, trans.textContent.split(";"));
     trans.textContent = Translated;
   }
   // i18n attribute
   translations = document.querySelectorAll("[i18n]");
-  for (trans of translations) {
+  for (let trans of translations) {
     let Translated = browser.i18n.getMessage.apply(null, trans.textContent.split(";"));
     trans.textContent = Translated;
   }
@@ -98,7 +99,7 @@ browser.storage.sync.get("settings", function (result) {
     }
   }
 });
-browser.storage.sync.onChanged.addListener(function (changes, namespace) {
+browser.storage.sync.onChanged.addListener(function (changes) {
   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
     if (key == "settings") {
       settings = newValue;
@@ -268,7 +269,7 @@ function toggleCategoryBoolean(target, setting) {
   if (!value) setCategoryToBoolean(target, false);
 }
 function listenForClicks() {
-  let listener = document.addEventListener("click", (e) => {
+  document.addEventListener("click", (e) => {
     if (e.target.classList.contains("reset")) {
       if (confirm("Are you sure to reset every Setting including Statistics?")) {
         console.log("settings resetted to default");
