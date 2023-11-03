@@ -10,6 +10,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License v3.0 for more details.
  */
+/* global chrome */
 console.log("badge.js loaded");
 chrome.action.setBadgeBackgroundColor({ color: "#d90000" });
 let Badges = {};

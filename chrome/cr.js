@@ -1,3 +1,16 @@
+/*
+ * Streaming enhanced
+ * Copyright (c) 2022 Marvin Krebber
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the  GNU General Public License v3.0.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License v3.0 for more details.
+ */
+/* global chrome */
 const defaultSettings = {
   settings: {
     Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false, showRating: true },
@@ -42,7 +55,7 @@ chrome.storage.sync.get("settings", function (result) {
     }
   }
 });
-chrome.storage.sync.onChanged.addListener(function (changes, namespace) {
+chrome.storage.sync.onChanged.addListener(function (changes) {
   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
     if (key == "settings") {
       settings = newValue;
@@ -69,17 +82,17 @@ async function addSkippedTime(startTime, endTime, key) {
     increaseBadge();
   }
 }
+function OnFullScreenChange() {
+  let video = document.querySelector("video");
+  if (window.fullScreen && video) {
+    video.play();
+    log("auto-played on fullscreen");
+    increaseBadge();
+  }
+}
 async function startPlayOnFullScreen() {
   if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
     log("started observing| PlayOnFullScreen");
-    function OnFullScreenChange() {
-      let video = document.querySelector("video");
-      if (window.fullScreen && video) {
-        video.play();
-        log("auto-played on fullscreen");
-        increaseBadge();
-      }
-    }
     addEventListener("fullscreenchange", OnFullScreenChange);
   } else {
     log("stopped observing| PlayOnFullScreen");
