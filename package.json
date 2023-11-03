@@ -7,6 +7,7 @@
     "profile": "web-ext run --source-dir ./firefox/ --firefox-profile=test",
     "build": "cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
     "lint": "web-ext lint --source-dir ./firefox/",
+    "esLint": "npx eslint firefox/",
     "test": "python test.py"
   },
   "repository": {
