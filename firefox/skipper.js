@@ -185,20 +185,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     // const data = await response.json();
     browser.runtime.sendMessage({ url }, function (data) {
       if (data != undefined && data != "") {
-        // // justwatch
-        // // "https://www.justwatch.com" + data.items[0].full_path;
-        // const jWURL = data?.items?.[0]?.full_path;
-        // // flatrate = free with subscription
-        // // (netflix, amazon prime, disney+) (x.package_short_name == "amp" || x.package_short_name == "nfx" || x.package_short_name == "dnp")
-        // // fuv and drv are both hulu
-        // let offers = data?.items?.[0].offers?.filter((x) => x.monetization_type == "flatrate");
-        // // get the first offer of each provider
-        // offers = offers?.filter((x, i) => offers.findIndex((y) => y.provider_id == x.provider_id) == i);
-        // // map offers to only package_short_name, country and standard_web url
-        // offers = offers?.map((x) => ({ country: x.country, package_short_name: x.package_short_name, url: x.urls.standard_web }));
-        // const score = data?.items?.[0]?.scoring?.filter((x) => x.provider_type == "imdb:score")?.[0]?.value;
-        // const compiledData = { jWURL, score, streamLinks: offers };
-
         // themoviedb
         let compiledData = {};
         // for (movie of data?.results) {
