@@ -89,11 +89,11 @@
     "message": "Ignorando os anúncios da Amazon e todos os anúncios no nível básico da Netflix"
   },
   "SliderSwitch": {
-    "message": "Adicionar controle deslizante de velocidade:",
+    "message": "Aprimorar a interface de vídeo:",
     "description": "Adicionar um interruptor de recurso de controle deslizante de velocidade"
   },
   "SliderSwitchDescription": {
-    "message": "Adição de um controle deslizante de ajuste de velocidade a cada vídeo"
+    "message": "Adição de um controle deslizante de ajuste de velocidade e alteração da aparência das legendas."
   },
   "SliderOptions": {
     "message": "Opções do controle deslizante: velocidade = quadro a quadro /10"

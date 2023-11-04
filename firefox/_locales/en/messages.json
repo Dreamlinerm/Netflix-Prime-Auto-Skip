@@ -89,11 +89,11 @@
     "message": "Skipping freevee ads for amazon and all of the ads in the basic Netflix tier"
   },
   "SliderSwitch": {
-    "message": "Add Speed Slider:",
+    "message": "Improve video interface:",
     "description": "Add a speed slider feature switch"
   },
   "SliderSwitchDescription": {
-    "message": "Adding a speed adjustment slider to every video"
+    "message": "Adding a speed adjustment slider and changing the look of the subtitles."
   },
   "SliderOptions": {
     "message": "Slider options: speed = stepsize /10"

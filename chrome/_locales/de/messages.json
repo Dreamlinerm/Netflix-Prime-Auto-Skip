@@ -89,11 +89,11 @@
     "message": "Überspringen der Freevee-Werbung für Amazon und Werbung in der Netflix-Basisstufe"
   },
   "SliderSwitch": {
-    "message": "Geschwindigkeitsregler:",
-    "description": "Add a speed slider feature switch"
+    "message": "Verbesserung der Videooberfläche:",
+    "description": "Schalter für Geschwindigkeitsschieberegler hinzufügen"
   },
   "SliderSwitchDescription": {
-    "message": "Hinzufügen eines Schiebereglers zur Geschwindigkeitsanpassung zu jedem Video"
+    "message": "Geschwindigkeitsregler hinzufügen und ändern des Aussehens der Untertitel"
   },
   "SliderOptions": {
     "message": "Slider-Optionen: geschwindigkeit = Schrittgröße /10"
