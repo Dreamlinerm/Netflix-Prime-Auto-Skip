@@ -684,6 +684,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (b && b.style.background != "rgba(0, 0, 0, 0.25)") {
       b.style.background = "rgba(0, 0, 0, 0.25)";
     }
+    // remove subtitle background
+    b = document.querySelector(".atvwebplayersdk-captions-text");
+    if (b && b.style.backgroundColor != "transparent") {
+      b.style.backgroundColor = "transparent";
+    }
     if (video) {
       let alreadySlider = document.querySelector("#videoSpeedSlider");
       if (!alreadySlider) {
