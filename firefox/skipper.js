@@ -396,6 +396,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   function Disney_SpeedSlider(video) {
+    // remove subtitle background
+    let subtitles = document.querySelectorAll(".dss-subtitle-renderer-line:not(.enhanced)");
+    subtitles.forEach((b) => {
+      b.classList.add("enhanced");
+      b.style.backgroundColor = "transparent";
+      b.style.textShadow = "0px 0px 7px black";
+    });
     if (video) {
       let alreadySlider = document.querySelector("#videoSpeedSlider");
       if (!alreadySlider) {
@@ -680,14 +687,17 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   async function Amazon_SpeedSlider(video) {
     // remove bad background hue which is annoying
     //document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
-    let b = document.querySelector(".fkpovp9.f8hspre");
-    if (b && b.style.background != "rgba(0, 0, 0, 0.25)") {
+    let b = document.querySelector(".fkpovp9.f8hspre:not(.enhanced)");
+    if (b) {
+      b.classList.add("enhanced");
       b.style.background = "rgba(0, 0, 0, 0.25)";
     }
     // remove subtitle background
-    b = document.querySelector(".atvwebplayersdk-captions-text");
-    if (b && b.style.backgroundColor != "transparent") {
+    b = document.querySelector(".atvwebplayersdk-captions-text:not(.enhanced)");
+    if (b) {
+      b.classList.add("enhanced");
       b.style.backgroundColor = "transparent";
+      b.style.textShadow = "0px 0px 7px black";
     }
     if (video) {
       let alreadySlider = document.querySelector("#videoSpeedSlider");
