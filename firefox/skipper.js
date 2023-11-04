@@ -240,7 +240,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     // for each is not going in order on chrome
     for (let i = 0; i < titleCards.length; i++) {
       let card = titleCards[i];
-      // add seeen class
+      // add seen class
       if (isNetflix || isDisney || isHotstar) card.classList.add("imdb");
       //Amazon
       else card.parentElement.classList.add("imdb");
