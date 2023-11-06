@@ -1,92 +1,29 @@
--------------------------------------------•  firefox:
 Você pode configurar o recurso a ser ativado na página de configurações.
 
 ✨ Recursos
 
 Na Netflix, Prime Video, Disney+ & Hotstar e Crunchyroll, será ativado automaticamente:
-
-<ul>
-<li>Pula as introduções</li>
-<li>Pula os créditos: passa automaticamente para o próximo episódio</li>
-<li>Pula anúncios</li>
-<li>Adiciona controle de velocidade de reprodução à interface do usuário</li>
-<li>Reproduz em tela cheia</li>
-<li>Mostra a classificação TMDB</li>
-</ul>
-
-Na Netflix:
-
-<ul>
-<li>Ignora recapitulações</li>
-<li>Bloqueia o aviso de inatividade: retoma automaticamente o vídeo</li>
-<li>Escolhe o último perfil usado</li>
-</ul>
-
-Na Amazon Prime Video:
-
-<ul>
-<li>Pula anúncios de autopromoção (anúncios de produções próprias/originais)</li>
-<li>Filtra conteúdo pago (filmes, séries)</li>
-<li>Remove o desfoque de movimento ao passar o ponteiro do mouse sobre o vídeo</li>
-<li>Adiciona links de streaming potencialmente gratuitos para programas pagos/anúncios</li>
-</ul>
-
-Na Crunchyroll:
-
-<ul>
-<li>Adiciona filtros ao calendário de lançamentos</li>
-</ul>
-
-Android: 
-O Prime Video e o Disney+ (no modo Desktop) são compatíveis com o Android. 
-Não funcionará na Netflix dentro do Android.
-
-Para usar no Android, faça o download do 
-<a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser" target="_blank">Kiwi Browser</a>
-ou um aplicativo semelhante para poder instalar o complemento do Chrome.
-
-☔ Seguro
-
-A extensão é de código aberto! Confira <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> se quiser contribuir.
-
-💕 Está gostando do streaming aprimorado?
-
-Deixe uma avaliação 5 estrelas! As avaliações ajudam a criar confiança e a atrair novos usuários!
-
-Me pague um <a href="https://paypal.me/MarvinKrebber" target="_blank">café</a>.
-
-Isenção de responsabilidade
-
-Netflix, Amazon Prime Video e Disney+ são marcas registradas e o autor deste complemento não é afiliado a essas empresas.
--------------------------------------------•  chrome:
-Você pode configurar o recurso a ser ativado na página de configurações.
-
-✨ Recursos
-
-Na Netflix, Prime Video, Disney+ & Hotstar e Crunchyroll, será ativado automaticamente:
-
-• Pula as introduções
-• Pula os créditos: passa automaticamente para o próximo episódio
+• Pula as introduções e Recapitulações
+• Ou Pula os créditos
+• Ou Assista os créditos
 • Pula anúncios
-• Adiciona controle de velocidade de reprodução à interface do usuário
-• Reproduz em tela cheia
 • Mostra a classificação TMDB
+• Adiciona controle de velocidade de reprodução
+• Aprimorar o estilo das legendas
+• Reproduz em tela cheia
+
+Além dos recursos compartilhados:
 
 Na Netflix:
-
-• Ignora recapitulações
-• Bloqueia o aviso de inatividade: retoma automaticamente o vídeo
 • Escolhe o último perfil usado
+• Bloqueia o aviso de inatividade (Você ainda está assistindo?)
 
 Na Amazon Prime Video:
-
 • Pula anúncios de autopromoção (anúncios de produções próprias/originais)
 • Filtra conteúdo pago (filmes, séries)
 • Remove o desfoque de movimento ao passar o ponteiro do mouse sobre o vídeo
-• Adiciona links de streaming potencialmente gratuitos para programas pagos/anúncios
 
 Na Crunchyroll:
-
 • Adiciona filtros ao calendário de lançamentos
 
 Android: 
@@ -105,6 +42,28 @@ A extensão é de código aberto! Confira (https://github.com/Dreamlinerm/Netfli
 Deixe uma avaliação 5 estrelas! As avaliações ajudam a criar confiança e a atrair novos usuários!
 
 Me pague um café em: (https://paypal.me/MarvinKrebber).
+
+Isenção de responsabilidade
+
+Netflix, Amazon Prime Video e Disney+ são marcas registradas e o autor deste complemento não é afiliado a essas empresas.
+-------------------------------------------  firefox:
+Android: 
+O Prime Video e o Disney+ (no modo Desktop) são compatíveis com o Android. 
+Não funcionará na Netflix dentro do Android.
+
+Para usar no Android, faça o download do 
+<a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser" target="_blank">Kiwi Browser</a>
+ou um aplicativo semelhante para poder instalar o complemento do Chrome.
+
+☔ Seguro
+
+A extensão é de código aberto! Confira <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> se quiser contribuir.
+
+💕 Está gostando do streaming aprimorado?
+
+Deixe uma avaliação 5 estrelas! As avaliações ajudam a criar confiança e a atrair novos usuários!
+
+Me pague um <a href="https://paypal.me/MarvinKrebber" target="_blank">café</a>.
 
 Isenção de responsabilidade
 
