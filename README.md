@@ -84,6 +84,7 @@ On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
 <li>Skips Ads</li>
 <li>Adds playback speed control to UI</li>
 <li>Plays on Fullscreen</li>
+<li>Shows TMDB Rating</li>
 </ul>
 
 On Netflix it also automatically:
@@ -92,7 +93,6 @@ On Netflix it also automatically:
 <li>Skips Recaps</li>
 <li>Blocks Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video</li>
 <li>Picks last used profile</li>
-<li>Shows IMDB Rating</li>
 </ul>
 
 On Amazon Prime Video it also automatically:
