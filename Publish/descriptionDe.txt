@@ -3,7 +3,6 @@ Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert
 ✨ Features
 
 Auf Netflix, Prime Video, Disney+ & Hotstar und Crunchyroll wird automatisch:
-
 • Intros & Zusammenfassungen übersprungen
 • Entweder Abspann übersprungen
 • Oder Abspann immer angezeigt
@@ -16,18 +15,15 @@ Auf Netflix, Prime Video, Disney+ & Hotstar und Crunchyroll wird automatisch:
 Zusätzlich zu den geteilten Funktionen:
 
 Auf Netflix wird auch automatisch:
-
 • Automatisch zuletzt verwendetes Profil ausgewählt
 • Inaktivitätswarnung übersprungen („Schauen Sie weiter?“)
 
 Auf Amazon Prime-Video wird auch automatisch:
-
 • Eigenwerbung übersprungen
 • Kostenpflichtige Inhalte gefiltert
 • Die lästige Unschärfe, wenn das overlay angezeigt wird entfernt
 
 Auf Crunchyroll wird auch automatisch:
-
 • Filter zum Release Kalender hinzugefügt
 
 Android: 

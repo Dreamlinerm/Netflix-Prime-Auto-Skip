@@ -3,7 +3,6 @@ You can configure which feature to enable in the Settings Page.
 ✨ Features
 
 On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
-
 • Skips Intros & Recaps
 • Either Skips Credits
 • Or Watch Credits
@@ -16,18 +15,15 @@ On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
 In addition to the Shared features:
 
 On Netflix, it also automatically:
-
 • Picks last used profile
 • Blocks Inactivity Warning (Are you still watching?)
 
 On Amazon Prime Video, it also automatically:
-
 • Skips Self-promoting ads (Ads for prime video productions)
 • Filters paid content (movies, series)
 • Removes annoying blur when hovering over video
 
 On Crunchyroll it automatically:
-
 • Adds Filters to Release Calendar
 
 Android:
