@@ -1,92 +1,34 @@
--------------------------------------------- firefox:
 You can configure which feature to enable in the Settings Page.
 
 ✨ Features
 
 On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
 
-<ul>
-<li>Skips Intros</li>
-<li>Skips Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
-<li>Skips Ads</li>
-<li>Adds playback speed control to UI</li>
-<li>Plays on Fullscreen</li>
-<li>Shows TMDB Rating</li>
-</ul>
-
-On Netflix, it also automatically:
-
-<ul>
-<li>Skips Recaps</li>
-<li>Blocks Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video</li>
-<li>Picks last used profile</li>
-</ul>
-
-On Amazon Prime Video, it also automatically:
-
-<ul>
-<li>Skips Self-promoting ads (Ads for prime video productions)</li>
-<li>Filters paid content (movies, series)</li>
-<li>Removes annoying blur when hovering over video</li>
-<li>Adds potentially free streaming links to paid/ad shows</li>
-</ul>
-
-On Crunchyroll it automatically:
-
-<ul>
-<li>adds Filters to Release Calendar</li>
-</ul>
-
-Android: 
-Prime Video and Disney+(in Desktop mode) are supported on Android. Netflix does not work on Android.
-
-To use on Android Phone Download
-<a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser" target="_blank">Kiwi Browser</a>
-or a similar App to be able to install the chrome addon.
-
-☔ Safe
-
-The extension is open-sourced! Check <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> out if you want to contribute.
-
-💕 Enjoying Streaming enhanced?
-
-Leave a 5 star review! Reviews help build trust and attract new users!
-
-Buy me a <a href="https://paypal.me/MarvinKrebber" target="_blank">coffee</a>.
-
-Disclaimer
-
-Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
---------------------------------------------  chrome:
-You can configure which feature to enable in the Settings Page.
-
-✨ Features
-
-On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
-
-• Skips Intros
-• Skips Credits                   : automatically goes to the next episode
+• Skips Intros & Recaps
+• Either Skips Credits
+• Or Watch Credits
 • Skips Ads
-• Adds playback speed control to UI
-• Plays on Fullscreen
 • Shows TMDB Rating
+• Add playback speed control
+• Improve subtitle styling
+• Plays on Fullscreen
+
+In addition to the Shared features:
 
 On Netflix, it also automatically:
 
-• Skips Recaps
-• Blocks Inactivity Warning      : automatically resuming the video
 • Picks last used profile
+• Blocks Inactivity Warning (Are you still watching?)
 
 On Amazon Prime Video, it also automatically:
 
 • Skips Self-promoting ads (Ads for prime video productions)
 • Filters paid content (movies, series)
 • Removes annoying blur when hovering over video
-• Adds potentially free streaming links to paid/ad shows
 
 On Crunchyroll it automatically:
 
-• adds Filters to Release Calendar
+• Adds Filters to Release Calendar
 
 Android:
 Prime Video and Disney+(in Desktop mode) are supported on Android. Netflix does not work on Android.
@@ -103,6 +45,25 @@ The extension is open-sourced! Check (https://github.com/Dreamlinerm/Netflix-Pri
 Leave a 5 star review! Reviews help build trust and attract new users!
 
 Buy me a coffee (https://paypal.me/MarvinKrebber).
+
+Disclaimer
+
+Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
+
+--------------------------------------------  firefox:
+To use on Android Phone Download
+<a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser" target="_blank">Kiwi Browser</a>
+or a similar App to be able to install the chrome addon.
+
+☔ Safe
+
+The extension is open-sourced! Check <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> out if you want to contribute.
+
+💕 Enjoying Streaming enhanced?
+
+Leave a 5 star review! Reviews help build trust and attract new users!
+
+Buy me a <a href="https://paypal.me/MarvinKrebber" target="_blank">coffee</a>.
 
 Disclaimer
 

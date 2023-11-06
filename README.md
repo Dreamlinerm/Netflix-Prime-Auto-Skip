@@ -79,20 +79,23 @@ It automatically skips Ads, intros, Credits, recaps, and anything else you don't
 On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
 
 <ul>
-<li>Skips Intros</li>
-<li>Skips Credits&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically goes to the next episode</li>
+<li>Skips Intros & Recaps</li>
+<li>Either Skips Credits</li>
+<li>Or Watch Credits</li>
 <li>Skips Ads</li>
-<li>Adds playback speed control to UI</li>
-<li>Plays on Fullscreen</li>
 <li>Shows TMDB Rating</li>
+<li>Adds playback speed control</li>
+<li>Improve subtitle styling</li>
+<li>Plays on Fullscreen</li>
 </ul>
+
+In addition to the Shared features:
 
 On Netflix it also automatically:
 
 <ul>
-<li>Skips Recaps</li>
-<li>Blocks Inactivity Warning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: automatically resuming the video</li>
 <li>Picks last used profile</li>
+<li>Blocks Inactivity Warning (Are you still watching?)</li>
 </ul>
 
 On Amazon Prime Video it also automatically:
@@ -101,12 +104,11 @@ On Amazon Prime Video it also automatically:
 <li>Skips Self promoting ads (Ads for prime video productions)</li>
 <li>Filters paid content (movies, series)</li>
 <li>Removes annoying blur when hovering over video</li>
-<li>Adds potentially free streaming links to paid/ad shows</li>
 </ul>
 
 On Crunchyroll it automatically:
 <ul>
-<li>adds Filters to Release Calendar</li>
+<li>Adds Filters to Release Calendar</li>
 </ul>
 
 If you want to see what is implemented go [here](#implemented-feature-overview):
