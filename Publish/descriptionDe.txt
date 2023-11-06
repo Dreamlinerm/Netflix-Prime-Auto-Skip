@@ -4,8 +4,7 @@ Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert
 
 Auf Netflix, Prime Video, Disney+ & Hotstar und Crunchyroll wird automatisch:
 • Intros & Zusammenfassungen übersprungen
-• Entweder Abspann übersprungen
-• Oder Abspann immer angezeigt
+• Abspann übersprigen/immer anzeigen
 • Werbung übersprungen
 • Zeigt TMDB-Bewertung
 • Geschwindigkeitsregler hinzugefügt

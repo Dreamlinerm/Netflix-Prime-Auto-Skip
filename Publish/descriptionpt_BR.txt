@@ -4,8 +4,7 @@ Você pode configurar o recurso a ser ativado na página de configurações.
 
 Na Netflix, Prime Video, Disney+ & Hotstar e Crunchyroll, será ativado automaticamente:
 • Pula as introduções e Recapitulações
-• Ou Pula os créditos
-• Ou Assista os créditos
+• Pula/Assista os créditos
 • Pula anúncios
 • Mostra a classificação TMDB
 • Adiciona controle de velocidade de reprodução

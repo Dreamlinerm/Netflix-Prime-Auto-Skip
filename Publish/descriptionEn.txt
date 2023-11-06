@@ -4,8 +4,7 @@ You can configure which feature to enable in the Settings Page.
 
 On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
 • Skips Intros & Recaps
-• Either Skips Credits
-• Or Watch Credits
+• Skip/Watch Credits
 • Skips Ads
 • Shows TMDB Rating
 • Add playback speed control
