@@ -7,7 +7,7 @@ Auf Netflix, Prime Video, Disney+ & Hotstar und Crunchyroll wird automatisch:
 • Abspann übersprigen/immer anzeigen
 • Werbung übersprungen
 • Zeigt TMDB-Bewertung
-• Geschwindigkeitsregler hinzugefügt
+• Anpassbaren Geschwindigkeitsregler hinzugefügt
 • Verbessert das Aussehen von Untertiteln
 • Abgespielt, wenn Vollbildschirm geöffnet wird
 

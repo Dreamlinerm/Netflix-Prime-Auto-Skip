@@ -7,7 +7,7 @@ Na Netflix, Prime Video, Disney+ & Hotstar e Crunchyroll, será ativado automati
 • Pula/Assista os créditos
 • Pula anúncios
 • Mostra a classificação TMDB
-• Adiciona controle de velocidade de reprodução
+• Adicionar controle de velocidade de reprodução personalizável
 • Aprimorar o estilo das legendas
 • Reproduz em tela cheia
 

@@ -7,7 +7,7 @@ On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
 • Skip/Watch Credits
 • Skips Ads
 • Shows TMDB Rating
-• Add playback speed control
+• Add customizable playback speed control
 • Improve subtitle styling
 • Plays on Fullscreen
 
