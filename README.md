@@ -84,7 +84,7 @@ On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
 <li>Or Watch Credits</li>
 <li>Skips Ads</li>
 <li>Shows TMDB Rating</li>
-<li>Adds playback speed control</li>
+<li>Adds customizable playback speed control</li>
 <li>Improve subtitle styling</li>
 <li>Plays on Fullscreen</li>
 </ul>
