@@ -25,7 +25,7 @@ const isCrunchyroll = /crunchyroll/i.test(hostname);
 
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
-const version = "1.0.68";
+const version = "1.0.69";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -527,13 +527,17 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           settings.Statistics.NetflixAdTimeSkipped += adLength;
           increaseBadge();
           video.playbackRate = playBackRate;
+          lastAdTimeText = adLength;
         } else if (adLength > 2 && video.playbackRate < 2) {
           video.playbackRate = adLength / 2;
+          lastAdTimeText = adLength;
         } else if (adLength && video.paused) {
           video.play();
-        } else if (adLength <= 2 || !adLength) {
+          // added lastAdTimeText because other speedsliders are not working anymore
+        } else if (adLength <= 2 || (!adLength && lastAdTimeText)) {
           // videospeed is speedSlider value
           video.playbackRate = videoSpeed;
+          lastAdTimeText = 0;
         }
       }
     }, 100);
