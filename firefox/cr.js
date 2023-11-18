@@ -120,7 +120,7 @@ async function Crunchyroll_SpeedSlider(video) {
       // console.log(document.querySelector("#settingsControl"));
       const position = document.querySelector("#settingsControl")?.parentElement;
       if (position) {
-        videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
+        videoSpeed = videoSpeed || video.playbackRate;
         let slider = document.createElement("input");
         slider.id = "videoSpeedSlider";
         slider.type = "range";
