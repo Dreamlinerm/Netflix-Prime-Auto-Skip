@@ -100,12 +100,11 @@ browser.storage.sync.get("settings", function (result) {
   }
 });
 browser.storage.sync.onChanged.addListener(function (changes) {
-  for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-    if (key == "settings") {
-      settings = newValue;
-      console.log(key, "Old value:", oldValue, ", new value:", newValue);
-      setCheckboxesToSettings();
-    }
+  if (changes?.settings) {
+    const { oldValue, newValue } = changes.settings;
+    settings = newValue;
+    console.log("settings", "Old value:", oldValue, ", new value:", newValue);
+    setCheckboxesToSettings();
   }
 });
 //global variables
