@@ -66,7 +66,7 @@ function OnFullScreenChange() {
   }
 }
 async function startPlayOnFullScreen() {
-  if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
+  if (settings.Video?.playOnFullScreen) {
     log("started observing| PlayOnFullScreen");
     addEventListener("fullscreenchange", OnFullScreenChange);
   } else {

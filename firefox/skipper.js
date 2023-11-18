@@ -298,7 +298,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function startPlayOnFullScreen() {
-    if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
+    if (settings.Video?.playOnFullScreen) {
       log("started observing| PlayOnFullScreen");
       addEventListener("fullscreenchange", OnFullScreenChange);
     } else {
@@ -434,25 +434,26 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   function Netflix() {
     const video = document.querySelector("video");
     const time = video?.currentTime;
-    if (settings.Netflix?.profile === undefined || settings.Netflix?.profile) Netflix_profile();
-    if (settings.Netflix?.skipIntro === undefined || settings.Netflix?.skipIntro) {
+    const NSettings = settings.Netflix;
+    if (NSettings?.profile) Netflix_profile();
+    if (NSettings?.skipIntro) {
       if (Netflix_General('[data-uia="player-skip-intro"]', "Intro skipped", false)) {
         setTimeout(function () {
           addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
         }, 600);
       }
     }
-    if (settings.Netflix?.skipRecap === undefined || settings.Netflix?.skipRecap) {
+    if (NSettings?.skipRecap) {
       if (Netflix_General('[data-uia="player-skip-recap"]', "Recap skipped", false) || Netflix_General('[data-uia="player-skip-preplay"]', "Recap skipped", false)) {
         setTimeout(function () {
           addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
         }, 600);
       }
     }
-    if (settings.Netflix?.skipCredits === undefined || settings.Netflix?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]', "Credits skipped");
-    if (settings.Netflix?.watchCredits === undefined || settings.Netflix?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched");
-    if (settings.Netflix?.skipBlocked === undefined || settings.Netflix?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
-    if (settings.Netflix?.speedSlider === undefined || settings.Netflix?.speedSlider) Netflix_SpeedSlider(video);
+    if (NSettings?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]', "Credits skipped");
+    if (NSettings?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched");
+    if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
+    if (NSettings?.speedSlider) Netflix_SpeedSlider(video);
   }
 
   function Netflix_profile() {
@@ -580,16 +581,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   const AmazonObserver = new MutationObserver(Amazon);
   function Amazon() {
     const video = document.querySelector(AmazonVideoClass);
-    if (settings.Amazon?.skipCredits === undefined || settings.Amazon?.skipCredits) Amazon_Credits();
-    if (settings.Amazon?.watchCredits === undefined || settings.Amazon?.watchCredits) Amazon_Watch_Credits();
-    if (settings.Amazon?.speedSlider === undefined || settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
-    if (settings.Amazon?.filterPaid === undefined || settings.Amazon?.filterPaid) Amazon_FilterPaid();
+    if (settings.Amazon?.skipCredits) Amazon_Credits();
+    if (settings.Amazon?.watchCredits) Amazon_Watch_Credits();
+    if (settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
+    if (settings.Amazon?.filterPaid) Amazon_FilterPaid();
   }
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
   function Amazon_Intro() {
-    if (settings.Amazon?.skipIntro === undefined || settings.Amazon?.skipIntro) {
+    if (settings.Amazon?.skipIntro) {
       // skips intro and recap
       // recap on lucifer season 3 episode 3
       // intro lucifer season 3 episode 4
@@ -824,64 +825,67 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }, 100);
   }
   // Crunchyroll functions
+  function filterQueued(display) {
+    let list = document.querySelectorAll("div.queue-flag:not(.queued)");
+    list.forEach((element) => {
+      element.parentElement.parentElement.parentElement.style.display = display;
+    });
+  }
+  function filterDub(display) {
+    let list = document.querySelectorAll("cite[itemprop='name']");
+    list.forEach((element) => {
+      if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
+    });
+  }
   async function Crunchyroll_ReleaseCalendar() {
     if (settings.Crunchyroll?.releaseCalendar && window.location.href.includes("simulcastcalendar")) {
-      function filterQueued(display) {
-        let list = document.querySelectorAll("div.queue-flag:not(.queued)");
-        list.forEach((element) => {
-          element.parentElement.parentElement.parentElement.style.display = display;
-        });
-      }
-      filterQueued(settings.General.filterQueued ? "none" : "block");
-      function filterDub(display) {
-        let list = document.querySelectorAll("cite[itemprop='name']");
-        list.forEach((element) => {
-          if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
-        });
-      }
-      filterDub(settings.General.filterDub ? "none" : "block");
       // Show playlist only
-      const label = document.createElement("label");
-      const span = document.createElement("span");
-      span.style = "display: flex;align-items: center;";
-      const input = document.createElement("input");
-      input.type = "checkbox";
-      input.checked = settings.General.filterQueued;
-      input.onclick = function () {
-        filterQueued(this.checked ? "none" : "block");
-        settings.General.filterQueued = this.checked;
-        browser.storage.sync.set({ settings });
-      };
-      const p = document.createElement("p");
-      p.style = "width: 100px;";
-      p.textContent = "Show Playlist only";
-      label.appendChild(span);
-      span.appendChild(input);
-      span.appendChild(p);
-      // Filter Dub
-      const label2 = document.createElement("label");
-      const span2 = document.createElement("span");
-      span2.style = "display: flex;align-items: center;";
-      const input2 = document.createElement("input");
-      input2.type = "checkbox";
-      input2.checked = settings.General.filterDub;
-      input2.onclick = function () {
-        filterDub(this.checked ? "none" : "block");
-        settings.General.filterDub = this.checked;
-        browser.storage.sync.set({ settings });
-      };
-      const p2 = document.createElement("p");
-      p2.style = "width: 100px;";
-      p2.textContent = "Filter Dub";
-      label2.appendChild(span2);
-      span2.appendChild(input2);
-      span2.appendChild(p2);
-
-      const toggleForm = document.querySelector("#filter_toggle_form");
-      toggleForm.style.display = "flex";
-      toggleForm.firstElementChild.appendChild(label);
-      toggleForm.firstElementChild.appendChild(label2);
+      filterQueued(settings.General.filterQueued ? "none" : "block");
+      filterDub(settings.General.filterDub ? "none" : "block");
+      addButtons();
     }
+  }
+  function addButtons() {
+    const label = document.createElement("label");
+    const span = document.createElement("span");
+    span.style = "display: flex;align-items: center;";
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.checked = settings.General.filterQueued;
+    input.onclick = function () {
+      filterQueued(this.checked ? "none" : "block");
+      settings.General.filterQueued = this.checked;
+      browser.storage.sync.set({ settings });
+    };
+    const p = document.createElement("p");
+    p.style = "width: 100px;";
+    p.textContent = "Show Playlist only";
+    label.appendChild(span);
+    span.appendChild(input);
+    span.appendChild(p);
+    // Filter Dub
+    const label2 = document.createElement("label");
+    const span2 = document.createElement("span");
+    span2.style = "display: flex;align-items: center;";
+    const input2 = document.createElement("input");
+    input2.type = "checkbox";
+    input2.checked = settings.General.filterDub;
+    input2.onclick = function () {
+      filterDub(this.checked ? "none" : "block");
+      settings.General.filterDub = this.checked;
+      browser.storage.sync.set({ settings });
+    };
+    const p2 = document.createElement("p");
+    p2.style = "width: 100px;";
+    p2.textContent = "Filter Dub";
+    label2.appendChild(span2);
+    span2.appendChild(input2);
+    span2.appendChild(p2);
+
+    const toggleForm = document.querySelector("#filter_toggle_form");
+    toggleForm.style.display = "flex";
+    toggleForm.firstElementChild.appendChild(label);
+    toggleForm.firstElementChild.appendChild(label2);
   }
   // Badge functions
   // eslint-disable-next-line no-unused-vars
