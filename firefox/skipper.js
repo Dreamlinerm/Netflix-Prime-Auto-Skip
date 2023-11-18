@@ -837,6 +837,32 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
     });
   }
+  function createFilterElement(filterType, filterText, settingsValue, filterFunction) {
+    const label = document.createElement("label");
+    const span = document.createElement("span");
+    span.style = "display: flex;align-items: center;";
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.checked = settingsValue;
+    input.onclick = function () {
+      filterFunction(this.checked ? "none" : "block");
+      settings.General[filterType] = this.checked;
+      browser.storage.sync.set({ settings });
+    };
+    const p = document.createElement("p");
+    p.style = "width: 100px;";
+    p.textContent = filterText;
+    label.appendChild(span);
+    span.appendChild(input);
+    span.appendChild(p);
+    return label;
+  }
+  function addButtons() {
+    const toggleForm = document.querySelector("#filter_toggle_form");
+    toggleForm.style.display = "flex";
+    toggleForm.firstElementChild.appendChild(createFilterElement("filterQueued", "Show Playlist only", settings.General.filterQueued, filterQueued));
+    toggleForm.firstElementChild.appendChild(createFilterElement("filterDub", "Filter Dub", settings.General.filterDub, filterDub));
+  }
   async function Crunchyroll_ReleaseCalendar() {
     if (settings.Crunchyroll?.releaseCalendar && window.location.href.includes("simulcastcalendar")) {
       // Show playlist only
@@ -844,48 +870,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       filterDub(settings.General.filterDub ? "none" : "block");
       addButtons();
     }
-  }
-  function addButtons() {
-    const label = document.createElement("label");
-    const span = document.createElement("span");
-    span.style = "display: flex;align-items: center;";
-    const input = document.createElement("input");
-    input.type = "checkbox";
-    input.checked = settings.General.filterQueued;
-    input.onclick = function () {
-      filterQueued(this.checked ? "none" : "block");
-      settings.General.filterQueued = this.checked;
-      browser.storage.sync.set({ settings });
-    };
-    const p = document.createElement("p");
-    p.style = "width: 100px;";
-    p.textContent = "Show Playlist only";
-    label.appendChild(span);
-    span.appendChild(input);
-    span.appendChild(p);
-    // Filter Dub
-    const label2 = document.createElement("label");
-    const span2 = document.createElement("span");
-    span2.style = "display: flex;align-items: center;";
-    const input2 = document.createElement("input");
-    input2.type = "checkbox";
-    input2.checked = settings.General.filterDub;
-    input2.onclick = function () {
-      filterDub(this.checked ? "none" : "block");
-      settings.General.filterDub = this.checked;
-      browser.storage.sync.set({ settings });
-    };
-    const p2 = document.createElement("p");
-    p2.style = "width: 100px;";
-    p2.textContent = "Filter Dub";
-    label2.appendChild(span2);
-    span2.appendChild(input2);
-    span2.appendChild(p2);
-
-    const toggleForm = document.querySelector("#filter_toggle_form");
-    toggleForm.style.display = "flex";
-    toggleForm.firstElementChild.appendChild(label);
-    toggleForm.firstElementChild.appendChild(label2);
   }
   // Badge functions
   // eslint-disable-next-line no-unused-vars
