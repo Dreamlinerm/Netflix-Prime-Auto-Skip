@@ -121,32 +121,30 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     });
   });
   browser.storage.local.onChanged.addListener(function (changes) {
-    for (let [key, { newValue }] of Object.entries(changes)) {
-      if (key == "DBCache") {
-        DBCache = newValue;
-      }
-    }
+    if (changes["DBCache"]) DBCache = changes["DBCache"].newValue;
   });
   browser.storage.sync.onChanged.addListener(function (changes) {
-    for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-      if (key == "settings") {
-        settings = newValue;
-        log(key, "Old value:", oldValue, ", new value:", newValue);
-        const oldValueUndef = oldValue == "undefined";
-        if (isNetflix) {
-          // if value is changed then check if it is enabled or disabled
-          if (oldValueUndef || (!oldValue?.Netflix?.skipAd && newValue.Netflix.skipAd)) Netflix_SkipAdInterval();
-          if (oldValueUndef || (!oldValue?.Netflix?.showRating && newValue.Netflix.showRating)) startShowRatingInterval();
-        } else if (isPrimeVideo) {
-          if (oldValueUndef || (!oldValue?.Amazon?.skipAd && newValue.Amazon.skipAd)) Amazon_AdTimeout();
-          if (oldValueUndef || (!oldValue?.Amazon?.blockFreevee && newValue.Amazon.blockFreevee)) Amazon_FreeveeTimeout();
-        } else if (isDisney || isHotstar) {
-          if (oldValueUndef || (!oldValue?.Disney?.showRating && newValue.Disney.showRating)) startShowRatingInterval();
-        }
-        if (oldValueUndef || (!oldValue?.Video?.playOnFullScreen && newValue?.Video?.playOnFullScreen)) startPlayOnFullScreen();
-      }
+    if (changes["settings"]) {
+      const { oldValue, newValue } = changes["settings"];
+      settings = newValue;
+      log("settings", "Old value:", oldValue, ", new value:", newValue);
+      if (isNetflix) NetflixSettingsChanged(oldValue?.Netflix, newValue?.Netflix);
+      else if (isPrimeVideo) AmazonSettingsChanged(oldValue?.Amazon, newValue?.Amazon);
+      else if (isDisney || isHotstar) DisneySettingsChanged(oldValue?.Disney, newValue?.Disney);
+      if (!oldValue || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
     }
   });
+  function NetflixSettingsChanged(oldValue, newValue) {
+    if (!oldValue?.skipAd && newValue.skipAd) Netflix_SkipAdInterval();
+    if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
+  }
+  function AmazonSettingsChanged(oldValue, newValue) {
+    if (!oldValue?.skipAd && newValue.skipAd) Amazon_AdTimeout();
+    if (!oldValue?.blockFreevee && newValue.blockFreevee) Amazon_FreeveeTimeout();
+  }
+  function DisneySettingsChanged(oldValue, newValue) {
+    if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
+  }
   async function addSkippedTime(startTime, endTime, key) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       log(key, endTime - startTime);
