@@ -352,7 +352,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
       let time;
-      if (isDisney) time = button.textContent.match(/\d+/)?.[0];
+      if (isDisney) time = /\d+/.exec(button.textContent)?.[0];
       if ((isHotstar && !document.evaluate("//span[contains(., 'My Space')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()) || (time && lastAdTimeText != time)) {
         button.click();
         lastAdTimeText = time;
@@ -369,7 +369,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
       let time;
-      if (isDisney) time = button.textContent.match(/\d+/)?.[0];
+      if (isDisney) time = /\d+/.exec(button.textContent)?.[0];
       if ((isHotstar && !document.evaluate("//span[contains(., 'My Space')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()) || (time && lastAdTimeText != time)) {
         let video = document.querySelector("video");
         if (video) {
@@ -659,7 +659,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (button) {
       // only skipping to next episode not an entirely new series
       const newEpNumber = document.querySelector("[class*=nextupcard-episode]");
-      if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
+      if (newEpNumber && !/(?<!\S)1(?!\S)/.exec(newEpNumber.textContent)) {
         button.click();
         increaseBadge();
         log("skipped Credits", button);
@@ -782,7 +782,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     // Series grimm
     let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
     if (adTimeText) {
-      const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
+      const adTime = parseInt(/\d+/.exec(adTimeText.textContent)?.[0]);
       // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
       // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
       if (!document.querySelector(".fu4rd6c.f1cw2swo") && !lastAdTimeText) {
@@ -823,20 +823,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
             let button = document.querySelector(".fu4rd6c.f1cw2swo");
             if (button) {
               // only getting the time after :08
-              let adTime = parseInt(
-                document
-                  .querySelector(".atvwebplayersdk-adtimeindicator-text")
-                  .innerHTML.match(/[:]\d+/)[0]
-                  .substring(1)
-              );
+              let adTime = parseInt(/:\d+/.exec(document.querySelector(".atvwebplayersdk-adtimeindicator-text").innerHTML)?.[0].substring(1));
               // wait for 100ms before skipping to make sure the button is not pressed too fast, or there will be infinite loading
               setTimeout(() => {
-                if (button) {
-                  button.click();
-                  if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
-                  increaseBadge();
-                  log("Self Ad skipped, length:", adTime, button);
-                }
+                button.click();
+                if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
+                increaseBadge();
+                log("Self Ad skipped, length:", adTime, button);
               }, 150);
             }
           }
