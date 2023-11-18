@@ -554,7 +554,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           // infobar position for the slider to be added
           let position = p[p.length - 2]?.firstChild?.lastChild;
           if (position) {
-            videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
+            videoSpeed = videoSpeed || video.playbackRate;
             let slider = document.createElement("input");
             slider.id = "videoSpeedSlider";
             slider.type = "range";
