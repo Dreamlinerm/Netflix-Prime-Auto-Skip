@@ -121,11 +121,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     });
   });
   browser.storage.local.onChanged.addListener(function (changes) {
-    if (changes["DBCache"]) DBCache = changes["DBCache"].newValue;
+    if (changes?.DBCache) DBCache = changes.DBCache.newValue;
   });
   browser.storage.sync.onChanged.addListener(function (changes) {
-    if (changes["settings"]) {
-      const { oldValue, newValue } = changes["settings"];
+    if (changes?.settings) {
+      const { oldValue, newValue } = changes.settings;
       settings = newValue;
       log("settings", "Old value:", oldValue, ", new value:", newValue);
       if (isNetflix) NetflixSettingsChanged(oldValue?.Netflix, newValue?.Netflix);
