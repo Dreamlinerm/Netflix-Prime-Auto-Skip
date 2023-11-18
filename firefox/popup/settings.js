@@ -62,41 +62,22 @@ const defaultSettings = {
 let settings = defaultSettings.settings;
 browser.storage.sync.get("settings", function (result) {
   settings = result.settings;
-  if (typeof settings !== "object") {
-    browser.storage.sync.set(defaultSettings);
-  } else {
-    console.log("settings:", settings);
-    // if there is an undefined setting, set it to the default
-    let changedSettings = false;
-    for (const key in defaultSettings.settings) {
-      if (typeof settings[key] === "undefined") {
-        console.log("undefined Setting:", key);
+  // delete every setting that is not in defaultSettings
+  let changedSettings;
+  for (const key in settings) {
+    for (const subkey in settings[key]) {
+      if (typeof defaultSettings.settings[key][subkey] === "undefined") {
+        console.log("delete Setting:", key, subkey);
         changedSettings = true;
-        settings[key] = defaultSettings.settings[key];
-      } else {
-        for (const subkey in defaultSettings.settings[key]) {
-          if (typeof settings[key][subkey] === "undefined") {
-            console.log("undefined Setting:", key, subkey);
-            changedSettings = true;
-            settings[key][subkey] = defaultSettings.settings[key][subkey];
-          }
-        }
+        delete settings[key][subkey];
       }
     }
-    // delete every setting that is not in defaultSettings
-    for (const key in settings) {
-      for (const subkey in settings[key]) {
-        if (typeof defaultSettings.settings[key][subkey] === "undefined") {
-          console.log("delete Setting:", key, subkey);
-          changedSettings = true;
-          delete settings[key][subkey];
-        }
-      }
-    }
-    setCheckboxesToSettings();
-    if (changedSettings) {
-      browser.storage.sync.set({ settings });
-    }
+  }
+  // if there is an undefined setting, set it to the default
+  settings = { ...defaultSettings.settings, ...result.settings };
+  setCheckboxesToSettings();
+  if (changedSettings) {
+    browser.storage.sync.set({ settings });
   }
 });
 browser.storage.sync.onChanged.addListener(function (changes) {
