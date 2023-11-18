@@ -132,15 +132,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (key == "settings") {
         settings = newValue;
         log(key, "Old value:", oldValue, ", new value:", newValue);
+        const oldValueUndef = oldValue == "undefined";
         if (isNetflix) {
           // if value is changed then check if it is enabled or disabled
-          if (oldValue === undefined || (newValue.Netflix.skipAd !== oldValue?.Netflix?.skipAd && newValue.Netflix.skipAd)) Netflix_SkipAdInterval();
+          if (oldValueUndef || (newValue.Netflix.skipAd !== oldValue?.Netflix?.skipAd && newValue.Netflix.skipAd)) Netflix_SkipAdInterval();
+          if (oldValueUndef || (newValue.Netflix.showRating !== oldValue?.Netflix?.showRating && newValue.Netflix.showRating)) startShowRatingInterval();
         } else if (isPrimeVideo) {
-          if (oldValue === undefined || (newValue.Amazon.skipAd !== oldValue?.Amazon?.skipAd && newValue.Amazon.skipAd)) Amazon_AdTimeout();
-          if (oldValue === undefined || (newValue.Amazon.blockFreevee !== oldValue?.Amazon?.blockFreevee && newValue.Amazon.blockFreevee)) Amazon_FreeveeTimeout();
+          if (oldValueUndef || (newValue.Amazon.skipAd !== oldValue?.Amazon?.skipAd && newValue.Amazon.skipAd)) Amazon_AdTimeout();
+          if (oldValueUndef || (newValue.Amazon.blockFreevee !== oldValue?.Amazon?.blockFreevee && newValue.Amazon.blockFreevee)) Amazon_FreeveeTimeout();
+        } else if (isDisney || isHotstar) {
+          if (oldValueUndef || (newValue.Disney.showRating !== oldValue?.Disney?.showRating && newValue.Disney.showRating)) startShowRatingInterval();
         }
-        if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
-        if (oldValue === undefined || (newValue.Netflix.showRating !== oldValue?.Netflix?.showRating && newValue.Netflix.showRating)) startShowRatingInterval();
+        if (oldValueUndef || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
       }
     }
   });
