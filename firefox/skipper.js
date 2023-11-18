@@ -48,58 +48,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     videoSpeed = speed;
   }
   resetBadge();
-  browser.storage.sync.get("settings", function (result) {
-    settings = result.settings;
-    console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
-    console.log("version:", version);
-    console.log("Settings", settings);
-    if (isNetflix) console.log("Page %cNetflix", "color: #e60010;");
-    else if (isPrimeVideo) console.log("Page %cAmazon", "color: #00aeef;");
-    else if (isDisney) console.log("Page %cDisney", "color: #0682f0;");
-    else if (isHotstar) console.log("Page %cHotstar", "color: #0682f0;");
-    if (typeof settings !== "object") {
-      browser.storage.sync.set(defaultSettings);
-    } else {
-      if (isNetflix) {
-        // start Observers depending on the settings
-        if (settings.Netflix?.profile) AutoPickProfile();
-        if (settings.Netflix?.skipAd) Netflix_SkipAdInterval();
-        NetflixObserver.observe(document, config);
-      } else if (isPrimeVideo) {
-        AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
-        AmazonObserver.observe(document, config);
-        if (settings.Amazon?.skipAd) Amazon_AdTimeout();
-        if (settings.Amazon?.blockFreevee) {
-          // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
-          setTimeout(function () {
-            Amazon_FreeveeTimeout();
-          }, 1000);
-        }
-      } else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
-      else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
-
-      if (settings.Video.playOnFullScreen) startPlayOnFullScreen();
-      // if there is an undefined setting, set it to the default
-      let changedSettings = false;
-      for (const key in defaultSettings.settings) {
-        if (typeof settings[key] === "undefined") {
-          log("undefined Setting:", key);
-          changedSettings = true;
-          settings[key] = defaultSettings.settings[key];
-        } else {
-          for (const subkey in defaultSettings.settings[key]) {
-            if (typeof settings[key][subkey] === "undefined") {
-              log("undefined Setting:", key, subkey);
-              changedSettings = true;
-              settings[key][subkey] = defaultSettings.settings[key][subkey];
-            }
-          }
-        }
-      }
-      if (changedSettings) {
-        browser.storage.sync.set({ settings });
-      }
-    }
+  async function getDBCache() {
     browser.storage.local.get("DBCache", function (result) {
       DBCache = result?.DBCache;
       if (typeof DBCache !== "object") {
@@ -119,6 +68,47 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         if (settings.Disney?.showRating) startShowRatingInterval();
       }
     });
+  }
+  function logStartOfAddon() {
+    console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
+    console.log("version:", version);
+    console.log("Settings", settings);
+    if (isNetflix) console.log("Page %cNetflix", "color: #e60010;");
+    else if (isPrimeVideo) console.log("Page %cAmazon", "color: #00aeef;");
+    else if (isDisney) console.log("Page %cDisney", "color: #0682f0;");
+    else if (isHotstar) console.log("Page %cHotstar", "color: #0682f0;");
+  }
+  function startNetflix(Netflix) {
+    if (Netflix?.profile) AutoPickProfile();
+    if (Netflix?.skipAd) Netflix_SkipAdInterval();
+    NetflixObserver.observe(document, config);
+  }
+  function startAmazon(Amazon) {
+    AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
+    AmazonObserver.observe(document, config);
+    if (Amazon?.skipAd) Amazon_AdTimeout();
+    if (Amazon?.blockFreevee) {
+      // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
+      setTimeout(function () {
+        Amazon_FreeveeTimeout();
+      }, 1000);
+    }
+  }
+  browser.storage.sync.get("settings", function (result) {
+    // if there is an undefined setting, set it to the default
+    settings = { ...defaultSettings.settings, ...result.settings };
+    logStartOfAddon();
+    getDBCache();
+
+    if (typeof settings !== "object") {
+      browser.storage.sync.set(defaultSettings);
+    } else {
+      if (isNetflix) startNetflix(settings.Netflix);
+      else if (isPrimeVideo) startAmazon(settings.Amazon);
+      else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
+      else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
+      if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
+    }
   });
   browser.storage.local.onChanged.addListener(function (changes) {
     if (changes?.DBCache) DBCache = changes.DBCache.newValue;
@@ -205,7 +195,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     });
   }
 
-  // Observers
+  // -----------------------   functions   ---------------------------------
   // default Options for the observer (which mutations to observe)
   const config = { attributes: true, childList: true, subtree: true };
 
