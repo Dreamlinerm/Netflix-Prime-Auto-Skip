@@ -135,15 +135,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         const oldValueUndef = oldValue == "undefined";
         if (isNetflix) {
           // if value is changed then check if it is enabled or disabled
-          if (oldValueUndef || (newValue.Netflix.skipAd !== oldValue?.Netflix?.skipAd && newValue.Netflix.skipAd)) Netflix_SkipAdInterval();
-          if (oldValueUndef || (newValue.Netflix.showRating !== oldValue?.Netflix?.showRating && newValue.Netflix.showRating)) startShowRatingInterval();
+          if (oldValueUndef || (!oldValue?.Netflix?.skipAd && newValue.Netflix.skipAd)) Netflix_SkipAdInterval();
+          if (oldValueUndef || (!oldValue?.Netflix?.showRating && newValue.Netflix.showRating)) startShowRatingInterval();
         } else if (isPrimeVideo) {
-          if (oldValueUndef || (newValue.Amazon.skipAd !== oldValue?.Amazon?.skipAd && newValue.Amazon.skipAd)) Amazon_AdTimeout();
-          if (oldValueUndef || (newValue.Amazon.blockFreevee !== oldValue?.Amazon?.blockFreevee && newValue.Amazon.blockFreevee)) Amazon_FreeveeTimeout();
+          if (oldValueUndef || (!oldValue?.Amazon?.skipAd && newValue.Amazon.skipAd)) Amazon_AdTimeout();
+          if (oldValueUndef || (!oldValue?.Amazon?.blockFreevee && newValue.Amazon.blockFreevee)) Amazon_FreeveeTimeout();
         } else if (isDisney || isHotstar) {
-          if (oldValueUndef || (newValue.Disney.showRating !== oldValue?.Disney?.showRating && newValue.Disney.showRating)) startShowRatingInterval();
+          if (oldValueUndef || (!oldValue?.Disney?.showRating && newValue.Disney.showRating)) startShowRatingInterval();
         }
-        if (oldValueUndef || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
+        if (oldValueUndef || (!oldValue?.Video?.playOnFullScreen && newValue?.Video?.playOnFullScreen)) startPlayOnFullScreen();
       }
     }
   });
