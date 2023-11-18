@@ -27,39 +27,15 @@ const version = "1.0.69";
 browser.storage.sync.get("settings", function (result) {
   console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
   console.log("version:", version);
-  settings = result.settings;
-  if (typeof settings !== "object") {
-    browser.storage.sync.set(defaultSettings);
-  } else {
-    CrunchyrollObserver.observe(document, config);
-    startPlayOnFullScreen();
-
-    let changedSettings = false;
-    for (const key in defaultSettings.settings) {
-      if (typeof settings[key] === "undefined") {
-        log("undefined Setting:", key);
-        changedSettings = true;
-        settings[key] = defaultSettings.settings[key];
-      } else {
-        for (const subkey in defaultSettings.settings[key]) {
-          if (typeof settings[key][subkey] === "undefined") {
-            log("undefined Setting:", key, subkey);
-            changedSettings = true;
-            settings[key][subkey] = defaultSettings.settings[key][subkey];
-          }
-        }
-      }
-    }
-    if (changedSettings) {
-      browser.storage.sync.set({ settings });
-    }
-  }
+  settings = { ...defaultSettings.settings, ...result.settings };
+  CrunchyrollObserver.observe(document, config);
+  if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
 });
 browser.storage.sync.onChanged.addListener(function (changes) {
   if (changes?.settings) {
     const { oldValue, newValue } = changes.settings;
     settings = newValue;
-    if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
+    if (!oldValue || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
   }
 });
 const config = { attributes: true, childList: true, subtree: true };

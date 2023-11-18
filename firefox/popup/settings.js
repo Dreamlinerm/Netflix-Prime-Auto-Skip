@@ -61,7 +61,8 @@ const defaultSettings = {
 };
 let settings = defaultSettings.settings;
 browser.storage.sync.get("settings", function (result) {
-  settings = result.settings;
+  // if there is an undefined setting, set it to the default
+  settings = { ...defaultSettings.settings, ...result.settings };
   // delete every setting that is not in defaultSettings
   let changedSettings;
   for (const key in settings) {
@@ -73,8 +74,6 @@ browser.storage.sync.get("settings", function (result) {
       }
     }
   }
-  // if there is an undefined setting, set it to the default
-  settings = { ...defaultSettings.settings, ...result.settings };
   setCheckboxesToSettings();
   if (changedSettings) {
     browser.storage.sync.set({ settings });

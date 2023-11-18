@@ -100,15 +100,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     logStartOfAddon();
     getDBCache();
 
-    if (typeof settings !== "object") {
-      browser.storage.sync.set(defaultSettings);
-    } else {
-      if (isNetflix) startNetflix(settings.Netflix);
-      else if (isPrimeVideo) startAmazon(settings.Amazon);
-      else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
-      else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
-      if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
-    }
+    if (isNetflix) startNetflix(settings.Netflix);
+    else if (isPrimeVideo) startAmazon(settings.Amazon);
+    else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
+    else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
+    if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
   });
   browser.storage.local.onChanged.addListener(function (changes) {
     if (changes?.DBCache) DBCache = changes.DBCache.newValue;
