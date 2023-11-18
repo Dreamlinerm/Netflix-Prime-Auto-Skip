@@ -398,7 +398,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         if (isDisney) position = document.querySelector(".controls__right");
         else position = document.querySelector(".icon-player-landscape").parentElement.parentElement.parentElement.parentElement;
         if (position) {
-          videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
+          videoSpeed = videoSpeed || video.playbackRate;
 
           let slider = document.createElement("input");
           slider.id = "videoSpeedSlider";
