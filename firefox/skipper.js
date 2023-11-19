@@ -188,6 +188,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         }
         setRatingOnCard(card, compiledData, title);
       }
+      // else {
+      //   DBCache[title] = { score: null, release_date: null, title: title, date: today, db: "tmdb" };
+      //   log("no Score found data undefined", title, data);
+      // }
     });
   }
 
@@ -214,6 +218,27 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
       setDBCache();
     }, 5000);
+  }
+  function getDiffInDays(firstDate, secondDate) {
+    const date1 = new Date(firstDate);
+    const date2 = new Date(secondDate);
+    const diffInDays = Math.round(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
+    return diffInDays;
+  }
+  function useDBCache(title, card) {
+    if (!DBCache[title]?.date) DBCache[title].date = today;
+
+    // if DBCache[title]?.date is older than 30 days
+    let diffInReleaseDate = false;
+    if (DBCache[title]?.release_date) diffInReleaseDate = getDiffInDays(new Date(DBCache[title]?.release_date), date) <= 30;
+    if (getDiffInDays(new Date(DBCache[title]?.date), date) >= 30 || diffInReleaseDate) {
+      if (diffInReleaseDate) log("update rating", title, DBCache[title]?.release_date, getDiffInDays(new Date(DBCache[title]?.release_date), date));
+      else log("update rating", title, DBCache[title]?.date, getDiffInDays(date, new Date(DBCache[title]?.date)));
+      getMovieInfo(title, card);
+      // log("no info today", title);
+    } else {
+      setRatingOnCard(card, DBCache[title], title);
+    }
   }
   async function addRating() {
     let titleCards;
@@ -243,31 +268,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         // sometimes more than one image is loaded for the same title
         lastTitle = title;
-        if (!DBCache[title]?.score) {
-          getMovieInfo(title, card);
-          // log("no info in DBcache", title);
-        } else {
-          if (!DBCache[title]?.date) {
-            DBCache[title].date = today;
-          }
-          // if DBCache[title]?.date is older than 30 days
-          function getDiffInDays(firstDate, secondDate) {
-            const date1 = new Date(firstDate);
-            const date2 = new Date(secondDate);
-            const diffInDays = Math.round(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
-            return diffInDays;
-          }
-          let diffInReleaseDate = false;
-          if (DBCache[title]?.release_date) diffInReleaseDate = getDiffInDays(new Date(DBCache[title]?.release_date), date) <= 30;
-          if (getDiffInDays(new Date(DBCache[title]?.date), date) >= 30 || diffInReleaseDate) {
-            if (diffInReleaseDate) log("update rating", title, DBCache[title]?.release_date, getDiffInDays(new Date(DBCache[title]?.release_date), date));
-            else log("update rating", title, DBCache[title]?.date, getDiffInDays(date, new Date(DBCache[title]?.date)));
-            getMovieInfo(title, card);
-            // log("no info today", title);
-          } else {
-            setRatingOnCard(card, DBCache[title], title);
-          }
-        }
+        if (DBCache[title]?.score || (DBCache[title]?.date && getDiffInDays(new Date(DBCache[title]?.date), date) <= 1)) {
+          useDBCache(title, card);
+        } else getMovieInfo(title, card);
       }
     }
   }
