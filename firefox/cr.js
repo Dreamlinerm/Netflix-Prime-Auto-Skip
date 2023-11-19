@@ -97,6 +97,7 @@ async function Crunchyroll_SpeedSlider(video) {
       const position = document.querySelector("#settingsControl")?.parentElement;
       if (position) {
         videoSpeed = videoSpeed || video.playbackRate;
+
         let slider = document.createElement("input");
         slider.id = "videoSpeedSlider";
         slider.type = "range";
@@ -118,8 +119,7 @@ async function Crunchyroll_SpeedSlider(video) {
         if (videoSpeed) video.playbackRate = videoSpeed;
         speed.onclick = function (event) {
           event.stopPropagation();
-          if (slider.style.display === "block") slider.style.display = "none";
-          else slider.style.display = "block";
+          slider.style.display = slider.style.display === "block" ? "none" : "block";
         };
         slider.onclick = function (event) {
           event.stopPropagation();
