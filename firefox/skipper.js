@@ -252,7 +252,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (isNetflix || isDisney || isHotstar) card.classList.add("imdb");
       //Amazon
       else card.parentElement.classList.add("imdb");
-      // let card = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
       // S2: E3 remove this part
@@ -261,8 +260,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       // amazon
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0];
+      // sometimes more than one image is loaded for the same title
       if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
-        // sometimes more than one image is loaded for the same title
         lastTitle = title;
         if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
           useDBCache(title, card);
