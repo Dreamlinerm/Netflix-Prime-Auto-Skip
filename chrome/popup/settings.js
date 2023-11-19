@@ -61,51 +61,30 @@ const defaultSettings = {
 };
 let settings = defaultSettings.settings;
 chrome.storage.sync.get("settings", function (result) {
-  settings = result.settings;
-  if (typeof settings !== "object") {
-    chrome.storage.sync.set(defaultSettings);
-  } else {
-    console.log("settings:", settings);
-    // if there is an undefined setting, set it to the default
-    let changedSettings = false;
-    for (const key in defaultSettings.settings) {
-      if (typeof settings[key] === "undefined") {
-        console.log("undefined Setting:", key);
+  // if there is an undefined setting, set it to the default
+  settings = { ...defaultSettings.settings, ...result.settings };
+  // delete every setting that is not in defaultSettings
+  let changedSettings;
+  for (const key in settings) {
+    for (const subkey in settings[key]) {
+      if (typeof defaultSettings.settings[key][subkey] === "undefined") {
+        console.log("delete Setting:", key, subkey);
         changedSettings = true;
-        settings[key] = defaultSettings.settings[key];
-      } else {
-        for (const subkey in defaultSettings.settings[key]) {
-          if (typeof settings[key][subkey] === "undefined") {
-            console.log("undefined Setting:", key, subkey);
-            changedSettings = true;
-            settings[key][subkey] = defaultSettings.settings[key][subkey];
-          }
-        }
+        delete settings[key][subkey];
       }
     }
-    // delete every setting that is not in defaultSettings
-    for (const key in settings) {
-      for (const subkey in settings[key]) {
-        if (typeof defaultSettings.settings[key][subkey] === "undefined") {
-          console.log("delete Setting:", key, subkey);
-          changedSettings = true;
-          delete settings[key][subkey];
-        }
-      }
-    }
-    setCheckboxesToSettings();
-    if (changedSettings) {
-      chrome.storage.sync.set({ settings });
-    }
+  }
+  setCheckboxesToSettings();
+  if (changedSettings) {
+    chrome.storage.sync.set({ settings });
   }
 });
 chrome.storage.sync.onChanged.addListener(function (changes) {
-  for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-    if (key == "settings") {
-      settings = newValue;
-      console.log(key, "Old value:", oldValue, ", new value:", newValue);
-      setCheckboxesToSettings();
-    }
+  if (changes?.settings) {
+    const { oldValue, newValue } = changes.settings;
+    settings = newValue;
+    console.log("settings", "Old value:", oldValue, ", new value:", newValue);
+    setCheckboxesToSettings();
   }
 });
 //global variables

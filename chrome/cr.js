@@ -27,40 +27,15 @@ const version = "1.0.70";
 chrome.storage.sync.get("settings", function (result) {
   console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
   console.log("version:", version);
-  settings = result.settings;
-  if (typeof settings !== "object") {
-    chrome.storage.sync.set(defaultSettings);
-  } else {
-    CrunchyrollObserver.observe(document, config);
-    startPlayOnFullScreen();
-
-    let changedSettings = false;
-    for (const key in defaultSettings.settings) {
-      if (typeof settings[key] === "undefined") {
-        log("undefined Setting:", key);
-        changedSettings = true;
-        settings[key] = defaultSettings.settings[key];
-      } else {
-        for (const subkey in defaultSettings.settings[key]) {
-          if (typeof settings[key][subkey] === "undefined") {
-            log("undefined Setting:", key, subkey);
-            changedSettings = true;
-            settings[key][subkey] = defaultSettings.settings[key][subkey];
-          }
-        }
-      }
-    }
-    if (changedSettings) {
-      chrome.storage.sync.set({ settings });
-    }
-  }
+  settings = { ...defaultSettings.settings, ...result.settings };
+  CrunchyrollObserver.observe(document, config);
+  if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
 });
 chrome.storage.sync.onChanged.addListener(function (changes) {
-  for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-    if (key == "settings") {
-      settings = newValue;
-      if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
-    }
+  if (changes?.settings) {
+    const { oldValue, newValue } = changes.settings;
+    settings = newValue;
+    if (!oldValue || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
   }
 });
 const config = { attributes: true, childList: true, subtree: true };
@@ -91,7 +66,7 @@ function OnFullScreenChange() {
   }
 }
 async function startPlayOnFullScreen() {
-  if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
+  if (settings.Video?.playOnFullScreen) {
     log("started observing| PlayOnFullScreen");
     addEventListener("fullscreenchange", OnFullScreenChange);
   } else {
@@ -121,7 +96,8 @@ async function Crunchyroll_SpeedSlider(video) {
       // console.log(document.querySelector("#settingsControl"));
       const position = document.querySelector("#settingsControl")?.parentElement;
       if (position) {
-        videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
+        videoSpeed = videoSpeed || video.playbackRate;
+
         let slider = document.createElement("input");
         slider.id = "videoSpeedSlider";
         slider.type = "range";
@@ -143,8 +119,7 @@ async function Crunchyroll_SpeedSlider(video) {
         if (videoSpeed) video.playbackRate = videoSpeed;
         speed.onclick = function (event) {
           event.stopPropagation();
-          if (slider.style.display === "block") slider.style.display = "none";
-          else slider.style.display = "block";
+          slider.style.display = slider.style.display === "block" ? "none" : "block";
         };
         slider.onclick = function (event) {
           event.stopPropagation();

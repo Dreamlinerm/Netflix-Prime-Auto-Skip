@@ -48,58 +48,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     videoSpeed = speed;
   }
   resetBadge();
-  chrome.storage.sync.get("settings", function (result) {
-    settings = result.settings;
-    console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
-    console.log("version:", version);
-    console.log("Settings", settings);
-    if (isNetflix) console.log("Page %cNetflix", "color: #e60010;");
-    else if (isPrimeVideo) console.log("Page %cAmazon", "color: #00aeef;");
-    else if (isDisney) console.log("Page %cDisney", "color: #0682f0;");
-    else if (isHotstar) console.log("Page %cHotstar", "color: #0682f0;");
-    if (typeof settings !== "object") {
-      chrome.storage.sync.set(defaultSettings);
-    } else {
-      if (isNetflix) {
-        // start Observers depending on the settings
-        if (settings.Netflix?.profile) AutoPickProfile();
-        if (settings.Netflix?.skipAd) Netflix_SkipAdInterval();
-        NetflixObserver.observe(document, config);
-      } else if (isPrimeVideo) {
-        AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
-        AmazonObserver.observe(document, config);
-        if (settings.Amazon?.skipAd) Amazon_AdTimeout();
-        if (settings.Amazon?.blockFreevee) {
-          // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
-          setTimeout(function () {
-            Amazon_FreeveeTimeout();
-          }, 1000);
-        }
-      } else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
-      else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
-
-      if (settings.Video.playOnFullScreen) startPlayOnFullScreen();
-      // if there is an undefined setting, set it to the default
-      let changedSettings = false;
-      for (const key in defaultSettings.settings) {
-        if (typeof settings[key] === "undefined") {
-          log("undefined Setting:", key);
-          changedSettings = true;
-          settings[key] = defaultSettings.settings[key];
-        } else {
-          for (const subkey in defaultSettings.settings[key]) {
-            if (typeof settings[key][subkey] === "undefined") {
-              log("undefined Setting:", key, subkey);
-              changedSettings = true;
-              settings[key][subkey] = defaultSettings.settings[key][subkey];
-            }
-          }
-        }
-      }
-      if (changedSettings) {
-        chrome.storage.sync.set({ settings });
-      }
-    }
+  async function getDBCache() {
     chrome.storage.local.get("DBCache", function (result) {
       DBCache = result?.DBCache;
       if (typeof DBCache !== "object") {
@@ -119,31 +68,69 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         if (settings.Disney?.showRating) startShowRatingInterval();
       }
     });
+  }
+  function logStartOfAddon() {
+    console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
+    console.log("version:", version);
+    console.log("Settings", settings);
+    if (isNetflix) console.log("Page %cNetflix", "color: #e60010;");
+    else if (isPrimeVideo) console.log("Page %cAmazon", "color: #00aeef;");
+    else if (isDisney) console.log("Page %cDisney", "color: #0682f0;");
+    else if (isHotstar) console.log("Page %cHotstar", "color: #0682f0;");
+  }
+  function startNetflix(Netflix) {
+    if (Netflix?.profile) AutoPickProfile();
+    if (Netflix?.skipAd) Netflix_SkipAdInterval();
+    NetflixObserver.observe(document, config);
+  }
+  function startAmazon(Amazon) {
+    AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
+    AmazonObserver.observe(document, config);
+    if (Amazon?.skipAd) Amazon_AdTimeout();
+    if (Amazon?.blockFreevee) {
+      // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
+      setTimeout(function () {
+        Amazon_FreeveeTimeout();
+      }, 1000);
+    }
+  }
+  chrome.storage.sync.get("settings", function (result) {
+    // if there is an undefined setting, set it to the default
+    settings = { ...defaultSettings.settings, ...result.settings };
+    logStartOfAddon();
+    getDBCache();
+
+    if (isNetflix) startNetflix(settings.Netflix);
+    else if (isPrimeVideo) startAmazon(settings.Amazon);
+    else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
+    else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
+    if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
   });
   chrome.storage.local.onChanged.addListener(function (changes) {
-    for (let [key, { newValue }] of Object.entries(changes)) {
-      if (key == "DBCache") {
-        DBCache = newValue;
-      }
-    }
+    if (changes?.DBCache) DBCache = changes.DBCache.newValue;
   });
   chrome.storage.sync.onChanged.addListener(function (changes) {
-    for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-      if (key == "settings") {
-        settings = newValue;
-        log(key, "Old value:", oldValue, ", new value:", newValue);
-        if (isNetflix) {
-          // if value is changed then check if it is enabled or disabled
-          if (oldValue === undefined || (newValue.Netflix.skipAd !== oldValue?.Netflix?.skipAd && newValue.Netflix.skipAd)) Netflix_SkipAdInterval();
-        } else if (isPrimeVideo) {
-          if (oldValue === undefined || (newValue.Amazon.skipAd !== oldValue?.Amazon?.skipAd && newValue.Amazon.skipAd)) Amazon_AdTimeout();
-          if (oldValue === undefined || (newValue.Amazon.blockFreevee !== oldValue?.Amazon?.blockFreevee && newValue.Amazon.blockFreevee)) Amazon_FreeveeTimeout();
-        }
-        if (oldValue === undefined || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
-        if (oldValue === undefined || (newValue.Netflix.showRating !== oldValue?.Netflix?.showRating && newValue.Netflix.showRating)) startShowRatingInterval();
-      }
+    if (changes?.settings) {
+      const { oldValue, newValue } = changes.settings;
+      settings = newValue;
+      log("settings", "Old value:", oldValue, ", new value:", newValue);
+      if (isNetflix) NetflixSettingsChanged(oldValue?.Netflix, newValue?.Netflix);
+      else if (isPrimeVideo) AmazonSettingsChanged(oldValue?.Amazon, newValue?.Amazon);
+      else if (isDisney || isHotstar) DisneySettingsChanged(oldValue?.Disney, newValue?.Disney);
+      if (!oldValue || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
     }
   });
+  function NetflixSettingsChanged(oldValue, newValue) {
+    if (!oldValue?.skipAd && newValue.skipAd) Netflix_SkipAdInterval();
+    if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
+  }
+  function AmazonSettingsChanged(oldValue, newValue) {
+    if (!oldValue?.skipAd && newValue.skipAd) Amazon_AdTimeout();
+    if (!oldValue?.blockFreevee && newValue.blockFreevee) Amazon_FreeveeTimeout();
+  }
+  function DisneySettingsChanged(oldValue, newValue) {
+    if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
+  }
   async function addSkippedTime(startTime, endTime, key) {
     if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
       log(key, endTime - startTime);
@@ -172,7 +159,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   // chrome.storage.local.set({ DBCache: {} });
   // justWatchAPI
   const today = date.toISOString().split("T")[0];
-  async function getMovieInfo(title, card) {
+  async function getMovieInfo(title, card, year = null) {
     // justwatch api
     // const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
     let locale = "en-US";
@@ -180,7 +167,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       locale = navigator?.language;
     }
     // use the url for themoviedb.org now
-    const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURI(title)}&include_adult=true&language=${locale}&page=1`;
+    let url = `https://api.themoviedb.org/3/search/movie?query=${encodeURI(title)}&include_adult=true&language=${locale}&page=1`;
+    if (year) url += `&year=${year}`;
     // const response = await fetch(encodeURI(url));
     // const data = await response.json();
     chrome.runtime.sendMessage({ url }, function (data) {
@@ -201,10 +189,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         }
         setRatingOnCard(card, compiledData, title);
       }
+      // else {
+      //   DBCache[title] = { score: null, release_date: null, title: title, date: today, db: "tmdb" };
+      //   log("no Score found data undefined", title, data);
+      // }
     });
   }
 
-  // Observers
+  // -----------------------   functions   ---------------------------------
   // default Options for the observer (which mutations to observe)
   const config = { attributes: true, childList: true, subtree: true };
 
@@ -228,6 +220,22 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       setDBCache();
     }, 5000);
   }
+  function getDiffInDays(firstDate, secondDate) {
+    if (!firstDate || !secondDate) return 31;
+    return Math.round(Math.abs(new Date(secondDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24));
+  }
+  function useDBCache(title, card) {
+    if (!DBCache[title]?.date) DBCache[title].date = today;
+    const diffInReleaseDate = getDiffInDays(DBCache[title]?.release_date, date) <= 20 && getDiffInDays(DBCache[title].date, date) > 0;
+    if (getDiffInDays(DBCache[title].date, date) >= 30 || diffInReleaseDate) {
+      if (diffInReleaseDate) log("update recent movie:", title, ",Age:", getDiffInDays(DBCache[title]?.release_date, date));
+      else log("update old rating:", title, ",Age:", getDiffInDays(DBCache[title].date, date));
+      getMovieInfo(title, card);
+      // log("no info today", title);
+    } else {
+      setRatingOnCard(card, DBCache[title], title);
+    }
+  }
   async function addRating() {
     let titleCards;
     if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
@@ -244,7 +252,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (isNetflix || isDisney || isHotstar) card.classList.add("imdb");
       //Amazon
       else card.parentElement.classList.add("imdb");
-      // let card = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
       // S2: E3 remove this part
@@ -253,34 +260,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       // amazon
       // remove everything after - in the title
       else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0];
+      // sometimes more than one image is loaded for the same title
       if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
-        // sometimes more than one image is loaded for the same title
         lastTitle = title;
-        if (!DBCache[title]?.score) {
-          getMovieInfo(title, card);
-          // log("no info in DBcache", title);
-        } else {
-          if (!DBCache[title]?.date) {
-            DBCache[title].date = today;
-          }
-          // if DBCache[title]?.date is older than 30 days
-          function getDiffInDays(firstDate, secondDate) {
-            const date1 = new Date(firstDate);
-            const date2 = new Date(secondDate);
-            const diffInDays = Math.round(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
-            return diffInDays;
-          }
-          let diffInReleaseDate = false;
-          if (DBCache[title]?.release_date) diffInReleaseDate = getDiffInDays(new Date(DBCache[title]?.release_date), date) <= 30;
-          if (getDiffInDays(new Date(DBCache[title]?.date), date) >= 30 || diffInReleaseDate) {
-            if (diffInReleaseDate) log("update rating", title, DBCache[title]?.release_date, getDiffInDays(new Date(DBCache[title]?.release_date), date));
-            else log("update rating", title, DBCache[title]?.date, getDiffInDays(date, new Date(DBCache[title]?.date)));
-            getMovieInfo(title, card);
-            // log("no info today", title);
-          } else {
-            setRatingOnCard(card, DBCache[title], title);
-          }
-        }
+        if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
+          useDBCache(title, card);
+        } else getMovieInfo(title, card);
       }
     }
   }
@@ -311,7 +296,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function startPlayOnFullScreen() {
-    if (settings.Video?.playOnFullScreen === undefined || settings.Video?.playOnFullScreen) {
+    if (settings.Video?.playOnFullScreen) {
       log("started observing| PlayOnFullScreen");
       addEventListener("fullscreenchange", OnFullScreenChange);
     } else {
@@ -351,7 +336,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
       let time;
-      if (isDisney) time = button.textContent.match(/\d+/)?.[0];
+      if (isDisney) time = /\d+/.exec(button.textContent)?.[0];
       if ((isHotstar && !document.evaluate("//span[contains(., 'My Space')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()) || (time && lastAdTimeText != time)) {
         button.click();
         lastAdTimeText = time;
@@ -368,7 +353,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
       let time;
-      if (isDisney) time = button.textContent.match(/\d+/)?.[0];
+      if (isDisney) time = /\d+/.exec(button.textContent)?.[0];
       if ((isHotstar && !document.evaluate("//span[contains(., 'My Space')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()) || (time && lastAdTimeText != time)) {
         let video = document.querySelector("video");
         if (video) {
@@ -381,6 +366,40 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }
   }
+  function createSlider(video, position, sliderStyle, speedStyle) {
+    videoSpeed = videoSpeed || video.playbackRate;
+
+    let slider = document.createElement("input");
+    slider.id = "videoSpeedSlider";
+    slider.type = "range";
+    slider.min = settings.General.sliderMin;
+    slider.max = settings.General.sliderMax;
+    slider.value = videoSpeed * 10;
+    slider.step = settings.General.sliderSteps;
+    slider.style = sliderStyle;
+    position.insertBefore(slider, position.firstChild);
+
+    let speed = document.createElement("p");
+    speed.id = "videoSpeed";
+    speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
+    speed.style = speedStyle;
+    position.insertBefore(speed, position.firstChild);
+
+    if (videoSpeed) video.playbackRate = videoSpeed;
+    speed.onclick = function () {
+      slider.style.display = slider.style.display === "block" ? "none" : "block";
+    };
+    slider.oninput = function () {
+      speed.textContent = (this.value / 10).toFixed(1) + "x";
+      video.playbackRate = this.value / 10;
+      setVideoSpeed(this.value / 10);
+    };
+
+    return { slider, speed };
+  }
+
+  const DisneySliderStyle = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;";
+  const DisneySpeedStyle = "height:10px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
   function Disney_SpeedSlider(video) {
     // remove subtitle background
     let subtitles = document.querySelectorAll(".dss-subtitle-renderer-line:not(.enhanced)");
@@ -396,38 +415,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         let position;
         if (isDisney) position = document.querySelector(".controls__right");
         else position = document.querySelector(".icon-player-landscape").parentElement.parentElement.parentElement.parentElement;
-        if (position) {
-          videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
-
-          let slider = document.createElement("input");
-          slider.id = "videoSpeedSlider";
-          slider.type = "range";
-          slider.min = settings.General.sliderMin;
-          slider.max = settings.General.sliderMax;
-          slider.value = videoSpeed * 10;
-          slider.step = settings.General.sliderSteps;
-          slider.style = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;";
-          position.insertBefore(slider, position.firstChild);
-
-          let speed = document.createElement("p");
-          speed.id = "videoSpeed";
-          speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
-          // makes the button clickable
-          // speed.setAttribute("class", "control-icon-btn");
-          speed.style = "height:10px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
-          position.insertBefore(speed, position.firstChild);
-
-          if (videoSpeed) video.playbackRate = videoSpeed;
-          speed.onclick = function () {
-            if (slider.style.display === "block") slider.style.display = "none";
-            else slider.style.display = "block";
-          };
-          slider.oninput = function () {
-            speed.textContent = (this.value / 10).toFixed(1) + "x";
-            video.playbackRate = this.value / 10;
-            setVideoSpeed(this.value / 10);
-          };
-        }
+        if (position) createSlider(video, position, DisneySliderStyle, DisneySpeedStyle);
       } else {
         // need to resync the slider with the video sometimes
         let speed = document.querySelector("#videoSpeed");
@@ -447,25 +435,26 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   function Netflix() {
     const video = document.querySelector("video");
     const time = video?.currentTime;
-    if (settings.Netflix?.profile === undefined || settings.Netflix?.profile) Netflix_profile();
-    if (settings.Netflix?.skipIntro === undefined || settings.Netflix?.skipIntro) {
+    const NSettings = settings.Netflix;
+    if (NSettings?.profile) Netflix_profile();
+    if (NSettings?.skipIntro) {
       if (Netflix_General('[data-uia="player-skip-intro"]', "Intro skipped", false)) {
         setTimeout(function () {
           addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
         }, 600);
       }
     }
-    if (settings.Netflix?.skipRecap === undefined || settings.Netflix?.skipRecap) {
+    if (NSettings?.skipRecap) {
       if (Netflix_General('[data-uia="player-skip-recap"]', "Recap skipped", false) || Netflix_General('[data-uia="player-skip-preplay"]', "Recap skipped", false)) {
         setTimeout(function () {
           addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
         }, 600);
       }
     }
-    if (settings.Netflix?.skipCredits === undefined || settings.Netflix?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]', "Credits skipped");
-    if (settings.Netflix?.watchCredits === undefined || settings.Netflix?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched");
-    if (settings.Netflix?.skipBlocked === undefined || settings.Netflix?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
-    if (settings.Netflix?.speedSlider === undefined || settings.Netflix?.speedSlider) Netflix_SpeedSlider(video);
+    if (NSettings?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]', "Credits skipped");
+    if (NSettings?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched");
+    if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
+    if (NSettings?.speedSlider) Netflix_SpeedSlider(video);
   }
 
   function Netflix_profile() {
@@ -542,6 +531,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }, 100);
   }
+  const NetflixSliderStyle = "position:relative;bottom:20px;display: none;width:200px;";
+  const NetflixSpeedStyle = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
   function Netflix_SpeedSlider(video) {
     // only add speed slider on lowest subscription tier
     // && !document.querySelector('[data-uia="control-speed"]')
@@ -551,39 +542,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         let p = document.querySelector('[data-uia="controls-standard"]')?.firstChild?.children;
         if (p) {
           // infobar position for the slider to be added
-          let position;
-          if (p) position = p[p.length - 2]?.firstChild?.lastChild;
-          if (position) {
-            videoSpeed = videoSpeed ? videoSpeed : video.playbackRate;
-            let slider = document.createElement("input");
-            slider.id = "videoSpeedSlider";
-            slider.type = "range";
-            slider.min = settings.General.sliderMin;
-            slider.max = settings.General.sliderMax;
-            slider.value = videoSpeed * 10;
-            slider.step = settings.General.sliderSteps;
-            slider.style = "position:relative;bottom:20px;display: none;width:200px;";
-            position.insertBefore(slider, position.firstChild);
-
-            let speed = document.createElement("p");
-            speed.id = "videoSpeed";
-            speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
-            // makes the button clickable
-            // speed.setAttribute("class", "control-icon-btn");
-            speed.style = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
-            position.insertBefore(speed, position.firstChild);
-
-            if (videoSpeed) video.playbackRate = videoSpeed;
-            speed.onclick = function () {
-              if (slider.style.display === "block") slider.style.display = "none";
-              else slider.style.display = "block";
-            };
-            slider.oninput = function () {
-              speed.textContent = (this.value / 10).toFixed(1) + "x";
-              video.playbackRate = this.value / 10;
-              setVideoSpeed(this.value / 10);
-            };
-          }
+          let position = p[p.length - 2]?.firstChild?.lastChild;
+          if (position) createSlider(video, position, NetflixSliderStyle, NetflixSpeedStyle);
         }
       }
     }
@@ -594,16 +554,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   const AmazonObserver = new MutationObserver(Amazon);
   function Amazon() {
     const video = document.querySelector(AmazonVideoClass);
-    if (settings.Amazon?.skipCredits === undefined || settings.Amazon?.skipCredits) Amazon_Credits();
-    if (settings.Amazon?.watchCredits === undefined || settings.Amazon?.watchCredits) Amazon_Watch_Credits();
-    if (settings.Amazon?.speedSlider === undefined || settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
-    if (settings.Amazon?.filterPaid === undefined || settings.Amazon?.filterPaid) Amazon_FilterPaid();
+    if (settings.Amazon?.skipCredits) Amazon_Credits();
+    if (settings.Amazon?.watchCredits) Amazon_Watch_Credits();
+    if (settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
+    if (settings.Amazon?.filterPaid) Amazon_FilterPaid();
   }
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
   function Amazon_Intro() {
-    if (settings.Amazon?.skipIntro === undefined || settings.Amazon?.skipIntro) {
+    if (settings.Amazon?.skipIntro) {
       // skips intro and recap
       // recap on lucifer season 3 episode 3
       // intro lucifer season 3 episode 4
@@ -659,7 +619,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (button) {
       // only skipping to next episode not an entirely new series
       const newEpNumber = document.querySelector("[class*=nextupcard-episode]");
-      if (newEpNumber && !newEpNumber.textContent.match(/(?<!\S)1(?!\S)/)) {
+      if (newEpNumber && !/(?<!\S)1(?!\S)/.exec(newEpNumber.textContent)) {
         button.click();
         increaseBadge();
         log("skipped Credits", button);
@@ -674,6 +634,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       log("Watched Credits", button);
     }
   }
+  const AmazonSliderStyle = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;";
   async function Amazon_SpeedSlider(video) {
     // remove bad background hue which is annoying
     //document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
@@ -694,31 +655,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
         let position = document.querySelector("[class*=infobar-container]")?.firstChild?.lastChild;
-        if (position) {
-          let slider = document.createElement("input");
-          slider.id = "videoSpeedSlider";
-          slider.type = "range";
-          slider.min = settings.General.sliderMin;
-          slider.max = settings.General.sliderMax;
-          slider.value = "10";
-          slider.step = settings.General.sliderSteps;
-          // slider.setAttribute("list", "markers");
-          slider.style = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;";
-          position.insertBefore(slider, position.firstChild);
-
-          let speed = document.createElement("p");
-          speed.id = "videoSpeed";
-          speed.textContent = "1.0x";
-          position.insertBefore(speed, position.firstChild);
-          speed.onclick = function () {
-            if (slider.style.display === "block") slider.style.display = "none";
-            else slider.style.display = "block";
-          };
-          slider.oninput = function () {
-            speed.textContent = (this.value / 10).toFixed(1) + "x";
-            video.playbackRate = this.value / 10;
-          };
-        }
+        if (position) createSlider(video, position, AmazonSliderStyle, "");
       } else {
         // need to resync the slider with the video sometimes
         let speed = document.querySelector("#videoSpeed");
@@ -782,7 +719,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     // Series grimm
     let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
     if (adTimeText) {
-      const adTime = parseInt(adTimeText.textContent.match(/\d+/)[0]);
+      const adTime = parseInt(/\d+/.exec(adTimeText.textContent)?.[0]);
       // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
       // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
       if (!document.querySelector(".fu4rd6c.f1cw2swo") && !lastAdTimeText) {
@@ -823,20 +760,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
             let button = document.querySelector(".fu4rd6c.f1cw2swo");
             if (button) {
               // only getting the time after :08
-              let adTime = parseInt(
-                document
-                  .querySelector(".atvwebplayersdk-adtimeindicator-text")
-                  .innerHTML.match(/[:]\d+/)[0]
-                  .substring(1)
-              );
+              let adTime = parseInt(/:\d+/.exec(document.querySelector(".atvwebplayersdk-adtimeindicator-text").innerHTML)?.[0].substring(1));
               // wait for 100ms before skipping to make sure the button is not pressed too fast, or there will be infinite loading
               setTimeout(() => {
-                if (button) {
-                  button.click();
-                  if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
-                  increaseBadge();
-                  log("Self Ad skipped, length:", adTime, button);
-                }
+                button.click();
+                if (typeof adTime === "number") settings.Statistics.AmazonAdTimeSkipped += adTime;
+                increaseBadge();
+                log("Self Ad skipped, length:", adTime, button);
               }, 150);
             }
           }
@@ -845,63 +775,59 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }, 100);
   }
   // Crunchyroll functions
+  function filterQueued(display) {
+    document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
+      element.parentElement.parentElement.parentElement.style.display = display;
+    });
+    if (display == "block" && settings.General.filterDub) {
+      document.querySelectorAll("cite[itemprop='name']").forEach((element) => {
+        if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = "none";
+      });
+    }
+  }
+  function filterDub(display) {
+    let list = document.querySelectorAll("cite[itemprop='name']");
+    list.forEach((element) => {
+      if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
+    });
+    if (display == "block" && settings.General.filterQueued) {
+      document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
+        element.parentElement.parentElement.parentElement.style.display = "none";
+      });
+    }
+  }
+  function createFilterElement(filterType, filterText, settingsValue, filterFunction) {
+    const label = document.createElement("label");
+    const span = document.createElement("span");
+    span.style = "display: flex;align-items: center;";
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.checked = settingsValue;
+    input.onclick = function () {
+      settings.General[filterType] = this.checked;
+      filterFunction(this.checked ? "none" : "block");
+      chrome.storage.sync.set({ settings });
+    };
+    const p = document.createElement("p");
+    p.style = "width: 100px;";
+    p.textContent = filterText;
+    label.appendChild(span);
+    span.appendChild(input);
+    span.appendChild(p);
+    return label;
+  }
+  function addButtons() {
+    const toggleForm = document.querySelector("#filter_toggle_form");
+    toggleForm.style.display = "flex";
+    toggleForm.firstElementChild.appendChild(createFilterElement("filterQueued", "Show Playlist only", settings.General.filterQueued, filterQueued));
+    toggleForm.firstElementChild.appendChild(createFilterElement("filterDub", "Filter Dub", settings.General.filterDub, filterDub));
+  }
   async function Crunchyroll_ReleaseCalendar() {
     if (settings.Crunchyroll?.releaseCalendar && window.location.href.includes("simulcastcalendar")) {
-      function filterQueued(display) {
-        let list = document.querySelectorAll("div.queue-flag:not(.queued)");
-        list.forEach((element) => {
-          element.parentElement.parentElement.parentElement.style.display = display;
-        });
-      }
-      filterQueued(settings.General.filterQueued ? "none" : "block");
-      function filterDub(display) {
-        let list = document.querySelectorAll("cite[itemprop='name']");
-        list.forEach((element) => {
-          if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
-        });
-      }
-      filterDub(settings.General.filterDub ? "none" : "block");
       // Show playlist only
-      const label = document.createElement("label");
-      const span = document.createElement("span");
-      span.style = "display: flex;align-items: center;";
-      const input = document.createElement("input");
-      input.type = "checkbox";
-      input.checked = settings.General.filterQueued;
-      input.onclick = function () {
-        filterQueued(this.checked ? "none" : "block");
-        settings.General.filterQueued = this.checked;
-        chrome.storage.sync.set({ settings });
-      };
-      const p = document.createElement("p");
-      p.style = "width: 100px;";
-      p.textContent = "Show Playlist only";
-      label.appendChild(span);
-      span.appendChild(input);
-      span.appendChild(p);
-      // Filter Dub
-      const label2 = document.createElement("label");
-      const span2 = document.createElement("span");
-      span2.style = "display: flex;align-items: center;";
-      const input2 = document.createElement("input");
-      input2.type = "checkbox";
-      input2.checked = settings.General.filterDub;
-      input2.onclick = function () {
-        filterDub(this.checked ? "none" : "block");
-        settings.General.filterDub = this.checked;
-        chrome.storage.sync.set({ settings });
-      };
-      const p2 = document.createElement("p");
-      p2.style = "width: 100px;";
-      p2.textContent = "Filter Dub";
-      label2.appendChild(span2);
-      span2.appendChild(input2);
-      span2.appendChild(p2);
-
-      const toggleForm = document.querySelector("#filter_toggle_form");
-      toggleForm.style.display = "flex";
-      toggleForm.firstElementChild.appendChild(label);
-      toggleForm.firstElementChild.appendChild(label2);
+      filterQueued(settings.General.filterQueued ? "none" : "block");
+      filterDub(settings.General.filterDub ? "none" : "block");
+      addButtons();
     }
   }
   // Badge functions
