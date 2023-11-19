@@ -221,20 +221,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }, 5000);
   }
   function getDiffInDays(firstDate, secondDate) {
-    const date1 = new Date(firstDate);
-    const date2 = new Date(secondDate);
-    const diffInDays = Math.round(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
-    return diffInDays;
+    if (!firstDate || !secondDate) return 31;
+    return Math.round(Math.abs(new Date(secondDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24));
   }
   function useDBCache(title, card) {
     if (!DBCache[title]?.date) DBCache[title].date = today;
-
-    // if DBCache[title]?.date is older than 20 days
     let diffInReleaseDate = false;
-    if (DBCache[title]?.release_date) diffInReleaseDate = getDiffInDays(new Date(DBCache[title]?.release_date), date) <= 20;
-    if (getDiffInDays(new Date(DBCache[title]?.date), date) >= 30 || diffInReleaseDate) {
-      if (diffInReleaseDate) log("update recent movie:", title, ",Age: " + getDiffInDays(new Date(DBCache[title]?.release_date), date));
-      else log("update old rating:", title, ",Age: " + getDiffInDays(date, new Date(DBCache[title]?.date)));
+    if (DBCache[title]?.release_date) diffInReleaseDate = getDiffInDays(DBCache[title]?.release_date, date) <= 20 && getDiffInDays(DBCache[title].date, date) <= 1;
+    if (getDiffInDays(DBCache[title].date, date) >= 30 || diffInReleaseDate) {
+      if (diffInReleaseDate) log("update recent movie:", title, ",Age:", getDiffInDays(DBCache[title]?.release_date, date));
+      else log("update old rating:", title, ",Age:", getDiffInDays(DBCache[title].date, date));
       getMovieInfo(title, card);
       // log("no info today", title);
     } else {
@@ -269,7 +265,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         // sometimes more than one image is loaded for the same title
         lastTitle = title;
-        if (DBCache[title]?.score || (DBCache[title]?.date && getDiffInDays(new Date(DBCache[title]?.date), date) <= 1)) {
+        if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
           useDBCache(title, card);
         } else getMovieInfo(title, card);
       }
