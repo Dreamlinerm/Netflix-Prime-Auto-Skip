@@ -233,8 +233,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     let diffInReleaseDate = false;
     if (DBCache[title]?.release_date) diffInReleaseDate = getDiffInDays(new Date(DBCache[title]?.release_date), date) <= 20;
     if (getDiffInDays(new Date(DBCache[title]?.date), date) >= 30 || diffInReleaseDate) {
-      if (diffInReleaseDate) log("update recent rating", title, DBCache[title]?.release_date, getDiffInDays(new Date(DBCache[title]?.release_date), date));
-      else log("update old rating", title, DBCache[title]?.date, getDiffInDays(date, new Date(DBCache[title]?.date)));
+      if (diffInReleaseDate) log("update recent movie:", title, ",Age: " + getDiffInDays(new Date(DBCache[title]?.release_date), date));
+      else log("update old rating:", title, ",Age: " + getDiffInDays(date, new Date(DBCache[title]?.date)));
       getMovieInfo(title, card);
       // log("no info today", title);
     } else {
