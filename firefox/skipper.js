@@ -159,7 +159,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   // browser.storage.local.set({ DBCache: {} });
   // justWatchAPI
   const today = date.toISOString().split("T")[0];
-  async function getMovieInfo(title, card) {
+  async function getMovieInfo(title, card, year = null) {
     // justwatch api
     // const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
     let locale = "en-US";
@@ -167,7 +167,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       locale = navigator?.language;
     }
     // use the url for themoviedb.org now
-    const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURI(title)}&include_adult=true&language=${locale}&page=1`;
+    let url = `https://api.themoviedb.org/3/search/movie?query=${encodeURI(title)}&include_adult=true&language=${locale}&page=1`;
+    if (year) url += `&year=${year}`;
     // const response = await fetch(encodeURI(url));
     // const data = await response.json();
     browser.runtime.sendMessage({ url }, function (data) {
@@ -228,12 +229,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   function useDBCache(title, card) {
     if (!DBCache[title]?.date) DBCache[title].date = today;
 
-    // if DBCache[title]?.date is older than 30 days
+    // if DBCache[title]?.date is older than 20 days
     let diffInReleaseDate = false;
-    if (DBCache[title]?.release_date) diffInReleaseDate = getDiffInDays(new Date(DBCache[title]?.release_date), date) <= 30;
+    if (DBCache[title]?.release_date) diffInReleaseDate = getDiffInDays(new Date(DBCache[title]?.release_date), date) <= 20;
     if (getDiffInDays(new Date(DBCache[title]?.date), date) >= 30 || diffInReleaseDate) {
-      if (diffInReleaseDate) log("update rating", title, DBCache[title]?.release_date, getDiffInDays(new Date(DBCache[title]?.release_date), date));
-      else log("update rating", title, DBCache[title]?.date, getDiffInDays(date, new Date(DBCache[title]?.date)));
+      if (diffInReleaseDate) log("update recent rating", title, DBCache[title]?.release_date, getDiffInDays(new Date(DBCache[title]?.release_date), date));
+      else log("update old rating", title, DBCache[title]?.date, getDiffInDays(date, new Date(DBCache[title]?.date)));
       getMovieInfo(title, card);
       // log("no info today", title);
     } else {
