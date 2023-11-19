@@ -75,15 +75,55 @@ async function startPlayOnFullScreen() {
   }
 }
 async function Crunchyroll_Intro(video, time) {
-  const button = document.querySelector('[data-testid="skipIntroText"]');
-  if (button) {
-    button?.click();
-    log("Intro skipped", button);
-    setTimeout(function () {
-      addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
-    }, 600);
+  if (!reverseButtonClicked) {
+    const button = document.querySelector('[data-testid="skipIntroText"]');
+    if (button) {
+      button?.click();
+      log("Intro skipped", button);
+      setTimeout(function () {
+        CrunchyrollGobackbutton(video, time, video?.currentTime);
+        addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
+      }, 600);
+    }
+  } else if (!document.querySelector(".reverse-button")) {
+    addButton(video, reverseButtonStartTime, reverseButtonEndTime);
   }
 }
+
+let reverseButtonClicked = false;
+let reverseButtonStartTime;
+let reverseButtonEndTime;
+function addButton(video, startTime, endTime) {
+  if (reverseButtonClicked) return;
+  const button = document.createElement("div");
+  button.setAttribute("class", "reverse-button css-1dbjc4n r-1awozwy r-lj0ial r-1jd5jdk r-1loqt21 r-18u37iz r-eu3ka r-1777fci r-kuhrb7 r-ymttw5 r-u8s1d r-1ff5aok r-1otgn73");
+  button.style = "color:white;";
+  button.textContent = "Watch skipped ?";
+
+  let buttonTimeout = setTimeout(() => {
+    button.remove();
+  }, 5000);
+  button.onclick = function () {
+    reverseButtonClicked = true;
+    video.currentTime = startTime;
+    button.remove();
+    clearTimeout(buttonTimeout);
+    const waitTime = endTime - startTime + 2;
+    //log("waiting for:", waitTime);
+    setTimeout(function () {
+      reverseButtonClicked = false;
+    }, waitTime * 1000);
+  };
+  let position = document.querySelector("#velocity-overlay-package");
+  if (position) position.appendChild(button);
+}
+
+async function CrunchyrollGobackbutton(video, startTime, endTime) {
+  reverseButtonStartTime = startTime;
+  reverseButtonEndTime = endTime;
+  addButton(video, startTime, endTime);
+}
+
 let videoSpeed;
 async function setVideoSpeed(speed) {
   videoSpeed = speed;
