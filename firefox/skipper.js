@@ -826,16 +826,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   // Crunchyroll functions
   function filterQueued(display) {
-    let list = document.querySelectorAll("div.queue-flag:not(.queued)");
-    list.forEach((element) => {
+    document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
       element.parentElement.parentElement.parentElement.style.display = display;
     });
+    if (display == "block" && settings.General.filterDub) {
+      document.querySelectorAll("cite[itemprop='name']").forEach((element) => {
+        if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = "none";
+      });
+    }
   }
   function filterDub(display) {
     let list = document.querySelectorAll("cite[itemprop='name']");
     list.forEach((element) => {
       if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
     });
+    if (display == "block" && settings.General.filterQueued) {
+      document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
+        element.parentElement.parentElement.parentElement.style.display = "none";
+      });
+    }
   }
   function createFilterElement(filterType, filterText, settingsValue, filterFunction) {
     const label = document.createElement("label");
@@ -845,8 +854,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     input.type = "checkbox";
     input.checked = settingsValue;
     input.onclick = function () {
-      filterFunction(this.checked ? "none" : "block");
       settings.General[filterType] = this.checked;
+      filterFunction(this.checked ? "none" : "block");
       browser.storage.sync.set({ settings });
     };
     const p = document.createElement("p");
