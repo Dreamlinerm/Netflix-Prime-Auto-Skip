@@ -368,6 +368,40 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }
   }
+  function createSlider(video, position, sliderStyle, speedStyle) {
+    videoSpeed = videoSpeed || video.playbackRate;
+
+    let slider = document.createElement("input");
+    slider.id = "videoSpeedSlider";
+    slider.type = "range";
+    slider.min = settings.General.sliderMin;
+    slider.max = settings.General.sliderMax;
+    slider.value = videoSpeed * 10;
+    slider.step = settings.General.sliderSteps;
+    slider.style = sliderStyle;
+    position.insertBefore(slider, position.firstChild);
+
+    let speed = document.createElement("p");
+    speed.id = "videoSpeed";
+    speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
+    speed.style = speedStyle;
+    position.insertBefore(speed, position.firstChild);
+
+    if (videoSpeed) video.playbackRate = videoSpeed;
+    speed.onclick = function () {
+      slider.style.display = slider.style.display === "block" ? "none" : "block";
+    };
+    slider.oninput = function () {
+      speed.textContent = (this.value / 10).toFixed(1) + "x";
+      video.playbackRate = this.value / 10;
+      setVideoSpeed(this.value / 10);
+    };
+
+    return { slider, speed };
+  }
+
+  const DisneySliderStyle = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;";
+  const DisneySpeedStyle = "height:10px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
   function Disney_SpeedSlider(video) {
     // remove subtitle background
     let subtitles = document.querySelectorAll(".dss-subtitle-renderer-line:not(.enhanced)");
@@ -383,38 +417,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         let position;
         if (isDisney) position = document.querySelector(".controls__right");
         else position = document.querySelector(".icon-player-landscape").parentElement.parentElement.parentElement.parentElement;
-        if (position) {
-          videoSpeed = videoSpeed || video.playbackRate;
-
-          let slider = document.createElement("input");
-          slider.id = "videoSpeedSlider";
-          slider.type = "range";
-          slider.min = settings.General.sliderMin;
-          slider.max = settings.General.sliderMax;
-          slider.value = videoSpeed * 10;
-          slider.step = settings.General.sliderSteps;
-          slider.style = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;";
-          position.insertBefore(slider, position.firstChild);
-
-          let speed = document.createElement("p");
-          speed.id = "videoSpeed";
-          speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
-          // makes the button clickable
-          // speed.setAttribute("class", "control-icon-btn");
-          speed.style = "height:10px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
-          position.insertBefore(speed, position.firstChild);
-
-          if (videoSpeed) video.playbackRate = videoSpeed;
-          speed.onclick = function () {
-            if (slider.style.display === "block") slider.style.display = "none";
-            else slider.style.display = "block";
-          };
-          slider.oninput = function () {
-            speed.textContent = (this.value / 10).toFixed(1) + "x";
-            video.playbackRate = this.value / 10;
-            setVideoSpeed(this.value / 10);
-          };
-        }
+        if (position) createSlider(video, position, DisneySliderStyle, DisneySpeedStyle);
       } else {
         // need to resync the slider with the video sometimes
         let speed = document.querySelector("#videoSpeed");
@@ -530,6 +533,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }, 100);
   }
+  const NetflixSliderStyle = "position:relative;bottom:20px;display: none;width:200px;";
+  const NetflixSpeedStyle = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
   function Netflix_SpeedSlider(video) {
     // only add speed slider on lowest subscription tier
     // && !document.querySelector('[data-uia="control-speed"]')
@@ -540,37 +545,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         if (p) {
           // infobar position for the slider to be added
           let position = p[p.length - 2]?.firstChild?.lastChild;
-          if (position) {
-            videoSpeed = videoSpeed || video.playbackRate;
-            let slider = document.createElement("input");
-            slider.id = "videoSpeedSlider";
-            slider.type = "range";
-            slider.min = settings.General.sliderMin;
-            slider.max = settings.General.sliderMax;
-            slider.value = videoSpeed * 10;
-            slider.step = settings.General.sliderSteps;
-            slider.style = "position:relative;bottom:20px;display: none;width:200px;";
-            position.insertBefore(slider, position.firstChild);
-
-            let speed = document.createElement("p");
-            speed.id = "videoSpeed";
-            speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
-            // makes the button clickable
-            // speed.setAttribute("class", "control-icon-btn");
-            speed.style = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
-            position.insertBefore(speed, position.firstChild);
-
-            if (videoSpeed) video.playbackRate = videoSpeed;
-            speed.onclick = function () {
-              if (slider.style.display === "block") slider.style.display = "none";
-              else slider.style.display = "block";
-            };
-            slider.oninput = function () {
-              speed.textContent = (this.value / 10).toFixed(1) + "x";
-              video.playbackRate = this.value / 10;
-              setVideoSpeed(this.value / 10);
-            };
-          }
+          if (position) createSlider(video, position, NetflixSliderStyle, NetflixSpeedStyle);
         }
       }
     }
@@ -661,6 +636,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       log("Watched Credits", button);
     }
   }
+  const AmazonSliderStyle = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;";
   async function Amazon_SpeedSlider(video) {
     // remove bad background hue which is annoying
     //document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
@@ -681,31 +657,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (!alreadySlider) {
         // infobar position for the slider to be added
         let position = document.querySelector("[class*=infobar-container]")?.firstChild?.lastChild;
-        if (position) {
-          let slider = document.createElement("input");
-          slider.id = "videoSpeedSlider";
-          slider.type = "range";
-          slider.min = settings.General.sliderMin;
-          slider.max = settings.General.sliderMax;
-          slider.value = "10";
-          slider.step = settings.General.sliderSteps;
-          // slider.setAttribute("list", "markers");
-          slider.style = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;";
-          position.insertBefore(slider, position.firstChild);
-
-          let speed = document.createElement("p");
-          speed.id = "videoSpeed";
-          speed.textContent = "1.0x";
-          position.insertBefore(speed, position.firstChild);
-          speed.onclick = function () {
-            if (slider.style.display === "block") slider.style.display = "none";
-            else slider.style.display = "block";
-          };
-          slider.oninput = function () {
-            speed.textContent = (this.value / 10).toFixed(1) + "x";
-            video.playbackRate = this.value / 10;
-          };
-        }
+        if (position) createSlider(video, position, AmazonSliderStyle, "");
       } else {
         // need to resync the slider with the video sometimes
         let speed = document.querySelector("#videoSpeed");
