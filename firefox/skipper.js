@@ -779,22 +779,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
       element.parentElement.parentElement.parentElement.style.display = display;
     });
-    if (display == "block" && settings.General.filterDub) {
-      document.querySelectorAll("cite[itemprop='name']").forEach((element) => {
-        if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = "none";
-      });
-    }
+    if (display == "block" && settings.General.filterDub) filterDub("none");
   }
   function filterDub(display) {
     let list = document.querySelectorAll("cite[itemprop='name']");
     list.forEach((element) => {
       if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
     });
-    if (display == "block" && settings.General.filterQueued) {
-      document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
-        element.parentElement.parentElement.parentElement.style.display = "none";
-      });
-    }
+    if (display == "block" && settings.General.filterQueued) filterQueued("none");
   }
   function createFilterElement(filterType, filterText, settingsValue, filterFunction) {
     const label = document.createElement("label");
