@@ -35,7 +35,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, skipAd: true, speedSlider: true, profile: true, showRating: true },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true },
-      Video: { playOnFullScreen: true },
+      Video: { playOnFullScreen: true, epilepsy: false },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
     },
@@ -515,6 +515,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           log("Ad skipped, length:", adLength, "s");
           settings.Statistics.NetflixAdTimeSkipped += adLength;
           increaseBadge();
+          if (settings.Video.epilepsy) video.style.opacity = 0;
           video.playbackRate = playBackRate;
           lastAdTimeText = adLength;
         } else if (adLength > 2 && video.playbackRate < 2) {
@@ -527,6 +528,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           // videospeed is speedSlider value
           video.playbackRate = videoSpeed;
           lastAdTimeText = 0;
+          if (settings.Video.epilepsy) video.style.opacity = 1;
         }
       }
     }, 100);
@@ -779,22 +781,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
       element.parentElement.parentElement.parentElement.style.display = display;
     });
-    if (display == "block" && settings.General.filterDub) {
-      document.querySelectorAll("cite[itemprop='name']").forEach((element) => {
-        if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = "none";
-      });
-    }
+    if (display == "block" && settings.General.filterDub) filterDub("none");
   }
   function filterDub(display) {
     let list = document.querySelectorAll("cite[itemprop='name']");
     list.forEach((element) => {
       if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
     });
-    if (display == "block" && settings.General.filterQueued) {
-      document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
-        element.parentElement.parentElement.parentElement.style.display = "none";
-      });
-    }
+    if (display == "block" && settings.General.filterQueued) filterQueued("none");
   }
   function createFilterElement(filterType, filterText, settingsValue, filterFunction) {
     const label = document.createElement("label");
