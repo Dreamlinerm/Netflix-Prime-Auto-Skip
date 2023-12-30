@@ -515,6 +515,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           log("Ad skipped, length:", adLength, "s");
           settings.Statistics.NetflixAdTimeSkipped += adLength;
           increaseBadge();
+          if (settings.Video.epilepsy) video.style.opacity = 0;
           video.playbackRate = playBackRate;
           lastAdTimeText = adLength;
         } else if (adLength > 2 && video.playbackRate < 2) {
@@ -527,6 +528,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           // videospeed is speedSlider value
           video.playbackRate = videoSpeed;
           lastAdTimeText = 0;
+          if (settings.Video.epilepsy) video.style.opacity = 1;
         }
       }
     }, 100);
