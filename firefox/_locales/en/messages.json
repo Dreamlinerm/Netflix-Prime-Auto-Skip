@@ -243,5 +243,11 @@
   },
   "ReleaseCalendarDescription": {
     "message": "Adds the checkboxes 'Show Playlists only' and 'Filter DUB' to the release calendar"
+  },
+  "EpilepsySwitch": {
+    "message": "Epilepsy option"
+  },
+  "EpilepsySwitchDescription": {
+    "message": "Darken the screen when skipping the ad"
   }
 }

@@ -54,7 +54,7 @@ const defaultSettings = {
     Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, skipAd: true, speedSlider: true, profile: true, showRating: true },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true },
-    Video: { playOnFullScreen: true },
+    Video: { playOnFullScreen: true, epilepsy: false },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
   },
@@ -163,6 +163,7 @@ function setCheckboxesToSettings() {
   });
   setButtonChecked("VideoAds", settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
   setButtonChecked("VideoFullScreen", settings?.Video.playOnFullScreen);
+  setButtonChecked("VideoEpilepsy", settings?.Video.epilepsy);
   //  -------------      Default        ---------------------------------------
   setButtonChecked("DefaultSkips", settings?.Amazon.filterPaid);
   // -------------      global buttons        ---------------------------------------
@@ -315,6 +316,7 @@ function listenForClicks() {
         if (VideoSkips) setCategoryToBoolean("watchCredits", false);
       } else if (e.target.id === "VideoAds") settings.Amazon.blockFreevee = settings.Netflix.skipAd = !(settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
       else if (e.target.id === "VideoFullScreen") settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
+      else if (e.target.id === "VideoEpilepsy") settings.Video.epilepsy = !settings.Video.epilepsy;
       else if (e.target.id.startsWith("Video")) {
         let key = lowerCaseFirstLetter(e.target.id.replace("Video", ""));
         if (key === "skipCredits" || key === "watchCredits") {
