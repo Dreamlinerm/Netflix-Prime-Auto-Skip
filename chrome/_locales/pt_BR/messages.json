@@ -237,5 +237,11 @@
   },
   "StreamLinksDescription": {
     "message": "Exibe links de streaming para filmes que estão disponíveis em outras plataformas ou em outros países."
+  },
+  "EpilepsySwitch": {
+    "message": "Opção de epilepsia"
+  },
+  "EpilepsySwitchDescription": {
+    "message": "Escurecer a tela ao pular o anúncio"
   }
 }
