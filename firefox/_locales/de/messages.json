@@ -243,5 +243,11 @@
   },
   "ReleaseCalendarDescription": {
     "message": "Fügt dem Veröffentlichungskalender die Kontrollkästchen 'Nur Playlists anzeigen' und 'DUB filtern' hinzu"
+  },
+  "EpilepsySwitch": {
+    "message": "Epilepsy option"
+  },
+  "EpilepsySwitchDescription": {
+    "message": "Beim überspringen der Werbung den Bildschrim verdunkeln"
   }
 }
