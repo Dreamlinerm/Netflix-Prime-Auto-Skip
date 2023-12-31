@@ -315,6 +315,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (settings.Disney?.watchCredits) Disney_Watch_Credits();
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
   }
+  let SetTimeToZeroOnce = null;
   function Disney_Intro(video, time) {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
@@ -327,6 +328,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       setTimeout(function () {
         addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
       }, 600);
+    }
+    // if intro/recap time starts at 0 there is no skip button
+    if (video && video.play && SetTimeToZeroOnce != video.src) {
+      if (video.currentTime > 0.5 && video.currentTime < 30) {
+        console.log("video.currentTime", video.currentTime);
+        video.currentTime = 0;
+        SetTimeToZeroOnce = video.src;
+      }
     }
   }
   function Disney_Credits() {
