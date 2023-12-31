@@ -331,8 +331,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
     // if intro/recap time starts at 0 there is no skip button
     if (video && video.play && SetTimeToZeroOnce != video.src) {
-      if (video.currentTime > 0.5 && video.currentTime < 30) {
-        console.log("video.currentTime", video.currentTime);
+      if (video.currentTime > 0.2 && video.currentTime < 5) {
         video.currentTime = 0;
         SetTimeToZeroOnce = video.src;
       }
