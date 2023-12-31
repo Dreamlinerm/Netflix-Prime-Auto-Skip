@@ -55,7 +55,7 @@
   },
 
   "defaultPageTitle": {
-    "message": "Alle standardmäßig ausgeschalteten Funktionen"
+    "message": "Optionale Funktionen"
   },
   "defaultPageDescription": {
     "message": "Alle Funktionen, die standardmäßig ausgeschaltet sind, entweder weil sie verwirrend sind, wenn sie eingeschaltet wären, oder weil sie in der Beta-Phase sind"

@@ -55,7 +55,7 @@
   },
 
   "defaultPageTitle": {
-    "message": "All turned off Features by default"
+    "message": "Optional functions"
   },
   "defaultPageDescription": {
     "message": "Every feature which is turned off by default either because they are confusing if they were turned on or they are in beta"
