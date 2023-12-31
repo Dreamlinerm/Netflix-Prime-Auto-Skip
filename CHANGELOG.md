@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
           <h2>Changelog</h2>
           <div>
             <div class="line flex">
-              <h2>1.0.71</h2>
+              <h2>1.0.72</h2>
               <ul>
                 <li>added Crunchyroll startPlayOnFullScreen</li>
                 <li>fixed bug Crunchyroll ReleaseCalendar removedDub on load</li>
@@ -414,7 +414,7 @@ All notable changes to this project will be documented in this file.
           <h2>Changelog</h2>
           <div>
             <div class="line flex">
-              <h2>1.0.71</h2>
+              <h2>1.0.72</h2>
               <ul>
                 <li>fixed Netflix ad skip: skips too far</li>
                 <li>added IMDB rating to Disney</li>
