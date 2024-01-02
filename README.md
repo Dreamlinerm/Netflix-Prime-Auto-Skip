@@ -115,10 +115,10 @@ If you want to see what is implemented go [here](#implemented-feature-overview):
 
 ## Contributing
 
+If you have any suggestions or Bugs, please open an issue or join the  [Discord](https://discord.gg/7us76ErE). 
 Everyone is welcome to contribute!
 
-If you have any suggestions or Bugs, please open an issue.
-## Contributors ✨
+## Other Contributors ✨
 
 <table>
   <tbody>
