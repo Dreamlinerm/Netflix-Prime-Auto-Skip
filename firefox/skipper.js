@@ -477,7 +477,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (currentProfileName && currentProfileName !== settings.General.profileName) {
         // small profile picture
         settings.General.profilePicture = currentProfile?.firstChild?.firstChild?.src;
-
         settings.General.profileName = currentProfileName;
         browser.storage.sync.set({ settings });
         log("Profile switched to", currentProfileName);
