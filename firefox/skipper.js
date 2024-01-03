@@ -464,13 +464,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
     if (NSettings?.speedSlider) Netflix_SpeedSlider(video);
   }
-
+  // to parse html aumlaut symbols like &auml; to ä
+  function decodeHtmlEntities(str) {
+    return new DOMParser().parseFromString("<!doctype html><body>" + str, "text/html").body.textContent;
+  }
   function Netflix_profile() {
     // AutoPickProfile();
     let currentProfile = document.querySelector("[href*='/YourAccount']");
     if (currentProfile) {
       // there is a space before the - thats why slice -1
-      const currentProfileName = currentProfile?.getAttribute("aria-label")?.split("–")?.[0].slice(0, -1);
+      const currentProfileName = decodeHtmlEntities(currentProfile?.getAttribute("aria-label")?.split("–")?.[0].slice(0, -1));
       if (currentProfileName && currentProfileName !== settings.General.profileName) {
         // small profile picture
         settings.General.profilePicture = currentProfile?.firstChild?.firstChild?.src;
