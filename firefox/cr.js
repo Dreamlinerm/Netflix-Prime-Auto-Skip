@@ -23,7 +23,7 @@ const defaultSettings = {
   },
 };
 let settings = defaultSettings.settings;
-const version = "1.0.72";
+const version = "1.0.73";
 browser.storage.sync.get("settings", function (result) {
   console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
   console.log("version:", version);
