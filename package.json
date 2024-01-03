@@ -3,10 +3,10 @@
   "version": "1.0.73",
   "description": "Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video and Disney+ & Hotstar.",
   "scripts": {
-    "start": "web-ext run --source-dir ./firefox/",
-    "profile": "web-ext run --source-dir ./firefox/ --keep-profile-changes --firefox-profile=test",
+    "start": "web-ext run",
+    "profile": "web-ext run --keep-profile-changes --firefox-profile=test",
     "build": "cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
-    "lint": "web-ext lint --source-dir ./firefox/ && web-ext lint --source-dir ./chrome/",
+    "lint": "web-ext lint && web-ext lint --source-dir ./chrome/",
     "esLint": "npx eslint firefox/ chrome/",
     "test": "python test.py"
   },
@@ -25,5 +25,8 @@
   },
   "dependencies": {
     "web-ext": "^7.9.0"
+  },
+  "webExt": {
+    "sourceDir": "firefox"
   }
 }
