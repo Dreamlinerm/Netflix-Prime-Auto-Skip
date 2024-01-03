@@ -6,7 +6,7 @@
     "start": "web-ext run",
     "profile": "web-ext run --keep-profile-changes --firefox-profile=test",
     "build": "cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
-    "lint": "web-ext lint && web-ext lint --source-dir ./chrome/",
+    "lint": "web-ext lint",
     "esLint": "npx eslint firefox/ chrome/",
     "test": "python test.py"
   },
