@@ -6,8 +6,8 @@
     "start": "web-ext run --source-dir ./firefox/",
     "profile": "web-ext run --source-dir ./firefox/ --firefox-profile=test",
     "build": "cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
-    "lint": "web-ext lint --source-dir ./firefox/",
-    "esLint": "npx eslint firefox/",
+    "lint": "web-ext lint --source-dir ./firefox/ && web-ext lint --source-dir ./chrome/",
+    "esLint": "npx eslint firefox/ chrome/",
     "test": "python test.py"
   },
   "repository": {
@@ -22,5 +22,8 @@
   "homepage": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip#readme",
   "devDependencies": {
     "eslint": "^8.52.0"
+  },
+  "dependencies": {
+    "web-ext": "^7.9.0"
   }
 }
