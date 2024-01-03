@@ -473,7 +473,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     let currentProfile = document.querySelector("[href*='/YourAccount']");
     if (currentProfile) {
       // there is a space before the - thats why slice -1
-      const currentProfileName = decodeHtmlEntities(currentProfile?.getAttribute("aria-label")?.split("–")?.[0].slice(0, -1));
+      const currentProfileName = decodeHtmlEntities(currentProfile?.getAttribute("aria-label")?.split("–")?.[0].split("-")?.[0].slice(0, -1));
       if (currentProfileName && currentProfileName !== settings.General.profileName) {
         // small profile picture
         settings.General.profilePicture = currentProfile?.firstChild?.firstChild?.src;
