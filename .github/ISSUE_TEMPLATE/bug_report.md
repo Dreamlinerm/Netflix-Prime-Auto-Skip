@@ -23,6 +23,7 @@ A clear and concise description of what you expected to happen.
 
 **Background information:**
  - Exact URL: [e.g. amazon.de, amazon.com, netflix.ca]
+ - Country: [e.g Germany (need to know for vpn)]
  - What show: [eg. Lucifer]
  - OS: [e.g. Windows]
  - Browser [e.g. chrome, firefox]
