@@ -22,8 +22,7 @@ A clear and concise description of what you expected to happen.
 
 
 **Background information:**
- - Exact URL: [e.g. amazon.de, amazon.com, netflix.ca]
- - What show: [eg. Lucifer]
- - OS: [e.g. Windows]
+ - Exact URL(includes show): [e.g. amazon.de, amazon.com, netflix.ca]
+ - Country: [e.g Germany (need to know for vpn)]
  - Browser [e.g. chrome, firefox]
- - Addon-Version [e.g. 1.0.31 seen if you click on the menu on the top]
+ - Addon-Version [e.g. 1.0.73 seen if you click on the menu on the top]
