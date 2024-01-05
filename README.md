@@ -41,7 +41,6 @@
 
 ## Install on Android
 
-
 <div style="display:flex">
                 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
                 <img src="Logos/firefox.svg" width="8%" alt="firefox">
@@ -53,17 +52,14 @@
 
 Download [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/), [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the chrome addon. 
 
+The drm for each streaming service will be installed automatically when a video started for the first time and you may need to reload the page once.
+
 Compatibility:
 
 | Browser | Netflix | Prime Video     | Disney+ & Hotstar | Crunchyroll |
 | ---     | ---     | ---             | ---               | ---         |
 | Firefox | ❌     | ✅(Desktop Website) | ✅(Desktop Website) | ✅   |
 | Kiwi    | ❌     | ✅                  | ✅(Desktop Website) | ✅   |
-
-But Netflix cannot be watched on android.
-
-
-It will work together with other skippers, but it may behave unexpectedly.
 
 ## Supported Streaming Services
 
