@@ -27,7 +27,6 @@ html,
 body,
 .content {
   min-width: 400px;
-  /* width: 100%; */
   background-color: #212121;
 }
 body {
