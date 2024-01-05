@@ -27,13 +27,11 @@ html,
 body,
 .content {
   min-width: 400px;
+  width: 100%;
   background-color: #212121;
 }
 body {
   margin: unset;
-}
-.content {
-  min-width: 400px;
 }
 .page {
   padding: 80px 0 0 3%;
