@@ -52,7 +52,13 @@
 </div>
 
 Download Firefox, [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the chrome addon. 
-Compability:
+
+Compatibility:
+
+| Browser | Netflix | Prime Video     | Disney+ & Hotstar | Crunchyroll |
+| ---     | ---     | ---             | ---               | ---         |
+| Firefox | ❌     | ✅(Desktop Website) | ✅(Desktop Website) | ✅   |
+| Kiwi    | ❌     | ✅                  | ✅(Desktop Website) | ✅   |
 
 But Netflix cannot be watched on android.
 
