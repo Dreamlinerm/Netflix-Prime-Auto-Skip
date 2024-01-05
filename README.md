@@ -41,14 +41,20 @@
 
 ## Install on Android
 
-<div style="display:flex;flex-direction:column">
-        <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
-          <img src="Logos/kiwi.webp" width="8%">
-          <br /><b>Kiwi Browser</b>
-          </a>
+
+<div style="display:flex">
+                <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
+                <img src="Logos/firefox.svg" width="8%" alt="firefox">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
+                <img src="Logos/kiwi.webp" width="8%">
+                </a>
 </div>
 
-Download [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the chrome addon. But Netflix cannot be watched on android.
+Download Firefox, [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the chrome addon. 
+Compability:
+
+But Netflix cannot be watched on android.
 
 
 It will work together with other skippers, but it may behave unexpectedly.
