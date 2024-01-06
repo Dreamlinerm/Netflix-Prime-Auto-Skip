@@ -30,33 +30,6 @@ const isEdge = /edg/i.test(ua);
 const version = "1.0.75";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
-  // customize mobile view for desktop website
-  // disney already has viewport meta tag
-  if (isPrimeVideo && isMobile) {
-    const video = document.querySelector(AmazonVideoClass);
-    if (video) {
-      // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
-      let meta = document.createElement("meta");
-      meta.name = "viewport";
-      meta.content = "width=device-width, initial-scale=1";
-      document.head.appendChild(meta);
-
-      let navBelt = document.querySelector("#nav-belt");
-      navBelt.style.width = "100vw";
-      navBelt.style.display = "flex";
-      navBelt.style.flexDirection = "column";
-      navBelt.style.height = "fit-content";
-
-      let navMain = document.querySelector("#nav-main");
-      navMain.style.width = "100vw";
-
-      let xshop = document.querySelector("#nav-xshop-container");
-      xshop.style.height = "fit-content";
-      // xshop.firstElementChild.style.display = "flex";
-      // xshop.firstElementChild.style.flexDirection = "column";
-      xshop.firstElementChild.style.width = "100%";
-    }
-  }
   // global variables in localStorage
   const defaultSettings = {
     settings: {
@@ -146,6 +119,30 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       setTimeout(function () {
         Amazon_FreeveeTimeout();
       }, 1000);
+    }
+    // customize mobile view for desktop website
+    if (settings.Video?.userAgent && isMobile && !document.querySelector(AmazonVideoClass)) {
+      // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
+      let meta = document.createElement("meta");
+      meta.name = "viewport";
+      meta.content = "width=device-width, initial-scale=1";
+      document.head.appendChild(meta);
+
+      // make amazon more mobile friendly
+      let navBelt = document.querySelector("#nav-belt");
+      navBelt.style.width = "100vw";
+      navBelt.style.display = "flex";
+      navBelt.style.flexDirection = "column";
+      navBelt.style.height = "fit-content";
+
+      let navMain = document.querySelector("#nav-main");
+      navMain.style.width = "100vw";
+
+      let xshop = document.querySelector("#nav-xshop-container");
+      xshop.style.height = "fit-content";
+      // xshop.firstElementChild.style.display = "flex";
+      // xshop.firstElementChild.style.flexDirection = "column";
+      xshop.firstElementChild.style.width = "100%";
     }
   }
   browser.storage.sync.get("settings", function (result) {
