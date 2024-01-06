@@ -96,7 +96,15 @@ if (isMobile) {
       return { requestHeaders: details.requestHeaders };
     },
     {
-      urls: ["*://*.disneyplus.com/*"],
+      urls: [
+        "*://*.disneyplus.com/*",
+        // these are only the prime video urls
+        "*://*.primevideo.com/*",
+        "*://*.amazon.com/gp/video/*",
+        "*://*.amazon.co.jp/gp/video/*",
+        "*://*.amazon.de/gp/video/*",
+        "*://*.amazon.co.uk/gp/video/*",
+      ],
     },
     ["blocking", "requestHeaders"]
   );

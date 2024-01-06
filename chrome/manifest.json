@@ -27,7 +27,7 @@
         "*://*.hotstar.com/*",
         "*://*.crunchyroll.com/*"
       ],
-      "js": ["skipper.js", "webRequest", "webRequestBlocking", "*://*.disneyplus.com/*"]
+      "js": ["skipper.js"]
     },
     {
       "all_frames": true,
@@ -35,7 +35,17 @@
       "matches": ["https://static.crunchyroll.com/vilos-v2/web/vilos/player.html*"]
     }
   ],
-  "permissions": ["storage"],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.disneyplus.com/*",
+    "*://*.primevideo.com/*",
+    "*://*.amazon.com/*",
+    "*://*.amazon.co.jp/*",
+    "*://*.amazon.de/*",
+    "*://*.amazon.co.uk/*"
+  ],
   "action": {
     "default_icon": {
       "16": "icons/NetflixAmazon Auto-Skip--16.png",
