@@ -52,7 +52,14 @@ browser.storage.sync.get("settings", function (result) {
     "color: white;font-size: 2em;"
   );
   console.log("version:", version);
-  settings = { ...defaultSettings.settings, ...result.settings };
+  // apparently 2 depth gets overwritten so here it is
+  settings.Amazon = { ...defaultSettings.settings.Amazon, ...result.settings.Amazon };
+  settings.Netflix = { ...defaultSettings.settings.Netflix, ...result.settings.Netflix };
+  settings.Disney = { ...defaultSettings.settings.Disney, ...result.settings.Disney };
+  settings.Crunchyroll = { ...defaultSettings.settings.Crunchyroll, ...result.settings.Crunchyroll };
+  settings.Video = { ...defaultSettings.settings.Video, ...result.settings.Video };
+  settings.Statistics = { ...defaultSettings.settings.Statistics, ...result.settings.Statistics };
+  settings.General = { ...defaultSettings.settings.General, ...result.settings.General };
   CrunchyrollObserver.observe(document, config);
   if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
 });

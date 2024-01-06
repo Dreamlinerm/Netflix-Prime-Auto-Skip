@@ -150,7 +150,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   browser.storage.sync.get("settings", function (result) {
     // if there is an undefined setting, set it to the default
-    settings = { ...defaultSettings.settings, ...result.settings };
+    // apparently 2 depth gets overwritten so here it is
+    settings.Amazon = { ...defaultSettings.settings.Amazon, ...result.settings.Amazon };
+    settings.Netflix = { ...defaultSettings.settings.Netflix, ...result.settings.Netflix };
+    settings.Disney = { ...defaultSettings.settings.Disney, ...result.settings.Disney };
+    settings.Crunchyroll = { ...defaultSettings.settings.Crunchyroll, ...result.settings.Crunchyroll };
+    settings.Video = { ...defaultSettings.settings.Video, ...result.settings.Video };
+    settings.Statistics = { ...defaultSettings.settings.Statistics, ...result.settings.Statistics };
+    settings.General = { ...defaultSettings.settings.General, ...result.settings.General };
     logStartOfAddon();
     getDBCache();
 
