@@ -58,8 +58,7 @@ Android Compatibility:
 
 | Browser | Netflix | Prime Video     | Disney+ & Hotstar | Crunchyroll |
 | ---     | ---     | ---             | ---               | ---         |
-| Firefox | ❌     | ✅(Desktop Website) | ✅(Desktop Website) | ✅   |
-| Kiwi    | ❌     | ✅                  | ✅(Desktop Website) | ✅   |
+| Firefox&Kiwi | ❌     | ✅(Desktop Website) | ✅(Desktop Website) | ✅   |
 
 ## Supported Streaming Services
 
