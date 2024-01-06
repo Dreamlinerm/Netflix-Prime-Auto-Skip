@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
-  "version": "1.0.76",
+  "version": "1.0.77",
 
   "homepage_url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip",
   "icons": {
@@ -35,17 +35,7 @@
       "matches": ["https://static.crunchyroll.com/vilos-v2/web/vilos/player.html*"]
     }
   ],
-  "permissions": [
-    "storage",
-    "webRequest",
-    "webRequestBlocking",
-    "*://*.disneyplus.com/*",
-    "*://*.primevideo.com/*",
-    "*://*.amazon.com/*",
-    "*://*.amazon.co.jp/*",
-    "*://*.amazon.de/*",
-    "*://*.amazon.co.uk/*"
-  ],
+  "permissions": ["storage"],
   "action": {
     "default_icon": {
       "16": "icons/NetflixAmazon Auto-Skip--16.png",

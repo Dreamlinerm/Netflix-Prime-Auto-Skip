@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 <div>
             <div class="line flex">
-              <h2>1.0.76</h2>
+              <h2>1.0.77</h2>
               <ul>
                 <li>Released for Firefox on Android</li>
               </ul>
