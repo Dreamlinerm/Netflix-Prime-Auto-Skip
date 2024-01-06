@@ -85,7 +85,6 @@ if (isMobile) {
     {
       urls: [
         "*://*.disneyplus.com/*",
-        "*://*.disneyplus.com/*",
         // these are only the prime video urls
         "*://*.primevideo.com/*",
         "*://*.amazon.com/gp/video/*",

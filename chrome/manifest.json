@@ -27,7 +27,7 @@
         "*://*.hotstar.com/*",
         "*://*.crunchyroll.com/*"
       ],
-      "js": ["skipper.js"]
+      "js": ["skipper.js", "webRequest", "webRequestBlocking", "*://*.disneyplus.com/*"]
     },
     {
       "all_frames": true,
