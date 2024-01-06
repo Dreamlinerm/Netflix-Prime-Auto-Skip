@@ -70,9 +70,10 @@ browser.runtime.onInstalled.addListener((details) => {
 });
 // change useragent if on series page
 const isMobile = /Android/i.test(navigator.userAgent);
-console.log(isMobile);
 if (isMobile) {
-  const newUa = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0";
+  const newUa = /firefox/i.test(navigator.userAgent)
+    ? "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0"
+    : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36";
   browser.webRequest.onBeforeSendHeaders.addListener(
     function (details) {
       console.log(details);
@@ -84,7 +85,17 @@ if (isMobile) {
       }
       return { requestHeaders: details.requestHeaders };
     },
-    { urls: ["*://*.disneyplus.com/*", "*://*.amazon.de/gp/video*"] },
+    {
+      urls: [
+        "*://*.disneyplus.com/*",
+        "*://*.disneyplus.com/*",
+        "*://*.primevideo.com/*",
+        "*://*.amazon.com/*",
+        "*://*.amazon.co.jp/*",
+        "*://*.amazon.de/gp/video*",
+        "*://*.amazon.co.uk/*",
+      ],
+    },
     ["blocking", "requestHeaders"]
   );
 }

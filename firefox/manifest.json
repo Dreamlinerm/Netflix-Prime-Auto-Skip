@@ -36,7 +36,17 @@
       "matches": ["https://static.crunchyroll.com/vilos-v2/web/vilos/player.html*"]
     }
   ],
-  "permissions": ["storage", "webRequest", "webRequestBlocking", "*://*.disneyplus.com/*", "*://*.amazon.de/gp/video*"],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.disneyplus.com/*",
+    "*://*.primevideo.com/*",
+    "*://*.amazon.com/*",
+    "*://*.amazon.co.jp/*",
+    "*://*.amazon.de/*",
+    "*://*.amazon.co.uk/*"
+  ],
   "browser_action": {
     "default_icon": "icons/NetflixAmazon Auto-Skip.svg",
     "default_title": "__MSG_extensionName__",
