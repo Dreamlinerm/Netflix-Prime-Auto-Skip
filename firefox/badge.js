@@ -13,7 +13,6 @@
 /* global browser */
 console.log("badge.js loaded");
 let Badges = {};
-// change useragent if on series page
 const isMobile = /Android/i.test(navigator.userAgent);
 /**
  *
