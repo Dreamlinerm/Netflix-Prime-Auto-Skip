@@ -183,6 +183,7 @@ function setCheckboxesToSettings() {
   setButtonChecked("VideoAds", settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
   setButtonChecked("VideoFullScreen", settings?.Video.playOnFullScreen);
   setButtonChecked("VideoEpilepsy", settings?.Video.epilepsy);
+  setButtonChecked("VideoUserAgent", settings?.Video.userAgent);
   //  -------------      Default        ---------------------------------------
   setButtonChecked("DefaultSkips", settings?.Amazon.filterPaid);
   // -------------      global buttons        ---------------------------------------
@@ -337,6 +338,7 @@ function listenForClicks() {
         settings.Amazon.blockFreevee = settings.Netflix.skipAd = !(settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
       else if (e.target.id === "VideoFullScreen") settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
       else if (e.target.id === "VideoEpilepsy") settings.Video.epilepsy = !settings.Video.epilepsy;
+      else if (e.target.id === "VideoUserAgent") settings.Video.userAgent = !settings.Video.userAgent;
       else if (e.target.id.startsWith("Video")) {
         let key = lowerCaseFirstLetter(e.target.id.replace("Video", ""));
         if (key === "skipCredits" || key === "watchCredits") {
