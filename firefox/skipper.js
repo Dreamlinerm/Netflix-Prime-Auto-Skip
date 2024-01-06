@@ -137,14 +137,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         navBelt.style.height = "fit-content";
       }
       let navMain = document.querySelector("#nav-main");
-      if (navMain) navMain.style.width = "100vw";
-      let xshop = document.querySelector("#nav-xshop-container");
-      if (xshop) {
-        xshop.style.height = "fit-content";
-        // xshop.firstElementChild.style.display = "flex";
-        // xshop.firstElementChild.style.flexDirection = "column";
-        xshop.firstElementChild.style.width = "100%";
-      }
+      if (navMain) navMain.style.display = "none";
     }
   }
   browser.storage.sync.get("settings", function (result) {
