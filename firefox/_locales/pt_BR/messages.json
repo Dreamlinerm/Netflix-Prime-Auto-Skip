@@ -243,5 +243,11 @@
   },
   "EpilepsySwitchDescription": {
     "message": "Escurecer a tela ao pular o anúncio"
+  },
+  "UserAgentSwitch": {
+    "message": "Mudar para sites de desktop"
+  },
+  "UserAgentSwitchDescription": {
+    "message": "Para o Prime Video e a Disney+, mude para o site para desktop e, para a Amazon, torne o site compatível com dispositivos móveis"
   }
 }

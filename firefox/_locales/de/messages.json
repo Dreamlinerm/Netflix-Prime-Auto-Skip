@@ -249,5 +249,11 @@
   },
   "EpilepsySwitchDescription": {
     "message": "Beim überspringen der Werbung den Bildschrim verdunkeln"
+  },
+  "UserAgentSwitch": {
+    "Nachricht": "Zu Desktop-Websites wechseln"
+  },
+  "UserAgentSwitchDescription": {
+    "message": "Für prime video und disney+ auf die Desktop-Website wechseln und für amazon die Website mobilfreundlich machen"
   }
 }
