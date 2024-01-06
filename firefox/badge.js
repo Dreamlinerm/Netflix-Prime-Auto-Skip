@@ -74,7 +74,6 @@ if (isMobile) {
   const newUa = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0";
   browser.webRequest.onBeforeSendHeaders.addListener(
     function (details) {
-      console.log(details);
       for (let header of details.requestHeaders) {
         if (header.name === "User-Agent") {
           header.value = newUa;
@@ -87,11 +86,12 @@ if (isMobile) {
       urls: [
         "*://*.disneyplus.com/*",
         "*://*.disneyplus.com/*",
+        // these are only the prime video urls
         "*://*.primevideo.com/*",
-        "*://*.amazon.com/*",
-        "*://*.amazon.co.jp/*",
-        "*://*.amazon.de/gp/video*",
-        "*://*.amazon.co.uk/*",
+        "*://*.amazon.com/gp/video/*",
+        "*://*.amazon.co.jp/gp/video/*",
+        "*://*.amazon.de/gp/video/*",
+        "*://*.amazon.co.uk/gp/video/*",
       ],
     },
     ["blocking", "requestHeaders"]
