@@ -13,8 +13,27 @@
 /* global browser */
 const defaultSettings = {
   settings: {
-    Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false, showRating: true },
-    Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, skipAd: true, speedSlider: true, profile: true, showRating: true },
+    Amazon: {
+      skipIntro: true,
+      skipCredits: true,
+      watchCredits: false,
+      skipAd: true,
+      blockFreevee: true,
+      speedSlider: true,
+      filterPaid: false,
+      showRating: true,
+    },
+    Netflix: {
+      skipIntro: true,
+      skipRecap: true,
+      skipCredits: true,
+      watchCredits: false,
+      skipBlocked: true,
+      skipAd: true,
+      speedSlider: true,
+      profile: true,
+      showRating: true,
+    },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true },
     Video: { playOnFullScreen: true, epilepsy: false },
@@ -23,9 +42,15 @@ const defaultSettings = {
   },
 };
 let settings = defaultSettings.settings;
-const version = "1.0.74";
+const version = "1.0.75";
 browser.storage.sync.get("settings", function (result) {
-  console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
+  console.log(
+    "%cNetflix%c/%cPrime%c Auto-Skip",
+    "color: #e60010;font-size: 2em;",
+    "color: white;font-size: 2em;",
+    "color: #00aeef;font-size: 2em;",
+    "color: white;font-size: 2em;"
+  );
   console.log("version:", version);
   settings = { ...defaultSettings.settings, ...result.settings };
   CrunchyrollObserver.observe(document, config);
@@ -96,7 +121,10 @@ let reverseButtonEndTime;
 function addButton(video, startTime, endTime) {
   if (reverseButtonClicked) return;
   const button = document.createElement("div");
-  button.setAttribute("class", "reverse-button css-1dbjc4n r-1awozwy r-lj0ial r-1jd5jdk r-1loqt21 r-18u37iz r-eu3ka r-1777fci r-kuhrb7 r-ymttw5 r-u8s1d r-1ff5aok r-1otgn73");
+  button.setAttribute(
+    "class",
+    "reverse-button css-1dbjc4n r-1awozwy r-lj0ial r-1jd5jdk r-1loqt21 r-18u37iz r-eu3ka r-1777fci r-kuhrb7 r-ymttw5 r-u8s1d r-1ff5aok r-1otgn73"
+  );
   button.style = "color:white;";
   button.textContent = "Watch skipped ?";
 
