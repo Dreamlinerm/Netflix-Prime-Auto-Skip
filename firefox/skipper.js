@@ -31,15 +31,11 @@ const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 const version = "1.0.74";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
-  if ((isPrimeVideo || isDisney) && isMobile && isFirefox) {
-    console.log("Unchanged Useragent:", ua);
-    Object.defineProperty(navigator, "userAgent", {
-      get: function () {
-        return "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0";
-      },
-    });
-    console.log("Changed Useragent:", navigator.userAgent);
-  }
+  // && isMobile
+  // if ((isPrimeVideo || isDisney) && isFirefox) {
+  //   console.log("Unchanged Useragent:", ua);
+
+  // }
 
   /* eslint-env root:true */
   // global variables in localStorage

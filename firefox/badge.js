@@ -68,3 +68,23 @@ browser.runtime.onInstalled.addListener((details) => {
     });
   }
 });
+// change useragent if on series page
+const isMobile = /Android/i.test(navigator.userAgent);
+console.log(isMobile);
+if (isMobile) {
+  const newUa = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0";
+  browser.webRequest.onBeforeSendHeaders.addListener(
+    function (details) {
+      console.log(details);
+      for (let i = 0; i < details.requestHeaders.length; ++i) {
+        if (details.requestHeaders[i].name === "User-Agent") {
+          details.requestHeaders[i].value = newUa;
+          break;
+        }
+      }
+      return { requestHeaders: details.requestHeaders };
+    },
+    { urls: ["*://*.disneyplus.com/*", "*://*.amazon.de/gp/video*"] },
+    ["blocking", "requestHeaders"]
+  );
+}
