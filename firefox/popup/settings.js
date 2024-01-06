@@ -193,7 +193,8 @@ function setCheckboxesToSettings() {
   setButtonChecked("VideoFullScreen", settings?.Video.playOnFullScreen);
   setButtonChecked("VideoEpilepsy", settings?.Video.epilepsy);
   setButtonChecked("VideoUserAgent", settings?.Video.userAgent);
-  document.querySelector(".categoryMobile").style.display = isMobile ? "block" : "none";
+  button = document.querySelector(".categoryMobile");
+  if (button) button.style.display = isMobile ? "block" : "none";
   //  -------------      Default        ---------------------------------------
   setButtonChecked("DefaultSkips", settings?.Amazon.filterPaid);
   // -------------      global buttons        ---------------------------------------

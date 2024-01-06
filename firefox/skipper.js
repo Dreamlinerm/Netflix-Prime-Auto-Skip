@@ -130,19 +130,21 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
 
       // make amazon more mobile friendly
       let navBelt = document.querySelector("#nav-belt");
-      navBelt.style.width = "100vw";
-      navBelt.style.display = "flex";
-      navBelt.style.flexDirection = "column";
-      navBelt.style.height = "fit-content";
-
+      if (navBelt) {
+        navBelt.style.width = "100vw";
+        navBelt.style.display = "flex";
+        navBelt.style.flexDirection = "column";
+        navBelt.style.height = "fit-content";
+      }
       let navMain = document.querySelector("#nav-main");
-      navMain.style.width = "100vw";
-
+      if (navMain) navMain.style.width = "100vw";
       let xshop = document.querySelector("#nav-xshop-container");
-      xshop.style.height = "fit-content";
-      // xshop.firstElementChild.style.display = "flex";
-      // xshop.firstElementChild.style.flexDirection = "column";
-      xshop.firstElementChild.style.width = "100%";
+      if (xshop) {
+        xshop.style.height = "fit-content";
+        // xshop.firstElementChild.style.display = "flex";
+        // xshop.firstElementChild.style.flexDirection = "column";
+        xshop.firstElementChild.style.width = "100%";
+      }
     }
   }
   browser.storage.sync.get("settings", function (result) {
