@@ -50,19 +50,47 @@ if (url.includes("#")) Menu(url.split("#")[1]);
 // global variables in localStorage
 const defaultSettings = {
   settings: {
-    Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false, showRating: true },
-    Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, skipAd: true, speedSlider: true, profile: true, showRating: true },
+    Amazon: {
+      skipIntro: true,
+      skipCredits: true,
+      watchCredits: false,
+      skipAd: true,
+      blockFreevee: true,
+      speedSlider: true,
+      filterPaid: false,
+      showRating: true,
+    },
+    Netflix: {
+      skipIntro: true,
+      skipRecap: true,
+      skipCredits: true,
+      watchCredits: false,
+      skipBlocked: true,
+      skipAd: true,
+      speedSlider: true,
+      profile: true,
+      showRating: true,
+    },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true },
-    Video: { playOnFullScreen: true, epilepsy: false },
+    Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
   },
 };
+const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent);
+console.log("isMobile", isMobile, navigator.userAgent);
 let settings = defaultSettings.settings;
 browser.storage.sync.get("settings", function (result) {
   // if there is an undefined setting, set it to the default
-  settings = { ...defaultSettings.settings, ...result.settings };
+  // apparently 2 depth gets overwritten so here it is
+  settings.Amazon = { ...defaultSettings.settings.Amazon, ...result.settings.Amazon };
+  settings.Netflix = { ...defaultSettings.settings.Netflix, ...result.settings.Netflix };
+  settings.Disney = { ...defaultSettings.settings.Disney, ...result.settings.Disney };
+  settings.Crunchyroll = { ...defaultSettings.settings.Crunchyroll, ...result.settings.Crunchyroll };
+  settings.Video = { ...defaultSettings.settings.Video, ...result.settings.Video };
+  settings.Statistics = { ...defaultSettings.settings.Statistics, ...result.settings.Statistics };
+  settings.General = { ...defaultSettings.settings.General, ...result.settings.General };
   // delete every setting that is not in defaultSettings
   let changedSettings;
   for (const key in settings) {
@@ -164,6 +192,9 @@ function setCheckboxesToSettings() {
   setButtonChecked("VideoAds", settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
   setButtonChecked("VideoFullScreen", settings?.Video.playOnFullScreen);
   setButtonChecked("VideoEpilepsy", settings?.Video.epilepsy);
+  setButtonChecked("VideoUserAgent", settings?.Video.userAgent);
+  button = document.querySelector(".categoryMobile");
+  if (button) button.style.display = isMobile ? "block" : "none";
   //  -------------      Default        ---------------------------------------
   setButtonChecked("DefaultSkips", settings?.Amazon.filterPaid);
   // -------------      global buttons        ---------------------------------------
@@ -314,9 +345,11 @@ function listenForClicks() {
         });
         settings.Amazon.blockFreevee = settings.Netflix.skipAd = settings.Video.playOnFullScreen = VideoSkips;
         if (VideoSkips) setCategoryToBoolean("watchCredits", false);
-      } else if (e.target.id === "VideoAds") settings.Amazon.blockFreevee = settings.Netflix.skipAd = !(settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
+      } else if (e.target.id === "VideoAds")
+        settings.Amazon.blockFreevee = settings.Netflix.skipAd = !(settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
       else if (e.target.id === "VideoFullScreen") settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
       else if (e.target.id === "VideoEpilepsy") settings.Video.epilepsy = !settings.Video.epilepsy;
+      else if (e.target.id === "VideoUserAgent") settings.Video.userAgent = !settings.Video.userAgent;
       else if (e.target.id.startsWith("Video")) {
         let key = lowerCaseFirstLetter(e.target.id.replace("Video", ""));
         if (key === "skipCredits" || key === "watchCredits") {
@@ -328,11 +361,18 @@ function listenForClicks() {
       // -------------      Default        ---------------------------------------
       else if (e.target.id === "DefaultSkips") settings.Amazon.filterPaid = !settings?.Amazon.filterPaid;
       //  -------------      Amazon        ---------------------------------------
-      else if (e.target.id === "AmazonSkips") settings.Amazon.skipAd = settings.Amazon.filterPaid = !(settings.Amazon.skipAd && settings.Amazon.filterPaid);
+      else if (e.target.id === "AmazonSkips")
+        settings.Amazon.skipAd = settings.Amazon.filterPaid = !(settings.Amazon.skipAd && settings.Amazon.filterPaid);
       else if (e.target.id === "NetflixSkips")
-        settings.Netflix.skipRecap = settings.Netflix.skipBlocked = settings.Netflix.profile = !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
+        settings.Netflix.skipRecap =
+          settings.Netflix.skipBlocked =
+          settings.Netflix.profile =
+            !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
       // else if (e.target.id === "DisneySkips") settings.Disney.skipIntro = !settings?.Disney.skipIntro
-      else if (e.target.id === "CrunchyrollSkips") settings.Crunchyroll.skipIntro = settings.Crunchyroll.releaseCalendar = !(settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar);
+      else if (e.target.id === "CrunchyrollSkips")
+        settings.Crunchyroll.skipIntro = settings.Crunchyroll.releaseCalendar = !(
+          settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar
+        );
       else {
         const services = ["Amazon", "Netflix", "Disney", "Crunchyroll"];
         for (const service of services) {

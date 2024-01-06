@@ -249,5 +249,11 @@
   },
   "EpilepsySwitchDescription": {
     "message": "Darken the screen when skipping the ad"
+  },
+  "UserAgentSwitch": {
+    "message": "Switch to desktop websites"
+  },
+  "UserAgentSwitchDescription": {
+    "message": "For prime video and disney+ change to the Desktop website and for amazon make the site mobile friendly"
   }
 }

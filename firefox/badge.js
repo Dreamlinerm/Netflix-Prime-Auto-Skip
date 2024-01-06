@@ -13,6 +13,7 @@
 /* global browser */
 console.log("badge.js loaded");
 let Badges = {};
+const isMobile = /Android/i.test(navigator.userAgent);
 /**
  *
  * Increases Badge by 1
@@ -68,3 +69,96 @@ browser.runtime.onInstalled.addListener((details) => {
     });
   }
 });
+
+if (isMobile) {
+  const defaultSettings = {
+    settings: {
+      Amazon: {
+        skipIntro: true,
+        skipCredits: true,
+        watchCredits: false,
+        skipAd: true,
+        blockFreevee: true,
+        speedSlider: true,
+        filterPaid: false,
+        showRating: true,
+      },
+      Netflix: {
+        skipIntro: true,
+        skipRecap: true,
+        skipCredits: true,
+        watchCredits: false,
+        skipBlocked: true,
+        skipAd: true,
+        speedSlider: true,
+        profile: true,
+        showRating: true,
+      },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
+      Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true },
+      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
+      Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
+      General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
+    },
+  };
+  let settings = defaultSettings.settings;
+  browser.storage.sync.get("settings", function (result) {
+    // if there is an undefined setting, set it to the default
+    // apparently 2 depth gets overwritten so here it is
+    settings.Amazon = { ...defaultSettings.settings.Amazon, ...result.settings.Amazon };
+    settings.Netflix = { ...defaultSettings.settings.Netflix, ...result.settings.Netflix };
+    settings.Disney = { ...defaultSettings.settings.Disney, ...result.settings.Disney };
+    settings.Crunchyroll = { ...defaultSettings.settings.Crunchyroll, ...result.settings.Crunchyroll };
+    settings.Video = { ...defaultSettings.settings.Video, ...result.settings.Video };
+    settings.Statistics = { ...defaultSettings.settings.Statistics, ...result.settings.Statistics };
+    settings.General = { ...defaultSettings.settings.General, ...result.settings.General };
+    ChangeUserAgent();
+    console.log("userAgent", settings.Video.userAgent);
+  });
+
+  browser.storage.sync.onChanged.addListener(function (changes) {
+    if (changes?.settings) {
+      const { oldValue, newValue } = changes.settings;
+      settings = newValue;
+      if (newValue.Video.userAgent !== oldValue?.Video?.userAgent) {
+        console.log("userAgent", settings.Video.userAgent);
+        // remove listener
+        if (!newValue?.Video?.userAgent) {
+          browser.webRequest.onBeforeSendHeaders.removeListener(ReplaceUserAgent);
+        } else {
+          ChangeUserAgent();
+        }
+      }
+    }
+  });
+  const newUa = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0 streamingEnhanced";
+  function ReplaceUserAgent(details) {
+    for (let header of details.requestHeaders) {
+      if (header.name === "User-Agent") {
+        header.value = newUa;
+        break;
+      }
+    }
+    return { requestHeaders: details.requestHeaders };
+  }
+
+  function ChangeUserAgent() {
+    if (settings.Video.userAgent) {
+      browser.webRequest.onBeforeSendHeaders.addListener(
+        ReplaceUserAgent,
+        {
+          urls: [
+            "*://*.disneyplus.com/*",
+            // these are only the prime video urls
+            "*://*.primevideo.com/*",
+            "*://*.amazon.com/gp/video/*",
+            "*://*.amazon.co.jp/gp/video/*",
+            "*://*.amazon.de/gp/video/*",
+            "*://*.amazon.co.uk/gp/video/*",
+          ],
+        },
+        ["blocking", "requestHeaders"]
+      );
+    }
+  }
+}

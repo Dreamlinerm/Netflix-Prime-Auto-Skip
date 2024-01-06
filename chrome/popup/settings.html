@@ -29,7 +29,7 @@
           <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" />
           <div class="flex-center flex-col">
             <h2 class="title" i18n>pageTitle</h2>
-            <p style="font-size: 1em">v.1.0.74</p>
+            <p style="font-size: 1em">v.1.0.75</p>
           </div>
         </div>
         <a
@@ -60,12 +60,22 @@
         </a>
         <a id="MenuNetflix" href="#Netflix" class="menuButton flex">
           <svg id="MenuNetflix" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
-            <path id="MenuNetflix" d="M6.5,2H10.5L13.44,10.83L13.5,2H17.5V22C16.25,21.78 14.87,21.64 13.41,21.58L10.5,13L10.43,21.59C9.03,21.65 7.7,21.79 6.5,22V2Z" />
+            <path
+              id="MenuNetflix"
+              d="M6.5,2H10.5L13.44,10.83L13.5,2H17.5V22C16.25,21.78 14.87,21.64 13.41,21.58L10.5,13L10.43,21.59C9.03,21.65 7.7,21.79 6.5,22V2Z"
+            />
           </svg>
           Netflix
         </a>
         <a id="MenuDisney" href="#Disney" class="menuButton flex">
-          <svg id="MenuDisney" preserveAspectRatio="xMidYMid meet" viewBox="0 0 700 700" width="700pt" xmlns="http://www.w3.org/2000/svg" class="icon">
+          <svg
+            id="MenuDisney"
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 700 700"
+            width="700pt"
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon"
+          >
             <!-- fill="#1d1fff" -->
             <path
               id="MenuDisney"
@@ -99,7 +109,9 @@
           <i18n id="MenuOther">backup</i18n>
         </a>
         <a id="MenuStatistics" href="#Statistics" class="menuButton flex">
-          <svg id="MenuStatistics" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon"><path id="MenuStatistics" d="M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z" /></svg>
+          <svg id="MenuStatistics" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+            <path id="MenuStatistics" d="M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z" />
+          </svg>
           <i18n id="MenuStatistics">statistics</i18n>
         </a>
         <a id="MenuChangelog" href="#Changelog" class="menuButton flex">
@@ -114,7 +126,12 @@
       </div>
       <div style="margin-top: auto">
         <div class="flex flex-col MenuButtons" style="flex-wrap: wrap; margin-bottom: 10px">
-          <a class="button flex flex-center blueButtons" style="margin: 5px 15px" href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">
+          <a
+            class="button flex flex-center blueButtons"
+            style="margin: 5px 15px"
+            href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip"
+            target="_blank"
+          >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
               <path
                 d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"
@@ -182,6 +199,17 @@
             </label>
           </div>
           <p class="description" i18n>SharedPageDescription</p>
+          <div class="categoryMobile">
+            <hr />
+            <div class="line flex">
+              <p i18n>UserAgentSwitch</p>
+              <label class="switch" style="margin-left: 5px">
+                <input type="checkbox" id="VideoUserAgent" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <p class="description" i18n>UserAgentSwitchDescription</p>
+          </div>
           <hr />
           <div class="line flex">
             <p i18n>IntroSwitch</p>
@@ -724,7 +752,14 @@
           <h2>Changelog</h2>
           <div>
             <div class="line flex">
-              <h2>1.0.74</h2>
+              <h2>1.0.75</h2>
+              <ul>
+                <li>Automatically use desktop mode on firefox/chrome mobile</li>
+                <li>Various mobile improvements</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.74</p>
               <ul>
                 <li>Released for Firefox on Android</li>
               </ul>

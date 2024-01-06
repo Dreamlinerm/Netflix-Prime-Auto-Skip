@@ -13,21 +13,53 @@
 /* global chrome */
 const defaultSettings = {
   settings: {
-    Amazon: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, blockFreevee: true, speedSlider: true, filterPaid: false, showRating: true },
-    Netflix: { skipIntro: true, skipRecap: true, skipCredits: true, watchCredits: false, skipBlocked: true, skipAd: true, speedSlider: true, profile: true, showRating: true },
+    Amazon: {
+      skipIntro: true,
+      skipCredits: true,
+      watchCredits: false,
+      skipAd: true,
+      blockFreevee: true,
+      speedSlider: true,
+      filterPaid: false,
+      showRating: true,
+    },
+    Netflix: {
+      skipIntro: true,
+      skipRecap: true,
+      skipCredits: true,
+      watchCredits: false,
+      skipBlocked: true,
+      skipAd: true,
+      speedSlider: true,
+      profile: true,
+      showRating: true,
+    },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true },
-    Video: { playOnFullScreen: true, epilepsy: false },
+    Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
   },
 };
 let settings = defaultSettings.settings;
-const version = "1.0.74";
+const version = "1.0.75";
 chrome.storage.sync.get("settings", function (result) {
-  console.log("%cNetflix%c/%cPrime%c Auto-Skip", "color: #e60010;font-size: 2em;", "color: white;font-size: 2em;", "color: #00aeef;font-size: 2em;", "color: white;font-size: 2em;");
+  console.log(
+    "%cNetflix%c/%cPrime%c Auto-Skip",
+    "color: #e60010;font-size: 2em;",
+    "color: white;font-size: 2em;",
+    "color: #00aeef;font-size: 2em;",
+    "color: white;font-size: 2em;"
+  );
   console.log("version:", version);
-  settings = { ...defaultSettings.settings, ...result.settings };
+  // apparently 2 depth gets overwritten so here it is
+  settings.Amazon = { ...defaultSettings.settings.Amazon, ...result.settings.Amazon };
+  settings.Netflix = { ...defaultSettings.settings.Netflix, ...result.settings.Netflix };
+  settings.Disney = { ...defaultSettings.settings.Disney, ...result.settings.Disney };
+  settings.Crunchyroll = { ...defaultSettings.settings.Crunchyroll, ...result.settings.Crunchyroll };
+  settings.Video = { ...defaultSettings.settings.Video, ...result.settings.Video };
+  settings.Statistics = { ...defaultSettings.settings.Statistics, ...result.settings.Statistics };
+  settings.General = { ...defaultSettings.settings.General, ...result.settings.General };
   CrunchyrollObserver.observe(document, config);
   if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
 });
@@ -96,7 +128,10 @@ let reverseButtonEndTime;
 function addButton(video, startTime, endTime) {
   if (reverseButtonClicked) return;
   const button = document.createElement("div");
-  button.setAttribute("class", "reverse-button css-1dbjc4n r-1awozwy r-lj0ial r-1jd5jdk r-1loqt21 r-18u37iz r-eu3ka r-1777fci r-kuhrb7 r-ymttw5 r-u8s1d r-1ff5aok r-1otgn73");
+  button.setAttribute(
+    "class",
+    "reverse-button css-1dbjc4n r-1awozwy r-lj0ial r-1jd5jdk r-1loqt21 r-18u37iz r-eu3ka r-1777fci r-kuhrb7 r-ymttw5 r-u8s1d r-1ff5aok r-1otgn73"
+  );
   button.style = "color:white;";
   button.textContent = "Watch skipped ?";
 
