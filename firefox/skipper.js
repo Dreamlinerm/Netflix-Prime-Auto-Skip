@@ -15,7 +15,7 @@
 const hostname = window.location.hostname;
 const title = document.title;
 const url = window.location.href;
-const ua = window.navigator.userAgent;
+const ua = navigator.userAgent;
 // only on prime video pages
 const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
 const isNetflix = /netflix/i.test(hostname);
@@ -23,10 +23,24 @@ const isDisney = /disneyplus/i.test(hostname);
 const isHotstar = /hotstar/i.test(hostname);
 const isCrunchyroll = /crunchyroll/i.test(hostname);
 
+const isMobile = /mobile/i.test(ua);
+const isFirefox = /firefox/i.test(ua);
+// const isChrome = /chrome/i.test(ua);
+
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 const version = "1.0.74";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
+  if ((isPrimeVideo || isDisney) && isMobile && isFirefox) {
+    console.log("Unchanged Useragent:", ua);
+    Object.defineProperty(navigator, "userAgent", {
+      get: function () {
+        return "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0";
+      },
+    });
+    console.log("Changed Useragent:", navigator.userAgent);
+  }
+
   /* eslint-env root:true */
   // global variables in localStorage
   const defaultSettings = {
