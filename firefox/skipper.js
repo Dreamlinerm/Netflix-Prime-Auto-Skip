@@ -121,23 +121,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }, 1000);
     }
     // customize mobile view for desktop website
-    if (settings.Video?.userAgent && isMobile && !document.querySelector(AmazonVideoClass)) {
-      // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
-      let meta = document.createElement("meta");
-      meta.name = "viewport";
-      meta.content = "width=device-width, initial-scale=1";
-      document.head.appendChild(meta);
+    if (settings.Video?.userAgent && isMobile) {
+      if (!document.querySelector(AmazonVideoClass) && !url.includes("/gp/video/detail/")) {
+        // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
+        let meta = document.createElement("meta");
+        meta.name = "viewport";
+        meta.content = "width=device-width, initial-scale=1";
+        document.head.appendChild(meta);
 
-      // make amazon more mobile friendly
-      let navBelt = document.querySelector("#nav-belt");
-      if (navBelt) {
-        navBelt.style.width = "100vw";
-        navBelt.style.display = "flex";
-        navBelt.style.flexDirection = "column";
-        navBelt.style.height = "fit-content";
+        // make amazon more mobile friendly
+        let navBelt = document.querySelector("#nav-belt");
+        if (navBelt) {
+          navBelt.style.width = "100vw";
+          navBelt.style.display = "flex";
+          navBelt.style.flexDirection = "column";
+          navBelt.style.height = "fit-content";
+        }
+        let navMain = document.querySelector("#nav-main");
+        if (navMain) navMain.style.display = "none";
       }
-      let navMain = document.querySelector("#nav-main");
-      if (navMain) navMain.style.display = "none";
     }
   }
   browser.storage.sync.get("settings", function (result) {
@@ -336,7 +338,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     let div = document.createElement("div");
     // right: 1.5vw;
     div.style =
-      "position: absolute;bottom: 0;right:0;z-index: 9999;color: black;background: #f5c518;border-radius: 5px;font-size: 1vw;padding: 0 2px 0 2px;";
+      "position: absolute;bottom: 0;right:0;z-index: 9999;color: black;background: #f5c518;border-radius: 5px;padding: 0 2px 0 2px;" +
+      (isMobile ? "font-size: 4vw;" : "font-size: 1vw;");
     // div.id = "imdb";
     if (data?.score) {
       div.textContent = data.score?.toFixed(1);
