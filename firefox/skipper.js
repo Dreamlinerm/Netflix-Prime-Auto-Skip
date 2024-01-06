@@ -23,13 +23,22 @@ const isDisney = /disneyplus/i.test(hostname);
 const isHotstar = /hotstar/i.test(hostname);
 const isCrunchyroll = /crunchyroll/i.test(hostname);
 
-// const isMobile = /mobile/i.test(ua);
+const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
 const version = "1.0.74";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
+  // disney already has viewport meta tag
+  if (isPrimeVideo && isMobile) {
+    console.log("Streaming enhanced is not supported on mobile devices");
+    // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
+    let meta = document.createElement("meta");
+    meta.name = "viewport";
+    meta.content = "width=device-width, initial-scale=1";
+    document.head.appendChild(meta);
+  }
   // global variables in localStorage
   const defaultSettings = {
     settings: {
