@@ -56,9 +56,9 @@ The drm for each streaming service will be installed automatically when a video 
 
 Android Compatibility:
 
-| Browser | Netflix | Prime Video     | Disney+ & Hotstar | Crunchyroll |
-| ---     | ---     | ---             | ---               | ---         |
-| Firefox&Kiwi | ❌     | ✅(Desktop Website) | ✅(Desktop Website) | ✅   |
+| Netflix | Prime Video     | Disney+ & Hotstar | Crunchyroll |
+| ---     | ---             | ---               | ---         |
+| ❌     | ✅(Desktop Website) | ✅(Desktop Website) | ✅   |
 
 ## Supported Streaming Services
 
