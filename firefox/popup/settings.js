@@ -78,6 +78,8 @@ const defaultSettings = {
     General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
   },
 };
+const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent);
+console.log("isMobile", isMobile, navigator.userAgent);
 let settings = defaultSettings.settings;
 browser.storage.sync.get("settings", function (result) {
   // if there is an undefined setting, set it to the default
@@ -191,6 +193,7 @@ function setCheckboxesToSettings() {
   setButtonChecked("VideoFullScreen", settings?.Video.playOnFullScreen);
   setButtonChecked("VideoEpilepsy", settings?.Video.epilepsy);
   setButtonChecked("VideoUserAgent", settings?.Video.userAgent);
+  document.querySelector(".categoryMobile").style.display = isMobile ? "block" : "none";
   //  -------------      Default        ---------------------------------------
   setButtonChecked("DefaultSkips", settings?.Amazon.filterPaid);
   // -------------      global buttons        ---------------------------------------
