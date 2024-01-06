@@ -27,7 +27,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.0.75";
+const version = "1.0.76";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -754,7 +754,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   async function Amazon_FilterPaid() {
     // if not on the shop page or homepremiere
-    if (!url.includes("storefront")) {
+    if (!url.includes("contentId=store") && !url.includes("contentId=homepremiere") && !url.includes("contentType=merch")) {
       // yellow headline is not everywhere the same
       document.querySelectorAll(".o86fri").forEach((a) => {
         deletePaidCategory(a);
