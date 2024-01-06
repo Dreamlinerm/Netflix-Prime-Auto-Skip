@@ -166,8 +166,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (isNetflix) NetflixSettingsChanged(oldValue?.Netflix, newValue?.Netflix);
       else if (isPrimeVideo) AmazonSettingsChanged(oldValue?.Amazon, newValue?.Amazon);
       else if (isDisney || isHotstar) DisneySettingsChanged(oldValue?.Disney, newValue?.Disney);
+
       if (!oldValue || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
-      if (newValue.Video.userAgent !== oldValue?.Video?.userAgent) window.location.reload();
+      if (oldValue?.Video?.userAgent != undefined && newValue.Video.userAgent !== oldValue?.Video?.userAgent) location.reload();
     }
   });
   function NetflixSettingsChanged(oldValue, newValue) {
@@ -753,7 +754,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   async function Amazon_FilterPaid() {
     // if not on the shop page or homepremiere
-    if (!window.location.href.includes("contentId=store") && !window.location.href.includes("contentId=homepremiere")) {
+    if (!url.includes("storefront")) {
       // yellow headline is not everywhere the same
       document.querySelectorAll(".o86fri").forEach((a) => {
         deletePaidCategory(a);
@@ -897,7 +898,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     toggleForm.firstElementChild.appendChild(createFilterElement("filterDub", "Filter Dub", settings.General.filterDub, filterDub));
   }
   async function Crunchyroll_ReleaseCalendar() {
-    if (settings.Crunchyroll?.releaseCalendar && window.location.href.includes("simulcastcalendar")) {
+    if (settings.Crunchyroll?.releaseCalendar && url.includes("simulcastcalendar")) {
       // Show playlist only
       filterQueued(settings.General.filterQueued ? "none" : "block");
       filterDub(settings.General.filterDub ? "none" : "block");
