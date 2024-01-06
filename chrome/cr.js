@@ -36,7 +36,7 @@ const defaultSettings = {
     },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true },
-    Video: { playOnFullScreen: true, epilepsy: false },
+    Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
   },
@@ -52,7 +52,14 @@ chrome.storage.sync.get("settings", function (result) {
     "color: white;font-size: 2em;"
   );
   console.log("version:", version);
-  settings = { ...defaultSettings.settings, ...result.settings };
+  // apparently 2 depth gets overwritten so here it is
+  settings.Amazon = { ...defaultSettings.settings.Amazon, ...result.settings.Amazon };
+  settings.Netflix = { ...defaultSettings.settings.Netflix, ...result.settings.Netflix };
+  settings.Disney = { ...defaultSettings.settings.Disney, ...result.settings.Disney };
+  settings.Crunchyroll = { ...defaultSettings.settings.Crunchyroll, ...result.settings.Crunchyroll };
+  settings.Video = { ...defaultSettings.settings.Video, ...result.settings.Video };
+  settings.Statistics = { ...defaultSettings.settings.Statistics, ...result.settings.Statistics };
+  settings.General = { ...defaultSettings.settings.General, ...result.settings.General };
   CrunchyrollObserver.observe(document, config);
   if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
 });

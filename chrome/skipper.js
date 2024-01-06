@@ -30,33 +30,6 @@ const isEdge = /edg/i.test(ua);
 const version = "1.0.75";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
-  // customize mobile view for desktop website
-  // disney already has viewport meta tag
-  if (isPrimeVideo && isMobile) {
-    const video = document.querySelector(AmazonVideoClass);
-    if (video) {
-      // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
-      let meta = document.createElement("meta");
-      meta.name = "viewport";
-      meta.content = "width=device-width, initial-scale=1";
-      document.head.appendChild(meta);
-
-      let navBelt = document.querySelector("#nav-belt");
-      navBelt.style.width = "100vw";
-      navBelt.style.display = "flex";
-      navBelt.style.flexDirection = "column";
-      navBelt.style.height = "fit-content";
-
-      let navMain = document.querySelector("#nav-main");
-      navMain.style.width = "100vw";
-
-      let xshop = document.querySelector("#nav-xshop-container");
-      xshop.style.height = "fit-content";
-      // xshop.firstElementChild.style.display = "flex";
-      // xshop.firstElementChild.style.flexDirection = "column";
-      xshop.firstElementChild.style.width = "100%";
-    }
-  }
   // global variables in localStorage
   const defaultSettings = {
     settings: {
@@ -83,7 +56,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true },
-      Video: { playOnFullScreen: true, epilepsy: false },
+      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
     },
@@ -147,10 +120,36 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         Amazon_FreeveeTimeout();
       }, 1000);
     }
+    // customize mobile view for desktop website
+    if (settings.Video?.userAgent && isMobile && !document.querySelector(AmazonVideoClass)) {
+      // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
+      let meta = document.createElement("meta");
+      meta.name = "viewport";
+      meta.content = "width=device-width, initial-scale=1";
+      document.head.appendChild(meta);
+
+      // make amazon more mobile friendly
+      let navBelt = document.querySelector("#nav-belt");
+      if (navBelt) {
+        navBelt.style.width = "100vw";
+        navBelt.style.display = "flex";
+        navBelt.style.flexDirection = "column";
+        navBelt.style.height = "fit-content";
+      }
+      let navMain = document.querySelector("#nav-main");
+      if (navMain) navMain.style.display = "none";
+    }
   }
   chrome.storage.sync.get("settings", function (result) {
     // if there is an undefined setting, set it to the default
-    settings = { ...defaultSettings.settings, ...result.settings };
+    // apparently 2 depth gets overwritten so here it is
+    settings.Amazon = { ...defaultSettings.settings.Amazon, ...result.settings.Amazon };
+    settings.Netflix = { ...defaultSettings.settings.Netflix, ...result.settings.Netflix };
+    settings.Disney = { ...defaultSettings.settings.Disney, ...result.settings.Disney };
+    settings.Crunchyroll = { ...defaultSettings.settings.Crunchyroll, ...result.settings.Crunchyroll };
+    settings.Video = { ...defaultSettings.settings.Video, ...result.settings.Video };
+    settings.Statistics = { ...defaultSettings.settings.Statistics, ...result.settings.Statistics };
+    settings.General = { ...defaultSettings.settings.General, ...result.settings.General };
     logStartOfAddon();
     getDBCache();
 
@@ -172,6 +171,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       else if (isPrimeVideo) AmazonSettingsChanged(oldValue?.Amazon, newValue?.Amazon);
       else if (isDisney || isHotstar) DisneySettingsChanged(oldValue?.Disney, newValue?.Disney);
       if (!oldValue || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
+      if (newValue.Video.userAgent !== oldValue?.Video?.userAgent) window.location.reload();
     }
   });
   function NetflixSettingsChanged(oldValue, newValue) {
