@@ -78,14 +78,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         DBCache = {};
       }
       if (isNetflix) {
-        if (settings.Netflix?.showRating) {
-          startShowRatingInterval();
-        }
-      }
-      // else if (isPrimeVideo) {
-      //   if (settings.Amazon?.streamLinks) addStreamLinks();
-      // }
-      else if (isDisney || isHotstar) {
+        if (settings.Netflix?.showRating) startShowRatingInterval();
+      } else if (isDisney || isHotstar) {
         if (settings.Disney?.showRating) startShowRatingInterval();
       }
     });
@@ -396,7 +390,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }, 600);
     }
     // if intro/recap time starts at 0 there is no skip button
-    if (video && video.play && SetTimeToZeroOnce != video.src) {
+    if (video?.play && SetTimeToZeroOnce != video.src) {
       if (video.currentTime > 0.2 && video.currentTime < 5) {
         video.currentTime = 0;
         SetTimeToZeroOnce = video.src;
