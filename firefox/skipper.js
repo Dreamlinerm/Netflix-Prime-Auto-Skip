@@ -578,6 +578,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
     return false;
   }
+  let intervalTimeout = 100;
   function Netflix_SkipAdInterval() {
     let AdInterval = setInterval(() => {
       if (!settings.Netflix?.skipAd) {
@@ -596,6 +597,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           settings.Statistics.NetflixAdTimeSkipped += adLength;
           increaseBadge();
           if (settings.Video.epilepsy) video.style.opacity = 0;
+          // reduce the intervalTimeout
+          intervalTimeout = 10;
+          video.muted = true;
           video.playbackRate = playBackRate;
           lastAdTimeText = adLength;
         } else if (adLength > 2 && video.playbackRate < 2) {
@@ -606,12 +610,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           // added lastAdTimeText because other speedsliders are not working anymore
         } else if (adLength <= 2 || (!adLength && lastAdTimeText)) {
           // videospeed is speedSlider value
+          video.muted = false;
           video.playbackRate = videoSpeed;
           lastAdTimeText = 0;
           if (settings.Video.epilepsy) video.style.opacity = 1;
+          // reset the intervalTimeout
+          intervalTimeout = 100;
         }
       }
-    }, 100);
+    }, intervalTimeout);
   }
   const NetflixSliderStyle = "position:relative;bottom:20px;display: none;width:200px;";
   const NetflixSpeedStyle = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
