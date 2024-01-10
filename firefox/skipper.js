@@ -736,23 +736,21 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function Amazon_continueWatchingPosition() {
-    let a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]');
-    let maxSectionDepth = 10;
-    while (a?.parentElement && maxSectionDepth > 0) {
-      a = a.parentElement;
-      maxSectionDepth--;
-      if (a?.classList?.contains("+OSZzQ")) break;
-    }
-    if (a) {
-      const div = document.querySelector("._2RwnU5.dynamic-type-ramp.dv-fable-breakpoints.VYbJYb.yL46mS.kK-hEr");
-      if (div) {
-        const insertBefore = div.childNodes[2];
-        if (insertBefore) {
-          // move continue category to the top
-          console.log(div, a, insertBefore);
-          div.insertBefore(a, insertBefore);
-          // continueCategory.remove();
-        }
+    const div = document.querySelector("._2RwnU5.dynamic-type-ramp.dv-fable-breakpoints.VYbJYb.yL46mS.kK-hEr");
+    if (div) {
+      let a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]');
+      let maxSectionDepth = 10;
+      while (a?.parentElement && maxSectionDepth > 0) {
+        a = a.parentElement;
+        maxSectionDepth--;
+        if (a?.classList?.contains("+OSZzQ")) break;
+      }
+      const insertBefore = div.childNodes[2];
+      if (a && insertBefore) {
+        // move continue category to the top
+        console.log(div, a, insertBefore);
+        div.insertBefore(a, insertBefore);
+        // continueCategory.remove();
       }
     }
   }
