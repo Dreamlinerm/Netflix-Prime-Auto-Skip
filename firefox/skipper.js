@@ -114,6 +114,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         Amazon_FreeveeTimeout();
       }, 1000);
     }
+    if (Amazon?.filterPaid) continueWatchingPosition();
     // customize mobile view for desktop website
     if (settings.Video?.userAgent && isMobile) {
       if (!document.querySelector(AmazonVideoClass) && !url.includes("/gp/video/detail/")) {
@@ -757,6 +758,23 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           video.playbackRate = this.value / 10;
         };
       }
+    }
+  }
+  async function continueWatchingPosition() {
+    let a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]');
+    let maxSectionDepth = 10;
+    while (a?.parentElement && maxSectionDepth > 0) {
+      a = a.parentElement;
+      maxSectionDepth--;
+      if (a?.classList?.contains("+OSZzQ")) break;
+    }
+    const div = document.querySelector("._2RwnU5.dynamic-type-ramp.dv-fable-breakpoints.VYbJYb.yL46mS.kK-hEr");
+    const insertBefore = div.childNodes[2];
+    if (a && div && insertBefore) {
+      // move continue category to the top
+      console.log(div, a, insertBefore);
+      div.insertBefore(a, insertBefore);
+      // continueCategory.remove();
     }
   }
   async function Amazon_FilterPaid() {
