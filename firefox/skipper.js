@@ -114,28 +114,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         Amazon_FreeveeTimeout();
       }, 1000);
     }
-    if (Amazon?.filterPaid) continueWatchingPosition();
-    // customize mobile view for desktop website
-    if (settings.Video?.userAgent && isMobile) {
-      if (!document.querySelector(AmazonVideoClass) && !url.includes("/gp/video/detail/")) {
-        // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
-        let meta = document.createElement("meta");
-        meta.name = "viewport";
-        meta.content = "width=device-width, initial-scale=1";
-        document.head.appendChild(meta);
-
-        // make amazon more mobile friendly
-        let navBelt = document.querySelector("#nav-belt");
-        if (navBelt) {
-          navBelt.style.width = "100vw";
-          navBelt.style.display = "flex";
-          navBelt.style.flexDirection = "column";
-          navBelt.style.height = "fit-content";
-        }
-        let navMain = document.querySelector("#nav-main");
-        if (navMain) navMain.style.display = "none";
-      }
-    }
+    if (Amazon?.filterPaid) Amazon_continueWatchingPosition();
+    if (settings.Video?.userAgent && isMobile) Amazon_customizeMobileView();
   }
   browser.storage.sync.get("settings", function (result) {
     // if there is an undefined setting, set it to the default
@@ -760,7 +740,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }
   }
-  async function continueWatchingPosition() {
+  async function Amazon_continueWatchingPosition() {
     let a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]');
     let maxSectionDepth = 10;
     while (a?.parentElement && maxSectionDepth > 0) {
@@ -881,6 +861,29 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         };
       }
     }, 100);
+  }
+
+  async function Amazon_customizeMobileView() {
+    console.log("customizeMobileView");
+    // customize mobile view for desktop website
+    if (!document.querySelector(AmazonVideoClass) && !url.includes("/gp/video/detail/")) {
+      // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
+      let meta = document.createElement("meta");
+      meta.name = "viewport";
+      meta.content = "width=device-width, initial-scale=1";
+      document.head.appendChild(meta);
+
+      // make amazon more mobile friendly
+      let navBelt = document.querySelector("#nav-belt");
+      if (navBelt) {
+        navBelt.style.width = "100vw";
+        navBelt.style.display = "flex";
+        navBelt.style.flexDirection = "column";
+        navBelt.style.height = "fit-content";
+      }
+      let navMain = document.querySelector("#nav-main");
+      if (navMain) navMain.style.display = "none";
+    }
   }
   // Crunchyroll functions
   function filterQueued(display) {
