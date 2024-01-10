@@ -743,13 +743,17 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       maxSectionDepth--;
       if (a?.classList?.contains("+OSZzQ")) break;
     }
-    const div = document.querySelector("._2RwnU5.dynamic-type-ramp.dv-fable-breakpoints.VYbJYb.yL46mS.kK-hEr");
-    const insertBefore = div.childNodes[2];
-    if (a && div && insertBefore) {
-      // move continue category to the top
-      console.log(div, a, insertBefore);
-      div.insertBefore(a, insertBefore);
-      // continueCategory.remove();
+    if (a) {
+      const div = document.querySelector("._2RwnU5.dynamic-type-ramp.dv-fable-breakpoints.VYbJYb.yL46mS.kK-hEr");
+      if (div) {
+        const insertBefore = div.childNodes[2];
+        if (insertBefore) {
+          // move continue category to the top
+          console.log(div, a, insertBefore);
+          div.insertBefore(a, insertBefore);
+          // continueCategory.remove();
+        }
+      }
     }
   }
   async function Amazon_FilterPaid() {
