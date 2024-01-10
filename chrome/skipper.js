@@ -27,7 +27,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.0.77";
+const version = "1.0.78";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -41,6 +41,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         blockFreevee: true,
         speedSlider: true,
         filterPaid: false,
+        continuePosition: true,
         showRating: true,
       },
       Netflix: {
@@ -114,27 +115,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         Amazon_FreeveeTimeout();
       }, 1000);
     }
-    // customize mobile view for desktop website
-    if (settings.Video?.userAgent && isMobile) {
-      if (!document.querySelector(AmazonVideoClass) && !url.includes("/gp/video/detail/")) {
-        // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
-        let meta = document.createElement("meta");
-        meta.name = "viewport";
-        meta.content = "width=device-width, initial-scale=1";
-        document.head.appendChild(meta);
-
-        // make amazon more mobile friendly
-        let navBelt = document.querySelector("#nav-belt");
-        if (navBelt) {
-          navBelt.style.width = "100vw";
-          navBelt.style.display = "flex";
-          navBelt.style.flexDirection = "column";
-          navBelt.style.height = "fit-content";
-        }
-        let navMain = document.querySelector("#nav-main");
-        if (navMain) navMain.style.display = "none";
-      }
-    }
+    if (Amazon?.continuePosition) Amazon_continuePosition();
+    if (settings.Video?.userAgent && isMobile) Amazon_customizeMobileView();
   }
   chrome.storage.sync.get("settings", function (result) {
     // if there is an undefined setting, set it to the default
@@ -178,6 +160,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   function AmazonSettingsChanged(oldValue, newValue) {
     if (!oldValue?.skipAd && newValue.skipAd) Amazon_AdTimeout();
     if (!oldValue?.blockFreevee && newValue.blockFreevee) Amazon_FreeveeTimeout();
+    if (!oldValue?.continuePosition && newValue.continuePosition) Amazon_continuePosition();
   }
   function DisneySettingsChanged(oldValue, newValue) {
     if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
@@ -596,6 +579,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           settings.Statistics.NetflixAdTimeSkipped += adLength;
           increaseBadge();
           if (settings.Video.epilepsy) video.style.opacity = 0;
+          video.muted = true;
           video.playbackRate = playBackRate;
           lastAdTimeText = adLength;
         } else if (adLength > 2 && video.playbackRate < 2) {
@@ -606,6 +590,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           // added lastAdTimeText because other speedsliders are not working anymore
         } else if (adLength <= 2 || (!adLength && lastAdTimeText)) {
           // videospeed is speedSlider value
+          video.muted = false;
           video.playbackRate = videoSpeed;
           lastAdTimeText = 0;
           if (settings.Video.epilepsy) video.style.opacity = 1;
@@ -752,6 +737,24 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }
   }
+  async function Amazon_continuePosition() {
+    const div = document.querySelector("._2RwnU5.dynamic-type-ramp.dv-fable-breakpoints.VYbJYb.yL46mS.kK-hEr");
+    if (div) {
+      let a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]');
+      let maxSectionDepth = 10;
+      while (a?.parentElement && maxSectionDepth > 0) {
+        a = a.parentElement;
+        maxSectionDepth--;
+        if (a?.classList?.contains("+OSZzQ")) break;
+      }
+      const insertBefore = div.childNodes[2];
+      if (a && insertBefore) {
+        // move continue category to the top
+        div.insertBefore(a, insertBefore);
+        // continueCategory.remove();
+      }
+    }
+  }
   async function Amazon_FilterPaid() {
     // if not on the shop page or homepremiere
     if (!url.includes("contentId=store") && !url.includes("contentId=homepremiere") && !url.includes("contentType=merch")) {
@@ -856,6 +859,29 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         };
       }
     }, 100);
+  }
+
+  async function Amazon_customizeMobileView() {
+    console.log("customizeMobileView");
+    // customize mobile view for desktop website
+    if (!document.querySelector(AmazonVideoClass) && !url.includes("/gp/video/detail/")) {
+      // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
+      let meta = document.createElement("meta");
+      meta.name = "viewport";
+      meta.content = "width=device-width, initial-scale=1";
+      document.head.appendChild(meta);
+
+      // make amazon more mobile friendly
+      let navBelt = document.querySelector("#nav-belt");
+      if (navBelt) {
+        navBelt.style.width = "100vw";
+        navBelt.style.display = "flex";
+        navBelt.style.flexDirection = "column";
+        navBelt.style.height = "fit-content";
+      }
+      let navMain = document.querySelector("#nav-main");
+      if (navMain) navMain.style.display = "none";
+    }
   }
   // Crunchyroll functions
   function filterQueued(display) {

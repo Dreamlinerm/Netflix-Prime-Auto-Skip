@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Streaming enhanced: Netflix Disney+ Prime Video",
+    "message": "Streaming enhanced Netflix Disney Prime Video",
     "description": "Nome da extensão"
   },
   "extensionDescription": {
@@ -129,6 +129,12 @@
   },
   "PaidContentDescription": {
     "message": "Remoção de todas as categorias de filmes/séries pagos"
+  },
+  "ContinuePositionSwitch": {
+    "message": "Mover categoria \"Continuar\":"
+  },
+  "ContinuePositionDescription": {
+    "message": "Mova a categoria \"Continuar\" para o topo da página"
   },
   "FreeveeSwitch": {
     "message": "Ignorar anúncios:"

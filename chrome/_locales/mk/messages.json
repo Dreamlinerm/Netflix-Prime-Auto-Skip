@@ -130,6 +130,12 @@
   "PaidContentDescription": {
     "message": "Отстранување на секоја ТВ-серија/филм кој треба да се купи за да се гледа"
   },
+  "ContinuePositionSwitch": {
+    "message": "Преместете ја категоријата „Продолжи“:"
+  },
+  "ContinuePositionDescription": {
+    "message": "Преместете ја категоријата „Продолжи“ на врвот на страницата"
+  },
   "FreeveeSwitch": {
     "message": "Прескокнете ги рекламите:"
   },

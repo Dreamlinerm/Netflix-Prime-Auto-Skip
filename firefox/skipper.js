@@ -27,7 +27,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.0.77";
+const version = "1.0.78";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -750,7 +750,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       const insertBefore = div.childNodes[2];
       if (a && insertBefore) {
         // move continue category to the top
-        console.log(div, a, insertBefore);
         div.insertBefore(a, insertBefore);
         // continueCategory.remove();
       }

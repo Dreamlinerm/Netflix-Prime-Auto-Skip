@@ -130,6 +130,12 @@
   "PaidContentDescription": {
     "message": "Entfernen aller bezahlten Serien/Filmkategorien"
   },
+  "ContinuePositionSwitch": {
+    "message": "Kategorie \"Fortsetzen\" verschieben:"
+  },
+  "ContinuePositionDescription": {
+    "message": "Kategorie \"Fortsetzen\" an den Seitenanfang verschieben"
+  },
   "FreeveeSwitch": {
     "message": "Freevee-Werbungen überspringen:"
   },

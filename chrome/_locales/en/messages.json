@@ -130,6 +130,12 @@
   "PaidContentDescription": {
     "message": "Removing every paid movie/series category"
   },
+  "ContinuePositionSwitch": {
+    "message": "Move category \"Continue\":"
+  },
+  "ContinuePositionDescription": {
+    "message": "Move category \"Continue\" to the top of the page"
+  },
   "FreeveeSwitch": {
     "message": "Skip Freevee Ads:"
   },
