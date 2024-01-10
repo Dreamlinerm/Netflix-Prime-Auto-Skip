@@ -40,7 +40,6 @@
     "storage",
     "webRequest",
     "webRequestBlocking",
-    "activeTab",
     "*://*.disneyplus.com/*",
     "*://*.primevideo.com/*",
     "*://*.amazon.com/*",
