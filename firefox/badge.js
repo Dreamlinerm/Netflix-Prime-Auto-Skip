@@ -81,6 +81,7 @@ if (isMobile) {
         blockFreevee: true,
         speedSlider: true,
         filterPaid: false,
+        continuePosition: true,
         showRating: true,
       },
       Netflix: {

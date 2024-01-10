@@ -21,6 +21,7 @@ const defaultSettings = {
       blockFreevee: true,
       speedSlider: true,
       filterPaid: false,
+      continuePosition: true,
       showRating: true,
     },
     Netflix: {

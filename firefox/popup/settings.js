@@ -58,6 +58,7 @@ const defaultSettings = {
       blockFreevee: true,
       speedSlider: true,
       filterPaid: false,
+      continuePosition: true,
       showRating: true,
     },
     Netflix: {
@@ -198,7 +199,7 @@ function setCheckboxesToSettings() {
   //  -------------      Default        ---------------------------------------
   setButtonChecked("DefaultSkips", settings?.Amazon.filterPaid);
   // -------------      global buttons        ---------------------------------------
-  setButtonChecked("AmazonSkips", settings?.Amazon.skipAd && settings?.Amazon.filterPaid);
+  setButtonChecked("AmazonSkips", settings?.Amazon.skipAd && settings?.Amazon.filterPaid && settings?.Amazon.continuePosition);
   setButtonChecked("NetflixSkips", settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
   setButtonChecked("DisneySkips", settings?.Disney.skipIntro);
   setButtonChecked("CrunchyrollSkips", settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar);
@@ -362,7 +363,10 @@ function listenForClicks() {
       else if (e.target.id === "DefaultSkips") settings.Amazon.filterPaid = !settings?.Amazon.filterPaid;
       //  -------------      Amazon        ---------------------------------------
       else if (e.target.id === "AmazonSkips")
-        settings.Amazon.skipAd = settings.Amazon.filterPaid = !(settings.Amazon.skipAd && settings.Amazon.filterPaid);
+        settings.Amazon.skipAd =
+          settings.Amazon.filterPaid =
+          settings.Amazon.continuePosition =
+            !(settings.Amazon.skipAd && settings.Amazon.filterPaid && settings.Amazon.continuePosition);
       else if (e.target.id === "NetflixSkips")
         settings.Netflix.skipRecap =
           settings.Netflix.skipBlocked =

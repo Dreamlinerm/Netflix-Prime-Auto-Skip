@@ -41,6 +41,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         blockFreevee: true,
         speedSlider: true,
         filterPaid: false,
+        continuePosition: true,
         showRating: true,
       },
       Netflix: {
@@ -114,7 +115,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         Amazon_FreeveeTimeout();
       }, 1000);
     }
-    if (Amazon?.filterPaid) Amazon_continueWatchingPosition();
+    if (Amazon?.continuePosition) Amazon_continuePosition();
     if (settings.Video?.userAgent && isMobile) Amazon_customizeMobileView();
   }
   browser.storage.sync.get("settings", function (result) {
@@ -159,6 +160,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   function AmazonSettingsChanged(oldValue, newValue) {
     if (!oldValue?.skipAd && newValue.skipAd) Amazon_AdTimeout();
     if (!oldValue?.blockFreevee && newValue.blockFreevee) Amazon_FreeveeTimeout();
+    if (!oldValue?.continuePosition && newValue.continuePosition) Amazon_continuePosition();
   }
   function DisneySettingsChanged(oldValue, newValue) {
     if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
@@ -735,7 +737,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }
   }
-  async function Amazon_continueWatchingPosition() {
+  async function Amazon_continuePosition() {
     const div = document.querySelector("._2RwnU5.dynamic-type-ramp.dv-fable-breakpoints.VYbJYb.yL46mS.kK-hEr");
     if (div) {
       let a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]');
