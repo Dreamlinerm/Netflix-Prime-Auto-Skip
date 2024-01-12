@@ -205,29 +205,36 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (year) url += `&year=${year}`;
     // const response = await fetch(encodeURI(url));
     // const data = await response.json();
-    browser.runtime.sendMessage({ url }, function (data) {
-      if (data != undefined && data != "") {
-        // themoviedb
-        let compiledData = {};
-        // for (movie of data?.results) {
-        //   if (movie.title.toLowerCase().includes(title.toLowerCase())) {
-        //     compiledData = { score: movie?.vote_average, release_date: movie?.release_date, date: today, db: "tmdb" };
-        //     break;
-        //   }
-        // }
-        const movie = data?.results?.[0];
-        compiledData = { score: movie?.vote_average, release_date: movie?.release_date, title: movie?.title, date: today, db: "tmdb" };
-        DBCache[title] = compiledData;
-        if (!compiledData?.score) {
-          log("no Score found", title, data);
+    browser.runtime
+      .sendMessage({ url }, function (data) {
+        if (data != undefined && data != "") {
+          // themoviedb
+          let compiledData = {};
+          // for (movie of data?.results) {
+          //   if (movie.title.toLowerCase().includes(title.toLowerCase())) {
+          //     compiledData = { score: movie?.vote_average, release_date: movie?.release_date, date: today, db: "tmdb" };
+          //     break;
+          //   }
+          // }
+          const movie = data?.results?.[0];
+          compiledData = { score: movie?.vote_average, release_date: movie?.release_date, title: movie?.title, date: today, db: "tmdb" };
+          DBCache[title] = compiledData;
+          if (!compiledData?.score) {
+            log("no Score found", title, data);
+          }
+          setRatingOnCard(card, compiledData, title);
         }
-        setRatingOnCard(card, compiledData, title);
-      }
-      // else {
-      //   DBCache[title] = { score: null, release_date: null, title: title, date: today, db: "tmdb" };
-      //   log("no Score found data undefined", title, data);
-      // }
-    });
+        // else {
+        //   DBCache[title] = { score: null, release_date: null, title: title, date: today, db: "tmdb" };
+        //   log("no Score found data undefined", title, data);
+        // }
+      })
+      .catch((error) => {
+        log(error);
+        if (error.toString().includes("Extension context invalidated")) {
+          location.reload();
+        }
+      });
   }
 
   // -----------------------   functions   ---------------------------------
@@ -936,21 +943,33 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   // Badge functions
   // eslint-disable-next-line no-unused-vars
   function setBadgeText(text) {
-    browser.runtime.sendMessage({
-      type: "setBadgeText",
-      content: text,
-    });
+    browser.runtime
+      .sendMessage({
+        type: "setBadgeText",
+        content: text,
+      })
+      .catch((error) => {
+        log(error);
+      });
   }
   function increaseBadge() {
     settings.Statistics.SegmentsSkipped++;
     browser.storage.sync.set({ settings });
-    browser.runtime.sendMessage({
-      type: "increaseBadge",
-    });
+    browser.runtime
+      .sendMessage({
+        type: "increaseBadge",
+      })
+      .catch((error) => {
+        log(error);
+      });
   }
   function resetBadge() {
-    browser.runtime.sendMessage({
-      type: "resetBadge",
-    });
+    browser.runtime
+      .sendMessage({
+        type: "resetBadge",
+      })
+      .catch((error) => {
+        log(error);
+      });
   }
 }
