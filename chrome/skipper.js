@@ -27,7 +27,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.0.78";
+const version = "1.0.79";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -687,7 +687,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (button) {
       // only skipping to next episode not an entirely new series
       const newEpNumber = document.querySelector("[class*=nextupcard-episode]");
-      if (newEpNumber && !/(?<!\S)1(?!\S)/.exec(newEpNumber.textContent)) {
+      if (newEpNumber && !/(?<!\S)1(?!\S)/.exec(newEpNumber.textContent) && lastAdTimeText != newEpNumber.textContent) {
+        lastAdTimeText = newEpNumber.textContent;
+        resetLastATimeText();
         button.click();
         increaseBadge();
         log("skipped Credits", button);
