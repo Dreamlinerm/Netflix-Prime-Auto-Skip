@@ -329,9 +329,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           .replace(/(S\d+)/g, "")
           .replace(/\[dt\.?\/OV\]/g, "")
           .replace(/\[OV\]/g, "")
+          .replace(/\s\(.*\)/g, "")
           .replace(/:?\sStaffel-?\s\d+/g, "")
           .replace(/:?\sSeason-?\s\d+/g, "")
-          .replace(/\s\(.+\)/g, "")
           .split(", ")[0];
 
       // sometimes more than one image is loaded for the same title
