@@ -221,9 +221,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           const movie = data?.results?.[0];
           compiledData = { score: movie?.vote_average, release_date: movie?.release_date, title: movie?.title, date: today, db: "tmdb" };
           DBCache[title] = compiledData;
-          if (!compiledData?.score) {
-            log("no Score found", title, data);
-          }
+          // if (!compiledData?.score) {
+          //   log("no Score found:", title, data);
+          // }
           setRatingOnCard(card, compiledData, title);
         }
         // else {
@@ -302,15 +302,38 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       // add seen class
       if (isNetflix || isDisney || isHotstar) card.classList.add("imdb");
       //Amazon
-      else card.parentElement.classList.add("imdb");
+      else {
+        let parent = card?.parentElement;
+        while (parent) {
+          if (parent.tagName == "LI") break;
+          parent = parent.parentElement;
+        }
+        if (parent) parent.classList.add("imdb");
+      }
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
       // S2: E3 remove this part
-      else if (isDisney) title = card?.getAttribute("alt")?.replace(/(S\d+:\sE\d+\s)/g, "");
+      else if (isDisney)
+        title = card
+          ?.getAttribute("alt")
+          ?.replace(/(S\d+:\s?E\d+\s)/g, "")
+          ?.split(". ")[0];
       else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
       // amazon
       // remove everything after - in the title
-      else title = card.getAttribute("data-card-title").split(" - ")[0].split(" – ")[0];
+      else
+        title = card
+          .getAttribute("data-card-title")
+          .split(" - ")[0]
+          .split(" – ")[0]
+          .replace(/(S\d+)/g, "")
+          .replace(/\[dt\.?\/OV\]/g, "")
+          .replace(/\[OV\]/g, "")
+          .replace(/:?\sStaffel\s\d+/g, "")
+          .replace(/:\sSeason\s\d+/g, "")
+          .replace(/\s\(.+\)/g, "")
+          .split(", ")[0];
+
       // sometimes more than one image is loaded for the same title
       if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
         lastTitle = title;
@@ -333,6 +356,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       // div.textContent = title;
     } else {
       div.textContent = "?";
+      log("no score found:", title, data);
     }
     if (isNetflix) card.appendChild(div);
     else if (isDisney || isHotstar) card.parentElement?.appendChild(div);
