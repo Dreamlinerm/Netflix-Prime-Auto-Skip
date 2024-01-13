@@ -82,6 +82,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         if (settings.Netflix?.showRating) startShowRatingInterval();
       } else if (isDisney || isHotstar) {
         if (settings.Disney?.showRating) startShowRatingInterval();
+      } else if (isPrimeVideo) {
+        if (settings.Amazon?.showRating) startShowRatingInterval();
       }
     });
   }
@@ -205,8 +207,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (year) url += `&year=${year}`;
     // const response = await fetch(encodeURI(url));
     // const data = await response.json();
-    browser.runtime
-      .sendMessage({ url }, function (data) {
+    try {
+      browser.runtime.sendMessage({ url }, function (data) {
         if (data != undefined && data != "") {
           // themoviedb
           let compiledData = {};
@@ -228,13 +230,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         //   DBCache[title] = { score: null, release_date: null, title: title, date: today, db: "tmdb" };
         //   log("no Score found data undefined", title, data);
         // }
-      })
-      .catch((error) => {
-        log(error);
-        if (error.toString().includes("Extension context invalidated")) {
-          location.reload();
-        }
       });
+    } catch (error) {
+      log(error);
+      if (error.toString().includes("Extension context invalidated")) {
+        location.reload();
+      }
+    }
   }
 
   // -----------------------   functions   ---------------------------------
@@ -943,33 +945,33 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   // Badge functions
   // eslint-disable-next-line no-unused-vars
   function setBadgeText(text) {
-    browser.runtime
-      .sendMessage({
+    try {
+      browser.runtime.sendMessage({
         type: "setBadgeText",
         content: text,
-      })
-      .catch((error) => {
-        log(error);
       });
+    } catch (error) {
+      log(error);
+    }
   }
   function increaseBadge() {
     settings.Statistics.SegmentsSkipped++;
     browser.storage.sync.set({ settings });
-    browser.runtime
-      .sendMessage({
+    try {
+      browser.runtime.sendMessage({
         type: "increaseBadge",
-      })
-      .catch((error) => {
-        log(error);
       });
+    } catch (error) {
+      log(error);
+    }
   }
   function resetBadge() {
-    browser.runtime
-      .sendMessage({
+    try {
+      browser.runtime.sendMessage({
         type: "resetBadge",
-      })
-      .catch((error) => {
-        log(error);
       });
+    } catch (error) {
+      log(error);
+    }
   }
 }
