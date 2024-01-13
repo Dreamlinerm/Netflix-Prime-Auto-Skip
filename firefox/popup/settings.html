@@ -365,12 +365,19 @@
           <table style="border: 1px solid white">
             <tr>
               <th>Netflix</th>
+              <th>Prime</th>
               <th>Disney</th>
             </tr>
             <tr>
               <td>
                 <label class="switch">
                   <input type="checkbox" id="NetflixShowRating" />
+                  <span class="slider round"></span>
+                </label>
+              </td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" id="AmazonShowRating" />
                   <span class="slider round"></span>
                 </label>
               </td>
@@ -759,7 +766,15 @@
           <h2>Changelog</h2>
           <div>
             <div class="line flex">
-              <h2>1.0.79</h2>
+              <h2>1.0.80</h2>
+              <ul>
+                <li>Added TMDB ratings to Prime Video</li>
+                <li>Better title filter for TMDB</li>
+                <li>On extension update no more Error Context invalidated errors</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.79</p>
               <ul>
                 <li>Fixed Prime Video Credits skip will crash page</li>
               </ul>
