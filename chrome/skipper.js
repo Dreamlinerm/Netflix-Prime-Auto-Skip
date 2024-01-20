@@ -607,7 +607,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (video) {
         let playBackRate = 8;
         if (isEdge) playBackRate = 3;
-        if (adLength > 8 && video.playbackRate != playBackRate) {
+        if ((adLength || lastAdTimeText) && video.paused) {
+          video.play();
+        } else if (adLength > 8 && video.playbackRate != playBackRate) {
           log("Ad skipped, length:", adLength, "s");
           settings.Statistics.NetflixAdTimeSkipped += adLength;
           increaseBadge();
@@ -618,10 +620,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         } else if (adLength > 2 && video.playbackRate < 2) {
           video.playbackRate = adLength / 2;
           lastAdTimeText = adLength;
-        } else if (adLength && video.paused) {
-          video.play();
-          // added lastAdTimeText because other speedsliders are not working anymore
-        } else if (adLength <= 2 || (!adLength && lastAdTimeText)) {
+        } // added lastAdTimeText because other speedsliders are not working anymore
+        else if (adLength <= 2 || (!adLength && lastAdTimeText)) {
           // videospeed is speedSlider value
           video.muted = false;
           video.playbackRate = videoSpeed;
@@ -964,6 +964,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       filterQueued(settings.General.filterQueued ? "none" : "block");
       filterDub(settings.General.filterDub ? "none" : "block");
       addButtons();
+      let days = document.querySelectorAll(".specific-date [datetime]");
+      for (const day of days) {
+        const date = new Date(day.getAttribute("datetime"));
+        const today = new Date();
+        // if the day of the week is the same as today click on it, like if its monday click on monday
+        if (date.getDay() == today.getDay()) {
+          day.click();
+          break;
+        }
+      }
     }
   }
   // Badge functions
