@@ -609,7 +609,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         if (isEdge) playBackRate = 3;
         if ((adLength || lastAdTimeText) && video.paused) {
           video.play();
-        } else if (adLength > 8 && video.playbackRate != playBackRate) {
+        }
+        if (adLength > 8 && video.playbackRate != playBackRate) {
           log("Ad skipped, length:", adLength, "s");
           settings.Statistics.NetflixAdTimeSkipped += adLength;
           increaseBadge();
