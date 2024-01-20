@@ -27,7 +27,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.0.80";
+const version = "1.0.81";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -607,7 +607,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       if (video) {
         let playBackRate = 8;
         if (isEdge) playBackRate = 3;
-        if (adLength && video.paused) {
+        if ((adLength || lastAdTimeText) && video.paused) {
           video.play();
         } else if (adLength > 8 && video.playbackRate != playBackRate) {
           log("Ad skipped, length:", adLength, "s");
@@ -964,6 +964,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       filterQueued(settings.General.filterQueued ? "none" : "block");
       filterDub(settings.General.filterDub ? "none" : "block");
       addButtons();
+      let days = document.querySelectorAll(".specific-date [datetime]");
+      for (const day of days) {
+        const date = new Date(day.getAttribute("datetime"));
+        const today = new Date();
+        // if the day of the week is the same as today click on it, like if its monday click on monday
+        if (date.getDay() == today.getDay()) {
+          day.click();
+          break;
+        }
+      }
     }
   }
   // Badge functions
