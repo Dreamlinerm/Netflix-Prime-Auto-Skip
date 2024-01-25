@@ -3,8 +3,51 @@
 All notable changes to this project will be documented in this file.
 
 <div>
+          <h2>Changelog</h2>
+          <div>
             <div class="line flex">
-              <h2>1.0.81</h2>
+              <h2>1.0.82</h2>
+              <ul>
+                <li>Prime Video Ad UI change: Skip ad fixed</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.81</p>
+              <ul>
+                <li>Fixed paused AD on Netflix</li>
+                <li>Open current Weekday on Cr Release Calendar</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.80</p>
+              <ul>
+                <li>Added TMDB ratings to Prime Video</li>
+                <li>Better title filter for TMDB</li>
+                <li>On extension update no more Error Context invalidated errors</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.79</p>
+              <ul>
+                <li>Fixed Prime Video Credits skip will crash page</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.78</p>
+              <ul>
+                <li>Mute Netflix Ad skip</li>
+                <li>Add Feature to Prime: move continue watching to the top</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.77</p>
+              <ul>
+                <li>Automatically use desktop mode on firefox/chrome mobile</li>
+                <li>Various mobile improvements</li>
+              </ul>
+            </div>
+            <div class="line flex">
+              <p>1.0.74</p>
               <ul>
                 <li>Released for Firefox on Android</li>
               </ul>
@@ -444,3 +487,4 @@ All notable changes to this project will be documented in this file.
               </ul>
             </div>
           </div>
+        </div>
