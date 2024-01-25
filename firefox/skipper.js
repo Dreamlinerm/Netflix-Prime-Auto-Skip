@@ -840,8 +840,17 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   async function skipAd(video) {
     // Series grimm
     let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
+    let adTime;
     if (adTimeText) {
-      const adTime = parseInt(/\d+/.exec(adTimeText.textContent)?.[0]);
+      adTime = parseInt(/\d+/.exec(adTimeText.textContent)?.[0]);
+    } else {
+      // on uk site
+      adTimeText = document.querySelector(".atvwebplayersdk-ad-timer-text");
+      if (adTimeText) adTimeText = adTimeText?.childNodes?.[1];
+      if (adTimeText)
+        adTime = parseInt(/:\d+/.exec(adTimeText.textContent)?.[0].substring(1)) + parseInt(/\d+/.exec(adTimeText.textContent)?.[0]) * 60;
+    }
+    if (adTimeText) {
       // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
       // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
       if (!document.querySelector(".fu4rd6c.f1cw2swo") && !lastAdTimeText) {
