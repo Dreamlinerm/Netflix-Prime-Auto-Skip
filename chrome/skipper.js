@@ -839,33 +839,23 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   async function skipAd(video) {
     // Series grimm
-    let adTimeText = document.querySelector(".atvwebplayersdk-adtimeindicator-text");
-    let adTime;
+    let adTimeText = document.querySelector(".atvwebplayersdk-ad-timer-text");
     if (adTimeText) {
-      adTime = parseInt(/\d+/.exec(adTimeText.textContent)?.[0]);
-    } else {
-      // on uk site different UI
-      adTimeText = document.querySelector(".atvwebplayersdk-ad-timer-text");
-      if (adTimeText) adTimeText = adTimeText?.childNodes?.[1];
+      adTimeText = adTimeText?.childNodes?.[1];
+      let adTime;
       if (adTimeText)
         adTime = parseInt(/:\d+/.exec(adTimeText.textContent)?.[0].substring(1)) + parseInt(/\d+/.exec(adTimeText.textContent)?.[0]) * 60;
-    }
-    if (adTimeText) {
-      // adTimeText.textContent.length > 7 so it doesn't try to skip when the self ad is playing
       // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
-      if (!document.querySelector(".fu4rd6c.f1cw2swo") && !lastAdTimeText) {
-        if (typeof adTime === "number" && adTime > 1) {
-          lastAdTimeText = adTime;
-          resetLastATimeText();
-          // getting stuck loading when skipping ad longer than 100 seconds i think
-          // let skipTime = adTime <= 20 ? adTime - 1 : 20;
-          let skipTime = adTime - 1;
-          video.currentTime += skipTime;
-          log("FreeVee Ad skipped, length:", skipTime, "s");
-          settings.Statistics.AmazonAdTimeSkipped += skipTime;
-          increaseBadge();
-          // video.removeEventListener("playing", skipAd);
-        }
+      if (!document.querySelector(".fu4rd6c.f1cw2swo") && typeof adTime === "number" && adTime > 1 && lastAdTimeText != adTime) {
+        lastAdTimeText = adTime;
+        resetLastATimeText();
+        // getting stuck loading when skipping ad longer than 100 seconds i think
+        // let skipTime = adTime <= 20 ? adTime - 1 : 20;
+        let skipTime = adTime - 1;
+        video.currentTime += skipTime;
+        log("FreeVee Ad skipped, length:", skipTime, "s");
+        settings.Statistics.AmazonAdTimeSkipped += skipTime;
+        increaseBadge();
       }
     }
   }
