@@ -283,7 +283,7 @@ On Prime video it matches buttons with the Css Classes:
   
 The freevee ad text contains the ad length which is matched by 
 
-* Freevee ads: .atvwebplayersdk-adtimeindicator-text
+* Freevee ads: .atvwebplayersdk-ad-timer-text
 
 and then skipped by forwarding by the ad length -0.1 seconds which will fix a lot of issues it turns out.
 
