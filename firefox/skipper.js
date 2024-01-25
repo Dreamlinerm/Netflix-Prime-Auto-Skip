@@ -844,7 +844,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (adTimeText) {
       adTime = parseInt(/\d+/.exec(adTimeText.textContent)?.[0]);
     } else {
-      // on uk site
+      // on uk site different UI
       adTimeText = document.querySelector(".atvwebplayersdk-ad-timer-text");
       if (adTimeText) adTimeText = adTimeText?.childNodes?.[1];
       if (adTimeText)
