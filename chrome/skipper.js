@@ -406,10 +406,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
       }, 600);
     }
-    // if intro/recap time starts at 0 there is no skip button
-    if (video?.play && SetTimeToZeroOnce != video.src) {
-      if (video.currentTime > 0.2 && video.currentTime < 5) {
-        video.currentTime = 0;
+    // if original disney show skip the disney+ intro
+    let OriginalIntro = 0;
+    if (video?.play && video.duration < 5) {
+      OriginalIntro = video.duration;
+      video.currentTime = video.duration;
+      console.log("skipped Original intro");
+    }
+    // if intro/recap time starts at 0 there is no skip button so allways rewind to 0
+    if (video?.play && SetTimeToZeroOnce != video.src && video.duration > 5) {
+      if (video.currentTime > 1 + OriginalIntro && video.currentTime < 5 + OriginalIntro) {
+        console.log("reset time to", video.currentTime);
+        video.currentTime = video.currentTime - 1;
         SetTimeToZeroOnce = video.src;
       }
     }
