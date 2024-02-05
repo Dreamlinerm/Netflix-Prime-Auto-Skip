@@ -117,7 +117,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         Amazon_FreeveeTimeout();
       }, 1000);
     }
-    if (Amazon?.continuePosition) Amazon_continuePosition();
+    if (Amazon?.continuePosition) setTimeout(() => Amazon_continuePosition(), 500);
     if (settings.Video?.userAgent && isMobile) Amazon_customizeMobileView();
   }
   browser.storage.sync.get("settings", function (result) {
