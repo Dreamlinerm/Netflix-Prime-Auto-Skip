@@ -51,6 +51,9 @@ browser.runtime.onMessage.addListener(function (message, sender, sendResponse) {
       .then((data) => sendResponse(data))
       .catch((error) => console.error(error));
     return true; // Indicates that sendResponse will be called asynchronously
+  } else if (message.type === "fullscreen") {
+    console.log("Fullscreen", sender);
+    browser.windows.update(sender.tab.windowId, { state: "fullscreen" });
   } else if (message.type === "setBadgeText") {
     setBadgeText(message.content, sender.tab.id);
   } else if (message.type === "increaseBadge") {

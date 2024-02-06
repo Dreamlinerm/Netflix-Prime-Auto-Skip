@@ -54,6 +54,9 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
       .then((data) => sendResponse(data))
       .catch((error) => console.error(error));
     return true; // Indicates that sendResponse will be called asynchronously
+  } else if (message.type === "fullscreen") {
+    console.log("Fullscreen", sender);
+    chrome.windows.update(sender.tab.windowId, { state: "fullscreen" });
   } else {
     chrome.storage.local.get("Badges", function (result) {
       Badges = result.Badges;

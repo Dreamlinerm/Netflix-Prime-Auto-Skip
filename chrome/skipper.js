@@ -440,11 +440,19 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         (isHotstar && !document.evaluate("//span[contains(., 'My Space')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()) ||
         (time && lastAdTimeText != time)
       ) {
+        const videoFullscreen = document.fullscreenElement !== null;
         button.click();
         lastAdTimeText = time;
         log("Credits skipped", button);
         increaseBadge();
         resetLastATimeText();
+        if (videoFullscreen) {
+          setTimeout(function () {
+            chrome.runtime.sendMessage({
+              type: "fullscreen",
+            });
+          }, 1000);
+        }
       }
     }
   }
