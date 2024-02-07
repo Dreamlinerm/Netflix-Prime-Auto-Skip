@@ -388,7 +388,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     let video = document.querySelector("video");
     const time = video?.currentTime;
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
-    if (settings.Disney?.skipCredits) Disney_Credits();
+    Disney_Credits();
     if (settings.Disney?.watchCredits) Disney_Watch_Credits();
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
   }
@@ -403,8 +403,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
     let button;
-    if (isDisney) button = document.querySelector(".skip__button");
-    else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
+    if (isDisney) {
+      if (!document.querySelector('[data-gv2elementkey="playNext"]')) button = document.querySelector(".skip__button");
+    } else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       button.click();
       log("Recap skipped", button);
@@ -441,18 +442,30 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         (time && lastAdTimeText != time)
       ) {
         const videoFullscreen = document.fullscreenElement !== null;
-        button.click();
         lastAdTimeText = time;
-        log("Credits skipped", button);
-        increaseBadge();
-        resetLastATimeText();
-        if (videoFullscreen) {
-          setTimeout(function () {
-            browser.runtime.sendMessage({
-              type: "fullscreen",
-            });
-          }, 1000);
+        if (settings.Disney?.skipCredits) {
+          button.click();
+          log("Credits skipped", button);
+          increaseBadge();
+          resetLastATimeText();
         }
+        setTimeout(function () {
+          if (videoFullscreen && document.fullscreenElement == null) {
+            browser.runtime.sendMessage({ type: "fullscreen" });
+            function resetFullscreen() {
+              browser.runtime.sendMessage({ type: "exitFullscreen" });
+              console.log("exitFullscreen");
+              removeEventListener("fullscreenchange", resetFullscreen);
+            }
+            addEventListener("fullscreenchange", resetFullscreen);
+            document.onkeydown = function (evt) {
+              if ("key" in evt && (evt.key === "Escape" || evt.key === "Esc")) {
+                browser.runtime.sendMessage({ type: "exitFullscreen" });
+              }
+            };
+            log("fullscreen");
+          }
+        }, 1000);
       }
     }
   }

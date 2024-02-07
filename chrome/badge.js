@@ -57,6 +57,9 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   } else if (message.type === "fullscreen") {
     console.log("Fullscreen", sender);
     chrome.windows.update(sender.tab.windowId, { state: "fullscreen" });
+  } else if (message.type === "exitFullscreen") {
+    console.log("exit Fullscreen", sender);
+    chrome.windows.update(sender.tab.windowId, { state: "normal" });
   } else {
     chrome.storage.local.get("Badges", function (result) {
       Badges = result.Badges;

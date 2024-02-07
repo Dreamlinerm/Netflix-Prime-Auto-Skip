@@ -54,6 +54,9 @@ browser.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   } else if (message.type === "fullscreen") {
     console.log("Fullscreen", sender);
     browser.windows.update(sender.tab.windowId, { state: "fullscreen" });
+  } else if (message.type === "exitFullscreen") {
+    console.log("exit Fullscreen", sender);
+    browser.windows.update(sender.tab.windowId, { state: "normal" });
   } else if (message.type === "setBadgeText") {
     setBadgeText(message.content, sender.tab.id);
   } else if (message.type === "increaseBadge") {
