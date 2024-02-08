@@ -62,7 +62,6 @@ div {
   user-select: none; /* Standard syntax */
 }
 .button:hover {
-  /* background-color: #d0d0d7; */
   opacity: 0.8;
 }
 
@@ -115,7 +114,6 @@ p {
   padding-right: 10px;
 }
 .Logo {
-  /* width: 100px; */
   height: 3em;
 }
 .title {
@@ -199,8 +197,6 @@ label {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  /* -webkit-transition: 0.4s;
-  transition: 0.4s; */
 }
 
 input:checked + .slider {
@@ -210,9 +206,6 @@ input:checked + .slider {
 input:checked + .slider:hover {
   background-color: #006303;
 }
-/* input:focus + .slider {
-  box-shadow: 0 0 1px #00a205;
-} */
 
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
@@ -228,11 +221,6 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-/* Firefox */
-/* html {
-  scrollbar-color: #212121 grey;
-  scrollbar-width: thin;
-} */
 /* WebKit and Chromiums */
 ::-webkit-scrollbar {
   width: 8px;
@@ -247,15 +235,8 @@ input:checked + .slider:before {
 
 /* The side navigation menu */
 .sidenav {
-  height: 100vh;
+  height: 100%;
   background-color: #111;
-  /* margin-right: 5px;
-  position: fixed; 
-  z-index: 1; 
-  top: 0; 
-  left: 0; */
-  /* border-radius: 15px; */
-  /* margin: 15px; */
   padding: 0 10px;
   gap: 20px;
   text-align: center;
@@ -322,7 +303,7 @@ hr {
   }
 }
 
-@media only screen and (max-height: 725px), only screen and (max-width: 1000px) {
+@media only screen and (max-height: 800px), only screen and (max-width: 1000px) {
   .MenuButtons {
     flex-direction: row;
     justify-content: center;
@@ -333,32 +314,39 @@ hr {
   }
   .blueButtons {
     margin: 0 5px !important;
+    font-size: 1em;
   }
   body {
     flex-direction: column;
   }
   .page {
     padding: 0px;
+    margin: 0 15px 0 15px;
+    width: calc(100% - 30px);
   }
   .IconBox {
     padding: 10px 0px 0px 0px;
     flex-direction: row;
-  }
-  .page {
-    margin: 0 15px 0 15px;
-    width: calc(100% - 30px);
   }
   .icon {
     margin: 0 5px !important;
   }
   .sidenav {
     height: auto;
+    display: block;
   }
 }
-@media only screen and (max-width: 600px) {
-  .menuButton,
-  .blueButtons {
+@media only screen and (max-width: 800px), only screen and (max-height: 600px) {
+  /* .menuButton {
     font-size: 1em;
+  } */
+  .menuButton i-18n,
+  .menuButton div,
+  .IconBox {
+    display: none;
+  }
+  .MenuButtons {
+    padding-top: 5px;
   }
 }
 .icon {
@@ -373,7 +361,3 @@ hr {
   align-items: center;
   cursor: pointer;
 }
-
-/* .icon path {
-  fill: white;
-} */

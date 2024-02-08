@@ -29,7 +29,7 @@ function localizeHtmlPage() {
   // https://stackoverflow.com/questions/25467009/internationalization-of-html-pages-for-my-google-chrome-extension
   // innerHTML triggers warnings so changed functions
   // i18n tag
-  let translations = document.getElementsByTagName("i18n");
+  let translations = document.getElementsByTagName("i-18n");
   for (let trans of translations) {
     let Translated = browser.i18n.getMessage.apply(null, trans.textContent.split(";"));
     trans.textContent = Translated;
@@ -42,6 +42,10 @@ function localizeHtmlPage() {
   }
 }
 localizeHtmlPage();
+// firefox inline settings change minheight;
+if (window.name == "addon-inline-options") {
+  document.querySelector("body").style.minHeight = "700px";
+}
 
 // remove everything before # in window.location
 let url = window.location.href;
