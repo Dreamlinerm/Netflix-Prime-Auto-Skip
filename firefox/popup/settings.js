@@ -39,8 +39,6 @@ function localizeHtmlPage() {
   for (let trans of translations) {
     let Translated = browser.i18n.getMessage.apply(null, trans.textContent.split(";"));
     trans.textContent = Translated;
-    // remove i18n attribute
-    trans.removeAttribute("i18n");
   }
 }
 localizeHtmlPage();
