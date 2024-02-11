@@ -35,7 +35,7 @@ function localizeHtmlPage() {
     trans.textContent = Translated;
   }
   // i18n attribute
-  translations = document.querySelectorAll("[i18n]");
+  translations = document.querySelectorAll("[data-i18n]");
   for (let trans of translations) {
     let Translated = chrome.i18n.getMessage.apply(null, trans.textContent.split(";"));
     trans.textContent = Translated;

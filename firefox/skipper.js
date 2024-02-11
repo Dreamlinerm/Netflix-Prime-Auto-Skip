@@ -420,7 +420,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       video.currentTime = video.duration;
       console.log("skipped Original intro");
     }
-    // if intro/recap time starts at 0 there is no skip button so allways rewind to 0
+    // if intro/recap time starts at 0 there is no skip button so always rewind to 0
     if (video?.play && SetTimeToZeroOnce != video.src && video.duration > 5 && !OriginalIntro) {
       if (video.currentTime > 0.2 && video.currentTime < 5) {
         console.log("reset time to", video.currentTime);
@@ -585,7 +585,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
     if (NSettings?.speedSlider) Netflix_SpeedSlider(video);
   }
-  // to parse html aumlaut symbols like &auml; to ä
+  // to parse html umlaut symbols like &auml; to ä
   function decodeHtmlEntities(str) {
     return new DOMParser().parseFromString("<!doctype html><body>" + str, "text/html").body.textContent;
   }
@@ -1003,7 +1003,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       for (const day of days) {
         const date = new Date(day.getAttribute("datetime"));
         const today = new Date();
-        // if the day of the week is the same as today click on it, like if its monday click on monday
+        // if the day of the week is the same as today click on it, like if its Monday click on Monday
         if (date.getDay() == today.getDay()) {
           day.click();
           break;
