@@ -343,7 +343,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }
   }
-  // eslint-disable-next-line no-unused-vars
+
   async function setRatingOnCard(card, data, title) {
     let div = document.createElement("div");
     // right: 1.5vw;
