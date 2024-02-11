@@ -12,1285 +12,1260 @@
   -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="settings.css" />
-    <!--  import "https://fonts.googleapis.com/css?family=Lato"; -->
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" />
-    <script src="settings.js" defer></script>
-    <title i18n>settingsTitle</title>
-    <link rel="icon" type="image/x-icon" href="/icons/NetflixAmazon Auto-Skip.svg" />
-  </head>
-  <body class="flex" style="height: 100vh">
-    <div class="sidenav flex flex-col">
-      <div class="flex-center flex-col IconBox">
-        <div class="flex-center flex-row">
-          <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" alt="Logo" />
-          <div class="flex-center flex-col">
-            <h2 class="title" i18n>pageTitle</h2>
-            <p style="font-size: 1em">v.1.0.87</p>
-          </div>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="settings.css">
+  <!--  import "https://fonts.googleapis.com/css?family=Lato"; -->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script src="settings.js" defer></script>
+  <title i18n>settingsTitle</title>
+  <link rel="icon" type="image/x-icon" href="/icons/NetflixAmazon Auto-Skip.svg">
+</head>
+
+<body class="flex" style="height: 100vh">
+  <div class="sidenav flex flex-col">
+    <div class="flex-center flex-col IconBox">
+      <div class="flex-center flex-row">
+        <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" alt="Logo">
+        <div class="flex-center flex-col">
+          <h2 class="title" i18n>pageTitle</h2>
+          <p style="font-size: 1em">v.1.0.87</p>
         </div>
-        <a
-          target="_blank"
-          class="flex-center flex-col"
-          style="text-align: center; text-decoration: none"
-          href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"
-        >
-          <p style="font-size: 1em" i18n>rateNow</p>
-          <img src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010" alt="rating" />
-        </a>
       </div>
-      <div class="flex flex-col MenuButtons" style="flex-wrap: wrap">
-        <a id="MenuVideo" href="#Video" class="menuButton flex" style="background-color: #e60010">
-          <svg id="MenuVideo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+      <a target="_blank" class="flex-center flex-col" style="text-align: center; text-decoration: none"
+        href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
+        <p style="font-size: 1em" i18n>rateNow</p>
+        <img src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010" alt="rating">
+      </a>
+    </div>
+    <div class="flex flex-col MenuButtons" style="flex-wrap: wrap">
+      <a id="MenuVideo" href="#Video" class="menuButton flex" style="background-color: #e60010">
+        <svg id="MenuVideo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+          <path id="MenuVideo"
+            d="M18,11H14.82C14.4,9.84 13.3,9 12,9C10.7,9 9.6,9.84 9.18,11H6C5.67,11 4,10.9 4,9V8C4,6.17 5.54,6 6,6H16.18C16.6,7.16 17.7,8 19,8A3,3 0 0,0 22,5A3,3 0 0,0 19,2C17.7,2 16.6,2.84 16.18,4H6C4.39,4 2,5.06 2,8V9C2,11.94 4.39,13 6,13H9.18C9.6,14.16 10.7,15 12,15C13.3,15 14.4,14.16 14.82,13H18C18.33,13 20,13.1 20,15V16C20,17.83 18.46,18 18,18H7.82C7.4,16.84 6.3,16 5,16A3,3 0 0,0 2,19A3,3 0 0,0 5,22C6.3,22 7.4,21.16 7.82,20H18C19.61,20 22,18.93 22,16V15C22,12.07 19.61,11 18,11M19,4A1,1 0 0,1 20,5A1,1 0 0,1 19,6A1,1 0 0,1 18,5A1,1 0 0,1 19,4M5,20A1,1 0 0,1 4,19A1,1 0 0,1 5,18A1,1 0 0,1 6,19A1,1 0 0,1 5,20Z" />
+        </svg>
+        <i-18n id="MenuVideo">sharedSettings</i-18n>
+      </a>
+      <a id="MenuAmazon" href="#Amazon" class="menuButton flex">
+        <svg id="MenuAmazon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+          <path id="MenuAmazon"
+            d="M13.2,11H10V7H13.2A2,2 0 0,1 15.2,9A2,2 0 0,1 13.2,11M13,3H6V21H10V15H13A6,6 0 0,0 19,9C19,5.68 16.31,3 13,3Z" />
+        </svg>
+        <div id="MenuAmazon">Prime Video</div>
+      </a>
+      <a id="MenuNetflix" href="#Netflix" class="menuButton flex">
+        <svg id="MenuNetflix" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+          <path id="MenuNetflix"
+            d="M6.5,2H10.5L13.44,10.83L13.5,2H17.5V22C16.25,21.78 14.87,21.64 13.41,21.58L10.5,13L10.43,21.59C9.03,21.65 7.7,21.79 6.5,22V2Z" />
+        </svg>
+        <div id="MenuNetflix">Netflix</div>
+      </a>
+      <a id="MenuDisney" href="#Disney" class="menuButton flex">
+        <svg id="MenuDisney" preserveAspectRatio="xMidYMid meet" viewBox="0 0 700 700" width="700pt"
+          xmlns="http://www.w3.org/2000/svg" class="icon">
+          <!-- fill="#1d1fff" -->
+          <path id="MenuDisney" transform="matrix(.1 0 0 -.1 0 700)"
+            d="m1457 6123c-1-1-52-4-112-7-61-4-123-8-140-11-16-2-55-7-85-10s-66-7-80-10c-14-2-56-9-95-15-120-19-295-59-410-94-60-19-143-44-184-56-65-19-82-29-130-79-56-57-149-188-193-271-28-55-30-141-4-186 45-76 192-120 373-112 142 7 224 30 247 69 16 28 16 32 2 54-9 14-23 25-31 25-9 0-23 4-33 10-18 10-167 54-220 65-77 16-5 60 161 100 56 13 119 26 141 30 21 3 41 7 45 9 3 2 33 7 66 11s74 8 90 10c201 25 714 25 880 0 30-4 94-11 190-21 28-3 75-9 105-14s71-12 90-15c46-7 138-24 170-30 14-3 39-8 55-11 213-38 604-144 865-233 137-46 408-152 540-211 135-59 519-250 620-308 47-26 105-60 130-74 158-89 518-331 650-435 30-25 62-50 70-56 132-105 202-169 360-327 380-380 604-777 648-1150 8-72 8-229-1-307-17-140-84-317-172-455-84-129-266-293-450-405-83-50-417-196-472-206-10-2-51-14-92-26-41-13-81-24-90-27-104-25-203-46-272-58-123-22-138-24-204-31-33-3-80-9-105-13-63-9-467-8-575 1-129 12-144 13-205 22-30 4-66 9-80 10-69 8-236 38-242 43-10 10-27 638-33 1207l-3 361 78-2c111-2 398-15 440-19 19-2 67-6 105-10 39-3 81-8 95-10s49-7 79-10c30-4 63-9 75-11s39-6 62-9c35-4 150-25 209-39 242-54 358-100 433-173 41-39 44-45 39-79-9-55-65-106-176-160-162-79-191-110-142-151 31-27 163-76 249-93 140-28 284 29 414 163 91 94 138 207 143 344 4 104-11 163-72 277-24 45-170 187-238 231-152 99-392 195-579 231-12 2-55 11-96 19s-92 17-114 20c-21 2-46 7-55 9-9 3-101 17-206 32-153 21-241 27-449 30-142 2-260 5-262 7-1 1-5 65-8 142-6 137-13 234-21 305-2 19-7 62-10 95-9 91-35 236-56 315-25 92-166 292-224 316-67 28-107-17-154-173-28-95-65-285-76-388-3-27-7-66-10-85-14-109-22-191-31-330-4-58-8-121-9-140-2-19-3-54-4-76l-1-42-67-13c-38-7-70-14-73-14-3-1-23-5-45-9-162-31-516-137-705-211-222-87-497-239-586-324-112-106-163-212-165-338-2-91 37-198 96-265 11-13 31-39 45-58 148-213 490-541 780-746 182-129 419-271 601-358 75-37 75-37 77-79 2-23 5-49 7-57s7-35 10-59c11-76 53-230 78-284 27-58 81-118 130-144 24-14 54-18 122-18 80 1 97 4 155 33 36 17 72 37 81 44 33 27 61 144 63 266 0 27 18 28 96 7 30-8 80-19 110-25s66-12 80-15c32-7 200-32 265-40 28-4 60-8 72-10 59-9 278-19 438-19 165 0 391 10 404 19 3 1 35 6 71 9 54 6 275 44 345 60 426 98 843 286 1120 504 106 84 262 247 337 353 151 212 265 507 294 760 3 30 9 77 13 104 17 117 3 283-36 449-132 558-540 1144-1154 1656-118 99-252 201-371 283-167 115-201 138-333 218-358 220-679 384-975 499-30 12-68 28-85 35-91 41-461 167-674 229-328 97-756 187-1051 221-25 3-61 7-80 10-42 5-128 12-265 21-90 6-434 12-438 7zm1199-3632c-4-207-9-403-11-436s-6-109-9-170c-12-207-25-387-29-391-1-1-49 17-107 40-382 155-699 343-975 580-89 76-245 232-272 271-42 60-33 141 20 188 56 50 328 144 532 183 11 2 31 6 45 9 56 12 175 33 225 39 11 2 38 6 60 10s56 8 75 10c57 6 153 17 180 21 14 2 66 7 115 10 50 4 91 8 92 9 1 0 16 2 33 2l32 2z" />
+        </svg>
+        <div id="MenuDisney">Disney+</div>
+      </a>
+      <a id="MenuCrunchyroll" href="#Crunchyroll" class="menuButton flex">
+        <svg id="MenuCrunchyroll" class="icon" viewBox="1.8 1.581 247.263 220" xmlns="http://www.w3.org/2000/svg">
+          <g fill="white">
+            <path id="MenuCrunchyroll"
+              d="m115.377 209.8c-3.54-.33-12.852-1.943-16.306-2.825-29.863-7.625-55.154-28.074-68.537-55.418-7.337-14.99-10.395-28.396-10.383-45.52.012-17.144 3.117-30.818 10.335-45.52 5.406-11.01 11.625-19.636 20.453-28.37 16.513-16.336 37.43-26.45 61.124-29.552 7.746-1.014 24.143-.684 31.377.631 15.045 2.737 28.553 8.112 40.658 16.178 25.149 16.76 41.461 42.39 45.714 71.828.91 6.303 1.437 19.42.824 20.515-.335.598-.508-.028-.727-2.62-1.086-12.843-6.642-28.373-14.307-39.991-23.298-35.313-66.767-50.295-107.013-36.883-31.064 10.352-54.41 36.615-60.818 68.416-3.169 15.725-2.218 31.139 2.86 46.355 8.953 26.836 30.382 48.274 57.558 57.584 6.41 2.196 14.64 4.026 20.068 4.461 6.5.522 4.861 1.018-3.157.956-4.376-.033-8.75-.135-9.723-.225z" />
+            <path id="MenuCrunchyroll"
+              d="m137.695 196.826c-33.594-2.447-61.427-27.495-67.236-60.507-1.057-6.008-1.261-17.24-.413-22.769 5.036-32.827 30.288-57.733 63.23-62.362 6.676-.938 18.574-.61 24.969.69 5.562 1.13 11.728 3.138 16.572 5.394l3.757 1.75-3.536 1.669c-12.758 6.025-20.633 20.118-18.784 33.619 1.851 13.52 11.2 24.13 24.622 27.945 4.832 1.374 12.22 1.373 17.054 0 6.25-1.777 11.152-4.682 15.613-9.254 1.506-1.544 2.835-2.648 2.954-2.455.119.194.463 2.322.765 4.73.745 5.939.308 17.238-.886 22.88-3.803 17.967-13.386 33.049-28.08 44.192-13.907 10.546-32.305 15.81-50.601 14.478z" />
+          </g>
+        </svg>
+        <div id="MenuCrunchyroll">Crunchyroll</div>
+      </a>
+      <a id="MenuOther" href="#Other" class="menuButton flex">
+        <svg id="MenuOther" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+          <path id="MenuOther"
+            d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z" />
+        </svg>
+        <i-18n id="MenuOther">backup</i-18n>
+      </a>
+      <a id="MenuStatistics" href="#Statistics" class="menuButton flex">
+        <svg id="MenuStatistics" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+          <path id="MenuStatistics" d="M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z" />
+        </svg>
+        <i-18n id="MenuStatistics">statistics</i-18n>
+      </a>
+      <a id="MenuChangelog" href="#Changelog" class="menuButton flex">
+        <svg id="MenuChangelog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+          <path id="MenuChangelog"
+            d="M7,5H21V7H7V5M7,13V11H21V13H7M4,4.5A1.5,1.5 0 0,1 5.5,6A1.5,1.5 0 0,1 4,7.5A1.5,1.5 0 0,1 2.5,6A1.5,1.5 0 0,1 4,4.5M4,10.5A1.5,1.5 0 0,1 5.5,12A1.5,1.5 0 0,1 4,13.5A1.5,1.5 0 0,1 2.5,12A1.5,1.5 0 0,1 4,10.5M7,19V17H21V19H7M4,16.5A1.5,1.5 0 0,1 5.5,18A1.5,1.5 0 0,1 4,19.5A1.5,1.5 0 0,1 2.5,18A1.5,1.5 0 0,1 4,16.5Z" />
+        </svg>
+        <i-18n id="MenuChangelog">changelog</i-18n>
+      </a>
+    </div>
+    <div style="margin-top: auto">
+      <div class="flex flex-col MenuButtons" style="flex-wrap: wrap; margin-bottom: 10px">
+        <a class="button flex flex-center blueButtons" style="margin: 5px 15px"
+          href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
             <path
-              id="MenuVideo"
-              d="M18,11H14.82C14.4,9.84 13.3,9 12,9C10.7,9 9.6,9.84 9.18,11H6C5.67,11 4,10.9 4,9V8C4,6.17 5.54,6 6,6H16.18C16.6,7.16 17.7,8 19,8A3,3 0 0,0 22,5A3,3 0 0,0 19,2C17.7,2 16.6,2.84 16.18,4H6C4.39,4 2,5.06 2,8V9C2,11.94 4.39,13 6,13H9.18C9.6,14.16 10.7,15 12,15C13.3,15 14.4,14.16 14.82,13H18C18.33,13 20,13.1 20,15V16C20,17.83 18.46,18 18,18H7.82C7.4,16.84 6.3,16 5,16A3,3 0 0,0 2,19A3,3 0 0,0 5,22C6.3,22 7.4,21.16 7.82,20H18C19.61,20 22,18.93 22,16V15C22,12.07 19.61,11 18,11M19,4A1,1 0 0,1 20,5A1,1 0 0,1 19,6A1,1 0 0,1 18,5A1,1 0 0,1 19,4M5,20A1,1 0 0,1 4,19A1,1 0 0,1 5,18A1,1 0 0,1 6,19A1,1 0 0,1 5,20Z"
-            />
+              d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
           </svg>
-          <i-18n id="MenuVideo">sharedSettings</i-18n>
+          Github
         </a>
-        <a id="MenuAmazon" href="#Amazon" class="menuButton flex">
-          <svg id="MenuAmazon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
-            <path id="MenuAmazon" d="M13.2,11H10V7H13.2A2,2 0 0,1 15.2,9A2,2 0 0,1 13.2,11M13,3H6V21H10V15H13A6,6 0 0,0 19,9C19,5.68 16.31,3 13,3Z" />
-          </svg>
-          <div id="MenuAmazon">Prime Video</div>
-        </a>
-        <a id="MenuNetflix" href="#Netflix" class="menuButton flex">
-          <svg id="MenuNetflix" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
+        <a class="button flex flex-center blueButtons" style="margin: 5px 15px" href="https://paypal.me/MarvinKrebber"
+          target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
             <path
-              id="MenuNetflix"
-              d="M6.5,2H10.5L13.44,10.83L13.5,2H17.5V22C16.25,21.78 14.87,21.64 13.41,21.58L10.5,13L10.43,21.59C9.03,21.65 7.7,21.79 6.5,22V2Z"
-            />
+              d="M9.06,1.93C7.17,1.92 5.33,3.74 6.17,6H3A2,2 0 0,0 1,8V10A1,1 0 0,0 2,11H11V8H13V11H22A1,1 0 0,0 23,10V8A2,2 0 0,0 21,6H17.83C19,2.73 14.6,0.42 12.57,3.24L12,4L11.43,3.22C10.8,2.33 9.93,1.94 9.06,1.93M9,4C9.89,4 10.34,5.08 9.71,5.71C9.08,6.34 8,5.89 8,5A1,1 0 0,1 9,4M15,4C15.89,4 16.34,5.08 15.71,5.71C15.08,6.34 14,5.89 14,5A1,1 0 0,1 15,4M2,12V20A2,2 0 0,0 4,22H20A2,2 0 0,0 22,20V12H13V20H11V12H2Z" />
           </svg>
-          <div id="MenuNetflix">Netflix</div>
+          <i-18n>donate</i-18n>
         </a>
-        <a id="MenuDisney" href="#Disney" class="menuButton flex">
-          <svg
-            id="MenuDisney"
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 700 700"
-            width="700pt"
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon"
-          >
-            <!-- fill="#1d1fff" -->
-            <path
-              id="MenuDisney"
-              transform="matrix(.1 0 0 -.1 0 700)"
-              d="m1457 6123c-1-1-52-4-112-7-61-4-123-8-140-11-16-2-55-7-85-10s-66-7-80-10c-14-2-56-9-95-15-120-19-295-59-410-94-60-19-143-44-184-56-65-19-82-29-130-79-56-57-149-188-193-271-28-55-30-141-4-186 45-76 192-120 373-112 142 7 224 30 247 69 16 28 16 32 2 54-9 14-23 25-31 25-9 0-23 4-33 10-18 10-167 54-220 65-77 16-5 60 161 100 56 13 119 26 141 30 21 3 41 7 45 9 3 2 33 7 66 11s74 8 90 10c201 25 714 25 880 0 30-4 94-11 190-21 28-3 75-9 105-14s71-12 90-15c46-7 138-24 170-30 14-3 39-8 55-11 213-38 604-144 865-233 137-46 408-152 540-211 135-59 519-250 620-308 47-26 105-60 130-74 158-89 518-331 650-435 30-25 62-50 70-56 132-105 202-169 360-327 380-380 604-777 648-1150 8-72 8-229-1-307-17-140-84-317-172-455-84-129-266-293-450-405-83-50-417-196-472-206-10-2-51-14-92-26-41-13-81-24-90-27-104-25-203-46-272-58-123-22-138-24-204-31-33-3-80-9-105-13-63-9-467-8-575 1-129 12-144 13-205 22-30 4-66 9-80 10-69 8-236 38-242 43-10 10-27 638-33 1207l-3 361 78-2c111-2 398-15 440-19 19-2 67-6 105-10 39-3 81-8 95-10s49-7 79-10c30-4 63-9 75-11s39-6 62-9c35-4 150-25 209-39 242-54 358-100 433-173 41-39 44-45 39-79-9-55-65-106-176-160-162-79-191-110-142-151 31-27 163-76 249-93 140-28 284 29 414 163 91 94 138 207 143 344 4 104-11 163-72 277-24 45-170 187-238 231-152 99-392 195-579 231-12 2-55 11-96 19s-92 17-114 20c-21 2-46 7-55 9-9 3-101 17-206 32-153 21-241 27-449 30-142 2-260 5-262 7-1 1-5 65-8 142-6 137-13 234-21 305-2 19-7 62-10 95-9 91-35 236-56 315-25 92-166 292-224 316-67 28-107-17-154-173-28-95-65-285-76-388-3-27-7-66-10-85-14-109-22-191-31-330-4-58-8-121-9-140-2-19-3-54-4-76l-1-42-67-13c-38-7-70-14-73-14-3-1-23-5-45-9-162-31-516-137-705-211-222-87-497-239-586-324-112-106-163-212-165-338-2-91 37-198 96-265 11-13 31-39 45-58 148-213 490-541 780-746 182-129 419-271 601-358 75-37 75-37 77-79 2-23 5-49 7-57s7-35 10-59c11-76 53-230 78-284 27-58 81-118 130-144 24-14 54-18 122-18 80 1 97 4 155 33 36 17 72 37 81 44 33 27 61 144 63 266 0 27 18 28 96 7 30-8 80-19 110-25s66-12 80-15c32-7 200-32 265-40 28-4 60-8 72-10 59-9 278-19 438-19 165 0 391 10 404 19 3 1 35 6 71 9 54 6 275 44 345 60 426 98 843 286 1120 504 106 84 262 247 337 353 151 212 265 507 294 760 3 30 9 77 13 104 17 117 3 283-36 449-132 558-540 1144-1154 1656-118 99-252 201-371 283-167 115-201 138-333 218-358 220-679 384-975 499-30 12-68 28-85 35-91 41-461 167-674 229-328 97-756 187-1051 221-25 3-61 7-80 10-42 5-128 12-265 21-90 6-434 12-438 7zm1199-3632c-4-207-9-403-11-436s-6-109-9-170c-12-207-25-387-29-391-1-1-49 17-107 40-382 155-699 343-975 580-89 76-245 232-272 271-42 60-33 141 20 188 56 50 328 144 532 183 11 2 31 6 45 9 56 12 175 33 225 39 11 2 38 6 60 10s56 8 75 10c57 6 153 17 180 21 14 2 66 7 115 10 50 4 91 8 92 9 1 0 16 2 33 2l32 2z"
-            />
-          </svg>
-          <div id="MenuDisney">Disney+</div>
-        </a>
-        <a id="MenuCrunchyroll" href="#Crunchyroll" class="menuButton flex">
-          <svg id="MenuCrunchyroll" class="icon" viewBox="1.8 1.581 247.263 220" xmlns="http://www.w3.org/2000/svg">
-            <g fill="white">
-              <path
-                id="MenuCrunchyroll"
-                d="m115.377 209.8c-3.54-.33-12.852-1.943-16.306-2.825-29.863-7.625-55.154-28.074-68.537-55.418-7.337-14.99-10.395-28.396-10.383-45.52.012-17.144 3.117-30.818 10.335-45.52 5.406-11.01 11.625-19.636 20.453-28.37 16.513-16.336 37.43-26.45 61.124-29.552 7.746-1.014 24.143-.684 31.377.631 15.045 2.737 28.553 8.112 40.658 16.178 25.149 16.76 41.461 42.39 45.714 71.828.91 6.303 1.437 19.42.824 20.515-.335.598-.508-.028-.727-2.62-1.086-12.843-6.642-28.373-14.307-39.991-23.298-35.313-66.767-50.295-107.013-36.883-31.064 10.352-54.41 36.615-60.818 68.416-3.169 15.725-2.218 31.139 2.86 46.355 8.953 26.836 30.382 48.274 57.558 57.584 6.41 2.196 14.64 4.026 20.068 4.461 6.5.522 4.861 1.018-3.157.956-4.376-.033-8.75-.135-9.723-.225z"
-              />
-              <path
-                id="MenuCrunchyroll"
-                d="m137.695 196.826c-33.594-2.447-61.427-27.495-67.236-60.507-1.057-6.008-1.261-17.24-.413-22.769 5.036-32.827 30.288-57.733 63.23-62.362 6.676-.938 18.574-.61 24.969.69 5.562 1.13 11.728 3.138 16.572 5.394l3.757 1.75-3.536 1.669c-12.758 6.025-20.633 20.118-18.784 33.619 1.851 13.52 11.2 24.13 24.622 27.945 4.832 1.374 12.22 1.373 17.054 0 6.25-1.777 11.152-4.682 15.613-9.254 1.506-1.544 2.835-2.648 2.954-2.455.119.194.463 2.322.765 4.73.745 5.939.308 17.238-.886 22.88-3.803 17.967-13.386 33.049-28.08 44.192-13.907 10.546-32.305 15.81-50.601 14.478z"
-              />
-            </g>
-          </svg>
-          <div id="MenuCrunchyroll">Crunchyroll</div>
-        </a>
-        <a id="MenuOther" href="#Other" class="menuButton flex">
-          <svg id="MenuOther" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
-            <path
-              id="MenuOther"
-              d="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
-            />
-          </svg>
-          <i-18n id="MenuOther">backup</i-18n>
-        </a>
-        <a id="MenuStatistics" href="#Statistics" class="menuButton flex">
-          <svg id="MenuStatistics" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
-            <path id="MenuStatistics" d="M22,21H2V3H4V19H6V10H10V19H12V6H16V19H18V14H22V21Z" />
-          </svg>
-          <i-18n id="MenuStatistics">statistics</i-18n>
-        </a>
-        <a id="MenuChangelog" href="#Changelog" class="menuButton flex">
-          <svg id="MenuChangelog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
-            <path
-              id="MenuChangelog"
-              d="M7,5H21V7H7V5M7,13V11H21V13H7M4,4.5A1.5,1.5 0 0,1 5.5,6A1.5,1.5 0 0,1 4,7.5A1.5,1.5 0 0,1 2.5,6A1.5,1.5 0 0,1 4,4.5M4,10.5A1.5,1.5 0 0,1 5.5,12A1.5,1.5 0 0,1 4,13.5A1.5,1.5 0 0,1 2.5,12A1.5,1.5 0 0,1 4,10.5M7,19V17H21V19H7M4,16.5A1.5,1.5 0 0,1 5.5,18A1.5,1.5 0 0,1 4,19.5A1.5,1.5 0 0,1 2.5,18A1.5,1.5 0 0,1 4,16.5Z"
-            />
-          </svg>
-          <i-18n id="MenuChangelog">changelog</i-18n>
-        </a>
-      </div>
-      <div style="margin-top: auto">
-        <div class="flex flex-col MenuButtons" style="flex-wrap: wrap; margin-bottom: 10px">
-          <a
-            class="button flex flex-center blueButtons"
-            style="margin: 5px 15px"
-            href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip"
-            target="_blank"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
-              <path
-                d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"
-              />
-            </svg>
-            Github
-          </a>
-          <a class="button flex flex-center blueButtons" style="margin: 5px 15px" href="https://paypal.me/MarvinKrebber" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
-              <path
-                d="M9.06,1.93C7.17,1.92 5.33,3.74 6.17,6H3A2,2 0 0,0 1,8V10A1,1 0 0,0 2,11H11V8H13V11H22A1,1 0 0,0 23,10V8A2,2 0 0,0 21,6H17.83C19,2.73 14.6,0.42 12.57,3.24L12,4L11.43,3.22C10.8,2.33 9.93,1.94 9.06,1.93M9,4C9.89,4 10.34,5.08 9.71,5.71C9.08,6.34 8,5.89 8,5A1,1 0 0,1 9,4M15,4C15.89,4 16.34,5.08 15.71,5.71C15.08,6.34 14,5.89 14,5A1,1 0 0,1 15,4M2,12V20A2,2 0 0,0 4,22H20A2,2 0 0,0 22,20V12H13V20H11V12H2Z"
-              />
-            </svg>
-            <i-18n>donate</i-18n>
-          </a>
-        </div>
       </div>
     </div>
-    <div class="content flex flex-col" style="overflow-y: auto; width: 100%">
-      <div class="page">
-        <div id="DefaultSettings" class="hidden">
-          <div class="line flex">
-            <h1 i18n>defaultPageTitle</h1>
-            <label class="switch">
-              <input type="checkbox" id="DefaultSkips" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>defaultPageDescription</p>
-          <hr />
-          <div class="line flex">
-            <p i18n>PaidContentSwitch</p>
-            <label class="switch">
-              <input type="checkbox" id="AmazonFilterPaid" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>DefaultPaidContentDescription</p>
-          <hr />
-          <div class="line flex">
-            <p i18n>EpilepsySwitch</p>
-            <label class="switch">
-              <input type="checkbox" id="VideoEpilepsy" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>EpilepsySwitchDescription</p>
-          <h1 i18n>conflictingTitle</h1>
-          <hr />
-          <div class="line flex">
-            <p i18n>WatchCreditsSwitch</p>
-            <label class="switch">
-              <input type="checkbox" id="VideoWatchCredits" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>WatchCreditsSwitchDescription</p>
+  </div>
+  <div class="content flex flex-col" style="overflow-y: auto; width: 100%">
+    <div class="page">
+      <div id="DefaultSettings" class="hidden">
+        <div class="line flex">
+          <h1 i18n>defaultPageTitle</h1>
+          <label class="switch">
+            <input type="checkbox" id="DefaultSkips">
+            <span class="slider round"></span>
+          </label>
         </div>
-        <div class="categoryVideo" id="VideoSettings" style="background-color: unset">
-          <div class="flex flex-between" style="padding: 5px 5px">
-            <h2 i18n>SharedPageTitle</h2>
-            <label class="switch">
-              <input type="checkbox" id="VideoSkips" />
+        <p class="description" i18n>defaultPageDescription</p>
+        <hr>
+        <div class="line flex">
+          <p i18n>PaidContentSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="AmazonFilterPaid">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>DefaultPaidContentDescription</p>
+        <hr>
+        <div class="line flex">
+          <p i18n>EpilepsySwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="VideoEpilepsy">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>EpilepsySwitchDescription</p>
+        <h1 i18n>conflictingTitle</h1>
+        <hr>
+        <div class="line flex">
+          <p i18n>WatchCreditsSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="VideoWatchCredits">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>WatchCreditsSwitchDescription</p>
+      </div>
+      <div class="categoryVideo" id="VideoSettings" style="background-color: unset">
+        <div class="flex flex-between" style="padding: 5px 5px">
+          <h2 i18n>SharedPageTitle</h2>
+          <label class="switch">
+            <input type="checkbox" id="VideoSkips">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>SharedPageDescription</p>
+        <div class="categoryMobile">
+          <hr>
+          <div class="line flex">
+            <p i18n>UserAgentSwitch</p>
+            <label class="switch" style="margin-left: 5px">
+              <input type="checkbox" id="VideoUserAgent">
               <span class="slider round"></span>
             </label>
           </div>
-          <p class="description" i18n>SharedPageDescription</p>
-          <div class="categoryMobile">
-            <hr />
-            <div class="line flex">
-              <p i18n>UserAgentSwitch</p>
-              <label class="switch" style="margin-left: 5px">
-                <input type="checkbox" id="VideoUserAgent" />
+          <p class="description" i18n>UserAgentSwitchDescription</p>
+        </div>
+        <hr>
+        <div class="line flex">
+          <p i18n>IntroSwitch</p>
+          <label class="switch" style="margin-left: 5px">
+            <input type="checkbox" id="VideoSkipIntro">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <table style="border: 1px solid white">
+          <tr>
+            <th>Netflix</th>
+            <th>Prime</th>
+            <th>Disney+</th>
+            <th>Crunchyroll</th>
+          </tr>
+          <tr>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="NetflixSkipIntro">
                 <span class="slider round"></span>
               </label>
-            </div>
-            <p class="description" i18n>UserAgentSwitchDescription</p>
-          </div>
-          <hr />
-          <div class="line flex">
-            <p i18n>IntroSwitch</p>
-            <label class="switch" style="margin-left: 5px">
-              <input type="checkbox" id="VideoSkipIntro" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <table style="border: 1px solid white">
-            <tr>
-              <th>Netflix</th>
-              <th>Prime</th>
-              <th>Disney+</th>
-              <th>Crunchyroll</th>
-            </tr>
-            <tr>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixSkipIntro" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonSkipIntro" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="DisneySkipIntro" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="CrunchyrollSkipIntro" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-            </tr>
-          </table>
-          <p class="description" i18n>SharedIntroDescription</p>
-          <hr />
-          <div class="line flex">
-            <p i18n>CreditsSwitch</p>
-            <label class="switch" style="margin-left: 5px">
-              <input type="checkbox" id="VideoSkipCredits" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <table style="border: 1px solid white">
-            <tr>
-              <th>Netflix</th>
-              <th>Prime</th>
-              <th>Disney+</th>
-            </tr>
-            <tr>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixSkipCredits" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonSkipCredits" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="DisneySkipCredits" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-            </tr>
-          </table>
-          <p class="description" i18n>CreditsSwitchDescription</p>
-          <hr />
-          <div class="line flex">
-            <p i18n>WatchCreditsSwitch</p>
-            <label class="switch" style="margin-left: 5px">
-              <input type="checkbox" id="VideoWatchCredits" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <table style="border: 1px solid white">
-            <tr>
-              <th>Netflix</th>
-              <th>Prime</th>
-              <th>Disney+</th>
-            </tr>
-            <tr>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixWatchCredits" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonWatchCredits" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="DisneyWatchCredits" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-            </tr>
-          </table>
-          <p class="description" i18n>WatchCreditsSwitchDescription</p>
-          <hr />
-          <div class="line flex">
-            <p i18n>AdsSwitch</p>
-            <label class="switch" style="margin-left: 5px">
-              <input type="checkbox" id="VideoAds" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <table style="border: 1px solid white">
-            <tr>
-              <th>Netflix</th>
-              <th>Prime</th>
-            </tr>
-            <tr>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixSkipAd" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonBlockFreevee" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-            </tr>
-          </table>
-          <p class="description" i18n>AdsSwitchDescription</p>
-
-          <hr />
-          <div class="line flex">
-            <p i18n>RatingSwitch</p>
-            <label class="switch" style="margin-left: 5px">
-              <input type="checkbox" id="VideoShowRating" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <table style="border: 1px solid white">
-            <tr>
-              <th>Netflix</th>
-              <th>Prime</th>
-              <th>Disney</th>
-            </tr>
-            <tr>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixShowRating" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonShowRating" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="DisneyShowRating" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-            </tr>
-          </table>
-          <p class="description" i18n>RatingSwitchDescription</p>
-
-          <hr />
-          <div class="line flex">
-            <p i18n>SliderSwitch</p>
-            <label class="switch" style="margin-left: 5px">
-              <input type="checkbox" id="VideoSpeedSlider" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <table style="border: 1px solid white">
-            <tr>
-              <th>Netflix</th>
-              <th>Prime</th>
-              <th>Disney+</th>
-              <th>Crunchyroll</th>
-            </tr>
-            <tr>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="NetflixSpeedSlider" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="AmazonSpeedSlider" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="DisneySpeedSlider" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-              <td>
-                <label class="switch">
-                  <input type="checkbox" id="CrunchyrollSpeedSlider" />
-                  <span class="slider round"></span>
-                </label>
-              </td>
-            </tr>
-          </table>
-          <p class="description" i18n>SliderSwitchDescription</p>
-          <p i18n>SliderOptions</p>
-          <table>
-            <tr>
-              <td>
-                <p i18n>SliderStepSize</p>
-              </td>
-              <td><input type="number" id="SliderSteps" /></td>
-            </tr>
-            <tr>
-              <td>
-                <p i18n>SliderMin</p>
-              </td>
-              <td>
-                <input type="number" id="SliderMin" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p i18n>SliderMax</p>
-              </td>
-              <td>
-                <input type="number" id="SliderMax" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p i18n>SliderPreview</p>
-              </td>
-              <td>
-                <div class="flex">
-                  <input type="range" id="SliderPreview" min="5" max="20" value="1" step="1" style="background: rgb(221, 221, 221); width: 200px" />
-                  <p id="SliderValue">1x</p>
-                </div>
-              </td>
-            </tr>
-          </table>
-          <hr />
-          <div class="line flex">
-            <p i18n>FullscreenSwitch</p>
-            <label class="switch" style="margin-left: 5px">
-              <input type="checkbox" id="VideoFullScreen" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>FullscreenSwitchDescription</p>
-          <hr />
-          <div class="line flex">
-            <p i18n>EpilepsySwitch</p>
-            <label class="switch" style="margin-left: 5px">
-              <input type="checkbox" id="VideoEpilepsy" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>EpilepsySwitchDescription</p>
-          <div style="margin-top: 5%"></div>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="AmazonSkipIntro">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="DisneySkipIntro">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="CrunchyrollSkipIntro">
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+        </table>
+        <p class="description" i18n>SharedIntroDescription</p>
+        <hr>
+        <div class="line flex">
+          <p i18n>CreditsSwitch</p>
+          <label class="switch" style="margin-left: 5px">
+            <input type="checkbox" id="VideoSkipCredits">
+            <span class="slider round"></span>
+          </label>
         </div>
-        <div class="categoryPrime hidden" style="margin-top: 0; background-color: unset" id="AmazonSettings">
-          <div class="flex flex-between" style="padding: 5px 5px; color: #00aeef">
-            <h2 i18n>PageSpecificTitle;Prime Video</h2>
-            <label class="switch">
-              <input type="checkbox" id="AmazonSkips" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <hr />
-          <div class="line flex">
-            <p i18n>SelfAdsSwitch</p>
-            <label class="switch">
-              <input type="checkbox" id="AmazonSkipAd" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>SelfAdsSwitchDescription</p>
-          <hr />
+        <table style="border: 1px solid white">
+          <tr>
+            <th>Netflix</th>
+            <th>Prime</th>
+            <th>Disney+</th>
+          </tr>
+          <tr>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="NetflixSkipCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="AmazonSkipCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="DisneySkipCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+        </table>
+        <p class="description" i18n>CreditsSwitchDescription</p>
+        <hr>
+        <div class="line flex">
+          <p i18n>WatchCreditsSwitch</p>
+          <label class="switch" style="margin-left: 5px">
+            <input type="checkbox" id="VideoWatchCredits">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <table style="border: 1px solid white">
+          <tr>
+            <th>Netflix</th>
+            <th>Prime</th>
+            <th>Disney+</th>
+          </tr>
+          <tr>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="NetflixWatchCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="AmazonWatchCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="DisneyWatchCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+        </table>
+        <p class="description" i18n>WatchCreditsSwitchDescription</p>
+        <hr>
+        <div class="line flex">
+          <p i18n>AdsSwitch</p>
+          <label class="switch" style="margin-left: 5px">
+            <input type="checkbox" id="VideoAds">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <table style="border: 1px solid white">
+          <tr>
+            <th>Netflix</th>
+            <th>Prime</th>
+          </tr>
+          <tr>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="NetflixSkipAd">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="AmazonBlockFreevee">
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+        </table>
+        <p class="description" i18n>AdsSwitchDescription</p>
 
-          <div class="line flex">
-            <p i18n>PaidContentSwitch</p>
-            <label class="switch">
-              <input type="checkbox" id="AmazonFilterPaid" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>PaidContentDescription</p>
-          <hr />
-          <div class="line flex">
-            <p i18n>ContinuePositionSwitch</p>
-            <label class="switch">
-              <input type="checkbox" id="AmazonContinuePosition" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>ContinuePositionDescription</p>
+        <hr>
+        <div class="line flex">
+          <p i18n>RatingSwitch</p>
+          <label class="switch" style="margin-left: 5px">
+            <input type="checkbox" id="VideoShowRating">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <table style="border: 1px solid white">
+          <tr>
+            <th>Netflix</th>
+            <th>Prime</th>
+            <th>Disney</th>
+          </tr>
+          <tr>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="NetflixShowRating">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="AmazonShowRating">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="DisneyShowRating">
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+        </table>
+        <p class="description" i18n>RatingSwitchDescription</p>
 
-          <!-- <div class="line flex">
+        <hr>
+        <div class="line flex">
+          <p i18n>SliderSwitch</p>
+          <label class="switch" style="margin-left: 5px">
+            <input type="checkbox" id="VideoSpeedSlider">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <table style="border: 1px solid white">
+          <tr>
+            <th>Netflix</th>
+            <th>Prime</th>
+            <th>Disney+</th>
+            <th>Crunchyroll</th>
+          </tr>
+          <tr>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="NetflixSpeedSlider">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="AmazonSpeedSlider">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="DisneySpeedSlider">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="CrunchyrollSpeedSlider">
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </tr>
+        </table>
+        <p class="description" i18n>SliderSwitchDescription</p>
+        <p i18n>SliderOptions</p>
+        <table>
+          <tr>
+            <td>
+              <p i18n>SliderStepSize</p>
+            </td>
+            <td><input type="number" id="SliderSteps"></td>
+          </tr>
+          <tr>
+            <td>
+              <p i18n>SliderMin</p>
+            </td>
+            <td>
+              <input type="number" id="SliderMin">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p i18n>SliderMax</p>
+            </td>
+            <td>
+              <input type="number" id="SliderMax">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p i18n>SliderPreview</p>
+            </td>
+            <td>
+              <div class="flex">
+                <input type="range" id="SliderPreview" min="5" max="20" value="1" step="1"
+                  style="background: rgb(221, 221, 221); width: 200px">
+                <p id="SliderValue">1x</p>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <hr>
+        <div class="line flex">
+          <p i18n>FullscreenSwitch</p>
+          <label class="switch" style="margin-left: 5px">
+            <input type="checkbox" id="VideoFullScreen">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>FullscreenSwitchDescription</p>
+        <hr>
+        <div class="line flex">
+          <p i18n>EpilepsySwitch</p>
+          <label class="switch" style="margin-left: 5px">
+            <input type="checkbox" id="VideoEpilepsy">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>EpilepsySwitchDescription</p>
+        <div style="margin-top: 5%"></div>
+      </div>
+      <div class="categoryPrime hidden" style="margin-top: 0; background-color: unset" id="AmazonSettings">
+        <div class="flex flex-between" style="padding: 5px 5px; color: #00aeef">
+          <h2 i18n>PageSpecificTitle;Prime Video</h2>
+          <label class="switch">
+            <input type="checkbox" id="AmazonSkips">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <hr>
+        <div class="line flex">
+          <p i18n>SelfAdsSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="AmazonSkipAd">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>SelfAdsSwitchDescription</p>
+        <hr>
+
+        <div class="line flex">
+          <p i18n>PaidContentSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="AmazonFilterPaid">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>PaidContentDescription</p>
+        <hr>
+        <div class="line flex">
+          <p i18n>ContinuePositionSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="AmazonContinuePosition">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>ContinuePositionDescription</p>
+
+        <!-- <div class="line flex">
             <p i18n>StreamLinksSwitch</p>
             <label class="switch">
-              <input type="checkbox" id="AmazonStreamLinks" />
+              <input type="checkbox" id="AmazonStreamLinks" >
               <span class="slider round"></span>
             </label>
           </div>
           <p class="description" i18n>StreamLinksDescription</p> -->
 
-          <!-- <h2 i18n>sharedSettings</h2>
+        <!-- <h2 i18n>sharedSettings</h2>
               <p class="description" i18n>sharedSettingsDescription;Prime Video</p>
               <div class="line flex">
                 <p i18n>IntroSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="AmazonSkipIntro" />
+                  <input type="checkbox" id="AmazonSkipIntro" >
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="line flex">
                 <p i18n>CreditsSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="AmazonSkipCredits" />
+                  <input type="checkbox" id="AmazonSkipCredits" >
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="line flex">
                 <p i18n>WatchCreditsSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="AmazonWatchCredits" />
+                  <input type="checkbox" id="AmazonWatchCredits" >
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="line flex">
                 <p i18n>FreeveeSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="AmazonBlockFreevee" />
+                  <input type="checkbox" id="AmazonBlockFreevee" >
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="line flex">
                 <p i18n>SliderSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="AmazonSpeedSlider" />
+                  <input type="checkbox" id="AmazonSpeedSlider" >
                   <span class="slider round"></span>
                 </label>
               </div> -->
+      </div>
+      <div class="categoryNetflix hidden" style="margin-top: 0; background-color: unset" id="NetflixSettings">
+        <div class="flex flex-between" style="padding: 5px 5px; color: #e60010">
+          <h2 i18n>PageSpecificTitle;Netflix</h2>
+          <label class="switch">
+            <input type="checkbox" id="NetflixSkips">
+            <span class="slider round"></span>
+          </label>
         </div>
-        <div class="categoryNetflix hidden" style="margin-top: 0; background-color: unset" id="NetflixSettings">
-          <div class="flex flex-between" style="padding: 5px 5px; color: #e60010">
-            <h2 i18n>PageSpecificTitle;Netflix</h2>
-            <label class="switch">
-              <input type="checkbox" id="NetflixSkips" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <hr />
-          <div class="line flex">
-            <p i18n>RecapSwitch</p>
-            <label class="switch">
-              <input type="checkbox" id="NetflixSkipRecap" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>RecapSwitchDescription</p>
-          <hr />
-          <div class="line flex">
-            <p i18n>InactivitySwitch</p>
-            <label class="switch">
-              <input type="checkbox" id="NetflixSkipBlocked" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>InactivitySwitchDescription</p>
+        <hr>
+        <div class="line flex">
+          <p i18n>RecapSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="NetflixSkipRecap">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>RecapSwitchDescription</p>
+        <hr>
+        <div class="line flex">
+          <p i18n>InactivitySwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="NetflixSkipBlocked">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>InactivitySwitchDescription</p>
 
-          <hr />
-          <div class="line flex">
-            <p i18n>ProfileSwitch</p>
-            <label class="switch">
-              <input type="checkbox" id="NetflixProfile" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>ProfileSwitchDescription</p>
-          <div class="line flex">
-            <p i18n>User</p>
-            <p id="profileName" style="text-transform: capitalize"></p>
-            <img
-              id="profilePicture"
-              class="hidden"
-              style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px"
-              alt="profilePicture"
-              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-            />
-          </div>
-          <!-- <h2 i18n>sharedSettings</h2>
+        <hr>
+        <div class="line flex">
+          <p i18n>ProfileSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="NetflixProfile">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>ProfileSwitchDescription</p>
+        <div class="line flex">
+          <p i18n>User</p>
+          <p id="profileName" style="text-transform: capitalize"></p>
+          <img id="profilePicture" class="hidden"
+            style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px" alt="profilePicture"
+            src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
+        </div>
+        <!-- <h2 i18n>sharedSettings</h2>
               <p class="description" i18n>sharedSettingsDescription;Netflix</p>
               <div class="line flex">
                 <p i18n>IntroSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="NetflixSkipIntro" />
+                  <input type="checkbox" id="NetflixSkipIntro" >
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="line flex">
                 <p i18n>CreditsSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="NetflixSkipCredits" />
+                  <input type="checkbox" id="NetflixSkipCredits" >
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="line flex">
                 <p i18n>WatchCreditsSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="NetflixWatchCredits" />
+                  <input type="checkbox" id="NetflixWatchCredits" >
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="line flex">
                 <p i18n>AdsSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="NetflixSkipAd" />
+                  <input type="checkbox" id="NetflixSkipAd" >
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="line flex">
                 <p i18n>SliderSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="NetflixSpeedSlider" />
+                  <input type="checkbox" id="NetflixSpeedSlider" >
                   <span class="slider round"></span>
                 </label>
               </div> -->
+      </div>
+      <div class="categoryDisney hidden" style="margin-top: 0; background-color: unset" id="DisneySettings">
+        <div class="flex flex-between" style="padding: 5px 5px; color: #1d1fff">
+          <h2 i18n>PageSpecificTitle;Disney+</h2>
+          <label class="switch">
+            <input type="checkbox" id="DisneySkips">
+            <span class="slider round"></span>
+          </label>
         </div>
-        <div class="categoryDisney hidden" style="margin-top: 0; background-color: unset" id="DisneySettings">
-          <div class="flex flex-between" style="padding: 5px 5px; color: #1d1fff">
-            <h2 i18n>PageSpecificTitle;Disney+</h2>
-            <label class="switch">
-              <input type="checkbox" id="DisneySkips" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <hr />
-          empty
+        <hr>
+        empty
 
-          <!-- <h2 i18n>sharedSettings</h2>
+        <!-- <h2 i18n>sharedSettings</h2>
               <p class="description" i18n>sharedSettingsDescription;Disney+</p>
               <div class="line flex">
                 <p i18n>IntroSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="DisneySkipIntro" />
+                  <input type="checkbox" id="DisneySkipIntro" >
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="line flex">
                 <p i18n>CreditsSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="DisneySkipCredits" />
+                  <input type="checkbox" id="DisneySkipCredits" >
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="line flex">
                 <p i18n>WatchCreditsSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="DisneyWatchCredits" />
+                  <input type="checkbox" id="DisneyWatchCredits" >
                   <span class="slider round"></span>
                 </label>
               </div>
               <div class="line flex">
                 <p i18n>SliderSwitch</p>
                 <label class="switch">
-                  <input type="checkbox" id="DisneySpeedSlider" />
+                  <input type="checkbox" id="DisneySpeedSlider" >
                   <span class="slider round"></span>
                 </label>
               </div> -->
-        </div>
-        <div class="categoryCrunchyroll hidden" style="margin-top: 0; background-color: unset" id="CrunchyrollSettings">
-          <div class="flex flex-between" style="padding: 5px 5px; color: #f78b24">
-            <h2 i18n>PageSpecificTitle;Crunchyroll</h2>
-            <label class="switch">
-              <input type="checkbox" id="CrunchyrollSkips" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <hr />
-          <div class="line flex">
-            <p i18n>IntroSwitch</p>
-            <label class="switch">
-              <input type="checkbox" id="CrunchyrollSkipIntro" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <hr />
-          <div class="line flex">
-            <p i18n>ReleaseCalendarSwitch</p>
-            <label class="switch">
-              <input type="checkbox" id="CrunchyrollReleaseCalendar" />
-              <span class="slider round"></span>
-            </label>
-          </div>
-          <p class="description" i18n>ReleaseCalendarDescription</p>
-        </div>
-        <div id="StatisticsSettings" class="hidden">
-          <h2 i18n>SkippedTime</h2>
-          <div class="line flex flex-between">
-            <p i18n>StatisticAd;Amazon</p>
-            <p id="StatisticsAmazonAdTimeSkipped">0s</p>
-          </div>
-          <p class="description" i18n>AmazonAdDescription</p>
-          <hr />
-          <div class="line flex flex-between">
-            <p i18n>StatisticAd;Netflix</p>
-            <p id="StatisticsNetflixAdTimeSkipped">0s</p>
-          </div>
-          <p class="description" i18n>NetflixAdDescription</p>
-          <hr />
-          <div class="line flex flex-between">
-            <p i18n>StatisticIntro</p>
-            <p id="StatisticsIntroTimeSkipped">0s</p>
-          </div>
-          <p class="description" i18n>StatisticIntroDescription</p>
-          <hr />
-          <div class="line flex flex-between">
-            <p i18n>StatisticRecap</p>
-            <p id="StatisticsRecapTimeSkipped">0s</p>
-          </div>
-          <p class="description" i18n>StatisticRecapDescription</p>
-          <hr />
-          <div class="line flex flex-between" style="padding-left: 0">
-            <p i18n>StatisticSegments</p>
-            <p id="StatisticsSegmentsSkipped">0</p>
-          </div>
-          <p class="description" i18n>StatisticSegmentsDescription</p>
-        </div>
-        <div id="OtherSettings" class="hidden">
-          <div>
-            <div class="flex flex-col flex-align">
-              <h2 i18n>ImportSettings</h2>
-              <a class="button" id="save" i18n>SaveSettings</a>
-              <div class="flex flex-row flex-align">
-                <input type="file" id="file" name="settings" accept="text/json" />
-                <div class="button" id="upload" i18n>UploadSettings</div>
-              </div>
-            </div>
-          </div>
-          <div class="button reset" i18n>ResetAddon</div>
-        </div>
-        <div id="ChangelogSettings" class="hidden">
-          <h2>Changelog</h2>
-          <div>
-            <div class="line flex">
-              <h2>1.0.87</h2>
-              <ul>
-                <li>Improved Settings style</li>
-                <li>Fixed settings bug with scrollbar</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.86</p>
-              <ul>
-                <li>Disney when going to next episode remain in full screen</li>
-                <li>Fix bug Amazon Continue Watching position</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.85</p>
-              <ul>
-                <li>Disney original intro skipped</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.83</p>
-              <ul>
-                <li>Better TMDB accuracy</li>
-                <li>Prime Video Ad UI change: Skip ad fixed</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.82</p>
-              <ul>
-                <li>Prime Video Ad UI change: Skip ad fixed</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.81</p>
-              <ul>
-                <li>Fixed paused AD on Netflix</li>
-                <li>Open current Weekday on Cr Release Calendar</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.80</p>
-              <ul>
-                <li>Added TMDB ratings to Prime Video</li>
-                <li>Better title filter for TMDB</li>
-                <li>On extension update no more Error Context invalidated errors</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.79</p>
-              <ul>
-                <li>Fixed Prime Video Credits skip will crash page</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.78</p>
-              <ul>
-                <li>Mute Netflix Ad skip</li>
-                <li>Add Feature to Prime: move continue watching to the top</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.77</p>
-              <ul>
-                <li>Automatically use desktop mode on firefox/chrome mobile</li>
-                <li>Various mobile improvements</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.74</p>
-              <ul>
-                <li>Released for Firefox on Android</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.73</p>
-              <ul>
-                <li>Fixed umlauts for Netflix auto profile pick</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.72</p>
-              <ul>
-                <li>Added epilepsy option</li>
-                <li>fixed disney intro/recap bug</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.70</p>
-              <ul>
-                <li>added Crunchyroll Gobackbutton from Intro</li>
-                <li>fix Crunchyroll Release calendar BUG when switch off function</li>
-                <li>less API calls to TMDB only refresh unknown daily</li>
-                <li>better remove old settings</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.69</p>
-              <ul>
-                <li>Improved subtitles of Amazon and Disney</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.67</p>
-              <ul>
-                <li>added Crunchyroll startPlayOnFullScreen</li>
-                <li>fixed bug Crunchyroll ReleaseCalendar removedDub on load</li>
-                <li>Changed 1x to 1.0x on Sliders</li>
-                <li>Some language changes on pt_br</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.66</p>
-              <ul>
-                <li>added Streaming Service Crunchyroll</li>
-                <li>fixed Netflix SpeedSlider was conflicting with netflix ad Skip</li>
-                <li>added Portuguese (BR) as a Language</li>
-                <li>simplified Code substantially(min. 600 LOC less)</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.65</p>
-              <ul>
-                <li>fixed Netflix SpeedSlider was conflicting with netflix ad Skip</li>
-                <li>added Portuguese (BR) as a Language</li>
-                <li>simplified Code substantially(600 LOC less)</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.64</p>
-              <ul>
-                <li>added TMDB to Hotstar</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.63</p>
-              <ul>
-                <li>less TMDB calls on disney: bugfix for each works different on chrome</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.62</p>
-              <ul>
-                <li>fixed Netflix ad skip: skips too far</li>
-                <li>added IMDB rating to Disney</li>
-                <li>replaced justWatch APi to themoviedb API since justWatch api no longer working</li>
-                <li>removed addStreamingLinks since justWatch api no longer working</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.59</p>
-              <ul>
-                <li>Added IMDB rating on Amazon Prime and Netflix</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.56,57</p>
-              <ul>
-                <li>Improved Freevee Ad skip</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.56</p>
-              <ul>
-                <li>Improved shared settings</li>
-                <li>Made Watch Credits inverse of Skip Credits</li>
-                <li>Fixed UI</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.55</p>
-              <ul>
-                <li>added Always Watch Credits feature</li>
-                <li>fixed Shared Features Switches</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.53</p>
-              <ul>
-                <li>Fixed chrome pop-up wrong width</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.52</p>
-              <ul>
-                <li>Fixed Amazon Prime skip Credits</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.51</p>
-              <ul>
-                <li>Fixed Netflix Ad skip due to changed css classes of Netflix</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.50</p>
-              <ul>
-                <li>Fixed amazon speedslider due to changed layout of amazon</li>
-                <li>Fixed Amazon Freevee ad skip bug if ad length divisible by 20</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.49</p>
-              <ul>
-                <li>Added Speedslider min,max,step options</li>
-                <li>Added Language: Macedonian</li>
-                <li>Edge: Netflix Ad bug fixed</li>
-                <li>Hotstar: Skip Ad,Recap,Credits fixed</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.48</p>
-              <ul>
-                <li>Changed name to Streaming enhanced</li>
-                <li>Added German Locale</li>
-                <li>Refreshed descriptions</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.47</p>
-              <ul>
-                <li>Added Disney Plus Hotstar</li>
-                <li>Fixed Netflix and Disney Speedsliders</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.46</p>
-              <ul>
-                <li>Added Disney Plus</li>
-                <li>Changed speed slider design on Amazon</li>
-                <li>Changed skip Recap definition since it is also skipped on amazon and disney</li>
-                <li>Added Netflix SpeedSlider</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.45</p>
-              <ul>
-                <li>Added Addon Install Page</li>
-                <li>Changed some UI</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.44</p>
-              <ul>
-                <li>Improved Freevee Ad skip by stopping 0.1s before ad is over instead of 1s</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.43</p>
-              <ul>
-                <li>Changed speed slider to 2X max</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.42</p>
-              <ul>
-                <li>Added Icons to Settings and changed Design</li>
-                <li>Added Statistics description</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.41</p>
-              <ul>
-                <li>Added back Individual options for shared options on the Settings page</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.40</p>
-              <ul>
-                <li>displayed shared skip ads incorrectly</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.38</p>
-              <ul>
-                <li>Confirm reset addon</li>
-                <li>Added title to Settings page</li>
-                <li>Changed button designs</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.37</p>
-              <ul>
-                <li>Fixed Chrome scroll bug in settings</li>
-                <li>Fixed floating settings button bug in popup</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.36</p>
-              <ul>
-                <li>Now starts playing the video automatically if Fullscreen is opened</li>
-                <li>Combined shared Settings from Amazon prime and Netflix</li>
-                <li>Mayor settings layout overhaul</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.35</p>
-              <ul>
-                <li>Faster automatic profile pick on Netflix</li>
-                <li>Bugfix: did not filter paid films on Category pages on Amazon</li>
-                <li>Won't filter paid films in shop, since it doesn't make sense there (Amazon)</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.34</p>
-              <ul>
-                <li>does not open settings on update anymore</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.33</p>
-              <ul>
-                <li>Fixed infinite loading issue with higher delay of 150 ms</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.32</p>
-              <ul>
-                <li>Fixed blank page bug on amazon prime with remove paid content feature</li>
-                <li>Show netflix profile picture in settings since name may be similar</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.31</p>
-              <ul>
-                <li>fixed auto click on profile on the profile manage page</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.30</p>
-              <ul>
-                <li>Automatically choosing last used Netflix Profile</li>
-                <li>Fixed arrow direction on settings page</li>
-                <li>Fixed various console errors</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.29</p>
-              <ul>
-                <li>proper Netflix Ad skip</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.28</p>
-              <ul>
-                <li>Fast Forwarding Ads on Netflix by 2X</li>
-                <li>automatic opening of the settings when the extension is updated/installed</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.27</p>
-              <ul>
-                <li>fixed Amazon enable/disable all button (speed slider and filter paid content were forgotten)</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.26</p>
-              <ul>
-                <li>filter Paid Content on Amazon, like Films and series</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.25</p>
-              <ul>
-                <li>changed the Amazon credit auto skip: It will now only skip if it is the same season in the same series.</li>
-                <li>changed Freevee Ad skip: Changed it to Interval, which fixes these bugs:</li>
-                <li>parts of the actual video were also skipped</li>
-                <li>sometimes Freevee ad was not skipped</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.24</p>
-              <ul>
-                <li>fixed issue of infinite loading on Freevee ad skip if it is longer than 90s</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.22</p>
-              <ul>
-                <li>fixed opened setting popups bug</li>
-                <li>fixed vw warning on slider</li>
-                <li>fixed warning if slider cannot be removed</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.21</p>
-              <ul>
-                <li>remove annoying background hue from amazon when mouse over on video</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.20</p>
-              <ul>
-                <li>added button to hide speed slider</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.19</p>
-              <ul>
-                <li>added a video speed slider to amazon prime video</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.18</p>
-              <ul>
-                <li>fixed bug not skipping ad between episodes</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.17</p>
-              <ul>
-                <li>fixed bug of forwarding into an ad won't skip it anymore</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.16</p>
-              <ul>
-                <li>implemented a go back button for Amazon, if the user wants to watch the intro</li>
-                <li>fixed the infinite loading on freevee on first launch of a film</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.15</p>
-              <ul>
-                <li>fixed: self ad skips disabling subtitles</li>
-                <li>fixed: self ad skips infinite loading on initial watching of series</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.14</p>
-              <ul>
-                <li>Fixed: not showing subtitles when self ad skipped</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.12</p>
-              <ul>
-                <li>Bugfix: if Amazon self ad is skipped, subtitles disappear</li>
-                <li>improved performance since function gets returned if found button.</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.11</p>
-              <ul>
-                <li>fixed bug when badge is not reset properly when pressing reset button</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.10</p>
-              <ul>
-                <li>added Segments skipped statistic</li>
-                <li>added Add-on Badges that show on the icon when something is skipped.</li>
-                <li>fixed bug where the statistics are overridden if you have multiple instances of the add-on running</li>
-                <li>improved self ad skipping logic</li>
-                <li>removed unnecessary URL permission which use primevideo.com</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.9</p>
-              <ul>
-                <li>improved Amazon Intro skipping</li>
-                <li>Added Addon Statistics: Ad , Intro, Recap time skipped</li>
-                <li>added Importing and Exporting of Settings in the Settings page</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.8</p>
-              <ul>
-                <li>the Individual settings are now opened automatically in the settings page</li>
-                <li>bug fixed: if there is an version update with a new setting, it wont show that the new setting is activated, although it is.</li>
-                <li>removed unnecessary , function () {} and {settings:settings}</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.7</p>
-              <ul>
-                <li>improved addon Settings page to include disable all amazon/netflix button and dropdown to decrease menu size</li>
-                <li>fixed bug: freevee ad skipping may crash the site on first opening, now doesn't skip too often</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.6</p>
-              <ul>
-                <li>Added Amazon Freevee ad skipping</li>
-                <li>better mutation observing => less computation</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.5</p>
-              <ul>
-                <li>synchronize the settings across accounts</li>
-                <li>bug fixed where ad is skipped when the infobar is not shown yet(misclicks)</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.4</p>
-              <ul>
-                <li>Updated the check if it is a video on Amazon to check the title and the url</li>
-                <li>Updated the skip Recap to also check for skip-preplay, which is a different button</li>
-                <li>removed error in console.logs</li>
-              </ul>
-            </div>
-            <div class="line flex">
-              <p>1.0.0</p>
-              <ul>
-                <li>Initial Release</li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </div>
-      <div id="error-content" class="hidden">
-        <p>Pop-up not working on this page.</p>
-        <p>Try the Amazon/Netflix page.</p>
+      <div class="categoryCrunchyroll hidden" style="margin-top: 0; background-color: unset" id="CrunchyrollSettings">
+        <div class="flex flex-between" style="padding: 5px 5px; color: #f78b24">
+          <h2 i18n>PageSpecificTitle;Crunchyroll</h2>
+          <label class="switch">
+            <input type="checkbox" id="CrunchyrollSkips">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <hr>
+        <div class="line flex">
+          <p i18n>IntroSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="CrunchyrollSkipIntro">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <hr>
+        <div class="line flex">
+          <p i18n>ReleaseCalendarSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="CrunchyrollReleaseCalendar">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" i18n>ReleaseCalendarDescription</p>
+      </div>
+      <div id="StatisticsSettings" class="hidden">
+        <h2 i18n>SkippedTime</h2>
+        <div class="line flex flex-between">
+          <p i18n>StatisticAd;Amazon</p>
+          <p id="StatisticsAmazonAdTimeSkipped">0s</p>
+        </div>
+        <p class="description" i18n>AmazonAdDescription</p>
+        <hr>
+        <div class="line flex flex-between">
+          <p i18n>StatisticAd;Netflix</p>
+          <p id="StatisticsNetflixAdTimeSkipped">0s</p>
+        </div>
+        <p class="description" i18n>NetflixAdDescription</p>
+        <hr>
+        <div class="line flex flex-between">
+          <p i18n>StatisticIntro</p>
+          <p id="StatisticsIntroTimeSkipped">0s</p>
+        </div>
+        <p class="description" i18n>StatisticIntroDescription</p>
+        <hr>
+        <div class="line flex flex-between">
+          <p i18n>StatisticRecap</p>
+          <p id="StatisticsRecapTimeSkipped">0s</p>
+        </div>
+        <p class="description" i18n>StatisticRecapDescription</p>
+        <hr>
+        <div class="line flex flex-between" style="padding-left: 0">
+          <p i18n>StatisticSegments</p>
+          <p id="StatisticsSegmentsSkipped">0</p>
+        </div>
+        <p class="description" i18n>StatisticSegmentsDescription</p>
+      </div>
+      <div id="OtherSettings" class="hidden">
+        <div>
+          <div class="flex flex-col flex-align">
+            <h2 i18n>ImportSettings</h2>
+            <a class="button" id="save" i18n>SaveSettings</a>
+            <div class="flex flex-row flex-align">
+              <input type="file" id="file" name="settings" accept="text/json">
+              <div class="button" id="upload" i18n>UploadSettings</div>
+            </div>
+          </div>
+        </div>
+        <div class="button reset" i18n>ResetAddon</div>
+      </div>
+      <div id="ChangelogSettings" class="hidden">
+        <h2>Changelog</h2>
+        <div>
+          <div class="line flex">
+            <h2>1.0.87</h2>
+            <ul>
+              <li>Improved Settings style</li>
+              <li>Fixed settings bug with scrollbar</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.86</p>
+            <ul>
+              <li>Disney when going to next episode remain in full screen</li>
+              <li>Fix bug Amazon Continue Watching position</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.85</p>
+            <ul>
+              <li>Disney original intro skipped</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.83</p>
+            <ul>
+              <li>Better TMDB accuracy</li>
+              <li>Prime Video Ad UI change: Skip ad fixed</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.82</p>
+            <ul>
+              <li>Prime Video Ad UI change: Skip ad fixed</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.81</p>
+            <ul>
+              <li>Fixed paused AD on Netflix</li>
+              <li>Open current Weekday on Cr Release Calendar</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.80</p>
+            <ul>
+              <li>Added TMDB ratings to Prime Video</li>
+              <li>Better title filter for TMDB</li>
+              <li>On extension update no more Error Context invalidated errors</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.79</p>
+            <ul>
+              <li>Fixed Prime Video Credits skip will crash page</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.78</p>
+            <ul>
+              <li>Mute Netflix Ad skip</li>
+              <li>Add Feature to Prime: move continue watching to the top</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.77</p>
+            <ul>
+              <li>Automatically use desktop mode on firefox/chrome mobile</li>
+              <li>Various mobile improvements</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.74</p>
+            <ul>
+              <li>Released for Firefox on Android</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.73</p>
+            <ul>
+              <li>Fixed umlauts for Netflix auto profile pick</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.72</p>
+            <ul>
+              <li>Added epilepsy option</li>
+              <li>fixed disney intro/recap bug</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.70</p>
+            <ul>
+              <li>added Crunchyroll Gobackbutton from Intro</li>
+              <li>fix Crunchyroll Release calendar BUG when switch off function</li>
+              <li>less API calls to TMDB only refresh unknown daily</li>
+              <li>better remove old settings</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.69</p>
+            <ul>
+              <li>Improved subtitles of Amazon and Disney</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.67</p>
+            <ul>
+              <li>added Crunchyroll startPlayOnFullScreen</li>
+              <li>fixed bug Crunchyroll ReleaseCalendar removedDub on load</li>
+              <li>Changed 1x to 1.0x on Sliders</li>
+              <li>Some language changes on pt_br</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.66</p>
+            <ul>
+              <li>added Streaming Service Crunchyroll</li>
+              <li>fixed Netflix SpeedSlider was conflicting with netflix ad Skip</li>
+              <li>added Portuguese (BR) as a Language</li>
+              <li>simplified Code substantially(min. 600 LOC less)</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.65</p>
+            <ul>
+              <li>fixed Netflix SpeedSlider was conflicting with netflix ad Skip</li>
+              <li>added Portuguese (BR) as a Language</li>
+              <li>simplified Code substantially(600 LOC less)</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.64</p>
+            <ul>
+              <li>added TMDB to Hotstar</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.63</p>
+            <ul>
+              <li>less TMDB calls on disney: bugfix for each works different on chrome</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.62</p>
+            <ul>
+              <li>fixed Netflix ad skip: skips too far</li>
+              <li>added IMDB rating to Disney</li>
+              <li>replaced justWatch APi to themoviedb API since justWatch api no longer working</li>
+              <li>removed addStreamingLinks since justWatch api no longer working</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.59</p>
+            <ul>
+              <li>Added IMDB rating on Amazon Prime and Netflix</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.56,57</p>
+            <ul>
+              <li>Improved Freevee Ad skip</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.56</p>
+            <ul>
+              <li>Improved shared settings</li>
+              <li>Made Watch Credits inverse of Skip Credits</li>
+              <li>Fixed UI</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.55</p>
+            <ul>
+              <li>added Always Watch Credits feature</li>
+              <li>fixed Shared Features Switches</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.53</p>
+            <ul>
+              <li>Fixed chrome pop-up wrong width</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.52</p>
+            <ul>
+              <li>Fixed Amazon Prime skip Credits</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.51</p>
+            <ul>
+              <li>Fixed Netflix Ad skip due to changed css classes of Netflix</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.50</p>
+            <ul>
+              <li>Fixed amazon speedslider due to changed layout of amazon</li>
+              <li>Fixed Amazon Freevee ad skip bug if ad length divisible by 20</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.49</p>
+            <ul>
+              <li>Added Speedslider min,max,step options</li>
+              <li>Added Language: Macedonian</li>
+              <li>Edge: Netflix Ad bug fixed</li>
+              <li>Hotstar: Skip Ad,Recap,Credits fixed</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.48</p>
+            <ul>
+              <li>Changed name to Streaming enhanced</li>
+              <li>Added German Locale</li>
+              <li>Refreshed descriptions</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.47</p>
+            <ul>
+              <li>Added Disney Plus Hotstar</li>
+              <li>Fixed Netflix and Disney Speedsliders</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.46</p>
+            <ul>
+              <li>Added Disney Plus</li>
+              <li>Changed speed slider design on Amazon</li>
+              <li>Changed skip Recap definition since it is also skipped on amazon and disney</li>
+              <li>Added Netflix SpeedSlider</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.45</p>
+            <ul>
+              <li>Added Addon Install Page</li>
+              <li>Changed some UI</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.44</p>
+            <ul>
+              <li>Improved Freevee Ad skip by stopping 0.1s before ad is over instead of 1s</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.43</p>
+            <ul>
+              <li>Changed speed slider to 2X max</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.42</p>
+            <ul>
+              <li>Added Icons to Settings and changed Design</li>
+              <li>Added Statistics description</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.41</p>
+            <ul>
+              <li>Added back Individual options for shared options on the Settings page</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.40</p>
+            <ul>
+              <li>displayed shared skip ads incorrectly</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.38</p>
+            <ul>
+              <li>Confirm reset addon</li>
+              <li>Added title to Settings page</li>
+              <li>Changed button designs</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.37</p>
+            <ul>
+              <li>Fixed Chrome scroll bug in settings</li>
+              <li>Fixed floating settings button bug in popup</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.36</p>
+            <ul>
+              <li>Now starts playing the video automatically if Fullscreen is opened</li>
+              <li>Combined shared Settings from Amazon prime and Netflix</li>
+              <li>Mayor settings layout overhaul</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.35</p>
+            <ul>
+              <li>Faster automatic profile pick on Netflix</li>
+              <li>Bugfix: did not filter paid films on Category pages on Amazon</li>
+              <li>Won't filter paid films in shop, since it doesn't make sense there (Amazon)</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.34</p>
+            <ul>
+              <li>does not open settings on update anymore</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.33</p>
+            <ul>
+              <li>Fixed infinite loading issue with higher delay of 150 ms</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.32</p>
+            <ul>
+              <li>Fixed blank page bug on amazon prime with remove paid content feature</li>
+              <li>Show netflix profile picture in settings since name may be similar</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.31</p>
+            <ul>
+              <li>fixed auto click on profile on the profile manage page</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.30</p>
+            <ul>
+              <li>Automatically choosing last used Netflix Profile</li>
+              <li>Fixed arrow direction on settings page</li>
+              <li>Fixed various console errors</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.29</p>
+            <ul>
+              <li>proper Netflix Ad skip</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.28</p>
+            <ul>
+              <li>Fast Forwarding Ads on Netflix by 2X</li>
+              <li>automatic opening of the settings when the extension is updated/installed</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.27</p>
+            <ul>
+              <li>fixed Amazon enable/disable all button (speed slider and filter paid content were forgotten)</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.26</p>
+            <ul>
+              <li>filter Paid Content on Amazon, like Films and series</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.25</p>
+            <ul>
+              <li>changed the Amazon credit auto skip: It will now only skip if it is the same season in the same
+                series.</li>
+              <li>changed Freevee Ad skip: Changed it to Interval, which fixes these bugs:</li>
+              <li>parts of the actual video were also skipped</li>
+              <li>sometimes Freevee ad was not skipped</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.24</p>
+            <ul>
+              <li>fixed issue of infinite loading on Freevee ad skip if it is longer than 90s</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.22</p>
+            <ul>
+              <li>fixed opened setting popups bug</li>
+              <li>fixed vw warning on slider</li>
+              <li>fixed warning if slider cannot be removed</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.21</p>
+            <ul>
+              <li>remove annoying background hue from amazon when mouse over on video</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.20</p>
+            <ul>
+              <li>added button to hide speed slider</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.19</p>
+            <ul>
+              <li>added a video speed slider to amazon prime video</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.18</p>
+            <ul>
+              <li>fixed bug not skipping ad between episodes</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.17</p>
+            <ul>
+              <li>fixed bug of forwarding into an ad won't skip it anymore</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.16</p>
+            <ul>
+              <li>implemented a go back button for Amazon, if the user wants to watch the intro</li>
+              <li>fixed the infinite loading on freevee on first launch of a film</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.15</p>
+            <ul>
+              <li>fixed: self ad skips disabling subtitles</li>
+              <li>fixed: self ad skips infinite loading on initial watching of series</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.14</p>
+            <ul>
+              <li>Fixed: not showing subtitles when self ad skipped</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.12</p>
+            <ul>
+              <li>Bugfix: if Amazon self ad is skipped, subtitles disappear</li>
+              <li>improved performance since function gets returned if found button.</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.11</p>
+            <ul>
+              <li>fixed bug when badge is not reset properly when pressing reset button</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.10</p>
+            <ul>
+              <li>added Segments skipped statistic</li>
+              <li>added Add-on Badges that show on the icon when something is skipped.</li>
+              <li>fixed bug where the statistics are overridden if you have multiple instances of the add-on running
+              </li>
+              <li>improved self ad skipping logic</li>
+              <li>removed unnecessary URL permission which use primevideo.com</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.9</p>
+            <ul>
+              <li>improved Amazon Intro skipping</li>
+              <li>Added Addon Statistics: Ad , Intro, Recap time skipped</li>
+              <li>added Importing and Exporting of Settings in the Settings page</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.8</p>
+            <ul>
+              <li>the Individual settings are now opened automatically in the settings page</li>
+              <li>bug fixed: if there is an version update with a new setting, it wont show that the new setting is
+                activated, although it is.</li>
+              <li>removed unnecessary , function () {} and {settings:settings}</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.7</p>
+            <ul>
+              <li>improved addon Settings page to include disable all amazon/netflix button and dropdown to decrease
+                menu size</li>
+              <li>fixed bug: freevee ad skipping may crash the site on first opening, now doesn't skip too often</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.6</p>
+            <ul>
+              <li>Added Amazon Freevee ad skipping</li>
+              <li>better mutation observing => less computation</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.5</p>
+            <ul>
+              <li>synchronize the settings across accounts</li>
+              <li>bug fixed where ad is skipped when the infobar is not shown yet(misclicks)</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.4</p>
+            <ul>
+              <li>Updated the check if it is a video on Amazon to check the title and the url</li>
+              <li>Updated the skip Recap to also check for skip-preplay, which is a different button</li>
+              <li>removed error in console.logs</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.0</p>
+            <ul>
+              <li>Initial Release</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </body>
+    <div id="error-content" class="hidden">
+      <p>Pop-up not working on this page.</p>
+      <p>Try the Amazon/Netflix page.</p>
+    </div>
+  </div>
+</body>
+
 </html>
