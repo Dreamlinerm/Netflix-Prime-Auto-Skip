@@ -39,6 +39,8 @@ function localizeHtmlPage() {
   for (let trans of translations) {
     let Translated = browser.i18n.getMessage.apply(null, trans.textContent.split(";"));
     trans.textContent = Translated;
+    // remove i18n attribute
+    trans.removeAttribute("i18n");
   }
 }
 localizeHtmlPage();
@@ -85,7 +87,7 @@ const defaultSettings = {
 };
 const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent);
 console.log("isMobile", isMobile, navigator.userAgent);
-let settings = defaultSettings.settings;
+let settings = { ...defaultSettings.settings };
 browser.storage.sync.get("settings", function (result) {
   // if there is an undefined setting, set it to the default
   // apparently 2 depth gets overwritten so here it is
