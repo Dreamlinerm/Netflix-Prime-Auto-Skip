@@ -25,6 +25,9 @@ On Amazon Prime Video, it also automatically:
 On Crunchyroll it automatically:
 • Adds Filters to Release Calendar
 
+On Disney+ (& Hotstar, STAR+) it automatically:
+- goes back to full screen when skipping to the next episode:
+
 Android:
 Prime Video and Disney+ (& Hotstar, STAR+) and Crunchyroll (in Desktop mode) are supported on Android. Netflix does not work on Android.
 

@@ -25,6 +25,9 @@ Auf Amazon Prime-Video wird auch automatisch:
 Auf Crunchyroll wird auch automatisch:
 • Filter zum Release Kalender hinzugefügt
 
+Auf Disney+ (& Hotstar, STAR+) wird auch automatisch:
+• wieder in Vollbild gegangen, wenn zur nächste Folge gesprungen wird: 
+
 Android: 
 Prime Video und Disney+ (& Hotstar, STAR+) und Crunchyroll (im Desktop-Modus) werden auf Android unterstützt. Netflix funktioniert nicht auf Android.
 
