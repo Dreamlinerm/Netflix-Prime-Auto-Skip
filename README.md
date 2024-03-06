@@ -4,7 +4,7 @@
 
 # Streaming enhanced
 
-## Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video, Disney+ & Hotstar and Crunchyroll
+## Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video, Disney+ (& Hotstar, STAR+) and Crunchyroll
 
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
 <img src="Logos/firefox.svg" width="20px">
@@ -74,6 +74,7 @@ Android Compatibility:
         <img src="Logos/crunchyroll.avif" width="20%">
         <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
         <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
+        <img src="Logos/starplus.png" width="20%">
       </td>
     </tr>
 </table>
