@@ -60,7 +60,7 @@ The drm for each streaming service will be installed automatically when a video 
 
 Android Compatibility:
 
-| Netflix | Prime Video     | Disney+ & Hotstar | Crunchyroll |
+| Netflix | Prime Video     | Disney+ & Hotstar (& Hotstar, STAR+) | Crunchyroll |
 | ---     | ---             | ---               | ---         |
 | ❌     | ✅(Desktop Website) | ✅(Desktop Website) | ✅   |
 
@@ -81,14 +81,14 @@ Android Compatibility:
 
 ## What it does
 
-The script, "skipper.js", is injected into all urls containing "amazon.\*/\*/video" or "netflix.com" or "disneyplus.com" or "hotstar.com".
+The script, "skipper.js", is injected into all urls containing "amazon.\*/\*/video" or "netflix.com" or "disneyplus.com" or "hotstar.com" or "starplus.com".
 
-It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix, Prime video and Disney Plus & Hotstar.
+It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix, Prime video and Disney Plus (& Hotstar, STAR+).
 
 
 ## ✨ Features
 
-On Netflix, Prime Video, Disney+ & Hotstar and Crunchyroll it automatically:
+On Netflix, Prime Video, Disney+ (& Hotstar, STAR+) and Crunchyroll it automatically:
 
 <ul>
 <li>Skips Intros & Recaps</li>
@@ -348,7 +348,7 @@ Cli ARGS:
 
 Table of test cases for each feature. S=season, E=episode of the show.
 
-| Feature | Netflix | Prime Video | Disney+ & Hotstar | Crunchyroll |
+| Feature | Netflix | Prime Video | Disney+ (& Hotstar, STAR+) | Crunchyroll |
 | --- | --- | --- | --- | --- |
 | Intro | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>| ✅  <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>| ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> | ✅ [One piece](https://www.crunchyroll.com/series/GRMG8ZQZR/one-piece) |
 | Recaps | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>| ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a> | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>| ? |
