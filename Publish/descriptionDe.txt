@@ -2,7 +2,7 @@ Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert
 
 ✨ Features
 
-Auf Netflix, Prime Video, Disney+ & Hotstar und Crunchyroll wird automatisch:
+Auf Netflix, Prime Video, Disney+ (& Hotstar, STAR+) und Crunchyroll wird automatisch:
 • Intros & Zusammenfassungen übersprungen
 • Abspann übersprigen/immer anzeigen
 • Werbung übersprungen
@@ -26,7 +26,7 @@ Auf Crunchyroll wird auch automatisch:
 • Filter zum Release Kalender hinzugefügt
 
 Android: 
-Prime Video und Disney+ (im Desktop-Modus) werden auf Android unterstützt. Netflix funktioniert nicht auf Android.
+Prime Video und Disney+ (& Hotstar, STAR+) und Crunchyroll (im Desktop-Modus) werden auf Android unterstützt. Netflix funktioniert nicht auf Android.
 
 Zur Verwendung auf einem Android Handy Laden Sie 
 [Kiwi Browser] (https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) 
@@ -45,10 +45,10 @@ Kaufen Sie mir einen Kaffee (https://paypal.me/MarvinKrebber).
 
 Haftungsausschluss
 
-Netflix, Amazon Prime-Video and Disney+ sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
+Netflix, Amazon Prime-Video and Disney+ (& Hotstar, STAR+) und Crunchyroll sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
 ---------------------------------------------- firefox
 Android: 
-Prime Video und Disney+ (im Desktop-Modus) werden auf Android unterstützt. Netflix funktioniert nicht auf Android.
+Prime Video und Disney+ (& Hotstar, STAR+) und Crunchyroll (im Desktop-Modus) werden auf Android unterstützt. Netflix funktioniert nicht auf Android.
 
 Zur Verwendung auf einem Android Handy Laden Sie <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser" target="_blank">Kiwi Browser</a> oder eine ähnliche App herunter, um das Chrome-Addon installieren zu können.
 
@@ -64,4 +64,4 @@ Kaufen Sie mir einen <a href="https://paypal.me/MarvinKrebber" target="_blank">K
 
 Haftungsausschluss
 
-Netflix, Amazon Prime-Video and Disney+ sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
+Netflix, Amazon Prime-Video and Disney+ (& Hotstar, STAR+) und Crunchyroll sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.

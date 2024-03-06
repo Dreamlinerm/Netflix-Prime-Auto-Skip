@@ -2,7 +2,7 @@ Você pode configurar o recurso a ser ativado na página de configurações.
 
 ✨ Recursos
 
-Na Netflix, Prime Video, Disney+ & Hotstar e Crunchyroll, será ativado automaticamente:
+Na Netflix, Prime Video, Disney+ (& Hotstar, STAR+) e Crunchyroll, será ativado automaticamente:
 • Pula as introduções e Recapitulações
 • Pula/Assista os créditos
 • Pula anúncios
@@ -26,7 +26,7 @@ Na Crunchyroll:
 • Adiciona filtros ao calendário de lançamentos
 
 Android: 
-O Prime Video e o Disney+ (no modo Desktop) são compatíveis com o Android. 
+O Prime Video e o Disney+ (& Hotstar, STAR+) e Crunchyroll (no modo Desktop) são compatíveis com o Android. 
 Não funcionará na Netflix dentro do Android.
 
 Para usar no Android, faça o download do [Kiwi Browser] (https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) 
@@ -44,10 +44,10 @@ Me pague um café em: (https://paypal.me/MarvinKrebber).
 
 Isenção de responsabilidade
 
-Netflix, Amazon Prime Video e Disney+ são marcas registradas e o autor deste complemento não é afiliado a essas empresas.
+Netflix, Amazon Prime Video e Disney+ (& Hotstar, STAR+) e Crunchyroll são marcas registradas e o autor deste complemento não é afiliado a essas empresas.
 -------------------------------------------  firefox:
 Android: 
-O Prime Video e o Disney+ (no modo Desktop) são compatíveis com o Android. 
+O Prime Video e o Disney+ (& Hotstar, STAR+) e Crunchyroll (no modo Desktop) são compatíveis com o Android. 
 Não funcionará na Netflix dentro do Android.
 
 Para usar no Android, faça o download do 
@@ -66,4 +66,4 @@ Me pague um <a href="https://paypal.me/MarvinKrebber" target="_blank">café</a>.
 
 Isenção de responsabilidade
 
-Netflix, Amazon Prime Video e Disney+ são marcas registradas e o autor deste complemento não é afiliado a essas empresas.
+Netflix, Amazon Prime Video e Disney+ (& Hotstar, STAR+) e Crunchyroll são marcas registradas e o autor deste complemento não é afiliado a essas empresas.
