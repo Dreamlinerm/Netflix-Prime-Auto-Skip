@@ -138,7 +138,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isSta
 
     if (isNetflix) startNetflix(settings.Netflix);
     else if (isPrimeVideo) startAmazon(settings.Amazon);
-    else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
+    else if (isDisney || isHotstar || isStarPlus) DisneyObserver.observe(document, config);
     else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
   });
@@ -406,9 +406,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isSta
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
     let button;
-    if (isDisney) {
+    if (isDisney || isStarPlus) {
       if (!document.querySelector('[data-gv2elementkey="playNext"]')) button = document.querySelector(".skip__button");
-    } else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
+    } else if (isHotstar)
+      button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       button.click();
       log("Recap skipped", button);
@@ -543,7 +544,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isSta
         // infobar position for the slider to be added
         let position;
         if (isDisney) position = document.querySelector(".controls__right");
-        else position = document.querySelector(".icon-player-landscape").parentElement.parentElement.parentElement.parentElement;
+        else position = document.querySelector(".icon-player-landscape")?.parentElement?.parentElement?.parentElement?.parentElement;
         if (position) createSlider(video, position, DisneySliderStyle, DisneySpeedStyle);
       } else {
         // need to resync the slider with the video sometimes
