@@ -408,8 +408,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     let button;
     if (isDisney) {
       if (!document.querySelector('[data-gv2elementkey="playNext"]')) button = document.querySelector(".skip__button");
-    } else if (isHotstar)
-      button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
+    } else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       button.click();
       log("Recap skipped", button);
