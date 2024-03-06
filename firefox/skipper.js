@@ -19,7 +19,7 @@ const ua = navigator.userAgent;
 // only on prime video pages
 const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
 const isNetflix = /netflix/i.test(hostname);
-const isDisney = /disneyplus/i.test(hostname);
+const isDisney = /disneyplus|| starplus/i.test(hostname);
 const isHotstar = /hotstar/i.test(hostname);
 const isCrunchyroll = /crunchyroll/i.test(hostname);
 const isStarPlus = /starplus/i.test(hostname);
@@ -29,7 +29,7 @@ const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
 const version = "1.0.88";
-if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isStarPlus) {
+if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
   // global variables in localStorage
   const defaultSettings = {
@@ -81,7 +81,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isSta
       }
       if (isNetflix) {
         if (settings.Netflix?.showRating) startShowRatingInterval();
-      } else if (isDisney || isHotstar || isStarPlus) {
+      } else if (isDisney || isHotstar) {
         if (settings.Disney?.showRating) startShowRatingInterval();
       } else if (isPrimeVideo) {
         if (settings.Amazon?.showRating) startShowRatingInterval();
@@ -138,7 +138,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isSta
 
     if (isNetflix) startNetflix(settings.Netflix);
     else if (isPrimeVideo) startAmazon(settings.Amazon);
-    else if (isDisney || isHotstar || isStarPlus) DisneyObserver.observe(document, config);
+    else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
     else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
   });
@@ -406,7 +406,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isSta
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
     let button;
-    if (isDisney || isStarPlus) {
+    if (isDisney) {
       if (!document.querySelector('[data-gv2elementkey="playNext"]')) button = document.querySelector(".skip__button");
     } else if (isHotstar)
       button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
