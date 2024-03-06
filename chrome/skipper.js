@@ -19,9 +19,10 @@ const ua = navigator.userAgent;
 // only on prime video pages
 const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
 const isNetflix = /netflix/i.test(hostname);
-const isDisney = /disneyplus/i.test(hostname);
+const isDisney = /disneyplus|starplus/i.test(hostname);
 const isHotstar = /hotstar/i.test(hostname);
 const isCrunchyroll = /crunchyroll/i.test(hostname);
+const isStarPlus = /starplus/i.test(hostname);
 
 const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
@@ -101,6 +102,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     else if (isPrimeVideo) console.log("Page %cAmazon", "color: #00aeef;");
     else if (isDisney) console.log("Page %cDisney", "color: #0682f0;");
     else if (isHotstar) console.log("Page %cHotstar", "color: #0682f0;");
+    else if (isCrunchyroll) console.log("Page %cCrunchyroll", "color: #e67a35;");
+    else if (isStarPlus) console.log("Page %cStarPlus", "color: #fe541c;");
   }
   function startNetflix(Netflix) {
     if (Netflix?.profile) AutoPickProfile();
@@ -540,7 +543,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         // infobar position for the slider to be added
         let position;
         if (isDisney) position = document.querySelector(".controls__right");
-        else position = document.querySelector(".icon-player-landscape").parentElement.parentElement.parentElement.parentElement;
+        else position = document.querySelector(".icon-player-landscape")?.parentElement?.parentElement?.parentElement?.parentElement;
         if (position) createSlider(video, position, DisneySliderStyle, DisneySpeedStyle);
       } else {
         // need to resync the slider with the video sometimes

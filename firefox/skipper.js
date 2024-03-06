@@ -19,7 +19,7 @@ const ua = navigator.userAgent;
 // only on prime video pages
 const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
 const isNetflix = /netflix/i.test(hostname);
-const isDisney = /disneyplus|| starplus/i.test(hostname);
+const isDisney = /disneyplus|starplus/i.test(hostname);
 const isHotstar = /hotstar/i.test(hostname);
 const isCrunchyroll = /crunchyroll/i.test(hostname);
 const isStarPlus = /starplus/i.test(hostname);
