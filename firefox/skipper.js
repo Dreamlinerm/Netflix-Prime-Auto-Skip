@@ -22,13 +22,14 @@ const isNetflix = /netflix/i.test(hostname);
 const isDisney = /disneyplus/i.test(hostname);
 const isHotstar = /hotstar/i.test(hostname);
 const isCrunchyroll = /crunchyroll/i.test(hostname);
+const isStarPlus = /starplus/i.test(hostname);
 
 const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
 const version = "1.0.88";
-if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
+if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isStarPlus) {
   /* eslint-env root:true */
   // global variables in localStorage
   const defaultSettings = {
@@ -80,7 +81,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
       if (isNetflix) {
         if (settings.Netflix?.showRating) startShowRatingInterval();
-      } else if (isDisney || isHotstar) {
+      } else if (isDisney || isHotstar || isStarPlus) {
         if (settings.Disney?.showRating) startShowRatingInterval();
       } else if (isPrimeVideo) {
         if (settings.Amazon?.showRating) startShowRatingInterval();
@@ -101,6 +102,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     else if (isPrimeVideo) console.log("Page %cAmazon", "color: #00aeef;");
     else if (isDisney) console.log("Page %cDisney", "color: #0682f0;");
     else if (isHotstar) console.log("Page %cHotstar", "color: #0682f0;");
+    else if (isCrunchyroll) console.log("Page %cCrunchyroll", "color: #e67a35;");
+    else if (isStarPlus) console.log("Page %cStarPlus", "color: #fe541c;");
   }
   function startNetflix(Netflix) {
     if (Netflix?.profile) AutoPickProfile();

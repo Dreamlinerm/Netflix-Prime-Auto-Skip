@@ -26,7 +26,8 @@
         "*://*.netflix.com.au/*",
         "*://*.disneyplus.com/*",
         "*://*.hotstar.com/*",
-        "*://*.crunchyroll.com/*"
+        "*://*.crunchyroll.com/*",
+        "*://*.starplus.com/*"
       ],
       "js": ["skipper.js"]
     },
