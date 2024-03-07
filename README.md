@@ -103,14 +103,14 @@ On Netflix, Prime Video, Disney+ (Hotstar, STAR+) and Crunchyroll it automatical
 
 In addition to the Shared features:
 
-On Netflix it also automatically:
+On Netflix it additionally automatically:
 
 <ul>
 <li>Picks last used profile</li>
 <li>Blocks Inactivity Warning (Are you still watching?)</li>
 </ul>
 
-On Amazon Prime Video it also automatically:
+On Amazon Prime Video it additionally automatically:
 
 <ul>
 <li>Skips Self promoting ads (Ads for prime video productions)</li>
@@ -118,7 +118,7 @@ On Amazon Prime Video it also automatically:
 <li>Removes annoying blur when hovering over video</li>
 </ul>
 
-On Crunchyroll it automatically:
+On Crunchyroll it additionally automatically:
 <ul>
 <li>Adds Filters to Release Calendar</li>
 </ul>
