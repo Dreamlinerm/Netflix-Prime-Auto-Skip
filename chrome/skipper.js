@@ -28,7 +28,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.0.89";
+const version = "1.0.90";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -389,6 +389,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   const DisneyObserver = new MutationObserver(Disney);
   function Disney() {
     let video = document.querySelector("video");
+    if (!video) video = document.querySelector("disney-web-player")?.shadowRoot?.firstChild?.firstChild;
     const time = video?.currentTime;
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
     Disney_Credits();
