@@ -180,14 +180,6 @@ If you want you first name or full name on here write FULLName or Firstname in t
     </tr>
      <tr>
       <td align="center" valign="top">
-      08.05.2023
-      </td>
-      <td align="center" valign="top" >
-      Donate
-      </td>
-    </tr>
-     <tr>
-      <td align="center" valign="top">
       04.06.2023
       </td>
       <td align="center" valign="top" >
@@ -218,12 +210,52 @@ If you want you first name or full name on here write FULLName or Firstname in t
       For one of the best addons with which you can still use Prime at all. I would be happy if it remains functional for a long time, as long as Amazon doesn't bring out some kind of club :)
       </td>
     </tr>
-          <tr>
+    <tr>
       <td align="center" valign="top" >
       01.09.2023   
       </td>
       <td align="center" valign="top">
       Your extension is the most useful extension I have ever used. Thanks for creating it!
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" >
+      27.10.2023
+      </td>
+      <td align="center" valign="top">
+      Hi I'm french NP enhanced is exactly what i'm looking for
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" >
+      31.12.2023
+      </td>
+      <td align="center" valign="top">
+      For New Year's Eve work :)
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" >
+      03.01.2024
+      </td>
+      <td align="center" valign="top">
+      "Thank you"
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" >
+      17.01.2024
+      </td>
+      <td align="center" valign="top">
+      Thanks for this extension. Please add a way to auto-update the extension
+      </td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" >
+      26.02.2024
+      </td>
+      <td align="center" valign="top">
+      Thank you for Streaming Enhanced. Good work
       </td>
     </tr>
   </tbody>
