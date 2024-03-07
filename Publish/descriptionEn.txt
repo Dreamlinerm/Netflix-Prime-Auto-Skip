@@ -2,7 +2,7 @@ You can configure which feature to enable in the Settings Page.
 
 ✨ Features
 
-On Netflix, Prime Video, Disney+ (& Hotstar, STAR+) and Crunchyroll it automatically:
+On Netflix, Prime Video, Disney+ (Hotstar, STAR+) and Crunchyroll it automatically:
 • Skips Intros & Recaps
 • Skip/Watch Credits
 • Skips Ads
@@ -25,11 +25,11 @@ On Amazon Prime Video, it also automatically:
 On Crunchyroll it automatically:
 • Adds Filters to Release Calendar
 
-On Disney+ (& Hotstar, STAR+) it automatically:
+On Disney+ (Hotstar, STAR+) it automatically:
 - goes back to full screen when skipping to the next episode:
 
 Android:
-Prime Video and Disney+ (& Hotstar, STAR+) and Crunchyroll (in Desktop mode) are supported on Android. Netflix does not work on Android.
+Prime Video and Disney+ (Hotstar, STAR+) and Crunchyroll (in Desktop mode) are supported on Android. Netflix does not work on Android.
 
 To use on Android Phone. Download [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser)
 or a similar App to be able to install the chrome addon.
@@ -46,7 +46,7 @@ Buy me a coffee (https://paypal.me/MarvinKrebber).
 
 Disclaimer
 
-Netflix, Amazon Prime video and Disney+ (& Hotstar, STAR+) and Crunchyroll are trademarks and the author of this addon is not affiliated with these companies.
+Netflix, Amazon Prime video and Disney+ (Hotstar, STAR+) and Crunchyroll are trademarks and the author of this addon is not affiliated with these companies.
 
 --------------------------------------------  firefox:
 To use on Android Phone Download
@@ -65,4 +65,4 @@ Buy me a <a href="https://paypal.me/MarvinKrebber" target="_blank">coffee</a>.
 
 Disclaimer
 
-Netflix, Amazon Prime video and Disney+ (& Hotstar, STAR+) and Crunchyroll are trademarks and the author of this addon is not affiliated with these companies.
+Netflix, Amazon Prime video and Disney+ (Hotstar, STAR+) and Crunchyroll are trademarks and the author of this addon is not affiliated with these companies.
