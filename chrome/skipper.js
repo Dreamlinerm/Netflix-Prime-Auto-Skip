@@ -393,6 +393,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     const time = video?.currentTime;
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
     Disney_Credits();
+    Disney_addHomeButton();
     if (settings.Disney?.watchCredits) Disney_Watch_Credits();
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
   }
@@ -435,7 +436,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   function Disney_Credits() {
     let button;
-    if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
+    if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]');
+    else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
+      button = document.querySelector('[data-testid="icon-restart"]')?.parentElement;
     else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
@@ -473,9 +476,33 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }
   }
+  function Disney_addHomeButton() {
+    // add home button to the end of the credits
+    const buttonDiv = document.querySelector('[data-testid="chrome-action-button"]')?.parentElement;
+    if (buttonDiv && !document.querySelector("#homeButton")) {
+      const homeButton = document.createElement("button");
+      homeButton.textContent = "Home";
+      homeButton.id = "homeButton";
+      homeButton.style =
+        'color: white;background-color: #40424A;border: rgb(64, 66, 74);border-radius: 5px;padding: 0 2px 0 2px;height: 56px;padding-left: 24px;padding-right: 24px;letter-spacing: 1.76px;font-size: 15px;  text-transform: uppercase;cursor: pointer;font-family:"Avenir-World-for-Disney-Demi", sans-serif;';
+      // add hover effect
+      homeButton.onmouseover = function () {
+        homeButton.style.backgroundColor = "#474a53";
+      };
+      homeButton.onmouseout = function () {
+        homeButton.style.backgroundColor = "#40424A";
+      };
+      homeButton.onclick = function () {
+        window.location.href = "/";
+      };
+      buttonDiv.appendChild(homeButton);
+    }
+  }
   function Disney_Watch_Credits() {
     let button;
-    if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
+    if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]');
+    else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
+      button = document.querySelector('[data-testid="icon-restart"]')?.parentElement;
     else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
