@@ -321,11 +321,11 @@ Just like chrome you can temporarily load the extension by going to ``about:addo
 
 ## debug
 
-Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then you can login into Netflix and Prime video in the profile and then every time you run the command you don't have to login again.
+Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then you can login into Netflix etc. in the profile and then every time you run the command you don't have to login again.
 
 ```npm run profile```
 
-## Test the Extension
+## Test the Extension with Selenium python
 
 ### setup
 
