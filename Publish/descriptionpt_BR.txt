@@ -29,7 +29,7 @@ Na Disney+ (Hotstar, STAR+):
 • volta para a tela cheia ao pular para o próximo episódio
 
 Android: 
-O Prime Video e o Disney+ (Hotstar, STAR+) e Crunchyroll (no modo Desktop) são compatíveis com o Android. 
+O Prime Video e o Disney+ (Hotstar, STAR+) e Crunchyroll são compatíveis com (no modo Desktop) o Android. 
 Não funcionará na Netflix dentro do Android.
 
 Para usar no Android, faça o download do [Kiwi Browser] (https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) 
@@ -49,10 +49,6 @@ Isenção de responsabilidade
 
 Netflix, Amazon Prime Video e Disney+ (Hotstar, STAR+) e Crunchyroll são marcas registradas e o autor deste complemento não é afiliado a essas empresas.
 -------------------------------------------  firefox:
-Android: 
-O Prime Video e o Disney+ (Hotstar, STAR+) e Crunchyroll (no modo Desktop) são compatíveis com o Android. 
-Não funcionará na Netflix dentro do Android.
-
 Para usar no Android, faça o download do 
 <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser" target="_blank">Kiwi Browser</a>
 ou um aplicativo semelhante para poder instalar o complemento do Chrome.

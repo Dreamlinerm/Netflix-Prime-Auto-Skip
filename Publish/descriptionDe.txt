@@ -4,7 +4,7 @@ Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert
 
 Auf Netflix, Prime Video, Disney+ (Hotstar, STAR+) und Crunchyroll wird automatisch:
 • Intros & Zusammenfassungen übersprungen
-• Abspann übersprigen/immer anzeigen
+• Abspann übersprungen/immer anzeigen
 • Werbung übersprungen
 • Zeigt TMDB-Bewertung
 • Anpassbaren Geschwindigkeitsregler hinzugefügt
@@ -29,7 +29,7 @@ Auf Disney+ (Hotstar, STAR+) wird zusätzlich automatisch:
 • wieder in Vollbild gegangen, wenn zur nächste Folge gesprungen wird
 
 Android: 
-Prime Video und Disney+ (Hotstar, STAR+) und Crunchyroll (im Desktop-Modus) werden auf Android unterstützt. Netflix funktioniert nicht auf Android.
+Prime Video und Disney+ (Hotstar, STAR+) und Crunchyroll werden auf Android (im Desktop-Modus) unterstützt. Netflix funktioniert nicht auf Android.
 
 Zur Verwendung auf einem Android Handy Laden Sie 
 [Kiwi Browser] (https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) 
@@ -50,9 +50,6 @@ Haftungsausschluss
 
 Netflix, Amazon Prime-Video and Disney+ (Hotstar, STAR+) und Crunchyroll sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
 ---------------------------------------------- firefox
-Android: 
-Prime Video und Disney+ (Hotstar, STAR+) und Crunchyroll (im Desktop-Modus) werden auf Android unterstützt. Netflix funktioniert nicht auf Android.
-
 Zur Verwendung auf einem Android Handy Laden Sie <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser" target="_blank">Kiwi Browser</a> oder eine ähnliche App herunter, um das Chrome-Addon installieren zu können.
 
 ☔ Sicher
