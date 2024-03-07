@@ -143,7 +143,6 @@ Everyone is welcome to contribute!
 
 Some are in German and therefore are translated to english.
 
-If you want you first name or full name on here write FULLName or Firstname in the Donation or open an issue.
 <table>
   <tbody>
     <tr>
