@@ -273,6 +273,7 @@ See Statistics. All statistics and settings are not shared but are synchronized 
 ## How it works
 
 The addon is observing every mutation of the dom Tree of the Website.
+The exact classes may be outdated since I do not update these regularly.
 
 On Netflix it matches the buttons with the data-uia tag containing:
 
@@ -304,7 +305,9 @@ I primarily just develop in firefox and then copy the code into chrome and repla
 
 ## Firefox 
 
-### Install web-ext and Firefox
+Just like chrome you can temporarily load the extension by going to ``about:addons``, clicking on the gear icon and then ``Install Add-ons From File``. Then you can load the ``firefox`` folder as a temporary extension.
+
+### Install web-ext and Firefox for a better development experience
 
 ```npm install --global web-ext```
 
