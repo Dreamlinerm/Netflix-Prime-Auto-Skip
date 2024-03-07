@@ -436,7 +436,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   function Disney_Credits() {
     let button;
-    if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
+    if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]');
+    else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
+      button = document.querySelector('[data-testid="icon-restart"]')?.parentElement;
     else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
@@ -498,7 +500,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   function Disney_Watch_Credits() {
     let button;
-    if (isDisney) button = document.querySelector('[data-gv2elementkey="playNext"]');
+    if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]');
+    else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
+      button = document.querySelector('[data-testid="icon-restart"]')?.parentElement;
     else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
