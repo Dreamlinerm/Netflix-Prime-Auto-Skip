@@ -375,7 +375,8 @@ Cli ARGS:
 
 ## Changelog
 
-You can see the [Changelog](CHANGELOG.md) here or in the published versions.
+You can see the Changelog in the addon or in the published versions.
+
 ## Disclaimer
 
-Netflix, Amazon Prime video and Disney+ are trademarks and the author of this addon is not affiliated with these companies.
+Netflix, Amazon Prime video and Disney+ (Hotstar, STAR+) and Crunchyroll are trademarks and the author of this addon is not affiliated with these companies.
