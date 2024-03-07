@@ -13,20 +13,20 @@ Auf Netflix, Prime Video, Disney+ (Hotstar, STAR+) und Crunchyroll wird automati
 
 Zusätzlich zu den geteilten Funktionen:
 
-Auf Netflix wird auch automatisch:
+Auf Netflix wird zusätzlich automatisch:
 • Automatisch zuletzt verwendetes Profil ausgewählt
 • Inaktivitätswarnung übersprungen („Schauen Sie weiter?“)
 
-Auf Amazon Prime-Video wird auch automatisch:
+Auf Amazon Prime-Video wird zusätzlich automatisch:
 • Eigenwerbung übersprungen
 • Kostenpflichtige Inhalte gefiltert
 • Die lästige Unschärfe, wenn das overlay angezeigt wird entfernt
 
-Auf Crunchyroll wird auch automatisch:
+Auf Crunchyroll wird zusätzlich automatisch:
 • Filter zum Release Kalender hinzugefügt
 
-Auf Disney+ (Hotstar, STAR+) wird auch automatisch:
-• wieder in Vollbild gegangen, wenn zur nächste Folge gesprungen wird: 
+Auf Disney+ (Hotstar, STAR+) wird zusätzlich automatisch:
+• wieder in Vollbild gegangen, wenn zur nächste Folge gesprungen wird
 
 Android: 
 Prime Video und Disney+ (Hotstar, STAR+) und Crunchyroll (im Desktop-Modus) werden auf Android unterstützt. Netflix funktioniert nicht auf Android.

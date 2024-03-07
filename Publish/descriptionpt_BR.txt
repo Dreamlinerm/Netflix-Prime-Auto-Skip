@@ -26,7 +26,7 @@ Na Crunchyroll:
 • Adiciona filtros ao calendário de lançamentos
 
 Na Disney+ (Hotstar, STAR+):
-- volta para a tela cheia ao pular para o próximo episódio:
+• volta para a tela cheia ao pular para o próximo episódio
 
 Android: 
 O Prime Video e o Disney+ (Hotstar, STAR+) e Crunchyroll (no modo Desktop) são compatíveis com o Android. 

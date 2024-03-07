@@ -123,6 +123,11 @@ On Crunchyroll it automatically:
 <li>Adds Filters to Release Calendar</li>
 </ul>
 
+On Disney+ (Hotstar, STAR+) it additionally automatically:
+<ul>
+<li>goes back to full screen when skipping to the next episode</li>
+</ul>
+
 If you want to see what is implemented go [here](#implemented-feature-overview):
 
 ## Contributing
