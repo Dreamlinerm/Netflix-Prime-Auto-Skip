@@ -389,6 +389,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   const DisneyObserver = new MutationObserver(Disney);
   function Disney() {
     let video = document.querySelector("video");
+    if (!video) video = document.querySelector("disney-web-player")?.shadowRoot?.firstChild?.firstChild;
+    // console.log("Disney", video);
     const time = video?.currentTime;
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
     Disney_Credits();
@@ -544,6 +546,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         let position;
         if (isDisney) position = document.querySelector(".controls__right");
         else position = document.querySelector(".icon-player-landscape")?.parentElement?.parentElement?.parentElement?.parentElement;
+        console.log("position", position);
         if (position) createSlider(video, position, DisneySliderStyle, DisneySpeedStyle);
       } else {
         // need to resync the slider with the video sometimes
