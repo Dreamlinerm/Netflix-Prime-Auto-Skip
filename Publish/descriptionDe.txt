@@ -33,7 +33,6 @@ Prime Video und Disney+ (Hotstar, STAR+) und Crunchyroll werden auf Android (im 
 
 Zur Verwendung auf einem Android Handy Laden Sie sich Firefox herunter.
 
-
 ☔ Sicher
 
 Die Erweiterung ist Open Source! Besuchen sie (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip), falls sie beitragen möchten.
