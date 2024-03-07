@@ -31,8 +31,7 @@ On Disney+ (Hotstar, STAR+) it additionally automatically:
 Android:
 Prime Video and Disney+ (Hotstar, STAR+) and Crunchyroll are supported (in Desktop mode) on Android. Netflix does not work on Android.
 
-To use on Android Phone. Download [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser)
-or a similar App to be able to install the chrome addon.
+To use on an Android phone, download Firefox.
 
 ☔ Safe
 
@@ -49,10 +48,6 @@ Disclaimer
 Netflix, Amazon Prime video and Disney+ (Hotstar, STAR+) and Crunchyroll are trademarks and the author of this addon is not affiliated with these companies.
 
 --------------------------------------------  firefox:
-To use on Android Phone Download
-<a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser" target="_blank">Kiwi Browser</a>
-or a similar App to be able to install the chrome addon.
-
 ☔ Safe
 
 The extension is open-sourced! Check <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> out if you want to contribute.

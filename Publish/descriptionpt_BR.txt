@@ -32,8 +32,7 @@ Android:
 O Prime Video e o Disney+ (Hotstar, STAR+) e Crunchyroll são compatíveis com (no modo Desktop) o Android. 
 Não funcionará na Netflix dentro do Android.
 
-Para usar no Android, faça o download do [Kiwi Browser] (https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) 
-ou um aplicativo semelhante para poder instalar o complemento do Chrome.
+Para usar em um telefone Android, baixe o Firefox.
 
 ☔ Seguro
 
@@ -49,10 +48,6 @@ Isenção de responsabilidade
 
 Netflix, Amazon Prime Video e Disney+ (Hotstar, STAR+) e Crunchyroll são marcas registradas e o autor deste complemento não é afiliado a essas empresas.
 -------------------------------------------  firefox:
-Para usar no Android, faça o download do 
-<a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser" target="_blank">Kiwi Browser</a>
-ou um aplicativo semelhante para poder instalar o complemento do Chrome.
-
 ☔ Seguro
 
 A extensão é de código aberto! Confira <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> se quiser contribuir.
