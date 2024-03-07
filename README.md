@@ -130,47 +130,14 @@ On Disney+ (Hotstar, STAR+) it additionally automatically:
 
 If you want to see what is implemented go [here](#implemented-feature-overview):
 
+## 💕 Enjoying Streaming enhanced?
+
+Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
+
 ## Contributing
 
 If you have any suggestions or Bugs, please open an issue or join the  [Discord](https://discord.gg/7us76ErE). 
 Everyone is welcome to contribute!
-
-## Other Contributors ✨
-
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top" width="14.28%">
-        <a href="www.makre.de"
-          >
-          <img
-            src="https://avatars.githubusercontent.com/u/90410608?s=96&v=4"
-            width="100px;"
-            alt="Marvin Krebber"
-          />
-          <br /><sub><b>Marvin Krebber</b></sub>
-          <br /><sub>Owner & Main Dev</sub>
-          </a>
-      </td>
-      <td align="center" valign="top" width="14.28%">
-        <a href="https://github.com/jakche"
-          >
-          <img
-            src="https://avatars.githubusercontent.com/u/70672583?v=4"
-            width="100px;"
-            alt="Jakche"
-          />
-          <br /><sub><b>Jakche</b></sub>
-          <br /><sub>Translated to macedonian</sub>
-          </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-## 💕 Enjoying Streaming enhanced?
-
-Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
 
 # Donation Comments
 
