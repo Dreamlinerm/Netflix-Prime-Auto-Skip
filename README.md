@@ -311,7 +311,7 @@ Just like chrome you can temporarily load the extension by going to ``about:addo
 
 ```npm install --global web-ext``` to install web-ext globally
 
-```npm run start``` to start in firefox
+```npm start``` to start in firefox
 
 ### debug
 
@@ -321,7 +321,7 @@ Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then 
 
 ## All Commands
 
-```npm run start```  start the firefox development
+```npm start```  start the firefox development
 
 ```npm run start-android```  start on firefox android
 
