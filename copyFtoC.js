@@ -34,22 +34,19 @@ const replaces = [
   ],
   ["Streaming enhanced: Netflix Disney+ Prime Video", "Streaming enhanced Netflix Disney Prime Video"],
 ];
+console.log("Copy Files from Firefox to Chrome:");
 for (let file of files) {
-  console.log(path.join("firefox", file) + ":");
+  console.log(path.join("chrome", file) + "");
   fs.readFile(path.join("firefox", file), "utf8", function (err, data) {
-    if (err) {
-      return console.log(err);
-    }
-
-    // Replace 'browser' with 'chrome'
-    let result = data;
+    if (err) return console.log(err);
     for (let replace of replaces) {
-      result = result.replaceAll(replace[0], replace[1]);
+      data = data.replaceAll(replace[0], replace[1]);
     }
 
     // Write the updated content to a new file in the 'chrome' folder
-    fs.writeFile(path.join("chrome", file), result, "utf8", function (err) {
+    fs.writeFile(path.join("chrome", file), data, "utf8", function (err) {
       if (err) return console.log(err);
     });
   });
 }
+console.log("\n");
