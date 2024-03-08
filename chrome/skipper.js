@@ -478,7 +478,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   function Disney_addHomeButton() {
     // add home button to the end of the credits
-    const buttonDiv = document.querySelector('[data-testid="chrome-action-button"]')?.parentElement;
+    const buttonDiv = document.querySelector('[data-testid="browser-action-button"]')?.parentElement;
     if (buttonDiv && !document.querySelector("#homeButton")) {
       const homeButton = document.createElement("button");
       homeButton.textContent = "Home";
