@@ -339,8 +339,8 @@ hr {
 }
 @media only screen and (max-width: 800px), only screen and (max-height: 600px) {
   /* .menuButton {
-     font-size: 1em;
-   } */
+    font-size: 1em;
+  } */
   .menuButton i-18n,
   .menuButton div,
   .IconBox {
