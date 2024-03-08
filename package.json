@@ -5,7 +5,7 @@
   "scripts": {
     "start": "web-ext run",
     "start-chrome": "web-ext run --source-dir ./chrome/ -t chromium",
-    "start-android": "adb devices && web-ext run -t firefox-android --adb-device 38091FDJH002WH --firefox-apk org.mozilla.firefox",
+    "start-android": "adb devices && web-ext run -t firefox-android --firefox-apk org.mozilla.firefox --adb-device 38091FDJH002WH",
     "profile": "web-ext run --keep-profile-changes --firefox-profile=test",
     "build": "node copyFtoC.js && cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
     "zip": "cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
