@@ -8,6 +8,7 @@
     "start-android": "adb devices && web-ext run -t firefox-android --adb-device 38091FDJH002WH --firefox-apk org.mozilla.firefox",
     "profile": "web-ext run --keep-profile-changes --firefox-profile=test",
     "build": "node copyFtoC.js && cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
+    "zip": "cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
     "copy": "node copyFtoC.js",
     "lint": "web-ext lint",
     "esLint": "npx eslint firefox/ chrome/",
