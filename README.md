@@ -337,13 +337,13 @@ Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then 
 
 ```npm run zip```    build the zips files to upload
 
-
+```npm test```       test with python Selenium __testsOutdated__
 
 ## Test the Extension with Selenium python
 
 ### setup
 
-- insert your own firefox profile name to be logged into every platform in the ``test.js`` file.
+- insert your own firefox profile filepath to be logged into every platform in the ``test.py`` file.
 - install Python
 - install selenium ``pip install -U selenium``
 - ``npm i``
@@ -352,9 +352,7 @@ Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then 
 
 To run the automated tests run:
 
-1. ```npm run build```
-2. copy the web-ext artifact into the normal folder and rename it to NetflixPrime@Autoskip.io.xpi
-3. ```npm test```
+```npm test```
 
 Cli ARGS:
 - none : all tests

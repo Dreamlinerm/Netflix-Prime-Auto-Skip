@@ -36,7 +36,7 @@ const replaces = [
 ];
 console.log("Copy Files from Firefox to Chrome:");
 for (let file of files) {
-  console.log(path.join("chrome", file) + "");
+  console.log(path.join("chrome", file));
   fs.readFile(path.join("firefox", file), "utf8", function (err, data) {
     if (err) return console.log(err);
     for (let replace of replaces) {

@@ -12,7 +12,7 @@
     "copy": "node copyFtoC.js",
     "lint": "web-ext lint",
     "esLint": "npx eslint firefox/ chrome/",
-    "test": "python test.py"
+    "test": "cd firefox && web-ext build  --overwrite-dest && cd .. && node refreshXPI.js && python test.py"
   },
   "repository": {
     "type": "git",
