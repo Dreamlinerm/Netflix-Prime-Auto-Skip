@@ -1,4 +1,5 @@
 /* global require */
+/* global process */
 const fs = require("fs");
 const path = require("path");
 
@@ -36,8 +37,8 @@ const replaces = [
 ];
 console.log("Copy Files from Firefox to Chrome:");
 for (let file of files) {
-  console.log(path.join("chrome", file));
   fs.readFile(path.join("firefox", file), "utf8", function (err, data) {
+    console.log(path.join("chrome", file));
     if (err) return console.log(err);
     for (let replace of replaces) {
       data = data.replaceAll(replace[0], replace[1]);
