@@ -7,8 +7,8 @@ if (!fs.existsSync("chrome")) {
   fs.mkdirSync("chrome");
 }
 
-// Read the files where 'browser' is used
-const browserFiles = [
+// Read all the firefox files and replace the chrome files
+const files = [
   "skipper.js",
   "cr.js",
   path.join("popup", "settings.js"),
@@ -21,6 +21,7 @@ const browserFiles = [
   path.join("_locales", path.join("mk", "messages.json")),
   path.join("_locales", path.join("pt_BR", "messages.json")),
 ];
+// all regex replacements
 const replaces = [
   [/browser([^-])/g, "chrome$1"],
   [
@@ -33,7 +34,7 @@ const replaces = [
   ],
   ["Streaming enhanced: Netflix Disney+ Prime Video", "Streaming enhanced Netflix Disney Prime Video"],
 ];
-for (let file of browserFiles) {
+for (let file of files) {
   console.log(path.join("firefox", file) + ":");
   fs.readFile(path.join("firefox", file), "utf8", function (err, data) {
     if (err) {
@@ -43,7 +44,7 @@ for (let file of browserFiles) {
     // Replace 'browser' with 'chrome'
     let result = data;
     for (let replace of replaces) {
-      result = result.replace(replace[0], replace[1]);
+      result = result.replaceAll(replace[0], replace[1]);
     }
 
     // Write the updated content to a new file in the 'chrome' folder
