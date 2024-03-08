@@ -341,15 +341,13 @@ Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then 
 
 ## Test the Extension with Selenium python
 
-### setup
+### Setup
 
 - insert your own firefox profile filepath to be logged into every platform in the ``test.py`` file.
 - install Python
 - install selenium ``pip install -U selenium``
 
-### run
-
-To run the automated tests run:
+### Run
 
 ```npm test```
 
