@@ -23,7 +23,7 @@
   <link rel="icon" type="image/x-icon" href="/icons/NetflixAmazon Auto-Skip.svg">
 </head>
 
-<body class="flex" style="height: 100vh">
+<body class="flex" style="height: calc(min(100vh,1800px));">
   <div class="sidenav flex flex-col">
     <div class="flex-center flex-col IconBox">
       <div class="flex-center flex-row">
@@ -36,8 +36,7 @@
       <a target="_blank" class="flex-center flex-col" style="text-align: center; text-decoration: none"
         href="https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle">
         <p style="font-size: 1em" data-i18n>rateNow</p>
-        <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010"
-          alt="rating">
+        <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" alt="rating">
       </a>
     </div>
     <div class="flex flex-col MenuButtons" style="flex-wrap: wrap">
@@ -502,7 +501,16 @@
           </label>
         </div>
         <p class="description" data-i18n>ContinuePositionDescription</p>
+        <hr>
 
+        <div class="line flex">
+          <p data-i18n>XraySwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="AmazonXray">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" data-i18n>XraySwitchDescription</p>
         <!-- <div class="line flex">
             <p data-i18n>StreamLinksSwitch</p>
             <label class="switch">
@@ -749,6 +757,14 @@
         <div>
           <div class="line flex">
             <h2>1.0.93</h2>
+            <ul>
+              <li>Remove Xray over amazon prime videos</li>
+              <li>Fix bug zoom in on settings on about:addons</li>
+              <li>Prime video hover now transparent</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.0.92</p>
             <ul>
               <li>Disney go to home button bug on Chrome</li>
             </ul>

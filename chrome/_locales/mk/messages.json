@@ -255,5 +255,11 @@
   },
   "UserAgentSwitchDescription": {
     "message": "За примарното видео и disney+ сменете на веб-страницата на Desktop и за amazon направете ја страницата пријателска за мобилни телефони"
+  },
+  "XraySwitch": {
+    "message": "Скриј Xray:"
+  },
+  "XraySwitchDescription": {
+    "message": "Скриј го брзиот преглед на Xray преку видео"
   }
 }

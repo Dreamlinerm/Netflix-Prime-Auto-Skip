@@ -23,6 +23,7 @@ const defaultSettings = {
       filterPaid: false,
       continuePosition: true,
       showRating: true,
+      xray: true,
     },
     Netflix: {
       skipIntro: true,
