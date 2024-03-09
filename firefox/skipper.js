@@ -44,6 +44,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         filterPaid: false,
         continuePosition: true,
         showRating: true,
+        xray: true,
       },
       Netflix: {
         skipIntro: true,
@@ -726,6 +727,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (settings.Amazon?.watchCredits) Amazon_Watch_Credits();
     if (settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
     if (settings.Amazon?.filterPaid) Amazon_FilterPaid();
+    if (settings.Amazon?.xray) Amazon_xray();
   }
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
@@ -982,6 +984,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
       let navMain = document.querySelector("#nav-main");
       if (navMain) navMain.style.display = "none";
+    }
+  }
+  async function Amazon_xray() {
+    const xrayList = document.querySelector(".xrayQuickViewList");
+    if (xrayList) {
+      xrayList.remove();
+      log("Xray removed");
     }
   }
   // Crunchyroll functions
