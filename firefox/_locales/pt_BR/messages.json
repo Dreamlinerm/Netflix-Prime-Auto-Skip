@@ -255,5 +255,11 @@
   },
   "UserAgentSwitchDescription": {
     "message": "Para o Prime Video e a Disney+, mude para o site para desktop e, para a Amazon, torne o site compatível com dispositivos móveis"
+  },
+  "XraySwitch": {
+    "message": "Ocultar Xray:"
+  },
+  "XraySwitchDescription": {
+    "message": "Ocultar a visualização rápida do raio Xray um vídeo"
   }
 }

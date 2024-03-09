@@ -261,5 +261,11 @@
   },
   "UserAgentSwitchDescription": {
     "message": "For prime video and disney+ change to the Desktop website and for amazon make the site mobile friendly"
+  },
+  "XraySwitch": {
+    "message": "Hide Xray:"
+  },
+  "XraySwitchDescription": {
+    "message": "Hide the Xray Quick View over a video"
   }
 }
