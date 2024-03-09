@@ -14,13 +14,6 @@
 
 // find out if on settings page or on popup page
 // if document.title is "Streaming enhanced" then it is not the popup page
-// if (window?.outerWidth > 400) {
-//   AmazonSettings();
-//   NetflixSettings();
-//   // Statistics();
-//   document.querySelector("#Export").style.display = "block";
-// }
-
 /**
  * Localize by replacing __MSG_***__ meta tags
  * @returns {void}
