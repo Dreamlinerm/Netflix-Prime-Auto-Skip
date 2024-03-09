@@ -813,7 +813,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     let b = document.querySelector(".fkpovp9.f8hspre:not(.enhanced)");
     if (b) {
       b.classList.add("enhanced");
-      b.style.background = "rgba(0, 0, 0, 0.25)";
+      b.style.backgroundColor = "transparent";
+      b.style.background = "transparent";
     }
     // remove subtitle background
     b = document.querySelector(".atvwebplayersdk-captions-text:not(.enhanced)");
