@@ -18,7 +18,6 @@
 <img src="Logos/chrome.svg" width="20px">
 </a>
 <img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
-<img src="https://img.shields.io/badge/installs-6232-informational" >
 <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" >
 <br>
 <a href="https://paypal.me/MarvinKrebber">
