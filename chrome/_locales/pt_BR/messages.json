@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Streaming enhanced Netflix Disney Prime Video",
+    "message": "Streaming enhanced: Netflix Disney+ Prime Video",
     "description": "Nome da extensão"
   },
   "extensionDescription": {
@@ -205,13 +205,13 @@
     "message": "Importar/exportar todas as configurações"
   },
   "SaveSettings": {
-    "message": "Salvar configurações em arquivo"
+    "message": "Salvar configurações para um arquivo"
   },
   "UploadSettings": {
     "message": "Carregar configurações"
   },
   "ResetAddon": {
-    "message": "Redefinir o Addon para o padrão"
+    "message": "Redefinir o extensão para o padrão"
   },
   "noWrap": {
     "message": "nowrap"
@@ -242,8 +242,11 @@
     "message": "Links para streaming:"
   },
   "StreamLinksDescription": {
-    "message": "Exibe links de streaming para filmes que estão disponíveis em outras plataformas ou em outros países."
+    "message": "Exibe links de serviços de streaming para filmes que estão disponíveis em outras plataformas ou em outros países."
   },
+ "ReleaseCalendarSwitch": {
+    "message": "Incluir calendário de lançamento:"
+  },  
   "EpilepsySwitch": {
     "message": "Opção de epilepsia"
   },
@@ -254,10 +257,10 @@
     "message": "Mudar para sites de desktop"
   },
   "UserAgentSwitchDescription": {
-    "message": "Para o Prime Video e a Disney+, mude para o site para desktop e, para a Amazon, torne o site compatível com dispositivos móveis"
+    "message": "Para o Prime Video e Disney+, mude para o site para desktop, para a Amazon, torne o site compatível com dispositivos móveis"
   },
   "XraySwitch": {
-    "message": "Ocultar Xray:"
+    "message": "Ocultar raioX:"
   },
   "XraySwitchDescription": {
     "message": "Ocultar a visualização rápida do raio Xray um vídeo"
