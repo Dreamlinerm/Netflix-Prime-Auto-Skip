@@ -28,7 +28,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.0.94";
+const version = "1.0.95";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -669,7 +669,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         return;
       }
       const video = document.querySelector("video");
-      const adLength = Number(document.querySelector(".ltr-mmvz9h")?.textContent);
+      const adLength = Number(document.querySelector(".default-ltr-cache-mmvz9h")?.textContent);
       // 16 max but too fast
       if (video) {
         let playBackRate = 8;

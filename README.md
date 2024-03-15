@@ -280,7 +280,7 @@ On Netflix it matches the buttons with the data-uia tag containing:
 * Recap: player-skip-recap, player-skip-preplay
 * Credits: next-episode-seamless-button
 * Inactivity Warning: interrupt-autoplay-continue
-* Basic tier ads: matched by css class .ltr-puk2kp and the speed is set to 16x until the ad is over
+* Basic tier ads: matched by css class .default-ltr-cache-mmvz9h and the speed is set to 16x until the ad is over
 
 On Prime video it matches buttons with the Css Classes:
 
