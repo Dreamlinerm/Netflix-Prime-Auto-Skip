@@ -990,11 +990,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function Amazon_xray() {
-    const xrayList = document.querySelector(".xrayQuickViewList");
-    if (xrayList) {
-      xrayList.remove();
-      log("Xray removed");
-    }
+    document.querySelector(".xrayQuickViewList")?.remove();
   }
   // Crunchyroll functions
   function filterQueued(display) {
