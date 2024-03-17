@@ -906,21 +906,23 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }, 100);
   }
+  function parseAdTime(adTimeText) {
+    const adTime = parseInt(/:\d+/.exec(adTimeText.textContent)?.[0].substring(1)) + parseInt(/\d+/.exec(adTimeText.textContent)?.[0]) * 60;
+    if (isNaN(adTime)) return false;
+    return adTime;
+  }
   async function skipAd(video) {
     // Series grimm
-    let adTimeText = document.querySelector(".atvwebplayersdk-ad-timer-text");
+    const adTimeText = document.querySelector(".atvwebplayersdk-ad-timer-text");
     if (adTimeText) {
-      adTimeText = adTimeText?.childNodes?.[1];
       let adTime;
-      if (adTimeText)
-        adTime = parseInt(/:\d+/.exec(adTimeText.textContent)?.[0].substring(1)) + parseInt(/\d+/.exec(adTimeText.textContent)?.[0]) * 60;
+      adTime = parseAdTime(adTimeText?.childNodes?.[0]);
+      if (!adTime) adTime = parseAdTime(adTimeText?.childNodes?.[1]);
       // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
-      if (!document.querySelector(".fu4rd6c.f1cw2swo") && typeof adTime === "number" && adTime > 1 && lastAdTimeText != adTime) {
+      if (!document.querySelector(".fu4rd6c.f1cw2swo") && adTime > 1 && !lastAdTimeText) {
         lastAdTimeText = adTime;
         resetLastATimeText();
-        // getting stuck loading when skipping ad longer than 100 seconds i think
-        // let skipTime = adTime <= 20 ? adTime - 1 : 20;
-        let skipTime = adTime - 1;
+        const skipTime = adTime - 1;
         video.currentTime += skipTime;
         log("FreeVee Ad skipped, length:", skipTime, "s");
         settings.Statistics.AmazonAdTimeSkipped += skipTime;
