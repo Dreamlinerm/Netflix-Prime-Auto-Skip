@@ -186,7 +186,7 @@ async function Crunchyroll_SpeedSlider(video) {
 
         let speed = document.createElement("p");
         speed.id = "videoSpeed";
-        speed.textContent = videoSpeed ? videoSpeed + "x" : "1.0x";
+        speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
         // makes the button clickable
         // speed.setAttribute("class", "control-icon-btn");
         speed.style = "color:white;margin: auto;padding: 0 5px;";
