@@ -4,7 +4,7 @@
     "description": "Name der Erweiterung"
   },
   "extensionDescription": {
-    "message": "Automatisch Werbung, Intros, Rückblicke, Abspänne usw. auf Netflix, Prime video, Disney+ und Crunchyroll überspringen.",
+    "message": "Automatisch Werbung, Intros, Rückblicke, Abspanne usw. auf Netflix, Prime video, Disney+ und Crunchyroll überspringen.",
     "description": "Beschreibung der Erweiterung"
   },
 
@@ -61,7 +61,7 @@
     "message": "Alle Funktionen, die standardmäßig ausgeschaltet sind, entweder weil sie verwirrend sind, wenn sie eingeschaltet wären, oder weil sie in der Beta-Phase sind"
   },
   "DefaultPaidContentDescription": {
-    "message": "Entfernen aller kostenpflichtigen Filme/Serien kategorien von Amazon Prime"
+    "message": "Entfernen aller kostenpflichtigen Filme/Serien Kategorien von Amazon Prime"
   },
 
   "SharedPageTitle": {
@@ -96,7 +96,7 @@
     "message": "Geschwindigkeitsregler hinzufügen und ändern des Aussehens der Untertitel"
   },
   "SliderOptions": {
-    "message": "Slider-Optionen: geschwindigkeit = Schrittgröße /10"
+    "message": "Slider-Optionen: Geschwindigkeit = Schrittgröße /10"
   },
   "SliderStepSize": {
     "message": "Slider Schrittgröße:"
@@ -236,13 +236,7 @@
     "message": "TMDB Bewertung:"
   },
   "RatingSwitchDescription": {
-    "message": "Zeigt die TMDB Bewertung für jeden film/serie an"
-  },
-  "StreamLinksSwitch": {
-    "message": "Streaming links:"
-  },
-  "StreamLinksDescription": {
-    "message": "Zeigt streaming links für filme an, die auf anderen plaformen oder anderen ländern verfügbar sind"
+    "message": "Zeigt die TMDB Bewertung für jeden Film/Serie an"
   },
   "ReleaseCalendarSwitch": {
     "message": "Release-Kalender Optionen hinzufügen:"
@@ -254,7 +248,7 @@
     "message": "Epilepsy option"
   },
   "EpilepsySwitchDescription": {
-    "message": "Beim überspringen der Werbung den Bildschrim verdunkeln"
+    "message": "Beim überspringen der Werbung den Bildschirm verdunkeln"
   },
   "UserAgentSwitch": {
     "message": "Zu Desktop-Webseiten wechseln"

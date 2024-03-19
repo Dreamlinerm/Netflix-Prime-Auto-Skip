@@ -238,12 +238,6 @@
   "RatingSwitchDescription": {
     "message": "Adding the TMDB rating to every movie and series"
   },
-  "StreamLinksSwitch": {
-    "message": "Streaming links:"
-  },
-  "StreamLinksDescription": {
-    "message": "Displays streaming links for films that are available on other platforms or in other countries."
-  },
   "ReleaseCalendarSwitch": {
     "message": "Add Release Calendar options:"
   },

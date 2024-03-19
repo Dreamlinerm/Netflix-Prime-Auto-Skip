@@ -238,12 +238,6 @@
   "RatingSwitchDescription": {
     "message": "Го прикажува рејтингот на IMDB за секој филм/серија"
   },
-  "StreamLinksSwitch": {
-    "message": "Линкови за стриминг:"
-  },
-  "StreamLinksDescription": {
-    "message": "Прикажува врски за стриминг за филмови достапни на други платформи или други земји"
-  },
   "EpilepsySwitch": {
     "message": "Опција за епилепсија"
   },
