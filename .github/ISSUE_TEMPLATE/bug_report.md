@@ -22,4 +22,4 @@ A clear and concise description of what you expected to happen.
  - Country: [e.g Germany (need to know for vpn)]
  - Browser [e.g. chrome, firefox]
  - Addon-Version [e.g. 1.0.74 seen if you click on the menu on the top]
- - Save the console logs in a txt and upload them here with ctrl+v or dragging
+ - Save the console logs (Press F12) in a txt and upload them here with ctrl+v or dragging
