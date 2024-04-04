@@ -238,15 +238,9 @@
   "RatingSwitchDescription": {
     "message": "Adiciona a classificação do TMDB a todos os filmes e séries"
   },
-  "StreamLinksSwitch": {
-    "message": "Links para streaming:"
-  },
-  "StreamLinksDescription": {
-    "message": "Exibe links de serviços de streaming para filmes que estão disponíveis em outras plataformas ou em outros países."
-  },
- "ReleaseCalendarSwitch": {
+  "ReleaseCalendarSwitch": {
     "message": "Incluir calendário de lançamento:"
-  },  
+  },
   "EpilepsySwitch": {
     "message": "Opção de epilepsia"
   },

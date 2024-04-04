@@ -28,7 +28,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.0.96";
+const version = "1.0.97";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -535,13 +535,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     slider.value = videoSpeed * 10;
     slider.step = settings.General.sliderSteps;
     slider.style = sliderStyle;
-    position.insertBefore(slider, position.firstChild);
 
     let speed = document.createElement("p");
     speed.id = "videoSpeed";
     speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
     speed.style = speedStyle;
+
     position.insertBefore(speed, position.firstChild);
+    position.insertBefore(slider, position.firstChild);
 
     if (videoSpeed) video.playbackRate = videoSpeed;
     speed.onclick = function () {
@@ -557,7 +558,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
 
   const DisneySliderStyle = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;";
-  const DisneySpeedStyle = "height:10px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
+  const DisneySpeedStyle = "height:10px;min-width:40px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
   function Disney_SpeedSlider(video) {
     // remove subtitle background
     let subtitles = document.querySelectorAll(".dss-subtitle-renderer-line:not(.enhanced)");
@@ -843,7 +844,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function Amazon_continuePosition() {
-    const div = document.querySelector("._2RwnU5.dynamic-type-ramp.dv-fable-breakpoints.VYbJYb.yL46mS.kK-hEr");
+    const div = document.querySelector('[class="+OSZzQ"]')?.parentNode;
     if (div) {
       let a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]');
       let maxSectionDepth = 10;
