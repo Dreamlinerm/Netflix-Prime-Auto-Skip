@@ -844,7 +844,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function Amazon_continuePosition() {
-    const div = document.querySelector("._2RwnU5.dynamic-type-ramp.dv-fable-breakpoints.VYbJYb.yL46mS.kK-hEr");
+    const div = document.querySelector('[class="+OSZzQ"]')?.parentNode;
     if (div) {
       let a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]');
       let maxSectionDepth = 10;
