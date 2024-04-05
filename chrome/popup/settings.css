@@ -27,7 +27,7 @@ html,
 body,
 .content {
   min-width: 500px;
-  min-height: 200px;
+  min-height: 400px;
   background-color: #212121;
 }
 body {

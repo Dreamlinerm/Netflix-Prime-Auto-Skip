@@ -1014,6 +1014,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     const input = document.createElement("input");
     input.type = "checkbox";
     input.checked = settingsValue;
+    input.id = filterType;
     input.onclick = function () {
       settings.General[filterType] = this.checked;
       filterFunction(this.checked ? "none" : "block");
@@ -1038,7 +1039,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       // Show playlist only
       filterQueued(settings.General.filterQueued ? "none" : "block");
       filterDub(settings.General.filterDub ? "none" : "block");
-      addButtons();
+      if (!document.querySelector("#filterQueued")) addButtons();
       let days = document.querySelectorAll(".specific-date [datetime]");
       for (const day of days) {
         const date = new Date(day.getAttribute("datetime"));
