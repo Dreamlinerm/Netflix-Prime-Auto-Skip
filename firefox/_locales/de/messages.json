@@ -68,7 +68,7 @@
     "message": "Gemeinsame Videofunktionen"
   },
   "SharedPageDescription": {
-    "message": "Alle Optionen aktivieren/deaktivieren die Einstellungen für alle Streaming-Dienste. Wenn Sie sie nur für einen bestimmten Dienst deaktivieren möchten, müssen Sie zu dessen individuellen Einstellungen gehen."
+    "message": "Diese Optionen aktivieren/deaktivieren die Einstellungen für alle Streaming-Dienste. In der folgenden Tabelle können Sie die gemeinsamen Einstellungen für einen bestimmten Dienst deaktivieren."
   },
   "IntroSwitch": {
     "message": "Intros & Rückblicke überspringen:"
@@ -261,5 +261,11 @@
   },
   "XraySwitchDescription": {
     "message": "Ausblenden der Xray-Schnellansicht über einem video"
+  },
+  "Feature": {
+    "message": "Funktion"
+  },
+  "SpecificFeature": {
+    "message": "Bestimmte Funktion für bestimmten Dienst ausschalten:"
   }
 }
