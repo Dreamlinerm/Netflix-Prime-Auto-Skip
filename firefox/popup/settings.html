@@ -183,17 +183,26 @@
           </div>
           <p class="description" data-i18n>UserAgentSwitchDescription</p>
         </div>
-        <h2 data-i18n>SpecificFeature</h2>
-        <table style="border: 1px solid white;margin-left: 5px">
+        <table style="border: 1px solid white;margin-left: 5px" class="featureTable">
           <tr>
             <th data-i18n>Feature</th>
+            <th data-i18n>Shared</th>
             <th>Netflix</th>
             <th>Prime</th>
             <th>Disney+</th>
             <th>Crunchyroll</th>
           </tr>
           <tr>
-            <td data-i18n>IntroSwitch</td>
+            <td class="tooltip">
+              <p data-i18n>IntroSwitch</p>
+              <i-18n class="tooltiptext">SharedIntroDescription</i-18n>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="VideoSkipIntro">
+                <span class="slider round"></span>
+              </label>
+            </td>
             <td>
               <label class="switch">
                 <input type="checkbox" id="NetflixSkipIntro">
@@ -220,7 +229,16 @@
             </td>
           </tr>
           <tr>
-            <td data-i18n>CreditsSwitch</td>
+            <td class="tooltip">
+              <p data-i18n>CreditsSwitch</p>
+              <i-18n class="tooltiptext">CreditsSwitchDescription</i-18n>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="VideoSkipCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
             <td>
               <label class="switch">
                 <input type="checkbox" id="NetflixSkipCredits">
@@ -241,7 +259,16 @@
             </td>
           </tr>
           <tr>
-            <td data-i18n>WatchCreditsSwitch</td>
+            <td class="tooltip">
+              <p data-i18n>WatchCreditsSwitch</p>
+              <i-18n class="tooltiptext">WatchCreditsSwitchDescription</i-18n>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="VideoWatchCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
             <td>
               <label class="switch">
                 <input type="checkbox" id="NetflixWatchCredits">
@@ -262,7 +289,16 @@
             </td>
           </tr>
           <tr>
-            <td data-i18n>AdsSwitch</td>
+            <td class="tooltip">
+              <p data-i18n>AdsSwitch</p>
+              <i-18n class="tooltiptext">AdsSwitchDescription</i-18n>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="VideoAds">
+                <span class="slider round"></span>
+              </label>
+            </td>
             <td>
               <label class="switch">
                 <input type="checkbox" id="NetflixSkipAd">
@@ -277,7 +313,16 @@
             </td>
           </tr>
           <tr>
-            <td data-i18n>RatingSwitch</td>
+            <td class="tooltip">
+              <p data-i18n>RatingSwitch</p>
+              <i-18n class="tooltiptext">RatingSwitchDescription</i-18n>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="VideoShowRating">
+                <span class="slider round"></span>
+              </label>
+            </td>
             <td>
               <label class="switch">
                 <input type="checkbox" id="NetflixShowRating">
@@ -298,7 +343,16 @@
             </td>
           </tr>
           <tr>
-            <td data-i18n>SliderSwitch</td>
+            <td class="tooltip">
+              <p data-i18n>SliderSwitch</p>
+              <i-18n class="tooltiptext">SliderSwitchDescription</i-18n>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="VideoSpeedSlider">
+                <span class="slider round"></span>
+              </label>
+            </td>
             <td>
               <label class="switch">
                 <input type="checkbox" id="NetflixSpeedSlider">
@@ -327,6 +381,15 @@
         </table>
         <hr>
         <div class="line flex">
+          <p data-i18n>FullscreenSwitch</p>
+          <label class="switch" style="margin-left: 5px">
+            <input type="checkbox" id="VideoFullScreen">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" data-i18n>FullscreenSwitchDescription</p>
+        <hr>
+        <div class="line flex">
           <p data-i18n>EpilepsySwitch</p>
           <label class="switch" style="margin-left: 5px">
             <input type="checkbox" id="VideoEpilepsy">
@@ -337,10 +400,6 @@
         <hr>
         <div class="line flex">
           <p data-i18n>SliderSwitch</p>
-          <label class="switch" style="margin-left: 5px">
-            <input type="checkbox" id="VideoSpeedSlider">
-            <span class="slider round"></span>
-          </label>
         </div>
         <p class="description" data-i18n>SliderSwitchDescription</p>
         <p data-i18n>SliderOptions</p>
@@ -380,60 +439,6 @@
             </td>
           </tr>
         </table>
-        <hr>
-        <div class="line flex">
-          <p data-i18n>IntroSwitch</p>
-          <label class="switch" style="margin-left: 5px">
-            <input type="checkbox" id="VideoSkipIntro">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <p class="description" data-i18n>SharedIntroDescription</p>
-        <hr>
-        <div class="line flex">
-          <p data-i18n>CreditsSwitch</p>
-          <label class="switch" style="margin-left: 5px">
-            <input type="checkbox" id="VideoSkipCredits">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <p class="description" data-i18n>CreditsSwitchDescription</p>
-        <hr>
-        <div class="line flex">
-          <p data-i18n>WatchCreditsSwitch</p>
-          <label class="switch" style="margin-left: 5px">
-            <input type="checkbox" id="VideoWatchCredits">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <p class="description" data-i18n>WatchCreditsSwitchDescription</p>
-        <hr>
-        <div class="line flex">
-          <p data-i18n>AdsSwitch</p>
-          <label class="switch" style="margin-left: 5px">
-            <input type="checkbox" id="VideoAds">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <p class="description" data-i18n>AdsSwitchDescription</p>
-        <hr>
-        <div class="line flex">
-          <p data-i18n>RatingSwitch</p>
-          <label class="switch" style="margin-left: 5px">
-            <input type="checkbox" id="VideoShowRating">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <p class="description" data-i18n>RatingSwitchDescription</p>
-        <hr>
-        <div class="line flex">
-          <p data-i18n>FullscreenSwitch</p>
-          <label class="switch" style="margin-left: 5px">
-            <input type="checkbox" id="VideoFullScreen">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <p class="description" data-i18n>FullscreenSwitchDescription</p>
         <div style="margin-top: 5%"></div>
       </div>
 

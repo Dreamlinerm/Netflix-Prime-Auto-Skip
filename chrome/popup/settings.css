@@ -239,7 +239,6 @@ input:checked + .slider:before {
   background-color: #111;
   padding: 0 10px;
   gap: 20px;
-  text-align: center;
 }
 
 /* The navigation menu links */
@@ -255,6 +254,7 @@ input:checked + .slider:before {
   color: white;
   font-size: 1.5em;
   user-select: none;
+  align-items: center;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -361,4 +361,58 @@ hr {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.featureTable tr *:nth-of-type(2) {
+  border-right: 1px solid white;
+}
+.featureTable tr td:nth-of-type(2) label {
+  margin-right: 20px;
+}
+.featureTable {
+  /* width: 100%; */
+  border-collapse: collapse;
+}
+/* .featureTable,
+th,
+td {
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+} */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted white;
+  /* color: #346991;
+  font-weight: bold; */
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 0%;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

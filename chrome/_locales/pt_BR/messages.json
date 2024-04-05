@@ -68,7 +68,7 @@
     "message": "Recursos de vídeo compartilhado"
   },
   "SharedPageDescription": {
-    "message": "Essas opções só ativam/desativam as configurações de todos os serviços de uma vez. Se você quiser desativá-las especificamente para um serviço, deverá acessar suas configurações individuais."
+    "message": "Essas opções só ativam/desativam as configurações de todos os serviços de streaming. Na tabela abaixo, você pode desativar as configurações compartilhadas de um serviço específico."
   },
   "IntroSwitch": {
     "message": "Pular a introdução e recapitulação:"
@@ -258,5 +258,11 @@
   },
   "XraySwitchDescription": {
     "message": "Ocultar a visualização rápida do raio Xray um vídeo"
+  },
+  "Feature": {
+    "message": "Recurso: Dica de ferramenta para obter mais informações"
+  },
+  "Shared": {
+    "message": "Todos"
   }
 }

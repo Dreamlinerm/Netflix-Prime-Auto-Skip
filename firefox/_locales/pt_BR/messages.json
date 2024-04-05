@@ -260,9 +260,9 @@
     "message": "Ocultar a visualização rápida do raio Xray um vídeo"
   },
   "Feature": {
-    "message": "Recurso"
+    "message": "Recurso: Dica de ferramenta para obter mais informações"
   },
-  "SpecificFeature": {
-    "message": "Desativar recurso específico para serviço específico:"
+  "Shared": {
+    "message": "Todos"
   }
 }

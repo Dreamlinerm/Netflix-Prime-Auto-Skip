@@ -68,7 +68,7 @@
     "message": "Shared Video features"
   },
   "SharedPageDescription": {
-    "message": "These options will only enable/disable the settings for all streaming services. If you want to only disable it specifically for one you have to go to its Individual settings."
+    "message": "These options will only enable/disable the settings for all streaming services. In the below table you can disable the shared settings for a specific service"
   },
   "IntroSwitch": {
     "message": "Skip Intro & Recap:"
@@ -261,5 +261,11 @@
   },
   "XraySwitchDescription": {
     "message": "Hide the Xray Quick View over a video"
+  },
+  "Feature": {
+    "message": "Feature: Tooltip for more information"
+  },
+  "Shared": {
+    "message": "All"
   }
 }

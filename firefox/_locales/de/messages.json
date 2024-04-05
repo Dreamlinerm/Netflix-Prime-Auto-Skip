@@ -263,9 +263,9 @@
     "message": "Ausblenden der Xray-Schnellansicht über einem video"
   },
   "Feature": {
-    "message": "Funktion"
+    "message": "Funktion: Tooltip für mehr Informationen"
   },
-  "SpecificFeature": {
-    "message": "Bestimmte Funktion für bestimmten Dienst ausschalten:"
+  "Shared": {
+    "message": "Alle"
   }
 }

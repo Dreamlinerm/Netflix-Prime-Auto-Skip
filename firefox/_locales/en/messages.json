@@ -263,9 +263,9 @@
     "message": "Hide the Xray Quick View over a video"
   },
   "Feature": {
-    "message": "Feature"
+    "message": "Feature: Tooltip for more information"
   },
-  "SpecificFeature": {
-    "message": "Switch off specific feature for specific service:"
+  "Shared": {
+    "message": "All"
   }
 }
