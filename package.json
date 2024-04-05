@@ -25,8 +25,7 @@
   },
   "homepage": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip#readme",
   "pre-commit": [
-    "lint",
-    "esLint"
+    "lint"
   ],
   "devDependencies": {
     "eslint": "^8.52.0",
