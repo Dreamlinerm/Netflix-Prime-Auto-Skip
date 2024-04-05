@@ -26,7 +26,8 @@ h6 {
 html,
 body,
 .content {
-  min-width: 400px;
+  min-width: 500px;
+  min-height: 200px;
   background-color: #212121;
 }
 body {
@@ -100,6 +101,9 @@ div {
   display: flex;
   justify-content: flex-start;
 }
+.flex-wrap {
+  flex-wrap: wrap;
+}
 .line,
 h1,
 h2,
@@ -120,43 +124,6 @@ p {
   padding-top: unset;
   padding-bottom: unset;
 }
-.categoryVideo {
-  background-color: #636363;
-  border-radius: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-.Prime {
-  color: #00aeef;
-}
-.Netflix {
-  color: #e60010;
-}
-.Disney {
-  color: #000c7d;
-}
-.categoryPrime {
-  background-color: #00aeef;
-}
-.categoryNetflix {
-  background-color: #e60010;
-}
-.categoryDisney {
-  background-color: #000c7d;
-}
-.categoryCrunchyroll {
-  background-color: #f78b24;
-}
-.categoryPrime,
-.categoryNetflix,
-.categoryDisney,
-.categoryCrunchyroll {
-  margin-top: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
-  border-radius: 10px;
-}
-
 /* Switch styling */
 label {
   margin-left: auto;
@@ -257,8 +224,24 @@ input:checked + .slider:before {
   align-items: center;
 }
 
+.popupMenuButton {
+  flex: 1 0 calc(25% - 20px);
+  max-width: calc(25% - 20px);
+  border-radius: 15px;
+  padding: 20px;
+  margin: 10px;
+  background-color: #242424;
+  cursor: pointer;
+  color: white;
+  align-items: center;
+}
+.popupMenuButton .icon {
+  width: 100%;
+  height: fit-content;
+}
 /* When you mouse over the navigation links, change their color */
-.menuButton:hover {
+.menuButton:hover,
+.popupMenuButton:hover {
   background-color: #4d0000;
 }
 
@@ -272,15 +255,6 @@ hr {
 }
 .IconBox {
   padding: 20px 20px;
-}
-#openVideoSettings,
-#openAmazonSettings,
-#openNetflixSettings,
-#openStatistics {
-  cursor: pointer;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
 }
 .settingsIcon:hover {
   -webkit-animation: spin 4s linear infinite;
@@ -415,4 +389,8 @@ td {
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+#backButton {
+  cursor: pointer;
 }

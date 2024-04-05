@@ -13,7 +13,7 @@
 /* global chrome */
 
 // find out if on settings page or on popup page
-// if document.title is "Streaming enhanced" then it is not the popup page
+const isPopup = document.title === "Popup";
 /**
  * Localize by replacing __MSG_***__ meta tags
  * @returns {void}
@@ -47,18 +47,16 @@ if (url.includes("#")) Menu(url.split("#")[1]);
 // if on streaming page open settings for page
 const query = { active: true, currentWindow: true };
 function callback(tabs) {
-  let currentTab = tabs[0]; // there will be only one in this array
-  console.log("currentTab", currentTab); // also has properties like currentTab.id
-  const currentUrl = currentTab.url;
+  const currentUrl = tabs[0].url;
   const isPrimeVideo = /amazon|primevideo/i.test(currentUrl);
   const isNetflix = /netflix/i.test(currentUrl);
   const isDisney = /disneyplus|starplus/i.test(currentUrl);
   const isHotstar = /hotstar/i.test(currentUrl);
   const isCrunchyroll = /crunchyroll/i.test(currentUrl);
-  if (isPrimeVideo) openIndividualSettings("Amazon");
-  else if (isNetflix) openIndividualSettings("Netflix");
-  else if (isDisney || isHotstar) openIndividualSettings("Disney");
-  else if (isCrunchyroll) openIndividualSettings("Crunchyroll");
+  if (isPrimeVideo) Menu("Amazon");
+  else if (isNetflix) Menu("Netflix");
+  else if (isDisney || isHotstar) Menu("Disney");
+  else if (isCrunchyroll) Menu("Crunchyroll");
 }
 chrome.tabs.query(query, callback);
 
@@ -260,21 +258,17 @@ function setCheckboxesToSettings() {
     button.download = "settings.json";
   }
 }
-// open and close the Amazon and Netflix Individual Settings
-function openIndividualSettings(setting) {
-  const open = document.getElementById(setting + "Settings").style.display === "none";
-  document.getElementById(setting + "Settings").style.display = open ? "block" : "none";
-  document.getElementsByClassName(setting + "DownArrow")[0].style.display = open ? "none" : "block";
-  document.getElementsByClassName(setting + "UpArrow")[0].style.display = open ? "block" : "none";
-}
+
 function Menu(setting) {
-  const Pages = ["Video", "Amazon", "Netflix", "Disney", "Crunchyroll", "Statistics", "Other", "Changelog", "Default"];
-  const noButton = ["Default"];
+  const Pages = isPopup
+    ? ["Video", "Amazon", "Netflix", "Disney", "Crunchyroll", "Statistics", "Popup"]
+    : ["Video", "Amazon", "Netflix", "Disney", "Crunchyroll", "Statistics", "Other", "Changelog", "Default"];
+  const noButton = ["Default", "Popup"];
   for (const page of Pages) {
     document.getElementById(page + "Settings").style.display = "none";
     if (!noButton.includes(page)) document.getElementById("Menu" + page).style.setProperty("background-color", "");
   }
-  document.getElementById(setting + "Settings").style.display = "block";
+  document.getElementById(setting + "Settings").style.display = setting == "Popup" ? "flex" : "block";
   if (!noButton.includes(setting)) document.getElementById("Menu" + setting).style.setProperty("background-color", "#e60010");
 }
 /**
@@ -341,8 +335,7 @@ function listenForClicks() {
     }
     //  -------------      Menu        ---------------------------------------
     else if (e.target.id.startsWith("Menu")) Menu(e.target.id.replace("Menu", ""));
-    //  -------------      openSettings        ---------------------------------------
-    else if (e.target.id.startsWith("open")) openIndividualSettings(e.target.id.replace("open", "").replace("Settings", ""));
+    else if (e.target.id === "backButton") Menu("Popup");
     // all buttons changing settings
     else {
       //  -------------      Video        ---------------------------------------
