@@ -239,7 +239,6 @@ input:checked + .slider:before {
   background-color: #111;
   padding: 0 10px;
   gap: 20px;
-  text-align: center;
 }
 
 /* The navigation menu links */
@@ -255,6 +254,7 @@ input:checked + .slider:before {
   color: white;
   font-size: 1.5em;
   user-select: none;
+  align-items: center;
 }
 
 /* When you mouse over the navigation links, change their color */
