@@ -234,6 +234,7 @@ input:checked + .slider:before {
   cursor: pointer;
   color: white;
   align-items: center;
+  user-select: none;
 }
 .popupMenuButton .icon {
   width: 100%;
