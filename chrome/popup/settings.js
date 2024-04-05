@@ -44,6 +44,24 @@ if (window.name == "addon-inline-options") {
 let url = window.location.href;
 if (url.includes("#")) Menu(url.split("#")[1]);
 
+// if on streaming page open settings for page
+const query = { active: true, currentWindow: true };
+function callback(tabs) {
+  let currentTab = tabs[0]; // there will be only one in this array
+  console.log("currentTab", currentTab); // also has properties like currentTab.id
+  const currentUrl = currentTab.url;
+  const isPrimeVideo = /amazon|primevideo/i.test(currentUrl);
+  const isNetflix = /netflix/i.test(currentUrl);
+  const isDisney = /disneyplus|starplus/i.test(currentUrl);
+  const isHotstar = /hotstar/i.test(currentUrl);
+  const isCrunchyroll = /crunchyroll/i.test(currentUrl);
+  if (isPrimeVideo) openIndividualSettings("Amazon");
+  else if (isNetflix) openIndividualSettings("Netflix");
+  else if (isDisney || isHotstar) openIndividualSettings("Disney");
+  else if (isCrunchyroll) openIndividualSettings("Crunchyroll");
+}
+chrome.tabs.query(query, callback);
+
 // global variables in localStorage
 const defaultSettings = {
   settings: {

@@ -39,6 +39,7 @@
   ],
   "permissions": [
     "storage",
+    "tabs",
     "webRequest",
     "webRequestBlocking",
     "*://*.disneyplus.com/*",
