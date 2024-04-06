@@ -24,14 +24,12 @@ function localizeHtmlPage() {
   // i18n tag
   let translations = document.getElementsByTagName("i-18n");
   for (let trans of translations) {
-    let Translated = browser.i18n.getMessage.apply(null, trans.textContent.split(";"));
-    trans.textContent = Translated;
+    trans.textContent = browser.i18n.getMessage.apply(null, trans.textContent.split(";"));
   }
   // i18n attribute
   translations = document.querySelectorAll("[data-i18n]");
   for (let trans of translations) {
-    let Translated = browser.i18n.getMessage.apply(null, trans.textContent.split(";"));
-    trans.textContent = Translated;
+    trans.textContent = browser.i18n.getMessage.apply(null, trans.textContent.split(";"));
   }
 }
 localizeHtmlPage();

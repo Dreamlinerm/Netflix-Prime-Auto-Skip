@@ -264,5 +264,8 @@
   },
   "Shared": {
     "message": "Todos"
+  },
+  "OpenSharedSettings": {
+    "message": "Abrir configurações compartilhadas"
   }
 }
