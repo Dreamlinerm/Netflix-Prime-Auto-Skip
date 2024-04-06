@@ -47,14 +47,13 @@ if (url.includes("#")) Menu(url.split("#")[1]);
 const query = { active: true, currentWindow: true };
 function callback(tabs) {
   const currentUrl = tabs[0].url;
-  const isPrimeVideo = /amazon|primevideo/i.test(currentUrl);
-  const isNetflix = /netflix/i.test(currentUrl);
-  const isDisney = /disneyplus|starplus/i.test(currentUrl);
-  const isHotstar = /hotstar/i.test(currentUrl);
-  const isCrunchyroll = /crunchyroll/i.test(currentUrl);
+  const isPrimeVideo = /.amazon.|.primevideo./i.test(currentUrl);
+  const isNetflix = /.netflix./i.test(currentUrl);
+  const isDisney = /.disneyplus.|.starplus.|.hotstar./i.test(currentUrl);
+  const isCrunchyroll = /.crunchyroll./i.test(currentUrl);
   if (isPrimeVideo) Menu("Amazon");
   else if (isNetflix) Menu("Netflix");
-  else if (isDisney || isHotstar) Menu("Disney");
+  else if (isDisney) Menu("Disney");
   else if (isCrunchyroll) Menu("Crunchyroll");
 }
 browser.tabs.query(query, callback);
