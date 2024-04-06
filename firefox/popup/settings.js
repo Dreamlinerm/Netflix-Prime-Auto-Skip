@@ -38,6 +38,7 @@ if (window.name == "addon-inline-options") {
   document.querySelector("body").style.minHeight = "700px";
 }
 
+let backButtonHistory = ["Popup"];
 // remove everything before # in window.location
 let url = window.location.href;
 if (url.includes("#")) Menu(url.split("#")[1]);
@@ -130,7 +131,6 @@ browser.storage.sync.onChanged.addListener(function (changes) {
 });
 //global variables
 let sliderValue = settings.General.sliderMax;
-let backButtonHistory = ["Popup"];
 // ------------------- functions --------------------
 function getTimeFormatted(sec = 0) {
   if (typeof sec !== "number") return "0s";
