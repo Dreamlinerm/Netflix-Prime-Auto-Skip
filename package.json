@@ -1,7 +1,7 @@
 {
   "name": "streaming-enhanced",
   "version": "1.0.98",
-  "description": "Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video and Disney+ & Hotstar.",
+  "description": "Automatically skip Ads, Intros, Credits and add Speed Control, etc. on Netflix, Prime video, Disney+ & Hotstar and Crunchyroll.",
   "scripts": {
     "start": "web-ext run",
     "start-chrome": "web-ext run --source-dir ./chrome/ -t chromium",
