@@ -37,7 +37,7 @@ const defaultSettings = {
       showRating: true,
     },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-    Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true },
+    Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
@@ -108,25 +108,74 @@ async function startPlayOnFullScreen() {
     removeEventListener("fullscreenchange", OnFullScreenChange);
   }
 }
+let skipped = false;
+let audioButtonClicked = false;
+async function setLanguage(lang, index) {
+  settings.Crunchyroll.dubLanguage = { lang: lang, index: index };
+  console.log("dubLanguage", settings.Crunchyroll.dubLanguage);
+  browser.storage.sync.set({ settings });
+}
+async function registerAudioButton() {
+  const Radios = document.querySelectorAll('[data-testid="vilos-settings_radio_item"]');
+  if (Radios) {
+    Radios.forEach((radio, index) => {
+      const checked = radio.querySelector("circle.dot")?.parentNode?.parentNode?.querySelector(".r-jwli3a");
+      const lang = radio.querySelector('[dir="auto"]')?.textContent;
+      if (checked && settings.Crunchyroll.dubLanguage?.lang != checked?.textContent) setLanguage(lang, index);
+      radio.addEventListener("click", function () {
+        setLanguage(lang, index);
+      });
+    });
+  }
+}
+function setAudioLanguage() {
+  // check if settings_audio_track_submenu  was clicked
+  const audioButton = document.querySelector('[data-testid="vilos-settings_audio_track_submenu"]');
+  if (audioButton) {
+    audioButton.addEventListener("click", function () {
+      if (!audioButtonClicked) {
+        console.log("audioButton clicked");
+        audioButtonClicked = true;
+        setTimeout(function () {
+          registerAudioButton();
+        }, 200);
+      }
+    });
+  } else if (audioButtonClicked) {
+    setTimeout(function () {
+      audioButtonClicked = false;
+    }, 1000);
+  }
+}
+let reverseButtonClicked = false;
+let reverseButtonStartTime;
+let reverseButtonEndTime;
 async function Crunchyroll_Intro(video, time) {
+  // saves the audio language to settings
+  setAudioLanguage();
   if (!reverseButtonClicked) {
     const button = document.querySelector('[data-testid="skipIntroText"]');
-    if (button) {
-      button?.click();
-      log("Intro skipped", button);
-      setTimeout(function () {
-        CrunchyrollGobackbutton(video, time, video?.currentTime);
-        addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
-      }, 600);
+    if (button && !skipped) {
+      // add timeout because it can skip mid sentence if language is not japanese.
+      skipped = true;
+      setTimeout(
+        function () {
+          button?.click();
+          skipped = false;
+          log("Intro skipped", button);
+          setTimeout(function () {
+            CrunchyrollGobackbutton(video, time, video?.currentTime);
+            addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
+          }, 600);
+        },
+        settings.Crunchyroll?.index === 0 || settings.Crunchyroll?.index == undefined ? 0 : 2e3
+      );
     }
   } else if (!document.querySelector(".reverse-button")) {
     addButton(video, reverseButtonStartTime, reverseButtonEndTime);
   }
 }
 
-let reverseButtonClicked = false;
-let reverseButtonStartTime;
-let reverseButtonEndTime;
 function addButton(video, startTime, endTime) {
   if (reverseButtonClicked) return;
   const button = document.createElement("div");
