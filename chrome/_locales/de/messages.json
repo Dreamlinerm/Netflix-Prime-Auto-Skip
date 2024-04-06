@@ -267,5 +267,8 @@
   },
   "Shared": {
     "message": "Alle"
+  },
+  "OpenSharedSettings": {
+    "message": "Gemeinsame Einstellungen öffnen"
   }
 }
