@@ -130,6 +130,7 @@ browser.storage.sync.onChanged.addListener(function (changes) {
 });
 //global variables
 let sliderValue = settings.General.sliderMax;
+let backButtonHistory = ["Popup"];
 // ------------------- functions --------------------
 function getTimeFormatted(sec = 0) {
   if (typeof sec !== "number") return "0s";
@@ -257,7 +258,9 @@ function setCheckboxesToSettings() {
   }
 }
 
-function Menu(setting) {
+function Menu(setting, isBackButton = false) {
+  if (!isBackButton) backButtonHistory.push(setting);
+  console.log(backButtonHistory);
   const Pages = isPopup
     ? ["Video", "Amazon", "Netflix", "Disney", "Crunchyroll", "Statistics", "Popup"]
     : ["Video", "Amazon", "Netflix", "Disney", "Crunchyroll", "Statistics", "Other", "Changelog", "Default"];
@@ -333,7 +336,12 @@ function listenForClicks() {
     }
     //  -------------      Menu        ---------------------------------------
     else if (e.target.id.startsWith("Menu")) Menu(e.target.id.replace("Menu", ""));
-    else if (e.target.id === "backButton") Menu("Popup");
+    else if (e.target.id === "backButton") {
+      if (backButtonHistory.length > 0) {
+        backButtonHistory.pop();
+        Menu(backButtonHistory[backButtonHistory.length - 1], true);
+      } else Menu("Popup", true);
+    }
     // all buttons changing settings
     else {
       //  -------------      Video        ---------------------------------------
