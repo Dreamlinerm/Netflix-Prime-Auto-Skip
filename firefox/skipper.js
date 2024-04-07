@@ -306,14 +306,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       // add seen class
       if (isNetflix || isDisney || isHotstar) card.classList.add("imdb");
       //Amazon
-      else {
-        let parent = card?.parentElement;
-        while (parent) {
-          if (parent.tagName == "LI") break;
-          parent = parent.parentElement;
-        }
-        if (parent) parent.classList.add("imdb");
-      }
+      else card?.closest("li")?.classList.add("imdb");
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
       // S2: E3 remove this part
@@ -864,21 +857,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function Amazon_continuePosition() {
-    const div = document.querySelector('[class="+OSZzQ"]')?.parentNode;
-    if (div) {
-      let a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]');
-      let maxSectionDepth = 10;
-      while (a?.parentElement && maxSectionDepth > 0) {
-        a = a.parentElement;
-        maxSectionDepth--;
-        if (a?.classList?.contains("+OSZzQ")) break;
-      }
-      const insertBefore = div.childNodes[2];
-      if (a && insertBefore) {
-        // move continue category to the top
-        div.insertBefore(a, insertBefore);
-        // continueCategory.remove();
-      }
+    const a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]')?.closest('[class="+OSZzQ"]');
+    const insertBefore = a?.parentNode?.childNodes?.[2];
+    if (a && insertBefore) {
+      a?.parentNode.insertBefore(a, insertBefore);
     }
   }
   async function Amazon_FilterPaid() {
