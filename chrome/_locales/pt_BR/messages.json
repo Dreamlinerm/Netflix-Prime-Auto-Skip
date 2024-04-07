@@ -274,7 +274,10 @@
   "requestTabs": {
     "message": "Solicitar permissão de guias"
   },
-  "autoOpenDescription": {
-    "message": "Se estiver em um site de streaming, abra automaticamente as configurações correspondentes na janela pop-up"
+  "DuplicateSwitch": {
+    "message": "Remover shows duplicados:"
+  },
+  "DuplicateSwitchDescription": {
+    "message": "Remover todos os programas duplicados, que já estavam visíveis na Disney anteriormente. Visível significa que o programa está entre os primeiros 5 programas em cada linha"
   }
 }

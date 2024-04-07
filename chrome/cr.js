@@ -36,7 +36,7 @@ const defaultSettings = {
       profile: true,
       showRating: true,
     },
-    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
+    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, filterDuplicates: false },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
@@ -111,7 +111,7 @@ async function startPlayOnFullScreen() {
 let skipped = false;
 let audioButtonClicked = false;
 async function setLanguage(lang, index) {
-  settings.Crunchyroll.dubLanguage = { lang: lang, index: index };
+  settings.Crunchyroll.dubLanguage = { lang, index };
   console.log("dubLanguage", settings.Crunchyroll.dubLanguage);
   chrome.storage.sync.set({ settings });
 }
@@ -168,7 +168,7 @@ async function Crunchyroll_Intro(video, time) {
             addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
           }, 600);
         },
-        settings.Crunchyroll?.index === 0 || settings.Crunchyroll?.index == undefined ? 0 : 2e3
+        settings.Crunchyroll?.dubLanguage?.index === 0 || settings.Crunchyroll?.dubLanguage?.index == undefined ? 0 : 2e3
       );
     }
   } else if (!document.querySelector(".reverse-button")) {

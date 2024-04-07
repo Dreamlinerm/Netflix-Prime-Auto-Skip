@@ -279,5 +279,11 @@
   },
   "autoOpenDescription": {
     "message": "Wenn auf der Streaming-Seite öffnet sich die entsprechenden Einstellungen im popup automatisch"
+  },
+  "DuplicateSwitch": {
+    "message": "Entfernt doppelte Shows:"
+  },
+  "DuplicateSwitchDescription": {
+    "message": "Entfernt jede doppelte Show, die bereits vorher auf Disney sichtbar war. Sichtbar bedeutet, dass die Show unter den ersten 5 Shows in jeder Reihe war"
   }
 }

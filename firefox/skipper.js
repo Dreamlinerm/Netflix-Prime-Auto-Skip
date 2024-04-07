@@ -77,7 +77,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       DBCache = result?.DBCache;
       if (typeof DBCache !== "object") {
         log("DBCache not found, creating new one", DBCache);
-        browser.storage.local.set({ DBCache: {} });
+        try {
+          browser.storage.local.set({ DBCache: {} });
+        } catch (error) {
+          log(error);
+        }
         DBCache = {};
       }
       if (isNetflix) {
@@ -272,7 +276,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         clearInterval(DBCacheInterval);
         return;
       }
-      setDBCache();
+      try {
+        setDBCache();
+      } catch (error) {
+        log(error);
+        clearInterval(DBCacheInterval);
+      }
     }, 5000);
   }
   function getDiffInDays(firstDate, secondDate) {
@@ -645,7 +654,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         // small profile picture
         settings.General.profilePicture = currentProfile?.firstChild?.firstChild?.src;
         settings.General.profileName = currentProfileName;
-        browser.storage.sync.set({ settings });
+        try {
+          browser.storage.sync.set({ settings });
+        } catch (error) {
+          log(error);
+        }
         log("Profile switched to", currentProfileName);
       }
     }
@@ -1010,7 +1023,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     input.onclick = function () {
       settings.General[filterType] = this.checked;
       filterFunction(this.checked ? "none" : "block");
-      browser.storage.sync.set({ settings });
+      try {
+        browser.storage.sync.set({ settings });
+      } catch (error) {
+        log(error);
+      }
     };
     const p = document.createElement("p");
     p.style = "width: 100px;";
@@ -1058,8 +1075,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   function increaseBadge() {
     settings.Statistics.SegmentsSkipped++;
-    browser.storage.sync.set({ settings });
     try {
+      browser.storage.sync.set({ settings });
       browser.runtime.sendMessage({
         type: "increaseBadge",
       });

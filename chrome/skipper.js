@@ -57,7 +57,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         profile: true,
         showRating: true,
       },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, filterDuplicates: false },
       Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
@@ -77,7 +77,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       DBCache = result?.DBCache;
       if (typeof DBCache !== "object") {
         log("DBCache not found, creating new one", DBCache);
-        chrome.storage.local.set({ DBCache: {} });
+        try {
+          chrome.storage.local.set({ DBCache: {} });
+        } catch (error) {
+          log(error);
+        }
         DBCache = {};
       }
       if (isNetflix) {
@@ -272,7 +276,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         clearInterval(DBCacheInterval);
         return;
       }
-      setDBCache();
+      try {
+        setDBCache();
+      } catch (error) {
+        log(error);
+        clearInterval(DBCacheInterval);
+      }
     }, 5000);
   }
   function getDiffInDays(firstDate, secondDate) {
@@ -306,14 +315,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       // add seen class
       if (isNetflix || isDisney || isHotstar) card.classList.add("imdb");
       //Amazon
-      else {
-        let parent = card?.parentElement;
-        while (parent) {
-          if (parent.tagName == "LI") break;
-          parent = parent.parentElement;
-        }
-        if (parent) parent.classList.add("imdb");
-      }
+      else card?.closest("li")?.classList.add("imdb");
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
       // S2: E3 remove this part
@@ -392,6 +394,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     let video = document.querySelector("video");
     if (!video) video = document.querySelector("disney-web-player")?.shadowRoot?.firstChild?.firstChild;
     const time = video?.currentTime;
+    if (settings.Disney?.filterDuplicates) Disney_filterDuplicates();
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
     Disney_Credits();
     Disney_addHomeButton();
@@ -589,6 +592,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
       }
     }
   }
+  function Disney_filterDuplicates() {
+    const titleSet = new Set();
+    const slideTracks = document.querySelectorAll(".slick-track");
+    for (const slideTrack of slideTracks) {
+      const titleCards = slideTrack.querySelectorAll(".basic-card div div img:first-of-type");
+      // remove only visible duplicates
+      for (let i = 0; i < titleCards.length && i <= 4; i++) {
+        const titleCard = titleCards[i];
+        const title = titleCard.getAttribute("alt");
+        if (titleSet.has(title)) {
+          log("removed duplicate:", title);
+          const div = titleCard.closest(".slick-slide");
+          div?.remove();
+        } else {
+          titleSet.add(title);
+        }
+      }
+    }
+  }
   // Netflix Observer
   const NetflixObserver = new MutationObserver(Netflix);
   function Netflix() {
@@ -632,7 +654,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         // small profile picture
         settings.General.profilePicture = currentProfile?.firstChild?.firstChild?.src;
         settings.General.profileName = currentProfileName;
-        chrome.storage.sync.set({ settings });
+        try {
+          chrome.storage.sync.set({ settings });
+        } catch (error) {
+          log(error);
+        }
         log("Profile switched to", currentProfileName);
       }
     }
@@ -844,21 +870,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function Amazon_continuePosition() {
-    const div = document.querySelector('[class="+OSZzQ"]')?.parentNode;
-    if (div) {
-      let a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]');
-      let maxSectionDepth = 10;
-      while (a?.parentElement && maxSectionDepth > 0) {
-        a = a.parentElement;
-        maxSectionDepth--;
-        if (a?.classList?.contains("+OSZzQ")) break;
-      }
-      const insertBefore = div.childNodes[2];
-      if (a && insertBefore) {
-        // move continue category to the top
-        div.insertBefore(a, insertBefore);
-        // continueCategory.remove();
-      }
+    const a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]')?.closest('[class="+OSZzQ"]');
+    const insertBefore = a?.parentNode?.childNodes?.[2];
+    if (a && insertBefore) {
+      a?.parentNode.insertBefore(a, insertBefore);
     }
   }
   async function Amazon_FilterPaid() {
@@ -875,20 +890,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function deletePaidCategory(a) {
-    // don't iterate too long too much performance impact
-    let maxSectionDepth = 10;
-    let SectionCount = 0;
-    while (a?.parentElement && SectionCount < 2 && maxSectionDepth > 0) {
-      a = a.parentElement;
-      maxSectionDepth--;
-      if (a.tagName == "SECTION") {
-        SectionCount++;
-      }
-    }
-    // fixes if no 2. section is found it will remove the hole page
-    if (a.tagName == "SECTION") {
-      log("Filtered paid Element", a.parentElement);
-      a.remove();
+    const secondSection = a?.closest("section")?.parentNode?.closest("section");
+    if (secondSection) {
+      log("Filtered paid Element", secondSection);
+      secondSection.remove();
       increaseBadge();
     }
   }
@@ -1018,7 +1023,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     input.onclick = function () {
       settings.General[filterType] = this.checked;
       filterFunction(this.checked ? "none" : "block");
-      chrome.storage.sync.set({ settings });
+      try {
+        chrome.storage.sync.set({ settings });
+      } catch (error) {
+        log(error);
+      }
     };
     const p = document.createElement("p");
     p.style = "width: 100px;";
@@ -1066,8 +1075,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
   }
   function increaseBadge() {
     settings.Statistics.SegmentsSkipped++;
-    chrome.storage.sync.set({ settings });
     try {
+      chrome.storage.sync.set({ settings });
       chrome.runtime.sendMessage({
         type: "increaseBadge",
       });
