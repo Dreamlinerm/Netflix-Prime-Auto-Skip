@@ -44,7 +44,7 @@ const defaultSettings = {
   },
 };
 let settings = defaultSettings.settings;
-const version = "1.1.1";
+const version = "1.1.2";
 browser.storage.sync.get("settings", function (result) {
   console.log(
     "%cNetflix%c/%cPrime%c Auto-Skip",
@@ -111,7 +111,7 @@ async function startPlayOnFullScreen() {
 let skipped = false;
 let audioButtonClicked = false;
 async function setLanguage(lang, index) {
-  settings.Crunchyroll.dubLanguage = { lang: lang, index: index };
+  settings.Crunchyroll.dubLanguage = { lang, index };
   console.log("dubLanguage", settings.Crunchyroll.dubLanguage);
   browser.storage.sync.set({ settings });
 }
@@ -168,7 +168,7 @@ async function Crunchyroll_Intro(video, time) {
             addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
           }, 600);
         },
-        settings.Crunchyroll?.index === 0 || settings.Crunchyroll?.index == undefined ? 0 : 2e3
+        settings.Crunchyroll?.dubLanguage?.index === 0 || settings.Crunchyroll?.dubLanguage?.index == undefined ? 0 : 2e3
       );
     }
   } else if (!document.querySelector(".reverse-button")) {
