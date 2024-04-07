@@ -877,20 +877,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function deletePaidCategory(a) {
-    // don't iterate too long too much performance impact
-    let maxSectionDepth = 10;
-    let SectionCount = 0;
-    while (a?.parentElement && SectionCount < 2 && maxSectionDepth > 0) {
-      a = a.parentElement;
-      maxSectionDepth--;
-      if (a.tagName == "SECTION") {
-        SectionCount++;
-      }
-    }
-    // fixes if no 2. section is found it will remove the hole page
-    if (a.tagName == "SECTION") {
-      log("Filtered paid Element", a.parentElement);
-      a.remove();
+    const secondSection = a?.closest("section")?.parentNode?.closest("section");
+    if (secondSection) {
+      log("Filtered paid Element", secondSection);
+      secondSection.remove();
       increaseBadge();
     }
   }
