@@ -545,8 +545,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
     speed.style = speedStyle;
 
-    position.insertBefore(speed, position.firstChild);
-    position.insertBefore(slider, position.firstChild);
+    position.prepend(slider, speed);
 
     if (videoSpeed) video.playbackRate = videoSpeed;
     speed.onclick = function () {

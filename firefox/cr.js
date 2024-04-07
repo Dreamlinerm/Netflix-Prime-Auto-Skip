@@ -239,8 +239,7 @@ async function Crunchyroll_SpeedSlider(video) {
         // makes the button clickable
         // speed.setAttribute("class", "control-icon-btn");
         speed.style = "color:white;margin: auto;padding: 0 5px;";
-        position.insertBefore(speed, position.firstChild);
-        position.insertBefore(slider, position.firstChild);
+        position.prepend(slider, speed);
 
         if (videoSpeed) video.playbackRate = videoSpeed;
         speed.onclick = function (event) {
