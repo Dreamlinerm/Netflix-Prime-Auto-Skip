@@ -279,5 +279,11 @@
   },
   "autoOpenDescription": {
     "message": "If on streaming site open the according settings in popup automatically"
+  },
+  "DuplicateSwitch": {
+    "message": "Remove duplicate Shows:"
+  },
+  "DuplicateSwitchDescription": {
+    "message": "Remove every duplicate show, which was already visible on Disney before. Visible means that the show is in the first 5 shows in every row"
   }
 }

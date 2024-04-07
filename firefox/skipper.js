@@ -57,7 +57,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         profile: true,
         showRating: true,
       },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, filterDuplicates: false },
       Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
@@ -392,6 +392,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     let video = document.querySelector("video");
     if (!video) video = document.querySelector("disney-web-player")?.shadowRoot?.firstChild?.firstChild;
     const time = video?.currentTime;
+    if (settings.Disney?.filterDuplicates) Disney_filterDuplicates();
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
     Disney_Credits();
     Disney_addHomeButton();
@@ -586,6 +587,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
           video.playbackRate = this.value / 10;
           setVideoSpeed(this.value / 10);
         };
+      }
+    }
+  }
+  function Disney_filterDuplicates() {
+    const titleSet = new Set();
+    const slideTracks = document.querySelectorAll(".slick-track");
+    for (const slideTrack of slideTracks) {
+      const titleCards = slideTrack.querySelectorAll(".basic-card div div img:first-of-type");
+      // remove only visible duplicates
+      for (let i = 0; i < titleCards.length && i <= 4; i++) {
+        const titleCard = titleCards[i];
+        const title = titleCard.getAttribute("alt");
+        if (titleSet.has(title)) {
+          log("removed duplicate:", title);
+          const div = titleCard.closest(".slick-slide");
+          div?.remove();
+        } else {
+          titleSet.add(title);
+        }
       }
     }
   }

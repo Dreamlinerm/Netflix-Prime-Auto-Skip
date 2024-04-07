@@ -271,7 +271,10 @@
   "requestTabs": {
     "message": "Побарајте дозвола за картички"
   },
-  "autoOpenDescription": {
-    "message": "Se estiver em um site de streaming, abra automaticamente as configurações correspondentes na janela pop-up"
+  "DuplicateSwitch": {
+    "message": "Отстрани дупликат емисии:"
+  },
+  "DuplicateSwitchDescription": {
+    "message": "Отстранете го секое дупликат шоу, кое претходно беше видливо на Disney. Видливо значи дека шоуто е во првите 5 емисии во секој ред"
   }
 }

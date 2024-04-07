@@ -84,7 +84,7 @@ const defaultSettings = {
       profile: true,
       showRating: true,
     },
-    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
+    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, filterDuplicates: false },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
@@ -216,7 +216,7 @@ function setCheckboxesToSettings() {
     settings?.Amazon.skipAd && settings?.Amazon.filterPaid && settings?.Amazon.continuePosition && settings?.Amazon.xray
   );
   setButtonChecked("NetflixSkips", settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
-  setButtonChecked("DisneySkips", settings?.Disney.skipIntro);
+  setButtonChecked("DisneySkips", settings?.Disney.filterDuplicates);
   setButtonChecked("CrunchyrollSkips", settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar);
   //  -------------      Individual Checkboxes        ---------------------------------------
   setCheckboxesOfService("Amazon");
@@ -393,7 +393,8 @@ function listenForClicks() {
         }
       }
       // -------------      Default        ---------------------------------------
-      else if (e.target.id === "DefaultSkips") settings.Amazon.filterPaid = !settings?.Amazon.filterPaid;
+      else if (e.target.id === "DefaultSkips")
+        settings.Amazon.filterPaid = settings.Disney.filterDuplicates = !(settings?.Amazon.filterPaid && settings?.Disney.filterDuplicates);
       //  -------------      Amazon        ---------------------------------------
       else if (e.target.id === "AmazonSkips")
         settings.Amazon.skipAd =
@@ -406,7 +407,7 @@ function listenForClicks() {
           settings.Netflix.skipBlocked =
           settings.Netflix.profile =
             !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
-      // else if (e.target.id === "DisneySkips") settings.Disney.skipIntro = !settings?.Disney.skipIntro
+      else if (e.target.id === "DisneySkips") settings.Disney.filterDuplicates = !settings?.Disney.filterDuplicates;
       else if (e.target.id === "CrunchyrollSkips")
         settings.Crunchyroll.skipIntro = settings.Crunchyroll.releaseCalendar = !(
           settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar

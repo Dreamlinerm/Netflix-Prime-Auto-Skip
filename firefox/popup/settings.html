@@ -153,6 +153,15 @@
         <p class="description" data-i18n>DefaultPaidContentDescription</p>
         <hr>
         <div class="line flex">
+          <p data-i18n>DuplicateSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="DisneyFilterDuplicates">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" data-i18n>DuplicateSwitchDescription</p>
+        <hr>
+        <div class="line flex">
           <p data-i18n>EpilepsySwitch</p>
           <label class="switch">
             <input type="checkbox" id="VideoEpilepsy">
@@ -558,7 +567,14 @@
           </label>
         </div>
         <hr>
-        empty
+        <div class="line flex">
+          <p data-i18n>DuplicateSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="DisneyFilterDuplicates">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" data-i18n>DuplicateSwitchDescription</p>
       </div>
       <div class="categoryCrunchyroll hidden" style="margin-top: 0; background-color: unset" id="CrunchyrollSettings">
         <div class="flex flex-between" style="padding: 5px 5px; color: #f78b24">
@@ -637,6 +653,7 @@
           <div class="line flex">
             <h2>1.1.2</h2>
             <ul>
+              <li>Filter duplicate shows on disney (optional)</li>
               <li>fixed Crunchyroll dub bug</li>
             </ul>
           </div>
