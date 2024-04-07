@@ -280,6 +280,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
         setDBCache();
       } catch (error) {
         log(error);
+        log("stopped DBCacheInterval");
         clearInterval(DBCacheInterval);
       }
     }, 5000);
