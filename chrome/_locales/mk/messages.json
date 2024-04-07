@@ -264,5 +264,14 @@
   },
   "OpenSharedSettings": {
     "message": "Отворете ги споделените поставки"
+  },
+  "autoOpenSettings": {
+    "message": "Автоматски отворете ги правилните поставки:"
+  },
+  "requestTabs": {
+    "message": "Побарајте дозвола за картички"
+  },
+  "autoOpenDescription": {
+    "message": "Se estiver em um site de streaming, abra automaticamente as configurações correspondentes na janela pop-up"
   }
 }

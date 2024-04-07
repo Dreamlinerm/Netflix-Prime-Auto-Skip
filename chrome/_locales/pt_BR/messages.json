@@ -267,5 +267,14 @@
   },
   "OpenSharedSettings": {
     "message": "Abrir configurações compartilhadas"
+  },
+  "autoOpenSettings": {
+    "message": "Abrir automaticamente as configurações corretas:"
+  },
+  "requestTabs": {
+    "message": "Solicitar permissão de guias"
+  },
+  "autoOpenDescription": {
+    "message": "Se estiver em um site de streaming, abra automaticamente as configurações correspondentes na janela pop-up"
   }
 }

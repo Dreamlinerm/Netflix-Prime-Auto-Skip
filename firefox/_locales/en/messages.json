@@ -270,5 +270,14 @@
   },
   "OpenSharedSettings": {
     "message": "Open Shared Settings"
+  },
+  "autoOpenSettings": {
+    "message": "Automatically open correct Settings:"
+  },
+  "requestTabs": {
+    "message": "Request Tabs permission"
+  },
+  "autoOpenDescription": {
+    "message": "If on streaming site open the according settings in popup automatically"
   }
 }

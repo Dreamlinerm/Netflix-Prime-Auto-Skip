@@ -247,6 +247,10 @@ function setCheckboxesToSettings() {
   }
   button = document.querySelector("#SliderValue");
   if (button) button.textContent = sliderValue / 10 + "x";
+  const optionalPermissions = ["tabs"];
+  optionalPermissions.forEach((permission) => {
+    showPermissionRequest(permission);
+  });
 
   // import/export buttons
   button = document.querySelector("#save");
@@ -254,6 +258,16 @@ function setCheckboxesToSettings() {
     let file = new Blob([JSON.stringify(settings)], { type: "text/json" });
     button.href = URL.createObjectURL(file);
     button.download = "settings.json";
+  }
+}
+async function showPermissionRequest(permission) {
+  const PermissionButtons = document.querySelectorAll("#Permission" + permission + "Div");
+  const permissionStatus = await chrome.permissions.contains({ permissions: [permission] });
+  if (!permissionStatus) {
+    PermissionButtons.forEach((button) => {
+      console.log(permissionStatus, button.parentNode);
+      button.style.display = "block";
+    });
   }
 }
 
@@ -340,6 +354,8 @@ function listenForClicks() {
         backButtonHistory.pop();
         Menu(backButtonHistory[backButtonHistory.length - 1], true);
       } else Menu("Popup", true);
+    } else if (e.target.id.startsWith("Permission")) {
+      chrome.permissions.request({ permissions: [e.target.id.replace("Permission", "")] });
     }
     // all buttons changing settings
     else {

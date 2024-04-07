@@ -30,7 +30,7 @@
         <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" alt="Logo">
         <div class="flex-center flex-col">
           <h2 class="title" data-i18n>pageTitle</h2>
-          <p style="font-size: 1em">v.1.1.0</p>
+          <p style="font-size: 1em">v.1.1.1</p>
         </div>
       </div>
       <a target="_blank" class="flex-center flex-col" style="text-align: center; text-decoration: none"
@@ -135,6 +135,14 @@
         </div>
         <p class="description" data-i18n>defaultPageDescription</p>
         <hr>
+        <div class="hidden" id="PermissiontabsDiv">
+          <div class="line flex">
+            <p data-i18n>autoOpenSettings</p>
+            <div class="button" style="margin-left: 5px" id="Permissiontabs" data-i18n>requestTabs</div>
+          </div>
+          <p class="description" data-i18n>autoOpenDescription</p>
+          <hr>
+        </div>
         <div class="line flex">
           <p data-i18n>PaidContentSwitch</p>
           <label class="switch">
@@ -398,6 +406,14 @@
         </div>
         <p class="description" data-i18n>EpilepsySwitchDescription</p>
         <hr>
+        <div class="hidden" id="PermissiontabsDiv">
+          <div class="line flex">
+            <p data-i18n>autoOpenSettings</p>
+            <div class="button" style="margin-left: 5px" id="Permissiontabs" data-i18n>requestTabs</div>
+          </div>
+          <p class="description" data-i18n>autoOpenDescription</p>
+          <hr>
+        </div>
         <div class="line flex">
           <p data-i18n>SliderSwitch</p>
         </div>
@@ -619,7 +635,13 @@
         <h2>Changelog</h2>
         <div>
           <div class="line flex">
-            <h2>1.1.0</h2>
+            <h2>1.1.1</h2>
+            <ul>
+              <li>added optional tabs permission because of misleading permission text on chrome</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.1.0</p>
             <ul>
               <li>Fixed default page on install</li>
             </ul>
