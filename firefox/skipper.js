@@ -870,11 +870,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     }
   }
   async function Amazon_continuePosition() {
-    const a = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]')?.closest('[class="+OSZzQ"]');
-    const insertBefore = a?.parentNode?.childNodes?.[2];
-    if (a && insertBefore) {
-      a?.parentNode.insertBefore(a, insertBefore);
-    }
+    const continueCategory = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]')?.closest('[class="+OSZzQ"]');
+    const position = continueCategory?.parentNode?.childNodes?.[2];
+    if (continueCategory && position) position.before(continueCategory);
   }
   async function Amazon_FilterPaid() {
     // if not on the shop page or homepremiere
