@@ -2,7 +2,8 @@
 
 <img src="firefox/icons/NetflixAmazon%20Auto-Skip.svg" width="10%">
 
-# Streaming enhanced
+# Streaming enhanced ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
+
 
 ## Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video, Disney+ (Hotstar, STAR+) and Crunchyroll
 
