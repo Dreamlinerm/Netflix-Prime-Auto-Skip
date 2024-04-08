@@ -11,7 +11,6 @@
 <img src="Logos/firefox.svg" width="20px">
 </a>
 <img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
-<img src="https://img.shields.io/badge/usersInstalls-5511-informational" >
 <img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
 <img src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010" >
 <br>
@@ -380,7 +379,7 @@ Cli ARGS:
 | Play on Fullscreen | ✅ | ✅ | ✅ | ✅ |
 | TMDB Rating | ✅ | ✅ | ✅ | ❌(MAL ratings better) |
 | Individual Features | --- | --- | --- | --- |
-|  | Inactivity Warning | Skip Self Ads | ➖ | Release Calendar Filters |
+|  | Inactivity Warning | Skip Self Ads | Remove duplicate Shows | Release Calendar Filters |
 |  | Auto pick last profile | Paid Content filter | ➖ | ➖ |
 
 ## Changelog
