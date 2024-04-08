@@ -378,9 +378,8 @@ Cli ARGS:
 | Add Speed Slider | ✅ | ✅ | ✅ | ✅ |
 | Play on Fullscreen | ✅ | ✅ | ✅ | ✅ |
 | TMDB Rating | ✅ | ✅ | ✅ | ❌(MAL ratings better) |
-| Individual Features | --- | --- | --- | --- |
-|  | Inactivity Warning | Skip Self Ads | Remove duplicate Shows | Release Calendar Filters |
-|  | Auto pick last profile | Paid Content filter | ➖ | ➖ |
+| Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue":</li></ul> | <ul><li>Remove duplicate Shows</li></ul> | <ul><li>Release Calendar Filters</li></ul> |
+
 
 ## Changelog
 
