@@ -23,13 +23,14 @@ const isDisney = /disneyplus|starplus/i.test(hostname);
 const isHotstar = /hotstar/i.test(hostname);
 const isCrunchyroll = /crunchyroll/i.test(hostname);
 const isStarPlus = /starplus/i.test(hostname);
+const isHBO = /max.com/i.test(hostname);
 
 const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
 const version = "1.1.2";
-if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
+if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
   const defaultSettings = {
@@ -94,21 +95,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     });
   }
   function logStartOfAddon() {
-    console.log(
-      "%cNetflix%c/%cPrime%c Auto-Skip",
-      "color: #e60010;font-size: 2em;",
-      "color: white;font-size: 2em;",
-      "color: #00aeef;font-size: 2em;",
-      "color: white;font-size: 2em;"
-    );
+    console.log("%cStreaming enhanced%c", "color: #00aeef;font-size: 2em;");
     console.log("version:", version);
     console.log("Settings", settings);
     if (isNetflix) console.log("Page %cNetflix", "color: #e60010;");
     else if (isPrimeVideo) console.log("Page %cAmazon", "color: #00aeef;");
+    else if (isStarPlus) console.log("Page %cStarPlus", "color: #fe541c;");
     else if (isDisney) console.log("Page %cDisney", "color: #0682f0;");
     else if (isHotstar) console.log("Page %cHotstar", "color: #0682f0;");
     else if (isCrunchyroll) console.log("Page %cCrunchyroll", "color: #e67a35;");
-    else if (isStarPlus) console.log("Page %cStarPlus", "color: #fe541c;");
+    else if (isHBO) console.log("Page %cHBO", "color: #0836f1;");
   }
   function startNetflix(Netflix) {
     if (Netflix?.profile) AutoPickProfile();

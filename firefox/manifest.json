@@ -27,7 +27,8 @@
         "*://*.disneyplus.com/*",
         "*://*.hotstar.com/*",
         "*://*.crunchyroll.com/*",
-        "*://*.starplus.com/*"
+        "*://*.starplus.com/*",
+        "*://*.max.com/*"
       ],
       "js": ["skipper.js"]
     },
