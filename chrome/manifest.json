@@ -27,7 +27,8 @@
         "*://*.hotstar.com/*",
         "*://*.crunchyroll.com/*",
         "*://*.starplus.com/*",
-        "*://*.max.com/*"
+        "*://*.max.com/*",
+        "*://*.hbomax.com/*"
       ],
       "js": ["skipper.js"]
     },
