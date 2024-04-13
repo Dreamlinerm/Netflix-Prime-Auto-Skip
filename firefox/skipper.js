@@ -129,15 +129,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll) {
     if (settings.Video?.userAgent && isMobile) Amazon_customizeMobileView();
   }
   browser.storage.sync.get("settings", function (result) {
-    // if there is an undefined setting, set it to the default
-    // apparently 2 depth gets overwritten so here it is
-    settings.Amazon = { ...defaultSettings.settings.Amazon, ...result.settings.Amazon };
-    settings.Netflix = { ...defaultSettings.settings.Netflix, ...result.settings.Netflix };
-    settings.Disney = { ...defaultSettings.settings.Disney, ...result.settings.Disney };
-    settings.Crunchyroll = { ...defaultSettings.settings.Crunchyroll, ...result.settings.Crunchyroll };
-    settings.Video = { ...defaultSettings.settings.Video, ...result.settings.Video };
-    settings.Statistics = { ...defaultSettings.settings.Statistics, ...result.settings.Statistics };
-    settings.General = { ...defaultSettings.settings.General, ...result.settings.General };
+    // overwrite default settings with user settings
+    settings = { ...defaultSettings.settings, ...result.settings };
     logStartOfAddon();
     getDBCache();
 
