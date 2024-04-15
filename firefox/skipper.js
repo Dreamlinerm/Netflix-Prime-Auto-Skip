@@ -220,7 +220,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           //   }
           // }
           const movie = data?.results?.[0];
-          compiledData = { score: movie?.vote_average, release_date: movie?.release_date, title: movie?.title, date: today, db: "tmdb" };
+          compiledData = {
+            score: movie?.vote_average,
+            release_date: movie?.release_date,
+            title: movie?.title || movie?.original_title || movie?.name || movie?.original_name,
+            date: today,
+            db: "tmdb",
+          };
           DBCache[title] = compiledData;
           // if (!compiledData?.score) {
           //   log("no Score found:", title, data);
@@ -356,7 +362,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     // div.id = "imdb";
     if (data?.score) {
       div.textContent = data.score?.toFixed(1);
-      // div.textContent = title;
+      console.log(data);
+      div.setAttribute("alt", data?.title);
     } else {
       div.textContent = "?";
       log("no score found:", title, data);
