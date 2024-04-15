@@ -527,7 +527,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
     }
   }
-  function createSlider(video, position, sliderStyle, speedStyle) {
+  function createSlider(video, position, sliderStyle, speedStyle, divStyle = "") {
     videoSpeed = videoSpeed || video.playbackRate;
 
     let slider = document.createElement("input");
@@ -543,8 +543,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     speed.id = "videoSpeed";
     speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x";
     speed.style = speedStyle;
-
-    position.prepend(slider, speed);
+    if (divStyle) {
+      let div = document.createElement("div");
+      div.style = divStyle;
+      div.appendChild(slider);
+      div.appendChild(speed);
+      position.prepend(div);
+    } else position.prepend(slider, speed);
 
     if (videoSpeed) video.playbackRate = videoSpeed;
     speed.onclick = function () {
@@ -1069,14 +1074,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.HBO?.speedSlider) HBO_SpeedSlider(video);
   }
   async function HBO_Intro(video, time) {
-    let button = document.querySelector('[class*="SkipButton-Beam-Web-Ent"]');
-    if (button) {
-      button.click();
-      log("Intro skipped", button);
-      setTimeout(function () {
-        addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
-      }, 600);
-    }
+    // let button = document.querySelector('[class*="SkipButton-Beam-Web-Ent"]');
+    // if (button) {
+    //   button.click();
+    //   log("Intro skipped", button);
+    //   setTimeout(function () {
+    //     addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
+    //   }, 600);
+    // }
   }
   async function HBO_Credits() {
     let button = document.querySelector('[class*="UpNextButton-Beam-Web-Ent"]');
@@ -1094,12 +1099,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       log("Watched Credits", button);
     }
   }
+  const HBOSliderStyle = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;";
+  const HBOSpeedStyle = "font-size: 1.5em;color:#b2b2b2;";
+  const HBODivStyle = "height:48px;display: flex;align-items: center;";
   async function HBO_SpeedSlider(video) {
     let alreadySlider = document.querySelector("#videoSpeedSlider");
     if (!alreadySlider) {
       // infobar position for the slider to be added
       let position = document.querySelector('[class*="ControlsFooterBottomRight-Beam-Web-Ent"]');
-      if (position) createSlider(video, position, NetflixSliderStyle, NetflixSpeedStyle);
+      if (position) createSlider(video, position, HBOSliderStyle, HBOSpeedStyle, HBODivStyle);
     }
   }
   // Badge functions
