@@ -62,7 +62,7 @@ Android Compatibility:
 
 | Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
 | ---     | ---                 | ---                      | ---         | ---                |
-| ❌     | ✅(Desktop Website) | ✅(Desktop Website)      | ✅         | ? (Desktop Website) |
+| ❌     | ✅(tweaked Desktop Website) | ✅(default Desktop Website)      | ✅         | ✅ |
 
 ## Supported Streaming Services
 
