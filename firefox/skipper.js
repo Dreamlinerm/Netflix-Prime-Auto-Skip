@@ -60,6 +60,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, filterDuplicates: false },
       Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
+      HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
@@ -124,6 +125,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (Amazon?.continuePosition) setTimeout(() => Amazon_continuePosition(), 500);
     if (settings.Video?.userAgent && isMobile) Amazon_customizeMobileView();
   }
+  function startHBO(HBO) {
+    HBOObserver.observe(document, config);
+  }
   browser.storage.sync.get("settings", function (result) {
     // overwrite default settings with user settings
     settings = { ...defaultSettings.settings, ...result.settings };
@@ -134,6 +138,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     else if (isPrimeVideo) startAmazon(settings.Amazon);
     else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
     else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
+    else if (isHBO) startHBO(settings.HBO);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
   });
   browser.storage.local.onChanged.addListener(function (changes) {
@@ -602,7 +607,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   // Netflix Observer
   const NetflixObserver = new MutationObserver(Netflix);
-  function Netflix() {
+  async function Netflix() {
     const video = document.querySelector("video");
     const time = video?.currentTime;
     const NSettings = settings.Netflix;
@@ -633,7 +638,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   function decodeHtmlEntities(str) {
     return new DOMParser().parseFromString("<!doctype html><body>" + str, "text/html").body.textContent;
   }
-  function Netflix_profile() {
+  async function Netflix_profile() {
     // AutoPickProfile();
     let currentProfile = document.querySelector("[href*='/YourAccount']");
     if (currentProfile) {
@@ -652,7 +657,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
     }
   }
-  function AutoPickProfile() {
+  async function AutoPickProfile() {
     if (!window.location.pathname.includes("Profile") && !window.location.pathname.includes("profile")) {
       let profileButtons = document.querySelectorAll(".profile-name");
       profileButtons.forEach((button) => {
@@ -667,7 +672,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       });
     }
   }
-  function Netflix_General(selector, name, incBadge = true) {
+  async function Netflix_General(selector, name, incBadge = true) {
     const button = document.querySelector(selector);
     if (button) {
       log(name, button);
@@ -677,7 +682,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
     return false;
   }
-  function Netflix_SkipAdInterval() {
+  async function Netflix_SkipAdInterval() {
     let AdInterval = setInterval(() => {
       if (!settings.Netflix?.skipAd) {
         log("stopped observing| Ad");
@@ -717,7 +722,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   const NetflixSliderStyle = "position:relative;bottom:20px;display: none;width:200px;";
   const NetflixSpeedStyle = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
-  function Netflix_SpeedSlider(video) {
+  async function Netflix_SpeedSlider(video) {
     // only add speed slider on lowest subscription tier
     // && !document.querySelector('[data-uia="control-speed"]')
     if (video) {
@@ -737,7 +742,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const AmazonVideoClass =
     "#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video";
   const AmazonObserver = new MutationObserver(Amazon);
-  function Amazon() {
+  async function Amazon() {
     const video = document.querySelector(AmazonVideoClass);
     if (settings.Amazon?.skipCredits) Amazon_Credits();
     if (settings.Amazon?.watchCredits) Amazon_Watch_Credits();
@@ -748,7 +753,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
-  function Amazon_Intro() {
+  async function Amazon_Intro() {
     if (settings.Amazon?.skipIntro) {
       // skips intro and recap
       // recap on lucifer season 3 episode 3
@@ -884,7 +889,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       increaseBadge();
     }
   }
-  function Amazon_FreeveeTimeout() {
+  async function Amazon_FreeveeTimeout() {
     // set loop every 1 sec and check if ad is there
     let AdInterval = setInterval(function () {
       if (!settings.Amazon.blockFreevee) {
@@ -1047,6 +1052,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         }
       }
     }
+  }
+  // HBO functions
+  const HBOObserver = new MutationObserver(HBO);
+  async function HBO() {
+    const video = document.querySelector("video");
+    const time = video?.currentTime;
+    if (settings.HBO?.skipIntro) HBO_Intro(video, time);
+    if (settings.HBO?.skipCredits) HBO_Credits();
+    if (settings.HBO?.speedSlider) HBO_SpeedSlider(video);
   }
   // Badge functions
   // eslint-disable-next-line no-unused-vars
