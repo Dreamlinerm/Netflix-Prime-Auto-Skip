@@ -86,13 +86,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         }
         DBCache = {};
       }
-      if (isNetflix) {
-        if (settings.Netflix?.showRating) startShowRatingInterval();
-      } else if (isDisney || isHotstar) {
+      if (isNetflix && settings.Netflix?.showRating) startShowRatingInterval();
+      else if (isDisney || isHotstar) {
         if (settings.Disney?.showRating) startShowRatingInterval();
-      } else if (isPrimeVideo) {
-        if (settings.Amazon?.showRating) startShowRatingInterval();
-      }
+      } else if (isPrimeVideo && settings.Amazon?.showRating) startShowRatingInterval();
+      else if (isHBO && settings.HBO?.showRating) startShowRatingInterval();
     });
   }
   function logStartOfAddon() {
@@ -152,6 +150,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (isNetflix) NetflixSettingsChanged(oldValue?.Netflix, newValue?.Netflix);
       else if (isPrimeVideo) AmazonSettingsChanged(oldValue?.Amazon, newValue?.Amazon);
       else if (isDisney || isHotstar) DisneySettingsChanged(oldValue?.Disney, newValue?.Disney);
+      else if (isHBO) HBOSettingsChanged(oldValue?.HBO, newValue?.HBO);
 
       if (!oldValue || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
       if (oldValue?.Video?.userAgent != undefined && newValue.Video.userAgent !== oldValue?.Video?.userAgent) location.reload();
@@ -167,6 +166,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (!oldValue?.continuePosition && newValue.continuePosition) Amazon_continuePosition();
   }
   function DisneySettingsChanged(oldValue, newValue) {
+    if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
+  }
+  function HBOSettingsChanged(oldValue, newValue) {
     if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
   }
   async function addSkippedTime(startTime, endTime, key) {
@@ -252,7 +254,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (
         (isNetflix && !settings.Netflix?.showRating) ||
         (isPrimeVideo && !settings.Amazon?.showRating) ||
-        ((isDisney || isHotstar) && !settings.Disney?.showRating)
+        ((isDisney || isHotstar) && !settings.Disney?.showRating) ||
+        (isHBO && !settings.HBO?.showRating)
       ) {
         log("stopped adding Rating");
         clearInterval(RatingInterval);
@@ -264,7 +267,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (
         (isNetflix && !settings.Netflix?.showRating) ||
         (isPrimeVideo && !settings.Amazon?.showRating) ||
-        ((isDisney || isHotstar) && !settings.Disney?.showRating)
+        ((isDisney || isHotstar) && !settings.Disney?.showRating) ||
+        (isHBO && !settings.HBO?.showRating)
       ) {
         log("stopped DBCacheInterval");
         clearInterval(DBCacheInterval);
@@ -300,15 +304,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
     else if (isDisney) titleCards = document.querySelectorAll(".basic-card div div img:not(.imdb)");
     else if (isHotstar) titleCards = document.querySelectorAll(".swiper-slide img:not(.imdb)");
-    // amazon
-    else titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
+    else if (isHBO) titleCards = document.querySelectorAll("a[class*='StyledTileLinkNormal-Beam-Web-Ent']:not(.imdb)");
+    else if (isPrimeVideo) titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
     // on disney there are multiple images for the same title so only use the first one
     let lastTitle = "";
     // for each is not going in order on chrome
     for (let i = 0; i < titleCards.length; i++) {
       let card = titleCards[i];
       // add seen class
-      if (isNetflix || isDisney || isHotstar) card.classList.add("imdb");
+      if (isNetflix || isDisney || isHotstar || isHBO) card.classList.add("imdb");
       //Amazon
       else card?.closest("li")?.classList.add("imdb");
       let title;
@@ -322,7 +326,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
       // amazon
       // remove everything after - in the title
-      else
+      else if (isPrimeVideo)
         title = card
           .getAttribute("data-card-title")
           .split(" - ")[0]
@@ -334,6 +338,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           .replace(/:?\sStaffel-?\s\d+/g, "")
           .replace(/:?\sSeason-?\s\d+/g, "")
           .split(", ")[0];
+      else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent;
 
       // sometimes more than one image is loaded for the same title
       if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
@@ -359,13 +364,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       div.textContent = "?";
       log("no score found:", title, data);
     }
-    if (isNetflix) card.appendChild(div);
+    if (isNetflix || isHBO) card.appendChild(div);
     else if (isDisney || isHotstar) card.parentElement?.appendChild(div);
-    else card.firstChild.firstChild.appendChild(div);
+    else if (isPrimeVideo) card.firstChild.firstChild.appendChild(div);
   }
   function OnFullScreenChange() {
     let video;
-    if (isNetflix || isDisney || isHotstar) video = document.querySelector("video");
+    if (isNetflix || isDisney || isHotstar || isHBO) video = document.querySelector("video");
     else video = document.querySelector(AmazonVideoClass);
     if (window.fullScreen && video) {
       video.play();
@@ -1060,7 +1065,42 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const time = video?.currentTime;
     if (settings.HBO?.skipIntro) HBO_Intro(video, time);
     if (settings.HBO?.skipCredits) HBO_Credits();
+    if (settings.HBO?.watchCredits) HBO_Watch_Credits();
     if (settings.HBO?.speedSlider) HBO_SpeedSlider(video);
+  }
+  async function HBO_Intro(video, time) {
+    let button = document.querySelector('[class*="SkipButton-Beam-Web-Ent"]');
+    if (button) {
+      button.click();
+      log("Intro skipped", button);
+      setTimeout(function () {
+        addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
+      }, 600);
+    }
+  }
+  async function HBO_Credits() {
+    let button = document.querySelector('[class*="UpNextButton-Beam-Web-Ent"]');
+    if (button) {
+      button.click();
+      increaseBadge();
+      log("Credits skipped", button);
+    }
+  }
+  async function HBO_Watch_Credits() {
+    let button = document.querySelector('[class*="DismissButton-Beam-Web-Ent"]');
+    if (button) {
+      button.click();
+      increaseBadge();
+      log("Watched Credits", button);
+    }
+  }
+  async function HBO_SpeedSlider(video) {
+    let alreadySlider = document.querySelector("#videoSpeedSlider");
+    if (!alreadySlider) {
+      // infobar position for the slider to be added
+      let position = document.querySelector('[class*="ControlsFooterBottomRight-Beam-Web-Ent"]');
+      if (position) createSlider(video, position, NetflixSliderStyle, NetflixSpeedStyle);
+    }
   }
   // Badge functions
   // eslint-disable-next-line no-unused-vars
