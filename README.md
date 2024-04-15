@@ -24,10 +24,11 @@
 <img src="https://img.shields.io/badge/Donate-PayPal-blue.svg?style=flat&logo=paypal">
 </a>
 <a href="https://discord.gg/5fBYathA7d">
-<img src="Logos/discord-6.svg" width="20">
-Discord
+<img src="Logos/discord-6.svg" width="50">
+Discord Server
 </a>
 </div>
+
 
 ## Install in Browser (click on image)
 
