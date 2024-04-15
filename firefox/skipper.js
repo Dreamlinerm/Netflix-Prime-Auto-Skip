@@ -1069,23 +1069,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const video = document.querySelector("video");
     const time = video?.currentTime;
     if (settings.HBO?.skipIntro) HBO_Intro(video, time);
-    if (settings.HBO?.skipCredits) HBO_Credits();
+    if (settings.HBO?.skipCredits) HBO_Credits(time);
     if (settings.HBO?.watchCredits) HBO_Watch_Credits();
     if (settings.HBO?.speedSlider) HBO_SpeedSlider(video);
   }
   async function HBO_Intro(video, time) {
-    // let button = document.querySelector('[class*="SkipButton-Beam-Web-Ent"]');
-    // if (button) {
-    //   button.click();
-    //   log("Intro skipped", button);
-    //   setTimeout(function () {
-    //     addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
-    //   }, 600);
-    // }
+    let button = document.querySelector('[class*="SkipButton-Beam-Web-Ent"]');
+    if (button && button.checkVisibility({ visibilityProperty: true })) {
+      button.click();
+      log("Intro skipped", button);
+      setTimeout(function () {
+        addSkippedTime(time, video?.currentTime, "IntroTimeSkipped");
+      }, 600);
+    }
   }
-  async function HBO_Credits() {
+  let lastSkip = 0;
+  async function HBO_Credits(time) {
     let button = document.querySelector('[class*="UpNextButton-Beam-Web-Ent"]');
-    if (button) {
+    if (button && lastSkip < time - 1) {
+      lastSkip = parseInt(time);
       button.click();
       increaseBadge();
       log("Credits skipped", button);
