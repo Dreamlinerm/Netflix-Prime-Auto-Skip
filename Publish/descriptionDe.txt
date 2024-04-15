@@ -2,7 +2,7 @@ Sie können auf der Einstellungsseite konfigurieren, welche Funktionen aktiviert
 
 ✨ Features
 
-Auf Netflix, Prime Video, Disney+ (Hotstar, STAR+) und Crunchyroll wird automatisch:
+Auf Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll und HBO max wird automatisch:
 • Intros & Zusammenfassungen übersprungen
 • Abspann übersprungen/immer anzeigen
 • Werbung übersprungen
@@ -29,7 +29,7 @@ Auf Disney+ (Hotstar, STAR+) wird zusätzlich automatisch:
 • wieder in Vollbild gegangen, wenn zur nächste Folge gesprungen wird
 
 Android: 
-Prime Video und Disney+ (Hotstar, STAR+) und Crunchyroll werden auf Android (im Desktop-Modus) unterstützt. Netflix funktioniert nicht auf Android.
+Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll und HBO max werden auf Android (im Desktop-Modus) unterstützt. Netflix funktioniert nicht auf Android.
 
 Zur Verwendung auf einem Android Handy Laden Sie sich Firefox herunter.
 
@@ -45,7 +45,7 @@ Kaufen Sie mir einen Kaffee (https://paypal.me/MarvinKrebber).
 
 Haftungsausschluss
 
-Netflix, Amazon Prime-Video and Disney+ (Hotstar, STAR+) und Crunchyroll sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
+Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll und HBO max sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
 ---------------------------------------------- firefox
 ☔ Sicher
 
@@ -59,4 +59,4 @@ Kaufen Sie mir einen <a href="https://paypal.me/MarvinKrebber" target="_blank">K
 
 Haftungsausschluss
 
-Netflix, Amazon Prime-Video and Disney+ (Hotstar, STAR+) und Crunchyroll sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.
+Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll und HBO max sind Warenzeichen und der Autor dieses Addons ist nicht mit diesen Unternehmen verbunden.

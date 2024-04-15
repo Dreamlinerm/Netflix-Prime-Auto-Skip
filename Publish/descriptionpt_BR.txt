@@ -2,7 +2,7 @@ Você pode configurar o recurso a ser ativado na página de configurações.
 
 ✨ Recursos
 
-Na Netflix, Prime Video, Disney+ (Hotstar, STAR+) e Crunchyroll, será ativado automaticamente:
+Na Netflix, Prime Video, Disney+ (Hotstar, STAR+) Crunchyroll e HBO max, será ativado automaticamente:
 • Pula as introduções e Recapitulações
 • Pula/Assista os créditos
 • Pula anúncios
@@ -29,7 +29,7 @@ Na Disney+ (Hotstar, STAR+):
 • volta para a tela cheia ao pular para o próximo episódio
 
 Android: 
-O Prime Video e o Disney+ (Hotstar, STAR+) e Crunchyroll são compatíveis com (no modo Desktop) o Android. 
+O Prime Video, Disney+ (Hotstar, STAR+) Crunchyroll e HBO max são compatíveis com (no modo Desktop) o Android. 
 Não funcionará na Netflix dentro do Android.
 
 Para usar em um telefone Android, baixe o Firefox.
@@ -46,7 +46,7 @@ Me pague um café em: (https://paypal.me/MarvinKrebber).
 
 Isenção de responsabilidade
 
-Netflix, Amazon Prime Video e Disney+ (Hotstar, STAR+) e Crunchyroll são marcas registradas e o autor deste complemento não é afiliado a essas empresas.
+Netflix, Prime Video, Disney+ (Hotstar, STAR+) Crunchyroll e HBO max são marcas registradas e o autor deste complemento não é afiliado a essas empresas.
 -------------------------------------------  firefox:
 ☔ Seguro
 
@@ -60,4 +60,4 @@ Me pague um <a href="https://paypal.me/MarvinKrebber" target="_blank">café</a>.
 
 Isenção de responsabilidade
 
-Netflix, Amazon Prime Video e Disney+ (Hotstar, STAR+) e Crunchyroll são marcas registradas e o autor deste complemento não é afiliado a essas empresas.
+Netflix, Prime Video, Disney+ (Hotstar, STAR+) Crunchyroll e HBO max são marcas registradas e o autor deste complemento não é afiliado a essas empresas.

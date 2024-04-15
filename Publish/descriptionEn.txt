@@ -2,7 +2,7 @@ You can configure which feature to enable in the Settings Page.
 
 ✨ Features
 
-On Netflix, Prime Video, Disney+ (Hotstar, STAR+) and Crunchyroll it automatically:
+On Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max it automatically:
 • Skips Intros & Recaps
 • Skip/Watch Credits
 • Skips Ads
@@ -29,7 +29,7 @@ On Disney+ (Hotstar, STAR+) it additionally automatically:
 • goes back to full screen when skipping to the next episode
 
 Android:
-Prime Video and Disney+ (Hotstar, STAR+) and Crunchyroll are supported (in Desktop mode) on Android. Netflix does not work on Android.
+Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are supported (in Desktop mode) on Android. Netflix does not work on Android.
 
 To use on an Android phone, download Firefox.
 
@@ -45,7 +45,7 @@ Buy me a coffee (https://paypal.me/MarvinKrebber).
 
 Disclaimer
 
-Netflix, Amazon Prime video and Disney+ (Hotstar, STAR+) and Crunchyroll are trademarks and the author of this addon is not affiliated with these companies.
+Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.
 
 --------------------------------------------  firefox:
 ☔ Safe
@@ -60,4 +60,4 @@ Buy me a <a href="https://paypal.me/MarvinKrebber" target="_blank">coffee</a>.
 
 Disclaimer
 
-Netflix, Amazon Prime video and Disney+ (Hotstar, STAR+) and Crunchyroll are trademarks and the author of this addon is not affiliated with these companies.
+Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.
