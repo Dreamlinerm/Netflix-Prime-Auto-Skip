@@ -38,6 +38,7 @@ const defaultSettings = {
     },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, filterDuplicates: false },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
+    HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
@@ -54,14 +55,8 @@ chrome.storage.sync.get("settings", function (result) {
     "color: white;font-size: 2em;"
   );
   console.log("version:", version);
-  // apparently 2 depth gets overwritten so here it is
-  settings.Amazon = { ...defaultSettings.settings.Amazon, ...result.settings.Amazon };
-  settings.Netflix = { ...defaultSettings.settings.Netflix, ...result.settings.Netflix };
-  settings.Disney = { ...defaultSettings.settings.Disney, ...result.settings.Disney };
-  settings.Crunchyroll = { ...defaultSettings.settings.Crunchyroll, ...result.settings.Crunchyroll };
-  settings.Video = { ...defaultSettings.settings.Video, ...result.settings.Video };
-  settings.Statistics = { ...defaultSettings.settings.Statistics, ...result.settings.Statistics };
-  settings.General = { ...defaultSettings.settings.General, ...result.settings.General };
+  // overwrite default settings with user settings
+  settings = { ...defaultSettings.settings, ...result.settings };
   CrunchyrollObserver.observe(document, config);
   if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
 });
@@ -239,8 +234,7 @@ async function Crunchyroll_SpeedSlider(video) {
         // makes the button clickable
         // speed.setAttribute("class", "control-icon-btn");
         speed.style = "color:white;margin: auto;padding: 0 5px;";
-        position.insertBefore(speed, position.firstChild);
-        position.insertBefore(slider, position.firstChild);
+        position.prepend(slider, speed);
 
         if (videoSpeed) video.playbackRate = videoSpeed;
         speed.onclick = function (event) {
