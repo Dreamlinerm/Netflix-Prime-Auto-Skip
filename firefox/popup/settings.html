@@ -208,6 +208,7 @@
             <th>Prime</th>
             <th>Disney+</th>
             <th>Crunchyroll</th>
+            <th>HBO</th>
           </tr>
           <tr>
             <td class="tooltip">
@@ -244,6 +245,12 @@
                 <span class="slider round"></span>
               </label>
             </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="HBOSkipIntro">
+                <span class="slider round"></span>
+              </label>
+            </td>
           </tr>
           <tr>
             <td class="tooltip">
@@ -271,6 +278,13 @@
             <td>
               <label class="switch">
                 <input type="checkbox" id="DisneySkipCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>➖</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="HBOSkipCredits">
                 <span class="slider round"></span>
               </label>
             </td>
@@ -304,6 +318,13 @@
                 <span class="slider round"></span>
               </label>
             </td>
+            <td>➖</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="HBOWatchCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
           </tr>
           <tr>
             <td class="tooltip">
@@ -328,6 +349,9 @@
                 <span class="slider round"></span>
               </label>
             </td>
+            <td>➖</td>
+            <td>➖</td>
+            <td>➖</td>
           </tr>
           <tr>
             <td class="tooltip">
@@ -355,6 +379,13 @@
             <td>
               <label class="switch">
                 <input type="checkbox" id="DisneyShowRating">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>➖</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="HBOShowRating">
                 <span class="slider round"></span>
               </label>
             </td>
@@ -391,6 +422,12 @@
             <td>
               <label class="switch">
                 <input type="checkbox" id="CrunchyrollSpeedSlider">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="HBOSpeedSlider">
                 <span class="slider round"></span>
               </label>
             </td>
@@ -457,9 +494,9 @@
             </td>
             <td>
               <div class="flex">
-                <input type="range" id="SliderPreview" min="5" max="20" value="1" step="1"
+                <input type="range" id="SliderPreview" min="5" max="20" value="1.0" step="1"
                   style="background: rgb(221, 221, 221); width: 200px">
-                <p id="SliderValue">1x</p>
+                <p id="SliderValue">1.0x</p>
               </div>
             </td>
           </tr>

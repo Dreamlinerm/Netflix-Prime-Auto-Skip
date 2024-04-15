@@ -86,6 +86,7 @@ const defaultSettings = {
     },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, filterDuplicates: false },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
+    HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
@@ -95,15 +96,8 @@ const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent);
 console.log("isMobile", isMobile, navigator.userAgent);
 let settings = { ...defaultSettings.settings };
 chrome.storage.sync.get("settings", function (result) {
-  // if there is an undefined setting, set it to the default
-  // apparently 2 depth gets overwritten so here it is
-  settings.Amazon = { ...defaultSettings.settings.Amazon, ...result.settings.Amazon };
-  settings.Netflix = { ...defaultSettings.settings.Netflix, ...result.settings.Netflix };
-  settings.Disney = { ...defaultSettings.settings.Disney, ...result.settings.Disney };
-  settings.Crunchyroll = { ...defaultSettings.settings.Crunchyroll, ...result.settings.Crunchyroll };
-  settings.Video = { ...defaultSettings.settings.Video, ...result.settings.Video };
-  settings.Statistics = { ...defaultSettings.settings.Statistics, ...result.settings.Statistics };
-  settings.General = { ...defaultSettings.settings.General, ...result.settings.General };
+  // overwrite default settings with user settings
+  settings = { ...defaultSettings.settings, ...result.settings };
   // delete every setting that is not in defaultSettings
   let changedSettings;
   for (const key in settings) {

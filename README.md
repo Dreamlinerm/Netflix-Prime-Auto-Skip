@@ -5,7 +5,7 @@
 # Streaming enhanced ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
 
 
-## Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video, Disney+ (Hotstar, STAR+) and Crunchyroll
+## Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max
 
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
 <img src="Logos/firefox.svg" width="20px">
@@ -59,9 +59,9 @@ The drm for each streaming service will be installed automatically when a video 
 
 Android Compatibility:
 
-| Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll |
-| ---     | ---             | ---               | ---         |
-| ❌     | ✅(Desktop Website) | ✅(Desktop Website) | ✅   |
+| Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
+| ---     | ---                 | ---                      | ---         | ---                |
+| ❌     | ✅(Desktop Website) | ✅(Desktop Website)      | ✅         | ? (Desktop Website) |
 
 ## Supported Streaming Services
 
@@ -69,11 +69,12 @@ Android Compatibility:
     <tr>
       <td align="center" valign="top" width="14.28%">
         <img src="Logos/Netflix.png" width="20%">
-        <img src="Logos/prime%20video.png" width="20%">
+        <img src="Logos/prime%20video.png" width="20%" >
         <img src="Logos/crunchyroll.avif" width="20%">
         <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
         <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
-        <img src="Logos/starplus.png" width="20%">
+        <img src="Logos/starplus.png" width="20%" style="background-color:white;">
+        <img src="Logos/HBO-max.jpg" width="20%">
       </td>
     </tr>
 </table>
@@ -266,8 +267,6 @@ Configure what is skipped in the settings Page.
 Import and Export all Settings.
 
 See Statistics. All statistics and settings are not shared but are synchronized with your browser account.
-  
-![Settings.png](Publish/Screenshots/settings.png?raw=true)
 
 ## How it works
 
@@ -369,16 +368,16 @@ Cli ARGS:
 |❌| Not implemented|
 | Name| service specific features|
 
-| Feature | Netflix | Prime Video | Disney+ (Hotstar, STAR+) | Crunchyroll |
-| --- | --- | --- | --- | --- |
-| Intro | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>| ✅  <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>| ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> | ✅ [One piece](https://www.crunchyroll.com/series/GRMG8ZQZR/one-piece) |
-| Recaps | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>| ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a> | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>| ? |
-| Credits | ✅ | ✅ | ✅ | ❌(not necessary if outro is skipped) |
-| Ads | ✅ | ✅ [2 Broke Girls](https://www.amazon.de/gp/video/detail/B01D0H8CAY/ref=atv_hm_fre_c_zwoINQ_2_2?jic=36%7CCgtmcmVld2l0aGFkcxIMc3Vic2NyaXB0aW9u) | ➖ | ❌(Ublock can do it) |
-| Add Speed Slider | ✅ | ✅ | ✅ | ✅ |
-| Play on Fullscreen | ✅ | ✅ | ✅ | ✅ |
-| TMDB Rating | ✅ | ✅ | ✅ | ❌(MAL ratings better) |
-| Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue":</li></ul> | <ul><li>Remove duplicate Shows</li></ul> | <ul><li>Release Calendar Filters</li></ul> |
+| Feature | Netflix | Prime Video | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO max |
+| --- | --- | --- | --- | --- | --- |
+| Intro | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>| ✅  <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>| ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> | ✅ [One piece](https://www.crunchyroll.com/series/GRMG8ZQZR/one-piece) | ✅ |
+| Recaps | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>| ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a> | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>| ? | ✅ |
+| Credits | ✅ | ✅ | ✅ | ❌(not necessary if outro is skipped) | ✅ |
+| Ads | ✅ | ✅ [2 Broke Girls](https://www.amazon.de/gp/video/detail/B01D0H8CAY/ref=atv_hm_fre_c_zwoINQ_2_2?jic=36%7CCgtmcmVld2l0aGFkcxIMc3Vic2NyaXB0aW9u) | ➖ | ❌(Ublock can do it) | ? |
+| Add Speed Slider | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Play on Fullscreen | ✅ | ✅ | ✅ | ✅ | ✅ |
+| TMDB Rating | ✅ | ✅ | ✅ | ❌(MAL ratings better) | ✅ |
+| Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue":</li></ul> | <ul><li>Remove duplicate Shows</li></ul> | <ul><li>Release Calendar Filters</li></ul> | ➖ |
 
 
 ## Changelog
@@ -387,4 +386,4 @@ You can see the Changelog in the addon or in the published versions.
 
 ## Disclaimer
 
-Netflix, Amazon Prime video and Disney+ (Hotstar, STAR+) and Crunchyroll are trademarks and the author of this addon is not affiliated with these companies.
+Netflix, Amazon Prime video and Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.

@@ -51,10 +51,12 @@ function callback(tabs) {
   const isNetflix = /.netflix./i.test(currentUrl);
   const isDisney = /.disneyplus.|.starplus.|.hotstar./i.test(currentUrl);
   const isCrunchyroll = /.crunchyroll./i.test(currentUrl);
+  // const isHBO = /max/i.test(currentUrl);
   if (isPrimeVideo) Menu("Amazon");
   else if (isNetflix) Menu("Netflix");
   else if (isDisney) Menu("Disney");
   else if (isCrunchyroll) Menu("Crunchyroll");
+  // else if (isHBO) Menu("HBO");
 }
 browser.tabs.query(query, callback);
 
@@ -86,6 +88,7 @@ const defaultSettings = {
     },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, filterDuplicates: false },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
+    HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
@@ -144,6 +147,7 @@ function getBooleanOfCategory(category) {
   if (settings?.Netflix?.[category] !== undefined) bool &= settings?.Netflix[category];
   if (settings?.Disney?.[category] !== undefined) bool &= settings?.Disney[category];
   if (settings?.Crunchyroll?.[category] !== undefined) bool &= settings?.Crunchyroll[category];
+  if (settings?.HBO?.[category] !== undefined) bool &= settings?.HBO[category];
   return bool;
 }
 function setCategoryToBoolean(category, bool) {
@@ -151,6 +155,7 @@ function setCategoryToBoolean(category, bool) {
   if (settings?.Netflix?.[category] !== undefined) settings.Netflix[category] = bool;
   if (settings?.Disney?.[category] !== undefined) settings.Disney[category] = bool;
   if (settings?.Crunchyroll?.[category] !== undefined) settings.Crunchyroll[category] = bool;
+  if (settings?.HBO?.[category] !== undefined) settings.HBO[category] = bool;
 }
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -211,12 +216,14 @@ function setCheckboxesToSettings() {
   setButtonChecked("NetflixSkips", settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
   setButtonChecked("DisneySkips", settings?.Disney.filterDuplicates);
   setButtonChecked("CrunchyrollSkips", settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar);
+  setButtonChecked("HBOSkips", true);
   //  -------------      Individual Checkboxes        ---------------------------------------
   setCheckboxesOfService("Amazon");
   setCheckboxesOfService("Netflix");
   setCheckboxesOfService("Disney");
   setCheckboxesOfService("Statistics");
   setCheckboxesOfService("Crunchyroll");
+  setCheckboxesOfService("HBO");
   //  -------------      Netflix other        ---------------------------------------
   button = document.querySelector("#profileName");
   if (button) button.textContent = settings?.General.profileName;
@@ -239,7 +246,7 @@ function setCheckboxesToSettings() {
     button.max = settings?.General.sliderMax;
   }
   button = document.querySelector("#SliderValue");
-  if (button) button.textContent = sliderValue / 10 + "x";
+  if (button) button.textContent = (sliderValue / 10).toFixed(1) + "x";
   const optionalPermissions = ["tabs"];
   optionalPermissions.forEach((permission) => {
     showPermissionRequest(permission);
@@ -405,8 +412,9 @@ function listenForClicks() {
         settings.Crunchyroll.skipIntro = settings.Crunchyroll.releaseCalendar = !(
           settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar
         );
+      // else if (e.target.id === "HBOSkips")
       else {
-        const services = ["Amazon", "Netflix", "Disney", "Crunchyroll"];
+        const services = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO"];
         for (const service of services) {
           if (e.target.id.startsWith(service)) {
             let key = lowerCaseFirstLetter(e.target.id.replace(service, ""));
