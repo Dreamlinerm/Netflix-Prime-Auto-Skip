@@ -36,8 +36,7 @@
       <a target="_blank" class="flex-center flex-col" style="text-align: center; text-decoration: none"
         href="https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle">
         <p style="font-size: 1em" data-i18n>rateNow</p>
-        <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010"
-          alt="rating">
+        <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" alt="rating">
       </a>
     </div>
     <div class="flex flex-col MenuButtons" style="flex-wrap: wrap">
@@ -209,6 +208,7 @@
             <th>Prime</th>
             <th>Disney+</th>
             <th>Crunchyroll</th>
+            <th>HBO</th>
           </tr>
           <tr>
             <td class="tooltip">
@@ -245,6 +245,12 @@
                 <span class="slider round"></span>
               </label>
             </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="HBOSkipIntro">
+                <span class="slider round"></span>
+              </label>
+            </td>
           </tr>
           <tr>
             <td class="tooltip">
@@ -272,6 +278,13 @@
             <td>
               <label class="switch">
                 <input type="checkbox" id="DisneySkipCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>➖</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="HBOSkipCredits">
                 <span class="slider round"></span>
               </label>
             </td>
@@ -305,6 +318,13 @@
                 <span class="slider round"></span>
               </label>
             </td>
+            <td>➖</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="HBOWatchCredits">
+                <span class="slider round"></span>
+              </label>
+            </td>
           </tr>
           <tr>
             <td class="tooltip">
@@ -329,6 +349,9 @@
                 <span class="slider round"></span>
               </label>
             </td>
+            <td>➖</td>
+            <td>➖</td>
+            <td>➖</td>
           </tr>
           <tr>
             <td class="tooltip">
@@ -356,6 +379,13 @@
             <td>
               <label class="switch">
                 <input type="checkbox" id="DisneyShowRating">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>➖</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="HBOShowRating">
                 <span class="slider round"></span>
               </label>
             </td>
@@ -392,6 +422,12 @@
             <td>
               <label class="switch">
                 <input type="checkbox" id="CrunchyrollSpeedSlider">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="HBOSpeedSlider">
                 <span class="slider round"></span>
               </label>
             </td>
@@ -458,9 +494,9 @@
             </td>
             <td>
               <div class="flex">
-                <input type="range" id="SliderPreview" min="5" max="20" value="1" step="1"
+                <input type="range" id="SliderPreview" min="5" max="20" value="1.0" step="1"
                   style="background: rgb(221, 221, 221); width: 200px">
-                <p id="SliderValue">1x</p>
+                <p id="SliderValue">1.0x</p>
               </div>
             </td>
           </tr>
@@ -653,6 +689,15 @@
         <div>
           <div class="line flex">
             <h2>1.1.3</h2>
+            <ul>
+              <li>Added HBO max streaming service</li>
+              <li>TBMD ratings show N/A if no rating available and ? if not found. And if you inspect the ratings label
+                you can see the found movie title</li>
+              <li>minor function improvements</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <h2>1.1.2</h2>
             <ul>
               <li>Filter duplicate shows on disney (optional)</li>
               <li>fixed Crunchyroll dub bug</li>

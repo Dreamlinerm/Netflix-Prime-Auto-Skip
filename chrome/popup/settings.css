@@ -395,3 +395,6 @@ td {
 #backButton {
   cursor: pointer;
 }
+td {
+  text-align: center;
+}
