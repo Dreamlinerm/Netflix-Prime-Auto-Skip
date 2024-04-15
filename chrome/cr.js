@@ -45,7 +45,7 @@ const defaultSettings = {
   },
 };
 let settings = defaultSettings.settings;
-const version = "1.1.2";
+const version = "1.1.3";
 chrome.storage.sync.get("settings", function (result) {
   console.log(
     "%cNetflix%c/%cPrime%c Auto-Skip",
