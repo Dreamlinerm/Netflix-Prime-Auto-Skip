@@ -213,12 +213,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         if (data != undefined && data != "") {
           // themoviedb
           let compiledData = {};
-          // for (movie of data?.results) {
-          //   if (movie.title.toLowerCase().includes(title.toLowerCase())) {
-          //     compiledData = { score: movie?.vote_average, release_date: movie?.release_date, date: today, db: "tmdb" };
-          //     break;
-          //   }
-          // }
           const movie = data?.results?.[0];
           compiledData = {
             score: movie?.vote_average,
@@ -228,15 +222,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             db: "tmdb",
           };
           DBCache[title] = compiledData;
-          // if (!compiledData?.score) {
-          //   log("no Score found:", title, data);
-          // }
           setRatingOnCard(card, compiledData, title);
         }
-        // else {
-        //   DBCache[title] = { score: null, release_date: null, title: title, date: today, db: "tmdb" };
-        //   log("no Score found data undefined", title, data);
-        // }
       });
     } catch (error) {
       log(error);
@@ -362,8 +349,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     // div.id = "imdb";
     if (data?.score) {
       div.textContent = data.score?.toFixed(1);
-      console.log(data);
       div.setAttribute("alt", data?.title);
+    } else if (data?.title) {
+      div.textContent = "N/A";
     } else {
       div.textContent = "?";
       log("no score found:", title, data);
