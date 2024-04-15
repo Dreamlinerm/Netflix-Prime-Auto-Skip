@@ -89,7 +89,7 @@ It automatically skips Ads, intros, Credits, recaps, and anything else you don't
 
 ## ✨ Features
 
-On Netflix, Prime Video, Disney+ (Hotstar, STAR+) and Crunchyroll it automatically:
+On Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max it automatically:
 
 <ul>
 <li>Skips Intros & Recaps</li>
