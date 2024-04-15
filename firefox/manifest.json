@@ -50,7 +50,9 @@
     "*://*.amazon.com/*",
     "*://*.amazon.co.jp/*",
     "*://*.amazon.de/*",
-    "*://*.amazon.co.uk/*"
+    "*://*.amazon.co.uk/*",
+    "*://*.max.com/*",
+    "*://*.hbomax.com/*"
   ],
   "browser_action": {
     "default_icon": "icons/NetflixAmazon Auto-Skip.svg",
