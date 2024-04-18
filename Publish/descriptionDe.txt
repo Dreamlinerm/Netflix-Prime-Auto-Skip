@@ -41,7 +41,7 @@ Die Erweiterung ist Open Source! Besuchen sie (https://github.com/Dreamlinerm/Ne
 
 Hinterlassen Sie eine 5-Sterne-Bewertung! Bewertungen helfen, Vertrauen aufzubauen und neue Benutzer zu gewinnen!
 
-Kaufen Sie mir einen Kaffee (https://paypal.me/MarvinKrebber).
+Kaufen Sie mir einen Kaffee (https://github.com/sponsors/Dreamlinerm).
 
 Haftungsausschluss
 
@@ -55,7 +55,7 @@ Die Erweiterung ist Open Source! Besuchen sie <a href="https://github.com/Dreaml
 
 Hinterlassen Sie eine 5-Sterne-Bewertung! Bewertungen helfen, Vertrauen aufzubauen und neue Benutzer zu gewinnen!
 
-Kaufen Sie mir einen <a href="https://paypal.me/MarvinKrebber" target="_blank">Kaffee</a>.
+Kaufen Sie mir einen <a href="https://github.com/sponsors/Dreamlinerm" target="_blank">Kaffee</a>.
 
 Haftungsausschluss
 

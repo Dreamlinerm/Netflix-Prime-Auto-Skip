@@ -20,7 +20,7 @@
 <img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
 <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" >
 <br>
-<a href="https://paypal.me/MarvinKrebber">
+<a href="https://github.com/sponsors/Dreamlinerm">
 <img src="https://img.shields.io/badge/Donate-PayPal-blue.svg?style=flat&logo=paypal">
 </a>
 <a href="https://discord.gg/5fBYathA7d">
@@ -133,7 +133,7 @@ If you want to see what is implemented go [here](#implemented-feature-overview):
 
 ## 💕 Enjoying Streaming enhanced?
 
-Buy me a coffee! [PayPal](https://paypal.me/MarvinKrebber)
+Buy me a coffee! [PayPal](https://github.com/sponsors/Dreamlinerm)
 
 ## Contributing
 

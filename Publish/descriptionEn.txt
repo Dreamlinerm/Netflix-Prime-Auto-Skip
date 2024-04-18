@@ -41,7 +41,7 @@ The extension is open-sourced! Check (https://github.com/Dreamlinerm/Netflix-Pri
 
 Leave a 5 star review! Reviews help build trust and attract new users!
 
-Buy me a coffee (https://paypal.me/MarvinKrebber).
+Buy me a coffee (https://github.com/sponsors/Dreamlinerm).
 
 Disclaimer
 
@@ -56,7 +56,7 @@ The extension is open-sourced! Check <a href="https://github.com/Dreamlinerm/Net
 
 Leave a 5 star review! Reviews help build trust and attract new users!
 
-Buy me a <a href="https://paypal.me/MarvinKrebber" target="_blank">coffee</a>.
+Buy me a <a href="https://github.com/sponsors/Dreamlinerm" target="_blank">coffee</a>.
 
 Disclaimer
 

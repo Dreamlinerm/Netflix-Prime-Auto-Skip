@@ -42,7 +42,7 @@ A extensão é de código aberto! Confira (https://github.com/Dreamlinerm/Netfli
 
 Deixe uma avaliação 5 estrelas! As avaliações ajudam a criar confiança e a atrair novos usuários!
 
-Me pague um café em: (https://paypal.me/MarvinKrebber).
+Me pague um café em: (https://github.com/sponsors/Dreamlinerm).
 
 Isenção de responsabilidade
 
@@ -56,7 +56,7 @@ A extensão é de código aberto! Confira <a href="https://github.com/Dreamliner
 
 Deixe uma avaliação 5 estrelas! As avaliações ajudam a criar confiança e a atrair novos usuários!
 
-Me pague um <a href="https://paypal.me/MarvinKrebber" target="_blank">café</a>.
+Me pague um <a href="https://github.com/sponsors/Dreamlinerm" target="_blank">café</a>.
 
 Isenção de responsabilidade
 
