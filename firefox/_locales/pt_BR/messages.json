@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Streaming enhanced: Netflix Disney+ Prime Video",
+    "message": "Streaming enhanced Netflix Disney Prime Video",
     "description": "Nome da extensão"
   },
   "extensionDescription": {
@@ -68,7 +68,7 @@
     "message": "Recursos de vídeo compartilhado"
   },
   "SharedPageDescription": {
-    "message": "Essas opções só ativam/desativam as configurações de todos os serviços de streaming. Na tabela abaixo, você pode desativar as configurações compartilhadas de um serviço específico."
+    "message": "Essas opções serão ativadas ou desativadas para todas os serviços de streaming. Na tabela abaixo, você pode desativar as configurações compartilhadas de um serviço específico."
   },
   "IntroSwitch": {
     "message": "Pular a introdução e recapitulação:"
@@ -128,7 +128,7 @@
     "description": "Remover o botão de recurso de conteúdo pago"
   },
   "PaidContentDescription": {
-    "message": "Remoção de todas as categorias de filmes/séries pagos"
+    "message": "Remoção de todas as categorias de filmes e séries pagos"
   },
   "ContinuePositionSwitch": {
     "message": "Mover categoria \"Continuar\":"
@@ -150,7 +150,7 @@
     "message": "Aviso de retorno por inatividade:"
   },
   "InactivitySwitchDescription": {
-    "message": "Reiniciar o vídeo se a mensagem (Você ainda está assistindo) for exibida"
+    "message": "Reiniciar o vídeo se a mensagem (você ainda está assistindo) for exibida"
   },
   "ProfileSwitch": {
     "message": "Seleção automática do último perfil:"
@@ -202,7 +202,7 @@
     "message": "Quantidade de segmentos individuais ignorados como introdução ou um anúncio da Netflix, Amazon e Disney+"
   },
   "ImportSettings": {
-    "message": "Importar/exportar todas as configurações"
+    "message": "Importar ou exportar configurações"
   },
   "SaveSettings": {
     "message": "Salvar configurações para um arquivo"
@@ -211,7 +211,7 @@
     "message": "Carregar configurações"
   },
   "ResetAddon": {
-    "message": "Redefinir o extensão para o padrão"
+    "message": "Redefinir a extensão para o padrão"
   },
   "noWrap": {
     "message": "nowrap"
@@ -241,6 +241,9 @@
   "ReleaseCalendarSwitch": {
     "message": "Incluir calendário de lançamento:"
   },
+  "ReleaseCalendarDescription": {
+    "message": "Adiciona as caixas de seleção "Mostrar somente listas de reprodução" e "Filtrar" ao calendário de lançamentos"
+  },
   "EpilepsySwitch": {
     "message": "Opção de epilepsia"
   },
@@ -257,7 +260,7 @@
     "message": "Ocultar raioX:"
   },
   "XraySwitchDescription": {
-    "message": "Ocultar a visualização rápida do raio Xray um vídeo"
+    "message": "Ocultar a visualização rápida do raio Xray da tela"
   },
   "Feature": {
     "message": "Recurso: Dica de ferramenta para obter mais informações"
@@ -275,7 +278,7 @@
     "message": "Solicitar permissão de guias"
   },
   "DuplicateSwitch": {
-    "message": "Remover shows duplicados:"
+    "message": "Remover programas duplicados:"
   },
   "DuplicateSwitchDescription": {
     "message": "Remover todos os programas duplicados, que já estavam visíveis na Disney anteriormente. Visível significa que o programa está entre os primeiros 5 programas em cada linha"
