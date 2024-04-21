@@ -42,23 +42,11 @@ Discord Server
 <img src="Logos/microsoft-edge-1.svg" width="8%" alt="chrome">
 </a>
 
+### Browser Compatibility:
 
-## Supported Streaming Services
-
-<table>
-    <tr>
-      <td align="center" valign="top" width="14.28%">
-        <img src="Logos/Netflix.png" width="20%">
-        <img src="Logos/prime%20video.png" width="20%" >
-        <img src="Logos/crunchyroll.avif" width="20%">
-        <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
-        <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
-        <img src="Logos/starplus.png" width="20%" style="background-color:white;">
-        <img src="Logos/HBO-max.jpg" width="20%">
-      </td>
-    </tr>
-</table>
-
+| Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
+| ---     | ---                 | ---                      | ---         | ---                |
+| ✅     | ✅ | ✅      | ✅         | ✅ |
 
 ## Install on Android
 
@@ -81,6 +69,22 @@ The drm for each streaming service will be installed automatically when a video 
 | Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
 | ---     | ---                 | ---                      | ---         | ---                |
 | ❌     | ✅(tweaked Desktop Website) | ✅(default Desktop Website)      | ✅         | ✅ |
+
+## Supported Streaming Services
+
+<table>
+    <tr>
+      <td align="center" valign="top" width="14.28%">
+        <img src="Logos/Netflix.png" width="20%">
+        <img src="Logos/prime%20video.png" width="20%" >
+        <img src="Logos/crunchyroll.avif" width="20%">
+        <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
+        <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
+        <img src="Logos/starplus.png" width="20%" style="background-color:white;">
+        <img src="Logos/HBO-max.jpg" width="20%">
+      </td>
+    </tr>
+</table>
 
 ## What it does
 
