@@ -42,7 +42,7 @@ Discord Server
 <img src="Logos/microsoft-edge-1.svg" width="8%" alt="chrome">
 </a>
 
-##### Browser Compatibility:
+### Browser Compatibility:
 
 | Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
 | ---     | ---                 | ---                      | ---         | ---                |
@@ -63,7 +63,7 @@ Download [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-s
 
 The drm for each streaming service will be installed automatically when a video started for the first time and you may need to reload the page once.
 
-#### Android Compatibility:
+## Android Compatibility:
 
 | Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
 | ---     | ---                 | ---                      | ---         | ---                |
