@@ -43,27 +43,6 @@ Discord Server
 </a>
 
 
-## Install on Android
-
-<div style="display:flex">
-                <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
-                <img src="Logos/firefox.svg" width="8%" alt="firefox">
-                </a>
-                <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
-                <img src="Logos/kiwi.webp" width="8%">
-                </a>
-</div>
-
-Download [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/), [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the firefox/chrome extension. 
-
-The drm for each streaming service will be installed automatically when a video started for the first time and you may need to reload the page once.
-
-Android Compatibility:
-
-| Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
-| ---     | ---                 | ---                      | ---         | ---                |
-| ❌     | ✅(tweaked Desktop Website) | ✅(default Desktop Website)      | ✅         | ✅ |
-
 ## Supported Streaming Services
 
 <table>
@@ -79,6 +58,29 @@ Android Compatibility:
       </td>
     </tr>
 </table>
+
+
+## Install on Android
+
+<div style="display:flex">
+                <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
+                <img src="Logos/firefox.svg" width="8%" alt="firefox">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
+                <img src="Logos/kiwi.webp" width="8%">
+                </a>
+</div>
+
+Download [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/), [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the firefox/chrome extension. 
+
+The drm for each streaming service will be installed automatically when a video started for the first time and you may need to reload the page once.
+
+
+## Android Compatibility:
+
+| Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
+| ---     | ---                 | ---                      | ---         | ---                |
+| ❌     | ✅(tweaked Desktop Website) | ✅(default Desktop Website)      | ✅         | ✅ |
 
 ## What it does
 
