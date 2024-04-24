@@ -1054,7 +1054,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (!document.querySelector("#filterQueued")) addButtons();
       // save the old calendar
       let localList = [];
-      document.querySelectorAll("div.queue-flag.queued").forEach((element) => {
+      document.querySelectorAll("div.queue-flag.queued:not(.enhanced)").forEach((element) => {
         const h1 = element.nextElementSibling?.firstChild?.nextSibling;
         const name = h1.firstChild.nextSibling.textContent;
         if (!name.includes("Dub")) {
@@ -1066,7 +1066,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       });
       const lastElement = localList[localList.length - 1];
       let oldList = settings.General.savedCrunchyList || [];
-      console.log(oldList);
 
       // delte all weekdays before todays weekday in the oldList
       const today = new Date().toLocaleString("en", { weekday: "short" });
@@ -1081,7 +1080,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       const isCurrentWeek =
         new Date(document.querySelector("li.day.active")?.querySelector("time")?.getAttribute("datetime")).toLocaleDateString() ==
         new Date().toLocaleDateString();
-      console.log(isCurrentWeek, today, lastElement.weekday);
       if (!isCurrentWeek) {
         oldList = [];
       } else {
@@ -1099,7 +1097,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       settings.General.savedCrunchyList = localList.concat(oldList);
       console.log(oldList, settings.General.savedCrunchyList);
       browser.storage.sync.set({ settings });
-      if (isCurrentWeek) {
+      if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
         function addShowsToList(position, list) {
           list.forEach((element) => {
             const article = document.createElement("article");
@@ -1107,7 +1105,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             article.innerHTML = `
   <time class="available-time">${new Date(element.time).toLocaleString([], { hour: "2-digit", minute: "2-digit" })}</time>
   <div>
-    <div class="queue-flag queued" group_id="283836">
+    <div class="queue-flag queued enhanced" group_id="283836">
       <svg viewBox="0 0 48 48">
         <title>In Queue</title>
         <use xlink:href="/i/svg/simulcastcalendar/calendar_icons.svg#cr_bookmark"></use>
