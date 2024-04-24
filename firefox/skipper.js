@@ -1076,20 +1076,21 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
       console.log(lastElement.weekday);
       // delete all previous weekdays from oldList
+      const lastHr = new Date(lastElement.time).getHours();
+      const lastMin = new Date(lastElement.time).getMinutes();
       oldList = oldList
         .filter((item) => {
-          return compareWeekday(today, item.weekday) < 0;
+          return compareWeekday(today, item.weekday) <= 0;
         })
         // delete all items from same weekday before lastElement time
         .filter((item) => {
-          return (
-            item.weekday != lastElement.weekday ||
-            (new Date(item.time).getHours() > new Date(lastElement.time).getHours() &&
-              new Date(item.time).getMinutes() > new Date(lastElement.time).getMinutes())
-          );
+          const itemTime = new Date(item.time);
+          const itemHr = itemTime.getHours();
+          if (item.weekday == today) console.log(itemHr, itemTime.getMinutes(), itemHr > lastHr, lastElement.time);
+          return item.weekday != today || itemHr > lastHr || (itemHr == lastHr && itemTime.getMinutes() > lastMin);
         });
       settings.Crunchyroll.releaseCalendarList = localList.concat(oldList);
-      // console.log(localList, settings.Crunchyroll.releaseCalendarList);
+      console.log(localList, oldList, settings.Crunchyroll.releaseCalendarList);
       browser.storage.sync.set({ settings });
       function addShowsToList(position, list) {
         list.forEach((element) => {
