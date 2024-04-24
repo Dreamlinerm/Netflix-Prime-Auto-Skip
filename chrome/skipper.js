@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.4";
+const version = "1.1.5";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -103,7 +103,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     });
   }
   function logStartOfAddon() {
-    console.log("%cStreaming enhanced%c", "color: #00aeef;font-size: 2em;");
+    console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;");
     console.log("version:", version);
     console.log("Settings", settings);
     if (isNetflix) console.log("Page %cNetflix", "color: #e60010;");
