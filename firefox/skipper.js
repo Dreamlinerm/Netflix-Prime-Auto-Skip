@@ -194,7 +194,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const size = new TextEncoder().encode(JSON.stringify(DBCache)).length;
     const kiloBytes = size / 1024;
     const megaBytes = kiloBytes / 1024;
-    if (megaBytes <= 5) {
+    if (megaBytes < 5) {
       browser.storage.local.set({ DBCache });
     } else {
       log("DBCache cleared", megaBytes);
