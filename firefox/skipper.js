@@ -1126,6 +1126,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         // now add the old list to the website list
         document.querySelectorAll("section.calendar-day").forEach((element) => {
           const weekday = new Date(element.querySelector("time")?.getAttribute("datetime")).getDay();
+          // remove Schedule Coming Soon text
+          if (shiftSunday(date.getDay()) - shiftSunday(weekday) < 0) element?.children?.[1]?.firstChild?.nextSibling?.remove();
           addShowsToList(
             element.children[1],
             oldList.filter((item) => new Date(item.time).getDay() == weekday)
