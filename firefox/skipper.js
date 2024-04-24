@@ -1119,7 +1119,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         const weekday = new Date(element.querySelector("time")?.getAttribute("datetime")).toLocaleString("en", { weekday: "short" });
         addShowsToList(
           element,
-          settings.Crunchyroll.releaseCalendarList.filter((item) => item.weekday == weekday)
+          oldList.filter((item) => item.weekday == weekday)
         );
       });
 
