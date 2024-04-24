@@ -1051,22 +1051,44 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     list.forEach((element) => {
       const article = document.createElement("article");
       article.className = "release js-release";
-      article.innerHTML = `
-<time class="available-time">${new Date(element.time).toLocaleString([], { hour: "2-digit", minute: "2-digit" })}</time>
-<div>
-<div class="queue-flag queued enhanced" group_id="283836">
-<svg viewBox="0 0 48 48">
-<title>In Queue</title>
-<use xlink:href="/i/svg/simulcastcalendar/calendar_icons.svg#cr_bookmark"></use>
-</svg>
-</div>
 
-<h1 class="season-name">
-<a class="js-season-name-link" href="${element.href}" itemprop="url">
-<cite itemprop="name">${element.name}</cite>
-</a>
-</h1>
-</div>`;
+      let time = document.createElement("time");
+      time.className = "available-time";
+      time.textContent = new Date(element.time).toLocaleString([], { hour: "2-digit", minute: "2-digit" });
+
+      let div1 = document.createElement("div");
+      let div2 = document.createElement("div");
+      div2.className = "queue-flag queued enhanced";
+
+      let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("viewBox", "0 0 48 48");
+
+      let use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+      use.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "/i/svg/simulcastcalendar/calendar_icons.svg#cr_bookmark");
+
+      svg.appendChild(use);
+      div2.appendChild(svg);
+
+      let h1 = document.createElement("h1");
+      h1.className = "season-name";
+
+      let a = document.createElement("a");
+      a.className = "js-season-name-link";
+      a.href = element.href;
+      a.setAttribute("itemprop", "url");
+
+      let cite = document.createElement("cite");
+      cite.setAttribute("itemprop", "name");
+      cite.textContent = element.name;
+
+      a.appendChild(cite);
+      h1.appendChild(a);
+
+      div1.appendChild(div2);
+      div1.appendChild(h1);
+
+      article.appendChild(time);
+      article.appendChild(div1);
       position.appendChild(article);
     });
   }
