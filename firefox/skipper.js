@@ -1060,42 +1060,44 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         if (!name.includes("Dub")) {
           const href = h1?.href;
           const time = element.parentElement?.parentElement?.firstElementChild?.getAttribute("datetime");
-          const weekday = new Date(time).toLocaleString("en", { weekday: "short" });
-          localList.push({ href, name, time, weekday });
+          localList.push({ href, name, time });
         }
       });
       const lastElement = localList[localList.length - 1];
       let oldList = settings.General.savedCrunchyList || [];
-
-      // delte all weekdays before todays weekday in the oldList
-      const today = new Date().toLocaleString("en", { weekday: "short" });
-      // check if a is before b
-      function compareWeekday(a, b) {
-        const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-        return days.indexOf(a) - days.indexOf(b);
-      }
       // delete all previous weekdays from oldList
       const lastHr = new Date(lastElement.time).getHours();
       const lastMin = new Date(lastElement.time).getMinutes();
-      const isCurrentWeek =
-        new Date(document.querySelector("li.day.active")?.querySelector("time")?.getAttribute("datetime")).toLocaleDateString() ==
-        new Date().toLocaleDateString();
+      let isCurrentWeek = false;
+      // click on currentday
+      let days = document.querySelectorAll(".specific-date [datetime]");
+      for (const day of days) {
+        const dateOnPage = new Date(day.getAttribute("datetime"));
+        // if the day of the week is the same as today click on it, like if its Monday click on Monday
+        if (date.getDay() == dateOnPage.getDay()) {
+          setTimeout(() => {
+            day.click();
+          }, 100);
+          isCurrentWeek = date.toLocaleDateString() == dateOnPage.toLocaleDateString();
+          break;
+        }
+      }
+      const shiftSunday = (a) => (a + 6) % 7;
       if (!isCurrentWeek) {
         oldList = [];
       } else {
         oldList = oldList
           .filter((item) => {
-            return compareWeekday(today, item.weekday) <= 0;
+            return shiftSunday(date.getDay()) - shiftSunday(new Date(item.time).getDay()) <= 0;
           })
           // delete all items from same weekday before lastElement time
           .filter((item) => {
             const itemTime = new Date(item.time);
             const itemHr = itemTime.getHours();
-            return item.weekday != today || itemHr > lastHr || (itemHr == lastHr && itemTime.getMinutes() > lastMin);
+            return new Date(item.time).getDay() != date.getDay() || itemHr > lastHr || (itemHr == lastHr && itemTime.getMinutes() > lastMin);
           });
       }
       settings.General.savedCrunchyList = localList.concat(oldList);
-      console.log(oldList, settings.General.savedCrunchyList);
       browser.storage.sync.set({ settings });
       if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
         function addShowsToList(position, list) {
@@ -1123,23 +1125,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         }
         // now add the old list to the website list
         document.querySelectorAll("section.calendar-day").forEach((element) => {
-          const weekday = new Date(element.querySelector("time")?.getAttribute("datetime")).toLocaleString("en", { weekday: "short" });
+          const weekday = new Date(element.querySelector("time")?.getAttribute("datetime")).getDay();
           addShowsToList(
             element.children[1],
-            oldList.filter((item) => item.weekday == weekday)
+            oldList.filter((item) => new Date(item.time).getDay() == weekday)
           );
         });
-      }
-
-      let days = document.querySelectorAll(".specific-date [datetime]");
-      for (const day of days) {
-        const date = new Date(day.getAttribute("datetime"));
-        const today = new Date();
-        // if the day of the week is the same as today click on it, like if its Monday click on Monday
-        if (date.getDay() == today.getDay()) {
-          day.click();
-          break;
-        }
       }
     }
   }
