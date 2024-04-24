@@ -103,7 +103,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     });
   }
   function logStartOfAddon() {
-    console.log("%cStreaming enhanced%c", "color: #00aeef;font-size: 2em;");
+    console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;");
     console.log("version:", version);
     console.log("Settings", settings);
     if (isNetflix) console.log("Page %cNetflix", "color: #e60010;");
