@@ -1102,8 +1102,27 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           );
         });
       settings.Crunchyroll.releaseCalendarList = localList.concat(oldList);
-      console.log(localList, settings.Crunchyroll.releaseCalendarList);
+      // console.log(localList, settings.Crunchyroll.releaseCalendarList);
       browser.storage.sync.set({ settings });
+      function addShowsToList(position, list) {
+        list.forEach((element) => {
+          const a = document.createElement("a");
+          a.href = element.href;
+          a.textContent = element.name;
+          a.style = "display: block;";
+          position.appendChild(a);
+          // console.log(a);
+        });
+      }
+      // now add the old list to the website list
+      document.querySelectorAll("section.calendar-day").forEach((element) => {
+        const weekday = new Date(element.querySelector("time")?.getAttribute("datetime")).toLocaleString("en", { weekday: "short" });
+        addShowsToList(
+          element,
+          settings.Crunchyroll.releaseCalendarList.filter((item) => item.weekday == weekday)
+        );
+      });
+
       let days = document.querySelectorAll(".specific-date [datetime]");
       for (const day of days) {
         const date = new Date(day.getAttribute("datetime"));
