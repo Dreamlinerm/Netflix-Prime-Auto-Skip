@@ -1046,94 +1046,108 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     toggleForm.firstElementChild.appendChild(createFilterElement("filterQueued", "Show Playlist only", settings.General.filterQueued, filterQueued));
     toggleForm.firstElementChild.appendChild(createFilterElement("filterDub", "Filter Dub", settings.General.filterDub, filterDub));
   }
+  // start of add CrunchyList to Crunchyroll
+  function addShowsToList(position, list) {
+    list.forEach((element) => {
+      const article = document.createElement("article");
+      article.className = "release js-release";
+      article.innerHTML = `
+<time class="available-time">${new Date(element.time).toLocaleString([], { hour: "2-digit", minute: "2-digit" })}</time>
+<div>
+<div class="queue-flag queued enhanced" group_id="283836">
+<svg viewBox="0 0 48 48">
+<title>In Queue</title>
+<use xlink:href="/i/svg/simulcastcalendar/calendar_icons.svg#cr_bookmark"></use>
+</svg>
+</div>
+
+<h1 class="season-name">
+<a class="js-season-name-link" href="${element.href}" itemprop="url">
+<cite itemprop="name">${element.name}</cite>
+</a>
+</h1>
+</div>`;
+      position.appendChild(article);
+    });
+  }
+  function clickOnCurrentDay() {
+    let days = document.querySelectorAll(".specific-date [datetime]");
+    for (const day of days) {
+      const dateOnPage = new Date(day.getAttribute("datetime"));
+      // if the day of the week is the same as today click on it, like if its Monday click on Monday
+      if (date.getDay() == dateOnPage.getDay()) {
+        // need timeout because the page is not fully loaded
+        setTimeout(() => {
+          day.click();
+        }, 100);
+        // isCurrentWeek
+        return date.toLocaleDateString() == dateOnPage.toLocaleDateString();
+      }
+    }
+  }
+  function createLocalList() {
+    let localList = [];
+    document.querySelectorAll("div.queue-flag.queued:not(.enhanced)").forEach((element) => {
+      const h1 = element.nextElementSibling?.firstChild?.nextSibling;
+      const name = h1.firstChild.nextSibling.textContent;
+      if (!name.includes("Dub")) {
+        const href = h1?.href;
+        const time = element.parentElement?.parentElement?.firstElementChild?.getAttribute("datetime");
+        localList.push({ href, name, time });
+      }
+    });
+    return localList;
+  }
+  function filterOldList(isCurrentWeek, lastHr, lastMin) {
+    let oldList = settings.General.savedCrunchyList || [];
+    // delete all previous weekdays from oldList
+    if (!isCurrentWeek) {
+      oldList = [];
+    } else {
+      oldList = oldList
+        .filter((item) => {
+          return shiftSunday(date.getDay()) - shiftSunday(new Date(item.time).getDay()) <= 0;
+        })
+        // delete all items from same weekday before lastElement time
+        .filter((item) => {
+          const itemTime = new Date(item.time);
+          const itemHr = itemTime.getHours();
+          return new Date(item.time).getDay() != date.getDay() || itemHr > lastHr || (itemHr == lastHr && itemTime.getMinutes() > lastMin);
+        });
+    }
+    return oldList;
+  }
+  const shiftSunday = (a) => (a + 6) % 7;
+  function addSavedCrunchyList() {
+    let localList = createLocalList();
+    const lastElement = localList[localList.length - 1];
+    const lastHr = new Date(lastElement.time).getHours();
+    const lastMin = new Date(lastElement.time).getMinutes();
+    const isCurrentWeek = clickOnCurrentDay();
+    const oldList = filterOldList(isCurrentWeek, lastHr, lastMin);
+    settings.General.savedCrunchyList = localList.concat(oldList);
+    browser.storage.sync.set({ settings });
+    if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
+      // now add the old list to the website list
+      document.querySelectorAll("section.calendar-day").forEach((element) => {
+        const weekday = new Date(element.querySelector("time")?.getAttribute("datetime")).getDay();
+        // remove Schedule Coming Soon text
+        if (shiftSunday(date.getDay()) - shiftSunday(weekday) < 0) element?.children?.[1]?.firstChild?.nextSibling?.remove();
+        addShowsToList(
+          element.children[1],
+          oldList.filter((item) => new Date(item.time).getDay() == weekday)
+        );
+      });
+    }
+  }
   async function Crunchyroll_ReleaseCalendar() {
     if (settings.Crunchyroll?.releaseCalendar && url.includes("simulcastcalendar")) {
       // Show playlist only
       filterQueued(settings.General.filterQueued ? "none" : "block");
       filterDub(settings.General.filterDub ? "none" : "block");
       if (!document.querySelector("#filterQueued")) addButtons();
-      // save the old calendar and click on currentDay
-      let localList = [];
-      document.querySelectorAll("div.queue-flag.queued:not(.enhanced)").forEach((element) => {
-        const h1 = element.nextElementSibling?.firstChild?.nextSibling;
-        const name = h1.firstChild.nextSibling.textContent;
-        if (!name.includes("Dub")) {
-          const href = h1?.href;
-          const time = element.parentElement?.parentElement?.firstElementChild?.getAttribute("datetime");
-          localList.push({ href, name, time });
-        }
-      });
-      const lastElement = localList[localList.length - 1];
-      let oldList = settings.General.savedCrunchyList || [];
-      // delete all previous weekdays from oldList
-      const lastHr = new Date(lastElement.time).getHours();
-      const lastMin = new Date(lastElement.time).getMinutes();
-      let isCurrentWeek = false;
-      // click on currentday
-      let days = document.querySelectorAll(".specific-date [datetime]");
-      for (const day of days) {
-        const dateOnPage = new Date(day.getAttribute("datetime"));
-        // if the day of the week is the same as today click on it, like if its Monday click on Monday
-        if (date.getDay() == dateOnPage.getDay()) {
-          setTimeout(() => {
-            day.click();
-          }, 100);
-          isCurrentWeek = date.toLocaleDateString() == dateOnPage.toLocaleDateString();
-          break;
-        }
-      }
-      const shiftSunday = (a) => (a + 6) % 7;
-      if (!isCurrentWeek) {
-        oldList = [];
-      } else {
-        oldList = oldList
-          .filter((item) => {
-            return shiftSunday(date.getDay()) - shiftSunday(new Date(item.time).getDay()) <= 0;
-          })
-          // delete all items from same weekday before lastElement time
-          .filter((item) => {
-            const itemTime = new Date(item.time);
-            const itemHr = itemTime.getHours();
-            return new Date(item.time).getDay() != date.getDay() || itemHr > lastHr || (itemHr == lastHr && itemTime.getMinutes() > lastMin);
-          });
-      }
-      settings.General.savedCrunchyList = localList.concat(oldList);
-      browser.storage.sync.set({ settings });
-      if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
-        function addShowsToList(position, list) {
-          list.forEach((element) => {
-            const article = document.createElement("article");
-            article.className = "release js-release";
-            article.innerHTML = `
-  <time class="available-time">${new Date(element.time).toLocaleString([], { hour: "2-digit", minute: "2-digit" })}</time>
-  <div>
-    <div class="queue-flag queued enhanced" group_id="283836">
-      <svg viewBox="0 0 48 48">
-        <title>In Queue</title>
-        <use xlink:href="/i/svg/simulcastcalendar/calendar_icons.svg#cr_bookmark"></use>
-      </svg>
-    </div>
-
-    <h1 class="season-name">
-      <a class="js-season-name-link" href="${element.href}" itemprop="url">
-        <cite itemprop="name">${element.name}</cite>
-      </a>
-    </h1>
-  </div>`;
-            position.appendChild(article);
-          });
-        }
-        // now add the old list to the website list
-        document.querySelectorAll("section.calendar-day").forEach((element) => {
-          const weekday = new Date(element.querySelector("time")?.getAttribute("datetime")).getDay();
-          // remove Schedule Coming Soon text
-          if (shiftSunday(date.getDay()) - shiftSunday(weekday) < 0) element?.children?.[1]?.firstChild?.nextSibling?.remove();
-          addShowsToList(
-            element.children[1],
-            oldList.filter((item) => new Date(item.time).getDay() == weekday)
-          );
-        });
-      }
+      // add saved CrunchyList and click on current day
+      addSavedCrunchyList();
     }
   }
   // HBO functions
