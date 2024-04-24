@@ -1121,10 +1121,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   function addSavedCrunchyList() {
     let localList = createLocalList();
     const lastElement = localList[localList.length - 1];
-    const lastHr = new Date(lastElement.time).getHours();
-    const lastMin = new Date(lastElement.time).getMinutes();
     const isCurrentWeek = clickOnCurrentDay();
-    const oldList = filterOldList(isCurrentWeek, lastHr, lastMin);
+    const oldList = filterOldList(isCurrentWeek, new Date(lastElement.time).getHours(), new Date(lastElement.time).getMinutes());
     settings.General.savedCrunchyList = localList.concat(oldList);
     browser.storage.sync.set({ settings });
     if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
