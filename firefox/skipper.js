@@ -1052,7 +1052,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       filterQueued(settings.General.filterQueued ? "none" : "block");
       filterDub(settings.General.filterDub ? "none" : "block");
       if (!document.querySelector("#filterQueued")) addButtons();
-      // save the old calendar
+      // save the old calendar and click on currentDay
       let localList = [];
       document.querySelectorAll("div.queue-flag.queued:not(.enhanced)").forEach((element) => {
         const h1 = element.nextElementSibling?.firstChild?.nextSibling;
