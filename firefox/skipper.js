@@ -1068,35 +1068,40 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       let oldList = settings.Crunchyroll?.releaseCalendarList || [];
 
       // delte all weekdays before todays weekday in the oldList
-      let today = new Date().toLocaleString("en", { weekday: "short" });
+      const today = new Date().toLocaleString("en", { weekday: "short" });
       // check if a is before b
       function compareWeekday(a, b) {
         const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
         return days.indexOf(a) - days.indexOf(b);
       }
-      console.log(lastElement.weekday);
       // delete all previous weekdays from oldList
       const lastHr = new Date(lastElement.time).getHours();
       const lastMin = new Date(lastElement.time).getMinutes();
-      oldList = oldList
-        .filter((item) => {
-          return compareWeekday(today, item.weekday) <= 0;
-        })
-        // delete all items from same weekday before lastElement time
-        .filter((item) => {
-          const itemTime = new Date(item.time);
-          const itemHr = itemTime.getHours();
-          if (item.weekday == today) console.log(itemHr, itemTime.getMinutes(), itemHr > lastHr, lastElement.time);
-          return item.weekday != today || itemHr > lastHr || (itemHr == lastHr && itemTime.getMinutes() > lastMin);
-        });
+      const isCurrentWeek = lastElement.weekday == today;
+      if (!isCurrentWeek) {
+        oldList = [];
+      } else {
+        oldList = oldList
+          .filter((item) => {
+            return compareWeekday(today, item.weekday) <= 0;
+          })
+          // delete all items from same weekday before lastElement time
+          .filter((item) => {
+            const itemTime = new Date(item.time);
+            const itemHr = itemTime.getHours();
+            if (item.weekday == today) console.log(itemHr, itemTime.getMinutes(), itemHr > lastHr, lastElement.time);
+            return item.weekday != today || itemHr > lastHr || (itemHr == lastHr && itemTime.getMinutes() > lastMin);
+          });
+      }
       settings.Crunchyroll.releaseCalendarList = localList.concat(oldList);
       console.log(localList, oldList, settings.Crunchyroll.releaseCalendarList);
       browser.storage.sync.set({ settings });
-      function addShowsToList(position, list) {
-        list.forEach((element) => {
-          const article = document.createElement("article");
-          article.className = "release js-release";
-          article.innerHTML = `
+      if (isCurrentWeek) {
+        function addShowsToList(position, list) {
+          list.forEach((element) => {
+            const article = document.createElement("article");
+            article.className = "release js-release";
+            article.innerHTML = `
   <time class="available-time">${new Date(element.time).toLocaleString([], { hour: "2-digit", minute: "2-digit" })}</time>
   <div>
     <div class="queue-flag queued" group_id="283836">
@@ -1112,17 +1117,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       </a>
     </h1>
   </div>`;
-          position.appendChild(article);
+            position.appendChild(article);
+          });
+        }
+        // now add the old list to the website list
+        document.querySelectorAll("section.calendar-day").forEach((element) => {
+          const weekday = new Date(element.querySelector("time")?.getAttribute("datetime")).toLocaleString("en", { weekday: "short" });
+          addShowsToList(
+            element,
+            oldList.filter((item) => item.weekday == weekday)
+          );
         });
       }
-      // now add the old list to the website list
-      document.querySelectorAll("section.calendar-day").forEach((element) => {
-        const weekday = new Date(element.querySelector("time")?.getAttribute("datetime")).toLocaleString("en", { weekday: "short" });
-        addShowsToList(
-          element,
-          oldList.filter((item) => item.weekday == weekday)
-        );
-      });
 
       let days = document.querySelectorAll(".specific-date [datetime]");
       for (const day of days) {
