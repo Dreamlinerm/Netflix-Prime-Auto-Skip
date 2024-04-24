@@ -1084,6 +1084,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         return date.toLocaleDateString() == dateOnPage.toLocaleDateString();
       }
     }
+    return false;
   }
   function createLocalList() {
     let localList = [];
