@@ -63,7 +63,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
-      General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
+      General: {
+        profileName: null,
+        profilePicture: null,
+        sliderSteps: 1,
+        sliderMin: 5,
+        sliderMax: 20,
+        filterDub: true,
+        filterQueued: true,
+        savedCrunchyList: [],
+      },
     },
   };
   let settings = defaultSettings.settings;
@@ -185,7 +194,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const size = new TextEncoder().encode(JSON.stringify(DBCache)).length;
     const kiloBytes = size / 1024;
     const megaBytes = kiloBytes / 1024;
-    if (megaBytes < 2) {
+    if (megaBytes <= 5) {
       browser.storage.local.set({ DBCache });
     } else {
       log("DBCache cleared", megaBytes);
@@ -1043,6 +1052,58 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       filterQueued(settings.General.filterQueued ? "none" : "block");
       filterDub(settings.General.filterDub ? "none" : "block");
       if (!document.querySelector("#filterQueued")) addButtons();
+      // save the old calendar
+      let localList = [];
+      document.querySelectorAll("div.queue-flag.queued").forEach((element) => {
+        const h1 = element.nextElementSibling?.firstChild?.nextSibling;
+        const name = h1.firstChild.nextSibling.textContent;
+        if (!name.includes("Dub")) {
+          const href = h1?.href;
+          const time = element.parentElement?.parentElement?.firstElementChild?.getAttribute("datetime");
+          const weekday = new Date(time).toLocaleString("en", { weekday: "short" });
+          localList.push({ href, name, time, weekday });
+        }
+      });
+      const lastElement = localList[localList.length - 1];
+      let oldList = settings.Crunchyroll?.releaseCalendarList || [];
+
+      // delte all weekdays before todays weekday in the oldList
+      let today = new Date().toLocaleString("en", { weekday: "short" });
+      // check if a is before b
+      function compareWeekday(a, b) {
+        if (a == b) return 0;
+        switch (a) {
+          case "Sun":
+          case "Mon":
+            return 1;
+          case "Tue":
+            return b == "Mon" ? 0 : 1;
+          case "Wed":
+            return b == "Mon" || b == "Tue" ? 0 : 1;
+          case "Thu":
+            return b == "Mon" || b == "Tue" || b == "Wed" ? 0 : 1;
+          case "Fri":
+            return b == "Mon" || b == "Tue" || b == "Wed" || b == "Thu" ? 0 : 1;
+          case "Sat":
+            return b == "Mon" || b == "Tue" || b == "Wed" || b == "Thu" || b == "Fri" ? 0 : 1;
+        }
+      }
+      // delete all previous weekdays from oldList
+      oldList = oldList
+        .filter((item) => {
+          return compareWeekday(today, item.weekday) == 1;
+        })
+        // delete all items from same weekday before lastElement time
+        .filter((item) => {
+          return (
+            item.weekday != lastElement.weekday ||
+            (new Date(item.time).getHours() > new Date(lastElement.time).getHours() &&
+              new Date(item.time).getMinutes() > new Date(lastElement.time).getMinutes())
+          );
+        });
+      settings.Crunchyroll.releaseCalendarList = localList.concat(oldList);
+      console.log(localList, settings.Crunchyroll.releaseCalendarList);
+      browser.storage.sync.set({ settings });
       let days = document.querySelectorAll(".specific-date [datetime]");
       for (const day of days) {
         const date = new Date(day.getAttribute("datetime"));
