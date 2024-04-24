@@ -1071,27 +1071,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       let today = new Date().toLocaleString("en", { weekday: "short" });
       // check if a is before b
       function compareWeekday(a, b) {
-        if (a == b) return 0;
-        switch (a) {
-          case "Sun":
-          case "Mon":
-            return 1;
-          case "Tue":
-            return b == "Mon" ? 0 : 1;
-          case "Wed":
-            return b == "Mon" || b == "Tue" ? 0 : 1;
-          case "Thu":
-            return b == "Mon" || b == "Tue" || b == "Wed" ? 0 : 1;
-          case "Fri":
-            return b == "Mon" || b == "Tue" || b == "Wed" || b == "Thu" ? 0 : 1;
-          case "Sat":
-            return b == "Mon" || b == "Tue" || b == "Wed" || b == "Thu" || b == "Fri" ? 0 : 1;
-        }
+        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        return days.indexOf(a) - days.indexOf(b);
       }
+      console.log(lastElement.weekday);
       // delete all previous weekdays from oldList
       oldList = oldList
         .filter((item) => {
-          return compareWeekday(today, item.weekday) == 1;
+          return compareWeekday(today, item.weekday) < 0;
         })
         // delete all items from same weekday before lastElement time
         .filter((item) => {
