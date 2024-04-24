@@ -1065,19 +1065,23 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         }
       });
       const lastElement = localList[localList.length - 1];
-      let oldList = settings.Crunchyroll?.releaseCalendarList || [];
+      let oldList = settings.General.savedCrunchyList || [];
+      console.log(oldList);
 
       // delte all weekdays before todays weekday in the oldList
       const today = new Date().toLocaleString("en", { weekday: "short" });
       // check if a is before b
       function compareWeekday(a, b) {
-        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
         return days.indexOf(a) - days.indexOf(b);
       }
       // delete all previous weekdays from oldList
       const lastHr = new Date(lastElement.time).getHours();
       const lastMin = new Date(lastElement.time).getMinutes();
-      const isCurrentWeek = lastElement.weekday == today;
+      const isCurrentWeek =
+        new Date(document.querySelector("li.day.active")?.querySelector("time")?.getAttribute("datetime")).toLocaleDateString() ==
+        new Date().toLocaleDateString();
+      console.log(isCurrentWeek, today, lastElement.weekday);
       if (!isCurrentWeek) {
         oldList = [];
       } else {
@@ -1089,12 +1093,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           .filter((item) => {
             const itemTime = new Date(item.time);
             const itemHr = itemTime.getHours();
-            if (item.weekday == today) console.log(itemHr, itemTime.getMinutes(), itemHr > lastHr, lastElement.time);
             return item.weekday != today || itemHr > lastHr || (itemHr == lastHr && itemTime.getMinutes() > lastMin);
           });
       }
-      settings.Crunchyroll.releaseCalendarList = localList.concat(oldList);
-      console.log(localList, oldList, settings.Crunchyroll.releaseCalendarList);
+      settings.General.savedCrunchyList = localList.concat(oldList);
+      console.log(oldList, settings.General.savedCrunchyList);
       browser.storage.sync.set({ settings });
       if (isCurrentWeek) {
         function addShowsToList(position, list) {
@@ -1124,7 +1127,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         document.querySelectorAll("section.calendar-day").forEach((element) => {
           const weekday = new Date(element.querySelector("time")?.getAttribute("datetime")).toLocaleString("en", { weekday: "short" });
           addShowsToList(
-            element,
+            element.children[1],
             oldList.filter((item) => item.weekday == weekday)
           );
         });

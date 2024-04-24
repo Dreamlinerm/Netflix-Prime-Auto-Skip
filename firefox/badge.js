@@ -107,7 +107,16 @@ if (isMobile) {
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
-      General: { profileName: null, profilePicture: null, sliderSteps: 1, sliderMin: 5, sliderMax: 20, filterDub: true, filterQueued: true },
+      General: {
+        profileName: null,
+        profilePicture: null,
+        sliderSteps: 1,
+        sliderMin: 5,
+        sliderMax: 20,
+        filterDub: true,
+        filterQueued: true,
+        savedCrunchyList: [],
+      },
     },
   };
   let settings = defaultSettings.settings;
