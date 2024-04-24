@@ -1106,12 +1106,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       browser.storage.sync.set({ settings });
       function addShowsToList(position, list) {
         list.forEach((element) => {
-          const a = document.createElement("a");
-          a.href = element.href;
-          a.textContent = element.name;
-          a.style = "display: block;";
-          position.appendChild(a);
-          // console.log(a);
+          const article = document.createElement("article");
+          article.className = "release js-release";
+          article.innerHTML = `
+  <time class="available-time">${new Date(element.time).toLocaleString([], { hour: "2-digit", minute: "2-digit" })}</time>
+  <div>
+    <div class="queue-flag queued" group_id="283836">
+      <svg viewBox="0 0 48 48">
+        <title>In Queue</title>
+        <use xlink:href="/i/svg/simulcastcalendar/calendar_icons.svg#cr_bookmark"></use>
+      </svg>
+    </div>
+
+    <h1 class="season-name">
+      <a class="js-season-name-link" href="${element.href}" itemprop="url">
+        <cite itemprop="name">${element.name}</cite>
+      </a>
+    </h1>
+  </div>`;
+          position.appendChild(article);
         });
       }
       // now add the old list to the website list
