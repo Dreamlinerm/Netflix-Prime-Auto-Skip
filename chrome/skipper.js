@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.5";
+const version = "1.1.6";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -1121,7 +1121,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     });
     return localList;
   }
-  function filterOldList(isCurrentWeek, lastHr, lastMin) {
+  function filterOldList(isCurrentWeek, lastDay, lastHr, lastMin) {
     let oldList = settings.General.savedCrunchyList || [];
     // delete all previous weekdays from oldList
     if (!isCurrentWeek) {
@@ -1135,7 +1135,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         .filter((item) => {
           const itemTime = new Date(item.time);
           const itemHr = itemTime.getHours();
-          return new Date(item.time).getDay() != date.getDay() || itemHr > lastHr || (itemHr == lastHr && itemTime.getMinutes() > lastMin);
+          // no shows today yet
+          const itemDay = itemTime.getDay();
+          return lastDay != itemDay || itemDay != date.getDay() || itemHr > lastHr || (itemHr == lastHr && itemTime.getMinutes() > lastMin);
         });
     }
     return oldList;
@@ -1145,7 +1147,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     let localList = createLocalList();
     const lastElement = localList[localList.length - 1];
     const isCurrentWeek = clickOnCurrentDay();
-    const oldList = filterOldList(isCurrentWeek, new Date(lastElement.time).getHours(), new Date(lastElement.time).getMinutes());
+    const lastTime = new Date(lastElement.time);
+    const oldList = filterOldList(isCurrentWeek, lastTime.getDay(), lastTime.getHours(), lastTime.getMinutes());
     settings.General.savedCrunchyList = localList.concat(oldList);
     chrome.storage.sync.set({ settings });
     if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
