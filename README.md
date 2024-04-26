@@ -9,16 +9,16 @@
 
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
 <img src="Logos/firefox.svg" width="20px">
-</a>
 <img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
 <img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
 <img src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010" >
+</a>
 <br>
 <a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
 <img src="Logos/chrome.svg" width="20px">
-</a>
 <img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
 <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" >
+</a>
 <br>
 <a href="https://github.com/sponsors/Dreamlinerm">
 <img src="https://img.shields.io/badge/Donate-PayPal-blue.svg?style=flat&logo=paypal">
