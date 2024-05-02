@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.6";
+const version = "1.1.7";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -1121,8 +1121,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     });
     return localList;
   }
-  function filterOldList(isCurrentWeek, lastDay, lastHr, lastMin) {
+  function filterOldList(isCurrentWeek, localList) {
     let oldList = settings.General.savedCrunchyList || [];
+    const lastElement = localList[localList.length - 1];
+    const lastTime = new Date(lastElement.time);
+    const [lastDay, lastHr, lastMin] = [lastTime.getDay(), lastTime.getHours(), lastTime.getMinutes()];
     // delete all previous weekdays from oldList
     if (!isCurrentWeek) {
       oldList = [];
@@ -1145,10 +1148,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const shiftSunday = (a) => (a + 6) % 7;
   function addSavedCrunchyList() {
     let localList = createLocalList();
-    const lastElement = localList[localList.length - 1];
     const isCurrentWeek = clickOnCurrentDay();
-    const lastTime = new Date(lastElement.time);
-    const oldList = filterOldList(isCurrentWeek, lastTime.getDay(), lastTime.getHours(), lastTime.getMinutes());
+    const oldList = localList.length > 0 ? filterOldList(isCurrentWeek, localList) : settings.General.savedCrunchyList || [];
     settings.General.savedCrunchyList = localList.concat(oldList);
     chrome.storage.sync.set({ settings });
     if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
