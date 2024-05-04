@@ -449,10 +449,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       // only skip if the next video is the next episode of a series (there is a timer)
       let time;
       if (isDisney) time = /\d+/.exec(button.textContent)?.[0];
-      if (
-        (isHotstar && !document.evaluate("//span[contains(., 'My Space')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()) ||
-        (time && lastAdTimeText != time)
-      ) {
+      else time = parseInt(document.querySelector("video")?.currentTime);
+      if (time && lastAdTimeText != time) {
         const videoFullscreen = document.fullscreenElement !== null;
         lastAdTimeText = time;
         if (settings.Disney?.skipCredits) {
