@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.8";
+const version = "1.1.9";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -397,7 +397,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const time = video?.currentTime;
     if (settings.Disney?.filterDuplicates) Disney_filterDuplicates();
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
-    Disney_Credits();
+    Disney_Credits(video);
     Disney_addHomeButton();
     if (settings.Disney?.watchCredits) Disney_Watch_Credits();
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
@@ -439,7 +439,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
     }
   }
-  function Disney_Credits() {
+  function Disney_Credits(video) {
     let button;
     if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]');
     else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
@@ -448,7 +448,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (button) {
       // only skip if the next video is the next episode of a series (there is a timer)
       let time;
-      if (isDisney) time = /\d+/.exec(button.textContent)?.[0];
+      if (isDisney) time = parseInt(video?.currentTime);
       else time = parseInt(document.querySelector("video")?.currentTime);
       if (time && lastAdTimeText != time) {
         const videoFullscreen = document.fullscreenElement !== null;
