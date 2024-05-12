@@ -397,7 +397,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const time = video?.currentTime;
     if (settings.Disney?.filterDuplicates) Disney_filterDuplicates();
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
-    Disney_Credits(video);
+    Disney_Credits(time);
     Disney_addHomeButton();
     if (settings.Disney?.watchCredits) Disney_Watch_Credits();
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
@@ -439,17 +439,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
     }
   }
-  function Disney_Credits(video) {
+  function Disney_Credits(currentTime) {
     let button;
     if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]');
     else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
       button = document.querySelector('[data-testid="icon-restart"]')?.parentElement;
     else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
-      // only skip if the next video is the next episode of a series (there is a timer)
-      let time;
-      if (isDisney) time = parseInt(video?.currentTime);
-      else time = parseInt(document.querySelector("video")?.currentTime);
+      // time is to avoid clicking too fast
+      const time = parseInt(currentTime);
       if (time && lastAdTimeText != time) {
         const videoFullscreen = document.fullscreenElement !== null;
         lastAdTimeText = time;
