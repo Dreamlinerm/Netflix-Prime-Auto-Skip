@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.9";
+const version = "1.1.10";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -397,7 +397,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const time = video?.currentTime;
     if (settings.Disney?.filterDuplicates) Disney_filterDuplicates();
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
-    Disney_Credits(video);
+    Disney_Credits(time);
     Disney_addHomeButton();
     if (settings.Disney?.watchCredits) Disney_Watch_Credits();
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
@@ -439,17 +439,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
     }
   }
-  function Disney_Credits(video) {
+  function Disney_Credits(currentTime) {
     let button;
     if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]');
     else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
       button = document.querySelector('[data-testid="icon-restart"]')?.parentElement;
     else button = document.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
-      // only skip if the next video is the next episode of a series (there is a timer)
-      let time;
-      if (isDisney) time = parseInt(video?.currentTime);
-      else time = parseInt(document.querySelector("video")?.currentTime);
+      // time is to avoid clicking too fast
+      const time = parseInt(currentTime);
       if (time && lastAdTimeText != time) {
         const videoFullscreen = document.fullscreenElement !== null;
         lastAdTimeText = time;
@@ -751,6 +749,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const AmazonVideoClass =
     "#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video";
   const AmazonObserver = new MutationObserver(Amazon);
+
   function Amazon() {
     const video = document.querySelector(AmazonVideoClass);
     if (settings.Amazon?.skipCredits) Amazon_Credits();
@@ -762,6 +761,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
+  let lastIntroTime = 0;
+  function resetLastIntroTime() {
+    setTimeout(() => {
+      lastIntroTime = 0;
+    }, 5000);
+  }
   function Amazon_Intro() {
     if (settings.Amazon?.skipIntro) {
       // skips intro and recap
@@ -771,7 +776,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (button) {
         let video = document.querySelector(AmazonVideoClass);
         const time = video?.currentTime;
-        if (time) {
+        if (time && lastIntroTime != parseInt(time)) {
+          lastIntroTime = parseInt(time);
+          resetLastIntroTime();
           button.click();
           log("Intro skipped", button);
           //delay where the video is loaded
@@ -789,11 +796,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       reverseButton = true;
       // go back button
       const button = document.createElement("button");
-      button.style = "padding: 0px 22px; line-height: normal; min-width: 0px";
+      button.style = "padding: 0px 22px; line-height: normal; min-width: 0px;z-index:999;pointer-events:all;";
       button.setAttribute("class", "fqye4e3 f1ly7q5u fk9c3ap fz9ydgy f1xrlb00 f1hy0e6n fgbpje3 f1uteees f1h2a8xb  f1cg7427 fiqc9rt fg426ew f1ekwadg");
       button.setAttribute("data-uia", "reverse-button");
       button.textContent = "Watch skipped ?";
-      document.querySelector(".f18oq18q.f6suwnu.fhxjtbc.f1ngx5al").appendChild(button);
+      document.querySelector(".atvwebplayersdk-action-buttons").appendChild(button);
       let buttonInHTML = document.querySelector('[data-uia="reverse-button"]');
       function goBack() {
         video.currentTime = startTime;

@@ -54,7 +54,7 @@ const defaultSettings = {
   },
 };
 let settings = defaultSettings.settings;
-const version = "1.1.9";
+const version = "1.1.10";
 browser.storage.sync.get("settings", function (result) {
   console.log(
     "%cNetflix%c/%cPrime%c Auto-Skip",
