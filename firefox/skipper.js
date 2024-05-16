@@ -749,6 +749,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const AmazonVideoClass =
     "#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video";
   const AmazonObserver = new MutationObserver(Amazon);
+
   function Amazon() {
     const video = document.querySelector(AmazonVideoClass);
     if (settings.Amazon?.skipCredits) Amazon_Credits();
@@ -760,6 +761,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
+  let lastIntroTime = 0;
+  function resetLastIntroTime() {
+    setTimeout(() => {
+      lastIntroTime = 0;
+    }, 5000);
+  }
   function Amazon_Intro() {
     if (settings.Amazon?.skipIntro) {
       // skips intro and recap
@@ -769,7 +776,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (button) {
         let video = document.querySelector(AmazonVideoClass);
         const time = video?.currentTime;
-        if (time) {
+        if (time && lastIntroTime != parseInt(time)) {
+          lastIntroTime = parseInt(time);
+          resetLastIntroTime();
           button.click();
           log("Intro skipped", button);
           //delay where the video is loaded
