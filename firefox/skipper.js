@@ -796,11 +796,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       reverseButton = true;
       // go back button
       const button = document.createElement("button");
-      button.style = "padding: 0px 22px; line-height: normal; min-width: 0px";
+      button.style = "padding: 0px 22px; line-height: normal; min-width: 0px;z-index:999;pointer-events:all;";
       button.setAttribute("class", "fqye4e3 f1ly7q5u fk9c3ap fz9ydgy f1xrlb00 f1hy0e6n fgbpje3 f1uteees f1h2a8xb  f1cg7427 fiqc9rt fg426ew f1ekwadg");
       button.setAttribute("data-uia", "reverse-button");
       button.textContent = "Watch skipped ?";
-      document.querySelector(".f18oq18q.f6suwnu.fhxjtbc.f1ngx5al").appendChild(button);
+      document.querySelector(".atvwebplayersdk-action-buttons").appendChild(button);
       let buttonInHTML = document.querySelector('[data-uia="reverse-button"]');
       function goBack() {
         video.currentTime = startTime;
