@@ -1,5 +1,4 @@
 <div align="center">
-
 <img src="firefox/icons/NetflixAmazon%20Auto-Skip.svg" width="10%">
 
 # Streaming enhanced ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
@@ -11,13 +10,13 @@
 <img src="Logos/firefox.svg" width="20px">
 <img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
 <img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
-<img src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010" >
+<img alt="Mozilla Add-on Rating" src="https://img.shields.io/amo/rating/NetflixPrime%40Autoskip.io">
 </a>
 <br>
 <a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
 <img src="Logos/chrome.svg" width="20px">
 <img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
-<img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" >
+<img alt="Chrome Web Store Rating" src="https://img.shields.io/chrome-web-store/rating/akaimhgappllmlkadblbdknhbfghdgle">
 </a>
 <br>
 <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/Dreamlinerm/Netflix-Prime-Auto-Skip">
@@ -34,8 +33,7 @@
 </a>
 <br>
 <a href="https://discord.gg/5fBYathA7d">
-<img src="Logos/discord-6.svg" width="50">
-Discord Server
+<img src="https://img.shields.io/badge/Discord-Server?logo=discord" width="200">
 </a>
 </div>
 
