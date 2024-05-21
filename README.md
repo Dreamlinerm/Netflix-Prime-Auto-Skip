@@ -20,9 +20,19 @@
 <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" >
 </a>
 <br>
-<a href="https://github.com/sponsors/Dreamlinerm">
-<img src="https://img.shields.io/badge/Donate-PayPal-blue.svg?style=flat&logo=paypal">
+<img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/Dreamlinerm/Netflix-Prime-Auto-Skip">
+<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Dreamlinerm/Netflix-Prime-Auto-Skip">
+<br>
+<a href="(https://github.com/sponsors/Dreamlinerm">
+<img src="https://img.shields.io/github/sponsors/Dreamlinerm?logo=githubsponsors">
 </a>
+<a href="https://www.paypal.com/donate/?hosted_button_id=N7CEVV9CCJWM6">
+<img src="https://img.shields.io/badge/Recurring-PayPal-blue.svg?style=flat&logo=paypal">
+</a>
+<a href="https://github.com/sponsors/Dreamlinerm">
+<img src="https://img.shields.io/badge/OneTime-PayPal-blue.svg?style=flat&logo=paypal">
+</a>
+<br>
 <a href="https://discord.gg/5fBYathA7d">
 <img src="Logos/discord-6.svg" width="50">
 Discord Server
@@ -30,17 +40,13 @@ Discord Server
 </div>
 
 
-## Install in Browser (click on image)
 
-<a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
-<img src="Logos/firefox.svg" width="8%" alt="firefox">
-</a>
-<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
-<img src="Logos/chrome.svg" width="8%" alt="chrome">
-</a>
-<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
-<img src="Logos/microsoft-edge-1.svg" width="8%" alt="chrome">
-</a>
+<p align="center">
+<a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"><img src="https://user-images.githubusercontent.com/585534/107280546-7b9b2a00-6a26-11eb-8f9f-f95932f4bfec.png" alt="Get Streaming enhanced for Firefox"/>
+<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="https://user-images.githubusercontent.com/585534/107280622-91a8ea80-6a26-11eb-8d07-77c548b28665.png" alt="Get Streaming enhanced for Chromium"/>
+</p>
+
+***
 
 ### Browser Compatibility:
 
