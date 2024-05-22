@@ -81,10 +81,10 @@ The drm for each streaming service will be installed automatically when a video 
         <img src="Logos/Netflix.png" width="20%">
         <img src="Logos/prime%20video.png" width="20%" >
         <img src="Logos/crunchyroll.avif" width="20%">
+        <img src="Logos/HBO-max.jpg" width="20%">
         <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
         <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
         <img src="Logos/starplus.png" width="20%" style="background-color:white;">
-        <img src="Logos/HBO-max.jpg" width="20%">
       </td>
     </tr>
 </table>
