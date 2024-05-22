@@ -341,13 +341,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           .replace(/:?\sSeason-?\s\d+/g, "")
           .split(", ")[0];
       else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent;
-
-      // sometimes more than one image is loaded for the same title
-      if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
-        lastTitle = title;
-        if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
-          useDBCache(title, card);
-        } else getMovieInfo(title, card);
+      // for the static Pixar Disney etc. cards
+      if (!isDisney || (!card?.classList.contains("_1p76x1y4") && !title.includes("Season"))) {
+        // sometimes more than one image is loaded for the same title
+        if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
+          lastTitle = title;
+          if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
+            useDBCache(title, card);
+          } else getMovieInfo(title, card);
+        }
       }
     }
   }
@@ -368,9 +370,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       div.textContent = "?";
       log("no score found:", title, data);
     }
-    if (isNetflix) card.appendChild(div);
-    else if (isHBO) card.appendChild(div);
-    else if (isDisney || isHotstar) card.parentElement?.appendChild(div);
+    if (isNetflix || isHBO) card.appendChild(div);
+    else if (isDisney) card?.querySelector("img").parentElement?.appendChild(div);
+    else if (isHotstar) card.parentElement.appendChild(div);
     else if (isPrimeVideo) card.firstChild.firstChild.appendChild(div);
   }
   function OnFullScreenChange() {
