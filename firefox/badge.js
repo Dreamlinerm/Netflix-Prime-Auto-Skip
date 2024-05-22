@@ -102,7 +102,7 @@ if (isMobile) {
         profile: true,
         showRating: true,
       },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, filterDuplicates: false },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },

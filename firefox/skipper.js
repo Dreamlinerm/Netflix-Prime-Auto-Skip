@@ -58,7 +58,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         profile: true,
         showRating: true,
       },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, filterDuplicates: false },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
@@ -320,11 +320,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       else if (isDisney)
         title = card
           ?.getAttribute("aria-label")
-          ?.replace(/(S\d+:\s?E\d+\s)/g, "")
           ?.replace(" Disney+ Original", "")
           ?.replace(" STAR Original", "")
-          ?.replace(" Select for details on this title.", "")
-          ?.split(". ")[0];
+          ?.replace(" Select for details on this title.", "");
       else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
       // amazon
       // remove everything after - in the title
@@ -401,7 +399,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     let video = document.querySelector("video");
     if (!video) video = document.querySelector("disney-web-player")?.shadowRoot?.firstChild?.firstChild;
     const time = video?.currentTime;
-    if (settings.Disney?.filterDuplicates) Disney_filterDuplicates();
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
     Disney_Credits(time);
     Disney_addHomeButton();
@@ -596,25 +593,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           video.playbackRate = this.value / 10;
           setVideoSpeed(this.value / 10);
         };
-      }
-    }
-  }
-  function Disney_filterDuplicates() {
-    const titleSet = new Set();
-    const slideTracks = document.querySelectorAll(".slick-track");
-    for (const slideTrack of slideTracks) {
-      const titleCards = slideTrack.querySelectorAll(".basic-card div div img:first-of-type");
-      // remove only visible duplicates
-      for (let i = 0; i < titleCards.length && i <= 4; i++) {
-        const titleCard = titleCards[i];
-        const title = titleCard.getAttribute("alt");
-        if (titleSet.has(title)) {
-          log("removed duplicate:", title);
-          const div = titleCard.closest(".slick-slide");
-          div?.remove();
-        } else {
-          titleSet.add(title);
-        }
       }
     }
   }
