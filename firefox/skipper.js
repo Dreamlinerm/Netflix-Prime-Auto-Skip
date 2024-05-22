@@ -301,7 +301,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   async function addRating() {
     let titleCards;
     if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
-    else if (isDisney) titleCards = document.querySelectorAll(".basic-card div div img:not(.imdb)");
+    else if (isDisney) titleCards = document.querySelectorAll("a[data-testid='set-item']:not(.imdb)");
     else if (isHotstar) titleCards = document.querySelectorAll(".swiper-slide img:not(.imdb)");
     else if (isHBO) titleCards = document.querySelectorAll("a[class*='StyledTileLinkNormal-Beam-Web-Ent']:not(.imdb)");
     else if (isPrimeVideo) titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
@@ -319,8 +319,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       // S2: E3 remove this part
       else if (isDisney)
         title = card
-          ?.getAttribute("alt")
+          ?.getAttribute("aria-label")
           ?.replace(/(S\d+:\s?E\d+\s)/g, "")
+          ?.replace(" Disney+ Original", "")
+          ?.replace(" STAR Original", "")
+          ?.replace(" Select for details on this title.", "")
           ?.split(". ")[0];
       else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
       // amazon
@@ -365,7 +368,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       div.textContent = "?";
       log("no score found:", title, data);
     }
-    if (isNetflix || isHBO) card.appendChild(div);
+    if (isNetflix) card.appendChild(div);
+    else if (isHBO) card.appendChild(div);
     else if (isDisney || isHotstar) card.parentElement?.appendChild(div);
     else if (isPrimeVideo) card.firstChild.firstChild.appendChild(div);
   }
