@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.10";
+const version = "1.1.11";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -58,7 +58,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         profile: true,
         showRating: true,
       },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, filterDuplicates: false },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
@@ -301,7 +301,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   async function addRating() {
     let titleCards;
     if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
-    else if (isDisney) titleCards = document.querySelectorAll(".basic-card div div img:not(.imdb)");
+    else if (isDisney) titleCards = document.querySelectorAll("a[data-testid='set-item']:not(.imdb)");
     else if (isHotstar) titleCards = document.querySelectorAll(".swiper-slide img:not(.imdb)");
     else if (isHBO) titleCards = document.querySelectorAll("a[class*='StyledTileLinkNormal-Beam-Web-Ent']:not(.imdb)");
     else if (isPrimeVideo) titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
@@ -319,9 +319,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       // S2: E3 remove this part
       else if (isDisney)
         title = card
-          ?.getAttribute("alt")
-          ?.replace(/(S\d+:\s?E\d+\s)/g, "")
-          ?.split(". ")[0];
+          ?.getAttribute("aria-label")
+          ?.replace(" Disney+ Original", "")
+          ?.replace(" STAR Original", "")
+          ?.replace(" Select for details on this title.", "");
       else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
       // amazon
       // remove everything after - in the title
@@ -338,13 +339,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           .replace(/:?\sSeason-?\s\d+/g, "")
           .split(", ")[0];
       else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent;
-
-      // sometimes more than one image is loaded for the same title
-      if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
-        lastTitle = title;
-        if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
-          useDBCache(title, card);
-        } else getMovieInfo(title, card);
+      // for the static Pixar Disney etc. cards
+      if (!isDisney || (!card?.classList.contains("_1p76x1y4") && !title.includes("Season"))) {
+        // sometimes more than one image is loaded for the same title
+        if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
+          lastTitle = title;
+          if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
+            useDBCache(title, card);
+          } else getMovieInfo(title, card);
+        }
       }
     }
   }
@@ -366,7 +369,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       log("no score found:", title, data);
     }
     if (isNetflix || isHBO) card.appendChild(div);
-    else if (isDisney || isHotstar) card.parentElement?.appendChild(div);
+    else if (isDisney) card?.querySelector("img").parentElement?.appendChild(div);
+    else if (isHotstar) card.parentElement.appendChild(div);
     else if (isPrimeVideo) card.firstChild.firstChild.appendChild(div);
   }
   function OnFullScreenChange() {
@@ -395,7 +399,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     let video = document.querySelector("video");
     if (!video) video = document.querySelector("disney-web-player")?.shadowRoot?.firstChild?.firstChild;
     const time = video?.currentTime;
-    if (settings.Disney?.filterDuplicates) Disney_filterDuplicates();
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
     Disney_Credits(time);
     Disney_addHomeButton();
@@ -590,25 +593,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           video.playbackRate = this.value / 10;
           setVideoSpeed(this.value / 10);
         };
-      }
-    }
-  }
-  function Disney_filterDuplicates() {
-    const titleSet = new Set();
-    const slideTracks = document.querySelectorAll(".slick-track");
-    for (const slideTrack of slideTracks) {
-      const titleCards = slideTrack.querySelectorAll(".basic-card div div img:first-of-type");
-      // remove only visible duplicates
-      for (let i = 0; i < titleCards.length && i <= 4; i++) {
-        const titleCard = titleCards[i];
-        const title = titleCard.getAttribute("alt");
-        if (titleSet.has(title)) {
-          log("removed duplicate:", title);
-          const div = titleCard.closest(".slick-slide");
-          div?.remove();
-        } else {
-          titleSet.add(title);
-        }
       }
     }
   }

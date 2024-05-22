@@ -30,7 +30,7 @@
         <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" alt="Logo">
         <div class="flex-center flex-col">
           <h2 class="title" data-i18n>pageTitle</h2>
-          <p style="font-size: 1em">v.1.1.10</p>
+          <p style="font-size: 1em">v.1.1.11</p>
         </div>
       </div>
       <a target="_blank" class="flex-center flex-col" style="text-align: center; text-decoration: none"
@@ -151,15 +151,6 @@
           </label>
         </div>
         <p class="description" data-i18n>DefaultPaidContentDescription</p>
-        <hr>
-        <div class="line flex">
-          <p data-i18n>DuplicateSwitch</p>
-          <label class="switch">
-            <input type="checkbox" id="DisneyFilterDuplicates">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <p class="description" data-i18n>DuplicateSwitchDescription</p>
         <hr>
         <div class="line flex">
           <p data-i18n>EpilepsySwitch</p>
@@ -604,14 +595,7 @@
           </label>
         </div>
         <hr>
-        <div class="line flex">
-          <p data-i18n>DuplicateSwitch</p>
-          <label class="switch">
-            <input type="checkbox" id="DisneyFilterDuplicates">
-            <span class="slider round"></span>
-          </label>
-        </div>
-        <p class="description" data-i18n>DuplicateSwitchDescription</p>
+        empty
       </div>
       <div class="categoryCrunchyroll hidden" style="margin-top: 0; background-color: unset" id="CrunchyrollSettings">
         <div class="flex flex-between" style="padding: 5px 5px; color: #f78b24">
@@ -687,6 +671,13 @@
       <div id="ChangelogSettings" class="hidden">
         <h2>Changelog</h2>
         <div>
+          <div class="line flex">
+            <h2>1.1.11</h2>
+            <ul>
+              <li>Fixed Disney TMDB rating</li>
+              <li>Filter duplicates removed, since now unnecessary on Disney</li>
+            </ul>
+          </div>
           <div class="line flex">
             <h2>1.1.10</h2>
             <ul>
