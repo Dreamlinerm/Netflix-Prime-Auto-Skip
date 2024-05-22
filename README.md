@@ -33,7 +33,7 @@
 </a>
 <br>
 <a href="https://discord.gg/5fBYathA7d">
-<img src="https://img.shields.io/badge/Discord-Server?logo=discord" width="200">
+<img src="https://img.shields.io/badge/Discord_Server-5a5a5a?logo=discord" width="200">
 </a>
 </div>
 
