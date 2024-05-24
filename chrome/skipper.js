@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.11";
+const version = "1.1.12";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -707,6 +707,21 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           video.playbackRate = videoSpeed;
           lastAdTimeText = 0;
           if (settings.Video.epilepsy) video.style.opacity = 1;
+        }
+
+        // pause video shows ad
+        // sherlock show comes alot.
+        const div = document.querySelector('div[data-uia="pause-ad-title-display"]');
+        const button = document.querySelector('button[data-uia="pause-ad-expand-button"]');
+        if (video.paused && button && div.checkVisibility({ opacityProperty: true }) && lastAdTimeText != parseInt(video.currentTime / 10)) {
+          lastAdTimeText = parseInt(video.currentTime / 10);
+          resetLastATimeText();
+          button.click();
+          log("Remove Video Paused ad", button);
+          increaseBadge();
+          setTimeout(function () {
+            video.pause();
+          }, 100);
         }
       }
     }, 100);
