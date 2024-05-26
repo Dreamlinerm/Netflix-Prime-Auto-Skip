@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.12";
+const version = "1.1.13";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -1186,12 +1186,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const time = video?.currentTime;
     if (settings.HBO?.skipIntro) HBO_Intro(video, time);
     if (settings.HBO?.skipCredits) HBO_Credits(time);
-    if (settings.HBO?.watchCredits) HBO_Watch_Credits();
+    if (settings.HBO?.watchCredits) HBO_Watch_Credits(video);
     if (settings.HBO?.speedSlider) HBO_SpeedSlider(video);
   }
   function HBO_Intro(video, time) {
     let button = document.querySelector('[class*="SkipButton-Beam-Web-Ent"]');
-    if (button && button.checkVisibility({ visibilityProperty: true })) {
+    if (button?.checkVisibility({ visibilityProperty: true })) {
       button.click();
       log("Intro skipped", button);
       setTimeout(function () {
@@ -1209,10 +1209,17 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       log("Credits skipped", button);
     }
   }
-  function HBO_Watch_Credits() {
+  function HBO_Watch_Credits(video) {
     let button = document.querySelector('[class*="DismissButton-Beam-Web-Ent"]');
     if (button) {
       button.click();
+      increaseBadge();
+      log("Watched Credits", button);
+    }
+    // is movie
+    button = document.querySelector(".player-shrink-transition-enter-done");
+    if (video && button) {
+      video.click();
       increaseBadge();
       log("Watched Credits", button);
     }
