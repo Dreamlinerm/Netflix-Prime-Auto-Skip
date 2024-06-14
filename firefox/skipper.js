@@ -351,12 +351,24 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
     }
   }
+  function getColorForRating(rating) {
+    // I want a color gradient from red to green with yellow in the middle
+    // the ratings are between 0 and 10
+    // the average rating is 6.5
+    // https://distributionofthings.com/imdb-movie-ratings/
+    if (!rating) return "grey";
+    if (rating <= 5.5) return "red";
+    if (rating <= 7) return "rgb(245, 197, 24)"; //#f5c518
+    return "rgb(0, 166, 0)";
+  }
 
   async function setRatingOnCard(card, data, title) {
     let div = document.createElement("div");
     // right: 1.5vw;
     div.style =
-      "position: absolute;bottom: 0;right:0;z-index: 9999;color: black;background: #f5c518;border-radius: 5px;padding: 0 2px 0 2px;" +
+      "position: absolute;bottom: 0;right:0;z-index: 9999;color: black;background:" +
+      getColorForRating(data?.score) +
+      ";border-radius: 5px;padding: 0 2px 0 2px;" +
       (isMobile ? "font-size: 4vw;" : "font-size: 1vw;");
     // div.id = "imdb";
     if (data?.score) {
