@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.14";
+const version = "1.1.15";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -995,7 +995,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   async function Amazon_customizeMobileView() {
     console.log("customizeMobileView");
     // customize mobile view for desktop website
-    if (!document.querySelector(AmazonVideoClass) && !url.includes("/gp/video/detail/")) {
+    // /gp/video/detail/ is the film description page otherwise looks weird
+    if (!url.includes("/gp/video/detail/")) {
       // add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
       let meta = document.createElement("meta");
       meta.name = "viewport";
