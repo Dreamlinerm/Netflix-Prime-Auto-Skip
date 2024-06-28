@@ -54,8 +54,8 @@ const defaultSettings = {
     },
   },
 };
-let settings = defaultSettings.settings;
-const version = "1.1.18";
+let settings = { ...defaultSettings.settings };
+const version = "1.1.19";
 browser.storage.sync.get("settings", function (result) {
   console.log(
     "%cNetflix%c/%cPrime%c Auto-Skip",
@@ -66,7 +66,6 @@ browser.storage.sync.get("settings", function (result) {
   );
   console.log("version:", version);
   // overwrite default settings with user settings
-  settings = { ...defaultSettings.settings, ...result.settings };
   // List of keys to merge individually
   Object.keys(defaultSettings.settings).forEach((key) => {
     if (result?.settings[key]) {

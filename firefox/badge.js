@@ -120,10 +120,9 @@ if (isMobile) {
       },
     },
   };
-  let settings = defaultSettings.settings;
+  let settings = { ...defaultSettings.settings };
   browser.storage.sync.get("settings", function (result) {
     // overwrite default settings with user settings
-    settings = { ...defaultSettings.settings, ...result.settings };
     // List of keys to merge individually
     Object.keys(defaultSettings.settings).forEach((key) => {
       if (result?.settings[key]) {

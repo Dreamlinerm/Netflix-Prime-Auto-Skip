@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.18";
+const version = "1.1.19";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -76,7 +76,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       },
     },
   };
-  let settings = defaultSettings.settings;
+  let settings = { ...defaultSettings.settings };
   let DBCache = {};
   let lastAdTimeText = 0;
   let videoSpeed = 1;
@@ -133,9 +133,21 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (Amazon?.continuePosition) setTimeout(() => Amazon_continuePosition(), 500);
     if (settings.Video?.userAgent && isMobile) Amazon_customizeMobileView();
   }
+  function startCrunchyroll(Crunchyroll) {
+    if (Crunchyroll?.releaseCalendar) Crunchyroll_ReleaseCalendar();
+    if (Crunchyroll?.profile) {
+      let pickInterval = setInterval(function () {
+        Crunchyroll_AutoPickProfile();
+      }, 100);
+      // only click on profile on page load not when switching profiles
+      setTimeout(function () {
+        clearInterval(pickInterval);
+      }, 2000);
+      CrunchyrollObserver.observe(document, config);
+    }
+  }
   browser.storage.sync.get("settings", function (result) {
     // overwrite default settings with user settings
-    settings = { ...defaultSettings.settings, ...result.settings };
     // List of keys to merge individually
     Object.keys(defaultSettings.settings).forEach((key) => {
       if (result?.settings[key]) {
@@ -148,11 +160,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (isNetflix) startNetflix(settings.Netflix);
     else if (isPrimeVideo) startAmazon(settings.Amazon);
     else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
-    else if (isCrunchyroll) {
-      Crunchyroll_ReleaseCalendar();
-      Crunchyroll_AutoPickProfile();
-      CrunchyrollObserver.observe(document, config);
-    } else if (isHBO) HBOObserver.observe(document, config);
+    else if (isCrunchyroll) startCrunchyroll(settings.Crunchyroll);
+    else if (isHBO) HBOObserver.observe(document, config);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
   });
   browser.storage.local.onChanged.addListener(function (changes) {
@@ -1176,7 +1185,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
   }
   async function Crunchyroll_ReleaseCalendar() {
-    if (settings.Crunchyroll?.releaseCalendar && url.includes("simulcastcalendar")) {
+    if (url.includes("simulcastcalendar")) {
       // Show playlist only
       filterQueued(settings.General.filterQueued ? "none" : "block");
       filterDub(settings.General.filterDub ? "none" : "block");
@@ -1199,18 +1208,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
   }
   async function Crunchyroll_AutoPickProfile() {
-    if (settings.Crunchyroll?.profile) {
-      window.addEventListener("load", function () {
-        log("Window Loaded");
-        // click on profile picture
-        if (document.querySelector(".profile-item-name")) {
-          document.querySelectorAll(".erc-profile-item img")?.forEach((img) => {
-            if (img.src === settings.General.Crunchyroll_profilePicture) {
-              img.click();
-              log("Profile automatically chosen:", img.src);
-              increaseBadge();
-            }
-          });
+    // click on profile picture
+    if (document.querySelector(".profile-item-name")) {
+      document.querySelectorAll(".erc-profile-item img")?.forEach((img) => {
+        if (img.src === settings.General.Crunchyroll_profilePicture) {
+          img.click();
+          log("Profile automatically chosen:", img.src);
+          increaseBadge();
         }
       });
     }

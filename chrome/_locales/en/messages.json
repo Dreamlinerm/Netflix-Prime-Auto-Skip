@@ -156,7 +156,7 @@
     "message": "Auto pick last profile:"
   },
   "ProfileSwitchDescription": {
-    "message": "The last used Netflix profile is directly chosen when the page is launched"
+    "message": "The last used profile is directly chosen when the page is launched"
   },
   "User": {
     "message": "User:"
