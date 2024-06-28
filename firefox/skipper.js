@@ -271,25 +271,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
       addRating();
     }, 1000);
-    let DBCacheInterval = setInterval(function () {
-      if (
-        (isNetflix && !settings.Netflix?.showRating) ||
-        (isPrimeVideo && !settings.Amazon?.showRating) ||
-        ((isDisney || isHotstar) && !settings.Disney?.showRating) ||
-        (isHBO && !settings.HBO?.showRating)
-      ) {
-        log("stopped DBCacheInterval");
-        clearInterval(DBCacheInterval);
-        return;
-      }
-      try {
-        setDBCache();
-      } catch (error) {
-        log(error);
-        log("stopped DBCacheInterval");
-        clearInterval(DBCacheInterval);
-      }
-    }, 5000);
   }
   function getDiffInDays(firstDate, secondDate) {
     if (!firstDate || !secondDate) return 31;
@@ -317,6 +298,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     // on disney there are multiple images for the same title so only use the first one
     let lastTitle = "";
     // for each is not going in order on chrome
+    let updateDBCache = false;
     for (let i = 0; i < titleCards.length; i++) {
       let card = titleCards[i];
       // add seen class
@@ -355,9 +337,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           lastTitle = title;
           if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
             useDBCache(title, card);
-          } else getMovieInfo(title, card);
+          } else {
+            getMovieInfo(title, card);
+            updateDBCache = true;
+          }
         }
       }
+    }
+    if (updateDBCache) {
+      setTimeout(function () {
+        log("updateDBCache");
+        setDBCache();
+      }, 5000);
     }
   }
   function getColorForRating(rating) {
