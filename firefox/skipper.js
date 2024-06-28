@@ -59,11 +59,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         showRating: true,
       },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-      Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
+      Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: {
+        Crunchyroll_profilePicture: null,
         profileName: null,
         profilePicture: null,
         sliderSteps: 1,
@@ -135,14 +136,22 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   browser.storage.sync.get("settings", function (result) {
     // overwrite default settings with user settings
     settings = { ...defaultSettings.settings, ...result.settings };
+    // List of keys to merge individually
+    Object.keys(defaultSettings.settings).forEach((key) => {
+      if (result?.settings[key]) {
+        settings[key] = { ...defaultSettings.settings[key], ...result.settings[key] };
+      }
+    });
     logStartOfAddon();
     getDBCache();
 
     if (isNetflix) startNetflix(settings.Netflix);
     else if (isPrimeVideo) startAmazon(settings.Amazon);
     else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
-    else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
-    else if (isHBO) HBOObserver.observe(document, config);
+    else if (isCrunchyroll) {
+      Crunchyroll_ReleaseCalendar();
+      Crunchyroll_profile();
+    } else if (isHBO) HBOObserver.observe(document, config);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
   });
   browser.storage.local.onChanged.addListener(function (changes) {
@@ -1190,6 +1199,34 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (!document.querySelector("#filterQueued")) addButtons();
       // add saved CrunchyList and click on current day
       addSavedCrunchyList();
+    }
+  }
+  async function Crunchyroll_profile() {
+    if (settings.Crunchyroll?.profile) {
+      window.addEventListener("load", function () {
+        // click on profile picture
+        if (document.querySelector(".profile-item-name")) {
+          document.querySelectorAll(".erc-profile-item")?.forEach((name) => {
+            let img = name.querySelector("img");
+            if (img.src === settings.General.Crunchyroll_profilePicture) {
+              img.click();
+              log("Profile automatically chosen:", img.src);
+              increaseBadge();
+            }
+          });
+        }
+        // save profile
+        let img = document.querySelector(".erc-authenticated-user-menu img");
+        if (img && img.src !== settings.General.Crunchyroll_profilePicture) {
+          settings.General.Crunchyroll_profilePicture = img.src;
+          try {
+            browser.storage.sync.set({ settings });
+          } catch (error) {
+            log(error);
+          }
+          log("Profile switched to", img.src);
+        }
+      });
     }
   }
   // HBO functions

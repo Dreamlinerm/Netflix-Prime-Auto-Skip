@@ -37,11 +37,12 @@ const defaultSettings = {
       showRating: true,
     },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-    Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
+    Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true },
     HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: {
+      Crunchyroll_profilePicture: null,
       profileName: null,
       profilePicture: null,
       sliderSteps: 1,
@@ -66,6 +67,12 @@ browser.storage.sync.get("settings", function (result) {
   console.log("version:", version);
   // overwrite default settings with user settings
   settings = { ...defaultSettings.settings, ...result.settings };
+  // List of keys to merge individually
+  Object.keys(defaultSettings.settings).forEach((key) => {
+    if (result?.settings[key]) {
+      settings[key] = { ...defaultSettings.settings[key], ...result.settings[key] };
+    }
+  });
   CrunchyrollObserver.observe(document, config);
   if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
 });
