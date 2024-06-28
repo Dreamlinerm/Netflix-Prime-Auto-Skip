@@ -87,11 +87,12 @@ const defaultSettings = {
       showRating: true,
     },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-    Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
+    Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true },
     HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: {
+      Crunchyroll_profilePicture: null,
       profileName: null,
       profilePicture: null,
       sliderSteps: 1,
@@ -230,7 +231,7 @@ function setCheckboxesToSettings() {
   );
   setButtonChecked("NetflixSkips", settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
   // setButtonChecked("DisneySkips", );
-  setButtonChecked("CrunchyrollSkips", settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar);
+  setButtonChecked("CrunchyrollSkips", settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar && settings?.Crunchyroll.profile);
   setButtonChecked("HBOSkips", true);
   //  -------------      Individual Checkboxes        ---------------------------------------
   setCheckboxesOfService("Amazon");
@@ -423,9 +424,10 @@ function listenForClicks() {
             !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
       // else if (e.target.id === "DisneySkips")
       else if (e.target.id === "CrunchyrollSkips")
-        settings.Crunchyroll.skipIntro = settings.Crunchyroll.releaseCalendar = !(
-          settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar
-        );
+        settings.Crunchyroll.skipIntro =
+          settings.Crunchyroll.releaseCalendar =
+          settings.Crunchyroll.profile =
+            !(settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar && settings.Crunchyroll.profile);
       // else if (e.target.id === "HBOSkips")
       else {
         const services = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO"];

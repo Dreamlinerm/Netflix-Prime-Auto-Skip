@@ -153,7 +153,7 @@
     "message": "Setzt das Video fort, wenn die Aufforderung 'Sehen Sie noch zu' angezeigt wird"
   },
   "ProfileSwitch": {
-    "message": "Automatisch das letzte Profil auswählen:"
+    "message": "Automatisch das letztes Profil auswählen:"
   },
   "ProfileSwitchDescription": {
     "message": "Das zuletzt verwendete Netflix-Profil wird direkt beim Start der Seite ausgewählt"

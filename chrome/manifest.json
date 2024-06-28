@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
-  "version": "1.1.16",
+  "version": "1.1.17",
 
   "homepage_url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip",
   "icons": {
