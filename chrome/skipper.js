@@ -59,11 +59,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         showRating: true,
       },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-      Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null },
+      Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: {
+        Crunchyroll_profilePicture: null,
         profileName: null,
         profilePicture: null,
         sliderSteps: 1,
@@ -135,14 +136,22 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   chrome.storage.sync.get("settings", function (result) {
     // overwrite default settings with user settings
     settings = { ...defaultSettings.settings, ...result.settings };
+    // List of keys to merge individually
+    Object.keys(defaultSettings.settings).forEach((key) => {
+      if (result?.settings[key]) {
+        settings[key] = { ...defaultSettings.settings[key], ...result.settings[key] };
+      }
+    });
     logStartOfAddon();
     getDBCache();
 
     if (isNetflix) startNetflix(settings.Netflix);
     else if (isPrimeVideo) startAmazon(settings.Amazon);
     else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
-    else if (isCrunchyroll) Crunchyroll_ReleaseCalendar();
-    else if (isHBO) HBOObserver.observe(document, config);
+    else if (isCrunchyroll) {
+      Crunchyroll_ReleaseCalendar();
+      Crunchyroll_profile();
+    } else if (isHBO) HBOObserver.observe(document, config);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
   });
   chrome.storage.local.onChanged.addListener(function (changes) {
@@ -190,7 +199,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), ...args);
   }
   // set DB Cache if cache size under 2MB
-  function setDBCache() {
+  async function setDBCache() {
     const size = new TextEncoder().encode(JSON.stringify(DBCache)).length;
     const kiloBytes = size / 1024;
     const megaBytes = kiloBytes / 1024;
@@ -262,25 +271,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
       addRating();
     }, 1000);
-    let DBCacheInterval = setInterval(function () {
-      if (
-        (isNetflix && !settings.Netflix?.showRating) ||
-        (isPrimeVideo && !settings.Amazon?.showRating) ||
-        ((isDisney || isHotstar) && !settings.Disney?.showRating) ||
-        (isHBO && !settings.HBO?.showRating)
-      ) {
-        log("stopped DBCacheInterval");
-        clearInterval(DBCacheInterval);
-        return;
-      }
-      try {
-        setDBCache();
-      } catch (error) {
-        log(error);
-        log("stopped DBCacheInterval");
-        clearInterval(DBCacheInterval);
-      }
-    }, 5000);
   }
   function getDiffInDays(firstDate, secondDate) {
     if (!firstDate || !secondDate) return 31;
@@ -308,6 +298,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     // on disney there are multiple images for the same title so only use the first one
     let lastTitle = "";
     // for each is not going in order on chrome
+    let updateDBCache = false;
     for (let i = 0; i < titleCards.length; i++) {
       let card = titleCards[i];
       // add seen class
@@ -346,9 +337,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           lastTitle = title;
           if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
             useDBCache(title, card);
-          } else getMovieInfo(title, card);
+          } else {
+            getMovieInfo(title, card);
+            updateDBCache = true;
+          }
         }
       }
+    }
+    if (updateDBCache) {
+      setTimeout(function () {
+        log("updateDBCache");
+        setDBCache();
+      }, 5000);
     }
   }
   function getColorForRating(rating) {
@@ -1192,6 +1192,34 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       addSavedCrunchyList();
     }
   }
+  async function Crunchyroll_profile() {
+    if (settings.Crunchyroll?.profile) {
+      window.addEventListener("load", function () {
+        // click on profile picture
+        if (document.querySelector(".profile-item-name")) {
+          document.querySelectorAll(".erc-profile-item")?.forEach((name) => {
+            let img = name.querySelector("img");
+            if (img.src === settings.General.Crunchyroll_profilePicture) {
+              img.click();
+              log("Profile automatically chosen:", img.src);
+              increaseBadge();
+            }
+          });
+        }
+        // save profile
+        let img = document.querySelector(".erc-authenticated-user-menu img");
+        if (img && img.src !== settings.General.Crunchyroll_profilePicture) {
+          settings.General.Crunchyroll_profilePicture = img.src;
+          try {
+            chrome.storage.sync.set({ settings });
+          } catch (error) {
+            log(error);
+          }
+          log("Profile switched to", img.src);
+        }
+      });
+    }
+  }
   // HBO functions
   const HBOObserver = new MutationObserver(HBO);
   async function HBO() {
@@ -1250,7 +1278,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   // Badge functions
   // eslint-disable-next-line no-unused-vars
-  function setBadgeText(text) {
+  async function setBadgeText(text) {
     try {
       chrome.runtime.sendMessage({
         type: "setBadgeText",
@@ -1260,7 +1288,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       log(error);
     }
   }
-  function increaseBadge() {
+  async function increaseBadge() {
     settings.Statistics.SegmentsSkipped++;
     try {
       chrome.storage.sync.set({ settings });
@@ -1271,7 +1299,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       log(error);
     }
   }
-  function resetBadge() {
+  async function resetBadge() {
     try {
       chrome.runtime.sendMessage({
         type: "resetBadge",
