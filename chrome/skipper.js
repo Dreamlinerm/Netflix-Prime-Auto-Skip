@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.17";
+const version = "1.1.18";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -150,7 +150,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
     else if (isCrunchyroll) {
       Crunchyroll_ReleaseCalendar();
-      Crunchyroll_profile();
+      Crunchyroll_AutoPickProfile();
+      CrunchyrollObserver.observe(document, config);
     } else if (isHBO) HBOObserver.observe(document, config);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
   });
@@ -651,11 +652,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         // small profile picture
         settings.General.profilePicture = currentProfile?.firstChild?.firstChild?.src;
         settings.General.profileName = currentProfileName;
-        try {
-          chrome.storage.sync.set({ settings });
-        } catch (error) {
-          log(error);
-        }
+        setStorage();
         log("Profile switched to", currentProfileName);
       }
     }
@@ -1043,11 +1040,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     input.onclick = function () {
       settings.General[filterType] = this.checked;
       filterFunction(this.checked ? "none" : "block");
-      try {
-        chrome.storage.sync.set({ settings });
-      } catch (error) {
-        log(error);
-      }
+      setStorage();
     };
     const p = document.createElement("p");
     p.style = "width: 100px;";
@@ -1168,7 +1161,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const isCurrentWeek = clickOnCurrentDay();
     const oldList = localList.length > 0 ? filterOldList(isCurrentWeek, localList) : settings.General.savedCrunchyList || [];
     settings.General.savedCrunchyList = localList.concat(oldList);
-    chrome.storage.sync.set({ settings });
+    setStorage();
     if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
       // now add the old list to the website list
       document.querySelectorAll("section.calendar-day").forEach((element) => {
@@ -1192,30 +1185,32 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       addSavedCrunchyList();
     }
   }
+  const CrunchyrollObserver = new MutationObserver(Crunchyroll);
+  async function Crunchyroll() {
+    if (settings.Crunchyroll?.profile) Crunchyroll_profile();
+  }
   async function Crunchyroll_profile() {
+    // save profile
+    let img = document.querySelector(".erc-authenticated-user-menu img");
+    if (img && img.src !== settings.General.Crunchyroll_profilePicture) {
+      settings.General.Crunchyroll_profilePicture = img.src;
+      setStorage();
+      log("Profile switched to", img.src);
+    }
+  }
+  async function Crunchyroll_AutoPickProfile() {
     if (settings.Crunchyroll?.profile) {
       window.addEventListener("load", function () {
+        log("Window Loaded");
         // click on profile picture
         if (document.querySelector(".profile-item-name")) {
-          document.querySelectorAll(".erc-profile-item")?.forEach((name) => {
-            let img = name.querySelector("img");
+          document.querySelectorAll(".erc-profile-item img")?.forEach((img) => {
             if (img.src === settings.General.Crunchyroll_profilePicture) {
               img.click();
               log("Profile automatically chosen:", img.src);
               increaseBadge();
             }
           });
-        }
-        // save profile
-        let img = document.querySelector(".erc-authenticated-user-menu img");
-        if (img && img.src !== settings.General.Crunchyroll_profilePicture) {
-          settings.General.Crunchyroll_profilePicture = img.src;
-          try {
-            chrome.storage.sync.set({ settings });
-          } catch (error) {
-            log(error);
-          }
-          log("Profile switched to", img.src);
         }
       });
     }
@@ -1304,6 +1299,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       chrome.runtime.sendMessage({
         type: "resetBadge",
       });
+    } catch (error) {
+      log(error);
+    }
+  }
+  async function setStorage() {
+    try {
+      chrome.storage.sync.set({ settings });
     } catch (error) {
       log(error);
     }
