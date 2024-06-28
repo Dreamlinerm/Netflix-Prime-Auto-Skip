@@ -199,7 +199,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), ...args);
   }
   // set DB Cache if cache size under 2MB
-  function setDBCache() {
+  async function setDBCache() {
     const size = new TextEncoder().encode(JSON.stringify(DBCache)).length;
     const kiloBytes = size / 1024;
     const megaBytes = kiloBytes / 1024;
@@ -1278,7 +1278,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   // Badge functions
   // eslint-disable-next-line no-unused-vars
-  function setBadgeText(text) {
+  async function setBadgeText(text) {
     try {
       browser.runtime.sendMessage({
         type: "setBadgeText",
@@ -1288,7 +1288,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       log(error);
     }
   }
-  function increaseBadge() {
+  async function increaseBadge() {
     settings.Statistics.SegmentsSkipped++;
     try {
       browser.storage.sync.set({ settings });
@@ -1299,7 +1299,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       log(error);
     }
   }
-  function resetBadge() {
+  async function resetBadge() {
     try {
       browser.runtime.sendMessage({
         type: "resetBadge",
