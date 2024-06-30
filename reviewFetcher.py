@@ -54,34 +54,38 @@ languageCodes = [
 # and save the comments in a file named LANGUAGECODE.json
 
 import requests
-import json
-import time
+from bs4 import BeautifulSoup
 import re
 
 url = "https://chromewebstore.google.com/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle?hl="
 l = ["en"]
 output = "<html><head>"
 position = 0
+
+re_pattern = re.compile(
+    r'<div class="NV6quc".*?<section class="T7rvce".*?<\/section></div>', re.DOTALL
+)
+
 for languageCode in languageCodes:
     response = requests.get(url + languageCode)
+    soup = BeautifulSoup(response.text, "html.parser")
+
     if position == 0:
-        # add all the css in the file to output
-        re_pattern = r"<style.*?</style>"
-        x = re.findall(re_pattern, response.text)
-        for i in x:
-            output += i
+        # Extract and add all the CSS in the file to output
+        styles = soup.find_all("style")
+        for style in styles:
+            output += str(style)
         output += "</head><body>"
         position += 1
-    re_pattern = re.compile(
-        r'<div class="NV6quc".*?<section class="T7rvce".*?<\/section></div>', re.DOTALL
-    )
-    x = re.findall(re_pattern, response.text)
-    if x:
-        output += "<h1>" + languageCode + "</h1>"
-        for i in x:
-            output += i
+
+    # Use CSS selectors or other BeautifulSoup methods to find the desired content
+    content = soup.select_one("div.NV6quc, section.T7rvce")
+    if re.findall(re_pattern, str(content)):
+        output += f"<h1>{languageCode}</h1>{str(content)}"
     else:
-        print("no comment in " + languageCode)
+        print(f"no comment in {languageCode}")
+
 output += "</body></html>"
+
 with open("ChromeReviews.html", "w", encoding="utf-8") as file:
     file.write(output)
