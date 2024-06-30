@@ -56,8 +56,13 @@ languageCodes = [
 import requests
 from bs4 import BeautifulSoup
 import re
+import sys
 
-url = "https://chromewebstore.google.com/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle?hl="
+url = (
+    sys.argv[1] + "?hl="
+    if len(sys.argv) > 1
+    else "https://chromewebstore.google.com/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle?hl="
+)
 l = ["en"]
 output = "<html><head>"
 position = 0
@@ -75,13 +80,14 @@ for languageCode in languageCodes:
         styles = soup.find_all("style")
         for style in styles:
             output += str(style)
+        output += "<style> a{color: black;}</style>"
         output += "</head><body>"
         position += 1
 
     # Use CSS selectors or other BeautifulSoup methods to find the desired content
     content = soup.select_one("div.NV6quc, section.T7rvce")
     if re.findall(re_pattern, str(content)):
-        output += f"<h1>{languageCode}</h1>{str(content)}"
+        output += f"<h1>{languageCode}</h1><a href='{url+languageCode}' target='_blank'>{str(content)}</a>"
     else:
         print(f"no comment in {languageCode}")
 
