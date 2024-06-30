@@ -57,6 +57,8 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import sys
+import webbrowser
+import os
 
 url = (
     sys.argv[1] + "?hl="
@@ -95,3 +97,6 @@ output += "</body></html>"
 
 with open("ChromeReviews.html", "w", encoding="utf-8") as file:
     file.write(output)
+# Automatically open the generated HTML file in the default web browser
+file_path = "file://" + os.path.realpath("ChromeReviews.html")
+webbrowser.open_new_tab(file_path)
