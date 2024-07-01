@@ -1,0 +1,3 @@
+[submodule "Chrome-extension-review-fetcher"]
+	path = Chrome-extension-review-fetcher
+	url = https://github.com/Dreamlinerm/Chrome-extension-review-fetcher
