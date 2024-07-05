@@ -110,11 +110,15 @@ let settings = { ...defaultSettings.settings };
 chrome.storage.sync.get("settings", function (result) {
   // overwrite default settings with user settings
   // List of keys to merge individually
-  Object.keys(defaultSettings.settings).forEach((key) => {
-    if (result?.settings[key]) {
-      settings[key] = { ...defaultSettings.settings[key], ...result.settings[key] };
-    }
-  });
+  settings.Amazon = { ...defaultSettings.settings.Amazon, ...result?.settings?.Amazon };
+  settings.Netflix = { ...defaultSettings.settings.Netflix, ...result?.settings?.Netflix };
+  settings.Disney = { ...defaultSettings.settings.Disney, ...result?.settings?.Disney };
+  settings.Crunchyroll = { ...defaultSettings.settings.Crunchyroll, ...result?.settings?.Crunchyroll };
+  settings.HBO = { ...defaultSettings.settings.HBO, ...result?.settings?.HBO };
+  settings.Video = { ...defaultSettings.settings.Video, ...result?.settings?.Video };
+  settings.Statistics = { ...defaultSettings.settings.Statistics, ...result?.settings?.Statistics };
+  settings.General = { ...defaultSettings.settings.General, ...result?.settings?.General };
+
   // delete every setting that is not in defaultSettings
   let changedSettings;
   for (const key in settings) {
