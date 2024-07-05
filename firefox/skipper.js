@@ -790,7 +790,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   function Amazon_Intro() {
     if (settings.Amazon?.skipIntro) {
-      console.log("Amazon_Intro");
       // skips intro and recap
       // recap on lucifer season 3 episode 3
       // intro lucifer season 3 episode 4
