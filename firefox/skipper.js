@@ -27,7 +27,6 @@ const isHBO = /max.com/i.test(hostname);
 
 const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
-console.log("test1", browser.i18n.getMessage("HomeButton"));
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
 const version = "1.1.22";
@@ -458,12 +457,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       OriginalIntro = video.duration;
       resetOriginalIntro();
       video.currentTime = video.duration;
-      console.log("skipped Original intro");
+      log("skipped Original intro");
     }
     // if intro/recap time starts at 0 there is no skip button so always rewind to 0
     if (video?.play && SetTimeToZeroOnce != video.src && video.duration > 5 && !OriginalIntro) {
       if (video.currentTime > 0.2 && video.currentTime < 5) {
-        console.log("reset time to", video.currentTime);
+        log("reset time to", video.currentTime);
         video.currentTime = 0;
         SetTimeToZeroOnce = video.src;
       }
@@ -492,7 +491,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             browser.runtime.sendMessage({ type: "fullscreen" });
             function resetFullscreen() {
               browser.runtime.sendMessage({ type: "exitFullscreen" });
-              console.log("exitFullscreen");
+              log("exitFullscreen");
               removeEventListener("fullscreenchange", resetFullscreen);
             }
             addEventListener("fullscreenchange", resetFullscreen);
@@ -1004,7 +1003,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
 
   async function Amazon_customizeMobileView() {
-    console.log("customizeMobileView");
+    log("customizeMobileView");
     // customize mobile view for desktop website
     // /gp/video/detail/ is the film description page otherwise looks weird
     if (!url.includes("/gp/video/detail/")) {
