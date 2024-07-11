@@ -285,5 +285,13 @@
   },
   "DuplicateSwitchDescription": {
     "message": "Entfernt jede doppelte Show, die bereits vorher auf Disney sichtbar war. Sichtbar bedeutet, dass die Show unter den ersten 5 Shows in jeder Reihe war"
+  },
+  "WatchSkippedButton": {
+    "message": "Zurückspulen?",
+    "description": "Watch skipped button to watch an intro"
+  },
+  "HomeButton": {
+    "message": "Startseite",
+    "description": "Disney Homepage button"
   }
 }

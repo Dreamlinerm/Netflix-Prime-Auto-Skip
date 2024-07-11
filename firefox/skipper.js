@@ -27,6 +27,7 @@ const isHBO = /max.com/i.test(hostname);
 
 const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
+console.log("test1", browser.i18n.getMessage("HomeButton"));
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
 const version = "1.1.22";
@@ -511,7 +512,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const buttonDiv = document.querySelector('[data-testid="browser-action-button"]')?.parentElement;
     if (buttonDiv && !document.querySelector("#homeButton")) {
       const homeButton = document.createElement("button");
-      homeButton.textContent = "Home";
+      homeButton.textContent = browser.i18n.getMessage("HomeButton");
       homeButton.id = "homeButton";
       homeButton.style =
         'color: white;background-color: #40424A;border: rgb(64, 66, 74);border-radius: 5px;padding: 0 2px 0 2px;height: 56px;padding-left: 24px;padding-right: 24px;letter-spacing: 1.76px;font-size: 15px;  text-transform: uppercase;cursor: pointer;font-family:"Avenir-World-for-Disney-Demi", sans-serif;';
@@ -820,8 +821,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       button.style = "padding: 0px 22px; line-height: normal; min-width: 0px;z-index:999;pointer-events:all;";
       button.setAttribute("class", "fqye4e3 f1ly7q5u fk9c3ap fz9ydgy f1xrlb00 f1hy0e6n fgbpje3 f1uteees f1h2a8xb  f1cg7427 fiqc9rt fg426ew f1ekwadg");
       button.setAttribute("data-uia", "reverse-button");
-      // TODO: translate
-      button.textContent = "Watch skipped ?";
+      button.textContent = browser.i18n.getMessage("WatchSkippedButton");
       document.querySelector(".atvwebplayersdk-action-buttons").appendChild(button);
       let buttonInHTML = document.querySelector('[data-uia="reverse-button"]');
       function goBack() {

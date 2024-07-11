@@ -285,5 +285,13 @@
   },
   "DuplicateSwitchDescription": {
     "message": "Remove every duplicate show, which was already visible on Disney before. Visible means that the show is in the first 5 shows in every row"
+  },
+  "WatchSkippedButton": {
+    "message": "Rewind?",
+    "description": "Watch skipped button to watch an intro"
+  },
+  "HomeButton": {
+    "message": "Home",
+    "description": "Disney Homepage button"
   }
 }

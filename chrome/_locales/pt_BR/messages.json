@@ -282,5 +282,13 @@
   },
   "DuplicateSwitchDescription": {
     "message": "Remover todos os programas duplicados, que já estavam visíveis na Disney anteriormente. Visível significa que o programa está entre os primeiros 5 programas em cada linha"
+  },
+  "WatchSkippedButton": {
+    "message": "Retroceder?",
+    "description": "Watch skipped button to watch an intro"
+  },
+  "HomeButton": {
+    "message": "Lar",
+    "description": "Disney Homepage button"
   }
 }

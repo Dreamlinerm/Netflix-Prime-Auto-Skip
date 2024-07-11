@@ -276,5 +276,13 @@
   },
   "DuplicateSwitchDescription": {
     "message": "Отстранете го секое дупликат шоу, кое претходно беше видливо на Disney. Видливо значи дека шоуто е во првите 5 емисии во секој ред"
+  },
+  "WatchSkippedButton": {
+    "message": "Премотајте назад?",
+    "description": "Watch skipped button to watch an intro"
+  },
+  "HomeButton": {
+    "message": "Дома",
+    "description": "Disney Homepage button"
   }
 }
