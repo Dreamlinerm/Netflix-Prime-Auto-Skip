@@ -86,7 +86,7 @@ const defaultSettings = {
       profile: true,
       showRating: true,
     },
-    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
+    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true },
     HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
@@ -233,7 +233,7 @@ function setCheckboxesToSettings() {
     settings?.Amazon.skipAd && settings?.Amazon.filterPaid && settings?.Amazon.continuePosition && settings?.Amazon.xray
   );
   setButtonChecked("NetflixSkips", settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
-  // setButtonChecked("DisneySkips", );
+  setButtonChecked("DisneySkips", settings?.Disney.selfAd);
   setButtonChecked("CrunchyrollSkips", settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar && settings?.Crunchyroll.profile);
   setButtonChecked("HBOSkips", true);
   //  -------------      Individual Checkboxes        ---------------------------------------
@@ -425,7 +425,7 @@ function listenForClicks() {
           settings.Netflix.skipBlocked =
           settings.Netflix.profile =
             !(settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
-      // else if (e.target.id === "DisneySkips")
+      else if (e.target.id === "DisneySkips") settings.Disney.selfAd = !settings?.Disney.selfAd;
       else if (e.target.id === "CrunchyrollSkips")
         settings.Crunchyroll.skipIntro =
           settings.Crunchyroll.releaseCalendar =

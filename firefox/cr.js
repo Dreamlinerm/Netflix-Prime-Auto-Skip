@@ -36,7 +36,7 @@ const defaultSettings = {
       profile: true,
       showRating: true,
     },
-    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
+    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
     Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true },
     HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
@@ -55,7 +55,7 @@ const defaultSettings = {
   },
 };
 let settings = { ...defaultSettings.settings };
-const version = "1.1.22";
+const version = "1.1.23";
 browser.storage.sync.get("settings", function (result) {
   console.log(
     "%cNetflix%c/%cPrime%c Auto-Skip",

@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.22";
+const version = "1.1.23";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -58,7 +58,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         profile: true,
         showRating: true,
       },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
       Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
@@ -430,6 +430,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     Disney_addHomeButton();
     if (settings.Disney?.watchCredits) Disney_Watch_Credits();
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
+    if (settings.Disney?.selfAd) Disney_selfAd(video, time);
   }
   let SetTimeToZeroOnce = null;
   let OriginalIntro = 0;
@@ -619,6 +620,19 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           video.playbackRate = this.value / 10;
           setVideoSpeed(this.value / 10);
         };
+      }
+    }
+  }
+
+  function Disney_selfAd(video, time) {
+    if (isDisney) {
+      let button = document.querySelector(".overlay_interstitials__promo_skip_button");
+      if (button) {
+        button.click();
+        log("SelfAd skipped", button);
+        setTimeout(function () {
+          addSkippedTime(time, video?.currentTime, "selfAdkipped");
+        }, 600);
       }
     }
   }
