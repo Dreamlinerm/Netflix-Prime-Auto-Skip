@@ -310,8 +310,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     else if (isHBO) AllTitleCardsTypes = [document.querySelectorAll("a[class*='StyledTileLinkNormal-Beam-Web-Ent']:not(.imdb)")];
     else if (isPrimeVideo)
       AllTitleCardsTypes = [
-        document.querySelectorAll("li:not(.imdb) article[data-card-title]"),
-        document.querySelectorAll("li:not(.imdb) article[data-testid='standard-hero-card']"),
+        document.querySelectorAll("li:not(.imdb) article[data-card-title]:not([data-card-entity-type='EVENT']):not([data-card-title='Live-TV'])"),
+        document.querySelectorAll("li:not(.imdb) article[data-testid*='-card']"),
       ];
     // on disney there are multiple images for the same title so only use the first one
     let lastTitle = "";
@@ -408,7 +408,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       div.setAttribute("alt", data?.title + ", OG title: " + title);
     } else if (data?.title) {
       div.textContent = "N/A";
-      div.setAttribute("alt", title);
+      div.setAttribute("alt", data?.title + ", OG title: " + title);
     } else {
       div.textContent = "?";
       div.setAttribute("alt", title);
