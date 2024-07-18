@@ -338,6 +338,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             ?.replace(" Select for details on this title.", "")
             // big title cards in the beginning of the page
             .split(" Season")[0]
+            // individual episodes
+            .split("Season")[0]
             .split(" New ")[0]
             .split(" All ")[0]
             .split(" Streaming ")[0];
