@@ -322,13 +322,19 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       let title;
       if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
       // S2: E3 remove this part
-      else if (isDisney)
+      else if (isDisney) {
         title = card
           ?.getAttribute("aria-label")
           ?.replace(" Disney+ Original", "")
           ?.replace(" STAR Original", "")
           ?.replace(" Select for details on this title.", "");
-      else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
+        // big title cards in the beginning of the page
+        if (title.includes(" Season")) title = title.split(" Season")[0];
+        if (title.includes(" New ")) title = title.split(" New ")[0];
+        if (title.includes(" All ")) title = title.split(" All ")[0];
+        if (title.includes(" Streaming ")) title = title.split(" Streaming ")[0];
+        if (title.includes(" minutes remaining")) title = title.replace(/ \d+ minutes remaining/g, "");
+      } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
       // amazon
       // remove everything after - in the title
       else if (isPrimeVideo)
@@ -344,8 +350,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           .replace(/:?\sSeason-?\s\d+/g, "")
           .split(", ")[0];
       else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent;
-      // for the static Pixar Disney etc. cards
-      if (!isDisney || (!card?.classList.contains("_1p76x1y4") && !title.includes("Season"))) {
+      // for the static Pixar Disney, Starplus etc. cards
+      if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
         // sometimes more than one image is loaded for the same title
         if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
           lastTitle = title;
@@ -387,11 +393,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     // div.id = "imdb";
     if (data?.score) {
       div.textContent = data.score?.toFixed(1);
-      div.setAttribute("alt", data?.title);
+      div.setAttribute("alt", data?.title + " - OG title: " + title);
     } else if (data?.title) {
       div.textContent = "N/A";
+      div.setAttribute("alt", title);
     } else {
       div.textContent = "?";
+      div.setAttribute("alt", title);
       log("no score found:", title, data);
     }
     if (isNetflix || isHBO) card.appendChild(div);
