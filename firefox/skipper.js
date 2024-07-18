@@ -320,7 +320,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       //Amazon
       else card?.closest("li")?.classList.add("imdb");
       let title;
-      if (isNetflix) title = card?.children?.[1]?.firstChild?.textContent.split(" – ")[0];
+      if (isNetflix) title = card?.parentElement?.getAttribute("aria-label").split(" – ")[0];
       // S2: E3 remove this part
       else if (isDisney) {
         title = card
