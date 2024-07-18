@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.24";
+const version = "1.1.25";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -338,9 +338,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             ?.replace(" Select for details on this title.", "")
             // big title cards in the beginning of the page
             .split(" Season")[0]
+            // individual episodes
+            .split("Season")[0]
             .split(" New ")[0]
             .split(" All ")[0]
-            .split(" Streaming ")[0];
+            .split(" Streaming ")[0]
+            // german translation
+            .split(" Für Details")[0]
+            .split(" Staffel")[0]
+            .split("Staffel")[0]
+            .split(" Neue")[0]
+            .split(" Alle")[0]
+            .split(" Jeden")[0];
           if (title.includes(" minutes remaining")) title = title.replace(/ \d+ minutes remaining/g, "");
         } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
         // amazon
