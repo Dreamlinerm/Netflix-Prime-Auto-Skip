@@ -303,63 +303,75 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
   }
   async function addRating() {
-    let titleCards;
-    if (isNetflix) titleCards = document.querySelectorAll(".title-card .boxart-container:not(.imdb)");
-    else if (isDisney) titleCards = document.querySelectorAll("a[data-testid='set-item']:not(.imdb)");
-    else if (isHotstar) titleCards = document.querySelectorAll(".swiper-slide img:not(.imdb)");
-    else if (isHBO) titleCards = document.querySelectorAll("a[class*='StyledTileLinkNormal-Beam-Web-Ent']:not(.imdb)");
-    else if (isPrimeVideo) titleCards = document.querySelectorAll("li:not(.imdb) [data-card-title]");
+    let AllTitleCardsTypes;
+    if (isNetflix) AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")];
+    else if (isDisney) AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not(.imdb)")];
+    else if (isHotstar) AllTitleCardsTypes = [document.querySelectorAll(".swiper-slide img:not(.imdb)")];
+    else if (isHBO) AllTitleCardsTypes = [document.querySelectorAll("a[class*='StyledTileLinkNormal-Beam-Web-Ent']:not(.imdb)")];
+    else if (isPrimeVideo)
+      AllTitleCardsTypes = [
+        document.querySelectorAll("li:not(.imdb) article[data-card-title]"),
+        document.querySelectorAll("li:not(.imdb) article[data-testid='standard-hero-card']"),
+      ];
     // on disney there are multiple images for the same title so only use the first one
     let lastTitle = "";
     // for each is not going in order on chrome
     let updateDBCache = false;
-    for (let i = 0; i < titleCards.length; i++) {
-      let card = titleCards[i];
-      // add seen class
-      if (isNetflix || isDisney || isHotstar || isHBO) card.classList.add("imdb");
-      //Amazon
-      else card?.closest("li")?.classList.add("imdb");
-      let title;
-      if (isNetflix) title = card?.parentElement?.getAttribute("aria-label").split(" – ")[0];
-      // S2: E3 remove this part
-      else if (isDisney) {
-        title = card
-          ?.getAttribute("aria-label")
-          ?.replace(" Disney+ Original", "")
-          ?.replace(" STAR Original", "")
-          ?.replace(" Select for details on this title.", "")
-          // big title cards in the beginning of the page
-          .split(" Season")[0]
-          .split(" New ")[0]
-          .split(" All ")[0]
-          .split(" Streaming ")[0];
-        if (title.includes(" minutes remaining")) title = title.replace(/ \d+ minutes remaining/g, "");
-      } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
-      // amazon
-      // remove everything after - in the title
-      else if (isPrimeVideo)
-        title = card
-          .getAttribute("data-card-title")
-          .split(" - ")[0]
-          .split(" – ")[0]
-          .replace(/(S\d+)/g, "")
-          .replace(/ \[dt\.?\/OV\]/g, "")
-          .replace(/\[OV\]/g, "")
-          .replace(/\s\(.*\)/g, "")
-          .replace(/:?\sStaffel-?\s\d+/g, "")
-          .replace(/:?\sSeason-?\s\d+/g, "")
-          .split(", ")[0];
-      else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent;
-      // for the static Pixar Disney, Starplus etc. cards
-      if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
-        // sometimes more than one image is loaded for the same title
-        if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
-          lastTitle = title;
-          if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
-            useDBCache(title, card);
-          } else {
-            getMovieInfo(title, card);
-            updateDBCache = true;
+    for (let type = 0; type < AllTitleCardsTypes.length; type++) {
+      const titleCards = AllTitleCardsTypes[type];
+      for (let i = 0; i < titleCards.length; i++) {
+        let card = titleCards[i];
+        // add seen class
+        if (isNetflix || isDisney || isHotstar || isHBO) card.classList.add("imdb");
+        else if (isPrimeVideo) {
+          if (type == 0) card?.closest("li")?.classList.add("imdb");
+          else if (type == 1) card?.parentElement?.classList.add("imdb");
+        }
+        let title;
+        if (isNetflix) title = card?.parentElement?.getAttribute("aria-label").split(" – ")[0];
+        // S2: E3 remove this part
+        else if (isDisney) {
+          title = card
+            ?.getAttribute("aria-label")
+            ?.replace(" Disney+ Original", "")
+            ?.replace(" STAR Original", "")
+            ?.replace(" Select for details on this title.", "")
+            // big title cards in the beginning of the page
+            .split(" Season")[0]
+            .split(" New ")[0]
+            .split(" All ")[0]
+            .split(" Streaming ")[0];
+          if (title.includes(" minutes remaining")) title = title.replace(/ \d+ minutes remaining/g, "");
+        } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
+        // amazon
+        // remove everything after - in the title
+        else if (isPrimeVideo) {
+          function fixTitle(title) {
+            return title
+              .split(" - ")[0]
+              .split(" – ")[0]
+              .replace(/(S\d+)/g, "")
+              .replace(/ \[dt\.?\/OV\]/g, "")
+              .replace(/\[OV\]/g, "")
+              .replace(/\s\(.*\)/g, "")
+              .replace(/:?\sStaffel-?\s\d+/g, "")
+              .replace(/:?\sSeason-?\s\d+/g, "")
+              .split(", ")[0];
+          }
+          if (type == 0) title = fixTitle(card.getAttribute("data-card-title"));
+          if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label"));
+        } else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent;
+        // for the static Pixar Disney, Starplus etc. cards
+        if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
+          // sometimes more than one image is loaded for the same title
+          if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
+            lastTitle = title;
+            if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
+              useDBCache(title, card);
+            } else {
+              getMovieInfo(title, card);
+              updateDBCache = true;
+            }
           }
         }
       }
@@ -405,7 +417,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (isNetflix || isHBO) card.appendChild(div);
     else if (isDisney) card?.querySelector("img").parentElement?.appendChild(div);
     else if (isHotstar) card.parentElement.appendChild(div);
-    else if (isPrimeVideo) card.firstChild.firstChild.appendChild(div);
+    else if (isPrimeVideo) {
+      if (card.getAttribute("data-card-title")) card.firstChild.firstChild.appendChild(div);
+      else card.appendChild(div);
+    }
   }
   function OnFullScreenChange() {
     let video;
