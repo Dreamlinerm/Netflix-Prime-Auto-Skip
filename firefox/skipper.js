@@ -327,12 +327,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           ?.getAttribute("aria-label")
           ?.replace(" Disney+ Original", "")
           ?.replace(" STAR Original", "")
-          ?.replace(" Select for details on this title.", "");
-        // big title cards in the beginning of the page
-        if (title.includes(" Season")) title = title.split(" Season")[0];
-        if (title.includes(" New ")) title = title.split(" New ")[0];
-        if (title.includes(" All ")) title = title.split(" All ")[0];
-        if (title.includes(" Streaming ")) title = title.split(" Streaming ")[0];
+          ?.replace(" Select for details on this title.", "")
+          // big title cards in the beginning of the page
+          .split(" Season")[0]
+          .split(" New ")[0]
+          .split(" All ")[0]
+          .split(" Streaming ")[0];
         if (title.includes(" minutes remaining")) title = title.replace(/ \d+ minutes remaining/g, "");
       } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
       // amazon
@@ -343,7 +343,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           .split(" - ")[0]
           .split(" – ")[0]
           .replace(/(S\d+)/g, "")
-          .replace(/\[dt\.?\/OV\]/g, "")
+          .replace(/ \[dt\.?\/OV\]/g, "")
           .replace(/\[OV\]/g, "")
           .replace(/\s\(.*\)/g, "")
           .replace(/:?\sStaffel-?\s\d+/g, "")
@@ -393,7 +393,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     // div.id = "imdb";
     if (data?.score) {
       div.textContent = data.score?.toFixed(1);
-      div.setAttribute("alt", data?.title + " - OG title: " + title);
+      div.setAttribute("alt", data?.title + ", OG title: " + title);
     } else if (data?.title) {
       div.textContent = "N/A";
       div.setAttribute("alt", title);
