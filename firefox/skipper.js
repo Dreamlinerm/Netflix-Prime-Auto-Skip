@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.25";
+const version = "1.1.26";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -218,6 +218,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const kiloBytes = size / 1024;
     const megaBytes = kiloBytes / 1024;
     if (megaBytes < 5) {
+      log("updateDBCache, MegaBytes:", megaBytes.toFixed(2));
       browser.storage.local.set({ DBCache });
     } else {
       log("DBCache cleared", megaBytes);
@@ -292,7 +293,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   function useDBCache(title, card) {
     if (!DBCache[title]?.date) DBCache[title].date = today;
-    const diffInReleaseDate = getDiffInDays(DBCache[title]?.release_date, date) <= 20 && getDiffInDays(DBCache[title].date, date) > 0;
+    const diffInReleaseDate = getDiffInDays(DBCache[title]?.release_date, date) <= 7 && getDiffInDays(DBCache[title].date, date) > 0;
     if (getDiffInDays(DBCache[title].date, date) >= 30 || diffInReleaseDate) {
       if (diffInReleaseDate) log("update recent movie:", title, ",Age:", getDiffInDays(DBCache[title]?.release_date, date));
       else log("update old rating:", title, ",Age:", getDiffInDays(DBCache[title].date, date));
@@ -356,16 +357,21 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         // remove everything after - in the title
         else if (isPrimeVideo) {
           function fixTitle(title) {
-            return title
-              .split(" - ")[0]
-              .split(" – ")[0]
-              .replace(/(S\d+)/g, "")
-              .replace(/ \[dt\.?\/OV\]/g, "")
-              .replace(/\[OV\]/g, "")
-              .replace(/\s\(.*\)/g, "")
-              .replace(/:?\sStaffel-?\s\d+/g, "")
-              .replace(/:?\sSeason-?\s\d+/g, "")
-              .split(", ")[0];
+            return (
+              title
+                ?.split(" - ")[0]
+                ?.split(" – ")[0]
+                ?.split(", ")[0]
+                ?.replace(/(S\d+)/g, "")
+                ?.replace(/ \[dt\.?\/OV\]/g, "")
+                ?.replace(/\[OV\]/g, "")
+                ?.replace(/\s\(.*\)/g, "")
+                ?.replace(/:?\sStaffel-?\s\d+/g, "")
+                ?.replace(/:?\sSeason-?\s\d+/g, "")
+                ?.split(": Die komplette")[0]
+                // nicht sicher
+                ?.split(": The complete")[0]
+            );
           }
           if (type == 0) title = fixTitle(card.getAttribute("data-card-title"));
           if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label"));
@@ -387,7 +393,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
     if (updateDBCache) {
       setTimeout(function () {
-        log("updateDBCache");
         setDBCache();
       }, 5000);
     }
