@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.26";
+const version = "1.1.27";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -818,8 +818,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
 
   // Amazon Observers
-  const AmazonVideoClass =
-    "#dv-web-player > div > div:nth-child(1) > div > div > div.scalingVideoContainer > div.scalingVideoContainerBottom > div > video";
+  const AmazonVideoClass = ".dv-player-fullscreen video";
   const AmazonObserver = new MutationObserver(Amazon);
 
   function Amazon() {
@@ -936,7 +935,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       let alreadySlider = document.querySelector("#videoSpeedSlider");
       if (!alreadySlider) {
         // infobar position for the slider to be added
-        let position = document.querySelector("[class*=infobar-container]")?.firstChild?.lastChild;
+        let position = document.querySelector(".dv-player-fullscreen [class*=infobar-container]")?.firstChild?.lastChild;
         if (position) createSlider(video, position, AmazonSliderStyle, "");
       } else {
         // need to resync the slider with the video sometimes
