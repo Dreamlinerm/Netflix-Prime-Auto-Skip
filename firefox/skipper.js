@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.27";
+const version = "1.1.28";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -482,23 +482,23 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     let button;
     if (isDisney) {
       if (!document.querySelector('[data-gv2elementkey="playNext"]')) button = document.querySelector(".skip__button");
-    } else button = document.evaluate("//span[contains(., 'Skip')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
+    } else button = document.evaluate("//span[contains(., 'Skip Intro')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       button.click();
-      log("Recap skipped", button);
+      log("Intro/Recap skipped", button);
       setTimeout(function () {
-        addSkippedTime(time, video?.currentTime, "RecapTimeSkipped");
+        addSkippedTime(time, video?.currentTime, "Intro/RecapTimeSkipped");
       }, 600);
     }
     // if original disney show skip the disney+ intro
-    if (video?.play && !OriginalIntro && video.duration < 5) {
+    if (isDisney && video?.play && !OriginalIntro && video.duration < 5) {
       OriginalIntro = video.duration;
       resetOriginalIntro();
       video.currentTime = video.duration;
       log("skipped Original intro");
     }
     // if intro/recap time starts at 0 there is no skip button so always rewind to 0
-    if (video?.play && SetTimeToZeroOnce != video.src && video.duration > 5 && !OriginalIntro) {
+    if (isDisney && video?.play && SetTimeToZeroOnce != video.src && video.duration > 5 && !OriginalIntro) {
       if (video.currentTime > 0.2 && video.currentTime < 5) {
         log("reset time to", video.currentTime);
         video.currentTime = 0;
