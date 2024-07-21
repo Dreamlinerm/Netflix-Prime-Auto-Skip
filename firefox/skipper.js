@@ -470,12 +470,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.Disney?.selfAd) Disney_selfAd(video, time);
   }
   let SetTimeToZeroOnce = null;
-  let OriginalIntro = 0;
-  function resetOriginalIntro() {
-    setTimeout(() => {
-      OriginalIntro = 0;
-    }, 5000);
-  }
   function Disney_Intro(video, time) {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
@@ -490,21 +484,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         addSkippedTime(time, video?.currentTime, "Intro/RecapTimeSkipped");
       }, 600);
     }
-    // if original disney show skip the disney+ intro
-    if (isDisney && video?.play && !OriginalIntro && video.duration < 5) {
-      OriginalIntro = video.duration;
-      resetOriginalIntro();
-      video.currentTime = video.duration;
-      log("skipped Original intro");
-    }
-    // if intro/recap time starts at 0 there is no skip button so always rewind to 0
-    if (isDisney && video?.play && SetTimeToZeroOnce != video.src && video.duration > 5 && !OriginalIntro) {
-      if (video.currentTime > 0.2 && video.currentTime < 5) {
-        log("reset time to", video.currentTime);
-        video.currentTime = 0;
-        SetTimeToZeroOnce = video.src;
-      }
-    }
+    // // if intro/recap time starts at 0 there is no skip button so always rewind to 0
+    // if (isDisney && video?.play && SetTimeToZeroOnce != video.src) {
+    //   if (video.currentTime > 0.2 && video.currentTime < 5) {
+    //     log("reset time to", video.currentTime);
+    //     video.currentTime = 0;
+    //     SetTimeToZeroOnce = video.src;
+    //   }
+    // }
   }
   function Disney_Credits(currentTime) {
     let button;
