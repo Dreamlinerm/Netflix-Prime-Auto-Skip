@@ -469,7 +469,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
     if (settings.Disney?.selfAd) Disney_selfAd(video, time);
   }
-  let SetTimeToZeroOnce = null;
+  // let SetTimeToZeroOnce = null;
   function Disney_Intro(video, time) {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
