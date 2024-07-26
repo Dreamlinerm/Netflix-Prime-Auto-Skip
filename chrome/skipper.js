@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.28";
+const version = "1.1.29";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -159,14 +159,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     settings.General = { ...defaultSettings.settings.General, ...result?.settings?.General };
 
     logStartOfAddon();
-    getDBCache();
-
     if (isNetflix) startNetflix(settings.Netflix);
     else if (isPrimeVideo) startAmazon(settings.Amazon);
     else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
     else if (isCrunchyroll) startCrunchyroll(settings.Crunchyroll);
     else if (isHBO) HBOObserver.observe(document, config);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
+    getDBCache();
   });
   chrome.storage.local.onChanged.addListener(function (changes) {
     if (changes?.DBCache) DBCache = changes.DBCache.newValue;
@@ -193,6 +192,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (!oldValue?.skipAd && newValue.skipAd) Amazon_AdTimeout();
     if (!oldValue?.blockFreevee && newValue.blockFreevee) Amazon_FreeveeTimeout();
     if (!oldValue?.continuePosition && newValue.continuePosition) Amazon_continuePosition();
+    if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
   }
   function DisneySettingsChanged(oldValue, newValue) {
     if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
@@ -469,13 +469,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
     if (settings.Disney?.selfAd) Disney_selfAd(video, time);
   }
-  let SetTimeToZeroOnce = null;
-  let OriginalIntro = 0;
-  function resetOriginalIntro() {
-    setTimeout(() => {
-      OriginalIntro = 0;
-    }, 5000);
-  }
+  // let SetTimeToZeroOnce = null;
   function Disney_Intro(video, time) {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
@@ -490,21 +484,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         addSkippedTime(time, video?.currentTime, "Intro/RecapTimeSkipped");
       }, 600);
     }
-    // if original disney show skip the disney+ intro
-    if (isDisney && video?.play && !OriginalIntro && video.duration < 5) {
-      OriginalIntro = video.duration;
-      resetOriginalIntro();
-      video.currentTime = video.duration;
-      log("skipped Original intro");
-    }
-    // if intro/recap time starts at 0 there is no skip button so always rewind to 0
-    if (isDisney && video?.play && SetTimeToZeroOnce != video.src && video.duration > 5 && !OriginalIntro) {
-      if (video.currentTime > 0.2 && video.currentTime < 5) {
-        log("reset time to", video.currentTime);
-        video.currentTime = 0;
-        SetTimeToZeroOnce = video.src;
-      }
-    }
+    // // if intro/recap time starts at 0 there is no skip button so always rewind to 0
+    // if (isDisney && video?.play && SetTimeToZeroOnce != video.src) {
+    //   if (video.currentTime > 0.2 && video.currentTime < 5) {
+    //     log("reset time to", video.currentTime);
+    //     video.currentTime = 0;
+    //     SetTimeToZeroOnce = video.src;
+    //   }
+    // }
   }
   function Disney_Credits(currentTime) {
     let button;
@@ -822,11 +809,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const AmazonObserver = new MutationObserver(Amazon);
 
   function Amazon() {
+    if (settings.Amazon?.filterPaid) Amazon_FilterPaid();
     const video = document.querySelector(AmazonVideoClass);
     if (settings.Amazon?.skipCredits) Amazon_Credits();
     if (settings.Amazon?.watchCredits) Amazon_Watch_Credits();
     if (settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
-    if (settings.Amazon?.filterPaid) Amazon_FilterPaid();
     if (settings.Amazon?.xray) Amazon_xray();
   }
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
@@ -951,29 +938,38 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
   }
   async function Amazon_continuePosition() {
-    const continueCategory = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]')?.closest('[class="+OSZzQ"]');
+    const continueCategory = document.querySelector('.j5ZgN-._0rmWBt[data-testid="card-overlay"]')?.closest('[class="+OSZzQ"]');
     const position = continueCategory?.parentNode?.childNodes?.[2];
     if (continueCategory && position) position.before(continueCategory);
   }
   async function Amazon_FilterPaid() {
     // if not on the shop page or homepremiere
-    if (!url.includes("contentId=store") && !url.includes("contentId=homepremiere") && !url.includes("contentType=merch")) {
-      // yellow headline is not everywhere the same
-      document.querySelectorAll(".o86fri").forEach((a) => {
-        deletePaidCategory(a);
-      });
-      // Mehr > is .GnSDwP //if (getComputedStyle(a).color == "rgb(255, 204, 0)")
-      document.querySelectorAll(".c3svnh a.Xa7aAK, .c3svnh a.Xa7aAK:link, .c3svnh a.Xa7aAK:visited").forEach((a) => {
+    if (url.includes("storefront") || url.includes("genre")) {
+      // the yellow hand bag is the paid category .NbhXwl
+      document.querySelectorAll("section[data-testid='standard-carousel'] ul:has(svg.NbhXwl)").forEach((a) => {
         deletePaidCategory(a);
       });
     }
   }
   async function deletePaidCategory(a) {
-    const secondSection = a?.closest("section")?.parentNode?.closest("section");
-    if (secondSection) {
-      log("Filtered paid Element", secondSection);
-      secondSection.remove();
+    // if the section is mostly paid content delete it
+    // -2 because sometimes there are title banners
+    if (
+      a.children.length - a.querySelectorAll('[data-hidden="true"]').length - 2 <=
+      a.querySelectorAll("[data-testid='card-overlay'] svg.NbhXwl").length
+    ) {
+      const section = a.closest('[class="+OSZzQ"]');
+      log("Filtered paid category", section);
+      section?.remove();
       increaseBadge();
+    }
+    // remove individual paid elements
+    else {
+      a.querySelectorAll("li:has(svg.NbhXwl)").forEach((b) => {
+        log("Filtered paid Element", b);
+        b.remove();
+        increaseBadge();
+      });
     }
   }
   function Amazon_FreeveeTimeout() {
