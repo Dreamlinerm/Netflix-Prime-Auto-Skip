@@ -946,28 +946,32 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     // if not on the shop page or homepremiere
     if (url.includes("storefront") || url.includes("genre")) {
       // the yellow hand bag is the paid category .NbhXwl
-      document.querySelectorAll("svg.NbhXwl:not(.enhanced)").forEach((a) => {
+      document.querySelectorAll("svg.NbhXwl:not(.processed)").forEach((a) => {
         deletePaidCategory(a);
       });
-      // settings.Amazon.filterPaid = false;
     }
   }
   async function deletePaidCategory(a) {
     const section = a?.closest("li");
     const category = section?.parentElement?.closest("section");
-    // find brother section
     const fistSection = section?.parentElement?.firstChild?.querySelector("svg.NbhXwl");
-    if (category && fistSection) {
-      log("Filtered paid category", category);
-      category.remove();
-      // increaseBadge();
-    } else if (category && !fistSection) {
-      log("Filtered paid Element", section);
-      section.remove();
-      // increaseBadge();
+    // Check if the category has already been processed
+    if (category) {
+      if (fistSection) {
+        if (!category.classList.contains("processed")) {
+          log("Filtered paid category", category);
+          category.remove();
+          increaseBadge();
+        }
+      } else {
+        log("Filtered paid Element", section);
+        section.remove();
+        increaseBadge();
+      }
+      // Mark the category as processed
+      category.classList.add("processed");
     } else {
-      log("no section found", a);
-      a.classList.add("enhanced");
+      a.classList.add("processed");
     }
   }
   function Amazon_FreeveeTimeout() {
