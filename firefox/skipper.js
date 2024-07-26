@@ -159,14 +159,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     settings.General = { ...defaultSettings.settings.General, ...result?.settings?.General };
 
     logStartOfAddon();
-    getDBCache();
-
     if (isNetflix) startNetflix(settings.Netflix);
     else if (isPrimeVideo) startAmazon(settings.Amazon);
     else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
     else if (isCrunchyroll) startCrunchyroll(settings.Crunchyroll);
     else if (isHBO) HBOObserver.observe(document, config);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
+    getDBCache();
   });
   browser.storage.local.onChanged.addListener(function (changes) {
     if (changes?.DBCache) DBCache = changes.DBCache.newValue;
@@ -193,6 +192,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (!oldValue?.skipAd && newValue.skipAd) Amazon_AdTimeout();
     if (!oldValue?.blockFreevee && newValue.blockFreevee) Amazon_FreeveeTimeout();
     if (!oldValue?.continuePosition && newValue.continuePosition) Amazon_continuePosition();
+    if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
   }
   function DisneySettingsChanged(oldValue, newValue) {
     if (!oldValue?.showRating && newValue.showRating) startShowRatingInterval();
@@ -809,11 +809,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const AmazonObserver = new MutationObserver(Amazon);
 
   function Amazon() {
+    if (settings.Amazon?.filterPaid) Amazon_FilterPaid();
     const video = document.querySelector(AmazonVideoClass);
     if (settings.Amazon?.skipCredits) Amazon_Credits();
     if (settings.Amazon?.watchCredits) Amazon_Watch_Credits();
     if (settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
-    if (settings.Amazon?.filterPaid) Amazon_FilterPaid();
     if (settings.Amazon?.xray) Amazon_xray();
   }
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
@@ -938,29 +938,36 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
   }
   async function Amazon_continuePosition() {
-    const continueCategory = document.querySelector('.j5ZgN-.r0m8Kk._0rmWBt[data-testid="card-overlay"]')?.closest('[class="+OSZzQ"]');
+    const continueCategory = document.querySelector('.j5ZgN-._0rmWBt[data-testid="card-overlay"]')?.closest('[class="+OSZzQ"]');
     const position = continueCategory?.parentNode?.childNodes?.[2];
     if (continueCategory && position) position.before(continueCategory);
   }
   async function Amazon_FilterPaid() {
     // if not on the shop page or homepremiere
-    if (!url.includes("contentId=store") && !url.includes("contentId=homepremiere") && !url.includes("contentType=merch")) {
-      // yellow headline is not everywhere the same
-      document.querySelectorAll(".o86fri").forEach((a) => {
+    if (url.includes("storefront") || url.includes("genre")) {
+      // the yellow hand bag is the paid category .NbhXwl
+      document.querySelectorAll("svg.NbhXwl:not(.enhanced)").forEach((a) => {
         deletePaidCategory(a);
       });
-      // Mehr > is .GnSDwP //if (getComputedStyle(a).color == "rgb(255, 204, 0)")
-      document.querySelectorAll(".c3svnh a.Xa7aAK, .c3svnh a.Xa7aAK:link, .c3svnh a.Xa7aAK:visited").forEach((a) => {
-        deletePaidCategory(a);
-      });
+      // settings.Amazon.filterPaid = false;
     }
   }
   async function deletePaidCategory(a) {
-    const secondSection = a?.closest("section")?.parentNode?.closest("section");
-    if (secondSection) {
-      log("Filtered paid Element", secondSection);
-      secondSection.remove();
-      increaseBadge();
+    const section = a?.closest("li");
+    const category = section?.parentElement?.closest("section");
+    // find brother section
+    const fistSection = section?.parentElement?.firstChild?.querySelector("svg.NbhXwl");
+    if (category && fistSection) {
+      log("Filtered paid category", category);
+      category.remove();
+      // increaseBadge();
+    } else if (category && !fistSection) {
+      log("Filtered paid Element", section);
+      section.remove();
+      // increaseBadge();
+    } else {
+      log("no section found", a);
+      a.classList.add("enhanced");
     }
   }
   function Amazon_FreeveeTimeout() {
