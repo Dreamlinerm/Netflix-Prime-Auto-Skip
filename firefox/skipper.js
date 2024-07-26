@@ -946,32 +946,30 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     // if not on the shop page or homepremiere
     if (url.includes("storefront") || url.includes("genre")) {
       // the yellow hand bag is the paid category .NbhXwl
-      document.querySelectorAll("svg.NbhXwl:not(.processed)").forEach((a) => {
+      document.querySelectorAll("section[data-testid='standard-carousel'] ul:has(svg.NbhXwl)").forEach((a) => {
         deletePaidCategory(a);
       });
     }
   }
   async function deletePaidCategory(a) {
-    const section = a?.closest("li");
-    const category = section?.parentElement?.closest("section");
-    const fistSection = section?.parentElement?.firstChild?.querySelector("svg.NbhXwl");
-    // Check if the category has already been processed
-    if (category) {
-      if (fistSection) {
-        if (!category.classList.contains("processed")) {
-          log("Filtered paid category", category);
-          category.remove();
-          increaseBadge();
-        }
-      } else {
-        log("Filtered paid Element", section);
-        section.remove();
+    // if the section is mostly paid content delete it
+    // -2 because sometimes there are title banners
+    if (
+      a.children.length - a.querySelectorAll('[data-hidden="true"]').length - 2 <=
+      a.querySelectorAll("[data-testid='card-overlay'] svg.NbhXwl").length
+    ) {
+      const section = a.closest('[class="+OSZzQ"]');
+      log("Filtered paid category", section);
+      section?.remove();
+      increaseBadge();
+    }
+    // remove individual paid elements
+    else {
+      a.querySelectorAll("li:has(svg.NbhXwl)").forEach((b) => {
+        log("Filtered paid Element", b);
+        b.remove();
         increaseBadge();
-      }
-      // Mark the category as processed
-      category.classList.add("processed");
-    } else {
-      a.classList.add("processed");
+      });
     }
   }
   function Amazon_FreeveeTimeout() {
