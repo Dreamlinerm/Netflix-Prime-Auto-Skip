@@ -944,7 +944,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   async function Amazon_FilterPaid() {
     // if not on the shop page or homepremiere
-    if (url.includes("storefront") || url.includes("genre")) {
+    if (url.includes("storefront") || url.includes("genre") || url.includes("movie")) {
       // the yellow hand bag is the paid category .NbhXwl
       document.querySelectorAll("section[data-testid='standard-carousel'] ul:has(svg.NbhXwl)").forEach((a) => {
         deletePaidCategory(a);
