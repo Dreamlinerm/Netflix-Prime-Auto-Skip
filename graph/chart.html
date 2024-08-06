@@ -1,23 +1,35 @@
 <head>
   <meta charset="utf-8" />
-  <title>Chart.js demo</title>
+  <title>User statistics</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-trendline/dist/chartjs-plugin-trendline.min.js"></script>
   <script src="downloads.js"></script>
   <script src="users.js"></script>
+  <script src="ChromeUsers.js"></script>
+  <script src="ChromeDownloads.js"></script>
 </head>
 
 <body>
-  <div style="width: 50%">
-    <!-- https://www.chartjs.org/ -->
-    <canvas id="users"></canvas>
-    <canvas id="downloads"></canvas>
+  <div style="display: flex;">
+    <div style="width: 50%">
+      Firefox
+      <!-- https://www.chartjs.org/ -->
+      <canvas id="users"></canvas>
+      <canvas id="downloads"></canvas>
+    </div>
+    <div style="width: 50%">
+      Chrome
+      <canvas id="ChromeUsers"></canvas>
+      <canvas id="ChromeDownloads"></canvas>
+    </div>
   </div>
 </body>
 
 <script>
   const cUsers = document.getElementById("users");
   const cDownloads = document.getElementById("downloads");
+  const cChromeUsers = document.getElementById("ChromeUsers");
+  const cChromeDownloads = document.getElementById("ChromeDownloads");
   new Chart(cUsers, {
     type: "line",
     data: {
@@ -47,6 +59,46 @@
         {
           label: "Downloads per Day",
           data: downloads.map((point) => point.count).reverse(),
+          borderWidth: 2,
+          trendlineLinear: {
+            lineStyle: "solid",
+            width: 2,
+          }
+        },
+      ],
+    },
+    options: {
+      pointRadius: 3,
+    },
+  });
+  new Chart(cChromeUsers, {
+    type: "line",
+    data: {
+      labels: chromeUsers.map((point) => point.date),
+      datasets: [
+        {
+          label: "Daily users",
+          data: chromeUsers.map((point) => point.count),
+          borderWidth: 2,
+          trendlineLinear: {
+            lineStyle: "solid",
+            width: 2,
+          }
+        },
+      ],
+    },
+    options: {
+      pointRadius: 3,
+    },
+  });
+  new Chart(cChromeDownloads, {
+    type: "line",
+    data: {
+      labels: chromeDownloads.map((point) => point.date),
+      datasets: [
+        {
+          label: "Downloads per Day",
+          data: chromeDownloads.map((point) => point.count),
           borderWidth: 2,
           trendlineLinear: {
             lineStyle: "solid",
