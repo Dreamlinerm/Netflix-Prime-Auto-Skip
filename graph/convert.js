@@ -4,6 +4,8 @@ function convertCsv(name) {
   let file = fs
     .readFileSync(path.join(__dirname, name + ".csv"), "utf-8")
     .split("\n")
+    // remove the first two lines
+    .slice(2)
     .map((line) => line.split(","))
     .map((line) => {
       return {
