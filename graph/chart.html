@@ -2,9 +2,11 @@
   <meta charset="utf-8" />
   <title>Chart.js demo</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-trendline/dist/chartjs-plugin-trendline.min.js"></script>
   <script src="downloads.js"></script>
   <script src="users.js"></script>
 </head>
+
 <body>
   <div style="width: 50%">
     <!-- https://www.chartjs.org/ -->
@@ -25,6 +27,10 @@
           label: "Daily users",
           data: users.map((point) => point.count).reverse(),
           borderWidth: 1,
+          trendlineLinear: {
+            lineStyle: "solid",
+            width: 2,
+          }
         },
       ],
     },
@@ -42,6 +48,10 @@
           label: "Downloads per Day",
           data: downloads.map((point) => point.count).reverse(),
           borderWidth: 2,
+          trendlineLinear: {
+            lineStyle: "solid",
+            width: 2,
+          }
         },
       ],
     },
