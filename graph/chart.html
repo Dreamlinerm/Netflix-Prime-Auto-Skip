@@ -36,14 +36,17 @@
   const chartFirefoxDownloads = document.getElementById("downloads");
   const chartChromeUsers = document.getElementById("ChromeUsers");
   const chartChromeDownloads = document.getElementById("ChromeDownloads");
+
   const maxUsersFirefox = Math.max(...firefoxUsers.map((point) => point.count));
   const maxUsersChrome = Math.max(...chromeUsers.map((point) => point.count));
-  console.log(firefoxUsers[0].count, chromeUsers[chromeUsers.length - 1].count);
-  const currentUsers = firefoxUsers[0].count + chromeUsers[chromeUsers.length - 1].count;
+  const maxUsers = Math.ceil(Math.max(maxUsersFirefox, maxUsersChrome) / 1000) * 1000;
+
   const maxDownloadsFirefox = Math.max(...firefoxDownloads.map((point) => point.count));
   const maxDownloadsChrome = Math.max(...chromeDownloads.map((point) => point.count));
-  const currentDownloads = firefoxDownloads[0].count + chromeDownloads[chromeUsers.length - 1].count;
-  console.log(firefoxDownloads[0].count, chromeDownloads[chromeDownloads.length - 1].count);
+  const maxDownloads = Math.ceil(Math.max(maxDownloadsFirefox, maxDownloadsChrome) / 10) * 10;
+
+  const currentDownloads = firefoxDownloads[0].count + chromeDownloads[chromeDownloads.length - 1].count;
+  const currentUsers = firefoxUsers[0].count + chromeUsers[chromeUsers.length - 1].count;
   document.getElementById("fmaxUsers").innerText = maxUsersFirefox;
   document.getElementById("fmaxDownloads").innerText = maxDownloadsFirefox;
   document.getElementById("cmaxUsers").innerText = maxUsersChrome;
@@ -68,6 +71,12 @@
     },
     options: {
       pointRadius: 1,
+      // scales: {
+      //   y: {
+      //     min: 0,
+      //     max: maxUsers,
+      //   },
+      // },
     },
   });
 
@@ -89,6 +98,12 @@
     },
     options: {
       pointRadius: 3,
+      // scales: {
+      //   y: {
+      //     min: 0,
+      //     max: maxDownloads,
+      //   },
+      // },
     },
   });
   new Chart(chartChromeUsers, {
@@ -109,6 +124,12 @@
     },
     options: {
       pointRadius: 3,
+      // scales: {
+      //   y: {
+      //     min: 0,
+      //     max: maxUsers,
+      //   },
+      // },
     },
   });
   new Chart(chartChromeDownloads, {
@@ -129,6 +150,12 @@
     },
     options: {
       pointRadius: 3,
+      // scales: {
+      //   y: {
+      //     min: 0,
+      //     max: maxDownloads,
+      //   },
+      // },
     },
   });
 </script>
