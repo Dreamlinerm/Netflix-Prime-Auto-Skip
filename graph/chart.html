@@ -3,8 +3,8 @@
   <title>User statistics</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-trendline/dist/chartjs-plugin-trendline.min.js"></script>
-  <script src="downloads.js"></script>
-  <script src="users.js"></script>
+  <script src="firefoxUsers.js"></script>
+  <script src="firefoxDownloads.js"></script>
   <script src="ChromeUsers.js"></script>
   <script src="ChromeDownloads.js"></script>
 </head>
@@ -26,18 +26,18 @@
 </body>
 
 <script>
-  const cUsers = document.getElementById("users");
-  const cDownloads = document.getElementById("downloads");
-  const cChromeUsers = document.getElementById("ChromeUsers");
-  const cChromeDownloads = document.getElementById("ChromeDownloads");
-  new Chart(cUsers, {
+  const chartFirefoxUsers = document.getElementById("users");
+  const chartFirefoxDownloads = document.getElementById("downloads");
+  const chartChromeUsers = document.getElementById("ChromeUsers");
+  const chartChromeDownloads = document.getElementById("ChromeDownloads");
+  new Chart(chartFirefoxUsers, {
     type: "line",
     data: {
-      labels: downloads.map((point) => point.date).reverse(),
+      labels: firefoxUsers.map((point) => point.date).reverse(),
       datasets: [
         {
           label: "Daily users",
-          data: users.map((point) => point.count).reverse(),
+          data: firefoxUsers.map((point) => point.count).reverse(),
           borderWidth: 1,
           trendlineLinear: {
             lineStyle: "solid",
@@ -51,14 +51,14 @@
     },
   });
 
-  new Chart(cDownloads, {
+  new Chart(chartFirefoxDownloads, {
     type: "line",
     data: {
-      labels: downloads.map((point) => point.date).reverse(),
+      labels: firefoxDownloads.map((point) => point.date).reverse(),
       datasets: [
         {
           label: "Downloads per Day",
-          data: downloads.map((point) => point.count).reverse(),
+          data: firefoxDownloads.map((point) => point.count).reverse(),
           borderWidth: 2,
           trendlineLinear: {
             lineStyle: "solid",
@@ -71,7 +71,7 @@
       pointRadius: 3,
     },
   });
-  new Chart(cChromeUsers, {
+  new Chart(chartChromeUsers, {
     type: "line",
     data: {
       labels: chromeUsers.map((point) => point.date),
@@ -91,7 +91,7 @@
       pointRadius: 3,
     },
   });
-  new Chart(cChromeDownloads, {
+  new Chart(chartChromeDownloads, {
     type: "line",
     data: {
       labels: chromeDownloads.map((point) => point.date),
