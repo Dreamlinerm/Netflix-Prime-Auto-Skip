@@ -10,17 +10,23 @@
 </head>
 
 <body>
+  <h1>Last Daily Users: <span id="currentUsers"></span></h1>
+  <h1>Last Daily Downloads: <span id="currentDownloads"></span></h1>
   <div style="display: flex;">
     <div style="width: 50%">
       Firefox
       <!-- https://www.chartjs.org/ -->
       <canvas id="users"></canvas>
       <canvas id="downloads"></canvas>
+      <h2>Firefox Max Users: <span id="fmaxUsers"></span></h2>
+      <h2>Firefox Max Downloads: <span id="fmaxDownloads"></span></h2>
     </div>
     <div style="width: 50%">
       Chrome
       <canvas id="ChromeUsers"></canvas>
       <canvas id="ChromeDownloads"></canvas>
+      <h2>Chrome Max Users: <span id="cmaxUsers"></span></h2>
+      <h2>Chrome Max Downloads: <span id="cmaxDownloads"></span></h2>
     </div>
   </div>
 </body>
@@ -30,6 +36,20 @@
   const chartFirefoxDownloads = document.getElementById("downloads");
   const chartChromeUsers = document.getElementById("ChromeUsers");
   const chartChromeDownloads = document.getElementById("ChromeDownloads");
+  const maxUsersFirefox = Math.max(...firefoxUsers.map((point) => point.count));
+  const maxUsersChrome = Math.max(...chromeUsers.map((point) => point.count));
+  console.log(firefoxUsers[0].count, chromeUsers[chromeUsers.length - 1].count);
+  const currentUsers = firefoxUsers[0].count + chromeUsers[chromeUsers.length - 1].count;
+  const maxDownloadsFirefox = Math.max(...firefoxDownloads.map((point) => point.count));
+  const maxDownloadsChrome = Math.max(...chromeDownloads.map((point) => point.count));
+  const currentDownloads = firefoxDownloads[0].count + chromeDownloads[chromeUsers.length - 1].count;
+  console.log(firefoxDownloads[0].count, chromeDownloads[chromeDownloads.length - 1].count);
+  document.getElementById("fmaxUsers").innerText = maxUsersFirefox;
+  document.getElementById("fmaxDownloads").innerText = maxDownloadsFirefox;
+  document.getElementById("cmaxUsers").innerText = maxUsersChrome;
+  document.getElementById("cmaxDownloads").innerText = maxDownloadsChrome;
+  document.getElementById("currentUsers").innerText = currentUsers;
+  document.getElementById("currentDownloads").innerText = currentDownloads;
   new Chart(chartFirefoxUsers, {
     type: "line",
     data: {
