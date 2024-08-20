@@ -1,63 +1,58 @@
-You can configure which feature to enable in the Settings Page.
+You can customize which features are enabled in the Settings.
 
 ✨ Features
 
-On Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max it automatically:
-• Skips Intros & Recaps
-• Skip/Watch Credits
-• Skips Ads
-• Shows TMDB Rating
-• Add customizable playback speed control
-• Improve subtitle styling
-• Plays on Fullscreen
+This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
+  • Block Ads
+  • Skipping Intros & Recaps
+  • Skipping or Watching Credits
+  • Displaying TMDB ratings for all shows
+  • Adding customizable playback speed control
+  • Improving subtitle styling (under the improve video interface option)
+  • Automatically start to play videos in Fullscreen
 
-In addition to the Shared features:
+Platform-Specific Features:
+  • Netflix:
+      • Remembers and selects your last-used profile automatically
+      • Blocks the “Are you still watching?” inactivity warning
 
-On Netflix, it additionally automatically:
-• Picks last used profile
-• Blocks Inactivity Warning (Are you still watching?)
+  • Amazon Prime Video:
+      • Skips self-promotional ads (for Prime Video productions)
+      • Filters out paid content (movies, series) from the home page
+      • Removes the blur effect when hovering over videos
 
-On Amazon Prime Video, it additionally automatically:
-• Skips Self-promoting ads (Ads for prime video productions)
-• Filters paid content (movies, series)
-• Removes annoying blur when hovering over video
+  • Crunchyroll:
+      • Remembers and selects your last-used profile automatically
+      • Adds filters to the release calendar, so it is useable
 
-On Crunchyroll it additionally automatically:
-• Adds Filters to Release Calendar
+  • Disney+ (Hotstar, STAR+):
+      • Skips self-promotional ads
+      • Automatically returns to fullscreen mode when going to the next episode
 
-On Disney+ (Hotstar, STAR+) it additionally automatically:
-• goes back to full screen when skipping to the next episode
+Android Support in Desktop mode
+  • Prime Video
+  • Disney+ (Hotstar, STAR+)
+  • Crunchyroll
+  • HBO Max
+To use the extension on an Android phone, download Firefox.
 
-Android:
-Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are supported (in Desktop mode) on Android. Netflix does not work on Android.
+☔ Safe & Open Source
+This extension is open-source! Feel free to contribute or explore the code on GitHub (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
 
-To use on an Android phone, download Firefox.
-
-☔ Safe
-
-The extension is open-sourced! Check (https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip) out if you want to contribute.
-
-💕 Enjoying Streaming enhanced?
-
-Leave a 5 star review! Reviews help build trust and attract new users!
-
-Buy me a coffee (https://github.com/sponsors/Dreamlinerm).
+💕 Enjoy Streaming enhanced?
+If you’re enjoying the enhanced streaming experience, please consider leaving a 5-star review! Reviews help build trust and attract new users.
+If you'd like to support further development, you can buy me a coffee (https://github.com/sponsors/Dreamlinerm).
 
 Disclaimer
-
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.
 
 --------------------------------------------  firefox:
-☔ Safe
-
-The extension is open-sourced! Check <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> out if you want to contribute.
+☔ Safe & Open Source
+This extension is open-source! Feel free to contribute or explore the code on <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>.
 
 💕 Enjoying Streaming enhanced?
-
-Leave a 5 star review! Reviews help build trust and attract new users!
-
-Buy me a <a href="https://github.com/sponsors/Dreamlinerm" target="_blank">coffee</a>.
+If you’re enjoying the enhanced streaming experience, please consider leaving a 5-star review! Reviews help build trust and attract new users.
+If you'd like to support further development, you can buy me a <a href="https://github.com/sponsors/Dreamlinerm" target="_blank">coffee</a>.
 
 Disclaimer
-
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.
