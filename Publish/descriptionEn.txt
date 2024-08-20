@@ -70,7 +70,6 @@ Platform-Specific Features:
     <li>Blocks the “Are you still watching?” inactivity warning</li>
   </ul>
 </li>
-
 <li>Amazon Prime Video:
   <ul>
     <li>Skips self-promotional ads (for Prime Video productions)</li>
