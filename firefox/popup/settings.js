@@ -104,6 +104,7 @@ const defaultSettings = {
     },
   },
 };
+let customProfilePicture = null;
 const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent);
 console.log("isMobile", isMobile, navigator.userAgent);
 let settings = { ...defaultSettings.settings };
@@ -140,6 +141,17 @@ browser.storage.sync.onChanged.addListener(function (changes) {
     const { oldValue, newValue } = changes.settings;
     settings = newValue;
     console.log("settings", "Old value:", oldValue, ", new value:", newValue);
+    setCheckboxesToSettings();
+  }
+});
+browser.storage.local.get("customProfilePicture", function (result) {
+  customProfilePicture = result.customProfilePicture;
+  setCheckboxesToSettings();
+});
+browser.storage.local.onChanged.addListener(function (changes) {
+  if (changes?.customProfilePicture) {
+    const { newValue } = changes.customProfilePicture;
+    customProfilePicture = newValue;
     setCheckboxesToSettings();
   }
 });
@@ -248,7 +260,8 @@ function setCheckboxesToSettings() {
   if (button) button.textContent = settings?.General.profileName;
   button = document.querySelector("#profilePicture");
   if (button && settings.General.profilePicture) {
-    button.setAttribute("src", settings?.General.profilePicture);
+    // button.setAttribute("src", settings?.General.profilePicture);
+    button.setAttribute("src", customProfilePicture);
     button.style.display = "block";
   }
   //  -------------      Slider Options        ---------------------------------------
@@ -364,6 +377,17 @@ function listenForClicks() {
       } else {
         alert("The file you uploaded is not a valid JSON file.");
         return;
+      }
+    } else if (e.target.id === "uploadProfilePicture") {
+      const file = document.getElementById("customProfilePicture").files[0];
+      console.log(file);
+      if (file !== undefined && file.type.startsWith("image/")) {
+        const img = new FileReader();
+        img.onload = function () {
+          customProfilePicture = img.result;
+          browser.storage.local.set({ customProfilePicture });
+        };
+        img.readAsDataURL(file);
       }
     }
     //  -------------      Menu        ---------------------------------------
