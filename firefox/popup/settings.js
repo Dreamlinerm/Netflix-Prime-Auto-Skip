@@ -260,8 +260,8 @@ function setCheckboxesToSettings() {
   if (button) button.textContent = settings?.General.profileName;
   button = document.querySelector("#profilePicture");
   if (button && settings.General.profilePicture) {
-    // button.setAttribute("src", settings?.General.profilePicture);
-    button.setAttribute("src", customProfilePicture);
+    if (customProfilePicture) button.setAttribute("src", customProfilePicture);
+    else button.setAttribute("src", settings?.General.profilePicture);
     button.style.display = "block";
   }
   //  -------------      Slider Options        ---------------------------------------
