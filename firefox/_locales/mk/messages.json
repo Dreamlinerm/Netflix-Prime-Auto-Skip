@@ -284,5 +284,11 @@
   "HomeButton": {
     "message": "Дома",
     "description": "Disney Homepage button"
+  },
+  "BigPlayerSwitch": {
+    "message": "Видео поголемо:"
+  },
+  "BigPlayerDescription": {
+    "message": "Ја проширува големината на видеото на целиот прозорец на прелистувачот без цел екран."
   }
 }

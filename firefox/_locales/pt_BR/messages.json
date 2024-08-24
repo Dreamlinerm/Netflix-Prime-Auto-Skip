@@ -290,5 +290,11 @@
   "HomeButton": {
     "message": "Lar",
     "description": "Disney Homepage button"
+  },
+  "BigPlayerSwitch": {
+    "message": "Vídeo maior:"
+  },
+  "BigPlayerDescription": {
+    "message": "Estende o tamanho do vídeo para toda a janela do navegador sem tela cheia."
   }
 }

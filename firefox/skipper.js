@@ -59,7 +59,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         showRating: true,
       },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
-      Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true },
+      Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true, bigPlayer: true },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
@@ -138,6 +138,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (Crunchyroll?.profile) {
       let pickInterval = setInterval(function () {
         Crunchyroll_AutoPickProfile();
+        if (settings.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayer();
       }, 100);
       // only click on profile on page load not when switching profiles
       setTimeout(function () {
@@ -1267,6 +1268,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           increaseBadge();
         }
       });
+    }
+  }
+  async function Crunchyroll_bigPlayer() {
+    let player = document.querySelector(".video-player-wrapper");
+    if (player) {
+      player.style.maxHeight = "calc(100vw / 1.7777)";
+      player.style.height = "calc(100vh - 60px)";
     }
   }
   // HBO functions
