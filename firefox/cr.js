@@ -273,7 +273,7 @@ async function Crunchyroll_SpeedSlider(video) {
   }
 }
 async function Crunchyroll_disableNumpad() {
-  document.addEventListener(
+  addEventListener(
     "keydown",
     async function (event) {
       if (event.location === 3) {
