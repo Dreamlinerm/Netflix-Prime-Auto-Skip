@@ -69,7 +69,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         disableNumpad: true,
       },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
+      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: {
         Crunchyroll_profilePicture: null,
@@ -176,6 +176,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     else if (isCrunchyroll) startCrunchyroll(settings.Crunchyroll);
     else if (isHBO) HBOObserver.observe(document, config);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
+    if (settings?.Video?.doubleClick) startdoubleClick();
     getDBCache();
   });
   browser.storage.local.onChanged.addListener(function (changes) {
@@ -192,6 +193,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       else if (isHBO) HBOSettingsChanged(oldValue?.HBO, newValue?.HBO);
 
       if (!oldValue || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
+      if (!oldValue || newValue.Video.doubleClick !== oldValue?.Video?.doubleClick) startdoubleClick();
       if (oldValue?.Video?.userAgent != undefined && newValue.Video.userAgent !== oldValue?.Video?.userAgent) location.reload();
     }
   });
@@ -459,11 +461,28 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   async function startPlayOnFullScreen() {
     if (settings.Video?.playOnFullScreen) {
-      log("started observing| PlayOnFullScreen");
       addEventListener("fullscreenchange", OnFullScreenChange);
     } else {
-      log("stopped observing| PlayOnFullScreen");
       removeEventListener("fullscreenchange", OnFullScreenChange);
+    }
+  }
+  async function startdoubleClick() {
+    if (settings.Video?.doubleClick) {
+      // event listener for double click
+      document.ondblclick = function () {
+        let video;
+        if (isPrimeVideo) video = document.querySelector("#dv-web-player");
+        if (video) {
+          // video is fullscreen
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          } else {
+            video.requestFullscreen();
+          }
+        }
+      };
+    } else {
+      document.ondblclick = null;
     }
   }
 

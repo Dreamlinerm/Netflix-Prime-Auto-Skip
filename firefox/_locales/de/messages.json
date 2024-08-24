@@ -305,5 +305,11 @@
   },
   "DisableNumpadDescription": {
     "message": "Deaktivieren Sie die Zifferntasten, damit nicht versehentlich die aktuelle Videozeit /-position geändert wird."
+  },
+  "DoubleClickSwitch": {
+    "message": "Vollbildmodus bei Doppelklick:"
+  },
+  "DoubleClickSwitchDescription": {
+    "message": "Wenn Sie auf das Video doppelklicken, wird es im Vollbildmodus angezeigt."
   }
 }

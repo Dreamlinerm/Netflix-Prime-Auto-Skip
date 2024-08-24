@@ -47,7 +47,7 @@ const defaultSettings = {
       disableNumpad: true,
     },
     HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-    Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
+    Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: {
       Crunchyroll_profilePicture: null,
@@ -75,6 +75,7 @@ browser.storage.sync.get("settings", function (result) {
   settings.Statistics = { ...defaultSettings.settings.Statistics, ...result?.settings?.Statistics };
   settings.General = { ...defaultSettings.settings.General, ...result?.settings?.General };
   if (settings?.Crunchyroll?.disableNumpad) Crunchyroll_disableNumpad();
+  if (settings?.Video?.doubleClick) startdoubleClick();
   CrunchyrollObserver.observe(document, config);
   if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
 });
@@ -284,6 +285,24 @@ async function Crunchyroll_disableNumpad() {
     },
     true
   );
+}
+async function startdoubleClick() {
+  if (settings.Video?.doubleClick) {
+    // event listener for double click
+    document.ondblclick = function () {
+      let video = document.querySelector("video");
+      if (video) {
+        // video is fullscreen
+        if (window.fullScreen) {
+          document.exitFullscreen();
+        } else {
+          document.body.requestFullscreen();
+        }
+      }
+    };
+  } else {
+    document.ondblclick = null;
+  }
 }
 // Badge Functions
 function increaseBadge() {
