@@ -13,26 +13,21 @@ This extension enhances your streaming experience on Netflix, Prime Video, Disne
   • Go fullscreen on double click
 
 Platform-Specific Features:
-• Netflix:
-    • Remembers and selects your last-used profile automatically
-    • Blocks the “Are you still watching?” inactivity warning
-
-• Amazon Prime Video:
-    • Skips self-promotional ads (for Prime Video productions)
-    • Filters out paid content (movies, series) from the home page
-    • Removes the blur effect when hovering over videos
-
-• Disney+ (Hotstar, STAR+):
-    • Skips self-promotional ads
-    • Automatically returns to fullscreen mode when going to the next episode
-
-• Crunchyroll:
-    • Remembers and selects your last-used profile automatically
-    • Adds filters to the release calendar, so it is useable
-    • Video size expanded to entire window
-    • Disable the numpad
-
-
+  • Netflix:
+      • Remembers and selects your last-used profile automatically
+      • Blocks the “Are you still watching?” inactivity warning
+  • Amazon Prime Video:
+      • Skips self-promotional ads (for Prime Video productions)
+      • Filters out paid content (movies, series) from the home page
+      • Removes the blur effect when hovering over videos
+  • Disney+ (Hotstar, STAR+):
+      • Skips self-promotional ads
+      • Automatically returns to fullscreen mode when going to the next episode
+  • Crunchyroll:
+      • Remembers and selects your last-used profile automatically
+      • Adds filters to the release calendar, so it is useable
+      • Video size expanded to entire window
+      • Disable the numpad
 Android Support in Desktop mode:
   • Prime Video
   • Disney+ (Hotstar, STAR+)

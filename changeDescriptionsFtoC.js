@@ -8,7 +8,9 @@ const target = path.join("docs", "ChromeStoreDescriptions");
 const files = fs.readdirSync(source);
 const replaces = [
   [/.*ul>\r?\n/g, ""],
-  ["<li>", "• "],
+  ["<li>", "  • "],
+  // only /li in line
+  [/\n<\/li>\r?\n/g, ""],
   ["</li>", ""],
   // change link to markdown
   [/<a href=\"(.*)\" .*>(.*)<\/a>/g, "[$2]($1)"],

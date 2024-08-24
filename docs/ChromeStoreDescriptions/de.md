@@ -3,41 +3,33 @@ Sie können in den Einstellungen festlegen, welche Funktionen aktiviert sind.
 ✨ Funktionen
 
 Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll und HBO Max durch automatische:
-  • Werbung blockieren
-  • Überspringen von Intros & Zusammenfassungen
-  • Überspringen von Credits
-  • Anzeigen von TMDB-Bewertungen für alle Shows
-  • Hinzufügen eines anpassbaren Geschwindigkeitsreglers
-  • Verbessern der Untertitel
-  • Automatische Videowiedergabe im Vollbildmodus
-  • In Vollbildmodus gehen mit Doppelklick
+    • Werbung blockieren
+    • Überspringen von Intros & Zusammenfassungen
+    • Überspringen von Credits
+    • Anzeigen von TMDB-Bewertungen für alle Shows
+    • Hinzufügen eines anpassbaren Geschwindigkeitsreglers
+    • Verbessern der Untertitel
+    • Automatische Videowiedergabe im Vollbildmodus
+    • In Vollbildmodus gehen mit Doppelklick
 
 Plattform-spezifische Funktionen:
-• Netflix:
-      • Wählt das zuletzt verwendetes Profil automatisch aus
-      • Blockiert die Inaktivitätswarnung „Sehen Sie immer noch zu?
-
-• Amazon Prime Video:
-      • Überspringt Eigenwerbung (für Prime Video-Produktionen)
-      • Filtert kostenpflichtige Inhalte (Filme, Serien) auf der Startseite heraus
-      • Entfernt den Unschärfe-Effekt, wenn man mit dem Mauszeiger über Videos fährt
-
-• Disney+ (Hotstar, STAR+):
-      • Überspringt Eigenwerbung
-      • Kehrt automatisch in den Vollbildmodus zurück, wenn zur nächsten Episode gesprungen wird
-
-• Crunchyroll:
-      • Wählt das zuletzt verwendetes Profil automatisch aus
-      • Fügt Filter zum Veröffentlichungskalender hinzu, so dass dieser nutzbar ist
-      • Erweitert die größe des Videos zum gesamten Browserfenster
-      • Ziffernblock deaktivieren
-
-
+  • Netflix:
+        • Wählt das zuletzt verwendetes Profil automatisch aus
+        • Blockiert die Inaktivitätswarnung „Sehen Sie immer noch zu?  • Amazon Prime Video:
+        • Überspringt Eigenwerbung (für Prime Video-Produktionen)
+        • Filtert kostenpflichtige Inhalte (Filme, Serien) auf der Startseite heraus
+        • Entfernt den Unschärfe-Effekt, wenn man mit dem Mauszeiger über Videos fährt  • Disney+ (Hotstar, STAR+):
+        • Überspringt Eigenwerbung
+        • Kehrt automatisch in den Vollbildmodus zurück, wenn zur nächsten Episode gesprungen wird  • Crunchyroll:
+        • Wählt das zuletzt verwendetes Profil automatisch aus
+        • Fügt Filter zum Veröffentlichungskalender hinzu, so dass dieser nutzbar ist
+        • Erweitert die größe des Videos zum gesamten Browserfenster
+        • Ziffernblock deaktivieren
 Android-Unterstützung im Desktop-Modus:
-  • Prime Video
-  • Disney+ (Hotstar, STAR+)
-  • Crunchyroll
-  • HBO Max
+    • Prime Video
+    • Disney+ (Hotstar, STAR+)
+    • Crunchyroll
+    • HBO Max
 Um die Erweiterung auf Android zu verwenden, laden Sie Firefox herunter.
 
 ☔ Sicher & Open Source

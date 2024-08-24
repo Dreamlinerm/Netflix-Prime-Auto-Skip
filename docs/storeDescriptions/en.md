@@ -4,14 +4,14 @@ You can customize which features are enabled in the Settings.
 
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
 <ul>
-  <li>Block Ads</li>
-  <li>Skipping Intros & Recaps</li>
-  <li>Skipping Credits</li>
-  <li>Displaying TMDB ratings for all shows</li>
-  <li>Adding customizable playback speed control</li>
-  <li>Improving subtitle styling (under the improve video interface option)</li>
-  <li>Automatically start to play videos in fullscreen</li>
-  <li>Go fullscreen on double click</li>
+<li>Block Ads</li>
+<li>Skipping Intros & Recaps</li>
+<li>Skipping Credits</li>
+<li>Displaying TMDB ratings for all shows</li>
+<li>Adding customizable playback speed control</li>
+<li>Improving subtitle styling (under the improve video interface option)</li>
+<li>Automatically start to play videos in fullscreen</li>
+<li>Go fullscreen on double click</li>
 </ul>
 
 Platform-Specific Features:
@@ -22,6 +22,7 @@ Platform-Specific Features:
     <li>Blocks the “Are you still watching?” inactivity warning</li>
   </ul>
 </li>
+
 <li>Amazon Prime Video:
   <ul>
     <li>Skips self-promotional ads (for Prime Video productions)</li>
@@ -29,12 +30,14 @@ Platform-Specific Features:
     <li>Removes the blur effect when hovering over videos</li>
   </ul>
 </li>
+
 <li>Disney+ (Hotstar, STAR+):
   <ul>
     <li>Skips self-promotional ads</li>
     <li>Automatically returns to fullscreen mode when going to the next episode</li>
   </ul>
 </li>
+
 <li>Crunchyroll:
   <ul>
     <li>Remembers and selects your last-used profile automatically</li>
@@ -47,10 +50,10 @@ Platform-Specific Features:
 
 Android Support in Desktop mode:
 <ul>
-  <li>Prime Video</li>
-  <li>Disney+ (Hotstar, STAR+)</li>
-  <li>Crunchyroll</li>
-  <li>HBO Max</li>
+<li>Prime Video</li>
+<li>Disney+ (Hotstar, STAR+)</li>
+<li>Crunchyroll</li>
+<li>HBO Max</li>
 </ul>
 To use the extension on an Android phone, download Firefox.
 
