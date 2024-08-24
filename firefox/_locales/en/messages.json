@@ -299,5 +299,11 @@
   },
   "BigPlayerDescription": {
     "message": "Extends the video size to the entire browser window without full screen."
+  },
+  "DisableNumpadSwitch": {
+    "message": "Disable numpad:"
+  },
+  "DisableNumpadDescription": {
+    "message": "Disable the numpad keys so you don't accidentally change the current video time/position."
   }
 }

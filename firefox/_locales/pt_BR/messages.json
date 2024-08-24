@@ -296,5 +296,11 @@
   },
   "BigPlayerDescription": {
     "message": "Estende o tamanho do vídeo para toda a janela do navegador sem tela cheia."
+  },
+  "DisableNumpadSwitch": {
+    "message": "Desativar o teclado numérico:"
+  },
+  "DisableNumpadDescription": {
+    "message": "Desative as teclas do teclado numérico para não alterar acidentalmente o tempo/posição do vídeo atual."
   }
 }

@@ -299,5 +299,11 @@
   },
   "BigPlayerDescription": {
     "message": "Erweitert die größe des Videos zum gesamten Browserfenster ohne Vollbild."
+  },
+  "DisableNumpadSwitch": {
+    "message": "Ziffernblock deaktivieren:"
+  },
+  "DisableNumpadDescription": {
+    "message": "Deaktivieren Sie die Zifferntasten, damit nicht versehentlich die aktuelle Videozeit /-position geändert wird."
   }
 }

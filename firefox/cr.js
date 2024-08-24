@@ -37,7 +37,15 @@ const defaultSettings = {
       showRating: true,
     },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
-    Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true, bigPlayer: true },
+    Crunchyroll: {
+      skipIntro: true,
+      speedSlider: true,
+      releaseCalendar: true,
+      dubLanguage: null,
+      profile: true,
+      bigPlayer: true,
+      disableNumpad: true,
+    },
     HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
@@ -55,16 +63,7 @@ const defaultSettings = {
   },
 };
 let settings = { ...defaultSettings.settings };
-const version = "1.1.29";
 browser.storage.sync.get("settings", function (result) {
-  console.log(
-    "%cNetflix%c/%cPrime%c Auto-Skip",
-    "color: #e60010;font-size: 2em;",
-    "color: white;font-size: 2em;",
-    "color: #00aeef;font-size: 2em;",
-    "color: white;font-size: 2em;"
-  );
-  console.log("version:", version);
   // overwrite default settings with user settings
   // List of keys to merge individually
   settings.Amazon = { ...defaultSettings.settings.Amazon, ...result?.settings?.Amazon };
@@ -75,7 +74,7 @@ browser.storage.sync.get("settings", function (result) {
   settings.Video = { ...defaultSettings.settings.Video, ...result?.settings?.Video };
   settings.Statistics = { ...defaultSettings.settings.Statistics, ...result?.settings?.Statistics };
   settings.General = { ...defaultSettings.settings.General, ...result?.settings?.General };
-
+  if (settings?.Crunchyroll?.disableNumpad) Crunchyroll_disableNumpad();
   CrunchyrollObserver.observe(document, config);
   if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
 });
@@ -272,6 +271,19 @@ async function Crunchyroll_SpeedSlider(video) {
       }
     }
   }
+}
+async function Crunchyroll_disableNumpad() {
+  document.addEventListener(
+    "keydown",
+    async function (event) {
+      if (event.location === 3) {
+        console.log("key blocked: " + event.key);
+        event.stopPropagation();
+        increaseBadge();
+      }
+    },
+    true
+  );
 }
 // Badge Functions
 function increaseBadge() {
