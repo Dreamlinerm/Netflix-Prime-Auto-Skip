@@ -222,12 +222,6 @@
   "WatchCreditsSwitchDescription": {
     "message": "Always watch the credits of every series"
   },
-  "gotoIndividual": {
-    "message": "For the individual settings of the streaming services go to the "
-  },
-  "extendedSettings": {
-    "message": "extended Settings"
-  },
   "conflictingTitle": {
     "message": "All conflicting Features"
   },

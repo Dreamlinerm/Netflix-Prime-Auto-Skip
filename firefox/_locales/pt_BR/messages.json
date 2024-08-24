@@ -223,12 +223,6 @@
   "WatchCreditsSwitchDescription": {
     "message": "Sempre assistir aos créditos de todas as séries"
   },
-  "gotoIndividual": {
-    "message": "Para obter as configurações individuais dos serviços de streaming, vá para a seção "
-  },
-  "extendedSettings": {
-    "message": "Configurações extendidas"
-  },
   "conflictingTitle": {
     "message": "Todos os recursos conflitantes"
   },

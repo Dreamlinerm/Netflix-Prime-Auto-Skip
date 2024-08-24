@@ -223,12 +223,6 @@
   "WatchCreditsSwitchDescription": {
     "message": "Секогаш гледај ги завршните наслови на секоја серија"
   },
-  "gotoIndividual": {
-    "message": "За индивидуалните поставки на услугата за стриминг, одете на "
-  },
-  "extendedSettings": {
-    "message": "напредни поставки"
-  },
   "conflictingTitle": {
     "message": "Сите конфликтни функции"
   },

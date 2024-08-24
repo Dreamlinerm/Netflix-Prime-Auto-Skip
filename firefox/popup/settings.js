@@ -311,7 +311,7 @@ function Menu(setting, isBackButton = false) {
     document.getElementById(page + "Settings").style.display = "none";
     if (!noButton.includes(page)) document.getElementById("Menu" + page).style.setProperty("background-color", "");
   }
-  document.getElementById(setting + "Settings").style.display = setting == "Popup" ? "flex" : "block";
+  document.getElementById(setting + "Settings").style.display = setting != "Video" && setting != "Statistics" && isPopup ? "flex" : "block";
   if (!noButton.includes(setting)) document.getElementById("Menu" + setting).style.setProperty("background-color", "#e60010");
 }
 /**
