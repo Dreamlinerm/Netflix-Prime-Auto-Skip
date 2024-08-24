@@ -289,7 +289,7 @@
     "description": "Disney Homepage button"
   },
   "BigPlayerSwitch": {
-    "message": "Video vergrößert:"
+    "message": "Video vergrößern:"
   },
   "BigPlayerDescription": {
     "message": "Erweitert die größe des Videos zum gesamten Browserfenster ohne Vollbild."

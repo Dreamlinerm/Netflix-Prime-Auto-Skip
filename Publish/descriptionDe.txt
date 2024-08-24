@@ -10,6 +10,7 @@ Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Di
   • Hinzufügen eines anpassbaren Geschwindigkeitsreglers
   • Verbessern der Untertitel
   • Automatische Videowiedergabe im Vollbildmodus
+  • In Vollbildmodus gehen bei Doppelklick
 
 Plattform-spezifische Funktionen:
   • Netflix:
@@ -21,13 +22,15 @@ Plattform-spezifische Funktionen:
       • Filtert kostenpflichtige Inhalte (Filme, Serien) auf der Startseite heraus
       • Entfernt den Unschärfe-Effekt, wenn man mit dem Mauszeiger über Videos fährt
 
-  • Crunchyroll:
-      • Wählt das zuletzt verwendetes Profil automatisch aus
-      • Fügt Filter zum Veröffentlichungskalender hinzu, so dass dieser nutzbar ist
-
   • Disney+ (Hotstar, STAR+):
       • Überspringt Eigenwerbung
       • Kehrt automatisch in den Vollbildmodus zurück, wenn zur nächsten Episode gesprungen wird
+
+  • Crunchyroll:
+      • Wählt das zuletzt verwendetes Profil automatisch aus
+      • Fügt Filter zum Veröffentlichungskalender hinzu, so dass dieser nutzbar ist
+      • Erweitert die größe des Videos zum gesamten Browserfenster
+      • Ziffernblock deaktivieren
 
 Android-Unterstützung im Desktop-Modus
   • Prime Video
@@ -60,6 +63,7 @@ Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Di
   <li>Hinzufügen eines anpassbaren Geschwindigkeitsreglers</li>
   <li>Verbessern der Untertitel</li>
   <li>Automatische Videowiedergabe im Vollbildmodus</li>
+  <li>In Vollbildmodus gehen bei Doppelklick</li>
 </ul>
 
 Plattform-spezifische Funktionen:
@@ -77,16 +81,18 @@ Plattform-spezifische Funktionen:
       <li>Entfernt den Unschärfe-Effekt, wenn man mit dem Mauszeiger über Videos fährt</li>
     </ul>
 </li>
-<li>Crunchyroll:
-    <ul>
-      <li>Wählt das zuletzt verwendetes Profil automatisch aus</li>
-      <li>Fügt Filter zum Veröffentlichungskalender hinzu, so dass dieser nutzbar ist</li>
-    </ul>
-</li>
 <li>Disney+ (Hotstar, STAR+):
     <ul>
       <li>Überspringt Eigenwerbung</li>
       <li>Kehrt automatisch in den Vollbildmodus zurück, wenn zur nächsten Episode gesprungen wird</li>
+    </ul>
+</li>
+<li>Crunchyroll:
+    <ul>
+      <li>Wählt das zuletzt verwendetes Profil automatisch aus</li>
+      <li>Fügt Filter zum Veröffentlichungskalender hinzu, so dass dieser nutzbar ist</li>
+      <li>Erweitert die größe des Videos zum gesamten Browserfenster</li>
+      <li>Ziffernblock deaktivieren</li>
     </ul>
 </li>
 </ul>

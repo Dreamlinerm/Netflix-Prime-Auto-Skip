@@ -9,7 +9,8 @@ This extension enhances your streaming experience on Netflix, Prime Video, Disne
   • Displaying TMDB ratings for all shows
   • Adding customizable playback speed control
   • Improving subtitle styling (under the improve video interface option)
-  • Automatically start to play videos in Fullscreen
+  • Automatically start to play videos in fullscreen
+  • Go fullscreen on double click
 
 Platform-Specific Features:
   • Netflix:
@@ -21,13 +22,15 @@ Platform-Specific Features:
       • Filters out paid content (movies, series) from the home page
       • Removes the blur effect when hovering over videos
 
-  • Crunchyroll:
-      • Remembers and selects your last-used profile automatically
-      • Adds filters to the release calendar, so it is useable
-
   • Disney+ (Hotstar, STAR+):
       • Skips self-promotional ads
       • Automatically returns to fullscreen mode when going to the next episode
+
+  • Crunchyroll:
+      • Remembers and selects your last-used profile automatically
+      • Adds filters to the release calendar, so it is useable
+      • Video size expanded to entire window
+      • Disable the numpad
 
 Android Support in Desktop mode
   • Prime Video
@@ -59,7 +62,8 @@ This extension enhances your streaming experience on Netflix, Prime Video, Disne
   <li>Displaying TMDB ratings for all shows</li>
   <li>Adding customizable playback speed control</li>
   <li>Improving subtitle styling (under the improve video interface option)</li>
-  <li>Automatically start to play videos in Fullscreen</li>
+  <li>Automatically start to play videos in fullscreen</li>
+  <li>Go fullscreen on double click</li>
 </ul>
 
 Platform-Specific Features:
@@ -77,16 +81,18 @@ Platform-Specific Features:
     <li>Removes the blur effect when hovering over videos</li>
   </ul>
 </li>
-<li>Crunchyroll:
-  <ul>
-    <li>Remembers and selects your last-used profile automatically</li>
-    <li>Adds filters to the release calendar, so it is useable</li>
-  </ul>
-</li>
 <li>Disney+ (Hotstar, STAR+):
   <ul>
     <li>Skips self-promotional ads</li>
     <li>Automatically returns to fullscreen mode when going to the next episode</li>
+  </ul>
+</li>
+<li>Crunchyroll:
+  <ul>
+    <li>Remembers and selects your last-used profile automatically</li>
+    <li>Adds filters to the release calendar, so it is useable</li>
+    <li>Video size expanded to entire window</li>
+    <li>Disable the numpad</li>
   </ul>
 </li>
 </ul>

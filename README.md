@@ -98,44 +98,49 @@ It automatically skips Ads, intros, Credits, recaps, and anything else you don't
 
 ## ✨ Features
 
-On Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max it automatically:
+This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
 
 <ul>
-<li>Skips Intros & Recaps</li>
-<li>Either Skips Credits</li>
-<li>Or Watch Credits</li>
-<li>Skips Ads</li>
-<li>Shows TMDB Rating</li>
-<li>Adds customizable playback speed control</li>
-<li>Improve subtitle styling</li>
-<li>Plays on Fullscreen</li>
+  <li>Block Ads</li>
+  <li>Skipping Intros & Recaps</li>
+  <li>Skipping Credits</li>
+  <li>Displaying TMDB ratings for all shows</li>
+  <li>Adding customizable playback speed control</li>
+  <li>Improving subtitle styling (under the improve video interface option)</li>
+  <li>Automatically start to play videos in fullscreen</li>
+  <li>Go fullscreen on double click</li>
 </ul>
 
-In addition to the Shared features:
-
-On Netflix it additionally automatically:
+Platform-Specific Features:
 
 <ul>
-<li>Picks last used profile</li>
-<li>Blocks Inactivity Warning (Are you still watching?)</li>
-</ul>
-
-On Amazon Prime Video it additionally automatically:
-
-<ul>
-<li>Skips Self promoting ads (Ads for prime video productions)</li>
-<li>Filters paid content (movies, series)</li>
-<li>Removes annoying blur when hovering over video</li>
-</ul>
-
-On Crunchyroll it additionally automatically:
-<ul>
-<li>Adds Filters to Release Calendar</li>
-</ul>
-
-On Disney+ (Hotstar, STAR+) it additionally automatically:
-<ul>
-<li>goes back to full screen when skipping to the next episode</li>
+<li>Netflix:
+  <ul>
+    <li>Remembers and selects your last-used profile automatically</li>
+    <li>Blocks the “Are you still watching?” inactivity warning</li>
+  </ul>
+</li>
+<li>Amazon Prime Video:
+  <ul>
+    <li>Skips self-promotional ads (for Prime Video productions)</li>
+    <li>Filters out paid content (movies, series) from the home page</li>
+    <li>Removes the blur effect when hovering over videos</li>
+  </ul>
+</li>
+<li>Disney+ (Hotstar, STAR+):
+  <ul>
+    <li>Skips self-promotional ads</li>
+    <li>Automatically returns to fullscreen mode when going to the next episode</li>
+  </ul>
+</li>
+<li>Crunchyroll:
+  <ul>
+    <li>Remembers and selects your last-used profile automatically</li>
+    <li>Adds filters to the release calendar, so it is useable</li>
+    <li>Video size expanded to entire window</li>
+    <li>Disable the numpad</li>
+  </ul>
+</li>
 </ul>
 
 If you want to see what is implemented go [here](#implemented-feature-overview):
@@ -151,12 +156,11 @@ Everyone is welcome to contribute!
 
 ## Settings
 
-Configure what is skipped in the settings Page.
+You can customize which features are enabled in the Settings.
 
 Import and Export all Settings.
 
 See Statistics. All statistics and settings are not shared but are synchronized with your browser account.
-
 
 # Implemented Feature Overview
 
@@ -175,15 +179,17 @@ See Statistics. All statistics and settings are not shared but are synchronized 
 | Intro | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>| ✅  <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>| ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> | ✅ [One piece](https://www.crunchyroll.com/series/GRMG8ZQZR/one-piece) | ✅ |
 | Recaps | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>| ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a> | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>| ? | ✅ |
 | Credits | ✅ | ✅ | ✅ | ❌(not necessary if outro is skipped) | ✅ |
-| Ads | ✅ | ✅ [2 Broke Girls](https://www.amazon.de/gp/video/detail/B01D0H8CAY/ref=atv_hm_fre_c_zwoINQ_2_2?jic=36%7CCgtmcmVld2l0aGFkcxIMc3Vic2NyaXB0aW9u) | ➖ | ❌(Ublock can do it) | ? |
+| Ads | ✅ | ✅ [2 Broke Girls](https://www.amazon.de/gp/video/detail/B01D0H8CAY/ref=atv_hm_fre_c_zwoINQ_2_2?jic=36%7CCgtmcmVld2l0aGFkcxIMc3Vic2NyaXB0aW9u) | ❌ | ❌(Ublock can do it) | ? |
 | Add Speed Slider | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Play on Fullscreen | ✅ | ✅ | ✅ | ✅ | ✅ |
+| fullscreen on double click | ➖ | ✅ | ➖ | ✅ | ? |
 | TMDB Rating | ✅ | ✅ | ✅ | ❌(MAL ratings better) | ✅ |
-| Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue":</li></ul> | <ul><li>Remove duplicate Shows</li></ul> | <ul><li>Release Calendar Filters</li></ul> | ➖ |
+| Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue":</li></ul> | <ul><li>Skip self ads</li><li>Remain fullscreen</li></ul> | <ul><li>Auto pick last profile</li><li>Release Calendar Filters</li><li>Big Video size</li><li>Disable the numpad</li></ul> | ➖ |
 
 ## How it works
 
 The addon is observing every mutation of the dom Tree of the Website.
+
 The exact classes may be outdated since I do not update these regularly.
 
 On Netflix it matches the buttons with the data-uia tag containing:
