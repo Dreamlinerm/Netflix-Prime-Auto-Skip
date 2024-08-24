@@ -1305,8 +1305,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       let style = document.createElement("style");
       style.innerHTML = `
       .video-player-wrapper{
-      max-Height: calc(100vw / 1.7777);
-      height: 100vh;
+          max-Height: calc(100vw / 1.7777);
+          height: 100vh;
       }
       .erc-large-header {
           position: absolute;
@@ -1316,16 +1316,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           z-index: 999;
       }
       .erc-large-header .header-content {
-          visibility: hidden;
-          height: 30px;
-          transition: height 0.2s ease-in-out, visibility 0.2s ease-in-out;
+          position: absolute;
+          top: -3.75rem;
+          transition: top 0.4s, top 0.4s;
       }
       .erc-large-header:hover .header-content {
-          visibility: visible;
-          height: 3.75rem;
-      }
-      .header-menu .header-actions{
-          height: inherit;
+          top: 0;
       }
     `;
       document.head.appendChild(style);
