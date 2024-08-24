@@ -58,7 +58,7 @@
     "message": "Recursos opcionais"
   },
   "defaultPageDescription": {
-    "message": "Todos as funcionalidades estão desativados por padrão, não funcionam corretamente ou estão em sua versão beta"
+    "message": "Todos as funcionalidades estão desativadas por padrão, não funcionam corretamente ou estão em sua versão beta"
   },
   "DefaultPaidContentDescription": {
     "message": "Remove todas as categorias de filmes/séries pagos do Amazon Prime"
@@ -118,7 +118,7 @@
   },
 
   "SelfAdsSwitch": {
-    "message": "Ignorar anúncios pessoais:"
+    "message": "Ignorar anúncios direcionados:"
   },
   "SelfAdsSwitchDescription": {
     "message": "Ignorar as prévias do programa principal que são exibidas antes de qualquer vídeo"
@@ -270,6 +270,9 @@
   },
   "requestTabs": {
     "message": "Solicitar permissão de guias"
+  },
+  "autoOpenDescription": {
+    "message": "Se estiver em um site de streaming, uma janela de configurações será aberta"
   },
   "DuplicateSwitch": {
     "message": "Remover programas duplicados:"
