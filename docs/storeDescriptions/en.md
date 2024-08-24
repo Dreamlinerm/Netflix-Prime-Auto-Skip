@@ -44,7 +44,8 @@ Platform-Specific Features:
   </ul>
 </li>
 </ul>
-Android Support in Desktop mode
+
+Android Support in Desktop mode:
 <ul>
   <li>Prime Video</li>
   <li>Disney+ (Hotstar, STAR+)</li>

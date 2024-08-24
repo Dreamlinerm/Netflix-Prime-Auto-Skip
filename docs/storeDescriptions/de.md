@@ -44,7 +44,8 @@ Plattform-spezifische Funktionen:
     </ul>
 </li>
 </ul>
-Android-Unterstützung im Desktop-Modus
+
+Android-Unterstützung im Desktop-Modus:
   <li>Prime Video</li>
   <li>Disney+ (Hotstar, STAR+)</li>
   <li>Crunchyroll</li>

@@ -44,6 +44,7 @@ Recursos específicos da plataforma:
   </ul>
 </li>
 </ul>
+
 Suporte para Android no modo Desktop
 <ul>
   <li>Prime Video</li>
