@@ -46,10 +46,12 @@ Plattform-spezifische Funktionen:
 </ul>
 
 Android-Unterstützung im Desktop-Modus:
+<ul>
   <li>Prime Video</li>
   <li>Disney+ (Hotstar, STAR+)</li>
   <li>Crunchyroll</li>
   <li>HBO Max</li>
+</ul>
 Um die Erweiterung auf Android zu verwenden, laden Sie Firefox herunter.
 
 ☔ Sicher & Open Source
