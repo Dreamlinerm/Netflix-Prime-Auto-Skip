@@ -48,9 +48,9 @@
 
 ### Browser Compatibility:
 
-| Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
-| ---     | ---                 | ---                      | ---         | ---                |
-| ✅     | ✅ | ✅      | ✅         | ✅ |
+| Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO    |
+| ---     | ---             | ---                      | ---         | ---    |
+| ✅      | ✅             | ✅                      | ✅          | ✅     |
 
 ## Install on Android
 
