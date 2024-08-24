@@ -223,12 +223,6 @@
   "WatchCreditsSwitchDescription": {
     "message": "Секогаш гледај ги завршните наслови на секоја серија"
   },
-  "gotoIndividual": {
-    "message": "За индивидуалните поставки на услугата за стриминг, одете на "
-  },
-  "extendedSettings": {
-    "message": "напредни поставки"
-  },
   "conflictingTitle": {
     "message": "Сите конфликтни функции"
   },
@@ -285,10 +279,16 @@
     "message": "Дома",
     "description": "Disney Homepage button"
   },
-  "BigPlayerSwitch": {
-    "message": "Видео поголемо:"
+  "DisableNumpadSwitch": {
+    "message": "Оневозможи numpad:"
   },
-  "BigPlayerDescription": {
-    "message": "Ја проширува големината на видеото на целиот прозорец на прелистувачот без цел екран."
+  "DisableNumpadDescription": {
+    "message": "Оневозможете ги копчињата со нумпод за случајно да не го промените тековното време/положба на видеото."
+  },
+  "DoubleClickSwitch": {
+    "message": "Цел екран со двоен клик:"
+  },
+  "DoubleClickSwitchDescription": {
+    "message": "Ако кликнете двапати на видеото, тоа ќе оди на цел екран."
   }
 }

@@ -223,12 +223,6 @@
   "WatchCreditsSwitchDescription": {
     "message": "Sempre assistir aos créditos de todas as séries"
   },
-  "gotoIndividual": {
-    "message": "Para obter as configurações individuais dos serviços de streaming, vá para a seção "
-  },
-  "extendedSettings": {
-    "message": "Configurações extendidas"
-  },
   "conflictingTitle": {
     "message": "Todos os recursos conflitantes"
   },
@@ -296,5 +290,17 @@
   },
   "BigPlayerDescription": {
     "message": "Estende o tamanho do vídeo para toda a janela do navegador sem tela cheia."
+  },
+  "DisableNumpadSwitch": {
+    "message": "Desativar o teclado numérico:"
+  },
+  "DisableNumpadDescription": {
+    "message": "Desative as teclas do teclado numérico para não alterar acidentalmente o tempo/posição do vídeo atual."
+  },
+  "DoubleClickSwitch": {
+    "message": "Tela cheia ao clicar duas vezes:"
+  },
+  "DoubleClickSwitchDescription": {
+    "message": "Se você clicar duas vezes no vídeo, ele será exibido em tela cheia."
   }
 }

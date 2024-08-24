@@ -111,12 +111,11 @@
     "message": "Slider preview:"
   },
   "FullscreenSwitch": {
-    "message": "Play on Fullscreen:"
+    "message": "Play on fullscreen:"
   },
   "FullscreenSwitchDescription": {
     "message": "If a video is put on fullscreen, the video will play automatically"
   },
-
   "SelfAdsSwitch": {
     "message": "Skip Self Ads:"
   },
@@ -223,12 +222,6 @@
   "WatchCreditsSwitchDescription": {
     "message": "Always watch the credits of every series"
   },
-  "gotoIndividual": {
-    "message": "For the individual settings of the streaming services go to the "
-  },
-  "extendedSettings": {
-    "message": "extended Settings"
-  },
   "conflictingTitle": {
     "message": "All conflicting Features"
   },
@@ -299,5 +292,17 @@
   },
   "BigPlayerDescription": {
     "message": "Extends the video size to the entire chrome window without full screen."
+  },
+  "DisableNumpadSwitch": {
+    "message": "Disable numpad:"
+  },
+  "DisableNumpadDescription": {
+    "message": "Disable the numpad keys so you don't accidentally change the current video time/position."
+  },
+  "DoubleClickSwitch": {
+    "message": "Fullscreen on double click:"
+  },
+  "DoubleClickSwitchDescription": {
+    "message": "If you double click on the video it will go to fullscreen."
   }
 }

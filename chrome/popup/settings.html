@@ -30,7 +30,7 @@
         <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" alt="Logo">
         <div class="flex-center flex-col">
           <h2 class="title" data-i18n>pageTitle</h2>
-          <p style="font-size: 1em">v.1.1.29</p>
+          <p style="font-size: 1em">v.1.1.30</p>
         </div>
       </div>
       <a target="_blank" class="flex-center flex-col" style="text-align: center; text-decoration: none"
@@ -435,6 +435,15 @@
         <p class="description" data-i18n>FullscreenSwitchDescription</p>
         <hr>
         <div class="line flex">
+          <p data-i18n>DoubleClickSwitch</p>
+          <label class="switch" style="margin-left: 5px">
+            <input type="checkbox" id="VideoDoubleClick">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" data-i18n>DoubleClickSwitchDescription</p>
+        <hr>
+        <div class="line flex">
           <p data-i18n>EpilepsySwitch</p>
           <label class="switch" style="margin-left: 5px">
             <input type="checkbox" id="VideoEpilepsy">
@@ -638,6 +647,7 @@
           </label>
         </div>
         <p class="description" data-i18n>ProfileSwitchDescription</p>
+        <hr>
         <div class="line flex">
           <p data-i18n>BigPlayerSwitch</p>
           <label class="switch">
@@ -645,8 +655,16 @@
             <span class="slider round"></span>
           </label>
         </div>
-        <hr>
         <p class="description" data-i18n>BigPlayerDescription</p>
+        <hr>
+        <div class="line flex">
+          <p data-i18n>DisableNumpadSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="CrunchyrollDisableNumpad">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" data-i18n>DisableNumpadDescription</p>
       </div>
       <div id="StatisticsSettings" class="hidden">
         <h2 data-i18n>SkippedTime</h2>
@@ -700,10 +718,12 @@
             <h2>1.1.30</h2>
             <ul>
               <li>Added Crunchyroll big video player mod.</li>
+              <li>Disable the numpad on Crunchyroll.</li>
+              <li>Added maximize on doubleclick</li>
             </ul>
           </div>
           <div class="line flex">
-            <p>1.1.29</p>
+            <p>1.1.30</p>
             <ul>
               <li>Fixed Prime filter paid movies.</li>
               <li>Fixed Prime Continue Watching position.</li>

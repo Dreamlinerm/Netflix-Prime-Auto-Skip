@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.29";
+const version = "1.1.30";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -59,9 +59,17 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         showRating: true,
       },
       Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
-      Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true, bigPlayer: true },
+      Crunchyroll: {
+        skipIntro: true,
+        speedSlider: true,
+        releaseCalendar: true,
+        dubLanguage: null,
+        profile: true,
+        bigPlayer: true,
+        disableNumpad: true,
+      },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
+      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: {
         Crunchyroll_profilePicture: null,
@@ -139,7 +147,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       let pickInterval = setInterval(function () {
         Crunchyroll_AutoPickProfile();
       }, 100);
-      if (settings.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStlye();
+      setTimeout(function () {
+        if (settings.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle();
+      }, 1000);
       // only click on profile on page load not when switching profiles
       setTimeout(function () {
         clearInterval(pickInterval);
@@ -166,6 +176,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     else if (isCrunchyroll) startCrunchyroll(settings.Crunchyroll);
     else if (isHBO) HBOObserver.observe(document, config);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
+    if (settings?.Video?.doubleClick) startdoubleClick();
     getDBCache();
   });
   chrome.storage.local.onChanged.addListener(function (changes) {
@@ -182,6 +193,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       else if (isHBO) HBOSettingsChanged(oldValue?.HBO, newValue?.HBO);
 
       if (!oldValue || newValue.Video.playOnFullScreen !== oldValue?.Video?.playOnFullScreen) startPlayOnFullScreen();
+      if (!oldValue || newValue.Video.doubleClick !== oldValue?.Video?.doubleClick) startdoubleClick();
       if (oldValue?.Video?.userAgent != undefined && newValue.Video.userAgent !== oldValue?.Video?.userAgent) location.reload();
     }
   });
@@ -449,11 +461,28 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   async function startPlayOnFullScreen() {
     if (settings.Video?.playOnFullScreen) {
-      log("started observing| PlayOnFullScreen");
       addEventListener("fullscreenchange", OnFullScreenChange);
     } else {
-      log("stopped observing| PlayOnFullScreen");
       removeEventListener("fullscreenchange", OnFullScreenChange);
+    }
+  }
+  async function startdoubleClick() {
+    if (settings.Video?.doubleClick) {
+      // event listener for double click
+      document.ondblclick = function () {
+        let video;
+        if (isPrimeVideo) video = document.querySelector("#dv-web-player");
+        if (video) {
+          // video is fullscreen
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          } else {
+            video.requestFullscreen();
+          }
+        }
+      };
+    } else {
+      document.ondblclick = null;
     }
   }
 
@@ -1270,35 +1299,37 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       });
     }
   }
-  async function Crunchyroll_bigPlayerStlye() {
-    // show header on hover
-    let style = document.createElement("style");
-    style.innerHTML = `
-    .video-player-wrapper{
-    maxHeight: calc(100vw / 1.7777);
-    height: 100vh;
+  async function Crunchyroll_bigPlayerStyle() {
+    if (document.querySelector(".video-player-wrapper")) {
+      // show header on hover
+      let style = document.createElement("style");
+      style.innerHTML = `
+      .video-player-wrapper{
+      max-Height: calc(100vw / 1.7777);
+      height: 100vh;
+      }
+      .erc-large-header {
+          position: absolute;
+          top: 0;
+          width: 100%;
+          height: 3.75rem;
+          z-index: 999;
+      }
+      .erc-large-header .header-content {
+          visibility: hidden;
+          height: 30px;
+          transition: height 0.2s ease-in-out, visibility 0.2s ease-in-out;
+      }
+      .erc-large-header:hover .header-content {
+          visibility: visible;
+          height: 3.75rem;
+      }
+      .header-menu .header-actions{
+          height: inherit;
+      }
+    `;
+      document.head.appendChild(style);
     }
-    .erc-large-header {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 3.75rem;
-        z-index: 999;
-    }
-    .erc-large-header .header-content {
-        visibility: hidden;
-        height: 30px;
-        transition: height 0.2s ease-in-out, visibility 0.2s ease-in-out;
-    }
-    .erc-large-header:hover .header-content {
-        visibility: visible;
-        height: 3.75rem;
-    }
-    .header-menu .header-actions{
-        height: inherit;
-    }
-`;
-    document.head.appendChild(style);
   }
   // HBO functions
   const HBOObserver = new MutationObserver(HBO);
