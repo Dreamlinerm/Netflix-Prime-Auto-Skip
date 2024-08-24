@@ -293,5 +293,11 @@
   "HomeButton": {
     "message": "Home",
     "description": "Disney Homepage button"
+  },
+  "BigPlayerSwitch": {
+    "message": "Video bigger:"
+  },
+  "BigPlayerDescription": {
+    "message": "Extends the video size to the entire chrome window without full screen."
   }
 }

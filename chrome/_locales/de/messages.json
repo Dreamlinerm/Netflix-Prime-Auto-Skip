@@ -293,5 +293,11 @@
   "HomeButton": {
     "message": "Startseite",
     "description": "Disney Homepage button"
+  },
+  "BigPlayerSwitch": {
+    "message": "Video vergrößert:"
+  },
+  "BigPlayerDescription": {
+    "message": "Erweitert die größe des Videos zum gesamten Browserfenster ohne Vollbild."
   }
 }

@@ -138,9 +138,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (Crunchyroll?.profile) {
       let pickInterval = setInterval(function () {
         Crunchyroll_AutoPickProfile();
-        if (settings.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayer();
       }, 100);
-      if (settings.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStlye();
+      setTimeout(function () {
+        if (settings.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle();
+      }, 1000);
       // only click on profile on page load not when switching profiles
       setTimeout(function () {
         clearInterval(pickInterval);
@@ -1271,38 +1272,37 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       });
     }
   }
-  async function Crunchyroll_bigPlayer() {
-    let player = document.querySelector(".video-player-wrapper");
-    if (player) {
-      player.style.maxHeight = "calc(100vw / 1.7777)";
-      player.style.height = "100vh";
+  async function Crunchyroll_bigPlayerStyle() {
+    if (document.querySelector(".video-player-wrapper")) {
+      // show header on hover
+      let style = document.createElement("style");
+      style.innerHTML = `
+      .video-player-wrapper{
+      max-Height: calc(100vw / 1.7777);
+      height: 100vh;
+      }
+      .erc-large-header {
+          position: absolute;
+          top: 0;
+          width: 100%;
+          height: 3.75rem;
+          z-index: 999;
+      }
+      .erc-large-header .header-content {
+          visibility: hidden;
+          height: 30px;
+          transition: height 0.2s ease-in-out, visibility 0.2s ease-in-out;
+      }
+      .erc-large-header:hover .header-content {
+          visibility: visible;
+          height: 3.75rem;
+      }
+      .header-menu .header-actions{
+          height: inherit;
+      }
+    `;
+      document.head.appendChild(style);
     }
-  }
-  async function Crunchyroll_bigPlayerStlye() {
-    // show header on hover
-    let style = document.createElement("style");
-    style.innerHTML = `
-    .erc-large-header {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 3.75rem;
-        z-index: 999;
-    }
-    .erc-large-header .header-content {
-        visibility: hidden;
-        height: 30px;
-        transition: height 0.2s ease-in-out, visibility 0.2s ease-in-out;
-    }
-    .erc-large-header:hover .header-content {
-        visibility: visible;
-        height: 3.75rem;
-    }
-    .header-menu .header-actions{
-        height: inherit;
-    }
-`;
-    document.head.appendChild(style);
   }
   // HBO functions
   const HBOObserver = new MutationObserver(HBO);

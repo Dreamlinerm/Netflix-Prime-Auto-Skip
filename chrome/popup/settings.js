@@ -87,7 +87,7 @@ const defaultSettings = {
       showRating: true,
     },
     Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
-    Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true },
+    Crunchyroll: { skipIntro: true, speedSlider: true, releaseCalendar: true, dubLanguage: null, profile: true, bigPlayer: true },
     HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
