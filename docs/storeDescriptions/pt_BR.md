@@ -1,6 +1,6 @@
 Você pode personalizar quais recursos estão ativados em Configurações.
 
-Recursos
+✨ Recursos
 
 Essa extensão aprimora sua experiência de streaming na Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll e HBO Max automaticamente:
 <ul>
@@ -60,7 +60,7 @@ Para usar a extensão em um telefone Android, faça o download do Firefox.
 ☔ Seguro e de código aberto
 Esta extensão é de código aberto! Sinta-se à vontade para contribuir ou explorar o código no <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>.
 
-Gostou do streaming aprimorado?
+💕 Gostou do streaming aprimorado?
 Se estiver gostando da experiência de streaming aprimorada, considere deixar uma avaliação de 5 estrelas! As avaliações ajudam a criar confiança e a atrair novos usuários.
 Se quiser apoiar o desenvolvimento, você pode me pagar um <a href="https://github.com/sponsors/Dreamlinerm" target="_blank">café</a>.
 
