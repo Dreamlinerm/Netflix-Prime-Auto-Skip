@@ -95,8 +95,12 @@ The script, "skipper.js", is injected into all urls containing "amazon.\*/\*/vid
 
 It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix, Prime video and Disney Plus (Hotstar, STAR+).
 
-
 ## ✨ Features
+
+| Features in other supported languages |
+| --- |
+| [Deutsch](docs/storeDescriptions/de.md) |
+| [Português (Brasil)](docs/storeDescriptions/pt_br.md) |
 
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
 
@@ -147,7 +151,7 @@ If you want to see what is implemented go [here](#implemented-feature-overview):
 
 ## 💕 Enjoying Streaming enhanced?
 
-Buy me a coffee! [PayPal](https://github.com/sponsors/Dreamlinerm)
+Buy me a [coffee](https://github.com/sponsors/Dreamlinerm)! 
 
 ## Contributing
 
