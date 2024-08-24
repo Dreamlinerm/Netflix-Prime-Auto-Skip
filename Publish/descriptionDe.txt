@@ -10,7 +10,7 @@ Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Di
   • Hinzufügen eines anpassbaren Geschwindigkeitsreglers
   • Verbessern der Untertitel
   • Automatische Videowiedergabe im Vollbildmodus
-  • In Vollbildmodus gehen bei Doppelklick
+  • In Vollbildmodus gehen mit Doppelklick
 
 Plattform-spezifische Funktionen:
   • Netflix:
@@ -63,7 +63,7 @@ Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Di
   <li>Hinzufügen eines anpassbaren Geschwindigkeitsreglers</li>
   <li>Verbessern der Untertitel</li>
   <li>Automatische Videowiedergabe im Vollbildmodus</li>
-  <li>In Vollbildmodus gehen bei Doppelklick</li>
+  <li>In Vollbildmodus gehen mit Doppelklick</li>
 </ul>
 
 Plattform-spezifische Funktionen:

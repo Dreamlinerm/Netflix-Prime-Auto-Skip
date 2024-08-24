@@ -10,6 +10,7 @@ Essa extensão aprimora sua experiência de streaming na Netflix, Prime Video, D
   • Adição de controle de velocidade de reprodução personalizável
   • Aprimoramento do estilo das legendas (na opção aprimorar interface de vídeo)
   • Iniciar automaticamente a reprodução de vídeos em tela cheia
+  • Ir para tela cheia ao clicar duas vezes
 
 Recursos específicos da plataforma:
   • Netflix:
@@ -21,13 +22,15 @@ Recursos específicos da plataforma:
       • Filtra o conteúdo pago (filmes, séries) da página inicial
       • Remove o efeito de desfoque ao passar o mouse sobre os vídeos
 
-  • Crunchyroll:
-      • Lembra e seleciona automaticamente seu último perfil usado
-      • Adiciona filtros ao calendário de lançamentos, para que ele possa ser usado
-
   • Disney+ (Hotstar, STAR+):
       • Pula os anúncios de autopromoção
       • Retorna automaticamente ao modo de tela cheia ao passar para o próximo episódio
+
+  • Crunchyroll:
+      • Lembra e seleciona automaticamente seu último perfil usado
+      • Adiciona filtros ao calendário de lançamentos, para que ele possa ser usado
+      • Tamanho do vídeo expandido para toda a janela
+      • Desativar o teclado numérico
 
 Suporte para Android no modo Desktop
   • Vídeo principal
@@ -59,6 +62,7 @@ Essa extensão aprimora sua experiência de streaming na Netflix, Prime Video, D
 <li>Adição de controle de velocidade de reprodução personalizável</li>
 <li>Aprimoramento do estilo das legendas (na opção aprimorar interface de vídeo)</li>
 <li>Iniciar automaticamente a reprodução de vídeos em tela cheia</li>
+<li>Ir para tela cheia ao clicar duas vezes</li>
 </ul>
 
 Recursos específicos da plataforma:
@@ -76,16 +80,18 @@ Recursos específicos da plataforma:
     <li>Remove o efeito de desfoque ao passar o mouse sobre os vídeos</li>
   </ul>
 </li>
-<li>Crunchyroll:
-  <ul>
-    <li>Lembra e seleciona automaticamente seu último perfil usado</li>
-    <li>Adiciona filtros ao calendário de lançamentos, para que ele possa ser usado</li>
-  </ul>
-</li>
 <li>Disney+ (Hotstar, STAR+):
   <ul>
     <li>Pula os anúncios de autopromoção</li>
     <li>Retorna automaticamente ao modo de tela cheia ao passar para o próximo episódio</li>
+  </ul>
+</li>
+<li>Crunchyroll:
+  <ul>
+    <li>Lembra e seleciona automaticamente seu último perfil usado</li>
+    <li>Adiciona filtros ao calendário de lançamentos, para que ele possa ser usado</li>
+    <li>Tamanho do vídeo expandido para toda a janela</li>
+    <li>Desativar o teclado numérico</li>
   </ul>
 </li>
 </ul>

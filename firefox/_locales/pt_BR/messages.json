@@ -301,7 +301,7 @@
     "message": "Desative as teclas do teclado numérico para não alterar acidentalmente o tempo/posição do vídeo atual."
   },
   "DoubleClickSwitch": {
-    "message": "Tela cheia ao clicar duas vezes:"
+    "message": "Tela cheia clicando duas vezes:"
   },
   "DoubleClickSwitchDescription": {
     "message": "Se você clicar duas vezes no vídeo, ele será exibido em tela cheia."
