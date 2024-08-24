@@ -300,7 +300,7 @@
     "message": "Disable the numpad keys so you don't accidentally change the current video time/position."
   },
   "DoubleClickSwitch": {
-    "message": "Fullscreen on double click:"
+    "message": "Fullscreen by double clicking:"
   },
   "DoubleClickSwitchDescription": {
     "message": "If you double click on the video it will go to fullscreen."

@@ -15,21 +15,24 @@ Essa extensão aprimora sua experiência de streaming na Netflix, Prime Video, D
 Recursos específicos da plataforma:
   • Netflix:
       • Lembra e seleciona automaticamente seu último perfil usado
-      • Bloqueia o aviso de inatividade “Você ainda está assistindo?  • Amazon Prime Video:
+      • Bloqueia o aviso de inatividade “Você ainda está assistindo?
+  • Amazon Prime Video:
       • Ignora anúncios de autopromoção (para produções do Prime Video)
       • Filtra o conteúdo pago (filmes, séries) da página inicial
-      • Remove o efeito de desfoque ao passar o mouse sobre os vídeos  • Disney+ (Hotstar, STAR+):
+      • Remove o efeito de desfoque ao passar o mouse sobre os vídeos
+  • Disney+ (Hotstar, STAR+):
       • Pula os anúncios de autopromoção
-      • Retorna automaticamente ao modo de tela cheia ao passar para o próximo episódio  • Crunchyroll:
+      • Retorna automaticamente ao modo de tela cheia ao passar para o próximo episódio
+  • Crunchyroll:
       • Lembra e seleciona automaticamente seu último perfil usado
       • Adiciona filtros ao calendário de lançamentos, para que ele possa ser usado
       • Tamanho do vídeo expandido para toda a janela
       • Desativar o teclado numérico
 Suporte para Android no modo Desktop
-    • Prime Video
-    • Disney+ (Hotstar, STAR+)
-    • Crunchyroll
-    • HBO Max
+  • Prime Video
+  • Disney+ (Hotstar, STAR+)
+  • Crunchyroll
+  • HBO Max
 Para usar a extensão em um telefone Android, faça o download do Firefox.
 
 ☔ Seguro e de código aberto

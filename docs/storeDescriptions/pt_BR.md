@@ -22,6 +22,7 @@ Recursos específicos da plataforma:
     <li>Bloqueia o aviso de inatividade “Você ainda está assistindo?</li>
   </ul>
 </li>
+
 <li>Amazon Prime Video:
   <ul>
     <li>Ignora anúncios de autopromoção (para produções do Prime Video)</li>
@@ -29,12 +30,14 @@ Recursos específicos da plataforma:
     <li>Remove o efeito de desfoque ao passar o mouse sobre os vídeos</li>
   </ul>
 </li>
+
 <li>Disney+ (Hotstar, STAR+):
   <ul>
     <li>Pula os anúncios de autopromoção</li>
     <li>Retorna automaticamente ao modo de tela cheia ao passar para o próximo episódio</li>
   </ul>
 </li>
+
 <li>Crunchyroll:
   <ul>
     <li>Lembra e seleciona automaticamente seu último perfil usado</li>
@@ -47,10 +50,10 @@ Recursos específicos da plataforma:
 
 Suporte para Android no modo Desktop
 <ul>
-  <li>Prime Video</li>
-  <li>Disney+ (Hotstar, STAR+)</li>
-  <li>Crunchyroll</li>
-  <li>HBO Max</li>
+<li>Prime Video</li>
+<li>Disney+ (Hotstar, STAR+)</li>
+<li>Crunchyroll</li>
+<li>HBO Max</li>
 </ul>
 Para usar a extensão em um telefone Android, faça o download do Firefox.
 

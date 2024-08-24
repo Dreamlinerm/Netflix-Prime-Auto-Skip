@@ -289,7 +289,7 @@
     "description": "Disney Homepage button"
   },
   "BigPlayerSwitch": {
-    "message": "Video vergrößert:"
+    "message": "Video vergrößern:"
   },
   "BigPlayerDescription": {
     "message": "Erweitert die größe des Videos zum gesamten Browserfenster ohne Vollbild."
@@ -301,7 +301,7 @@
     "message": "Deaktivieren Sie die Zifferntasten, damit nicht versehentlich die aktuelle Videozeit /-position geändert wird."
   },
   "DoubleClickSwitch": {
-    "message": "Vollbildmodus bei Doppelklick:"
+    "message": "Vollbildmodus mit Doppelklick:"
   },
   "DoubleClickSwitchDescription": {
     "message": "Wenn Sie auf das Video doppelklicken, wird es im Vollbildmodus angezeigt."
