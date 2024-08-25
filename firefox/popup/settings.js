@@ -18,7 +18,7 @@ const isPopup = document.title === "Popup";
  * Localize by replacing __MSG_***__ meta tags
  * @returns {void}
  */
-function localizeHtmlPage() {
+async function localizeHtmlPage() {
   // https://stackoverflow.com/questions/25467009/internationalization-of-html-pages-for-my-google-chrome-extension
   // innerHTML triggers warnings so changed functions
   // i18n tag
@@ -191,7 +191,7 @@ function capitalizeFirstLetter(str) {
 function lowerCaseFirstLetter(str) {
   return str.charAt(0).toLowerCase() + str.slice(1);
 }
-function setCheckboxesOfService(service) {
+async function setCheckboxesOfService(service) {
   Object.keys(settings[service]).forEach((key) => {
     const buttons = document.querySelectorAll("#" + service + capitalizeFirstLetter(key));
     console.log(service + capitalizeFirstLetter(key), buttons);
@@ -203,14 +203,13 @@ function setCheckboxesOfService(service) {
     });
   });
 }
-function setButtonChecked(id, condition) {
+async function setButtonChecked(id, condition) {
   const buttons = document.querySelectorAll(`#${id}`);
   buttons.forEach((button) => {
-    // console.log(button, condition);
     button.checked = condition;
   });
 }
-function setCheckboxesToSettings() {
+async function setCheckboxesToSettings() {
   let button;
   button = document.querySelector("#VideoSkips");
   if (button)
