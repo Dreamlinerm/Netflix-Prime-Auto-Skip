@@ -90,6 +90,7 @@ if (isMobile) {
         continuePosition: true,
         showRating: true,
         xray: true,
+        subtitle: true,
       },
       Netflix: {
         skipIntro: true,
@@ -102,7 +103,7 @@ if (isMobile) {
         profile: true,
         showRating: true,
       },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true, subtitle: true },
       Crunchyroll: {
         skipIntro: true,
         speedSlider: true,

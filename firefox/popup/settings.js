@@ -74,6 +74,7 @@ const defaultSettings = {
       continuePosition: true,
       showRating: true,
       xray: true,
+      subtitle: true,
     },
     Netflix: {
       skipIntro: true,
@@ -86,7 +87,7 @@ const defaultSettings = {
       profile: true,
       showRating: true,
     },
-    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
+    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true, subtitle: true },
     Crunchyroll: {
       skipIntro: true,
       speedSlider: true,
@@ -126,7 +127,7 @@ browser.storage.sync.get("settings", function (result) {
   settings.Video = { ...defaultSettings.settings.Video, ...result?.settings?.Video };
   settings.Statistics = { ...defaultSettings.settings.Statistics, ...result?.settings?.Statistics };
   settings.General = { ...defaultSettings.settings.General, ...result?.settings?.General };
-
+  console.log(settings);
   // delete every setting that is not in defaultSettings
   let changedSettings;
   for (const key in settings) {
@@ -193,7 +194,7 @@ function lowerCaseFirstLetter(str) {
 function setCheckboxesOfService(service) {
   Object.keys(settings[service]).forEach((key) => {
     const buttons = document.querySelectorAll("#" + service + capitalizeFirstLetter(key));
-    // console.log(service + capitalizeFirstLetter(key), buttons);
+    console.log(service + capitalizeFirstLetter(key), buttons);
     buttons.forEach((button) => {
       if (service === "Statistics") {
         if (key != "SegmentsSkipped") button.textContent = getTimeFormatted(settings[service][key]);
@@ -221,10 +222,11 @@ function setCheckboxesToSettings() {
       settings?.Netflix.skipAd &&
       getBooleanOfCategory("showRating") &&
       getBooleanOfCategory("speedSlider") &&
+      getBooleanOfCategory("subtitle") &&
       // playOnFullScreen
       settings?.Video.playOnFullScreen &&
       settings?.Video.doubleClick;
-  let VideoCheckboxes = ["skipIntro", "skipCredits", "watchCredits", "showRating", "speedSlider"];
+  let VideoCheckboxes = ["skipIntro", "skipCredits", "watchCredits", "showRating", "speedSlider", "subtitle"];
   VideoCheckboxes.forEach((key) => {
     setButtonChecked("Video" + capitalizeFirstLetter(key), getBooleanOfCategory(key));
   });
@@ -399,11 +401,12 @@ function listenForClicks() {
           settings?.Netflix.skipAd &&
           getBooleanOfCategory("showRating") &&
           getBooleanOfCategory("speedSlider") &&
+          getBooleanOfCategory("subtitle") &&
           // playOnFullScreen
           settings?.Video.playOnFullScreen &&
           settings?.Video.doubleClick
         );
-        let VideoSkipTypes = ["skipIntro", "skipCredits", "showRating", "speedSlider"];
+        let VideoSkipTypes = ["skipIntro", "skipCredits", "showRating", "speedSlider", "subtitle"];
         VideoSkipTypes.forEach((key) => {
           setCategoryToBoolean(key, VideoSkips);
         });
