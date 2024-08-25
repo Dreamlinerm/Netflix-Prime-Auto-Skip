@@ -10,7 +10,7 @@
     "build": "node copyFtoC.js && cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
     "zip": "cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
     "copy": "node copyFtoC.js",
-    "transGoogle": "jsontt firefox/_locales/en/messages.json -m google2 -n myApp -fb yes -cl 3 -f en -t de fr nl es it pt sv ru zh-CN zh-TW ja",
+    "transGoogle": "jsontt Publish/translate.json -m google2 -n t -fb yes -cl 3 -f en -t de fr es pt it ja pl sv zh-CN ko tr",
     "transDeepL": "node deepl.js",
     "lint": "web-ext lint",
     "esLint": "npx eslint firefox/ chrome/",
