@@ -245,7 +245,14 @@ async function setCheckboxesToSettings() {
   );
   setButtonChecked("NetflixSkips", settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
   setButtonChecked("DisneySkips", settings?.Disney.selfAd);
-  setButtonChecked("CrunchyrollSkips", settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar && settings?.Crunchyroll.profile);
+  setButtonChecked(
+    "CrunchyrollSkips",
+    settings?.Crunchyroll.skipIntro &&
+      settings?.Crunchyroll.releaseCalendar &&
+      settings?.Crunchyroll.profile &&
+      settings?.Crunchyroll.bigPlayer &&
+      settings?.Crunchyroll.disableNumpad
+  );
   setButtonChecked("HBOSkips", true);
   //  -------------      Individual Checkboxes        ---------------------------------------
   setCheckboxesOfService("Amazon");
@@ -444,7 +451,15 @@ function listenForClicks() {
         settings.Crunchyroll.skipIntro =
           settings.Crunchyroll.releaseCalendar =
           settings.Crunchyroll.profile =
-            !(settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar && settings.Crunchyroll.profile);
+          settings.Crunchyroll.bigPlayer =
+          settings.Crunchyroll.disableNumpad =
+            !(
+              settings?.Crunchyroll.skipIntro &&
+              settings?.Crunchyroll.releaseCalendar &&
+              settings.Crunchyroll.profile &&
+              settings.Crunchyroll.bigPlayer &&
+              settings.Crunchyroll.disableNumpad
+            );
       // else if (e.target.id === "HBOSkips")
       else {
         const services = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO"];
