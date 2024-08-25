@@ -127,7 +127,6 @@ browser.storage.sync.get("settings", function (result) {
   settings.Video = { ...defaultSettings.settings.Video, ...result?.settings?.Video };
   settings.Statistics = { ...defaultSettings.settings.Statistics, ...result?.settings?.Statistics };
   settings.General = { ...defaultSettings.settings.General, ...result?.settings?.General };
-  console.log(settings);
   // delete every setting that is not in defaultSettings
   let changedSettings;
   for (const key in settings) {
@@ -194,7 +193,6 @@ function lowerCaseFirstLetter(str) {
 async function setCheckboxesOfService(service) {
   Object.keys(settings[service]).forEach((key) => {
     const buttons = document.querySelectorAll("#" + service + capitalizeFirstLetter(key));
-    console.log(service + capitalizeFirstLetter(key), buttons);
     buttons.forEach((button) => {
       if (service === "Statistics") {
         if (key != "SegmentsSkipped") button.textContent = getTimeFormatted(settings[service][key]);
@@ -302,7 +300,6 @@ async function showPermissionRequest(permission) {
   const permissionStatus = await browser.permissions.contains({ permissions: [permission] });
   if (!permissionStatus) {
     PermissionButtons.forEach((button) => {
-      console.log(permissionStatus, button.parentNode);
       button.style.display = "block";
     });
   }
