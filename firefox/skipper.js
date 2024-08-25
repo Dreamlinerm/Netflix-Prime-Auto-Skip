@@ -472,13 +472,17 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       // event listener for double click
       document.ondblclick = function () {
         let video;
-        if (isPrimeVideo) video = document.querySelector("#dv-web-player");
-        if (video) {
+        let webPlayer;
+        if (isPrimeVideo) {
+          video = document.querySelector(AmazonVideoClass);
+          webPlayer = document.querySelector(".dv-player-fullscreen");
+        }
+        if (webPlayer && video?.checkVisibility()) {
           // video is fullscreen
           if (document.fullscreenElement) {
             document.exitFullscreen();
           } else {
-            video.requestFullscreen();
+            webPlayer.requestFullscreen();
           }
         }
       };
