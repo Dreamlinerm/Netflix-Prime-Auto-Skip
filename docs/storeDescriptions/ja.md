@@ -58,7 +58,7 @@
 Android 携帯で拡張機能を使用するには、Firefox をダウンロードしてください
 
 ☔ 安全でオープン ソース
-この拡張機能はオープン ソースです<a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> で自由に貢献したり、コードを調べたりしてください
+この拡張機能はオープン ソースです <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> で自由に貢献したり、コードを調べたりしてください
 
 💕 強化されたストリーミングをお楽しみですか?
 強化されたストリーミング体験をお楽しみいただけている場合は、5 つ星のレビューを残すことを検討してくださいレビューは信頼を築き、新しいユーザーを引き付けるのに役立ちます

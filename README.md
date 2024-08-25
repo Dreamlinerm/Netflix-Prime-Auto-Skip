@@ -97,10 +97,19 @@ It automatically skips Ads, intros, Credits, recaps, and anything else you don't
 
 ## ✨ Features
 
-| Features in other supported languages |
-| --- |
+Features in other supported languages:
 | [Deutsch](docs/storeDescriptions/de.md) |
+| [Français](docs/storeDescriptions/fr.md) |
+| [Español](docs/storeDescriptions/es.md) |
+| [Português](docs/storeDescriptions/pt.md) |
 | [Português (Brasil)](docs/storeDescriptions/pt_br.md) |
+| [Italiano](docs/storeDescriptions/it.md) |
+| [日本語](docs/storeDescriptions/ja.md) |
+| [Polski](docs/storeDescriptions/pl.md) |
+| [Svenska](docs/storeDescriptions/sv.md) |
+| [汉语](docs/storeDescriptions/zh_CN.md) |
+| [한국어](docs/storeDescriptions/ko.md) |
+| [Türkçe](docs/storeDescriptions/tr.md) |
 
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
 

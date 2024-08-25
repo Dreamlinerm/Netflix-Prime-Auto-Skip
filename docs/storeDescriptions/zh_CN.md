@@ -58,7 +58,7 @@
 要在安卓手机上使用扩展，请下载 Firefox。
 
 ☔ 安全且开源
-此扩展程序是开源的！欢迎在 <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> 上贡献或探索代码。
+此扩展是开源的！欢迎在 <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a> 上贡献或探索代码。
 
 💕 喜欢增强的流媒体体验吗？
 如果您喜欢增强的流媒体体验，请考虑留下 5 星评价！评论有助于建立信任并吸引新用户。
