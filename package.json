@@ -10,7 +10,8 @@
     "build": "node copyFtoC.js && cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
     "zip": "cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
     "copy": "node copyFtoC.js",
-    "translateMessages": "jsontt firefox/_locales/en/messages.json -m google2 -n myApp -fb yes -cl 3 -f en -t de en fr nl es it pt sv ru zh-CN zh-TW ja",
+    "transGoogle": "jsontt firefox/_locales/en/messages.json -m google2 -n myApp -fb yes -cl 3 -f en -t de fr nl es it pt sv ru zh-CN zh-TW ja",
+    "transDeepL": "node deepl.js",
     "lint": "web-ext lint",
     "esLint": "npx eslint firefox/ chrome/",
     "test": "cd firefox && web-ext build  --overwrite-dest && cd .. && node refreshXPI.js && python test.py"
@@ -30,6 +31,7 @@
   },
   "dependencies": {
     "@parvineyvazov/json-translator": "^3.1.0",
+    "dotenv": "^16.4.5",
     "web-ext": "^7.11.0"
   },
   "webExt": {
