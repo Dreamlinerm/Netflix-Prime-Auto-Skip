@@ -18,7 +18,7 @@ const isPopup = document.title === "Popup";
  * Localize by replacing __MSG_***__ meta tags
  * @returns {void}
  */
-function localizeHtmlPage() {
+async function localizeHtmlPage() {
   // https://stackoverflow.com/questions/25467009/internationalization-of-html-pages-for-my-google-chrome-extension
   // innerHTML triggers warnings so changed functions
   // i18n tag
@@ -127,7 +127,6 @@ chrome.storage.sync.get("settings", function (result) {
   settings.Video = { ...defaultSettings.settings.Video, ...result?.settings?.Video };
   settings.Statistics = { ...defaultSettings.settings.Statistics, ...result?.settings?.Statistics };
   settings.General = { ...defaultSettings.settings.General, ...result?.settings?.General };
-  console.log(settings);
   // delete every setting that is not in defaultSettings
   let changedSettings;
   for (const key in settings) {
@@ -191,10 +190,9 @@ function capitalizeFirstLetter(str) {
 function lowerCaseFirstLetter(str) {
   return str.charAt(0).toLowerCase() + str.slice(1);
 }
-function setCheckboxesOfService(service) {
+async function setCheckboxesOfService(service) {
   Object.keys(settings[service]).forEach((key) => {
     const buttons = document.querySelectorAll("#" + service + capitalizeFirstLetter(key));
-    console.log(service + capitalizeFirstLetter(key), buttons);
     buttons.forEach((button) => {
       if (service === "Statistics") {
         if (key != "SegmentsSkipped") button.textContent = getTimeFormatted(settings[service][key]);
@@ -203,14 +201,13 @@ function setCheckboxesOfService(service) {
     });
   });
 }
-function setButtonChecked(id, condition) {
+async function setButtonChecked(id, condition) {
   const buttons = document.querySelectorAll(`#${id}`);
   buttons.forEach((button) => {
-    // console.log(button, condition);
     button.checked = condition;
   });
 }
-function setCheckboxesToSettings() {
+async function setCheckboxesToSettings() {
   let button;
   button = document.querySelector("#VideoSkips");
   if (button)
@@ -246,7 +243,14 @@ function setCheckboxesToSettings() {
   );
   setButtonChecked("NetflixSkips", settings?.Netflix.skipRecap && settings?.Netflix.skipBlocked && settings?.Netflix.profile);
   setButtonChecked("DisneySkips", settings?.Disney.selfAd);
-  setButtonChecked("CrunchyrollSkips", settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar && settings?.Crunchyroll.profile);
+  setButtonChecked(
+    "CrunchyrollSkips",
+    settings?.Crunchyroll.skipIntro &&
+      settings?.Crunchyroll.releaseCalendar &&
+      settings?.Crunchyroll.profile &&
+      settings?.Crunchyroll.bigPlayer &&
+      settings?.Crunchyroll.disableNumpad
+  );
   setButtonChecked("HBOSkips", true);
   //  -------------      Individual Checkboxes        ---------------------------------------
   setCheckboxesOfService("Amazon");
@@ -296,7 +300,6 @@ async function showPermissionRequest(permission) {
   const permissionStatus = await chrome.permissions.contains({ permissions: [permission] });
   if (!permissionStatus) {
     PermissionButtons.forEach((button) => {
-      console.log(permissionStatus, button.parentNode);
       button.style.display = "block";
     });
   }
@@ -445,7 +448,15 @@ function listenForClicks() {
         settings.Crunchyroll.skipIntro =
           settings.Crunchyroll.releaseCalendar =
           settings.Crunchyroll.profile =
-            !(settings?.Crunchyroll.skipIntro && settings?.Crunchyroll.releaseCalendar && settings.Crunchyroll.profile);
+          settings.Crunchyroll.bigPlayer =
+          settings.Crunchyroll.disableNumpad =
+            !(
+              settings?.Crunchyroll.skipIntro &&
+              settings?.Crunchyroll.releaseCalendar &&
+              settings.Crunchyroll.profile &&
+              settings.Crunchyroll.bigPlayer &&
+              settings.Crunchyroll.disableNumpad
+            );
       // else if (e.target.id === "HBOSkips")
       else {
         const services = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO"];

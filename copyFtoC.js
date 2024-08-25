@@ -9,19 +9,19 @@ if (!fs.existsSync("chrome")) {
 }
 
 // Read all the firefox files and replace the chrome files
-const files = [
+let files = [
   "skipper.js",
   "cr.js",
   path.join("popup", "settings.js"),
   path.join("popup", "settings.css"),
   path.join("popup", "popup.html"),
   path.join("popup", "settings.html"),
-
-  path.join("_locales", path.join("de", "messages.json")),
-  path.join("_locales", path.join("en", "messages.json")),
-  path.join("_locales", path.join("mk", "messages.json")),
-  path.join("_locales", path.join("pt_BR", "messages.json")),
 ];
+const locales = fs.readdirSync(path.join("firefox", "_locales"));
+for (let locale of locales) {
+  // console.log(locsale);
+  files.push(path.join("_locales", path.join(locale, "messages.json")));
+}
 // all regex replacements
 const replaces = [
   [/browser([^-])/g, "chrome$1"],
