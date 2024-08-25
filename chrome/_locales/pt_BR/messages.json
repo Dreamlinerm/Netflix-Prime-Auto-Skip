@@ -89,11 +89,16 @@
     "message": "Ignorando os anúncios da Amazon e todos os anúncios no nível básico da Netflix"
   },
   "SliderSwitch": {
-    "message": "Aprimorar a interface de vídeo:",
-    "description": "Adicionar um interruptor de recurso de controle deslizante de velocidade"
+    "message": "Adicionar controle de velocidade:"
   },
   "SliderSwitchDescription": {
-    "message": "Adição de um controle deslizante de ajuste de velocidade e alteração da aparência das legendas."
+    "message": "Adição de um controle deslizante de ajuste de velocidade."
+  },
+  "SubtitleSwitch": {
+    "message": "Melhorar as legendas:"
+  },
+  "SubtitleSwitchDescription": {
+    "message": "Alterar a aparência das legendas. Alterar também o desfoque na amazônia."
   },
   "SliderOptions": {
     "message": "Opções do controle deslizante: velocidade = quadro a quadro /10"

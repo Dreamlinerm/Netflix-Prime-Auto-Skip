@@ -46,6 +46,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         continuePosition: true,
         showRating: true,
         xray: true,
+        subtitle: true,
       },
       Netflix: {
         skipIntro: true,
@@ -58,7 +59,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         profile: true,
         showRating: true,
       },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true, subtitle: true },
       Crunchyroll: {
         skipIntro: true,
         speedSlider: true,
@@ -471,13 +472,17 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       // event listener for double click
       document.ondblclick = function () {
         let video;
-        if (isPrimeVideo) video = document.querySelector("#dv-web-player");
-        if (video) {
+        let webPlayer;
+        if (isPrimeVideo) {
+          video = document.querySelector(AmazonVideoClass);
+          webPlayer = document.querySelector(".dv-player-fullscreen");
+        }
+        if (webPlayer && video?.checkVisibility()) {
           // video is fullscreen
           if (document.fullscreenElement) {
             document.exitFullscreen();
           } else {
-            video.requestFullscreen();
+            webPlayer.requestFullscreen();
           }
         }
       };
@@ -497,6 +502,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     Disney_addHomeButton();
     if (settings.Disney?.watchCredits) Disney_Watch_Credits();
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
+    if (settings.Disney?.subtitle) Disney_Subtitles();
     if (settings.Disney?.selfAd) Disney_selfAd(video, time);
   }
   // let SetTimeToZeroOnce = null;
@@ -648,13 +654,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const DisneySliderStyle = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;";
   const DisneySpeedStyle = "height:10px;min-width:40px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
   function Disney_SpeedSlider(video) {
-    // remove subtitle background
-    let subtitles = document.querySelectorAll(".dss-subtitle-renderer-line:not(.enhanced)");
-    subtitles.forEach((b) => {
-      b.classList.add("enhanced");
-      b.style.backgroundColor = "transparent";
-      b.style.textShadow = "0px 0px 7px black";
-    });
     if (video) {
       let alreadySlider = document.querySelector("#videoSpeedSlider");
       if (!alreadySlider) {
@@ -676,6 +675,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         };
       }
     }
+  }
+  async function Disney_Subtitles() {
+    // remove subtitle background
+    let subtitles = document.querySelectorAll(".dss-subtitle-renderer-line:not(.enhanced)");
+    subtitles.forEach((b) => {
+      b.classList.add("enhanced");
+      b.style.backgroundColor = "transparent";
+      b.style.textShadow = "0px 0px 7px black";
+    });
   }
 
   function Disney_selfAd(video, time) {
@@ -844,6 +852,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.Amazon?.skipCredits) Amazon_Credits();
     if (settings.Amazon?.watchCredits) Amazon_Watch_Credits();
     if (settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
+    if (settings.Amazon?.subtitle) Amazon_Subtitles();
     if (settings.Amazon?.xray) Amazon_xray();
   }
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
@@ -933,21 +942,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   const AmazonSliderStyle = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;";
   async function Amazon_SpeedSlider(video) {
-    // remove bad background hue which is annoying
-    //document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
-    let b = document.querySelector(".fkpovp9.f8hspre:not(.enhanced)");
-    if (b) {
-      b.classList.add("enhanced");
-      b.style.backgroundColor = "transparent";
-      b.style.background = "transparent";
-    }
-    // remove subtitle background
-    b = document.querySelector(".atvwebplayersdk-captions-text:not(.enhanced)");
-    if (b) {
-      b.classList.add("enhanced");
-      b.style.backgroundColor = "transparent";
-      b.style.textShadow = "0px 0px 7px black";
-    }
     if (video) {
       let alreadySlider = document.querySelector("#videoSpeedSlider");
       if (!alreadySlider) {
@@ -967,6 +961,24 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
     }
   }
+  async function Amazon_Subtitles() {
+    // remove bad background hue which is annoying
+    //document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
+    let b = document.querySelector(".fkpovp9.f8hspre:not(.enhanced)");
+    if (b) {
+      b.classList.add("enhanced");
+      b.style.backgroundColor = "transparent";
+      b.style.background = "transparent";
+    }
+    // remove subtitle background
+    b = document.querySelector(".atvwebplayersdk-captions-text:not(.enhanced)");
+    if (b) {
+      b.classList.add("enhanced");
+      b.style.backgroundColor = "transparent";
+      b.style.textShadow = "0px 0px 7px black";
+    }
+  }
+
   async function Amazon_continuePosition() {
     const continueCategory = document.querySelector('.j5ZgN-._0rmWBt[data-testid="card-overlay"]')?.closest('[class="+OSZzQ"]');
     const position = continueCategory?.parentNode?.childNodes?.[2];

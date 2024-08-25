@@ -36,8 +36,7 @@
       <a target="_blank" class="flex-center flex-col" style="text-align: center; text-decoration: none"
         href="https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle">
         <p style="font-size: 1em" data-i18n>rateNow</p>
-        <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010"
-          alt="rating">
+        <img src="https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010" alt="rating">
       </a>
     </div>
     <div class="flex flex-col MenuButtons" style="flex-wrap: wrap">
@@ -424,6 +423,33 @@
               </label>
             </td>
           </tr>
+          <tr>
+            <td class="tooltip">
+              <p data-i18n>SubtitleSwitch</p>
+              <i-18n class="tooltiptext">SubtitleSwitchDescription</i-18n>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="VideoSubtitle">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>➖</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="AmazonSubtitle">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <label class="switch">
+                <input type="checkbox" id="DisneySubtitle">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>➖</td>
+            <td>➖</td>
+          </tr>
         </table>
         <hr>
         <div class="line flex">
@@ -718,6 +744,13 @@
           <div class="line flex">
             <h2>1.1.33</h2>
             <ul>
+              <li>Separated the Speedslider from the subtitle setting on user request.</li>
+              <li>Fixed Amazon double click to Fullscreen.</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.1.32</p>
+            <ul>
               <li>Added Crunchyroll big video player mod.</li>
               <li>Disable the numpad on Crunchyroll.</li>
               <li>Added maximize on doubleclick</li>
@@ -725,7 +758,7 @@
             </ul>
           </div>
           <div class="line flex">
-            <p>1.1.33</p>
+            <p>1.1.29</p>
             <ul>
               <li>Fixed Prime filter paid movies.</li>
               <li>Fixed Prime Continue Watching position.</li>
