@@ -46,6 +46,9 @@
 
 ***
 
+### Language
+I used DeepL to translate into most languages. If there is anything wrong with them you can see [here](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues/42) what to do.
+
 ### Browser Compatibility:
 
 | Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO    |
