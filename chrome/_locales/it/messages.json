@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "Streaming enhanced Netflix Disney Prime Video", "description": "Nome dell'estensione" },
   "extensionDescription": {
-    "message": "Salta automaticamente annunci, intro, titoli di coda e regola la velocità su Netflix, Prime Video, Disney+, Crunchyroll e HBO Max.",
+    "message": "Salta annunci, intro, titoli di coda e regola la velocità su Netflix, Prime Video, Disney+, Crunchyroll e HBO Max.",
     "description": "Descrizione dell'estensione"
   },
   "settingsTitle": { "message": "Impostazioni - Streaming enhanced", "description": "Titolo della scheda Impostazioni" },

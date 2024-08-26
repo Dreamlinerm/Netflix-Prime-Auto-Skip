@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "Streaming enhanced Netflix Disney Prime Video", "description": "扩展名" },
   "extensionDescription": {
-    "message": "在 Netflix、Prime video、Disney+、Crunchyroll 和 HBO max 上自动跳过广告、前言、片头，并添加速度控制等功能。",
+    "message": "在 Netflix、Prime video、Disney+、Crunchyroll 和 HBO max 上跳过广告、开场白、片头，并添加调整速度等功能。",
     "description": "扩展说明"
   },
   "settingsTitle": { "message": "设置 - Streaming enhanced", "description": "设置选项卡标题" },

@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "Streaming enhanced Netflix Disney Prime Video", "description": "확장 프로그램 이름" },
   "extensionDescription": {
-    "message": "넷플릭스, 프라임 비디오, 디즈니+, 크런치롤, HBO max에서 광고, 인트로, 크레딧을 자동으로 건너뛰고 속도 제어 등을 추가할 수 있습니다.",
+    "message": "넷플릭스, 프라임 비디오, 디즈니+, 크런치롤, HBO max에서 광고, 인트로, 크레딧을 건너뛰고 속도 조절 등을 추가할 수 있습니다.",
     "description": "확장 기능에 대한 설명"
   },
   "settingsTitle": { "message": "설정 - Streaming enhanced", "description": "설정 탭의 제목" },

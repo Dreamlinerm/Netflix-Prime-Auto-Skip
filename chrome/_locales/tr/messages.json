@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "Streaming enhanced Netflix Disney Prime Video", "description": "Uzantının adı" },
   "extensionDescription": {
-    "message": "Netflix, Prime video, Disney+, Crunchyroll ve HBO max'te Reklamları, İntroları, Kredileri otomatik olarak atlayın ve Hız Kontrolü vb. ekleyin.",
+    "message": "Netflix, Prime video, Disney+, Crunchyroll ve HBO max'te reklamları, introları, jenerikleri atlayın ve hız ayarı vb. ekleyin.",
     "description": "Uzantının açıklaması"
   },
   "settingsTitle": { "message": "Ayarlar - Streaming enhanced", "description": "Ayarlar Sekmesinin Başlığı" },

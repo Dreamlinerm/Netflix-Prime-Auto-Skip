@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "Streaming enhanced Netflix Disney Prime Video", "description": "Nom de l'extension" },
   "extensionDescription": {
-    "message": "Sauter automatiquement les pubs, intros, génériques et ajuste la vitesse sur Netflix, Prime Video, Disney+, Crunchyroll et HBO Max.",
+    "message": "Passez les publicités, intros, génériques et ajustez la vitesse, etc. sur Netflix, Prime video, Disney+, Crunchyroll et HBO max.",
     "description": "Description de l'extension"
   },
   "settingsTitle": { "message": "Paramètres - Streaming enhanced", "description": "Titre de l'onglet Paramètres" },
