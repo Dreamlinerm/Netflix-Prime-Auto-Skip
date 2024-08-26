@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "Streaming enhanced: Netflix Disney+ Prime Video", "description": "Nombre de la extensión" },
   "extensionDescription": {
-    "message": "Omite automáticamente anuncios, intros, créditos y añade control de velocidad, etc. en Netflix, Prime video, Disney+, Crunchyroll y HBO max.",
+    "message": "Omite anuncios, intros, créditos y añade ajustar velocidad, etc. en Netflix, Prime video, Disney+, Crunchyroll y HBO max.",
     "description": "Descripción de la ampliación"
   },
   "settingsTitle": { "message": "Ajustes - Streaming enhanced", "description": "Título de la pestaña Configuración" },

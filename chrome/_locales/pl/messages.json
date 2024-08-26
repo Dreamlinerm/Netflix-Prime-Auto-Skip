@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "Streaming enhanced Netflix Disney Prime Video", "description": "Nazwa rozszerzenia" },
   "extensionDescription": {
-    "message": "Automatyczne pomijanie reklam, wstępów, napisów końcowych i dodawanie funkcji kontroli prędkości itp. w serwisach Netflix, Prime Video, Disney+, Crunchyroll i HBO max.",
+    "message": "Automatyczne pomijanie reklam, wstępów i napisów końcowych w serwisach Netflix, Prime Video, Disney+, Crunchyroll i HBO Max.",
     "description": "Opis rozszerzenia"
   },
   "settingsTitle": { "message": "Ustawienia - Streaming enhanced", "description": "Tytuł karty Ustawienia" },

@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "Streaming enhanced: Netflix Disney+ Prime Video", "description": "Namn på tillägget" },
   "extensionDescription": {
-    "message": "Hoppa automatiskt över annonser, intron, eftertexter och lägg till hastighetskontroll etc. på Netflix, Prime video, Disney+, Crunchyroll och HBO max.",
+    "message": "Hoppa över annonser, intron, eftertexter och justera hastighet m.m. på Netflix, Prime video, Disney+, Crunchyroll och HBO max.",
     "description": "Beskrivning av tillägget"
   },
   "settingsTitle": { "message": "Inställningar - Streaming enhanced", "description": "Titel på fliken Inställningar" },

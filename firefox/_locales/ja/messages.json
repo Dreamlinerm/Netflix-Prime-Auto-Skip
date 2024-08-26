@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "Streaming enhanced: Netflix Disney+ Prime Video", "description": "拡張子の名前" },
   "extensionDescription": {
-    "message": "Netflix、Prime video、Disney+、Crunchyroll、HBO maxの広告、イントロ、クレジットを自動的にスキップし、スピードコントロールなどを追加します。",
+    "message": "Netflix、Prime video、Disney+、Crunchyroll、HBO maxでは、広告、イントロ、クレジットをスキップし、速度などを調整できます。",
     "description": "エクステンションの説明"
   },
   "settingsTitle": { "message": "設定 - Streaming enhanced", "description": "設定タブのタイトル" },
