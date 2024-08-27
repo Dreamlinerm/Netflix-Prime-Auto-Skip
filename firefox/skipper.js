@@ -283,7 +283,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   // -----------------------   functions   ---------------------------------
   // default Options for the observer (which mutations to observe)
   const config = { attributes: true, childList: true, subtree: true };
-
+  // #region Shared funcs
   // shared functions
   async function startShowRatingInterval() {
     addRating();
@@ -467,7 +467,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       removeEventListener("fullscreenchange", OnFullScreenChange);
     }
   }
-
+  // #endregion
+  // #region Disney
   // Disney Observers
   const DisneyObserver = new MutationObserver(Disney);
   function Disney() {
@@ -675,6 +676,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
     }
   }
+  // #endregion
+  // #region Netflix
   // Netflix Observer
   const NetflixObserver = new MutationObserver(Netflix);
   function Netflix() {
@@ -818,7 +821,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
     }
   }
-
+  // #endregion
+  // #region Amazon
   // Amazon Observers
   const AmazonVideoClass = ".dv-player-fullscreen video";
   const AmazonObserver = new MutationObserver(Amazon);
@@ -1126,6 +1130,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
     };
   }
+  // #endregion
+  // #region Crunchyroll
   // Crunchyroll functions
   function filterQueued(display) {
     document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
@@ -1349,6 +1355,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       document.head.appendChild(style);
     }
   }
+  // #endregion
+  // #region HBO
   // HBO functions
   const HBOObserver = new MutationObserver(HBO);
   async function HBO() {
@@ -1405,6 +1413,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (position) createSlider(video, position, HBOSliderStyle, HBOSpeedStyle, HBODivStyle);
     }
   }
+  // #endregion
   // Badge functions
   // eslint-disable-next-line no-unused-vars
   async function setBadgeText(text) {
