@@ -40,13 +40,15 @@
 
 
 <p align="center">
-<a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"><img src="https://user-images.githubusercontent.com/585534/107280546-7b9b2a00-6a26-11eb-8f9f-f95932f4bfec.png" alt="Get Streaming enhanced for Firefox"/>
-<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="https://user-images.githubusercontent.com/585534/107280622-91a8ea80-6a26-11eb-8d07-77c548b28665.png" alt="Get Streaming enhanced for Chromium"/>
+<a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"><img src="Logos/download button/firefox.png" alt="Get Streaming enhanced for Firefox"/>
+<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="Logos/download button/chrome.png" alt="Get Streaming enhanced for Chromium"/>
+<a href="https://microsoftedge.microsoft.com/addons/detail/dhfpagghjamocfaaignghcljfpppelffe"><img src="Logos/download button/microsoft.png" alt="Get Streaming enhanced for Edge"/>
 </p>
 
 ***
 
 ### Language
+
 I used DeepL to translate into most languages. If there is anything wrong with them you can see [here](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues/42) what to do.
 
 ### Browser Compatibility:
