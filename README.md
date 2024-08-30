@@ -42,7 +42,7 @@
 <p align="center">
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"><img src="Logos/download button/firefox.png" alt="Get Streaming enhanced for Firefox"/>
 <a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="Logos/download button/chrome.png" alt="Get Streaming enhanced for Chromium"/>
-<a href="https://microsoftedge.microsoft.com/addons/detail/dhfpagghjamocfaaignghcljfpppelffe"><img src="Logos/download button/microsoft.png" alt="Get Streaming enhanced for Edge"/>
+<a href="https://microsoftedge.microsoft.com/addons/detail/streaming-enhanced-netfli/dhfpagghjamocfaaignghcljfpppelff"><img src="Logos/download button/microsoft.png" alt="Get Streaming enhanced for Edge"/>
 </p>
 
 ***
