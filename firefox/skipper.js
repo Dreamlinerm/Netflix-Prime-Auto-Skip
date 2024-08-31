@@ -174,8 +174,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     logStartOfAddon();
     if (isNetflix) startNetflix(settings.Netflix);
     else if (isPrimeVideo) startAmazon(settings.Amazon);
-    else if (isDisney || isHotstar) DisneyObserver.observe(document, config);
-    else if (isCrunchyroll) startCrunchyroll(settings.Crunchyroll);
+    else if (isDisney || isHotstar) {
+      if (isHotstar) Hotstar_doubleClick();
+      DisneyObserver.observe(document, config);
+    } else if (isCrunchyroll) startCrunchyroll(settings.Crunchyroll);
     else if (isHBO) HBOObserver.observe(document, config);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
     getDBCache();
@@ -476,20 +478,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (!video) video = document.querySelector("disney-web-player")?.shadowRoot?.firstChild?.firstChild;
     const time = video?.currentTime;
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
-    Disney_Credits(time);
-    Disney_addHomeButton();
+    Disney_skipCredits(time);
     if (settings.Disney?.watchCredits) Disney_Watch_Credits();
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
-    if (settings.Disney?.subtitle) Disney_Subtitles();
-    if (settings.Disney?.selfAd) Disney_selfAd(video, time);
+    if (isDisney) {
+      Disney_addHomeButton();
+      if (settings.Disney?.subtitle) Disney_Subtitles();
+      if (settings.Disney?.selfAd) Disney_selfAd(video, time);
+    }
   }
   // let SetTimeToZeroOnce = null;
-  function Disney_Intro(video, time) {
+  async function Disney_Intro(video, time) {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
     let button;
     if (isDisney) {
-      if (!document.querySelector('[data-gv2elementkey="playNext"]')) button = document.querySelector(".skip__button");
+      const skipCreditsButton = isStarPlus
+        ? document.querySelector('[data-gv2elementkey="playNext"]')
+        : document.querySelector('[data-testid="playback-action-button"]');
+      if (!skipCreditsButton) button = document.querySelector(".skip__button");
     } else button = document.evaluate("//span[contains(., 'Skip Intro')]", document, null, XPathResult.ANY_TYPE, null)?.iterateNext()?.parentElement;
     if (button) {
       button.click();
@@ -507,7 +514,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     //   }
     // }
   }
-  function Disney_Credits(currentTime) {
+  async function Disney_skipCredits(currentTime) {
     let button;
     if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]');
     else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
@@ -525,27 +532,30 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           increaseBadge();
           resetLastATimeText();
         }
-        setTimeout(function () {
-          if (videoFullscreen && document.fullscreenElement == null) {
-            browser.runtime.sendMessage({ type: "fullscreen" });
-            function resetFullscreen() {
-              browser.runtime.sendMessage({ type: "exitFullscreen" });
-              log("exitFullscreen");
-              removeEventListener("fullscreenchange", resetFullscreen);
-            }
-            addEventListener("fullscreenchange", resetFullscreen);
-            document.onkeydown = function (evt) {
-              if ("key" in evt && (evt.key === "Escape" || evt.key === "Esc")) {
+        if (!isHotstar) {
+          // keep video fullscreen
+          setTimeout(function () {
+            if (videoFullscreen && document.fullscreenElement == null) {
+              browser.runtime.sendMessage({ type: "fullscreen" });
+              function resetFullscreen() {
                 browser.runtime.sendMessage({ type: "exitFullscreen" });
+                log("exitFullscreen");
+                removeEventListener("fullscreenchange", resetFullscreen);
               }
-            };
-            log("fullscreen");
-          }
-        }, 1000);
+              addEventListener("fullscreenchange", resetFullscreen);
+              document.onkeydown = function (evt) {
+                if ("key" in evt && (evt.key === "Escape" || evt.key === "Esc")) {
+                  browser.runtime.sendMessage({ type: "exitFullscreen" });
+                }
+              };
+              log("fullscreen");
+            }
+          }, 1000);
+        }
       }
     }
   }
-  function Disney_addHomeButton() {
+  async function Disney_addHomeButton() {
     // add home button to the end of the credits
     const buttonDiv = document.querySelector('[data-testid="browser-action-button"]')?.parentElement;
     if (buttonDiv && !document.querySelector("#homeButton")) {
@@ -567,7 +577,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       buttonDiv.appendChild(homeButton);
     }
   }
-  function Disney_Watch_Credits() {
+  async function Disney_Watch_Credits() {
     let button;
     if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]');
     else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
@@ -585,7 +595,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         if (video) {
           video.click();
           lastAdTimeText = time;
-          log("Credits skipped", button);
+          log("Credits Watched", button);
           increaseBadge();
           resetLastATimeText();
         }
@@ -631,7 +641,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
 
   const DisneySliderStyle = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;";
   const DisneySpeedStyle = "height:10px;min-width:40px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;";
-  function Disney_SpeedSlider(video) {
+  async function Disney_SpeedSlider(video) {
     if (video) {
       let alreadySlider = document.querySelector("#videoSpeedSlider");
       if (!alreadySlider) {
@@ -664,7 +674,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     });
   }
 
-  function Disney_selfAd(video, time) {
+  async function Disney_selfAd(video, time) {
     if (isDisney) {
       let button = document.querySelector(".overlay_interstitials__promo_skip_button");
       if (button) {
@@ -674,6 +684,18 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           addSkippedTime(time, video?.currentTime, "selfAdkipped");
         }, 600);
       }
+    }
+  }
+
+  async function Hotstar_doubleClick() {
+    if (settings.Video?.doubleClick) {
+      // event listener for double click
+      document.ondblclick = function () {
+        document.querySelector(".icon-player-landscape")?.closest("button")?.click();
+        document.querySelector(".icon-player-portrait")?.closest("button")?.click();
+      };
+    } else {
+      document.ondblclick = null;
     }
   }
   // #endregion
