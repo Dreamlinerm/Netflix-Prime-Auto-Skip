@@ -857,7 +857,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
     if (settings.Amazon?.subtitle) Amazon_Subtitles();
     if (settings.Amazon?.xray) Amazon_xray();
-    if (settings?.Video?.doubleClick) Amazon_closeFullscreenButtons();
   }
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
@@ -1125,32 +1124,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.Video?.doubleClick) {
       // event listener for double click
       document.ondblclick = function () {
-        let video = document.querySelector(AmazonVideoClass);
-        let webPlayer = document.querySelector(".dv-player-fullscreen");
-        if (webPlayer && video?.checkVisibility()) {
-          // video is fullscreen
-          if (document.fullscreenElement) {
-            document.exitFullscreen();
-          } else {
-            webPlayer.requestFullscreen();
-          }
-        }
+        document.querySelector(".dv-player-fullscreen button[class*=fullscreen-button]")?.click();
       };
     } else {
       document.ondblclick = null;
     }
-  }
-  async function Amazon_closeFullscreenButtons() {
-    document.querySelector(".dv-player-fullscreen button[class*=playerclose-button]").onclick = function () {
-      if (document.fullscreenElement) {
-        document.exitFullscreen();
-      }
-    };
-    document.querySelector(".dv-player-fullscreen button[class*=fullscreen-button]").onclick = function () {
-      if (document.fullscreenElement) {
-        document.exitFullscreen();
-      }
-    };
   }
   // #endregion
   // #region Crunchyroll
