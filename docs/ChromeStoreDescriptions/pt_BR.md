@@ -8,26 +8,29 @@ Essa extensão aprimora sua experiência de streaming na Netflix, Prime Video, D
   • Pular créditos
   • Exibição de classificações do TMDB para todos os programas
   • Adição de controle de velocidade de reprodução personalizável
-  • Aprimoramento do estilo das legendas
   • Iniciar automaticamente a reprodução de vídeos em tela cheia
   • Ir para tela cheia ao clicar duas vezes
 
 Recursos específicos da plataforma:
   • Netflix:
       • Lembra e seleciona automaticamente seu último perfil usado
-      • Bloqueia o aviso de inatividade “Você ainda está assistindo?
+      • Bloqueia o aviso de inatividade “Você ainda está assistindo?
+
   • Amazon Prime Video:
       • Ignora anúncios de autopromoção (para produções do Prime Video)
       • Filtra o conteúdo pago (filmes, séries) da página inicial
-      • Remove o efeito de desfoque ao passar o mouse sobre os vídeos
+      • Remove o efeito de desfoque ao passar o mouse sobre os vídeos
+
   • Disney+ (Hotstar, STAR+):
       • Pula os anúncios de autopromoção
-      • Retorna automaticamente ao modo de tela cheia ao passar para o próximo episódio
+      • Retorna automaticamente ao modo de tela cheia ao passar para o próximo episódio
+
   • Crunchyroll:
       • Lembra e seleciona automaticamente seu último perfil usado
       • Adiciona filtros ao calendário de lançamentos, para que ele possa ser usado
       • Tamanho do vídeo expandido para toda a janela
-      • Desativar o teclado numérico
+      • Desativar o teclado numérico
+
 Suporte para Android no modo Desktop
   • Prime Video
   • Disney+ (Hotstar, STAR+)

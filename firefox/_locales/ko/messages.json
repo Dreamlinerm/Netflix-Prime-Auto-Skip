@@ -32,8 +32,6 @@
   "AdsSwitchDescription": { "message": "아마존 프리비 광고 건너뛰기 및 기본 넷플릭스 티어의 모든 광고 건너뛰기" },
   "SliderSwitch": { "message": "속도 제어를 추가합니다:" },
   "SliderSwitchDescription": { "message": "속도 조절 슬라이더 추가" },
-  "SubtitleSwitch": { "message": "자막을 개선합니다:" },
-  "SubtitleSwitchDescription": { "message": "자막 모양 변경하기. 또한 아마존에서 블러를 변경합니다." },
   "SliderOptions": { "message": "슬라이더 옵션: 속도 = 단계 크기 /10" },
   "SliderStepSize": { "message": "슬라이더 단계 크기:" },
   "SliderMin": { "message": "최소 슬라이더:" },

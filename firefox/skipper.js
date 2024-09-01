@@ -46,7 +46,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         continuePosition: true,
         showRating: true,
         xray: true,
-        subtitle: true,
       },
       Netflix: {
         skipIntro: true,
@@ -59,7 +58,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         profile: true,
         showRating: true,
       },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true, subtitle: true },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
       Crunchyroll: {
         skipIntro: true,
         speedSlider: true,
@@ -483,7 +482,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.Disney?.speedSlider) Disney_SpeedSlider(video);
     if (isDisney) {
       Disney_addHomeButton();
-      if (settings.Disney?.subtitle) Disney_Subtitles();
       if (settings.Disney?.selfAd) Disney_selfAd(video, time);
     }
   }
@@ -663,15 +661,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         };
       }
     }
-  }
-  async function Disney_Subtitles() {
-    // remove subtitle background
-    let subtitles = document.querySelectorAll(".dss-subtitle-renderer-line:not(.enhanced)");
-    subtitles.forEach((b) => {
-      b.classList.add("enhanced");
-      b.style.backgroundColor = "transparent";
-      b.style.textShadow = "0px 0px 7px black";
-    });
   }
 
   async function Disney_selfAd(video, time) {
@@ -855,7 +844,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.Amazon?.skipCredits) Amazon_Credits();
     if (settings.Amazon?.watchCredits) Amazon_Watch_Credits();
     if (settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
-    if (settings.Amazon?.subtitle) Amazon_Subtitles();
     if (settings.Amazon?.xray) Amazon_xray();
   }
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
@@ -962,23 +950,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           video.playbackRate = this.value / 10;
         };
       }
-    }
-  }
-  async function Amazon_Subtitles() {
-    // remove bad background hue which is annoying
-    //document.querySelector(".fkpovp9.f8hspre").style.background = "rgba(0, 0, 0, 0.25)";
-    let b = document.querySelector(".fkpovp9.f8hspre:not(.enhanced)");
-    if (b) {
-      b.classList.add("enhanced");
-      b.style.backgroundColor = "transparent";
-      b.style.background = "transparent";
-    }
-    // remove subtitle background
-    b = document.querySelector(".atvwebplayersdk-captions-text:not(.enhanced)");
-    if (b) {
-      b.classList.add("enhanced");
-      b.style.backgroundColor = "transparent";
-      b.style.textShadow = "0px 0px 7px black";
     }
   }
 

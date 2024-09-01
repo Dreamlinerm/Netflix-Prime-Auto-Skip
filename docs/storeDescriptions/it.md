@@ -9,7 +9,6 @@ Questa estensione migliora la vostra esperienza di streaming su Netflix, Prime V
 <li>Salvando i titoli di coda</li>
 <li>Visualizzando le valutazioni TMDB per tutti gli spettacoli</li>
 <li>Aggiungi una velocità di riproduzione personalizzabile </li>
-<li>Migliorare lo stile dei sottotitoli</li>
 <li>Avviare automaticamente la riproduzione dei video a schermo intero</li>
 <li>Andare a schermo intero con un doppio clic</li>
 </ul>

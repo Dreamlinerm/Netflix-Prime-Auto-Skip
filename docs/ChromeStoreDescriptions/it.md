@@ -8,26 +8,29 @@ Questa estensione migliora la vostra esperienza di streaming su Netflix, Prime V
   • Salvando i titoli di coda
   • Visualizzando le valutazioni TMDB per tutti gli spettacoli
   • Aggiungi una velocità di riproduzione personalizzabile 
-  • Migliorare lo stile dei sottotitoli
   • Avviare automaticamente la riproduzione dei video a schermo intero
   • Andare a schermo intero con un doppio clic
 
 Platform-Caratteristiche specifiche:
   • Netflix:
       • Ricorda e seleziona automaticamente l'ultimo profilo utilizzato
-      • Blocca l'avviso di inattività "Stai ancora guardando?"
+      • Blocca l'avviso di inattività "Stai ancora guardando?"
+
   • Amazon Prime Video:
       • Skipa gli annunci autopromozionali (per le produzioni Prime Video)
       • Filtra i contenuti a pagamento (film, serie) dalla home page
-      • Rimuove l'effetto sfocatura quando si passa il mouse sui video
+      • Rimuove l'effetto sfocatura quando si passa il mouse sui video
+
   • Disney+ (Hotstar, STAR+):
       • Skipa gli annunci autopromozionali
-      • Ritorna automaticamente alla modalità a schermo intero quando si passa all'episodio successivo
+      • Ritorna automaticamente alla modalità a schermo intero quando si passa all'episodio successivo
+
   • Crunchyroll:
       • Ricorda e seleziona automaticamente l'ultimo profilo utilizzato
       • Aggiunge filtri al calendario delle uscite, in modo che sia utilizzabile
       • La dimensione del video viene espansa all'intera finestra
-      • Disattiva il tastierino numerico
+      • Disattiva il tastierino numerico
+
 Supporto Android in modalità Desktop:
   • Prime Video
   • Disney+ (Hotstar, STAR+)

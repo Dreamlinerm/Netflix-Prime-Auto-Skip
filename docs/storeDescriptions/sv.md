@@ -9,7 +9,6 @@ Detta tillägg förbättrar din streamingupplevelse på Netflix, Prime Video, Di
 <li>Skippa eftertexter</li>
 <li>Visa TMDB-betyg för alla program</li>
 <li>Lägga till anpassningsbar uppspelningshastighet kontroll</li>
-<li>Förbättra styling av undertexter</li>
 <li>Automatiskt börja spela upp videor i helskärm</li>
 <li>Gå till helskärm vid dubbelklick</li>
 </ul>

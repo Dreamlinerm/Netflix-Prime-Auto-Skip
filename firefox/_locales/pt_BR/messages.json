@@ -94,12 +94,6 @@
   "SliderSwitchDescription": {
     "message": "Adição de um controle deslizante de ajuste de velocidade."
   },
-  "SubtitleSwitch": {
-    "message": "Melhorar as legendas:"
-  },
-  "SubtitleSwitchDescription": {
-    "message": "Alterar a aparência das legendas. Alterar também o desfoque na amazônia."
-  },
   "SliderOptions": {
     "message": "Opções do controle deslizante: velocidade = quadro a quadro /10"
   },

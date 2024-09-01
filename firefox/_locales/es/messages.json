@@ -36,8 +36,6 @@
   "AdsSwitchDescription": { "message": "Saltar los anuncios de freevee para amazon y todos los anuncios en el nivel básico de Netflix" },
   "SliderSwitch": { "message": "Añadir control de velocidad:" },
   "SliderSwitchDescription": { "message": "Añadir un control deslizante de ajuste de la velocidad" },
-  "SubtitleSwitch": { "message": "Mejorar los subtítulos:" },
-  "SubtitleSwitchDescription": { "message": "Cambiar el aspecto de los subtítulos. También cambiar el desenfoque en amazon." },
   "SliderOptions": { "message": "Opciones del control deslizante: velocidad = tamaño del paso /10" },
   "SliderStepSize": { "message": "Tamaño de paso del deslizador:" },
   "SliderMin": { "message": "Deslizador mínimo:" },

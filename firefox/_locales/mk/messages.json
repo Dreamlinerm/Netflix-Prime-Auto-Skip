@@ -94,12 +94,6 @@
   "SliderSwitchDescription": {
     "message": "Додавање лизгач за прилагодување на брзината"
   },
-  "SubtitleSwitch": {
-    "message": "Подобрете ги преводите:"
-  },
-  "SubtitleSwitchDescription": {
-    "message": "Промена на изгледот на преводите. Променете го и заматувањето на amazon."
-  },
   "SliderOptions": {
     "message": "Добивање на брзина на лизгачот: брзина = големина на чекори / 10"
   },

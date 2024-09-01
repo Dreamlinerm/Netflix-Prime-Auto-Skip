@@ -9,7 +9,6 @@ Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Di
 <li>Überspringen von Credits</li>
 <li>Anzeigen von TMDB-Bewertungen für alle Shows</li>
 <li>Hinzufügen eines anpassbaren Geschwindigkeitsreglers</li>
-<li>Verbessern der Untertitel</li>
 <li>Automatische Videowiedergabe im Vollbildmodus</li>
 <li>In Vollbildmodus gehen mit Doppelklick</li>
 </ul>

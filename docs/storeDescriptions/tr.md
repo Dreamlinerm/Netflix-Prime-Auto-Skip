@@ -9,7 +9,6 @@ Bu uzantı Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll ve HBO Ma
 <li>Kredileri Atla</li>
 <li>Tüm şovlar için TMDB derecelendirmelerini görüntüleme</li>
 <li>Özelleştirilebilir oynatma hızı ekleme kontrolü</li>
-<li>Altyazı stilini geliştirme</li>
 <li>Videoları otomatik olarak tam ekranda oynatmaya başlama</li>
 <li>Çift tıklamada tam ekrana geçme</li>
 </ul>

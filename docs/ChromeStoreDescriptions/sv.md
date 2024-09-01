@@ -8,26 +8,29 @@ Detta tillägg förbättrar din streamingupplevelse på Netflix, Prime Video, Di
   • Skippa eftertexter
   • Visa TMDB-betyg för alla program
   • Lägga till anpassningsbar uppspelningshastighet kontroll
-  • Förbättra styling av undertexter
   • Automatiskt börja spela upp videor i helskärm
   • Gå till helskärm vid dubbelklick
 
 Platform-Specifika funktioner:
   • Netflix:
       • Kommer ihåg och väljer din senast använda profil automatiskt
-      • Blockerar inaktivitetsvarningen "Tittar du fortfarande?"
+      • Blockerar inaktivitetsvarningen "Tittar du fortfarande?"
+
   • Amazon Prime Video:
       • Skippar självreklamerande annonser (för Prime Video-produktioner)
       • Filtrerar bort betalt innehåll (filmer, serier) från startsidan
-      • Tar bort oskärpeeffekten när du håller muspekaren över videoklipp
+      • Tar bort oskärpeeffekten när du håller muspekaren över videoklipp
+
   • Disney+ (Hotstar, STAR+):
       • Skippar självpromoterande annonser
-      • Automatiskt återgår till helskärmsläge när du går till nästa avsnitt
+      • Automatiskt återgår till helskärmsläge när du går till nästa avsnitt
+
   • Crunchyroll:
       • Kommer ihåg och väljer din senast använda profil automatiskt
       • Lägger till filter i utgivningskalendern så att den blir användbar
       • Videostorlek utökas till hela fönstret
-      • Avaktivera numpad
+      • Avaktivera numpad
+
 Androidstöd i skrivbordsläge:
   • Prime Video
   • Disney+ (Hotstar, STAR+)
