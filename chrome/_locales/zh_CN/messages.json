@@ -30,8 +30,6 @@
   "AdsSwitchDescription": { "message": "跳过亚马逊的 freevee 广告和 Netflix 基本层的所有广告" },
   "SliderSwitch": { "message": "添加速度控制：" },
   "SliderSwitchDescription": { "message": "添加速度调节滑块" },
-  "SubtitleSwitch": { "message": "改进字幕：" },
-  "SubtitleSwitchDescription": { "message": "更改字幕的外观。还可更改亚马逊网站上的模糊效果。" },
   "SliderOptions": { "message": "滑块选项：速度 = 步长 /10" },
   "SliderStepSize": { "message": "滑块步长" },
   "SliderMin": { "message": "滑块最小值：" },

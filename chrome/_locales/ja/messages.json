@@ -34,8 +34,6 @@
   "AdsSwitchDescription": { "message": "amazonのfreevee広告とNetflixのベーシック・ティアの広告をすべてスキップする。" },
   "SliderSwitch": { "message": "スピードコントロールを追加する：" },
   "SliderSwitchDescription": { "message": "スピード調整スライダーの追加" },
-  "SubtitleSwitch": { "message": "字幕の改善：" },
-  "SubtitleSwitchDescription": { "message": "字幕の見た目を変更。amazonのぼかしも変更。" },
   "SliderOptions": { "message": "スライダーのオプション：スピード = ステップサイズ /10" },
   "SliderStepSize": { "message": "スライダーのステップサイズ：" },
   "SliderMin": { "message": "スライダーの最小値：" },

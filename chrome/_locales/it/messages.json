@@ -36,8 +36,6 @@
   "AdsSwitchDescription": { "message": "Saltare gli annunci di freevee per amazon e tutti gli annunci nel livello base di Netflix" },
   "SliderSwitch": { "message": "Aggiungere il controllo della velocità:" },
   "SliderSwitchDescription": { "message": "Aggiunta di un cursore di regolazione della velocità" },
-  "SubtitleSwitch": { "message": "Migliorare i sottotitoli:" },
-  "SubtitleSwitchDescription": { "message": "Cambiare l'aspetto dei sottotitoli. Modificare anche la sfocatura su amazon." },
   "SliderOptions": { "message": "Opzioni del cursore: velocità = stepsize /10" },
   "SliderStepSize": { "message": "Dimensione del cursore:" },
   "SliderMin": { "message": "Cursore minimo:" },

@@ -94,12 +94,6 @@
   "SliderSwitchDescription": {
     "message": "Adding a speed adjustment slider"
   },
-  "SubtitleSwitch": {
-    "message": "Improve subtitles:"
-  },
-  "SubtitleSwitchDescription": {
-    "message": "Changing the look of the subtitles. Also change the blur on amazon."
-  },
   "SliderOptions": {
     "message": "Slider options: speed = stepsize /10"
   },

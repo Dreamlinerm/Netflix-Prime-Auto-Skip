@@ -14,23 +14,19 @@ Cette extension améliore votre expérience de streaming sur Netflix, Prime Vide
 Platforme-Caractéristiques spécifiques:
   • Netflix:
       • Rappelle et sélectionne automatiquement votre dernier profil utilisé
-      • Bloque l'avertissement d'inactivité "Are you still watching ?"
-
+      • Bloque l'avertissement d'inactivité "Are you still watching ?"
   • Amazon Prime Video:
       • Supprime les publicités auto-promotionnelles (pour les productions Prime Video)
       • Filtre les contenus payants (films, séries) de la page d'accueil
-      • Supprime l'effet de flou au survol des vidéos
-
+      • Supprime l'effet de flou au survol des vidéos
   • Disney+ (Hotstar, STAR+):
       • Supprime les publicités auto-promotionnelles
-      • Retour automatique au mode plein écran lors du passage à l'épisode suivant
-
+      • Retour automatique au mode plein écran lors du passage à l'épisode suivant
   • Crunchyroll:
       • Rappelle et sélectionne automatiquement votre dernier profil utilisé
       • Ajoute des filtres au calendrier des sorties, pour qu'il soit utilisable
       • La taille de la vidéo est étendue à l'ensemble de la fenêtre
-      • Désactive le pavé numérique
-
+      • Désactive le pavé numérique
 Support Android en mode bureau:
   • Prime Video
   • Disney+ (Hotstar, STAR+)

@@ -94,12 +94,6 @@
   "SliderSwitchDescription": {
     "message": "Geschwindigkeitsregler hinzufügen."
   },
-  "SubtitleSwitch": {
-    "message": "Untertitel Verbessern:"
-  },
-  "SubtitleSwitchDescription": {
-    "message": "Ändert das Aussehen der Untertitel . Ändert auch die Unschärfe auf amazon"
-  },
   "SliderOptions": {
     "message": "Slider-Optionen: Geschwindigkeit = Schrittgröße /10"
   },

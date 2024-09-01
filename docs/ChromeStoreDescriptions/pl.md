@@ -14,23 +14,19 @@ To rozszerzenie poprawia jakość streamowania w serwisach Netflix, Prime Video,
 Platforma-Cechy szczególne:
   • Netflix:
       • Zapamiętuje i automatycznie wybiera ostatnio używany profil
-      • Blokuje ostrzeżenie o braku aktywności "Czy nadal oglądasz?"
-
+      • Blokuje ostrzeżenie o braku aktywności "Czy nadal oglądasz?"
   • Amazon Prime Video:
       • Omija reklamy autopromocyjne (dla produkcji Prime Video)
       • Filtruje płatne treści (filmy, seriale) ze strony głównej
-      • Usuwa efekt rozmycia po najechaniu kursorem na filmy
-
+      • Usuwa efekt rozmycia po najechaniu kursorem na filmy
   • Disney+ (Hotstar, STAR+):
       • Omija reklamy autopromocyjne
-      • Automatycznie powraca do trybu pełnoekranowego po przejściu do następnego odcinka
-
+      • Automatycznie powraca do trybu pełnoekranowego po przejściu do następnego odcinka
   • Crunchyroll:
       • Zapamiętuje i automatycznie wybiera ostatnio używany profil
       • Dodaje filtry do kalendarza wydań, dzięki czemu jest on użyteczny
       • Rozszerzenie rozmiaru wideo do całego okna
-      • Wyłącz klawiaturę numeryczną
-
+      • Wyłącz klawiaturę numeryczną
 Obsługa Androida w trybie pulpitu:
   • Prime Video
   • Disney+ (Hotstar, STAR+)

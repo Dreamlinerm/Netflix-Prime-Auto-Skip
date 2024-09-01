@@ -14,23 +14,19 @@ Esta extensión mejora su experiencia de streaming en Netflix, Prime Video, Disn
 Plataforma-Características específicas:
   • Netflix:
       • Recuerda y selecciona automáticamente tu último perfil utilizado
-      • Bloquea el aviso de inactividad "¿Sigues viendo?"
-
+      • Bloquea el aviso de inactividad "¿Sigues viendo?"
   • Amazon Prime Video:
       • Saltea los anuncios de autopromoción (para producciones de Prime Video)
       • Filtra los contenidos de pago (películas, series) de la página de inicio
-      • Elimina el efecto borroso al pasar el ratón por encima de los vídeos
-
+      • Elimina el efecto borroso al pasar el ratón por encima de los vídeos
   • Disney+ (Hotstar, STAR+):
       • Salta los anuncios de autopromoción
-      • Vuelve automáticamente al modo de pantalla completa al pasar al siguiente episodio
-
+      • Vuelve automáticamente al modo de pantalla completa al pasar al siguiente episodio
   • Crunchyroll:
       • Recuerda y selecciona tu último perfil utilizado automáticamente
       • Añade filtros al calendario de estrenos, para que sea utilizable
       • Tamaño del vídeo ampliado a toda la ventana
-      • Desactiva el teclado numérico
-
+      • Desactiva el teclado numérico
 Soporte Android en modo Escritorio:
   • Prime Video
   • Disney+ (Hotstar, STAR+)

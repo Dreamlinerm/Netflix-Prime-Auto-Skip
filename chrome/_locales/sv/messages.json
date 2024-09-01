@@ -36,8 +36,6 @@
   "AdsSwitchDescription": { "message": "Hoppa över freevee-annonser för Amazon och alla annonser i den grundläggande Netflix-nivån" },
   "SliderSwitch": { "message": "Lägg till Speed control:" },
   "SliderSwitchDescription": { "message": "Lägga till ett reglage för hastighetsjustering" },
-  "SubtitleSwitch": { "message": "Förbättra undertexter:" },
-  "SubtitleSwitchDescription": { "message": "Ändra utseendet på undertexterna. Ändra också suddigheten på Amazon." },
   "SliderOptions": { "message": "Slider-alternativ: hastighet = stegstorlek /10" },
   "SliderStepSize": { "message": "Skjutreglagets stegstorlek:" },
   "SliderMin": { "message": "Slider minimum:" },

@@ -36,8 +36,6 @@
   "AdsSwitchDescription": { "message": "Pomijanie reklam freevee dla amazon i wszystkich reklam w podstawowej warstwie Netflix." },
   "SliderSwitch": { "message": "Dodaj kontrolę prędkości:" },
   "SliderSwitchDescription": { "message": "Dodanie suwaka regulacji prędkości" },
-  "SubtitleSwitch": { "message": "Popraw napisy:" },
-  "SubtitleSwitchDescription": { "message": "Zmiana wyglądu napisów. Również zmiana rozmycia na amazon." },
   "SliderOptions": { "message": "Opcje suwaka: prędkość = wielkość kroku /10" },
   "SliderStepSize": { "message": "Wielkość kroku suwaka:" },
   "SliderMin": { "message": "Suwak minimum:" },

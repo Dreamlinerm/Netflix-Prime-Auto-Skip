@@ -36,8 +36,6 @@
   "AdsSwitchDescription": { "message": "Amazon için freevee reklamlarını ve temel Netflix katmanındaki tüm reklamları atlamak" },
   "SliderSwitch": { "message": "Hız kontrolü ekleyin:" },
   "SliderSwitchDescription": { "message": "Hız ayarlama sürgüsü ekleme" },
-  "SubtitleSwitch": { "message": "Altyazıları iyileştirin:" },
-  "SubtitleSwitchDescription": { "message": "Altyazıların görünümünü değiştiriyorum. Ayrıca amazon'daki bulanıklığı da değiştirin." },
   "SliderOptions": { "message": "Kaydırıcı seçenekleri: hız = adım boyutu /10" },
   "SliderStepSize": { "message": "Kaydırıcı adım boyutu:" },
   "SliderMin": { "message": "Kaydırıcı minimum:" },
