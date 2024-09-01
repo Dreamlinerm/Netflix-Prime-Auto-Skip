@@ -35,11 +35,11 @@ Support Android en mode bureau:
 Pour utiliser l'extension sur un téléphone Android, téléchargez Firefox.
 
 ☔ Safe & Open Source
-Cette extension est open-source ! N'hésitez pas à contribuer ou à explorer le code sur <a href='https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip' target='_blank'>Github</a>.
+Cette extension est open-source ! N'hésitez pas à contribuer ou à explorer le code sur [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
 
 💕 Enjoying Streaming enhanced?
 Si vous appréciez l'expérience de streaming améliorée, n'hésitez pas à laisser un commentaire 5 étoiles ! Les commentaires aident à établir la confiance et à attirer de nouveaux utilisateurs.
-Si vous souhaitez soutenir le développement futur, vous pouvez m'acheter un <a href='https://github.com/sponsors/Dreamlinerm' target='_blank'>café</a>.
+Si vous souhaitez soutenir le développement futur, vous pouvez m'acheter un [café](https://github.com/sponsors/Dreamlinerm).
 
 Disclaimer
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll et HBO max sont des marques déposées et l'auteur de cet addon n'est pas affilié à ces sociétés.

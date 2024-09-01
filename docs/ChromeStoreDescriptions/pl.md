@@ -35,11 +35,11 @@ Obsługa Androida w trybie pulpitu:
 Aby korzystać z rozszerzenia na telefonie z Androidem, pobierz Firefox.
 
 ☔ Bezpieczne i otwarte źródło
-To rozszerzenie jest open-source! Zachęcamy do współtworzenia lub zapoznania się z kodem na <a href='https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip' target='_blank'>Github</a>.
+To rozszerzenie jest open-source! Zachęcamy do współtworzenia lub zapoznania się z kodem na [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
 
 💕 Korzystasz z ulepszonego strumieniowania? 
 Jeśli korzystasz z ulepszonego strumieniowania, rozważ pozostawienie 5-gwiazdkowej recenzji! Recenzje pomagają budować zaufanie i przyciągać nowych użytkowników.
-Jeśli chcesz wesprzeć dalszy rozwój, możesz kupić mi <a href='https://github.com/sponsors/Dreamlinerm' target='_blank'>kawę</a>.
+Jeśli chcesz wesprzeć dalszy rozwój, możesz kupić mi [kawę](https://github.com/sponsors/Dreamlinerm).
 
 Zastrzeżenie
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll i HBO max są znakami towarowymi, a autor tego dodatku nie jest powiązany z tymi firmami.

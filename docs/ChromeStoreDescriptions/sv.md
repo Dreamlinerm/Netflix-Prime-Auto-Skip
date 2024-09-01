@@ -35,11 +35,11 @@ Androidstöd i skrivbordsläge:
 För att använda tillägget på en Android-telefon, ladda ner Firefox.
 
 ☔ Säker och öppen källkod
-Det här tillägget är öppen källkod! Känn dig fri att bidra eller utforska koden på <a href='https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip' target='_blank'>Github</a>.
+Det här tillägget är öppen källkod! Känn dig fri att bidra eller utforska koden på [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
 
 💕 Njuter du av förbättrad streaming? 
  Om du njuter av den förbättrade streamingupplevelsen, överväg att lämna en 5-stjärnig recension! Recensioner hjälper till att bygga förtroende och locka nya användare.
-Om du vill stödja vidareutveckling kan du köpa mig en <a href='https://github.com/sponsors/Dreamlinerm' target='_blank'>kaffe</a>.
+Om du vill stödja vidareutveckling kan du köpa mig en [kaffe](https://github.com/sponsors/Dreamlinerm).
 
 Disclaimer
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll och HBO max är varumärken och författaren till detta tillägg är inte ansluten till dessa företag.

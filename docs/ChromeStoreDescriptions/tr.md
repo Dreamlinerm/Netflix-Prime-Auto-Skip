@@ -35,11 +35,11 @@ Masaüstü modunda Android Desteği:
 Uzantıyı bir Android telefonda kullanmak için Firefox'u indirin.
 
 ☔ Güvenli ve Açık Kaynak
-Bu uzantı açık kaynaklıdır! Katkıda bulunmaktan veya <a href='https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip' target='_blank'>Github</a>'daki kodu keşfetmekten çekinmeyin.
+Bu uzantı açık kaynaklıdır! Katkıda bulunmaktan veya [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip)'daki kodu keşfetmekten çekinmeyin.
 
 💕 Geliştirilmiş Akışın Keyfini Çıkarıyor musunuz? 
 Geliştirilmiş akış deneyiminin keyfini çıkarıyorsanız, lütfen 5 yıldızlı bir yorum bırakmayı düşünün! Yorumlar güven oluşturmaya ve yeni kullanıcılar çekmeye yardımcı olur.
-Daha fazla geliştirmeyi desteklemek isterseniz, bana bir <a href='https://github.com/sponsors/Dreamlinerm' target='_blank'>kahve</a> satın alabilirsiniz.
+Daha fazla geliştirmeyi desteklemek isterseniz, bana bir [kahve](https://github.com/sponsors/Dreamlinerm) satın alabilirsiniz.
 
 Bildirim
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll ve HBO max ticari markalardır ve bu eklentinin yazarı bu şirketlerle bağlantılı değildir.

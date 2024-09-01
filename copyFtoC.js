@@ -64,6 +64,7 @@ const replacesForDescription = [
   ["</li>", ""],
   // change link to markdown
   [/<a href=\"(.*)\" .*>(.*)<\/a>/g, "[$2]($1)"],
+  [/<a href=\'(.*)\' .*>(.*)<\/a>/g, "[$2]($1)"],
 ];
 // pick last file
 storeDescriptions.forEach((file) => {
