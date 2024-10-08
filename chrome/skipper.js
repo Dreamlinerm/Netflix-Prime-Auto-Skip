@@ -242,7 +242,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
   }
   // chrome.storage.local.set({ DBCache: {} });
-  // justWatchAPI
   const today = date.toISOString().split("T")[0];
   async function getMovieInfo(title, card, year = null) {
     // justwatch api
@@ -251,7 +250,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (navigator?.language) {
       locale = navigator?.language;
     }
-    // use the url for themoviedb.org now
     let url = `https://api.themoviedb.org/3/search/multi?query=${encodeURI(title)}&include_adult=false&language=${locale}&page=1`;
     if (year) url += `&year=${year}`;
     // const response = await fetch(encodeURI(url));
@@ -264,6 +262,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           const movie = data?.results?.[0];
           compiledData = {
             score: movie?.vote_average,
+            vote_count: movie?.vote_count,
             release_date: movie?.release_date,
             title: movie?.title || movie?.original_title || movie?.name || movie?.original_name,
             date: today,
@@ -308,9 +307,19 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   function useDBCache(title, card) {
     if (!DBCache[title]?.date) DBCache[title].date = today;
-    const diffInReleaseDate = getDiffInDays(DBCache[title]?.release_date, date) <= 7 && getDiffInDays(DBCache[title].date, date) > 0;
+    const vote_count = DBCache[title]?.vote_count || 100;
+    const diffInReleaseDate =
+      // vote count is under 80 inaccurate rating
+      vote_count < 100 &&
+      // did not refresh rating in the last 2 days
+      getDiffInDays(DBCache[title].date, date) > 2 &&
+      // release date is in the last 30 days after not many people will
+      getDiffInDays(DBCache[title]?.release_date, date) <= 50;
+
+    // refresh rating if older than 30 days or release date is in last month and vote count is under 100
     if (getDiffInDays(DBCache[title].date, date) >= 30 || diffInReleaseDate) {
-      if (diffInReleaseDate) log("update recent movie:", title, ",Age:", getDiffInDays(DBCache[title]?.release_date, date));
+      if (diffInReleaseDate)
+        log("update recent movie:", title, ",Age:", getDiffInDays(DBCache[title]?.release_date, date), "Vote count:", vote_count);
       else log("update old rating:", title, ",Age:", getDiffInDays(DBCache[title].date, date));
       getMovieInfo(title, card);
       // log("no info today", title);
@@ -378,7 +387,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
                 ?.split(" – ")[0]
                 ?.split(", ")[0]
                 ?.replace(/(S\d+)/g, "")
-                ?.replace(/ \[dt\.?\/OV\]/g, "")
+                ?.replace(/ \[dt\.\/?O?V?\]/g, "")
                 ?.replace(/\[OV\]/g, "")
                 ?.replace(/\s\(.*\)/g, "")
                 ?.replace(/:?\sStaffel-?\s\d+/g, "")
@@ -396,7 +405,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           // sometimes more than one image is loaded for the same title
           if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
             lastTitle = title;
-            if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 1) {
+            if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 7) {
               useDBCache(title, card);
             } else {
               getMovieInfo(title, card);
@@ -412,12 +421,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }, 5000);
     }
   }
-  function getColorForRating(rating) {
+  function getColorForRating(rating, lowVoteCount) {
     // I want a color gradient from red to green with yellow in the middle
     // the ratings are between 0 and 10
     // the average rating is 6.5
     // https://distributionofthings.com/imdb-movie-ratings/
-    if (!rating) return "grey";
+    if (!rating || lowVoteCount) return "grey";
     if (rating <= 5.5) return "red";
     if (rating <= 7) return "rgb(245, 197, 24)"; //#f5c518
     return "rgb(0, 166, 0)";
@@ -425,19 +434,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
 
   async function setRatingOnCard(card, data, title) {
     let div = document.createElement("div");
+    const vote_count = data?.vote_count || 100;
     // right: 1.5vw;
     div.style =
       "position: absolute;bottom: 0;right:0;z-index: 9999;color: black;background:" +
-      getColorForRating(data?.score) +
+      getColorForRating(data?.score, vote_count < 80) +
       ";border-radius: 5px;padding: 0 2px 0 2px;" +
       (isMobile ? "font-size: 4vw;" : "font-size: 1vw;");
     // div.id = "imdb";
-    if (data?.score) {
+    if (data?.score && vote_count >= 80) {
       div.textContent = data.score?.toFixed(1);
-      div.setAttribute("alt", data?.title + ", OG title: " + title);
+      div.setAttribute("alt", data?.title + ", OG title: " + title + ", Vote count: " + vote_count);
     } else if (data?.title) {
       div.textContent = "N/A";
-      div.setAttribute("alt", data?.title + ", OG title: " + title);
+      div.setAttribute("alt", data?.title + ", OG title: " + title + ", Vote count: " + vote_count);
     } else {
       div.textContent = "?";
       div.setAttribute("alt", title);
@@ -1089,6 +1099,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   async function Amazon_xray() {
     document.querySelector(".xrayQuickViewList")?.remove();
+    // remove bad background hue which is annoying
+    let b = document.querySelector(".fkpovp9.f8hspre:not(.enhanced)");
+    if (b) {
+      b.classList.add("enhanced");
+      b.style.backgroundColor = "transparent";
+      b.style.background = "transparent";
+    }
   }
 
   async function Amazon_doubleClick() {
@@ -1106,14 +1123,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   // Crunchyroll functions
   function filterQueued(display) {
     document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
-      element.parentElement.parentElement.parentElement.style.display = display;
+      // if not on premiere
+      element.parentElement.parentElement.parentElement.style.display = element.parentElement.parentElement
+        .querySelector(".premiere-flag")
+        ?.checkVisibility()
+        ? "block"
+        : display;
     });
     if (display == "block" && settings.General.filterDub) filterDub("none");
   }
   function filterDub(display) {
     let list = document.querySelectorAll("cite[itemprop='name']");
     list.forEach((element) => {
-      if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
+      if (element.textContent.includes("Dub") || element.textContent.includes("Audio"))
+        element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
     });
     if (display == "block" && settings.General.filterQueued) filterQueued("none");
   }

@@ -26,7 +26,7 @@ h6 {
 html,
 body,
 .content {
-  min-width: 500px;
+  /* width: 500px; */
   min-height: 450px;
   background-color: #212121;
 }
@@ -225,8 +225,7 @@ input:checked + .slider:before {
 }
 
 .popupMenuButton {
-  flex: 1 0 calc(25% - 20px);
-  max-width: calc(25% - 20px);
+  flex: 1 0 calc(25% - 30px);
   border-radius: 15px;
   padding: 20px;
   margin: 10px;
@@ -237,6 +236,7 @@ input:checked + .slider:before {
   user-select: none;
 }
 .popupMenuButton .icon {
+  margin: 0;
   width: 100%;
   height: fit-content;
 }
@@ -304,18 +304,12 @@ hr {
     padding: 10px 0px 0px 0px;
     flex-direction: row;
   }
-  .icon {
-    margin: 0 5px !important;
-  }
   .sidenav {
     height: auto;
     display: block;
   }
 }
 @media only screen and (max-width: 800px), only screen and (max-height: 600px) {
-  /* .menuButton {
-    font-size: 1em;
-  } */
   .menuButton i-18n,
   .menuButton div,
   .IconBox {
@@ -328,7 +322,6 @@ hr {
 .icon {
   width: 1.4em;
   height: 1.4em;
-  margin: 0 10px;
   background-color: transparent;
   fill: white;
   color: white;
@@ -336,6 +329,7 @@ hr {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin: 0 5px;
 }
 
 .featureTable tr *:nth-of-type(2) {
@@ -345,7 +339,6 @@ hr {
   margin-right: 20px;
 }
 .featureTable {
-  /* width: 100%; */
   border-collapse: collapse;
 }
 /* .featureTable,
