@@ -494,8 +494,26 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       Disney_addHomeButton();
       if (settings.Disney?.selfAd) Disney_selfAd(video, time);
     }
+    if (settings.Video?.scrollVolume) Disney_scrollVolume(video);
   }
-  // let SetTimeToZeroOnce = null;
+  async function Disney_scrollVolume(video) {
+    const volumeControl = document.querySelector("div.audio-control:not(.enhanced)");
+    if (volumeControl) {
+      volumeControl.classList.add("enhanced");
+      volumeControl?.addEventListener("wheel", (event) => {
+        let volume = video.volume;
+        if (event.deltaY < 0) volume = Math.min(1, volume + 0.05);
+        else volume = Math.max(0, volume - 0.05);
+        video.volume = volume;
+        const sliderContainer = volumeControl.querySelector(".slider-container");
+        sliderContainer.firstChild.children[1].style.strokeDashoffset = 100 - volume * 100 + "px";
+        sliderContainer.children[1].style.height = volume * 100 + "%";
+        sliderContainer.children[2].style.height = volume * 100 + "%";
+        console.log("test", event);
+      });
+    }
+  }
+
   async function Disney_Intro(video, time) {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
