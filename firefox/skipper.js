@@ -730,7 +730,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.Video?.scrollVolume) Netflix_scrollVolume(video);
   }
   async function Netflix_scrollVolume(video) {
-    console.log("scrollVolume");
     const volumeControl = document.querySelector('[data-uia*="control-volume"]:not(.enhanced)');
     if (volumeControl) {
       volumeControl.classList.add("enhanced");
@@ -875,10 +874,26 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.Amazon?.watchCredits) Amazon_Watch_Credits();
     if (settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
     if (settings.Amazon?.xray) Amazon_xray();
+    if (settings.Video?.scrollVolume) Amazon_scrollVolume();
   }
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
+
+  async function Amazon_scrollVolume() {
+    const volumeControl = document.querySelector('[aria-label="Volume"]:not(.enhanced)');
+    if (volumeControl) {
+      volumeControl.classList.add("enhanced");
+      volumeControl?.addEventListener("wheel", (event) => {
+        const video = document.querySelector(AmazonVideoClass);
+        let volume = video.volume;
+        if (event.deltaY < 0) volume = Math.min(1, volume + 0.05);
+        else volume = Math.max(0, volume - 0.05);
+        video.volume = volume;
+        console.log("test", event);
+      });
+    }
+  }
   let lastIntroTime = -1;
   function resetLastIntroTime() {
     setTimeout(() => {
