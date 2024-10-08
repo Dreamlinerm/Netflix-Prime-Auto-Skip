@@ -47,7 +47,7 @@ const defaultSettings = {
       disableNumpad: true,
     },
     HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-    Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true },
+    Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: {
       Crunchyroll_profilePicture: null,
@@ -93,6 +93,22 @@ function Crunchyroll() {
   const time = video?.currentTime;
   if (settings.Crunchyroll?.skipIntro) Crunchyroll_Intro(video, time);
   if (settings.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider(video);
+  if (settings.Video?.scrollVolume) Crunchyroll_scrollVolume(video);
+}
+async function Crunchyroll_scrollVolume(video) {
+  const volumeControl = document.querySelector('[data-testid="vilos-volume_container"]:not(.enhanced)');
+  if (volumeControl) {
+    volumeControl.classList.add("enhanced");
+    volumeControl?.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      let volume = video.volume;
+      if (event.deltaY < 0) volume = Math.min(1, volume + 0.05);
+      else volume = Math.max(0, volume - 0.05);
+      video.volume = volume;
+      const sliderKnob = document.querySelector('div[data-testid="vilos-volume_slider"]').children[1].firstChild.firstChild;
+      sliderKnob.style.transform = `translateX(${volume * 61}px) translateX(-8px) scale(1)`;
+    });
+  }
 }
 const date = new Date();
 function log(...args) {

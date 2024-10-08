@@ -509,7 +509,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         sliderContainer.firstChild.children[1].style.strokeDashoffset = 100 - volume * 100 + "px";
         sliderContainer.children[1].style.height = volume * 100 + "%";
         sliderContainer.children[2].style.height = volume * 100 + "%";
-        console.log("test", event);
       });
     }
   }
@@ -756,7 +755,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         if (event.deltaY < 0) volume = Math.min(1, volume + 0.05);
         else volume = Math.max(0, volume - 0.05);
         video.volume = volume;
-        console.log("test", event);
       });
     }
   }
@@ -908,7 +906,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         if (event.deltaY < 0) volume = Math.min(1, volume + 0.05);
         else volume = Math.max(0, volume - 0.05);
         video.volume = volume;
-        console.log("test", event);
       });
     }
   }

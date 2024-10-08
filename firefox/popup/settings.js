@@ -97,7 +97,7 @@ const defaultSettings = {
       disableNumpad: true,
     },
     HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-    Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true },
+    Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
     Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
     General: {
       Crunchyroll_profilePicture: null,
