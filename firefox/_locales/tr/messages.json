@@ -105,5 +105,7 @@
   "DisableNumpadSwitch": { "message": "Numpad'i devre dışı bırakın:" },
   "DisableNumpadDescription": { "message": "Mevcut video zamanını/konumunu yanlışlıkla değiştirmemek için sayısal tuşları devre dışı bırakın." },
   "DoubleClickSwitch": { "message": "Çift tıklayarak tam ekran yapın:" },
-  "DoubleClickSwitchDescription": { "message": "Videoya çift tıklarsanız tam ekrana geçecektir." }
+  "DoubleClickSwitchDescription": { "message": "Videoya çift tıklarsanız tam ekrana geçecektir." },
+  "scrollVolumeSwitch": { "message": "Ses seviyesi için kaydırın:" },
+  "scrollVolumeDescription": { "message": "Ses Simgesi üzerinde yukarı veya aşağı kaydırma yapmak ses seviyesini değiştirecektir." }
 }

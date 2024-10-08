@@ -220,7 +220,8 @@ async function setCheckboxesToSettings() {
       getBooleanOfCategory("speedSlider") &&
       // playOnFullScreen
       settings?.Video.playOnFullScreen &&
-      settings?.Video.doubleClick;
+      settings?.Video.doubleClick &&
+      settings?.Video.scrollVolume;
   let VideoCheckboxes = ["skipIntro", "skipCredits", "watchCredits", "showRating", "speedSlider"];
   VideoCheckboxes.forEach((key) => {
     setButtonChecked("Video" + capitalizeFirstLetter(key), getBooleanOfCategory(key));
@@ -228,6 +229,7 @@ async function setCheckboxesToSettings() {
   setButtonChecked("VideoAds", settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
   setButtonChecked("VideoFullScreen", settings?.Video.playOnFullScreen);
   setButtonChecked("VideoDoubleClick", settings?.Video.doubleClick);
+  setButtonChecked("VideoScrollVolume", settings?.Video.scrollVolume);
   setButtonChecked("VideoEpilepsy", settings?.Video.epilepsy);
   setButtonChecked("VideoUserAgent", settings?.Video.userAgent);
   button = document.querySelector(".categoryMobile");
@@ -404,18 +406,25 @@ function listenForClicks() {
           getBooleanOfCategory("speedSlider") &&
           // playOnFullScreen
           settings?.Video.playOnFullScreen &&
-          settings?.Video.doubleClick
+          settings?.Video.doubleClick &&
+          settings?.Video.scrollVolume
         );
         let VideoSkipTypes = ["skipIntro", "skipCredits", "showRating", "speedSlider"];
         VideoSkipTypes.forEach((key) => {
           setCategoryToBoolean(key, VideoSkips);
         });
-        settings.Amazon.blockFreevee = settings.Netflix.skipAd = settings.Video.playOnFullScreen = settings.Video.doubleClick = VideoSkips;
+        settings.Amazon.blockFreevee =
+          settings.Netflix.skipAd =
+          settings.Video.playOnFullScreen =
+          settings.Video.doubleClick =
+          settings.Video.scrollVolume =
+            VideoSkips;
         if (VideoSkips) setCategoryToBoolean("watchCredits", false);
       } else if (e.target.id === "VideoAds")
         settings.Amazon.blockFreevee = settings.Netflix.skipAd = !(settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
       else if (e.target.id === "VideoFullScreen") settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
       else if (e.target.id === "VideoDoubleClick") settings.Video.doubleClick = !settings.Video.doubleClick;
+      else if (e.target.id === "VideoScrollVolume") settings.Video.scrollVolume = !settings.Video.scrollVolume;
       else if (e.target.id === "VideoEpilepsy") settings.Video.epilepsy = !settings.Video.epilepsy;
       else if (e.target.id === "VideoUserAgent") settings.Video.userAgent = !settings.Video.userAgent;
       else if (e.target.id.startsWith("Video")) {

@@ -114,5 +114,7 @@
     "message": "Disattivare i tasti del tastierino numerico per evitare di modificare accidentalmente la posizione o l'ora del video corrente."
   },
   "DoubleClickSwitch": { "message": "Fare doppio clic su schermo intero:" },
-  "DoubleClickSwitchDescription": { "message": "Se si fa doppio clic sul video, questo verrà visualizzato a schermo intero." }
+  "DoubleClickSwitchDescription": { "message": "Se si fa doppio clic sul video, questo verrà visualizzato a schermo intero." },
+  "scrollVolumeSwitch": { "message": "Scorrere per il volume:" },
+  "scrollVolumeDescription": { "message": "Lo scorrimento verso l'alto o verso il basso dell'icona del suono modifica il volume." }
 }

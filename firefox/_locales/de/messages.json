@@ -304,5 +304,7 @@
   },
   "DoubleClickSwitchDescription": {
     "message": "Wenn Sie auf das Video doppelklicken, wird es im Vollbildmodus angezeigt."
-  }
+  },
+  "scrollVolumeSwitch": { "message": "Scrollen für Lautstärke:" },
+  "scrollVolumeDescription": { "message": "Wenn Sie auf dem Tonsymbol nach oben oder unten scrollen, wird die Lautstärke geändert." }
 }

@@ -105,5 +105,7 @@
   "DisableNumpadSwitch": { "message": "Inaktivera numpad:" },
   "DisableNumpadDescription": { "message": "Inaktivera numpad-tangenterna så att du inte av misstag ändrar den aktuella videotiden/positionen." },
   "DoubleClickSwitch": { "message": "Fullskärm genom att dubbelklicka:" },
-  "DoubleClickSwitchDescription": { "message": "Om du dubbelklickar på videon kommer den att visas i helskärm." }
+  "DoubleClickSwitchDescription": { "message": "Om du dubbelklickar på videon kommer den att visas i helskärm." },
+  "scrollVolumeSwitch": { "message": "Bläddra för volym:" },
+  "scrollVolumeDescription": { "message": "Om du bläddrar upp eller ner på ljudikonen ändras volymen." }
 }

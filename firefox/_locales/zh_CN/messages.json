@@ -95,5 +95,7 @@
   "DisableNumpadSwitch": { "message": "禁用数字键盘：" },
   "DisableNumpadDescription": { "message": "禁用数字键盘，以免意外更改当前视频时间/位置。" },
   "DoubleClickSwitch": { "message": "双击全屏：" },
-  "DoubleClickSwitchDescription": { "message": "如果双击视频，它就会变成全屏。" }
+  "DoubleClickSwitchDescription": { "message": "如果双击视频，它就会变成全屏。" },
+  "scrollVolumeSwitch": { "message": "滚动音量：" },
+  "scrollVolumeDescription": { "message": "上下滚动声音图标可改变音量。" }
 }

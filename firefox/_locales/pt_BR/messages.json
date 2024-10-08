@@ -304,5 +304,7 @@
   },
   "DoubleClickSwitchDescription": {
     "message": "Se você clicar duas vezes no vídeo, ele será exibido em tela cheia."
-  }
+  },
+  "scrollVolumeSwitch": { "message": "Deslocação para o volume:" },
+  "scrollVolumeDescription": { "message": "Deslocar-se para cima ou para baixo no ícone de som altera o volume." }
 }

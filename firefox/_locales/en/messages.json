@@ -303,5 +303,11 @@
   },
   "DoubleClickSwitchDescription": {
     "message": "If you double click on the video it will go to fullscreen."
+  },
+  "scrollVolumeSwitch": {
+    "message": "Scroll for volume:"
+  },
+  "scrollVolumeDescription": {
+    "message": "Scrolling up or down on the Sound Icon will change the volume."
   }
 }

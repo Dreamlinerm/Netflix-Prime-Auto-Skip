@@ -101,5 +101,7 @@
   "DisableNumpadSwitch": { "message": "숫자 패드를 비활성화합니다:" },
   "DisableNumpadDescription": { "message": "현재 동영상 시간/위치를 실수로 변경하지 않도록 숫자패드 키를 비활성화합니다." },
   "DoubleClickSwitch": { "message": "두 번 클릭하면 전체 화면으로 전환됩니다:" },
-  "DoubleClickSwitchDescription": { "message": "동영상을 두 번 클릭하면 전체 화면으로 이동합니다." }
+  "DoubleClickSwitchDescription": { "message": "동영상을 두 번 클릭하면 전체 화면으로 이동합니다." },
+  "scrollVolumeSwitch": { "message": "볼륨을 찾으려면 스크롤합니다:" },
+  "scrollVolumeDescription": { "message": "사운드 아이콘을 위아래로 스크롤하면 볼륨이 변경됩니다." }
 }

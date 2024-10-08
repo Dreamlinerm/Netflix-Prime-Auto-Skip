@@ -1,3 +1,8 @@
 {
-  "test": "Skip ads, intros, credits and add adjust speed, etc. on Netflix, Prime video, Disney+, Crunchyroll and HBO max."
+  "scrollVolumeSwitch": {
+    "message": "Scroll for volume:"
+  },
+  "scrollVolumeDescription": {
+    "message": "Scrolling up or down on the Sound Icon will change the volume."
+  }
 }

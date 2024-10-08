@@ -113,5 +113,7 @@
     "message": "Desactiva las teclas del teclado numérico para no cambiar accidentalmente el tiempo/posición de vídeo actual."
   },
   "DoubleClickSwitch": { "message": "Pantalla completa haciendo doble clic:" },
-  "DoubleClickSwitchDescription": { "message": "Si haces doble clic en el vídeo, pasará a pantalla completa." }
+  "DoubleClickSwitchDescription": { "message": "Si haces doble clic en el vídeo, pasará a pantalla completa." },
+  "scrollVolumeSwitch": { "message": "Desplácese para el volumen:" },
+  "scrollVolumeDescription": { "message": "Si se desplaza hacia arriba o hacia abajo en el icono de sonido, cambiará el volumen." }
 }

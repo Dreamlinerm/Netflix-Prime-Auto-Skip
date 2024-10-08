@@ -111,5 +111,7 @@
   "DisableNumpadSwitch": { "message": "Desativar o teclado numérico:" },
   "DisableNumpadDescription": { "message": "Desativar as teclas do teclado numérico para não alterar acidentalmente a hora/posição atual do vídeo." },
   "DoubleClickSwitch": { "message": "Ecrã completo com um duplo clique:" },
-  "DoubleClickSwitchDescription": { "message": "Se fizer duplo clique no vídeo, este passará para ecrã inteiro." }
+  "DoubleClickSwitchDescription": { "message": "Se fizer duplo clique no vídeo, este passará para ecrã inteiro." },
+  "scrollVolumeSwitch": { "message": "Deslocação para o volume:" },
+  "scrollVolumeDescription": { "message": "Deslocar-se para cima ou para baixo no ícone de som altera o volume." }
 }

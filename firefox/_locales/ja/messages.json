@@ -103,5 +103,7 @@
   "DisableNumpadSwitch": { "message": "テンキーパッドを無効にする：" },
   "DisableNumpadDescription": { "message": "誤って現在のビデオ時間/位置を変更しないように、テンキーキーを無効にします。" },
   "DoubleClickSwitch": { "message": "ダブルクリックでフルスクリーン：" },
-  "DoubleClickSwitchDescription": { "message": "ビデオをダブルクリックするとフルスクリーンになります。" }
+  "DoubleClickSwitchDescription": { "message": "ビデオをダブルクリックするとフルスクリーンになります。" },
+  "scrollVolumeSwitch": { "message": "音量をスクロールする：" },
+  "scrollVolumeDescription": { "message": "サウンドアイコンを上下にスクロールすると音量が変わります。" }
 }

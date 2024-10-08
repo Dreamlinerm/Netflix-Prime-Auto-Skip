@@ -289,5 +289,11 @@
   },
   "DoubleClickSwitchDescription": {
     "message": "Ако кликнете двапати на видеото, тоа ќе оди на цел екран."
+  },
+  "scrollVolumeSwitch": {
+    "message": "Скролувајте за јачина на звук:"
+  },
+  "scrollVolumeDescription": {
+    "message": "Скролањето нагоре или надолу на иконата за звук ќе ја промени јачината на звукот."
   }
 }

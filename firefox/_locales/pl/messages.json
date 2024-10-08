@@ -107,5 +107,7 @@
   "DisableNumpadSwitch": { "message": "Wyłącz klawiaturę numeryczną:" },
   "DisableNumpadDescription": { "message": "Wyłącz klawisze numeryczne, aby przypadkowo nie zmienić bieżącego czasu/pozycji wideo." },
   "DoubleClickSwitch": { "message": "Pełny ekran po dwukrotnym kliknięciu:" },
-  "DoubleClickSwitchDescription": { "message": "Dwukrotne kliknięcie wideo spowoduje przejście do trybu pełnoekranowego." }
+  "DoubleClickSwitchDescription": { "message": "Dwukrotne kliknięcie wideo spowoduje przejście do trybu pełnoekranowego." },
+  "scrollVolumeSwitch": { "message": "Przewijanie głośności:" },
+  "scrollVolumeDescription": { "message": "Przewijanie ikony dźwięku w górę lub w dół powoduje zmianę głośności." }
 }
