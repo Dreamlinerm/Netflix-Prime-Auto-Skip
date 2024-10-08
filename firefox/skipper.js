@@ -1089,6 +1089,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   async function Amazon_xray() {
     document.querySelector(".xrayQuickViewList")?.remove();
+    // remove bad background hue which is annoying
+    let b = document.querySelector(".fkpovp9.f8hspre:not(.enhanced)");
+    if (b) {
+      b.classList.add("enhanced");
+      b.style.backgroundColor = "transparent";
+      b.style.background = "transparent";
+    }
   }
 
   async function Amazon_doubleClick() {
