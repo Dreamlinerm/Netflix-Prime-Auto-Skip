@@ -1,1 +1,306 @@
-{  "extensionName": { "message": "Streaming enhanced: Netflix Disney+ Prime Video", "description": "Nombre de la extensión" },  "extensionDescription": {    "message": "Omite anuncios, intros, créditos y añade ajustar velocidad, etc. en Netflix, Prime video, Disney+, Crunchyroll y HBO max.",    "description": "Descripción de la ampliación"  },  "settingsTitle": { "message": "Ajustes - Streaming enhanced", "description": "Título de la pestaña Configuración" },  "pageTitle": { "message": "mejorado", "description": "Título de la página de configuración" },  "rateNow": { "message": "¡Califique ahora!" },  "sharedSettings": { "message": "Ajustes compartidos" },  "sharedSettingsDescription": {    "message": "Estas opciones sólo activarán/desactivarán la parte $service$ de la configuración compartida",    "placeholders": { "service": { "content": "$1", "example": "Netflix" } }  },  "backup": { "message": "Copia de seguridad/reinicio" },  "statistics": { "message": "Estadísticas" },  "changelog": { "message": "Registro de cambios" },  "donate": { "message": "Donar" },  "PageSpecificTitle": { "message": "$service$ específico", "placeholders": { "service": { "content": "$1", "example": "Netflix" } } },  "defaultPageTitle": { "message": "Funciones opcionales" },  "defaultPageDescription": {    "message": "Todas las funciones que están desactivadas por defecto, ya sea porque son confusas si se activan o porque están en fase beta."  },  "DefaultPaidContentDescription": { "message": "Eliminación de todas las categorías de películas/series de pago de Amazon prime" },  "SharedPageTitle": { "message": "Funciones de vídeo compartido" },  "SharedPageDescription": {    "message": "Estas opciones sólo activarán/desactivarán los ajustes para todos los servicios de streaming. En la siguiente tabla puede desactivar los ajustes compartidos para un servicio específico"  },  "IntroSwitch": { "message": "Skip Intro & Recap:" },  "SharedIntroDescription": {    "message": "Saltarse las intros y las recapitulaciones de cualquier serie. Excepto Netflix, ya que los resúmenes no se pueden volver a ver."  },  "CreditsSwitch": { "message": "Saltar créditos:" },  "CreditsSwitchDescription": { "message": "Saltar al siguiente episodio de cada serie lo más rápido posible" },  "AdsSwitch": { "message": "Saltar anuncios:" },  "AdsSwitchDescription": { "message": "Saltar los anuncios de freevee para amazon y todos los anuncios en el nivel básico de Netflix" },  "SliderSwitch": { "message": "Añadir control de velocidad:" },  "SliderSwitchDescription": { "message": "Añadir un control deslizante de ajuste de la velocidad" },  "SliderOptions": { "message": "Opciones del control deslizante: velocidad = tamaño del paso /10" },  "SliderStepSize": { "message": "Tamaño de paso del deslizador:" },  "SliderMin": { "message": "Deslizador mínimo:" },  "SliderMax": { "message": "Deslizador máximo:" },  "SliderPreview": { "message": "Vista previa del deslizador:" },  "FullscreenSwitch": { "message": "Juega a pantalla completa:" },  "FullscreenSwitchDescription": { "message": "Si un vídeo se pone en pantalla completa, se reproducirá automáticamente" },  "SelfAdsSwitch": { "message": "Saltar anuncios propios:" },  "SelfAdsSwitchDescription": { "message": "Saltar los avances de los programas de máxima audiencia que se muestran antes de cualquier vídeo" },  "PaidContentSwitch": { "message": "Elimine los contenidos de pago:", "description": "Eliminar la función de contenidos de pago" },  "PaidContentDescription": { "message": "Eliminación de todas las categorías de películas/series de pago" },  "ContinuePositionSwitch": { "message": "Mover categoría \"Continuar\":" },  "ContinuePositionDescription": { "message": "Mover la categoría \"Continuar\" a la parte superior de la página" },  "FreeveeSwitch": { "message": "Saltar anuncios de Freevee:" },  "RecapSwitch": { "message": "Skip Recaps:" },  "RecapSwitchDescription": { "message": "Se salta las recapitulaciones de cada programa" },  "InactivitySwitch": { "message": "Reanudar aviso de inactividad:" },  "InactivitySwitchDescription": { "message": "Reanuda el vídeo si se muestra el mensaje \"¿Sigue viendo el vídeo?" },  "ProfileSwitch": { "message": "Elección automática del último perfil:" },  "ProfileSwitchDescription": { "message": "Al abrir la página, se selecciona directamente el último perfil utilizado." },  "User": { "message": "Usuario:" },  "StatisticPageTitle": { "message": "Estadísticas" },  "SkippedTime": { "message": "Tiempo perdido:" },  "AmazonAdDescription": { "message": "Tiempo de anuncios de FreeVee omitidos + anuncios propios de Prime Video" },  "StatisticAd": { "message": "$service$ Ad:", "placeholders": { "service": { "content": "$1", "example": "Netflix" } } },  "NetflixAdDescription": { "message": "Tiempo de anuncios de Netflix omitidos" },  "StatisticIntro": { "message": "Intro:" },  "StatisticIntroDescription": { "message": "Tiempo de Intros saltadas en Netflix, Amazon y Disney+." },  "StatisticRecap": { "message": "Recapitulemos:" },  "StatisticRecapDescription": { "message": "Tiempo de recapitulaciones omitidas en Netflix, Amazon y Disney+." },  "StatisticSegments": { "message": "Segmentos saltados:" },  "StatisticSegmentsDescription": {    "message": "Cantidad de segmentos individuales omitidos como una introducción o un anuncio para Netflix, Amazon y Disney+."  },  "ImportSettings": { "message": "Importar/exportar todos los ajustes" },  "SaveSettings": { "message": "Guardar configuración como archivo" },  "UploadSettings": { "message": "Cargar configuración" },  "ResetAddon": { "message": "Restablecer Addon por defecto" },  "noWrap": { "message": "nowrap" },  "WatchCreditsSwitch": { "message": "Ver créditos:" },  "WatchCreditsSwitchDescription": { "message": "Ver siempre los créditos de cada serie" },  "conflictingTitle": { "message": "Todas las características en conflicto" },  "RatingSwitch": { "message": "Clasificación TMDB:" },  "RatingSwitchDescription": { "message": "Añadir la clasificación TMDB a todas las películas y series" },  "ReleaseCalendarSwitch": { "message": "Añadir opciones de calendario de publicación:" },  "ReleaseCalendarDescription": {    "message": "Añade las casillas \"Mostrar sólo listas de reproducción\" y \"Filtrar DUB\" al calendario de lanzamientos."  },  "EpilepsySwitch": { "message": "Opción epilepsia" },  "EpilepsySwitchDescription": { "message": "Oscurecer la pantalla al saltar el anuncio" },  "UserAgentSwitch": { "message": "Cambiar a sitios web de escritorio" },  "UserAgentSwitchDescription": {    "message": "Para prime video y disney+ cambiar a la web de escritorio y para amazon hacer el sitio móvil amigable"  },  "XraySwitch": { "message": "Ocultar Rayos X:" },  "XraySwitchDescription": { "message": "Ocultar la vista rápida de rayos X sobre un vídeo" },  "Feature": { "message": "Función: Tooltip para más información" },  "Shared": { "message": "Todos" },  "OpenSharedSettings": { "message": "Abrir la configuración compartida" },  "autoOpenSettings": { "message": "Abrir automáticamente la configuración correcta:" },  "requestTabs": { "message": "Solicitar permiso para pestañas" },  "autoOpenDescription": {    "message": "Si en el sitio de streaming de abrir la configuración de acuerdo en la ventana emergente de forma automática"  },  "DuplicateSwitch": { "message": "Eliminar duplicados Espectáculos:" },  "DuplicateSwitchDescription": {    "message": "Elimina todos los programas duplicados que ya estaban visibles en Disney. Visible significa que el programa está entre los 5 primeros programas de cada fila."  },  "WatchSkippedButton": { "message": "¿Rebobinar?", "description": "Botón Watch skipped para ver una introducción" },  "HomeButton": { "message": "Inicio", "description": "Botón Disney Homepage" },  "BigPlayerSwitch": { "message": "Un vídeo más grande:" },  "BigPlayerDescription": { "message": "Amplía el tamaño del vídeo a toda la ventana del navegador sin pantalla completa." },  "DisableNumpadSwitch": { "message": "Desactiva el teclado numérico:" },  "DisableNumpadDescription": {    "message": "Desactiva las teclas del teclado numérico para no cambiar accidentalmente el tiempo/posición de vídeo actual."  },  "DoubleClickSwitch": { "message": "Pantalla completa haciendo doble clic:" },  "DoubleClickSwitchDescription": { "message": "Si haces doble clic en el vídeo, pasará a pantalla completa." },  "scrollVolumeSwitch": { "message": "Desplácese para el volumen:" },  "scrollVolumeDescription": { "message": "Si se desplaza hacia arriba o hacia abajo en el icono de sonido, cambiará el volumen." }}
+{
+  "extensionName": {
+    "message": "Streaming enhanced: Netflix Disney+ Prime Video",
+    "description": "Nombre de la extensión"
+  },
+  "extensionDescription": {
+    "message": "Omite anuncios, intros, créditos y añade ajustar velocidad, etc. en Netflix, Prime video, Disney+, Crunchyroll y HBO max.",
+    "description": "Descripción de la ampliación"
+  },
+  "settingsTitle": {
+    "message": "Ajustes - Streaming enhanced",
+    "description": "Título de la pestaña Configuración"
+  },
+  "pageTitle": {
+    "message": "mejorado",
+    "description": "Título de la página de configuración"
+  },
+  "rateNow": {
+    "message": "¡Califique ahora!"
+  },
+  "sharedSettings": {
+    "message": "Ajustes compartidos"
+  },
+  "sharedSettingsDescription": {
+    "message": "Estas opciones sólo activarán/desactivarán la parte $service$ de la configuración compartida",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "backup": {
+    "message": "Copia de seguridad/reinicio"
+  },
+  "statistics": {
+    "message": "Estadísticas"
+  },
+  "changelog": {
+    "message": "Registro de cambios"
+  },
+  "donate": {
+    "message": "Donar"
+  },
+  "PageSpecificTitle": {
+    "message": "$service$ específico",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "defaultPageTitle": {
+    "message": "Funciones opcionales"
+  },
+  "defaultPageDescription": {
+    "message": "Todas las funciones que están desactivadas por defecto, ya sea porque son confusas si se activan o porque están en fase beta."
+  },
+  "DefaultPaidContentDescription": {
+    "message": "Eliminación de todas las categorías de películas/series de pago de Amazon prime"
+  },
+  "SharedPageTitle": {
+    "message": "Funciones de vídeo compartido"
+  },
+  "SharedPageDescription": {
+    "message": "Estas opciones sólo activarán/desactivarán los ajustes para todos los servicios de streaming. En la siguiente tabla puede desactivar los ajustes compartidos para un servicio específico"
+  },
+  "IntroSwitch": {
+    "message": "Skip Intro & Recap:"
+  },
+  "SharedIntroDescription": {
+    "message": "Saltarse las intros y las recapitulaciones de cualquier serie. Excepto Netflix, ya que los resúmenes no se pueden volver a ver."
+  },
+  "CreditsSwitch": {
+    "message": "Saltar créditos:"
+  },
+  "CreditsSwitchDescription": {
+    "message": "Saltar al siguiente episodio de cada serie lo más rápido posible"
+  },
+  "AdsSwitch": {
+    "message": "Saltar anuncios:"
+  },
+  "AdsSwitchDescription": {
+    "message": "Saltar los anuncios de freevee para amazon y todos los anuncios en el nivel básico de Netflix"
+  },
+  "SliderSwitch": {
+    "message": "Añadir control de velocidad:"
+  },
+  "SliderSwitchDescription": {
+    "message": "Añadir un control deslizante de ajuste de la velocidad"
+  },
+  "SliderOptions": {
+    "message": "Opciones del control deslizante: velocidad = tamaño del paso /10"
+  },
+  "SliderStepSize": {
+    "message": "Tamaño de paso del deslizador:"
+  },
+  "SliderMin": {
+    "message": "Deslizador mínimo:"
+  },
+  "SliderMax": {
+    "message": "Deslizador máximo:"
+  },
+  "SliderPreview": {
+    "message": "Vista previa del deslizador:"
+  },
+  "FullscreenSwitch": {
+    "message": "Juega a pantalla completa:"
+  },
+  "FullscreenSwitchDescription": {
+    "message": "Si un vídeo se pone en pantalla completa, se reproducirá automáticamente"
+  },
+  "SelfAdsSwitch": {
+    "message": "Saltar anuncios propios:"
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "Saltar los avances de los programas de máxima audiencia que se muestran antes de cualquier vídeo"
+  },
+  "PaidContentSwitch": {
+    "message": "Elimine los contenidos de pago:",
+    "description": "Eliminar la función de contenidos de pago"
+  },
+  "PaidContentDescription": {
+    "message": "Eliminación de todas las categorías de películas/series de pago"
+  },
+  "ContinuePositionSwitch": {
+    "message": "Mover categoría \"Continuar\":"
+  },
+  "ContinuePositionDescription": {
+    "message": "Mover la categoría \"Continuar\" a la parte superior de la página"
+  },
+  "FreeveeSwitch": {
+    "message": "Saltar anuncios de Freevee:"
+  },
+  "RecapSwitch": {
+    "message": "Skip Recaps:"
+  },
+  "RecapSwitchDescription": {
+    "message": "Se salta las recapitulaciones de cada programa"
+  },
+  "InactivitySwitch": {
+    "message": "Reanudar aviso de inactividad:"
+  },
+  "InactivitySwitchDescription": {
+    "message": "Reanuda el vídeo si se muestra el mensaje \"¿Sigue viendo el vídeo?"
+  },
+  "ProfileSwitch": {
+    "message": "Elección automática del último perfil:"
+  },
+  "ProfileSwitchDescription": {
+    "message": "Al abrir la página, se selecciona directamente el último perfil utilizado."
+  },
+  "User": {
+    "message": "Usuario:"
+  },
+  "StatisticPageTitle": {
+    "message": "Estadísticas"
+  },
+  "SkippedTime": {
+    "message": "Tiempo perdido:"
+  },
+  "AmazonAdDescription": {
+    "message": "Tiempo de anuncios de FreeVee omitidos + anuncios propios de Prime Video"
+  },
+  "StatisticAd": {
+    "message": "$service$ Ad:",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "NetflixAdDescription": {
+    "message": "Tiempo de anuncios de Netflix omitidos"
+  },
+  "StatisticIntro": {
+    "message": "Intro:"
+  },
+  "StatisticIntroDescription": {
+    "message": "Tiempo de Intros saltadas en Netflix, Amazon y Disney+."
+  },
+  "StatisticRecap": {
+    "message": "Recapitulemos:"
+  },
+  "StatisticRecapDescription": {
+    "message": "Tiempo de recapitulaciones omitidas en Netflix, Amazon y Disney+."
+  },
+  "StatisticSegments": {
+    "message": "Segmentos saltados:"
+  },
+  "StatisticSegmentsDescription": {
+    "message": "Cantidad de segmentos individuales omitidos como una introducción o un anuncio para Netflix, Amazon y Disney+."
+  },
+  "ImportSettings": {
+    "message": "Importar/exportar todos los ajustes"
+  },
+  "SaveSettings": {
+    "message": "Guardar configuración como archivo"
+  },
+  "UploadSettings": {
+    "message": "Cargar configuración"
+  },
+  "ResetAddon": {
+    "message": "Restablecer Addon por defecto"
+  },
+  "noWrap": {
+    "message": "nowrap"
+  },
+  "WatchCreditsSwitch": {
+    "message": "Ver créditos:"
+  },
+  "WatchCreditsSwitchDescription": {
+    "message": "Ver siempre los créditos de cada serie"
+  },
+  "conflictingTitle": {
+    "message": "Todas las características en conflicto"
+  },
+  "RatingSwitch": {
+    "message": "Clasificación TMDB:"
+  },
+  "RatingSwitchDescription": {
+    "message": "Añadir la clasificación TMDB a todas las películas y series"
+  },
+  "ReleaseCalendarSwitch": {
+    "message": "Añadir opciones de calendario de publicación:"
+  },
+  "ReleaseCalendarDescription": {
+    "message": "Añade las casillas \"Mostrar sólo listas de reproducción\" y \"Filtrar DUB\" al calendario de lanzamientos."
+  },
+  "EpilepsySwitch": {
+    "message": "Opción epilepsia"
+  },
+  "EpilepsySwitchDescription": {
+    "message": "Oscurecer la pantalla al saltar el anuncio"
+  },
+  "UserAgentSwitch": {
+    "message": "Cambiar a sitios web de escritorio"
+  },
+  "UserAgentSwitchDescription": {
+    "message": "Para prime video y disney+ cambiar a la web de escritorio y para amazon hacer el sitio móvil amigable"
+  },
+  "XraySwitch": {
+    "message": "Ocultar Rayos X:"
+  },
+  "XraySwitchDescription": {
+    "message": "Ocultar la vista rápida de rayos X sobre un vídeo"
+  },
+  "Feature": {
+    "message": "Función: Tooltip para más información"
+  },
+  "Shared": {
+    "message": "Todos"
+  },
+  "OpenSharedSettings": {
+    "message": "Abrir la configuración compartida"
+  },
+  "autoOpenSettings": {
+    "message": "Abrir automáticamente la configuración correcta:"
+  },
+  "requestTabs": {
+    "message": "Solicitar permiso para pestañas"
+  },
+  "autoOpenDescription": {
+    "message": "Si en el sitio de streaming de abrir la configuración de acuerdo en la ventana emergente de forma automática"
+  },
+  "DuplicateSwitch": {
+    "message": "Eliminar duplicados Espectáculos:"
+  },
+  "DuplicateSwitchDescription": {
+    "message": "Elimina todos los programas duplicados que ya estaban visibles en Disney. Visible significa que el programa está entre los 5 primeros programas de cada fila."
+  },
+  "WatchSkippedButton": {
+    "message": "¿Rebobinar?",
+    "description": "Botón Watch skipped para ver una introducción"
+  },
+  "HomeButton": {
+    "message": "Inicio",
+    "description": "Botón Disney Homepage"
+  },
+  "BigPlayerSwitch": {
+    "message": "Un vídeo más grande:"
+  },
+  "BigPlayerDescription": {
+    "message": "Amplía el tamaño del vídeo a toda la ventana del navegador sin pantalla completa."
+  },
+  "DisableNumpadSwitch": {
+    "message": "Desactiva el teclado numérico:"
+  },
+  "DisableNumpadDescription": {
+    "message": "Desactiva las teclas del teclado numérico para no cambiar accidentalmente el tiempo/posición de vídeo actual."
+  },
+  "DoubleClickSwitch": {
+    "message": "Pantalla completa haciendo doble clic:"
+  },
+  "DoubleClickSwitchDescription": {
+    "message": "Si haces doble clic en el vídeo, pasará a pantalla completa."
+  },
+  "scrollVolumeSwitch": {
+    "message": "Desplácese para el volumen:"
+  },
+  "scrollVolumeDescription": {
+    "message": "Si se desplaza hacia arriba o hacia abajo en el icono de sonido, cambiará el volumen."
+  }
+}
