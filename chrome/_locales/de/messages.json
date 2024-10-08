@@ -7,7 +7,6 @@
     "message": "Werbung, Intros, Rückblicke, Abspanne usw. auf Netflix, Prime video, Disney+, Crunchyroll und HBO max überspringen.",
     "description": "Beschreibung der Erweiterung"
   },
-
   "settingsTitle": {
     "message": "Einstellungen - Streaming enhanced",
     "description": "Titel der Registerkarte 'Einstellungen'"
@@ -43,7 +42,6 @@
   "donate": {
     "message": "Spende"
   },
-
   "PageSpecificTitle": {
     "message": "$service$ spezifisch",
     "placeholders": {
@@ -53,7 +51,6 @@
       }
     }
   },
-
   "defaultPageTitle": {
     "message": "Optionale Funktionen"
   },
@@ -63,7 +60,6 @@
   "DefaultPaidContentDescription": {
     "message": "Entfernen aller kostenpflichtigen Filme/Serien Kategorien von Amazon Prime"
   },
-
   "SharedPageTitle": {
     "message": "Gemeinsame Videofunktionen"
   },
@@ -115,7 +111,6 @@
   "FullscreenSwitchDescription": {
     "message": "Wenn ein Video auf Vollbild umgeschaltet wird, wird das Video automatisch abgespielt"
   },
-
   "SelfAdsSwitch": {
     "message": "Eigenwerbung überspringen:"
   },
@@ -138,7 +133,6 @@
   "FreeveeSwitch": {
     "message": "Freevee-Werbungen überspringen:"
   },
-
   "RecapSwitch": {
     "message": "Rückblicke überspringen:"
   },
@@ -160,7 +154,6 @@
   "User": {
     "message": "Benutzer:"
   },
-
   "StatisticPageTitle": {
     "message": "Statistik"
   },
@@ -215,7 +208,6 @@
   "noWrap": {
     "message": "unset"
   },
-
   "WatchCreditsSwitch": {
     "message": "Credits ansehen:"
   },
@@ -304,5 +296,11 @@
   },
   "DoubleClickSwitchDescription": {
     "message": "Wenn Sie auf das Video doppelklicken, wird es im Vollbildmodus angezeigt."
+  },
+  "scrollVolumeSwitch": {
+    "message": "Scrollen für Lautstärke:"
+  },
+  "scrollVolumeDescription": {
+    "message": "Wenn Sie auf dem Tonsymbol nach oben oder unten scrollen, wird die Lautstärke geändert."
   }
 }

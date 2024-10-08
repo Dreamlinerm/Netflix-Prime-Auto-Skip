@@ -7,7 +7,6 @@
     "message": "Skip ads, intros, credits and add adjust speed, etc. on Netflix, Prime video, Disney+, Crunchyroll and HBO max.",
     "description": "Description of the extension"
   },
-
   "settingsTitle": {
     "message": "Settings - Streaming enhanced",
     "description": "Title of the Settings Tab"
@@ -43,7 +42,6 @@
   "donate": {
     "message": "Donate"
   },
-
   "PageSpecificTitle": {
     "message": "$service$ specific",
     "placeholders": {
@@ -53,7 +51,6 @@
       }
     }
   },
-
   "defaultPageTitle": {
     "message": "Optional functions"
   },
@@ -63,7 +60,6 @@
   "DefaultPaidContentDescription": {
     "message": "Removing every paid movie/series category from Amazon prime"
   },
-
   "SharedPageTitle": {
     "message": "Shared Video features"
   },
@@ -137,7 +133,6 @@
   "FreeveeSwitch": {
     "message": "Skip Freevee Ads:"
   },
-
   "RecapSwitch": {
     "message": "Skip Recaps:"
   },
@@ -159,7 +154,6 @@
   "User": {
     "message": "User:"
   },
-
   "StatisticPageTitle": {
     "message": "Statistics"
   },
@@ -214,7 +208,6 @@
   "noWrap": {
     "message": "nowrap"
   },
-
   "WatchCreditsSwitch": {
     "message": "Watch Credits:"
   },
@@ -303,5 +296,11 @@
   },
   "DoubleClickSwitchDescription": {
     "message": "If you double click on the video it will go to fullscreen."
+  },
+  "scrollVolumeSwitch": {
+    "message": "Scroll for volume:"
+  },
+  "scrollVolumeDescription": {
+    "message": "Scrolling up or down on the Sound Icon will change the volume."
   }
 }

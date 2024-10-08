@@ -1,105 +1,306 @@
 {
-  "extensionName": { "message": "Streaming enhanced Netflix Disney Prime Video", "description": "확장 프로그램 이름" },
+  "extensionName": {
+    "message": "Streaming enhanced Netflix Disney Prime Video",
+    "description": "확장 프로그램 이름"
+  },
   "extensionDescription": {
     "message": "넷플릭스, 프라임 비디오, 디즈니+, 크런치롤, HBO max에서 광고, 인트로, 크레딧을 건너뛰고 속도 조절 등을 추가할 수 있습니다.",
     "description": "확장 기능에 대한 설명"
   },
-  "settingsTitle": { "message": "설정 - Streaming enhanced", "description": "설정 탭의 제목" },
-  "pageTitle": { "message": "향상된", "description": "설정 페이지의 제목" },
-  "rateNow": { "message": "지금 평가하세요!" },
-  "sharedSettings": { "message": "공유 설정" },
+  "settingsTitle": {
+    "message": "설정 - Streaming enhanced",
+    "description": "설정 탭의 제목"
+  },
+  "pageTitle": {
+    "message": "향상된",
+    "description": "설정 페이지의 제목"
+  },
+  "rateNow": {
+    "message": "지금 평가하세요!"
+  },
+  "sharedSettings": {
+    "message": "공유 설정"
+  },
   "sharedSettingsDescription": {
     "message": "이러한 옵션은 공유 설정의 $service$ 부분만 활성화/비활성화합니다.",
-    "placeholders": { "service": { "content": "$1", "example": "넷플릭스" } }
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "넷플릭스"
+      }
+    }
   },
-  "backup": { "message": "백업/리셋" },
-  "statistics": { "message": "통계" },
-  "changelog": { "message": "변경 로그" },
-  "donate": { "message": "기부하기" },
-  "PageSpecificTitle": { "message": "$service$ 특정", "placeholders": { "service": { "content": "$1", "example": "넷플릭스" } } },
-  "defaultPageTitle": { "message": "선택적 기능" },
-  "defaultPageDescription": { "message": "켜져 있으면 혼란스럽거나 베타 버전이기 때문에 기본적으로 꺼져 있는 모든 기능" },
-  "DefaultPaidContentDescription": { "message": "Amazon Prime에서 모든 유료 영화/시리즈 카테고리 제거하기" },
-  "SharedPageTitle": { "message": "공유 비디오 기능" },
+  "backup": {
+    "message": "백업/리셋"
+  },
+  "statistics": {
+    "message": "통계"
+  },
+  "changelog": {
+    "message": "변경 로그"
+  },
+  "donate": {
+    "message": "기부하기"
+  },
+  "PageSpecificTitle": {
+    "message": "$service$ 특정",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "넷플릭스"
+      }
+    }
+  },
+  "defaultPageTitle": {
+    "message": "선택적 기능"
+  },
+  "defaultPageDescription": {
+    "message": "켜져 있으면 혼란스럽거나 베타 버전이기 때문에 기본적으로 꺼져 있는 모든 기능"
+  },
+  "DefaultPaidContentDescription": {
+    "message": "Amazon Prime에서 모든 유료 영화/시리즈 카테고리 제거하기"
+  },
+  "SharedPageTitle": {
+    "message": "공유 비디오 기능"
+  },
   "SharedPageDescription": {
     "message": "이러한 옵션은 모든 스트리밍 서비스에 대한 설정만 활성화/비활성화합니다. 아래 표에서 특정 서비스에 대한 공유 설정을 비활성화할 수 있습니다."
   },
-  "IntroSwitch": { "message": "소개 및 요약 건너뛰기:" },
-  "SharedIntroDescription": { "message": "모든 시리즈의 인트로 및 요약 건너뛰기. 넷플릭스는 다시 볼 수 없는 요약본이 있으므로 제외합니다." },
-  "CreditsSwitch": { "message": "크레딧 건너뛰기:" },
-  "CreditsSwitchDescription": { "message": "모든 시리즈의 다음 에피소드로 최대한 빠르게 건너뛰기" },
-  "AdsSwitch": { "message": "광고 건너뛰기:" },
-  "AdsSwitchDescription": { "message": "아마존 프리비 광고 건너뛰기 및 기본 넷플릭스 티어의 모든 광고 건너뛰기" },
-  "SliderSwitch": { "message": "속도 제어를 추가합니다:" },
-  "SliderSwitchDescription": { "message": "속도 조절 슬라이더 추가" },
-  "SliderOptions": { "message": "슬라이더 옵션: 속도 = 단계 크기 /10" },
-  "SliderStepSize": { "message": "슬라이더 단계 크기:" },
-  "SliderMin": { "message": "최소 슬라이더:" },
-  "SliderMax": { "message": "슬라이더 최대:" },
-  "SliderPreview": { "message": "슬라이더 미리 보기:" },
-  "FullscreenSwitch": { "message": "전체 화면으로 재생합니다:" },
-  "FullscreenSwitchDescription": { "message": "동영상이 전체 화면으로 표시되면 동영상이 자동으로 재생됩니다." },
-  "SelfAdsSwitch": { "message": "셀프 광고 건너뛰기:" },
-  "SelfAdsSwitchDescription": { "message": "동영상 전에 표시되는 프라임 쇼 미리보기 건너뛰기" },
-  "PaidContentSwitch": { "message": "유료 콘텐츠를 제거합니다:", "description": "유료 콘텐츠 기능 전환 제거" },
-  "PaidContentDescription": { "message": "모든 유료 영화/시리즈 카테고리 삭제" },
-  "ContinuePositionSwitch": { "message": "카테고리 이동 \"계속\":" },
-  "ContinuePositionDescription": { "message": "카테고리 '계속'을 페이지 상단으로 이동합니다." },
-  "FreeveeSwitch": { "message": "프리비 광고 건너뛰기:" },
-  "RecapSwitch": { "message": "요약 건너뛰기:" },
-  "RecapSwitchDescription": { "message": "모든 프로그램 요약 건너뛰기" },
-  "InactivitySwitch": { "message": "비활성 상태 재개 경고:" },
-  "InactivitySwitchDescription": { "message": "'아직 시청 중이십니까'라는 메시지가 표시되면 동영상을 다시 시작합니다." },
-  "ProfileSwitch": { "message": "마지막 프로필 자동 선택:" },
-  "ProfileSwitchDescription": { "message": "페이지가 시작될 때 마지막으로 사용한 프로필이 바로 선택됩니다." },
-  "User": { "message": "사용자:" },
-  "StatisticPageTitle": { "message": "통계" },
-  "SkippedTime": { "message": "시간 건너뛰기:" },
-  "AmazonAdDescription": { "message": "프리비 광고 + 프라임 비디오 셀프 광고 건너뛰기 시간" },
-  "StatisticAd": { "message": "$service$ 광고:", "placeholders": { "service": { "content": "$1", "example": "넷플릭스" } } },
-  "NetflixAdDescription": { "message": "넷플릭스 광고를 건너뛴 시간" },
-  "StatisticIntro": { "message": "소개:" },
-  "StatisticIntroDescription": { "message": "넷플릭스, 아마존, 디즈니+에서 인트로를 건너뛴 시간" },
-  "StatisticRecap": { "message": "요약합니다:" },
-  "StatisticRecapDescription": { "message": "넷플릭스, 아마존 및 디즈니+에서 건너뛴 요약 시간" },
-  "StatisticSegments": { "message": "세그먼트 건너뛰기:" },
-  "StatisticSegmentsDescription": { "message": "넷플릭스, 아마존 및 디즈니+의 인트로 또는 광고처럼 건너뛴 개별 세그먼트의 수" },
-  "ImportSettings": { "message": "모든 설정 가져오기/내보내기" },
-  "SaveSettings": { "message": "설정을 파일로 저장" },
-  "UploadSettings": { "message": "업로드 설정" },
-  "ResetAddon": { "message": "애드온을 기본값으로 재설정" },
-  "noWrap": { "message": "nowrap" },
-  "WatchCreditsSwitch": { "message": "크레딧 보기:" },
-  "WatchCreditsSwitchDescription": { "message": "모든 시리즈의 크레딧을 항상 시청하세요" },
-  "conflictingTitle": { "message": "충돌하는 모든 기능" },
-  "RatingSwitch": { "message": "TMDB 등급:" },
-  "RatingSwitchDescription": { "message": "모든 영화 및 시리즈에 TMDB 등급 추가하기" },
-  "ReleaseCalendarSwitch": { "message": "릴리즈 캘린더 옵션을 추가합니다:" },
-  "ReleaseCalendarDescription": { "message": "출시 캘린더에 '재생목록만 표시' 및 'DUB 필터링' 확인란을 추가합니다." },
-  "EpilepsySwitch": { "message": "간질 옵션" },
-  "EpilepsySwitchDescription": { "message": "광고 건너뛰기 시 화면 어둡게 하기" },
-  "UserAgentSwitch": { "message": "데스크톱 웹사이트로 전환" },
+  "IntroSwitch": {
+    "message": "소개 및 요약 건너뛰기:"
+  },
+  "SharedIntroDescription": {
+    "message": "모든 시리즈의 인트로 및 요약 건너뛰기. 넷플릭스는 다시 볼 수 없는 요약본이 있으므로 제외합니다."
+  },
+  "CreditsSwitch": {
+    "message": "크레딧 건너뛰기:"
+  },
+  "CreditsSwitchDescription": {
+    "message": "모든 시리즈의 다음 에피소드로 최대한 빠르게 건너뛰기"
+  },
+  "AdsSwitch": {
+    "message": "광고 건너뛰기:"
+  },
+  "AdsSwitchDescription": {
+    "message": "아마존 프리비 광고 건너뛰기 및 기본 넷플릭스 티어의 모든 광고 건너뛰기"
+  },
+  "SliderSwitch": {
+    "message": "속도 제어를 추가합니다:"
+  },
+  "SliderSwitchDescription": {
+    "message": "속도 조절 슬라이더 추가"
+  },
+  "SliderOptions": {
+    "message": "슬라이더 옵션: 속도 = 단계 크기 /10"
+  },
+  "SliderStepSize": {
+    "message": "슬라이더 단계 크기:"
+  },
+  "SliderMin": {
+    "message": "최소 슬라이더:"
+  },
+  "SliderMax": {
+    "message": "슬라이더 최대:"
+  },
+  "SliderPreview": {
+    "message": "슬라이더 미리 보기:"
+  },
+  "FullscreenSwitch": {
+    "message": "전체 화면으로 재생합니다:"
+  },
+  "FullscreenSwitchDescription": {
+    "message": "동영상이 전체 화면으로 표시되면 동영상이 자동으로 재생됩니다."
+  },
+  "SelfAdsSwitch": {
+    "message": "셀프 광고 건너뛰기:"
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "동영상 전에 표시되는 프라임 쇼 미리보기 건너뛰기"
+  },
+  "PaidContentSwitch": {
+    "message": "유료 콘텐츠를 제거합니다:",
+    "description": "유료 콘텐츠 기능 전환 제거"
+  },
+  "PaidContentDescription": {
+    "message": "모든 유료 영화/시리즈 카테고리 삭제"
+  },
+  "ContinuePositionSwitch": {
+    "message": "카테고리 이동 \"계속\":"
+  },
+  "ContinuePositionDescription": {
+    "message": "카테고리 '계속'을 페이지 상단으로 이동합니다."
+  },
+  "FreeveeSwitch": {
+    "message": "프리비 광고 건너뛰기:"
+  },
+  "RecapSwitch": {
+    "message": "요약 건너뛰기:"
+  },
+  "RecapSwitchDescription": {
+    "message": "모든 프로그램 요약 건너뛰기"
+  },
+  "InactivitySwitch": {
+    "message": "비활성 상태 재개 경고:"
+  },
+  "InactivitySwitchDescription": {
+    "message": "'아직 시청 중이십니까'라는 메시지가 표시되면 동영상을 다시 시작합니다."
+  },
+  "ProfileSwitch": {
+    "message": "마지막 프로필 자동 선택:"
+  },
+  "ProfileSwitchDescription": {
+    "message": "페이지가 시작될 때 마지막으로 사용한 프로필이 바로 선택됩니다."
+  },
+  "User": {
+    "message": "사용자:"
+  },
+  "StatisticPageTitle": {
+    "message": "통계"
+  },
+  "SkippedTime": {
+    "message": "시간 건너뛰기:"
+  },
+  "AmazonAdDescription": {
+    "message": "프리비 광고 + 프라임 비디오 셀프 광고 건너뛰기 시간"
+  },
+  "StatisticAd": {
+    "message": "$service$ 광고:",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "넷플릭스"
+      }
+    }
+  },
+  "NetflixAdDescription": {
+    "message": "넷플릭스 광고를 건너뛴 시간"
+  },
+  "StatisticIntro": {
+    "message": "소개:"
+  },
+  "StatisticIntroDescription": {
+    "message": "넷플릭스, 아마존, 디즈니+에서 인트로를 건너뛴 시간"
+  },
+  "StatisticRecap": {
+    "message": "요약합니다:"
+  },
+  "StatisticRecapDescription": {
+    "message": "넷플릭스, 아마존 및 디즈니+에서 건너뛴 요약 시간"
+  },
+  "StatisticSegments": {
+    "message": "세그먼트 건너뛰기:"
+  },
+  "StatisticSegmentsDescription": {
+    "message": "넷플릭스, 아마존 및 디즈니+의 인트로 또는 광고처럼 건너뛴 개별 세그먼트의 수"
+  },
+  "ImportSettings": {
+    "message": "모든 설정 가져오기/내보내기"
+  },
+  "SaveSettings": {
+    "message": "설정을 파일로 저장"
+  },
+  "UploadSettings": {
+    "message": "업로드 설정"
+  },
+  "ResetAddon": {
+    "message": "애드온을 기본값으로 재설정"
+  },
+  "noWrap": {
+    "message": "nowrap"
+  },
+  "WatchCreditsSwitch": {
+    "message": "크레딧 보기:"
+  },
+  "WatchCreditsSwitchDescription": {
+    "message": "모든 시리즈의 크레딧을 항상 시청하세요"
+  },
+  "conflictingTitle": {
+    "message": "충돌하는 모든 기능"
+  },
+  "RatingSwitch": {
+    "message": "TMDB 등급:"
+  },
+  "RatingSwitchDescription": {
+    "message": "모든 영화 및 시리즈에 TMDB 등급 추가하기"
+  },
+  "ReleaseCalendarSwitch": {
+    "message": "릴리즈 캘린더 옵션을 추가합니다:"
+  },
+  "ReleaseCalendarDescription": {
+    "message": "출시 캘린더에 '재생목록만 표시' 및 'DUB 필터링' 확인란을 추가합니다."
+  },
+  "EpilepsySwitch": {
+    "message": "간질 옵션"
+  },
+  "EpilepsySwitchDescription": {
+    "message": "광고 건너뛰기 시 화면 어둡게 하기"
+  },
+  "UserAgentSwitch": {
+    "message": "데스크톱 웹사이트로 전환"
+  },
   "UserAgentSwitchDescription": {
     "message": "프라임 비디오 및 디즈니+의 경우 데스크톱 웹사이트로 변경하고 아마존의 경우 사이트를 모바일 친화적으로 만듭니다."
   },
-  "XraySwitch": { "message": "X레이 숨기기:" },
-  "XraySwitchDescription": { "message": "동영상 위에 X레이 퀵뷰 숨기기" },
-  "Feature": { "message": "기능: 기능: 자세한 내용은 도구 설명" },
-  "Shared": { "message": "모두" },
-  "OpenSharedSettings": { "message": "공유 설정 열기" },
-  "autoOpenSettings": { "message": "올바른 설정이 자동으로 열립니다:" },
-  "requestTabs": { "message": "탭 권한 요청" },
-  "autoOpenDescription": { "message": "스트리밍 사이트에서 해당 설정이 자동으로 팝업으로 열리면 다음과 같이 설정합니다." },
-  "DuplicateSwitch": { "message": "중복된 쇼를 제거합니다:" },
+  "XraySwitch": {
+    "message": "X레이 숨기기:"
+  },
+  "XraySwitchDescription": {
+    "message": "동영상 위에 X레이 퀵뷰 숨기기"
+  },
+  "Feature": {
+    "message": "기능: 기능: 자세한 내용은 도구 설명"
+  },
+  "Shared": {
+    "message": "모두"
+  },
+  "OpenSharedSettings": {
+    "message": "공유 설정 열기"
+  },
+  "autoOpenSettings": {
+    "message": "올바른 설정이 자동으로 열립니다:"
+  },
+  "requestTabs": {
+    "message": "탭 권한 요청"
+  },
+  "autoOpenDescription": {
+    "message": "스트리밍 사이트에서 해당 설정이 자동으로 팝업으로 열리면 다음과 같이 설정합니다."
+  },
+  "DuplicateSwitch": {
+    "message": "중복된 쇼를 제거합니다:"
+  },
   "DuplicateSwitchDescription": {
     "message": "이전에 Disney에서 이미 표시되었던 중복 쇼를 모두 제거합니다. 표시됨은 모든 행의 처음 5개 쇼에 해당 쇼가 있음을 의미합니다."
   },
-  "WatchSkippedButton": { "message": "되감기?", "description": "인트로를 시청하려면 건너뛰기 버튼을 클릭하세요." },
-  "HomeButton": { "message": "홈", "description": "디즈니 홈페이지 버튼" },
-  "BigPlayerSwitch": { "message": "동영상 크게 보기:" },
-  "BigPlayerDescription": { "message": "동영상 크기를 전체 화면 없이 브라우저 창 전체로 확장합니다." },
-  "DisableNumpadSwitch": { "message": "숫자 패드를 비활성화합니다:" },
-  "DisableNumpadDescription": { "message": "현재 동영상 시간/위치를 실수로 변경하지 않도록 숫자패드 키를 비활성화합니다." },
-  "DoubleClickSwitch": { "message": "두 번 클릭하면 전체 화면으로 전환됩니다:" },
-  "DoubleClickSwitchDescription": { "message": "동영상을 두 번 클릭하면 전체 화면으로 이동합니다." }
+  "WatchSkippedButton": {
+    "message": "되감기?",
+    "description": "인트로를 시청하려면 건너뛰기 버튼을 클릭하세요."
+  },
+  "HomeButton": {
+    "message": "홈",
+    "description": "디즈니 홈페이지 버튼"
+  },
+  "BigPlayerSwitch": {
+    "message": "동영상 크게 보기:"
+  },
+  "BigPlayerDescription": {
+    "message": "동영상 크기를 전체 화면 없이 브라우저 창 전체로 확장합니다."
+  },
+  "DisableNumpadSwitch": {
+    "message": "숫자 패드를 비활성화합니다:"
+  },
+  "DisableNumpadDescription": {
+    "message": "현재 동영상 시간/위치를 실수로 변경하지 않도록 숫자패드 키를 비활성화합니다."
+  },
+  "DoubleClickSwitch": {
+    "message": "두 번 클릭하면 전체 화면으로 전환됩니다:"
+  },
+  "DoubleClickSwitchDescription": {
+    "message": "동영상을 두 번 클릭하면 전체 화면으로 이동합니다."
+  },
+  "scrollVolumeSwitch": {
+    "message": "볼륨을 찾으려면 스크롤합니다:"
+  },
+  "scrollVolumeDescription": {
+    "message": "사운드 아이콘을 위아래로 스크롤하면 볼륨이 변경됩니다."
+  }
 }

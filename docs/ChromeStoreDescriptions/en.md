@@ -10,6 +10,7 @@ This extension enhances your streaming experience on Netflix, Prime Video, Disne
   • Adding customizable playback speed control
   • Automatically start to play videos in fullscreen
   • Go fullscreen on double click
+  • Scroll to change the volume
 
 Platform-Specific Features:
   • Netflix:

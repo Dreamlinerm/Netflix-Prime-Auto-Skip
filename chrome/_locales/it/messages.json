@@ -1,118 +1,306 @@
 {
-  "extensionName": { "message": "Streaming enhanced Netflix Disney Prime Video", "description": "Nome dell'estensione" },
+  "extensionName": {
+    "message": "Streaming enhanced Netflix Disney Prime Video",
+    "description": "Nome dell'estensione"
+  },
   "extensionDescription": {
     "message": "Salta annunci, intro, titoli di coda e regola la velocità su Netflix, Prime Video, Disney+, Crunchyroll e HBO Max.",
     "description": "Descrizione dell'estensione"
   },
-  "settingsTitle": { "message": "Impostazioni - Streaming enhanced", "description": "Titolo della scheda Impostazioni" },
-  "pageTitle": { "message": "potenziato", "description": "Titolo della pagina delle impostazioni" },
-  "rateNow": { "message": "Vota ora!" },
-  "sharedSettings": { "message": "Impostazioni condivise" },
+  "settingsTitle": {
+    "message": "Impostazioni - Streaming enhanced",
+    "description": "Titolo della scheda Impostazioni"
+  },
+  "pageTitle": {
+    "message": "potenziato",
+    "description": "Titolo della pagina delle impostazioni"
+  },
+  "rateNow": {
+    "message": "Vota ora!"
+  },
+  "sharedSettings": {
+    "message": "Impostazioni condivise"
+  },
   "sharedSettingsDescription": {
     "message": "Queste opzioni abilitano/disabilitano solo la parte $service$ dell'impostazione condivisa",
-    "placeholders": { "service": { "content": "$1", "example": "Netflix" } }
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
   },
-  "backup": { "message": "Backup/Reset" },
-  "statistics": { "message": "Statistiche" },
-  "changelog": { "message": "Changelog" },
-  "donate": { "message": "Donare" },
-  "PageSpecificTitle": { "message": "$service$ specifico", "placeholders": { "service": { "content": "$1", "example": "Netflix" } } },
-  "defaultPageTitle": { "message": "Funzioni opzionali" },
+  "backup": {
+    "message": "Backup/Reset"
+  },
+  "statistics": {
+    "message": "Statistiche"
+  },
+  "changelog": {
+    "message": "Changelog"
+  },
+  "donate": {
+    "message": "Donare"
+  },
+  "PageSpecificTitle": {
+    "message": "$service$ specifico",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "defaultPageTitle": {
+    "message": "Funzioni opzionali"
+  },
   "defaultPageDescription": {
     "message": "Tutte le funzionalità che sono disattivate per impostazione predefinita o perché confondono se sono attivate o perché sono in fase di beta."
   },
-  "DefaultPaidContentDescription": { "message": "Rimozione di ogni categoria di film/serie a pagamento da Amazon prime" },
-  "SharedPageTitle": { "message": "Caratteristiche dei video condivisi" },
+  "DefaultPaidContentDescription": {
+    "message": "Rimozione di ogni categoria di film/serie a pagamento da Amazon prime"
+  },
+  "SharedPageTitle": {
+    "message": "Caratteristiche dei video condivisi"
+  },
   "SharedPageDescription": {
     "message": "Queste opzioni abilitano/disabilitano le impostazioni solo per tutti i servizi di streaming. Nella tabella seguente è possibile disattivare le impostazioni condivise per un servizio specifico."
   },
-  "IntroSwitch": { "message": "Salta l'introduzione e la ripetizione:" },
+  "IntroSwitch": {
+    "message": "Salta l'introduzione e la ripetizione:"
+  },
   "SharedIntroDescription": {
     "message": "Saltare le introduzioni e i riassunti di qualsiasi serie. Tranne che su Netflix, dove i riassunti non possono essere guardati di nuovo."
   },
-  "CreditsSwitch": { "message": "Crediti di salto:" },
-  "CreditsSwitchDescription": { "message": "Saltare all'episodio successivo di ogni serie il più velocemente possibile" },
-  "AdsSwitch": { "message": "Salta gli annunci:" },
-  "AdsSwitchDescription": { "message": "Saltare gli annunci di freevee per amazon e tutti gli annunci nel livello base di Netflix" },
-  "SliderSwitch": { "message": "Aggiungere il controllo della velocità:" },
-  "SliderSwitchDescription": { "message": "Aggiunta di un cursore di regolazione della velocità" },
-  "SliderOptions": { "message": "Opzioni del cursore: velocità = stepsize /10" },
-  "SliderStepSize": { "message": "Dimensione del cursore:" },
-  "SliderMin": { "message": "Cursore minimo:" },
-  "SliderMax": { "message": "Cursore massimo:" },
-  "SliderPreview": { "message": "Anteprima del cursore:" },
-  "FullscreenSwitch": { "message": "Riproduzione a schermo intero:" },
-  "FullscreenSwitchDescription": { "message": "Se un video viene messo a schermo intero, il video verrà riprodotto automaticamente." },
-  "SelfAdsSwitch": { "message": "Salta gli annunci personali:" },
-  "SelfAdsSwitchDescription": { "message": "Saltare le anteprime della prima serata, che vengono mostrate prima di ogni video." },
+  "CreditsSwitch": {
+    "message": "Crediti di salto:"
+  },
+  "CreditsSwitchDescription": {
+    "message": "Saltare all'episodio successivo di ogni serie il più velocemente possibile"
+  },
+  "AdsSwitch": {
+    "message": "Salta gli annunci:"
+  },
+  "AdsSwitchDescription": {
+    "message": "Saltare gli annunci di freevee per amazon e tutti gli annunci nel livello base di Netflix"
+  },
+  "SliderSwitch": {
+    "message": "Aggiungere il controllo della velocità:"
+  },
+  "SliderSwitchDescription": {
+    "message": "Aggiunta di un cursore di regolazione della velocità"
+  },
+  "SliderOptions": {
+    "message": "Opzioni del cursore: velocità = stepsize /10"
+  },
+  "SliderStepSize": {
+    "message": "Dimensione del cursore:"
+  },
+  "SliderMin": {
+    "message": "Cursore minimo:"
+  },
+  "SliderMax": {
+    "message": "Cursore massimo:"
+  },
+  "SliderPreview": {
+    "message": "Anteprima del cursore:"
+  },
+  "FullscreenSwitch": {
+    "message": "Riproduzione a schermo intero:"
+  },
+  "FullscreenSwitchDescription": {
+    "message": "Se un video viene messo a schermo intero, il video verrà riprodotto automaticamente."
+  },
+  "SelfAdsSwitch": {
+    "message": "Salta gli annunci personali:"
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "Saltare le anteprime della prima serata, che vengono mostrate prima di ogni video."
+  },
   "PaidContentSwitch": {
     "message": "Rimuovere i contenuti a pagamento:",
     "description": "Rimuovere il cambio di funzione dei contenuti a pagamento"
   },
-  "PaidContentDescription": { "message": "Rimozione di tutte le categorie di film/serie a pagamento" },
-  "ContinuePositionSwitch": { "message": "Spostare la categoria \"Continua\":" },
-  "ContinuePositionDescription": { "message": "Spostare la categoria \"Continua\" all'inizio della pagina" },
-  "FreeveeSwitch": { "message": "Salta gli annunci di Freevee:" },
-  "RecapSwitch": { "message": "Skip Recaps:" },
-  "RecapSwitchDescription": { "message": "Salta le ricapitolazioni di ogni spettacolo" },
-  "InactivitySwitch": { "message": "Avviso di inattività della ripresa:" },
-  "InactivitySwitchDescription": { "message": "Riprende il video se viene visualizzato il messaggio \"Stai ancora guardando\"." },
-  "ProfileSwitch": { "message": "Scelta automatica dell'ultimo profilo:" },
-  "ProfileSwitchDescription": { "message": "All'avvio della pagina viene scelto direttamente l'ultimo profilo utilizzato." },
-  "User": { "message": "Utente:" },
-  "StatisticPageTitle": { "message": "Statistiche" },
-  "SkippedTime": { "message": "Tempo saltato:" },
-  "AmazonAdDescription": { "message": "Tempo degli annunci FreeVee saltati + Prime Video Self Ads" },
-  "StatisticAd": { "message": "$service$ Annuncio:", "placeholders": { "service": { "content": "$1", "example": "Netflix" } } },
-  "NetflixAdDescription": { "message": "Tempo di salto degli annunci di Netflix" },
-  "StatisticIntro": { "message": "Introduzione:" },
-  "StatisticIntroDescription": { "message": "Tempo di intro saltate su Netflix, Amazon e Disney+" },
-  "StatisticRecap": { "message": "Riconoscimento:" },
-  "StatisticRecapDescription": { "message": "Il tempo delle repliche saltate su Netflix, Amazon e Disney+" },
-  "StatisticSegments": { "message": "Segmenti saltati:" },
+  "PaidContentDescription": {
+    "message": "Rimozione di tutte le categorie di film/serie a pagamento"
+  },
+  "ContinuePositionSwitch": {
+    "message": "Spostare la categoria \"Continua\":"
+  },
+  "ContinuePositionDescription": {
+    "message": "Spostare la categoria \"Continua\" all'inizio della pagina"
+  },
+  "FreeveeSwitch": {
+    "message": "Salta gli annunci di Freevee:"
+  },
+  "RecapSwitch": {
+    "message": "Skip Recaps:"
+  },
+  "RecapSwitchDescription": {
+    "message": "Salta le ricapitolazioni di ogni spettacolo"
+  },
+  "InactivitySwitch": {
+    "message": "Avviso di inattività della ripresa:"
+  },
+  "InactivitySwitchDescription": {
+    "message": "Riprende il video se viene visualizzato il messaggio \"Stai ancora guardando\"."
+  },
+  "ProfileSwitch": {
+    "message": "Scelta automatica dell'ultimo profilo:"
+  },
+  "ProfileSwitchDescription": {
+    "message": "All'avvio della pagina viene scelto direttamente l'ultimo profilo utilizzato."
+  },
+  "User": {
+    "message": "Utente:"
+  },
+  "StatisticPageTitle": {
+    "message": "Statistiche"
+  },
+  "SkippedTime": {
+    "message": "Tempo saltato:"
+  },
+  "AmazonAdDescription": {
+    "message": "Tempo degli annunci FreeVee saltati + Prime Video Self Ads"
+  },
+  "StatisticAd": {
+    "message": "$service$ Annuncio:",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "NetflixAdDescription": {
+    "message": "Tempo di salto degli annunci di Netflix"
+  },
+  "StatisticIntro": {
+    "message": "Introduzione:"
+  },
+  "StatisticIntroDescription": {
+    "message": "Tempo di intro saltate su Netflix, Amazon e Disney+"
+  },
+  "StatisticRecap": {
+    "message": "Riconoscimento:"
+  },
+  "StatisticRecapDescription": {
+    "message": "Il tempo delle repliche saltate su Netflix, Amazon e Disney+"
+  },
+  "StatisticSegments": {
+    "message": "Segmenti saltati:"
+  },
   "StatisticSegmentsDescription": {
     "message": "Quantità di singoli segmenti saltati come un'introduzione o una pubblicità per Netflix, Amazon e Disney+"
   },
-  "ImportSettings": { "message": "Importazione/Esportazione di tutte le impostazioni" },
-  "SaveSettings": { "message": "Salva le impostazioni come file" },
-  "UploadSettings": { "message": "Impostazioni di caricamento" },
-  "ResetAddon": { "message": "Ripristinare l'impostazione predefinita del componente aggiuntivo" },
-  "noWrap": { "message": "nowrap" },
-  "WatchCreditsSwitch": { "message": "Guarda i crediti:" },
-  "WatchCreditsSwitchDescription": { "message": "Guardate sempre i titoli di coda di ogni serie" },
-  "conflictingTitle": { "message": "Tutte le caratteristiche in conflitto" },
-  "RatingSwitch": { "message": "Valutazione TMDB:" },
-  "RatingSwitchDescription": { "message": "Aggiunta della valutazione TMDB a tutti i film e le serie" },
-  "ReleaseCalendarSwitch": { "message": "Aggiungere le opzioni del calendario di rilascio:" },
+  "ImportSettings": {
+    "message": "Importazione/Esportazione di tutte le impostazioni"
+  },
+  "SaveSettings": {
+    "message": "Salva le impostazioni come file"
+  },
+  "UploadSettings": {
+    "message": "Impostazioni di caricamento"
+  },
+  "ResetAddon": {
+    "message": "Ripristinare l'impostazione predefinita del componente aggiuntivo"
+  },
+  "noWrap": {
+    "message": "nowrap"
+  },
+  "WatchCreditsSwitch": {
+    "message": "Guarda i crediti:"
+  },
+  "WatchCreditsSwitchDescription": {
+    "message": "Guardate sempre i titoli di coda di ogni serie"
+  },
+  "conflictingTitle": {
+    "message": "Tutte le caratteristiche in conflitto"
+  },
+  "RatingSwitch": {
+    "message": "Valutazione TMDB:"
+  },
+  "RatingSwitchDescription": {
+    "message": "Aggiunta della valutazione TMDB a tutti i film e le serie"
+  },
+  "ReleaseCalendarSwitch": {
+    "message": "Aggiungere le opzioni del calendario di rilascio:"
+  },
   "ReleaseCalendarDescription": {
     "message": "Aggiunge le caselle di controllo \"Mostra solo playlist\" e \"Filtra DUB\" al calendario delle uscite."
   },
-  "EpilepsySwitch": { "message": "Opzione epilessia" },
-  "EpilepsySwitchDescription": { "message": "Oscuramento dello schermo quando si salta l'annuncio" },
-  "UserAgentSwitch": { "message": "Passare a siti web desktop" },
+  "EpilepsySwitch": {
+    "message": "Opzione epilessia"
+  },
+  "EpilepsySwitchDescription": {
+    "message": "Oscuramento dello schermo quando si salta l'annuncio"
+  },
+  "UserAgentSwitch": {
+    "message": "Passare a siti web desktop"
+  },
   "UserAgentSwitchDescription": {
     "message": "Per prime video e disney+ passare al sito web per desktop e per amazon rendere il sito compatibile con i dispositivi mobili."
   },
-  "XraySwitch": { "message": "Nascondere i raggi X:" },
-  "XraySwitchDescription": { "message": "Nascondere la vista rapida Xray su un video" },
-  "Feature": { "message": "Caratteristica: Tooltip per maggiori informazioni" },
-  "Shared": { "message": "Tutti" },
-  "OpenSharedSettings": { "message": "Aprire le impostazioni condivise" },
-  "autoOpenSettings": { "message": "Aprire automaticamente le impostazioni corrette:" },
-  "requestTabs": { "message": "Richiesta di autorizzazione per le schede" },
-  "autoOpenDescription": { "message": "Se sul sito di streaming si aprono automaticamente le impostazioni corrispondenti nel popup" },
-  "DuplicateSwitch": { "message": "Rimuovere i duplicati delle Mostre:" },
+  "XraySwitch": {
+    "message": "Nascondere i raggi X:"
+  },
+  "XraySwitchDescription": {
+    "message": "Nascondere la vista rapida Xray su un video"
+  },
+  "Feature": {
+    "message": "Caratteristica: Tooltip per maggiori informazioni"
+  },
+  "Shared": {
+    "message": "Tutti"
+  },
+  "OpenSharedSettings": {
+    "message": "Aprire le impostazioni condivise"
+  },
+  "autoOpenSettings": {
+    "message": "Aprire automaticamente le impostazioni corrette:"
+  },
+  "requestTabs": {
+    "message": "Richiesta di autorizzazione per le schede"
+  },
+  "autoOpenDescription": {
+    "message": "Se sul sito di streaming si aprono automaticamente le impostazioni corrispondenti nel popup"
+  },
+  "DuplicateSwitch": {
+    "message": "Rimuovere i duplicati delle Mostre:"
+  },
   "DuplicateSwitchDescription": {
     "message": "Rimuove tutti gli spettacoli duplicati che erano già visibili su Disney. Visibile significa che lo spettacolo è tra i primi 5 spettacoli di ogni riga."
   },
-  "WatchSkippedButton": { "message": "Riavvolgere?", "description": "Pulsante Guarda saltato per guardare un'introduzione" },
-  "HomeButton": { "message": "Casa", "description": "Pulsante della homepage Disney" },
-  "BigPlayerSwitch": { "message": "Video più grande:" },
-  "BigPlayerDescription": { "message": "Estende le dimensioni del video all'intera finestra del chrome senza schermo intero." },
-  "DisableNumpadSwitch": { "message": "Disabilita il tastierino numerico:" },
+  "WatchSkippedButton": {
+    "message": "Riavvolgere?",
+    "description": "Pulsante Guarda saltato per guardare un'introduzione"
+  },
+  "HomeButton": {
+    "message": "Casa",
+    "description": "Pulsante della homepage Disney"
+  },
+  "BigPlayerSwitch": {
+    "message": "Video più grande:"
+  },
+  "BigPlayerDescription": {
+    "message": "Estende le dimensioni del video all'intera finestra del chrome senza schermo intero."
+  },
+  "DisableNumpadSwitch": {
+    "message": "Disabilita il tastierino numerico:"
+  },
   "DisableNumpadDescription": {
     "message": "Disattivare i tasti del tastierino numerico per evitare di modificare accidentalmente la posizione o l'ora del video corrente."
   },
-  "DoubleClickSwitch": { "message": "Fare doppio clic su schermo intero:" },
-  "DoubleClickSwitchDescription": { "message": "Se si fa doppio clic sul video, questo verrà visualizzato a schermo intero." }
+  "DoubleClickSwitch": {
+    "message": "Fare doppio clic su schermo intero:"
+  },
+  "DoubleClickSwitchDescription": {
+    "message": "Se si fa doppio clic sul video, questo verrà visualizzato a schermo intero."
+  },
+  "scrollVolumeSwitch": {
+    "message": "Scorrere per il volume:"
+  },
+  "scrollVolumeDescription": {
+    "message": "Lo scorrimento verso l'alto o verso il basso dell'icona del suono modifica il volume."
+  }
 }

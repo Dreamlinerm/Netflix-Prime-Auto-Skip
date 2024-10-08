@@ -1,109 +1,306 @@
 {
-  "extensionName": { "message": "Streaming enhanced Netflix Disney Prime Video", "description": "Uzantının adı" },
+  "extensionName": {
+    "message": "Streaming enhanced Netflix Disney Prime Video",
+    "description": "Uzantının adı"
+  },
   "extensionDescription": {
     "message": "Netflix, Prime video, Disney+, Crunchyroll ve HBO max'te reklamları, introları, jenerikleri atlayın ve hız ayarı vb. ekleyin.",
     "description": "Uzantının açıklaması"
   },
-  "settingsTitle": { "message": "Ayarlar - Streaming enhanced", "description": "Ayarlar Sekmesinin Başlığı" },
-  "pageTitle": { "message": "geliştirilmiş", "description": "Ayarlar Sayfasının Başlığı" },
-  "rateNow": { "message": "Şimdi değerlendirin!" },
-  "sharedSettings": { "message": "Paylaşılan Ayarlar" },
+  "settingsTitle": {
+    "message": "Ayarlar - Streaming enhanced",
+    "description": "Ayarlar Sekmesinin Başlığı"
+  },
+  "pageTitle": {
+    "message": "geliştirilmiş",
+    "description": "Ayarlar Sayfasının Başlığı"
+  },
+  "rateNow": {
+    "message": "Şimdi değerlendirin!"
+  },
+  "sharedSettings": {
+    "message": "Paylaşılan Ayarlar"
+  },
   "sharedSettingsDescription": {
     "message": "Bu seçenekler yalnızca paylaşılan ayarın $service$ kısmını etkinleştirir/devre dışı bırakır",
-    "placeholders": { "service": { "content": "$1", "example": "Netflix" } }
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
   },
-  "backup": { "message": "Yedekleme/Sıfırlama" },
-  "statistics": { "message": "İstatistikler" },
-  "changelog": { "message": "Değişiklik Günlüğü" },
-  "donate": { "message": "Bağış Yapın" },
-  "PageSpecificTitle": { "message": "$service$ özel", "placeholders": { "service": { "content": "$1", "example": "Netflix" } } },
-  "defaultPageTitle": { "message": "İsteğe bağlı fonksiyonlar" },
+  "backup": {
+    "message": "Yedekleme/Sıfırlama"
+  },
+  "statistics": {
+    "message": "İstatistikler"
+  },
+  "changelog": {
+    "message": "Değişiklik Günlüğü"
+  },
+  "donate": {
+    "message": "Bağış Yapın"
+  },
+  "PageSpecificTitle": {
+    "message": "$service$ özel",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "defaultPageTitle": {
+    "message": "İsteğe bağlı fonksiyonlar"
+  },
   "defaultPageDescription": {
     "message": "Varsayılan olarak kapalı olan her özellik ya açık olduklarında kafa karıştırıcı oldukları için ya da beta aşamasında oldukları için"
   },
-  "DefaultPaidContentDescription": { "message": "Amazon Prime'dan tüm ücretli film/dizi kategorilerinin kaldırılması" },
-  "SharedPageTitle": { "message": "Paylaşılan Video özellikleri" },
+  "DefaultPaidContentDescription": {
+    "message": "Amazon Prime'dan tüm ücretli film/dizi kategorilerinin kaldırılması"
+  },
+  "SharedPageTitle": {
+    "message": "Paylaşılan Video özellikleri"
+  },
   "SharedPageDescription": {
     "message": "Bu seçenekler yalnızca tüm akış hizmetleri için ayarları etkinleştirir/devre dışı bırakır. Aşağıdaki tabloda belirli bir hizmet için paylaşılan ayarları devre dışı bırakabilirsiniz"
   },
-  "IntroSwitch": { "message": "Giriş ve Özeti Atlayın:" },
+  "IntroSwitch": {
+    "message": "Giriş ve Özeti Atlayın:"
+  },
   "SharedIntroDescription": {
     "message": "Herhangi bir dizinin girişlerini ve özetlerini atlamak. Netflix hariç çünkü orada özetler tekrar izlenemiyor."
   },
-  "CreditsSwitch": { "message": "Skip Credits:" },
-  "CreditsSwitchDescription": { "message": "Her dizinin bir sonraki bölümüne olabildiğince hızlı atlamak" },
-  "AdsSwitch": { "message": "Reklamları atla:" },
-  "AdsSwitchDescription": { "message": "Amazon için freevee reklamlarını ve temel Netflix katmanındaki tüm reklamları atlamak" },
-  "SliderSwitch": { "message": "Hız kontrolü ekleyin:" },
-  "SliderSwitchDescription": { "message": "Hız ayarlama sürgüsü ekleme" },
-  "SliderOptions": { "message": "Kaydırıcı seçenekleri: hız = adım boyutu /10" },
-  "SliderStepSize": { "message": "Kaydırıcı adım boyutu:" },
-  "SliderMin": { "message": "Kaydırıcı minimum:" },
-  "SliderMax": { "message": "Kaydırıcı maksimum:" },
-  "SliderPreview": { "message": "Kaydırıcı önizlemesi:" },
-  "FullscreenSwitch": { "message": "Tam ekranda oynatın:" },
-  "FullscreenSwitchDescription": { "message": "Bir video tam ekrana getirilirse, video otomatik olarak oynatılır" },
-  "SelfAdsSwitch": { "message": "Kendi Reklamlarını Atla:" },
-  "SelfAdsSwitchDescription": { "message": "Herhangi bir videodan önce gösterilen ana program önizlemelerini atlama" },
-  "PaidContentSwitch": { "message": "Ücretli içeriği kaldırın:", "description": "Ücretli içerik özelliği anahtarını kaldırın" },
-  "PaidContentDescription": { "message": "Tüm ücretli film/dizi kategorilerinin kaldırılması" },
-  "ContinuePositionSwitch": { "message": "\"Devam\" kategorisine taşıyın:" },
-  "ContinuePositionDescription": { "message": "\"Devam\" kategorisini sayfanın en üstüne taşıyın" },
-  "FreeveeSwitch": { "message": "Freevee Reklamlarını Atla:" },
-  "RecapSwitch": { "message": "Skip Recaps:" },
-  "RecapSwitchDescription": { "message": "Her gösterinin özetini atlar" },
-  "InactivitySwitch": { "message": "Hareketsizlik uyarısına devam edin:" },
-  "InactivitySwitchDescription": { "message": "'Hala izliyor musunuz' uyarısı gösterilirse videoyu devam ettirir" },
-  "ProfileSwitch": { "message": "Son profili otomatik seç:" },
-  "ProfileSwitchDescription": { "message": "Sayfa başlatıldığında en son kullanılan profil doğrudan seçilir" },
-  "User": { "message": "Kullanıcı:" },
-  "StatisticPageTitle": { "message": "İstatistikler" },
-  "SkippedTime": { "message": "Atlanan zaman:" },
-  "AmazonAdDescription": { "message": "Atlanan FreeVee Reklamlarının Süresi + Prime Video Self Reklamları" },
-  "StatisticAd": { "message": "$service$ Reklam:", "placeholders": { "service": { "content": "$1", "example": "Netflix" } } },
-  "NetflixAdDescription": { "message": "Atlanan Netflix Reklamlarının Süresi" },
-  "StatisticIntro": { "message": "Giriş:" },
-  "StatisticIntroDescription": { "message": "Netflix, Amazon ve Disney+'ta atlanan tanıtımların zamanı" },
-  "StatisticRecap": { "message": "Özet:" },
-  "StatisticRecapDescription": { "message": "Netflix, Amazon ve Disney+'ta Atlanan Özetler Zamanı" },
-  "StatisticSegments": { "message": "Atlanan bölümler:" },
-  "StatisticSegmentsDescription": { "message": "Netflix, Amazon ve Disney+ için Giriş veya Reklam Gibi Atlanan Bireysel Bölümlerin Miktarı" },
-  "ImportSettings": { "message": "Tüm Ayarları İçe/Dışa Aktar" },
-  "SaveSettings": { "message": "Ayarları dosya olarak kaydet" },
-  "UploadSettings": { "message": "Yükleme ayarları" },
-  "ResetAddon": { "message": "Eklentiyi varsayılana sıfırla" },
-  "noWrap": { "message": "nowrap" },
-  "WatchCreditsSwitch": { "message": "İzleme Kredileri:" },
-  "WatchCreditsSwitchDescription": { "message": "Her dizinin jeneriğini mutlaka izleyin" },
-  "conflictingTitle": { "message": "Tüm çelişkili özellikler" },
-  "RatingSwitch": { "message": "TMDB Değerlendirmesi:" },
-  "RatingSwitchDescription": { "message": "Her film ve diziye TMDB derecelendirmesinin eklenmesi" },
-  "ReleaseCalendarSwitch": { "message": "Yayın Takvimi seçenekleri ekleyin:" },
-  "ReleaseCalendarDescription": { "message": "Yayın takvimine 'Yalnızca Çalma Listelerini Göster' ve 'DUB'ı Filtrele' onay kutularını ekler" },
-  "EpilepsySwitch": { "message": "Epilepsi seçeneği" },
-  "EpilepsySwitchDescription": { "message": "Reklamı atlarken ekranı karartın" },
-  "UserAgentSwitch": { "message": "Masaüstü web sitelerine geçiş yapın" },
+  "CreditsSwitch": {
+    "message": "Skip Credits:"
+  },
+  "CreditsSwitchDescription": {
+    "message": "Her dizinin bir sonraki bölümüne olabildiğince hızlı atlamak"
+  },
+  "AdsSwitch": {
+    "message": "Reklamları atla:"
+  },
+  "AdsSwitchDescription": {
+    "message": "Amazon için freevee reklamlarını ve temel Netflix katmanındaki tüm reklamları atlamak"
+  },
+  "SliderSwitch": {
+    "message": "Hız kontrolü ekleyin:"
+  },
+  "SliderSwitchDescription": {
+    "message": "Hız ayarlama sürgüsü ekleme"
+  },
+  "SliderOptions": {
+    "message": "Kaydırıcı seçenekleri: hız = adım boyutu /10"
+  },
+  "SliderStepSize": {
+    "message": "Kaydırıcı adım boyutu:"
+  },
+  "SliderMin": {
+    "message": "Kaydırıcı minimum:"
+  },
+  "SliderMax": {
+    "message": "Kaydırıcı maksimum:"
+  },
+  "SliderPreview": {
+    "message": "Kaydırıcı önizlemesi:"
+  },
+  "FullscreenSwitch": {
+    "message": "Tam ekranda oynatın:"
+  },
+  "FullscreenSwitchDescription": {
+    "message": "Bir video tam ekrana getirilirse, video otomatik olarak oynatılır"
+  },
+  "SelfAdsSwitch": {
+    "message": "Kendi Reklamlarını Atla:"
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "Herhangi bir videodan önce gösterilen ana program önizlemelerini atlama"
+  },
+  "PaidContentSwitch": {
+    "message": "Ücretli içeriği kaldırın:",
+    "description": "Ücretli içerik özelliği anahtarını kaldırın"
+  },
+  "PaidContentDescription": {
+    "message": "Tüm ücretli film/dizi kategorilerinin kaldırılması"
+  },
+  "ContinuePositionSwitch": {
+    "message": "\"Devam\" kategorisine taşıyın:"
+  },
+  "ContinuePositionDescription": {
+    "message": "\"Devam\" kategorisini sayfanın en üstüne taşıyın"
+  },
+  "FreeveeSwitch": {
+    "message": "Freevee Reklamlarını Atla:"
+  },
+  "RecapSwitch": {
+    "message": "Skip Recaps:"
+  },
+  "RecapSwitchDescription": {
+    "message": "Her gösterinin özetini atlar"
+  },
+  "InactivitySwitch": {
+    "message": "Hareketsizlik uyarısına devam edin:"
+  },
+  "InactivitySwitchDescription": {
+    "message": "'Hala izliyor musunuz' uyarısı gösterilirse videoyu devam ettirir"
+  },
+  "ProfileSwitch": {
+    "message": "Son profili otomatik seç:"
+  },
+  "ProfileSwitchDescription": {
+    "message": "Sayfa başlatıldığında en son kullanılan profil doğrudan seçilir"
+  },
+  "User": {
+    "message": "Kullanıcı:"
+  },
+  "StatisticPageTitle": {
+    "message": "İstatistikler"
+  },
+  "SkippedTime": {
+    "message": "Atlanan zaman:"
+  },
+  "AmazonAdDescription": {
+    "message": "Atlanan FreeVee Reklamlarının Süresi + Prime Video Self Reklamları"
+  },
+  "StatisticAd": {
+    "message": "$service$ Reklam:",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "NetflixAdDescription": {
+    "message": "Atlanan Netflix Reklamlarının Süresi"
+  },
+  "StatisticIntro": {
+    "message": "Giriş:"
+  },
+  "StatisticIntroDescription": {
+    "message": "Netflix, Amazon ve Disney+'ta atlanan tanıtımların zamanı"
+  },
+  "StatisticRecap": {
+    "message": "Özet:"
+  },
+  "StatisticRecapDescription": {
+    "message": "Netflix, Amazon ve Disney+'ta Atlanan Özetler Zamanı"
+  },
+  "StatisticSegments": {
+    "message": "Atlanan bölümler:"
+  },
+  "StatisticSegmentsDescription": {
+    "message": "Netflix, Amazon ve Disney+ için Giriş veya Reklam Gibi Atlanan Bireysel Bölümlerin Miktarı"
+  },
+  "ImportSettings": {
+    "message": "Tüm Ayarları İçe/Dışa Aktar"
+  },
+  "SaveSettings": {
+    "message": "Ayarları dosya olarak kaydet"
+  },
+  "UploadSettings": {
+    "message": "Yükleme ayarları"
+  },
+  "ResetAddon": {
+    "message": "Eklentiyi varsayılana sıfırla"
+  },
+  "noWrap": {
+    "message": "nowrap"
+  },
+  "WatchCreditsSwitch": {
+    "message": "İzleme Kredileri:"
+  },
+  "WatchCreditsSwitchDescription": {
+    "message": "Her dizinin jeneriğini mutlaka izleyin"
+  },
+  "conflictingTitle": {
+    "message": "Tüm çelişkili özellikler"
+  },
+  "RatingSwitch": {
+    "message": "TMDB Değerlendirmesi:"
+  },
+  "RatingSwitchDescription": {
+    "message": "Her film ve diziye TMDB derecelendirmesinin eklenmesi"
+  },
+  "ReleaseCalendarSwitch": {
+    "message": "Yayın Takvimi seçenekleri ekleyin:"
+  },
+  "ReleaseCalendarDescription": {
+    "message": "Yayın takvimine 'Yalnızca Çalma Listelerini Göster' ve 'DUB'ı Filtrele' onay kutularını ekler"
+  },
+  "EpilepsySwitch": {
+    "message": "Epilepsi seçeneği"
+  },
+  "EpilepsySwitchDescription": {
+    "message": "Reklamı atlarken ekranı karartın"
+  },
+  "UserAgentSwitch": {
+    "message": "Masaüstü web sitelerine geçiş yapın"
+  },
   "UserAgentSwitchDescription": {
     "message": "Prime video ve disney+ için Masaüstü web sitesine geçin ve amazon için siteyi mobil uyumlu hale getirin"
   },
-  "XraySwitch": { "message": "Xray'i sakla:" },
-  "XraySwitchDescription": { "message": "Xray Hızlı Görünümünü bir video üzerinde gizleme" },
-  "Feature": { "message": "Özellik: Daha fazla bilgi için araç ipucu" },
-  "Shared": { "message": "Tümü" },
-  "OpenSharedSettings": { "message": "Paylaşılan Ayarları Açın" },
-  "autoOpenSettings": { "message": "Doğru Ayarları otomatik olarak aç:" },
-  "requestTabs": { "message": "Sekmeler izni iste" },
-  "autoOpenDescription": { "message": "Akış sitesindeyse, açılır pencerede otomatik olarak uygun ayarları açın" },
-  "DuplicateSwitch": { "message": "Yinelenen Gösterileri kaldırın:" },
+  "XraySwitch": {
+    "message": "Xray'i sakla:"
+  },
+  "XraySwitchDescription": {
+    "message": "Xray Hızlı Görünümünü bir video üzerinde gizleme"
+  },
+  "Feature": {
+    "message": "Özellik: Daha fazla bilgi için araç ipucu"
+  },
+  "Shared": {
+    "message": "Tümü"
+  },
+  "OpenSharedSettings": {
+    "message": "Paylaşılan Ayarları Açın"
+  },
+  "autoOpenSettings": {
+    "message": "Doğru Ayarları otomatik olarak aç:"
+  },
+  "requestTabs": {
+    "message": "Sekmeler izni iste"
+  },
+  "autoOpenDescription": {
+    "message": "Akış sitesindeyse, açılır pencerede otomatik olarak uygun ayarları açın"
+  },
+  "DuplicateSwitch": {
+    "message": "Yinelenen Gösterileri kaldırın:"
+  },
   "DuplicateSwitchDescription": {
     "message": "Daha önce Disney'de zaten görünür olan her yinelenen gösteriyi kaldırın. Görünür, gösterinin her satırdaki ilk 5 gösteri içinde olduğu anlamına gelir"
   },
-  "WatchSkippedButton": { "message": "Geri sarmak mı?", "description": "Bir girişi izlemek için atlananları izle düğmesi" },
-  "HomeButton": { "message": "Ev", "description": "Disney Ana Sayfa düğmesi" },
-  "BigPlayerSwitch": { "message": "Video daha büyük:" },
-  "BigPlayerDescription": { "message": "Video boyutunu tam ekran olmadan tüm tarayıcı penceresine genişletir." },
-  "DisableNumpadSwitch": { "message": "Numpad'i devre dışı bırakın:" },
-  "DisableNumpadDescription": { "message": "Mevcut video zamanını/konumunu yanlışlıkla değiştirmemek için sayısal tuşları devre dışı bırakın." },
-  "DoubleClickSwitch": { "message": "Çift tıklayarak tam ekran yapın:" },
-  "DoubleClickSwitchDescription": { "message": "Videoya çift tıklarsanız tam ekrana geçecektir." }
+  "WatchSkippedButton": {
+    "message": "Geri sarmak mı?",
+    "description": "Bir girişi izlemek için atlananları izle düğmesi"
+  },
+  "HomeButton": {
+    "message": "Ev",
+    "description": "Disney Ana Sayfa düğmesi"
+  },
+  "BigPlayerSwitch": {
+    "message": "Video daha büyük:"
+  },
+  "BigPlayerDescription": {
+    "message": "Video boyutunu tam ekran olmadan tüm tarayıcı penceresine genişletir."
+  },
+  "DisableNumpadSwitch": {
+    "message": "Numpad'i devre dışı bırakın:"
+  },
+  "DisableNumpadDescription": {
+    "message": "Mevcut video zamanını/konumunu yanlışlıkla değiştirmemek için sayısal tuşları devre dışı bırakın."
+  },
+  "DoubleClickSwitch": {
+    "message": "Çift tıklayarak tam ekran yapın:"
+  },
+  "DoubleClickSwitchDescription": {
+    "message": "Videoya çift tıklarsanız tam ekrana geçecektir."
+  },
+  "scrollVolumeSwitch": {
+    "message": "Ses seviyesi için kaydırın:"
+  },
+  "scrollVolumeDescription": {
+    "message": "Ses Simgesi üzerinde yukarı veya aşağı kaydırma yapmak ses seviyesini değiştirecektir."
+  }
 }

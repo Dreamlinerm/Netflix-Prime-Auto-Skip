@@ -1,107 +1,306 @@
 {
-  "extensionName": { "message": "Streaming enhanced Netflix Disney Prime Video", "description": "拡張子の名前" },
+  "extensionName": {
+    "message": "Streaming enhanced Netflix Disney Prime Video",
+    "description": "拡張子の名前"
+  },
   "extensionDescription": {
     "message": "Netflix、Prime video、Disney+、Crunchyroll、HBO maxでは、広告、イントロ、クレジットをスキップし、速度などを調整できます。",
     "description": "エクステンションの説明"
   },
-  "settingsTitle": { "message": "設定 - Streaming enhanced", "description": "設定タブのタイトル" },
-  "pageTitle": { "message": "強化された", "description": "設定ページのタイトル" },
-  "rateNow": { "message": "今すぐレートを" },
-  "sharedSettings": { "message": "共有設定" },
+  "settingsTitle": {
+    "message": "設定 - Streaming enhanced",
+    "description": "設定タブのタイトル"
+  },
+  "pageTitle": {
+    "message": "強化された",
+    "description": "設定ページのタイトル"
+  },
+  "rateNow": {
+    "message": "今すぐレートを"
+  },
+  "sharedSettings": {
+    "message": "共有設定"
+  },
   "sharedSettingsDescription": {
     "message": "これらのオプションは、共有設定の$service$部分のみを有効/無効にします。",
-    "placeholders": { "service": { "content": "$1", "example": "ネットフリックス" } }
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "ネットフリックス"
+      }
+    }
   },
-  "backup": { "message": "バックアップ/リセット" },
-  "statistics": { "message": "統計" },
-  "changelog": { "message": "変更履歴" },
-  "donate": { "message": "寄付する" },
-  "PageSpecificTitle": { "message": "$service$ 専用", "placeholders": { "service": { "content": "$1", "example": "ネットフリックス" } } },
-  "defaultPageTitle": { "message": "オプション機能" },
+  "backup": {
+    "message": "バックアップ/リセット"
+  },
+  "statistics": {
+    "message": "統計"
+  },
+  "changelog": {
+    "message": "変更履歴"
+  },
+  "donate": {
+    "message": "寄付する"
+  },
+  "PageSpecificTitle": {
+    "message": "$service$ 専用",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "ネットフリックス"
+      }
+    }
+  },
+  "defaultPageTitle": {
+    "message": "オプション機能"
+  },
   "defaultPageDescription": {
     "message": "デフォルトでオフになっているすべての機能は、オンになっていると混乱を招くか、ベータ版であるかのどちらかである。"
   },
-  "DefaultPaidContentDescription": { "message": "Amazonプライムからすべての有料映画／シリーズカテゴリーを削除" },
-  "SharedPageTitle": { "message": "共有ビデオ機能" },
+  "DefaultPaidContentDescription": {
+    "message": "Amazonプライムからすべての有料映画／シリーズカテゴリーを削除"
+  },
+  "SharedPageTitle": {
+    "message": "共有ビデオ機能"
+  },
   "SharedPageDescription": {
     "message": "これらのオプションは、すべてのストリーミングサービスの設定のみを有効/無効にします。以下の表では、特定のサービスの共有設定を無効にすることができます。"
   },
-  "IntroSwitch": { "message": "イントロと総括をスキップする：" },
-  "SharedIntroDescription": { "message": "どのシリーズでもイントロと総集編をスキップする。ただし、Netflixは再放送ができないので別だ。" },
-  "CreditsSwitch": { "message": "スキップ・クレジット" },
-  "CreditsSwitchDescription": { "message": "すべてのシリーズの次のエピソードにできるだけ早く飛ぶ" },
-  "AdsSwitch": { "message": "広告をスキップする：" },
-  "AdsSwitchDescription": { "message": "amazonのfreevee広告とNetflixのベーシック・ティアの広告をすべてスキップする。" },
-  "SliderSwitch": { "message": "スピードコントロールを追加する：" },
-  "SliderSwitchDescription": { "message": "スピード調整スライダーの追加" },
-  "SliderOptions": { "message": "スライダーのオプション：スピード = ステップサイズ /10" },
-  "SliderStepSize": { "message": "スライダーのステップサイズ：" },
-  "SliderMin": { "message": "スライダーの最小値：" },
-  "SliderMax": { "message": "スライダーの最大値：" },
-  "SliderPreview": { "message": "スライダーのプレビュー" },
-  "FullscreenSwitch": { "message": "フルスクリーンで再生する：" },
-  "FullscreenSwitchDescription": { "message": "ビデオをフルスクリーンにすると、自動的に再生されます。" },
-  "SelfAdsSwitch": { "message": "自己広告をスキップする：" },
-  "SelfAdsSwitchDescription": { "message": "ビデオの前に表示されるプライムショーのプレビューをスキップする。" },
-  "PaidContentSwitch": { "message": "有料コンテンツを削除する：", "description": "有料コンテンツ機能のスイッチを削除" },
-  "PaidContentDescription": { "message": "すべての有料映画／シリーズカテゴリーの削除" },
-  "ContinuePositionSwitch": { "message": "カテゴリーを「続ける」に移動する：" },
-  "ContinuePositionDescription": { "message": "カテゴリー \"Continue \"をページのトップに移動" },
-  "FreeveeSwitch": { "message": "フリービー広告をスキップする：" },
-  "RecapSwitch": { "message": "スキップ・リキャップ" },
-  "RecapSwitchDescription": { "message": "すべてのショーの総括を省略" },
-  "InactivitySwitch": { "message": "非アクティブの警告を再開する：" },
-  "InactivitySwitchDescription": { "message": "まだ見ていますか」というプロンプトが表示されたら、ビデオを再開する" },
-  "ProfileSwitch": { "message": "最後のプロファイルを自動的に選択します：" },
-  "ProfileSwitchDescription": { "message": "最後に使用されたプロファイルは、ページが立ち上げられたときに直接選択される" },
-  "User": { "message": "ユーザー" },
-  "StatisticPageTitle": { "message": "統計" },
-  "SkippedTime": { "message": "時間を飛ばした：" },
-  "AmazonAdDescription": { "message": "FreeVee広告＋プライム・ビデオ自己広告のスキップ時間" },
-  "StatisticAd": { "message": "$service$ 広告：", "placeholders": { "service": { "content": "$1", "example": "ネットフリックス" } } },
-  "NetflixAdDescription": { "message": "Netflix広告のスキップ時間" },
-  "StatisticIntro": { "message": "イントロダクション" },
-  "StatisticIntroDescription": { "message": "Netflix、Amazon、Disney+のイントロがスキップされる時間" },
-  "StatisticRecap": { "message": "総括する：" },
-  "StatisticRecapDescription": { "message": "Netflix、Amazon、Disney+で再放送をスキップした時間" },
-  "StatisticSegments": { "message": "セグメントスキップ：" },
-  "StatisticSegmentsDescription": { "message": "Netflix、Amazon、Disney+のイントロや広告のようにスキップされた個別セグメントの量" },
-  "ImportSettings": { "message": "すべての設定のインポート/エクスポート" },
-  "SaveSettings": { "message": "設定をファイルに保存" },
-  "UploadSettings": { "message": "設定のアップロード" },
-  "ResetAddon": { "message": "アドオンをデフォルトに戻す" },
-  "noWrap": { "message": "ナウラップ" },
-  "WatchCreditsSwitch": { "message": "クレジットを見る" },
-  "WatchCreditsSwitchDescription": { "message": "すべてのシリーズのクレジットを見る" },
-  "conflictingTitle": { "message": "相反するすべての機能" },
-  "RatingSwitch": { "message": "TMDBの評価" },
-  "RatingSwitchDescription": { "message": "すべての映画とシリーズにTMDBの評価を加える" },
-  "ReleaseCalendarSwitch": { "message": "リリースカレンダーのオプションを追加：" },
-  "ReleaseCalendarDescription": { "message": "リリースカレンダーに「プレイリストのみ表示」と「DUBをフィルタリング」のチェックボックスを追加" },
-  "EpilepsySwitch": { "message": "てんかんオプション" },
-  "EpilepsySwitchDescription": { "message": "広告スキップ時に画面を暗くする" },
-  "UserAgentSwitch": { "message": "デスクトップウェブサイトへの切り替え" },
+  "IntroSwitch": {
+    "message": "イントロと総括をスキップする："
+  },
+  "SharedIntroDescription": {
+    "message": "どのシリーズでもイントロと総集編をスキップする。ただし、Netflixは再放送ができないので別だ。"
+  },
+  "CreditsSwitch": {
+    "message": "スキップ・クレジット"
+  },
+  "CreditsSwitchDescription": {
+    "message": "すべてのシリーズの次のエピソードにできるだけ早く飛ぶ"
+  },
+  "AdsSwitch": {
+    "message": "広告をスキップする："
+  },
+  "AdsSwitchDescription": {
+    "message": "amazonのfreevee広告とNetflixのベーシック・ティアの広告をすべてスキップする。"
+  },
+  "SliderSwitch": {
+    "message": "スピードコントロールを追加する："
+  },
+  "SliderSwitchDescription": {
+    "message": "スピード調整スライダーの追加"
+  },
+  "SliderOptions": {
+    "message": "スライダーのオプション：スピード = ステップサイズ /10"
+  },
+  "SliderStepSize": {
+    "message": "スライダーのステップサイズ："
+  },
+  "SliderMin": {
+    "message": "スライダーの最小値："
+  },
+  "SliderMax": {
+    "message": "スライダーの最大値："
+  },
+  "SliderPreview": {
+    "message": "スライダーのプレビュー"
+  },
+  "FullscreenSwitch": {
+    "message": "フルスクリーンで再生する："
+  },
+  "FullscreenSwitchDescription": {
+    "message": "ビデオをフルスクリーンにすると、自動的に再生されます。"
+  },
+  "SelfAdsSwitch": {
+    "message": "自己広告をスキップする："
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "ビデオの前に表示されるプライムショーのプレビューをスキップする。"
+  },
+  "PaidContentSwitch": {
+    "message": "有料コンテンツを削除する：",
+    "description": "有料コンテンツ機能のスイッチを削除"
+  },
+  "PaidContentDescription": {
+    "message": "すべての有料映画／シリーズカテゴリーの削除"
+  },
+  "ContinuePositionSwitch": {
+    "message": "カテゴリーを「続ける」に移動する："
+  },
+  "ContinuePositionDescription": {
+    "message": "カテゴリー \"Continue \"をページのトップに移動"
+  },
+  "FreeveeSwitch": {
+    "message": "フリービー広告をスキップする："
+  },
+  "RecapSwitch": {
+    "message": "スキップ・リキャップ"
+  },
+  "RecapSwitchDescription": {
+    "message": "すべてのショーの総括を省略"
+  },
+  "InactivitySwitch": {
+    "message": "非アクティブの警告を再開する："
+  },
+  "InactivitySwitchDescription": {
+    "message": "まだ見ていますか」というプロンプトが表示されたら、ビデオを再開する"
+  },
+  "ProfileSwitch": {
+    "message": "最後のプロファイルを自動的に選択します："
+  },
+  "ProfileSwitchDescription": {
+    "message": "最後に使用されたプロファイルは、ページが立ち上げられたときに直接選択される"
+  },
+  "User": {
+    "message": "ユーザー"
+  },
+  "StatisticPageTitle": {
+    "message": "統計"
+  },
+  "SkippedTime": {
+    "message": "時間を飛ばした："
+  },
+  "AmazonAdDescription": {
+    "message": "FreeVee広告＋プライム・ビデオ自己広告のスキップ時間"
+  },
+  "StatisticAd": {
+    "message": "$service$ 広告：",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "ネットフリックス"
+      }
+    }
+  },
+  "NetflixAdDescription": {
+    "message": "Netflix広告のスキップ時間"
+  },
+  "StatisticIntro": {
+    "message": "イントロダクション"
+  },
+  "StatisticIntroDescription": {
+    "message": "Netflix、Amazon、Disney+のイントロがスキップされる時間"
+  },
+  "StatisticRecap": {
+    "message": "総括する："
+  },
+  "StatisticRecapDescription": {
+    "message": "Netflix、Amazon、Disney+で再放送をスキップした時間"
+  },
+  "StatisticSegments": {
+    "message": "セグメントスキップ："
+  },
+  "StatisticSegmentsDescription": {
+    "message": "Netflix、Amazon、Disney+のイントロや広告のようにスキップされた個別セグメントの量"
+  },
+  "ImportSettings": {
+    "message": "すべての設定のインポート/エクスポート"
+  },
+  "SaveSettings": {
+    "message": "設定をファイルに保存"
+  },
+  "UploadSettings": {
+    "message": "設定のアップロード"
+  },
+  "ResetAddon": {
+    "message": "アドオンをデフォルトに戻す"
+  },
+  "noWrap": {
+    "message": "ナウラップ"
+  },
+  "WatchCreditsSwitch": {
+    "message": "クレジットを見る"
+  },
+  "WatchCreditsSwitchDescription": {
+    "message": "すべてのシリーズのクレジットを見る"
+  },
+  "conflictingTitle": {
+    "message": "相反するすべての機能"
+  },
+  "RatingSwitch": {
+    "message": "TMDBの評価"
+  },
+  "RatingSwitchDescription": {
+    "message": "すべての映画とシリーズにTMDBの評価を加える"
+  },
+  "ReleaseCalendarSwitch": {
+    "message": "リリースカレンダーのオプションを追加："
+  },
+  "ReleaseCalendarDescription": {
+    "message": "リリースカレンダーに「プレイリストのみ表示」と「DUBをフィルタリング」のチェックボックスを追加"
+  },
+  "EpilepsySwitch": {
+    "message": "てんかんオプション"
+  },
+  "EpilepsySwitchDescription": {
+    "message": "広告スキップ時に画面を暗くする"
+  },
+  "UserAgentSwitch": {
+    "message": "デスクトップウェブサイトへの切り替え"
+  },
   "UserAgentSwitchDescription": {
     "message": "プライム・ビデオとdisney+はデスクトップ・サイトに変更し、amazonはモバイル・フレンドリー・サイトにする。"
   },
-  "XraySwitch": { "message": "X線を隠す：" },
-  "XraySwitchDescription": { "message": "Xrayクイックビューをビデオの上に隠す" },
-  "Feature": { "message": "特徴詳細情報のツールチップ" },
-  "Shared": { "message": "すべて" },
-  "OpenSharedSettings": { "message": "共有設定を開く" },
-  "autoOpenSettings": { "message": "自動的に正しい設定を開きます：" },
-  "requestTabs": { "message": "タブの使用許可を申請する" },
-  "autoOpenDescription": { "message": "ストリーミング・サイトの場合、ポップアップで該当する設定を自動的に開く" },
-  "DuplicateSwitch": { "message": "重複する番組を削除する：" },
+  "XraySwitch": {
+    "message": "X線を隠す："
+  },
+  "XraySwitchDescription": {
+    "message": "Xrayクイックビューをビデオの上に隠す"
+  },
+  "Feature": {
+    "message": "特徴詳細情報のツールチップ"
+  },
+  "Shared": {
+    "message": "すべて"
+  },
+  "OpenSharedSettings": {
+    "message": "共有設定を開く"
+  },
+  "autoOpenSettings": {
+    "message": "自動的に正しい設定を開きます："
+  },
+  "requestTabs": {
+    "message": "タブの使用許可を申請する"
+  },
+  "autoOpenDescription": {
+    "message": "ストリーミング・サイトの場合、ポップアップで該当する設定を自動的に開く"
+  },
+  "DuplicateSwitch": {
+    "message": "重複する番組を削除する："
+  },
   "DuplicateSwitchDescription": {
     "message": "以前ディズニーで表示されていた重複ショーをすべて削除する。表示されているということは、そのショーがすべての行の最初の5つのショーに入っているということです。"
   },
-  "WatchSkippedButton": { "message": "巻き戻し？", "description": "スキップボタンでイントロを見る" },
-  "HomeButton": { "message": "ホーム", "description": "ディズニー・ホームページ・ボタン" },
-  "BigPlayerSwitch": { "message": "ビデオも大きくなった：" },
-  "BigPlayerDescription": { "message": "フルスクリーンにすることなく、動画サイズをブラウザウィンドウ全体に拡大します。" },
-  "DisableNumpadSwitch": { "message": "テンキーパッドを無効にする：" },
-  "DisableNumpadDescription": { "message": "誤って現在のビデオ時間/位置を変更しないように、テンキーキーを無効にします。" },
-  "DoubleClickSwitch": { "message": "ダブルクリックでフルスクリーン：" },
-  "DoubleClickSwitchDescription": { "message": "ビデオをダブルクリックするとフルスクリーンになります。" }
+  "WatchSkippedButton": {
+    "message": "巻き戻し？",
+    "description": "スキップボタンでイントロを見る"
+  },
+  "HomeButton": {
+    "message": "ホーム",
+    "description": "ディズニー・ホームページ・ボタン"
+  },
+  "BigPlayerSwitch": {
+    "message": "ビデオも大きくなった："
+  },
+  "BigPlayerDescription": {
+    "message": "フルスクリーンにすることなく、動画サイズをブラウザウィンドウ全体に拡大します。"
+  },
+  "DisableNumpadSwitch": {
+    "message": "テンキーパッドを無効にする："
+  },
+  "DisableNumpadDescription": {
+    "message": "誤って現在のビデオ時間/位置を変更しないように、テンキーキーを無効にします。"
+  },
+  "DoubleClickSwitch": {
+    "message": "ダブルクリックでフルスクリーン："
+  },
+  "DoubleClickSwitchDescription": {
+    "message": "ビデオをダブルクリックするとフルスクリーンになります。"
+  },
+  "scrollVolumeSwitch": {
+    "message": "音量をスクロールする："
+  },
+  "scrollVolumeDescription": {
+    "message": "サウンドアイコンを上下にスクロールすると音量が変わります。"
+  }
 }

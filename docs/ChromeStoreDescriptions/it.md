@@ -10,6 +10,7 @@ Questa estensione migliora la vostra esperienza di streaming su Netflix, Prime V
   • Aggiungi una velocità di riproduzione personalizzabile 
   • Avviare automaticamente la riproduzione dei video a schermo intero
   • Andare a schermo intero con un doppio clic
+  • Scorrere per modificare il volume
 
 Platform-Caratteristiche specifiche:
   • Netflix:

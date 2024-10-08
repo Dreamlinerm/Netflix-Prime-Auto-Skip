@@ -10,6 +10,7 @@ Esta extensión mejora su experiencia de streaming en Netflix, Prime Video, Disn
   • Añadir velocidad de reproducción personalizable. control
   • Iniciar automáticamente la reproducción de vídeos en pantalla completa
   • Ir a pantalla completa al hacer doble clic
+  • Desplácese para cambiar el volumen
 
 Plataforma-Características específicas:
   • Netflix:

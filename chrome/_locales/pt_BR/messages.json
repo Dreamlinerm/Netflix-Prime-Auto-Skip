@@ -7,7 +7,6 @@
     "message": "Pule anúncios, introduções, créditos e ajuste a velocidade... na Netflix, Prime Video, Disney+, Crunchyroll e HBO Max.",
     "description": "Descrição da extensão"
   },
-
   "settingsTitle": {
     "message": "Configurações - aprimoramento de serviços de streaming",
     "description": "Título da guia Configurações"
@@ -43,7 +42,6 @@
   "donate": {
     "message": "Doar"
   },
-
   "PageSpecificTitle": {
     "message": "$service$",
     "placeholders": {
@@ -53,7 +51,6 @@
       }
     }
   },
-
   "defaultPageTitle": {
     "message": "Recursos opcionais"
   },
@@ -63,7 +60,6 @@
   "DefaultPaidContentDescription": {
     "message": "Remove todas as categorias de filmes/séries pagos do Amazon Prime"
   },
-
   "SharedPageTitle": {
     "message": "Recursos de vídeo compartilhado"
   },
@@ -115,7 +111,6 @@
   "FullscreenSwitchDescription": {
     "message": "Se um vídeo for colocado em tela cheia, ele será reproduzido automaticamente"
   },
-
   "SelfAdsSwitch": {
     "message": "Ignorar anúncios direcionados:"
   },
@@ -138,7 +133,6 @@
   "FreeveeSwitch": {
     "message": "Ignorar anúncios:"
   },
-
   "RecapSwitch": {
     "message": "Ignorar recapitulações:"
   },
@@ -160,7 +154,6 @@
   "User": {
     "message": "Usuário:"
   },
-
   "StatisticPageTitle": {
     "message": "Estatísticas"
   },
@@ -215,7 +208,6 @@
   "noWrap": {
     "message": "nowrap"
   },
-
   "WatchCreditsSwitch": {
     "message": "Assista os créditos:"
   },
@@ -304,5 +296,11 @@
   },
   "DoubleClickSwitchDescription": {
     "message": "Se você clicar duas vezes no vídeo, ele será exibido em tela cheia."
+  },
+  "scrollVolumeSwitch": {
+    "message": "Deslocação para o volume:"
+  },
+  "scrollVolumeDescription": {
+    "message": "Deslocar-se para cima ou para baixo no ícone de som altera o volume."
   }
 }

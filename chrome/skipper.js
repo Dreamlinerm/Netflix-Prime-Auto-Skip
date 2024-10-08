@@ -69,7 +69,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         disableNumpad: true,
       },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true },
+      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: {
         Crunchyroll_profilePicture: null,
@@ -494,8 +494,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       Disney_addHomeButton();
       if (settings.Disney?.selfAd) Disney_selfAd(video, time);
     }
+    if (settings.Video?.scrollVolume) Disney_scrollVolume(video);
   }
-  // let SetTimeToZeroOnce = null;
+  async function Disney_scrollVolume(video) {
+    const volumeControl = document.querySelector("div.audio-control:not(.enhanced)");
+    if (volumeControl) {
+      volumeControl.classList.add("enhanced");
+      volumeControl?.addEventListener("wheel", (event) => {
+        let volume = video.volume;
+        if (event.deltaY < 0) volume = Math.min(1, volume + 0.1);
+        else volume = Math.max(0, volume - 0.1);
+        video.volume = volume;
+        const sliderContainer = volumeControl.querySelector(".slider-container");
+        sliderContainer.firstChild.children[1].style.strokeDashoffset = 100 - volume * 100 + "px";
+        sliderContainer.children[1].style.height = volume * 100 + "%";
+        sliderContainer.children[2].style.height = volume * 100 + "%";
+      });
+    }
+  }
+
   async function Disney_Intro(video, time) {
     // intro star wars andor Season 1 episode 2
     // Recap Criminal Minds Season 1 Episode 2
@@ -727,6 +744,21 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (NSettings?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched");
     if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
     if (NSettings?.speedSlider) Netflix_SpeedSlider(video);
+    if (settings.Video?.scrollVolume) Netflix_scrollVolume(video);
+  }
+  async function Netflix_scrollVolume(video) {
+    const volumeControl = document.querySelector('[data-uia*="control-volume"]:not(.enhanced)');
+    if (volumeControl) {
+      volumeControl.classList.add("enhanced");
+      const handleVolumeControl = (event) => {
+        let volume = video.volume;
+        if (event.deltaY < 0) volume = Math.min(1, volume + 0.05);
+        else volume = Math.max(0, volume - 0.05);
+        video.volume = volume;
+      };
+      removeEventListener("wheel", handleVolumeControl);
+      volumeControl?.addEventListener("wheel", handleVolumeControl);
+    }
   }
   // to parse html umlaut symbols like &auml; to ä
   function decodeHtmlEntities(str) {
@@ -808,21 +840,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           lastAdTimeText = 0;
           if (settings.Video.epilepsy) video.style.opacity = 1;
         }
-
-        // pause video shows ad
-        // sherlock show comes alot.
-        const div = document.querySelector('div[data-uia="pause-ad-title-display"]');
-        const button = document.querySelector('button[data-uia="pause-ad-expand-button"]');
-        if (video.paused && button && div.checkVisibility({ opacityProperty: true }) && lastAdTimeText != parseInt(video.currentTime / 10)) {
-          lastAdTimeText = parseInt(video.currentTime / 10);
-          resetLastATimeText();
-          button.click();
-          log("Remove Video Paused ad", button);
-          increaseBadge();
-          setTimeout(function () {
-            video.pause();
-          }, 100);
-        }
+      }
+      // pause video shows ad
+      // sherlock show comes alot.
+      const div = document.querySelector('div[data-uia="pause-ad-title-display"]');
+      const button = document.querySelector('button[data-uia="pause-ad-expand-button"]');
+      if (
+        button &&
+        div.checkVisibility({ opacityProperty: true }) &&
+        (!video || (video.paused && lastAdTimeText != parseInt(video.currentTime / 10)))
+      ) {
+        lastAdTimeText = parseInt(video.currentTime / 10);
+        resetLastATimeText();
+        button.click();
+        log("Remove Video Paused ad", button);
+        increaseBadge();
+        setTimeout(() => {
+          // not always a video is showing on next episode apparently
+          (video || document.querySelector("video")).pause();
+        }, 100);
       }
     }, 100);
   }
@@ -856,10 +892,25 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (settings.Amazon?.watchCredits) Amazon_Watch_Credits();
     if (settings.Amazon?.speedSlider) Amazon_SpeedSlider(video);
     if (settings.Amazon?.xray) Amazon_xray();
+    if (settings.Video?.scrollVolume) Amazon_scrollVolume();
   }
   const AmazonSkipIntroConfig = { attributes: true, attributeFilter: [".skipelement"], subtree: true, childList: true, attributeOldValue: false };
   // const AmazonSkipIntro = new RegExp("skipelement", "i");
   const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
+
+  async function Amazon_scrollVolume() {
+    const volumeControl = document.querySelector('[aria-label="Volume"]:not(.enhanced)');
+    if (volumeControl) {
+      volumeControl.classList.add("enhanced");
+      volumeControl?.addEventListener("wheel", (event) => {
+        const video = document.querySelector(AmazonVideoClass);
+        let volume = video.volume;
+        if (event.deltaY < 0) volume = Math.min(1, volume + 0.1);
+        else volume = Math.max(0, volume - 0.1);
+        video.volume = volume;
+      });
+    }
+  }
   let lastIntroTime = -1;
   function resetLastIntroTime() {
     setTimeout(() => {
