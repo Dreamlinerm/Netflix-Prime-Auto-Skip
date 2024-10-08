@@ -309,7 +309,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (!DBCache[title]?.date) DBCache[title].date = today;
     const vote_count = DBCache[title]?.vote_count || 100;
     const diffInReleaseDate =
-      // vote count is under 80 accurate rating
+      // vote count is under 80 inaccurate rating
       vote_count < 100 &&
       // did not refresh rating in the last 2 days
       getDiffInDays(DBCache[title].date, date) > 2 &&

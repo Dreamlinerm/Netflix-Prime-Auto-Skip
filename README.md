@@ -179,6 +179,21 @@ Import and Export all Settings.
 
 See Statistics. All statistics and settings are not shared but are synchronized with your browser account.
 
+## Ratings
+
+The ratings are gathered from the TMDB API. Ratings are refreshed every month.
+If there is no score they are refreshed once per day. If the movie is newer than 50 days and has less than 100 votes it will get refreshed every 3 days.
+
+| Rating | Explanation |
+| --- | --- |
+| ? | Title not found |
+| N/A | Too new movie or less than 80 votes |
+| <div style="background-color:grey;width:20px;height:20px;"><div> | ? or N/A |
+| <div style="background-color:red;width:20px;height:20px;"><div> | <= 5.5 stars|
+| <div style="background-color:rgb(245, 197, 24);width:20px;height:20px;"><div> | <= 7 stars|
+| <div style="background-color:rgb(0, 166, 0);width:20px;height:20px;"><div> | >7 stars|
+
+
 # Implemented Feature Overview
 
 | abbrev. | definition |
