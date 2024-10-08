@@ -69,7 +69,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         disableNumpad: true,
       },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true },
+      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
       Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
       General: {
         Crunchyroll_profilePicture: null,
@@ -727,6 +727,21 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (NSettings?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched");
     if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
     if (NSettings?.speedSlider) Netflix_SpeedSlider(video);
+    if (settings.Video?.scrollVolume) Netflix_scrollVolume(video);
+  }
+  async function Netflix_scrollVolume(video) {
+    console.log("scrollVolume");
+    const volumeControl = document.querySelector('[data-uia*="control-volume"]:not(.enhanced)');
+    if (volumeControl) {
+      volumeControl.classList.add("enhanced");
+      volumeControl?.addEventListener("wheel", (event) => {
+        let volume = video.volume;
+        if (event.deltaY < 0) volume = Math.min(1, volume + 0.05);
+        else volume = Math.max(0, volume - 0.05);
+        video.volume = volume;
+        console.log("test", event);
+      });
+    }
   }
   // to parse html umlaut symbols like &auml; to ä
   function decodeHtmlEntities(str) {
@@ -809,19 +824,23 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           if (settings.Video.epilepsy) video.style.opacity = 1;
         }
       }
-
       // pause video shows ad
       // sherlock show comes alot.
       const div = document.querySelector('div[data-uia="pause-ad-title-display"]');
       const button = document.querySelector('button[data-uia="pause-ad-expand-button"]');
-      if (video.paused && button && div.checkVisibility({ opacityProperty: true }) && lastAdTimeText != parseInt(video.currentTime / 10)) {
+      if (
+        button &&
+        div.checkVisibility({ opacityProperty: true }) &&
+        (!video || (video.paused && lastAdTimeText != parseInt(video.currentTime / 10)))
+      ) {
         lastAdTimeText = parseInt(video.currentTime / 10);
         resetLastATimeText();
         button.click();
         log("Remove Video Paused ad", button);
         increaseBadge();
-        setTimeout(function () {
-          video.pause();
+        setTimeout(() => {
+          // not always a video is showing on next episode apparently
+          (video || document.querySelector("video")).pause();
         }, 100);
       }
     }, 100);
