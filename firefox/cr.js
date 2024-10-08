@@ -102,8 +102,8 @@ async function Crunchyroll_scrollVolume(video) {
     volumeControl?.addEventListener("wheel", (event) => {
       event.preventDefault();
       let volume = video.volume;
-      if (event.deltaY < 0) volume = Math.min(1, volume + 0.05);
-      else volume = Math.max(0, volume - 0.05);
+      if (event.deltaY < 0) volume = Math.min(1, volume + 0.1);
+      else volume = Math.max(0, volume - 0.1);
       video.volume = volume;
       const sliderKnob = document.querySelector('div[data-testid="vilos-volume_slider"]').children[1].firstChild.firstChild;
       sliderKnob.style.transform = `translateX(${volume * 61}px) translateX(-8px) scale(1)`;

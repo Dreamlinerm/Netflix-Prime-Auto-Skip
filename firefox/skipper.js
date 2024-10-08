@@ -502,8 +502,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       volumeControl.classList.add("enhanced");
       volumeControl?.addEventListener("wheel", (event) => {
         let volume = video.volume;
-        if (event.deltaY < 0) volume = Math.min(1, volume + 0.05);
-        else volume = Math.max(0, volume - 0.05);
+        if (event.deltaY < 0) volume = Math.min(1, volume + 0.1);
+        else volume = Math.max(0, volume - 0.1);
         video.volume = volume;
         const sliderContainer = volumeControl.querySelector(".slider-container");
         sliderContainer.firstChild.children[1].style.strokeDashoffset = 100 - volume * 100 + "px";
@@ -750,12 +750,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const volumeControl = document.querySelector('[data-uia*="control-volume"]:not(.enhanced)');
     if (volumeControl) {
       volumeControl.classList.add("enhanced");
-      volumeControl?.addEventListener("wheel", (event) => {
+      const handleVolumeControl = (event) => {
         let volume = video.volume;
         if (event.deltaY < 0) volume = Math.min(1, volume + 0.05);
         else volume = Math.max(0, volume - 0.05);
         video.volume = volume;
-      });
+      };
+      removeEventListener("wheel", handleVolumeControl);
+      volumeControl?.addEventListener("wheel", handleVolumeControl);
     }
   }
   // to parse html umlaut symbols like &auml; to ä
@@ -903,8 +905,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       volumeControl?.addEventListener("wheel", (event) => {
         const video = document.querySelector(AmazonVideoClass);
         let volume = video.volume;
-        if (event.deltaY < 0) volume = Math.min(1, volume + 0.05);
-        else volume = Math.max(0, volume - 0.05);
+        if (event.deltaY < 0) volume = Math.min(1, volume + 0.1);
+        else volume = Math.max(0, volume - 0.1);
         video.volume = volume;
       });
     }
