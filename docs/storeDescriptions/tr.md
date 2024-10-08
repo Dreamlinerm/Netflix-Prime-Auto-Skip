@@ -11,6 +11,7 @@ Bu uzantı Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll ve HBO Ma
 <li>Özelleştirilebilir oynatma hızı ekleme kontrolü</li>
 <li>Videoları otomatik olarak tam ekranda oynatmaya başlama</li>
 <li>Çift tıklamada tam ekrana geçme</li>
+<li>Ses seviyesini değiştirmek için kaydırın</li>
 </ul>
 
 Platform-Belirli Özellikler:

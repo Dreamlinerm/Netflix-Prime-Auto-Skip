@@ -11,6 +11,7 @@ To rozszerzenie poprawia jakość streamowania w serwisach Netflix, Prime Video,
 <li>Adding customizable playback speed odtwarzania</li>
 <li>Automatyczne uruchamianie odtwarzania filmów na pełnym ekranie</li>
 <li>Przejście na pełny ekran po dwukrotnym kliknięciu</li>
+<li>Przewiń, aby zmienić głośność</li>
 </ul>
 
 Platforma-Cechy szczególne:

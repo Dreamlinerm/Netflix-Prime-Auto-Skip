@@ -11,6 +11,7 @@ Essa extensão aprimora sua experiência de streaming na Netflix, Prime Video, D
 <li>Adição de controle de velocidade de reprodução personalizável</li>
 <li>Iniciar automaticamente a reprodução de vídeos em tela cheia</li>
 <li>Ir para tela cheia ao clicar duas vezes</li>
+<li>Deslocar-se para alterar o volume</li>
 </ul>
 
 Recursos específicos da plataforma:

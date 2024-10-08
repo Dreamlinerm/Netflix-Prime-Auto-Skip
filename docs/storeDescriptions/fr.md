@@ -11,6 +11,7 @@ Cette extension améliore votre expérience de streaming sur Netflix, Prime Vide
 <li>Ajout d'un contrôle de vitesse de lecture personnalisable</li>
 <li>Démarrer automatiquement la lecture des vidéos en plein écran</li>
 <li>Passer en plein écran en double-cliquant</li>
+<li>Défilement pour modifier le volume</li>
 </ul>
 
 Platforme-Caractéristiques spécifiques:

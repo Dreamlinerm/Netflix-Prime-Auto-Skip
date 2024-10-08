@@ -11,6 +11,7 @@ Esta extensão melhora a sua experiência de streaming no Netflix, Prime Video, 
 <li>Adicionar velocidade de reprodução personalizável de reprodução personalizável</li>
 <li>Iniciar automaticamente a reprodução de vídeos em ecrã total</li>
 <li>Ir para ecrã total com um duplo clique</li>
+<li>Deslocar-se para alterar o volume</li>
 </ul>
 
 Plataforma-Caraterísticas específicas:

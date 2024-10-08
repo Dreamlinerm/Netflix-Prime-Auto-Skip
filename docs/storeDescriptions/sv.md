@@ -11,6 +11,7 @@ Detta tillägg förbättrar din streamingupplevelse på Netflix, Prime Video, Di
 <li>Lägga till anpassningsbar uppspelningshastighet kontroll</li>
 <li>Automatiskt börja spela upp videor i helskärm</li>
 <li>Gå till helskärm vid dubbelklick</li>
+<li>Bläddra för att ändra volymen</li>
 </ul>
 
 Platform-Specifika funktioner:

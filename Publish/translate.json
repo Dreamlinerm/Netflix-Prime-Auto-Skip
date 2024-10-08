@@ -1,8 +1,3 @@
 {
-  "scrollVolumeSwitch": {
-    "message": "Scroll for volume:"
-  },
-  "scrollVolumeDescription": {
-    "message": "Scrolling up or down on the Sound Icon will change the volume."
-  }
+  "test": "Scroll to change the volume"
 }

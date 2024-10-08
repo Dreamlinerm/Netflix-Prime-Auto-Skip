@@ -11,6 +11,7 @@ Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Di
 <li>Hinzufügen eines anpassbaren Geschwindigkeitsreglers</li>
 <li>Automatische Videowiedergabe im Vollbildmodus</li>
 <li>In Vollbildmodus gehen mit Doppelklick</li>
+<li>Scrollen, um die Lautstärke zu ändern</li>
 </ul>
 
 Plattform-spezifische Funktionen:
