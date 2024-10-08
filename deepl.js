@@ -14,7 +14,7 @@ exec("jsontt Publish/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -f EN -t DE E
   console.log(`Output: ${stdout}`);
 });
 
-if (process.argv.length === 2) {
+if (process.argv.length === 3) {
   // read the deepl.Lang.json files and copy the new keys into the language files in the folder firefox _locales
 
   const fs = require("fs");
