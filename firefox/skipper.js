@@ -242,7 +242,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
   }
   // browser.storage.local.set({ DBCache: {} });
-  // justWatchAPI
   const today = date.toISOString().split("T")[0];
   async function getMovieInfo(title, card, year = null) {
     // justwatch api
@@ -251,7 +250,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (navigator?.language) {
       locale = navigator?.language;
     }
-    // use the url for themoviedb.org now
     let url = `https://api.themoviedb.org/3/search/multi?query=${encodeURI(title)}&include_adult=false&language=${locale}&page=1`;
     if (year) url += `&year=${year}`;
     // const response = await fetch(encodeURI(url));
@@ -264,6 +262,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           const movie = data?.results?.[0];
           compiledData = {
             score: movie?.vote_average,
+            vote_count: movie?.vote_count,
             release_date: movie?.release_date,
             title: movie?.title || movie?.original_title || movie?.name || movie?.original_name,
             date: today,
@@ -309,6 +308,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   function useDBCache(title, card) {
     if (!DBCache[title]?.date) DBCache[title].date = today;
     const diffInReleaseDate = getDiffInDays(DBCache[title]?.release_date, date) <= 7 && getDiffInDays(DBCache[title].date, date) > 0;
+    // refresh rating if older than 30 days or release date is within 7 days
     if (getDiffInDays(DBCache[title].date, date) >= 30 || diffInReleaseDate) {
       if (diffInReleaseDate) log("update recent movie:", title, ",Age:", getDiffInDays(DBCache[title]?.release_date, date));
       else log("update old rating:", title, ",Age:", getDiffInDays(DBCache[title].date, date));
@@ -1106,14 +1106,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   // Crunchyroll functions
   function filterQueued(display) {
     document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
-      element.parentElement.parentElement.parentElement.style.display = display;
+      // if not on premiere
+      element.parentElement.parentElement.parentElement.style.display = element.parentElement.parentElement
+        .querySelector(".premiere-flag")
+        ?.checkVisibility()
+        ? "block"
+        : display;
     });
     if (display == "block" && settings.General.filterDub) filterDub("none");
   }
   function filterDub(display) {
     let list = document.querySelectorAll("cite[itemprop='name']");
     list.forEach((element) => {
-      if (element.textContent.includes("Dub")) element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
+      if (element.textContent.includes("Dub") || element.textContent.includes("Audio"))
+        element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
     });
     if (display == "block" && settings.General.filterQueued) filterQueued("none");
   }
