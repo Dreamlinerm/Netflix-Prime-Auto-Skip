@@ -1,18 +1,18 @@
 #!/usr/bin/env node
-require("dotenv").config();
-const { exec } = require("child_process");
+// require("dotenv").config();
+// const { exec } = require("child_process");
 
-exec("jsontt Publish/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -f EN -t DE ES FR IT JA KO PL PT SV TR ZH", (error, stdout, stderr) => {
-  if (error) {
-    console.error(`Error: ${error.message}`);
-    return;
-  }
-  if (stderr) {
-    console.error(`Stderr: ${stderr}`);
-    return;
-  }
-  console.log(`Output: ${stdout}`);
-});
+// exec("jsontt Publish/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -f EN -t DE ES FR IT JA KO PL PT SV TR ZH", (error, stdout, stderr) => {
+//   if (error) {
+//     console.error(`Error: ${error.message}`);
+//     return;
+//   }
+//   if (stderr) {
+//     console.error(`Stderr: ${stderr}`);
+//     return;
+//   }
+//   console.log(`Output: ${stdout}`);
+// });
 
 if (process.argv.length === 3) {
   // read the deepl.Lang.json files and copy the new keys into the language files in the folder firefox _locales
@@ -35,7 +35,7 @@ if (process.argv.length === 3) {
       fs.readFile(firefoxPath + "\\" + firefoxLocales[index] + "\\messages.json", "utf8", function (err, oldKeys) {
         if (err) return console.log(err);
         const newTranslation = { ...JSON.parse(oldKeys), ...JSON.parse(newKeys) };
-        fs.writeFile(firefoxPath + "\\" + firefoxLocales[index] + "\\messages.json", JSON.stringify(newTranslation), "utf8", function (err) {
+        fs.writeFile(firefoxPath + "\\" + firefoxLocales[index] + "\\messages.json", JSON.stringify(newTranslation, null, 2), "utf8", function (err) {
           if (err) return console.log(err);
         });
       });
