@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "Przewijanie ikony dźwięku w górę lub w dół powoduje zmianę głośności."
+  },
+  "DisneyAdDescription": {
+    "message": "Czas pominiętych reklam Disneya."
   }
 }
