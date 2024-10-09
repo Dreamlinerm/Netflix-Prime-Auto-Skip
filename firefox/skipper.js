@@ -70,7 +70,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
-      Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
+      Statistics: {
+        AmazonAdTimeSkipped: 0,
+        NetflixAdTimeSkipped: 0,
+        DisneyAdTimeSkipped: 0,
+        IntroTimeSkipped: 0,
+        RecapTimeSkipped: 0,
+        SegmentsSkipped: 0,
+      },
       General: {
         Crunchyroll_profilePicture: null,
         profileName: null,
@@ -495,7 +502,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (settings.Disney?.selfAd) Disney_selfAd(video, time);
     }
     if (settings.Video?.scrollVolume) Disney_scrollVolume(video);
-    Disney_skipAd(video);
+    if (settings.Disney?.skipAd) Disney_skipAd(video);
   }
   async function Disney_skipAd(video) {
     if (video) {
@@ -504,11 +511,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         const adTime = parseAdTime(adTimeText.textContent);
         if (adTime > 1 && !lastAdTimeText) {
           lastAdTimeText = adTime;
-          resetLastATimeText();
-          const skipTime = adTime - 1;
-          video.currentTime += skipTime;
-          log("Disney Ad skipped, length:", skipTime, "s");
-          settings.Statistics.DisneyAdTimeSkipped += skipTime;
+          resetLastATimeText(100);
+          video.currentTime += adTime;
+          log("Disney Ad skipped, length:", adTime, "s");
+          settings.Statistics.DisneyAdTimeSkipped += adTime;
           increaseBadge();
         }
       }

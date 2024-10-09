@@ -102,7 +102,7 @@ if (isMobile) {
         profile: true,
         showRating: true,
       },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, speedSlider: true, showRating: true, selfAd: true },
       Crunchyroll: {
         skipIntro: true,
         speedSlider: true,
@@ -114,7 +114,14 @@ if (isMobile) {
       },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
-      Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
+      Statistics: {
+        AmazonAdTimeSkipped: 0,
+        NetflixAdTimeSkipped: 0,
+        DisneyAdTimeSkipped: 0,
+        IntroTimeSkipped: 0,
+        RecapTimeSkipped: 0,
+        SegmentsSkipped: 0,
+      },
       General: {
         Crunchyroll_profilePicture: null,
         profileName: null,

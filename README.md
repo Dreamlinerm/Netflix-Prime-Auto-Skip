@@ -211,7 +211,7 @@ If there is no score they are refreshed once per day. If the movie is newer than
 | Intro | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>| ✅  <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>| ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> | ✅ [One piece](https://www.crunchyroll.com/series/GRMG8ZQZR/one-piece) | ✅ |
 | Recaps | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>| ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a> | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>| ? | ✅ |
 | Credits | ✅ | ✅ | ✅ | ❌(not necessary if outro is skipped) | ✅ |
-| Ads | ✅ | ✅ [2 Broke Girls](https://www.amazon.de/gp/video/detail/B01D0H8CAY/ref=atv_hm_fre_c_zwoINQ_2_2?jic=36%7CCgtmcmVld2l0aGFkcxIMc3Vic2NyaXB0aW9u) | ❌ | ❌(Ublock can do it) | ? |
+| Ads | ✅ | ✅ [2 Broke Girls](https://www.amazon.de/gp/video/detail/B01D0H8CAY/ref=atv_hm_fre_c_zwoINQ_2_2?jic=36%7CCgtmcmVld2l0aGFkcxIMc3Vic2NyaXB0aW9u) | ✅ | ❌(Ublock can do it) | ? |
 | Add Speed Slider | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Play on Fullscreen | ✅ | ✅ | ✅ | ✅ | ✅ |
 | fullscreen on double click | ➖ | ✅ | ➖ | ✅ | ? |
