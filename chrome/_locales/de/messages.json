@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "Wenn Sie auf dem Tonsymbol nach oben oder unten scrollen, wird die Lautstärke geändert."
+  },
+  "DisneyAdDescription": {
+    "message": "Zeit der übersprungenen Disney-Werbung."
   }
 }

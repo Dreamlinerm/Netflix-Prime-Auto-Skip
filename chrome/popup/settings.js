@@ -86,7 +86,7 @@ const defaultSettings = {
       profile: true,
       showRating: true,
     },
-    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
+    Disney: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, speedSlider: true, showRating: true, selfAd: true },
     Crunchyroll: {
       skipIntro: true,
       speedSlider: true,
@@ -98,7 +98,14 @@ const defaultSettings = {
     },
     HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
     Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
-    Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
+    Statistics: {
+      AmazonAdTimeSkipped: 0,
+      NetflixAdTimeSkipped: 0,
+      DisneyAdTimeSkipped: 0,
+      IntroTimeSkipped: 0,
+      RecapTimeSkipped: 0,
+      SegmentsSkipped: 0,
+    },
     General: {
       Crunchyroll_profilePicture: null,
       profileName: null,
@@ -216,6 +223,7 @@ async function setCheckboxesToSettings() {
       // Ads
       settings?.Amazon.blockFreevee &&
       settings?.Netflix.skipAd &&
+      settings?.Disney.skipAd &&
       getBooleanOfCategory("showRating") &&
       getBooleanOfCategory("speedSlider") &&
       // playOnFullScreen
@@ -226,7 +234,7 @@ async function setCheckboxesToSettings() {
   VideoCheckboxes.forEach((key) => {
     setButtonChecked("Video" + capitalizeFirstLetter(key), getBooleanOfCategory(key));
   });
-  setButtonChecked("VideoAds", settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
+  setButtonChecked("VideoAds", settings?.Amazon.blockFreevee && settings?.Netflix.skipAd && settings?.Disney.skipAd);
   setButtonChecked("VideoFullScreen", settings?.Video.playOnFullScreen);
   setButtonChecked("VideoDoubleClick", settings?.Video.doubleClick);
   setButtonChecked("VideoScrollVolume", settings?.Video.scrollVolume);
@@ -402,6 +410,7 @@ function listenForClicks() {
           // Ads
           settings?.Amazon.blockFreevee &&
           settings?.Netflix.skipAd &&
+          settings?.Disney.skipAd &&
           getBooleanOfCategory("showRating") &&
           getBooleanOfCategory("speedSlider") &&
           // playOnFullScreen
@@ -415,13 +424,17 @@ function listenForClicks() {
         });
         settings.Amazon.blockFreevee =
           settings.Netflix.skipAd =
+          settings.Disney.skipAd =
           settings.Video.playOnFullScreen =
           settings.Video.doubleClick =
           settings.Video.scrollVolume =
             VideoSkips;
         if (VideoSkips) setCategoryToBoolean("watchCredits", false);
       } else if (e.target.id === "VideoAds")
-        settings.Amazon.blockFreevee = settings.Netflix.skipAd = !(settings?.Amazon.blockFreevee && settings?.Netflix.skipAd);
+        settings.Amazon.blockFreevee =
+          settings.Netflix.skipAd =
+          settings.Disney.skipAd =
+            !(settings?.Amazon.blockFreevee && settings?.Netflix.skipAd && settings?.Disney.skipAd);
       else if (e.target.id === "VideoFullScreen") settings.Video.playOnFullScreen = !settings.Video.playOnFullScreen;
       else if (e.target.id === "VideoDoubleClick") settings.Video.doubleClick = !settings.Video.doubleClick;
       else if (e.target.id === "VideoScrollVolume") settings.Video.scrollVolume = !settings.Video.scrollVolume;

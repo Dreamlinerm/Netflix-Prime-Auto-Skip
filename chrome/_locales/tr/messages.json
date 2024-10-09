@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "Ses Simgesi üzerinde yukarı veya aşağı kaydırma yapmak ses seviyesini değiştirecektir."
+  },
+  "DisneyAdDescription": {
+    "message": "Disney reklamlarını atlama zamanı."
   }
 }

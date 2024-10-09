@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "Om du bläddrar upp eller ner på ljudikonen ändras volymen."
+  },
+  "DisneyAdDescription": {
+    "message": "Tid för överhoppade Disney-annonser."
   }
 }

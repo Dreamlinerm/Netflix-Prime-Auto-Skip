@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "Le défilement vers le haut ou vers le bas de l'icône du son modifie le volume."
+  },
+  "DisneyAdDescription": {
+    "message": "Durée des publicités Disney sautées."
   }
 }

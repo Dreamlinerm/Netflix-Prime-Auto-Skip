@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "Scrolling up or down on the Sound Icon will change the volume."
+  },
+  "DisneyAdDescription": {
+    "message": "Time of skipped Disney Ads."
   }
 }

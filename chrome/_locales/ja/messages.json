@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "サウンドアイコンを上下にスクロールすると音量が変わります。"
+  },
+  "DisneyAdDescription": {
+    "message": "ディズニーの広告をスキップした時間。"
   }
 }

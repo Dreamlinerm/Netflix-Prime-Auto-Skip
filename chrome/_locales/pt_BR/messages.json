@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "Deslocar-se para cima ou para baixo no ícone de som altera o volume."
+  },
+  "DisneyAdDescription": {
+    "message": "Tempo de saltar anúncios da Disney."
   }
 }

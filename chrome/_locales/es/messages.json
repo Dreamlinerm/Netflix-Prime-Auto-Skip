@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "Si se desplaza hacia arriba o hacia abajo en el icono de sonido, cambiará el volumen."
+  },
+  "DisneyAdDescription": {
+    "message": "Tiempo de anuncios Disney saltados."
   }
 }

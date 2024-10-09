@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "Lo scorrimento verso l'alto o verso il basso dell'icona del suono modifica il volume."
+  },
+  "DisneyAdDescription": {
+    "message": "Tempo di salto degli annunci Disney."
   }
 }

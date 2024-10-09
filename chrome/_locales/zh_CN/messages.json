@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "上下滚动声音图标可改变音量。"
+  },
+  "DisneyAdDescription": {
+    "message": "跳过迪斯尼广告的时间"
   }
 }

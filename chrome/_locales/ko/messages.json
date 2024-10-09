@@ -302,5 +302,8 @@
   },
   "scrollVolumeDescription": {
     "message": "사운드 아이콘을 위아래로 스크롤하면 볼륨이 변경됩니다."
+  },
+  "DisneyAdDescription": {
+    "message": "디즈니 광고를 건너뛴 시간."
   }
 }

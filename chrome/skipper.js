@@ -58,7 +58,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         profile: true,
         showRating: true,
       },
-      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true, selfAd: true },
+      Disney: { skipIntro: true, skipCredits: true, watchCredits: false, skipAd: true, speedSlider: true, showRating: true, selfAd: true },
       Crunchyroll: {
         skipIntro: true,
         speedSlider: true,
@@ -70,7 +70,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
-      Statistics: { AmazonAdTimeSkipped: 0, NetflixAdTimeSkipped: 0, IntroTimeSkipped: 0, RecapTimeSkipped: 0, SegmentsSkipped: 0 },
+      Statistics: {
+        AmazonAdTimeSkipped: 0,
+        NetflixAdTimeSkipped: 0,
+        DisneyAdTimeSkipped: 0,
+        IntroTimeSkipped: 0,
+        RecapTimeSkipped: 0,
+        SegmentsSkipped: 0,
+      },
       General: {
         Crunchyroll_profilePicture: null,
         profileName: null,
@@ -495,6 +502,23 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (settings.Disney?.selfAd) Disney_selfAd(video, time);
     }
     if (settings.Video?.scrollVolume) Disney_scrollVolume(video);
+    if (settings.Disney?.skipAd) Disney_skipAd(video);
+  }
+  async function Disney_skipAd(video) {
+    if (video) {
+      const adTimeText = document.querySelector("div.overlay_interstitials__content_time_display");
+      if (adTimeText) {
+        const adTime = parseAdTime(adTimeText.textContent);
+        if (adTime >= 1 && !lastAdTimeText) {
+          lastAdTimeText = adTime;
+          resetLastATimeText(100);
+          video.currentTime += adTime;
+          log("Disney Ad skipped, length:", adTime, "s");
+          settings.Statistics.DisneyAdTimeSkipped += adTime;
+          increaseBadge();
+        }
+      }
+    }
   }
   async function Disney_scrollVolume(video) {
     const volumeControl = document.querySelector("div.audio-control:not(.enhanced)");
@@ -1066,7 +1090,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }, 100);
   }
   function parseAdTime(adTimeText) {
-    const adTime = parseInt(/:\d+/.exec(adTimeText.textContent)?.[0].substring(1)) + parseInt(/\d+/.exec(adTimeText.textContent)?.[0]) * 60;
+    const adTime = parseInt(/:\d+/.exec(adTimeText)?.[0].substring(1)) + parseInt(/\d+/.exec(adTimeText)?.[0]) * 60;
     if (isNaN(adTime)) return false;
     return adTime;
   }
@@ -1075,8 +1099,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const adTimeText = document.querySelector(".atvwebplayersdk-ad-timer-text");
     if (adTimeText) {
       let adTime;
-      adTime = parseAdTime(adTimeText?.childNodes?.[0]);
-      if (!adTime) adTime = parseAdTime(adTimeText?.childNodes?.[1]);
+      adTime = parseAdTime(adTimeText?.childNodes?.[0]?.textContent);
+      if (!adTime) adTime = parseAdTime(adTimeText?.childNodes?.[1]?.textContent);
       // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
       if (!document.querySelector(".fu4rd6c.f1cw2swo") && adTime > 1 && !lastAdTimeText) {
         lastAdTimeText = adTime;
