@@ -4,8 +4,7 @@
 # Streaming enhanced ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
 
 
-## Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max
-
+## Automatically skip Ads, Intros, Recaps, Credits, etc. on <br> Netflix, Prime video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
 <img src="Logos/firefox.svg" width="20px">
 <img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
@@ -37,15 +36,16 @@
 </a>
 </div>
 
+***
 
-
-<p align="center">
+## Download & Install
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"><img src="Logos/download button/firefox.png" alt="Get Streaming enhanced for Firefox"/>
 <a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="Logos/download button/chrome.png" alt="Get Streaming enhanced for Chromium"/>
 <a href="https://microsoftedge.microsoft.com/addons/detail/streaming-enhanced-netfli/dhfpagghjamocfaaignghcljfpppelff"><img src="Logos/download button/microsoft.png" alt="Get Streaming enhanced for Edge"/>
-</p>
 
-***
+## Contributing to Translation
+
+We welcome contributions to the translation of the extension. If you're interested in helping us translate the extension to your language look [here](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues/42).
 
 ### Supported Streaming Services:
 
