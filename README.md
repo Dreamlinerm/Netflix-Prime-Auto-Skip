@@ -8,8 +8,8 @@
 
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
 <img src="Logos/firefox.svg" width="20px">
-<img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
 <img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
+<img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
 <img alt="Mozilla Add-on Rating" src="https://img.shields.io/amo/rating/NetflixPrime%40Autoskip.io">
 </a>
 <br>
