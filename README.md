@@ -188,10 +188,10 @@ If there is no score they are refreshed once per day. If the movie is newer than
 | --- | --- |
 | ? | Title not found |
 | N/A | Too new movie or less than 80 votes |
-| <div style="background-color:grey;width:20px;height:20px;"><div> | ? or N/A |
-| <div style="background-color:red;width:20px;height:20px;"><div> | <= 5.5 stars|
-| <div style="background-color:rgb(245, 197, 24);width:20px;height:20px;"><div> | <= 7 stars|
-| <div style="background-color:rgb(0, 166, 0);width:20px;height:20px;"><div> | >7 stars|
+| <img src="Logos/greyBox.svg" height="20px"> | ? or N/A |
+| <img src="Logos/redBox.svg" height="20px"> | <= 5.5 stars|
+| <img src="Logos/yellowBox.svg" height="20px"> | <= 7 stars|
+| <img src="Logos/greenBox.svg" height="20px"> | >7 stars|
 
 
 # Implemented Feature Overview
