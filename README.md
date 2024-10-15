@@ -4,7 +4,7 @@
 # Streaming enhanced ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
 
 
-## Automatically skip Ads, Intros, Recaps, Credits, etc. on <br> Netflix, Prime video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max
+## Automatically skip Ads, Intros, Recaps, Credits, etc.
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
 <img src="Logos/firefox.svg" width="20px">
 <img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
@@ -32,7 +32,7 @@
 </a>
 <br>
 <a href="https://discord.gg/5fBYathA7d">
-<img src="https://img.shields.io/badge/Discord_Server-5a5a5a?logo=discord" width="200">
+<img src="https://img.shields.io/badge/Discord_Server-5a5a5a?logo=discord" width="300">
 </a>
 </div>
 
