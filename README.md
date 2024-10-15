@@ -49,10 +49,6 @@ We welcome contributions to the translation of the extension. If you're interest
 
 ### Supported Streaming Services:
 
-| Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO    |
-| ---     | ---             | ---                      | ---         | ---    |
-| ✅      | ✅             | ✅                      | ✅          | ✅     |
-
 <table>
     <tr>
       <td align="center" valign="top" width="14.28%">
@@ -66,6 +62,10 @@ We welcome contributions to the translation of the extension. If you're interest
       </td>
     </tr>
 </table>
+
+| Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO    |
+| ---     | ---             | ---                      | ---         | ---    |
+| ✅      | ✅             | ✅                      | ✅          | ✅     |
 
 ## Install on Android
 
