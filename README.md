@@ -47,15 +47,25 @@
 
 ***
 
-### Language
-
-I used DeepL to translate into most languages. If there is anything wrong with them you can see [here](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues/42) what to do.
-
-### Browser Compatibility:
+### Supported Streaming Services:
 
 | Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO    |
 | ---     | ---             | ---                      | ---         | ---    |
 | ✅      | ✅             | ✅                      | ✅          | ✅     |
+
+<table>
+    <tr>
+      <td align="center" valign="top" width="14.28%">
+        <img src="Logos/Netflix.png" width="20%">
+        <img src="Logos/prime%20video.png" width="20%" >
+        <img src="Logos/crunchyroll.avif" width="20%">
+        <img src="Logos/HBO-max.jpg" width="20%">
+        <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
+        <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
+        <img src="Logos/starplus.png" width="20%" style="background-color:white;">
+      </td>
+    </tr>
+</table>
 
 ## Install on Android
 
@@ -77,22 +87,6 @@ The drm for each streaming service will be installed automatically when a video 
 | Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
 | ---     | ---                 | ---                      | ---         | ---                |
 | ❌     | ✅(tweaked Desktop Website) | ✅(default Desktop Website)      | ✅         | ✅ |
-
-## Supported Streaming Services
-
-<table>
-    <tr>
-      <td align="center" valign="top" width="14.28%">
-        <img src="Logos/Netflix.png" width="20%">
-        <img src="Logos/prime%20video.png" width="20%" >
-        <img src="Logos/crunchyroll.avif" width="20%">
-        <img src="Logos/HBO-max.jpg" width="20%">
-        <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
-        <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
-        <img src="Logos/starplus.png" width="20%" style="background-color:white;">
-      </td>
-    </tr>
-</table>
 
 ## What it does
 
