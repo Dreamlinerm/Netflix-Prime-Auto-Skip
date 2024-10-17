@@ -4,12 +4,11 @@
 # Streaming enhanced ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
 
 
-## Automatically skip Ads, Intros, Recaps, Credits, etc. on Netflix, Prime video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max
-
+## Automatically skip Ads, Intros, Recaps, Credits, etc.
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
 <img src="Logos/firefox.svg" width="20px">
-<img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
 <img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
+<img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
 <img alt="Mozilla Add-on Rating" src="https://img.shields.io/amo/rating/NetflixPrime%40Autoskip.io">
 </a>
 <br>
@@ -33,25 +32,36 @@
 </a>
 <br>
 <a href="https://discord.gg/5fBYathA7d">
-<img src="https://img.shields.io/badge/Discord_Server-5a5a5a?logo=discord" width="200">
+<img src="https://img.shields.io/badge/Discord_Server-5a5a5a?logo=discord" width="300">
 </a>
 </div>
 
+***
 
-
-<p align="center">
+## Download & Install
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"><img src="Logos/download button/firefox.png" alt="Get Streaming enhanced for Firefox"/>
 <a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="Logos/download button/chrome.png" alt="Get Streaming enhanced for Chromium"/>
 <a href="https://microsoftedge.microsoft.com/addons/detail/streaming-enhanced-netfli/dhfpagghjamocfaaignghcljfpppelff"><img src="Logos/download button/microsoft.png" alt="Get Streaming enhanced for Edge"/>
-</p>
 
-***
+## Contributing to Translation
 
-### Language
+We welcome contributions to the translation of the extension. If you're interested in helping us translate the extension to your language look [here](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues/42).
 
-I used DeepL to translate into most languages. If there is anything wrong with them you can see [here](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues/42) what to do.
+### Supported Streaming Services:
 
-### Browser Compatibility:
+<table>
+    <tr>
+      <td align="center" valign="top" width="14.28%">
+        <img src="Logos/Netflix.png" width="20%">
+        <img src="Logos/prime%20video.png" width="20%" >
+        <img src="Logos/crunchyroll.avif" width="20%">
+        <img src="Logos/HBO-max.jpg" width="20%">
+        <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
+        <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
+        <img src="Logos/starplus.png" width="20%" style="background-color:white;">
+      </td>
+    </tr>
+</table>
 
 | Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO    |
 | ---     | ---             | ---                      | ---         | ---    |
@@ -78,22 +88,6 @@ The drm for each streaming service will be installed automatically when a video 
 | ---     | ---                 | ---                      | ---         | ---                |
 | ❌     | ✅(tweaked Desktop Website) | ✅(default Desktop Website)      | ✅         | ✅ |
 
-## Supported Streaming Services
-
-<table>
-    <tr>
-      <td align="center" valign="top" width="14.28%">
-        <img src="Logos/Netflix.png" width="20%">
-        <img src="Logos/prime%20video.png" width="20%" >
-        <img src="Logos/crunchyroll.avif" width="20%">
-        <img src="Logos/HBO-max.jpg" width="20%">
-        <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
-        <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
-        <img src="Logos/starplus.png" width="20%" style="background-color:white;">
-      </td>
-    </tr>
-</table>
-
 ## What it does
 
 The script, "skipper.js", is injected into all urls containing "amazon.\*/\*/video" or "netflix.com" or "disneyplus.com" or "hotstar.com" or "starplus.com".
@@ -117,19 +111,18 @@ Features in other supported languages:
 | [Türkçe](docs/storeDescriptions/tr.md) |
 
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
-
 <ul>
-  <li>Block Ads</li>
-  <li>Skipping Intros & Recaps</li>
-  <li>Skipping Credits</li>
-  <li>Displaying TMDB ratings for all shows</li>
-  <li>Adding customizable playback speed control</li>
-  <li>Automatically start to play videos in fullscreen</li>
-  <li>Go fullscreen on double click</li>
+<li>Block Ads</li>
+<li>Skipping Intros & Recaps</li>
+<li>Skipping Credits</li>
+<li>Displaying TMDB ratings for all shows</li>
+<li>Adding customizable playback speed control</li>
+<li>Automatically start to play videos in fullscreen</li>
+<li>Go fullscreen on double click</li>
+<li>Scroll to change the volume</li>
 </ul>
 
 Platform-Specific Features:
-
 <ul>
 <li>Netflix:
   <ul>
@@ -137,6 +130,7 @@ Platform-Specific Features:
     <li>Blocks the “Are you still watching?” inactivity warning</li>
   </ul>
 </li>
+
 <li>Amazon Prime Video:
   <ul>
     <li>Skips self-promotional ads (for Prime Video productions)</li>
@@ -144,12 +138,14 @@ Platform-Specific Features:
     <li>Removes the blur effect when hovering over videos</li>
   </ul>
 </li>
+
 <li>Disney+ (Hotstar, STAR+):
   <ul>
     <li>Skips self-promotional ads</li>
     <li>Automatically returns to fullscreen mode when going to the next episode</li>
   </ul>
 </li>
+
 <li>Crunchyroll:
   <ul>
     <li>Remembers and selects your last-used profile automatically</li>
@@ -215,8 +211,9 @@ If there is no score they are refreshed once per day. If the movie is newer than
 | Add Speed Slider | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Play on Fullscreen | ✅ | ✅ | ✅ | ✅ | ✅ |
 | fullscreen on double click | ➖ | ✅ | ➖ | ✅ | ? |
+| Scroll for volume |  ✅ | ✅ | ✅ | ✅ | ❌ |
 | TMDB Rating | ✅ | ✅ | ✅ | ❌(MAL ratings better) | ✅ |
-| Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue":</li></ul> | <ul><li>Skip self ads</li><li>Remain fullscreen</li></ul> | <ul><li>Auto pick last profile</li><li>Release Calendar Filters</li><li>Big Video size</li><li>Disable the numpad</li></ul> | ➖ |
+| Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue"</li><li>Hide Xray</li></ul> | <ul><li>Skip self ads</li><li>Remain fullscreen</li></ul> | <ul><li>Auto pick last profile</li><li>Release Calendar Filters</li><li>Big Video size</li><li>Disable the numpad</li></ul> | ➖ |
 
 ## How it works
 
