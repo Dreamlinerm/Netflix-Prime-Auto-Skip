@@ -226,7 +226,6 @@ input:checked + .slider:before {
 
 .popupMenuButton {
   flex: 1 0 calc(25% - 30px);
-  max-width: calc(25% - 20px);
   border-radius: 15px;
   padding: 20px;
   margin: 10px;
