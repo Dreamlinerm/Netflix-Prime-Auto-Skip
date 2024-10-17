@@ -43,6 +43,21 @@
 <a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="Logos/download button/chrome.png" alt="Get Streaming enhanced for Chromium"/>
 <a href="https://microsoftedge.microsoft.com/addons/detail/streaming-enhanced-netfli/dhfpagghjamocfaaignghcljfpppelff"><img src="Logos/download button/microsoft.png" alt="Get Streaming enhanced for Edge"/>
 
+## Install on Android
+
+<div style="display:flex">
+                <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
+                <img src="Logos/firefox.svg" width="8%" alt="firefox">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
+                <img src="Logos/kiwi.webp" width="8%">
+                </a>
+</div>
+
+Download [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/), [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the firefox/chrome extension. 
+
+The drm for each streaming service will be installed automatically when a video started for the first time and you may need to reload the page once.
+
 ## Contributing to Translation
 
 We welcome contributions to the translation of the extension. If you're interested in helping us translate the extension to your language look [here](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues/42).
@@ -66,21 +81,6 @@ We welcome contributions to the translation of the extension. If you're interest
 | Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO    |
 | ---     | ---             | ---                      | ---         | ---    |
 | ✅      | ✅             | ✅                      | ✅          | ✅     |
-
-## Install on Android
-
-<div style="display:flex">
-                <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
-                <img src="Logos/firefox.svg" width="8%" alt="firefox">
-                </a>
-                <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
-                <img src="Logos/kiwi.webp" width="8%">
-                </a>
-</div>
-
-Download [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/), [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the firefox/chrome extension. 
-
-The drm for each streaming service will be installed automatically when a video started for the first time and you may need to reload the page once.
 
 ## Android Compatibility:
 
