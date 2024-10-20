@@ -769,6 +769,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped");
     if (NSettings?.speedSlider) Netflix_SpeedSlider(video);
     if (settings.Video?.scrollVolume) Netflix_scrollVolume(video);
+    /* global addSubtitles */
+    addSubtitles();
   }
   async function Netflix_scrollVolume(video) {
     const volumeControl = document.querySelector('[data-uia*="control-volume"]:not(.enhanced)');

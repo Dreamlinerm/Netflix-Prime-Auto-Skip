@@ -31,7 +31,7 @@
         "*://*.max.com/*",
         "*://*.hbomax.com/*"
       ],
-      "js": ["skipper.js"]
+      "js": ["SubtitleParsers/srtParser.js", "subtitles.js", "skipper.js"]
     },
     {
       "all_frames": true,
