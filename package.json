@@ -15,7 +15,7 @@
     "lint": "web-ext lint",
     "esLint": "npx eslint firefox/ chrome/",
     "test": "cd firefox && web-ext build  --overwrite-dest && cd .. && node refreshXPI.js && python test.py",
-    "hours": "git hours -since 2018-02-01 -before today -author Marvin Alexander Krebber"
+    "hours": "git hours -since 2018-02-01 -before today -author marvinkrebber@yahoo.de > AuthorHours.txt && node hourstxtToJSON.js"
   },
   "repository": {
     "type": "git",
