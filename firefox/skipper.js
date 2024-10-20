@@ -886,8 +886,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }
     }, 100);
   }
-  const NetflixSliderStyle = "position:relative;bottom:20px;display: none;width:200px;";
-  const NetflixSpeedStyle = "position:relative;bottom:20px;font-size: 3em;padding: 0 5px;";
+  const NetflixSliderStyle = "display: none;width:200px;";
+  const NetflixSpeedStyle = "font-size: 3em;padding: 0 5px;margin: unset;align-content: center;";
   function Netflix_SpeedSlider(video) {
     // only add speed slider on lowest subscription tier
     // && !document.querySelector('[data-uia="control-speed"]')
