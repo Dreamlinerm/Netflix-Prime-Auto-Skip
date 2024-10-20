@@ -1,7 +1,7 @@
 <div align="center">
 <img src="firefox/icons/NetflixAmazon%20Auto-Skip.svg" width="10%">
 
-# Streaming enhanced ![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
+# Streaming enhanced ![Project Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
 
 
 ## Automatically skip Ads, Intros, Recaps, Credits, etc.
@@ -20,6 +20,7 @@
 <br>
 <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/Dreamlinerm/Netflix-Prime-Auto-Skip">
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Dreamlinerm/Netflix-Prime-Auto-Skip">
+<img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FAuthorHours.json&query=time&label=Approx%20Development%20Time%20(Owner)">
 <br>
 <a href="(https://github.com/sponsors/Dreamlinerm">
 <img src="https://img.shields.io/github/sponsors/Dreamlinerm?logo=githubsponsors">
@@ -161,6 +162,8 @@ If you want to see what is implemented go [here](#implemented-feature-overview):
 ## 💕 Enjoying Streaming enhanced?
 
 Buy me a [coffee](https://github.com/sponsors/Dreamlinerm)! 
+
+<img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FAuthorHours.json&query=time&label=Approx%20Development%20Time%20(Owner)">
 
 ## Contributing
 

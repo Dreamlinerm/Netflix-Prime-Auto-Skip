@@ -1,5 +1,6 @@
 /* global require */
 /* global process */
+// requires https://github.com/lazypic/git-hours to be installed globally
 const fs = require("fs");
 const path = require("path");
 
