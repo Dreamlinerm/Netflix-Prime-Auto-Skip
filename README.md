@@ -20,7 +20,7 @@
 <br>
 <img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/Dreamlinerm/Netflix-Prime-Auto-Skip">
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Dreamlinerm/Netflix-Prime-Auto-Skip">
-<img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FAuthorHours.json&query=time&label=Approx%20Development%20Time%20(Owner)">
+<img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FAuthorHours.json&query=time&label=Approx%20Dev%20Time%20(Owner)">
 <br>
 <a href="(https://github.com/sponsors/Dreamlinerm">
 <img src="https://img.shields.io/github/sponsors/Dreamlinerm?logo=githubsponsors">
