@@ -1,4 +1,5 @@
 // https://raw.githubusercontent.com/1c7/srt-parser-2/refs/heads/master/src/index.ts
+// from srt-parser-2
 function timestampToSeconds(srtTimestamp) {
   const [rest, millisecondsString] = srtTimestamp.split(",");
   const milliseconds = parseInt(millisecondsString);
