@@ -39,4 +39,20 @@ function parseSrtFile(text) {
   console.log("parseSrtFile");
   var srt_array = fromSrt(text);
   console.log("srt_array", srt_array);
+  let subtitles = document.createElement("div");
+  subtitles.id = "subtitles";
+  subtitles.style = "z-index:999;position: absolute;top: 50%;left: 50%;  font-size: 3em;";
+  document.body.appendChild(subtitles);
+  let video = document.querySelector("video");
+
+  video.addEventListener("timeupdate", function () {
+    console.log("timeupdate", video.currentTime);
+    const currentTime = video.currentTime;
+    // find currentTime in subtitles
+    let currentSubtitle =
+      srt_array.find((subtitle, index) => {
+        return currentTime >= subtitle.startSeconds && currentTime <= subtitle.endSeconds;
+      }) || "";
+    subtitles.innerHTML = currentSubtitle?.text || "";
+  });
 }
