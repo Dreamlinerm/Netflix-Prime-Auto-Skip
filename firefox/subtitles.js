@@ -61,15 +61,18 @@ function parseSrtFile(text, position) {
   let video = document.querySelector("video");
 
   video.addEventListener("timeupdate", function (evt) {
-    console.log("timeupdate", evt);
-    console.log("timeupdate", video.currentTime);
-    const currentTime = video.currentTime;
-    // find currentTime in subtitles
-    let currentSubtitle =
-      srt_array.find((subtitle, index) => {
-        return currentTime >= subtitle.startSeconds && currentTime <= subtitle.endSeconds;
-      }) || "";
-    subtitles.innerHTML = currentSubtitle?.text || "";
+    const currentTime = isPrimeVideo
+      ? parseAdTime(document.querySelector(".atvwebplayersdk-timeindicator-text")?.firstChild?.textContent)
+      : video.currentTime;
+    console.log("timeupdate", currentTime, video.currentTime);
+    if (currentTime) {
+      // find currentTime in subtitles
+      let currentSubtitle =
+        srt_array.find((subtitle, index) => {
+          return currentTime >= subtitle.startSeconds && currentTime <= subtitle.endSeconds;
+        }) || "";
+      subtitles.innerHTML = currentSubtitle?.text || "";
+    }
   });
 }
 
