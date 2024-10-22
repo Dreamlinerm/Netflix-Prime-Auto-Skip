@@ -1,4 +1,3 @@
-addSubtitles();
 /*
  * Streaming enhanced
  * Copyright (c) 2022 Marvin Krebber
@@ -31,6 +30,14 @@ const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
 const version = "1.1.43";
+let service;
+if (isPrimeVideo) service = "Amazon";
+else if (isNetflix) service = "Netflix";
+else if (isDisney) service = "Disney";
+else if (isCrunchyroll) service = "Crunchyroll";
+else if (isHBO) service = "HBO";
+else service = "Video";
+addSubtitles(service);
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage

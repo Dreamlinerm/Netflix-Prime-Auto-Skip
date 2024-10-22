@@ -1,4 +1,5 @@
-async function addSubtitles() {
+async function addSubtitles(service) {
+  console.log("service", service);
   if (document.getElementById("uploadSubtitles") !== null) document.getElementById("uploadSubtitles").remove();
   console.log("subtitles.js");
   const div = document.createElement("div");
