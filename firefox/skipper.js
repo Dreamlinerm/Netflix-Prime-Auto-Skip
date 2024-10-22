@@ -30,14 +30,6 @@ const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
 const version = "1.1.43";
-let service;
-if (isPrimeVideo) service = "Amazon";
-else if (isNetflix) service = "Netflix";
-else if (isDisney) service = "Disney";
-else if (isCrunchyroll) service = "Crunchyroll";
-else if (isHBO) service = "HBO";
-else service = "Video";
-addSubtitles(service);
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -142,6 +134,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (Netflix?.profile) AutoPickProfile();
     if (Netflix?.skipAd) Netflix_SkipAdInterval();
     NetflixObserver.observe(document, config);
+    addSubtitles();
   }
   function startAmazon(Amazon) {
     AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
@@ -156,6 +149,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
     if (Amazon?.continuePosition) setTimeout(() => Amazon_continuePosition(), 500);
     if (settings.Video?.userAgent && isMobile) Amazon_customizeMobileView();
+    Amazon_addSubtitles();
   }
   function startCrunchyroll(Crunchyroll) {
     if (Crunchyroll?.releaseCalendar) Crunchyroll_ReleaseCalendar();
@@ -172,6 +166,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       }, 2000);
       CrunchyrollObserver.observe(document, config);
     }
+    addSubtitles();
   }
   browser.storage.sync.get("settings", function (result) {
     // overwrite default settings with user settings
@@ -191,6 +186,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     else if (isDisney || isHotstar) {
       if (isHotstar) Hotstar_doubleClick();
       DisneyObserver.observe(document, config);
+      addSubtitles();
     } else if (isCrunchyroll) startCrunchyroll(settings.Crunchyroll);
     else if (isHBO) HBOObserver.observe(document, config);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
