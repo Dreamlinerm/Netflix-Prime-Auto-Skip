@@ -1096,7 +1096,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   async function skipAd(video) {
     // Series grimm
-    const adTimeText = document.querySelector(".atvwebplayersdk-ad-timer-text");
+    // there area multiple adtime texts, the dv-player-fullscreen is the correct one
+    const adTimeText = document.querySelector(".dv-player-fullscreen .atvwebplayersdk-ad-timer-text");
     if (adTimeText?.checkVisibility()) {
       let adTime;
       adTime = parseAdTime(adTimeText?.childNodes?.[0]?.textContent);
@@ -1104,7 +1105,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
       if (!document.querySelector(".fu4rd6c.f1cw2swo") && adTime > 1 && !lastAdTimeText) {
         lastAdTimeText = adTime;
-        resetLastATimeText();
+        resetLastATimeText(3000);
         // biggest skiptime before crashing on amazon.com, can be little higher than 90 but 90 to be safe
         const bigTime = 90;
         const skipTime = adTime > bigTime ? bigTime : adTime - 1;
