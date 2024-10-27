@@ -1097,7 +1097,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   async function skipAd(video) {
     // Series grimm
     const adTimeText = document.querySelector(".atvwebplayersdk-ad-timer-text");
-    if (adTimeText) {
+    if (adTimeText?.checkVisibility()) {
       let adTime;
       adTime = parseAdTime(adTimeText?.childNodes?.[0]?.textContent);
       if (!adTime) adTime = parseAdTime(adTimeText?.childNodes?.[1]?.textContent);
@@ -1105,7 +1105,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (!document.querySelector(".fu4rd6c.f1cw2swo") && adTime > 1 && !lastAdTimeText) {
         lastAdTimeText = adTime;
         resetLastATimeText();
-        const skipTime = adTime - 1;
+        // biggest skiptime before crashing on amazon.com, can be little higher than 90 but 90 to be safe
+        const bigTime = 90;
+        const skipTime = adTime > bigTime ? bigTime : adTime - 1;
         video.currentTime += skipTime;
         log("FreeVee Ad skipped, length:", skipTime, "s");
         settings.Statistics.AmazonAdTimeSkipped += skipTime;
