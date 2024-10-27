@@ -1020,14 +1020,15 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const AmazonSliderStyle = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;";
   async function Amazon_SpeedSlider(video) {
     if (video) {
-      let alreadySlider = document.querySelector("#videoSpeedSlider");
+      let alreadySlider = document.querySelector(".dv-player-fullscreen #videoSpeedSlider");
       if (!alreadySlider) {
         // infobar position for the slider to be added
         let position = document.querySelector(".dv-player-fullscreen [class*=infobar-container]")?.firstChild?.lastChild;
+        console.log("video", position);
         if (position) createSlider(video, position, AmazonSliderStyle, "");
       } else {
         // need to resync the slider with the video sometimes
-        let speed = document.querySelector("#videoSpeed");
+        let speed = document.querySelector(".dv-player-fullscreen #videoSpeed");
         if (video.playbackRate != alreadySlider.value / 10) {
           video.playbackRate = alreadySlider.value / 10;
         }
