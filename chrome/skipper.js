@@ -1020,14 +1020,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const AmazonSliderStyle = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;";
   async function Amazon_SpeedSlider(video) {
     if (video) {
-      let alreadySlider = document.querySelector("#videoSpeedSlider");
+      let alreadySlider = document.querySelector(".dv-player-fullscreen #videoSpeedSlider");
       if (!alreadySlider) {
         // infobar position for the slider to be added
         let position = document.querySelector(".dv-player-fullscreen [class*=infobar-container]")?.firstChild?.lastChild;
         if (position) createSlider(video, position, AmazonSliderStyle, "");
       } else {
         // need to resync the slider with the video sometimes
-        let speed = document.querySelector("#videoSpeed");
+        let speed = document.querySelector(".dv-player-fullscreen #videoSpeed");
         if (video.playbackRate != alreadySlider.value / 10) {
           video.playbackRate = alreadySlider.value / 10;
         }
@@ -1096,16 +1096,19 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   }
   async function skipAd(video) {
     // Series grimm
-    const adTimeText = document.querySelector(".atvwebplayersdk-ad-timer-text");
-    if (adTimeText) {
+    // there area multiple adtime texts, the dv-player-fullscreen is the correct one
+    const adTimeText = document.querySelector(".dv-player-fullscreen .atvwebplayersdk-ad-timer-text");
+    if (adTimeText?.checkVisibility()) {
       let adTime;
       adTime = parseAdTime(adTimeText?.childNodes?.[0]?.textContent);
       if (!adTime) adTime = parseAdTime(adTimeText?.childNodes?.[1]?.textContent);
       // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
       if (!document.querySelector(".fu4rd6c.f1cw2swo") && adTime > 1 && !lastAdTimeText) {
         lastAdTimeText = adTime;
-        resetLastATimeText();
-        const skipTime = adTime - 1;
+        // biggest skiptime before crashing on amazon.com, can be little higher than 90 but 90 to be safe
+        const bigTime = 90;
+        resetLastATimeText(adTime > bigTime ? 3000 : 1000);
+        const skipTime = adTime > bigTime ? bigTime : adTime - 1;
         video.currentTime += skipTime;
         log("FreeVee Ad skipped, length:", skipTime, "s");
         settings.Statistics.AmazonAdTimeSkipped += skipTime;
