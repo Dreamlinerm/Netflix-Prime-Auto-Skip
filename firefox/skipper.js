@@ -1107,7 +1107,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         lastAdTimeText = adTime;
         // biggest skiptime before crashing on amazon.com, can be little higher than 90 but 90 to be safe
         const bigTime = 90;
-        resetLastATimeText(adTime > bigTime || video.currentTime < 300 ? 3000 : 1000);
+        resetLastATimeText(adTime > bigTime ? 3000 : 1000);
         const skipTime = adTime > bigTime ? bigTime : adTime - 1;
         video.currentTime += skipTime;
         log("FreeVee Ad skipped, length:", skipTime, "s");
