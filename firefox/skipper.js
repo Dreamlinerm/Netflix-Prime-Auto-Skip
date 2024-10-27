@@ -1024,7 +1024,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (!alreadySlider) {
         // infobar position for the slider to be added
         let position = document.querySelector(".dv-player-fullscreen [class*=infobar-container]")?.firstChild?.lastChild;
-        console.log("video", position);
         if (position) createSlider(video, position, AmazonSliderStyle, "");
       } else {
         // need to resync the slider with the video sometimes
@@ -1106,9 +1105,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       // !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
       if (!document.querySelector(".fu4rd6c.f1cw2swo") && adTime > 1 && !lastAdTimeText) {
         lastAdTimeText = adTime;
-        resetLastATimeText(3000);
         // biggest skiptime before crashing on amazon.com, can be little higher than 90 but 90 to be safe
         const bigTime = 90;
+        resetLastATimeText(adTime > bigTime || video.currentTime < 300 ? 3000 : 1000);
         const skipTime = adTime > bigTime ? bigTime : adTime - 1;
         video.currentTime += skipTime;
         log("FreeVee Ad skipped, length:", skipTime, "s");
