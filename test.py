@@ -9,7 +9,7 @@ ffOptions = Options()
 
 ffOptions.add_argument("-profile")
 ffOptions.add_argument(
-    r"C:\Users\Marvin\AppData\Roaming\Mozilla\Firefox\Profiles\fd74ra9i.test"
+    r"C:\Users\Marvin\AppData\Roaming\Mozilla\Firefox\Profiles\35x42i21.test"
 )
 driver = webdriver.Firefox(options=ffOptions)
 extension_path = "NetflixPrime@Autoskip.io.xpi"
@@ -312,7 +312,7 @@ if len(sys.argv) <= 1 or "p" in sys.argv:
 if len(sys.argv) <= 1 or "n" in sys.argv:
     print("Netflix:")
     Netflix_Profile()
-    # Netflix_intro()
+    Netflix_intro()
 
 if len(sys.argv) <= 1 or "d" in sys.argv:
     print("Disney:")

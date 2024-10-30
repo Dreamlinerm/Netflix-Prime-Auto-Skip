@@ -21,6 +21,13 @@
       "targets": [],
       "value": ""
     }, {
+      "id": "cd65917a-fcf6-48fa-98d5-4d4d8483e3a7",
+      "comment": "",
+      "command": "verifyElementPresent",
+      "target": "css=.iconOnly",
+      "targets": [],
+      "value": ""
+    }, {
       "id": "9bf0bd78-a7ce-4383-a20c-b28911e25daa",
       "comment": "",
       "command": "click",
