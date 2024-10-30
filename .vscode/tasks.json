@@ -1,18 +1,18 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-      {
-        "label": "Launch firefox addon", // Name of task
-        "type": "shell",
-        "command": "npm run profile", // Enter your command here
-        "group": "none",
-        "presentation": {
-          "reveal": "always",
-          "panel": "new"
-        },
-        "runOptions": {
-          "runOn": "folderOpen"
-        }
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Launch firefox addon", // Name of task
+      "type": "shell",
+      "command": "npm start", // Enter your command here
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
       }
-    ]
-  }
+    }
+  ]
+}

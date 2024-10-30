@@ -264,17 +264,11 @@ Just like chrome you can temporarily load the extension by going to ``about:addo
 
 ### debug
 
-Create a profile named ``test`` in Firefox in the ``about:profiles`` page. Then you can login into Netflix etc. in the profile and then every time you run the command you don't have to login again.
-
-```npm run profile``` to start in firefox with the profile "test" selected
-
-## All Commands
-
-```npm start```  start the firefox development
+```npm start```  start the firefox development with a dev profile
 
 ```npm run start-android```  start on firefox android
 
-```npm run profile```  start the firefox development with the profile "test" selected
+```npm run start-chrome```  start on chrome
 
 ```npm run lint```   lint all the js files
 

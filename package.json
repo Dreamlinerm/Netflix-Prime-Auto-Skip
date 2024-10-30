@@ -3,10 +3,9 @@
   "version": "1.1.44",
   "description": "Automatically skip Ads, Intros, Credits and add Speed Control, etc. on Netflix, Prime video, Disney+ & Hotstar and Crunchyroll.",
   "scripts": {
-    "start": "web-ext run",
+    "start": "web-ext run --keep-profile-changes --firefox-profile=test --profile-create-if-missing",
     "start-chrome": "web-ext run --source-dir ./chrome/ -t chromium",
     "start-android": "adb devices && web-ext run -t firefox-android --firefox-apk org.mozilla.firefox --adb-device 38091FDJH002WH",
-    "profile": "web-ext run --keep-profile-changes --firefox-profile=test",
     "build": "node copyFtoC.js && cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
     "zip": "cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
     "copy": "node copyFtoC.js",
