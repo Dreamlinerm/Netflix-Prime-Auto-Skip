@@ -1,0 +1,166 @@
+{
+  "id": "f39d74f5-9e93-487b-9c34-2d2dc1c1ea48",
+  "version": "2.0",
+  "name": "Streaming enhanced",
+  "url": "https://www.netflix.com",
+  "tests": [{
+    "id": "522546c3-ebd2-4f1f-8a6e-5c31d802b923",
+    "name": "fast forward",
+    "commands": [{
+      "id": "7742b47e-3ebf-40db-afa6-daa11441fe6b",
+      "comment": "",
+      "command": "open",
+      "target": "/watch/80004161?trackId=14170286",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6783d8c4-ca33-4299-8f53-f6fc1c76ebc5",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1048",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9bf0bd78-a7ce-4383-a20c-b28911e25daa",
+      "comment": "",
+      "command": "click",
+      "target": "css=.iconOnly",
+      "targets": [
+        ["css=.iconOnly", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//div[@id='appMountPoint']/div/div/div/div/div/div/div[2]/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "086fa5ff-9bf6-4f0a-a5b6-94920cdc7598",
+      "comment": "",
+      "command": "click",
+      "target": "id=videoSpeed",
+      "targets": [
+        ["id=videoSpeed", "id"],
+        ["css=#videoSpeed", "css:finder"],
+        ["xpath=//p[@id='videoSpeed']", "xpath:attributes"],
+        ["xpath=//div[@id='appMountPoint']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div/div[3]/p", "xpath:idRelative"],
+        ["xpath=//p", "xpath:position"],
+        ["xpath=//p[contains(.,'1.0x')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f4ff398c-751e-4b7d-90ba-f43b51c2a61f",
+      "comment": "",
+      "command": "mouseDownAt",
+      "target": "id=videoSpeedSlider",
+      "targets": [
+        ["id=videoSpeedSlider", "id"],
+        ["css=#videoSpeedSlider", "css:finder"],
+        ["xpath=//input[@id='videoSpeedSlider']", "xpath:attributes"],
+        ["xpath=//div[@id='appMountPoint']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "236.6500244140625,27"
+    }, {
+      "id": "61173a39-91b8-410f-9197-12c3f3ced60b",
+      "comment": "",
+      "command": "mouseMoveAt",
+      "target": "id=videoSpeedSlider",
+      "targets": [
+        ["id=videoSpeedSlider", "id"],
+        ["css=#videoSpeedSlider", "css:finder"],
+        ["xpath=//input[@id='videoSpeedSlider']", "xpath:attributes"],
+        ["xpath=//div[@id='appMountPoint']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "236.6500244140625,27"
+    }, {
+      "id": "0e0a2c2d-d188-4ab6-9edf-3f77347b4ce6",
+      "comment": "",
+      "command": "mouseUpAt",
+      "target": "id=videoSpeedSlider",
+      "targets": [
+        ["id=videoSpeedSlider", "id"],
+        ["css=#videoSpeedSlider", "css:finder"],
+        ["xpath=//input[@id='videoSpeedSlider']", "xpath:attributes"],
+        ["xpath=//div[@id='appMountPoint']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "236.6500244140625,27"
+    }, {
+      "id": "a4a611cf-2c7e-4457-96e5-5564e9b99dfa",
+      "comment": "",
+      "command": "type",
+      "target": "id=videoSpeedSlider",
+      "targets": [
+        ["id=videoSpeedSlider", "id"],
+        ["css=#videoSpeedSlider", "css:finder"],
+        ["xpath=//input[@id='videoSpeedSlider']", "xpath:attributes"],
+        ["xpath=//div[@id='appMountPoint']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "20"
+    }, {
+      "id": "580e5986-43f3-4de9-a6fb-a2bc71c467fd",
+      "comment": "",
+      "command": "click",
+      "target": "id=videoSpeedSlider",
+      "targets": [
+        ["id=videoSpeedSlider", "id"],
+        ["css=#videoSpeedSlider", "css:finder"],
+        ["xpath=//input[@id='videoSpeedSlider']", "xpath:attributes"],
+        ["xpath=//div[@id='appMountPoint']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bbce9aa6-fc6c-4728-9993-2451b8d223b3",
+      "comment": "",
+      "command": "type",
+      "target": "id=videoSpeedSlider",
+      "targets": [
+        ["id=videoSpeedSlider", "id"],
+        ["css=#videoSpeedSlider", "css:finder"],
+        ["xpath=//input[@id='videoSpeedSlider']", "xpath:attributes"],
+        ["xpath=//div[@id='appMountPoint']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "10"
+    }, {
+      "id": "d7443132-ad6c-47d0-bf6c-98d228ac50c8",
+      "comment": "",
+      "command": "click",
+      "target": "id=videoSpeedSlider",
+      "targets": [
+        ["id=videoSpeedSlider", "id"],
+        ["css=#videoSpeedSlider", "css:finder"],
+        ["xpath=//input[@id='videoSpeedSlider']", "xpath:attributes"],
+        ["xpath=//div[@id='appMountPoint']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f5d0f967-e0d0-4d6c-a87f-81a1c5ac4cb6",
+      "comment": "",
+      "command": "click",
+      "target": "id=videoSpeed",
+      "targets": [
+        ["id=videoSpeed", "id"],
+        ["css=#videoSpeed", "css:finder"],
+        ["xpath=//p[@id='videoSpeed']", "xpath:attributes"],
+        ["xpath=//div[@id='appMountPoint']/div/div/div/div/div/div/div[2]/div[2]/div/div/div[3]/div/div[3]/p", "xpath:idRelative"],
+        ["xpath=//p", "xpath:position"],
+        ["xpath=//p[contains(.,'1.1x')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "7ca5932a-6f3b-4b66-a92a-4c06dfe8f6af",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["522546c3-ebd2-4f1f-8a6e-5c31d802b923"]
+  }],
+  "urls": ["https://www.netflix.com/"],
+  "plugins": []
+}

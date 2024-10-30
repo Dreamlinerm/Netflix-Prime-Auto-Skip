@@ -312,7 +312,7 @@ if len(sys.argv) <= 1 or "p" in sys.argv:
 if len(sys.argv) <= 1 or "n" in sys.argv:
     print("Netflix:")
     Netflix_Profile()
-    Netflix_intro()
+    # Netflix_intro()
 
 if len(sys.argv) <= 1 or "d" in sys.argv:
     print("Disney:")
