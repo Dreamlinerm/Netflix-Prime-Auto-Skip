@@ -18,19 +18,8 @@
 <img alt="Chrome Web Store Rating" src="https://img.shields.io/chrome-web-store/rating/akaimhgappllmlkadblbdknhbfghdgle">
 </a>
 <br>
-<img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/Dreamlinerm/Netflix-Prime-Auto-Skip">
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Dreamlinerm/Netflix-Prime-Auto-Skip">
 <img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FAuthorHours.json&query=time&label=Approx%20Dev%20Time%20(Owner)">
-<br>
-<a href="(https://github.com/sponsors/Dreamlinerm">
-<img src="https://img.shields.io/github/sponsors/Dreamlinerm?logo=githubsponsors">
-</a>
-<a href="https://www.paypal.com/donate/?hosted_button_id=N7CEVV9CCJWM6">
-<img src="https://img.shields.io/badge/Recurring-PayPal-blue.svg?style=flat&logo=paypal">
-</a>
-<a href="https://github.com/sponsors/Dreamlinerm">
-<img src="https://img.shields.io/badge/OneTime-PayPal-blue.svg?style=flat&logo=paypal">
-</a>
 <br>
 <a href="https://discord.gg/5fBYathA7d">
 <img src="https://img.shields.io/badge/Discord_Server-5a5a5a?logo=discord" width="300">
