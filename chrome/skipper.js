@@ -518,6 +518,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           increaseBadge();
         }
       }
+      // remove das video wird nach der pause fortgesetzt text after skipping ad
+      const continueText = document.querySelector("p.toast-notification__text[aria-hidden='true']");
+      if (continueText?.checkVisibility()) {
+        continueText.remove();
+        increaseBadge();
+      }
     }
   }
   async function Disney_scrollVolume(video) {
