@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.44";
+const version = "1.1.45";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -517,6 +517,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           settings.Statistics.DisneyAdTimeSkipped += adTime;
           increaseBadge();
         }
+      }
+      // remove das video wird nach der pause fortgesetzt text after skipping ad
+      const continueText = document.querySelector("p.toast-notification__text[aria-hidden='true']");
+      if (continueText?.checkVisibility()) {
+        continueText.remove();
+        increaseBadge();
       }
     }
   }
