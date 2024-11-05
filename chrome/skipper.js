@@ -29,7 +29,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.45";
+const version = "1.1.46";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -268,6 +268,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           let compiledData = {};
           const movie = data?.results?.[0];
           compiledData = {
+            id: movie?.id,
+            media_type: movie?.media_type,
             score: movie?.vote_average,
             vote_count: movie?.vote_count,
             release_date: movie?.release_date,
@@ -438,18 +440,27 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (rating <= 7) return "rgb(245, 197, 24)"; //#f5c518
     return "rgb(0, 166, 0)";
   }
+  function getTMDBUrl(id, media_type, title) {
+    return `https://www.themoviedb.org/${media_type}/${id}-${title.toLowerCase().replace(/ /g, "-")}`;
+  }
 
   async function setRatingOnCard(card, data, title) {
-    let div = document.createElement("div");
+    let div = document.createElement(data?.id ? "a" : "div");
+    if (data?.id) {
+      div.href = getTMDBUrl(data.id, data.media_type, title);
+      div.target = "_blank";
+    }
     const vote_count = data?.vote_count || 100;
     // right: 1.5vw;
     div.style =
-      "position: absolute;bottom: 0;right:0;z-index: 9999;color: black;background:" +
-      getColorForRating(data?.score, vote_count < 80) +
+      "position: absolute;bottom: 0;z-index: 9999;color: black;text-decoration: none;background:" +
+      getColorForRating(data?.score, vote_count < 50) +
       ";border-radius: 5px;padding: 0 2px 0 2px;" +
+      (isNetflix ? "right:0.2vw;" : "right:0;") +
       (isMobile ? "font-size: 4vw;" : "font-size: 1vw;");
+
     // div.id = "imdb";
-    if (data?.score && vote_count >= 80) {
+    if (data?.score && vote_count >= 50) {
       div.textContent = data.score?.toFixed(1);
       div.setAttribute("alt", data?.title + ", OG title: " + title + ", Vote count: " + vote_count);
     } else if (data?.title) {
@@ -460,8 +471,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       div.setAttribute("alt", title);
       log("no score found:", title, data);
     }
-    if (isNetflix || isHBO) card.appendChild(div);
-    else if (isDisney) card?.querySelector("img").parentElement?.appendChild(div);
+    if (isNetflix) {
+      card.closest(".title-card-container")?.appendChild(div);
+    } else if (isHBO) card.appendChild(div);
+    else if (isDisney) card?.parentElement?.appendChild(div);
     else if (isHotstar) card.parentElement.appendChild(div);
     else if (isPrimeVideo) {
       if (card.getAttribute("data-card-title")) card.firstChild.firstChild.appendChild(div);

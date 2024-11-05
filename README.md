@@ -169,6 +169,8 @@ See Statistics. All statistics and settings are not shared but are synchronized 
 
 ## Ratings
 
+Click on Rating to go to the TMDB page of the movie.
+
 The ratings are gathered from the TMDB API. Ratings are refreshed every month.
 If there is no score they are refreshed once per day. If the movie is newer than 50 days and has less than 100 votes it will get refreshed every 3 days.
 
