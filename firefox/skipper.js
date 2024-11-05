@@ -454,13 +454,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     // right: 1.5vw;
     div.style =
       "position: absolute;bottom: 0;z-index: 9999;color: black;text-decoration: none;background:" +
-      getColorForRating(data?.score, vote_count < 80) +
+      getColorForRating(data?.score, vote_count < 50) +
       ";border-radius: 5px;padding: 0 2px 0 2px;" +
       (isNetflix ? "right:0.2vw;" : "right:0;") +
       (isMobile ? "font-size: 4vw;" : "font-size: 1vw;");
 
     // div.id = "imdb";
-    if (data?.score && vote_count >= 80) {
+    if (data?.score && vote_count >= 50) {
       div.textContent = data.score?.toFixed(1);
       div.setAttribute("alt", data?.title + ", OG title: " + title + ", Vote count: " + vote_count);
     } else if (data?.title) {
