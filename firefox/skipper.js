@@ -453,7 +453,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const vote_count = data?.vote_count || 100;
     // right: 1.5vw;
     div.style =
-      "position: absolute;bottom: 0;z-index: 9999;color: black;background:" +
+      "position: absolute;bottom: 0;z-index: 9999;color: black;text-decoration: none;background:" +
       getColorForRating(data?.score, vote_count < 80) +
       ";border-radius: 5px;padding: 0 2px 0 2px;" +
       (isNetflix ? "right:0.2vw;" : "right:0;") +
@@ -472,7 +472,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       log("no score found:", title, data);
     }
     if (isNetflix) {
-      card.closest(".title-card-container").appendChild(div);
+      card.closest(".title-card-container")?.appendChild(div);
     } else if (isHBO) card.appendChild(div);
     else if (isDisney) card?.parentElement?.appendChild(div);
     else if (isHotstar) card.parentElement.appendChild(div);
