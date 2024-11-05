@@ -474,7 +474,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (isNetflix) {
       card.closest(".title-card-container").appendChild(div);
     } else if (isHBO) card.appendChild(div);
-    else if (isDisney) card?.querySelector("img").parentElement?.appendChild(div);
+    else if (isDisney) card?.parentElement?.appendChild(div);
     else if (isHotstar) card.parentElement.appendChild(div);
     else if (isPrimeVideo) {
       if (card.getAttribute("data-card-title")) card.firstChild.firstChild.appendChild(div);
