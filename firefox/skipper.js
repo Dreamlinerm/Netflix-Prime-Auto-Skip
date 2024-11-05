@@ -268,6 +268,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           let compiledData = {};
           const movie = data?.results?.[0];
           compiledData = {
+            id: movie?.id,
+            media_type: movie?.media_type,
             score: movie?.vote_average,
             vote_count: movie?.vote_count,
             release_date: movie?.release_date,
@@ -438,9 +440,16 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (rating <= 7) return "rgb(245, 197, 24)"; //#f5c518
     return "rgb(0, 166, 0)";
   }
+  function getTMDBUrl(id, media_type, title) {
+    return `https://www.themoviedb.org/${media_type}/${id}-${title.toLowerCase().replace(/ /g, "-")}`;
+  }
 
   async function setRatingOnCard(card, data, title) {
-    let div = document.createElement("div");
+    let div = document.createElement(data?.id ? "a" : "div");
+    if (data?.id) {
+      div.href = getTMDBUrl(data.id, data.media_type, title);
+      div.target = "_blank";
+    }
     const vote_count = data?.vote_count || 100;
     // right: 1.5vw;
     div.style =
