@@ -376,14 +376,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               .split("Staffel")[0]
               .split(" Neue")[0]
               .split(" Alle")[0]
-              // comment means did not find translation
-              .split(" Jeden")[0]
-              //
               .split(" Demnächst")[0]
-              .split(" Premiere")[0]
               .split(" Altersfreigabe")[0]
-              //
-              .split(" Noch")[0];
+              .split(" Mach dich bereit")[0]
+              //did not find translation
+              .split(" Jeden")[0]
+              .split(" Noch")[0]
+              .split(" Premiere")[0];
           } else if (htmlLang == "en") {
             title = title
               ?.replace(/Number \d* /, "")
@@ -392,12 +391,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               .split("Season")[0]
               .split(" New ")[0]
               .split(" All Episodes")[0]
-              //
-              .split(" Streaming ")[0]
-              //
-              .split(" Coming Soon")[0]
+              .split(" Coming")[0]
               .split(" Two-Episode")[0]
-              .split(" Rated")[0];
+              .split(" Rated")[0]
+              .split(" Prepare for")[0] // deadpool
+              // comment means did not find translation
+              .split(" Streaming ")[0];
           }
         } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
         // amazon
