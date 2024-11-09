@@ -29,7 +29,8 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua);
 const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
-const version = "1.1.46";
+const htmlLang = document.documentElement.lang;
+const version = "1.1.47";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -365,26 +366,39 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         if (isNetflix) title = card?.parentElement?.getAttribute("aria-label").split(" – ")[0];
         // S2: E3 remove this part
         else if (isDisney) {
-          title = card
-            ?.getAttribute("aria-label")
-            ?.replace(" Disney+ Original", "")
-            ?.replace(" STAR Original", "")
-            ?.replace(" Select for details on this title.", "")
-            // big title cards in the beginning of the page
-            .split(" Season")[0]
-            // individual episodes
-            .split("Season")[0]
-            .split(" New ")[0]
-            .split(" All ")[0]
-            .split(" Streaming ")[0]
-            // german translation
-            .split(" Für Details")[0]
-            .split(" Staffel")[0]
-            .split("Staffel")[0]
-            .split(" Neue")[0]
-            .split(" Alle")[0]
-            .split(" Jeden")[0];
-          if (title.includes(" minutes remaining")) title = title.replace(/ \d+ minutes remaining/g, "");
+          title = card?.getAttribute("aria-label")?.replace(" Disney+ Original", "")?.replace(" STAR Original", "");
+          // german translation
+          if (htmlLang == "de") {
+            title = title
+              ?.replace(/Nummer \d* /, "")
+              .split(" Für Details")[0]
+              .split(" Staffel")[0]
+              .split("Staffel")[0]
+              .split(" Neue")[0]
+              .split(" Alle")[0]
+              // comment means did not find translation
+              .split(" Jeden")[0]
+              //
+              .split(" Demnächst")[0]
+              .split(" Premiere")[0]
+              .split(" Altersfreigabe")[0]
+              //
+              .split(" Noch")[0];
+          } else if (htmlLang == "en") {
+            title = title
+              ?.replace(/Number \d* /, "")
+              .replace(" Select for details on this title.", "")
+              .split(" Season")[0]
+              .split("Season")[0]
+              .split(" New ")[0]
+              .split(" All Episodes")[0]
+              //
+              .split(" Streaming ")[0]
+              //
+              .split(" Coming Soon")[0]
+              .split(" Two-Episode")[0]
+              .split(" Rated")[0];
+          }
         } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
         // amazon
         // remove everything after - in the title
@@ -453,10 +467,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const vote_count = data?.vote_count || 100;
     // right: 1.5vw;
     div.style =
-      "position: absolute;bottom: 0;z-index: 9999;color: black;text-decoration: none;background:" +
+      "position: absolute;bottom: 0;color: black;text-decoration: none;background:" +
       getColorForRating(data?.score, vote_count < 50) +
       ";border-radius: 5px;padding: 0 2px 0 2px;" +
       (isNetflix ? "right:0.2vw;" : "right:0;") +
+      (isDisney ? "" : "z-index: 9999;") +
       (isMobile ? "font-size: 4vw;" : "font-size: 1vw;");
 
     // div.id = "imdb";
@@ -474,8 +489,17 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (isNetflix) {
       card.closest(".title-card-container")?.appendChild(div);
     } else if (isHBO) card.appendChild(div);
-    else if (isDisney) card?.parentElement?.appendChild(div);
-    else if (isHotstar) card.parentElement.appendChild(div);
+    else if (isDisney) {
+      const parentDiv = card?.closest("div");
+      if (parentDiv) {
+        if (card.nextElementSibling) {
+          div.style.top = card.offsetHeight + "px";
+          div.style.bottom = "";
+        }
+        parentDiv.style.position = "relative";
+        parentDiv.appendChild(div);
+      }
+    } else if (isHotstar) card.parentElement.appendChild(div);
     else if (isPrimeVideo) {
       if (card.getAttribute("data-card-title")) card.firstChild.firstChild.appendChild(div);
       else card.appendChild(div);
