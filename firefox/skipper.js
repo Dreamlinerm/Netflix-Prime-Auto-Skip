@@ -254,10 +254,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   async function getMovieInfo(title, card, year = null) {
     // justwatch api
     // const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
-    let locale = "en-US";
-    if (navigator?.language) {
-      locale = navigator?.language;
-    }
+    let locale = htmlLang || navigator?.language || "en-US";
     let url = `https://api.themoviedb.org/3/search/multi?query=${encodeURI(title)}&include_adult=false&language=${locale}&page=1`;
     if (year) url += `&year=${year}`;
     // const response = await fetch(encodeURI(url));
@@ -378,7 +375,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               .split(" Alle")[0]
               .split(" Demnächst")[0]
               .split(" Altersfreigabe")[0]
-              .split(" Mach dich bereit")[0]
+              .split(" Mach dich bereit")[0] // deadpool
               //did not find translation
               .split(" Jeden")[0]
               .split(" Noch")[0]
@@ -395,8 +392,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               .split(" Two-Episode")[0]
               .split(" Rated")[0]
               .split(" Prepare for")[0] // deadpool
-              // comment means did not find translation
+              //did not find translation
               .split(" Streaming ")[0];
+            //did not find translation
+            if (title.includes(" minutes remaining")) title = title.replace(/ \d+ minutes remaining/g, "");
           }
         } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
         // amazon
