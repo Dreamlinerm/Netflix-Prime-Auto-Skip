@@ -376,7 +376,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               .split("Staffel")[0]
               .split(" Neue")[0]
               .split(" Alle")[0]
-              //
+              // comment means did not find translation
               .split(" Jeden")[0]
               //
               .split(" Demnächst")[0]
@@ -399,8 +399,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               .split(" Two-Episode")[0]
               .split(" Rated")[0];
           }
-
-          if (title.includes(" minutes remaining")) title = title.replace(/ \d+ minutes remaining/g, "");
         } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
         // amazon
         // remove everything after - in the title
