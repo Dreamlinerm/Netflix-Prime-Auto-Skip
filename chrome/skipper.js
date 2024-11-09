@@ -14,7 +14,7 @@
 // matches all amazon urls under https://en.wikipedia.org/wiki/Amazon_(company)#Website
 const hostname = window.location.hostname;
 const title = document.title;
-const url = window.location.href;
+let url = window.location.href;
 const ua = navigator.userAgent;
 // only on prime video pages
 const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
@@ -254,10 +254,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   async function getMovieInfo(title, card, year = null) {
     // justwatch api
     // const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
-    let locale = "en-US";
-    if (navigator?.language) {
-      locale = navigator?.language;
-    }
+    let locale = htmlLang || navigator?.language || "en-US";
     let url = `https://api.themoviedb.org/3/search/multi?query=${encodeURI(title)}&include_adult=false&language=${locale}&page=1`;
     if (year) url += `&year=${year}`;
     // const response = await fetch(encodeURI(url));
@@ -278,6 +275,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             date: today,
             db: "tmdb",
           };
+          // if (
+          //   compiledData?.title &&
+          //   !compiledData.title
+          //     .toLowerCase()
+          //     .replace(":", "")
+          //     .replace("-", "")
+          //     .replace(",", "")
+          //     .includes(title.toLowerCase().replace(":", "").replace("-", "").replace(",", ""))
+          // ) {
+          //   console.log(
+          //     "Title mismatch",
+          //     title.replace(":", "").replace("-", "").replace(",", "") + "><" + compiledData.title.replace(":", "").replace("-", "").replace(",", "")
+          //   );
+          // }
           DBCache[title] = compiledData;
           setRatingOnCard(card, compiledData, title);
         }
@@ -295,8 +306,27 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const config = { attributes: true, childList: true, subtree: true };
   // #region Shared funcs
   // shared functions
+  // show rating depending on page
+  const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/g;
+  function showRating() {
+    if (isDisney) {
+      url = window.location.href;
+      // disable search and suggested movies
+      if (url.includes("search")) return false;
+      if (url.includes("entity")) {
+        return uuidRegex.test(document.querySelector('[aria-selected="true"]')?.id.split("_control")[0]);
+      }
+      return true;
+    } else if (isPrimeVideo) {
+      // suggested movies
+      if (window.location.href.includes("detail")) {
+        return document.querySelector('[data-testid="btf-related-tab"]')?.tabIndex == 0;
+      }
+      return true;
+    } else return true;
+  }
   async function startShowRatingInterval() {
-    addRating();
+    if (showRating()) addRating();
     let RatingInterval = setInterval(function () {
       if (
         (isNetflix && !settings.Netflix?.showRating) ||
@@ -308,7 +338,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         clearInterval(RatingInterval);
         return;
       }
-      addRating();
+      if (showRating()) addRating();
     }, 1000);
   }
   function getDiffInDays(firstDate, secondDate) {
@@ -363,6 +393,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           else if (type == 1) card?.parentElement?.classList.add("imdb");
         }
         let title;
+
         if (isNetflix) title = card?.parentElement?.getAttribute("aria-label").split(" – ")[0];
         // S2: E3 remove this part
         else if (isDisney) {
@@ -376,14 +407,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               .split("Staffel")[0]
               .split(" Neue")[0]
               .split(" Alle")[0]
-              // comment means did not find translation
-              .split(" Jeden")[0]
-              //
               .split(" Demnächst")[0]
-              .split(" Premiere")[0]
               .split(" Altersfreigabe")[0]
-              //
-              .split(" Noch")[0];
+              .split(" Mach dich bereit")[0] // deadpool
+              //did not find translation
+              .split(" Jeden")[0]
+              .split(" Noch")[0]
+              .split(" Premiere")[0];
           } else if (htmlLang == "en") {
             title = title
               ?.replace(/Number \d* /, "")
@@ -392,12 +422,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               .split("Season")[0]
               .split(" New ")[0]
               .split(" All Episodes")[0]
-              //
-              .split(" Streaming ")[0]
-              //
-              .split(" Coming Soon")[0]
+              .split(" Coming")[0]
               .split(" Two-Episode")[0]
-              .split(" Rated")[0];
+              .split(" Rated")[0]
+              .split(" Prepare for")[0] // deadpool
+              //did not find translation
+              .split(" Streaming ")[0]
+              //did not find translation
+              .replace(/ \d+ minutes remaining/g, "");
           }
         } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
         // amazon
@@ -408,13 +440,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               title
                 ?.split(" - ")[0]
                 ?.split(" – ")[0]
-                ?.split(", ")[0]
                 ?.replace(/(S\d+)/g, "")
-                ?.replace(/ \[dt\.\/?O?V?\]/g, "")
-                ?.replace(/\[OV\]/g, "")
+                ?.replace(/ \[.*\]/g, "")
                 ?.replace(/\s\(.*\)/g, "")
                 ?.replace(/:?\sStaffel-?\s\d+/g, "")
                 ?.replace(/:?\sSeason-?\s\d+/g, "")
+                ?.replace(/ \/ \d/g, "")
                 ?.split(": Die komplette")[0]
                 // nicht sicher
                 ?.split(": The complete")[0]
@@ -475,11 +506,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       (isMobile ? "font-size: 4vw;" : "font-size: 1vw;");
 
     // div.id = "imdb";
-    if (data?.score && vote_count >= 50) {
+    if (data?.score >= 0) {
       div.textContent = data.score?.toFixed(1);
-      div.setAttribute("alt", data?.title + ", OG title: " + title + ", Vote count: " + vote_count);
-    } else if (data?.title) {
-      div.textContent = "N/A";
       div.setAttribute("alt", data?.title + ", OG title: " + title + ", Vote count: " + vote_count);
     } else {
       div.textContent = "?";
