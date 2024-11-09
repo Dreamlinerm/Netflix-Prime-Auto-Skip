@@ -319,7 +319,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         clearInterval(RatingInterval);
         return;
       }
-      addRating();
+      if (!isDisney || (!window.location.href.includes("search") && !window.location.href.includes("entity"))) addRating();
     }, 1000);
   }
   function getDiffInDays(firstDate, secondDate) {
