@@ -370,6 +370,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             ?.replace(" Disney+ Original", "")
             ?.replace(" STAR Original", "")
             ?.replace(" Select for details on this title.", "")
+            ?.replace(/Nummer \d* /, "")
+            ?.replace(/Number \d* /, "")
             // big title cards in the beginning of the page
             .split(" Season")[0]
             // individual episodes
@@ -383,7 +385,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             .split("Staffel")[0]
             .split(" Neue")[0]
             .split(" Alle")[0]
-            .split(" Jeden")[0];
+            .split(" Jeden")[0]
+            .split(" Altersfreigabe")[0]
+            .split(" Demnächst")[0]
+            .split(" Premiere")[0];
           if (title.includes(" minutes remaining")) title = title.replace(/ \d+ minutes remaining/g, "");
         } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
         // amazon
