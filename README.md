@@ -177,8 +177,7 @@ If there is no score they are refreshed once per day. If the movie is newer than
 | Rating | Explanation |
 | --- | --- |
 | ? | Title not found |
-| N/A | Too new movie or less than 80 votes |
-| <img src="Logos/greyBox.svg" height="20px"> | ? or N/A |
+| <img src="Logos/greyBox.svg" height="20px"> | ? or less than 30 votes |
 | <img src="Logos/redBox.svg" height="20px"> | <= 5.5 stars|
 | <img src="Logos/yellowBox.svg" height="20px"> | <= 7 stars|
 | <img src="Logos/greenBox.svg" height="20px"> | >7 stars|
