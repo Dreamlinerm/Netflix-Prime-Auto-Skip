@@ -275,6 +275,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             date: today,
             db: "tmdb",
           };
+          // if (
+          //   compiledData?.title &&
+          //   !compiledData.title
+          //     .toLowerCase()
+          //     .replace(":", "")
+          //     .replace("-", "")
+          //     .replace(",", "")
+          //     .includes(title.toLowerCase().replace(":", "").replace("-", "").replace(",", ""))
+          // ) {
+          //   console.log(
+          //     "Title mismatch",
+          //     title.replace(":", "").replace("-", "").replace(",", "") + "><" + compiledData.title.replace(":", "").replace("-", "").replace(",", "")
+          //   );
+          // }
           DBCache[title] = compiledData;
           setRatingOnCard(card, compiledData, title);
         }
@@ -393,9 +407,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               .split(" Rated")[0]
               .split(" Prepare for")[0] // deadpool
               //did not find translation
-              .split(" Streaming ")[0];
-            //did not find translation
-            if (title.includes(" minutes remaining")) title = title.replace(/ \d+ minutes remaining/g, "");
+              .split(" Streaming ")[0]
+              //did not find translation
+              .replace(/ \d+ minutes remaining/g, "");
           }
         } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
         // amazon
@@ -411,6 +425,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
                 ?.replace(/\s\(.*\)/g, "")
                 ?.replace(/:?\sStaffel-?\s\d+/g, "")
                 ?.replace(/:?\sSeason-?\s\d+/g, "")
+                ?.replace(/ \/ \d/g, "")
                 ?.split(": Die komplette")[0]
                 // nicht sicher
                 ?.split(": The complete")[0]
