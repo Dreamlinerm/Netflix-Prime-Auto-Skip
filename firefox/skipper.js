@@ -406,10 +406,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               title
                 ?.split(" - ")[0]
                 ?.split(" – ")[0]
-                ?.split(", ")[0]
                 ?.replace(/(S\d+)/g, "")
-                ?.replace(/ \[dt\.\/?O?V?\]/g, "")
-                ?.replace(/\[OV\]/g, "")
+                ?.replace(/ \[.*\]/g, "")
                 ?.replace(/\s\(.*\)/g, "")
                 ?.replace(/:?\sStaffel-?\s\d+/g, "")
                 ?.replace(/:?\sSeason-?\s\d+/g, "")
