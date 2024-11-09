@@ -14,7 +14,7 @@
 // matches all amazon urls under https://en.wikipedia.org/wiki/Amazon_(company)#Website
 const hostname = window.location.hostname;
 const title = document.title;
-const url = window.location.href;
+let url = window.location.href;
 const ua = navigator.userAgent;
 // only on prime video pages
 const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url));
@@ -310,7 +310,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/g;
   function showRating() {
     if (isDisney) {
-      const url = window.location.href;
+      url = window.location.href;
       // disable search and suggested movies
       if (url.includes("search")) return false;
       if (url.includes("entity")) {
@@ -453,7 +453,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           }
           if (type == 0) title = fixTitle(card.getAttribute("data-card-title"));
           if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label"));
-          console.log(title);
         } else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent;
         // for the static Pixar Disney, Starplus etc. cards
         if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
@@ -507,11 +506,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       (isMobile ? "font-size: 4vw;" : "font-size: 1vw;");
 
     // div.id = "imdb";
-    if (data?.score && vote_count >= 50) {
+    if (data?.score >= 0) {
       div.textContent = data.score?.toFixed(1);
-      div.setAttribute("alt", data?.title + ", OG title: " + title + ", Vote count: " + vote_count);
-    } else if (data?.title) {
-      div.textContent = "N/A";
       div.setAttribute("alt", data?.title + ", OG title: " + title + ", Vote count: " + vote_count);
     } else {
       div.textContent = "?";
