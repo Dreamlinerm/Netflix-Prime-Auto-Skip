@@ -16,6 +16,9 @@
     "test": "cd firefox && web-ext build  --overwrite-dest && cd .. && node refreshXPI.js && python test.py",
     "hours": "git hours -since 2018-02-01 -before today -author marvinkrebber@yahoo.de > authorHours.json && node hourstxtToJSON.js"
   },
+  "pre-commit": [
+    "hours"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip.git"
@@ -27,7 +30,8 @@
   },
   "homepage": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip#readme",
   "devDependencies": {
-    "eslint": "^8.52.0"
+    "eslint": "^8.52.0",
+    "pre-commit": "^1.2.2"
   },
   "dependencies": {
     "@parvineyvazov/json-translator": "^3.1.0",
