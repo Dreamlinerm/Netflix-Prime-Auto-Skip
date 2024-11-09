@@ -307,14 +307,22 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   // #region Shared funcs
   // shared functions
   // show rating depending on page
+  const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/g;
   function showRating() {
     if (isDisney) {
       const url = window.location.href;
       // disable search and suggested movies
-      return !url.includes("search") && !url.includes("entity");
+      if (url.includes("search")) return false;
+      if (url.includes("entity")) {
+        return uuidRegex.test(document.querySelector('[aria-selected="true"]')?.id.split("_control")[0]);
+      }
+      return true;
     } else if (isPrimeVideo) {
       // suggested movies
-      return !window.location.href.includes("detail");
+      if (window.location.href.includes("detail")) {
+        return document.querySelector('[data-testid="btf-related-tab"]')?.tabIndex == 0;
+      }
+      return true;
     } else return true;
   }
   async function startShowRatingInterval() {
