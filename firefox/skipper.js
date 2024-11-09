@@ -306,8 +306,19 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   const config = { attributes: true, childList: true, subtree: true };
   // #region Shared funcs
   // shared functions
+  // show rating depending on page
+  function showRating() {
+    if (isDisney) {
+      const url = window.location.href;
+      // disable search and suggested movies
+      return !url.includes("search") && !url.includes("entity");
+    } else if (isPrimeVideo) {
+      // suggested movies
+      return !window.location.href.includes("detail");
+    } else return true;
+  }
   async function startShowRatingInterval() {
-    addRating();
+    if (showRating()) addRating();
     let RatingInterval = setInterval(function () {
       if (
         (isNetflix && !settings.Netflix?.showRating) ||
@@ -319,7 +330,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         clearInterval(RatingInterval);
         return;
       }
-      if (!isDisney || (!window.location.href.includes("search") && !window.location.href.includes("entity"))) addRating();
+      if (showRating()) addRating();
     }, 1000);
   }
   function getDiffInDays(firstDate, secondDate) {
@@ -374,6 +385,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           else if (type == 1) card?.parentElement?.classList.add("imdb");
         }
         let title;
+
         if (isNetflix) title = card?.parentElement?.getAttribute("aria-label").split(" – ")[0];
         // S2: E3 remove this part
         else if (isDisney) {
@@ -433,6 +445,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           }
           if (type == 0) title = fixTitle(card.getAttribute("data-card-title"));
           if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label"));
+          console.log(title);
         } else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent;
         // for the static Pixar Disney, Starplus etc. cards
         if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
