@@ -30,7 +30,7 @@ const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
 const htmlLang = document.documentElement.lang;
-const version = "1.1.47";
+const version = "1.1.48";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -327,7 +327,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     } else return true;
   }
   async function startShowRatingInterval() {
-    // if (showRating()) addRating();
+    if (showRating()) addRating();
     let RatingInterval = setInterval(function () {
       if (
         (isNetflix && !settings.Netflix?.showRating) ||

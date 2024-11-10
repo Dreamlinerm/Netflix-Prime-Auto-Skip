@@ -30,7 +30,7 @@ const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
 const htmlLang = document.documentElement.lang;
-const version = "1.1.47";
+const version = "1.1.48";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -314,7 +314,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       // disable search and suggested movies
       if (url.includes("search")) return false;
       if (url.includes("entity")) {
-        return uuidRegex.test(document.querySelector('[aria-selected="true"]')?.id.split("_control")[0]);
+        const SelectedTab = document.querySelector('[aria-selected="true"]');
+        return uuidRegex.test(SelectedTab?.id.split("_control")[0]) && SelectedTab?.getAttribute("aria-label") != "EXTRAS";
       }
       return true;
     } else if (isPrimeVideo) {
@@ -398,6 +399,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         // S2: E3 remove this part
         else if (isDisney) {
           title = card?.getAttribute("aria-label")?.replace(" Disney+ Original", "")?.replace(" STAR Original", "");
+          // no section Extras on disney shows
+          if (url.includes("entity")) {
+            const SelectedTabId = document.querySelector('[aria-selected="true"]')?.id.split("_control")[0];
+            if (SelectedTabId != card.closest('div[role="tabpanel"]')?.id) title = "";
+          }
           // german translation
           if (htmlLang == "de") {
             title = title
