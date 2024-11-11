@@ -171,7 +171,7 @@ See Statistics. All statistics and settings are not shared but are synchronized 
 
 Skip Credits and Watch Credits are mutally exclusive, but you can turn both of the off. One allways skips the credits and one allways watches them, if both are turned off its the default behaviour showing the skip credit button.
 
-<img src="Logos/svg/settings.svg" alt="Settings Preview" width="50%">
+<img src="Logos/svg/settings.svg" alt="Settings Preview">
 
 ## Ratings
 
