@@ -167,6 +167,10 @@ Import and Export all Settings.
 
 See Statistics. All statistics and settings are not shared but are synchronized with your browser account.
 
+### Interactive Preview of the shared settings:
+
+<img src="Logos/svg/settings.svg" alt="Settings Svg">
+
 ## Ratings
 
 Click on Rating to go to the TMDB page of the movie.
