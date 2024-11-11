@@ -167,7 +167,7 @@ Import and Export all Settings.
 
 See Statistics. All statistics and settings are not shared but are synchronized with your browser account.
 
-### Shared Settings Preview
+### Skip Credits, Watch Credits
 
 Skip Credits and Watch Credits are mutally exclusive, but you can turn both of the off. One allways skips the credits and one allways watches them, if both are turned off its the default behaviour showing the skip credit button.
 

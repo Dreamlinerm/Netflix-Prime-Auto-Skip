@@ -74,5 +74,6 @@
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "python.formatting.provider": "none",
-  "workbench.editor.wrapTabs": true
+  "workbench.editor.wrapTabs": true,
+  "svg.preview.background": "dark-transparent"
 }
