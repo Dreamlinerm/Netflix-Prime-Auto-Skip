@@ -83,15 +83,98 @@
                     background-color: #00a205;
                 }
 
-                /* change color on hover */
-                input:checked+.slider:hover {
-                    background-color: #006303;
-                }
-
                 input:checked+.slider:before {
                     -webkit-transform: translateX(26px);
                     -ms-transform: translateX(26px);
                     transform: translateX(26px);
+                }
+
+                .animation .slider:before {
+                    animation: transform 4s infinite;
+                }
+
+                .animation input:checked+.slider {
+                    animation: color 4s infinite;
+                }
+
+                @keyframes transform {
+                    0% {
+                        transform: translateX(0);
+                    }
+
+                    80% {
+                        transform: translateX(0);
+                    }
+
+                    90% {
+                        transform: translateX(26px);
+                    }
+
+                    100% {
+                        transform: translateX(0);
+                    }
+                }
+
+                @keyframes color {
+                    0% {
+                        background-color: #ccc;
+                    }
+
+                    80% {
+                        background-color: #ccc;
+                    }
+
+                    90% {
+                        background-color: #00a205;
+                    }
+
+                    100% {
+                        background-color: #ccc;
+                    }
+                }
+
+                .closeAnimation .slider:before {
+                    animation: closeTransform 4s infinite;
+                }
+
+                .closeAnimation input:checked+.slider {
+                    animation: colorasd 4s infinite;
+                }
+
+                @keyframes closeTransform {
+                    0% {
+                        transform: translateX(26px);
+                    }
+
+                    80% {
+                        transform: translateX(26px);
+                    }
+
+                    90% {
+                        transform: translateX(0);
+                    }
+
+                    100% {
+                        transform: translateX(26px);
+                    }
+                }
+
+                @keyframes colorasd {
+                    0% {
+                        background-color: #00a205;
+                    }
+
+                    80% {
+                        background-color: #00a205;
+                    }
+
+                    90% {
+                        background-color: #ccc;
+                    }
+
+                    100% {
+                        background-color: #00a205;
+                    }
                 }
 
                 /* Rounded sliders */
@@ -118,15 +201,15 @@
                 <hr />
                 <div class="line flex">
                     <p>Skip Credits:</p>
-                    <label class="switch">
+                    <label class="switch animation">
                         <input type="checkbox" checked="true" />
                         <span class="slider round"></span>
                     </label>
                 </div>
                 <div class="line flex">
                     <p>Watch Credits:</p>
-                    <label class="switch">
-                        <input type="checkbox" />
+                    <label class="switch closeAnimation">
+                        <input type="checkbox" checked="true" />
                         <span class="slider round"></span>
                     </label>
                 </div>
