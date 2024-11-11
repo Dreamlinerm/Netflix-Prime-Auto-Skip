@@ -109,7 +109,7 @@
             </style>
             <div class="content">
                 <div class="line flex">
-                    <p>Skip Intro & Recap:</p>
+                    <p>Skip Intro &amp; Recap:</p>
                     <label class="switch">
                         <input type="checkbox" checked="true" />
                         <span class="slider round"></span>
