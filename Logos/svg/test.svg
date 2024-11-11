@@ -79,11 +79,16 @@
                     background-color: white;
                 }
 
-                input:checked="true"+.slider {
+                input:checked+.slider {
                     background-color: #00a205;
                 }
 
-                input:checked="true"+.slider:before {
+                /* change color on hover */
+                input:checked+.slider:hover {
+                    background-color: #006303;
+                }
+
+                input:checked+.slider:before {
                     -webkit-transform: translateX(26px);
                     -ms-transform: translateX(26px);
                     transform: translateX(26px);
@@ -104,7 +109,7 @@
             </style>
             <div class="content">
                 <div class="line flex">
-                    <p>IntroSwitch</p>
+                    <p>Skip Intro & Recap:</p>
                     <label class="switch">
                         <input type="checkbox" checked="true" />
                         <span class="slider round"></span>
@@ -112,57 +117,57 @@
                 </div>
                 <hr />
                 <div class="line flex">
-                    <p>CreditsSwitch</p>
+                    <p>Skip Credits:</p>
                     <label class="switch">
                         <input type="checkbox" checked="true" />
                         <span class="slider round"></span>
                     </label>
                 </div>
                 <div class="line flex">
-                    <p>WatchCreditsSwitch</p>
+                    <p>Watch Credits:</p>
                     <label class="switch">
-                        <input type="checkbox" checked="true" />
+                        <input type="checkbox" />
                         <span class="slider round"></span>
                     </label>
                 </div>
                 <hr />
                 <div class="line flex">
-                    <p>AdsSwitch</p>
+                    <p>Skip Ads:</p>
                     <label class="switch">
                         <input type="checkbox" checked="true" />
                         <span class="slider round"></span>
                     </label>
                 </div>
                 <div class="line flex">
-                    <p>SliderSwitch</p>
+                    <p>Add Speed control:</p>
                     <label class="switch">
                         <input type="checkbox" checked="true" />
                         <span class="slider round"></span>
                     </label>
                 </div>
                 <div class="line flex">
-                    <p>FullscreenSwitch</p>
+                    <p>Play on fullscreen:</p>
                     <label class="switch">
                         <input type="checkbox" checked="true" />
                         <span class="slider round"></span>
                     </label>
                 </div>
                 <div class="line flex">
-                    <p>DoubleClickSwitch</p>
+                    <p>Fullscreen by double clicking:</p>
                     <label class="switch">
                         <input type="checkbox" checked="true" />
                         <span class="slider round"></span>
                     </label>
                 </div>
                 <div class="line flex">
-                    <p>scrollVolumeSwitch</p>
+                    <p>Scroll for volume:</p>
                     <label class="switch">
                         <input type="checkbox" checked="true" />
                         <span class="slider round"></span>
                     </label>
                 </div>
                 <div class="line flex">
-                    <p>RatingSwitch</p>
+                    <p>TMDB Rating:</p>
                     <label class="switch">
                         <input type="checkbox" checked="true" />
                         <span class="slider round"></span>
