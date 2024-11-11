@@ -1,0 +1,174 @@
+<svg fill="none" viewBox="0 0 500 450" width="500px" height="450px" xmlns="http://www.w3.org/2000/svg">
+    <script xmlns="">
+        var ythdlog = () =&gt; {};;var ythderror = () =&gt; {};
+    </script>
+    <foreignObject width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            <style>
+                * {
+                    font-family: "Lato", sans-serif;
+                }
+
+                .content {
+                    background-color: #212121;
+                }
+
+                div {
+                    color: white;
+                }
+
+                .flex {
+                    display: flex;
+                }
+
+                .line,
+                h1,
+                h2,
+                h3,
+                p {
+                    padding: 5px 5px;
+                    margin: unset;
+                }
+
+                p {
+                    color: white;
+                    font-size: 1.4em;
+                    padding-right: 10px;
+                }
+
+                /* Switch styling */
+                label {
+                    margin-left: auto;
+                }
+
+                /* The switch - the box around the slider */
+                .switch {
+                    position: relative;
+                    display: inline-block;
+                    width: 60px;
+                    height: 34px;
+                }
+
+                /* Hide default HTML checkbox */
+                .switch input {
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                }
+
+                /* The slider */
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #ccc;
+                    -webkit-transition: 0.4s;
+                    transition: 0.4s;
+                }
+
+                .slider:before {
+                    position: absolute;
+                    content: "";
+                    height: 26px;
+                    width: 26px;
+                    left: 4px;
+                    bottom: 4px;
+                    background-color: white;
+                }
+
+                input:checked="true"+.slider {
+                    background-color: #00a205;
+                }
+
+                input:checked="true"+.slider:before {
+                    -webkit-transform: translateX(26px);
+                    -ms-transform: translateX(26px);
+                    transform: translateX(26px);
+                }
+
+                /* Rounded sliders */
+                .slider.round {
+                    border-radius: 34px;
+                }
+
+                .slider.round:before {
+                    border-radius: 50%;
+                }
+
+                hr {
+                    margin: 0 5px;
+                }
+            </style>
+            <div class="content">
+                <div class="line flex">
+                    <p>IntroSwitch</p>
+                    <label class="switch">
+                        <input type="checkbox" checked="true" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <hr />
+                <div class="line flex">
+                    <p>CreditsSwitch</p>
+                    <label class="switch">
+                        <input type="checkbox" checked="true" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="line flex">
+                    <p>WatchCreditsSwitch</p>
+                    <label class="switch">
+                        <input type="checkbox" checked="true" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <hr />
+                <div class="line flex">
+                    <p>AdsSwitch</p>
+                    <label class="switch">
+                        <input type="checkbox" checked="true" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="line flex">
+                    <p>SliderSwitch</p>
+                    <label class="switch">
+                        <input type="checkbox" checked="true" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="line flex">
+                    <p>FullscreenSwitch</p>
+                    <label class="switch">
+                        <input type="checkbox" checked="true" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="line flex">
+                    <p>DoubleClickSwitch</p>
+                    <label class="switch">
+                        <input type="checkbox" checked="true" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="line flex">
+                    <p>scrollVolumeSwitch</p>
+                    <label class="switch">
+                        <input type="checkbox" checked="true" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="line flex">
+                    <p>RatingSwitch</p>
+                    <label class="switch">
+                        <input type="checkbox" checked="true" />
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </foreignObject>
+</svg>
