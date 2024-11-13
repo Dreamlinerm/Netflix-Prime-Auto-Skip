@@ -30,7 +30,9 @@ const isEdge = /edg/i.test(ua);
 // const isFirefox = /firefox/i.test(ua);
 // const isChrome = /chrome/i.test(ua);
 const htmlLang = document.documentElement.lang;
-const version = "1.1.48";
+const date = new Date();
+const today = date.toISOString().split("T")[0];
+const version = "1.1.49";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -89,6 +91,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         filterDub: true,
         filterQueued: true,
         savedCrunchyList: [],
+        GCdate: today,
       },
     },
   };
@@ -100,6 +103,23 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     videoSpeed = speed;
   }
   resetBadge();
+  // how long a record should be kept in the cache
+  const GCdiff = 30;
+  async function garbageCollection() {
+    // clear every rating older than 30 days
+    // clear every rating where db != tmdb
+    log("garbageCollection started, deleting old ratings:");
+    const keys = Object.keys(DBCache);
+    for (let key of keys) {
+      if (getDiffInDays(DBCache[key].date, date) >= GCdiff || DBCache[key].db != "tmdb") {
+        console.log(DBCache[key].date, key);
+        delete DBCache[key];
+      }
+    }
+    settings.General.GCdate = today;
+    setStorage();
+    setDBCache();
+  }
   async function getDBCache() {
     chrome.storage.local.get("DBCache", function (result) {
       DBCache = result?.DBCache;
@@ -117,6 +137,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         if (settings.Disney?.showRating) startShowRatingInterval();
       } else if (isPrimeVideo && settings.Amazon?.showRating) startShowRatingInterval();
       else if (isHBO && settings.HBO?.showRating) startShowRatingInterval();
+      if (getDiffInDays(settings.General.GCdate, date) >= GCdiff) garbageCollection();
     });
   }
   function logStartOfAddon() {
@@ -231,7 +252,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
   }
   // ...args
-  const date = new Date();
   function log(...args) {
     console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), ...args);
   }
@@ -241,7 +261,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const kiloBytes = size / 1024;
     const megaBytes = kiloBytes / 1024;
     if (megaBytes < 5) {
-      log("updateDBCache, MegaBytes:", megaBytes.toFixed(2));
+      log("updateDBCache size:", megaBytes.toFixed(4) + " MB");
       chrome.storage.local.set({ DBCache });
     } else {
       log("DBCache cleared", megaBytes);
@@ -249,8 +269,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       chrome.storage.local.set({ DBCache });
     }
   }
-  // chrome.storage.local.set({ DBCache: {} });
-  const today = date.toISOString().split("T")[0];
   async function getMovieInfo(title, card, year = null) {
     // justwatch api
     // const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
@@ -354,11 +372,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       vote_count < 100 &&
       // did not refresh rating in the last 2 days
       getDiffInDays(DBCache[title].date, date) > 2 &&
-      // release date is in the last 30 days after not many people will
+      // release date is in the last 50 days after not many people will
       getDiffInDays(DBCache[title]?.release_date, date) <= 50;
 
     // refresh rating if older than 30 days or release date is in last month and vote count is under 100
-    if (getDiffInDays(DBCache[title].date, date) >= 30 || diffInReleaseDate) {
+    if (getDiffInDays(DBCache[title].date, date) >= GCdiff || diffInReleaseDate) {
       if (diffInReleaseDate)
         log("update recent movie:", title, ",Age:", getDiffInDays(DBCache[title]?.release_date, date), "Vote count:", vote_count);
       else log("update old rating:", title, ",Age:", getDiffInDays(DBCache[title].date, date));
