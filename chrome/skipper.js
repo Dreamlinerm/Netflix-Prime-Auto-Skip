@@ -32,7 +32,7 @@ const isEdge = /edg/i.test(ua);
 const htmlLang = document.documentElement.lang;
 const date = new Date();
 const today = date.toISOString().split("T")[0];
-const version = "1.1.49";
+const version = "1.1.50";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -91,7 +91,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         filterDub: true,
         filterQueued: true,
         savedCrunchyList: [],
-        GCdate: today,
+        GCdate: "2024-01-01",
       },
     },
   };
