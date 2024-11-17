@@ -370,8 +370,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const diffInReleaseDate =
       // vote count is under 80 inaccurate rating
       vote_count < 100 &&
-      // did not refresh rating in the last 2 days
-      getDiffInDays(DBCache[title].date, date) > 2 &&
+      // did not refresh rating in the last 0 days
+      getDiffInDays(DBCache[title].date, date) > 0 &&
       // release date is in the last 50 days after not many people will
       getDiffInDays(DBCache[title]?.release_date, date) <= 50;
 
