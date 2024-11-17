@@ -413,7 +413,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         }
         let title;
 
-        if (isNetflix) title = card?.parentElement?.getAttribute("aria-label").split(" – ")[0];
+        if (isNetflix) title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0];
         // S2: E3 remove this part
         else if (isDisney) {
           title = card?.getAttribute("aria-label")?.replace(" Disney+ Original", "")?.replace(" STAR Original", "");
@@ -509,14 +509,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (rating <= 7) return "rgb(245, 197, 24)"; //#f5c518
     return "rgb(0, 166, 0)";
   }
-  function getTMDBUrl(id, media_type, title) {
-    return `https://www.themoviedb.org/${media_type}/${id}-${title.toLowerCase().replace(/ /g, "-")}`;
+  function getTMDBUrl(id, media_type) {
+    return `https://www.themoviedb.org/${media_type}/${id}`;
   }
 
   async function setRatingOnCard(card, data, title) {
     let div = document.createElement(data?.id ? "a" : "div");
     if (data?.id) {
-      div.href = getTMDBUrl(data.id, data.media_type, title);
+      div.href = getTMDBUrl(data.id, data.media_type);
       div.target = "_blank";
     }
     const vote_count = data?.vote_count || 100;
