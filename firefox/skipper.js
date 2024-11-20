@@ -70,6 +70,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         profile: true,
         bigPlayer: true,
         disableNumpad: true,
+        filterDubs: [],
       },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
       Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
@@ -1295,7 +1296,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   // #endregion
   // #region Crunchyroll
   // Crunchyroll functions
-  function filterQueued(display) {
+  function filterQueued(checked) {
+    const display = checked ? "none" : "block";
     document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
       // if not on premiere
       element.parentElement.parentElement.parentElement.style.display = element.parentElement.parentElement
@@ -1306,25 +1308,34 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     });
     if (display == "block" && settings.General.filterDub) filterDub("none");
   }
-  function filterDub(display) {
+  function filterDub(checked) {
+    const display = checked ? "none" : "block";
     let list = document.querySelectorAll("cite[itemprop='name']");
     list.forEach((element) => {
-      if (element.textContent.includes("Dub") || element.textContent.includes("Audio"))
+      let text = element.textContent;
+      if (
+        (text.includes("Dub") || text.includes("Audio")) &&
+        (!settings.Crunchyroll.filterDubs.includes(text.split(" ")[0].replace("(", "")) || display == "block")
+      )
         element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display;
     });
     if (display == "block" && settings.General.filterQueued) filterQueued("none");
   }
-  function createFilterElement(filterType, filterText, settingsValue, filterFunction) {
+  function lang(display, lang) {
+    if (display) settings.Crunchyroll.filterDubs.push(lang);
+    else settings.Crunchyroll.filterDubs = settings.Crunchyroll.filterDubs.filter((item) => item !== lang);
+  }
+  function createFilterElement(filterText, settingsValue, filterFunction, filterType = false, lang = false) {
     const label = document.createElement("label");
     const span = document.createElement("span");
     span.style = "display: flex;align-items: center;";
     const input = document.createElement("input");
     input.type = "checkbox";
     input.checked = settingsValue;
-    input.id = filterType;
     input.onclick = function () {
-      settings.General[filterType] = this.checked;
-      filterFunction(this.checked ? "none" : "block");
+      if (filterType) settings.General[filterType] = this.checked;
+      if (lang) filterFunction(this.checked, lang);
+      else filterFunction(this.checked);
       setStorage();
     };
     const p = document.createElement("p");
@@ -1338,8 +1349,24 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   function addButtons() {
     const toggleForm = document.querySelector("#filter_toggle_form");
     toggleForm.style.display = "flex";
-    toggleForm.firstElementChild.appendChild(createFilterElement("filterQueued", "Show Playlist only", settings.General.filterQueued, filterQueued));
-    toggleForm.firstElementChild.appendChild(createFilterElement("filterDub", "Filter Dub", settings.General.filterDub, filterDub));
+    toggleForm.firstElementChild.appendChild(createFilterElement("Show Playlist only", settings.General.filterQueued, filterQueued, "filterQueued"));
+    const p = document.createElement("p");
+    p.style = "width: 100px;";
+    p.textContent = "Show Dubs:";
+    toggleForm.firstElementChild.appendChild(p);
+    toggleForm.firstElementChild.appendChild(
+      createFilterElement("English", settings.Crunchyroll.filterDubs.includes("English"), lang, false, "English")
+    );
+    toggleForm.firstElementChild.appendChild(
+      createFilterElement("German", settings.Crunchyroll.filterDubs.includes("German"), lang, false, "German")
+    );
+    toggleForm.firstElementChild.appendChild(
+      createFilterElement("Spanish", settings.Crunchyroll.filterDubs.includes("Spanish"), lang, false, "Spanish")
+    );
+    toggleForm.firstElementChild.appendChild(
+      createFilterElement("French", settings.Crunchyroll.filterDubs.includes("French"), lang, false, "French")
+    );
+    toggleForm.firstElementChild.appendChild(createFilterElement("Other:", settings.General.filterDub, filterDub, "filterDub"));
   }
   // start of add CrunchyList to Crunchyroll
   function addShowsToList(position, list) {
