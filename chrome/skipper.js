@@ -32,7 +32,7 @@ const isEdge = /edg/i.test(ua);
 const htmlLang = document.documentElement.lang;
 const date = new Date();
 const today = date.toISOString().split("T")[0];
-const version = "1.1.51";
+const version = "1.1.52";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
@@ -205,6 +205,10 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     else if (isDisney || isHotstar) {
       if (isHotstar) Hotstar_doubleClick();
       DisneyObserver.observe(document, config);
+      setInterval(function () {
+        let video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility());
+        if (settings.Disney?.skipAd) Disney_skipAd(video);
+      }, 300);
     } else if (isCrunchyroll) startCrunchyroll(settings.Crunchyroll);
     else if (isHBO) HBOObserver.observe(document, config);
     if (settings?.Video?.playOnFullScreen) startPlayOnFullScreen();
@@ -370,8 +374,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     const diffInReleaseDate =
       // vote count is under 80 inaccurate rating
       vote_count < 100 &&
-      // did not refresh rating in the last 2 days
-      getDiffInDays(DBCache[title].date, date) > 2 &&
+      // did not refresh rating in the last 0 days
+      getDiffInDays(DBCache[title].date, date) > 0 &&
       // release date is in the last 50 days after not many people will
       getDiffInDays(DBCache[title]?.release_date, date) <= 50;
 
@@ -579,8 +583,8 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
   // Disney Observers
   const DisneyObserver = new MutationObserver(Disney);
   function Disney() {
-    let video = document.querySelector("video");
-    if (!video) video = document.querySelector("disney-web-player")?.shadowRoot?.firstChild?.firstChild;
+    // first ad not first video
+    let video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility());
     const time = video?.currentTime;
     if (settings.Disney?.skipIntro) Disney_Intro(video, time);
     Disney_skipCredits(time);
@@ -591,22 +595,22 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (settings.Disney?.selfAd) Disney_selfAd(video, time);
     }
     if (settings.Video?.scrollVolume) Disney_scrollVolume(video);
-    if (settings.Disney?.skipAd) Disney_skipAd(video);
   }
   async function Disney_skipAd(video) {
     if (video) {
       const adTimeText = document.querySelector("div.overlay_interstitials__content_time_display");
       if (adTimeText) {
         const adTime = parseAdTime(adTimeText.textContent);
-        if (adTime >= 1 && !lastAdTimeText) {
-          lastAdTimeText = adTime;
-          resetLastATimeText(100);
+        if (adTime >= 1 && lastAdTimeText != video.currentTime) {
+          if (lastAdTimeText == 0) {
+            log("Disney Ad skipped, length:", adTime, "s");
+            settings.Statistics.DisneyAdTimeSkipped += adTime;
+            increaseBadge();
+          }
+          lastAdTimeText = video.currentTime;
           video.currentTime += adTime;
-          log("Disney Ad skipped, length:", adTime, "s");
-          settings.Statistics.DisneyAdTimeSkipped += adTime;
-          increaseBadge();
         }
-      }
+      } else lastAdTimeText = 0;
       // remove das video wird nach der pause fortgesetzt text after skipping ad
       const continueText = document.querySelector("p.toast-notification__text[aria-hidden='true']");
       if (continueText?.checkVisibility()) {
