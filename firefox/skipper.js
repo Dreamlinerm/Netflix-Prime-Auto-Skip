@@ -490,8 +490,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
                 ?.split(": The complete")[0]
             );
           }
-          if (type == 0) title = fixTitle(card.getAttribute("data-card-title"));
-          else if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label"));
+          // detail means not live shows
+          if (card.querySelector("a").href.includes("detail")) {
+            if (type == 0) title = fixTitle(card.getAttribute("data-card-title"));
+            else if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label"));
+          }
           if (url.includes("video/tv")) media_type = "tv";
           else if (url.includes("video/movie")) media_type = "movie";
           else media_type = getMediaType(card.getAttribute("data-card-entity-type"));
