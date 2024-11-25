@@ -273,11 +273,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       browser.storage.local.set({ DBCache });
     }
   }
-  async function getMovieInfo(title, card, year = null) {
+  async function getMovieInfo(title, card, media_type = null, year = null) {
     // justwatch api
     // const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
     let locale = htmlLang || navigator?.language || "en-US";
-    let url = `https://api.themoviedb.org/3/search/multi?query=${encodeURI(title)}&include_adult=false&language=${locale}&page=1`;
+    const queryType = media_type || "multi";
+    let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURI(title)}&include_adult=false&language=${locale}&page=1`;
     if (year) url += `&year=${year}`;
     // const response = await fetch(encodeURI(url));
     // const data = await response.json();
@@ -289,7 +290,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           const movie = data?.results?.[0];
           compiledData = {
             id: movie?.id,
-            media_type: movie?.media_type,
+            media_type: queryType == "multi" ? movie?.media_type : queryType,
             score: movie?.vote_average,
             vote_count: movie?.vote_count,
             release_date: movie?.release_date,
@@ -368,7 +369,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (!firstDate || !secondDate) return 31;
     return Math.round(Math.abs(new Date(secondDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24));
   }
-  function useDBCache(title, card) {
+  function useDBCache(title, card, media_type) {
     if (!DBCache[title]?.date) DBCache[title].date = today;
     const vote_count = DBCache[title]?.vote_count || 100;
     const diffInReleaseDate =
@@ -384,13 +385,20 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
       if (diffInReleaseDate)
         log("update recent movie:", title, ",Age:", getDiffInDays(DBCache[title]?.release_date, date), "Vote count:", vote_count);
       else log("update old rating:", title, ",Age:", getDiffInDays(DBCache[title].date, date));
-      getMovieInfo(title, card);
+      getMovieInfo(title, card, media_type);
       // log("no info today", title);
     } else {
       setRatingOnCard(card, DBCache[title], title);
     }
   }
+  function getMediaType(type) {
+    if (!type) return null;
+    if (type.toLowerCase().includes("tv")) return "tv";
+    if (type.toLowerCase().includes("movie")) return "movie";
+    return null;
+  }
   async function addRating() {
+    url = window.location.href;
     let AllTitleCardsTypes;
     if (isNetflix) AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")];
     else if (isDisney) AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not(.imdb)")];
@@ -407,6 +415,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     let updateDBCache = false;
     for (let type = 0; type < AllTitleCardsTypes.length; type++) {
       const titleCards = AllTitleCardsTypes[type];
+      let media_type = null;
       for (let i = 0; i < titleCards.length; i++) {
         let card = titleCards[i];
         // add seen class
@@ -416,8 +425,11 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
           else if (type == 1) card?.parentElement?.classList.add("imdb");
         }
         let title;
-
-        if (isNetflix) title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0];
+        if (isNetflix) {
+          title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0];
+          if (url.includes("genre/83")) media_type = "tv";
+          else if (url.includes("genre/34399")) media_type = "movie";
+        }
         // S2: E3 remove this part
         else if (isDisney) {
           title = card?.getAttribute("aria-label")?.replace(" Disney+ Original", "")?.replace(" STAR Original", "");
@@ -426,6 +438,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             const SelectedTabId = document.querySelector('[aria-selected="true"]')?.id.split("_control")[0];
             if (SelectedTabId != card.closest('div[role="tabpanel"]')?.id) title = "";
           }
+          if (url.includes("browse/series")) media_type = "tv";
+          else if (url.includes("browse/movies")) media_type = "movie";
+          else if (/(Staffel)|(Nummer)|(Season)|(Episod)|(Number)/g.test(title)) media_type = "tv";
           // german translation
           if (htmlLang == "de") {
             title = title
@@ -480,17 +495,24 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             );
           }
           if (type == 0) title = fixTitle(card.getAttribute("data-card-title"));
-          if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label"));
+          else if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label"));
+          if (url.includes("video/tv")) media_type = "tv";
+          else if (url.includes("video/movie")) media_type = "movie";
+          else media_type = getMediaType(card.getAttribute("data-card-entity-type"));
         } else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent;
         // for the static Pixar Disney, Starplus etc. cards
         if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
           // sometimes more than one image is loaded for the same title
           if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
             lastTitle = title;
-            if (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 7) {
-              useDBCache(title, card);
+            console.log("Title:", title, media_type);
+            if (
+              (DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 7) &&
+              (!media_type || DBCache[title]?.media_type == media_type)
+            ) {
+              useDBCache(title, card, media_type);
             } else {
-              getMovieInfo(title, card);
+              getMovieInfo(title, card, media_type);
               updateDBCache = true;
             }
           }
