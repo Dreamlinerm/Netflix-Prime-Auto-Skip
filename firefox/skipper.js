@@ -407,7 +407,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     else if (isPrimeVideo)
       AllTitleCardsTypes = [
         document.querySelectorAll("li:not(.imdb) article[data-card-title]:not([data-card-entity-type='EVENT']):not([data-card-title='Live-TV'])"),
-        document.querySelectorAll("li:not(.imdb) article[data-testid*='-card']"),
+        document.querySelectorAll("article[data-testid*='-card']:not(.imdb):not(:has(a#rating))"),
       ];
     // on disney there are multiple images for the same title so only use the first one
     let lastTitle = "";
@@ -422,16 +422,14 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         if (isNetflix || isDisney || isHotstar || isHBO) card.classList.add("imdb");
         else if (isPrimeVideo) {
           if (type == 0) card?.closest("li")?.classList.add("imdb");
-          else if (type == 1) card?.parentElement?.classList.add("imdb");
+          else if (type == 1) card?.classList.add("imdb");
         }
         let title;
         if (isNetflix) {
           title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0];
           if (url.includes("genre/83")) media_type = "tv";
           else if (url.includes("genre/34399")) media_type = "movie";
-        }
-        // S2: E3 remove this part
-        else if (isDisney) {
+        } else if (isDisney) {
           title = card?.getAttribute("aria-label")?.replace(" Disney+ Original", "")?.replace(" STAR Original", "");
           // no section Extras on disney shows
           if (url.includes("entity")) {
@@ -475,8 +473,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
               .replace(/ \d+ minutes remaining/g, "");
           }
         } else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "");
-        // amazon
-        // remove everything after - in the title
         else if (isPrimeVideo) {
           function fixTitle(title) {
             return (
@@ -547,6 +543,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     }
     const vote_count = data?.vote_count || 100;
     // right: 1.5vw;
+    div.id = "rating";
     div.style =
       "position: absolute;bottom: 0;color: black;text-decoration: none;background:" +
       getColorForRating(data?.score, vote_count < 50) +
@@ -580,7 +577,9 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     } else if (isHotstar) card.parentElement.appendChild(div);
     else if (isPrimeVideo) {
       if (card.getAttribute("data-card-title")) card.firstChild.firstChild.appendChild(div);
-      else card.appendChild(div);
+      else if (card.querySelector('div[data-testid="title-metadata-main"]')) {
+        card.querySelector('div[data-testid="title-metadata-main"]').appendChild(div);
+      } else card.appendChild(div);
     }
   }
   function OnFullScreenChange() {
