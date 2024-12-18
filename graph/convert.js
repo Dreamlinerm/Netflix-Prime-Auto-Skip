@@ -17,11 +17,30 @@ function convertCsv(name) {
   while (file[0].count === 0) {
     file.shift();
   }
-  // delete last two entries
-  file.pop();
-  file.pop();
-  console.log(file);
+  // // delete last two entries
+  // file.pop();
+  // file.pop();
+  // console.log(file);
   fs.writeFileSync(path.join(__dirname, name + ".js"), "let " + name + " = " + JSON.stringify(file));
 }
 convertCsv("chromeUsers");
 convertCsv("chromeDownloads");
+
+function convertEdgeCsv(name) {
+  let file = fs
+    .readFileSync(path.join(__dirname, name + ".csv"), "utf-8")
+    .split("\n")
+    // remove the first line
+    .slice(1)
+    .map((line) => line.split(","))
+    .map((line) => {
+      return {
+        date: line[4],
+        count: parseInt(line[5]),
+      };
+    });
+  fs.writeFileSync(path.join(__dirname, name + ".js"), "let " + name + " = " + JSON.stringify(file));
+}
+
+convertEdgeCsv("edgeUsers");
+convertEdgeCsv("edgeDownloads");
