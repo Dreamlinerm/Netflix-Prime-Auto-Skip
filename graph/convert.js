@@ -27,16 +27,20 @@ convertCsv("chromeUsers");
 convertCsv("chromeDownloads");
 
 function convertEdgeCsv(name) {
-  let file = fs
-    .readFileSync(path.join(__dirname, name + ".csv"), "utf-8")
+  let file = fs.readFileSync(path.join(__dirname, name + ".csv"), "utf-8");
+  const firstLine = file.split("\n")[0];
+  const userCountPosition = firstLine.split(",").indexOf("userCount");
+  const datePosition = firstLine.split(",").indexOf("date");
+
+  file = file
     .split("\n")
     // remove the first line
     .slice(1)
     .map((line) => line.split(","))
     .map((line) => {
       return {
-        date: line[4],
-        count: parseInt(line[5]),
+        date: line[datePosition],
+        count: parseInt(line[userCountPosition]),
       };
     });
   fs.writeFileSync(path.join(__dirname, name + ".js"), "let " + name + " = " + JSON.stringify(file));
