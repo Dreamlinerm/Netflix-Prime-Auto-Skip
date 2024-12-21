@@ -67,10 +67,14 @@ We welcome contributions to the translation of the extension. If you're interest
       </td>
     </tr>
 </table>
+<details>
+  <summary>The above table in markdown</summary>
+  
+  | Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO    |
+  | ---     | ---             | ---                      | ---         | ---    |
+  | ✅      | ✅             | ✅                      | ✅          | ✅    |
+</details>
 
-| Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO    |
-| ---     | ---             | ---                      | ---         | ---    |
-| ✅      | ✅             | ✅                      | ✅          | ✅     |
 
 ## Android Compatibility:
 
