@@ -557,7 +557,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
 
     // div.id = "imdb";
     if (data?.score >= 0) {
-      const releaseDate = new Date(data?.release_date)?.getFullYear() + "-";
+      const releaseDate = data?.release_date ? new Date(data?.release_date)?.getFullYear() + "-" : "";
       // const year = new Date(data?.release_date)?.getYear();
       // let releaseDate = "";
       // if (year) {
