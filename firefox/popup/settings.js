@@ -117,6 +117,7 @@ const defaultSettings = {
       filterQueued: true,
       savedCrunchyList: [],
       GCdate: "2024-01-01",
+      showYear: false,
     },
   },
 };

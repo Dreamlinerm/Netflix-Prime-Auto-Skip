@@ -92,6 +92,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         filterQueued: true,
         savedCrunchyList: [],
         GCdate: "2024-01-01",
+        showYear: false,
       },
     },
   };
@@ -557,12 +558,12 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
 
     // div.id = "imdb";
     if (data?.score >= 0) {
-      const releaseDate = data?.release_date ? new Date(data?.release_date)?.getFullYear() + "-" : "";
-      // const year = new Date(data?.release_date)?.getYear();
-      // let releaseDate = "";
-      // if (year) {
-      //   releaseDate = year >= 100 ? (year + " ").substring(1) : year + " ";
-      // }
+      let releaseDate = "";
+      if (settings.General?.showYear && data?.release_date) {
+        const releaseDate = new Date(data?.release_date)?.getFullYear() + "-";
+        // const year = new Date(data?.release_date)?.getYear();
+        // releaseDate = year >= 100 ? (year + " ").substring(1) : year + " ";
+      }
       div.textContent = releaseDate + data.score?.toFixed(1);
       div.setAttribute("alt", data?.title + ", OG title: " + title + ", Vote count: " + vote_count);
     } else {
