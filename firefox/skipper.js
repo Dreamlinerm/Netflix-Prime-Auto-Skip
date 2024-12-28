@@ -293,7 +293,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
             media_type: queryType == "multi" ? movie?.media_type : queryType,
             score: movie?.vote_average,
             vote_count: movie?.vote_count,
-            release_date: movie?.release_date,
+            release_date: movie?.release_date || movie?.first_air_date,
             title: movie?.title || movie?.original_title || movie?.name || movie?.original_name,
             date: today,
             db: "tmdb",
@@ -557,7 +557,13 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
 
     // div.id = "imdb";
     if (data?.score >= 0) {
-      div.textContent = data.score?.toFixed(1);
+      const releaseDate = new Date(data?.release_date)?.getFullYear() + "-";
+      // const year = new Date(data?.release_date)?.getYear();
+      // let releaseDate = "";
+      // if (year) {
+      //   releaseDate = year >= 100 ? (year + " ").substring(1) : year + " ";
+      // }
+      div.textContent = releaseDate + data.score?.toFixed(1);
       div.setAttribute("alt", data?.title + ", OG title: " + title + ", Vote count: " + vote_count);
     } else {
       div.textContent = "?";
