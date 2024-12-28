@@ -72,7 +72,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         disableNumpad: true,
       },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
+      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true, showYear: false },
       Statistics: {
         AmazonAdTimeSkipped: 0,
         NetflixAdTimeSkipped: 0,
@@ -92,7 +92,6 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
         filterQueued: true,
         savedCrunchyList: [],
         GCdate: "2024-01-01",
-        showYear: false,
       },
     },
   };
@@ -559,7 +558,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     // div.id = "imdb";
     if (data?.score >= 0) {
       let releaseDate = "";
-      if (settings.General?.showYear && data?.release_date) {
+      if (settings.Video?.showYear && data?.release_date) {
         const releaseDate = new Date(data?.release_date)?.getFullYear() + "-";
         // const year = new Date(data?.release_date)?.getYear();
         // releaseDate = year >= 100 ? (year + " ").substring(1) : year + " ";

@@ -17,6 +17,7 @@ if (process.argv.length === 2) {
 }
 
 if (process.argv.length === 3) {
+  console.log("Update the language files");
   // read the deepl.Lang.json files and copy the new keys into the language files in the folder firefox _locales
 
   const fs = require("fs");

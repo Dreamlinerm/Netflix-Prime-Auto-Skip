@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "Czas pominiętych reklam Disneya."
+  },
+  "ShowYearSwitch": {
+    "message": "Rok premiery programu:"
+  },
+  "ShowYearDescription": {
+    "message": "Pokazuje rok wydania obok oceny."
   }
 }

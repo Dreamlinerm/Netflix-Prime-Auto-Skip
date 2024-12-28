@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "Disney reklamlarını atlama zamanı."
+  },
+  "ShowYearSwitch": {
+    "message": "Gösterinin çıkış yılı:"
+  },
+  "ShowYearDescription": {
+    "message": "Derecelendirmenin yanında yayın yılını gösterir."
   }
 }

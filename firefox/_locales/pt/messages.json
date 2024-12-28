@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "Tempo de saltar anúncios da Disney."
+  },
+  "ShowYearSwitch": {
+    "message": "Ano de lançamento do espetáculo:"
+  },
+  "ShowYearDescription": {
+    "message": "Mostra o ano de lançamento ao lado da classificação."
   }
 }

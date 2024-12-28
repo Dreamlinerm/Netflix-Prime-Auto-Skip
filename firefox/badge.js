@@ -113,7 +113,7 @@ if (isMobile) {
         disableNumpad: true,
       },
       HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
+      Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true, showYear: false },
       Statistics: {
         AmazonAdTimeSkipped: 0,
         NetflixAdTimeSkipped: 0,
@@ -133,7 +133,6 @@ if (isMobile) {
         filterQueued: true,
         savedCrunchyList: [],
         GCdate: "2024-01-01",
-        showYear: false,
       },
     },
   };

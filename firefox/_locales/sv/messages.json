@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "Tid för överhoppade Disney-annonser."
+  },
+  "ShowYearSwitch": {
+    "message": "Visa utgivningsår:"
+  },
+  "ShowYearDescription": {
+    "message": "Visar utgivningsåret bredvid klassificeringen."
   }
 }

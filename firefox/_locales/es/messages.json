@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "Tiempo de anuncios Disney saltados."
+  },
+  "ShowYearSwitch": {
+    "message": "Mostrar año de lanzamiento:"
+  },
+  "ShowYearDescription": {
+    "message": "Muestra el año de publicación junto a la clasificación."
   }
 }

@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "Durée des publicités Disney sautées."
+  },
+  "ShowYearSwitch": {
+    "message": "Année de sortie de l'exposition :"
+  },
+  "ShowYearDescription": {
+    "message": "Indique l'année de publication à côté de la note."
   }
 }
