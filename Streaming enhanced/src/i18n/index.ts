@@ -1,6 +1,6 @@
 import { createI18n } from "vue-i18n";
-import en from "@/_locales/en/messages.json";
-import de from "@/_locales/de/messages.json";
+import en from "@/i18n/locales/en.json";
+import de from "@/i18n/locales/de.json";
 import dateTimeFormats from "@/i18n/dateTimeFormats.json";
 import numberFormats from "@/i18n/numberFormats.json";
 
