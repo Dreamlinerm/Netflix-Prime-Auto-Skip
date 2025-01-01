@@ -39,7 +39,17 @@ import "@/theme/main.css";
 
 import i18n from "@/i18n";
 
-const app = createApp(App).use(IonicVue).use(router).use(i18n);
+function $t(key: string, ...args: any[]): string {
+  return browser.i18n.getMessage.apply(null, [key, ...args]);
+}
+const isDevMode = process.env.NODE_ENV === "development";
+const app = createApp(App).use(IonicVue).use(router);
+if (isDevMode) {
+  app.use(i18n);
+} else {
+  // Add $t to global properties
+  app.config.globalProperties.$t = $t;
+}
 
 router.isReady().then(() => {
   app.mount("#app");
