@@ -2,7 +2,7 @@
   <ion-page>
     <ion-content :fullscreen="true">
       <p class="text-xl bg-red-900">
-        {{ $t('test') }}<br>
+        {{ $t('extensionName.message') }}<br>
         {{ $d(new Date(), "long") }}<br>
         {{ $n(1234.56, "currency") }}<br>
       </p>

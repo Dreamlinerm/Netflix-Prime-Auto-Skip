@@ -1,0 +1,315 @@
+{
+  "extensionName": {
+    "message": "Streaming enhanced: Netflix Disney+ Prime Video",
+    "description": "Name of the extension"
+  },
+  "extensionDescription": {
+    "message": "Skip ads, intros, credits and add adjust speed, etc. on Netflix, Prime video, Disney+, Crunchyroll and HBO max.",
+    "description": "Description of the extension"
+  },
+  "settingsTitle": {
+    "message": "Settings - Streaming enhanced",
+    "description": "Title of the Settings Tab"
+  },
+  "pageTitle": {
+    "message": "enhanced",
+    "description": "Title of the Settings Page"
+  },
+  "rateNow": {
+    "message": "Rate now!"
+  },
+  "sharedSettings": {
+    "message": "Shared Settings"
+  },
+  "sharedSettingsDescription": {
+    "message": "These options will only enable/disable the $service$ part of the shared setting",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "backup": {
+    "message": "Backup/Reset"
+  },
+  "statistics": {
+    "message": "Statistics"
+  },
+  "changelog": {
+    "message": "Changelog"
+  },
+  "donate": {
+    "message": "Donate"
+  },
+  "PageSpecificTitle": {
+    "message": "$service$ specific",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "defaultPageTitle": {
+    "message": "Optional functions"
+  },
+  "defaultPageDescription": {
+    "message": "Every feature which is turned off by default either because they are confusing if they were turned on or they are in beta"
+  },
+  "DefaultPaidContentDescription": {
+    "message": "Removing every paid movie/series category from Amazon prime"
+  },
+  "SharedPageTitle": {
+    "message": "Shared Video features"
+  },
+  "SharedPageDescription": {
+    "message": "These options will only enable/disable the settings for all streaming services. In the below table you can disable the shared settings for a specific service"
+  },
+  "IntroSwitch": {
+    "message": "Skip Intro & Recap:"
+  },
+  "SharedIntroDescription": {
+    "message": "Skipping the intros and recaps of any series. Except Netflix since there Recaps cannot be watched again."
+  },
+  "CreditsSwitch": {
+    "message": "Skip Credits:"
+  },
+  "CreditsSwitchDescription": {
+    "message": "Skipping to the next episode of every series as fast as possible"
+  },
+  "AdsSwitch": {
+    "message": "Skip Ads:"
+  },
+  "AdsSwitchDescription": {
+    "message": "Skipping freevee ads for amazon and all of the ads in the basic Netflix tier"
+  },
+  "SliderSwitch": {
+    "message": "Add Speed control:"
+  },
+  "SliderSwitchDescription": {
+    "message": "Adding a speed adjustment slider"
+  },
+  "SliderOptions": {
+    "message": "Slider options: speed = stepsize /10"
+  },
+  "SliderStepSize": {
+    "message": "Slider stepsize:"
+  },
+  "SliderMin": {
+    "message": "Slider minimum:"
+  },
+  "SliderMax": {
+    "message": "Slider maximum:"
+  },
+  "SliderPreview": {
+    "message": "Slider preview:"
+  },
+  "FullscreenSwitch": {
+    "message": "Play on fullscreen:"
+  },
+  "FullscreenSwitchDescription": {
+    "message": "If a video is put on fullscreen, the video will play automatically"
+  },
+  "SelfAdsSwitch": {
+    "message": "Skip Self Ads:"
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "Skipping the prime show previews which are shown before any video"
+  },
+  "PaidContentSwitch": {
+    "message": "Remove paid content:",
+    "description": "Remove paid content feature switch"
+  },
+  "PaidContentDescription": {
+    "message": "Removing every paid movie/series category"
+  },
+  "ContinuePositionSwitch": {
+    "message": "Move category \"Continue\":"
+  },
+  "ContinuePositionDescription": {
+    "message": "Move category \"Continue\" to the top of the page"
+  },
+  "FreeveeSwitch": {
+    "message": "Skip Freevee Ads:"
+  },
+  "RecapSwitch": {
+    "message": "Skip Recaps:"
+  },
+  "RecapSwitchDescription": {
+    "message": "Skips recapitulations of every show"
+  },
+  "InactivitySwitch": {
+    "message": "Resume inactivity warning:"
+  },
+  "InactivitySwitchDescription": {
+    "message": "Resumes the video if the 'Are you still watching' prompt is shown"
+  },
+  "ProfileSwitch": {
+    "message": "Auto pick last profile:"
+  },
+  "ProfileSwitchDescription": {
+    "message": "The last used profile is directly chosen when the page is launched"
+  },
+  "User": {
+    "message": "User:"
+  },
+  "StatisticPageTitle": {
+    "message": "Statistics"
+  },
+  "SkippedTime": {
+    "message": "Skipped time:"
+  },
+  "AmazonAdDescription": {
+    "message": "Time of skipped FreeVee Ads + Prime Video Self Ads"
+  },
+  "StatisticAd": {
+    "message": "$service$ Ad:",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "NetflixAdDescription": {
+    "message": "Time of skipped Netflix Ads"
+  },
+  "StatisticIntro": {
+    "message": "Intro:"
+  },
+  "StatisticIntroDescription": {
+    "message": "Time of skipped Intros on Netflix, Amazon and Disney+"
+  },
+  "StatisticRecap": {
+    "message": "Recap:"
+  },
+  "StatisticRecapDescription": {
+    "message": "Time of skipped Recaps on Netflix, Amazon and Disney+"
+  },
+  "StatisticSegments": {
+    "message": "Segments Skipped:"
+  },
+  "StatisticSegmentsDescription": {
+    "message": "Amount of Individual Segments Skipped like an Intro or an Ad for Netflix, Amazon and Disney+"
+  },
+  "ImportSettings": {
+    "message": "Import/Export all Settings"
+  },
+  "SaveSettings": {
+    "message": "Save Settings as file"
+  },
+  "UploadSettings": {
+    "message": "Upload settings"
+  },
+  "ResetAddon": {
+    "message": "Reset Addon to default"
+  },
+  "noWrap": {
+    "message": "nowrap"
+  },
+  "WatchCreditsSwitch": {
+    "message": "Watch Credits:"
+  },
+  "WatchCreditsSwitchDescription": {
+    "message": "Always watch the credits of every series"
+  },
+  "conflictingTitle": {
+    "message": "All conflicting Features"
+  },
+  "RatingSwitch": {
+    "message": "TMDB Rating:"
+  },
+  "RatingSwitchDescription": {
+    "message": "Adding the TMDB rating to every movie and series"
+  },
+  "ReleaseCalendarSwitch": {
+    "message": "Add Release Calendar options:"
+  },
+  "ReleaseCalendarDescription": {
+    "message": "Adds the checkboxes 'Show Playlists only' and 'Filter DUB' to the release calendar"
+  },
+  "EpilepsySwitch": {
+    "message": "Epilepsy option"
+  },
+  "EpilepsySwitchDescription": {
+    "message": "Darken the screen when skipping the ad"
+  },
+  "UserAgentSwitch": {
+    "message": "Switch to desktop websites"
+  },
+  "UserAgentSwitchDescription": {
+    "message": "For prime video and disney+ change to the Desktop website and for amazon make the site mobile friendly"
+  },
+  "XraySwitch": {
+    "message": "Hide Xray:"
+  },
+  "XraySwitchDescription": {
+    "message": "Hide the Xray Quick View over a video"
+  },
+  "Feature": {
+    "message": "Feature: Tooltip for more information"
+  },
+  "Shared": {
+    "message": "All"
+  },
+  "OpenSharedSettings": {
+    "message": "Open Shared Settings"
+  },
+  "autoOpenSettings": {
+    "message": "Automatically open correct Settings:"
+  },
+  "requestTabs": {
+    "message": "Request Tabs permission"
+  },
+  "autoOpenDescription": {
+    "message": "If on streaming site open the according settings in popup automatically"
+  },
+  "DuplicateSwitch": {
+    "message": "Remove duplicate Shows:"
+  },
+  "DuplicateSwitchDescription": {
+    "message": "Remove every duplicate show, which was already visible on Disney before. Visible means that the show is in the first 5 shows in every row"
+  },
+  "WatchSkippedButton": {
+    "message": "Rewind?",
+    "description": "Watch skipped button to watch an intro"
+  },
+  "HomeButton": {
+    "message": "Home",
+    "description": "Disney Homepage button"
+  },
+  "BigPlayerSwitch": {
+    "message": "Video bigger:"
+  },
+  "BigPlayerDescription": {
+    "message": "Extends the video size to the entire browser window without full screen."
+  },
+  "DisableNumpadSwitch": {
+    "message": "Disable numpad:"
+  },
+  "DisableNumpadDescription": {
+    "message": "Disable the numpad keys so you don't accidentally change the current video time/position."
+  },
+  "DoubleClickSwitch": {
+    "message": "Fullscreen by double clicking:"
+  },
+  "DoubleClickSwitchDescription": {
+    "message": "If you double click on the video it will go to fullscreen."
+  },
+  "scrollVolumeSwitch": {
+    "message": "Scroll for volume:"
+  },
+  "scrollVolumeDescription": {
+    "message": "Scrolling up or down on the Sound Icon will change the volume."
+  },
+  "DisneyAdDescription": {
+    "message": "Time of skipped Disney Ads."
+  },
+  "ShowYearSwitch": {
+    "message": "Show release year:"
+  },
+  "ShowYearDescription": {
+    "message": "Shows the release year next to the rating."
+  }
+}

@@ -1,0 +1,315 @@
+{
+  "extensionName": {
+    "message": "Streaming enhanced: Netflix Disney+ Prime Video",
+    "description": "Namn på tillägget"
+  },
+  "extensionDescription": {
+    "message": "Hoppa över annonser, intron, eftertexter och justera hastighet m.m. på Netflix, Prime video, Disney+, Crunchyroll och HBO max.",
+    "description": "Beskrivning av tillägget"
+  },
+  "settingsTitle": {
+    "message": "Inställningar - Streaming enhanced",
+    "description": "Titel på fliken Inställningar"
+  },
+  "pageTitle": {
+    "message": "förbättrad",
+    "description": "Titel på sidan Inställningar"
+  },
+  "rateNow": {
+    "message": "Betygsätt nu!"
+  },
+  "sharedSettings": {
+    "message": "Delade inställningar"
+  },
+  "sharedSettingsDescription": {
+    "message": "Dessa alternativ aktiverar/avaktiverar endast $service$-delen av den delade inställningen",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "backup": {
+    "message": "Säkerhetskopiering/återställning"
+  },
+  "statistics": {
+    "message": "Statistik"
+  },
+  "changelog": {
+    "message": "Changelog"
+  },
+  "donate": {
+    "message": "Donera"
+  },
+  "PageSpecificTitle": {
+    "message": "$service$ specifik",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "defaultPageTitle": {
+    "message": "Valfria funktioner"
+  },
+  "defaultPageDescription": {
+    "message": "Alla funktioner som är avstängda som standard antingen för att de är förvirrande om de är påslagna eller för att de är i betaversion"
+  },
+  "DefaultPaidContentDescription": {
+    "message": "Ta bort alla betalda film- och seriekategorier från Amazon Prime"
+  },
+  "SharedPageTitle": {
+    "message": "Funktioner för delad video"
+  },
+  "SharedPageDescription": {
+    "message": "Dessa alternativ aktiverar/inaktiverar endast inställningarna för alla streamingtjänster. I tabellen nedan kan du inaktivera de delade inställningarna för en specifik tjänst"
+  },
+  "IntroSwitch": {
+    "message": "Hoppa över intro och sammanfattning:"
+  },
+  "SharedIntroDescription": {
+    "message": "Hoppa över intron och sammanfattningar av alla serier. Utom Netflix eftersom deras sammanfattningar inte kan ses igen."
+  },
+  "CreditsSwitch": {
+    "message": "Hoppa över krediter:"
+  },
+  "CreditsSwitchDescription": {
+    "message": "Hoppa till nästa avsnitt i varje serie så snabbt som möjligt"
+  },
+  "AdsSwitch": {
+    "message": "Hoppa över annonser:"
+  },
+  "AdsSwitchDescription": {
+    "message": "Hoppa över freevee-annonser för Amazon och alla annonser i den grundläggande Netflix-nivån"
+  },
+  "SliderSwitch": {
+    "message": "Lägg till Speed control:"
+  },
+  "SliderSwitchDescription": {
+    "message": "Lägga till ett reglage för hastighetsjustering"
+  },
+  "SliderOptions": {
+    "message": "Slider-alternativ: hastighet = stegstorlek /10"
+  },
+  "SliderStepSize": {
+    "message": "Skjutreglagets stegstorlek:"
+  },
+  "SliderMin": {
+    "message": "Slider minimum:"
+  },
+  "SliderMax": {
+    "message": "Slider maximalt:"
+  },
+  "SliderPreview": {
+    "message": "Förhandsgranskning av slider:"
+  },
+  "FullscreenSwitch": {
+    "message": "Spela på helskärm:"
+  },
+  "FullscreenSwitchDescription": {
+    "message": "Om en video läggs i helskärmsläge spelas videon upp automatiskt"
+  },
+  "SelfAdsSwitch": {
+    "message": "Hoppa över självannonser:"
+  },
+  "SelfAdsSwitchDescription": {
+    "message": "Hoppa över förhandsvisningarna av prime show som visas före varje video"
+  },
+  "PaidContentSwitch": {
+    "message": "Ta bort betalt innehåll:",
+    "description": "Ta bort funktionen för betalt innehåll"
+  },
+  "PaidContentDescription": {
+    "message": "Ta bort alla kategorier för betalda filmer/serier"
+  },
+  "ContinuePositionSwitch": {
+    "message": "Flytta kategori \"Fortsätt\":"
+  },
+  "ContinuePositionDescription": {
+    "message": "Flytta kategorin \"Fortsätt\" till toppen av sidan"
+  },
+  "FreeveeSwitch": {
+    "message": "Hoppa över Freevee-annonser:"
+  },
+  "RecapSwitch": {
+    "message": "Hoppa över sammanfattningar:"
+  },
+  "RecapSwitchDescription": {
+    "message": "Hoppar över sammanfattningar av varje program"
+  },
+  "InactivitySwitch": {
+    "message": "Varning för inaktivitet vid återupptagning:"
+  },
+  "InactivitySwitchDescription": {
+    "message": "Återupptar videon om meddelandet \"Tittar du fortfarande?\" visas"
+  },
+  "ProfileSwitch": {
+    "message": "Välj automatiskt den senaste profilen:"
+  },
+  "ProfileSwitchDescription": {
+    "message": "Den senast använda profilen väljs direkt när sidan startas"
+  },
+  "User": {
+    "message": "Användare:"
+  },
+  "StatisticPageTitle": {
+    "message": "Statistik"
+  },
+  "SkippedTime": {
+    "message": "Hoppade över tid:"
+  },
+  "AmazonAdDescription": {
+    "message": "Tid för överhoppade FreeVee-annonser + Prime Video självannonser"
+  },
+  "StatisticAd": {
+    "message": "$service$ Annons:",
+    "placeholders": {
+      "service": {
+        "content": "$1",
+        "example": "Netflix"
+      }
+    }
+  },
+  "NetflixAdDescription": {
+    "message": "Tid för överhoppade Netflix-annonser"
+  },
+  "StatisticIntro": {
+    "message": "Intro:"
+  },
+  "StatisticIntroDescription": {
+    "message": "Tid för överhoppade intron på Netflix, Amazon och Disney+"
+  },
+  "StatisticRecap": {
+    "message": "Sammanställning:"
+  },
+  "StatisticRecapDescription": {
+    "message": "Time of skipped Återblickar på Netflix, Amazon och Disney+"
+  },
+  "StatisticSegments": {
+    "message": "Överhoppade segment:"
+  },
+  "StatisticSegmentsDescription": {
+    "message": "Mängden enskilda segment som hoppats över som ett intro eller en annons för Netflix, Amazon och Disney+"
+  },
+  "ImportSettings": {
+    "message": "Importera/exportera alla inställningar"
+  },
+  "SaveSettings": {
+    "message": "Spara inställningar som fil"
+  },
+  "UploadSettings": {
+    "message": "Ladda upp inställningar"
+  },
+  "ResetAddon": {
+    "message": "Återställ Addon till standard"
+  },
+  "noWrap": {
+    "message": "nurap"
+  },
+  "WatchCreditsSwitch": {
+    "message": "Titta på krediter:"
+  },
+  "WatchCreditsSwitchDescription": {
+    "message": "Titta alltid på eftertexterna i varje serie"
+  },
+  "conflictingTitle": {
+    "message": "Alla motstridiga funktioner"
+  },
+  "RatingSwitch": {
+    "message": "TMDB Betyg:"
+  },
+  "RatingSwitchDescription": {
+    "message": "Lägga till TMDB-betyg för varje film och serie"
+  },
+  "ReleaseCalendarSwitch": {
+    "message": "Lägg till alternativ för Release Calendar:"
+  },
+  "ReleaseCalendarDescription": {
+    "message": "Lägger till kryssrutorna \"Visa endast spellistor\" och \"Filtrera DUB\" i releasekalendern"
+  },
+  "EpilepsySwitch": {
+    "message": "Alternativ för epilepsi"
+  },
+  "EpilepsySwitchDescription": {
+    "message": "Mörka skärmen när du hoppar över annonsen"
+  },
+  "UserAgentSwitch": {
+    "message": "Byt till desktop-webbplatser"
+  },
+  "UserAgentSwitchDescription": {
+    "message": "För prime video och disney+ byt till Desktop-webbplatsen och för amazon gör webbplatsen mobilvänlig"
+  },
+  "XraySwitch": {
+    "message": "Göm röntgen:"
+  },
+  "XraySwitchDescription": {
+    "message": "Dölj snabbvisningen för röntgen över en video"
+  },
+  "Feature": {
+    "message": "Funktion: Verktygstips för mer information"
+  },
+  "Shared": {
+    "message": "Alla"
+  },
+  "OpenSharedSettings": {
+    "message": "Öppna delade inställningar"
+  },
+  "autoOpenSettings": {
+    "message": "Öppna automatiskt korrekta inställningar:"
+  },
+  "requestTabs": {
+    "message": "Begär tillstånd för flikar"
+  },
+  "autoOpenDescription": {
+    "message": "Om du är på en streamingwebbplats öppnas motsvarande inställningar automatiskt i popup-fönstret"
+  },
+  "DuplicateSwitch": {
+    "message": "Ta bort duplicerade program:"
+  },
+  "DuplicateSwitchDescription": {
+    "message": "Ta bort alla dubbletter av program som redan tidigare var synliga på Disney. Synlig innebär att programmet finns bland de 5 första programmen i varje rad"
+  },
+  "WatchSkippedButton": {
+    "message": "Spola tillbaka?",
+    "description": "Se överhoppad knapp för att se ett intro"
+  },
+  "HomeButton": {
+    "message": "Hem",
+    "description": "Knapp för Disneys hemsida"
+  },
+  "BigPlayerSwitch": {
+    "message": "Video större:"
+  },
+  "BigPlayerDescription": {
+    "message": "Utökar videostorleken till hela webbläsarfönstret utan helskärm."
+  },
+  "DisableNumpadSwitch": {
+    "message": "Inaktivera numpad:"
+  },
+  "DisableNumpadDescription": {
+    "message": "Inaktivera numpad-tangenterna så att du inte av misstag ändrar den aktuella videotiden/positionen."
+  },
+  "DoubleClickSwitch": {
+    "message": "Fullskärm genom att dubbelklicka:"
+  },
+  "DoubleClickSwitchDescription": {
+    "message": "Om du dubbelklickar på videon kommer den att visas i helskärm."
+  },
+  "scrollVolumeSwitch": {
+    "message": "Bläddra för volym:"
+  },
+  "scrollVolumeDescription": {
+    "message": "Om du bläddrar upp eller ner på ljudikonen ändras volymen."
+  },
+  "DisneyAdDescription": {
+    "message": "Tid för överhoppade Disney-annonser."
+  },
+  "ShowYearSwitch": {
+    "message": "Visa utgivningsår:"
+  },
+  "ShowYearDescription": {
+    "message": "Visar utgivningsåret bredvid klassificeringen."
+  }
+}
