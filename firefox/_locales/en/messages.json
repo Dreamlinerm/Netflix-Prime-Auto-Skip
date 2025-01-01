@@ -311,5 +311,11 @@
   },
   "ShowYearDescription": {
     "message": "Shows the release year next to the rating."
+  },
+  "Affiliate": {
+    "message": "Affiliate links"
+  },
+  "AffiliateTitle": {
+    "message": "Affiliate Programs"
   }
 }

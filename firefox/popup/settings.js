@@ -320,7 +320,7 @@ function Menu(setting, isBackButton = false) {
   console.log(backButtonHistory);
   const Pages = isPopup
     ? ["Video", "Amazon", "Netflix", "Disney", "Crunchyroll", "Statistics", "Popup"]
-    : ["Video", "Amazon", "Netflix", "Disney", "Crunchyroll", "Statistics", "Other", "Changelog", "Default"];
+    : ["Video", "Amazon", "Netflix", "Disney", "Crunchyroll", "Statistics", "Other", "Changelog", "Affiliate", "Default"];
   const noButton = ["Default", "Popup"];
   for (const page of Pages) {
     document.getElementById(page + "Settings").style.display = "none";
