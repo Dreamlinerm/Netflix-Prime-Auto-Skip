@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "serve": "ionic serve",
-    "dev": "vite",
+    "dev": "NODE_ENV=development vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "test:e2e": "cypress run",
