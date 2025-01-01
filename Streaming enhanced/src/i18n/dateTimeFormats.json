@@ -1,0 +1,32 @@
+{
+  "en": {
+    "short": {
+      "year": "2-digit",
+      "month": "short",
+      "day": "numeric"
+    },
+    "long": {
+      "year": "2-digit",
+      "month": "numeric",
+      "day": "numeric",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": false
+    }
+  },
+  "de": {
+    "short": {
+      "year": "2-digit",
+      "month": "2-digit",
+      "day": "2-digit"
+    },
+    "long": {
+      "year": "2-digit",
+      "month": "numeric",
+      "day": "numeric",
+      "hour": "numeric",
+      "minute": "numeric",
+      "hour12": false
+    }
+  }
+}

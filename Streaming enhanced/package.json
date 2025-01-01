@@ -1,0 +1,49 @@
+{
+  "name": "makre",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "serve": "ionic serve",
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "test:e2e": "cypress run",
+    "test:unit": "vitest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@capacitor/app": "6.0.0",
+    "@capacitor/core": "6.0.0",
+    "@capacitor/haptics": "6.0.0",
+    "@capacitor/keyboard": "6.0.0",
+    "@capacitor/status-bar": "6.0.0",
+    "@ionic/vue": "^8.0.0",
+    "@ionic/vue-router": "^8.0.0",
+    "ionicons": "^7.0.0",
+    "vue": "^3.3.0",
+    "vue-i18n": "^9.13.1",
+    "vue-material-design-icons": "^5.3.0",
+    "vue-router": "^4.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "6.0.0",
+    "@vitejs/plugin-legacy": "^5.0.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "@vue/test-utils": "^2.3.0",
+    "autoprefixer": "^10.4.19",
+    "cypress": "^13.5.0",
+    "eslint": "^8.35.0",
+    "eslint-plugin-vue": "^9.9.0",
+    "jsdom": "^22.1.0",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
+    "terser": "^5.4.0",
+    "typescript": "^5.1.6",
+    "vite": "^5.0.0",
+    "vitest": "^0.34.6",
+    "vue-tsc": "^1.0.24"
+  },
+  "description": "An Ionic project"
+}
