@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "Zeit der übersprungenen Disney-Werbung."
+  },
+  "ShowYearSwitch": {
+    "message": "Erscheinungsjahr anzeigen:"
+  },
+  "ShowYearDescription": {
+    "message": "Zeigt das Erscheinungsjahr neben der Bewertung an."
   }
 }

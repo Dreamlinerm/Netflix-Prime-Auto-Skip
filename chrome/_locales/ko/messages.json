@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "디즈니 광고를 건너뛴 시간."
+  },
+  "ShowYearSwitch": {
+    "message": "출시 연도를 표시합니다:"
+  },
+  "ShowYearDescription": {
+    "message": "등급 옆에 출시 연도를 표시합니다."
   }
 }

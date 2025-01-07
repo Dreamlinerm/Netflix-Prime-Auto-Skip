@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "ディズニーの広告をスキップした時間。"
+  },
+  "ShowYearSwitch": {
+    "message": "ショーのリリース年"
+  },
+  "ShowYearDescription": {
+    "message": "レーティングの横にリリース年を表示。"
   }
 }

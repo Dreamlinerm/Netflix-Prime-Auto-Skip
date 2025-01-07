@@ -30,7 +30,7 @@
         <img class="Logo" src="../icons/NetflixAmazon Auto-Skip.svg" alt="Logo">
         <div class="flex-center flex-col">
           <h2 class="title" data-i18n>pageTitle</h2>
-          <p style="font-size: 1em">v.1.1.53</p>
+          <p style="font-size: 1em">v.1.1.54</p>
         </div>
       </div>
       <a target="_blank" class="flex-center flex-col" style="text-align: center; text-decoration: none"
@@ -151,6 +151,15 @@
           </label>
         </div>
         <p class="description" data-i18n>DefaultPaidContentDescription</p>
+        <hr>
+        <div class="line flex">
+          <p data-i18n>ShowYearSwitch</p>
+          <label class="switch">
+            <input type="checkbox" id="VideoShowYear">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" data-i18n>ShowYearDescription</p>
         <hr>
         <div class="line flex">
           <p data-i18n>EpilepsySwitch</p>
@@ -466,6 +475,15 @@
         </div>
         <p class="description" data-i18n>EpilepsySwitchDescription</p>
         <hr>
+        <div class="line flex">
+          <p data-i18n>ShowYearSwitch</p>
+          <label class="switch" style="margin-left: 5px">
+            <input type="checkbox" id="VideoShowYear">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <p class="description" data-i18n>ShowYearSwitchDescription</p>
+        <hr>
         <div class="hidden" id="PermissiontabsDiv">
           <div class="line flex">
             <p data-i18n>autoOpenSettings</p>
@@ -735,7 +753,13 @@
         <h2>Changelog</h2>
         <div>
           <div class="line flex">
-            <h2>1.1.53</h2>
+            <h2>1.1.54</h2>
+            <ul>
+              <li>Added release year optionally.</li>
+            </ul>
+          </div>
+          <div class="line flex">
+            <p>1.1.53</p>
             <ul>
               <li>Prime wont load Ratings for Live tv</li>
               <li>Prime fixed TMDB title card on chrome.</li>

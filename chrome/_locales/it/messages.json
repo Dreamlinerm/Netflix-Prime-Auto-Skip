@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "Tempo di salto degli annunci Disney."
+  },
+  "ShowYearSwitch": {
+    "message": "Anno di uscita dello spettacolo:"
+  },
+  "ShowYearDescription": {
+    "message": "Mostra l'anno di uscita accanto al rating."
   }
 }
