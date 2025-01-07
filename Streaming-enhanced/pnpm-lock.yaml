@@ -30,6 +30,9 @@ importers:
         specifier: ^0.12.0
         version: 0.12.0
     devDependencies:
+      '@babel/plugin-transform-typescript':
+        specifier: ^7.26.3
+        version: 7.26.3(@babel/core@7.26.0)
       '@crxjs/vite-plugin':
         specifier: 2.0.0-beta.29
         version: 2.0.0-beta.29

@@ -9,6 +9,7 @@ import { Notivue, Notification } from 'notivue'
     <div class="p-4 prose">
       <RouterView />
     </div>
+    test
 
 
     <AppFooter />
