@@ -42,8 +42,6 @@ export default {
   },
   devtools_page: "src/devtools/index.html",
   options_page: "src/ui/options-page/index.html",
-  offline_enabled: true,
-  host_permissions: [],
   permissions: ["storage"],
   optional_permissions: ["tabs"],
   icons: {
@@ -53,4 +51,5 @@ export default {
     128: "src/assets/Logo/NetflixAmazon Auto-Skip--128.png",
     400: "src/assets/Logo/NetflixAmazon Auto-Skip--400.png",
   },
+  homepage_url: "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip",
 } as ManifestV3Export
