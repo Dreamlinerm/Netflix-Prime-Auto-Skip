@@ -23,6 +23,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterLinkUp: typeof import('./../components/RouterLinkUp.vue')['default']
     RouterView: typeof import('vue-router')['RouterView']
+    Switch: typeof import('./../components/Switch.vue')['default']
     TailwindEmptyState: typeof import('./../components/state/tailwind-empty-state.vue')['default']
     TestComponent: typeof import('./../components/TestComponent.vue')['default']
     ThemeSwitch: typeof import('./../components/ThemeSwitch.vue')['default']
