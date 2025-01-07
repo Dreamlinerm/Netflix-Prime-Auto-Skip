@@ -8,7 +8,7 @@
     "vue-router": "^4.5.0",
     "webextension-polyfill": "^0.12.0"
   },
-  "description": "A Vue 3 + Vite project for building Chrome extensions",
+  "description": "Automatically skip Ads, Intros, Credits and add Speed Control, etc. on Netflix, Prime video, Disney+ & Hotstar and Crunchyroll.",
   "devDependencies": {
     "@crxjs/vite-plugin": "2.0.0-beta.29",
     "@eslint/compat": "^1.2.4",
@@ -64,8 +64,8 @@
     "web-ext": "^8.3.0",
     "webext-bridge": "^6.0.1"
   },
-  "displayName": "Vite Vue 3 Chrome Extension",
-  "name": "vite-vue3-browser-extension-v3",
+  "displayName": "Streaming enhanced",
+  "name": "streaming-enhanced",
   "overrides": {
     "@crxjs/vite-plugin": "$@crxjs/vite-plugin"
   },
