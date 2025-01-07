@@ -170,7 +170,6 @@ export default defineConfig({
       input: {
         setup: "src/ui/setup/index.html",
         iframe: "src/ui/content-script-iframe/index.html",
-        devtoolsPanel: "src/ui/devtools-panel/index.html",
       },
     },
   },

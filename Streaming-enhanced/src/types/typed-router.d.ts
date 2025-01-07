@@ -28,7 +28,6 @@ declare module 'vue-router/auto-routes' {
     '/common/privacy-policy': RouteRecordInfo<'/common/privacy-policy', '/common/privacy-policy', Record<never, never>, Record<never, never>>,
     '/common/terms-of-service': RouteRecordInfo<'/common/terms-of-service', '/common/terms-of-service', Record<never, never>, Record<never, never>>,
     '/content-script-iframe/': RouteRecordInfo<'/content-script-iframe/', '/content-script-iframe', Record<never, never>, Record<never, never>>,
-    '/devtools-panel/': RouteRecordInfo<'/devtools-panel/', '/devtools-panel', Record<never, never>, Record<never, never>>,
     '/options-page/': RouteRecordInfo<'/options-page/', '/options-page', Record<never, never>, Record<never, never>>,
     '/setup/install': RouteRecordInfo<'/setup/install', '/setup/install', Record<never, never>, Record<never, never>>,
     '/setup/update': RouteRecordInfo<'/setup/update', '/setup/update', Record<never, never>, Record<never, never>>,
