@@ -3,6 +3,22 @@
   "description": "Skip ads, intros, credits and add adjust speed, etc. on Netflix, Prime video, Disney+, Crunchyroll and HBO max.",
   "name": "streaming-enhanced",
   "version": "1.1.54",
+  "scripts": {
+    "start": "concurrently \"npm run dev:firefox\" \"web-ext run --source-dir dist/firefox --firefox-profile test --profile-create-if-missing\"",
+    "build": "npm run build:chrome && npm run build:firefox",
+    "build:chrome": "vite build -c vite.chrome.config.ts",
+    "build:firefox": "vite build -c vite.firefox.config.ts",
+    "dev": "concurrently \"npm run dev:chrome\" \"npm run dev:firefox\"",
+    "dev:chrome": "vite -c vite.chrome.config.ts",
+    "dev:firefox": "vite build --mode development --watch -c vite.firefox.config.ts",
+    "format": "prettier --write .",
+    "launch": "tsx scripts/launch.ts",
+    "launch:all": "tsx scripts/launch.ts --all",
+    "lint": "eslint . --fix --cache",
+    "lint:manifest": "web-ext lint --pretty",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit"
+  },
   "dependencies": {
     "marked": "^15.0.6",
     "notivue": "^2.4.5",
@@ -86,23 +102,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/mubaidr/vite-vue3-browser-extension-v3"
-  },
-  "scripts": {
-    "start": "concurrently \"npm run dev:firefox\" \"web-ext run --source-dir dist/firefox --firefox-profile test --profile-create-if-missing\"",
-    "build": "npm run build:chrome && npm run build:firefox",
-    "build:chrome": "vite build -c vite.chrome.config.ts",
-    "build:firefox": "vite build -c vite.firefox.config.ts",
-    "dev": "concurrently \"npm run dev:chrome\" \"npm run dev:firefox\"",
-    "dev:chrome": "vite -c vite.chrome.config.ts",
-    "dev:firefox": "vite build --mode development --watch -c vite.firefox.config.ts",
-    "format": "prettier --write .",
-    "launch": "tsx scripts/launch.ts",
-    "launch:all": "tsx scripts/launch.ts --all",
-    "lint": "eslint . --fix --cache",
-    "lint:manifest": "web-ext lint --pretty",
-    "preview": "vite preview",
-    "typecheck": "vue-tsc --noEmit"
+    "url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip"
   },
   "type": "module"
 }

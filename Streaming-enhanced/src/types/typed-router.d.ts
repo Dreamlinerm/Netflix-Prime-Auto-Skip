@@ -32,6 +32,5 @@ declare module 'vue-router/auto-routes' {
     '/options-page/': RouteRecordInfo<'/options-page/', '/options-page', Record<never, never>, Record<never, never>>,
     '/setup/install': RouteRecordInfo<'/setup/install', '/setup/install', Record<never, never>, Record<never, never>>,
     '/setup/update': RouteRecordInfo<'/setup/update', '/setup/update', Record<never, never>, Record<never, never>>,
-    '/side-panel/': RouteRecordInfo<'/side-panel/', '/side-panel', Record<never, never>, Record<never, never>>,
   }
 }
