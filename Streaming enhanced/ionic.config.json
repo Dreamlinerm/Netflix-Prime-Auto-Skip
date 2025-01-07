@@ -1,7 +1,0 @@
-{
-  "name": "makre",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "vue-vite"
-}
