@@ -37,7 +37,6 @@ export default {
       run_at: "document_end",
     },
   ],
-  devtools_page: "src/devtools/index.html",
   options_page: "src/ui/options-page/index.html",
   permissions: ["storage"],
   optional_permissions: ["tabs"],
