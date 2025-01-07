@@ -169,7 +169,6 @@ export default defineConfig({
       // ui or pages that are not specified in manifest file need to be specified here
       input: {
         setup: "src/ui/setup/index.html",
-        iframe: "src/ui/content-script-iframe/index.html",
       },
     },
   },
