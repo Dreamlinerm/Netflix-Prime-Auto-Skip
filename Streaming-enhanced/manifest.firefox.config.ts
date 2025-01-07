@@ -9,6 +9,7 @@ export default defineManifest((env) => ({
       id: env["FIREFOX_ADDON_ID"],
     },
   },
+  manifest_version: 3,
   background: {
     scripts: ["src/background/index.ts"],
     type: "module",
