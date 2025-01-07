@@ -88,6 +88,7 @@
     "url": "https://github.com/mubaidr/vite-vue3-browser-extension-v3"
   },
   "scripts": {
+    "start": "npm run dev:firefox && web-ext run --source-dir dist/firefox --firefox-profile test --profile-create-if-missing",
     "build": "npm run build:chrome && npm run build:firefox",
     "build:chrome": "vite build -c vite.chrome.config.ts",
     "build:firefox": "vite build -c vite.firefox.config.ts",
@@ -103,5 +104,5 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "type": "module",
-  "version": "0.0.1"
+  "version": "v.1.1.54"
 }
