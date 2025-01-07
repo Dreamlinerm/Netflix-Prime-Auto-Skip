@@ -1,4 +1,8 @@
 {
+  "displayName": "Streaming enhanced: Netflix Disney+ Prime Video",
+  "description": "Skip ads, intros, credits and add adjust speed, etc. on Netflix, Prime video, Disney+, Crunchyroll and HBO max.",
+  "name": "streaming-enhanced",
+  "version": "v.1.1.54",
   "dependencies": {
     "marked": "^15.0.6",
     "notivue": "^2.4.5",
@@ -8,7 +12,6 @@
     "vue-router": "^4.5.0",
     "webextension-polyfill": "^0.12.0"
   },
-  "description": "Automatically skip Ads, Intros, Credits and add Speed Control, etc. on Netflix, Prime video, Disney+ & Hotstar and Crunchyroll.",
   "devDependencies": {
     "@crxjs/vite-plugin": "2.0.0-beta.29",
     "@eslint/compat": "^1.2.4",
@@ -64,8 +67,6 @@
     "web-ext": "^8.3.0",
     "webext-bridge": "^6.0.1"
   },
-  "displayName": "Streaming enhanced",
-  "name": "streaming-enhanced",
   "overrides": {
     "@crxjs/vite-plugin": "$@crxjs/vite-plugin"
   },
@@ -103,6 +104,5 @@
     "preview": "vite preview",
     "typecheck": "vue-tsc --noEmit"
   },
-  "type": "module",
-  "version": "v.1.1.54"
+  "type": "module"
 }
