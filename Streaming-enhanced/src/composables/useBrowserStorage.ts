@@ -1,8 +1,6 @@
 import { ref, watch } from "vue"
 export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
   const data = ref<T>(defaultValue)
-  console.log("defaultValue", defaultValue)
-
   // Initialize storage with the value from chrome.storage.sync
   chrome.storage.sync.get(key, (result) => {
     if (result[key] !== undefined) {
@@ -24,7 +22,6 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 
 export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
   const data = ref<T>(defaultValue)
-  console.log("defaultValue", defaultValue)
 
   // Initialize storage with the value from chrome.storage.local
   chrome.storage.local.get(key, (result) => {
@@ -36,7 +33,7 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
     }
   })
 
-  // Watch for changes in the storage and update chrome.storage.sync
+  // Watch for changes in the storage and update chrome.storage.local
   watch(data, (newValue) => {
     console.info("newValue", newValue)
     chrome.storage.local.set({ [key]: newValue })
