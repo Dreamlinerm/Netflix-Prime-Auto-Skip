@@ -1,16 +1,12 @@
 <template>
   <div class="line flex">
     <p>{{ $t("IntroSwitch") }}</p>
-    <Switch v-model="settings.Amazon.skipAd"></Switch>
-  </div>
-  <div class="line flex">
-    <p>{{ $t("IntroSwitch") }}</p>
-    <Switch v-model="settings.Amazon.skipIntro"></Switch>
+    <Switch v-model="skipIntro"></Switch>
   </div>
   <hr />
   <div class="line flex">
     <p>{{ $t("CreditsSwitch") }}</p>
-    <Switch v-model="settings.Amazon.skipCredits"></Switch>
+    <Switch v-model="skipCredits"></Switch>
   </div>
   <div class="line flex">
     <p>{{ $t("WatchCreditsSwitch") }}</p>
@@ -60,5 +56,34 @@
 <script setup lang="ts">
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
+const skipIntro = computed({
+  get: () =>
+    settings.value.Amazon.skipIntro &&
+    settings.value.Netflix.skipIntro &&
+    settings.value.Disney.skipIntro &&
+    settings.value.Crunchyroll.skipIntro &&
+    settings.value.HBO.skipIntro,
+  set: (value) => {
+    settings.value.Amazon.skipIntro = value
+    settings.value.Netflix.skipIntro = value
+    settings.value.Disney.skipIntro = value
+    settings.value.Crunchyroll.skipIntro = value
+    settings.value.HBO.skipIntro = value
+  },
+})
+
+const skipCredits = computed({
+  get: () =>
+    settings.value.Amazon.skipCredits &&
+    settings.value.Netflix.skipCredits &&
+    settings.value.Disney.skipCredits &&
+    settings.value.HBO.skipCredits,
+  set: (value) => {
+    settings.value.Amazon.skipCredits = value
+    settings.value.Netflix.skipCredits = value
+    settings.value.Disney.skipCredits = value
+    settings.value.HBO.skipCredits = value
+  },
+})
 </script>
 <style scoped></style>
