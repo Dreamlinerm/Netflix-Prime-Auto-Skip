@@ -1,50 +1,80 @@
 <template>
-  <div class="line flex">
+  <div class="p-1 m-0 flex">
     <p>{{ $t("IntroSwitch") }}</p>
-    <Switch v-model="skipIntro"></Switch>
+    <Switch
+      v-model="skipIntro"
+      class="ml-auto"
+    ></Switch>
   </div>
   <hr />
-  <div class="line flex">
+  <div class="p-1 m-0 flex">
     <p>{{ $t("CreditsSwitch") }}</p>
-    <Switch v-model="skipCredits"></Switch>
+    <Switch
+      v-model="skipCredits"
+      class="ml-auto"
+    ></Switch>
   </div>
-  <div class="line flex">
+  <div class="p-1 m-0 flex">
     <p>{{ $t("WatchCreditsSwitch") }}</p>
-    <Switch v-model="watchCredits"></Switch>
+    <Switch
+      v-model="watchCredits"
+      class="ml-auto"
+    ></Switch>
   </div>
   <hr />
-  <div class="line flex">
+  <div class="p-1 m-0 flex">
     <p>{{ $t("AdsSwitch") }}</p>
-    <Switch v-model="blockAds"></Switch>
+    <Switch
+      v-model="blockAds"
+      class="ml-auto"
+    ></Switch>
   </div>
-  <div class="line flex">
+  <div class="p-1 m-0 flex">
     <p>{{ $t("SliderSwitch") }}</p>
-    <Switch v-model="speedSlider"></Switch>
+    <Switch
+      v-model="speedSlider"
+      class="ml-auto"
+    ></Switch>
   </div>
-  <div class="line flex">
+  <div class="p-1 m-0 flex">
     <p>{{ $t("FullscreenSwitch") }}</p>
-    <Switch v-model="settings.Video.playOnFullScreen"></Switch>
+    <Switch
+      v-model="settings.Video.playOnFullScreen"
+      class="ml-auto"
+    ></Switch>
   </div>
-  <div class="line flex">
+  <div class="p-1 m-0 flex">
     <p>{{ $t("DoubleClickSwitch") }}</p>
-    <Switch v-model="settings.Video.doubleClick"></Switch>
+    <Switch
+      v-model="settings.Video.doubleClick"
+      class="ml-auto"
+    ></Switch>
   </div>
-  <div class="line flex">
+  <div class="p-1 m-0 flex">
     <p>{{ $t("scrollVolumeSwitch") }}</p>
-    <Switch v-model="settings.Video.scrollVolume"></Switch>
+    <Switch
+      v-model="settings.Video.scrollVolume"
+      class="ml-auto"
+    ></Switch>
   </div>
-  <div class="line flex">
+  <div class="p-1 m-0 flex">
     <p>{{ $t("RatingSwitch") }}</p>
-    <Switch v-model="showRating"></Switch>
+    <Switch
+      v-model="showRating"
+      class="ml-auto"
+    ></Switch>
   </div>
-  <div class="line flex">
+  <div class="p-1 m-0 flex">
     <p>{{ $t("ShowYearSwitch") }}</p>
-    <Switch v-model="settings.Video.showYear"></Switch>
+    <Switch
+      v-model="settings.Video.showYear"
+      class="ml-auto"
+    ></Switch>
   </div>
   <a
     href="https://www.themoviedb.org"
     target="_blank"
-    class="line flex"
+    class="p-1 m-0 flex"
   >
     <img
       src="@assets/TMDB.svg"
@@ -133,4 +163,8 @@ const showRating = computed({
   },
 })
 </script>
-<style scoped></style>
+<style scoped>
+/* label {
+  margin-left: auto;
+} */
+</style>

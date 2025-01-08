@@ -1,8 +1,8 @@
 // required for vue-devtools
-@use '/node_modules/vite-plugin-vue-devtools/src/overlay/devtools-overlay.css';
-@use 'tailwindcss/base';
-@use 'tailwindcss/components';
-@use 'tailwindcss/utilities';
+@use "/node_modules/vite-plugin-vue-devtools/src/overlay/devtools-overlay.css";
+@use "tailwindcss/base";
+@use "tailwindcss/components";
+@use "tailwindcss/utilities";
 
 body {
   @apply min-w-96 !overflow-y-scroll;
@@ -12,7 +12,9 @@ label {
   @apply label font-semibold;
 }
 
-input:not([type="radio"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
+input:not([type="radio"]):not([type="checkbox"]):not([type="radio"]):not(
+    [type="file"]
+  ) {
   @apply input input-bordered input-primary;
 }
 
