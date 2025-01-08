@@ -160,9 +160,11 @@ export const useOptionsStore = defineStore("options", () => {
   const profile = useBrowserSyncStorage<{
     name: string
     age: number
+    test: boolean
   }>("profile", {
     name: "Mario",
     age: 24,
+    test: true,
   })
 
   const others = useBrowserLocalStorage<{

@@ -3,7 +3,11 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
   const data = ref<T>(defaultValue)
   // Initialize storage with the value from chrome.storage.sync
   chrome.storage.sync.get(key, (result) => {
-    if (result[key] != undefined && result[key] != "") {
+    if (
+      result[key] != undefined &&
+      result[key] != "" &&
+      typeof result[key] === typeof defaultValue
+    ) {
       data.value = result[key]
     }
   })
@@ -21,14 +25,15 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 
 export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
   const data = ref<T>(defaultValue)
-  console.info("data", data.value)
   // Initialize storage with the value from chrome.storage.local
   chrome.storage.local.get(key, (result) => {
-    if (result[key] != undefined && result[key] != "") {
+    if (
+      result[key] != undefined &&
+      result[key] != "" &&
+      typeof result[key] === typeof defaultValue
+    ) {
       data.value = result[key]
-      console.info(key, "=", data.value)
-    } else {
-      console.info(key, "not found")
+      console.info(key, "=", result)
     }
   })
 
