@@ -168,7 +168,7 @@ export const useOptionsStore = defineStore("options", () => {
   const others = useBrowserLocalStorage<{
     awesome: boolean
     counter: number
-  }>("test", {
+  }>("others", {
     awesome: true,
     counter: 0,
   })

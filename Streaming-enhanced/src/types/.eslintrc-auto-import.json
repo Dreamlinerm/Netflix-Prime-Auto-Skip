@@ -362,6 +362,7 @@
     "usePreferredReducedTransparency": true,
     "useSSRWidth": true,
     "onElementRemoval": true,
-    "isFirefox": true
+    "isFirefox": true,
+    "useOthers": true
   }
 }

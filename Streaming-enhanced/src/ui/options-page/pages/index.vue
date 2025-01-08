@@ -2,11 +2,6 @@
 const optionsStore = useOptionsStore()
 // const { toggleDark } = optionsStore
 const { isDark, profile, others } = storeToRefs(optionsStore)
-console.log("isDark", isDark)
-setTimeout(() => {
-  profile.value.age = -1
-  console.log("profile", profile)
-}, 1000)
 </script>
 
 <template>
