@@ -1,4 +1,3 @@
-
 # vite-vue3-browser-extension-v3
 
 [![build](https://github.com/mubaidr/vite-vue3-browser-extension-v3/actions/workflows/build.yml/badge.svg)](https://github.com/mubaidr/vite-vue3-browser-extension-v3/actions/workflows/build.yml)

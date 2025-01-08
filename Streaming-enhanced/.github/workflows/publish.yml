@@ -16,8 +16,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22'
-          cache: 'pnpm'
+          node-version: "22"
+          cache: "pnpm"
 
       - name: Install pnpm
         run: npm install -g pnpm
@@ -58,6 +58,6 @@ jobs:
         uses: cardinalby/webext-buildtools-firefox-addons-action@v1
         with:
           zipFilePath: firefox.zip
-          extensionId: '{7b312f5e-9680-436b-acc1-9b09f60e8aaa}'
+          extensionId: "{7b312f5e-9680-436b-acc1-9b09f60e8aaa}"
           jwtIssuer: ${{ secrets.FF_JWT_ISSUER }}
           jwtSecret: ${{ secrets.FF_JWT_SECRET }}

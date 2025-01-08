@@ -7,8 +7,8 @@ import App from "./app.vue"
 import "./index.scss"
 
 appRouter.addRoute({
-  path: "/",
-  redirect: "/action-popup",
+	path: "/",
+	redirect: "/action-popup",
 })
 
 // router.beforeEach((to, from, next) => {
@@ -26,9 +26,9 @@ app.mount("#app")
 export default app
 
 self.onerror = function (message, source, lineno, colno, error) {
-  console.info("Error: " + message)
-  console.info("Source: " + source)
-  console.info("Line: " + lineno)
-  console.info("Column: " + colno)
-  console.info("Error object: " + error)
+	console.info("Error: " + message)
+	console.info("Source: " + source)
+	console.info("Line: " + lineno)
+	console.info("Column: " + colno)
+	console.info("Error object: " + error)
 }
