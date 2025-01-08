@@ -4,8 +4,7 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
   // Initialize storage with the value from chrome.storage.sync
   chrome.storage.sync.get(key, (result) => {
     if (
-      result[key] != undefined &&
-      result[key] != "" &&
+      result?.[key] != undefined &&
       typeof result[key] === typeof defaultValue
     ) {
       data.value = result[key]
@@ -28,8 +27,7 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
   // Initialize storage with the value from chrome.storage.local
   chrome.storage.local.get(key, (result) => {
     if (
-      result[key] != undefined &&
-      result[key] != "" &&
+      result?.[key] != undefined &&
       typeof result[key] === typeof defaultValue
     ) {
       data.value = result[key]
