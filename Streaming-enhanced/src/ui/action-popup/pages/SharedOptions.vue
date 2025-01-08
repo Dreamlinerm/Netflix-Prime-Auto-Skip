@@ -10,17 +10,16 @@
   </div>
   <div class="line flex">
     <p>{{ $t("WatchCreditsSwitch") }}</p>
-    <Switch v-model="settings.Amazon.watchCredits"></Switch>
+    <Switch v-model="watchCredits"></Switch>
   </div>
   <hr />
   <div class="line flex">
     <p>{{ $t("AdsSwitch") }}</p>
-    #VideoAds
-    <Switch v-model="settings.Amazon.skipIntro"></Switch>
+    <Switch v-model="blockAds"></Switch>
   </div>
   <div class="line flex">
     <p>{{ $t("SliderSwitch") }}</p>
-    <Switch v-model="settings.Amazon.speedSlider"></Switch>
+    <Switch v-model="speedSlider"></Switch>
   </div>
   <div class="line flex">
     <p>{{ $t("FullscreenSwitch") }}</p>
@@ -36,7 +35,7 @@
   </div>
   <div class="line flex">
     <p>{{ $t("RatingSwitch") }}</p>
-    <Switch v-model="settings.Amazon.showRating"></Switch>
+    <Switch v-model="showRating"></Switch>
   </div>
   <div class="line flex">
     <p>{{ $t("ShowYearSwitch") }}</p>
@@ -77,6 +76,58 @@ const skipCredits = computed({
     streamingServices.forEach((service) => {
       if (settings.value[service]?.skipCredits !== undefined) {
         settings.value[service].skipCredits = value
+      }
+    })
+  },
+})
+
+const watchCredits = computed({
+  get: () =>
+    streamingServices.every(
+      (service) => settings.value[service]?.watchCredits ?? true,
+    ),
+  set: (value) => {
+    streamingServices.forEach((service) => {
+      if (settings.value[service]?.watchCredits !== undefined) {
+        settings.value[service].watchCredits = value
+      }
+    })
+  },
+})
+const blockAds = computed({
+  get: () =>
+    settings.value?.Amazon.blockFreevee &&
+    settings.value?.Netflix.skipAd &&
+    settings.value?.Disney.skipAd,
+  set: (value) => {
+    settings.value.Amazon.blockFreevee =
+      settings.value.Netflix.skipAd =
+      settings.value.Disney.skipAd =
+        value
+  },
+})
+
+const speedSlider = computed({
+  get: () =>
+    streamingServices.every(
+      (service) => settings.value[service]?.speedSlider ?? true,
+    ),
+  set: (value) => {
+    streamingServices.forEach((service) => {
+      settings.value[service].speedSlider = value
+    })
+  },
+})
+
+const showRating = computed({
+  get: () =>
+    streamingServices.every(
+      (service) => settings.value[service]?.showRating ?? true,
+    ),
+  set: (value) => {
+    streamingServices.forEach((service) => {
+      if (settings.value[service]?.watchCredits !== undefined) {
+        settings.value[service].showRating = value
       }
     })
   },
