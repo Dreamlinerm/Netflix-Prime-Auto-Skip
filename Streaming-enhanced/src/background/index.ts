@@ -33,5 +33,13 @@ self.onerror = function (message, source, lineno, colno, error) {
 }
 
 console.info("hello world from background")
+import { onMessage } from "webext-bridge/background"
 
+onMessage("LOG", runAction)
+async function runAction({ data }: { data: any }) {
+  // process data
+  console.info(...data)
+  // return data
+  return {}
+}
 export {}

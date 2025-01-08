@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const optionsStore = useOptionsStore()
 // const { toggleDark } = optionsStore
-const { isDark, others } = storeToRefs(optionsStore)
+const { isDark, profile, others } = storeToRefs(optionsStore)
 </script>
 
 <template>
@@ -32,6 +32,25 @@ const { isDark, others } = storeToRefs(optionsStore)
     <div class="form-control">
       <label>Change Language</label>
       <LocaleSwitch />
+    </div>
+
+    <h3>Profile</h3>
+    <p>Change your name and age.</p>
+
+    <div class="form-control">
+      <label>Name</label>
+      <input
+        v-model="profile.name"
+        type="text"
+      />
+    </div>
+
+    <div class="form-control">
+      <label>Age</label>
+      <input
+        v-model="profile.age"
+        type="number"
+      />
     </div>
 
     <h3>Others</h3>
