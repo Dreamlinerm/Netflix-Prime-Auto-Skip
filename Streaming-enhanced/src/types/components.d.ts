@@ -13,9 +13,7 @@ declare module 'vue' {
     IPhDotsThreeVertical: typeof import('~icons/ph/dots-three-vertical')['default']
     IPhGear: typeof import('~icons/ph/gear')['default']
     IPhGlobe: typeof import('~icons/ph/globe')['default']
-    IPhMinus: typeof import('~icons/ph/minus')['default']
     IPhMoon: typeof import('~icons/ph/moon')['default']
-    IPhPlus: typeof import('~icons/ph/plus')['default']
     IPhQuestion: typeof import('~icons/ph/question')['default']
     IPhSun: typeof import('~icons/ph/sun')['default']
     LoadingSpinner: typeof import('./../components/state/LoadingSpinner.vue')['default']
@@ -25,7 +23,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     Switch: typeof import('./../components/Switch.vue')['default']
     TailwindEmptyState: typeof import('./../components/state/tailwind-empty-state.vue')['default']
-    TestComponent: typeof import('./../components/TestComponent.vue')['default']
     ThemeSwitch: typeof import('./../components/ThemeSwitch.vue')['default']
   }
 }
