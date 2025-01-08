@@ -4,7 +4,7 @@
   "name": "streaming-enhanced",
   "version": "1.1.54",
   "scripts": {
-    "start": "concurrently \"npm run dev:firefox\" \"web-ext run --source-dir dist/firefox --firefox-profile test --profile-create-if-missing\"",
+    "start": "concurrently \"npm run dev:firefox\" \"web-ext run --source-dir dist/firefox --keep-profile-changes --firefox-profile=test --profile-create-if-missing\"",
     "build": "npm run build:chrome && npm run build:firefox",
     "build:chrome": "vite build -c vite.chrome.config.ts",
     "build:firefox": "vite build -c vite.firefox.config.ts",
