@@ -19,7 +19,7 @@ export default {
   // up to four numbers separated by dots
   version: `${major}.${minor}.${patch}`,
   // semver is OK in "version_name"
-  version_name: version,
+  // version_name: version,
   manifest_version: 3,
   // key: '',
   action: {
