@@ -63,6 +63,7 @@ export default [
 			"vue/multi-word-component-names": "warn",
 			"vue/singleline-html-element-content-newline": "off",
 			"vue/html-self-closing": "off",
+			"vue/html-indent": "off",
 		},
 	},
 	{
