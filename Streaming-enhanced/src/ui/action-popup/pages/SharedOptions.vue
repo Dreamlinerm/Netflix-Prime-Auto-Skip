@@ -56,33 +56,29 @@
 <script setup lang="ts">
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
+const streamingServices = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO"]
+
 const skipIntro = computed({
   get: () =>
-    settings.value.Amazon.skipIntro &&
-    settings.value.Netflix.skipIntro &&
-    settings.value.Disney.skipIntro &&
-    settings.value.Crunchyroll.skipIntro &&
-    settings.value.HBO.skipIntro,
+    streamingServices.every((service) => settings.value[service].skipIntro),
   set: (value) => {
-    settings.value.Amazon.skipIntro = value
-    settings.value.Netflix.skipIntro = value
-    settings.value.Disney.skipIntro = value
-    settings.value.Crunchyroll.skipIntro = value
-    settings.value.HBO.skipIntro = value
+    streamingServices.forEach((service) => {
+      settings.value[service].skipIntro = value
+    })
   },
 })
 
 const skipCredits = computed({
   get: () =>
-    settings.value.Amazon.skipCredits &&
-    settings.value.Netflix.skipCredits &&
-    settings.value.Disney.skipCredits &&
-    settings.value.HBO.skipCredits,
+    streamingServices.every(
+      (service) => settings.value[service]?.skipCredits ?? true,
+    ),
   set: (value) => {
-    settings.value.Amazon.skipCredits = value
-    settings.value.Netflix.skipCredits = value
-    settings.value.Disney.skipCredits = value
-    settings.value.HBO.skipCredits = value
+    streamingServices.forEach((service) => {
+      if (settings.value[service]?.skipCredits !== undefined) {
+        settings.value[service].skipCredits = value
+      }
+    })
   },
 })
 </script>
