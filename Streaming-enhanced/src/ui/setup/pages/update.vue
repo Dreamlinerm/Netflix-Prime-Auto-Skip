@@ -8,6 +8,7 @@ const version = __VERSION__
     class="w-full h-full flex flex-col justify-center items-center text-center md:my-12"
   >
     <h1>🎉 {{ $t("updated") }}! 🚀</h1>
+    <Switch></Switch>
     <p>
       Thank you for installing {{ displayName }}! ❤️
       <br />
