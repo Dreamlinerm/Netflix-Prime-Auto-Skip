@@ -1,84 +1,86 @@
+export type settingsType = {
+  Amazon: {
+    skipIntro: boolean
+    skipCredits: boolean
+    watchCredits: boolean
+    skipAd: boolean
+    blockFreevee: boolean
+    speedSlider: boolean
+    filterPaid: boolean
+    continuePosition: boolean
+    showRating: boolean
+    xray: boolean
+  }
+  Netflix: {
+    skipIntro: boolean
+    skipRecap: boolean
+    skipCredits: boolean
+    watchCredits: boolean
+    skipBlocked: boolean
+    skipAd: boolean
+    speedSlider: boolean
+    profile: boolean
+    showRating: boolean
+  }
+  Disney: {
+    skipIntro: boolean
+    skipCredits: boolean
+    watchCredits: boolean
+    skipAd: boolean
+    speedSlider: boolean
+    showRating: boolean
+    selfAd: boolean
+  }
+  Crunchyroll: {
+    skipIntro: boolean
+    speedSlider: boolean
+    releaseCalendar: boolean
+    dubLanguage: null
+    profile: boolean
+    bigPlayer: boolean
+    disableNumpad: boolean
+  }
+  HBO: {
+    skipIntro: boolean
+    skipCredits: boolean
+    watchCredits: boolean
+    speedSlider: boolean
+    showRating: boolean
+  }
+  Video: {
+    playOnFullScreen: boolean
+    epilepsy: boolean
+    userAgent: boolean
+    doubleClick: boolean
+    scrollVolume: boolean
+    showYear: boolean
+  }
+  Statistics: {
+    AmazonAdTimeSkipped: number
+    NetflixAdTimeSkipped: number
+    DisneyAdTimeSkipped: number
+    IntroTimeSkipped: number
+    RecapTimeSkipped: number
+    SegmentsSkipped: number
+  }
+  General: {
+    Crunchyroll_profilePicture: null | string
+    profileName: null | string
+    profilePicture: null | string
+    sliderSteps: number
+    sliderMin: number
+    sliderMax: number
+    filterDub: boolean
+    filterQueued: boolean
+    savedCrunchyList: Array<string>
+    GCdate: string
+  }
+}
+
 export const useOptionsStore = defineStore("options", () => {
   const { isDark, toggleDark } = useTheme()
 
-  const settings = useBrowserSyncStorage<{
-    Amazon: {
-      skipIntro: boolean
-      skipCredits: boolean
-      watchCredits: boolean
-      skipAd: boolean
-      blockFreevee: boolean
-      speedSlider: boolean
-      filterPaid: boolean
-      continuePosition: boolean
-      showRating: boolean
-      xray: boolean
-    }
-    Netflix: {
-      skipIntro: boolean
-      skipRecap: boolean
-      skipCredits: boolean
-      watchCredits: boolean
-      skipBlocked: boolean
-      skipAd: boolean
-      speedSlider: boolean
-      profile: boolean
-      showRating: boolean
-    }
-    Disney: {
-      skipIntro: boolean
-      skipCredits: boolean
-      watchCredits: boolean
-      skipAd: boolean
-      speedSlider: boolean
-      showRating: boolean
-      selfAd: boolean
-    }
-    Crunchyroll: {
-      skipIntro: boolean
-      speedSlider: boolean
-      releaseCalendar: boolean
-      dubLanguage: null
-      profile: boolean
-      bigPlayer: boolean
-      disableNumpad: boolean
-    }
-    HBO: {
-      skipIntro: boolean
-      skipCredits: boolean
-      watchCredits: boolean
-      speedSlider: boolean
-      showRating: boolean
-    }
-    Video: {
-      playOnFullScreen: boolean
-      epilepsy: boolean
-      userAgent: boolean
-      doubleClick: boolean
-      scrollVolume: boolean
-      showYear: boolean
-    }
-    Statistics: {
-      AmazonAdTimeSkipped: number
-      NetflixAdTimeSkipped: number
-      DisneyAdTimeSkipped: number
-      IntroTimeSkipped: number
-      RecapTimeSkipped: number
-      SegmentsSkipped: number
-    }
-    General: {
-      Crunchyroll_profilePicture: null | string
-      profileName: null | string
-      profilePicture: null | string
-      sliderSteps: number
-      sliderMin: number
-      sliderMax: number
-      filterDub: boolean
-      filterQueued: boolean
-      savedCrunchyList: Array<string>
-      GCdate: string
-    }
-  }>("settings", {
+  const settings = useBrowserSyncStorage<settingsType>("settings", {
     Amazon: {
       skipIntro: true,
       skipCredits: true,

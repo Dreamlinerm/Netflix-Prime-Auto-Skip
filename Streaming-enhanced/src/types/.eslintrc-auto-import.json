@@ -363,6 +363,8 @@
     "useSSRWidth": true,
     "onElementRemoval": true,
     "isFirefox": true,
-    "useOthers": true
+    "useOthers": true,
+    "settings": true,
+    "settingsType": true
   }
 }

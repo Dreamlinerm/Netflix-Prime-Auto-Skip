@@ -1,10 +1,10 @@
 {
-  "htmlWhitespaceSensitivity": "ignore",
-  "quoteProps": "as-needed",
-  "semi": false,
-  "singleAttributePerLine": true,
-  "singleQuote": false,
-  "tabWidth": 2,
-  "trailingComma": "all",
-  "useTabs": false
+	"htmlWhitespaceSensitivity": "ignore",
+	"quoteProps": "as-needed",
+	"semi": false,
+	"singleAttributePerLine": true,
+	"tabWidth": 2,
+	"trailingComma": "all",
+	"useTabs": true,
+	"printWidth": 120
 }
