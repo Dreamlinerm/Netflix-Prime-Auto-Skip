@@ -1,9 +1,9 @@
 <template>
 	<div class="flex items-center">
 		<RouterLinkUp />
-		<h2 class="text-amazon">
+		<h1 class="text-amazon">
 			{{ $t("sharedPageTitle") }}
-		</h2>
+		</h1>
 	</div>
 	<div class="p-1 m-0 flex">
 		<p>{{ $t("skipIntroSwitch") }}</p>

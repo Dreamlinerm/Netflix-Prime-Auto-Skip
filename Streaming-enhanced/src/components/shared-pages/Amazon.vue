@@ -1,9 +1,9 @@
 <template>
 	<div class="flex items-center">
 		<RouterLinkUp />
-		<h2 class="text-amazon">
+		<h1 class="text-amazon">
 			{{ $t("pageSpecificTitle", ["Prime Video"]) }}
-		</h2>
+		</h1>
 	</div>
 	<template
 		v-for="setting in settingsList"

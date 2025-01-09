@@ -1,9 +1,9 @@
 <template>
 	<div class="flex items-center">
 		<RouterLinkUp />
-		<h2 class="text-disney">
+		<h1 class="text-disney">
 			{{ $t("pageSpecificTitle", ["Disney"]) }}
-		</h2>
+		</h1>
 	</div>
 	<div class="p-1 m-0 flex">
 		<p>{{ $t("selfAdSwitch") }}</p>

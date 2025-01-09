@@ -1,9 +1,9 @@
 <template>
 	<div class="flex items-center">
 		<RouterLinkUp />
-		<h2>
+		<h1>
 			{{ $t("skippedTime") }}
-		</h2>
+		</h1>
 	</div>
 	<div class="p-1 m-0 flex justify-between">
 		<p>{{ $t("statisticAd", ["Amazon"]) }}</p>

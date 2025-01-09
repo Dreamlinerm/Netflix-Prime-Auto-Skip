@@ -4,11 +4,6 @@
 @use "tailwindcss/components";
 @use "tailwindcss/utilities";
 
-p {
-	@apply m-0;
-	@apply text-primary-content;
-}
-
 .description {
 	@apply text-base p-[10px_80px_20px_20px];
 }
@@ -17,9 +12,18 @@ h1,
 h2,
 h3,
 p {
-	@apply py-1 m-0;
+	@apply py-1 m-0 text-primary-content;
 }
 
 hr {
 	@apply my-1;
+}
+h1 {
+	@apply text-2xl font-bold;
+}
+h2 {
+	@apply text-xl font-semibold;
+}
+h3 {
+	@apply text-lg;
 }

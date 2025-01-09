@@ -1,9 +1,9 @@
 <template>
 	<div class="flex items-center">
 		<RouterLinkUp />
-		<h2 class="text-crunchyroll">
+		<h1 class="text-crunchyroll">
 			{{ $t("pageSpecificTitle", ["Crunchyroll"]) }}
-		</h2>
+		</h1>
 	</div>
 	<template
 		v-for="setting in settingsList"

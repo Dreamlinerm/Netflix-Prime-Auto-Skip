@@ -21,6 +21,8 @@ const fullScreen = computed({
 const SliderPreview = ref(10)
 </script>
 <template>
+	<h1>{{ $t("sharedPageTitle") }}</h1>
+	<p class="description">{{ $t("sharedPageDescription") }}</p>
 	<OptionsPageSettingsTable></OptionsPageSettingsTable>
 	<hr />
 	<div class="line flex">
