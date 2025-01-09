@@ -2,15 +2,21 @@
 	<div class="flex items-center">
 		<RouterLinkUp />
 		<h2 class="text-disney">
-			{{ $t("PageSpecificTitle", ["Disney"]) }}
+			{{ $t("pageSpecificTitle", ["Disney"]) }}
 		</h2>
 	</div>
 	<div class="line flex">
-		<p>{{ $t("SelfAdsSwitch") }}</p>
+		<p>{{ $t("selfAdSwitch") }}</p>
 		<Switch
 			v-model="settings.Disney.selfAd"
 			class="ml-auto"
 		></Switch>
+		<p
+			v-if="advancedSettings"
+			class="description"
+		>
+			{{ $t("selfAdDescription") }}
+		</p>
 	</div>
 </template>
 <script setup lang="ts">

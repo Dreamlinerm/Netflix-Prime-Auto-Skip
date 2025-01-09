@@ -2,32 +2,28 @@
 	<div class="flex items-center">
 		<RouterLinkUp />
 		<h2 class="text-netflix">
-			{{ $t("PageSpecificTitle", ["Netflix"]) }}
+			{{ $t("pageSpecificTitle", ["Netflix"]) }}
 		</h2>
 	</div>
-	<div class="line flex">
-		<p>{{ $t("RecapSwitch") }}</p>
+	<div
+		v-for="setting in settingsList"
+		:key="setting"
+		class="line flex"
+	>
+		<p>{{ $t(setting + "Switch") }}</p>
 		<Switch
-			v-model="settings.Netflix.skipRecap"
+			v-model="settings.Netflix[setting]"
 			class="ml-auto"
 		></Switch>
-	</div>
-	<div class="line flex">
-		<p>{{ $t("InactivitySwitch") }}</p>
-		<Switch
-			v-model="settings.Netflix.skipBlocked"
-			class="ml-auto"
-		></Switch>
-	</div>
-	<div class="line flex">
-		<p>{{ $t("ProfileSwitch") }}</p>
-		<Switch
-			v-model="settings.Netflix.profile"
-			class="ml-auto"
-		></Switch>
+		<p
+			v-if="advancedSettings"
+			class="description"
+		>
+			{{ $t(setting + "Description") }}
+		</p>
 	</div>
 	<!-- <div class="line flex">
-			<p>{{ $t("User") }}</p>
+			<p>{{ $t("user") }}</p>
 			<p
 				id="profileName"
 				style="text-transform: capitalize"
@@ -50,5 +46,6 @@ const props = defineProps({
 		default: false,
 	},
 })
+const settingsList: Array<"skipRecap" | "skipBlocked" | "profile"> = ["skipRecap", "skipBlocked", "profile"]
 </script>
 <style scoped></style>

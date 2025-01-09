@@ -2,31 +2,31 @@
 	<div class="flex items-center">
 		<RouterLinkUp />
 		<h2>
-			{{ $t("SkippedTime") }}
+			{{ $t("skippedTime") }}
 		</h2>
 	</div>
 	<div class="line flex flex-between">
-		<p>{{ $t("StatisticAd", ["Amazon"]) }}</p>
+		<p>{{ $t("statisticAd", ["Amazon"]) }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.AmazonAdTimeSkipped) }}</p>
 	</div>
 	<div class="line flex flex-between">
-		<p>{{ $t("StatisticAd", ["Netflix"]) }}</p>
+		<p>{{ $t("statisticAd", ["Netflix"]) }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.NetflixAdTimeSkipped) }}</p>
 	</div>
 	<div class="line flex flex-between">
-		<p>{{ $t("StatisticAd", ["Disney"]) }}</p>
+		<p>{{ $t("statisticAd", ["Disney"]) }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.DisneyAdTimeSkipped) }}</p>
 	</div>
 	<div class="line flex flex-between">
-		<p>{{ $t("StatisticIntro") }}</p>
+		<p>{{ $t("statisticIntro") }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.IntroTimeSkipped) }}</p>
 	</div>
 	<div class="line flex flex-between">
-		<p>{{ $t("StatisticRecap") }}</p>
+		<p>{{ $t("statisticRecap") }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.RecapTimeSkipped) }}</p>
 	</div>
 	<div class="line flex flex-between">
-		<p>{{ $t("StatisticSegments") }}</p>
+		<p>{{ $t("statisticSegments") }}</p>
 		<p>{{ settings.Statistics.SegmentsSkipped }}</p>
 	</div>
 </template>

@@ -8,3 +8,7 @@ p {
 	@apply m-0;
 	@apply text-primary-content;
 }
+
+.description {
+	@apply text-base p-[10px_80px_20px_20px];
+}

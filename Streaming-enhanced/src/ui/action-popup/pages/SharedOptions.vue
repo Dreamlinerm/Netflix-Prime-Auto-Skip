@@ -2,11 +2,11 @@
 	<div class="flex items-center">
 		<RouterLinkUp />
 		<h2 class="text-amazon">
-			{{ $t("SharedPageTitle") }}
+			{{ $t("sharedPageTitle") }}
 		</h2>
 	</div>
 	<div class="p-1 m-0 flex">
-		<p>{{ $t("IntroSwitch") }}</p>
+		<p>{{ $t("skipIntroSwitch") }}</p>
 		<Switch
 			v-model="skipIntro"
 			class="ml-auto"
@@ -14,14 +14,14 @@
 	</div>
 	<hr />
 	<div class="p-1 m-0 flex">
-		<p>{{ $t("CreditsSwitch") }}</p>
+		<p>{{ $t("creditsSwitch") }}</p>
 		<Switch
 			v-model="skipCredits"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<div class="p-1 m-0 flex">
-		<p>{{ $t("WatchCreditsSwitch") }}</p>
+		<p>{{ $t("watchCreditsSwitch") }}</p>
 		<Switch
 			v-model="watchCredits"
 			class="ml-auto"
@@ -29,28 +29,28 @@
 	</div>
 	<hr />
 	<div class="p-1 m-0 flex">
-		<p>{{ $t("AdsSwitch") }}</p>
+		<p>{{ $t("skipAdSwitch") }}</p>
 		<Switch
 			v-model="blockAds"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<div class="p-1 m-0 flex">
-		<p>{{ $t("SliderSwitch") }}</p>
+		<p>{{ $t("sliderSwitch") }}</p>
 		<Switch
 			v-model="speedSlider"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<div class="p-1 m-0 flex">
-		<p>{{ $t("FullscreenSwitch") }}</p>
+		<p>{{ $t("fullscreenSwitch") }}</p>
 		<Switch
 			v-model="settings.Video.playOnFullScreen"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<div class="p-1 m-0 flex">
-		<p>{{ $t("DoubleClickSwitch") }}</p>
+		<p>{{ $t("doubleClickSwitch") }}</p>
 		<Switch
 			v-model="settings.Video.doubleClick"
 			class="ml-auto"
@@ -64,14 +64,14 @@
 		></Switch>
 	</div>
 	<div class="p-1 m-0 flex">
-		<p>{{ $t("RatingSwitch") }}</p>
+		<p>{{ $t("ratingSwitch") }}</p>
 		<Switch
 			v-model="showRating"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<div class="p-1 m-0 flex">
-		<p>{{ $t("ShowYearSwitch") }}</p>
+		<p>{{ $t("showYearSwitch") }}</p>
 		<Switch
 			v-model="settings.Video.showYear"
 			class="ml-auto"

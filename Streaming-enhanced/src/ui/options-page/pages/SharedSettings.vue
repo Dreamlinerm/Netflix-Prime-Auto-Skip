@@ -24,25 +24,25 @@ const SliderPreview = ref(10)
 	<OptionsPageSettingsTable></OptionsPageSettingsTable>
 	<hr />
 	<div class="line flex">
-		<p>{{ $t("FullscreenSwitch") }}</p>
+		<p>{{ $t("fullscreenSwitch") }}</p>
 		<Switch
 			v-model="fullScreen"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<p class="description">
-		{{ $t("FullscreenSwitchDescription") }}
+		{{ $t("fullscreenDescription") }}
 	</p>
 	<hr />
 	<div class="line flex">
-		<p>{{ $t("DoubleClickSwitch") }}</p>
+		<p>{{ $t("doubleClickSwitch") }}</p>
 		<Switch
 			v-model="settings.Video.doubleClick"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<p class="description">
-		{{ $t("DoubleClickSwitchDescription") }}
+		{{ $t("doubleClickDescription") }}
 	</p>
 	<hr />
 	<div class="line flex">
@@ -57,25 +57,25 @@ const SliderPreview = ref(10)
 	</p>
 	<hr />
 	<div class="line flex">
-		<p>{{ $t("EpilepsySwitch") }}</p>
+		<p>{{ $t("epilepsySwitch") }}</p>
 		<Switch
 			v-model="settings.Video.epilepsy"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<p class="description">
-		{{ $t("EpilepsySwitchDescription") }}
+		{{ $t("epilepsyDescription") }}
 	</p>
 	<hr />
 	<div class="line flex">
-		<p>{{ $t("ShowYearSwitch") }}</p>
+		<p>{{ $t("showYearSwitch") }}</p>
 		<Switch
 			v-model="settings.Video.showYear"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<p class="description">
-		{{ $t("ShowYearSwitchDescription") }}
+		{{ $t("showYearDescription") }}
 	</p>
 	<hr />
 	<div
@@ -98,16 +98,16 @@ const SliderPreview = ref(10)
 		<hr />
 	</div>
 	<div class="line flex">
-		<p>{{ $t("SliderSwitch") }}</p>
+		<p>{{ $t("sliderSwitch") }}</p>
 	</div>
 	<p class="description">
-		{{ $t("SliderSwitchDescription") }}
+		{{ $t("sliderDescription") }}
 	</p>
-	<p>{{ $t("SliderOptions") }}</p>
+	<p>{{ $t("sliderOptions") }}</p>
 	<table>
 		<tr>
 			<td>
-				<p>{{ $t("SliderStepSize") }}</p>
+				<p>{{ $t("sliderStepSize") }}</p>
 			</td>
 			<td>
 				<input
@@ -119,7 +119,7 @@ const SliderPreview = ref(10)
 		</tr>
 		<tr>
 			<td>
-				<p>{{ $t("SliderMin") }}</p>
+				<p>{{ $t("sliderMin") }}</p>
 			</td>
 			<td>
 				<input
@@ -131,7 +131,7 @@ const SliderPreview = ref(10)
 		</tr>
 		<tr>
 			<td>
-				<p>{{ $t("SliderMax") }}</p>
+				<p>{{ $t("sliderMax") }}</p>
 			</td>
 			<td>
 				<input
@@ -143,7 +143,7 @@ const SliderPreview = ref(10)
 		</tr>
 		<tr>
 			<td>
-				<p>{{ $t("SliderPreview") }}</p>
+				<p>{{ $t("sliderPreview") }}</p>
 			</td>
 			<td>
 				<div class="flex">

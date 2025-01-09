@@ -4,8 +4,8 @@
 		class="featureTable"
 	>
 		<tr>
-			<th class="whitespace-nowrap">{{ $t("Feature") }}</th>
-			<th>{{ $t("Shared") }}</th>
+			<th class="whitespace-nowrap">{{ $t("feature") }}</th>
+			<th>{{ $t("shared") }}</th>
 			<th>Netflix</th>
 			<th>Prime</th>
 			<th>Disney+</th>
@@ -14,8 +14,8 @@
 		</tr>
 		<tr>
 			<td class="tooltip">
-				<p>{{ $t("IntroSwitch") }}</p>
-				<p class="tooltiptext">{{ $t("SharedIntroDescription") }}</p>
+				<p>{{ $t("skipIntroSwitch") }}</p>
+				<p class="tooltiptext">{{ $t("sharedIntroDescription") }}</p>
 			</td>
 			<td>
 				<Switch
@@ -56,8 +56,8 @@
 		</tr>
 		<tr>
 			<td class="tooltip">
-				<p>{{ $t("CreditsSwitch") }}</p>
-				<p class="tooltiptext">{{ $t("CreditsSwitchDescription") }}</p>
+				<p>{{ $t("creditsSwitch") }}</p>
+				<p class="tooltiptext">{{ $t("creditsDescription") }}</p>
 			</td>
 			<td>
 				<Switch
@@ -93,8 +93,8 @@
 		</tr>
 		<tr>
 			<td class="tooltip">
-				<p>{{ $t("WatchCreditsSwitch") }}</p>
-				<p class="tooltiptext">{{ $t("WatchCreditsSwitchDescription") }}</p>
+				<p>{{ $t("watchCreditsSwitch") }}</p>
+				<p class="tooltiptext">{{ $t("watchCreditsDescription") }}</p>
 			</td>
 			<td>
 				<Switch
@@ -130,8 +130,8 @@
 		</tr>
 		<tr>
 			<td class="tooltip">
-				<p>{{ $t("AdsSwitch") }}</p>
-				<p class="tooltiptext">{{ $t("AdsSwitchDescription") }}</p>
+				<p>{{ $t("skipAdSwitch") }}</p>
+				<p class="tooltiptext">{{ $t("skipAdDescription") }}</p>
 			</td>
 			<td>
 				<Switch
@@ -162,8 +162,8 @@
 		</tr>
 		<tr>
 			<td class="tooltip">
-				<p>{{ $t("RatingSwitch") }}</p>
-				<p class="tooltiptext">{{ $t("RatingSwitchDescription") }}</p>
+				<p>{{ $t("ratingSwitch") }}</p>
+				<p class="tooltiptext">{{ $t("ratingDescription") }}</p>
 			</td>
 			<td>
 				<Switch
@@ -199,8 +199,8 @@
 		</tr>
 		<tr>
 			<td class="tooltip">
-				<p>{{ $t("SliderSwitch") }}</p>
-				<p class="tooltiptext">{{ $t("SliderSwitchDescription") }}</p>
+				<p>{{ $t("sliderSwitch") }}</p>
+				<p class="tooltiptext">{{ $t("sliderDescription") }}</p>
 			</td>
 			<td>
 				<Switch

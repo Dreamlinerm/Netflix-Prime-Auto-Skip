@@ -2,36 +2,25 @@
 	<div class="flex items-center">
 		<RouterLinkUp />
 		<h2 class="text-amazon">
-			{{ $t("PageSpecificTitle", ["Prime Video"]) }}
+			{{ $t("pageSpecificTitle", ["Prime Video"]) }}
 		</h2>
 	</div>
-	<div class="line flex">
-		<p>{{ $t("SelfAdsSwitch") }}</p>
+	<div
+		v-for="setting in settingsList"
+		:key="setting"
+		class="line flex"
+	>
+		<p>{{ $t(setting + "Switch") }}</p>
 		<Switch
-			v-model="settings.Amazon.skipAd"
+			v-model="settings.Amazon[setting]"
 			class="ml-auto"
 		></Switch>
-	</div>
-	<div class="line flex">
-		<p>{{ $t("PaidContentSwitch") }}</p>
-		<Switch
-			v-model="settings.Amazon.filterPaid"
-			class="ml-auto"
-		></Switch>
-	</div>
-	<div class="line flex">
-		<p>{{ $t("ContinuePositionSwitch") }}</p>
-		<Switch
-			v-model="settings.Amazon.continuePosition"
-			class="ml-auto"
-		></Switch>
-	</div>
-	<div class="line flex">
-		<p>{{ $t("XraySwitch") }}</p>
-		<Switch
-			v-model="settings.Amazon.xray"
-			class="ml-auto"
-		></Switch>
+		<p
+			v-if="advancedSettings"
+			class="description"
+		>
+			{{ $t(setting + "Description") }}
+		</p>
 	</div>
 </template>
 <script setup lang="ts">
@@ -43,5 +32,12 @@ const props = defineProps({
 		default: false,
 	},
 })
+
+const settingsList: Array<"skipAd" | "filterPaid" | "continuePosition" | "xray"> = [
+	"skipAd",
+	"filterPaid",
+	"continuePosition",
+	"xray",
+]
 </script>
 <style scoped></style>
