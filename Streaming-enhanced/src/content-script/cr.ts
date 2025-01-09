@@ -75,8 +75,11 @@ function createFilterElement(
 	input.checked = settingsValue
 	input.id = filterType
 	input.onclick = function () {
-		settings.General[filterType] = this.checked
-		filterFunction(this.checked ? "none" : "block")
+		settings.General[filterType] = input.checked
+		filterFunction(input.checked ? "none" : "block")
+		// TODO: check if input.checked is correct
+		// settings.General[filterType] = (this as HTMLInputElement).checked
+		// filterFunction(this.checked ? "none" : "block")
 		//setStorage()
 	}
 	const p = document.createElement("p")
