@@ -20,9 +20,12 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/action-popup/': RouteRecordInfo<'/action-popup/', '/action-popup', Record<never, never>, Record<never, never>>,
     '/action-popup/Amazon': RouteRecordInfo<'/action-popup/Amazon', '/action-popup/Amazon', Record<never, never>, Record<never, never>>,
+    '/action-popup/Crunchyroll': RouteRecordInfo<'/action-popup/Crunchyroll', '/action-popup/Crunchyroll', Record<never, never>, Record<never, never>>,
+    '/action-popup/Disney': RouteRecordInfo<'/action-popup/Disney', '/action-popup/Disney', Record<never, never>, Record<never, never>>,
     '/action-popup/Netflix': RouteRecordInfo<'/action-popup/Netflix', '/action-popup/Netflix', Record<never, never>, Record<never, never>>,
     '/action-popup/playground': RouteRecordInfo<'/action-popup/playground', '/action-popup/playground', Record<never, never>, Record<never, never>>,
     '/action-popup/SharedOptions': RouteRecordInfo<'/action-popup/SharedOptions', '/action-popup/SharedOptions', Record<never, never>, Record<never, never>>,
+    '/action-popup/Statistics': RouteRecordInfo<'/action-popup/Statistics', '/action-popup/Statistics', Record<never, never>, Record<never, never>>,
     '/common/404': RouteRecordInfo<'/common/404', '/common/404', Record<never, never>, Record<never, never>>,
     '/common/about': RouteRecordInfo<'/common/about', '/common/about', Record<never, never>, Record<never, never>>,
     '/common/change-log': RouteRecordInfo<'/common/change-log', '/common/change-log', Record<never, never>, Record<never, never>>,
