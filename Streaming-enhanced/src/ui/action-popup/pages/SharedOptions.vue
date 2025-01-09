@@ -111,6 +111,11 @@ const skipCredits = computed({
 				settings.value[service].skipCredits = value
 			}
 		})
+		streamingServices.forEach((service) => {
+			if (settings.value[service]?.watchCredits !== undefined) {
+				settings.value[service].watchCredits = !value
+			}
+		})
 	},
 })
 
@@ -120,6 +125,11 @@ const watchCredits = computed({
 		streamingServices.forEach((service) => {
 			if (settings.value[service]?.watchCredits !== undefined) {
 				settings.value[service].watchCredits = value
+			}
+		})
+		streamingServices.forEach((service) => {
+			if (settings.value[service]?.skipCredits !== undefined) {
+				settings.value[service].skipCredits = !value
 			}
 		})
 	},
