@@ -10,7 +10,7 @@ export const optionsStore = useOptionsStore(pinia)
 export const date = new Date()
 // ...args
 export async function log(...args: any[]) {
-	console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), ...args)
+	console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + date.getMilliseconds(), ...args)
 }
 
 export async function increaseBadge() {

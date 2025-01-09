@@ -1,27 +1,21 @@
-// import { createPinia, defineStore } from "pinia"
-// import { useOptionsStore } from "@/stores/options.store"
-import { log, increaseBadge, optionsStore, date } from "@/utils/helper"
-const { settings } = optionsStore
-// const pinia = createPinia()
+import { log, increaseBadge, date, optionsStore } from "@/utils/helper"
 
-// // Global Variables
+// Global Variables
 
-// // Use the store
-// const optionsStore = useOptionsStore(pinia)
-// const { settings } = optionsStore
-
+const { settings } = storeToRefs(optionsStore)
+log("Crunchyroll script started", settings.value)
 // default Options for the observer (which mutations to observe)
 const config = { attributes: true, childList: true, subtree: true }
 const url = window.location.href
 
 function startCrunchyroll() {
-	if (settings.Crunchyroll.releaseCalendar) Crunchyroll_ReleaseCalendar()
-	if (settings.Crunchyroll.profile) {
+	if (settings.value.Crunchyroll.releaseCalendar) Crunchyroll_ReleaseCalendar()
+	if (settings.value.Crunchyroll.profile) {
 		const pickInterval = setInterval(function () {
 			Crunchyroll_AutoPickProfile()
 		}, 100)
 		setTimeout(function () {
-			if (settings.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle()
+			if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle()
 		}, 1000)
 		// only click on profile on page load not when switching profiles
 		setTimeout(function () {
@@ -133,12 +127,12 @@ function addShowsToList(position: HTMLElement, list: CrunchyList) {
 
 		const a = document.createElement("a")
 		a.className = "js-season-name-link"
-		a.href = element.href
+		a.href = element?.href || ""
 		a.setAttribute("itemprop", "url")
 
 		const cite = document.createElement("cite")
 		cite.setAttribute("itemprop", "name")
-		cite.textContent = element.name
+		cite.textContent = element?.name || ""
 
 		a.appendChild(cite)
 		h1.appendChild(a)
@@ -161,7 +155,7 @@ function clickOnCurrentDay() {
 			// need timeout because the page is not fully loaded
 			setTimeout(() => {
 				day.click()
-			}, 100)
+			}, 1000)
 			// isCurrentWeek
 			return date.toLocaleDateString() == dateOnPage.toLocaleDateString()
 		}
@@ -175,7 +169,7 @@ function createLocalList() {
 		const name = h1?.firstChild?.nextSibling?.textContent
 		if (!name?.includes("Dub")) {
 			const href = h1?.href
-			const time = element.parentElement?.parentElement?.firstElementChild?.getAttribute("datetime") || ""
+			const time = element.parentElement?.parentElement?.firstElementChild?.getAttribute("datetime") ?? ""
 			localList.push({ href, name, time })
 		}
 	})
@@ -222,7 +216,7 @@ function addSavedCrunchyList() {
 	if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
 		// now add the old list to the website list
 		document.querySelectorAll("section.calendar-day").forEach((element) => {
-			const datetime = element.querySelector("time")?.getAttribute("datetime") || ""
+			const datetime = element.querySelector("time")?.getAttribute("datetime") ?? ""
 			const weekday = new Date(datetime).getDay()
 			// remove Schedule Coming Soon text
 			if (shiftSunday(date.getDay()) - shiftSunday(weekday) < 0)
@@ -299,5 +293,8 @@ async function Crunchyroll_bigPlayerStyle() {
 	}
 }
 // #endregion
-
-startCrunchyroll()
+// watch ready state
+setTimeout(function () {
+	log("startCrunchyroll", settings.value)
+	startCrunchyroll()
+}, 10)

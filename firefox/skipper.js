@@ -559,7 +559,7 @@ if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO
     if (data?.score >= 0) {
       let releaseDate = "";
       if (settings.Video?.showYear && data?.release_date) {
-        const releaseDate = new Date(data?.release_date)?.getFullYear() + "-";
+        releaseDate = new Date(data?.release_date)?.getFullYear() + "-";
         // const year = new Date(data?.release_date)?.getYear();
         // releaseDate = year >= 100 ? (year + " ").substring(1) : year + " ";
       }
