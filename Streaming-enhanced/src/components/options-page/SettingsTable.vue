@@ -1,10 +1,10 @@
 <template>
 	<table
-		style="border: 1px solid white; margin-left: 5px"
+		style="border: 1px solid white"
 		class="featureTable"
 	>
 		<tr>
-			<th class="tooltip">{{ $t("Feature") }}</th>
+			<th class="whitespace-nowrap">{{ $t("Feature") }}</th>
 			<th>{{ $t("Shared") }}</th>
 			<th>Netflix</th>
 			<th>Prime</th>
@@ -340,12 +340,17 @@ const showRating = computed({
 .featureTable {
 	border-collapse: collapse;
 }
-th {
-	/* center */
+th,
+td {
 	text-align: center;
 }
 p {
 	@apply m-0;
+}
+
+.tooltip {
+	border-bottom: 1px dotted white;
+	@apply whitespace-nowrap inline-block relative;
 }
 
 .tooltip .tooltiptext {
@@ -361,8 +366,8 @@ p {
 	bottom: 100%;
 	left: 0%;
 }
-.tooltip {
-	white-space: nowrap;
+.tooltiptext {
+	white-space: normal;
 }
 .tooltip .tooltiptext::after {
 	content: "";
