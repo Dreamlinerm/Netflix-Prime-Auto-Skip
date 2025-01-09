@@ -22,11 +22,13 @@ module.exports = {
 			{
 				light: {
 					primary: "#fff",
+					"primary-content": "#000",
 				},
 			},
 			{
 				dark: {
 					primary: "#242424",
+					"primary-content": "#fff",
 					secondary: "#0082fc",
 					accent: "#00ffff",
 					neutral: "#161616",
