@@ -7,7 +7,7 @@ const currentLocale = useLocale()
 
 <template>
 	<div>
-		<div class="dropdown">
+		<div class="dropdown dropdown-bottom">
 			<div
 				tabindex="0"
 				role="button"
@@ -25,7 +25,7 @@ const currentLocale = useLocale()
 					:key="`locale-${locale}`"
 				>
 					<button
-						class="text-neutral px-4"
+						class="text-primary-content px-4"
 						@click="currentLocale = locale"
 					>
 						{{ locale }}
