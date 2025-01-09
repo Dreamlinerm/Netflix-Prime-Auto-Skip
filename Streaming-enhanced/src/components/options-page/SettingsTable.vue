@@ -4,7 +4,7 @@
 		class="featureTable"
 	>
 		<tr>
-			<th>{{ $t("Feature") }}</th>
+			<th class="tooltip">{{ $t("Feature") }}</th>
 			<th>{{ $t("Shared") }}</th>
 			<th>Netflix</th>
 			<th>Prime</th>
@@ -329,3 +329,53 @@ const showRating = computed({
 	},
 })
 </script>
+
+<style scoped>
+.featureTable tr *:nth-of-type(2) {
+	border-right: 1px solid white;
+}
+.featureTable tr td:nth-of-type(2) label {
+	margin-right: 20px;
+}
+.featureTable {
+	border-collapse: collapse;
+}
+th {
+	/* center */
+	text-align: center;
+}
+p {
+	@apply m-0;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 300px;
+	background-color: #fff;
+	color: #000;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 100%;
+	left: 0%;
+}
+.tooltip {
+	white-space: nowrap;
+}
+.tooltip .tooltiptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #fff transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
+</style>

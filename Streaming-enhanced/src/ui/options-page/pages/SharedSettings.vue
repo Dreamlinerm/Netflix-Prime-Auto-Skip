@@ -1,5 +1,4 @@
-<script setup lang="js"></script>
+<script setup lang="ts"></script>
 <template>
 	<OptionsPageSettingsTable></OptionsPageSettingsTable>
-	test
 </template>
