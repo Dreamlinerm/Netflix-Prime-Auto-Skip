@@ -2,7 +2,14 @@
 module.exports = {
 	content: ["src/**/*.{html,vue,js,ts,jsx,tsx}"],
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				netflix: "#e60010",
+				amazon: "#00aeef",
+				disney: "#1d1fff",
+				crunchyroll: "#f78b24",
+			},
+		},
 	},
 	plugins: [
 		"prettier-plugin-tailwindcss",

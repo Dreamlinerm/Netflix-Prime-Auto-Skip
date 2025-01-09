@@ -1,7 +1,7 @@
 <template>
 	<div class="flex flex-align">
-		<h2 class="text-amazon">
-			{{ $t("PageSpecificTitle", ["Prime Video"]) }}
+		<h2 class="text-netflix">
+			{{ $t("PageSpecificTitle", ["Netflix"]) }}
 		</h2>
 	</div>
 	<div class="line flex">
