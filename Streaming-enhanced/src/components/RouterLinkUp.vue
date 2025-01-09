@@ -1,9 +1,5 @@
 <script setup lang="ts">
 const router = useRouter()
-
-defineProps<{
-	label?: string
-}>()
 </script>
 
 <template>
@@ -12,7 +8,6 @@ defineProps<{
 		@click="router.back()"
 	>
 		<i-ph-arrow-left />
-		{{ label || "Go Back" }}
 	</button>
 </template>
 
