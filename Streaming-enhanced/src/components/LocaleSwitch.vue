@@ -25,7 +25,7 @@ const currentLocale = useLocale()
 					:key="`locale-${locale}`"
 				>
 					<button
-						class="text-primary px-4"
+						class="text-neutral px-4"
 						@click="currentLocale = locale"
 					>
 						{{ locale }}

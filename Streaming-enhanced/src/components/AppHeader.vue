@@ -3,7 +3,7 @@ const version = __VERSION__
 </script>
 
 <template>
-	<div class="navbar bg-bgcustom text-primary-content p-2">
+	<div class="navbar base-100 text-primary-content p-2">
 		<div class="flex-1 pl-2">
 			<RouterLink
 				to="/"

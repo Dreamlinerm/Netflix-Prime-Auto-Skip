@@ -4,7 +4,7 @@ const { isDark, toggleDark } = useTheme()
 
 <template>
 	<button
-		class="btn text-primary h-fit min-h-1"
+		class="btn btn-primary h-fit min-h-1"
 		@click="toggleDark()"
 	>
 		<template v-if="isDark">

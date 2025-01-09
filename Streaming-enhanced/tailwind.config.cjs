@@ -8,7 +8,6 @@ module.exports = {
 				amazon: "#00aeef",
 				disney: "#1d1fff",
 				crunchyroll: "#f78b24",
-				bgcustom: "#212121",
 			},
 		},
 	},
@@ -19,7 +18,27 @@ module.exports = {
 		require("daisyui"),
 	],
 	daisyui: {
-		themes: ["light", "dark"],
+		themes: [
+			{
+				light: {
+					primary: "#fff",
+					neutral: "#fff",
+				},
+			},
+			{
+				dark: {
+					primary: "#242424",
+					secondary: "#0082fc",
+					accent: "#00ffff",
+					neutral: "#000",
+					"base-100": "#212121",
+					info: "#0000ff",
+					success: "#00ff00",
+					warning: "#00ff00",
+					error: "#ff0000",
+				},
+			},
+		],
 		logs: false,
 	},
 }
