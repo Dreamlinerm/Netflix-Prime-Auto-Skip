@@ -3,3 +3,4 @@
 const router = useRouter()
 router.push("/options-page/SharedSettings")
 </script>
+<template>You found my easter egg! 🐣</template>
