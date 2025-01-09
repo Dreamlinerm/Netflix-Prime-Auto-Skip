@@ -4,38 +4,40 @@
 @use "tailwindcss/components";
 @use "tailwindcss/utilities";
 
-body {
-	@apply min-w-96 !overflow-y-scroll;
-}
+// default styles for daisy ui
 
-label {
-	@apply label font-semibold;
-}
+// body {
+// 	@apply min-w-96 !overflow-y-scroll;
+// }
 
-input:not([type="radio"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
-	@apply input input-bordered input-primary;
-}
+// label {
+// 	@apply label font-semibold;
+// }
 
-textarea {
-	@apply input input-bordered input-primary;
-}
+// input:not([type="radio"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
+// 	@apply input input-bordered input-primary;
+// }
 
-input[type="radio"] {
-	@apply radio radio-primary;
-}
+// textarea {
+// 	@apply input input-bordered input-primary;
+// }
 
-input[type="file"] {
-	@apply file-input file-input-bordered file-input-primary;
-}
+// input[type="radio"] {
+// 	@apply radio radio-primary;
+// }
 
-input[type="range"] {
-	@apply range range-primary;
-}
+// input[type="file"] {
+// 	@apply file-input file-input-bordered file-input-primary;
+// }
 
-select {
-	@apply select select-bordered select-primary;
-}
+// input[type="range"] {
+// 	@apply range range-primary;
+// }
 
-.prose {
-	@apply max-w-full;
-}
+// select {
+// 	@apply select select-bordered select-primary;
+// }
+
+// .prose {
+// 	@apply max-w-full;
+// }

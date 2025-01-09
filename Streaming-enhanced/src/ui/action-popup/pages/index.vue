@@ -103,8 +103,8 @@
 	background-color: #4d0000;
 }
 .icon {
-	width: 1.4em;
-	height: 1.4em;
+	width: 1.4rem;
+	height: 1.4rem;
 	background-color: transparent;
 	fill: white;
 	color: white;
