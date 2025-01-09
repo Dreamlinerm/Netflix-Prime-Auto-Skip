@@ -19,16 +19,15 @@ const version = __VERSION__
 						<h2 class="title">
 							{{ $t("pageTitle") }}
 						</h2>
-						<p style="font-size: 1rem">{{ version }}</p>
+						<p class="font text-base">{{ version }}</p>
 					</div>
 				</div>
 				<a
 					target="_blank"
-					class="flex justify-center items-center flex-col"
-					style="text-align: center; text-decoration: none"
+					class="flex justify-center items-center flex-col text-center no-underline"
 					href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"
 				>
-					<p style="font-size: 1rem">
+					<p class="text-base">
 						{{ $t("rateNow") }}
 					</p>
 					<img
@@ -39,8 +38,8 @@ const version = __VERSION__
 				</a>
 			</div>
 			<div class="flex flex-col MenuButtons flex-wrap">
-				<a
-					href="#Video"
+				<RouterLink
+					to="/options-page/SharedSettings"
 					class="menuButton flex"
 					style="background-color: #e60010"
 					draggable="false"
@@ -49,9 +48,9 @@ const version = __VERSION__
 					<div>
 						{{ $t("sharedSettings") }}
 					</div>
-				</a>
-				<a
-					href="#Amazon"
+				</RouterLink>
+				<RouterLink
+					to="/options-page/Amazon"
 					class="menuButton flex"
 					draggable="false"
 				>
@@ -61,9 +60,9 @@ const version = __VERSION__
 						class="icon"
 					/>
 					<div>Prime Video</div>
-				</a>
-				<a
-					href="#Netflix"
+				</RouterLink>
+				<RouterLink
+					to="/options-page/Netflix"
 					class="menuButton flex"
 					draggable="false"
 				>
@@ -73,9 +72,9 @@ const version = __VERSION__
 						class="icon"
 					/>
 					<div>Netflix</div>
-				</a>
-				<a
-					href="#Disney"
+				</RouterLink>
+				<RouterLink
+					to="/options-page/Disney"
 					class="menuButton flex"
 					draggable="false"
 				>
@@ -85,9 +84,9 @@ const version = __VERSION__
 						class="icon"
 					/>
 					<div>Disney+</div>
-				</a>
-				<a
-					href="#Crunchyroll"
+				</RouterLink>
+				<RouterLink
+					to="/options-page/Crunchyroll"
 					class="menuButton flex"
 					draggable="false"
 				>
@@ -97,37 +96,34 @@ const version = __VERSION__
 						class="icon"
 					/>
 					<div>Crunchyroll</div>
-				</a>
-				<a
-					href="#Other"
+				</RouterLink>
+				<RouterLink
+					to="/options-page/Other"
 					class="menuButton flex"
 					draggable="false"
 				>
 					<i-mdi-dots-horizontal class="icon" />
 					<p>{{ $t("backup") }}</p>
-				</a>
-				<a
-					href="#Statistics"
+				</RouterLink>
+				<RouterLink
+					to="/options-page/Statistics"
 					class="menuButton flex"
 					draggable="false"
 				>
 					<i-mdi-chart-bar class="icon" />
 					<p>{{ $t("statistics") }}</p>
-				</a>
-				<a
-					href="#Changelog"
+				</RouterLink>
+				<RouterLink
+					to="/options-page/Changelog"
 					class="menuButton flex"
 					draggable="false"
 				>
 					<i-mdi-format-list-bulleted class="icon" />
 					<p>{{ $t("changelog") }}</p>
-				</a>
+				</RouterLink>
 			</div>
-			<div style="margin-top: auto">
-				<div
-					class="flex flex-col MenuButtons"
-					style="flex-wrap: wrap; margin-bottom: 10px"
-				>
+			<div class="mt-auto">
+				<div class="flex flex-col MenuButtons flex-wrap mb-2">
 					<a
 						class="button flex flex justify-center items-center blueButtons"
 						style="margin: 5px 15px"
@@ -146,8 +142,7 @@ const version = __VERSION__
 						Github
 					</a>
 					<a
-						class="button flex flex justify-center items-center blueButtons"
-						style="margin: 5px 15px"
+						class="button flex flex justify-center items-center blueButtons m-[5px_15px]"
 						href="https://github.com/sponsors/Dreamlinerm"
 						target="_blank"
 					>
@@ -157,10 +152,7 @@ const version = __VERSION__
 				</div>
 			</div>
 		</div>
-		<div
-			class="content flex flex-col"
-			style="overflow-y: auto; width: 100%"
-		>
+		<div class="content flex flex-col overflow-y-auto w-full">
 			<div class="page">
 				<div class="p-4 prose">
 					<RouterView />
@@ -194,7 +186,7 @@ const version = __VERSION__
 	@apply h-12;
 }
 .title {
-	@apply py-0;
+	@apply py-0 text-primary-content;
 }
 
 .content {
