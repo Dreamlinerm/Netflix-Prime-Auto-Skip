@@ -1,6 +1,6 @@
 // import { createPinia, defineStore } from "pinia"
 // import { useOptionsStore } from "@/stores/options.store"
-import { log, increaseBadge, optionsStore } from "@/utils/helper"
+import { log, increaseBadge, optionsStore, date } from "@/utils/helper"
 const { settings } = optionsStore
 // const pinia = createPinia()
 
@@ -59,10 +59,17 @@ function filterDub(display: displayType) {
 	})
 	if (display == "block" && settings.General.filterQueued) filterQueued("none")
 }
-function createFilterElement(filterType, filterText, settingsValue, filterFunction) {
+type FilterFunction = (display: displayType) => void
+function createFilterElement(
+	filterType: "filterQueued" | "filterDub",
+	filterText: string,
+	settingsValue: boolean,
+	filterFunction: FilterFunction,
+) {
 	const label = document.createElement("label")
 	const span = document.createElement("span")
-	span.style = "display: flex;align-items: center;"
+	span.style.display = "flex"
+	span.style.alignItems = "center"
 	const input = document.createElement("input")
 	input.type = "checkbox"
 	input.checked = settingsValue
@@ -73,7 +80,7 @@ function createFilterElement(filterType, filterText, settingsValue, filterFuncti
 		//setStorage()
 	}
 	const p = document.createElement("p")
-	p.style = "width: 100px;"
+	p.style.width = "100px"
 	p.textContent = filterText
 	label.appendChild(span)
 	span.appendChild(input)
@@ -81,7 +88,8 @@ function createFilterElement(filterType, filterText, settingsValue, filterFuncti
 	return label
 }
 function addButtons() {
-	const toggleForm = document.querySelector("#filter_toggle_form")
+	const toggleForm = document.querySelector("#filter_toggle_form") as HTMLElement
+	if (!toggleForm?.firstElementChild) return
 	toggleForm.style.display = "flex"
 	toggleForm.firstElementChild.appendChild(
 		createFilterElement("filterQueued", "Show Playlist only", settings.General.filterQueued, filterQueued),
@@ -91,23 +99,23 @@ function addButtons() {
 	)
 }
 // start of add CrunchyList to Crunchyroll
-function addShowsToList(position, list) {
+function addShowsToList(position: HTMLElement, list: CrunchyList) {
 	list.forEach((element) => {
 		const article = document.createElement("article")
 		article.className = "release js-release"
 
-		let time = document.createElement("time")
+		const time = document.createElement("time")
 		time.className = "available-time"
 		time.textContent = new Date(element.time).toLocaleString([], { hour: "2-digit", minute: "2-digit" })
 
-		let div1 = document.createElement("div")
-		let div2 = document.createElement("div")
+		const div1 = document.createElement("div")
+		const div2 = document.createElement("div")
 		div2.className = "queue-flag queued enhanced"
 
-		let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+		const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
 		svg.setAttribute("viewBox", "0 0 48 48")
 
-		let use = document.createElementNS("http://www.w3.org/2000/svg", "use")
+		const use = document.createElementNS("http://www.w3.org/2000/svg", "use")
 		use.setAttributeNS(
 			"http://www.w3.org/1999/xlink",
 			"xlink:href",
@@ -117,15 +125,15 @@ function addShowsToList(position, list) {
 		svg.appendChild(use)
 		div2.appendChild(svg)
 
-		let h1 = document.createElement("h1")
+		const h1 = document.createElement("h1")
 		h1.className = "season-name"
 
-		let a = document.createElement("a")
+		const a = document.createElement("a")
 		a.className = "js-season-name-link"
 		a.href = element.href
 		a.setAttribute("itemprop", "url")
 
-		let cite = document.createElement("cite")
+		const cite = document.createElement("cite")
 		cite.setAttribute("itemprop", "name")
 		cite.textContent = element.name
 
@@ -141,7 +149,8 @@ function addShowsToList(position, list) {
 	})
 }
 function clickOnCurrentDay() {
-	let days = document.querySelectorAll(".specific-date [datetime]")
+	const days = document.querySelectorAll(".specific-date [datetime]")
+	// @ts-expect-error days is a NodeList
 	for (const day of days) {
 		const dateOnPage = new Date(day.getAttribute("datetime"))
 		// if the day of the week is the same as today click on it, like if its Monday click on Monday
@@ -156,9 +165,6 @@ function clickOnCurrentDay() {
 	}
 	return false
 }
-type Nullable<T> = T | null | undefined
-type CrunchyListElement = { href: Nullable<string>; name: Nullable<string>; time: Nullable<string> }
-type CrunchyList = Array<CrunchyListElement>
 function createLocalList() {
 	const localList: CrunchyList = []
 	document.querySelectorAll("div.queue-flag.queued:not(.enhanced)").forEach((element) => {
@@ -166,7 +172,7 @@ function createLocalList() {
 		const name = h1?.firstChild?.nextSibling?.textContent
 		if (!name?.includes("Dub")) {
 			const href = h1?.href
-			const time = element.parentElement?.parentElement?.firstElementChild?.getAttribute("datetime")
+			const time = element.parentElement?.parentElement?.firstElementChild?.getAttribute("datetime") || ""
 			localList.push({ href, name, time })
 		}
 	})
@@ -175,6 +181,7 @@ function createLocalList() {
 function filterOldList(isCurrentWeek: boolean, localList: CrunchyList) {
 	let oldList = settings.General.savedCrunchyList || []
 	const lastElement = localList[localList.length - 1]
+	if (!lastElement?.time) return oldList
 	const lastTime = new Date(lastElement.time)
 	const [lastDay, lastHr, lastMin] = [lastTime.getDay(), lastTime.getHours(), lastTime.getMinutes()]
 	// delete all previous weekdays from oldList
@@ -212,12 +219,13 @@ function addSavedCrunchyList() {
 	if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
 		// now add the old list to the website list
 		document.querySelectorAll("section.calendar-day").forEach((element) => {
-			const weekday = new Date(element.querySelector("time")?.getAttribute("datetime")).getDay()
+			const datetime = element.querySelector("time")?.getAttribute("datetime") || ""
+			const weekday = new Date(datetime).getDay()
 			// remove Schedule Coming Soon text
 			if (shiftSunday(date.getDay()) - shiftSunday(weekday) < 0)
 				element?.children?.[1]?.firstChild?.nextSibling?.remove()
 			addShowsToList(
-				element.children[1],
+				element.children[1] as HTMLElement,
 				oldList.filter((item) => new Date(item.time).getDay() == weekday),
 			)
 		})

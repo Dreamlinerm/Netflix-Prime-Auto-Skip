@@ -84,10 +84,16 @@ export type settingsType = {
 		sliderMax: number
 		filterDub: boolean
 		filterQueued: boolean
-		savedCrunchyList: Array<string>
+		savedCrunchyList: CrunchyList
 		GCdate: string
 	}
 }
+
+export type Nullable<T> = T | null | undefined
+export type CrunchyListElement = { href: Nullable<string>; name: Nullable<string>; time: string }
+export type CrunchyList = Array<CrunchyListElement>
+
+// Default settings
 export const defaultSettings = {
 	Amazon: {
 		skipIntro: true,

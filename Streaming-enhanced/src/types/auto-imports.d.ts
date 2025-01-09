@@ -37,6 +37,7 @@ declare global {
   const createUnrefFn: typeof import('@vueuse/core')['createUnrefFn']
   const customRef: typeof import('vue')['customRef']
   const customersRef: typeof import('../utils/firebase')['customersRef']
+  const date: typeof import('../utils/helper')['date']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
   const defaultSettings: typeof import('../stores/options.store')['defaultSettings']
@@ -366,7 +367,7 @@ declare global {
   export type { Component, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { settingsType } from '../stores/options.store'
+  export type { settingsType, Nullable, CrunchyListElement, CrunchyList } from '../stores/options.store'
   import('../stores/options.store')
 }
 
@@ -401,6 +402,7 @@ declare module 'vue' {
     readonly createTemplatePromise: UnwrapRef<typeof import('@vueuse/core')['createTemplatePromise']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
+    readonly date: UnwrapRef<typeof import('../utils/helper')['date']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
     readonly defaultSettings: UnwrapRef<typeof import('../stores/options.store')['defaultSettings']>

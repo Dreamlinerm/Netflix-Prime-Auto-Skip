@@ -7,7 +7,7 @@ const pinia = createPinia()
 // Use the store
 export const optionsStore = useOptionsStore(pinia)
 
-const date = new Date()
+export const date = new Date()
 // ...args
 export async function log(...args: any[]) {
 	console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds(), ...args)

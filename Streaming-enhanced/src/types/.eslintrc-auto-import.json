@@ -368,6 +368,10 @@
     "settingsType": true,
     "defaultSettings": true,
     "log": true,
-    "increaseBadge": true
+    "increaseBadge": true,
+    "date": true,
+    "CrunchyList": true,
+    "CrunchyListElement": true,
+    "Nullable": true
   }
 }
