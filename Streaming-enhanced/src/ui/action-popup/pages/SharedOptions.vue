@@ -1,5 +1,9 @@
 <template>
-	<!-- {{ JSON.stringify(settings) }} -->
+	<div class="flex items-center">
+		<h2 class="text-amazon">
+			{{ $t("SharedPageTitle") }}
+		</h2>
+	</div>
 	<div class="p-1 m-0 flex">
 		<p>{{ $t("IntroSwitch") }}</p>
 		<Switch

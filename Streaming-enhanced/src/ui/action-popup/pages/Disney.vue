@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-align">
+	<div class="flex items-center">
 		<h2 class="text-disney">
 			{{ $t("PageSpecificTitle", ["Disney"]) }}
 		</h2>
