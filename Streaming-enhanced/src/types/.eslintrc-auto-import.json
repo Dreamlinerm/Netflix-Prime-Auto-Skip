@@ -365,6 +365,7 @@
     "isFirefox": true,
     "useOthers": true,
     "settings": true,
-    "settingsType": true
+    "settingsType": true,
+    "defaultSettings": true
   }
 }

@@ -1,3 +1,35 @@
+export const useOptionsStore = defineStore("options", () => {
+	const { isDark, toggleDark } = useTheme()
+
+	const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+
+	const profile = useBrowserSyncStorage<{
+		name: string
+		age: number
+		test: boolean
+	}>("profile", {
+		name: "Mario",
+		age: 24,
+		test: true,
+	})
+
+	const others = useBrowserLocalStorage<{
+		awesome: boolean
+		counter: number
+	}>("others", {
+		awesome: true,
+		counter: 0,
+	})
+
+	return {
+		profile,
+		isDark,
+		toggleDark,
+		settings,
+		others,
+	}
+})
+
 export type settingsType = {
 	Amazon: {
 		skipIntro: boolean
@@ -76,112 +108,81 @@ export type settingsType = {
 		GCdate: string
 	}
 }
-
-export const useOptionsStore = defineStore("options", () => {
-	const { isDark, toggleDark } = useTheme()
-
-	const settings = useBrowserSyncStorage<settingsType>("settings", {
-		Amazon: {
-			skipIntro: true,
-			skipCredits: true,
-			watchCredits: false,
-			skipAd: true,
-			blockFreevee: true,
-			speedSlider: true,
-			filterPaid: false,
-			continuePosition: true,
-			showRating: true,
-			xray: true,
-		},
-		Netflix: {
-			skipIntro: true,
-			skipRecap: true,
-			skipCredits: true,
-			watchCredits: false,
-			skipBlocked: true,
-			skipAd: true,
-			speedSlider: true,
-			profile: true,
-			showRating: true,
-		},
-		Disney: {
-			skipIntro: true,
-			skipCredits: true,
-			watchCredits: false,
-			skipAd: true,
-			speedSlider: true,
-			showRating: true,
-			selfAd: true,
-		},
-		Crunchyroll: {
-			skipIntro: true,
-			speedSlider: true,
-			releaseCalendar: true,
-			dubLanguage: null,
-			profile: true,
-			bigPlayer: true,
-			disableNumpad: true,
-		},
-		HBO: {
-			skipIntro: true,
-			skipCredits: true,
-			watchCredits: false,
-			speedSlider: true,
-			showRating: true,
-		},
-		Video: {
-			playOnFullScreen: true,
-			epilepsy: false,
-			userAgent: true,
-			doubleClick: true,
-			scrollVolume: true,
-			showYear: false,
-		},
-		Statistics: {
-			AmazonAdTimeSkipped: 0,
-			NetflixAdTimeSkipped: 0,
-			DisneyAdTimeSkipped: 0,
-			IntroTimeSkipped: 0,
-			RecapTimeSkipped: 0,
-			SegmentsSkipped: 0,
-		},
-		General: {
-			Crunchyroll_profilePicture: null,
-			profileName: null,
-			profilePicture: null,
-			sliderSteps: 1,
-			sliderMin: 5,
-			sliderMax: 20,
-			filterDub: true,
-			filterQueued: true,
-			savedCrunchyList: [],
-			GCdate: "2024-01-01",
-		},
-	})
-
-	const profile = useBrowserSyncStorage<{
-		name: string
-		age: number
-		test: boolean
-	}>("profile", {
-		name: "Mario",
-		age: 24,
-		test: true,
-	})
-
-	const others = useBrowserLocalStorage<{
-		awesome: boolean
-		counter: number
-	}>("others", {
-		awesome: true,
-		counter: 0,
-	})
-
-	return {
-		profile,
-		isDark,
-		toggleDark,
-		settings,
-		others,
-	}
-})
+export const defaultSettings = {
+	Amazon: {
+		skipIntro: true,
+		skipCredits: true,
+		watchCredits: false,
+		skipAd: true,
+		blockFreevee: true,
+		speedSlider: true,
+		filterPaid: false,
+		continuePosition: true,
+		showRating: true,
+		xray: true,
+	},
+	Netflix: {
+		skipIntro: true,
+		skipRecap: true,
+		skipCredits: true,
+		watchCredits: false,
+		skipBlocked: true,
+		skipAd: true,
+		speedSlider: true,
+		profile: true,
+		showRating: true,
+	},
+	Disney: {
+		skipIntro: true,
+		skipCredits: true,
+		watchCredits: false,
+		skipAd: true,
+		speedSlider: true,
+		showRating: true,
+		selfAd: true,
+	},
+	Crunchyroll: {
+		skipIntro: true,
+		speedSlider: true,
+		releaseCalendar: true,
+		dubLanguage: null,
+		profile: true,
+		bigPlayer: true,
+		disableNumpad: true,
+	},
+	HBO: {
+		skipIntro: true,
+		skipCredits: true,
+		watchCredits: false,
+		speedSlider: true,
+		showRating: true,
+	},
+	Video: {
+		playOnFullScreen: true,
+		epilepsy: false,
+		userAgent: true,
+		doubleClick: true,
+		scrollVolume: true,
+		showYear: false,
+	},
+	Statistics: {
+		AmazonAdTimeSkipped: 0,
+		NetflixAdTimeSkipped: 0,
+		DisneyAdTimeSkipped: 0,
+		IntroTimeSkipped: 0,
+		RecapTimeSkipped: 0,
+		SegmentsSkipped: 0,
+	},
+	General: {
+		Crunchyroll_profilePicture: null,
+		profileName: null,
+		profilePicture: null,
+		sliderSteps: 1,
+		sliderMin: 5,
+		sliderMax: 20,
+		filterDub: true,
+		filterQueued: true,
+		savedCrunchyList: [],
+		GCdate: "2024-01-01",
+	},
+}
