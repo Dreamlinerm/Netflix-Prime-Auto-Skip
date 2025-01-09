@@ -90,7 +90,7 @@
 }
 
 .popupMenuButton {
-	@apply rounded-lg p-5 bg-[#242424] cursor-pointer text-white flex items-center select-none;
+	@apply rounded-[15px] p-5 bg-[#242424] cursor-pointer text-white flex items-center select-none;
 }
 .popupMenuButton .icon {
 	@apply m-0 w-full h-auto;
