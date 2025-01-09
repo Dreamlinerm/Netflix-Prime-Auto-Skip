@@ -1,8 +1,5 @@
 <script setup lang="ts">
-const optionsStore = useOptionsStore()
+// go to Shared Setting Page
+const router = useRouter()
+router.push("/options-page/SharedSettings")
 </script>
-
-<template>
-	<RouterLinkUp />
-	Settings
-</template>
