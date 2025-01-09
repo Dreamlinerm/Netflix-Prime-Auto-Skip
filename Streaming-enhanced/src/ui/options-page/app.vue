@@ -42,7 +42,7 @@ const hash = ref(window.location.hash)
 				<RouterLink
 					to="/options-page/SharedSettings"
 					class="menuButton flex"
-					:class="hash.endsWith('SharedSettings') ? 'bg-[#e60010]' : 'bg-primary'"
+					:class="hash.endsWith('SharedSettings') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
 					@click="hash = 'SharedSettings'"
 				>
@@ -54,7 +54,7 @@ const hash = ref(window.location.hash)
 				<RouterLink
 					to="/options-page/Amazon"
 					class="menuButton flex"
-					:class="hash.endsWith('Amazon') ? 'bg-[#e60010]' : 'bg-primary'"
+					:class="hash.endsWith('Amazon') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
 					@click="hash = 'Amazon'"
 				>
@@ -68,7 +68,7 @@ const hash = ref(window.location.hash)
 				<RouterLink
 					to="/options-page/Netflix"
 					class="menuButton flex"
-					:class="hash.endsWith('Netflix') ? 'bg-[#e60010]' : 'bg-primary'"
+					:class="hash.endsWith('Netflix') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
 					@click="hash = 'Netflix'"
 				>
@@ -82,7 +82,7 @@ const hash = ref(window.location.hash)
 				<RouterLink
 					to="/options-page/Disney"
 					class="menuButton flex"
-					:class="hash.endsWith('Disney') ? 'bg-[#e60010]' : 'bg-primary'"
+					:class="hash.endsWith('Disney') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
 					@click="hash = 'Disney'"
 				>
@@ -96,7 +96,7 @@ const hash = ref(window.location.hash)
 				<RouterLink
 					to="/options-page/Crunchyroll"
 					class="menuButton flex"
-					:class="hash.endsWith('Crunchyroll') ? 'bg-[#e60010]' : 'bg-primary'"
+					:class="hash.endsWith('Crunchyroll') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
 					@click="hash = 'Crunchyroll'"
 				>
@@ -110,7 +110,7 @@ const hash = ref(window.location.hash)
 				<RouterLink
 					to="/options-page/Other"
 					class="menuButton flex"
-					:class="hash.endsWith('Other') ? 'bg-[#e60010]' : 'bg-primary'"
+					:class="hash.endsWith('Other') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
 					@click="hash = 'Other'"
 				>
@@ -120,7 +120,7 @@ const hash = ref(window.location.hash)
 				<RouterLink
 					to="/options-page/Statistics"
 					class="menuButton flex"
-					:class="hash.endsWith('Statistics') ? 'bg-[#e60010]' : 'bg-primary'"
+					:class="hash.endsWith('Statistics') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
 					@click="hash = 'Statistics'"
 				>
@@ -130,7 +130,7 @@ const hash = ref(window.location.hash)
 				<RouterLink
 					to="/options-page/Changelog"
 					class="menuButton flex"
-					:class="hash.endsWith('Changelog') ? 'bg-[#e60010]' : 'bg-primary'"
+					:class="hash.endsWith('Changelog') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
 					@click="hash = 'Changelog'"
 				>
