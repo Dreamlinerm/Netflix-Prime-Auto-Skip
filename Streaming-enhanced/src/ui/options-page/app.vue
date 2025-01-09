@@ -1,17 +1,280 @@
 <script setup lang="ts">
 import { Notivue, Notification } from "notivue"
+const version = __VERSION__
 </script>
-
 <template>
-	<div>
-		<div class="p-4 prose">
-			<RouterView />
+	<div
+		class="flex"
+		style="height: calc(min(100vh, 1800px))"
+	>
+		<div class="sidenav flex flex-col">
+			<div class="flex justify-center align-center flex-col IconBox">
+				<div class="flex justify-center align-center flex-row">
+					<img
+						class="Logo"
+						src="@/assets/Logo/NetflixAmazon Auto-Skip.svg"
+						alt="Logo"
+					/>
+					<div class="flex justify-center align-center flex-col">
+						<h2 class="title">
+							{{ $t("pageTitle") }}
+						</h2>
+						<p style="font-size: 1rem">{{ version }}</p>
+					</div>
+				</div>
+				<a
+					target="_blank"
+					class="flex justify-center align-center flex-col"
+					style="text-align: center; text-decoration: none"
+					href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"
+				>
+					<p style="font-size: 1rem">
+						{{ $t("rateNow") }}
+					</p>
+					<img
+						src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010"
+						alt="rating"
+					/>
+				</a>
+			</div>
+			<div
+				class="flex flex-col MenuButtons"
+				style="flex-wrap: wrap"
+			>
+				<a
+					href="#Video"
+					class="menuButton flex"
+					style="background-color: #e60010"
+					draggable="false"
+				>
+					<i-mdi-transit-connection-variant
+						width="100%"
+						height="100%"
+					/>
+					<div>
+						{{ $t("sharedSettings") }}
+					</div>
+				</a>
+				<a
+					href="#Amazon"
+					class="menuButton flex"
+					draggable="false"
+				>
+					<img
+						src="@/assets/MenuIcons/Amazon.svg"
+						alt="Amazon"
+						class="icon"
+					/>
+					<div>Prime Video</div>
+				</a>
+				<a
+					href="#Netflix"
+					class="menuButton flex"
+					draggable="false"
+				>
+					<img
+						src="@/assets/MenuIcons/Netflix.svg"
+						alt="Netflix"
+						class="icon"
+					/>
+					<div>Netflix</div>
+				</a>
+				<a
+					href="#Disney"
+					class="menuButton flex"
+					draggable="false"
+				>
+					<img
+						src="@/assets/MenuIcons/Disney.svg"
+						alt="Disney"
+						class="icon"
+					/>
+					<div>Disney+</div>
+				</a>
+				<a
+					href="#Crunchyroll"
+					class="menuButton flex"
+					draggable="false"
+				>
+					<img
+						src="@/assets/MenuIcons/Crunchyroll.svg"
+						alt="Crunchyroll"
+						class="icon"
+					/>
+					<div>Crunchyroll</div>
+				</a>
+				<a
+					href="#Other"
+					class="menuButton flex"
+					draggable="false"
+				>
+					<i-mdi-dots-horizontal
+						width="100%"
+						height="100%"
+					/>
+					<p>{{ $t("backup") }}</p>
+				</a>
+				<a
+					href="#Statistics"
+					class="menuButton flex"
+					draggable="false"
+				>
+					<i-mdi-chart-bar
+						width="100%"
+						height="100%"
+					/>
+					<p>{{ $t("statistics") }}</p>
+				</a>
+				<a
+					href="#Changelog"
+					class="menuButton flex"
+					draggable="false"
+				>
+					<i-mdi-format-list-bulleted
+						width="100%"
+						height="100%"
+					/>
+					<p>{{ $t("changelog") }}</p>
+				</a>
+			</div>
+			<div style="margin-top: auto">
+				<div
+					class="flex flex-col MenuButtons"
+					style="flex-wrap: wrap; margin-bottom: 10px"
+				>
+					<a
+						class="button flex flex justify-center align-center blueButtons"
+						style="margin: 5px 15px"
+						href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip"
+						target="_blank"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							class="icon"
+						>
+							<path
+								d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"
+							/>
+						</svg>
+						Github
+					</a>
+					<a
+						class="button flex flex justify-center align-center blueButtons"
+						style="margin: 5px 15px"
+						href="https://github.com/sponsors/Dreamlinerm"
+						target="_blank"
+					>
+						<i-mdi-gift
+							width="100%"
+							height="100%"
+						/>
+						<p>{{ $t("donate") }}</p>
+					</a>
+				</div>
+			</div>
 		</div>
+		<div
+			class="content flex flex-col"
+			style="overflow-y: auto; width: 100%"
+		>
+			<div class="page">
+				<div class="p-4 prose">
+					<RouterView />
+				</div>
 
-		<Notivue v-slot="item">
-			<Notification :item="item" />
-		</Notivue>
+				<Notivue v-slot="item">
+					<Notification :item="item" />
+				</Notivue>
+			</div>
+		</div>
 	</div>
 </template>
 
-<style scoped></style>
+<style scoped>
+/* The side navigation menu */
+.sidenav {
+	height: 100%;
+	background-color: #111;
+	padding: 0 10px;
+	gap: 20px;
+}
+.menuButton {
+	border-radius: 15px;
+	margin: 5px 15px;
+	padding: 13px 20px;
+	max-width: 400px;
+	background-color: #242424;
+	text-decoration: none;
+	white-space: nowrap; /*TODO: change according language*/
+	cursor: pointer;
+	color: white;
+	font-size: 1.5em;
+	user-select: none;
+	align-items: center;
+}
+/* When you mouse over the navigation links, change their color */
+.menuButton:hover {
+	background-color: #4d0000;
+}
+.IconBox {
+	padding: 20px 20px;
+}
+.Logo {
+	height: 3rem;
+}
+.title {
+	padding-top: unset;
+	padding-bottom: unset;
+}
+
+@media only screen and (max-width: 800px), only screen and (max-height: 600px) {
+	.menuButton p,
+	.menuButton div,
+	.IconBox {
+		display: none;
+	}
+	.MenuButtons {
+		padding-top: 5px;
+	}
+}
+@media only screen and (max-height: 800px), only screen and (max-width: 1000px) {
+	.MenuButtons {
+		flex-direction: row;
+		justify-content: center;
+	}
+	.menuButton {
+		margin: 5px;
+		padding: 5px 10px;
+	}
+	.blueButtons {
+		margin: 0 5px !important;
+		font-size: 1em;
+	}
+	body {
+		flex-direction: column;
+	}
+	.page {
+		padding: 0px;
+		margin: 0 15px 0 15px;
+		width: calc(100% - 30px);
+	}
+	.IconBox {
+		padding: 10px 0px 0px 0px;
+		flex-direction: row;
+	}
+	.sidenav {
+		height: auto;
+		display: block;
+	}
+}
+.content {
+	min-width: 500px;
+	min-height: 450px;
+	background-color: #212121;
+}
+.page {
+	padding: 80px 0 0 3%;
+	width: 97%;
+}
+</style>

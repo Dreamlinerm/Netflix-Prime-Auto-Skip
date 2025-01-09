@@ -11,6 +11,8 @@ declare module 'vue' {
     DisplayError: typeof import('./../components/state/DisplayError.vue')['default']
     IMdiChartBar: typeof import('~icons/mdi/chart-bar')['default']
     IMdiCog: typeof import('~icons/mdi/cog')['default']
+    IMdiDotsHorizontal: typeof import('~icons/mdi/dots-horizontal')['default']
+    IMdiFormatListBulleted: typeof import('~icons/mdi/format-list-bulleted')['default']
     IMdiGift: typeof import('~icons/mdi/gift')['default']
     IMdiTransitConnectionVariant: typeof import('~icons/mdi/transit-connection-variant')['default']
     IPhArrowLeft: typeof import('~icons/ph/arrow-left')['default']

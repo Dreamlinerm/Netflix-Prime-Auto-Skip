@@ -1,5 +1,11 @@
 <script setup lang="ts">
 const version = __VERSION__
+function openSettings() {
+	chrome.tabs.create({
+		active: true,
+		url: chrome.runtime.getURL("src/ui/options-page/index.html#"),
+	})
+}
 </script>
 
 <template>
@@ -68,9 +74,8 @@ const version = __VERSION__
 			<ul class="menu menu-horizontal menu-xs">
 				<li>
 					<a
-						href="index.html#/options-page/"
-						target="_blank"
 						class="flex gap-2 items-center"
+						@click="openSettings"
 					>
 						<i-mdi-cog />
 					</a>

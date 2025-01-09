@@ -15,7 +15,7 @@ chrome.runtime.onInstalled.addListener(async (opt) => {
 			// can know if we need to show the install page or update page.
 			// url: chrome.runtime.getURL("src/ui/setup/index.html#/setup/install"),
 			// url: chrome.runtime.getURL("src/ui/setup/index.html#/action-popup/"),
-			url: chrome.runtime.getURL("src/ui/setup/index.html#/options-page/SharedSettings"),
+			url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page"),
 		})
 	}
 
@@ -23,7 +23,7 @@ chrome.runtime.onInstalled.addListener(async (opt) => {
 		chrome.tabs.create({
 			active: true,
 			// url: chrome.runtime.getURL("src/ui/setup/index.html#/setup/update"),
-			url: chrome.runtime.getURL("src/ui/setup/index.html#/options-page/SharedSettings"),
+			url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page"),
 		})
 	}
 })
