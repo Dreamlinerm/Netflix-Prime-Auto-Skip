@@ -21,7 +21,7 @@ function mergeDeep(defaults: any, source: any): any {
 function checkType(defaultValue: any, value: any): boolean {
 	// Check if the value type is the same type as the default value or null
 	// there are only strings, booleans, nulls and arrays as types left
-	return typeof value === typeof defaultValue || value === null
+	return (typeof value === typeof defaultValue && Array.isArray(value) == Array.isArray(defaultValue)) || value === null
 }
 function isObject(value: any): boolean {
 	return value !== null && value instanceof Object && !Array.isArray(value)

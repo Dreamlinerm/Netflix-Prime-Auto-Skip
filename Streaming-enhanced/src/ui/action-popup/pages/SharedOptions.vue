@@ -1,4 +1,5 @@
 <template>
+	<!-- {{ JSON.stringify(settings) }} -->
 	<div class="p-1 m-0 flex">
 		<p>{{ $t("IntroSwitch") }}</p>
 		<Switch
