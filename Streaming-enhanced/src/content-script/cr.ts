@@ -39,7 +39,7 @@ function filterQueued(display: displayType) {
 				: display
 		}
 	})
-	if (display == "block" && settings.General.filterDub) filterDub("none")
+	if (display == "block" && settings.value.General.filterDub) filterDub("none")
 }
 
 function filterDub(display: displayType) {
@@ -51,7 +51,7 @@ function filterDub(display: displayType) {
 		)
 			element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
 	})
-	if (display == "block" && settings.General.filterQueued) filterQueued("none")
+	if (display == "block" && settings.value.General.filterQueued) filterQueued("none")
 }
 type FilterFunction = (display: displayType) => void
 function createFilterElement(
@@ -69,10 +69,11 @@ function createFilterElement(
 	input.checked = settingsValue
 	input.id = filterType
 	input.onclick = function () {
-		settings.General[filterType] = input.checked
+		settings.value.General[filterType] = input.checked
+		log("input.checked", input.checked)
 		filterFunction(input.checked ? "none" : "block")
 		// TODO: check if input.checked is correct
-		// settings.General[filterType] = (this as HTMLInputElement).checked
+		// settings.value.General[filterType] = (this as HTMLInputElement).checked
 		// filterFunction(this.checked ? "none" : "block")
 		//setStorage()
 	}
@@ -89,10 +90,10 @@ function addButtons() {
 	if (!toggleForm?.firstElementChild) return
 	toggleForm.style.display = "flex"
 	toggleForm.firstElementChild.appendChild(
-		createFilterElement("filterQueued", "Show Playlist only", settings.General.filterQueued, filterQueued),
+		createFilterElement("filterQueued", "Show Playlist only", settings.value.General.filterQueued, filterQueued),
 	)
 	toggleForm.firstElementChild.appendChild(
-		createFilterElement("filterDub", "Filter Dub", settings.General.filterDub, filterDub),
+		createFilterElement("filterDub", "Filter Dub", settings.value.General.filterDub, filterDub),
 	)
 }
 // start of add CrunchyList to Crunchyroll
@@ -176,7 +177,7 @@ function createLocalList() {
 	return localList
 }
 function filterOldList(isCurrentWeek: boolean, localList: CrunchyList) {
-	let oldList = settings.General.savedCrunchyList || []
+	let oldList = settings.value.General.savedCrunchyList || []
 	const lastElement = localList[localList.length - 1]
 	if (!lastElement?.time) return oldList
 	const lastTime = new Date(lastElement.time)
@@ -210,8 +211,8 @@ function addSavedCrunchyList() {
 	const localList = createLocalList()
 	const isCurrentWeek = clickOnCurrentDay()
 	const oldList =
-		localList.length > 0 ? filterOldList(isCurrentWeek, localList) : settings.General.savedCrunchyList || []
-	settings.General.savedCrunchyList = localList.concat(oldList)
+		localList.length > 0 ? filterOldList(isCurrentWeek, localList) : settings.value.General.savedCrunchyList || []
+	settings.value.General.savedCrunchyList = localList.concat(oldList)
 	//setStorage()
 	if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
 		// now add the old list to the website list
@@ -231,8 +232,8 @@ function addSavedCrunchyList() {
 async function Crunchyroll_ReleaseCalendar() {
 	if (url.includes("simulcastcalendar")) {
 		// Show playlist only
-		filterQueued(settings.General.filterQueued ? "none" : "block")
-		filterDub(settings.General.filterDub ? "none" : "block")
+		filterQueued(settings.value.General.filterQueued ? "none" : "block")
+		filterDub(settings.value.General.filterDub ? "none" : "block")
 		if (!document.querySelector("#filterQueued")) addButtons()
 		// add saved CrunchyList and click on current day
 		addSavedCrunchyList()
@@ -240,13 +241,13 @@ async function Crunchyroll_ReleaseCalendar() {
 }
 const CrunchyrollObserver = new MutationObserver(Crunchyroll)
 async function Crunchyroll() {
-	if (settings.Crunchyroll?.profile) Crunchyroll_profile()
+	if (settings.value.Crunchyroll?.profile) Crunchyroll_profile()
 }
 async function Crunchyroll_profile() {
 	// save profile
 	const img = document.querySelector(".erc-authenticated-user-menu img") as HTMLImageElement
-	if (img && img.src !== settings.General.Crunchyroll_profilePicture) {
-		settings.General.Crunchyroll_profilePicture = img.src
+	if (img && img.src !== settings.value.General.Crunchyroll_profilePicture) {
+		settings.value.General.Crunchyroll_profilePicture = img.src
 		//setStorage()
 		log("Profile switched to", img.src)
 	}
@@ -256,7 +257,7 @@ async function Crunchyroll_AutoPickProfile() {
 	if (document.querySelector(".profile-item-name")) {
 		document.querySelectorAll(".erc-profile-item img")?.forEach((element) => {
 			const img = element as HTMLImageElement
-			if (img.src === settings.General.Crunchyroll_profilePicture) {
+			if (img.src === settings.value.General.Crunchyroll_profilePicture) {
 				img.click()
 				log("Profile automatically chosen:", img.src)
 				increaseBadge()
