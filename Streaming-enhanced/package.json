@@ -10,7 +10,7 @@
 		"build:firefox": "vite build -c vite.firefox.config.ts",
 		"dev": "concurrently \"npm run dev:chrome\" \"npm run dev:firefox\"",
 		"dev:chrome": "vite -c vite.chrome.config.ts",
-		"dev:firefox": "vite build --mode development --watch -c vite.firefox.config.ts",
+		"dev:firefox": "NODE_ENV=development vite build --mode development --watch -c vite.firefox.config.ts",
 		"format": "prettier --write .",
 		"launch": "tsx scripts/launch.ts",
 		"launch:all": "tsx scripts/launch.ts --all",

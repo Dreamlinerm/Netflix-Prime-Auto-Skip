@@ -7,6 +7,7 @@ import ViteConfig from "./vite.config"
 import chalk from "chalk"
 
 const IS_DEV = process.env.NODE_ENV === "development"
+console.info("IS_DEV", IS_DEV)
 const browser = "firefox"
 const outDir = "dist"
 const browserOutDir = `${outDir}/${browser}`

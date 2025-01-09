@@ -107,61 +107,63 @@ const SliderPreview = ref(10)
 	</p>
 	<p>{{ $t("sliderOptions") }}</p>
 	<table>
-		<tr>
-			<td>
-				<p>{{ $t("sliderStepSize") }}</p>
-			</td>
-			<td>
-				<input
-					v-model="settings.General.sliderSteps"
-					type="number"
-					class="input border-inherit"
-				/>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<p>{{ $t("sliderMin") }}</p>
-			</td>
-			<td>
-				<input
-					v-model="settings.General.sliderMin"
-					type="number"
-					class="input border-inherit"
-				/>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<p>{{ $t("sliderMax") }}</p>
-			</td>
-			<td>
-				<input
-					v-model="settings.General.sliderMax"
-					type="number"
-					class="input border-inherit"
-				/>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<p>{{ $t("sliderPreview") }}</p>
-			</td>
-			<td>
-				<div class="flex">
+		<tbody>
+			<tr>
+				<td>
+					<p>{{ $t("sliderStepSize") }}</p>
+				</td>
+				<td>
 					<input
-						v-model="SliderPreview"
-						type="range"
-						:min="settings.General.sliderMin"
-						:max="settings.General.sliderMax"
-						value="1.0"
-						:step="settings.General.sliderSteps"
-						style="background: rgb(221, 221, 221); width: 200px"
+						v-model="settings.General.sliderSteps"
+						type="number"
+						class="input border-inherit"
 					/>
-					<p>{{ SliderPreview / 10 + "x" }}</p>
-				</div>
-			</td>
-		</tr>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>{{ $t("sliderMin") }}</p>
+				</td>
+				<td>
+					<input
+						v-model="settings.General.sliderMin"
+						type="number"
+						class="input border-inherit"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>{{ $t("sliderMax") }}</p>
+				</td>
+				<td>
+					<input
+						v-model="settings.General.sliderMax"
+						type="number"
+						class="input border-inherit"
+					/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p>{{ $t("sliderPreview") }}</p>
+				</td>
+				<td>
+					<div class="flex">
+						<input
+							v-model="SliderPreview"
+							type="range"
+							:min="settings.General.sliderMin"
+							:max="settings.General.sliderMax"
+							value="1.0"
+							:step="settings.General.sliderSteps"
+							style="background: rgb(221, 221, 221); width: 200px"
+						/>
+						<p>{{ SliderPreview / 10 + "x" }}</p>
+					</div>
+				</td>
+			</tr>
+		</tbody>
 	</table>
 	<!-- <div style="margin-top: 5%"></div> -->
 </template>
