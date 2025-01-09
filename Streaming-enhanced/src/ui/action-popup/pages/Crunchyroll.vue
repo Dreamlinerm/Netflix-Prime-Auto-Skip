@@ -1,44 +1,44 @@
 <template>
 	<div class="flex flex-align">
-		<h2 class="text-netflix">
-			{{ $t("PageSpecificTitle", ["Netflix"]) }}
+		<h2 class="text-crunchyroll">
+			{{ $t("PageSpecificTitle", ["Crunchyroll"]) }}
 		</h2>
 	</div>
 	<div class="line flex">
-		<p>{{ $t("RecapSwitch") }}</p>
+		<p>{{ $t("IntroSwitch") }}</p>
 		<Switch
-			v-model="settings.Netflix.skipRecap"
+			v-model="settings.Crunchyroll.skipIntro"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<div class="line flex">
-		<p>{{ $t("InactivitySwitch") }}</p>
+		<p>{{ $t("ReleaseCalendarSwitch") }}</p>
 		<Switch
-			v-model="settings.Netflix.skipBlocked"
+			v-model="settings.Crunchyroll.releaseCalendar"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<div class="line flex">
 		<p>{{ $t("ProfileSwitch") }}</p>
 		<Switch
-			v-model="settings.Netflix.profile"
+			v-model="settings.Crunchyroll.profile"
 			class="ml-auto"
 		></Switch>
 	</div>
-	<!-- <div class="line flex">
-			<p>{{ $t("User") }}</p>
-			<p
-				id="profileName"
-				style="text-transform: capitalize"
-			></p>
-			<img
-				id="profilePicture"
-				class="hidden"
-				style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px"
-				alt="profile Picture"
-				src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-			/>
-		</div> -->
+	<div class="line flex">
+		<p>{{ $t("BigPlayerSwitch") }}</p>
+		<Switch
+			v-model="settings.Crunchyroll.bigPlayer"
+			class="ml-auto"
+		></Switch>
+	</div>
+	<div class="line flex">
+		<p>{{ $t("DisableNumpadSwitch") }}</p>
+		<Switch
+			v-model="settings.Crunchyroll.disableNumpad"
+			class="ml-auto"
+		></Switch>
+	</div>
 </template>
 <script setup lang="ts">
 const optionsStore = useOptionsStore()
