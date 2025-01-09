@@ -8,14 +8,14 @@ const version = __VERSION__
 		style="height: calc(min(100vh, 1800px))"
 	>
 		<div class="sidenav flex flex-col">
-			<div class="flex justify-center align-center flex-col IconBox">
-				<div class="flex justify-center align-center flex-row">
+			<div class="flex justify-center items-center flex-col IconBox">
+				<div class="flex justify-center items-center flex-row">
 					<img
 						class="Logo"
 						src="@/assets/Logo/NetflixAmazon Auto-Skip.svg"
 						alt="Logo"
 					/>
-					<div class="flex justify-center align-center flex-col">
+					<div class="flex justify-center items-center flex-col">
 						<h2 class="title">
 							{{ $t("pageTitle") }}
 						</h2>
@@ -24,7 +24,7 @@ const version = __VERSION__
 				</div>
 				<a
 					target="_blank"
-					class="flex justify-center align-center flex-col"
+					class="flex justify-center items-center flex-col"
 					style="text-align: center; text-decoration: none"
 					href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"
 				>
@@ -34,23 +34,18 @@ const version = __VERSION__
 					<img
 						src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010"
 						alt="rating"
+						class="w-24"
 					/>
 				</a>
 			</div>
-			<div
-				class="flex flex-col MenuButtons"
-				style="flex-wrap: wrap"
-			>
+			<div class="flex flex-col MenuButtons flex-wrap">
 				<a
 					href="#Video"
 					class="menuButton flex"
 					style="background-color: #e60010"
 					draggable="false"
 				>
-					<i-mdi-transit-connection-variant
-						width="100%"
-						height="100%"
-					/>
+					<i-mdi-transit-connection-variant class="icon" />
 					<div>
 						{{ $t("sharedSettings") }}
 					</div>
@@ -108,10 +103,7 @@ const version = __VERSION__
 					class="menuButton flex"
 					draggable="false"
 				>
-					<i-mdi-dots-horizontal
-						width="100%"
-						height="100%"
-					/>
+					<i-mdi-dots-horizontal class="icon" />
 					<p>{{ $t("backup") }}</p>
 				</a>
 				<a
@@ -119,10 +111,7 @@ const version = __VERSION__
 					class="menuButton flex"
 					draggable="false"
 				>
-					<i-mdi-chart-bar
-						width="100%"
-						height="100%"
-					/>
+					<i-mdi-chart-bar class="icon" />
 					<p>{{ $t("statistics") }}</p>
 				</a>
 				<a
@@ -130,10 +119,7 @@ const version = __VERSION__
 					class="menuButton flex"
 					draggable="false"
 				>
-					<i-mdi-format-list-bulleted
-						width="100%"
-						height="100%"
-					/>
+					<i-mdi-format-list-bulleted class="icon" />
 					<p>{{ $t("changelog") }}</p>
 				</a>
 			</div>
@@ -143,7 +129,7 @@ const version = __VERSION__
 					style="flex-wrap: wrap; margin-bottom: 10px"
 				>
 					<a
-						class="button flex flex justify-center align-center blueButtons"
+						class="button flex flex justify-center items-center blueButtons"
 						style="margin: 5px 15px"
 						href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip"
 						target="_blank"
@@ -160,15 +146,12 @@ const version = __VERSION__
 						Github
 					</a>
 					<a
-						class="button flex flex justify-center align-center blueButtons"
+						class="button flex flex justify-center items-center blueButtons"
 						style="margin: 5px 15px"
 						href="https://github.com/sponsors/Dreamlinerm"
 						target="_blank"
 					>
-						<i-mdi-gift
-							width="100%"
-							height="100%"
-						/>
+						<i-mdi-gift class="icon" />
 						<p>{{ $t("donate") }}</p>
 					</a>
 				</div>
@@ -197,7 +180,7 @@ const version = __VERSION__
 	@apply h-full bg-[#111] px-2.5 gap-5;
 }
 .menuButton {
-	@apply rounded-[15px] m-[5px_15px] p-[13px_20px] max-w-[400px] no-underline whitespace-nowrap cursor-pointer text-primary-content text-[1.5rem] select-none items-center;
+	@apply bg-primary rounded-[15px] m-[5px_15px] p-[13px_20px] max-w-[400px] no-underline whitespace-nowrap cursor-pointer text-primary-content text-[1.5rem] select-none items-center;
 	/*TODO: change whitespace according language*/
 }
 /* When you mouse over the navigation links, change their color */
@@ -221,7 +204,13 @@ const version = __VERSION__
 	@apply p-[80px_0_0_3%] w-[97%];
 }
 
-@media only screen and (max-width: 800px), only screen and (max-height: 600px) {
+.icon {
+	width: 2rem;
+	height: 2rem;
+	margin: 0 5px;
+}
+
+/* @media only screen and (max-width: 800px), only screen and (max-height: 600px) {
 	.menuButton p,
 	.menuButton div,
 	.IconBox {
@@ -260,5 +249,5 @@ const version = __VERSION__
 		height: auto;
 		display: block;
 	}
-}
+} */
 </style>
