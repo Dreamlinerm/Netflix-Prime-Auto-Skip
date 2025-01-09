@@ -115,13 +115,15 @@ const skipCredits = computed({
 				settings.value[service].skipCredits = value
 			}
 		})
-		streamingServices.forEach((service) => {
-			// @ts-expect-error ?. handles the error
-			if (settings.value[service]?.watchCredits !== undefined) {
+		if (value) {
+			streamingServices.forEach((service) => {
 				// @ts-expect-error ?. handles the error
-				settings.value[service].watchCredits = !value
-			}
-		})
+				if (settings.value[service]?.watchCredits !== undefined) {
+					// @ts-expect-error ?. handles the error
+					settings.value[service].watchCredits = !value
+				}
+			})
+		}
 	},
 })
 
@@ -136,13 +138,15 @@ const watchCredits = computed({
 				settings.value[service].watchCredits = value
 			}
 		})
-		streamingServices.forEach((service) => {
-			// @ts-expect-error ?. handles the error
-			if (settings.value[service]?.skipCredits !== undefined) {
+		if (value) {
+			streamingServices.forEach((service) => {
 				// @ts-expect-error ?. handles the error
-				settings.value[service].skipCredits = !value
-			}
-		})
+				if (settings.value[service]?.skipCredits !== undefined) {
+					// @ts-expect-error ?. handles the error
+					settings.value[service].skipCredits = !value
+				}
+			})
+		}
 	},
 })
 const blockAds = computed({

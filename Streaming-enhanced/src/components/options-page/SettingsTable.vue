@@ -67,26 +67,26 @@
 			</td>
 			<td>
 				<Switch
-					v-model="settings.Netflix.skipCredits"
+					v-model="NetflixSkipCredits"
 					class="ml-auto"
 				></Switch>
 			</td>
 			<td>
 				<Switch
-					v-model="settings.Amazon.skipCredits"
+					v-model="AmazonSkipCredits"
 					class="ml-auto"
 				></Switch>
 			</td>
 			<td>
 				<Switch
-					v-model="settings.Disney.skipCredits"
+					v-model="DisneySkipCredits"
 					class="ml-auto"
 				></Switch>
 			</td>
 			<td>➖</td>
 			<td>
 				<Switch
-					v-model="settings.HBO.skipCredits"
+					v-model="HBOSkipCredits"
 					class="ml-auto"
 				></Switch>
 			</td>
@@ -104,26 +104,26 @@
 			</td>
 			<td>
 				<Switch
-					v-model="settings.Netflix.watchCredits"
+					v-model="NetflixWatchCredits"
 					class="ml-auto"
 				></Switch>
 			</td>
 			<td>
 				<Switch
-					v-model="settings.Amazon.watchCredits"
+					v-model="AmazonWatchCredits"
 					class="ml-auto"
 				></Switch>
 			</td>
 			<td>
 				<Switch
-					v-model="settings.Disney.watchCredits"
+					v-model="DisneyWatchCredits"
 					class="ml-auto"
 				></Switch>
 			</td>
 			<td>➖</td>
 			<td>
 				<Switch
-					v-model="settings.HBO.watchCredits"
+					v-model="HBOWatchCredits"
 					class="ml-auto"
 				></Switch>
 			</td>
@@ -269,13 +269,73 @@ const skipCredits = computed({
 				settings.value[service].skipCredits = value
 			}
 		})
-		streamingServices.forEach((service) => {
-			// @ts-expect-error ?. handles the error
-			if (settings.value[service]?.watchCredits !== undefined) {
+		if (value) {
+			streamingServices.forEach((service) => {
 				// @ts-expect-error ?. handles the error
-				settings.value[service].watchCredits = !value
-			}
-		})
+				if (settings.value[service]?.watchCredits !== undefined) {
+					// @ts-expect-error ?. handles the error
+					settings.value[service].watchCredits = !value
+				}
+			})
+		}
+	},
+})
+
+const AmazonSkipCredits = computed({
+	get: () => settings.value.Amazon.skipCredits,
+	set: (value) => {
+		settings.value.Amazon.skipCredits = value
+		if (value) settings.value.Amazon.watchCredits = !value
+	},
+})
+const NetflixSkipCredits = computed({
+	get: () => settings.value.Netflix.skipCredits,
+	set: (value) => {
+		settings.value.Netflix.skipCredits = value
+		if (value) settings.value.Netflix.watchCredits = !value
+	},
+})
+const DisneySkipCredits = computed({
+	get: () => settings.value.Disney.skipCredits,
+	set: (value) => {
+		settings.value.Disney.skipCredits = value
+		if (value) settings.value.Disney.watchCredits = !value
+	},
+})
+const HBOSkipCredits = computed({
+	get: () => settings.value.HBO.skipCredits,
+	set: (value) => {
+		settings.value.HBO.skipCredits = value
+		if (value) settings.value.HBO.watchCredits = !value
+	},
+})
+
+const AmazonWatchCredits = computed({
+	get: () => settings.value.Amazon.watchCredits,
+	set: (value) => {
+		settings.value.Amazon.watchCredits = value
+		if (value) settings.value.Amazon.skipCredits = !value
+	},
+})
+const NetflixWatchCredits = computed({
+	get: () => settings.value.Netflix.watchCredits,
+	set: (value) => {
+		settings.value.Netflix.watchCredits = value
+		if (value) settings.value.Netflix.skipCredits = !value
+	},
+})
+const DisneyWatchCredits = computed({
+	get: () => settings.value.Disney.watchCredits,
+	set: (value) => {
+		settings.value.Disney.watchCredits = value
+		if (value) settings.value.Disney.skipCredits = !value
+	},
+})
+const HBOWatchCredits = computed({
+	get: () => settings.value.HBO.watchCredits,
+	set: (value) => {
+		settings.value.HBO.watchCredits = value
+		if (value) settings.value.HBO.skipCredits = !value
 	},
 })
 
@@ -290,13 +350,15 @@ const watchCredits = computed({
 				settings.value[service].watchCredits = value
 			}
 		})
-		streamingServices.forEach((service) => {
-			// @ts-expect-error ?. handles the error
-			if (settings.value[service]?.skipCredits !== undefined) {
+		if (value) {
+			streamingServices.forEach((service) => {
 				// @ts-expect-error ?. handles the error
-				settings.value[service].skipCredits = !value
-			}
-		})
+				if (settings.value[service]?.skipCredits !== undefined) {
+					// @ts-expect-error ?. handles the error
+					settings.value[service].skipCredits = !value
+				}
+			})
+		}
 	},
 })
 const skipAd = computed({

@@ -113,7 +113,7 @@ const SliderPreview = ref(1.0)
 				<input
 					v-model="settings.General.sliderSteps"
 					type="number"
-					class="input"
+					class="input border-inherit"
 				/>
 			</td>
 		</tr>
@@ -125,7 +125,7 @@ const SliderPreview = ref(1.0)
 				<input
 					v-model="settings.General.sliderMin"
 					type="number"
-					class="input"
+					class="input border-inherit"
 				/>
 			</td>
 		</tr>
@@ -137,7 +137,7 @@ const SliderPreview = ref(1.0)
 				<input
 					v-model="settings.General.sliderMax"
 					type="number"
-					class="input"
+					class="input border-inherit"
 				/>
 			</td>
 		</tr>
