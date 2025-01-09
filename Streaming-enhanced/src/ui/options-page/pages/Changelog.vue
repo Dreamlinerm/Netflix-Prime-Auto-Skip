@@ -10,9 +10,6 @@ const changelog = __CHANGELOG__
 
 <template>
 	<div>
-		<RouterLinkUp />
-		test
-
 		<p>Version: {{ version }}</p>
 		<!-- eslint-disable vue/no-v-html -->
 		<div

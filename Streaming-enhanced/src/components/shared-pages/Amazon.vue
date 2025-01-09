@@ -1,6 +1,6 @@
 <template>
 	<div class="flex items-center">
-		<RouterLinkUp />
+		<RouterLinkUp v-if="!advancedSettings" />
 		<h1 class="text-amazon">
 			{{ $t("pageSpecificTitle", ["Prime Video"]) }}
 		</h1>
