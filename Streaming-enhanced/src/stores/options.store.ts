@@ -3,30 +3,10 @@ export const useOptionsStore = defineStore("options", () => {
 
 	const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 
-	const profile = useBrowserSyncStorage<{
-		name: string
-		age: number
-		test: boolean
-	}>("profile", {
-		name: "Mario",
-		age: 24,
-		test: true,
-	})
-
-	const others = useBrowserLocalStorage<{
-		awesome: boolean
-		counter: number
-	}>("others", {
-		awesome: true,
-		counter: 0,
-	})
-
 	return {
-		profile,
 		isDark,
 		toggleDark,
 		settings,
-		others,
 	}
 })
 

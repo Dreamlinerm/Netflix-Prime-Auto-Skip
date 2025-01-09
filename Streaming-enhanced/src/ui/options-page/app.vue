@@ -4,8 +4,6 @@ import { Notivue, Notification } from "notivue"
 
 <template>
 	<div>
-		<AppHeader />
-
 		<div class="p-4 prose">
 			<RouterView />
 		</div>
