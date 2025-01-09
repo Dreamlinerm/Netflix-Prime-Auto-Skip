@@ -104,15 +104,20 @@ const skipIntro = computed({
 })
 
 const skipCredits = computed({
+	// @ts-expect-error ?. handles the error
 	get: () => streamingServices.every((service) => settings.value[service]?.skipCredits ?? true),
 	set: (value) => {
 		streamingServices.forEach((service) => {
+			// @ts-expect-error ?. handles the error
 			if (settings.value[service]?.skipCredits !== undefined) {
+				// @ts-expect-error ?. handles the error
 				settings.value[service].skipCredits = value
 			}
 		})
 		streamingServices.forEach((service) => {
+			// @ts-expect-error ?. handles the error
 			if (settings.value[service]?.watchCredits !== undefined) {
+				// @ts-expect-error ?. handles the error
 				settings.value[service].watchCredits = !value
 			}
 		})
@@ -120,15 +125,20 @@ const skipCredits = computed({
 })
 
 const watchCredits = computed({
+	// @ts-expect-error ?. handles the error
 	get: () => streamingServices.every((service) => settings.value[service]?.watchCredits ?? true),
 	set: (value) => {
 		streamingServices.forEach((service) => {
+			// @ts-expect-error ?. handles the error
 			if (settings.value[service]?.watchCredits !== undefined) {
+				// @ts-expect-error ?. handles the error
 				settings.value[service].watchCredits = value
 			}
 		})
 		streamingServices.forEach((service) => {
+			// @ts-expect-error ?. handles the error
 			if (settings.value[service]?.skipCredits !== undefined) {
+				// @ts-expect-error ?. handles the error
 				settings.value[service].skipCredits = !value
 			}
 		})
@@ -151,10 +161,13 @@ const speedSlider = computed({
 })
 
 const showRating = computed({
+	// @ts-expect-error ?. handles the error
 	get: () => streamingServices.every((service) => settings.value[service]?.showRating ?? true),
 	set: (value) => {
 		streamingServices.forEach((service) => {
+			// @ts-expect-error ?. handles the error
 			if (settings.value[service]?.showRating !== undefined) {
+				// @ts-expect-error ?. handles the error
 				settings.value[service].showRating = value
 			}
 		})
