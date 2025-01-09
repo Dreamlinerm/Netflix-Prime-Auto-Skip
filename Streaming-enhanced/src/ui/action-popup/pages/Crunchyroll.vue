@@ -1,5 +1,6 @@
 <template>
 	<div class="flex items-center">
+		<RouterLinkUp />
 		<h2 class="text-crunchyroll">
 			{{ $t("PageSpecificTitle", ["Crunchyroll"]) }}
 		</h2>

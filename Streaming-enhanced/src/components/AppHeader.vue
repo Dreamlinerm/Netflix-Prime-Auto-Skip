@@ -67,12 +67,13 @@ const version = __VERSION__
 		<div class="flex-none">
 			<ul class="menu menu-horizontal menu-xs">
 				<li>
-					<RouterLink
-						to="/options-page"
+					<a
+						href="index.html#/options-page/"
+						target="_blank"
 						class="flex gap-2 items-center"
 					>
 						<i-mdi-cog />
-					</RouterLink>
+					</a>
 				</li>
 				<li>
 					<LocaleSwitch />
