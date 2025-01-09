@@ -5,19 +5,19 @@
 			{{ $t("pageSpecificTitle", ["Disney"]) }}
 		</h2>
 	</div>
-	<div class="line flex">
+	<div class="p-1 m-0 flex">
 		<p>{{ $t("selfAdSwitch") }}</p>
 		<Switch
 			v-model="settings.Disney.selfAd"
 			class="ml-auto"
 		></Switch>
-		<p
-			v-if="advancedSettings"
-			class="description"
-		>
+	</div>
+	<template v-if="advancedSettings">
+		<p class="description">
 			{{ $t("selfAdDescription") }}
 		</p>
-	</div>
+		<hr />
+	</template>
 </template>
 <script setup lang="ts">
 const optionsStore = useOptionsStore()

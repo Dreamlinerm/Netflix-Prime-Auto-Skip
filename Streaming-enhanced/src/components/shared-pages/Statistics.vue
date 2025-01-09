@@ -5,27 +5,27 @@
 			{{ $t("skippedTime") }}
 		</h2>
 	</div>
-	<div class="line flex flex-between">
+	<div class="p-1 m-0 flex justify-between">
 		<p>{{ $t("statisticAd", ["Amazon"]) }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.AmazonAdTimeSkipped) }}</p>
 	</div>
-	<div class="line flex flex-between">
+	<div class="p-1 m-0 flex justify-between">
 		<p>{{ $t("statisticAd", ["Netflix"]) }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.NetflixAdTimeSkipped) }}</p>
 	</div>
-	<div class="line flex flex-between">
+	<div class="p-1 m-0 flex justify-between">
 		<p>{{ $t("statisticAd", ["Disney"]) }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.DisneyAdTimeSkipped) }}</p>
 	</div>
-	<div class="line flex flex-between">
+	<div class="p-1 m-0 flex justify-between">
 		<p>{{ $t("statisticIntro") }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.IntroTimeSkipped) }}</p>
 	</div>
-	<div class="line flex flex-between">
+	<div class="p-1 m-0 flex justify-between">
 		<p>{{ $t("statisticRecap") }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.RecapTimeSkipped) }}</p>
 	</div>
-	<div class="line flex flex-between">
+	<div class="p-1 m-0 flex justify-between">
 		<p>{{ $t("statisticSegments") }}</p>
 		<p>{{ settings.Statistics.SegmentsSkipped }}</p>
 	</div>

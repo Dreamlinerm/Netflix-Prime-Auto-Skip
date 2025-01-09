@@ -12,3 +12,14 @@ p {
 .description {
 	@apply text-base p-[10px_80px_20px_20px];
 }
+
+h1,
+h2,
+h3,
+p {
+	@apply py-1 m-0;
+}
+
+hr {
+	@apply my-1;
+}

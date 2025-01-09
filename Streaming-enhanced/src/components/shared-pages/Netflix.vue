@@ -5,24 +5,25 @@
 			{{ $t("pageSpecificTitle", ["Netflix"]) }}
 		</h2>
 	</div>
-	<div
+	<template
 		v-for="setting in settingsList"
 		:key="setting"
-		class="line flex"
 	>
-		<p>{{ $t(setting + "Switch") }}</p>
-		<Switch
-			v-model="settings.Netflix[setting]"
-			class="ml-auto"
-		></Switch>
-		<p
-			v-if="advancedSettings"
-			class="description"
-		>
-			{{ $t(setting + "Description") }}
-		</p>
-	</div>
-	<!-- <div class="line flex">
+		<div class="p-1 m-0 flex">
+			<p>{{ $t(setting + "Switch") }}</p>
+			<Switch
+				v-model="settings.Netflix[setting]"
+				class="ml-auto"
+			></Switch>
+		</div>
+		<template v-if="advancedSettings">
+			<p class="description">
+				{{ $t(setting + "Description") }}
+			</p>
+			<hr />
+		</template>
+	</template>
+	<!-- <div class="p-1 m-0 flex">
 			<p>{{ $t("user") }}</p>
 			<p
 				id="profileName"
