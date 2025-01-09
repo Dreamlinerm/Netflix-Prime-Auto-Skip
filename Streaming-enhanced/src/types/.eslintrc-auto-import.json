@@ -366,6 +366,8 @@
     "useOthers": true,
     "settings": true,
     "settingsType": true,
-    "defaultSettings": true
+    "defaultSettings": true,
+    "log": true,
+    "increaseBadge": true
   }
 }
