@@ -274,7 +274,7 @@ const skipCredits = computed({
 				// @ts-expect-error ?. handles the error
 				if (settings.value[service]?.watchCredits !== undefined) {
 					// @ts-expect-error ?. handles the error
-					settings.value[service].watchCredits = !value
+					settings.value[service].watchCredits = false
 				}
 			})
 		}
@@ -285,28 +285,28 @@ const AmazonSkipCredits = computed({
 	get: () => settings.value.Amazon.skipCredits,
 	set: (value) => {
 		settings.value.Amazon.skipCredits = value
-		if (value) settings.value.Amazon.watchCredits = !value
+		if (value) settings.value.Amazon.watchCredits = false
 	},
 })
 const NetflixSkipCredits = computed({
 	get: () => settings.value.Netflix.skipCredits,
 	set: (value) => {
 		settings.value.Netflix.skipCredits = value
-		if (value) settings.value.Netflix.watchCredits = !value
+		if (value) settings.value.Netflix.watchCredits = false
 	},
 })
 const DisneySkipCredits = computed({
 	get: () => settings.value.Disney.skipCredits,
 	set: (value) => {
 		settings.value.Disney.skipCredits = value
-		if (value) settings.value.Disney.watchCredits = !value
+		if (value) settings.value.Disney.watchCredits = false
 	},
 })
 const HBOSkipCredits = computed({
 	get: () => settings.value.HBO.skipCredits,
 	set: (value) => {
 		settings.value.HBO.skipCredits = value
-		if (value) settings.value.HBO.watchCredits = !value
+		if (value) settings.value.HBO.watchCredits = false
 	},
 })
 
@@ -314,28 +314,28 @@ const AmazonWatchCredits = computed({
 	get: () => settings.value.Amazon.watchCredits,
 	set: (value) => {
 		settings.value.Amazon.watchCredits = value
-		if (value) settings.value.Amazon.skipCredits = !value
+		if (value) settings.value.Amazon.skipCredits = false
 	},
 })
 const NetflixWatchCredits = computed({
 	get: () => settings.value.Netflix.watchCredits,
 	set: (value) => {
 		settings.value.Netflix.watchCredits = value
-		if (value) settings.value.Netflix.skipCredits = !value
+		if (value) settings.value.Netflix.skipCredits = false
 	},
 })
 const DisneyWatchCredits = computed({
 	get: () => settings.value.Disney.watchCredits,
 	set: (value) => {
 		settings.value.Disney.watchCredits = value
-		if (value) settings.value.Disney.skipCredits = !value
+		if (value) settings.value.Disney.skipCredits = false
 	},
 })
 const HBOWatchCredits = computed({
 	get: () => settings.value.HBO.watchCredits,
 	set: (value) => {
 		settings.value.HBO.watchCredits = value
-		if (value) settings.value.HBO.skipCredits = !value
+		if (value) settings.value.HBO.skipCredits = false
 	},
 })
 
@@ -355,7 +355,7 @@ const watchCredits = computed({
 				// @ts-expect-error ?. handles the error
 				if (settings.value[service]?.skipCredits !== undefined) {
 					// @ts-expect-error ?. handles the error
-					settings.value[service].skipCredits = !value
+					settings.value[service].skipCredits = false
 				}
 			})
 		}

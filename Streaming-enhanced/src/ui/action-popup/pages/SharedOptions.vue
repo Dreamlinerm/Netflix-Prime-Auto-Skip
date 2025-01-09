@@ -120,7 +120,7 @@ const skipCredits = computed({
 				// @ts-expect-error ?. handles the error
 				if (settings.value[service]?.watchCredits !== undefined) {
 					// @ts-expect-error ?. handles the error
-					settings.value[service].watchCredits = !value
+					settings.value[service].watchCredits = false
 				}
 			})
 		}
@@ -143,7 +143,7 @@ const watchCredits = computed({
 				// @ts-expect-error ?. handles the error
 				if (settings.value[service]?.skipCredits !== undefined) {
 					// @ts-expect-error ?. handles the error
-					settings.value[service].skipCredits = !value
+					settings.value[service].skipCredits = false
 				}
 			})
 		}
