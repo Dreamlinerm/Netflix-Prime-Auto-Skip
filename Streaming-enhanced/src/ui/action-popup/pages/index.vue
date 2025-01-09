@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-	<div class="flex justify-between flex-col max-w-[500px] flex-grow">
+	<div class="grid grid-cols-3 gap-4">
 		<RouterLink
 			to="/action-popup/SharedOptions"
 			class="popupMenuButton flex"
@@ -84,10 +84,8 @@
 
 <style scoped>
 .popupMenuButton {
-	flex: 1 0 calc(25% - 30px);
 	border-radius: 15px;
 	padding: 20px;
-	margin: 10px;
 	background-color: #242424;
 	cursor: pointer;
 	color: white;
