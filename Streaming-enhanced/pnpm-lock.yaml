@@ -29,6 +29,10 @@ importers:
       webextension-polyfill:
         specifier: ^0.12.0
         version: 0.12.0
+    optionalDependencies:
+      win-node-env:
+        specifier: ^0.6.1
+        version: 0.6.1
     devDependencies:
       '@crxjs/vite-plugin':
         specifier: 2.0.0-beta.29
@@ -4365,6 +4369,11 @@ packages:
   widest-line@5.0.0:
     resolution: {integrity: sha512-c9bZp7b5YtRj2wOe6dlj32MK+Bx/M/d+9VB2SHM1OtsUHR0aV0tdP6DWh/iMt0kWi1t5g1Iudu6hQRNd1A4PVA==}
     engines: {node: '>=18'}
+
+  win-node-env@0.6.1:
+    resolution: {integrity: sha512-oR+MLQ6jdvwqkLEkKBYxRvBOYbTlQV9dJKn8vLzjA4HCzcqdlCE6H1oOvA7lAdCgNXiOX0xfjl/Y47ZcZN6FDA==}
+    os: [win32]
+    hasBin: true
 
   winreg@0.0.12:
     resolution: {integrity: sha512-typ/+JRmi7RqP1NanzFULK36vczznSNN8kWVA9vIqXyv8GhghUlwhGp1Xj3Nms1FsPcNnsQrJOR10N58/nQ9hQ==}
@@ -9034,6 +9043,9 @@ snapshots:
   widest-line@5.0.0:
     dependencies:
       string-width: 7.2.0
+
+  win-node-env@0.6.1:
+    optional: true
 
   winreg@0.0.12: {}
 

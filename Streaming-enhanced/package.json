@@ -104,5 +104,8 @@
 		"type": "git",
 		"url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip"
 	},
-	"type": "module"
+	"type": "module",
+	"optionalDependencies": {
+		"win-node-env": "^0.6.1"
+	}
 }
