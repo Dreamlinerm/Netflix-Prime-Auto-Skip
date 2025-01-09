@@ -56,7 +56,7 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	chrome.storage.sync.onChanged.addListener(function (changes) {
 		if (changes?.[key]) {
 			isUpdatingFromStorage = true
-			const { oldValue, newValue } = changes.settings
+			const { oldValue, newValue } = changes[key]
 			data.value = newValue
 			setTimeout(() => {
 				isUpdatingFromStorage = false
@@ -92,7 +92,7 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	chrome.storage.local.onChanged.addListener(function (changes) {
 		if (changes?.[key]) {
 			isUpdatingFromStorage = true
-			const { oldValue, newValue } = changes.settings
+			const { oldValue, newValue } = changes[key]
 			data.value = newValue
 			setTimeout(() => {
 				isUpdatingFromStorage = false
