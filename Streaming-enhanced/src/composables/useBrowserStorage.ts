@@ -32,6 +32,7 @@ function isObject(value: any): boolean {
 
 export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	const data = ref<T>(defaultValue)
+	let isUpdatingFromStorage = false
 	// Initialize storage with the value from chrome.storage.sync
 	chrome.storage.sync.get(key, (result) => {
 		if (result?.[key] !== undefined) {
@@ -47,15 +48,27 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	watch(
 		data,
 		(newValue) => {
-			chrome.storage.sync.set({ [key]: toRaw(newValue) })
+			if (!isUpdatingFromStorage) chrome.storage.sync.set({ [key]: toRaw(newValue) })
 		},
 		{ deep: true },
 	)
+	// Add the onChanged listener here
+	chrome.storage.sync.onChanged.addListener(function (changes) {
+		if (changes?.[key]) {
+			isUpdatingFromStorage = true
+			const { oldValue, newValue } = changes.settings
+			data.value = newValue
+			setTimeout(() => {
+				isUpdatingFromStorage = false
+			}, 5)
+		}
+	})
 	return data
 }
 
 export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	const data = ref<T>(defaultValue)
+	let isUpdatingFromStorage = false
 	// Initialize storage with the value from chrome.storage.local
 	chrome.storage.local.get(key, (result) => {
 		if (result?.[key] !== undefined) {
@@ -71,9 +84,20 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	watch(
 		data,
 		(newValue) => {
-			chrome.storage.local.set({ [key]: toRaw(newValue) })
+			if (!isUpdatingFromStorage) chrome.storage.local.set({ [key]: toRaw(newValue) })
 		},
 		{ deep: true },
 	)
+	// Add the onChanged listener here
+	chrome.storage.local.onChanged.addListener(function (changes) {
+		if (changes?.[key]) {
+			isUpdatingFromStorage = true
+			const { oldValue, newValue } = changes.settings
+			data.value = newValue
+			setTimeout(() => {
+				isUpdatingFromStorage = false
+			}, 5)
+		}
+	})
 	return data
 }
