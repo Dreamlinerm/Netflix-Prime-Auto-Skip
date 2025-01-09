@@ -13,7 +13,7 @@ module.exports = {
 	},
 	plugins: [
 		"prettier-plugin-tailwindcss",
-		require("@tailwindcss/typography"),
+		// require("@tailwindcss/typography"),
 		// require('@tailwindcss/forms'),
 		require("daisyui"),
 	],
