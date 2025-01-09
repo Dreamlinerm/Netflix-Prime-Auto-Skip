@@ -7,7 +7,6 @@ import ViteConfig from "./vite.config"
 import chalk from "chalk"
 
 const IS_DEV = process.env.NODE_ENV === "development"
-console.info("IS_DEV", IS_DEV)
 const browser = "firefox"
 const outDir = "dist"
 const browserOutDir = `${outDir}/${browser}`
@@ -51,6 +50,11 @@ if (!ViteConfig.plugins) {
 }
 
 ViteConfig.build.outDir = browserOutDir
+
+if (IS_DEV) {
+	ViteConfig.build.minify = false
+	ViteConfig.build.sourcemap = true
+}
 
 ViteConfig.plugins.unshift(
 	crx({
