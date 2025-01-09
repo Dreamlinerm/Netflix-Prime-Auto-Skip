@@ -18,40 +18,9 @@
 		<div class="flex-none">
 			<ul class="menu menu-horizontal menu-xs">
 				<li>
-					<RouterLink to="/options-page">
-						<i-ph-gear />
-					</RouterLink>
-				</li>
-				<li>
 					<LocaleSwitch />
 				</li>
-				<li>
-					<div class="dropdown dropdown-bottom dropdown-end">
-						<div
-							tabindex="0"
-							role="button"
-							class="flex gap-1"
-						>
-							<i-ph-dots-three-vertical />
-						</div>
-						<ul
-							tabindex="0"
-							class="dropdown-content menu bg-white rounded-box z-[1] shadow-lg"
-						>
-							<li><ThemeSwitch /></li>
-							<li></li>
-							<li>
-								<RouterLink
-									to="/common/about"
-									class="text-primary"
-								>
-									<i-ph-question />
-									About
-								</RouterLink>
-							</li>
-						</ul>
-					</div>
-				</li>
+				<li><ThemeSwitch /></li>
 			</ul>
 		</div>
 	</div>
