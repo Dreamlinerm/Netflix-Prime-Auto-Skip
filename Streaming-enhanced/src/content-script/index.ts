@@ -18,4 +18,4 @@ self.onerror = function (message, source, lineno, colno, error) {
 	console.info("Error object: " + error)
 }
 
-console.info("hello world from content-script")
+console.log("hello world from content-script")
