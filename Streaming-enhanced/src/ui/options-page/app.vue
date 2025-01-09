@@ -218,7 +218,7 @@ const hash = ref(window.location.hash)
 	margin: 0 5px;
 }
 
-/* @media only screen and (max-width: 800px), only screen and (max-height: 600px) {
+@media only screen and (max-width: 800px), only screen and (max-height: 600px) {
 	.menuButton p,
 	.menuButton div,
 	.IconBox {
@@ -257,5 +257,5 @@ const hash = ref(window.location.hash)
 		height: auto;
 		display: block;
 	}
-} */
+}
 </style>

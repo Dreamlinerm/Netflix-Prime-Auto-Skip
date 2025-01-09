@@ -1,3 +1,4 @@
+<
 <script setup lang="ts"></script>
 
 <template>
@@ -87,3 +88,4 @@
 	@apply text-white fill-current;
 }
 </style>
+>

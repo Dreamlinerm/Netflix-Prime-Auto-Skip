@@ -1,8 +1,3 @@
-<script setup lang="ts">
-const optionsStore = useOptionsStore()
-</script>
-
 <template>
-	<RouterLinkUp />
-	Settings
+	<SharedPagesDisney advanced-settings></SharedPagesDisney>
 </template>

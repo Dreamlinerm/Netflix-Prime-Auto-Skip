@@ -3,6 +3,5 @@ const optionsStore = useOptionsStore()
 </script>
 
 <template>
-	<RouterLinkUp />
-	Settings
+	<SharedPagesAmazon advanced-settings></SharedPagesAmazon>
 </template>
