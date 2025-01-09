@@ -10,7 +10,6 @@ declare module 'vue' {
     AppHeader: typeof import('./../components/AppHeader.vue')['default']
     DisplayError: typeof import('./../components/state/DisplayError.vue')['default']
     IMdiCog: typeof import('~icons/mdi/cog')['default']
-    IMdiGear: typeof import('~icons/mdi/gear')['default']
     IMdiGift: typeof import('~icons/mdi/gift')['default']
     IPhArrowLeft: typeof import('~icons/ph/arrow-left')['default']
     IPhGlobe: typeof import('~icons/ph/globe')['default']
