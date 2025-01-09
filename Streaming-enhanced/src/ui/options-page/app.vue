@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Notivue, Notification } from "notivue"
 const version = __VERSION__
+const hash = ref(window.location.hash)
 </script>
 <template>
 	<div
@@ -41,8 +42,9 @@ const version = __VERSION__
 				<RouterLink
 					to="/options-page/SharedSettings"
 					class="menuButton flex"
-					style="background-color: #e60010"
+					:class="hash.endsWith('SharedSettings') ? 'bg-[#e60010]' : 'bg-primary'"
 					draggable="false"
+					@click="hash = 'SharedSettings'"
 				>
 					<i-mdi-transit-connection-variant class="icon" />
 					<div>
@@ -52,7 +54,9 @@ const version = __VERSION__
 				<RouterLink
 					to="/options-page/Amazon"
 					class="menuButton flex"
+					:class="hash.endsWith('Amazon') ? 'bg-[#e60010]' : 'bg-primary'"
 					draggable="false"
+					@click="hash = 'Amazon'"
 				>
 					<img
 						src="@/assets/MenuIcons/Amazon.svg"
@@ -64,7 +68,9 @@ const version = __VERSION__
 				<RouterLink
 					to="/options-page/Netflix"
 					class="menuButton flex"
+					:class="hash.endsWith('Netflix') ? 'bg-[#e60010]' : 'bg-primary'"
 					draggable="false"
+					@click="hash = 'Netflix'"
 				>
 					<img
 						src="@/assets/MenuIcons/Netflix.svg"
@@ -76,7 +82,9 @@ const version = __VERSION__
 				<RouterLink
 					to="/options-page/Disney"
 					class="menuButton flex"
+					:class="hash.endsWith('Disney') ? 'bg-[#e60010]' : 'bg-primary'"
 					draggable="false"
+					@click="hash = 'Disney'"
 				>
 					<img
 						src="@/assets/MenuIcons/Disney.svg"
@@ -88,7 +96,9 @@ const version = __VERSION__
 				<RouterLink
 					to="/options-page/Crunchyroll"
 					class="menuButton flex"
+					:class="hash.endsWith('Crunchyroll') ? 'bg-[#e60010]' : 'bg-primary'"
 					draggable="false"
+					@click="hash = 'Crunchyroll'"
 				>
 					<img
 						src="@/assets/MenuIcons/Crunchyroll.svg"
@@ -100,7 +110,9 @@ const version = __VERSION__
 				<RouterLink
 					to="/options-page/Other"
 					class="menuButton flex"
+					:class="hash.endsWith('Other') ? 'bg-[#e60010]' : 'bg-primary'"
 					draggable="false"
+					@click="hash = 'Other'"
 				>
 					<i-mdi-dots-horizontal class="icon" />
 					<p>{{ $t("backup") }}</p>
@@ -108,7 +120,9 @@ const version = __VERSION__
 				<RouterLink
 					to="/options-page/Statistics"
 					class="menuButton flex"
+					:class="hash.endsWith('Statistics') ? 'bg-[#e60010]' : 'bg-primary'"
 					draggable="false"
+					@click="hash = 'Statistics'"
 				>
 					<i-mdi-chart-bar class="icon" />
 					<p>{{ $t("statistics") }}</p>
@@ -116,7 +130,9 @@ const version = __VERSION__
 				<RouterLink
 					to="/options-page/Changelog"
 					class="menuButton flex"
+					:class="hash.endsWith('Changelog') ? 'bg-[#e60010]' : 'bg-primary'"
 					draggable="false"
+					@click="hash = 'Changelog'"
 				>
 					<i-mdi-format-list-bulleted class="icon" />
 					<p>{{ $t("changelog") }}</p>
@@ -172,7 +188,7 @@ const version = __VERSION__
 	@apply h-full bg-[#111] px-2.5 gap-5;
 }
 .menuButton {
-	@apply bg-primary rounded-[15px] m-[5px_15px] p-[13px_20px] max-w-[400px] no-underline whitespace-nowrap cursor-pointer text-primary-content text-[1.5rem] select-none items-center;
+	@apply rounded-[15px] m-[5px_15px] p-[13px_20px] max-w-[400px] no-underline whitespace-nowrap cursor-pointer text-primary-content text-[1.5rem] select-none items-center;
 	/*TODO: change whitespace according language*/
 }
 /* When you mouse over the navigation links, change their color */
