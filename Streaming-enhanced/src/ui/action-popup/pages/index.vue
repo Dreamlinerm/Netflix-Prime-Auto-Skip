@@ -83,27 +83,19 @@
 </template>
 
 <style scoped>
-.popupMenuButton {
-	border-radius: 15px;
-	padding: 20px;
-	background-color: #242424;
-	cursor: pointer;
-	color: white;
-	align-items: center;
-	user-select: none;
-}
-.popupMenuButton .icon {
-	margin: 0;
-	width: 100%;
-	height: fit-content;
-}
 /* When you mouse over the navigation links, change their color */
 .menuButton:hover,
 .popupMenuButton:hover {
 	background-color: #4d0000;
 }
+
+.popupMenuButton {
+	@apply rounded-lg p-5 bg-[#242424] cursor-pointer text-white flex items-center select-none;
+}
+.popupMenuButton .icon {
+	@apply m-0 w-full h-auto;
+}
 .icon {
-	fill: white;
-	color: white;
+	@apply text-white fill-current;
 }
 </style>
