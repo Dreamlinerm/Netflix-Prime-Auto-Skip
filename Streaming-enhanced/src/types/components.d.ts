@@ -9,8 +9,11 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppHeader: typeof import('./../components/AppHeader.vue')['default']
     DisplayError: typeof import('./../components/state/DisplayError.vue')['default']
+    IMdiChartBar: typeof import('~icons/mdi/chart-bar')['default']
     IMdiCog: typeof import('~icons/mdi/cog')['default']
     IMdiGift: typeof import('~icons/mdi/gift')['default']
+    IMdiTransitConnectionVariant: typeof import('~icons/mdi/transit-connection-variant')['default']
+    IMdiTransittransitConnectionVariant: typeof import('~icons/mdi/transittransit-connection-variant')['default']
     IPhArrowLeft: typeof import('~icons/ph/arrow-left')['default']
     IPhGlobe: typeof import('~icons/ph/globe')['default']
     IPhMoon: typeof import('~icons/ph/moon')['default']
