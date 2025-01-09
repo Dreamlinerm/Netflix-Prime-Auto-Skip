@@ -4,14 +4,17 @@ function mergeDeep(defaults: any, source: any): any {
 	const output = { ...defaults } // Start with defaults
 
 	Object.keys(defaults).forEach((key) => {
-		if (isObject(defaults[key]) && source?.[key] != null) {
+		const defaultValue = defaults[key]
+		const sourceValue = source?.[key]
+
+		if (isObject(defaultValue) && sourceValue != null) {
 			// Recursively merge nested objects
-			output[key] = mergeDeep(defaults[key], source[key])
-		} else if (checkType(defaults[key], source?.[key])) {
-			output[key] = source[key]
+			output[key] = mergeDeep(defaultValue, sourceValue)
+		} else if (checkType(defaultValue, sourceValue)) {
+			output[key] = sourceValue
 		} else {
 			// If the type is different, use the default value
-			output[key] = defaults[key]
+			output[key] = defaultValue
 		}
 	})
 
