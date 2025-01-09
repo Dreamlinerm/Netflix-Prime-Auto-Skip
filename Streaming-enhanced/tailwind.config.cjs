@@ -8,6 +8,7 @@ module.exports = {
 				amazon: "#00aeef",
 				disney: "#1d1fff",
 				crunchyroll: "#f78b24",
+				bgcustom: "#212121",
 			},
 		},
 	},
