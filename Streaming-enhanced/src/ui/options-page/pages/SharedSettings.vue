@@ -18,7 +18,7 @@ const fullScreen = computed({
 		})
 	},
 })
-const SliderPreview = ref(1.0)
+const SliderPreview = ref(10)
 </script>
 <template>
 	<OptionsPageSettingsTable></OptionsPageSettingsTable>
