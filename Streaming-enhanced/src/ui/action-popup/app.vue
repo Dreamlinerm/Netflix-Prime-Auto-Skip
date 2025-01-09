@@ -6,7 +6,7 @@ import { Notivue, Notification } from "notivue"
 	<div>
 		<AppHeader />
 
-		<div class="p-4 prose">
+		<div class="p-4">
 			<RouterView />
 		</div>
 
