@@ -194,38 +194,31 @@ const version = __VERSION__
 <style scoped>
 /* The side navigation menu */
 .sidenav {
-	height: 100%;
-	background-color: #111;
-	padding: 0 10px;
-	gap: 20px;
+	@apply h-full bg-[#111] px-2.5 gap-5;
 }
 .menuButton {
-	border-radius: 15px;
-	margin: 5px 15px;
-	padding: 13px 20px;
-	max-width: 400px;
-	background-color: #242424;
-	text-decoration: none;
-	white-space: nowrap; /*TODO: change according language*/
-	cursor: pointer;
-	color: white;
-	font-size: 1.5em;
-	user-select: none;
-	align-items: center;
+	@apply rounded-[15px] m-[5px_15px] p-[13px_20px] max-w-[400px] no-underline whitespace-nowrap cursor-pointer text-primary-content text-[1.5rem] select-none items-center;
+	/*TODO: change whitespace according language*/
 }
 /* When you mouse over the navigation links, change their color */
 .menuButton:hover {
 	background-color: #4d0000;
 }
 .IconBox {
-	padding: 20px 20px;
+	@apply p-5;
 }
 .Logo {
-	height: 3rem;
+	@apply h-12;
 }
 .title {
-	padding-top: unset;
-	padding-bottom: unset;
+	@apply py-0;
+}
+
+.content {
+	@apply min-w-[500px] min-h-[450px];
+}
+.page {
+	@apply p-[80px_0_0_3%] w-[97%];
 }
 
 @media only screen and (max-width: 800px), only screen and (max-height: 600px) {
@@ -267,14 +260,5 @@ const version = __VERSION__
 		height: auto;
 		display: block;
 	}
-}
-.content {
-	min-width: 500px;
-	min-height: 450px;
-	background-color: #212121;
-}
-.page {
-	padding: 80px 0 0 3%;
-	width: 97%;
 }
 </style>
