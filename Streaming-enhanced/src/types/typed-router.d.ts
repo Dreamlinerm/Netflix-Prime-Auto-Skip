@@ -35,6 +35,7 @@ declare module 'vue-router/auto-routes' {
     '/options-page/': RouteRecordInfo<'/options-page/', '/options-page', Record<never, never>, Record<never, never>>,
     '/options-page/Amazon': RouteRecordInfo<'/options-page/Amazon', '/options-page/Amazon', Record<never, never>, Record<never, never>>,
     '/options-page/Backup': RouteRecordInfo<'/options-page/Backup', '/options-page/Backup', Record<never, never>, Record<never, never>>,
+    '/options-page/Changelog': RouteRecordInfo<'/options-page/Changelog', '/options-page/Changelog', Record<never, never>, Record<never, never>>,
     '/options-page/Crunchyroll': RouteRecordInfo<'/options-page/Crunchyroll', '/options-page/Crunchyroll', Record<never, never>, Record<never, never>>,
     '/options-page/Disney': RouteRecordInfo<'/options-page/Disney', '/options-page/Disney', Record<never, never>, Record<never, never>>,
     '/options-page/Netflix': RouteRecordInfo<'/options-page/Netflix', '/options-page/Netflix', Record<never, never>, Record<never, never>>,

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const version = __VERSION__
+const githubUrl = __GITHUB_URL__
 function openSettings() {
 	chrome.tabs.create({
 		active: true,
@@ -46,7 +47,7 @@ function openSettings() {
 			<a
 				class="flex flex-center"
 				style="font-size: 1.5rem"
-				href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip"
+				:href="githubUrl"
 				target="_blank"
 			>
 				<svg

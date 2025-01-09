@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Notivue, Notification } from "notivue"
 const version = __VERSION__
+const githubUrl = __GITHUB_URL__
 const hash = ref(window.location.hash)
 </script>
 <template>
@@ -143,7 +144,7 @@ const hash = ref(window.location.hash)
 					<a
 						class="button flex flex justify-center items-center blueButtons"
 						style="margin: 5px 15px"
-						href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip"
+						:href="githubUrl"
 						target="_blank"
 					>
 						<svg

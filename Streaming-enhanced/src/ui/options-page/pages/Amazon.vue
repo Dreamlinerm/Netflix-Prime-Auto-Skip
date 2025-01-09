@@ -1,6 +1,4 @@
-<script setup lang="ts">
-const optionsStore = useOptionsStore()
-</script>
+<script setup lang="ts"></script>
 
 <template>
 	<SharedPagesAmazon advanced-settings></SharedPagesAmazon>
