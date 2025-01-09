@@ -27,7 +27,6 @@ declare module 'vue-router/auto-routes' {
     '/action-popup/Statistics': RouteRecordInfo<'/action-popup/Statistics', '/action-popup/Statistics', Record<never, never>, Record<never, never>>,
     '/common/404': RouteRecordInfo<'/common/404', '/common/404', Record<never, never>, Record<never, never>>,
     '/common/about': RouteRecordInfo<'/common/about', '/common/about', Record<never, never>, Record<never, never>>,
-    '/common/change-log': RouteRecordInfo<'/common/change-log', '/common/change-log', Record<never, never>, Record<never, never>>,
     '/common/features': RouteRecordInfo<'/common/features', '/common/features', Record<never, never>, Record<never, never>>,
     '/common/help': RouteRecordInfo<'/common/help', '/common/help', Record<never, never>, Record<never, never>>,
     '/common/privacy-policy': RouteRecordInfo<'/common/privacy-policy', '/common/privacy-policy', Record<never, never>, Record<never, never>>,
