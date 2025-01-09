@@ -4,17 +4,9 @@ function mergeDeep(defaults: any, source: any): any {
 	const output = { ...defaults } // Start with defaults
 
 	Object.keys(defaults).forEach((key) => {
-		if (defaults[key] instanceof Object && key in source && source[key] != null) {
-			if (Array.isArray(defaults[key])) {
-				if (Array.isArray(source[key])) {
-					output[key] = source[key]
-				} else {
-					output[key] = defaults[key]
-				}
-			} else {
-				// Recursively merge nested objects
-				output[key] = mergeDeep(defaults[key], source[key])
-			}
+		if (key in source && isObject(defaults[key]) && source[key] != null) {
+			// Recursively merge nested objects
+			output[key] = mergeDeep(defaults[key], source[key])
 		} else if (checkType(defaults[key], source[key])) {
 			output[key] = source[key]
 		} else {
@@ -28,8 +20,11 @@ function mergeDeep(defaults: any, source: any): any {
 
 function checkType(defaultValue: any, value: any): boolean {
 	// Check if the value type is the same type as the default value or null
-	// there are only strings, booleans, and nulls as types left
+	// there are only strings, booleans, nulls and arrays as types left
 	return typeof value === typeof defaultValue || value === null
+}
+function isObject(value: any): boolean {
+	return value !== null && value instanceof Object && !Array.isArray(value)
 }
 
 export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
@@ -37,12 +32,8 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	// Initialize storage with the value from chrome.storage.sync
 	chrome.storage.sync.get(key, (result) => {
 		if (result?.[key] !== undefined) {
-			if (defaultValue instanceof Object && result[key] != null) {
-				if (Array.isArray(defaultValue)) {
-					if (Array.isArray(result[key])) data.value = result[key]
-				} else {
-					data.value = mergeDeep(defaultValue, result[key])
-				}
+			if (isObject(defaultValue) && isObject(result[key])) {
+				data.value = mergeDeep(defaultValue, result[key])
 			} else if (checkType(defaultValue, result[key])) {
 				data.value = result[key]
 			}
@@ -65,12 +56,8 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	// Initialize storage with the value from chrome.storage.local
 	chrome.storage.local.get(key, (result) => {
 		if (result?.[key] !== undefined) {
-			if (defaultValue instanceof Object && result[key] != null) {
-				if (Array.isArray(defaultValue)) {
-					if (Array.isArray(result[key])) data.value = result[key]
-				} else {
-					data.value = mergeDeep(defaultValue, result[key])
-				}
+			if (isObject(defaultValue) && isObject(result[key])) {
+				data.value = mergeDeep(defaultValue, result[key])
 			} else if (checkType(defaultValue, result[key])) {
 				data.value = result[key]
 			}
