@@ -100,6 +100,32 @@ async function garbageCollection() {
 	settings.value.General.GCdate = today
 	setDBCache()
 }
+type TMDBMovie = {
+	adult: boolean
+	backdrop_path: string
+	genre_ids: Array<number>
+	id: number
+	original_language: string
+	original_title: string
+	original_name: string
+	overview: string
+	popularity: number
+	poster_path: string
+	release_date: string
+	first_air_date: string
+	title: string
+	name: string
+	video: boolean
+	vote_average: number
+	vote_count: number
+	media_type: string
+}
+type TMDBResponse = {
+	page: number
+	results: Array<TMDBMovie>
+	total_pages: number
+	total_results: number
+}
 
 async function getMovieInfo(
 	title: string,
@@ -113,26 +139,24 @@ async function getMovieInfo(
 	const queryType = media_type ?? "multi"
 	let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURI(title)}&include_adult=false&language=${locale}&page=1`
 	if (year) url += `&year=${year}`
-	await sendMessage("fetch", { url }, "background")
-	onMessage("fetch", async (data: any) => {
-		if (data != undefined) {
-			console.log("data", data)
-			// themoviedb
-			const movie = data?.results?.[0]
-			const compiledData: MovieInfo = {
-				id: movie?.id,
-				media_type: queryType == "multi" ? movie?.media_type : queryType,
-				score: movie?.vote_average,
-				vote_count: movie?.vote_count,
-				release_date: movie?.release_date || movie?.first_air_date,
-				title: movie?.title || movie?.original_title || movie?.name || movie?.original_name,
-				date: today,
-				db: "tmdb",
-			}
-			DBCache[title] = compiledData
-			setRatingOnCard(card, compiledData, title)
+	const data: TMDBResponse = await sendMessage("fetch", { url }, "background")
+	if (data != undefined) {
+		console.log("data", data)
+		// themoviedb
+		const movie = data?.results?.[0]
+		const compiledData: MovieInfo = {
+			id: movie?.id,
+			media_type: queryType == "multi" ? movie?.media_type : queryType,
+			score: movie?.vote_average,
+			vote_count: movie?.vote_count,
+			release_date: movie?.release_date || movie?.first_air_date,
+			title: movie?.title || movie?.original_title || movie?.name || movie?.original_name,
+			date: today,
+			db: "tmdb",
 		}
-	})
+		DBCache[title] = compiledData
+		setRatingOnCard(card, compiledData, title)
+	}
 }
 
 // #region Shared funcs

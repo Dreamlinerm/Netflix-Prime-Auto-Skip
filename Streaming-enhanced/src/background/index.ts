@@ -54,18 +54,21 @@ async function setBadgeText(text: string, tabId: number) {
 // onMessage
 onMessage("fetch", async (message: { data: { url: string } }) => {
 	const { data } = message
-	fetch(data.url, {
-		method: "GET",
-		headers: {
-			accept: "application/json",
-			Authorization:
-				"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OWQyMWUxMmYzNjU1MjM4NzdhNTAwODVhMmVjYThiZiIsInN1YiI6IjY1M2E3Mjg3MjgxMWExMDBlYTA4NjI5OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.x_EaVXQkg1_plk0NVSBnoNUl4QlGytdeO613nXIsP3w",
-		},
-	})
-		.then((response) => response.json())
-		.then((data) => sendMessage("fetch", data, "content-script"))
-		.catch((error) => console.error(error))
-	return true // Indicates that sendResponse will be called asynchronously
+	try {
+		const response = await fetch(data.url, {
+			method: "GET",
+			headers: {
+				accept: "application/json",
+				Authorization:
+					"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OWQyMWUxMmYzNjU1MjM4NzdhNTAwODVhMmVjYThiZiIsInN1YiI6IjY1M2E3Mjg3MjgxMWExMDBlYTA4NjI5OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.x_EaVXQkg1_plk0NVSBnoNUl4QlGytdeO613nXIsP3w",
+			},
+		})
+		const responseData = await response.json()
+		return responseData
+	} catch (error) {
+		console.error(error)
+		return { error: (error as Error).message }
+	}
 })
 onMessage("fullscreen", async (message: { sender: any }) => {
 	const { sender } = message
