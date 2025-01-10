@@ -1,4 +1,4 @@
-import { log, increaseBadge, date, optionsStore } from "@/utils/helper"
+import { log, increaseBadge, date, optionsStore, checkStoreReady } from "@/utils/helper"
 
 // Global Variables
 
@@ -7,7 +7,9 @@ const { settings } = storeToRefs(optionsStore)
 const config = { attributes: true, childList: true, subtree: true }
 const url = window.location.href
 
-function startCrunchyroll() {
+async function startCrunchyroll() {
+	// watch ready state
+	await checkStoreReady(settings)
 	if (settings.value.Crunchyroll.releaseCalendar) Crunchyroll_ReleaseCalendar()
 	if (settings.value.Crunchyroll.profile) {
 		const pickInterval = setInterval(function () {
@@ -290,11 +292,4 @@ async function Crunchyroll_bigPlayerStyle() {
 	}
 }
 // #endregion
-// watch ready state
-const readyStateCheckInterval = setInterval(function () {
-	// @ts-expect-error add $ready to object datatypes
-	if (settings.value?.$ready) {
-		clearInterval(readyStateCheckInterval)
-		startCrunchyroll()
-	}
-}, 1)
+startCrunchyroll()

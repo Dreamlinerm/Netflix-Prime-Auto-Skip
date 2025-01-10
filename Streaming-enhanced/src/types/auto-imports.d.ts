@@ -18,6 +18,8 @@ declare global {
   const auth: typeof import('../utils/firebase')['auth']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const browser: typeof import('webextension-polyfill')
+  const checkReady: typeof import('../utils/helper')['checkReady']
+  const checkStoreReady: typeof import('../utils/helper')['checkStoreReady']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
   const computedEager: typeof import('@vueuse/core')['computedEager']
@@ -384,6 +386,7 @@ declare module 'vue' {
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly browser: UnwrapRef<typeof import('webextension-polyfill')>
+    readonly checkStoreReady: UnwrapRef<typeof import('../utils/helper')['checkStoreReady']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>

@@ -24,3 +24,14 @@ export async function increaseBadge() {
 		log(error)
 	}
 }
+
+export async function checkStoreReady(setting: Ref<any>) {
+	return new Promise((resolve) => {
+		const readyStateCheckInterval = setInterval(function () {
+			if (setting.value?.$ready) {
+				clearInterval(readyStateCheckInterval)
+				resolve(true)
+			}
+		}, 1)
+	})
+}

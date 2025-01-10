@@ -372,6 +372,8 @@
     "date": true,
     "CrunchyList": true,
     "CrunchyListElement": true,
-    "Nullable": true
+    "Nullable": true,
+    "checkReady": true,
+    "checkStoreReady": true
   }
 }
