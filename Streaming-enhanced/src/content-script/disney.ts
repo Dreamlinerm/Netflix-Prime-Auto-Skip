@@ -26,7 +26,7 @@ async function resetLastATimeText(time = 1000) {
 	}, time)
 }
 let videoSpeed: number = 1
-async function setVideoSpeed(speed) {
+async function setVideoSpeed(speed: number) {
 	videoSpeed = speed
 }
 
@@ -110,11 +110,11 @@ async function Disney_Intro(video: HTMLVideoElement, time: number) {
 		const skipCreditsButton = isStarPlus
 			? document.querySelector('[data-gv2elementkey="playNext"]')
 			: document.querySelector('[data-testid="playback-action-button"]')
-		if (!skipCreditsButton) button = document.querySelector(".skip__button")
+		if (!skipCreditsButton) button = document.querySelector(".skip__button") as HTMLElement
 	} else
 		button = document
 			.evaluate("//span[contains(., 'Skip Intro')]", document, null, XPathResult.ANY_TYPE, null)
-			?.iterateNext()?.parentElement
+			?.iterateNext()?.parentElement as HTMLElement
 	if (button) {
 		button.click()
 		log("Intro/Recap skipped", button)
@@ -124,10 +124,10 @@ async function Disney_Intro(video: HTMLVideoElement, time: number) {
 	}
 }
 async function Disney_skipCredits(currentTime: number) {
-	let button
-	if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]')
+	let button: HTMLElement
+	if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]') as HTMLElement
 	else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
-		button = document.querySelector('[data-testid="icon-restart"]')?.parentElement
+		button = document.querySelector('[data-testid="icon-restart"]')?.parentElement as HTMLElement
 	else
 		button = document
 			.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)
@@ -174,8 +174,10 @@ async function Disney_addHomeButton() {
 		const homeButton = document.createElement("button")
 		homeButton.textContent = browser.i18n.getMessage("HomeButton")
 		homeButton.id = "homeButton"
-		homeButton.style =
-			'color: white;background-color: #40424A;border: rgb(64, 66, 74);border-radius: 5px;padding: 0 2px 0 2px;height: 56px;padding-left: 24px;padding-right: 24px;letter-spacing: 1.76px;font-size: 15px;  text-transform: uppercase;cursor: pointer;font-family:"Avenir-World-for-Disney-Demi", sans-serif;'
+		Object.assign(
+			homeButton.style,
+			'color: white;background-color: #40424A;border: rgb(64, 66, 74);border-radius: 5px;padding: 0 2px 0 2px;height: 56px;padding-left: 24px;padding-right: 24px;letter-spacing: 1.76px;font-size: 15px;  text-transform: uppercase;cursor: pointer;font-family:"Avenir-World-for-Disney-Demi", sans-serif;',
+		)
 		// add hover effect
 		homeButton.onmouseover = function () {
 			homeButton.style.backgroundColor = "#474a53"
@@ -190,7 +192,7 @@ async function Disney_addHomeButton() {
 	}
 }
 async function Disney_Watch_Credits() {
-	let button
+	let button: Element | null | undefined
 	if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]')
 	else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
 		button = document.querySelector('[data-testid="icon-restart"]')?.parentElement
@@ -201,7 +203,7 @@ async function Disney_Watch_Credits() {
 	if (button) {
 		// only skip if the next video is the next episode of a series (there is a timer)
 		let time
-		if (isDisney) time = /\d+/.exec(button.textContent)?.[0]
+		if (isDisney) time = /\d+/.exec(button?.textContent ?? "")?.[0]
 		if (
 			(isHotstar &&
 				!document
@@ -212,7 +214,7 @@ async function Disney_Watch_Credits() {
 			const video = document.querySelector("video")
 			if (video) {
 				video.click()
-				lastAdTimeText = time
+				lastAdTimeText = time ?? 0
 				log("Credits Watched", button)
 				increaseBadge()
 				resetLastATimeText()
@@ -275,11 +277,11 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 		const alreadySlider: HTMLInputElement | null = document.querySelector("#videoSpeedSlider")
 		if (!alreadySlider) {
 			// infobar position for the slider to be added
-			let position
+			let position: HTMLElement | null
 			if (isDisney) position = document.querySelector(".controls__right")
 			else
-				position =
-					document.querySelector(".icon-player-landscape")?.parentElement?.parentElement?.parentElement?.parentElement
+				position = document.querySelector(".icon-player-landscape")?.parentElement?.parentElement?.parentElement
+					?.parentElement as HTMLElement
 			if (position) createSlider(video, position, DisneySliderStyle, DisneySpeedStyle)
 		} else {
 			// need to resync the slider with the video sometimes
