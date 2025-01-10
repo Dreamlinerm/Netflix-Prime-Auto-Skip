@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { sendMessage, onMessage } from "webext-bridge/content-script"
 import { log, increaseBadge, optionsStore, checkStoreReady, Platforms, logStartOfAddon, date } from "@/utils/helper"
 logStartOfAddon(Platforms.Amazon)
@@ -93,7 +94,10 @@ function showRating() {
 		if (url.includes("search")) return false
 		if (url.includes("entity")) {
 			const SelectedTab = document.querySelector('[aria-selected="true"]')
-			return uuidRegex.test(SelectedTab?.id.split("_control")[0]) && SelectedTab?.getAttribute("aria-label") != "EXTRAS"
+			return (
+				uuidRegex.test(SelectedTab?.id?.split("_control")?.[0] ?? "") &&
+				SelectedTab?.getAttribute("aria-label") != "EXTRAS"
+			)
 		}
 		return true
 	} else if (isPrimeVideo) {
@@ -124,7 +128,7 @@ function getDiffInDays(firstDate: string, secondDate: Date) {
 	if (!firstDate || !secondDate) return 31
 	return Math.round(Math.abs(new Date(secondDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24))
 }
-function useDBCache(title: string, card: HTMLElement, media_type: string) {
+function useDBCache(title: string, card: HTMLElement, media_type: string | null) {
 	if (!DBCache.value[title]?.date) DBCache.value[title].date = today
 	const vote_count = DBCache.value[title]?.vote_count || 100
 	const diffInReleaseDate =
@@ -181,16 +185,15 @@ async function addRating() {
 	for (let type = 0; type < AllTitleCardsTypes.length; type++) {
 		const titleCards = AllTitleCardsTypes[type]
 		let media_type = null
-
 		for (let i = 0; i < titleCards.length; i++) {
-			let card = titleCards[i]
+			const card = titleCards[i] as HTMLElement
 			// add seen class
 			if (isNetflix || isDisney || isHotstar || isHBO) card.classList.add("imdb")
 			else if (isPrimeVideo) {
 				if (type == 0) card?.closest("li")?.classList.add("imdb")
 				else if (type == 1) card?.classList.add("imdb")
 			}
-			let title
+			let title: string | undefined
 			if (isNetflix) {
 				title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0]
 				if (url.includes("genre/83")) media_type = "tv"
@@ -240,7 +243,7 @@ async function addRating() {
 				}
 			} else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "")
 			else if (isPrimeVideo) {
-				function fixTitle(title) {
+				function fixTitle(title: string | undefined) {
 					return (
 						title
 							?.split(" - ")[0]
@@ -257,9 +260,9 @@ async function addRating() {
 					)
 				}
 				// detail means not live shows
-				if (card.querySelector("a").href.includes("detail")) {
-					if (type == 0) title = fixTitle(card.getAttribute("data-card-title"))
-					else if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label"))
+				if (card.querySelector("a")?.href?.includes("detail")) {
+					if (type == 0) title = fixTitle(card.getAttribute("data-card-title") ?? "")
+					else if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label") ?? "")
 				}
 				if (url.includes("video/tv")) media_type = "tv"
 				else if (url.includes("video/movie")) media_type = "movie"
@@ -300,7 +303,7 @@ function getColorForRating(rating: number, lowVoteCount: boolean) {
 	if (rating <= 7) return "rgb(245, 197, 24)" //#f5c518
 	return "rgb(0, 166, 0)"
 }
-function getTMDBUrl(id: string, media_type: string) {
+function getTMDBUrl(id: string | number, media_type: string) {
 	return `https://www.themoviedb.org/${media_type}/${id}`
 }
 
