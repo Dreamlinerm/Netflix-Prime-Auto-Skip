@@ -93,7 +93,7 @@ function Netflix_profile() {
 	if (currentProfile) {
 		// there is a space before the - thats why slice -1
 		const currentProfileName = decodeHtmlEntities(
-			currentProfile?.getAttribute("aria-label")?.split("–")?.[0].split("-")?.[0].slice(0, -1),
+			currentProfile?.getAttribute("aria-label")?.split("–")?.[0].split("-")?.[0].slice(0, -1) ?? "",
 		)
 		if (currentProfileName && currentProfileName !== settings.value.General.profileName) {
 			// small profile picture
@@ -183,7 +183,8 @@ function Netflix_SkipAdInterval() {
 			increaseBadge()
 			setTimeout(() => {
 				// not always a video is showing on next episode apparently
-				;(video || document.querySelector("video")).pause()
+				const v = video || document.querySelector("video")
+				v?.pause()
 			}, 100)
 		}
 	}, 100)
