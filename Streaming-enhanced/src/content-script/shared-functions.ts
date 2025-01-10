@@ -103,7 +103,7 @@ function showRating() {
 	} else if (isPrimeVideo) {
 		// suggested movies
 		if (window.location.href.includes("detail")) {
-			return document.querySelector('[data-testid="btf-related-tab"]')?.tabIndex == 0
+			return document.querySelector('[data-testid="btf-related-tab"]')?.getAttribute("tabIndex") == "0"
 		}
 		return true
 	} else return true
@@ -152,7 +152,6 @@ function useDBCache(title: string, card: HTMLElement, media_type: string | null)
 			)
 		else log("update old rating:", title, ",Age:", getDiffInDays(DBCache.value[title].date, date))
 		getMovieInfo(title, card, media_type)
-		// log("no info today", title);
 	} else {
 		setRatingOnCard(card, DBCache.value[title], title)
 	}
@@ -207,7 +206,7 @@ async function addRating() {
 				}
 				if (url.includes("browse/series")) media_type = "tv"
 				else if (url.includes("browse/movies")) media_type = "movie"
-				else if (/(Staffel)|(Nummer)|(Season)|(Episod)|(Number)/g.test(title)) media_type = "tv"
+				else if (/(Staffel)|(Nummer)|(Season)|(Episod)|(Number)/g.test(title ?? "")) media_type = "tv"
 				// german translation
 				if (htmlLang == "de") {
 					title = title
@@ -267,7 +266,7 @@ async function addRating() {
 				if (url.includes("video/tv")) media_type = "tv"
 				else if (url.includes("video/movie")) media_type = "movie"
 				else media_type = getMediaType(card.getAttribute("data-card-entity-type") ?? "")
-			} else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent
+			} else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent ?? ""
 			// for the static Pixar Disney, Starplus etc. cards
 			if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
 				// sometimes more than one image is loaded for the same title
@@ -330,7 +329,6 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		fontSize: isMobile ? "4vw" : "1vw",
 	})
 
-	// div.id = "imdb";
 	if (data?.score >= 0) {
 		let releaseDate = ""
 		if (settings.value.Video?.showYear && data?.release_date) {
