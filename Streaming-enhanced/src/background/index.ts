@@ -31,7 +31,6 @@ self.onerror = function (message, source, lineno, colno, error) {
 	console.info("Error object: " + error)
 }
 
-console.info("hello world from background")
 import { onMessage, sendMessage } from "webext-bridge/background"
 import { log, optionsStore, checkStoreReady, isFirefox } from "@/utils/helper"
 log("background loaded")
@@ -70,24 +69,26 @@ onMessage("fetch", async (message: { data: { url: string } }) => {
 })
 onMessage("fullscreen", async (message: { sender: any }) => {
 	const { sender } = message
+	console.log("fullscreen", sender)
 	chrome.windows.update(sender.tab.windowId, { state: "fullscreen" })
 })
 onMessage("exitFullscreen", async (message: { sender: any }) => {
 	const { sender } = message
+	console.log("exitFullscreen", sender)
 	chrome.windows.update(sender.tab.windowId, { state: "normal" })
 })
 onMessage("setBadgeText", async (message: { sender: any; data: { text: string } }) => {
 	const { sender, data } = message
-	setBadgeText(data.text, sender.tab.id)
+	setBadgeText(data.text, sender.tabId)
 })
 onMessage("increaseBadge", async (message: { sender: any }) => {
 	const { sender } = message
-	increaseBadge(sender.tab.id)
+	increaseBadge(sender.tabId)
 })
 onMessage("resetBadge", async (message: { sender: any }) => {
 	const { sender } = message
-	if (Badges[sender.tab.id]) delete Badges[sender.tab.id]
-	chrome.action.setBadgeText({ text: "", tabId: sender.tab.id })
+	if (Badges[sender.tabId]) delete Badges[sender.tabId]
+	chrome.action.setBadgeText({ text: "", tabId: sender.tabId })
 })
 
 async function startMobile() {
