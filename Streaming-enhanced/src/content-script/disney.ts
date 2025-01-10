@@ -35,7 +35,6 @@ async function startDisney() {
 		if (settings.value.Disney?.skipAd) Disney_skipAd(video)
 	}, 300)
 }
-startDisney()
 
 // #region Disney
 // Disney Observers
@@ -274,3 +273,6 @@ async function Hotstar_doubleClick() {
 		document.ondblclick = null
 	}
 }
+// #endregion
+
+startDisney()

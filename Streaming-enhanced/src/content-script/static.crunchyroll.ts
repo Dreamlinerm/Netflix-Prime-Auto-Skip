@@ -29,8 +29,9 @@ async function startCrunchyroll() {
 		{ deep: true },
 	)
 }
-startCrunchyroll()
 
+// #region Crunchyroll
+// Crunchyroll functions
 const CrunchyrollObserver = new MutationObserver(Crunchyroll)
 function Crunchyroll() {
 	const video = document.querySelector("video")
@@ -262,3 +263,5 @@ async function startdoubleClick() {
 		document.ondblclick = null
 	}
 }
+// #endregion
+startCrunchyroll()
