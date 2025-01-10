@@ -3,30 +3,14 @@ export const useOptionsStore = defineStore("options", () => {
 	const currentLocale = useLocale()
 
 	const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
-	const DBCache = useBrowserLocalStorage<DBCache>("DBCache", {})
 
 	return {
 		isDark,
 		toggleDark,
 		settings,
 		currentLocale,
-		DBCache,
 	}
 })
-
-export type MovieInfo = {
-	id: number
-	title: string
-	score: number
-	vote_count: number
-	release_date: string
-	media_type: string
-	date: string
-	db: string
-}
-export type DBCache = {
-	[title: string]: MovieInfo
-}
 
 export type settingsType = {
 	Amazon: {

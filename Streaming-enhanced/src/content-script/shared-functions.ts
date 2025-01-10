@@ -4,7 +4,7 @@ import { log, increaseBadge, optionsStore, checkStoreReady, Platforms, logStartO
 logStartOfAddon(Platforms.Amazon)
 // Global Variables
 
-const { settings, DBCache } = storeToRefs(optionsStore)
+const { settings } = storeToRefs(optionsStore)
 const today = date.toISOString().split("T")[0]
 
 const ua = navigator.userAgent
@@ -20,6 +20,7 @@ let isHBO = /max.com/i.test(hostname)
 const htmlLang = document.documentElement.lang
 
 const AmazonVideoClass = ".dv-player-fullscreen video"
+let DBCache: DBCache = {}
 
 export async function startSharedFunctions(platform: Platforms) {
 	// if(platform == Platforms.Amazon) isPrimeVideo = true, because should only be called on amazon prime video
@@ -29,13 +30,58 @@ export async function startSharedFunctions(platform: Platforms) {
 
 	await checkStoreReady(settings)
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
-	await checkStoreReady(DBCache)
-	if (isNetflix && settings.value.Netflix?.showRating) startShowRatingInterval()
-	else if (isDisney || isHotstar) {
-		if (settings.value.Disney?.showRating) startShowRatingInterval()
-	} else if (isPrimeVideo && settings.value.Amazon?.showRating) startShowRatingInterval()
-	else if (isHBO && settings.value.HBO?.showRating) startShowRatingInterval()
-	if (getDiffInDays(settings.value.General.GCdate, date) >= GCdiff) garbageCollection()
+	getDBCache()
+}
+
+type MovieInfo = {
+	id: number
+	title: string
+	score: number
+	vote_count: number
+	release_date: string
+	media_type: string
+	date: string
+	db: string
+}
+type DBCache = {
+	[title: string]: MovieInfo
+}
+async function getDBCache() {
+	chrome.storage.local.get("DBCache", function (result) {
+		DBCache = result?.DBCache
+		if (typeof DBCache !== "object") {
+			log("DBCache not found, creating new one", DBCache)
+			try {
+				chrome.storage.local.set({ DBCache: {} })
+			} catch (error) {
+				log(error)
+			}
+			DBCache = {}
+		}
+		if (isNetflix && settings.value.Netflix?.showRating) startShowRatingInterval()
+		else if (isDisney || isHotstar) {
+			if (settings.value.Disney?.showRating) startShowRatingInterval()
+		} else if (isPrimeVideo && settings.value.Amazon?.showRating) startShowRatingInterval()
+		else if (isHBO && settings.value.HBO?.showRating) startShowRatingInterval()
+		if (getDiffInDays(settings.value.General.GCdate, date) >= GCdiff) garbageCollection()
+	})
+	chrome.storage.local.onChanged.addListener(function (changes) {
+		if (changes?.DBCache) DBCache = changes.DBCache.newValue
+	})
+}
+// set DB Cache if cache size under 5MB
+async function setDBCache() {
+	const size = new TextEncoder().encode(JSON.stringify(DBCache)).length
+	const kiloBytes = size / 1024
+	const megaBytes = kiloBytes / 1024
+	if (megaBytes < 5) {
+		log("updateDBCache size:", megaBytes.toFixed(4) + " MB")
+		chrome.storage.local.set({ DBCache })
+	} else {
+		log("DBCache cleared", megaBytes)
+		DBCache = {}
+		chrome.storage.local.set({ DBCache })
+	}
 }
 
 // how long a record should be kept in the cache
@@ -46,12 +92,13 @@ async function garbageCollection() {
 	log("garbageCollection started, deleting old ratings:")
 	const keys = Object.keys(DBCache)
 	for (const key of keys) {
-		if (getDiffInDays(DBCache.value[key].date, date) >= GCdiff || DBCache.value[key].db != "tmdb") {
-			console.log(DBCache.value[key].date, key)
-			delete DBCache.value[key]
+		if (getDiffInDays(DBCache[key].date, date) >= GCdiff || DBCache[key].db != "tmdb") {
+			console.log(DBCache[key].date, key)
+			delete DBCache[key]
 		}
 	}
 	settings.value.General.GCdate = today
+	setDBCache()
 }
 
 async function getMovieInfo(
@@ -82,7 +129,7 @@ async function getMovieInfo(
 				date: today,
 				db: "tmdb",
 			}
-			DBCache.value[title] = compiledData
+			DBCache[title] = compiledData
 			setRatingOnCard(card, compiledData, title)
 		}
 	})
@@ -134,31 +181,31 @@ function getDiffInDays(firstDate: string, secondDate: Date) {
 	return Math.round(Math.abs(new Date(secondDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24))
 }
 function useDBCache(title: string, card: HTMLElement, media_type: string | null) {
-	if (!DBCache.value[title]?.date) DBCache.value[title].date = today
-	const vote_count = DBCache.value[title]?.vote_count || 100
+	if (!DBCache[title]?.date) DBCache[title].date = today
+	const vote_count = DBCache[title]?.vote_count || 100
 	const diffInReleaseDate =
 		// vote count is under 80 inaccurate rating
 		vote_count < 100 &&
 		// did not refresh rating in the last 0 days
-		getDiffInDays(DBCache.value[title].date, date) > 0 &&
+		getDiffInDays(DBCache[title].date, date) > 0 &&
 		// release date is in the last 50 days after not many people will
-		getDiffInDays(DBCache.value[title]?.release_date, date) <= 50
+		getDiffInDays(DBCache[title]?.release_date, date) <= 50
 
 	// refresh rating if older than 30 days or release date is in last month and vote count is under 100
-	if (getDiffInDays(DBCache.value[title].date, date) >= GCdiff || diffInReleaseDate) {
+	if (getDiffInDays(DBCache[title].date, date) >= GCdiff || diffInReleaseDate) {
 		if (diffInReleaseDate)
 			log(
 				"update recent movie:",
 				title,
 				",Age:",
-				getDiffInDays(DBCache.value[title]?.release_date, date),
+				getDiffInDays(DBCache[title]?.release_date, date),
 				"Vote count:",
 				vote_count,
 			)
-		else log("update old rating:", title, ",Age:", getDiffInDays(DBCache.value[title].date, date))
+		else log("update old rating:", title, ",Age:", getDiffInDays(DBCache[title].date, date))
 		getMovieInfo(title, card, media_type)
 	} else {
-		setRatingOnCard(card, DBCache.value[title], title)
+		setRatingOnCard(card, DBCache[title], title)
 	}
 }
 function getMediaType(type: string) {
@@ -279,8 +326,8 @@ async function addRating() {
 					lastTitle = title
 					console.log("Title:", title, media_type)
 					if (
-						(DBCache.value[title]?.score || getDiffInDays(DBCache.value[title]?.date, date) <= 7) &&
-						(!media_type || DBCache.value[title]?.media_type == media_type)
+						(DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 7) &&
+						(!media_type || DBCache[title]?.media_type == media_type)
 					) {
 						useDBCache(title, card, media_type)
 					} else {
@@ -291,11 +338,11 @@ async function addRating() {
 			}
 		}
 	}
-	// if (updateDBCache) {
-	// 	setTimeout(function () {
-	// 		setDBCache()
-	// 	}, 5000)
-	// }
+	if (updateDBCache) {
+		setTimeout(function () {
+			setDBCache()
+		}, 5000)
+	}
 }
 function getColorForRating(rating: number, lowVoteCount: boolean) {
 	// I want a color gradient from red to green with yellow in the middle
