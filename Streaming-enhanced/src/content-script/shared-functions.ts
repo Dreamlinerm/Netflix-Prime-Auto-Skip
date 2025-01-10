@@ -1,4 +1,5 @@
 import { DBCache } from "@/stores/options.store"
+import { sendMessage, onMessage } from "webext-bridge/content-script"
 import {
 	log,
 	increaseBadge,
@@ -28,6 +29,7 @@ const isNetflix = /netflix/i.test(hostname)
 const isDisney = /disneyplus|starplus/i.test(hostname)
 const isHotstar = /hotstar/i.test(hostname)
 const isHBO = /max.com/i.test(hostname)
+const htmlLang = document.documentElement.lang
 
 const AmazonVideoClass = ".dv-player-fullscreen video"
 
@@ -57,6 +59,40 @@ async function garbageCollection() {
 		}
 	}
 	settings.value.General.GCdate = today
+}
+
+async function getMovieInfo(
+	title: string,
+	card: HTMLElement,
+	media_type: string | null = null,
+	year: string | null = null,
+) {
+	// justwatch api
+	// const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
+	const locale = htmlLang || navigator?.language || "en-US"
+	const queryType = media_type || "multi"
+	let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURI(title)}&include_adult=false&language=${locale}&page=1`
+	if (year) url += `&year=${year}`
+	await sendMessage("fetch", { url }, "background")
+	onMessage("fetch", async (data: any) => {
+		if (data != undefined) {
+			console.log("data", data)
+			// themoviedb
+			const movie = data?.results?.[0]
+			const compiledData: MovieInfo = {
+				id: movie?.id,
+				media_type: queryType == "multi" ? movie?.media_type : queryType,
+				score: movie?.vote_average,
+				vote_count: movie?.vote_count,
+				release_date: movie?.release_date || movie?.first_air_date,
+				title: movie?.title || movie?.original_title || movie?.name || movie?.original_name,
+				date: today,
+				db: "tmdb",
+			}
+			DBCache.value[title] = compiledData
+			setRatingOnCard(card, compiledData, title)
+		}
+	})
 }
 
 // #region Shared funcs
@@ -97,11 +133,11 @@ async function startShowRatingInterval() {
 		if (showRating()) addRating()
 	}, 1000)
 }
-function getDiffInDays(firstDate: string, secondDate: string) {
+function getDiffInDays(firstDate: string, secondDate: Date) {
 	if (!firstDate || !secondDate) return 31
 	return Math.round(Math.abs(new Date(secondDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24))
 }
-function useDBCache(title, card, media_type) {
+function useDBCache(title: string, card: HTMLElement, media_type: string) {
 	if (!DBCache.value[title]?.date) DBCache.value[title].date = today
 	const vote_count = DBCache.value[title]?.vote_count || 100
 	const diffInReleaseDate =
