@@ -220,7 +220,13 @@ async function Disney_Watch_Credits() {
 		}
 	}
 }
-function createSlider(video: HTMLVideoElement, position, sliderStyle: string, speedStyle: string, divStyle = "") {
+function createSlider(
+	video: HTMLVideoElement,
+	position: HTMLElement,
+	sliderStyle: string,
+	speedStyle: string,
+	divStyle = "",
+) {
 	videoSpeed = videoSpeed || video.playbackRate
 
 	const slider = document.createElement("input")
@@ -237,7 +243,7 @@ function createSlider(video: HTMLVideoElement, position, sliderStyle: string, sp
 	speed.id = "videoSpeed"
 	speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x"
 	// speed.style = speedStyle
-	Object.assign(speed.style, sliderStyle)
+	Object.assign(speed.style, speedStyle)
 	if (divStyle) {
 		const div = document.createElement("div")
 		// div.style = divStyle
@@ -278,7 +284,7 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 		} else {
 			// need to resync the slider with the video sometimes
 			const speed = document.querySelector("#videoSpeed")
-			if (video.playbackRate != alreadySlider.value / 10) {
+			if (video.playbackRate !== parseFloat(alreadySlider.value) / 10) {
 				video.playbackRate = parseFloat(alreadySlider.value) / 10
 			}
 			alreadySlider.oninput = function () {
