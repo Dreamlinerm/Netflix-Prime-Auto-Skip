@@ -41,11 +41,10 @@ function Crunchyroll() {
 	if (settings.value.Video?.scrollVolume) Crunchyroll_scrollVolume(video)
 }
 async function Crunchyroll_scrollVolume(video: HTMLVideoElement) {
-	const volumeControl = document.querySelector('[data-testid="vilos-volume_container"]:not(.enhanced)')
+	const volumeControl = document.querySelector('[data-testid="vilos-volume_container"]:not(.enhanced)') as HTMLElement
 	if (volumeControl) {
 		volumeControl.classList.add("enhanced")
-		//ts-expect-error addEventListener is not a function
-		volumeControl?.addEventListener("wheel", (event: WheelEvent) => {
+		volumeControl.addEventListener("wheel", (event: WheelEvent) => {
 			event.preventDefault()
 			let volume = video.volume
 			if (event.deltaY < 0) volume = Math.min(1, volume + 0.1)
@@ -60,8 +59,8 @@ async function Crunchyroll_scrollVolume(video: HTMLVideoElement) {
 
 function OnFullScreenChange() {
 	const video = document.querySelector("video") as HTMLVideoElement
-	//ts-expect-error fullscreenElement does not exist on type Document
-	if (window.fullScreen && video) {
+	//TODO: check if document.fullscreenElement is working before: window.fullScreen
+	if (document.fullscreenElement && video) {
 		video.play()
 		log("auto-played on fullscreen")
 		increaseBadge()
@@ -251,8 +250,8 @@ async function startdoubleClick() {
 			const video = document.querySelector("video")
 			if (video) {
 				// video is fullscreen
-				//ts-expect-error fullscreenElement does not exist on type Document
-				if (window.fullScreen) {
+				//TODO: check if document.fullscreenElement is working before: window.fullScreen
+				if (document.fullscreenElement) {
 					document.exitFullscreen()
 				} else {
 					document.body.requestFullscreen()
