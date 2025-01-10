@@ -69,6 +69,7 @@ onMessage("fetch", async (message: { data: { url: string } }) => {
 })
 onMessage("fullscreen", async (message: { sender: any }) => {
 	const { sender } = message
+	// TODO: probably not working
 	console.log("fullscreen", sender)
 	chrome.windows.update(sender.tab.windowId, { state: "fullscreen" })
 })
