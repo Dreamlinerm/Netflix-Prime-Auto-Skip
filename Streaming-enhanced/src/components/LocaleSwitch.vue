@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useLocale } from "@/composables/useLocale"
 import { i18n } from "@/utils/i18n"
-
-const currentLocale = useLocale()
+const optionsStore = useOptionsStore()
+const { currentLocale } = storeToRefs(optionsStore)
 </script>
 
 <template>
