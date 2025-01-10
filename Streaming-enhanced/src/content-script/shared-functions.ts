@@ -1,18 +1,5 @@
-import { DBCache } from "@/stores/options.store"
 import { sendMessage, onMessage } from "webext-bridge/content-script"
-import {
-	log,
-	increaseBadge,
-	optionsStore,
-	checkStoreReady,
-	Platforms,
-	logStartOfAddon,
-	config,
-	addSkippedTime,
-	parseAdTime,
-	createSlider,
-	date,
-} from "@/utils/helper"
+import { log, increaseBadge, optionsStore, checkStoreReady, Platforms, logStartOfAddon, date } from "@/utils/helper"
 logStartOfAddon(Platforms.Amazon)
 // Global Variables
 
@@ -70,7 +57,7 @@ async function getMovieInfo(
 	// justwatch api
 	// const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
 	const locale = htmlLang || navigator?.language || "en-US"
-	const queryType = media_type || "multi"
+	const queryType = media_type ?? "multi"
 	let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURI(title)}&include_adult=false&language=${locale}&page=1`
 	if (year) url += `&year=${year}`
 	await sendMessage("fetch", { url }, "background")
@@ -166,7 +153,7 @@ function useDBCache(title: string, card: HTMLElement, media_type: string) {
 		setRatingOnCard(card, DBCache.value[title], title)
 	}
 }
-function getMediaType(type) {
+function getMediaType(type: string) {
 	if (!type) return null
 	if (type.toLowerCase().includes("tv")) return "tv"
 	if (type.toLowerCase().includes("movie")) return "movie"
@@ -174,7 +161,7 @@ function getMediaType(type) {
 }
 async function addRating() {
 	url = window.location.href
-	let AllTitleCardsTypes
+	let AllTitleCardsTypes: Array<NodeListOf<Element>> = []
 	if (isNetflix) AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")]
 	else if (isDisney) AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not(.imdb)")]
 	else if (isHotstar) AllTitleCardsTypes = [document.querySelectorAll(".swiper-slide img:not(.imdb)")]
@@ -276,7 +263,7 @@ async function addRating() {
 				}
 				if (url.includes("video/tv")) media_type = "tv"
 				else if (url.includes("video/movie")) media_type = "movie"
-				else media_type = getMediaType(card.getAttribute("data-card-entity-type"))
+				else media_type = getMediaType(card.getAttribute("data-card-entity-type") ?? "")
 			} else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent
 			// for the static Pixar Disney, Starplus etc. cards
 			if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
@@ -297,11 +284,11 @@ async function addRating() {
 			}
 		}
 	}
-	if (updateDBCache) {
-		setTimeout(function () {
-			setDBCache()
-		}, 5000)
-	}
+	// if (updateDBCache) {
+	// 	setTimeout(function () {
+	// 		setDBCache()
+	// 	}, 5000)
+	// }
 }
 function getColorForRating(rating: number, lowVoteCount: boolean) {
 	// I want a color gradient from red to green with yellow in the middle
@@ -368,7 +355,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 			parentDiv.style.position = "relative"
 			parentDiv.appendChild(div)
 		}
-	} else if (isHotstar) card.parentElement.appendChild(div)
+	} else if (isHotstar) card?.parentElement?.appendChild(div)
 	else if (isPrimeVideo) {
 		if (card.getAttribute("data-card-title")) card?.firstChild?.firstChild?.appendChild(div)
 		else if (card.querySelector('div[data-testid="title-metadata-main"]')) {
