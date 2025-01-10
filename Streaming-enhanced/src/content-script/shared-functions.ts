@@ -265,7 +265,7 @@ async function addRating() {
 		}, 5000)
 	}
 }
-function getColorForRating(rating, lowVoteCount) {
+function getColorForRating(rating: number, lowVoteCount: boolean) {
 	// I want a color gradient from red to green with yellow in the middle
 	// the ratings are between 0 and 10
 	// the average rating is 6.5
@@ -275,16 +275,17 @@ function getColorForRating(rating, lowVoteCount) {
 	if (rating <= 7) return "rgb(245, 197, 24)" //#f5c518
 	return "rgb(0, 166, 0)"
 }
-function getTMDBUrl(id, media_type) {
+function getTMDBUrl(id: string, media_type: string) {
 	return `https://www.themoviedb.org/${media_type}/${id}`
 }
 
 async function setRatingOnCard(card, data, title) {
-	let div = document.createElement(data?.id ? "a" : "div")
+	let div
 	if (data?.id) {
+		div = document.createElement("a")
 		div.href = getTMDBUrl(data.id, data.media_type)
 		div.target = "_blank"
-	}
+	} else div = document.createElement("div")
 	const vote_count = data?.vote_count || 100
 	// right: 1.5vw;
 	div.id = "rating"
