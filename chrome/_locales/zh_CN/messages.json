@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "跳过迪斯尼广告的时间"
+  },
+  "ShowYearSwitch": {
+    "message": "节目发布年份："
+  },
+  "ShowYearDescription": {
+    "message": "显示评级旁边的发行年份。"
   }
 }

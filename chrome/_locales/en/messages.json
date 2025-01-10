@@ -305,5 +305,11 @@
   },
   "DisneyAdDescription": {
     "message": "Time of skipped Disney Ads."
+  },
+  "ShowYearSwitch": {
+    "message": "Show release year:"
+  },
+  "ShowYearDescription": {
+    "message": "Shows the release year next to the rating."
   }
 }

@@ -97,7 +97,7 @@ const defaultSettings = {
       disableNumpad: true,
     },
     HBO: { skipIntro: true, skipCredits: true, watchCredits: false, speedSlider: true, showRating: true },
-    Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true },
+    Video: { playOnFullScreen: true, epilepsy: false, userAgent: true, doubleClick: true, scrollVolume: true, showYear: false },
     Statistics: {
       AmazonAdTimeSkipped: 0,
       NetflixAdTimeSkipped: 0,
@@ -235,6 +235,7 @@ async function setCheckboxesToSettings() {
   VideoCheckboxes.forEach((key) => {
     setButtonChecked("Video" + capitalizeFirstLetter(key), getBooleanOfCategory(key));
   });
+  setButtonChecked("VideoShowYear", settings?.Video.showYear);
   setButtonChecked("VideoAds", settings?.Amazon.blockFreevee && settings?.Netflix.skipAd && settings?.Disney.skipAd);
   setButtonChecked("VideoFullScreen", settings?.Video.playOnFullScreen);
   setButtonChecked("VideoDoubleClick", settings?.Video.doubleClick);
@@ -431,7 +432,8 @@ function listenForClicks() {
           settings.Video.scrollVolume =
             VideoSkips;
         if (VideoSkips) setCategoryToBoolean("watchCredits", false);
-      } else if (e.target.id === "VideoAds")
+      } else if (e.target.id === "VideoShowYear") settings.Video.showYear = !settings.Video.showYear;
+      else if (e.target.id === "VideoAds")
         settings.Amazon.blockFreevee =
           settings.Netflix.skipAd =
           settings.Disney.skipAd =

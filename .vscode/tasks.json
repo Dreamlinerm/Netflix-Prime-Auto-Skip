@@ -4,7 +4,7 @@
     {
       "label": "Launch firefox addon", // Name of task
       "type": "shell",
-      "command": "npm start", // Enter your command here
+      "command": "cd Streaming-enhanced && npm start", // Enter your command here
       "group": "none",
       "presentation": {
         "reveal": "always",

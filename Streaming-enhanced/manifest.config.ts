@@ -64,6 +64,11 @@ export default {
 			js: ["src/content-script/max.ts"],
 			matches: ["*://*.max.com/*", "*://*.hbomax.com/*"],
 		},
+		{
+			all_frames: true,
+			js: ["src/content-script/static.crunchyroll.ts"],
+			matches: ["https://static.crunchyroll.com/vilos-v2/web/vilos/player.html*"],
+		},
 	],
 	options_page: "src/ui/options-page/index.html",
 	permissions: ["storage"],
