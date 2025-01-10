@@ -3,7 +3,6 @@ import { log, increaseBadge, date, optionsStore } from "@/utils/helper"
 // Global Variables
 
 const { settings } = storeToRefs(optionsStore)
-log("Crunchyroll script started", settings.value)
 // default Options for the observer (which mutations to observe)
 const config = { attributes: true, childList: true, subtree: true }
 const url = window.location.href
@@ -292,7 +291,10 @@ async function Crunchyroll_bigPlayerStyle() {
 }
 // #endregion
 // watch ready state
-setTimeout(function () {
-	log("startCrunchyroll", settings.value)
-	startCrunchyroll()
-}, 10)
+const readyStateCheckInterval = setInterval(function () {
+	// @ts-expect-error add $ready to object datatypes
+	if (settings.value?.$ready) {
+		clearInterval(readyStateCheckInterval)
+		startCrunchyroll()
+	}
+}, 1)

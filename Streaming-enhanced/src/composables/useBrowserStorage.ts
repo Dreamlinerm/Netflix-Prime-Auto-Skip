@@ -32,16 +32,21 @@ function isObject(value: any): boolean {
 
 export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	const data = ref<T>(defaultValue)
-	let isUpdatingFromStorage = false
+	let isUpdatingFromStorage = true
+	const isObjectc = isObject(defaultValue)
+	// check if the data is ready to be used and not just the default value
+	if (isObjectc) data.value.$ready = false
 	// Initialize storage with the value from chrome.storage.sync
 	chrome.storage.sync.get(key, (result) => {
 		if (result?.[key] !== undefined) {
-			if (isObject(defaultValue) && isObject(result[key])) {
+			if (isObjectc && isObject(result[key])) {
 				data.value = mergeDeep(defaultValue, result[key])
 			} else if (checkType(defaultValue, result[key])) {
 				data.value = result[key]
 			}
 		}
+		if (isObjectc) data.value.$ready = true
+		isUpdatingFromStorage = false
 	})
 
 	// Watch for changes in the storage and update chrome.storage.sync
@@ -68,16 +73,21 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 
 export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	const data = ref<T>(defaultValue)
-	let isUpdatingFromStorage = false
+	let isUpdatingFromStorage = true
+	const isObjectc = isObject(defaultValue)
+	// check if the data is ready to be used and not just the default value
+	if (isObjectc) data.value.$ready = false
 	// Initialize storage with the value from chrome.storage.local
 	chrome.storage.local.get(key, (result) => {
 		if (result?.[key] !== undefined) {
-			if (isObject(defaultValue) && isObject(result[key])) {
+			if (isObjectc && isObject(result[key])) {
 				data.value = mergeDeep(defaultValue, result[key])
 			} else if (checkType(defaultValue, result[key])) {
 				data.value = result[key]
 			}
 		}
+		if (isObjectc) data.value.$ready = true
+		isUpdatingFromStorage = false
 	})
 
 	// Watch for changes in the storage and update chrome.storage.local
