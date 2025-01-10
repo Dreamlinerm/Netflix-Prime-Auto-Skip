@@ -141,7 +141,6 @@ async function getMovieInfo(
 	if (year) url += `&year=${year}`
 	const data: TMDBResponse = await sendMessage("fetch", { url }, "background")
 	if (data != undefined) {
-		console.log("data", data)
 		// themoviedb
 		const movie = data?.results?.[0]
 		const compiledData: MovieInfo = {
@@ -348,7 +347,7 @@ async function addRating() {
 				// sometimes more than one image is loaded for the same title
 				if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
 					lastTitle = title
-					console.log("Title:", title, media_type)
+					// console.log("Title:", title, media_type)
 					if (
 						(DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 7) &&
 						(!media_type || DBCache[title]?.media_type == media_type)
