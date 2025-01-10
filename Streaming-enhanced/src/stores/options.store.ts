@@ -81,9 +81,9 @@ export type settingsType = {
 		Crunchyroll_profilePicture: null | string
 		profileName: null | string
 		profilePicture: null | string
-		sliderSteps: string
-		sliderMin: string
-		sliderMax: string
+		sliderSteps: number
+		sliderMin: number
+		sliderMax: number
 		filterDub: boolean
 		filterQueued: boolean
 		savedCrunchyList: CrunchyList

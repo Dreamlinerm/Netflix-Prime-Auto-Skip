@@ -46,14 +46,19 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 			}
 		}
 		if (isObjectc) data.value.$ready = true
-		isUpdatingFromStorage = false
+		setTimeout(() => {
+			isUpdatingFromStorage = false
+		}, 5)
 	})
 
 	// Watch for changes in the storage and update chrome.storage.sync
 	watch(
 		data,
 		(newValue) => {
-			if (!isUpdatingFromStorage) chrome.storage.sync.set({ [key]: toRaw(newValue) })
+			if (!isUpdatingFromStorage) {
+				chrome.storage.sync.set({ [key]: toRaw(newValue) })
+				// console.log(key, "changed", newValue)
+			}
 		},
 		{ deep: true },
 	)
@@ -87,14 +92,19 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 			}
 		}
 		if (isObjectc) data.value.$ready = true
-		isUpdatingFromStorage = false
+		setTimeout(() => {
+			isUpdatingFromStorage = false
+		}, 5)
 	})
 
 	// Watch for changes in the storage and update chrome.storage.local
 	watch(
 		data,
 		(newValue) => {
-			if (!isUpdatingFromStorage) chrome.storage.local.set({ [key]: toRaw(newValue) })
+			if (!isUpdatingFromStorage) {
+				chrome.storage.local.set({ [key]: toRaw(newValue) })
+				// console.log(key, "changed", newValue)
+			}
 		},
 		{ deep: true },
 	)
