@@ -32,7 +32,7 @@ const isEdge = /edg/i.test(ua);
 const htmlLang = document.documentElement.lang;
 const date = new Date();
 const today = date.toISOString().split("T")[0];
-const version = "1.1.53";
+const version = "1.1.54";
 if (isPrimeVideo || isNetflix || isDisney || isHotstar || isCrunchyroll || isHBO) {
   /* eslint-env root:true */
   // global variables in localStorage
