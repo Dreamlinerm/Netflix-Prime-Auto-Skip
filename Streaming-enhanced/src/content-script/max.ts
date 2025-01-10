@@ -7,7 +7,6 @@ import {
 	logStartOfAddon,
 	config,
 	addSkippedTime,
-	parseAdTime,
 	createSlider,
 } from "@/utils/helper"
 logStartOfAddon(Platforms.HBO)

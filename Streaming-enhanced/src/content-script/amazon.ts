@@ -57,7 +57,6 @@ const AmazonSkipIntroConfig = {
 	childList: true,
 	attributeOldValue: false,
 }
-// const AmazonSkipIntro = new RegExp("skipelement", "i");
 const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro)
 
 async function Amazon_scrollVolume() {
