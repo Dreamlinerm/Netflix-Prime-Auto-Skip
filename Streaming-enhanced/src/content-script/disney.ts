@@ -10,7 +10,9 @@ import {
 	parseAdTime,
 	createSlider,
 } from "@/utils/helper"
+import { startSharedFunctions } from "@/content-script/shared-functions"
 logStartOfAddon(Platforms.Disney)
+startSharedFunctions(Platforms.Disney)
 // Global Variables
 
 const { settings } = storeToRefs(optionsStore)

@@ -13,15 +13,20 @@ let url = window.location.href
 const hostname = window.location.hostname
 const title = document.title
 const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url))
-const isNetflix = /netflix/i.test(hostname)
-const isDisney = /disneyplus|starplus/i.test(hostname)
+let isNetflix = /netflix/i.test(hostname)
+let isDisney = /disneyplus|starplus/i.test(hostname)
 const isHotstar = /hotstar/i.test(hostname)
-const isHBO = /max.com/i.test(hostname)
+let isHBO = /max.com/i.test(hostname)
 const htmlLang = document.documentElement.lang
 
 const AmazonVideoClass = ".dv-player-fullscreen video"
 
-export async function startSharedFunctions() {
+export async function startSharedFunctions(platform: Platforms) {
+	// if(platform == Platforms.Amazon) isPrimeVideo = true, because should only be called on amazon prime video
+	if (platform == Platforms.Netflix) isNetflix = true
+	if (platform == Platforms.Disney) isDisney = true
+	if (platform == Platforms.HBO) isHBO = true
+
 	await checkStoreReady(settings)
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	await checkStoreReady(DBCache)

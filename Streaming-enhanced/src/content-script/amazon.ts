@@ -10,6 +10,7 @@ import {
 	parseAdTime,
 	createSlider,
 } from "@/utils/helper"
+import { startSharedFunctions } from "@/content-script/shared-functions"
 logStartOfAddon(Platforms.Amazon)
 // Global Variables
 
@@ -19,6 +20,14 @@ const isMobile = /mobile|streamingEnhanced/i.test(ua)
 let lastAdTimeText: number | string = 0
 const videoSpeed: Ref<number> = ref(1)
 const url = window.location.href
+const hostname = window.location.hostname
+const title = document.title
+const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url))
+
+if (isPrimeVideo) {
+	startSharedFunctions(Platforms.Amazon)
+	startAmazon()
+}
 
 async function startAmazon() {
 	await checkStoreReady(settings)
@@ -348,5 +357,3 @@ async function Amazon_doubleClick() {
 	}
 }
 // #endregion
-
-startAmazon()

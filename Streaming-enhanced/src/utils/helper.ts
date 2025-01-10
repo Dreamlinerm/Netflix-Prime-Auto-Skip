@@ -1,7 +1,6 @@
 import { createPinia } from "pinia"
 import { useOptionsStore } from "@/stores/options.store"
-import { sendMessage, onMessage } from "webext-bridge/content-script"
-import Amazon from "@/components/shared-pages/Amazon.vue"
+import { sendMessage } from "webext-bridge/content-script"
 const pinia = createPinia()
 
 // Global Variables

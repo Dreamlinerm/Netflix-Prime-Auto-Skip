@@ -8,7 +8,9 @@ import {
 	logStartOfAddon,
 	config,
 } from "@/utils/helper"
+import { startSharedFunctions } from "@/content-script/shared-functions"
 logStartOfAddon(Platforms.Crunchyroll)
+startSharedFunctions(Platforms.Crunchyroll)
 // Global Variables
 
 const { settings } = storeToRefs(optionsStore)

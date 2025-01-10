@@ -9,8 +9,9 @@ import {
 	addSkippedTime,
 	createSlider,
 } from "@/utils/helper"
-import { ImgHTMLAttributes } from "vue"
+import { startSharedFunctions } from "@/content-script/shared-functions"
 logStartOfAddon(Platforms.Netflix)
+startSharedFunctions(Platforms.Netflix)
 // Global Variables
 
 const { settings } = storeToRefs(optionsStore)
