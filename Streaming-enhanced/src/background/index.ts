@@ -1,28 +1,28 @@
 // Sample code if using extensionpay.com
 // import { extPay } from '@/utils/payment/extPay'
 // extPay.startBackground()
+const is_DEV = process.env.NODE_ENV === "development"
 
 chrome.runtime.onInstalled.addListener(async (opt) => {
 	// Check if reason is install or update. Eg: opt.reason === 'install' // If extension is installed.
-	// opt.reason === 'update' // If extension is updated.
 	if (opt.reason === "install") {
 		// TODO: add back
 		// await chrome.storage.local.clear()
+		const url = is_DEV
+			? chrome.runtime.getURL("src/ui/setup/index.html#/setup/install")
+			: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page")
 
 		chrome.tabs.create({
 			active: true,
 			// Open the setup page and append `?type=install` to the URL so frontend
 			// can know if we need to show the install page or update page.
-			// url: chrome.runtime.getURL("src/ui/setup/index.html#/setup/install"),
-			// url: chrome.runtime.getURL("src/ui/setup/index.html#/action-popup/"),
-			url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page"),
+			url,
 		})
 	}
 
-	if (opt.reason === "update") {
+	if (opt.reason === "update" && is_DEV) {
 		chrome.tabs.create({
 			active: true,
-			// url: chrome.runtime.getURL("src/ui/setup/index.html#/setup/update"),
 			url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page"),
 		})
 	}
@@ -38,7 +38,7 @@ self.onerror = function (message, source, lineno, colno, error) {
 
 console.info("hello world from background")
 import { onMessage, sendMessage } from "webext-bridge/background"
-import { log, optionsStore, checkStoreReady } from "@/utils/helper"
+import { log, optionsStore, checkStoreReady, isFirefox } from "@/utils/helper"
 log("background loaded")
 const { settings } = storeToRefs(optionsStore)
 const Badges: { [key: string]: string | number } = {}
@@ -49,17 +49,17 @@ async function increaseBadge(tabId: number) {
 		Badges[tabId] = 0
 	}
 	Badges[tabId]++
-	browser.browserAction.setBadgeText({ text: Badges[tabId].toString(), tabId })
+	chrome.action.setBadgeText({ text: Badges[tabId].toString(), tabId })
 }
 // Set Badge to a specific value
 async function setBadgeText(text: string, tabId: number) {
 	Badges[tabId] = text
-	browser.browserAction.setBadgeText({ text, tabId })
+	chrome.action.setBadgeText({ text, tabId })
 }
 
 // onMessage
-onMessage("fetch", async (message: { sender: any; data: { url: string } }) => {
-	const { sender, data } = message
+onMessage("fetch", async (message: { data: { url: string } }) => {
+	const { data } = message
 	fetch(data.url, {
 		method: "GET",
 		headers: {
@@ -75,11 +75,11 @@ onMessage("fetch", async (message: { sender: any; data: { url: string } }) => {
 })
 onMessage("fullscreen", async (message: { sender: any }) => {
 	const { sender } = message
-	browser.windows.update(sender.tab.windowId, { state: "fullscreen" })
+	chrome.windows.update(sender.tab.windowId, { state: "fullscreen" })
 })
 onMessage("exitFullscreen", async (message: { sender: any }) => {
 	const { sender } = message
-	browser.windows.update(sender.tab.windowId, { state: "normal" })
+	chrome.windows.update(sender.tab.windowId, { state: "normal" })
 })
 onMessage("setBadgeText", async (message: { sender: any; data: { text: string } }) => {
 	const { sender, data } = message
@@ -92,7 +92,7 @@ onMessage("increaseBadge", async (message: { sender: any }) => {
 onMessage("resetBadge", async (message: { sender: any }) => {
 	const { sender } = message
 	if (Badges[sender.tab.id]) delete Badges[sender.tab.id]
-	browser.browserAction.setBadgeText({ text: "", tabId: sender.tab.id })
+	chrome.action.setBadgeText({ text: "", tabId: sender.tab.id })
 })
 
 async function startMobile() {
@@ -100,7 +100,7 @@ async function startMobile() {
 	ChangeUserAgent()
 }
 
-if (isMobile) {
+if (isFirefox && isMobile) {
 	startMobile()
 }
 const newUa = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0 streamingEnhanced"

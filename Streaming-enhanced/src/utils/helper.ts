@@ -6,6 +6,7 @@ const pinia = createPinia()
 // Use the store
 export const optionsStore = useOptionsStore(pinia)
 export const date = new Date()
+export const isFirefox = typeof browser !== "undefined"
 const { settings } = storeToRefs(optionsStore)
 
 // Functions
