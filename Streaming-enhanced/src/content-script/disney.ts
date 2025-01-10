@@ -1,7 +1,6 @@
 import {
 	log,
 	increaseBadge,
-	date,
 	optionsStore,
 	checkStoreReady,
 	Platforms,
@@ -9,6 +8,7 @@ import {
 	config,
 	addSkippedTime,
 	parseAdTime,
+	createSlider,
 } from "@/utils/helper"
 logStartOfAddon(Platforms.Disney)
 // Global Variables
@@ -25,12 +25,9 @@ async function resetLastATimeText(time = 1000) {
 		lastAdTimeText = 0
 	}, time)
 }
-let videoSpeed: number = 1
-async function setVideoSpeed(speed: number) {
-	videoSpeed = speed
-}
-
+const videoSpeed: Ref<number> = ref(1)
 async function startDisney() {
+	await checkStoreReady(settings)
 	if (isHotstar) Hotstar_doubleClick()
 	DisneyObserver.observe(document, config)
 	setInterval(function () {
@@ -222,52 +219,6 @@ async function Disney_Watch_Credits() {
 		}
 	}
 }
-function createSlider(
-	video: HTMLVideoElement,
-	position: HTMLElement,
-	sliderStyle: string,
-	speedStyle: string,
-	divStyle = "",
-) {
-	videoSpeed = videoSpeed || video.playbackRate
-
-	const slider = document.createElement("input")
-	slider.id = "videoSpeedSlider"
-	slider.type = "range"
-	slider.min = settings.value.General.sliderMin.toString()
-	slider.max = settings.value.General.sliderMax.toString()
-	slider.value = (videoSpeed * 10).toString()
-	slider.step = settings.value.General.sliderSteps.toString()
-	// slider.style = sliderStyle
-	Object.assign(slider.style, sliderStyle)
-
-	const speed = document.createElement("p")
-	speed.id = "videoSpeed"
-	speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x"
-	// speed.style = speedStyle
-	Object.assign(speed.style, speedStyle)
-	if (divStyle) {
-		const div = document.createElement("div")
-		// div.style = divStyle
-		Object.assign(div.style, divStyle)
-		div.appendChild(slider)
-		div.appendChild(speed)
-		position.prepend(div)
-	} else position.prepend(slider, speed)
-
-	if (videoSpeed) video.playbackRate = videoSpeed
-	speed.onclick = function () {
-		slider.style.display = slider.style.display === "block" ? "none" : "block"
-	}
-	slider.oninput = function () {
-		const sliderValue = parseFloat(slider.value)
-		speed.textContent = (sliderValue / 10).toFixed(1) + "x"
-		video.playbackRate = sliderValue / 10
-		setVideoSpeed(sliderValue / 10)
-	}
-
-	return { slider, speed }
-}
 
 const DisneySliderStyle = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;"
 const DisneySpeedStyle =
@@ -282,7 +233,7 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 			else
 				position = document.querySelector(".icon-player-landscape")?.parentElement?.parentElement?.parentElement
 					?.parentElement as HTMLElement
-			if (position) createSlider(video, position, DisneySliderStyle, DisneySpeedStyle)
+			if (position) createSlider(video, videoSpeed, position, DisneySliderStyle, DisneySpeedStyle)
 		} else {
 			// need to resync the slider with the video sometimes
 			const speed = document.querySelector("#videoSpeed")
@@ -293,7 +244,7 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 				const sliderValue = parseFloat(alreadySlider.value)
 				if (speed) speed.textContent = (sliderValue / 10).toFixed(1) + "x"
 				video.playbackRate = sliderValue / 10
-				setVideoSpeed(sliderValue / 10)
+				videoSpeed.value = sliderValue / 10
 			}
 		}
 	}

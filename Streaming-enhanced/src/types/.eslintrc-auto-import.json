@@ -343,6 +343,7 @@
     "Platforms": true,
     "config": true,
     "addSkippedTime": true,
-    "parseAdTime": true
+    "parseAdTime": true,
+    "createSlider": true
   }
 }
