@@ -73,3 +73,13 @@ export async function addSkippedTime(startTime: number, endTime: number, key: St
 		increaseBadge()
 	}
 }
+
+export function parseAdTime(adTimeText: string | null) {
+	if (!adTimeText) return false
+	const second = /:\d+/.exec(adTimeText)?.[0].substring(1)
+	const minute = /\d+/.exec(adTimeText)?.[0]
+	if (!second || !minute) return false
+	const adTime = parseInt(second) + parseInt(minute) * 60
+	if (isNaN(adTime)) return false
+	return adTime
+}

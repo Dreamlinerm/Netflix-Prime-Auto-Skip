@@ -342,6 +342,7 @@
     "logStartOfAddon": true,
     "Platforms": true,
     "config": true,
-    "addSkippedTime": true
+    "addSkippedTime": true,
+    "parseAdTime": true
   }
 }

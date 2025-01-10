@@ -96,6 +96,7 @@ declare global {
   const onUpdated: typeof import('vue')['onUpdated']
   const onWatcherCleanup: typeof import('vue')['onWatcherCleanup']
   const optionsStore: typeof import('../utils/helper')['optionsStore']
+  const parseAdTime: typeof import('../utils/helper')['parseAdTime']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
   const pinia: typeof import('../utils/pinia')['pinia']
   const provide: typeof import('vue')['provide']
@@ -439,6 +440,7 @@ declare module 'vue' {
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly onWatcherCleanup: UnwrapRef<typeof import('vue')['onWatcherCleanup']>
     readonly optionsStore: UnwrapRef<typeof import('../utils/helper')['optionsStore']>
+    readonly parseAdTime: UnwrapRef<typeof import('../utils/helper')['parseAdTime']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly pinia: UnwrapRef<typeof import('../utils/pinia')['pinia']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
