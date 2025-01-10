@@ -105,7 +105,7 @@ async function Disney_scrollVolume(video: HTMLVideoElement) {
 async function Disney_Intro(video: HTMLVideoElement, time: number) {
 	// intro star wars andor Season 1 episode 2
 	// Recap Criminal Minds Season 1 Episode 2
-	let button
+	let button: HTMLElement | undefined
 	if (isDisney) {
 		const skipCreditsButton = isStarPlus
 			? document.querySelector('[data-gv2elementkey="playNext"]')
@@ -220,25 +220,28 @@ async function Disney_Watch_Credits() {
 		}
 	}
 }
-function createSlider(video, position, sliderStyle, speedStyle, divStyle = "") {
+function createSlider(video: HTMLVideoElement, position, sliderStyle: string, speedStyle: string, divStyle = "") {
 	videoSpeed = videoSpeed || video.playbackRate
 
-	let slider = document.createElement("input")
+	const slider = document.createElement("input")
 	slider.id = "videoSpeedSlider"
 	slider.type = "range"
-	slider.min = settings.value.General.sliderMin
-	slider.max = settings.value.General.sliderMax
-	slider.value = videoSpeed * 10
-	slider.step = settings.value.General.sliderSteps
-	slider.style = sliderStyle
+	slider.min = settings.value.General.sliderMin.toString()
+	slider.max = settings.value.General.sliderMax.toString()
+	slider.value = (videoSpeed * 10).toString()
+	slider.step = settings.value.General.sliderSteps.toString()
+	// slider.style = sliderStyle
+	Object.assign(slider.style, sliderStyle)
 
-	let speed = document.createElement("p")
+	const speed = document.createElement("p")
 	speed.id = "videoSpeed"
 	speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x"
-	speed.style = speedStyle
+	// speed.style = speedStyle
+	Object.assign(speed.style, sliderStyle)
 	if (divStyle) {
-		let div = document.createElement("div")
-		div.style = divStyle
+		const div = document.createElement("div")
+		// div.style = divStyle
+		Object.assign(div.style, divStyle)
 		div.appendChild(slider)
 		div.appendChild(speed)
 		position.prepend(div)
@@ -249,9 +252,10 @@ function createSlider(video, position, sliderStyle, speedStyle, divStyle = "") {
 		slider.style.display = slider.style.display === "block" ? "none" : "block"
 	}
 	slider.oninput = function () {
-		speed.textContent = (this.value / 10).toFixed(1) + "x"
-		video.playbackRate = this.value / 10
-		setVideoSpeed(this.value / 10)
+		const sliderValue = parseFloat(slider.value)
+		speed.textContent = (sliderValue / 10).toFixed(1) + "x"
+		video.playbackRate = sliderValue / 10
+		setVideoSpeed(sliderValue / 10)
 	}
 
 	return { slider, speed }
@@ -262,7 +266,7 @@ const DisneySpeedStyle =
 	"height:10px;min-width:40px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;"
 async function Disney_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
-		let alreadySlider = document.querySelector("#videoSpeedSlider")
+		const alreadySlider: HTMLInputElement | null = document.querySelector("#videoSpeedSlider")
 		if (!alreadySlider) {
 			// infobar position for the slider to be added
 			let position
@@ -275,12 +279,13 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 			// need to resync the slider with the video sometimes
 			const speed = document.querySelector("#videoSpeed")
 			if (video.playbackRate != alreadySlider.value / 10) {
-				video.playbackRate = alreadySlider.value / 10
+				video.playbackRate = parseFloat(alreadySlider.value) / 10
 			}
 			alreadySlider.oninput = function () {
-				speed.textContent = (alreadySlider.value / 10).toFixed(1) + "x"
-				video.playbackRate = alreadySlider.value / 10
-				setVideoSpeed(alreadySlider.value / 10)
+				const sliderValue = parseFloat(alreadySlider.value)
+				if (speed) speed.textContent = (sliderValue / 10).toFixed(1) + "x"
+				video.playbackRate = sliderValue / 10
+				setVideoSpeed(sliderValue / 10)
 			}
 		}
 	}
@@ -288,12 +293,12 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 
 async function Disney_selfAd(video: HTMLVideoElement, time: number) {
 	if (isDisney) {
-		const button = document.querySelector(".overlay_interstitials__promo_skip_button")
+		const button: HTMLElement | null = document.querySelector(".overlay_interstitials__promo_skip_button")
 		if (button) {
 			button.click()
 			log("SelfAd skipped", button)
 			setTimeout(function () {
-				addSkippedTime(time, video?.currentTime, "selfAdkipped")
+				addSkippedTime(time, video?.currentTime, "DisneyAdTimeSkipped")
 			}, 600)
 		}
 	}
