@@ -151,7 +151,7 @@ async function Amazon_Credits() {
 			!/(?<!\S)1(?!\S)/.exec(newEpNumber?.textContent ?? "") &&
 			lastAdTimeText != newEpNumber.textContent
 		) {
-			lastAdTimeText = newEpNumber.textContent
+			lastAdTimeText = newEpNumber.textContent ?? ""
 			resetLastATimeText()
 			button.click()
 			increaseBadge()
