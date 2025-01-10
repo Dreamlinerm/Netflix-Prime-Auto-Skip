@@ -340,6 +340,8 @@
     "whenever": true,
     "Websites": true,
     "logStartOfAddon": true,
-    "Platforms": true
+    "Platforms": true,
+    "config": true,
+    "addSkippedTime": true
   }
 }

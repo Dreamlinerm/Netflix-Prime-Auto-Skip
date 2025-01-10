@@ -9,6 +9,9 @@ const pinia = createPinia()
 export const optionsStore = useOptionsStore(pinia)
 export const date = new Date()
 export const isFirefox = typeof browser !== "undefined"
+// default Options for the observer (which mutations to observe)
+export const config = { attributes: true, childList: true, subtree: true }
+
 const { settings } = storeToRefs(optionsStore)
 const version = __VERSION__
 
@@ -55,4 +58,18 @@ export function logStartOfAddon(page: Platforms) {
 	else if (page == Platforms.Hotstar) console.log("Page %cHotstar", "color: #0682f0;")
 	else if (page == Platforms.Crunchyroll) console.log("Page %cCrunchyroll", "color: #e67a35;")
 	else if (page == Platforms.HBO) console.log("Page %cHBO", "color: #0836f1;")
+}
+type StatisticsKey =
+	| "AmazonAdTimeSkipped"
+	| "NetflixAdTimeSkipped"
+	| "DisneyAdTimeSkipped"
+	| "IntroTimeSkipped"
+	| "RecapTimeSkipped"
+	| "SegmentsSkipped"
+export async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
+	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+		log(key, endTime - startTime)
+		settings.value.Statistics[key] += endTime - startTime
+		increaseBadge()
+	}
 }

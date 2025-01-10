@@ -49,7 +49,7 @@ export type settingsType = {
 		skipIntro: boolean
 		speedSlider: boolean
 		releaseCalendar: boolean
-		dubLanguage: null
+		dubLanguage: { lang: string; index: number } | null
 		profile: boolean
 		bigPlayer: boolean
 		disableNumpad: boolean
@@ -81,9 +81,9 @@ export type settingsType = {
 		Crunchyroll_profilePicture: null | string
 		profileName: null | string
 		profilePicture: null | string
-		sliderSteps: number
-		sliderMin: number
-		sliderMax: number
+		sliderSteps: string
+		sliderMin: string
+		sliderMax: string
 		filterDub: boolean
 		filterQueued: boolean
 		savedCrunchyList: CrunchyList

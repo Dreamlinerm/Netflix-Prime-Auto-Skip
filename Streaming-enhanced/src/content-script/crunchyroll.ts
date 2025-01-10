@@ -1,10 +1,17 @@
-import { log, increaseBadge, date, optionsStore, checkStoreReady, Platforms, logStartOfAddon } from "@/utils/helper"
+import {
+	log,
+	increaseBadge,
+	date,
+	optionsStore,
+	checkStoreReady,
+	Platforms,
+	logStartOfAddon,
+	config,
+} from "@/utils/helper"
 logStartOfAddon(Platforms.Crunchyroll)
 // Global Variables
 
 const { settings } = storeToRefs(optionsStore)
-// default Options for the observer (which mutations to observe)
-const config = { attributes: true, childList: true, subtree: true }
 const url = window.location.href
 
 async function startCrunchyroll() {
