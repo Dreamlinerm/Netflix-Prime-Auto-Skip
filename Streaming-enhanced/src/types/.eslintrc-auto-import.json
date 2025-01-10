@@ -344,6 +344,8 @@
     "config": true,
     "addSkippedTime": true,
     "parseAdTime": true,
-    "createSlider": true
+    "createSlider": true,
+    "DBCache": true,
+    "MovieInfo": true
   }
 }

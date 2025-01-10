@@ -340,7 +340,7 @@ declare global {
   export type { Component, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { settingsType, Nullable, CrunchyListElement, CrunchyList } from '../stores/options.store'
+  export type { MovieInfo, DBCache, settingsType, Nullable, CrunchyListElement, CrunchyList } from '../stores/options.store'
   import('../stores/options.store')
   // @ts-ignore
   export type { Platforms } from '../utils/helper'
