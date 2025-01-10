@@ -76,7 +76,7 @@ export async function addSkippedTime(startTime: number, endTime: number, key: St
 
 export function parseAdTime(adTimeText: string | null) {
 	if (!adTimeText) return false
-	const adTime =
+	const adTime: number =
 		parseInt(/:\d+/.exec(adTimeText ?? "")?.[0].substring(1) ?? "") +
 		parseInt(/\d+/.exec(adTimeText ?? "")?.[0] ?? "") * 60
 	if (isNaN(adTime)) return false

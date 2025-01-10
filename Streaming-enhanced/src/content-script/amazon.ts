@@ -43,7 +43,7 @@ const AmazonObserver = new MutationObserver(Amazon)
 
 function Amazon() {
 	if (settings.value.Amazon?.filterPaid) Amazon_FilterPaid()
-	const video = document.querySelector(AmazonVideoClass)
+	const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
 	if (settings.value.Amazon?.skipCredits) Amazon_Credits()
 	if (settings.value.Amazon?.watchCredits) Amazon_Watch_Credits()
 	if (settings.value.Amazon?.speedSlider) Amazon_SpeedSlider(video)
@@ -88,9 +88,9 @@ function Amazon_Intro() {
 		const button = document.querySelector("[class*=skipelement]") as HTMLButtonElement
 		if (button) {
 			const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
-			const time = video?.currentTime ?? ""
-			if (typeof time === "number" && lastIntroTime != parseInt(time)) {
-				lastIntroTime = parseInt(time)
+			const time = video?.currentTime ?? 0
+			if (typeof time === "number" && lastIntroTime != time) {
+				lastIntroTime = time
 				resetLastIntroTime()
 				button.click()
 				log("Intro skipped", button)
@@ -109,7 +109,10 @@ async function AmazonGobackbutton(video: HTMLVideoElement, startTime: number, en
 		reverseButton = true
 		// go back button
 		const button = document.createElement("button")
-		button.style = "padding: 0px 22px; line-height: normal; min-width: 0px;z-index:999;pointer-events:all;"
+		Object.assign(
+			button.style,
+			"padding: 0px 22px; line-height: normal; min-width: 0px;z-index:999;pointer-events:all;",
+		)
 		button.setAttribute(
 			"class",
 			"fqye4e3 f1ly7q5u fk9c3ap fz9ydgy f1xrlb00 f1hy0e6n fgbpje3 f1uteees f1h2a8xb  f1cg7427 fiqc9rt fg426ew f1ekwadg",
@@ -142,7 +145,7 @@ async function Amazon_Credits() {
 	const button = document.querySelector("[class*=nextupcard-button]") as HTMLElement
 	if (button) {
 		// only skipping to next episode not an entirely new series
-		const newEpNumber = document.querySelector("[class*=nextupcard-episode]")
+		const newEpNumber = document.querySelector("[class*=nextupcard-episode]") as HTMLElement
 		if (
 			newEpNumber &&
 			!/(?<!\S)1(?!\S)/.exec(newEpNumber?.textContent ?? "") &&
@@ -180,7 +183,7 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 				video.playbackRate = parseFloat(alreadySlider.value) / 10
 			}
 			alreadySlider.oninput = function () {
-				speed.textContent = (parseFloat(alreadySlider.value) / 10).toFixed(1) + "x"
+				if (speed) speed.textContent = (parseFloat(alreadySlider.value) / 10).toFixed(1) + "x"
 				video.playbackRate = parseFloat(alreadySlider.value) / 10
 			}
 		}
@@ -199,11 +202,11 @@ async function Amazon_FilterPaid() {
 	if (url.includes("storefront") || url.includes("genre") || url.includes("movie")) {
 		// the yellow hand bag is the paid category .NbhXwl
 		document.querySelectorAll("section[data-testid='standard-carousel'] ul:has(svg.NbhXwl)").forEach((a) => {
-			deletePaidCategory(a)
+			deletePaidCategory(a as HTMLElement)
 		})
 	}
 }
-async function deletePaidCategory(a) {
+async function deletePaidCategory(a: HTMLElement) {
 	// if the section is mostly paid content delete it
 	// -2 because sometimes there are title banners
 	if (
@@ -248,7 +251,7 @@ async function skipAd(video: HTMLVideoElement) {
 		adTime = parseAdTime(adTimeText?.childNodes?.[0]?.textContent)
 		if (!adTime) adTime = parseAdTime(adTimeText?.childNodes?.[1]?.textContent)
 		// !document.querySelector(".fu4rd6c.f1cw2swo") so it doesn't try to skip when the self ad is playing
-		if (!document.querySelector(".fu4rd6c.f1cw2swo") && adTime > 1 && !lastAdTimeText) {
+		if (!document.querySelector(".fu4rd6c.f1cw2swo") && typeof adTime == "number" && adTime > 1 && !lastAdTimeText) {
 			lastAdTimeText = adTime
 			// biggest skiptime before crashing on amazon.com, can be little higher than 90 but 90 to be safe
 			const bigTime = 90
@@ -279,12 +282,15 @@ async function Amazon_AdTimeout() {
 		if (video) {
 			video.onplay = function () {
 				// if video is playing
-				if (getComputedStyle(document.querySelector("#dv-web-player")).display != "none") {
-					const button = document.querySelector(".fu4rd6c.f1cw2swo")
+				const dvWebPlayer = document.querySelector("#dv-web-player")
+				if (dvWebPlayer && getComputedStyle(dvWebPlayer).display != "none") {
+					const button = document.querySelector(".fu4rd6c.f1cw2swo") as HTMLElement
 					if (button) {
 						// only getting the time after :08
 						const adTime = parseInt(
-							/:\d+/.exec(document.querySelector(".atvwebplayersdk-adtimeindicator-text").innerHTML)?.[0].substring(1),
+							/:\d+/
+								.exec(document.querySelector(".atvwebplayersdk-adtimeindicator-text")?.innerHTML ?? "")?.[0]
+								?.substring(1) ?? "",
 						)
 						// wait for 100ms before skipping to make sure the button is not pressed too fast, or there will be infinite loading
 						setTimeout(() => {
