@@ -48,7 +48,7 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 		if (isObjectc) data.value.$ready = true
 		setTimeout(() => {
 			isUpdatingFromStorage = false
-		}, 5)
+		}, 1)
 	})
 
 	// Watch for changes in the storage and update chrome.storage.sync
@@ -70,7 +70,7 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 			data.value = newValue
 			setTimeout(() => {
 				isUpdatingFromStorage = false
-			}, 5)
+			}, 1)
 		}
 	})
 	return data
@@ -94,7 +94,7 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 		if (isObjectc) data.value.$ready = true
 		setTimeout(() => {
 			isUpdatingFromStorage = false
-		}, 5)
+		}, 1)
 	})
 
 	// Watch for changes in the storage and update chrome.storage.local
@@ -116,7 +116,7 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 			data.value = newValue
 			setTimeout(() => {
 				isUpdatingFromStorage = false
-			}, 5)
+			}, 1)
 		}
 	})
 	return data
