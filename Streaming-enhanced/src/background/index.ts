@@ -6,17 +6,12 @@ const is_DEV = process.env.NODE_ENV === "development"
 chrome.runtime.onInstalled.addListener(async (opt) => {
 	// Check if reason is install or update. Eg: opt.reason === 'install' // If extension is installed.
 	if (opt.reason === "install") {
-		// TODO: add back
 		// await chrome.storage.local.clear()
-		const url = is_DEV
-			? chrome.runtime.getURL("src/ui/setup/index.html#/setup/install")
-			: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page")
-
 		chrome.tabs.create({
 			active: true,
 			// Open the setup page and append `?type=install` to the URL so frontend
 			// can know if we need to show the install page or update page.
-			url,
+			url: chrome.runtime.getURL("src/ui/setup/index.html#/setup/install"),
 		})
 	}
 

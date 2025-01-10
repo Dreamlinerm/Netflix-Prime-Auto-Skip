@@ -1,5 +1,6 @@
 import { createPinia } from "pinia"
 import { useOptionsStore } from "@/stores/options.store"
+import { sendMessage, onMessage } from "webext-bridge/content-script"
 const pinia = createPinia()
 
 // Global Variables
@@ -18,9 +19,7 @@ export async function log(...args: any[]) {
 // increase the badge count
 export async function increaseBadge() {
 	settings.value.Statistics.SegmentsSkipped++
-	chrome.runtime.sendMessage({
-		type: "increaseBadge",
-	})
+	sendMessage("increaseBadge", {}, "background")
 }
 // checks if the store got the data from the storage
 export async function checkStoreReady(setting: Ref<any>) {
