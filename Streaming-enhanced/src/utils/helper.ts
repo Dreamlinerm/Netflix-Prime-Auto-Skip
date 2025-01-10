@@ -1,6 +1,7 @@
 import { createPinia } from "pinia"
 import { useOptionsStore } from "@/stores/options.store"
 import { sendMessage, onMessage } from "webext-bridge/content-script"
+import Amazon from "@/components/shared-pages/Amazon.vue"
 const pinia = createPinia()
 
 // Global Variables
@@ -9,6 +10,7 @@ export const optionsStore = useOptionsStore(pinia)
 export const date = new Date()
 export const isFirefox = typeof browser !== "undefined"
 const { settings } = storeToRefs(optionsStore)
+const version = __VERSION__
 
 // Functions
 // custom log function
@@ -31,4 +33,26 @@ export async function checkStoreReady(setting: Ref<any>) {
 			}
 		}, 1)
 	})
+}
+
+export enum Platforms {
+	Netflix = "netflix",
+	Amazon = "amazon",
+	StarPlus = "starplus",
+	Disney = "disney",
+	Hotstar = "hotstar",
+	Crunchyroll = "crunchyroll",
+	HBO = "hbo",
+}
+export function logStartOfAddon(page: Platforms) {
+	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
+	console.log("version:", version)
+	console.log("Settings", settings.value)
+	if (page == Platforms.Netflix) console.log("Page %cNetflix", "color: #e60010;")
+	else if (page == Platforms.Amazon) console.log("Page %cAmazon", "color: #00aeef;")
+	else if (page == Platforms.StarPlus) console.log("Page %cStarPlus", "color: #fe541c;")
+	else if (page == Platforms.Disney) console.log("Page %cDisney", "color: #0682f0;")
+	else if (page == Platforms.Hotstar) console.log("Page %cHotstar", "color: #0682f0;")
+	else if (page == Platforms.Crunchyroll) console.log("Page %cCrunchyroll", "color: #e67a35;")
+	else if (page == Platforms.HBO) console.log("Page %cHBO", "color: #0836f1;")
 }

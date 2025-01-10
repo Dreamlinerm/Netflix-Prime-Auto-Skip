@@ -1,2 +1,5 @@
-import { log, increaseBadge, date, optionsStore } from "@/utils/helper"
-log("amazon.ts")
+import { log, increaseBadge, date, optionsStore, checkStoreReady, Platforms, logStartOfAddon } from "@/utils/helper"
+logStartOfAddon(Platforms.Amazon)
+// Global Variables
+
+const { settings } = storeToRefs(optionsStore)

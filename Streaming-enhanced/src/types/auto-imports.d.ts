@@ -9,6 +9,8 @@ declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const Notification: typeof import('notivue')['Notification']
   const Notivue: typeof import('notivue')['Notivue']
+  const Platforms: typeof import('../utils/helper')['Platforms']
+  const Websites: typeof import('../utils/helper')['Websites']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const appRouter: typeof import('../utils/router/index')['appRouter']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
@@ -60,6 +62,7 @@ declare global {
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
   const log: typeof import('../utils/helper')['log']
+  const logStartOfAddon: typeof import('../utils/helper')['logStartOfAddon']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const mapActions: typeof import('pinia')['mapActions']
   const mapGetters: typeof import('pinia')['mapGetters']
@@ -335,6 +338,9 @@ declare global {
   // @ts-ignore
   export type { settingsType, Nullable, CrunchyListElement, CrunchyList } from '../stores/options.store'
   import('../stores/options.store')
+  // @ts-ignore
+  export type { Platforms } from '../utils/helper'
+  import('../utils/helper')
 }
 
 // for vue template auto import
@@ -345,6 +351,7 @@ declare module 'vue' {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly Notification: UnwrapRef<typeof import('notivue')['Notification']>
     readonly Notivue: UnwrapRef<typeof import('notivue')['Notivue']>
+    readonly Platforms: UnwrapRef<typeof import('../utils/helper')['Platforms']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly appRouter: UnwrapRef<typeof import('../utils/router/index')['appRouter']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
@@ -396,6 +403,7 @@ declare module 'vue' {
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly log: UnwrapRef<typeof import('../utils/helper')['log']>
+    readonly logStartOfAddon: UnwrapRef<typeof import('../utils/helper')['logStartOfAddon']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly mapActions: UnwrapRef<typeof import('pinia')['mapActions']>
     readonly mapGetters: UnwrapRef<typeof import('pinia')['mapGetters']>

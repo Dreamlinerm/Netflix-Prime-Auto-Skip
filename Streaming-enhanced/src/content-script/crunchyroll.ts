@@ -1,5 +1,5 @@
-import { log, increaseBadge, date, optionsStore, checkStoreReady } from "@/utils/helper"
-
+import { log, increaseBadge, date, optionsStore, checkStoreReady, Platforms, logStartOfAddon } from "@/utils/helper"
+logStartOfAddon(Platforms.Crunchyroll)
 // Global Variables
 
 const { settings } = storeToRefs(optionsStore)
