@@ -196,10 +196,10 @@ async function Crunchyroll_SpeedSlider(video: HTMLVideoElement) {
 				const slider = document.createElement("input")
 				slider.id = "videoSpeedSlider"
 				slider.type = "range"
-				slider.min = settings.value.General.sliderMin
-				slider.max = settings.value.General.sliderMax
+				slider.min = settings.value.General.sliderMin.toString()
+				slider.max = settings.value.General.sliderMax.toString()
 				slider.value = (videoSpeed * 10).toString()
-				slider.step = settings.value.General.sliderSteps
+				slider.step = settings.value.General.sliderSteps.toString()
 				slider.style.display = "none"
 				slider.style.width = "200px"
 
