@@ -29,10 +29,15 @@ function checkType(defaultValue: any, value: any): boolean {
 function isObject(value: any): boolean {
 	return value !== null && value instanceof Object && !Array.isArray(value)
 }
+function resetUpdatingFlag(flag: Ref<boolean>) {
+	setTimeout(() => {
+		flag.value = false
+	}, 1)
+}
 
 export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	const data = ref<T>(defaultValue)
-	let isUpdatingFromStorage = true
+	const isUpdatingFromStorage = ref(true)
 	const isObjectc = isObject(defaultValue)
 	// check if the data is ready to be used and not just the default value
 	if (isObjectc) data.value.$ready = false
@@ -46,16 +51,14 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 			}
 		}
 		if (isObjectc) data.value.$ready = true
-		setTimeout(() => {
-			isUpdatingFromStorage = false
-		}, 1)
+		resetUpdatingFlag(isUpdatingFromStorage)
 	})
 
 	// Watch for changes in the storage and update chrome.storage.sync
 	watch(
 		data,
 		(newValue) => {
-			if (!isUpdatingFromStorage) {
+			if (!isUpdatingFromStorage.value) {
 				chrome.storage.sync.set({ [key]: toRaw(newValue) })
 				// console.log(key, "changed", newValue)
 			}
@@ -65,12 +68,10 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	// Add the onChanged listener here
 	chrome.storage.sync.onChanged.addListener(function (changes) {
 		if (changes?.[key]) {
-			isUpdatingFromStorage = true
+			isUpdatingFromStorage.value = true
 			const { oldValue, newValue } = changes[key]
 			data.value = newValue
-			setTimeout(() => {
-				isUpdatingFromStorage = false
-			}, 1)
+			resetUpdatingFlag(isUpdatingFromStorage)
 		}
 	})
 	return data
@@ -78,7 +79,7 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 
 export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	const data = ref<T>(defaultValue)
-	let isUpdatingFromStorage = true
+	const isUpdatingFromStorage = ref(true)
 	const isObjectc = isObject(defaultValue)
 	// check if the data is ready to be used and not just the default value
 	if (isObjectc) data.value.$ready = false
@@ -92,16 +93,14 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 			}
 		}
 		if (isObjectc) data.value.$ready = true
-		setTimeout(() => {
-			isUpdatingFromStorage = false
-		}, 1)
+		resetUpdatingFlag(isUpdatingFromStorage)
 	})
 
 	// Watch for changes in the storage and update chrome.storage.local
 	watch(
 		data,
 		(newValue) => {
-			if (!isUpdatingFromStorage) {
+			if (!isUpdatingFromStorage.value) {
 				chrome.storage.local.set({ [key]: toRaw(newValue) })
 				// console.log(key, "changed", newValue)
 			}
@@ -111,12 +110,10 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	// Add the onChanged listener here
 	chrome.storage.local.onChanged.addListener(function (changes) {
 		if (changes?.[key]) {
-			isUpdatingFromStorage = true
+			isUpdatingFromStorage.value = true
 			const { oldValue, newValue } = changes[key]
 			data.value = newValue
-			setTimeout(() => {
-				isUpdatingFromStorage = false
-			}, 1)
+			resetUpdatingFlag(isUpdatingFromStorage)
 		}
 	})
 	return data
