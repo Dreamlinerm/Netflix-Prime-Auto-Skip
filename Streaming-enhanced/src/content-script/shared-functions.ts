@@ -1,3 +1,4 @@
+import { DBCache } from "@/stores/options.store"
 import {
 	log,
 	increaseBadge,
@@ -157,6 +158,7 @@ async function addRating() {
 	for (let type = 0; type < AllTitleCardsTypes.length; type++) {
 		const titleCards = AllTitleCardsTypes[type]
 		let media_type = null
+
 		for (let i = 0; i < titleCards.length; i++) {
 			let card = titleCards[i]
 			// add seen class
@@ -279,7 +281,7 @@ function getTMDBUrl(id: string, media_type: string) {
 	return `https://www.themoviedb.org/${media_type}/${id}`
 }
 
-async function setRatingOnCard(card, data, title) {
+async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string) {
 	let div
 	if (data?.id) {
 		div = document.createElement("a")
@@ -332,9 +334,9 @@ async function setRatingOnCard(card, data, title) {
 		}
 	} else if (isHotstar) card.parentElement.appendChild(div)
 	else if (isPrimeVideo) {
-		if (card.getAttribute("data-card-title")) card.firstChild.firstChild.appendChild(div)
+		if (card.getAttribute("data-card-title")) card?.firstChild?.firstChild?.appendChild(div)
 		else if (card.querySelector('div[data-testid="title-metadata-main"]')) {
-			card.querySelector('div[data-testid="title-metadata-main"]').appendChild(div)
+			card.querySelector('div[data-testid="title-metadata-main"]')?.appendChild(div)
 		} else card.appendChild(div)
 	}
 }
