@@ -22,6 +22,7 @@ export type MovieInfo = {
 	release_date: string
 	media_type: string
 	date: string
+	db: string
 }
 export type DBCache = {
 	[title: string]: MovieInfo

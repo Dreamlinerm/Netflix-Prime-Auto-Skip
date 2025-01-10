@@ -108,10 +108,7 @@ async function AmazonGobackbutton(video: HTMLVideoElement, startTime: number, en
 		reverseButton = true
 		// go back button
 		const button = document.createElement("button")
-		Object.assign(
-			button.style,
-			"padding: 0px 22px; line-height: normal; min-width: 0px;z-index:999;pointer-events:all;",
-		)
+		button.style.cssText = "padding: 0px 22px; line-height: normal; min-width: 0px; z-index: 999; pointer-events: all;"
 		button.setAttribute(
 			"class",
 			"fqye4e3 f1ly7q5u fk9c3ap fz9ydgy f1xrlb00 f1hy0e6n fgbpje3 f1uteees f1h2a8xb  f1cg7427 fiqc9rt fg426ew f1ekwadg",

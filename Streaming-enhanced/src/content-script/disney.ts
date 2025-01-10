@@ -170,10 +170,8 @@ async function Disney_addHomeButton() {
 		const homeButton = document.createElement("button")
 		homeButton.textContent = browser.i18n.getMessage("HomeButton")
 		homeButton.id = "homeButton"
-		Object.assign(
-			homeButton.style,
-			'color: white;background-color: #40424A;border: rgb(64, 66, 74);border-radius: 5px;padding: 0 2px 0 2px;height: 56px;padding-left: 24px;padding-right: 24px;letter-spacing: 1.76px;font-size: 15px;  text-transform: uppercase;cursor: pointer;font-family:"Avenir-World-for-Disney-Demi", sans-serif;',
-		)
+		homeButton.style.cssText =
+			'color: white;background-color: #40424A;border: rgb(64, 66, 74);border-radius: 5px;padding: 0 2px 0 2px;height: 56px;padding-left: 24px;padding-right: 24px;letter-spacing: 1.76px;font-size: 15px;  text-transform: uppercase;cursor: pointer;font-family:"Avenir-World-for-Disney-Demi", sans-serif;'
 		// add hover effect
 		homeButton.onmouseover = function () {
 			homeButton.style.backgroundColor = "#474a53"

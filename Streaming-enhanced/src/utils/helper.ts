@@ -100,18 +100,15 @@ export function createSlider(
 	slider.max = settings.value.General.sliderMax.toString()
 	slider.value = (videoSpeed.value * 10).toString()
 	slider.step = settings.value.General.sliderSteps.toString()
-	// slider.style = sliderStyle
-	Object.assign(slider.style, sliderStyle)
+	slider.style.cssText = sliderStyle
 
 	const speed = document.createElement("p")
 	speed.id = "videoSpeed"
 	speed.textContent = videoSpeed.value ? videoSpeed.value.toFixed(1) + "x" : "1.0x"
-	// speed.style = speedStyle
-	Object.assign(speed.style, speedStyle)
+	speed.style.cssText = speedStyle
 	if (divStyle) {
 		const div = document.createElement("div")
-		// div.style = divStyle
-		Object.assign(div.style, divStyle)
+		div.style.cssText = divStyle
 		div.appendChild(slider)
 		div.appendChild(speed)
 		position.prepend(div)

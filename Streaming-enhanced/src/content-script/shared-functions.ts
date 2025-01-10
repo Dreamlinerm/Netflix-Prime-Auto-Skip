@@ -28,7 +28,9 @@ const isDisney = /disneyplus|starplus/i.test(hostname)
 const isHotstar = /hotstar/i.test(hostname)
 const isHBO = /max.com/i.test(hostname)
 
-async function startSharedFunctions() {
+const AmazonVideoClass = ".dv-player-fullscreen video"
+
+export async function startSharedFunctions() {
 	await checkStoreReady(settings)
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	await checkStoreReady(DBCache)
@@ -47,7 +49,7 @@ async function garbageCollection() {
 	// clear every rating where db != tmdb
 	log("garbageCollection started, deleting old ratings:")
 	const keys = Object.keys(DBCache)
-	for (let key of keys) {
+	for (const key of keys) {
 		if (getDiffInDays(DBCache.value[key].date, date) >= GCdiff || DBCache.value[key].db != "tmdb") {
 			console.log(DBCache.value[key].date, key)
 			delete DBCache.value[key]
@@ -80,7 +82,7 @@ function showRating() {
 }
 async function startShowRatingInterval() {
 	if (showRating()) addRating()
-	let RatingInterval = setInterval(function () {
+	const RatingInterval = setInterval(function () {
 		if (
 			(isNetflix && !settings.value.Netflix?.showRating) ||
 			(isPrimeVideo && !settings.value.Amazon?.showRating) ||
@@ -94,7 +96,7 @@ async function startShowRatingInterval() {
 		if (showRating()) addRating()
 	}, 1000)
 }
-function getDiffInDays(firstDate, secondDate) {
+function getDiffInDays(firstDate: string, secondDate: string) {
 	if (!firstDate || !secondDate) return 31
 	return Math.round(Math.abs(new Date(secondDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24))
 }
@@ -286,13 +288,18 @@ async function setRatingOnCard(card, data, title) {
 	const vote_count = data?.vote_count || 100
 	// right: 1.5vw;
 	div.id = "rating"
-	div.style =
-		"position: absolute;bottom: 0;color: black;text-decoration: none;background:" +
-		getColorForRating(data?.score, vote_count < 50) +
-		";border-radius: 5px;padding: 0 2px 0 2px;" +
-		(isNetflix ? "right:0.2vw;" : "right:0;") +
-		(isDisney ? "" : "z-index: 9999;") +
-		(isMobile ? "font-size: 4vw;" : "font-size: 1vw;")
+	Object.assign(div.style, {
+		position: "absolute",
+		bottom: "0",
+		color: "black",
+		textDecoration: "none",
+		background: getColorForRating(data?.score, vote_count < 50),
+		borderRadius: "5px",
+		padding: "0 2px 0 2px",
+		right: isNetflix ? "0.2vw" : "0",
+		zIndex: isDisney ? "" : "9999",
+		fontSize: isMobile ? "4vw" : "1vw",
+	})
 
 	// div.id = "imdb";
 	if (data?.score >= 0) {
@@ -331,10 +338,11 @@ async function setRatingOnCard(card, data, title) {
 	}
 }
 function OnFullScreenChange() {
-	let video
-	if (isNetflix || isDisney || isHotstar || isHBO) video = document.querySelector("video")
-	else video = document.querySelector(AmazonVideoClass)
-	if (window.fullScreen && video) {
+	let video: HTMLVideoElement
+	if (isNetflix || isDisney || isHotstar || isHBO) video = document.querySelector("video") as HTMLVideoElement
+	else video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
+	//TODO: window.fullScreen
+	if (document.fullscreenElement && video) {
 		video.play()
 		log("auto-played on fullscreen")
 		increaseBadge()
@@ -348,5 +356,3 @@ async function startPlayOnFullScreen() {
 	}
 }
 // #endregion
-
-startSharedFunctions()
