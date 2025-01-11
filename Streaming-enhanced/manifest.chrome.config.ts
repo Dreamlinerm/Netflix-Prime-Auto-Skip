@@ -9,6 +9,5 @@ export default defineManifest((env) => ({
 	action: {
 		default_popup: "src/ui/action-popup/index.html",
 	},
-	name: env.mode === "staging" ? `[INTERNAL] ${name}` : displayName.replace(":", "").replace("+", "") || name,
 	key: env["CHROME_ADDON_KEY"],
 }))
