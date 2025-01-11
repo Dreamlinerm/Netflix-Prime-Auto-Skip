@@ -24,7 +24,7 @@ chrome.tabs.query(query, callback)
 	<div class="min-h-[300px]">
 		<AppHeader />
 
-		<div class="p-4">
+		<div class="p-4 pt-0">
 			<RouterView />
 		</div>
 

@@ -21,10 +21,6 @@ export default {
 	// semver is OK in "version_name"
 	// version_name: version,
 	manifest_version: 3,
-	// key: '',
-	action: {
-		default_popup: "src/ui/action-popup/index.html",
-	},
 	background: {
 		service_worker: "src/background/index.ts",
 		type: "module",
