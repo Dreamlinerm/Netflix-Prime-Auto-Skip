@@ -17,7 +17,10 @@
 		"lint": "eslint . --fix --cache",
 		"lint:manifest": "web-ext lint --pretty",
 		"preview": "vite preview",
-		"typecheck": "vue-tsc --noEmit"
+		"typecheck": "vue-tsc --noEmit",
+		"transGoogle": "jsontt .translation/deepl.EN.json -m google2 -n google2 -fb yes -cl 3 -f en -t de fr es pt it ja pl sv zh-CN ko tr",
+		"deepl": "jsontt .translation/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -f EN -t DE ES FR IT JA KO PL PT SV TR ZH",
+		"transDeepL": "tsx scripts/deepl.ts"
 	},
 	"dependencies": {
 		"marked": "^15.0.6",
@@ -106,6 +109,7 @@
 	},
 	"type": "module",
 	"optionalDependencies": {
-		"win-node-env": "^0.6.1"
+		"win-node-env": "^0.6.1",
+		"@parvineyvazov/json-translator": "^3.2.2"
 	}
 }
