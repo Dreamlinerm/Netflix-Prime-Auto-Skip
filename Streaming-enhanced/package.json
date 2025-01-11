@@ -32,6 +32,7 @@
 		"webextension-polyfill": "^0.12.0"
 	},
 	"devDependencies": {
+		"@parvineyvazov/json-translator": "^3.2.2",
 		"@crxjs/vite-plugin": "2.0.0-beta.29",
 		"@eslint/compat": "^1.2.4",
 		"@eslint/js": "^9.17.0",
@@ -109,7 +110,6 @@
 	},
 	"type": "module",
 	"optionalDependencies": {
-		"win-node-env": "^0.6.1",
-		"@parvineyvazov/json-translator": "^3.2.2"
+		"win-node-env": "^0.6.1"
 	}
 }
