@@ -70,16 +70,16 @@ onMessage("fetch", async (message: { data: { url: string } }) => {
 		return { error: (error as Error).message }
 	}
 })
-onMessage("fullscreen", async (message: { sender: any }) => {
-	const { sender } = message
-	// TODO: probably not working
-	console.log("fullscreen", sender)
-	chrome.windows.update(sender.tab.windowId, { state: "fullscreen" })
-})
-onMessage("exitFullscreen", async (message: { sender: any }) => {
-	const { sender } = message
-	console.log("exitFullscreen", sender)
-	chrome.windows.update(sender.tab.windowId, { state: "normal" })
+// allowWindowMessaging is security risk thats why we are not using it and using chrome.message instead
+// receive message from content script with the badgeText and set it in the badge
+chrome.runtime.onMessage.addListener(function (message: { type: string }, sender: any, sendResponse) {
+	if (message.type === "fullscreen") {
+		console.log("Fullscreen", sender)
+		browser.windows.update(sender.tab.windowId, { state: "fullscreen" })
+	} else if (message.type === "exitFullscreen") {
+		console.log("exit Fullscreen", sender)
+		browser.windows.update(sender.tab.windowId, { state: "normal" })
+	}
 })
 onMessage("setBadgeText", async (message: { sender: any; data: { text: string } }) => {
 	const { sender, data } = message

@@ -11,6 +11,7 @@ import {
 	createSlider,
 } from "@/utils/helper"
 import { startSharedFunctions } from "@/content-script/shared-functions"
+import { sendMessage } from "webext-bridge/content-script"
 logStartOfAddon(Platforms.Disney)
 startSharedFunctions(Platforms.Disney)
 // Global Variables
@@ -121,6 +122,8 @@ async function Disney_Intro(video: HTMLVideoElement, time: number) {
 		}, 600)
 	}
 }
+chrome.runtime.sendMessage({ type: "fullscreen" })
+// chrome.runtime.sendMessage({ type: "exitFullscreen" })
 async function Disney_skipCredits(currentTime: number) {
 	let button: HTMLElement
 	if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]') as HTMLElement
@@ -146,16 +149,16 @@ async function Disney_skipCredits(currentTime: number) {
 				// keep video fullscreen
 				setTimeout(function () {
 					if (videoFullscreen && document.fullscreenElement == null) {
-						browser.runtime.sendMessage({ type: "fullscreen" })
+						chrome.runtime.sendMessage({ type: "fullscreen" })
 						function resetFullscreen() {
-							browser.runtime.sendMessage({ type: "exitFullscreen" })
+							chrome.runtime.sendMessage({ type: "exitFullscreen" })
 							log("exitFullscreen")
 							removeEventListener("fullscreenchange", resetFullscreen)
 						}
 						addEventListener("fullscreenchange", resetFullscreen)
 						document.onkeydown = function (evt) {
 							if ("key" in evt && (evt.key === "Escape" || evt.key === "Esc")) {
-								browser.runtime.sendMessage({ type: "exitFullscreen" })
+								chrome.runtime.sendMessage({ type: "exitFullscreen" })
 							}
 						}
 						log("fullscreen")
