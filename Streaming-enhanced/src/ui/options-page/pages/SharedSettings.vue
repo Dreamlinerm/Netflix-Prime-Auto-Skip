@@ -59,17 +59,6 @@ const SliderPreview = ref(10)
 	</p>
 	<hr />
 	<div class="line flex">
-		<p>{{ $t("epilepsySwitch") }}</p>
-		<Switch
-			v-model="settings.Video.epilepsy"
-			class="ml-auto"
-		></Switch>
-	</div>
-	<p class="description">
-		{{ $t("epilepsyDescription") }}
-	</p>
-	<hr />
-	<div class="line flex">
 		<p>{{ $t("showYearSwitch") }}</p>
 		<Switch
 			v-model="settings.Video.showYear"
@@ -78,6 +67,17 @@ const SliderPreview = ref(10)
 	</div>
 	<p class="description">
 		{{ $t("showYearDescription") }}
+	</p>
+	<hr />
+	<div class="line flex">
+		<p>{{ $t("epilepsySwitch") }}</p>
+		<Switch
+			v-model="settings.Video.epilepsy"
+			class="ml-auto"
+		></Switch>
+	</div>
+	<p class="description">
+		{{ $t("epilepsyDescription") }}
 	</p>
 	<hr />
 	<div

@@ -22,12 +22,7 @@ function replaceSettings(event: Event) {
 		reader.addEventListener("load", (e) => {
 			try {
 				const data = JSON.parse(e.target?.result as string)
-				if (data?.settings == null) {
-					alert("The file you uploaded is not a valid JSON file.")
-					console.log(data)
-					return
-				}
-				settings.value = data.settings
+				settings.value = data
 			} catch (e) {
 				alert("The file you uploaded is not a valid JSON file.")
 				return
