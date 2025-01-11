@@ -11,8 +11,7 @@ function openSettings() {
 </script>
 
 <template>
-	<!-- base-100 -->
-	<div class="navbar bg-secondary text-primary-content p-2">
+	<div class="navbar text-primary-content p-2">
 		<div class="flex-1 pl-2">
 			<RouterLink
 				to="/"

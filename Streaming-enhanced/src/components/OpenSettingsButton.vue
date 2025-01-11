@@ -7,7 +7,7 @@ const gotoSettings = () => {
 </script>
 <template>
 	<button
-		class="btn btn-secondary rounded-2xl w-full"
+		class="btn btn-secondary rounded-2xl w-full mt-auto"
 		@click="gotoSettings"
 	>
 		{{ $t("openSharedSettings") }}
