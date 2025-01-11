@@ -70,7 +70,7 @@ export default {
 		},
 	],
 	options_page: "src/ui/options-page/index.html",
-	permissions: ["storage"],
+	permissions: ["storage", "background"],
 	optional_permissions: ["tabs"],
 	icons: {
 		16: "src/assets/Logo/NetflixAmazon Auto-Skip--16.png",
