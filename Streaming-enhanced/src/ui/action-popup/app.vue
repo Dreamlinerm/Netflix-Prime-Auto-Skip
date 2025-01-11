@@ -20,11 +20,10 @@ chrome.tabs.query(query, callback)
 </script>
 
 <template>
-	<!-- min-h-[600px] is max -->
-	<div class="min-h-[300px]">
+	<!-- min-h-[700px] is max -->
+	<div class="max-w-[470px] max-h-[700px] overflow-auto flex flex-col">
 		<AppHeader />
-
-		<div class="p-4 pt-0">
+		<div class="p-4 pt-0 overflow-auto flex-1">
 			<RouterView />
 		</div>
 
