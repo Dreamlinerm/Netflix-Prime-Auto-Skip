@@ -25,6 +25,9 @@ export default {
 		service_worker: "src/background/index.ts",
 		type: "module",
 	},
+	action: {
+		default_popup: "src/ui/action-popup/index.html",
+	},
 	content_scripts: [
 		// {
 		// 	// all_frames: false,

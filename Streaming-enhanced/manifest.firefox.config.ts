@@ -17,9 +17,6 @@ export default defineManifest((env) => ({
 		},
 	},
 	manifest_version: 3,
-	browser_action: {
-		default_popup: "src/ui/action-popup/index.html",
-	},
 	background: {
 		scripts: ["src/background/index.ts"],
 		type: "module",

@@ -6,8 +6,5 @@ const { name, displayName } = packageJson
 // @ts-expect-error ManifestConfig provides all required fields
 export default defineManifest((env) => ({
 	...ManifestConfig,
-	action: {
-		default_popup: "src/ui/action-popup/index.html",
-	},
 	key: env["CHROME_ADDON_KEY"],
 }))

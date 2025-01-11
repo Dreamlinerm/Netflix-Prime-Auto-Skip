@@ -79,6 +79,10 @@ const postBuildPlugin = () => {
 				webacessibleRecources = [...webacessibleRecources, ...(resource.resources as string[])]
 			}
 			manifest.web_accessible_resources = webacessibleRecources
+
+			// replace action with browser_action
+			manifest.browser_action = manifest.action
+			delete manifest.action
 			// write back to browserOutDir/manifest.json
 			fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
 		},
