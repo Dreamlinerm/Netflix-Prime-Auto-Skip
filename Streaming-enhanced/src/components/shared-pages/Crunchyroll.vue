@@ -26,7 +26,6 @@
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("user") + " " }}</p>
 		<!-- <p style="text-transform: capitalize">{{ settings.General.pr }}</p> -->
-		{{ settings.General.Crunchyroll_profilePicture }}
 		<img
 			style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px"
 			alt="profile Picture"
@@ -50,9 +49,9 @@ const props = defineProps({
 const settingsList: Array<"skipIntro" | "releaseCalendar" | "profile" | "bigPlayer" | "disableNumpad"> = [
 	"skipIntro",
 	"releaseCalendar",
-	"profile",
 	"bigPlayer",
 	"disableNumpad",
+	"profile",
 ]
 </script>
 <style scoped></style>

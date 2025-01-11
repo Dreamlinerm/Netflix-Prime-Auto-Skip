@@ -252,8 +252,10 @@ async function Crunchyroll() {
 }
 async function Crunchyroll_profile() {
 	// save profile
-	const img = document.querySelector(".erc-authenticated-user-menu img") as HTMLImageElement
+	const img = document.querySelector(".avatar-wrapper img") as HTMLImageElement
+	if (img) console.log("img.src", img.src)
 	if (img && img.src !== settings.value.General.Crunchyroll_profilePicture) {
+		console.log("img.src", img.src)
 		settings.value.General.Crunchyroll_profilePicture = img.src
 		//setStorage()
 		log("Profile switched to", img.src)

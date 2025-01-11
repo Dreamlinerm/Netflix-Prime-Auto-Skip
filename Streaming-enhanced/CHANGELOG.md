@@ -2,7 +2,7 @@
 
 ## 1.1.55
 
-- Fixed Crunchyroll big picture
+- Fixed Crunchyroll big picture, auto pick profile, because of change website
 - Mayor Migration to VUE3 instead of native js
 
 ## 1.1.54
