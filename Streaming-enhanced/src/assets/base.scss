@@ -12,7 +12,7 @@ h1,
 h2,
 h3,
 p {
-	@apply py-1 m-0 text-primary-content;
+	@apply m-0 text-primary-content;
 }
 
 hr {
@@ -30,4 +30,8 @@ h3 {
 
 .btn {
 	@apply text-xl h-9 leading-9;
+}
+
+p {
+	@apply text-2xl;
 }

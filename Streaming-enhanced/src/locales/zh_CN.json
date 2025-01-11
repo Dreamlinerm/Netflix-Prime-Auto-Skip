@@ -17,7 +17,7 @@
 	"sharedPageTitle": "共享视频功能",
 	"sharedPageDescription": "这些选项只能启用/禁用所有流媒体服务的设置。在下表中，您可以禁用特定服务的共享设置",
 	"skipIntroSwitch": "跳过介绍和回顾：",
-	"sharedIntroDescription": "跳过任何剧集的前奏和回顾。Netflix除外，因为那里的剧情回顾不能再看一遍。",
+	"skipIntroDescription": "跳过任何剧集的前奏和回顾。Netflix除外，因为那里的剧情回顾不能再看一遍。",
 	"creditsSwitch": "略过：",
 	"creditsDescription": "以最快的速度跳到每个系列的下一集",
 	"skipAdSwitch": "跳过广告",

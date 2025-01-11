@@ -17,7 +17,7 @@
 	"sharedPageTitle": "Funktioner för delad video",
 	"sharedPageDescription": "Dessa alternativ aktiverar/inaktiverar endast inställningarna för alla streamingtjänster. I tabellen nedan kan du inaktivera de delade inställningarna för en specifik tjänst",
 	"skipIntroSwitch": "Hoppa över intro och sammanfattning:",
-	"sharedIntroDescription": "Hoppa över intron och sammanfattningar av alla serier. Utom Netflix eftersom deras sammanfattningar inte kan ses igen.",
+	"skipIntroDescription": "Hoppa över intron och sammanfattningar av alla serier. Utom Netflix eftersom deras sammanfattningar inte kan ses igen.",
 	"creditsSwitch": "Hoppa över krediter:",
 	"creditsDescription": "Hoppa till nästa avsnitt i varje serie så snabbt som möjligt",
 	"skipAdSwitch": "Hoppa över annonser:",

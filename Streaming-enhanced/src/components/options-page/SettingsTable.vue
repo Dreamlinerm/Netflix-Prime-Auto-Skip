@@ -18,7 +18,7 @@
 			<tr>
 				<td class="tooltip">
 					<p>{{ $t("skipIntroSwitch") }}</p>
-					<p class="tooltiptext">{{ $t("sharedIntroDescription") }}</p>
+					<p class="tooltiptext">{{ $t("skipIntroDescription") }}</p>
 				</td>
 				<td>
 					<Switch

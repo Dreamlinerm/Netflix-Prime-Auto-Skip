@@ -17,7 +17,7 @@
 	"sharedPageTitle": "Shared Video features",
 	"sharedPageDescription": "These options will only enable/disable the settings for all streaming services. In the below table you can disable the shared settings for a specific service",
 	"skipIntroSwitch": "Skip Intro & Recap:",
-	"sharedIntroDescription": "Skipping the intros and recaps of any series. Except Netflix since there Recaps cannot be watched again.",
+	"skipIntroDescription": "Skipping the intros and recaps of any series. Except Netflix since there Recaps cannot be watched again.",
 	"creditsSwitch": "Skip Credits:",
 	"creditsDescription": "Skipping to the next episode of every series as fast as possible",
 	"skipAdSwitch": "Skip Ads:",

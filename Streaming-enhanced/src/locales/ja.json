@@ -17,7 +17,7 @@
 	"sharedPageTitle": "共有ビデオ機能",
 	"sharedPageDescription": "これらのオプションは、すべてのストリーミングサービスの設定のみを有効/無効にします。以下の表では、特定のサービスの共有設定を無効にすることができます。",
 	"skipIntroSwitch": "イントロと総括をスキップする：",
-	"sharedIntroDescription": "どのシリーズでもイントロと総集編をスキップする。ただし、Netflixは再放送ができないので別だ。",
+	"skipIntroDescription": "どのシリーズでもイントロと総集編をスキップする。ただし、Netflixは再放送ができないので別だ。",
 	"creditsSwitch": "スキップ・クレジット",
 	"creditsDescription": "すべてのシリーズの次のエピソードにできるだけ早く飛ぶ",
 	"skipAdSwitch": "広告をスキップする：",

@@ -17,7 +17,7 @@
 	"sharedPageTitle": "Funciones de vídeo compartido",
 	"sharedPageDescription": "Estas opciones sólo activarán/desactivarán los ajustes para todos los servicios de streaming. En la siguiente tabla puede desactivar los ajustes compartidos para un servicio específico",
 	"skipIntroSwitch": "Skip Intro & Recap:",
-	"sharedIntroDescription": "Saltarse las intros y las recapitulaciones de cualquier serie. Excepto Netflix, ya que los resúmenes no se pueden volver a ver.",
+	"skipIntroDescription": "Saltarse las intros y las recapitulaciones de cualquier serie. Excepto Netflix, ya que los resúmenes no se pueden volver a ver.",
 	"creditsSwitch": "Saltar créditos:",
 	"creditsDescription": "Saltar al siguiente episodio de cada serie lo más rápido posible",
 	"skipAdSwitch": "Saltar anuncios:",

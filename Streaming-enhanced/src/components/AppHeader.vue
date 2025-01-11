@@ -75,7 +75,7 @@ function openSettings() {
 			</a>
 		</div>
 		<div class="flex-none">
-			<ul class="menu menu-xs">
+			<ul class="menu menu-xs p-0">
 				<li>
 					<LocaleSwitch />
 				</li>

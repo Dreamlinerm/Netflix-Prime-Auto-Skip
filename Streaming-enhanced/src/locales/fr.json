@@ -17,7 +17,7 @@
 	"sharedPageTitle": "Fonctionnalités de la vidéo partagée",
 	"sharedPageDescription": "Ces options n'activent/désactivent les paramètres que pour tous les services de diffusion en continu. Dans le tableau ci-dessous, vous pouvez désactiver les paramètres partagés pour un service spécifique.",
 	"skipIntroSwitch": "Skip Intro & Recap:",
-	"sharedIntroDescription": "Sauter les intros et les récapitulatifs de n'importe quelle série. Sauf Netflix, car les récapitulatifs ne peuvent pas être regardés à nouveau.",
+	"skipIntroDescription": "Sauter les intros et les récapitulatifs de n'importe quelle série. Sauf Netflix, car les récapitulatifs ne peuvent pas être regardés à nouveau.",
 	"creditsSwitch": "Crédits Skip:",
 	"creditsDescription": "Passer à l'épisode suivant de chaque série aussi vite que possible",
 	"skipAdSwitch": "Sauter les annonces:",
