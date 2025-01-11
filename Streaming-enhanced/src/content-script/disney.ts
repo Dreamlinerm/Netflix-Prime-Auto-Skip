@@ -11,7 +11,6 @@ import {
 	createSlider,
 } from "@/utils/helper"
 import { startSharedFunctions } from "@/content-script/shared-functions"
-import { sendMessage } from "webext-bridge/content-script"
 logStartOfAddon(Platforms.Disney)
 startSharedFunctions(Platforms.Disney)
 // Global Variables
@@ -122,8 +121,6 @@ async function Disney_Intro(video: HTMLVideoElement, time: number) {
 		}, 600)
 	}
 }
-chrome.runtime.sendMessage({ type: "fullscreen" })
-// chrome.runtime.sendMessage({ type: "exitFullscreen" })
 async function Disney_skipCredits(currentTime: number) {
 	let button: HTMLElement
 	if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]') as HTMLElement
