@@ -150,9 +150,9 @@ const watchCredits = computed({
 	},
 })
 const blockAds = computed({
-	get: () => settings.value?.Amazon.blockFreevee && settings.value?.Netflix.skipAd && settings.value?.Disney.skipAd,
+	get: () => settings.value?.Amazon.skipAd && settings.value?.Netflix.skipAd && settings.value?.Disney.skipAd,
 	set: (value) => {
-		settings.value.Amazon.blockFreevee = settings.value.Netflix.skipAd = settings.value.Disney.skipAd = value
+		settings.value.Amazon.skipAd = settings.value.Netflix.skipAd = settings.value.Disney.skipAd = value
 	},
 })
 

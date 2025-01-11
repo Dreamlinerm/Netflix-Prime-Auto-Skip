@@ -150,7 +150,7 @@
 				</td>
 				<td>
 					<Switch
-						v-model="settings.Amazon.blockFreevee"
+						v-model="settings.Amazon.skipAd"
 						class="ml-auto"
 					></Switch>
 				</td>
@@ -366,9 +366,9 @@ const watchCredits = computed({
 	},
 })
 const skipAd = computed({
-	get: () => settings.value?.Amazon.blockFreevee && settings.value?.Netflix.skipAd && settings.value?.Disney.skipAd,
+	get: () => settings.value?.Amazon.skipAd && settings.value?.Netflix.skipAd && settings.value?.Disney.skipAd,
 	set: (value) => {
-		settings.value.Amazon.blockFreevee = settings.value.Netflix.skipAd = settings.value.Disney.skipAd = value
+		settings.value.Amazon.skipAd = settings.value.Netflix.skipAd = settings.value.Disney.skipAd = value
 	},
 })
 

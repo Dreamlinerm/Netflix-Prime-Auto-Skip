@@ -17,7 +17,7 @@ export type settingsType = {
 		skipCredits: boolean
 		watchCredits: boolean
 		selfAd: boolean
-		blockFreevee: boolean
+		skipAd: boolean
 		speedSlider: boolean
 		filterPaid: boolean
 		continuePosition: boolean
@@ -101,7 +101,7 @@ export const defaultSettings = {
 		skipCredits: true,
 		watchCredits: false,
 		selfAd: true,
-		blockFreevee: true,
+		skipAd: true,
 		speedSlider: true,
 		filterPaid: false,
 		continuePosition: true,

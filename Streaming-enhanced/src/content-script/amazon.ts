@@ -33,7 +33,7 @@ async function startAmazon() {
 	if (settings.value?.Video?.doubleClick) Amazon_doubleClick()
 	AmazonObserver.observe(document, config)
 	if (settings.value.Amazon?.selfAd) Amazon_AdTimeout()
-	if (settings.value.Amazon?.blockFreevee) {
+	if (settings.value.Amazon?.skipAd) {
 		// timeout of 100 ms because the ad is not loaded fast enough and the video will crash
 		setTimeout(function () {
 			Amazon_FreeveeTimeout()
@@ -233,7 +233,7 @@ async function deletePaidCategory(a: HTMLElement) {
 function Amazon_FreeveeTimeout() {
 	// set loop every 1 sec and check if ad is there
 	const AdInterval = setInterval(function () {
-		if (!settings.value.Amazon.blockFreevee) {
+		if (!settings.value.Amazon.skipAd) {
 			log("stopped observing| FreeVee Ad")
 			clearInterval(AdInterval)
 			return
