@@ -11,7 +11,6 @@
 	"changelog": "Changelog",
 	"donate": "Spende",
 	"pageSpecificTitle": "{0} spezifisch",
-
 	"defaultfilterPaidDescription": "Entfernen aller kostenpflichtigen Filme/Serien Kategorien von Amazon Prime",
 	"sharedPageTitle": "Gemeinsame Videofunktionen",
 	"sharedPageDescription": "Diese Optionen aktivieren/deaktivieren die Einstellungen für alle Streaming-Dienste. In der folgenden Tabelle können Sie die gemeinsamen Einstellungen für einen bestimmten Dienst deaktivieren.",
@@ -93,5 +92,8 @@
 	"scrollVolumeDescription": "Wenn Sie auf dem Tonsymbol nach oben oder unten scrollen, wird die Lautstärke geändert.",
 	"disneyAdDescription": "Zeit der übersprungenen Disney-Werbung.",
 	"showYearSwitch": "Erscheinungsjahr anzeigen:",
-	"showYearDescription": "Zeigt das Erscheinungsjahr neben der Bewertung an."
+	"showYearDescription": "Zeigt das Erscheinungsjahr neben der Bewertung an.",
+	"installPageTitle": "🎉 Installiert! 🚀",
+	"installThanks": "Vielen Dank für die Installation von Streaming Enhanced! ❤️",
+	"installTurnOnOptional": "Alle optionalen Funktionen einschalten:"
 }

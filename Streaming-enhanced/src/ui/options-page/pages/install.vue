@@ -12,11 +12,11 @@ const optionalSettings = computed({
 
 <template>
 	<div class="w-full h-full flex flex-col justify-center items-center text-center md:my-12">
-		<h1>🎉 Installed! 🚀</h1>
+		<h1>{{ $t("installPageTitle") }}</h1>
 		<p>
-			Thank you for installing Streaming enhanced! ❤️
+			{{ $t("installThanks") }}
 			<br />
-			Turn on all optional features:
+			{{ $t("installTurnOnOptional") }}
 			<Switch
 				v-model="optionalSettings"
 				class="ml-auto"
