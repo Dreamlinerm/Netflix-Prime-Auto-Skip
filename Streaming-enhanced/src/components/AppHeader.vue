@@ -75,19 +75,19 @@ function openSettings() {
 			</a>
 		</div>
 		<div class="flex-none">
-			<ul class="menu menu-horizontal menu-xs">
+			<ul class="menu menu-xs">
 				<li>
+					<LocaleSwitch />
+				</li>
+				<li class="flex flex-row">
 					<a
 						class="flex gap-2 items-center"
 						@click="openSettings"
 					>
 						<i-mdi-cog />
 					</a>
+					<ThemeSwitch />
 				</li>
-				<li>
-					<LocaleSwitch />
-				</li>
-				<li><ThemeSwitch /></li>
 			</ul>
 		</div>
 	</div>
