@@ -1,7 +1,6 @@
 export const useOptionsStore = defineStore("options", () => {
 	const { isDark, toggleDark } = useTheme()
 	const currentLocale = useLocale()
-
 	const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 
 	return {

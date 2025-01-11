@@ -23,6 +23,7 @@ const optionalSettings = computed({
 			></Switch>
 		</p>
 	</div>
+	<OptionalPermission />
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("filterPaidSwitch") }}</p>
 		<Switch
