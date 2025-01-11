@@ -20,7 +20,7 @@ chrome.tabs.query(query, callback)
 </script>
 
 <template>
-	<div class="min-h-[700px]">
+	<div class="min-h-[600px]">
 		<AppHeader />
 
 		<div class="p-4">

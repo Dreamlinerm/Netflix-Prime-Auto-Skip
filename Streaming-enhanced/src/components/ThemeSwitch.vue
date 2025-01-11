@@ -3,8 +3,8 @@ const { isDark, toggleDark } = useTheme()
 </script>
 
 <template>
-	<button
-		class="btn btn-primary h-fit min-h-1"
+	<a
+		class="h-fit min-h-1"
 		@click="toggleDark()"
 	>
 		<template v-if="isDark">
@@ -13,5 +13,5 @@ const { isDark, toggleDark } = useTheme()
 		<template v-else>
 			<i-ph-sun />
 		</template>
-	</button>
+	</a>
 </template>
