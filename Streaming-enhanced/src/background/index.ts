@@ -77,9 +77,11 @@ onMessage("fetch", async (message: { data: { url: string } }) => {
 // receive message from content script with the badgeText and set it in the badge
 chrome.runtime.onMessage.addListener(function (message: { type: string }, sender: any, sendResponse: () => void) {
 	if (message.type === "fullscreen") {
-		chrome.windows.update(sender.tab.windowId, { state: "fullscreen" })
+		log("fullscreen")
+		if (sender?.tab?.windowId) chrome.windows.update(sender.tab.windowId, { state: "fullscreen" })
 	} else if (message.type === "exitFullscreen") {
-		chrome.windows.update(sender.tab.windowId, { state: "normal" })
+		log("exitFullscreen")
+		if (sender?.tab?.windowId) chrome.windows.update(sender.tab.windowId, { state: "normal" })
 	}
 	return false
 })

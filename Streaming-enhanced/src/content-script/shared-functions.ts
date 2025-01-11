@@ -401,7 +401,6 @@ async function addRating() {
 				// sometimes more than one image is loaded for the same title
 				if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
 					lastTitle = title
-					// console.log("Title:", title, media_type)
 					if (
 						(DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 7) &&
 						(!media_type || DBCache[title]?.media_type == media_type)

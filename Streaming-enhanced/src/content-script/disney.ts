@@ -103,15 +103,14 @@ async function Disney_Intro(video: HTMLVideoElement, time: number) {
 	// Recap Criminal Minds Season 1 Episode 2
 	let button: HTMLElement | undefined
 	if (isDisney) {
-		const skipCreditsButton = isStarPlus
-			? document.querySelector('[data-gv2elementkey="playNext"]')
-			: document.querySelector('[data-testid="playback-action-button"]')
-		if (!skipCreditsButton) button = document.querySelector(".skip__button") as HTMLElement
+		button = isStarPlus
+			? (document.querySelector('[data-gv2elementkey="playNext"]') as HTMLElement)
+			: (document.querySelector(".skip__button") as HTMLElement)
 	} else
 		button = document
 			.evaluate("//span[contains(., 'Skip Intro')]", document, null, XPathResult.ANY_TYPE, null)
 			?.iterateNext()?.parentElement as HTMLElement
-	if (button) {
+	if (button && !document.querySelector('[data-testid="icon-restart"]')?.parentElement) {
 		button.click()
 		log("Intro/Recap skipped", button)
 		setTimeout(function () {
@@ -122,8 +121,7 @@ async function Disney_Intro(video: HTMLVideoElement, time: number) {
 async function Disney_skipCredits(currentTime: number) {
 	let button: HTMLElement
 	if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]') as HTMLElement
-	else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
-		button = document.querySelector('[data-testid="icon-restart"]')?.parentElement as HTMLElement
+	else if (isDisney) button = document.querySelector('[data-testid="icon-restart"]')?.parentElement as HTMLElement
 	else
 		button = document
 			.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)
