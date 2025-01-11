@@ -56,6 +56,30 @@ if (IS_DEV) {
 	ViteConfig.build.sourcemap = true
 }
 
+import fs from "fs"
+import path from "path"
+// Custom plugin to run a script after the build
+const postBuildPlugin = () => {
+	return {
+		name: "post-build-plugin",
+		writeBundle() {
+			console.log("Replacing manifest V3 with V2")
+			const manifestPath = path.join(browserOutDir, "manifest.json")
+			// if manifest exists in browserOutDir
+			if (!fs.existsSync(manifestPath)) {
+				console.error(`Manifest file not found at ${manifestPath}`)
+				return
+			}
+			// read browserOutDir/manifest.json
+			const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"))
+			// change manifest version to 2
+			manifest.manifest_version = 2
+			// write back to browserOutDir/manifest.json
+			fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
+		},
+	}
+}
+
 ViteConfig.plugins.unshift(
 	crx({
 		manifest,
@@ -65,6 +89,7 @@ ViteConfig.plugins.unshift(
 		},
 	}),
 )
+ViteConfig.plugins.push(postBuildPlugin())
 
 if (IS_DEV) {
 	ViteConfig.plugins.push({
