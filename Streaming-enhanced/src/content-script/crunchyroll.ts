@@ -276,11 +276,19 @@ async function Crunchyroll_bigPlayerStyle() {
 	if (document.querySelector(".video-player-wrapper")) {
 		// show header on hover
 		const style = document.createElement("style")
+		const parentDiv = document.querySelector('[class^="app-layout__header"]')?.classList?.[0]
 		style.innerHTML = `
       .video-player-wrapper{
           max-Height: calc(100vw / 1.7777);
           height: 100vh;
       }
+			.${parentDiv} {
+					position: absolute;
+          top: 0;
+          width: 100%;
+          height: 3.75rem;
+          z-index: 999;
+			}
       .erc-large-header {
           position: absolute;
           top: 0;

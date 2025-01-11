@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.55
+
+- Fixed Crunchyroll big picture
+- Mayor Migration to VUE3 instead of native js
+
 ## 1.1.54
 
 - Added release year optionally.
