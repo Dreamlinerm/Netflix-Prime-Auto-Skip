@@ -32,9 +32,7 @@ export default {
 		// {
 		// 	// all_frames: false,
 		// 	js: ["src/content-script/index.ts"],
-		// 	matches: [
-		// 		"*://*",
-		// 	],
+		// 	matches: ["*://*"],
 		// 	// run_at: "document_end",
 		// },
 		{
