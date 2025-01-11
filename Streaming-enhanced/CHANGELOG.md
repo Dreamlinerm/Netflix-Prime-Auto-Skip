@@ -3,6 +3,7 @@
 ## 1.1.55
 
 - Fixed Crunchyroll big picture, auto pick profile, because of change website
+- Fixed Disney auto play on fullscreen
 - Mayor Migration to VUE3 instead of native js, verified all functions working on pc.
 
 ## 1.1.54

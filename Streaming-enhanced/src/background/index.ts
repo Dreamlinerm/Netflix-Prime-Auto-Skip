@@ -87,16 +87,18 @@ chrome.runtime.onMessage.addListener(function (message: { type: string }, sender
 })
 onMessage("setBadgeText", async (message: { sender: any; data: { text: string } }) => {
 	const { sender, data } = message
-	setBadgeText(data.text, sender.tabId)
+	if (sender?.tabId) setBadgeText(data.text, sender.tabId)
 })
 onMessage("increaseBadge", async (message: { sender: any }) => {
 	const { sender } = message
-	increaseBadge(sender.tabId)
+	if (sender?.tabId) increaseBadge(sender.tabId)
 })
 onMessage("resetBadge", async (message: { sender: any }) => {
 	const { sender } = message
-	if (Badges[sender.tabId]) delete Badges[sender.tabId]
-	chrome.action.setBadgeText({ text: "", tabId: sender.tabId })
+	if (sender?.tabId) {
+		if (Badges[sender.tabId]) delete Badges[sender.tabId]
+		chrome.action.setBadgeText({ text: "", tabId: sender.tabId })
+	}
 })
 
 async function startMobile() {

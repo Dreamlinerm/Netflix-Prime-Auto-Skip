@@ -80,7 +80,8 @@ async function Disney_scrollVolume(video: HTMLVideoElement) {
 	const volumeControl = document.querySelector("div.audio-control:not(.enhanced)") as HTMLElement
 	if (volumeControl) {
 		volumeControl.classList.add("enhanced")
-		volumeControl?.addEventListener("wheel", (event: WheelEvent) => {
+		volumeControl.addEventListener("wheel", (event: WheelEvent) => {
+			console.log("wheel")
 			let volume = video.volume
 			if (event.deltaY < 0) volume = Math.min(1, volume + 0.1)
 			else volume = Math.max(0, volume - 0.1)
