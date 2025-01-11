@@ -10,6 +10,6 @@ const gotoSettings = () => {
 		class="btn btn-secondary rounded-2xl w-full"
 		@click="gotoSettings"
 	>
-		Open Settings
+		{{ $t("openSharedSettings") }}
 	</button>
 </template>
