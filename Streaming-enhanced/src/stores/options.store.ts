@@ -161,9 +161,9 @@ export const defaultSettings = {
 		SegmentsSkipped: 0,
 	},
 	General: {
-		Crunchyroll_profilePicture: null,
-		profileName: null,
-		profilePicture: null,
+		Crunchyroll_profilePicture: "",
+		profileName: "",
+		profilePicture: "",
 		sliderSteps: 1,
 		sliderMin: 5,
 		sliderMax: 20,

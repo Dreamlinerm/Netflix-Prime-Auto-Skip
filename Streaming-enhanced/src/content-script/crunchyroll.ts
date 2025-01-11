@@ -9,7 +9,6 @@ import {
 	config,
 } from "@/utils/helper"
 import { startSharedFunctions } from "@/content-script/shared-functions"
-logStartOfAddon(Platforms.Crunchyroll)
 startSharedFunctions(Platforms.Crunchyroll)
 // Global Variables
 
@@ -19,6 +18,7 @@ const url = window.location.href
 async function startCrunchyroll() {
 	// watch ready state
 	await checkStoreReady(settings)
+	logStartOfAddon(Platforms.Crunchyroll)
 	if (settings.value.Crunchyroll.releaseCalendar) Crunchyroll_ReleaseCalendar()
 	if (settings.value.Crunchyroll.profile) {
 		const pickInterval = setInterval(function () {

@@ -9,7 +9,6 @@ import {
 	addSkippedTime,
 } from "@/utils/helper"
 import { startSharedFunctions, parseAdTime, createSlider } from "@/content-script/shared-functions"
-logStartOfAddon(Platforms.Amazon)
 // Global Variables
 
 const { settings } = storeToRefs(optionsStore)
@@ -29,6 +28,7 @@ if (isPrimeVideo) {
 
 async function startAmazon() {
 	await checkStoreReady(settings)
+	logStartOfAddon(Platforms.Amazon)
 	AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig)
 	if (settings.value?.Video?.doubleClick) Amazon_doubleClick()
 	AmazonObserver.observe(document, config)

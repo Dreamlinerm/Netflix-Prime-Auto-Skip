@@ -98,6 +98,7 @@ function Netflix_profile() {
 		if (currentProfileName && currentProfileName !== settings.value.General.profileName) {
 			// small profile picture
 			settings.value.General.profilePicture = (currentProfile?.firstChild?.firstChild as HTMLImageElement)?.src
+			console.log("Profile switched to", currentProfileName, settings.value.General?.profilePicture)
 			settings.value.General.profileName = currentProfileName
 			log("Profile switched to", currentProfileName)
 		}

@@ -9,7 +9,6 @@ async function checkOptionalPermissions() {
 		if (isFirefox) {
 			const result = await browser.permissions.contains({ permissions: [permission] })
 			if (!result) unsetPermissions.value.push(permission)
-			console.log(result, unsetPermissions.value)
 		} else {
 			const result = await chrome.permissions.contains({ permissions: [permission] })
 			if (!result) unsetPermissions.value.push(permission)

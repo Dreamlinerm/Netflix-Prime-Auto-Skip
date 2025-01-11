@@ -9,7 +9,6 @@ import {
 	addSkippedTime,
 } from "@/utils/helper"
 import { startSharedFunctions, createSlider } from "@/content-script/shared-functions"
-startSharedFunctions(Platforms.HBO)
 logStartOfAddon(Platforms.HBO)
 // Global Variables
 
@@ -19,6 +18,7 @@ let lastAdTimeText: number = 0
 
 async function startHBO() {
 	await checkStoreReady(settings)
+	startSharedFunctions(Platforms.HBO)
 	HBOObserver.observe(document, config)
 }
 

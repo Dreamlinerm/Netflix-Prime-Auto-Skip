@@ -23,20 +23,19 @@
 			<hr />
 		</template>
 	</template>
-	<!-- <div class="py-1 m-0 flex">
-			<p>{{ $t("user") }}</p>
-			<p
-				id="profileName"
-				style="text-transform: capitalize"
-			></p>
-			<img
-				id="profilePicture"
-				class="hidden"
-				style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px"
-				alt="profile Picture"
-				src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-			/>
-		</div> -->
+	<div class="py-1 m-0 flex">
+		<p>{{ $t("user") + " " }}</p>
+		<p style="text-transform: capitalize">{{ settings.General.profileName }}</p>
+		<img
+			style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px"
+			alt="profile Picture"
+			:src="
+				settings.General.profilePicture
+					? settings.General.profilePicture
+					: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+			"
+		/>
+	</div>
 </template>
 <script setup lang="ts">
 const optionsStore = useOptionsStore()

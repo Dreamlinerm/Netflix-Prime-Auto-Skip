@@ -9,7 +9,6 @@ import {
 	addSkippedTime,
 } from "@/utils/helper"
 import { startSharedFunctions, parseAdTime, createSlider } from "@/content-script/shared-functions"
-logStartOfAddon(Platforms.Disney)
 startSharedFunctions(Platforms.Disney)
 // Global Variables
 
@@ -28,6 +27,7 @@ async function resetLastATimeText(time = 1000) {
 const videoSpeed: Ref<number> = ref(1)
 async function startDisney() {
 	await checkStoreReady(settings)
+	logStartOfAddon(Platforms.Disney)
 	if (isHotstar) Hotstar_doubleClick()
 	DisneyObserver.observe(document, config)
 	setInterval(function () {
