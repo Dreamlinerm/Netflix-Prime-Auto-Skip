@@ -38,10 +38,9 @@ declare module 'vue-router/auto-routes' {
     '/options-page/Changelog': RouteRecordInfo<'/options-page/Changelog', '/options-page/Changelog', Record<never, never>, Record<never, never>>,
     '/options-page/Crunchyroll': RouteRecordInfo<'/options-page/Crunchyroll', '/options-page/Crunchyroll', Record<never, never>, Record<never, never>>,
     '/options-page/Disney': RouteRecordInfo<'/options-page/Disney', '/options-page/Disney', Record<never, never>, Record<never, never>>,
+    '/options-page/install': RouteRecordInfo<'/options-page/install', '/options-page/install', Record<never, never>, Record<never, never>>,
     '/options-page/Netflix': RouteRecordInfo<'/options-page/Netflix', '/options-page/Netflix', Record<never, never>, Record<never, never>>,
     '/options-page/SharedSettings': RouteRecordInfo<'/options-page/SharedSettings', '/options-page/SharedSettings', Record<never, never>, Record<never, never>>,
     '/options-page/Statistics': RouteRecordInfo<'/options-page/Statistics', '/options-page/Statistics', Record<never, never>, Record<never, never>>,
-    '/setup/install': RouteRecordInfo<'/setup/install', '/setup/install', Record<never, never>, Record<never, never>>,
-    '/setup/update': RouteRecordInfo<'/setup/update', '/setup/update', Record<never, never>, Record<never, never>>,
   }
 }
