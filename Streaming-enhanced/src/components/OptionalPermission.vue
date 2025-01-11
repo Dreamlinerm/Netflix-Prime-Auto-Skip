@@ -25,9 +25,6 @@ async function requestUnsetPermissions() {
 }
 </script>
 <template>
-	test
-	{{ JSON.stringify(unsetPermissions) }}
-	{{ unsetPermissions.length }}
 	<div
 		v-if="unsetPermissions.length > 0"
 		class="border border-error rounded-lg bg-gray-400 p-4 flex flex-col gap-2 w-fit"
