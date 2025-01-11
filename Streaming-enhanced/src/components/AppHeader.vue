@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { isFirefox } from "@/utils/helper"
-const version = __VERSION__
 const githubUrl = __GITHUB_URL__
 function openSettings() {
 	chrome.tabs.create({
@@ -11,7 +10,7 @@ function openSettings() {
 </script>
 
 <template>
-	<div class="navbar text-primary-content p-2">
+	<div class="navbar text-primary-content p-2 w-[461px]">
 		<div class="flex-1 pl-2">
 			<RouterLink
 				to="/"
@@ -23,12 +22,7 @@ function openSettings() {
 						alt="logo"
 						class="h-12 w-auto"
 					/>
-					<div class="flex-center flex-col">
-						<h2>
-							{{ $t("pageTitle") }}
-						</h2>
-						<p style="color: grey; font-size: 1rem">{{ version }}</p>
-					</div>
+					<h2 class="text-wrap">{{ $t("pageTitle") }}</h2>
 				</div>
 			</RouterLink>
 			<a
