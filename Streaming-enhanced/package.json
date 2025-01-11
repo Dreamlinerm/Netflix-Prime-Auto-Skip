@@ -5,7 +5,9 @@
 	"version": "1.1.55",
 	"scripts": {
 		"start": "concurrently \"npm run dev:firefox\" \"web-ext run --source-dir dist/firefox --keep-profile-changes --firefox-profile=test --profile-create-if-missing\"",
-		"build": "npm run build:chrome && npm run build:firefox",
+		"start-chrome": "concurrently \"npm run dev:firefox\" \"web-ext run --source-dir dist/chrome/ -t chromium\"",
+		"start-android": "adb devices && web-ext run --source-dir dist/firefox -t firefox-android --firefox-apk org.mozilla.firefox --adb-device 38091FDJH002WH",
+		"build": "npm run build:chrome && npm run build:firefox && npm run hours",
 		"build:chrome": "cross-env NODE_ENV=production vite build -c vite.chrome.config.ts",
 		"build:firefox": "cross-env NODE_ENV=production vite build -c vite.firefox.config.ts",
 		"dev": "concurrently \"npm run dev:chrome\" \"npm run dev:firefox\"",
@@ -16,7 +18,6 @@
 		"launch:all": "tsx scripts/launch.ts --all",
 		"lint": "eslint . --fix --cache",
 		"lint:manifest": "web-ext lint --pretty",
-		"preview": "vite preview",
 		"typecheck": "vue-tsc --noEmit",
 		"transGoogle": "jsontt .translation/deepl.EN.json -m google2 -n google2 -fb yes -cl 3 -f en -t de fr es pt it ja pl sv zh-CN ko tr",
 		"deepl": "jsontt .translation/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -f EN -t DE ES FR IT JA KO PL PT SV TR ZH",
