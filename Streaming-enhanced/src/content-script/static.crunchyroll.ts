@@ -1,7 +1,6 @@
 import {
 	log,
 	increaseBadge,
-	date,
 	optionsStore,
 	checkStoreReady,
 	Platforms,

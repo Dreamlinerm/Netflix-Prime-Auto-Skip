@@ -7,9 +7,8 @@ import {
 	logStartOfAddon,
 	config,
 	addSkippedTime,
-	createSlider,
 } from "@/utils/helper"
-import { startSharedFunctions } from "@/content-script/shared-functions"
+import { startSharedFunctions, createSlider } from "@/content-script/shared-functions"
 logStartOfAddon(Platforms.Netflix)
 startSharedFunctions(Platforms.Netflix)
 // Global Variables

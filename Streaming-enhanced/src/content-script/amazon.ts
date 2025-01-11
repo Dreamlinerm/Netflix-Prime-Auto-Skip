@@ -7,10 +7,8 @@ import {
 	logStartOfAddon,
 	config,
 	addSkippedTime,
-	parseAdTime,
-	createSlider,
 } from "@/utils/helper"
-import { startSharedFunctions } from "@/content-script/shared-functions"
+import { startSharedFunctions, parseAdTime, createSlider } from "@/content-script/shared-functions"
 logStartOfAddon(Platforms.Amazon)
 // Global Variables
 

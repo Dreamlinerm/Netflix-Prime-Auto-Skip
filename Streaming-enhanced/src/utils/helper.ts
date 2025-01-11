@@ -25,6 +25,21 @@ export async function increaseBadge() {
 	settings.value.Statistics.SegmentsSkipped++
 	sendMessage("increaseBadge", {}, "background")
 }
+type StatisticsKey =
+	| "AmazonAdTimeSkipped"
+	| "NetflixAdTimeSkipped"
+	| "DisneyAdTimeSkipped"
+	| "IntroTimeSkipped"
+	| "RecapTimeSkipped"
+	| "SegmentsSkipped"
+export async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
+	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+		log(key, endTime - startTime)
+		settings.value.Statistics[key] += endTime - startTime
+		increaseBadge()
+	}
+}
+
 // checks if the store got the data from the storage
 export async function checkStoreReady(setting: Ref<any>) {
 	return new Promise((resolve) => {
@@ -57,72 +72,4 @@ export function logStartOfAddon(page: Platforms) {
 	else if (page == Platforms.Hotstar) console.log("Page %cHotstar", "color: #0682f0;")
 	else if (page == Platforms.Crunchyroll) console.log("Page %cCrunchyroll", "color: #e67a35;")
 	else if (page == Platforms.HBO) console.log("Page %cHBO", "color: #0836f1;")
-}
-type StatisticsKey =
-	| "AmazonAdTimeSkipped"
-	| "NetflixAdTimeSkipped"
-	| "DisneyAdTimeSkipped"
-	| "IntroTimeSkipped"
-	| "RecapTimeSkipped"
-	| "SegmentsSkipped"
-export async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
-	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
-		log(key, endTime - startTime)
-		settings.value.Statistics[key] += endTime - startTime
-		increaseBadge()
-	}
-}
-
-export function parseAdTime(adTimeText: string | null) {
-	if (!adTimeText) return false
-	const adTime: number =
-		parseInt(/:\d+/.exec(adTimeText ?? "")?.[0].substring(1) ?? "") +
-		parseInt(/\d+/.exec(adTimeText ?? "")?.[0] ?? "") * 60
-	if (isNaN(adTime)) return false
-	return adTime
-}
-
-export function createSlider(
-	video: HTMLVideoElement,
-	videoSpeed: Ref<number>,
-	position: HTMLElement,
-	sliderStyle: string,
-	speedStyle: string,
-	divStyle = "",
-) {
-	videoSpeed.value = videoSpeed.value || video.playbackRate
-
-	const slider = document.createElement("input")
-	slider.id = "videoSpeedSlider"
-	slider.type = "range"
-	slider.min = settings.value.General.sliderMin.toString()
-	slider.max = settings.value.General.sliderMax.toString()
-	slider.value = (videoSpeed.value * 10).toString()
-	slider.step = settings.value.General.sliderSteps.toString()
-	slider.style.cssText = sliderStyle
-
-	const speed = document.createElement("p")
-	speed.id = "videoSpeed"
-	speed.textContent = videoSpeed.value ? videoSpeed.value.toFixed(1) + "x" : "1.0x"
-	speed.style.cssText = speedStyle
-	if (divStyle) {
-		const div = document.createElement("div")
-		div.style.cssText = divStyle
-		div.appendChild(slider)
-		div.appendChild(speed)
-		position.prepend(div)
-	} else position.prepend(slider, speed)
-
-	if (videoSpeed.value) video.playbackRate = videoSpeed.value
-	speed.onclick = function () {
-		slider.style.display = slider.style.display === "block" ? "none" : "block"
-	}
-	slider.oninput = function () {
-		const sliderValue = parseFloat(slider.value)
-		speed.textContent = (sliderValue / 10).toFixed(1) + "x"
-		video.playbackRate = sliderValue / 10
-		videoSpeed.value = sliderValue / 10
-	}
-
-	return { slider, speed }
 }

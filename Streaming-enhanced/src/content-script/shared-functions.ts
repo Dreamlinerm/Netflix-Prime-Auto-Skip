@@ -100,6 +100,64 @@ async function garbageCollection() {
 	settings.value.General.GCdate = today
 	setDBCache()
 }
+// #region exported functions
+// parse string time to seconds e.g. 1:30 -> 90
+export function parseAdTime(adTimeText: string | null) {
+	if (!adTimeText) return false
+	const adTime: number =
+		parseInt(/:\d+/.exec(adTimeText ?? "")?.[0].substring(1) ?? "") +
+		parseInt(/\d+/.exec(adTimeText ?? "")?.[0] ?? "") * 60
+	if (isNaN(adTime)) return false
+	return adTime
+}
+
+export function createSlider(
+	video: HTMLVideoElement,
+	videoSpeed: Ref<number>,
+	position: HTMLElement,
+	sliderStyle: string,
+	speedStyle: string,
+	divStyle = "",
+) {
+	videoSpeed.value = videoSpeed.value || video.playbackRate
+
+	const slider = document.createElement("input")
+	slider.id = "videoSpeedSlider"
+	slider.type = "range"
+	slider.min = settings.value.General.sliderMin.toString()
+	slider.max = settings.value.General.sliderMax.toString()
+	slider.value = (videoSpeed.value * 10).toString()
+	slider.step = settings.value.General.sliderSteps.toString()
+	slider.style.cssText = sliderStyle
+
+	const speed = document.createElement("p")
+	speed.id = "videoSpeed"
+	speed.textContent = videoSpeed.value ? videoSpeed.value.toFixed(1) + "x" : "1.0x"
+	speed.style.cssText = speedStyle
+	if (divStyle) {
+		const div = document.createElement("div")
+		div.style.cssText = divStyle
+		div.appendChild(slider)
+		div.appendChild(speed)
+		position.prepend(div)
+	} else position.prepend(slider, speed)
+
+	if (videoSpeed.value) video.playbackRate = videoSpeed.value
+	speed.onclick = function () {
+		slider.style.display = slider.style.display === "block" ? "none" : "block"
+	}
+	slider.oninput = function () {
+		const sliderValue = parseFloat(slider.value)
+		speed.textContent = (sliderValue / 10).toFixed(1) + "x"
+		video.playbackRate = sliderValue / 10
+		videoSpeed.value = sliderValue / 10
+	}
+
+	return { slider, speed }
+}
+// #endregion
+
+// #region startSharedFuncs
 type TMDBMovie = {
 	adult: boolean
 	backdrop_path: string
@@ -133,8 +191,6 @@ async function getMovieInfo(
 	media_type: string | null = null,
 	year: string | null = null,
 ) {
-	// justwatch api
-	// const url = `https://apis.justwatch.com/content/titles/${locale}/popular?language=en&body={"page_size":1,"page":1,"query":"${title}","content_types":["show","movie"]}`;
 	const locale = htmlLang || navigator?.language || "en-US"
 	const queryType = media_type ?? "multi"
 	let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURI(title)}&include_adult=false&language=${locale}&page=1`
@@ -158,8 +214,6 @@ async function getMovieInfo(
 	}
 }
 
-// #region Shared funcs
-// shared functions
 // show rating depending on page
 const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/g
 function showRating() {

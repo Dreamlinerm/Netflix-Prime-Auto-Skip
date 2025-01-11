@@ -379,7 +379,6 @@ declare module 'vue' {
     readonly createReactiveFn: UnwrapRef<typeof import('@vueuse/core')['createReactiveFn']>
     readonly createReusableTemplate: UnwrapRef<typeof import('@vueuse/core')['createReusableTemplate']>
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
-    readonly createSlider: UnwrapRef<typeof import('../utils/helper')['createSlider']>
     readonly createTemplatePromise: UnwrapRef<typeof import('@vueuse/core')['createTemplatePromise']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
@@ -442,7 +441,6 @@ declare module 'vue' {
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly onWatcherCleanup: UnwrapRef<typeof import('vue')['onWatcherCleanup']>
     readonly optionsStore: UnwrapRef<typeof import('../utils/helper')['optionsStore']>
-    readonly parseAdTime: UnwrapRef<typeof import('../utils/helper')['parseAdTime']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly pinia: UnwrapRef<typeof import('../utils/pinia')['pinia']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
