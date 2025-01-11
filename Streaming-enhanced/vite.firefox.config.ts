@@ -74,6 +74,11 @@ const postBuildPlugin = () => {
 			const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"))
 			// change manifest version to 2
 			manifest.manifest_version = 2
+			let webacessibleRecources: string[] = []
+			for (const resource of manifest.web_accessible_resources) {
+				webacessibleRecources = [...webacessibleRecources, ...(resource.resources as string[])]
+			}
+			manifest.web_accessible_resources = webacessibleRecources
 			// write back to browserOutDir/manifest.json
 			fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
 		},

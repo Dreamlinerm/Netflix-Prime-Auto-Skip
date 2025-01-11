@@ -44,12 +44,14 @@ async function increaseBadge(tabId: number) {
 		Badges[tabId] = 0
 	}
 	Badges[tabId]++
-	chrome.action.setBadgeText({ text: Badges[tabId].toString(), tabId })
+	if (isFirefox) browser.browserAction.setBadgeText({ text: Badges[tabId].toString(), tabId })
+	else chrome.action.setBadgeText({ text: Badges[tabId].toString(), tabId })
 }
 // Set Badge to a specific value
 async function setBadgeText(text: string, tabId: number) {
 	Badges[tabId] = text
-	chrome.action.setBadgeText({ text, tabId })
+	if (isFirefox) browser.browserAction.setBadgeText({ text, tabId })
+	else chrome.action.setBadgeText({ text, tabId })
 }
 
 // onMessage
