@@ -5,7 +5,7 @@
 			{{ $t("pageSpecificTitle", ["Disney"]) }}
 		</h1>
 	</div>
-	<div class="p-1 m-0 flex">
+	<div class="py-1 m-0 flex">
 		<p>{{ $t("selfAdSwitch") }}</p>
 		<Switch
 			v-model="settings.Disney.selfAd"

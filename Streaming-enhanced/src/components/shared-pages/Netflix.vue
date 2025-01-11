@@ -9,7 +9,7 @@
 		v-for="setting in settingsList"
 		:key="setting"
 	>
-		<div class="p-1 m-0 flex">
+		<div class="py-1 m-0 flex">
 			<p>{{ $t(setting + "Switch") }}</p>
 			<Switch
 				v-model="settings.Netflix[setting]"
@@ -23,7 +23,7 @@
 			<hr />
 		</template>
 	</template>
-	<!-- <div class="p-1 m-0 flex">
+	<!-- <div class="py-1 m-0 flex">
 			<p>{{ $t("user") }}</p>
 			<p
 				id="profileName"

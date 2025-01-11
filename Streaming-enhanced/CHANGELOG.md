@@ -46,7 +46,7 @@
 - On Amazon.com fixed: Speedslider not showing up on dv-player-fullscreen
 - On Amazon.com fixed: Not skipping ads longer than 150 seconds
 
-            <p>1.1.43</h2>
+## 1.1.43
 
 - Netflix Toolbar gets higher bug fixed
 

@@ -5,30 +5,66 @@
 			{{ $t("skippedTime") }}
 		</h1>
 	</div>
-	<div class="p-1 m-0 flex justify-between">
+	<div class="py-1 m-0 flex justify-between">
 		<p>{{ $t("statisticAd", ["Amazon"]) }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.AmazonAdTimeSkipped) }}</p>
 	</div>
-	<div class="p-1 m-0 flex justify-between">
+	<template v-if="advancedSettings">
+		<p class="description">
+			{{ $t("amazonAdDescription") }}
+		</p>
+		<hr />
+	</template>
+	<div class="py-1 m-0 flex justify-between">
 		<p>{{ $t("statisticAd", ["Netflix"]) }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.NetflixAdTimeSkipped) }}</p>
 	</div>
-	<div class="p-1 m-0 flex justify-between">
+	<template v-if="advancedSettings">
+		<p class="description">
+			{{ $t("netflixAdDescription") }}
+		</p>
+		<hr />
+	</template>
+	<div class="py-1 m-0 flex justify-between">
 		<p>{{ $t("statisticAd", ["Disney"]) }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.DisneyAdTimeSkipped) }}</p>
 	</div>
-	<div class="p-1 m-0 flex justify-between">
+	<template v-if="advancedSettings">
+		<p class="description">
+			{{ $t("disneyAdDescription") }}
+		</p>
+		<hr />
+	</template>
+	<div class="py-1 m-0 flex justify-between">
 		<p>{{ $t("statisticIntro") }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.IntroTimeSkipped) }}</p>
 	</div>
-	<div class="p-1 m-0 flex justify-between">
+	<template v-if="advancedSettings">
+		<p class="description">
+			{{ $t("statisticIntroDescription") }}
+		</p>
+		<hr />
+	</template>
+	<div class="py-1 m-0 flex justify-between">
 		<p>{{ $t("statisticRecap") }}</p>
 		<p>{{ getTimeFormatted(settings.Statistics.RecapTimeSkipped) }}</p>
 	</div>
-	<div class="p-1 m-0 flex justify-between">
+	<template v-if="advancedSettings">
+		<p class="description">
+			{{ $t("statisticskipRecapDescription") }}
+		</p>
+		<hr />
+	</template>
+	<div class="py-1 m-0 flex justify-between">
 		<p>{{ $t("statisticSegments") }}</p>
 		<p>{{ settings.Statistics.SegmentsSkipped }}</p>
 	</div>
+	<template v-if="advancedSettings">
+		<p class="description">
+			{{ $t("statisticSegmentsDescription") }}
+		</p>
+		<hr />
+	</template>
 </template>
 <script setup lang="ts">
 const optionsStore = useOptionsStore()
