@@ -34,8 +34,8 @@ const props = defineProps({
 	},
 })
 
-const settingsList: Array<"skipAd" | "filterPaid" | "continuePosition" | "xray"> = [
-	"skipAd",
+const settingsList: Array<"selfAd" | "filterPaid" | "continuePosition" | "xray"> = [
+	"selfAd",
 	"filterPaid",
 	"continuePosition",
 	"xray",
