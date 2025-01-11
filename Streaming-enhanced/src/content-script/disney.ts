@@ -203,7 +203,7 @@ async function Disney_Watch_Credits() {
 					?.iterateNext()) ||
 			(time && lastAdTimeText != time)
 		) {
-			const video = document.querySelector("video")
+			const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
 			if (video) {
 				video.click()
 				lastAdTimeText = time ?? 0

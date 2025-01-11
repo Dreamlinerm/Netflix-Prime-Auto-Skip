@@ -494,7 +494,9 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 }
 function OnFullScreenChange() {
 	let video: HTMLVideoElement
-	if (isNetflix || isDisney || isHotstar || isHBO) video = document.querySelector("video") as HTMLVideoElement
+	if (isDisney)
+		video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
+	else if (isNetflix || isHotstar || isHBO) video = document.querySelector("video") as HTMLVideoElement
 	else video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
 	//TODO: window.fullScreen
 	if (document.fullscreenElement && video) {
