@@ -6,6 +6,6 @@ const { name, displayName } = packageJson
 // @ts-expect-error ManifestConfig provides all required fields
 export default defineManifest((env) => ({
 	...ManifestConfig,
-	name: env.mode === "staging" ? `[INTERNAL] ${name}` : displayName.replace(":", "") || name,
+	name: env.mode === "staging" ? `[INTERNAL] ${name}` : displayName.replace(":", "").replace("+", "") || name,
 	key: env["CHROME_ADDON_KEY"],
 }))
