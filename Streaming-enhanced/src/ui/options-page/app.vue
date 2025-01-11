@@ -149,9 +149,9 @@ const hash = ref(window.location.hash)
 				</RouterLink>
 			</div>
 			<div class="mt-auto">
-				<div class="grid grid-rows-2 gap-2 mb-2">
+				<div class="flex flex-col mb-2 MenuButtons">
 					<a
-						class="btn btn-secondary rounded-2xl"
+						class="btn btn-secondary rounded-2xl blueButtons m-[5px_15px]"
 						:href="githubUrl"
 						target="_blank"
 					>
@@ -167,7 +167,7 @@ const hash = ref(window.location.hash)
 						Github
 					</a>
 					<a
-						class="btn btn-secondary rounded-2xl"
+						class="btn btn-secondary rounded-2xl blueButtons m-[5px_15px]"
 						href="https://github.com/sponsors/Dreamlinerm"
 						target="_blank"
 					>
