@@ -118,11 +118,11 @@ const hash = ref(window.location.hash)
 					<div>Crunchyroll</div>
 				</RouterLink>
 				<RouterLink
-					to="/options-page/Other"
+					to="/options-page/Backup"
 					class="menuButton flex"
-					:class="hash.endsWith('Other') ? 'bg-netflix' : 'bg-primary'"
+					:class="hash.endsWith('Backup') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
-					@click="hash = 'Other'"
+					@click="hash = 'Backup'"
 				>
 					<i-mdi-dots-horizontal class="icon" />
 					<p>{{ $t("backup") }}</p>
