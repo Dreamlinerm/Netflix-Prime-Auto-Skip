@@ -20,7 +20,8 @@
 		"typecheck": "vue-tsc --noEmit",
 		"transGoogle": "jsontt .translation/deepl.EN.json -m google2 -n google2 -fb yes -cl 3 -f en -t de fr es pt it ja pl sv zh-CN ko tr",
 		"deepl": "jsontt .translation/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -f EN -t DE ES FR IT JA KO PL PT SV TR ZH",
-		"transDeepL": "tsx scripts/deepl.ts"
+		"transDeepL": "tsx scripts/deepl.ts",
+		"hours": "git hours -since 2018-02-01 -before today -author marvinkrebber@yahoo.de > authorHours.json && tsx scripts/hourstxtToJSON.ts"
 	},
 	"dependencies": {
 		"marked": "^15.0.6",
