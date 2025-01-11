@@ -19,7 +19,7 @@ chrome.runtime.onInstalled.addListener(async (opt) => {
 		chrome.tabs.create({
 			active: true,
 			// url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page"),
-			url: chrome.runtime.getURL("/src/ui/options-page/index.html#/options-page/Backup"),
+			url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page/install"),
 		})
 	}
 })

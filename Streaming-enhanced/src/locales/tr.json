@@ -11,8 +11,7 @@
 	"changelog": "Değişiklik Günlüğü",
 	"donate": "Bağış Yapın",
 	"pageSpecificTitle": "{0} özel",
-	"defaultPageTitle": "İsteğe bağlı fonksiyonlar",
-	"defaultPageDescription": "Varsayılan olarak kapalı olan her özellik ya açık olduklarında kafa karıştırıcı oldukları için ya da beta aşamasında oldukları için",
+
 	"defaultfilterPaidDescription": "Amazon Prime'dan tüm ücretli film/dizi kategorilerinin kaldırılması",
 	"sharedPageTitle": "Paylaşılan Video özellikleri",
 	"sharedPageDescription": "Bu seçenekler yalnızca tüm akış hizmetleri için ayarları etkinleştirir/devre dışı bırakır. Aşağıdaki tabloda belirli bir hizmet için paylaşılan ayarları devre dışı bırakabilirsiniz",

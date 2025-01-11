@@ -11,8 +11,7 @@
 	"changelog": "更新日志",
 	"donate": "捐赠",
 	"pageSpecificTitle": "{0} 专属",
-	"defaultPageTitle": "可选功能",
-	"defaultPageDescription": "默认情况下关闭的所有功能，要么是因为开启后会引起混淆，要么是因为处于测试阶段",
+
 	"defaultfilterPaidDescription": "从亚马逊 prime 中删除所有付费电影/连续剧类别",
 	"sharedPageTitle": "共享视频功能",
 	"sharedPageDescription": "这些选项只能启用/禁用所有流媒体服务的设置。在下表中，您可以禁用特定服务的共享设置",

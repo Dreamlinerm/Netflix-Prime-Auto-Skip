@@ -11,8 +11,7 @@
 	"changelog": "Changelog",
 	"donate": "Spende",
 	"pageSpecificTitle": "{0} spezifisch",
-	"defaultPageTitle": "Optionale Funktionen",
-	"defaultPageDescription": "Alle Funktionen, die standardmäßig ausgeschaltet sind, entweder weil sie verwirrend sind, wenn sie eingeschaltet wären, oder weil sie in der Beta-Phase sind",
+
 	"defaultfilterPaidDescription": "Entfernen aller kostenpflichtigen Filme/Serien Kategorien von Amazon Prime",
 	"sharedPageTitle": "Gemeinsame Videofunktionen",
 	"sharedPageDescription": "Diese Optionen aktivieren/deaktivieren die Einstellungen für alle Streaming-Dienste. In der folgenden Tabelle können Sie die gemeinsamen Einstellungen für einen bestimmten Dienst deaktivieren.",

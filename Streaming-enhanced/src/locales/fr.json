@@ -11,8 +11,7 @@
 	"changelog": "Changelog",
 	"donate": "Faire un don",
 	"pageSpecificTitle": "{0} spécifique",
-	"defaultPageTitle": "Fonctions optionnelles",
-	"defaultPageDescription": "Toutes les fonctionnalités qui sont désactivées par défaut, soit parce qu'elles prêtent à confusion si elles sont activées, soit parce qu'elles sont en version bêta.",
+
 	"defaultfilterPaidDescription": "Suppression de toutes les catégories de films et de séries payantes sur Amazon Prime",
 	"sharedPageTitle": "Fonctionnalités de la vidéo partagée",
 	"sharedPageDescription": "Ces options n'activent/désactivent les paramètres que pour tous les services de diffusion en continu. Dans le tableau ci-dessous, vous pouvez désactiver les paramètres partagés pour un service spécifique.",

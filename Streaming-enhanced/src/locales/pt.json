@@ -11,8 +11,7 @@
 	"changelog": "Registo de alterações",
 	"donate": "Doar",
 	"pageSpecificTitle": "{0} específico",
-	"defaultPageTitle": "Funções opcionais",
-	"defaultPageDescription": "Todas as funcionalidades que estão desactivadas por defeito ou porque são confusas se estiverem activadas ou porque estão em fase beta",
+
 	"defaultfilterPaidDescription": "Remoção de todas as categorias de filmes/séries pagas do Amazon prime",
 	"sharedPageTitle": "Caraterísticas do vídeo partilhado",
 	"sharedPageDescription": "Estas opções só activam/desactivam as definições para todos os serviços de streaming. Na tabela abaixo, pode desativar as definições partilhadas para um serviço específico",

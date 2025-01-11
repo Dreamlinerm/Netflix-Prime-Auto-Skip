@@ -11,8 +11,7 @@
 	"changelog": "Changelog",
 	"donate": "Donera",
 	"pageSpecificTitle": "{0} specifik",
-	"defaultPageTitle": "Valfria funktioner",
-	"defaultPageDescription": "Alla funktioner som är avstängda som standard antingen för att de är förvirrande om de är påslagna eller för att de är i betaversion",
+
 	"defaultfilterPaidDescription": "Ta bort alla betalda film- och seriekategorier från Amazon Prime",
 	"sharedPageTitle": "Funktioner för delad video",
 	"sharedPageDescription": "Dessa alternativ aktiverar/inaktiverar endast inställningarna för alla streamingtjänster. I tabellen nedan kan du inaktivera de delade inställningarna för en specifik tjänst",

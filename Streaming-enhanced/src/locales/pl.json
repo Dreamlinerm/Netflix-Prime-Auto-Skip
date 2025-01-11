@@ -11,8 +11,7 @@
 	"changelog": "Dziennik zmian",
 	"donate": "Darowizna",
 	"pageSpecificTitle": "{0} Specyficzna",
-	"defaultPageTitle": "Funkcje opcjonalne",
-	"defaultPageDescription": "Każda funkcja, która jest domyślnie wyłączona, ponieważ jest myląca, jeśli została włączona, lub jest w wersji beta.",
+
 	"defaultfilterPaidDescription": "Usunięcie każdej płatnej kategorii filmów/seriali z Amazon Prime",
 	"sharedPageTitle": "Funkcje udostępnionego wideo",
 	"sharedPageDescription": "Opcje te włączą/wyłączą ustawienia tylko dla wszystkich usług streamingowych. W poniższej tabeli można wyłączyć współdzielone ustawienia dla określonej usługi.",

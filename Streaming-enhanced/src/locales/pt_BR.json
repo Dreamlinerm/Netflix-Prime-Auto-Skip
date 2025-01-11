@@ -11,8 +11,7 @@
 	"changelog": "Registro de mudanças",
 	"donate": "Doar",
 	"pageSpecificTitle": "{0}",
-	"defaultPageTitle": "Recursos opcionais",
-	"defaultPageDescription": "Todos as funcionalidades estão desativadas por padrão, não funcionam corretamente ou estão em sua versão beta",
+
 	"defaultfilterPaidDescription": "Remove todas as categorias de filmes/séries pagos do Amazon Prime",
 	"sharedPageTitle": "Recursos de vídeo compartilhado",
 	"sharedPageDescription": "Essas opções serão ativadas ou desativadas para todas os serviços de streaming. Na tabela abaixo, você pode desativar as configurações compartilhadas de um serviço específico.",

@@ -11,8 +11,7 @@
 	"changelog": "Changelog",
 	"donate": "Donare",
 	"pageSpecificTitle": "{0} specifico",
-	"defaultPageTitle": "Funzioni opzionali",
-	"defaultPageDescription": "Tutte le funzionalità che sono disattivate per impostazione predefinita o perché confondono se sono attivate o perché sono in fase di beta.",
+
 	"defaultfilterPaidDescription": "Rimozione di ogni categoria di film/serie a pagamento da Amazon prime",
 	"sharedPageTitle": "Caratteristiche dei video condivisi",
 	"sharedPageDescription": "Queste opzioni abilitano/disabilitano le impostazioni solo per tutti i servizi di streaming. Nella tabella seguente è possibile disattivare le impostazioni condivise per un servizio specifico.",

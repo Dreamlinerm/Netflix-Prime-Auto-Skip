@@ -11,8 +11,7 @@
 	"changelog": "変更履歴",
 	"donate": "寄付する",
 	"pageSpecificTitle": "{0} 専用",
-	"defaultPageTitle": "オプション機能",
-	"defaultPageDescription": "デフォルトでオフになっているすべての機能は、オンになっていると混乱を招くか、ベータ版であるかのどちらかである。",
+
 	"defaultfilterPaidDescription": "Amazonプライムからすべての有料映画／シリーズカテゴリーを削除",
 	"sharedPageTitle": "共有ビデオ機能",
 	"sharedPageDescription": "これらのオプションは、すべてのストリーミングサービスの設定のみを有効/無効にします。以下の表では、特定のサービスの共有設定を無効にすることができます。",

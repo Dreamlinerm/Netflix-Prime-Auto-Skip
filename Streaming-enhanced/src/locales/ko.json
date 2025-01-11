@@ -11,8 +11,7 @@
 	"changelog": "변경 로그",
 	"donate": "기부하기",
 	"pageSpecificTitle": "{0} 특정",
-	"defaultPageTitle": "선택적 기능",
-	"defaultPageDescription": "켜져 있으면 혼란스럽거나 베타 버전이기 때문에 기본적으로 꺼져 있는 모든 기능",
+
 	"defaultfilterPaidDescription": "Amazon Prime에서 모든 유료 영화/시리즈 카테고리 제거하기",
 	"sharedPageTitle": "공유 비디오 기능",
 	"sharedPageDescription": "이러한 옵션은 모든 스트리밍 서비스에 대한 설정만 활성화/비활성화합니다. 아래 표에서 특정 서비스에 대한 공유 설정을 비활성화할 수 있습니다.",
