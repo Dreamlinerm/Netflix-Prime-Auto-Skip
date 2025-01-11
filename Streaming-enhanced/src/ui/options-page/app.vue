@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Notivue, Notification } from "notivue"
+import { isFirefox } from "@/utils/helper"
 const version = __VERSION__
 const githubUrl = __GITHUB_URL__
 const hash = ref(window.location.hash)
@@ -27,13 +28,21 @@ const hash = ref(window.location.hash)
 				<a
 					target="_blank"
 					class="flex justify-center items-center flex-col text-center no-underline"
-					href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"
+					:href="
+						isFirefox
+							? 'https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/'
+							: 'https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle'
+					"
 				>
 					<p class="text-base">
 						{{ $t("rateNow") }}
 					</p>
 					<img
-						src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010"
+						:src="
+							isFirefox
+								? 'https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010'
+								: 'https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010'
+						"
 						alt="rating"
 						class="w-24"
 					/>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isFirefox } from "@/utils/helper"
 const version = __VERSION__
 const githubUrl = __GITHUB_URL__
 function openSettings() {
@@ -10,7 +11,8 @@ function openSettings() {
 </script>
 
 <template>
-	<div class="navbar base-100 text-primary-content p-2">
+	<!-- base-100 -->
+	<div class="navbar bg-secondary text-primary-content p-2">
 		<div class="flex-1 pl-2">
 			<RouterLink
 				to="/"
@@ -20,7 +22,7 @@ function openSettings() {
 					<img
 						src="@assets/logo.png"
 						alt="logo"
-						class="h-8 w-auto"
+						class="h-12 w-auto"
 					/>
 					<div class="flex-center flex-col">
 						<h2>
@@ -34,13 +36,21 @@ function openSettings() {
 				target="_blank"
 				class="flex-center flex-col"
 				style="text-align: center; text-decoration: none"
-				href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"
+				:href="
+					isFirefox
+						? 'https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/'
+						: 'https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle'
+				"
 			>
 				<p style="font-size: 1rem">
 					{{ $t("rateNow") }}
 				</p>
 				<img
-					src="https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010"
+					:src="
+						isFirefox
+							? 'https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010'
+							: 'https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010'
+					"
 					alt="rating"
 				/>
 			</a>
@@ -90,4 +100,9 @@ function openSettings() {
 	</div>
 </template>
 
-<style scoped></style>
+<style scoped>
+h2,
+p {
+	@apply p-0;
+}
+</style>
