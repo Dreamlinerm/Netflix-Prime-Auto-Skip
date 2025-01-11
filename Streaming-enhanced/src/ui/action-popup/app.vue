@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Notivue, Notification } from "notivue"
+const router = useRouter()
 // if on streaming page open settings for page
 const query = { active: true, currentWindow: true }
 function callback(tabs: chrome.tabs.Tab[]) {
