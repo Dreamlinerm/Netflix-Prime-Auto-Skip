@@ -21,6 +21,7 @@ declare module 'vue' {
     IPhSun: typeof import('~icons/ph/sun')['default']
     LoadingSpinner: typeof import('./../components/state/LoadingSpinner.vue')['default']
     LocaleSwitch: typeof import('./../components/LocaleSwitch.vue')['default']
+    OpenSettingsButton: typeof import('./../components/OpenSettingsButton.vue')['default']
     OptionsPageSettingsTable: typeof import('./../components/options-page/SettingsTable.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterLinkUp: typeof import('./../components/RouterLinkUp.vue')['default']
