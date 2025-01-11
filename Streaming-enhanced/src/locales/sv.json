@@ -76,7 +76,6 @@
   "shared": "Alla",
   "openSharedSettings": "Öppna delade inställningar",
   "autoOpenSettings": "Öppna automatiskt korrekta inställningar:",
-  "requestTabs": "Begär tillstånd för flikar",
   "autoOpenDescription": "Om du är på en streamingwebbplats öppnas motsvarande inställningar automatiskt i popup-fönstret",
   "duplicateSwitch": "Ta bort duplicerade program:",
   "duplicateDescription": "Ta bort alla dubbletter av program som redan tidigare var synliga på Disney. Synlig innebär att programmet finns bland de 5 första programmen i varje rad",
@@ -95,5 +94,7 @@
   "showYearDescription": "Visar utgivningsåret bredvid klassificeringen.",
   "installPageTitle": "🎉 Installerad! 🚀",
   "installThanks": "Tack för att du installerade Streaming enhanced! ❤️",
-  "installTurnOnOptional": "Slå på alla tillvalsfunktioner:"
+  "installTurnOnOptional": "Slå på alla tillvalsfunktioner:",
+  "tabsPermission": "nödvändigt för automatisk öppning av rätt inställningar",
+  "missingPermission": "Saknade behörigheter upptäckta"
 }

@@ -76,7 +76,6 @@
   "shared": "Tous",
   "openSharedSettings": "Ouvrir les paramètres partagés",
   "autoOpenSettings": "Ouvrir automatiquement les paramètres corrects:",
-  "requestTabs": "Demande d'autorisation pour les onglets",
   "autoOpenDescription": "Si vous êtes sur un site de streaming, les paramètres correspondants s'ouvrent automatiquement dans une fenêtre contextuelle.",
   "duplicateSwitch": "Supprimer les spectacles en double:",
   "duplicateDescription": "Supprimez tous les spectacles en double, qui étaient déjà visibles sur Disney auparavant. Visible signifie que le spectacle se trouve dans les 5 premiers spectacles de chaque ligne.",
@@ -95,5 +94,7 @@
   "showYearDescription": "Indique l'année de publication à côté de la note.",
   "installPageTitle": "🎉 Installé ! 🚀",
   "installThanks": "Merci d'avoir installé Streaming enhanced ! ❤️",
-  "installTurnOnOptional": "Activer toutes les fonctions optionnelles :"
+  "installTurnOnOptional": "Activer toutes les fonctions optionnelles :",
+  "tabsPermission": "nécessaire à l'ouverture automatique des paramètres corrects",
+  "missingPermission": "Permissions manquantes détectées"
 }

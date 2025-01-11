@@ -29,13 +29,15 @@ async function requestUnsetPermissions() {
 		v-if="unsetPermissions.length > 0"
 		class="border border-error rounded-lg bg-gray-400 p-4 flex flex-col gap-2 w-fit"
 	>
-		<h1>Missing permissions detected</h1>
+		<h1>{{ $t("missingPermission") }}</h1>
 		<div
 			v-for="permission in unsetPermissions"
 			:key="permission"
-			class="bg-gray-900 w-fit rounded text-error-content"
+			class="flex text-primary-content"
 		>
-			{{ permission }}
+			<div class="bg-gray-900 w-12 rounded text-error-content text-center">{{ permission }}</div>
+			->
+			<div class="bg-gray-900 rounded text-error-content">{{ $t(permission + "Permission") }}</div>
 		</div>
 		<button
 			class="btn btn-error w-fit"

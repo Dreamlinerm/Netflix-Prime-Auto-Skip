@@ -18,12 +18,24 @@ const fullScreen = computed({
 		})
 	},
 })
+
+const speedSlider = computed({
+	get: () => streamingServices.every((service) => settings.value[service]?.speedSlider ?? true),
+	set: (value) => {
+		streamingServices.forEach((service) => {
+			if (settings.value[service]?.speedSlider !== undefined) {
+				settings.value[service].speedSlider = value
+			}
+		})
+	},
+})
 const SliderPreview = ref(10)
 </script>
 <template>
 	<h1>{{ $t("sharedPageTitle") }}</h1>
 	<p class="description">{{ $t("sharedPageDescription") }}</p>
 	<OptionsPageSettingsTable></OptionsPageSettingsTable>
+	<OptionalPermission />
 	<hr />
 	<div class="line flex">
 		<p>{{ $t("fullscreenSwitch") }}</p>
@@ -80,27 +92,12 @@ const SliderPreview = ref(10)
 		{{ $t("epilepsyDescription") }}
 	</p>
 	<hr />
-	<div
-		class="hidden"
-		id="PermissiontabsDiv"
-	>
-		<div class="line flex">
-			<p>{{ $t("autoOpenSettings") }}</p>
-			<div
-				class="button"
-				style="margin-left: 5px"
-				id="Permissiontabs"
-			>
-				{{ $t("requestTabs") }}
-			</div>
-		</div>
-		<p class="description">
-			{{ $t("autoOpenDescription") }}
-		</p>
-		<hr />
-	</div>
 	<div class="line flex">
 		<p>{{ $t("sliderSwitch") }}</p>
+		<Switch
+			v-model="speedSlider"
+			class="ml-auto"
+		></Switch>
 	</div>
 	<p class="description">
 		{{ $t("sliderDescription") }}

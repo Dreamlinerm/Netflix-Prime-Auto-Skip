@@ -76,7 +76,6 @@
   "shared": "All",
   "openSharedSettings": "Open Shared Settings",
   "autoOpenSettings": "Automatically open correct Settings:",
-  "requestTabs": "Request Tabs permission",
   "autoOpenDescription": "If on streaming site open the according settings in popup automatically",
   "duplicateSwitch": "Remove duplicate Shows:",
   "duplicateDescription": "Remove every duplicate show, which was already visible on Disney before. Visible means that the show is in the first 5 shows in every row",
@@ -95,5 +94,7 @@
   "showYearDescription": "Shows the release year next to the rating.",
   "installPageTitle": "🎉 Installed! 🚀",
   "installThanks": "Thank you for installing Streaming enhanced! ❤️",
-  "installTurnOnOptional": "Turn on all optional features:"
+  "installTurnOnOptional": "Turn on all optional features:",
+  "tabsPermission": "necessary for the automatic opening of the correct settings",
+  "missingPermission": "Missing permissions detected"
 }

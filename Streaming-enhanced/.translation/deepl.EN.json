@@ -1,5 +1,3 @@
 {
-	"installPageTitle": "🎉 Installed! 🚀",
-	"installThanks": "Thank you for installing Streaming enhanced! ❤️",
-	"installTurnOnOptional": "Turn on all optional features:"
+	"missingPermission": "Missing permissions detected"
 }

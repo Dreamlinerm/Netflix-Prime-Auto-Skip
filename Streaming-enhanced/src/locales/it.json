@@ -76,7 +76,6 @@
   "shared": "Tutti",
   "openSharedSettings": "Aprire le impostazioni condivise",
   "autoOpenSettings": "Aprire automaticamente le impostazioni corrette:",
-  "requestTabs": "Richiesta di autorizzazione per le schede",
   "autoOpenDescription": "Se sul sito di streaming si aprono automaticamente le impostazioni corrispondenti nel popup",
   "duplicateSwitch": "Rimuovere i duplicati delle Mostre:",
   "duplicateDescription": "Rimuove tutti gli spettacoli duplicati che erano già visibili su Disney. Visibile significa che lo spettacolo è tra i primi 5 spettacoli di ogni riga.",
@@ -95,5 +94,7 @@
   "showYearDescription": "Mostra l'anno di uscita accanto al rating.",
   "installPageTitle": "🎉 Installato! 🚀",
   "installThanks": "Grazie per aver installato Streaming enhanced! ❤️",
-  "installTurnOnOptional": "Attivare tutte le funzioni opzionali:"
+  "installTurnOnOptional": "Attivare tutte le funzioni opzionali:",
+  "tabsPermission": "necessario per l'apertura automatica delle impostazioni corrette",
+  "missingPermission": "Rilevati permessi mancanti"
 }

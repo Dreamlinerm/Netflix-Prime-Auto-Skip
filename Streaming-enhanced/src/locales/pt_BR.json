@@ -76,7 +76,6 @@
   "shared": "Todos",
   "openSharedSettings": "Abrir configurações compartilhadas",
   "autoOpenSettings": "Abrir automaticamente as configurações corretas:",
-  "requestTabs": "Solicitar permissão de guias",
   "autoOpenDescription": "Se estiver em um site de streaming, uma janela de configurações será aberta",
   "duplicateSwitch": "Remover programas duplicados:",
   "duplicateDescription": "Remover todos os programas duplicados, que já estavam visíveis na Disney anteriormente. Visível significa que o programa está entre os primeiros 5 programas em cada linha",
@@ -95,5 +94,7 @@
   "showYearDescription": "Mostra o ano de lançamento ao lado da classificação.",
   "installPageTitle": "🎉 Instalado! 🚀",
   "installThanks": "Obrigado por instalar o Streaming enhanced! ❤️",
-  "installTurnOnOptional": "Ativar todas as caraterísticas opcionais:"
+  "installTurnOnOptional": "Ativar todas as caraterísticas opcionais:",
+  "tabsPermission": "necessário para a abertura automática das definições corretas",
+  "missingPermission": "Detectadas permissões em falta"
 }

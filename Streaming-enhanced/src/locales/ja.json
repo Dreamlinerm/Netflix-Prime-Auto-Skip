@@ -76,7 +76,6 @@
   "shared": "すべて",
   "openSharedSettings": "共有設定を開く",
   "autoOpenSettings": "自動的に正しい設定を開きます：",
-  "requestTabs": "タブの使用許可を申請する",
   "autoOpenDescription": "ストリーミング・サイトの場合、ポップアップで該当する設定を自動的に開く",
   "duplicateSwitch": "重複する番組を削除する：",
   "duplicateDescription": "以前ディズニーで表示されていた重複ショーをすべて削除する。表示されているということは、そのショーがすべての行の最初の5つのショーに入っているということです。",
@@ -95,5 +94,7 @@
   "showYearDescription": "レーティングの横にリリース年を表示。",
   "installPageTitle": "インストールされています！🚀",
   "installThanks": "Streaming enhancedをインストールしていただきありがとうございます！❤️",
-  "installTurnOnOptional": "すべてのオプション機能をオンにする："
+  "installTurnOnOptional": "すべてのオプション機能をオンにする：",
+  "tabsPermission": "正しい設定の自動オープンに必要",
+  "missingPermission": "欠落したパーミッションが検出された"
 }

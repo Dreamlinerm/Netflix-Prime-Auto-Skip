@@ -76,7 +76,6 @@
   "shared": "모두",
   "openSharedSettings": "공유 설정 열기",
   "autoOpenSettings": "올바른 설정이 자동으로 열립니다:",
-  "requestTabs": "탭 권한 요청",
   "autoOpenDescription": "스트리밍 사이트에서 해당 설정이 자동으로 팝업으로 열리면 다음과 같이 설정합니다.",
   "duplicateSwitch": "중복된 쇼를 제거합니다:",
   "duplicateDescription": "이전에 Disney에서 이미 표시되었던 중복 쇼를 모두 제거합니다. 표시됨은 모든 행의 처음 5개 쇼에 해당 쇼가 있음을 의미합니다.",
@@ -95,5 +94,7 @@
   "showYearDescription": "등급 옆에 출시 연도를 표시합니다.",
   "installPageTitle": "🎉 설치 완료! 🚀",
   "installThanks": "스트리밍 기능을 설치해 주셔서 감사합니다! ❤️",
-  "installTurnOnOptional": "모든 옵션 기능을 켭니다:"
+  "installTurnOnOptional": "모든 옵션 기능을 켭니다:",
+  "tabsPermission": "올바른 설정을 자동으로 여는 데 필요합니다.",
+  "missingPermission": "누락된 권한이 감지됨"
 }
