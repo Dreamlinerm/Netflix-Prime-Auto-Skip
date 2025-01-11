@@ -19,9 +19,7 @@ chrome.runtime.onInstalled.addListener(async (opt) => {
 		chrome.tabs.create({
 			active: true,
 			// url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page"),
-			url: chrome.runtime.getURL(
-				"moz-extension://b7af81ca-0d83-4826-bfea-01fe16a61bae/src/ui/action-popup/index.html#/action-popup",
-			),
+			url: chrome.runtime.getURL("/src/ui/options-page/index.html#/options-page/Backup"),
 		})
 	}
 })

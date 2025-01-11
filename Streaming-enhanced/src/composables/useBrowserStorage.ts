@@ -58,7 +58,9 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	watch(
 		data,
 		(newValue) => {
-			if (!isUpdatingFromStorage.value) chrome.storage.sync.set({ [key]: toRaw(newValue) })
+			if (!isUpdatingFromStorage.value && checkType(defaultValue, newValue)) {
+				chrome.storage.sync.set({ [key]: toRaw(newValue) })
+			}
 		},
 		{ deep: true },
 	)
@@ -97,7 +99,9 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	watch(
 		data,
 		(newValue) => {
-			if (!isUpdatingFromStorage.value) chrome.storage.local.set({ [key]: toRaw(newValue) })
+			if (!isUpdatingFromStorage.value && checkType(defaultValue, newValue)) {
+				chrome.storage.local.set({ [key]: toRaw(newValue) })
+			}
 		},
 		{ deep: true },
 	)
