@@ -7,7 +7,7 @@ const hash = ref(window.location.hash)
 </script>
 <template>
 	<div
-		class="flex"
+		class="wrapper"
 		style="height: calc(min(100vh, 1800px))"
 	>
 		<div class="sidenav flex flex-col">
@@ -225,49 +225,50 @@ const hash = ref(window.location.hash)
 }
 
 .icon {
-	width: 2rem;
-	height: 2rem;
-	margin: 0 5px;
+	@apply w-8 h-8 mx-1.5;
+}
+.wrapper {
+	@apply flex flex-row;
 }
 
 @media only screen and (max-width: 800px), only screen and (max-height: 600px) {
+	.wrapper {
+		@apply flex flex-col;
+	}
 	.menuButton p,
 	.menuButton div,
 	.IconBox {
-		display: none;
+		@apply hidden;
 	}
 	.MenuButtons {
-		padding-top: 5px;
+		@apply pt-1.5;
 	}
 }
+
 @media only screen and (max-height: 800px), only screen and (max-width: 1000px) {
+	.wrapper {
+		@apply flex flex-col;
+	}
 	.MenuButtons {
-		flex-direction: row;
-		justify-content: center;
+		@apply flex-row justify-center;
 	}
 	.menuButton {
-		margin: 5px;
-		padding: 5px 10px;
+		@apply m-1.5 px-2.5 py-1.5;
 	}
 	.blueButtons {
-		margin: 0 5px !important;
-		font-size: 1em;
+		@apply mx-1.5 text-base !important;
 	}
 	body {
-		flex-direction: column;
+		@apply flex-col;
 	}
 	.page {
-		padding: 0px;
-		margin: 0 15px 0 15px;
-		width: calc(100% - 30px);
+		@apply p-0 mx-3.5 w-[calc(100%-30px)];
 	}
 	.IconBox {
-		padding: 10px 0px 0px 0px;
-		flex-direction: row;
+		@apply pt-2.5 flex-row;
 	}
 	.sidenav {
-		height: auto;
-		display: block;
+		@apply h-auto block;
 	}
 }
 </style>
