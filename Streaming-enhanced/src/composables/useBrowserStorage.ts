@@ -29,65 +29,16 @@ function checkType(defaultValue: any, value: any): boolean {
 function isObject(value: any): boolean {
 	return value !== null && value instanceof Object && !Array.isArray(value)
 }
-async function resetUpdatingFlag(flag: Ref<boolean>) {
-	// wait for the watch to be triggered and then reset the flag
-	setTimeout(() => {
-		flag.value = false
-	}, 1)
-}
 
 export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
-	const data = ref<T>(defaultValue)
-	let isUpdatingFromStorage = true
-	const isObjectc = isObject(defaultValue)
-	// check if the data is ready to be used and not just the default value
-	if (isObjectc) data.value.$ready = false
-	// Initialize storage with the value from chrome.storage.sync
-	const promise = new Promise((resolve) => {
-		console.log("fetching " + key)
-		chrome.storage.sync.get(key, async (result) => {
-			if (result?.[key] !== undefined) {
-				if (isObjectc && isObject(result[key])) {
-					data.value = mergeDeep(defaultValue, result[key])
-				} else if (checkType(defaultValue, result[key])) {
-					data.value = result[key]
-				}
-			}
-			if (isObjectc) data.value.$ready = true
-			await nextTick()
-			isUpdatingFromStorage = false
-			resolve(true)
-		})
-	})
-
-	// Watch for changes in the storage and update chrome.storage.sync
-	watch(
-		data,
-		(newValue) => {
-			if (!isUpdatingFromStorage) {
-				if (checkType(defaultValue, newValue)) {
-					chrome.storage.sync.set({ [key]: toRaw(newValue) })
-				} else {
-					console.error("not updating " + key + ": type mismatch")
-				}
-			}
-		},
-		{ deep: true, flush: "post" },
-	)
-	// Add the onChanged listener here
-	chrome.storage.sync.onChanged.addListener(async function (changes) {
-		if (changes?.[key]) {
-			isUpdatingFromStorage = true
-			const { oldValue, newValue } = changes[key]
-			data.value = newValue
-			await nextTick()
-			isUpdatingFromStorage = false
-		}
-	})
-	return { data, promise }
+	return useBrowserStorage(key, defaultValue, "sync")
 }
 
 export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
+	return useBrowserStorage(key, defaultValue, "local")
+}
+
+function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" | "local" = "sync") {
 	const data = ref<T>(defaultValue)
 	let isUpdatingFromStorage = true
 	const isObjectc = isObject(defaultValue)
@@ -95,7 +46,7 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	if (isObjectc) data.value.$ready = false
 	// Initialize storage with the value from chrome.storage.local
 	const promise = new Promise((resolve) => {
-		chrome.storage.local.get(key, async (result) => {
+		chrome.storage[storageType].get(key, async (result) => {
 			if (result?.[key] !== undefined) {
 				if (isObjectc && isObject(result[key])) {
 					data.value = mergeDeep(defaultValue, result[key])
@@ -116,7 +67,7 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 		(newValue) => {
 			if (!isUpdatingFromStorage) {
 				if (checkType(defaultValue, newValue)) {
-					chrome.storage.local.set({ [key]: toRaw(newValue) })
+					chrome.storage[storageType].set({ [key]: toRaw(newValue) })
 				} else {
 					console.error("not updating " + key + ": type mismatch")
 				}
@@ -125,7 +76,7 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 		{ deep: true, flush: "post" },
 	)
 	// Add the onChanged listener here
-	chrome.storage.local.onChanged.addListener(async function (changes) {
+	chrome.storage[storageType].onChanged.addListener(async function (changes) {
 		if (changes?.[key]) {
 			isUpdatingFromStorage = true
 			const { oldValue, newValue } = changes[key]
