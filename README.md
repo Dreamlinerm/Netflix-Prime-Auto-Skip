@@ -251,21 +251,28 @@ and then skipped by forwarding by the ad length -0.1 seconds which will fix a lo
 
 - ```npm install -g pnpm``` install pnpm
 - ```pnpm install``` install all required packages
-- ```pnpm build``` build the extension
+- ```pnpm build``` build firefox and chrome zip files in dist folder
 - ```pnpm web-ext``` run the extension in firefox
 - ```pnpm chrome``` run the extension in chrome
 
-### Commands
+### Further Commands
 
-```pnpm build``` build firefox and chrome zip files in dist folder
-
-```pnpm web-ext``` run web-ext firefox
+```pnpm dev``` hot build with sourcemaps and w/o minification for both
+```pnpm dev:chrome``` hot build with sourcemaps and w/o minification for chrome
+```pnpm dev:firefox``` hot build with sourcemaps and w/o minification for firefox
 
 ```npm run start-android```  start on firefox android
 
-```npm run lint```   lint all files
+```pnpm format``` run prettier on all files 
+```pnpm lint``` run esLint
+```pnpm lint:manifest``` web-ext lint manifest files
 
-```lint:manifest``` lint all the manifest files
+### Author
+
+```pnpm transDeepL``` translate .translation/deepl.EN.json and output them into the locales files directly
+```pnpm hours``` calculate the hours spent on the project
+```pnpm copyDocsFtoC``` copy the docs from the firefox folder to the chrome folder
+
 
 ## Open the Extension without web-ext
 
