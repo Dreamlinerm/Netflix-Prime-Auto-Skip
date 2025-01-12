@@ -243,7 +243,7 @@ The freevee ad text contains the ad length which is matched by
 
 * Freevee ads: .atvwebplayersdk-ad-timer-text
 
-and then skipped by forwarding by the ad length -0.1 seconds which will fix a lot of issues it turns out.
+and then skipped by forwarding by the ad length.
 
 ## Develop the Extension
 
@@ -257,24 +257,15 @@ and then skipped by forwarding by the ad length -0.1 seconds which will fix a lo
 
 ### Further Commands
 
-```pnpm dev``` hot build with sourcemaps and w/o minification for both
-```pnpm dev:chrome``` hot build with sourcemaps and w/o minification for chrome
-```pnpm dev:firefox``` hot build with sourcemaps and w/o minification for firefox
+- ```pnpm dev``` hot build with sourcemaps and w/o minification for both
+- ```pnpm dev:chrome``` hot build with sourcemaps and w/o minification for chrome
+- ```pnpm dev:firefox``` hot build with sourcemaps and w/o minification for firefox
 
-```npm run start-android```  start on firefox android
-
-```pnpm format``` run prettier on all files 
-```pnpm lint``` run esLint
-```pnpm lint:manifest``` web-ext lint manifest files
+- ```npm run start-android```  start on firefox android
 
 This extension was built with the template [vite-vue3-browser-extension-v3](https://github.com/mubaidr/vite-vue3-browser-extension-v3)
 
-### Author
-
-```pnpm transDeepL``` translate .translation/deepl.EN.json and output them into the locales files directly
-```pnpm hours``` calculate the hours spent on the project
-```pnpm copyDocsFtoC``` copy the docs from the firefox folder to the chrome folder
-
+The refreshed Readme of the template can be found [here](README_TEMPLATE.md)
 
 ## Open the Extension without web-ext
 
@@ -286,6 +277,20 @@ I primarily just develop in firefox and then copy the code into chrome and repla
 ## Firefox 
 
 Just like chrome you can temporarily load the extension by going to ``about:addons``, clicking on the gear icon and then ``Install Add-ons From File``. Then you can load the ``dist/firefox`` folder as a temporary extension.
+
+### Formatting and Linting Commands
+
+- ```pnpm format``` run prettier on all files 
+- ```pnpm lint``` run esLint
+- ```pnpm lint:manifest``` web-ext lint manifest files
+
+### Author Commands
+
+- ```pnpm transDeepL``` translate .translation/deepl.EN.json and output them into the locales files directly
+- ```pnpm hours``` calculate the hours spent on the project
+- ```pnpm copyDocsFtoC``` copy the docs from the firefox folder to the chrome folder
+
+
 
 ## Changelog
 
