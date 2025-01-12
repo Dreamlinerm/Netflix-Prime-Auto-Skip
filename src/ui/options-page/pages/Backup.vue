@@ -36,13 +36,15 @@ function replaceSettings(event: Event) {
 	<div>
 		<div class="flex flex-col flex-align">
 			<h2>{{ $t("importSettings") }}</h2>
-			<a
-				class="btn btn-secondary rounded-2xl my-2"
-				:href="href"
-				download="settings.json"
-			>
-				{{ $t("saveSettings") }}
-			</a>
+			<div>
+				<a
+					class="btn btn-secondary rounded-2xl my-2"
+					:href="href"
+					download="settings.json"
+				>
+					{{ $t("saveSettings") }}
+				</a>
+			</div>
 			<div class="flex flex-row flex-align">
 				<p>Upload Settings:</p>
 				<input
