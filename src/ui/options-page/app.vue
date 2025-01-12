@@ -234,7 +234,7 @@ useFrontendStore()
 }
 
 .content {
-	@apply min-w-[500px] min-h-[450px];
+	@apply min-w-[200px] min-h-[450px];
 }
 .page {
 	@apply p-[80px_0_0_3%] w-[97%];

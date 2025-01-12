@@ -2,13 +2,13 @@
 	<table class="featureTable">
 		<thead>
 			<tr>
-				<th class="whitespace-nowrap">{{ $t("feature") }}</th>
+				<th class="tooltip">{{ $t("feature") }}</th>
 				<th>{{ $t("shared") }}</th>
-				<th>Netflix</th>
-				<th>Prime</th>
-				<th>Disney+</th>
-				<th>Crunchyroll</th>
-				<th>HBO</th>
+				<th class="other">Netflix</th>
+				<th class="other">Prime</th>
+				<th class="other">Disney+</th>
+				<th class="other">Crunchyroll</th>
+				<th class="other">HBO</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,31 +23,31 @@
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Netflix.skipIntro"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Amazon.skipIntro"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Disney.skipIntro"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Crunchyroll.skipIntro"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.HBO.skipIntro"
 						class="ml-auto"
@@ -65,26 +65,26 @@
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="NetflixSkipCredits"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="AmazonSkipCredits"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="DisneySkipCredits"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>➖</td>
-				<td>
+				<td class="other">➖</td>
+				<td class="other">
 					<Switch
 						v-model="HBOSkipCredits"
 						class="ml-auto"
@@ -102,26 +102,26 @@
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="NetflixWatchCredits"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="AmazonWatchCredits"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="DisneyWatchCredits"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>➖</td>
-				<td>
+				<td class="other">➖</td>
+				<td class="other">
 					<Switch
 						v-model="HBOWatchCredits"
 						class="ml-auto"
@@ -139,26 +139,26 @@
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Netflix.skipAd"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Amazon.skipAd"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Disney.skipAd"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>➖</td>
-				<td>➖</td>
+				<td class="other">➖</td>
+				<td class="other">➖</td>
 			</tr>
 			<tr>
 				<td class="tooltip">
@@ -171,26 +171,26 @@
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Netflix.showRating"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Amazon.showRating"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Disney.showRating"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>➖</td>
-				<td>
+				<td class="other">➖</td>
+				<td class="other">
 					<Switch
 						v-model="settings.HBO.showRating"
 						class="ml-auto"
@@ -208,31 +208,31 @@
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Netflix.speedSlider"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Amazon.speedSlider"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Disney.speedSlider"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.Crunchyroll.speedSlider"
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td>
+				<td class="other">
 					<Switch
 						v-model="settings.HBO.speedSlider"
 						class="ml-auto"
@@ -417,6 +417,20 @@ p {
 .tooltip {
 	border-bottom: 1px dotted white;
 	@apply whitespace-nowrap inline-block relative;
+}
+@media only screen and (max-width: 800px), only screen and (max-height: 600px) {
+	.tooltip {
+		white-space: wrap;
+	}
+	/* label {
+		transform: scale(0.8);
+	} */
+	.featureTable tr td:nth-of-type(2) label {
+		margin-right: unset;
+	}
+	.other {
+		display: none;
+	}
 }
 
 .tooltip .tooltiptext {
