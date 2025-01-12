@@ -30,7 +30,8 @@ window.addEventListener("message", function (event) {
 	if (event.data.type === "applyPrimeAffiliateLink") {
 		// Handle the message from the iframe
 		console.log("applyPrimeAffiliateLink")
-		sendMessage("updateUrl", { url: window.location.href + affiliateTag }, "background")
+		const url = window.location.href + affiliateTag
+		sendMessage("updateUrl", { url }, "background")
 	}
 })
 

@@ -96,5 +96,7 @@
   "installThanks": "Thank you for installing Streaming enhanced! ❤️",
   "installTurnOnOptional": "Turn on all optional features:",
   "tabsPermission": "necessary for the automatic opening of the correct settings",
-  "missingPermission": "Missing permissions detected"
+  "missingPermission": "Missing permissions detected",
+  "iframeTitle": "Support Streaming enhanced ❤️",
+  "iframeButton": "Apply affiliate link"
 }
