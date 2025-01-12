@@ -12,12 +12,12 @@
 			alt="Logo"
 		/>
 		<div>
-			<h1>{{ $t("iframeTitle") }}</h1>
+			<h1>Support Streaming enhanced ❤️</h1>
 			<button
 				class="btn btn-secondary"
 				@click="applyPrimeAffiliateLink"
 			>
-				{{ $t("iframeButton") }}
+				Apply affiliate link
 			</button>
 		</div>
 	</div>
