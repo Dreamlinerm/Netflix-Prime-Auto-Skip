@@ -15,6 +15,7 @@ function mergeDeep(defaults: any, source: any): any {
 		} else {
 			// If the type is different, use the default value
 			output[key] = defaultValue
+			console.log("Type mismatch", key, sourceValue)
 		}
 	})
 
