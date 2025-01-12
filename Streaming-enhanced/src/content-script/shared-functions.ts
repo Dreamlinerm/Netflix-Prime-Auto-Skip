@@ -1,10 +1,9 @@
 /* eslint-disable no-console */
 import { sendMessage } from "webext-bridge/content-script"
-import { increaseBadge, checkStoreReady, Platforms, logStartOfAddon, date } from "@/utils/helper"
 logStartOfAddon(Platforms.Amazon)
 // Global Variables
 
-const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const today = date.toISOString().split("T")[0]
 
 const ua = navigator.userAgent
@@ -28,7 +27,7 @@ export async function startSharedFunctions(platform: Platforms) {
 	if (platform == Platforms.Disney) isDisney = true
 	if (platform == Platforms.HBO) isHBO = true
 
-	await checkStoreReady(settings)
+	await promise
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	getDBCache()
 }

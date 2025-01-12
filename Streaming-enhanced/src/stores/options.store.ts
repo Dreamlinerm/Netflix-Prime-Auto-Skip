@@ -1,5 +1,5 @@
 export const useOptionsStore = defineStore("options", () => {
-	const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+	const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 	return {
 		settings,
 	}

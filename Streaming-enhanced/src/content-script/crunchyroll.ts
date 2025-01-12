@@ -1,14 +1,13 @@
-import { increaseBadge, date, checkStoreReady, Platforms, logStartOfAddon, config } from "@/utils/helper"
 import { startSharedFunctions } from "@/content-script/shared-functions"
 startSharedFunctions(Platforms.Crunchyroll)
 // Global Variables
 
-const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const url = window.location.href
 
 async function startCrunchyroll() {
 	// watch ready state
-	await checkStoreReady(settings)
+	await promise
 	logStartOfAddon(Platforms.Crunchyroll)
 	if (settings.value.Crunchyroll.releaseCalendar) Crunchyroll_ReleaseCalendar()
 	if (settings.value.Crunchyroll.profile) {

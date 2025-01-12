@@ -1,8 +1,7 @@
-import { increaseBadge, checkStoreReady, Platforms, logStartOfAddon, config, addSkippedTime } from "@/utils/helper"
 import { startSharedFunctions, parseAdTime, createSlider } from "@/content-script/shared-functions"
 // Global Variables
 
-const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const ua = navigator.userAgent
 const isMobile = /mobile|streamingEnhanced/i.test(ua)
 let lastAdTimeText: number | string = 0
@@ -18,7 +17,7 @@ if (isPrimeVideo) {
 }
 
 async function startAmazon() {
-	await checkStoreReady(settings)
+	await promise
 	logStartOfAddon(Platforms.Amazon)
 	AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig)
 	if (settings.value?.Video?.doubleClick) Amazon_doubleClick()

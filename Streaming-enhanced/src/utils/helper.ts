@@ -8,7 +8,7 @@ export const date = new Date()
 // default Options for the observer (which mutations to observe)
 export const config = { attributes: true, childList: true, subtree: true }
 
-const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const version = __VERSION__
 
 // Functions
@@ -37,18 +37,6 @@ export async function addSkippedTime(startTime: number, endTime: number, key: St
 	}
 }
 
-// checks if the store got the data from the storage
-export async function checkStoreReady(setting: Ref<any>) {
-	return new Promise((resolve) => {
-		const readyStateCheckInterval = setInterval(function () {
-			if (setting.value?.$ready) {
-				clearInterval(readyStateCheckInterval)
-				resolve(true)
-			}
-		}, 1)
-	})
-}
-
 export enum Platforms {
 	Netflix = "netflix",
 	Amazon = "amazon",
@@ -58,7 +46,8 @@ export enum Platforms {
 	Crunchyroll = "crunchyroll",
 	HBO = "hbo",
 }
-export function logStartOfAddon(page: Platforms) {
+export async function logStartOfAddon(page: Platforms) {
+	await promise
 	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
 	console.log("version:", version)
 	console.log("Settings", settings.value)

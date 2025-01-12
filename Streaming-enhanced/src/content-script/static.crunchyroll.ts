@@ -1,10 +1,9 @@
-import { increaseBadge, checkStoreReady, Platforms, logStartOfAddon, config, addSkippedTime } from "@/utils/helper"
 logStartOfAddon(Platforms.Crunchyroll)
 // Global Variables
 
-const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 async function startCrunchyroll() {
-	await checkStoreReady(settings)
+	await promise
 	if (settings.value.Crunchyroll.disableNumpad) Crunchyroll_disableNumpad()
 	if (settings.value.Video.doubleClick) startdoubleClick()
 	CrunchyrollObserver.observe(document, config)

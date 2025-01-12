@@ -39,6 +39,7 @@ console.log("background loaded")
 const Badges: { [key: string]: string | number } = {}
 const isMobile = /Android/i.test(navigator.userAgent)
 const isFirefox = typeof browser !== "undefined"
+console.log("isFirefox", isFirefox, typeof browser, browser)
 // Increases Badge by 1
 async function increaseBadge(tabId: number) {
 	if (Badges?.[tabId] === undefined || typeof Badges[tabId] !== "number") {
@@ -104,8 +105,8 @@ onMessage("resetBadge", async (message: { sender: any }) => {
 // && isMobile
 if (isFirefox) {
 	// mobile section
-	const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
-	console.log("mobile", settings.value)
+	const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+	ChangeUserAgent()
 
 	const newUa = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0 streamingEnhanced"
 	function ReplaceUserAgent(details: any) {
@@ -120,7 +121,9 @@ if (isFirefox) {
 		return { requestHeaders: details.requestHeaders }
 	}
 
-	function ChangeUserAgent() {
+	async function ChangeUserAgent() {
+		await promise
+		console.log("userAgent", settings.value.Video.userAgent)
 		browser.webRequest.onBeforeSendHeaders.addListener(
 			ReplaceUserAgent,
 			{

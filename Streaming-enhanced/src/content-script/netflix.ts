@@ -1,10 +1,9 @@
-import { increaseBadge, checkStoreReady, Platforms, logStartOfAddon, config, addSkippedTime } from "@/utils/helper"
 import { startSharedFunctions, createSlider } from "@/content-script/shared-functions"
 logStartOfAddon(Platforms.Netflix)
 startSharedFunctions(Platforms.Netflix)
 // Global Variables
 
-const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const ua = navigator.userAgent
 let lastAdTimeText: number | string = 0
 const videoSpeed: Ref<number> = ref(1)
@@ -18,7 +17,7 @@ async function resetLastATimeText(time = 1000) {
 }
 
 async function startNetflix() {
-	await checkStoreReady(settings)
+	await promise
 	if (settings.value.Netflix?.profile) AutoPickProfile()
 	if (settings.value.Netflix?.skipAd) Netflix_SkipAdInterval()
 	NetflixObserver.observe(document, config)
