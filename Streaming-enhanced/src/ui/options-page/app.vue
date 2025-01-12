@@ -25,7 +25,7 @@ useFrontendStore()
 						<h2 class="title">
 							{{ $t("pageTitle") }}
 						</h2>
-						<p class="font text-base">{{ version }}</p>
+						<p class="font text-base text-white">{{ version }}</p>
 					</div>
 				</div>
 				<a
@@ -37,7 +37,7 @@ useFrontendStore()
 							: 'https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle'
 					"
 				>
-					<p class="text-base">
+					<p class="text-base text-white">
 						{{ $t("rateNow") }}
 					</p>
 					<img
@@ -85,11 +85,7 @@ useFrontendStore()
 					draggable="false"
 					@click="hash = 'Netflix'"
 				>
-					<img
-						src="@/assets/MenuIcons/Netflix.svg"
-						alt="Netflix"
-						class="icon"
-					/>
+					<i-mdi-netflix class="icon" />
 					<div>Netflix</div>
 				</RouterLink>
 				<RouterLink
@@ -217,7 +213,7 @@ useFrontendStore()
 	@apply h-12;
 }
 .title {
-	@apply py-0 text-primary-content;
+	@apply py-0 text-white;
 }
 
 .content {

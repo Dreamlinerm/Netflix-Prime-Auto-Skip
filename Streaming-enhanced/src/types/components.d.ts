@@ -14,6 +14,7 @@ declare module 'vue' {
     IMdiDotsHorizontal: typeof import('~icons/mdi/dots-horizontal')['default']
     IMdiFormatListBulleted: typeof import('~icons/mdi/format-list-bulleted')['default']
     IMdiGift: typeof import('~icons/mdi/gift')['default']
+    IMdiNetflix: typeof import('~icons/mdi/netflix')['default']
     IMdiTransitConnectionVariant: typeof import('~icons/mdi/transit-connection-variant')['default']
     IPhArrowLeft: typeof import('~icons/ph/arrow-left')['default']
     IPhGlobe: typeof import('~icons/ph/globe')['default']

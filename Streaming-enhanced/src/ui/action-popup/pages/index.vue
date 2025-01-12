@@ -30,11 +30,7 @@ const githubUrl = __GITHUB_URL__
 			class="popupMenuButton flex"
 			draggable="false"
 		>
-			<img
-				src="@/assets/MenuIcons/Netflix.svg"
-				alt="Netflix"
-				class="icon"
-			/>
+			<i-mdi-netflix class="icon" />
 		</RouterLink>
 		<RouterLink
 			to="/action-popup/Disney"
