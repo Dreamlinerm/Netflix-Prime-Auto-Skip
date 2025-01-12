@@ -1,5 +1,4 @@
 import {
-	log,
 	increaseBadge,
 	optionsStore,
 	checkStoreReady,
@@ -60,7 +59,7 @@ async function Disney_skipAd(video: HTMLVideoElement) {
 			const adTime = parseAdTime(adTimeText?.textContent)
 			if (adTime && adTime >= 1 && lastAdTimeText != video.currentTime) {
 				if (lastAdTimeText == 0) {
-					log("Disney Ad skipped, length:", adTime, "s")
+					console.log("Disney Ad skipped, length:", adTime, "s")
 					settings.value.Statistics.DisneyAdTimeSkipped += adTime
 					increaseBadge()
 				}
@@ -113,7 +112,7 @@ async function Disney_Intro(video: HTMLVideoElement, time: number) {
 			?.iterateNext()?.parentElement as HTMLElement
 	if (button && !document.querySelector('[data-testid="icon-restart"]')?.parentElement) {
 		button.click()
-		log("Intro/Recap skipped", button)
+		console.log("Intro/Recap skipped", button)
 		setTimeout(function () {
 			addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
 		}, 600)
@@ -135,7 +134,7 @@ async function Disney_skipCredits(currentTime: number) {
 			lastAdTimeText = time
 			if (settings.value.Disney?.skipCredits) {
 				button.click()
-				log("Credits skipped", button)
+				console.log("Credits skipped", button)
 				increaseBadge()
 				resetLastATimeText()
 			}
@@ -146,7 +145,7 @@ async function Disney_skipCredits(currentTime: number) {
 						chrome.runtime.sendMessage({ type: "fullscreen" })
 						function resetFullscreen() {
 							chrome.runtime.sendMessage({ type: "exitFullscreen" })
-							log("exitFullscreen")
+							console.log("exitFullscreen")
 							removeEventListener("fullscreenchange", resetFullscreen)
 						}
 						addEventListener("fullscreenchange", resetFullscreen)
@@ -155,7 +154,7 @@ async function Disney_skipCredits(currentTime: number) {
 								chrome.runtime.sendMessage({ type: "exitFullscreen" })
 							}
 						}
-						log("fullscreen")
+						console.log("fullscreen")
 					}
 				}, 1000)
 			}
@@ -208,7 +207,7 @@ async function Disney_Watch_Credits() {
 			if (video) {
 				video.click()
 				lastAdTimeText = time ?? 0
-				log("Credits Watched", button)
+				console.log("Credits Watched", button)
 				increaseBadge()
 				resetLastATimeText()
 			}
@@ -251,7 +250,7 @@ async function Disney_selfAd(video: HTMLVideoElement, time: number) {
 		const button: HTMLElement | null = document.querySelector(".overlay_interstitials__promo_skip_button")
 		if (button) {
 			button.click()
-			log("SelfAd skipped", button)
+			console.log("SelfAd skipped", button)
 			setTimeout(function () {
 				addSkippedTime(time, video?.currentTime, "DisneyAdTimeSkipped")
 			}, 600)

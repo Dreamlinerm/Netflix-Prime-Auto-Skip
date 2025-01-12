@@ -1,13 +1,4 @@
-import {
-	log,
-	increaseBadge,
-	date,
-	optionsStore,
-	checkStoreReady,
-	Platforms,
-	logStartOfAddon,
-	config,
-} from "@/utils/helper"
+import { increaseBadge, date, optionsStore, checkStoreReady, Platforms, logStartOfAddon, config } from "@/utils/helper"
 import { startSharedFunctions } from "@/content-script/shared-functions"
 startSharedFunctions(Platforms.Crunchyroll)
 // Global Variables
@@ -80,7 +71,7 @@ function createFilterElement(
 	input.id = filterType
 	input.onclick = function () {
 		settings.value.General[filterType] = input.checked
-		log("input.checked", input.checked)
+		console.log("input.checked", input.checked)
 		filterFunction(input.checked ? "none" : "block")
 		//setStorage()
 	}
@@ -256,7 +247,7 @@ async function Crunchyroll_profile() {
 	if (img && img.src !== settings.value.General.Crunchyroll_profilePicture) {
 		settings.value.General.Crunchyroll_profilePicture = img.src
 		//setStorage()
-		log("Profile switched to", img.src)
+		console.log("Profile switched to", img.src)
 	}
 }
 async function Crunchyroll_AutoPickProfile() {
@@ -266,7 +257,7 @@ async function Crunchyroll_AutoPickProfile() {
 			const img = element as HTMLImageElement
 			if (img.src === settings.value.General.Crunchyroll_profilePicture) {
 				img.click()
-				log("Profile automatically chosen:", img.src)
+				console.log("Profile automatically chosen:", img.src)
 				increaseBadge()
 			}
 		})

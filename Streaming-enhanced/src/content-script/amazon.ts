@@ -1,5 +1,4 @@
 import {
-	log,
 	increaseBadge,
 	optionsStore,
 	checkStoreReady,
@@ -99,7 +98,7 @@ function Amazon_Intro() {
 				lastIntroTime = time
 				resetLastIntroTime()
 				button.click()
-				log("Intro skipped", button)
+				console.log("Intro skipped", button)
 				//delay where the video is loaded
 				setTimeout(function () {
 					AmazonGobackbutton(video, time, video.currentTime)
@@ -128,11 +127,11 @@ async function AmazonGobackbutton(video: HTMLVideoElement, startTime: number, en
 			function goBack() {
 				video.currentTime = startTime
 				if (buttonInHTML) buttonInHTML.remove()
-				log("stopped observing| Intro")
+				console.log("stopped observing| Intro")
 				AmazonSkipIntroObserver.disconnect()
 				const waitTime = endTime - startTime + 2
 				setTimeout(function () {
-					log("restarted observing| Intro")
+					console.log("restarted observing| Intro")
 					AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig)
 				}, waitTime * 1000)
 			}
@@ -158,7 +157,7 @@ async function Amazon_Credits() {
 			resetLastATimeText()
 			button.click()
 			increaseBadge()
-			log("skipped Credits", button)
+			console.log("skipped Credits", button)
 		}
 	}
 }
@@ -167,7 +166,7 @@ async function Amazon_Watch_Credits() {
 	if (button) {
 		button.click()
 		increaseBadge()
-		log("Watched Credits", button)
+		console.log("Watched Credits", button)
 	}
 }
 const AmazonSliderStyle = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;"
@@ -217,14 +216,14 @@ async function deletePaidCategory(a: HTMLElement) {
 		a.querySelectorAll("[data-testid='card-overlay'] svg.NbhXwl").length
 	) {
 		const section = a.closest('[class="+OSZzQ"]')
-		log("Filtered paid category", section)
+		console.log("Filtered paid category", section)
 		section?.remove()
 		increaseBadge()
 	}
 	// remove individual paid elements
 	else {
 		a.querySelectorAll("li:has(svg.NbhXwl)").forEach((b) => {
-			log("Filtered paid Element", b)
+			console.log("Filtered paid Element", b)
 			b.remove()
 			increaseBadge()
 		})
@@ -234,7 +233,7 @@ function Amazon_FreeveeTimeout() {
 	// set loop every 1 sec and check if ad is there
 	const AdInterval = setInterval(function () {
 		if (!settings.value.Amazon.skipAd) {
-			log("stopped observing| FreeVee Ad")
+			console.log("stopped observing| FreeVee Ad")
 			clearInterval(AdInterval)
 			return
 		}
@@ -261,7 +260,7 @@ async function skipAd(video: HTMLVideoElement) {
 			resetLastATimeText(adTime > bigTime ? 3000 : 1000)
 			const skipTime = adTime > bigTime ? bigTime : adTime - 1
 			video.currentTime += skipTime
-			log("FreeVee Ad skipped, length:", skipTime, "s")
+			console.log("FreeVee Ad skipped, length:", skipTime, "s")
 			settings.value.Statistics.AmazonAdTimeSkipped += skipTime
 			increaseBadge()
 		}
@@ -277,7 +276,7 @@ async function Amazon_selfAdTimeout() {
 	// set loop every 1 sec and check if ad is there
 	const AdInterval = setInterval(function () {
 		if (!settings.value.Amazon.selfAd) {
-			log("stopped observing| Self Ad")
+			console.log("stopped observing| Self Ad")
 			clearInterval(AdInterval)
 			return
 		}
@@ -300,7 +299,7 @@ async function Amazon_selfAdTimeout() {
 							button.click()
 							if (typeof adTime === "number") settings.value.Statistics.AmazonAdTimeSkipped += adTime
 							increaseBadge()
-							log("Self Ad skipped, length:", adTime, button)
+							console.log("Self Ad skipped, length:", adTime, button)
 						}, 150)
 					}
 				}
@@ -310,7 +309,7 @@ async function Amazon_selfAdTimeout() {
 }
 
 async function Amazon_customizeMobileView() {
-	log("customizeMobileView")
+	console.log("customizeMobileView")
 	// customize mobile view for desktop website
 	// /gp/video/detail/ is the film description page otherwise looks weird
 	if (!url.includes("/gp/video/detail/")) {

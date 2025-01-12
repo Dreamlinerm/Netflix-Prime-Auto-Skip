@@ -1,5 +1,4 @@
 import {
-	log,
 	increaseBadge,
 	optionsStore,
 	checkStoreReady,
@@ -62,16 +61,16 @@ function OnFullScreenChange() {
 	//TODO: check if document.fullscreenElement is working before: window.fullScreen
 	if (document.fullscreenElement && video) {
 		video.play()
-		log("auto-played on fullscreen")
+		console.log("auto-played on fullscreen")
 		increaseBadge()
 	}
 }
 async function startPlayOnFullScreen() {
 	if (settings.value.Video?.playOnFullScreen) {
-		log("started observing| PlayOnFullScreen")
+		console.log("started observing| PlayOnFullScreen")
 		addEventListener("fullscreenchange", OnFullScreenChange)
 	} else {
-		log("stopped observing| PlayOnFullScreen")
+		console.log("stopped observing| PlayOnFullScreen")
 		removeEventListener("fullscreenchange", OnFullScreenChange)
 	}
 }
@@ -127,7 +126,7 @@ async function Crunchyroll_Intro(video: HTMLVideoElement, time: number) {
 				function () {
 					button?.click()
 					skipped = false
-					log("Intro skipped", button)
+					console.log("Intro skipped", button)
 					setTimeout(function () {
 						CrunchyrollGobackbutton(video, time, video?.currentTime)
 						addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
@@ -163,7 +162,7 @@ function addButton(video: HTMLVideoElement, startTime: number, endTime: number) 
 		button.remove()
 		clearTimeout(buttonTimeout)
 		const waitTime = endTime - startTime + 2
-		//log("waiting for:", waitTime);
+		//console.log("waiting for:", waitTime);
 		setTimeout(function () {
 			reverseButtonClicked = false
 		}, waitTime * 1000)
@@ -187,7 +186,7 @@ async function Crunchyroll_SpeedSlider(video: HTMLVideoElement) {
 		const alreadySlider = document.querySelector("#videoSpeedSlider")
 		if (!alreadySlider) {
 			// infobar position for the slider to be added
-			// console.log(document.querySelector("#settingsControl"));
+			// console.log((document.querySelector("#settingsControl"));
 			const position = document.querySelector("#settingsControl")?.parentElement
 			if (position) {
 				videoSpeed = videoSpeed || video.playbackRate
@@ -235,7 +234,7 @@ async function Crunchyroll_disableNumpad() {
 		"keydown",
 		async function (event) {
 			if (event.location === 3) {
-				log("key blocked: " + event.key)
+				console.log("key blocked: " + event.key)
 				event.stopPropagation()
 				increaseBadge()
 			}

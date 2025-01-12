@@ -1,5 +1,4 @@
 import {
-	log,
 	increaseBadge,
 	optionsStore,
 	checkStoreReady,
@@ -100,7 +99,7 @@ function Netflix_profile() {
 			settings.value.General.profilePicture = (currentProfile?.firstChild?.firstChild as HTMLImageElement)?.src
 			console.log("Profile switched to", currentProfileName, settings.value.General?.profilePicture)
 			settings.value.General.profileName = currentProfileName
-			log("Profile switched to", currentProfileName)
+			console.log("Profile switched to", currentProfileName)
 		}
 	}
 }
@@ -115,7 +114,7 @@ function AutoPickProfile() {
 					button?.parentElement?.firstChild?.firstChild as HTMLElement
 				)?.style?.backgroundImage?.slice(5, -2)
 				button?.parentElement?.click()
-				log("Profile automatically chosen:", settings.value.General.profileName)
+				console.log("Profile automatically chosen:", settings.value.General.profileName)
 				increaseBadge()
 			}
 		})
@@ -124,7 +123,7 @@ function AutoPickProfile() {
 function Netflix_General(selector: string, name: string, incBadge = true) {
 	const button = document.querySelector(selector) as HTMLElement
 	if (button) {
-		log(name, button)
+		console.log(name, button)
 		button.click()
 		if (incBadge) increaseBadge()
 		return true
@@ -134,7 +133,7 @@ function Netflix_General(selector: string, name: string, incBadge = true) {
 function Netflix_SkipAdInterval() {
 	const AdInterval = setInterval(() => {
 		if (!settings.value.Netflix?.skipAd) {
-			log("stopped observing| Ad")
+			console.log("stopped observing| Ad")
 			clearInterval(AdInterval)
 			return
 		}
@@ -149,7 +148,7 @@ function Netflix_SkipAdInterval() {
 				video.play()
 			}
 			if (adLength > 8 && video.playbackRate != playBackRate) {
-				log("Ad skipped, length:", adLength, "s")
+				console.log("Ad skipped, length:", adLength, "s")
 				settings.value.Statistics.NetflixAdTimeSkipped += adLength
 				increaseBadge()
 				if (settings.value.Video.epilepsy) video.style.opacity = "0"
@@ -180,7 +179,7 @@ function Netflix_SkipAdInterval() {
 			if (video) lastAdTimeText = video.currentTime / 10
 			resetLastATimeText()
 			button.click()
-			log("Remove Video Paused ad", button)
+			console.log("Remove Video Paused ad", button)
 			increaseBadge()
 			setTimeout(() => {
 				// not always a video is showing on next episode apparently

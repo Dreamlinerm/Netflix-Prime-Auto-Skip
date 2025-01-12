@@ -16,9 +16,9 @@ const version = __VERSION__
 
 // Functions
 // custom log function
-export async function log(...args: any[]) {
-	console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + date.getMilliseconds(), ...args)
-}
+// export async function log(...args: any[]) {
+// 	console.log(date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + date.getMilliseconds(), ...args)
+// }
 
 // increase the badge count
 export async function increaseBadge() {
@@ -34,7 +34,7 @@ type StatisticsKey =
 	| "SegmentsSkipped"
 export async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
 	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
-		log(key, endTime - startTime)
+		console.log(key, endTime - startTime)
 		settings.value.Statistics[key] += endTime - startTime
 		increaseBadge()
 	}

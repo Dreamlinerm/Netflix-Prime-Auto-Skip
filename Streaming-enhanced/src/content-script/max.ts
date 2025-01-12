@@ -1,5 +1,4 @@
 import {
-	log,
 	increaseBadge,
 	optionsStore,
 	checkStoreReady,
@@ -37,7 +36,7 @@ function HBO_Intro(video: HTMLVideoElement, time: number) {
 	const button = document.querySelector('[class*="SkipButton-Beam-Web-Ent"]') as HTMLElement
 	if (button?.checkVisibility({ visibilityProperty: true })) {
 		button.click()
-		log("Intro skipped", button)
+		console.log("Intro skipped", button)
 		setTimeout(function () {
 			addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
 		}, 600)
@@ -49,7 +48,7 @@ function HBO_Credits(time: number) {
 		lastAdTimeText = time
 		button.click()
 		increaseBadge()
-		log("Credits skipped", button)
+		console.log("Credits skipped", button)
 	}
 }
 function HBO_Watch_Credits(video: HTMLVideoElement) {
@@ -57,14 +56,14 @@ function HBO_Watch_Credits(video: HTMLVideoElement) {
 	if (button) {
 		button.click()
 		increaseBadge()
-		log("Watched Credits", button)
+		console.log("Watched Credits", button)
 	}
 	// is movie
 	button = document.querySelector(".player-shrink-transition-enter-done") as HTMLElement
 	if (video && button) {
 		video.click()
 		increaseBadge()
-		log("Watched Credits", button)
+		console.log("Watched Credits", button)
 	}
 }
 const HBOSliderStyle = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;"

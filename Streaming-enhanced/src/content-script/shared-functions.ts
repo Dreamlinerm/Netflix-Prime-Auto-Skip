@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { sendMessage, onMessage } from "webext-bridge/content-script"
-import { log, increaseBadge, optionsStore, checkStoreReady, Platforms, logStartOfAddon, date } from "@/utils/helper"
+import { sendMessage } from "webext-bridge/content-script"
+import { increaseBadge, optionsStore, checkStoreReady, Platforms, logStartOfAddon, date } from "@/utils/helper"
 logStartOfAddon(Platforms.Amazon)
 // Global Variables
 
@@ -50,11 +50,11 @@ async function getDBCache() {
 	chrome.storage.local.get("DBCache", function (result) {
 		DBCache = result?.DBCache
 		if (typeof DBCache !== "object") {
-			log("DBCache not found, creating new one", DBCache)
+			console.log("DBCache not found, creating new one", DBCache)
 			try {
 				chrome.storage.local.set({ DBCache: {} })
 			} catch (error) {
-				log(error)
+				console.log(error)
 			}
 			DBCache = {}
 		}
@@ -75,10 +75,10 @@ async function setDBCache() {
 	const kiloBytes = size / 1024
 	const megaBytes = kiloBytes / 1024
 	if (megaBytes < 5) {
-		log("updateDBCache size:", megaBytes.toFixed(4) + " MB")
+		console.log("updateDBCache size:", megaBytes.toFixed(4) + " MB")
 		chrome.storage.local.set({ DBCache })
 	} else {
-		log("DBCache cleared", megaBytes)
+		console.log("DBCache cleared", megaBytes)
 		DBCache = {}
 		chrome.storage.local.set({ DBCache })
 	}
@@ -89,7 +89,7 @@ const GCdiff = 30
 async function garbageCollection() {
 	// clear every rating older than 30 days
 	// clear every rating where db != tmdb
-	log("garbageCollection started, deleting old ratings:")
+	console.log("garbageCollection started, deleting old ratings:")
 	const keys = Object.keys(DBCache)
 	for (const key of keys) {
 		if (getDiffInDays(DBCache[key].date, date) >= GCdiff || DBCache[key].db != "tmdb") {
@@ -246,7 +246,7 @@ async function startShowRatingInterval() {
 			((isDisney || isHotstar) && !settings.value.Disney?.showRating) ||
 			(isHBO && !settings.value.HBO?.showRating)
 		) {
-			log("stopped adding Rating")
+			console.log("stopped adding Rating")
 			clearInterval(RatingInterval)
 			return
 		}
@@ -271,7 +271,7 @@ function useDBCache(title: string, card: HTMLElement, media_type: string | null)
 	// refresh rating if older than 30 days or release date is in last month and vote count is under 100
 	if (getDiffInDays(DBCache[title].date, date) >= GCdiff || diffInReleaseDate) {
 		if (diffInReleaseDate)
-			log(
+			console.log(
 				"update recent movie:",
 				title,
 				",Age:",
@@ -279,7 +279,7 @@ function useDBCache(title: string, card: HTMLElement, media_type: string | null)
 				"Vote count:",
 				vote_count,
 			)
-		else log("update old rating:", title, ",Age:", getDiffInDays(DBCache[title].date, date))
+		else console.log("update old rating:", title, ",Age:", getDiffInDays(DBCache[title].date, date))
 		getMovieInfo(title, card, media_type)
 	} else {
 		setRatingOnCard(card, DBCache[title], title)
@@ -469,7 +469,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 	} else {
 		div.textContent = "?"
 		div.setAttribute("alt", title)
-		log("no score found:", title, data)
+		console.log("no score found:", title, data)
 	}
 	if (isNetflix) {
 		card.closest(".title-card-container")?.appendChild(div)
@@ -501,7 +501,7 @@ function OnFullScreenChange() {
 	//TODO: window.fullScreen
 	if (document.fullscreenElement && video) {
 		video.play()
-		log("auto-played on fullscreen")
+		console.log("auto-played on fullscreen")
 		increaseBadge()
 	}
 }
