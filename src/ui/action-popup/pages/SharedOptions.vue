@@ -87,6 +87,13 @@
 			alt="TMDB"
 		/>
 	</a>
+	<div class="line flex">
+		<p>{{ $t("affiliateSwitch") }}</p>
+		<Switch
+			v-model="settings.General.affiliate"
+			class="ml-auto"
+		></Switch>
+	</div>
 </template>
 <script setup lang="ts">
 const optionsStore = useOptionsStore()

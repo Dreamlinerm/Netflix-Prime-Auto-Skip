@@ -1,6 +1,9 @@
 import { sendMessage } from "webext-bridge/content-script"
+const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 // This import scss file is used to style the iframe that is injected into the page
 import "./index.scss"
+
+startIframe()
 
 const src = chrome.runtime.getURL("/src/ui/iframe-page/index.html")
 
@@ -39,9 +42,11 @@ window.addEventListener("message", function (event) {
 	}
 })
 
-if (iframe && isOnAffiliatePage(url)) {
-	document.body?.append(iframe)
-	// get current Tab id
+async function startIframe() {
+	await promise
+	if (iframe && isOnAffiliatePage(url) && settings.value?.General?.affiliate) {
+		document.body?.append(iframe)
+	}
 }
 
 self.onerror = function (message, source, lineno, colno, error) {

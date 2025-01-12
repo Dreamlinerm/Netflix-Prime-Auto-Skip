@@ -74,6 +74,7 @@ export type settingsType = {
 		filterQueued: boolean
 		savedCrunchyList: CrunchyList
 		GCdate: string
+		affiliate: boolean
 	}
 }
 
@@ -158,5 +159,6 @@ export const defaultSettings = {
 		filterQueued: true,
 		savedCrunchyList: [],
 		GCdate: "2024-01-01",
+		affiliate: true,
 	},
 }

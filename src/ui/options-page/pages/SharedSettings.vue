@@ -47,6 +47,15 @@ const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent)
 		</div>
 		<p class="description">{{ $t("userAgentDescription") }}</p>
 	</div>
+	<hr />
+	<div class="line flex">
+		<p>{{ $t("affiliateSwitch") }}</p>
+		<Switch
+			v-model="settings.General.affiliate"
+			class="ml-auto"
+		></Switch>
+	</div>
+	<p class="description">{{ $t("affiliateDescription") }}</p>
 	<OptionsPageSettingsTable></OptionsPageSettingsTable>
 	<OptionalPermission />
 	<hr />
