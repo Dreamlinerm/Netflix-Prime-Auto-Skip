@@ -1,4 +1,4 @@
-import { sendMessage } from "webext-bridge/content-script"
+import { sendMessage, onMessage } from "webext-bridge/content-script"
 import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
 // Global Variables
 
