@@ -4,6 +4,7 @@
 const is_DEV = process.env.NODE_ENV === "development"
 
 chrome.runtime.onInstalled.addListener(async (opt) => {
+	// await chrome.storage.sync.clear()
 	// Check if reason is install or update. Eg: opt.reason === 'install' // If extension is installed.
 	if (opt.reason === "install") {
 		// await chrome.storage.local.clear()
@@ -33,9 +34,13 @@ self.onerror = function (message, source, lineno, colno, error) {
 }
 
 import { onMessage } from "webext-bridge/background"
-import { log, optionsStore, checkStoreReady } from "@/utils/helper"
-log("background loaded")
-const { settings } = storeToRefs(optionsStore)
+let settings = {
+	Video: {
+		userAgent: true,
+	},
+}
+console.log("background loaded")
+
 const Badges: { [key: string]: string | number } = {}
 const isMobile = /Android/i.test(navigator.userAgent)
 const isFirefox = typeof browser !== "undefined"
@@ -78,10 +83,10 @@ onMessage("fetch", async (message: { data: { url: string } }) => {
 // receive message from content script with the badgeText and set it in the badge
 chrome.runtime.onMessage.addListener(function (message: { type: string }, sender: any, sendResponse: () => void) {
 	if (message.type === "fullscreen") {
-		log("fullscreen")
+		console.log("fullscreen")
 		if (sender?.tab?.windowId) chrome.windows.update(sender.tab.windowId, { state: "fullscreen" })
 	} else if (message.type === "exitFullscreen") {
-		log("exitFullscreen")
+		console.log("exitFullscreen")
 		if (sender?.tab?.windowId) chrome.windows.update(sender.tab.windowId, { state: "normal" })
 	}
 	return false
@@ -101,45 +106,61 @@ onMessage("resetBadge", async (message: { sender: any }) => {
 		chrome.action.setBadgeText({ text: "", tabId: sender.tabId })
 	}
 })
-
-async function startMobile() {
-	await checkStoreReady(settings)
-	ChangeUserAgent()
-}
-
 if (isFirefox && isMobile) {
-	startMobile()
-}
-const newUa = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0 streamingEnhanced"
-function ReplaceUserAgent(details: any) {
-	if (settings.value.Video.userAgent) {
-		for (const header of details.requestHeaders) {
-			if (header.name === "User-Agent") {
-				header.value = newUa
-				break
+	// mobile section
+	chrome.storage.sync.get("settings", (data: any) => {
+		if (data?.settings?.Video?.userAgent) {
+			settings = data?.settings
+		}
+		ChangeUserAgent()
+	})
+	chrome.storage.onChanged.addListener((changes, area) => {
+		if (changes.settings) {
+			const { oldValue, newValue } = changes.settings
+			console.log("settings", newValue)
+			if (newValue && newValue.Video.userAgent !== oldValue?.Video?.userAgent) {
+				console.log("userAgent", newValue.Video.userAgent)
+				// remove listener
+				if (!newValue?.Video?.userAgent) {
+					browser.webRequest.onBeforeSendHeaders.removeListener(ReplaceUserAgent)
+				} else {
+					ChangeUserAgent()
+				}
 			}
 		}
-	}
-	return { requestHeaders: details.requestHeaders }
-}
+	})
 
-function ChangeUserAgent() {
-	browser.webRequest.onBeforeSendHeaders.addListener(
-		ReplaceUserAgent,
-		{
-			urls: [
-				"*://*.disneyplus.com/*",
-				"*://*.starplus.com/*",
-				"*://*.max.com/*",
-				"*://*.hbomax.com/*",
-				// these are only the prime video urls
-				"*://*.primevideo.com/*",
-				"*://*.amazon.com/gp/video/*",
-				"*://*.amazon.co.jp/gp/video/*",
-				"*://*.amazon.de/gp/video/*",
-				"*://*.amazon.co.uk/gp/video/*",
-			],
-		},
-		["blocking", "requestHeaders"],
-	)
+	const newUa = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0 streamingEnhanced"
+	function ReplaceUserAgent(details: any) {
+		if (settings.Video.userAgent) {
+			for (const header of details.requestHeaders) {
+				if (header.name === "User-Agent") {
+					header.value = newUa
+					break
+				}
+			}
+		}
+		return { requestHeaders: details.requestHeaders }
+	}
+
+	function ChangeUserAgent() {
+		browser.webRequest.onBeforeSendHeaders.addListener(
+			ReplaceUserAgent,
+			{
+				urls: [
+					"*://*.disneyplus.com/*",
+					"*://*.starplus.com/*",
+					"*://*.max.com/*",
+					"*://*.hbomax.com/*",
+					// these are only the prime video urls
+					"*://*.primevideo.com/*",
+					"*://*.amazon.com/gp/video/*",
+					"*://*.amazon.co.jp/gp/video/*",
+					"*://*.amazon.de/gp/video/*",
+					"*://*.amazon.co.uk/gp/video/*",
+				],
+			},
+			["blocking", "requestHeaders"],
+		)
+	}
 }
