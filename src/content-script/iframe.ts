@@ -27,11 +27,10 @@ function isOnAffiliatePage(url: string) {
 }
 
 window.addEventListener("message", function (event) {
-	console.log(event.data)
 	if (event.data.type === "applyPrimeAffiliateLink") {
 		// Handle the message from the iframe
 		console.log("applyPrimeAffiliateLink")
-		sendMessage("applyPrimeAffiliateLink", { url: window.location.href + affiliateTag }, "background")
+		sendMessage("updateUrl", { url: window.location.href + affiliateTag }, "background")
 	}
 })
 
