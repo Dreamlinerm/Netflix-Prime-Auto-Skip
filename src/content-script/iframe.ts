@@ -8,6 +8,7 @@ const iframe = new DOMParser().parseFromString(`<iframe class="crx-iframe" src="
 
 const affiliateTag = "?tag=dreamliner05-20"
 const affiliatePages = [
+	"https://www.amazon.de/amazonprime?language=pl_PL",
 	"http://www.amazon.de/primegratistesten",
 	"https://www.amazon.co.uk/tryprimefree",
 
@@ -15,17 +16,27 @@ const affiliatePages = [
 	// "https://www.amazon.fr/prime",
 	// "http://www.amazon.it/amazonprime",
 	// "https://www.amazon.nl/prime",
-	"https://www.amazon.de/amazonprime?language=pl_PL",
 ]
-
 const url = document.URL
 
 function isOnAffiliatePage(url: string) {
-	return affiliatePages.some((page) => url.includes(page) && url !== page)
+	return (
+		(affiliatePages.some((page) => url.includes(page)) || url.includes("/amazonprime")) && !url.includes(affiliateTag)
+	)
 }
+
+window.addEventListener("message", function (event) {
+	console.log(event.data)
+	if (event.data.type === "applyPrimeAffiliateLink") {
+		// Handle the message from the iframe
+		chrome.tabs.update({ selected: true, url: window.location.href + affiliateTag })
+		console.log("applyPrimeAffiliateLink")
+	}
+})
 
 if (iframe && isOnAffiliatePage(url)) {
 	document.body?.append(iframe)
+	chrome.tabs.update({ selected: true, url: window.location.href + affiliateTag })
 }
 
 self.onerror = function (message, source, lineno, colno, error) {

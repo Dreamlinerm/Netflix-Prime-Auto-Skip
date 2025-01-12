@@ -18,8 +18,7 @@
 </template>
 
 <script setup lang="ts">
-const url = document.URL
 function applyPrimeAffiliateLink() {
-	console.log("test")
+	window.parent.postMessage({ type: "applyPrimeAffiliateLink" }, "*")
 }
 </script>
