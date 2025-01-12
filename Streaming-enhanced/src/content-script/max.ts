@@ -1,17 +1,9 @@
-import {
-	increaseBadge,
-	optionsStore,
-	checkStoreReady,
-	Platforms,
-	logStartOfAddon,
-	config,
-	addSkippedTime,
-} from "@/utils/helper"
+import { increaseBadge, checkStoreReady, Platforms, logStartOfAddon, config, addSkippedTime } from "@/utils/helper"
 import { startSharedFunctions, createSlider } from "@/content-script/shared-functions"
 logStartOfAddon(Platforms.HBO)
 // Global Variables
 
-const { settings } = storeToRefs(optionsStore)
+const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const videoSpeed: Ref<number> = ref(1)
 let lastAdTimeText: number = 0
 

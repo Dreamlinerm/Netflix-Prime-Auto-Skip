@@ -34,11 +34,6 @@ self.onerror = function (message, source, lineno, colno, error) {
 }
 
 import { onMessage } from "webext-bridge/background"
-let settings = {
-	Video: {
-		userAgent: true,
-	},
-}
 console.log("background loaded")
 
 const Badges: { [key: string]: string | number } = {}
@@ -106,33 +101,15 @@ onMessage("resetBadge", async (message: { sender: any }) => {
 		chrome.action.setBadgeText({ text: "", tabId: sender.tabId })
 	}
 })
-if (isFirefox && isMobile) {
+// && isMobile
+if (isFirefox) {
 	// mobile section
-	chrome.storage.sync.get("settings", (data: any) => {
-		if (data?.settings?.Video?.userAgent) {
-			settings = data?.settings
-		}
-		ChangeUserAgent()
-	})
-	chrome.storage.onChanged.addListener((changes, area) => {
-		if (changes.settings) {
-			const { oldValue, newValue } = changes.settings
-			console.log("settings", newValue)
-			if (newValue && newValue.Video.userAgent !== oldValue?.Video?.userAgent) {
-				console.log("userAgent", newValue.Video.userAgent)
-				// remove listener
-				if (!newValue?.Video?.userAgent) {
-					browser.webRequest.onBeforeSendHeaders.removeListener(ReplaceUserAgent)
-				} else {
-					ChangeUserAgent()
-				}
-			}
-		}
-	})
+	const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+	console.log("mobile", settings.value)
 
 	const newUa = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0 streamingEnhanced"
 	function ReplaceUserAgent(details: any) {
-		if (settings.Video.userAgent) {
+		if (settings.value.Video.userAgent) {
 			for (const header of details.requestHeaders) {
 				if (header.name === "User-Agent") {
 					header.value = newUa

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defaultSettings } from "@/stores/options.store"
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
 

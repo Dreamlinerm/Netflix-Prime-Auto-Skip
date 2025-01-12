@@ -1,9 +1,9 @@
-import { increaseBadge, date, optionsStore, checkStoreReady, Platforms, logStartOfAddon, config } from "@/utils/helper"
+import { increaseBadge, date, checkStoreReady, Platforms, logStartOfAddon, config } from "@/utils/helper"
 import { startSharedFunctions } from "@/content-script/shared-functions"
 startSharedFunctions(Platforms.Crunchyroll)
 // Global Variables
 
-const { settings } = storeToRefs(optionsStore)
+const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const url = window.location.href
 
 async function startCrunchyroll() {

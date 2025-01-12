@@ -1,16 +1,8 @@
-import {
-	increaseBadge,
-	optionsStore,
-	checkStoreReady,
-	Platforms,
-	logStartOfAddon,
-	config,
-	addSkippedTime,
-} from "@/utils/helper"
+import { increaseBadge, checkStoreReady, Platforms, logStartOfAddon, config, addSkippedTime } from "@/utils/helper"
 import { startSharedFunctions, parseAdTime, createSlider } from "@/content-script/shared-functions"
 // Global Variables
 
-const { settings } = storeToRefs(optionsStore)
+const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const ua = navigator.userAgent
 const isMobile = /mobile|streamingEnhanced/i.test(ua)
 let lastAdTimeText: number | string = 0

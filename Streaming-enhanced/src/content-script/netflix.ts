@@ -1,18 +1,10 @@
-import {
-	increaseBadge,
-	optionsStore,
-	checkStoreReady,
-	Platforms,
-	logStartOfAddon,
-	config,
-	addSkippedTime,
-} from "@/utils/helper"
+import { increaseBadge, checkStoreReady, Platforms, logStartOfAddon, config, addSkippedTime } from "@/utils/helper"
 import { startSharedFunctions, createSlider } from "@/content-script/shared-functions"
 logStartOfAddon(Platforms.Netflix)
 startSharedFunctions(Platforms.Netflix)
 // Global Variables
 
-const { settings } = storeToRefs(optionsStore)
+const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const ua = navigator.userAgent
 let lastAdTimeText: number | string = 0
 const videoSpeed: Ref<number> = ref(1)

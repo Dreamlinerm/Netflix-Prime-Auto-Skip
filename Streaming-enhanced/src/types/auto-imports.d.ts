@@ -41,7 +41,7 @@ declare global {
   const date: typeof import('../utils/helper')['date']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
   const debouncedWatch: typeof import('@vueuse/core')['debouncedWatch']
-  const defaultSettings: typeof import('../stores/options.store')['defaultSettings']
+  const defaultSettings: typeof import('../stores/storeTypes')['defaultSettings']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const definePage: typeof import('vue-router/auto')['definePage']
@@ -341,8 +341,8 @@ declare global {
   export type { Component, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { settingsType, Nullable, CrunchyListElement, CrunchyList } from '../stores/options.store'
-  import('../stores/options.store')
+  export type { settingsType, Nullable, CrunchyListElement, CrunchyList } from '../stores/storeTypes'
+  import('../stores/storeTypes')
   // @ts-ignore
   export type { Platforms } from '../utils/helper'
   import('../utils/helper')
@@ -386,7 +386,7 @@ declare module 'vue' {
     readonly date: UnwrapRef<typeof import('../utils/helper')['date']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
-    readonly defaultSettings: UnwrapRef<typeof import('../stores/options.store')['defaultSettings']>
+    readonly defaultSettings: UnwrapRef<typeof import('../stores/storeTypes')['defaultSettings']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly definePage: UnwrapRef<typeof import('vue-router/auto')['definePage']>
@@ -439,7 +439,6 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly onWatcherCleanup: UnwrapRef<typeof import('vue')['onWatcherCleanup']>
-    readonly optionsStore: UnwrapRef<typeof import('../utils/helper')['optionsStore']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
     readonly pinia: UnwrapRef<typeof import('../utils/pinia')['pinia']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>

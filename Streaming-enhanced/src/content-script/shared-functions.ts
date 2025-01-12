@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import { sendMessage } from "webext-bridge/content-script"
-import { increaseBadge, optionsStore, checkStoreReady, Platforms, logStartOfAddon, date } from "@/utils/helper"
+import { increaseBadge, checkStoreReady, Platforms, logStartOfAddon, date } from "@/utils/helper"
 logStartOfAddon(Platforms.Amazon)
 // Global Variables
 
-const { settings } = storeToRefs(optionsStore)
+const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const today = date.toISOString().split("T")[0]
 
 const ua = navigator.userAgent

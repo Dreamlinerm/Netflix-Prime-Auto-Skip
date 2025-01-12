@@ -1,17 +1,14 @@
 import { createPinia } from "pinia"
 import { useOptionsStore } from "@/stores/options.store"
 import { sendMessage } from "webext-bridge/content-script"
-const pinia = createPinia()
-
 // Global Variables
 // Use the store
-export const optionsStore = useOptionsStore(pinia)
 export const date = new Date()
 // export const isFirefox = typeof browser !== "undefined"
 // default Options for the observer (which mutations to observe)
 export const config = { attributes: true, childList: true, subtree: true }
 
-const { settings } = storeToRefs(optionsStore)
+const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const version = __VERSION__
 
 // Functions

@@ -1,17 +1,8 @@
-import {
-	increaseBadge,
-	optionsStore,
-	checkStoreReady,
-	Platforms,
-	logStartOfAddon,
-	config,
-	addSkippedTime,
-} from "@/utils/helper"
+import { increaseBadge, checkStoreReady, Platforms, logStartOfAddon, config, addSkippedTime } from "@/utils/helper"
 logStartOfAddon(Platforms.Crunchyroll)
 // Global Variables
 
-const { settings } = storeToRefs(optionsStore)
-
+const settings = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 async function startCrunchyroll() {
 	await checkStoreReady(settings)
 	if (settings.value.Crunchyroll.disableNumpad) Crunchyroll_disableNumpad()
