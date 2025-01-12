@@ -67,6 +67,13 @@ export default {
 			matches: ["https://static.crunchyroll.com/vilos-v2/web/vilos/player.html*"],
 		},
 	],
+	web_accessible_resources: [
+		{
+			matches: ["*://*.amazon.de/*"],
+			resources: ["src/ui/iframe-page/index.html"],
+			use_dynamic_url: false,
+		},
+	],
 	options_page: "src/ui/options-page/index.html",
 	permissions: ["storage"],
 	optional_permissions: ["tabs"],
