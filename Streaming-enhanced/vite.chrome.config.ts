@@ -54,6 +54,11 @@ ViteConfig.build.outDir = browserOutDir
 //   ? `http://localhost:${ViteConfig.server?.port}/`
 //   : `/dist/${browser}`
 
+if (IS_DEV) {
+	ViteConfig.build.minify = false
+	ViteConfig.build.sourcemap = true
+}
+
 ViteConfig.plugins.unshift(
 	crx({
 		manifest,
