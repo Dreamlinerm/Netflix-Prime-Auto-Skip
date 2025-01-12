@@ -1,8 +1,5 @@
 <template>
-	<table
-		style="border: 1px solid white"
-		class="featureTable"
-	>
+	<table class="featureTable">
 		<thead>
 			<tr>
 				<th class="whitespace-nowrap">{{ $t("feature") }}</th>
@@ -397,8 +394,11 @@ const showRating = computed({
 </script>
 
 <style scoped>
+table {
+	@apply border-[1px] border-solid border-primary-content;
+}
 .featureTable tr *:nth-of-type(2) {
-	border-right: 1px solid white;
+	@apply border-r-[1px] border-primary-content;
 }
 .featureTable tr td:nth-of-type(2) label {
 	margin-right: 20px;
@@ -422,7 +422,6 @@ p {
 .tooltip .tooltiptext {
 	visibility: hidden;
 	width: 300px;
-	background-color: #fff;
 	color: #000;
 	text-align: center;
 	border-radius: 6px;
@@ -431,6 +430,7 @@ p {
 	z-index: 1;
 	bottom: 100%;
 	left: 0%;
+	@apply bg-primary-content text-primary;
 }
 .tooltiptext {
 	white-space: normal;
