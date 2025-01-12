@@ -15,8 +15,6 @@ async function logStartOfAddon() {
 async function startCrunchyroll() {
 	// watch ready state
 	await promise
-	settings.value.Statistics.SegmentsSkipped++
-	sendMessage("increaseBadge", {}, "background")
 	logStartOfAddon()
 	if (settings.value.Crunchyroll.releaseCalendar) Crunchyroll_ReleaseCalendar()
 	if (settings.value.Crunchyroll.profile) {

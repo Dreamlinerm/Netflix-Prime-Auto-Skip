@@ -1,4 +1,4 @@
-import { ref, watch } from "vue"
+import { ref, watch, nextTick } from "vue"
 function mergeDeep(defaults: any, source: any): any {
 	// Merge the default options with the stored options
 	const output = { ...defaults } // Start with defaults
@@ -29,7 +29,8 @@ function checkType(defaultValue: any, value: any): boolean {
 function isObject(value: any): boolean {
 	return value !== null && value instanceof Object && !Array.isArray(value)
 }
-function resetUpdatingFlag(flag: Ref<boolean>) {
+async function resetUpdatingFlag(flag: Ref<boolean>) {
+	// wait for the watch to be triggered and then reset the flag
 	setTimeout(() => {
 		flag.value = false
 	}, 1)
@@ -43,7 +44,8 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	if (isObjectc) data.value.$ready = false
 	// Initialize storage with the value from chrome.storage.sync
 	const promise = new Promise((resolve) => {
-		chrome.storage.sync.get(key, (result) => {
+		console.log("fetching " + key)
+		chrome.storage.sync.get(key, async (result) => {
 			if (result?.[key] !== undefined) {
 				if (isObjectc && isObject(result[key])) {
 					data.value = mergeDeep(defaultValue, result[key])
@@ -52,7 +54,8 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 				}
 			}
 			if (isObjectc) data.value.$ready = true
-			resetUpdatingFlag(isUpdatingFromStorage)
+			await nextTick()
+			isUpdatingFromStorage.value = false
 			resolve(true)
 		})
 	})
@@ -61,19 +64,24 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	watch(
 		data,
 		(newValue) => {
-			if (!isUpdatingFromStorage.value && checkType(defaultValue, newValue)) {
-				chrome.storage.sync.set({ [key]: toRaw(newValue) })
+			if (!isUpdatingFromStorage.value) {
+				if (checkType(defaultValue, newValue)) {
+					chrome.storage.sync.set({ [key]: toRaw(newValue) })
+				} else {
+					console.error("not updating " + key + ": type mismatch")
+				}
 			}
 		},
-		{ deep: true },
+		{ deep: true, flush: "post" },
 	)
 	// Add the onChanged listener here
-	chrome.storage.sync.onChanged.addListener(function (changes) {
+	chrome.storage.sync.onChanged.addListener(async function (changes) {
 		if (changes?.[key]) {
 			isUpdatingFromStorage.value = true
 			const { oldValue, newValue } = changes[key]
 			data.value = newValue
-			resetUpdatingFlag(isUpdatingFromStorage)
+			await nextTick()
+			isUpdatingFromStorage.value = false
 		}
 	})
 	return { data, promise }
@@ -87,7 +95,7 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	if (isObjectc) data.value.$ready = false
 	// Initialize storage with the value from chrome.storage.local
 	const promise = new Promise((resolve) => {
-		chrome.storage.local.get(key, (result) => {
+		chrome.storage.local.get(key, async (result) => {
 			if (result?.[key] !== undefined) {
 				if (isObjectc && isObject(result[key])) {
 					data.value = mergeDeep(defaultValue, result[key])
@@ -96,7 +104,8 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 				}
 			}
 			if (isObjectc) data.value.$ready = true
-			resetUpdatingFlag(isUpdatingFromStorage)
+			await nextTick()
+			isUpdatingFromStorage.value = false
 			resolve(true)
 		})
 	})
@@ -105,19 +114,24 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	watch(
 		data,
 		(newValue) => {
-			if (!isUpdatingFromStorage.value && checkType(defaultValue, newValue)) {
-				chrome.storage.local.set({ [key]: toRaw(newValue) })
+			if (!isUpdatingFromStorage.value) {
+				if (checkType(defaultValue, newValue)) {
+					chrome.storage.local.set({ [key]: toRaw(newValue) })
+				} else {
+					console.error("not updating " + key + ": type mismatch")
+				}
 			}
 		},
-		{ deep: true },
+		{ deep: true, flush: "post" },
 	)
 	// Add the onChanged listener here
-	chrome.storage.local.onChanged.addListener(function (changes) {
+	chrome.storage.local.onChanged.addListener(async function (changes) {
 		if (changes?.[key]) {
 			isUpdatingFromStorage.value = true
 			const { oldValue, newValue } = changes[key]
 			data.value = newValue
-			resetUpdatingFlag(isUpdatingFromStorage)
+			await nextTick()
+			isUpdatingFromStorage.value = false
 		}
 	})
 	return { data, promise }
