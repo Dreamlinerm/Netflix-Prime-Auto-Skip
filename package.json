@@ -1,41 +1,129 @@
 {
-  "name": "streaming-enhanced",
-  "version": "1.1.54",
-  "description": "Automatically skip Ads, Intros, Credits and add Speed Control, etc. on Netflix, Prime video, Disney+ & Hotstar and Crunchyroll.",
-  "scripts": {
-    "start": "web-ext run --keep-profile-changes --firefox-profile=test --profile-create-if-missing",
-    "start-chrome": "web-ext run --source-dir ./chrome/ -t chromium",
-    "start-android": "adb devices && web-ext run -t firefox-android --firefox-apk org.mozilla.firefox --adb-device 38091FDJH002WH",
-    "build": "node copyFtoC.js && cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest && npm run hours",
-    "zip": "cd firefox && web-ext build  --overwrite-dest && cd ../chrome/ && web-ext build --overwrite-dest",
-    "copy": "node copyFtoC.js",
-    "transGoogle": "jsontt Publish/translate.json -m google2 -n google2 -fb yes -cl 3 -f en -t de fr es pt it ja pl sv zh-CN ko tr",
-    "transDeepL": "node deepl.js",
-    "lint": "web-ext lint",
-    "esLint": "npx eslint firefox/ chrome/",
-    "test": "cd firefox && web-ext build  --overwrite-dest && cd .. && node refreshXPI.js && python test.py",
-    "hours": "git hours -since 2018-02-01 -before today -author marvinkrebber@yahoo.de > authorHours.json && node hourstxtToJSON.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip.git"
-  },
-  "author": "Marvin Krebber",
-  "license": "weaklyProtective",
-  "bugs": {
-    "url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues"
-  },
-  "homepage": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip#readme",
-  "devDependencies": {
-    "eslint": "^8.52.0"
-  },
-  "dependencies": {
-    "@parvineyvazov/json-translator": "^3.1.0",
-    "dotenv": "^16.4.5",
-    "web-ext": "^7.11.0"
-  },
-  "webExt": {
-    "sourceDir": "firefox"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+	"displayName": "Streaming enhanced Netflix Disney Prime Video",
+	"description": "Skip ads, intros, credits and add adjust speed, etc. on Netflix, Prime video, Disney+, Crunchyroll and HBO max.",
+	"name": "streaming-enhanced",
+	"version": "1.1.55",
+	"scripts": {
+		"start": "concurrently \"npm run dev:firefox\" \"web-ext run --source-dir dist/firefox --keep-profile-changes --firefox-profile=test --profile-create-if-missing\"",
+		"web-ext": "web-ext run",
+		"firefox": "web-ext run --keep-profile-changes --firefox-profile=test --profile-create-if-missing",
+		"chrome": "web-ext run --source-dir dist/chrome/ -t chromium",
+		"start-android": "adb devices && web-ext run --source-dir dist/firefox -t firefox-android --firefox-apk org.mozilla.firefox --adb-device 38091FDJH002WH",
+		"build": "npm run build:chrome && npm run build:firefox && npm run hours",
+		"build:chrome": "cross-env NODE_ENV=production vite build -c vite.chrome.config.ts",
+		"build:firefox": "cross-env NODE_ENV=production vite build -c vite.firefox.config.ts",
+		"dev": "concurrently \"npm run dev:chrome\" \"npm run dev:firefox\"",
+		"dev:chrome": "cross-env NODE_ENV=development vite build --mode development --watch  -c vite.chrome.config.ts",
+		"dev:firefox": "cross-env NODE_ENV=development vite build --mode development --watch -c vite.firefox.config.ts",
+		"format": "prettier --write .",
+		"launch": "tsx scripts/launch.ts",
+		"launch:all": "tsx scripts/launch.ts --all",
+		"lint": "eslint . --fix --cache",
+		"lint:manifest": "web-ext lint",
+		"typecheck": "vue-tsc --noEmit",
+		"transGoogle": "jsontt .translation/deepl.EN.json -m google2 -n google2 -fb yes -cl 3 -f en -t de fr es pt it ja pl sv zh-CN ko tr",
+		"deepl": "jsontt .translation/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -f EN -t DE ES FR IT JA KO PL PT SV TR ZH",
+		"transDeepL": "tsx scripts/deepl.ts",
+		"hours": "git hours -since 2018-02-01 -before today -author marvinkrebber@yahoo.de > authorHours.json && tsx scripts/hourstxtToJSON.ts",
+		"copyDocsFtoC": "tsx scripts/copyDocsFtoC.ts"
+	},
+	"dependencies": {
+		"marked": "^15.0.6",
+		"notivue": "^2.4.5",
+		"pinia": "^2.3.0",
+		"vue": "^3.5.13",
+		"vue-i18n": "^11.0.1",
+		"vue-router": "^4.5.0",
+		"webextension-polyfill": "^0.12.0"
+	},
+	"devDependencies": {
+		"@parvineyvazov/json-translator": "^3.2.2",
+		"@crxjs/vite-plugin": "2.0.0-beta.29",
+		"@eslint/compat": "^1.2.4",
+		"@eslint/js": "^9.17.0",
+		"@iconify-json/carbon": "^1.2.5",
+		"@iconify-json/lucide": "^1.2.21",
+		"@iconify-json/mdi": "^1.2.2",
+		"@iconify-json/ph": "^1.2.2",
+		"@iconify-json/svg-spinners": "^1.2.2",
+		"@intlify/unplugin-vue-i18n": "^6.0.3",
+		"@tailwindcss/forms": "^0.5.10",
+		"@tailwindcss/typography": "^0.5.16",
+		"@types/eslint": "^9.6.1",
+		"@types/eslint__js": "~8.42.3",
+		"@types/node": "^22.10.5",
+		"@types/webextension-polyfill": "^0.12.1",
+		"@vitejs/plugin-vue": "^5.2.1",
+		"@vue/compiler-sfc": "^3.5.13",
+		"@vueuse/core": "^12.3.0",
+		"autoprefixer": "^10.4.20",
+		"chalk": "^5.4.1",
+		"chrome-types": "^0.1.329",
+		"commander": "^12.1.0",
+		"concurrently": "^9.1.2",
+		"cross-env": "^7.0.3",
+		"daisyui": "^4.12.23",
+		"dotenv": "^16.4.7",
+		"eslint": "^9.17.0",
+		"eslint-plugin-vue": "^9.32.0",
+		"get-installed-browsers": "^0.1.7",
+		"globals": "^15.14.0",
+		"postcss": "^8.4.49",
+		"prettier": "^3.4.2",
+		"prettier-plugin-tailwindcss": "^0.6.9",
+		"sass": "^1.83.1",
+		"tailwindcss": "^3.4.17",
+		"terser": "^5.37.0",
+		"tsx": "^4.19.2",
+		"typescript": "^5.7.2",
+		"typescript-eslint": "^8.19.1",
+		"unplugin-auto-import": "^0.19.0",
+		"unplugin-icons": "^0.22.0",
+		"unplugin-imagemin": "^0.6.5",
+		"unplugin-turbo-console": "^1.11.1",
+		"unplugin-vue-components": "^0.28.0",
+		"unplugin-vue-router": "^0.10.9",
+		"vite": "^6.0.7",
+		"vite-plugin-html": "^3.2.2",
+		"vite-plugin-vue-devtools": "^7.7.0",
+		"vite-plugin-zip-pack": "^1.2.4",
+		"vue-tsc": "^2.2.0",
+		"vuefire": "^3.2.1",
+		"web-ext": "^8.3.0",
+		"webext-bridge": "^6.0.1"
+	},
+	"overrides": {
+		"@crxjs/vite-plugin": "$@crxjs/vite-plugin"
+	},
+	"pnpm": {
+		"overrides": {},
+		"peerDependencyRules": {
+			"allowAny": [],
+			"allowedDeprecatedVersions": {
+				"sourcemap-codec": "1.4.8"
+			},
+			"allowedVersions": {
+				"node-fetch": "*"
+			},
+			"ignoreMissing": []
+		}
+	},
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip.git"
+	},
+	"type": "module",
+	"optionalDependencies": {
+		"win-node-env": "^0.6.1"
+	},
+	"author": "Marvin Krebber",
+	"license": "weaklyProtective",
+	"bugs": {
+		"url": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues"
+	},
+	"homepage": "https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip#readme",
+	"webExt": {
+		"sourceDir": "dist/firefox"
+	}
 }

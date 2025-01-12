@@ -1,5 +1,5 @@
 <div align="center">
-<img src="firefox/icons/NetflixAmazon%20Auto-Skip.svg" width="10%">
+<img src="icons/NetflixAmazon%20Auto-Skip.svg" width="10%">
 
 # Streaming enhanced ![Project Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
 
@@ -245,66 +245,42 @@ The freevee ad text contains the ad length which is matched by
 
 and then skipped by forwarding by the ad length -0.1 seconds which will fix a lot of issues it turns out.
 
-## Run the Extension
+## Develop the Extension
+
+### Setup
+
+- ```npm install -g pnpm``` install pnpm
+- ```pnpm install``` install all required packages
+- ```pnpm build``` build the extension
+- ```pnpm web-ext``` run the extension in firefox
+- ```pnpm chrome``` run the extension in chrome
+
+### Commands
+
+```pnpm build``` build firefox and chrome zip files in dist folder
+
+```pnpm web-ext``` run web-ext firefox
+
+```npm run start-android```  start on firefox android
+
+```npm run lint```   lint all files
+
+```lint:manifest``` lint all the manifest files
+
+## Open the Extension without web-ext
 
 ## Chrome
 
-To run the extension in chrome you can just load the ``chrome`` folder as an unpacked extension. But every time you modify the code you have to reload the extension on the extension page manually.
+To run the extension in chrome you can just load the ``dist/chrome`` folder as an unpacked extension. But every time you modify the code you have to reload the extension on the extension page manually.
 I primarily just develop in firefox and then copy the code into chrome and replace ``browser`` with ``chrome`` in the code.
 
 ## Firefox 
 
-Just like chrome you can temporarily load the extension by going to ``about:addons``, clicking on the gear icon and then ``Install Add-ons From File``. Then you can load the ``firefox`` folder as a temporary extension.
-
-### Install web-ext and Firefox for a better development experience
-
-```npm install --global web-ext``` to install web-ext globally
-
-```npm start``` to start in firefox
-
-### debug
-
-```npm start```  start the firefox development with a dev profile
-
-```npm run start-android```  start on firefox android
-
-```npm run start-chrome```  start on chrome
-
-```npm run lint```   lint all the js files
-
-```npm run esLint``` lint all the manifest files
-
-```npm run build```  copy files from firefox to chrome and build the zips files to upload
-
-```npm run copy```   copy files from firefox to chrome
-
-```npm run zip```    build the zips files to upload
-
-```npm test```       test with python Selenium __testsOutdated__
-
-## Test the Extension with Selenium python
-
-### Setup
-
-- insert your own firefox profile filepath to be logged into every platform in the ``test.py`` file.
-- install Python
-- install selenium ``pip install -U selenium``
-
-### Run
-
-```npm test```
-
-Cli ARGS:
-- none : all tests
-- 'n': Netflix tests
-- 'p': Prime Video tests
-- 'd': Disney tests
-
-```npm test n p d```
+Just like chrome you can temporarily load the extension by going to ``about:addons``, clicking on the gear icon and then ``Install Add-ons From File``. Then you can load the ``dist/firefox`` folder as a temporary extension.
 
 ## Changelog
 
-You can see the Changelog in the addon or in the published versions.
+You can see the [Changelog](./CHANGELOG.md) here or the extension settings.
 
 ## Disclaimer
 

@@ -1,0 +1,3 @@
+<template>
+	<SharedPagesStatistics></SharedPagesStatistics>
+</template>

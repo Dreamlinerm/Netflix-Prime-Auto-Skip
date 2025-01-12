@@ -1,0 +1,48 @@
+// required for vue-devtools
+// @use "/node_modules/vite-plugin-vue-devtools/src/overlay/devtools-overlay.css";
+@use "tailwindcss/base";
+@use "tailwindcss/components";
+@use "tailwindcss/utilities";
+
+.description {
+	@apply text-base p-[10px_80px_20px_20px];
+}
+
+h1,
+h2,
+h3,
+p {
+	@apply m-0 text-primary-content;
+}
+
+hr {
+	@apply my-1;
+}
+h1 {
+	@apply text-2xl font-bold;
+}
+h2 {
+	@apply text-xl font-semibold;
+}
+h3 {
+	@apply text-lg;
+}
+
+.btn {
+	@apply text-xl h-9 leading-9;
+}
+
+p {
+	@apply text-2xl;
+}
+
+/* WebKit and Chromiums */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+	background-color: #212121;
+}
+::-webkit-scrollbar-thumb {
+	background: grey;
+	border-radius: 5px;
+}
