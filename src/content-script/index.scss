@@ -8,8 +8,9 @@
 	background-color: #fff;
 	margin: 2em;
 	position: fixed;
-	bottom: 0;
+	top: 0;
 	right: 0;
 	width: 420px;
-	min-height: 340px;
+	z-index: 999999999;
+	// min-height: 340px;
 }

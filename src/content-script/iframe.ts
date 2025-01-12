@@ -27,11 +27,15 @@ function isOnAffiliatePage(url: string) {
 }
 
 window.addEventListener("message", function (event) {
-	if (event.data.type === "applyPrimeAffiliateLink") {
+	if (event?.data?.type === "applyPrimeAffiliateLink") {
 		// Handle the message from the iframe
 		console.log("applyPrimeAffiliateLink")
 		const url = window.location.href + affiliateTag
 		sendMessage("updateUrl", { url }, "background")
+	} else if (event?.data?.type === "removeIframe") {
+		// Handle the message from the iframe
+		console.log("removeIframe")
+		iframe?.remove()
 	}
 })
 
