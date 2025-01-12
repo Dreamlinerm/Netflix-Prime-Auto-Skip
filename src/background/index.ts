@@ -105,7 +105,8 @@ onMessage("resetBadge", async (message: { sender: any }) => {
 	const { sender } = message
 	if (sender?.tabId) {
 		if (Badges[sender.tabId]) delete Badges[sender.tabId]
-		chrome.action.setBadgeText({ text: "", tabId: sender.tabId })
+		if (isFirefox) browser.browserAction.setBadgeText({ text: "", tabId: sender.tabId })
+		else chrome.action.setBadgeText({ text: "", tabId: sender.tabId })
 	}
 })
 if (isFirefox && isMobile) {
