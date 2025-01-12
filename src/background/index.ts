@@ -56,6 +56,14 @@ async function setBadgeText(text: string, tabId: number) {
 }
 
 // onMessage
+const affiliateTag = "?tag=dreamliner05-20"
+onMessage("applyPrimeAffiliateLink", async (message: { sender: any; data: { url: string } }) => {
+	const { sender, data } = message
+	if (sender?.tabId) {
+		console.log("applyPrimeAffiliateLink")
+		chrome.tabs.update(sender.tabId, { url: data.url + affiliateTag })
+	}
+})
 onMessage("fetch", async (message: { data: { url: string } }) => {
 	const { data } = message
 	try {

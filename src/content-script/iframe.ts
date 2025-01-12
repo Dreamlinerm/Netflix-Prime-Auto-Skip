@@ -1,3 +1,4 @@
+import { sendMessage } from "webext-bridge/content-script"
 // This import scss file is used to style the iframe that is injected into the page
 import "./index.scss"
 
@@ -29,14 +30,14 @@ window.addEventListener("message", function (event) {
 	console.log(event.data)
 	if (event.data.type === "applyPrimeAffiliateLink") {
 		// Handle the message from the iframe
-		chrome.tabs.update({ selected: true, url: window.location.href + affiliateTag })
 		console.log("applyPrimeAffiliateLink")
+		sendMessage("applyPrimeAffiliateLink", { url: window.location.href + affiliateTag }, "background")
 	}
 })
 
 if (iframe && isOnAffiliatePage(url)) {
 	document.body?.append(iframe)
-	chrome.tabs.update({ selected: true, url: window.location.href + affiliateTag })
+	// get current Tab id
 }
 
 self.onerror = function (message, source, lineno, colno, error) {
