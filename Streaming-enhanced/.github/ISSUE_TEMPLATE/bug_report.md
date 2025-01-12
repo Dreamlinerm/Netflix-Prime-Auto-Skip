@@ -1,40 +1,25 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ""
-labels: ""
-assignees: ""
+title: "[BUG]"
+labels: bug, feature
+assignees: Dreamlinerm
+
 ---
 
-**Describe the bug**
+### Describe the bug
+What feature is the bug regardig? e.g. Freevee ad
 A clear and concise description of what the bug is.
 
-**To Reproduce**
-Steps to reproduce the behavior:
+### To Reproduce
+Steps to reproduce the behavior
 
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
-**Expected behavior**
+### Expected behavior
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
-
-- OS: [e.g. iOS]
-- Browser [e.g. chrome, safari]
-- Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
-
-- Device: [e.g. iPhone6]
-- OS: [e.g. iOS8.1]
-- Browser [e.g. stock browser, safari]
-- Version [e.g. 22]
-
-**Additional context**
-Add any other context about the problem here.
+### Background information:
+ - Exact URL(includes show): [e.g. amazon.de, amazon.com, netflix.ca]
+ - Country: [e.g Germany (need to know for vpn)]
+ - Browser [e.g. chrome, firefox]
+ - Addon-Version [e.g. 1.0.74 seen if you click on the menu on the top]
+ - Save the console logs (Press F12) in a txt and upload them here with ctrl+v or dragging
