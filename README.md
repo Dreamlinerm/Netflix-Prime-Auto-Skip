@@ -19,7 +19,7 @@
 </a>
 <br>
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Dreamlinerm/Netflix-Prime-Auto-Skip">
-<img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FAuthorHours.json&query=time&label=Approx%20Dev%20Time%20(Owner)">
+<img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FauthorHours.json&query=time&label=Approx%20Dev%20Time%20(Owner)">
 <br>
 <a href="https://discord.gg/5fBYathA7d">
 <img src="https://img.shields.io/badge/Discord_Server-5a5a5a?logo=discord" width="300">
@@ -156,7 +156,7 @@ If you want to see what is implemented go [here](#implemented-feature-overview):
 
 Buy me a [coffee](https://github.com/sponsors/Dreamlinerm)! 
 
-<img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FAuthorHours.json&query=time&label=Approx%20Development%20Time%20(Owner)">
+<img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FauthorHours.json&query=time&label=Approx%20Development%20Time%20(Owner)">
 
 ## Contributing
 
