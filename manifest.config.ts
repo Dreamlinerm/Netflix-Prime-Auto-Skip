@@ -29,12 +29,12 @@ export default {
 		default_popup: "src/ui/action-popup/index.html",
 	},
 	content_scripts: [
-		// {
-		// 	// all_frames: false,
-		// 	js: ["src/content-script/index.ts"],
-		// 	matches: ["*://*"],
-		// 	// run_at: "document_end",
-		// },
+		{
+			all_frames: false,
+			js: ["src/content-script/iframe.ts"],
+			matches: ["*://*.amazon.de/*"],
+			run_at: "document_end",
+		},
 		{
 			js: ["src/content-script/crunchyroll.ts"],
 			matches: ["*://*.crunchyroll.com/*"],
