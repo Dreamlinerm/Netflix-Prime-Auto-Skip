@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isFirefox } from "@/utils/helper"
+const isFirefox = typeof browser !== "undefined"
 const githubUrl = __GITHUB_URL__
 function openSettings() {
 	chrome.tabs.create({

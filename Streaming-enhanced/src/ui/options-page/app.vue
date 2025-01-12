@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Notivue, Notification } from "notivue"
-import { isFirefox } from "@/utils/helper"
+const isFirefox = typeof browser !== "undefined"
 const version = __VERSION__
 const githubUrl = __GITHUB_URL__
 const hash = ref(window.location.hash)

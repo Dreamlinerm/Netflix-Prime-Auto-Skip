@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { isFirefox } from "@/utils/helper"
+const isFirefox = typeof browser !== "undefined"
 import { push } from "notivue"
 const optionalPermissions = ["tabs"]
 const unsetPermissions: Ref<string[]> = ref([])

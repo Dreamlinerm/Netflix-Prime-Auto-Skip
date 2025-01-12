@@ -32,12 +32,13 @@ self.onerror = function (message, source, lineno, colno, error) {
 	console.info("Error object: " + error)
 }
 
-import { onMessage, sendMessage } from "webext-bridge/background"
-import { log, optionsStore, checkStoreReady, isFirefox } from "@/utils/helper"
+import { onMessage } from "webext-bridge/background"
+import { log, optionsStore, checkStoreReady } from "@/utils/helper"
 log("background loaded")
 const { settings } = storeToRefs(optionsStore)
 const Badges: { [key: string]: string | number } = {}
 const isMobile = /Android/i.test(navigator.userAgent)
+const isFirefox = typeof browser !== "undefined"
 // Increases Badge by 1
 async function increaseBadge(tabId: number) {
 	if (Badges?.[tabId] === undefined || typeof Badges[tabId] !== "number") {
