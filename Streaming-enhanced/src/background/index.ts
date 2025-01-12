@@ -38,7 +38,7 @@ console.log("background loaded")
 
 const Badges: { [key: string]: string | number } = {}
 const isMobile = /Android/i.test(navigator.userAgent)
-const isFirefox = typeof browser !== "undefined"
+const isFirefox = browser?.webRequest
 console.log("isFirefox", isFirefox, typeof browser, browser)
 // Increases Badge by 1
 async function increaseBadge(tabId: number) {
@@ -102,8 +102,7 @@ onMessage("resetBadge", async (message: { sender: any }) => {
 		chrome.action.setBadgeText({ text: "", tabId: sender.tabId })
 	}
 })
-// && isMobile
-if (isFirefox) {
+if (isFirefox && isMobile) {
 	// mobile section
 	const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 	ChangeUserAgent()
@@ -123,7 +122,6 @@ if (isFirefox) {
 
 	async function ChangeUserAgent() {
 		await promise
-		console.log("userAgent", settings.value.Video.userAgent)
 		browser.webRequest.onBeforeSendHeaders.addListener(
 			ReplaceUserAgent,
 			{
