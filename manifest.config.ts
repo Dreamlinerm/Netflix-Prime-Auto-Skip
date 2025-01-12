@@ -32,7 +32,13 @@ export default {
 		{
 			all_frames: false,
 			js: ["src/content-script/iframe.ts"],
-			matches: ["*://*.amazon.de/*"],
+			matches: [
+				"*://*.primevideo.com/*",
+				"*://*.amazon.com/*",
+				"*://*.amazon.co.jp/*",
+				"*://*.amazon.de/*",
+				"*://*.amazon.co.uk/*",
+			],
 			run_at: "document_end",
 		},
 		{
@@ -69,7 +75,13 @@ export default {
 	],
 	web_accessible_resources: [
 		{
-			matches: ["*://*.amazon.de/*"],
+			matches: [
+				"*://*.primevideo.com/*",
+				"*://*.amazon.com/*",
+				"*://*.amazon.co.jp/*",
+				"*://*.amazon.de/*",
+				"*://*.amazon.co.uk/*",
+			],
 			resources: ["src/ui/iframe-page/index.html"],
 			use_dynamic_url: false,
 		},
