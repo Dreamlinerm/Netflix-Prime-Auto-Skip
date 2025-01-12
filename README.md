@@ -267,6 +267,8 @@ and then skipped by forwarding by the ad length -0.1 seconds which will fix a lo
 ```pnpm lint``` run esLint
 ```pnpm lint:manifest``` web-ext lint manifest files
 
+This extension was built with the template [vite-vue3-browser-extension-v3](https://github.com/mubaidr/vite-vue3-browser-extension-v3)
+
 ### Author
 
 ```pnpm transDeepL``` translate .translation/deepl.EN.json and output them into the locales files directly
