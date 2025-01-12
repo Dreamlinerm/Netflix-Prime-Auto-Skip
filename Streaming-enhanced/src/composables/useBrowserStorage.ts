@@ -38,7 +38,7 @@ async function resetUpdatingFlag(flag: Ref<boolean>) {
 
 export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	const data = ref<T>(defaultValue)
-	const isUpdatingFromStorage = ref(true)
+	let isUpdatingFromStorage = true
 	const isObjectc = isObject(defaultValue)
 	// check if the data is ready to be used and not just the default value
 	if (isObjectc) data.value.$ready = false
@@ -55,7 +55,7 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 			}
 			if (isObjectc) data.value.$ready = true
 			await nextTick()
-			isUpdatingFromStorage.value = false
+			isUpdatingFromStorage = false
 			resolve(true)
 		})
 	})
@@ -64,7 +64,7 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	watch(
 		data,
 		(newValue) => {
-			if (!isUpdatingFromStorage.value) {
+			if (!isUpdatingFromStorage) {
 				if (checkType(defaultValue, newValue)) {
 					chrome.storage.sync.set({ [key]: toRaw(newValue) })
 				} else {
@@ -77,11 +77,11 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 	// Add the onChanged listener here
 	chrome.storage.sync.onChanged.addListener(async function (changes) {
 		if (changes?.[key]) {
-			isUpdatingFromStorage.value = true
+			isUpdatingFromStorage = true
 			const { oldValue, newValue } = changes[key]
 			data.value = newValue
 			await nextTick()
-			isUpdatingFromStorage.value = false
+			isUpdatingFromStorage = false
 		}
 	})
 	return { data, promise }
@@ -89,7 +89,7 @@ export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
 
 export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	const data = ref<T>(defaultValue)
-	const isUpdatingFromStorage = ref(true)
+	let isUpdatingFromStorage = true
 	const isObjectc = isObject(defaultValue)
 	// check if the data is ready to be used and not just the default value
 	if (isObjectc) data.value.$ready = false
@@ -105,7 +105,7 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 			}
 			if (isObjectc) data.value.$ready = true
 			await nextTick()
-			isUpdatingFromStorage.value = false
+			isUpdatingFromStorage = false
 			resolve(true)
 		})
 	})
@@ -114,7 +114,7 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	watch(
 		data,
 		(newValue) => {
-			if (!isUpdatingFromStorage.value) {
+			if (!isUpdatingFromStorage) {
 				if (checkType(defaultValue, newValue)) {
 					chrome.storage.local.set({ [key]: toRaw(newValue) })
 				} else {
@@ -127,11 +127,11 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 	// Add the onChanged listener here
 	chrome.storage.local.onChanged.addListener(async function (changes) {
 		if (changes?.[key]) {
-			isUpdatingFromStorage.value = true
+			isUpdatingFromStorage = true
 			const { oldValue, newValue } = changes[key]
 			data.value = newValue
 			await nextTick()
-			isUpdatingFromStorage.value = false
+			isUpdatingFromStorage = false
 		}
 	})
 	return { data, promise }
