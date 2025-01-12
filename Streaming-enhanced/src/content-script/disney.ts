@@ -1,5 +1,5 @@
 import { sendMessage } from "webext-bridge/content-script"
-import { startSharedFunctions, parseAdTime, createSlider } from "@/content-script/shared-functions"
+import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
 startSharedFunctions(Platforms.Disney)
 // Global Variables
 

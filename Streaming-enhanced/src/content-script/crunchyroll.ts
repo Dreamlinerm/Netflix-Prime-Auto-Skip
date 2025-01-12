@@ -1,5 +1,5 @@
 import { sendMessage } from "webext-bridge/content-script"
-import { startSharedFunctions } from "@/content-script/shared-functions"
+import { startSharedFunctions, Platforms } from "@/content-script/shared-functions"
 startSharedFunctions(Platforms.Crunchyroll)
 // Global Variables
 
@@ -10,20 +10,6 @@ const config = { attributes: true, childList: true, subtree: true }
 async function logStartOfAddon() {
 	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
 	console.log("Settings", settings.value)
-}
-type StatisticsKey =
-	| "AmazonAdTimeSkipped"
-	| "NetflixAdTimeSkipped"
-	| "DisneyAdTimeSkipped"
-	| "IntroTimeSkipped"
-	| "RecapTimeSkipped"
-	| "SegmentsSkipped"
-async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
-	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
-		console.log(key, endTime - startTime)
-		settings.value.Statistics[key] += endTime - startTime
-		increaseBadge()
-	}
 }
 
 async function startCrunchyroll() {

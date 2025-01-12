@@ -1,5 +1,5 @@
 import { sendMessage } from "webext-bridge/content-script"
-import { startSharedFunctions, createSlider } from "@/content-script/shared-functions"
+import { startSharedFunctions, createSlider, Platforms } from "@/content-script/shared-functions"
 
 startSharedFunctions(Platforms.Netflix)
 // Global Variables

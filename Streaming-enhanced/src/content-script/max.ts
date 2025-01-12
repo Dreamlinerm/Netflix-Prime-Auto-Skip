@@ -1,4 +1,4 @@
-import { startSharedFunctions, createSlider } from "@/content-script/shared-functions"
+import { startSharedFunctions, createSlider, Platforms } from "@/content-script/shared-functions"
 import { sendMessage } from "webext-bridge/content-script"
 // Global Variables
 
