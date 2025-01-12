@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { sendMessage } from "webext-bridge/content-script"
-logStartOfAddon(Platforms.Amazon)
+console.log("shared-functions loaded")
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
