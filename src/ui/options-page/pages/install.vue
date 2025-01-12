@@ -46,6 +46,15 @@ const optionalSettings = computed({
 		{{ $t("showYearDescription") }}
 	</p>
 	<hr />
+	<!-- <div class="line flex">
+		<p>{{ $t("affiliateSwitch") }}</p>
+		<Switch
+			v-model="settings.General.affiliate"
+			class="ml-auto"
+		></Switch>
+	</div>
+	<p class="description">{{ $t("affiliateDescription") }}</p>
+	<hr /> -->
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("epilepsySwitch") }}</p>
 		<Switch

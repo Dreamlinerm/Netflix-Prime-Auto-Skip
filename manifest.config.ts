@@ -28,19 +28,32 @@ export default {
 	action: {
 		default_popup: "src/ui/action-popup/index.html",
 	},
+	// web_accessible_resources: [
+	// 	{
+	// 		matches: [
+	// 			"*://*.primevideo.com/*",
+	// 			"*://*.amazon.com/*",
+	// 			"*://*.amazon.co.jp/*",
+	// 			"*://*.amazon.de/*",
+	// 			"*://*.amazon.co.uk/*",
+	// 		],
+	// 		resources: ["src/ui/iframe-page/index.html"],
+	// 		use_dynamic_url: false,
+	// 	},
+	// ],
 	content_scripts: [
-		{
-			all_frames: false,
-			js: ["src/content-script/iframe.ts"],
-			matches: [
-				"*://*.primevideo.com/*",
-				"*://*.amazon.com/*",
-				"*://*.amazon.co.jp/*",
-				"*://*.amazon.de/*",
-				"*://*.amazon.co.uk/*",
-			],
-			run_at: "document_end",
-		},
+		// {
+		// 	all_frames: false,
+		// 	js: ["src/content-script/iframe.ts"],
+		// 	matches: [
+		// 		"*://*.primevideo.com/*",
+		// 		"*://*.amazon.com/*",
+		// 		"*://*.amazon.co.jp/*",
+		// 		"*://*.amazon.de/*",
+		// 		"*://*.amazon.co.uk/*",
+		// 	],
+		// 	run_at: "document_end",
+		// },
 		{
 			js: ["src/content-script/crunchyroll.ts"],
 			matches: ["*://*.crunchyroll.com/*"],
@@ -71,19 +84,6 @@ export default {
 			all_frames: true,
 			js: ["src/content-script/static.crunchyroll.ts"],
 			matches: ["https://static.crunchyroll.com/vilos-v2/web/vilos/player.html*"],
-		},
-	],
-	web_accessible_resources: [
-		{
-			matches: [
-				"*://*.primevideo.com/*",
-				"*://*.amazon.com/*",
-				"*://*.amazon.co.jp/*",
-				"*://*.amazon.de/*",
-				"*://*.amazon.co.uk/*",
-			],
-			resources: ["src/ui/iframe-page/index.html"],
-			use_dynamic_url: false,
 		},
 	],
 	options_page: "src/ui/options-page/index.html",
