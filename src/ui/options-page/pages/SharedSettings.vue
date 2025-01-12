@@ -45,7 +45,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent)
 				class="ml-auto"
 			></Switch>
 		</div>
-		<p class="description">{{ $t("userAgentSwitchDescription") }}</p>
+		<p class="description">{{ $t("userAgentDescription") }}</p>
 	</div>
 	<OptionsPageSettingsTable></OptionsPageSettingsTable>
 	<OptionalPermission />
