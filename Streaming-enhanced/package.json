@@ -17,7 +17,7 @@
 		"launch": "tsx scripts/launch.ts",
 		"launch:all": "tsx scripts/launch.ts --all",
 		"lint": "eslint . --fix --cache",
-		"lint:manifest": "web-ext lint --pretty",
+		"lint:manifest": "web-ext lint -s dist/firefox",
 		"typecheck": "vue-tsc --noEmit",
 		"transGoogle": "jsontt .translation/deepl.EN.json -m google2 -n google2 -fb yes -cl 3 -f en -t de fr es pt it ja pl sv zh-CN ko tr",
 		"deepl": "jsontt .translation/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -f EN -t DE ES FR IT JA KO PL PT SV TR ZH",

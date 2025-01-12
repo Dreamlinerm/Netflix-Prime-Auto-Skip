@@ -2,8 +2,8 @@
 	<label class="switch">
 		<input
 			:checked="props.modelValue"
-			@input="emit('update:modelValue', $event.target.checked)"
 			type="checkbox"
+			@input="emit('update:modelValue', $event.target.checked)"
 		/>
 		<span class="slider round"></span>
 	</label>

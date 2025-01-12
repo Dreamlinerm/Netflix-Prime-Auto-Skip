@@ -20,5 +20,6 @@ module.exports = {
   },
   rules: {
     "no-inner-declarations": "off",
+    "no-console": "off",
   },
 };

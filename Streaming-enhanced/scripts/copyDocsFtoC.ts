@@ -13,16 +13,16 @@ const replacesForDescription = [
 	[/\n<\/li>\r?\n/g, ""],
 	["</li>", ""],
 	// change link to markdown
-	[/<a href=\"(.*)\" .*>(.*)<\/a>/g, "[$2]($1)"],
-	[/<a href=\'(.*)\' .*>(.*)<\/a>/g, "[$2]($1)"],
+	[/<a href="(.*)" .*>(.*)<\/a>/g, "[$2]($1)"],
+	[/<a href='(.*)' .*>(.*)<\/a>/g, "[$2]($1)"],
 ]
 // pick last file
 storeDescriptions.forEach((file) => {
 	console.log(ChromeStoreDescriptionsPath + "\\" + file)
 	fs.readFile(path.join(storeDescriptionsPath, file), "utf8", function (err, data) {
 		if (err) return console.log(err)
-		for (let replace of replacesForDescription) {
-			data = data.replaceAll(replace[0], replace[1])
+		for (const replace of replacesForDescription) {
+			data = data.replaceAll(replace[0], replace[1] as string)
 		}
 		fs.writeFile(path.join(ChromeStoreDescriptionsPath, file), data, "utf8", function (err) {
 			if (err) return console.log(err)
