@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
+
 type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO"
 
 const streamingServices: Array<StreamingService> = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO"]
@@ -30,10 +31,22 @@ const speedSlider = computed({
 	},
 })
 const SliderPreview = ref(10)
+const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent)
 </script>
 <template>
 	<h1>{{ $t("sharedPageTitle") }}</h1>
 	<p class="description">{{ $t("sharedPageDescription") }}</p>
+	<div :class="isMobile ? '' : 'hidden'">
+		<hr />
+		<div class="line flex">
+			<p>{{ $t("userAgentSwitch") }}</p>
+			<Switch
+				v-model="settings.Video.userAgent"
+				class="ml-auto"
+			></Switch>
+		</div>
+		<p class="description">{{ $t("userAgentSwitchDescription") }}</p>
+	</div>
 	<OptionsPageSettingsTable></OptionsPageSettingsTable>
 	<OptionalPermission />
 	<hr />

@@ -16,6 +16,9 @@ function callback(tabs: chrome.tabs.Tab[]) {
 	else if (isCrunchyroll) router.push("/action-popup/Crunchyroll")
 	// else if (isHBO) Menu("HBO");
 }
+const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent)
+const optionsStore = useOptionsStore()
+const { settings } = storeToRefs(optionsStore)
 chrome.tabs.query(query, callback)
 </script>
 
@@ -23,6 +26,16 @@ chrome.tabs.query(query, callback)
 	<div class="w-[470px] h-fit max-w-[470px] max-h-[700px] overflow-auto flex flex-col">
 		<AppHeader />
 		<div class="p-4 pt-0 overflow-auto flex-1">
+			<div
+				class="line flex"
+				:class="isMobile ? '' : 'hidden'"
+			>
+				<p>{{ $t("userAgentSwitch") }}</p>
+				<Switch
+					v-model="settings.Video.userAgent"
+					class="ml-auto"
+				></Switch>
+			</div>
 			<RouterView />
 		</div>
 
