@@ -4,6 +4,9 @@ const isFirefox = typeof browser !== "undefined"
 const version = __VERSION__
 const githubUrl = __GITHUB_URL__
 const hash = ref(window.location.hash)
+import { useFrontendStore } from "@/stores/options.store"
+// wont sync without opening once
+useFrontendStore()
 </script>
 <template>
 	<div

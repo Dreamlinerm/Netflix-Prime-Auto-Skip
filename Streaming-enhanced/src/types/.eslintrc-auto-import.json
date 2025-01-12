@@ -346,6 +346,7 @@
     "parseAdTime": true,
     "createSlider": true,
     "DBCache": true,
-    "MovieInfo": true
+    "MovieInfo": true,
+    "useFrontendStore": true
   }
 }

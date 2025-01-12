@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useLocale } from "@/composables/useLocale"
 import { i18n } from "@/utils/i18n"
-const optionsStore = useOptionsStore()
-const { currentLocale } = storeToRefs(optionsStore)
+import { useFrontendStore } from "@/stores/options.store"
+const frontendStore = useFrontendStore()
+const { currentLocale } = storeToRefs(frontendStore)
 </script>
 
 <template>
