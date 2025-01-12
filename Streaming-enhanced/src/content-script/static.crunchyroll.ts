@@ -1,9 +1,15 @@
-logStartOfAddon(Platforms.Crunchyroll)
+import { sendMessage } from "webext-bridge/content-script"
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+const config = { attributes: true, childList: true, subtree: true }
+async function logStartOfAddon() {
+	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
+	console.log("Settings", settings.value)
+}
 async function startCrunchyroll() {
 	await promise
+	logStartOfAddon()
 	if (settings.value.Crunchyroll.disableNumpad) Crunchyroll_disableNumpad()
 	if (settings.value.Video.doubleClick) startdoubleClick()
 	CrunchyrollObserver.observe(document, config)
@@ -16,6 +22,20 @@ async function startCrunchyroll() {
 		},
 		{ deep: true },
 	)
+}
+type StatisticsKey =
+	| "AmazonAdTimeSkipped"
+	| "NetflixAdTimeSkipped"
+	| "DisneyAdTimeSkipped"
+	| "IntroTimeSkipped"
+	| "RecapTimeSkipped"
+	| "SegmentsSkipped"
+async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
+	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+		console.log(key, endTime - startTime)
+		settings.value.Statistics[key] += endTime - startTime
+		increaseBadge()
+	}
 }
 
 // #region Crunchyroll
@@ -52,7 +72,8 @@ function OnFullScreenChange() {
 	if (document.fullscreenElement && video) {
 		video.play()
 		console.log("auto-played on fullscreen")
-		increaseBadge()
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
 	}
 }
 async function startPlayOnFullScreen() {
@@ -226,7 +247,8 @@ async function Crunchyroll_disableNumpad() {
 			if (event.location === 3) {
 				console.log("key blocked: " + event.key)
 				event.stopPropagation()
-				increaseBadge()
+				settings.value.Statistics.SegmentsSkipped++
+				sendMessage("increaseBadge", {}, "background")
 			}
 		},
 		true,

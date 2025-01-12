@@ -4,6 +4,7 @@ console.log("shared-functions loaded")
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+export const date = new Date()
 const today = date.toISOString().split("T")[0]
 
 const ua = navigator.userAgent
@@ -20,6 +21,16 @@ const htmlLang = document.documentElement.lang
 
 const AmazonVideoClass = ".dv-player-fullscreen video"
 let DBCache: DBCache = {}
+
+export enum Platforms {
+	Netflix = "netflix",
+	Amazon = "amazon",
+	StarPlus = "starplus",
+	Disney = "disney",
+	Hotstar = "hotstar",
+	Crunchyroll = "crunchyroll",
+	HBO = "hbo",
+}
 
 export async function startSharedFunctions(platform: Platforms) {
 	// if(platform == Platforms.Amazon) isPrimeVideo = true, because should only be called on amazon prime video
@@ -501,7 +512,8 @@ function OnFullScreenChange() {
 	if (document.fullscreenElement && video) {
 		video.play()
 		console.log("auto-played on fullscreen")
-		increaseBadge()
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
 	}
 }
 async function startPlayOnFullScreen() {

@@ -1,3 +1,4 @@
+import { sendMessage } from "webext-bridge/content-script"
 import { startSharedFunctions, parseAdTime, createSlider } from "@/content-script/shared-functions"
 startSharedFunctions(Platforms.Disney)
 // Global Variables
@@ -8,6 +9,26 @@ const isDisney = /disneyplus|starplus/i.test(hostname)
 const isHotstar = /hotstar/i.test(hostname)
 const isStarPlus = /starplus/i.test(hostname)
 let lastAdTimeText: number | string = 0
+const config = { attributes: true, childList: true, subtree: true }
+async function logStartOfAddon() {
+	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
+	console.log("Settings", settings.value)
+}
+type StatisticsKey =
+	| "AmazonAdTimeSkipped"
+	| "NetflixAdTimeSkipped"
+	| "DisneyAdTimeSkipped"
+	| "IntroTimeSkipped"
+	| "RecapTimeSkipped"
+	| "SegmentsSkipped"
+async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
+	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+		console.log(key, endTime - startTime)
+		settings.value.Statistics[key] += endTime - startTime
+		increaseBadge()
+	}
+}
+
 async function resetLastATimeText(time = 1000) {
 	// timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
 	setTimeout(() => {
@@ -17,7 +38,7 @@ async function resetLastATimeText(time = 1000) {
 const videoSpeed: Ref<number> = ref(1)
 async function startDisney() {
 	await promise
-	logStartOfAddon(Platforms.Disney)
+	logStartOfAddon()
 	if (isHotstar) Hotstar_doubleClick()
 	DisneyObserver.observe(document, config)
 	setInterval(function () {
@@ -52,7 +73,8 @@ async function Disney_skipAd(video: HTMLVideoElement) {
 				if (lastAdTimeText == 0) {
 					console.log("Disney Ad skipped, length:", adTime, "s")
 					settings.value.Statistics.DisneyAdTimeSkipped += adTime
-					increaseBadge()
+					settings.value.Statistics.SegmentsSkipped++
+					sendMessage("increaseBadge", {}, "background")
 				}
 				lastAdTimeText = video.currentTime
 				video.currentTime += adTime
@@ -62,7 +84,8 @@ async function Disney_skipAd(video: HTMLVideoElement) {
 		const continueText = document.querySelector("p.toast-notification__text[aria-hidden='true']")
 		if (continueText?.checkVisibility()) {
 			continueText.remove()
-			increaseBadge()
+			settings.value.Statistics.SegmentsSkipped++
+			sendMessage("increaseBadge", {}, "background")
 		}
 	}
 }
@@ -126,7 +149,8 @@ async function Disney_skipCredits(currentTime: number) {
 			if (settings.value.Disney?.skipCredits) {
 				button.click()
 				console.log("Credits skipped", button)
-				increaseBadge()
+				settings.value.Statistics.SegmentsSkipped++
+				sendMessage("increaseBadge", {}, "background")
 				resetLastATimeText()
 			}
 			if (!isHotstar) {
@@ -199,7 +223,8 @@ async function Disney_Watch_Credits() {
 				video.click()
 				lastAdTimeText = time ?? 0
 				console.log("Credits Watched", button)
-				increaseBadge()
+				settings.value.Statistics.SegmentsSkipped++
+				sendMessage("increaseBadge", {}, "background")
 				resetLastATimeText()
 			}
 		}

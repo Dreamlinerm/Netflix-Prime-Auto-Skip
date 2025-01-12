@@ -1,3 +1,4 @@
+import { sendMessage } from "webext-bridge/content-script"
 import { startSharedFunctions, parseAdTime, createSlider } from "@/content-script/shared-functions"
 // Global Variables
 
@@ -10,6 +11,25 @@ const url = window.location.href
 const hostname = window.location.hostname
 const title = document.title
 const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url))
+const config = { attributes: true, childList: true, subtree: true }
+async function logStartOfAddon() {
+	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
+	console.log("Settings", settings.value)
+}
+type StatisticsKey =
+	| "AmazonAdTimeSkipped"
+	| "NetflixAdTimeSkipped"
+	| "DisneyAdTimeSkipped"
+	| "IntroTimeSkipped"
+	| "RecapTimeSkipped"
+	| "SegmentsSkipped"
+async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
+	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+		console.log(key, endTime - startTime)
+		settings.value.Statistics[key] += endTime - startTime
+		increaseBadge()
+	}
+}
 
 if (isPrimeVideo) {
 	startSharedFunctions(Platforms.Amazon)
@@ -18,7 +38,7 @@ if (isPrimeVideo) {
 
 async function startAmazon() {
 	await promise
-	logStartOfAddon(Platforms.Amazon)
+	logStartOfAddon()
 	AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig)
 	if (settings.value?.Video?.doubleClick) Amazon_doubleClick()
 	AmazonObserver.observe(document, config)
@@ -147,7 +167,8 @@ async function Amazon_Credits() {
 			lastAdTimeText = newEpNumber.textContent ?? ""
 			resetLastATimeText()
 			button.click()
-			increaseBadge()
+			settings.value.Statistics.SegmentsSkipped++
+			sendMessage("increaseBadge", {}, "background")
 			console.log("skipped Credits", button)
 		}
 	}
@@ -156,7 +177,8 @@ async function Amazon_Watch_Credits() {
 	const button = document.querySelector("[class*=nextupcardhide-button]") as HTMLElement
 	if (button) {
 		button.click()
-		increaseBadge()
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
 		console.log("Watched Credits", button)
 	}
 }
@@ -209,14 +231,16 @@ async function deletePaidCategory(a: HTMLElement) {
 		const section = a.closest('[class="+OSZzQ"]')
 		console.log("Filtered paid category", section)
 		section?.remove()
-		increaseBadge()
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
 	}
 	// remove individual paid elements
 	else {
 		a.querySelectorAll("li:has(svg.NbhXwl)").forEach((b) => {
 			console.log("Filtered paid Element", b)
 			b.remove()
-			increaseBadge()
+			settings.value.Statistics.SegmentsSkipped++
+			sendMessage("increaseBadge", {}, "background")
 		})
 	}
 }
@@ -253,7 +277,8 @@ async function skipAd(video: HTMLVideoElement) {
 			video.currentTime += skipTime
 			console.log("FreeVee Ad skipped, length:", skipTime, "s")
 			settings.value.Statistics.AmazonAdTimeSkipped += skipTime
-			increaseBadge()
+			settings.value.Statistics.SegmentsSkipped++
+			sendMessage("increaseBadge", {}, "background")
 		}
 	}
 }
@@ -289,7 +314,8 @@ async function Amazon_selfAdTimeout() {
 						setTimeout(() => {
 							button.click()
 							if (typeof adTime === "number") settings.value.Statistics.AmazonAdTimeSkipped += adTime
-							increaseBadge()
+							settings.value.Statistics.SegmentsSkipped++
+							sendMessage("increaseBadge", {}, "background")
 							console.log("Self Ad skipped, length:", adTime, button)
 						}, 150)
 					}

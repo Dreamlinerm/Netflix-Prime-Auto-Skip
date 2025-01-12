@@ -1,5 +1,6 @@
+import { sendMessage } from "webext-bridge/content-script"
 import { startSharedFunctions, createSlider } from "@/content-script/shared-functions"
-logStartOfAddon(Platforms.Netflix)
+
 startSharedFunctions(Platforms.Netflix)
 // Global Variables
 
@@ -8,6 +9,25 @@ const ua = navigator.userAgent
 let lastAdTimeText: number | string = 0
 const videoSpeed: Ref<number> = ref(1)
 const isEdge = /edg/i.test(ua)
+const config = { attributes: true, childList: true, subtree: true }
+async function logStartOfAddon() {
+	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
+	console.log("Settings", settings.value)
+}
+type StatisticsKey =
+	| "AmazonAdTimeSkipped"
+	| "NetflixAdTimeSkipped"
+	| "DisneyAdTimeSkipped"
+	| "IntroTimeSkipped"
+	| "RecapTimeSkipped"
+	| "SegmentsSkipped"
+async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
+	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+		console.log(key, endTime - startTime)
+		settings.value.Statistics[key] += endTime - startTime
+		increaseBadge()
+	}
+}
 
 async function resetLastATimeText(time = 1000) {
 	// timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
@@ -18,6 +38,7 @@ async function resetLastATimeText(time = 1000) {
 
 async function startNetflix() {
 	await promise
+	logStartOfAddon()
 	if (settings.value.Netflix?.profile) AutoPickProfile()
 	if (settings.value.Netflix?.skipAd) Netflix_SkipAdInterval()
 	NetflixObserver.observe(document, config)
@@ -106,7 +127,8 @@ function AutoPickProfile() {
 				)?.style?.backgroundImage?.slice(5, -2)
 				button?.parentElement?.click()
 				console.log("Profile automatically chosen:", settings.value.General.profileName)
-				increaseBadge()
+				settings.value.Statistics.SegmentsSkipped++
+				sendMessage("increaseBadge", {}, "background")
 			}
 		})
 	}
@@ -116,7 +138,8 @@ function Netflix_General(selector: string, name: string, incBadge = true) {
 	if (button) {
 		console.log(name, button)
 		button.click()
-		if (incBadge) increaseBadge()
+		if (incBadge) settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
 		return true
 	}
 	return false
@@ -141,7 +164,8 @@ function Netflix_SkipAdInterval() {
 			if (adLength > 8 && video.playbackRate != playBackRate) {
 				console.log("Ad skipped, length:", adLength, "s")
 				settings.value.Statistics.NetflixAdTimeSkipped += adLength
-				increaseBadge()
+				settings.value.Statistics.SegmentsSkipped++
+				sendMessage("increaseBadge", {}, "background")
 				if (settings.value.Video.epilepsy) video.style.opacity = "0"
 				video.muted = true
 				video.playbackRate = playBackRate
@@ -171,7 +195,8 @@ function Netflix_SkipAdInterval() {
 			resetLastATimeText()
 			button.click()
 			console.log("Remove Video Paused ad", button)
-			increaseBadge()
+			settings.value.Statistics.SegmentsSkipped++
+			sendMessage("increaseBadge", {}, "background")
 			setTimeout(() => {
 				// not always a video is showing on next episode apparently
 				const v = video || document.querySelector("video")

@@ -1,14 +1,37 @@
+import { sendMessage } from "webext-bridge/content-script"
 import { startSharedFunctions } from "@/content-script/shared-functions"
 startSharedFunctions(Platforms.Crunchyroll)
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const url = window.location.href
+const date = new Date()
+const config = { attributes: true, childList: true, subtree: true }
+async function logStartOfAddon() {
+	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
+	console.log("Settings", settings.value)
+}
+type StatisticsKey =
+	| "AmazonAdTimeSkipped"
+	| "NetflixAdTimeSkipped"
+	| "DisneyAdTimeSkipped"
+	| "IntroTimeSkipped"
+	| "RecapTimeSkipped"
+	| "SegmentsSkipped"
+async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
+	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+		console.log(key, endTime - startTime)
+		settings.value.Statistics[key] += endTime - startTime
+		increaseBadge()
+	}
+}
 
 async function startCrunchyroll() {
 	// watch ready state
 	await promise
-	logStartOfAddon(Platforms.Crunchyroll)
+	settings.value.Statistics.SegmentsSkipped++
+	sendMessage("increaseBadge", {}, "background")
+	logStartOfAddon()
 	if (settings.value.Crunchyroll.releaseCalendar) Crunchyroll_ReleaseCalendar()
 	if (settings.value.Crunchyroll.profile) {
 		const pickInterval = setInterval(function () {
@@ -257,7 +280,8 @@ async function Crunchyroll_AutoPickProfile() {
 			if (img.src === settings.value.General.Crunchyroll_profilePicture) {
 				img.click()
 				console.log("Profile automatically chosen:", img.src)
-				increaseBadge()
+				settings.value.Statistics.SegmentsSkipped++
+				sendMessage("increaseBadge", {}, "background")
 			}
 		})
 	}
