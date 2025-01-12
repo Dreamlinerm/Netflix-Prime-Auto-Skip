@@ -38,8 +38,7 @@ console.log("background loaded")
 
 const Badges: { [key: string]: string | number } = {}
 const isMobile = /Android/i.test(navigator.userAgent)
-const isFirefox = browser?.webRequest
-console.log("isFirefox", isFirefox, typeof browser, browser)
+const isFirefox = !!browser?.webRequest
 // Increases Badge by 1
 async function increaseBadge(tabId: number) {
 	if (Badges?.[tabId] === undefined || typeof Badges[tabId] !== "number") {
