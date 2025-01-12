@@ -6,7 +6,25 @@ const src = chrome.runtime.getURL("/src/ui/iframe-page/index.html")
 const iframe = new DOMParser().parseFromString(`<iframe class="crx-iframe" src="${src}"></iframe>`, "text/html").body
 	.firstElementChild
 
-if (iframe) {
+const affiliateTag = "?tag=dreamliner05-20"
+const affiliatePages = [
+	"http://www.amazon.de/primegratistesten",
+	"https://www.amazon.co.uk/tryprimefree",
+
+	// "http://www.amazon.es/prime",
+	// "https://www.amazon.fr/prime",
+	// "http://www.amazon.it/amazonprime",
+	// "https://www.amazon.nl/prime",
+	"https://www.amazon.de/amazonprime?language=pl_PL",
+]
+
+const url = document.URL
+
+function isOnAffiliatePage(url: string) {
+	return affiliatePages.some((page) => url.includes(page) && url !== page)
+}
+
+if (iframe && isOnAffiliatePage(url)) {
 	document.body?.append(iframe)
 }
 
