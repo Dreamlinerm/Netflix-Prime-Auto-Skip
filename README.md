@@ -1,239 +1,311 @@
-# vite-vue3-browser-extension-v3
+<div align="center">
+<img src="firefox/icons/NetflixAmazon%20Auto-Skip.svg" width="10%">
 
-[![build](https://github.com/mubaidr/vite-vue3-browser-extension-v3/actions/workflows/build.yml/badge.svg)](https://github.com/mubaidr/vite-vue3-browser-extension-v3/actions/workflows/build.yml)
+# Streaming enhanced ![Project Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
 
-A [Vite](https://vitejs.dev/) powered WebExtension ([Chrome](https://developer.chrome.com/docs/extensions/reference/), [FireFox](https://addons.mozilla.org/en-US/developers/), etc.) starter template based on `manifest 3`, `vue3` and `vite` and alot more preconfigured.
 
-## Please take a moment to fill out a 3 question [Feedback Form](https://forms.gle/2nzS2AQkVGmqHTLV6) and let us know if you would be interested in purchasing a feature rich template, along with any features (auth, payment integration and more) you would like to see.
+## Automatically skip Ads, Intros, Recaps, Credits, etc.
+<a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
+<img src="Logos/firefox.svg" width="20px">
+<img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
+<img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
+<img alt="Mozilla Add-on Rating" src="https://img.shields.io/amo/rating/NetflixPrime%40Autoskip.io">
+</a>
+<br>
+<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
+<img src="Logos/chrome.svg" width="20px">
+<img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
+<img alt="Chrome Web Store Rating" src="https://img.shields.io/chrome-web-store/rating/akaimhgappllmlkadblbdknhbfghdgle">
+</a>
+<br>
+<img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/Dreamlinerm/Netflix-Prime-Auto-Skip">
+<img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FAuthorHours.json&query=time&label=Approx%20Dev%20Time%20(Owner)">
+<br>
+<a href="https://discord.gg/5fBYathA7d">
+<img src="https://img.shields.io/badge/Discord_Server-5a5a5a?logo=discord" width="300">
+</a>
+</div>
 
-**Note:** Your responses will help shape the future of this project and ensure we meet your needs better.
+***
 
----
+## Download & Install
+<a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"><img src="Logos/download button/firefox.png" alt="Get Streaming enhanced for Firefox"/>
+<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="Logos/download button/chrome.png" alt="Get Streaming enhanced for Chromium"/>
+<a href="https://microsoftedge.microsoft.com/addons/detail/streaming-enhanced-netfli/dhfpagghjamocfaaignghcljfpppelff"><img src="Logos/download button/microsoft.png" alt="Get Streaming enhanced for Edge"/>
 
-## Screenshots
+## Install on Android
 
-<p align="center">
-    <img src="./screenshots/Screenshot_20241225_225109.png" width="auto" height="180" alt="Options" style="margin: 0 10px;" />
-    <img src="./screenshots/Screenshot_20241225_224440.png" width="auto" height="180" alt="Options" style="margin: 0 10px;" />
-    <img src="./screenshots/Screenshot_20241225_224236.png" width="auto" height="180" alt="Options (Dark Mode)" style="margin: 0 10px;" />
-</p>
+<div style="display:flex">
+                <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
+                <img src="Logos/firefox.svg" width="8%" alt="firefox">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
+                <img src="Logos/kiwi.webp" width="8%">
+                </a>
+</div>
 
-<p align="center">
-    <img src="./screenshots/Screenshot_20241225_224300.png" width="auto" height="180" alt="Update Screen" />
-    <img src="./screenshots/Screenshot_20241227_000344.png" width="auto" height="180" alt="Update Screen" />
-</p>
+Download [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/), [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the firefox/chrome extension. 
 
-## Features
+The drm for each streaming service will be installed automatically when a video started for the first time and you may need to reload the page once.
 
-- Boiler plate Pages for
-  - Background
-  - Action Popup
-  - Options
-  - Content Script
-  - Devtools panel
-  - Browser Side Panel
-  - Setup pages for Install and Update events
-  - Offscreen pages for audio, screen recording etc
-  - Sample pages for Contact, About, Pricing etc
-- Dynamic/ Directory based routing. Just add a file in `src/pages` or relevant ui directory and it will be automatically registered as a route
-- State & UI Components
-  - Header
-  - Footer
-  - Locale Switch (i18n)
-  - Theme Switch (dark/light)
-  - Loading Spinner
-  - Error Boundary
-  - Empty State
-  - Notifications using `notivue`
-- Store for options preconfigured etc
-- Composables for
-  - i18n
-  - Theme
-  - Notifications
-  - Loading
-  - Error handling
-  - `useBrowserStorage` for extension settings and user options management
-- Preconfigured Pinia Store (optional perisitent and non-persistent)
-  - System wide
-  - Easily extendable
-  - Type safe
+## Contributing to Translation
 
-_Please create an issue if you feel some feature is missing or could be improved._
+We welcome contributions to the translation of the extension. If you're interested in helping us translate the extension to your language look [here](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues/42).
 
-## Directory Structure
+### Supported Streaming Services:
 
-```bash
-.
-├── dist                     # Built extension files
-│   ├── chrome              # Chrome-specific build
-│   └── firefox             # Firefox-specific build
-├── public                  # Static assets
-│   └── icons              # Extension icons
-├── scripts                 # Build/dev scripts
-├── src                     # Source code
-│   ├── assets             # Global assets (images, styles)
-│   ├── background         # Extension background script
-│   ├── components         # Shared Vue components
-│   ├── composables        # Vue composables/hooks
-│   ├── content-script     # Content scripts injected into pages
-│   ├── devtools          # Chrome devtools panel
-│   ├── locales           # i18n translation files
-│   ├── offscreen         # Offscreen pages (audio, recording)
-│   ├── stores            # Pinia stores
-│   ├── types             # TypeScript type definitions
-│   ├── ui                # UI pages
-│   │   ├── action-popup  # Browser toolbar popup
-│   │   ├── common        # Shared pages
-│   │   ├── content-script-iframe        # Content script app injected into pages by content script
-│   │   ├── devtools-panel # Devtools panel UI
-│   │   ├── options-page  # Extension options
-│   │   ├── setup        # Install/update pages
-│   │   └── side-panel   # Browser side panel
-│   └── utils            # Shared utilities
-├── manifest.config.ts    # Base manifest configuration
-├── vite.config.ts       # Base Vite configuration
-├── tailwind.config.cjs  # Tailwind CSS configuration
-└── package.json         # Project dependencies and scripts
-```
-
-## Development tools
-
-### Vite Plugins
-
-- [`unplugin-vue-router`](https://github.com/posva/unplugin-vue-router) - File system based route generator for Vite
-- [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import) - Directly use `browser` and Vue Composition API without importing
-- [`unplugin-vue-components`](https://github.com/antfu/vite-plugin-components) - components auto import
-- [`unplugin-icons`](https://github.com/antfu/unplugin-icons) - icons as components
-- [`unplugin-turbo-console`](https://github.com/unplugin/unplugin-turbo-console) - Improve the Developer Experience of console
-- [`@intlify/unplugin-vue-i18n`](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n) - unplugin for Vue I18n
-
-### Vue Plugins
-
-- [Pinia](https://pinia.vuejs.org/) - Intuitive, type safe, light and flexible Store for Vue
-- [VueUse](https://github.com/antfu/vueuse) - collection of useful composition APIs
-- [Notivue](
-- [Vue-i18n](https://kazupon.github.io/vue-i18n/) - Internationalization plugin for Vue.js
-
-### Plugins
-
-- [Marked](https://github.com/markedjs/marked) - A markdown parser and compiler. Used for CHANGELOG.md to show in Update page
-
-### UI Frameworks
-
-- [tailwindcss](https://tailwindcss.com) - A utility-first CSS framework
-- [daisyUI](https://daisyui.com/) - The most popular component library for Tailwind CSS
-
-_Tailwind css `forms` and `typography` plugins are enabled for default styling of form controls._
-
-### WebExtension Libraries
-
-- [`webext-bridge`](https://github.com/zikaari/webext-bridge) - effortlessly communication between contexts
-- [`webextension-polyfill`](https://github.com/mozilla/webextension-polyfill) - A lightweight polyfill library for Promise-based WebExtension APIs in Chrome
-
-### Coding Style
-
-- [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript at Any Scale
-- [ESLint](https://eslint.org/) - Linting utility for JavaScript and JSX
-- [Prettier](https://prettier.io/) - Code formatter
-- Use Composition API with [`<script setup>` SFC syntax](https://github.com/vuejs/rfcs/pull/227)
-- Use Composition API with [`setup` SFC syntax](https://pinia.vuejs.org/cookbook/composables.html#Setup-Stores) in Pinia stores
-
-## Use the Template
-
-### GitHub Template
-
-[Create a repo from this template on GitHub](https://github.com/mubaidr/vite-vue3-browser-extension-v3/generate).
-
-### Clone to local
-
-If you prefer to do it manually with the cleaner git history
-
-> If you don't have pnpm installed, run: npm install -g pnpm
-
-```bash
-pnpx degit mubaidr/vite-vue3-browser-extension-v3 my-webext
-cd my-webext
-pnpm i
-```
-
-### Browser Related Configurations
-
-- `manifest.config.ts` - Base extension manifest with common configuration
-- `manifest.chrome.config.ts` - Chrome/ chromium based browsers specific manifest
-- `manifest.firefox.config.ts` - Firefox spefic manifest
-- `vite.config.ts` - Base vite configuration
-- `vite.chrome.config.ts` - Chrome/ chromium based browsers specific vite configuration
-- `vite.firefox.config.ts` - Firefox specific vite configuration
-
-### Scripts
-
-- `pnpm dev` - Start development server
-- `pnpm build` - Build extension
-- `pnpm lint` - Lint files
-
-_You can also use pnpm dev:chrome, pnpm dev:firefox, pnpm build:chrome, pnpm build:firefox, pnpm lint:fix_
-
-_Then load extension in browser with the `dist/` folder_
-
-**Note**: Pack files under `dist/chrome` or `dist/firefox`, you can upload to appropriate extension store.
-
-## Support
-
-If you like this project, you can support me by donating [mubaidr](https://www.patreon.com/c/mubaidr) and starring ⭐ this repository.
-
-## Hire me
-
-I am a full stack developer. I am open to work. If you are looking for a developer or have a project you want to start, please visit my profile and website here: [mubaidr](https://mubaidr.js.org).
-
-## Contributors
-
-<!-- readme: collaborators,contributors -start -->
 <table>
-	<tbody>
-		<tr>
-            <td align="center">
-                <a href="https://github.com/mubaidr">
-                    <img src="https://avatars.githubusercontent.com/u/2222702?v=4" width="100;" alt="mubaidr"/>
-                    <br />
-                    <sub><b>Muhammad Ubaid Raza</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/baramofme">
-                    <img src="https://avatars.githubusercontent.com/u/44565599?v=4" width="100;" alt="baramofme"/>
-                    <br />
-                    <sub><b>Jihoon Yi</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/poncianodiego">
-                    <img src="https://avatars.githubusercontent.com/u/20716004?v=4" width="100;" alt="poncianodiego"/>
-                    <br />
-                    <sub><b>Diego Ponciano</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/IgorFZ">
-                    <img src="https://avatars.githubusercontent.com/u/85708187?v=4" width="100;" alt="IgorFZ"/>
-                    <br />
-                    <sub><b>igorfz</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/hi2code">
-                    <img src="https://avatars.githubusercontent.com/u/51270649?v=4" width="100;" alt="hi2code"/>
-                    <br />
-                    <sub><b>hi2code</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/justorez">
-                    <img src="https://avatars.githubusercontent.com/u/17308328?v=4" width="100;" alt="justorez"/>
-                    <br />
-                    <sub><b>Null</b></sub>
-                </a>
-            </td>
-		</tr>
-	<tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%">
+        <img src="Logos/Netflix.png" width="20%">
+        <img src="Logos/prime%20video.png" width="20%" >
+        <img src="Logos/crunchyroll.avif" width="20%">
+        <img src="Logos/HBO-max.jpg" width="20%">
+        <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
+        <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
+        <img src="Logos/starplus.png" width="20%" style="background-color:white;">
+      </td>
+    </tr>
 </table>
-<!-- readme: collaborators,contributors -end -->
+<details>
+  <summary>The above table in markdown</summary>
+  
+  | Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO    |
+  | ---     | ---             | ---                      | ---         | ---    |
+  | ✅      | ✅             | ✅                      | ✅          | ✅    |
+</details>
+
+
+## Android Compatibility:
+
+| Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
+| ---     | ---                 | ---                      | ---         | ---                |
+| ❌     | ✅(tweaked Desktop Website) | ✅(default Desktop Website)      | ✅         | ✅ |
+
+## What it does
+
+The script, "skipper.js", is injected into all urls containing "amazon.\*/\*/video" or "netflix.com" or "disneyplus.com" or "hotstar.com" or "starplus.com".
+
+It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix, Prime video and Disney Plus (Hotstar, STAR+).
+
+## ✨ Features
+
+Features in other supported languages:
+| [Deutsch](docs/storeDescriptions/de.md) |
+| [Français](docs/storeDescriptions/fr.md) |
+| [Español](docs/storeDescriptions/es.md) |
+| [Português](docs/storeDescriptions/pt.md) |
+| [Português (Brasil)](docs/storeDescriptions/pt_br.md) |
+| [Italiano](docs/storeDescriptions/it.md) |
+| [日本語](docs/storeDescriptions/ja.md) |
+| [Polski](docs/storeDescriptions/pl.md) |
+| [Svenska](docs/storeDescriptions/sv.md) |
+| [汉语](docs/storeDescriptions/zh_CN.md) |
+| [한국어](docs/storeDescriptions/ko.md) |
+| [Türkçe](docs/storeDescriptions/tr.md) |
+
+This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
+<ul>
+<li>Block Ads</li>
+<li>Skipping Intros & Recaps</li>
+<li>Skipping Credits</li>
+<li>Displaying TMDB ratings for all shows</li>
+<li>Adding customizable playback speed control</li>
+<li>Automatically start to play videos in fullscreen</li>
+<li>Go fullscreen on double click</li>
+<li>Scroll to change the volume</li>
+</ul>
+
+Platform-Specific Features:
+<ul>
+<li>Netflix:
+  <ul>
+    <li>Remembers and selects your last-used profile automatically</li>
+    <li>Blocks the “Are you still watching?” inactivity warning</li>
+  </ul>
+</li>
+
+<li>Amazon Prime Video:
+  <ul>
+    <li>Skips self-promotional ads (for Prime Video productions)</li>
+    <li>Filters out paid content (movies, series) from the home page</li>
+    <li>Removes the blur effect when hovering over videos</li>
+  </ul>
+</li>
+
+<li>Disney+ (Hotstar, STAR+):
+  <ul>
+    <li>Skips self-promotional ads</li>
+    <li>Automatically returns to fullscreen mode when going to the next episode</li>
+  </ul>
+</li>
+
+<li>Crunchyroll:
+  <ul>
+    <li>Remembers and selects your last-used profile automatically</li>
+    <li>Adds filters to the release calendar, so it is useable</li>
+    <li>Video size expanded to entire window</li>
+    <li>Disable the numpad</li>
+  </ul>
+</li>
+</ul>
+
+If you want to see what is implemented go [here](#implemented-feature-overview):
+
+## 💕 Enjoying Streaming enhanced?
+
+Buy me a [coffee](https://github.com/sponsors/Dreamlinerm)! 
+
+<img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FAuthorHours.json&query=time&label=Approx%20Development%20Time%20(Owner)">
+
+## Contributing
+
+If you have any suggestions or Bugs, please open an issue or join the  [Discord](https://discord.gg/7us76ErE). 
+Everyone is welcome to contribute!
+
+## Settings
+
+You can customize which features are enabled in the Settings.
+
+Import and Export all Settings.
+
+See Statistics. All statistics and settings are not shared but are synchronized with your browser account.
+
+### Skip Credits, Watch Credits
+
+Skip Credits and Watch Credits are mutally exclusive, but you can turn both of the off. One allways skips the credits and one allways watches them, if both are turned off its the default behaviour showing the skip credit button.
+
+<img src="Logos/svg/settings.svg" alt="Settings Preview">
+
+## Ratings
+
+Click on Rating to go to the TMDB page of the movie.
+
+The ratings are gathered from the TMDB API. Ratings are refreshed every month.
+If there is no score they are refreshed once per day. If the movie is newer than 50 days and has less than 100 votes it will get refreshed every 3 days.
+
+| Rating | Explanation |
+| --- | --- |
+| ? | Title not found |
+| <img src="Logos/greyBox.svg" height="20px"> | ? or less than 30 votes |
+| <img src="Logos/redBox.svg" height="20px"> | <= 5.5 stars|
+| <img src="Logos/yellowBox.svg" height="20px"> | <= 7 stars|
+| <img src="Logos/greenBox.svg" height="20px"> | >7 stars|
+
+
+# Implemented Feature Overview
+
+| abbrev. | definition |
+| --- | --- |
+|S|season|
+|E|episode|
+|✅| Implemented|
+|➖| Not available|
+|❌| Not implemented|
+|?| don't know if necessary|
+| Name| service specific features|
+
+| Feature | Netflix | Prime Video | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO max |
+| --- | --- | --- | --- | --- | --- |
+| Intro | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>| ✅  <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>| ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> | ✅ [One piece](https://www.crunchyroll.com/series/GRMG8ZQZR/one-piece) | ✅ |
+| Recaps | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>| ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a> | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>| ? | ✅ |
+| Credits | ✅ | ✅ | ✅ | ❌(not necessary if outro is skipped) | ✅ |
+| Ads | ✅ | ✅ | ✅ | ❌(Ublock can do it) | ? |
+| Add Speed Slider | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Play on Fullscreen | ✅ | ✅ | ✅ | ✅ | ✅ |
+| fullscreen on double click | ➖ | ✅ | ➖ | ✅ | ? |
+| Scroll for volume |  ✅ | ✅ | ✅ | ✅ | ❌ |
+| TMDB Rating | ✅ | ✅ | ✅ | ❌(MAL ratings better) | ✅ |
+| Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue"</li><li>Hide Xray</li></ul> | <ul><li>Skip self ads</li><li>Remain fullscreen</li></ul> | <ul><li>Auto pick last profile</li><li>Release Calendar Filters</li><li>Big Video size</li><li>Disable the numpad</li></ul> | ➖ |
+
+## How it works
+
+The addon is observing every mutation of the dom Tree of the Website.
+
+The exact classes may be outdated since I do not update these regularly.
+
+On Netflix it matches the buttons with the data-uia tag containing:
+
+* Intro: player-skip-intro
+* Recap: player-skip-recap, player-skip-preplay
+* Credits: next-episode-seamless-button
+* Inactivity Warning: interrupt-autoplay-continue
+* Basic tier ads: matched by css class .default-ltr-cache-mmvz9h and the speed is set to 16x until the ad is over
+
+On Prime video it matches buttons with the Css Classes:
+
+* Intro: skipelement
+* Credits: nextupcard-button
+* Self promoting ads: .fu4rd6c.f1cw2swo
+* Paid Content: .o86fri (yallow text indicates paid films)
+  
+The freevee ad text contains the ad length which is matched by 
+
+* Freevee ads: .atvwebplayersdk-ad-timer-text
+
+and then skipped by forwarding by the ad length -0.1 seconds which will fix a lot of issues it turns out.
+
+## Run the Extension
+
+## Chrome
+
+To run the extension in chrome you can just load the ``chrome`` folder as an unpacked extension. But every time you modify the code you have to reload the extension on the extension page manually.
+I primarily just develop in firefox and then copy the code into chrome and replace ``browser`` with ``chrome`` in the code.
+
+## Firefox 
+
+Just like chrome you can temporarily load the extension by going to ``about:addons``, clicking on the gear icon and then ``Install Add-ons From File``. Then you can load the ``firefox`` folder as a temporary extension.
+
+### Install web-ext and Firefox for a better development experience
+
+```npm install --global web-ext``` to install web-ext globally
+
+```npm start``` to start in firefox
+
+### debug
+
+```npm start```  start the firefox development with a dev profile
+
+```npm run start-android```  start on firefox android
+
+```npm run start-chrome```  start on chrome
+
+```npm run lint```   lint all the js files
+
+```npm run esLint``` lint all the manifest files
+
+```npm run build```  copy files from firefox to chrome and build the zips files to upload
+
+```npm run copy```   copy files from firefox to chrome
+
+```npm run zip```    build the zips files to upload
+
+```npm test```       test with python Selenium __testsOutdated__
+
+## Test the Extension with Selenium python
+
+### Setup
+
+- insert your own firefox profile filepath to be logged into every platform in the ``test.py`` file.
+- install Python
+- install selenium ``pip install -U selenium``
+
+### Run
+
+```npm test```
+
+Cli ARGS:
+- none : all tests
+- 'n': Netflix tests
+- 'p': Prime Video tests
+- 'd': Disney tests
+
+```npm test n p d```
+
+## Changelog
+
+You can see the Changelog in the addon or in the published versions.
+
+## Disclaimer
+
+Netflix, Amazon Prime video and Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.
