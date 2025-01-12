@@ -275,7 +275,7 @@ async function Crunchyroll_bigPlayerStyle() {
 		// show header on hover
 		const style = document.createElement("style")
 		const parentDiv = document.querySelector('[class^="app-layout__header"]')?.classList?.[0]
-		style.innerHTML = `
+		const styles = `
       .video-player-wrapper{
           max-Height: calc(100vw / 1.7777);
           height: 100vh;
@@ -303,6 +303,7 @@ async function Crunchyroll_bigPlayerStyle() {
           top: 0;
       }
     `
+		style.appendChild(document.createTextNode(styles))
 		document.head.appendChild(style)
 	}
 }
