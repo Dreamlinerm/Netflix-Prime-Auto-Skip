@@ -158,18 +158,9 @@ Buy me a [coffee](https://github.com/sponsors/Dreamlinerm)!
 
 <img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FauthorHours.json&query=time&label=Approx%20Development%20Time%20(Owner)">
 
-## Contributing
-
-If you have any suggestions or Bugs, please open an issue or join the  [Discord](https://discord.gg/7us76ErE). 
-Everyone is welcome to contribute!
-
 ## Settings
 
 You can customize which features are enabled in the Settings.
-
-Import and Export all Settings.
-
-See Statistics. All statistics and settings are not shared but are synchronized with your browser account.
 
 ### Skip Credits, Watch Credits
 
@@ -218,33 +209,6 @@ If there is no score they are refreshed once per day. If the movie is newer than
 | TMDB Rating | ✅ | ✅ | ✅ | ❌(MAL ratings better) | ✅ |
 | Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue"</li><li>Hide Xray</li></ul> | <ul><li>Skip self ads</li><li>Remain fullscreen</li></ul> | <ul><li>Auto pick last profile</li><li>Release Calendar Filters</li><li>Big Video size</li><li>Disable the numpad</li></ul> | ➖ |
 
-## How it works
-
-The addon is observing every mutation of the dom Tree of the Website.
-
-The exact classes may be outdated since I do not update these regularly.
-
-On Netflix it matches the buttons with the data-uia tag containing:
-
-* Intro: player-skip-intro
-* Recap: player-skip-recap, player-skip-preplay
-* Credits: next-episode-seamless-button
-* Inactivity Warning: interrupt-autoplay-continue
-* Basic tier ads: matched by css class .default-ltr-cache-mmvz9h and the speed is set to 16x until the ad is over
-
-On Prime video it matches buttons with the Css Classes:
-
-* Intro: skipelement
-* Credits: nextupcard-button
-* Self promoting ads: .fu4rd6c.f1cw2swo
-* Paid Content: .o86fri (yallow text indicates paid films)
-  
-The freevee ad text contains the ad length which is matched by 
-
-* Freevee ads: .atvwebplayersdk-ad-timer-text
-
-and then skipped by forwarding by the ad length.
-
 ## Develop the Extension
 
 ### Setup
@@ -255,17 +219,16 @@ and then skipped by forwarding by the ad length.
 - ```pnpm web-ext``` run the extension in firefox
 - ```pnpm chrome``` run the extension in chrome
 
+This extension was built with the template [vite-vue3-browser-extension-v3](https://github.com/mubaidr/vite-vue3-browser-extension-v3)
+
 ### Further Commands
 
 - ```pnpm dev``` hot build with sourcemaps and w/o minification for both
 - ```pnpm dev:chrome``` hot build with sourcemaps and w/o minification for chrome
 - ```pnpm dev:firefox``` hot build with sourcemaps and w/o minification for firefox
-
 - ```npm run start-android```  start on firefox android
 
-This extension was built with the template [vite-vue3-browser-extension-v3](https://github.com/mubaidr/vite-vue3-browser-extension-v3)
-
-The refreshed Readme of the template can be found [here](README_TEMPLATE.md)
+Further documentation is [here](README_TEMPLATE.md)
 
 ## Open the Extension without web-ext
 
@@ -277,20 +240,6 @@ I primarily just develop in firefox and then copy the code into chrome and repla
 ## Firefox 
 
 Just like chrome you can temporarily load the extension by going to ``about:addons``, clicking on the gear icon and then ``Install Add-ons From File``. Then you can load the ``dist/firefox`` folder as a temporary extension.
-
-### Formatting and Linting Commands
-
-- ```pnpm format``` run prettier on all files 
-- ```pnpm lint``` run esLint
-- ```pnpm lint:manifest``` web-ext lint manifest files
-
-### Author Commands
-
-- ```pnpm transDeepL``` translate .translation/deepl.EN.json and output them into the locales files directly
-- ```pnpm hours``` calculate the hours spent on the project
-- ```pnpm copyDocsFtoC``` copy the docs from the firefox folder to the chrome folder
-
-
 
 ## Changelog
 
