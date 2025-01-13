@@ -228,7 +228,7 @@ This extension was built with the template [vite-vue3-browser-extension-v3](http
 - ```pnpm dev:firefox``` hot build with sourcemaps and w/o minification for firefox
 - ```npm run start-android```  start on firefox android
 
-Further documentation is [here](README_TEMPLATE.md)
+Further documentation is [here](develop.md)
 
 ## Open the Extension without web-ext
 
