@@ -1,3 +1,13 @@
 {
-	"recommendations": []
+	"recommendations": [
+		"lokalise.i18n-ally",
+		"bradlc.vscode-tailwindcss",
+		"vue.volar",
+		"formulahendry.auto-rename-tag",
+		"pranaygp.vscode-css-peek",
+		"esbenp.prettier-vscode",
+		"streetsidesoftware.code-spell-checker",
+		"alefragnani.project-manager",
+		"hediet.vscode-drawio"
+	]
 }
