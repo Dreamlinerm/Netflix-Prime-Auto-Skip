@@ -48,6 +48,7 @@
 - ```pnpm transDeepL``` translate .translation/deepl.EN.json and output them into the locales files directly
 - ```pnpm hours``` calculate the hours spent on the project
 - ```pnpm copyDocsFtoC``` copy the docs from the firefox folder to the chrome folder
+- ```pnpm firefox``` run extension with permanent firefox profile
 
 
 ## Development tools
