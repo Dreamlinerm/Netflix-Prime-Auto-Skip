@@ -72,5 +72,6 @@
 	"editor.stickyScroll.enabled": true,
 	"task.allowAutomaticTasks": "on",
 	"workbench.editor.wrapTabs": true,
-	"svg.preview.background": "dark-transparent"
+	"svg.preview.background": "dark-transparent",
+	"i18n-ally.keystyle": "flat"
 }
