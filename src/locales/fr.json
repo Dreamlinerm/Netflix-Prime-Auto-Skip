@@ -100,5 +100,6 @@
   "iframeTitle": "Support Streaming enhanced ❤️",
   "iframeButton": "Appliquer le lien d'affiliation",
   "affiliateSwitch": "Popup d'affiliation :",
-  "affiliateDescription": "Si une page contenant un lien d'affiliation est ouverte, une fenêtre contextuelle s'affiche pour appliquer le lien d'affiliation, comme pour amazon prime."
+  "affiliateDescription": "Si une page contenant un lien d'affiliation est ouverte, une fenêtre contextuelle s'affiche pour appliquer le lien d'affiliation, comme pour amazon prime.",
+  "addPermissionButton": "Ajouter"
 }

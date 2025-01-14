@@ -100,5 +100,6 @@
   "iframeTitle": "支持 Streaming enhanced ❤️",
   "iframeButton": "申请联盟链接",
   "affiliateSwitch": "联盟弹出窗口：",
-  "affiliateDescription": "如果打开了带有联盟链接的页面，则弹出应用联盟链接的窗口，如亚马逊黄金。"
+  "affiliateDescription": "如果打开了带有联盟链接的页面，则弹出应用联盟链接的窗口，如亚马逊黄金。",
+  "addPermissionButton": "添加"
 }

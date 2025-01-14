@@ -100,5 +100,6 @@
   "iframeTitle": "Stöd för Streaming enhanced ❤️",
   "iframeButton": "Använd affiliate-länk",
   "affiliateSwitch": "Affiliate Popup:",
-  "affiliateDescription": "Om en sida med en affiliate-länk är öppen visas en popup för att tillämpa affiliate-länken, t.ex. för Amazon Prime."
+  "affiliateDescription": "Om en sida med en affiliate-länk är öppen visas en popup för att tillämpa affiliate-länken, t.ex. för Amazon Prime.",
+  "addPermissionButton": "Lägg till"
 }

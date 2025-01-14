@@ -100,5 +100,6 @@
   "iframeTitle": "Suporte a Streaming enhanced ❤️",
   "iframeButton": "Aplicar a ligação de afiliado",
   "affiliateSwitch": "Popup de afiliado:",
-  "affiliateDescription": "Se uma página com uma ligação de afiliado estiver aberta, mostra uma janela pop-up para aplicar a ligação de afiliado, como no caso do amazon prime."
+  "affiliateDescription": "Se uma página com uma ligação de afiliado estiver aberta, mostra uma janela pop-up para aplicar a ligação de afiliado, como no caso do amazon prime.",
+  "addPermissionButton": "Adicionar"
 }

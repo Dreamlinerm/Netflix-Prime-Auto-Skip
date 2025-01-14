@@ -100,5 +100,6 @@
   "iframeTitle": "Support Streaming enhanced ❤️",
   "iframeButton": "アフィリエイトリンクを貼る",
   "affiliateSwitch": "アフィリエイト・ポップアップ",
-  "affiliateDescription": "アフィリエイトリンクのあるページが開いている場合、amazonプライムのようにアフィリエイトリンクを適用するためのポップアップを表示する。"
+  "affiliateDescription": "アフィリエイトリンクのあるページが開いている場合、amazonプライムのようにアフィリエイトリンクを適用するためのポップアップを表示する。",
+  "addPermissionButton": "追加"
 }

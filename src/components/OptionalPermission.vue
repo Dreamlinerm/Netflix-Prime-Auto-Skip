@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 const isFirefox = typeof browser !== "undefined"
-import { push } from "notivue"
 const optionalPermissions = ["tabs"]
 const unsetPermissions: Ref<string[]> = ref([])
 checkOptionalPermissions()
@@ -34,15 +33,15 @@ async function requestUnsetPermissions() {
 			:key="permission"
 			class="flex text-primary-content"
 		>
-			<div class="bg-gray-900 w-12 rounded text-error-content text-center">{{ permission }}</div>
+			<div class="bg-gray-800 w-12 px-2 rounded text-error-content text-center">{{ permission }}</div>
 			->
-			<div class="bg-gray-900 rounded text-error-content">{{ $t(permission + "Permission") }}</div>
+			<div class="bg-gray-800 rounded text-error-content px-2">{{ $t(permission + "Permission") }}</div>
 		</div>
 		<button
 			class="btn btn-error w-fit"
 			@click="requestUnsetPermissions"
 		>
-			Add
+			{{ $t("addPermissionButton") }}
 		</button>
 	</div>
 </template>
