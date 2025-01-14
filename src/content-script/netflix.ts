@@ -74,7 +74,12 @@ function Netflix() {
 			}
 		}
 	}
-	if (NSettings?.skipCredits) Netflix_General('[data-uia="next-episode-seamless-button"]', "Credits skipped")
+	if (NSettings?.skipCredits) {
+		Netflix_General('[data-uia="next-episode-seamless-button-draining"]', "Credits skipped")
+		// if (!Netflix_General('[data-uia="next-episode-seamless-button-draining"]', "Credits skipped draining")) {
+		// 	Netflix_General('[data-uia="next-episode-seamless-button"]', "Credits skipped regular")
+		// }
+	}
 	if (NSettings?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched")
 	if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped")
 	if (NSettings?.speedSlider && video) Netflix_SpeedSlider(video)

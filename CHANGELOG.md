@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.56
+
+- Netflix skip Credits immediately not after draining animation
+- Fixed browser action color back to red on chrome.
+
 ## 1.1.55
 
 - Fixed Crunchyroll big picture, auto pick profile, because of change website
