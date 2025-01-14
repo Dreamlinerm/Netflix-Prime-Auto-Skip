@@ -39,6 +39,8 @@ console.log("background loaded")
 const Badges: { [key: string]: string | number } = {}
 const isMobile = /Android/i.test(navigator.userAgent)
 const isFirefox = !!browser?.webRequest
+if (isFirefox) browser.browserAction.setBadgeBackgroundColor({ color: "#e60010" })
+else chrome.action.setBadgeBackgroundColor({ color: "#e60010" })
 // Increases Badge by 1
 async function increaseBadge(tabId: number) {
 	if (Badges?.[tabId] === undefined || typeof Badges[tabId] !== "number") {
