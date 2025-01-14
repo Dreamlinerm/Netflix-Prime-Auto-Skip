@@ -192,7 +192,7 @@ function filterOldList(isCurrentWeek: boolean, localList: CrunchyList) {
 	} else {
 		oldList = oldList
 			.filter((item) => {
-				return shiftSunday(date.getDay()) - shiftSunday(new Date(item.time).getDay()) <= 0
+				return item && shiftSunday(date.getDay()) - shiftSunday(new Date(item.time).getDay()) <= 0
 			})
 			// delete all items from same weekday before lastElement time
 			.filter((item) => {

@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.57
+
+- fixed bug in Crunchyroll Release Calendar
+- 
+
 ## 1.1.56
 
 - Netflix skip Credits immediately not after draining animation
