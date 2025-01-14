@@ -4,7 +4,6 @@
 
 - fixed bug in Crunchyroll Release Calendar
 - Amazon,Disney skipCredits now not triggered if last episode
-- 
 
 ## 1.1.56
 
