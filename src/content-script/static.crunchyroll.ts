@@ -34,7 +34,7 @@ async function addSkippedTime(startTime: number, endTime: number, key: Statistic
 	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
 		console.log(key, endTime - startTime)
 		settings.value.Statistics[key] += endTime - startTime
-		increaseBadge()
+		sendMessage("increaseBadge", {}, "background")
 	}
 }
 
