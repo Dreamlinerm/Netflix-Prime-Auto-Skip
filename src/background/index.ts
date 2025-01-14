@@ -39,22 +39,21 @@ console.log("background loaded")
 const Badges: { [key: string]: string | number } = {}
 const isMobile = /Android/i.test(navigator.userAgent)
 const isFirefox = !!browser?.webRequest
-if (isFirefox) browser.browserAction.setBadgeBackgroundColor({ color: "#e60010" })
-else chrome.action.setBadgeBackgroundColor({ color: "#e60010" })
+const action = isFirefox ? browser.browserAction : chrome.action
+action.setBadgeBackgroundColor({ color: "#e60010" })
 // Increases Badge by 1
 async function increaseBadge(tabId: number) {
 	if (Badges?.[tabId] === undefined || typeof Badges[tabId] !== "number") {
 		Badges[tabId] = 0
 	}
 	Badges[tabId]++
-	if (isFirefox) browser.browserAction.setBadgeText({ text: Badges[tabId].toString(), tabId })
-	else chrome.action.setBadgeText({ text: Badges[tabId].toString(), tabId })
+	console.log("increaseBadge")
+	action.setBadgeText({ text: Badges[tabId].toString(), tabId })
 }
 // Set Badge to a specific value
 async function setBadgeText(text: string, tabId: number) {
 	Badges[tabId] = text
-	if (isFirefox) browser.browserAction.setBadgeText({ text, tabId })
-	else chrome.action.setBadgeText({ text, tabId })
+	action.setBadgeText({ text, tabId })
 }
 
 // onMessage
@@ -107,8 +106,7 @@ onMessage("resetBadge", async (message: { sender: any }) => {
 	const { sender } = message
 	if (sender?.tabId) {
 		if (Badges[sender.tabId]) delete Badges[sender.tabId]
-		if (isFirefox) browser.browserAction.setBadgeText({ text: "", tabId: sender.tabId })
-		else chrome.action.setBadgeText({ text: "", tabId: sender.tabId })
+		action.setBadgeText({ text: "", tabId: sender.tabId })
 	}
 })
 if (isFirefox && isMobile) {
