@@ -160,8 +160,10 @@ async function Amazon_Credits() {
 		// only skipping to next episode not an entirely new series
 		const newEpNumber = document.querySelector("[class*=nextupcard-episode]") as HTMLElement
 		if (
-			newEpNumber &&
-			!/(?<!\S)1(?!\S)/.exec(newEpNumber?.textContent ?? "") &&
+			// is series
+			newEpNumber?.textContent &&
+			// not different show.
+			!/(?<!\S)1(?!\S)/.exec(newEpNumber.textContent) &&
 			lastAdTimeText != newEpNumber.textContent
 		) {
 			lastAdTimeText = newEpNumber.textContent ?? ""

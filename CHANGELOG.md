@@ -3,6 +3,7 @@
 ## 1.1.57
 
 - fixed bug in Crunchyroll Release Calendar
+- Amazon skipCredits now not triggered if last episode
 - 
 
 ## 1.1.56
