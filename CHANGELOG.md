@@ -4,6 +4,7 @@
 
 - Netflix skip Credits immediately not after draining animation
 - Fixed browser action color back to red on chrome.
+- Netflix: fixed scroll on Volume button to change volume
 
 ## 1.1.55
 

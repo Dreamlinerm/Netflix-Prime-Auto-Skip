@@ -86,16 +86,16 @@ function Netflix() {
 	if (settings.value.Video?.scrollVolume && video) Netflix_scrollVolume(video)
 }
 async function Netflix_scrollVolume(video: HTMLVideoElement) {
-	const volumeControl = document.querySelector('[data-uia*="control-volume"]:not(.enhanced)') as HTMLElement
+	const volumeControl = document.querySelector('[data-uia*="control-volume"] div:not(.enhanced)') as HTMLElement
 	if (volumeControl) {
 		volumeControl.classList.add("enhanced")
 		const handleVolumeControl = (event: WheelEvent) => {
 			let volume = video.volume
-			if (event.deltaY < 0) volume = Math.min(1, volume + 0.05)
-			else volume = Math.max(0, volume - 0.05)
+			if (event.deltaY < 0) volume = Math.min(1, volume + 0.1)
+			else volume = Math.max(0, volume - 0.1)
 			video.volume = volume
 		}
-		removeEventListener("wheel", handleVolumeControl)
+		volumeControl?.removeEventListener("wheel", handleVolumeControl)
 		volumeControl?.addEventListener("wheel", handleVolumeControl)
 	}
 }
