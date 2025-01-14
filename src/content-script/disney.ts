@@ -140,7 +140,8 @@ async function Disney_skipCredits(currentTime: number) {
 		button = document
 			.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)
 			?.iterateNext()?.parentElement as HTMLElement
-	if (button) {
+	// button.getAttribute("data-testid") is to avoid clicking the next episode button when different show.
+	if (button && !button.getAttribute("data-testid")) {
 		// time is to avoid clicking too fast
 		const time = currentTime
 		if (time && lastAdTimeText != time) {
@@ -181,7 +182,8 @@ async function Disney_addHomeButton() {
 	const buttonDiv = document.querySelector('[data-testid="browser-action-button"]')?.parentElement
 	if (buttonDiv && !document.querySelector("#homeButton")) {
 		const homeButton = document.createElement("button")
-		homeButton.textContent = browser.i18n.getMessage("HomeButton")
+		// $t("HomeButton")
+		homeButton.textContent = "Home"
 		homeButton.id = "homeButton"
 		homeButton.style.cssText =
 			'color: white;background-color: #40424A;border: rgb(64, 66, 74);border-radius: 5px;padding: 0 2px 0 2px;height: 56px;padding-left: 24px;padding-right: 24px;letter-spacing: 1.76px;font-size: 15px;  text-transform: uppercase;cursor: pointer;font-family:"Avenir-World-for-Disney-Demi", sans-serif;'
