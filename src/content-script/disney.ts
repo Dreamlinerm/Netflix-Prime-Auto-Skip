@@ -182,7 +182,7 @@ async function Disney_addHomeButton() {
 	const buttonDiv = document.querySelector('[data-testid="browser-action-button"]')?.parentElement
 	if (buttonDiv && !document.querySelector("#homeButton")) {
 		const homeButton = document.createElement("button")
-		// $t("HomeButton")
+		//  browser.i18n.getMessage $t("HomeButton")
 		homeButton.textContent = "Home"
 		homeButton.id = "homeButton"
 		homeButton.style.cssText =

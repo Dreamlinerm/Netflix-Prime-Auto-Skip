@@ -102,9 +102,9 @@ function Amazon_Intro() {
 		// recap on lucifer season 3 episode 3
 		// intro lucifer season 3 episode 4
 		const button = document.querySelector("[class*=skipelement]") as HTMLButtonElement
-		if (button) {
+		if (button?.checkVisibility()) {
 			const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
-			const time = video?.currentTime ?? 0
+			const time = Math.floor(video?.currentTime ?? 0)
 			if (typeof time === "number" && lastIntroTime != time) {
 				lastIntroTime = time
 				resetLastIntroTime()
@@ -131,7 +131,8 @@ async function AmazonGobackbutton(video: HTMLVideoElement, startTime: number, en
 			"fqye4e3 f1ly7q5u fk9c3ap fz9ydgy f1xrlb00 f1hy0e6n fgbpje3 f1uteees f1h2a8xb  f1cg7427 fiqc9rt fg426ew f1ekwadg",
 		)
 		button.setAttribute("data-uia", "reverse-button")
-		button.textContent = browser.i18n.getMessage("WatchSkippedButton")
+		//  browser.i18n.getMessage("WatchSkippedButton")
+		button.textContent = "Rewind?"
 		document.querySelector(".atvwebplayersdk-action-buttons")?.appendChild(button)
 		const buttonInHTML = document.querySelector('[data-uia="reverse-button"]')
 		if (buttonInHTML) {
