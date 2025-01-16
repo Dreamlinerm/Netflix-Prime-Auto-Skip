@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.59
+
+- fix crunchyroll release calendar bug, because of new storage
+
 ## 1.1.58
 
 - BUG: fixed skip intro amazon loop

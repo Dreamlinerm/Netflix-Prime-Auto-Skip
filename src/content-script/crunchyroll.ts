@@ -181,7 +181,7 @@ function createLocalList() {
 	return localList
 }
 function filterOldList(isCurrentWeek: boolean, localList: CrunchyList) {
-	let oldList = settings.value.General.savedCrunchyList || []
+	let oldList = toRaw(settings.value.General.savedCrunchyList)
 	const lastElement = localList[localList.length - 1]
 	if (!lastElement?.time) return oldList
 	const lastTime = new Date(lastElement.time)
@@ -190,6 +190,7 @@ function filterOldList(isCurrentWeek: boolean, localList: CrunchyList) {
 	if (!isCurrentWeek) {
 		oldList = []
 	} else {
+		// delete all items from weekday before today
 		oldList = oldList
 			.filter((item) => {
 				return item && shiftSunday(date.getDay()) - shiftSunday(new Date(item.time).getDay()) <= 0
@@ -215,9 +216,8 @@ function addSavedCrunchyList() {
 	const localList = createLocalList()
 	const isCurrentWeek = clickOnCurrentDay()
 	const oldList =
-		localList.length > 0 ? filterOldList(isCurrentWeek, localList) : settings.value.General.savedCrunchyList || []
+		localList.length > 0 ? filterOldList(isCurrentWeek, localList) : toRaw(settings.value.General.savedCrunchyList)
 	settings.value.General.savedCrunchyList = localList.concat(oldList)
-	//setStorage()
 	if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
 		// now add the old list to the website list
 		document.querySelectorAll("section.calendar-day").forEach((element) => {
