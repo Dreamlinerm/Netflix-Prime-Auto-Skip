@@ -73,7 +73,7 @@ function openSettings() {
 				/>
 			</a>
 			<a
-				class="flex gap-2 items-center"
+				class="flex gap-2 items-center cursor-pointer"
 				@click="openSettings"
 			>
 				<i-mdi-cog
