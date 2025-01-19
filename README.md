@@ -1,19 +1,19 @@
 <div align="center">
-<img src="icons/NetflixAmazon%20Auto-Skip.svg" width="10%">
+<img src="docs/icons/NetflixAmazon%20Auto-Skip.svg" width="10%">
 
 # Streaming enhanced ![Project Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
 
 
 ## Automatically skip Ads, Intros, Recaps, Credits, etc.
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
-<img src="Logos/firefox.svg" width="20px">
+<img src="docs/Logos/firefox.svg" width="20px">
 <img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
 <img src="https://img.shields.io/amo/dw/NetflixPrime@Autoskip.io" >
 <img alt="Mozilla Add-on Rating" src="https://img.shields.io/amo/rating/NetflixPrime%40Autoskip.io">
 </a>
 <br>
 <a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
-<img src="Logos/chrome.svg" width="20px">
+<img src="docs/Logos/chrome.svg" width="20px">
 <img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
 <img alt="Chrome Web Store Rating" src="https://img.shields.io/chrome-web-store/rating/akaimhgappllmlkadblbdknhbfghdgle">
 </a>
@@ -29,18 +29,18 @@
 ***
 
 ## Download & Install
-<a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"><img src="Logos/download button/firefox.png" alt="Get Streaming enhanced for Firefox"/>
-<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="Logos/download button/chrome.png" alt="Get Streaming enhanced for Chromium"/>
-<a href="https://microsoftedge.microsoft.com/addons/detail/streaming-enhanced-netfli/dhfpagghjamocfaaignghcljfpppelff"><img src="Logos/download button/microsoft.png" alt="Get Streaming enhanced for Edge"/>
+<a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"><img src="docs/Logos/download button/firefox.png" alt="Get Streaming enhanced for Firefox"/>
+<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="docs/Logos/download button/chrome.png" alt="Get Streaming enhanced for Chromium"/>
+<a href="https://microsoftedge.microsoft.com/addons/detail/streaming-enhanced-netfli/dhfpagghjamocfaaignghcljfpppelff"><img src="docs/Logos/download button/microsoft.png" alt="Get Streaming enhanced for Edge"/>
 
 ## Install on Android
 
 <div style="display:flex">
                 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
-                <img src="Logos/firefox.svg" width="8%" alt="firefox">
+                <img src="docs/Logos/firefox.svg" width="8%" alt="firefox">
                 </a>
                 <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
-                <img src="Logos/kiwi.webp" width="8%">
+                <img src="docs/Logos/kiwi.webp" width="8%">
                 </a>
 </div>
 
@@ -57,13 +57,13 @@ We welcome contributions to the translation of the extension. If you're interest
 <table>
     <tr>
       <td align="center" valign="top" width="14.28%">
-        <img src="Logos/Netflix.png" width="20%">
-        <img src="Logos/prime%20video.png" width="20%" >
-        <img src="Logos/crunchyroll.avif" width="20%">
-        <img src="Logos/HBO-max.jpg" width="20%">
-        <img src="Logos/disney-plus-logoBackground.jpeg" width="20%">
-        <img src="Logos/Disney-Plus-HotstarBackground.webp" width="20%">
-        <img src="Logos/starplus.png" width="20%" style="background-color:white;">
+        <img src="docs/Logos/Netflix.png" width="20%">
+        <img src="docs/Logos/prime%20video.png" width="20%" >
+        <img src="docs/Logos/crunchyroll.avif" width="20%">
+        <img src="docs/Logos/HBO-max.jpg" width="20%">
+        <img src="docs/Logos/disney-plus-logoBackground.jpeg" width="20%">
+        <img src="docs/Logos/Disney-Plus-HotstarBackground.webp" width="20%">
+        <img src="docs/Logos/starplus.png" width="20%" style="background-color:white;">
       </td>
     </tr>
 </table>
@@ -166,7 +166,7 @@ You can customize which features are enabled in the Settings.
 
 Skip Credits and Watch Credits are mutally exclusive, but you can turn both of the off. One allways skips the credits and one allways watches them, if both are turned off its the default behaviour showing the skip credit button.
 
-<img src="Logos/svg/settings.svg" alt="Settings Preview">
+<img src="docs/Logos/svg/settings.svg" alt="Settings Preview">
 
 ## Ratings
 
@@ -178,10 +178,10 @@ If there is no score they are refreshed once per day. If the movie is newer than
 | Rating | Explanation |
 | --- | --- |
 | ? | Title not found |
-| <img src="Logos/greyBox.svg" height="20px"> | ? or less than 30 votes |
-| <img src="Logos/redBox.svg" height="20px"> | <= 5.5 stars|
-| <img src="Logos/yellowBox.svg" height="20px"> | <= 7 stars|
-| <img src="Logos/greenBox.svg" height="20px"> | >7 stars|
+| <img src="docs/Logos/greyBox.svg" height="20px"> | ? or less than 30 votes |
+| <img src="docs/Logos/redBox.svg" height="20px"> | <= 5.5 stars|
+| <img src="docs/Logos/yellowBox.svg" height="20px"> | <= 7 stars|
+| <img src="docs/Logos/greenBox.svg" height="20px"> | >7 stars|
 
 
 # Implemented Feature Overview

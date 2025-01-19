@@ -10,12 +10,14 @@
 ├── dist                    # Built extension files
 │   ├── chrome              # Chrome-specific build
 │   └── firefox             # Firefox-specific build
-├── docs                    # Localized store descriptions
-├── downloaded HtmlButtons  # Some downloaded html buttons
+├── docs                    # documentation
+│   ├── ChromeStoreDescriptions # Chrome store descriptions
+│   ├──storeDescriptions    # Firefox store descriptions
+│   ├── HtmlButtons         # Some downloaded html buttons
+│   ├── icon                # copy of used icons and logos
+│   ├── Logos               # Images used in Readme
+│   ├── Screenshots         # Screenshots of the extension
 ├── graph                   # chrome and firefox user statistics
-├── icon                    # copy of used icons and logos
-├── Logos                   # Images used in Readme
-├── Screenshots             # Screenshots of the extension
 ├── scripts                 # Build/dev scripts
 ├── src                     # Source code
 │   ├── assets              # Global assets (images, styles)
