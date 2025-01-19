@@ -23,7 +23,7 @@ chrome.tabs.query(query, callback)
 </script>
 
 <template>
-	<div class="w-[470px] max-w-[470px] h-fit max-h-[700px] overflow-clip">
+	<div class="w-[470px] max-w-[470px] h-fit max-h-[700px]">
 		<AppHeader />
 		<div class="p-4 pt-0 overflow-auto flex-1">
 			<div
