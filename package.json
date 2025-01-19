@@ -98,6 +98,10 @@
 			"ignoreMissing": []
 		}
 	},
+	"engines": {
+		"npm": ">=18",
+		"pnpm": ">=3"
+	},
 	"private": true,
 	"repository": {
 		"type": "git",

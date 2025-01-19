@@ -228,7 +228,7 @@ If there is no score they are refreshed once per day. If the movie is newer than
 
 ### Setup
 
-- ```npm install -g pnpm``` install pnpm
+- ```npm install -g pnpm``` install pnpm. npm is also possible but pnpm is recommended
 - ```pnpm install``` install all required packages
 - ```pnpm build``` build firefox and chrome zip files in dist folder
 - ```pnpm web-ext``` run the extension in firefox
