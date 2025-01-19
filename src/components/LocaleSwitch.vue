@@ -3,11 +3,13 @@ import { i18n } from "@/utils/i18n"
 import { useFrontendStore } from "@/stores/options.store"
 const frontendStore = useFrontendStore()
 const { currentLocale } = storeToRefs(frontendStore)
+console.log("a", i18n.global.availableLocales)
+const fixLocales = ["de", "en", "es", "fr", "it", "ja", "ko", "pl", "pt", "pt_BR", "sv", "tr", "zh_CN"]
 </script>
 
 <template>
 	<div>
-		<div class="dropdown dropdown-bottom">
+		<div class="dropdown dropdown-end">
 			<div
 				tabindex="0"
 				role="button"
@@ -18,10 +20,10 @@ const { currentLocale } = storeToRefs(frontendStore)
 			</div>
 			<ul
 				tabindex="0"
-				class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-lg -ml-4 mt-4"
+				class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-lg -ml-4 mt-2"
 			>
 				<li
-					v-for="locale in i18n.global.availableLocales"
+					v-for="locale in i18n?.global?.availableLocales || fixLocales"
 					:key="`locale-${locale}`"
 				>
 					<button
@@ -35,5 +37,3 @@ const { currentLocale } = storeToRefs(frontendStore)
 		</div>
 	</div>
 </template>
-
-<style scoped></style>
