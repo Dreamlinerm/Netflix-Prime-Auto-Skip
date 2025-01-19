@@ -37,20 +37,16 @@
 
 <div style="display:flex">
                 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
-                <img src="docs/Logos/firefox.svg" width="8%" alt="firefox">
+                <img src="docs/Logos/firefox.svg" height="64px" alt="firefox">
                 </a>
                 <a href="https://play.google.com/store/apps/details?id=com.kiwibrowser.browser">
-                <img src="docs/Logos/kiwi.webp" width="8%">
+                <img src="docs/Logos/kiwi.webp" height="64px">
                 </a>
 </div>
 
 Download [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/), [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the firefox/chrome extension. 
 
 The drm for each streaming service will be installed automatically when a video started for the first time and you may need to reload the page once.
-
-## Contributing to Translation
-
-We welcome contributions to the translation of the extension. If you're interested in helping us translate the extension to your language look [here](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/issues/42).
 
 ### Supported Streaming Services:
 
@@ -75,6 +71,16 @@ We welcome contributions to the translation of the extension. If you're interest
   | ✅      | ✅             | ✅                      | ✅          | ✅    |
 </details>
 
+## Table of Contents
+
+- [Android Compatibility](#android-compatibility)
+- [Contributing to Translation](#contributing-to-translation)
+- [Features](#-features)  
+- [Ratings explanation](#ratings)
+- [Implemented Feature Overview](#implemented-feature-overview)
+- [Develop the Extension](#develop-the-extension)
+- [Changelog](./CHANGELOG.md)
+
 
 ## Android Compatibility:
 
@@ -82,11 +88,9 @@ We welcome contributions to the translation of the extension. If you're interest
 | ---     | ---                 | ---                      | ---         | ---                |
 | ❌     | ✅(tweaked Desktop Website) | ✅(default Desktop Website)      | ✅         | ✅ |
 
-## What it does
+## Contributing to Translation
 
-The script, "skipper.js", is injected into all urls containing "amazon.\*/\*/video" or "netflix.com" or "disneyplus.com" or "hotstar.com" or "starplus.com".
-
-It automatically skips Ads, intros, Credits, recaps, and anything else you don't want to watch on Netflix, Prime video and Disney Plus (Hotstar, STAR+).
+We welcome contributions to the translation of the extension. If you're interested in helping us translate the extension to your language look [here](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip/wiki/Add-or-Fix-Language-Localization).
 
 ## ✨ Features
 
@@ -255,7 +259,3 @@ Just like chrome you can temporarily load the extension by going to ``about:addo
 ## Changelog
 
 You can see the [Changelog](./CHANGELOG.md) here or the extension settings.
-
-## Disclaimer
-
-Netflix, Amazon Prime video and Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.
