@@ -4,6 +4,7 @@
 
 - Added disabled Settings Page
 - Changed Popup UI a little
+- BUG: playOnFullScreen switch was not working
 
 ## 1.1.59
 

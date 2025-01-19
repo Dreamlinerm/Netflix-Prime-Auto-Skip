@@ -42,20 +42,17 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" | "local" = "sync") {
 	const data = ref<T>(defaultValue)
 	let isUpdatingFromStorage = true
-	const isObjectc = isObject(defaultValue)
-	// check if the data is ready to be used and not just the default value
-	if (isObjectc) data.value.$ready = false
+	const defaultIsObject = isObject(defaultValue)
 	// Initialize storage with the value from chrome.storage.local
 	const promise = new Promise((resolve) => {
 		chrome.storage[storageType].get(key, async (result) => {
 			if (result?.[key] !== undefined) {
-				if (isObjectc && isObject(result[key])) {
+				if (defaultIsObject && isObject(result[key])) {
 					data.value = mergeDeep(defaultValue, result[key])
 				} else if (checkType(defaultValue, result[key])) {
 					data.value = result[key]
 				}
 			}
-			if (isObjectc) data.value.$ready = true
 			await nextTick()
 			isUpdatingFromStorage = false
 			resolve(true)
