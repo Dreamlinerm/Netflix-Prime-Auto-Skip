@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.60
+
+- Added disabled Settings Page
+- Changed Popup UI a little
+
 ## 1.1.59
 
 - fix crunchyroll release calendar bug, because of new storage
