@@ -12,7 +12,7 @@
 │   └── firefox             # Firefox-specific build
 ├── docs                    # documentation
 │   ├── ChromeStoreDescriptions # Chrome store descriptions
-│   ├──storeDescriptions    # Firefox store descriptions
+│   ├── storeDescriptions   # Firefox store descriptions
 │   ├── HtmlButtons         # Some downloaded html buttons
 │   ├── icon                # copy of used icons and logos
 │   ├── Logos               # Images used in Readme
