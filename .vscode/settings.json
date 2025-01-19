@@ -73,5 +73,6 @@
 	"task.allowAutomaticTasks": "on",
 	"workbench.editor.wrapTabs": true,
 	"svg.preview.background": "dark-transparent",
-	"i18n-ally.keystyle": "flat"
+	"i18n-ally.keystyle": "flat",
+	"editor.gotoLocation.multipleDefinitions": "goto"
 }
