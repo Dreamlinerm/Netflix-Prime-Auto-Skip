@@ -170,7 +170,7 @@ If you’re enjoying the enhanced streaming experience, please consider leaving 
 If you'd like to support further development, you can buy me a <a href="https://github.com/sponsors/Dreamlinerm" target="_blank">coffee</a>.
 
 ## Disclaimer
-Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.s.ed in the Settings.
+Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.
 <!-- descriptionEnd -->
 
 ### Skip Credits, Watch Credits
