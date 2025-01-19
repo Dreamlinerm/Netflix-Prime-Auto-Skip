@@ -14,7 +14,7 @@ const { currentLocale } = storeToRefs(frontendStore)
 				class="flex gap-1"
 			>
 				<i-ph-globe />
-				{{ currentLocale }}
+				<!-- {{ currentLocale }} -->
 			</div>
 			<ul
 				tabindex="0"
