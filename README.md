@@ -104,6 +104,8 @@ Features in other supported languages:
 | [한국어](docs/storeDescriptions/ko.md) |
 | [Türkçe](docs/storeDescriptions/tr.md) |
 
+<!-- description -->
+
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
 <ul>
 <li>Block Ads</li>
@@ -161,6 +163,8 @@ Buy me a [coffee](https://github.com/sponsors/Dreamlinerm)!
 ## Settings
 
 You can customize which features are enabled in the Settings.
+
+<!-- descriptionEnd -->
 
 ### Skip Credits, Watch Credits
 
