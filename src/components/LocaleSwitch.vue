@@ -3,7 +3,6 @@ import { i18n } from "@/utils/i18n"
 import { useFrontendStore } from "@/stores/options.store"
 const frontendStore = useFrontendStore()
 const { currentLocale } = storeToRefs(frontendStore)
-console.log("a", i18n.global.availableLocales)
 const fixLocales = ["de", "en", "es", "fr", "it", "ja", "ko", "pl", "pt", "pt_BR", "sv", "tr", "zh_CN"]
 </script>
 
