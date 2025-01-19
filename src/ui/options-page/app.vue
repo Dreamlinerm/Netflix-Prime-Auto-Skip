@@ -3,10 +3,23 @@ import { Notivue, Notification } from "notivue"
 const isFirefox = typeof browser !== "undefined"
 const version = __VERSION__
 const githubUrl = __GITHUB_URL__
-const hash = ref(window.location.hash)
 import { useFrontendStore } from "@/stores/options.store"
 // wont sync without opening once
 useFrontendStore()
+const router = useRouter()
+const hash = ref(router.currentRoute.value.path)
+// watch router route changed
+watch(
+	() => router.currentRoute.value.path,
+	(newHash) => {
+		console.log(newHash)
+		hash.value = newHash
+	},
+	{
+		immediate: true,
+		deep: true,
+	},
+)
 </script>
 <template>
 	<div
@@ -57,7 +70,6 @@ useFrontendStore()
 					class="menuButton flex"
 					:class="hash.endsWith('SharedSettings') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
-					@click="hash = 'SharedSettings'"
 				>
 					<i-mdi-transit-connection-variant class="icon" />
 					<div>
@@ -69,7 +81,6 @@ useFrontendStore()
 					class="menuButton flex"
 					:class="hash.endsWith('Amazon') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
-					@click="hash = 'Amazon'"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +99,6 @@ useFrontendStore()
 					class="menuButton flex"
 					:class="hash.endsWith('Netflix') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
-					@click="hash = 'Netflix'"
 				>
 					<i-mdi-netflix class="icon" />
 					<div>Netflix</div>
@@ -98,7 +108,6 @@ useFrontendStore()
 					class="menuButton flex"
 					:class="hash.endsWith('Disney') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
-					@click="hash = 'Disney'"
 				>
 					<svg
 						preserveAspectRatio="xMidYMid meet"
@@ -121,7 +130,6 @@ useFrontendStore()
 					class="menuButton flex"
 					:class="hash.endsWith('Crunchyroll') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
-					@click="hash = 'Crunchyroll'"
 				>
 					<svg
 						viewBox="1.8 1.581 247.263 220"
@@ -146,7 +154,6 @@ useFrontendStore()
 					class="menuButton flex"
 					:class="hash.endsWith('Backup') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
-					@click="hash = 'Backup'"
 				>
 					<i-mdi-dots-horizontal class="icon" />
 					<p>{{ $t("backup") }}</p>
@@ -156,7 +163,6 @@ useFrontendStore()
 					class="menuButton flex"
 					:class="hash.endsWith('Statistics') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
-					@click="hash = 'Statistics'"
 				>
 					<i-mdi-chart-bar class="icon" />
 					<p>{{ $t("statistics") }}</p>
@@ -166,7 +172,6 @@ useFrontendStore()
 					class="menuButton flex"
 					:class="hash.endsWith('Changelog') ? 'bg-netflix' : 'bg-primary'"
 					draggable="false"
-					@click="hash = 'Changelog'"
 				>
 					<i-mdi-format-list-bulleted class="icon" />
 					<p>{{ $t("changelog") }}</p>

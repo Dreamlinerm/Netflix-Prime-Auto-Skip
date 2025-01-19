@@ -3,10 +3,28 @@ const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
 type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO" | "Video"
 const settingsCategories: Array<StreamingService> = ["Video", "Amazon", "Netflix", "Disney", "Crunchyroll", "HBO"]
+
+const hasDisabledSetting = computed(() => {
+	return settingsCategories.some((category) => {
+		return Object.keys(settings.value[category]).some((setting) => {
+			return (
+				!settings.value[category][setting] &&
+				setting != "watchCredits" &&
+				setting != "epilepsy" &&
+				typeof settings.value[category][setting] === "boolean"
+			)
+		})
+	})
+})
+const router = useRouter()
+watch(hasDisabledSetting, (value) => {
+	if (!value) router.push("/options-page/SharedSettings")
+})
 </script>
 
 <template>
-	Disabled settings:
+	<h1>All disabled Settings:</h1>
+	<br />
 	<template
 		v-for="category in settingsCategories"
 		:key="category"
@@ -23,9 +41,7 @@ const settingsCategories: Array<StreamingService> = ["Video", "Amazon", "Netflix
 			"
 		>
 			<template v-if="category == 'Video'">
-				<h1 class="text-video">
-					{{ $t("pageSpecificTitle", ["Video"]) }}
-				</h1>
+				<h1>{{ $t("sharedPageTitle") }}</h1>
 			</template>
 			<template v-if="category == 'Amazon'">
 				<h1 class="text-amazon">
@@ -48,7 +64,7 @@ const settingsCategories: Array<StreamingService> = ["Video", "Amazon", "Netflix
 				</h1>
 			</template>
 			<template v-if="category == 'HBO'">
-				<h1 class="text-hbo">
+				<h1>
 					{{ $t("pageSpecificTitle", ["HBO"]) }}
 				</h1>
 			</template>
