@@ -41,9 +41,10 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
 
 function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" | "local" = "sync") {
 	const data = ref<T>(defaultValue)
+	// Blocking setting storage if it is updating from storage
 	let isUpdatingFromStorage = true
 	const defaultIsObject = isObject(defaultValue)
-	// Initialize storage with the value from chrome.storage.local
+	// Initialize storage with the value from chrome.storage
 	const promise = new Promise((resolve) => {
 		chrome.storage[storageType].get(key, async (result) => {
 			if (result?.[key] !== undefined) {
@@ -59,7 +60,7 @@ function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" 
 		})
 	})
 
-	// Watch for changes in the storage and update chrome.storage.local
+	// Watch for changes in the storage and update chrome.storage
 	watch(
 		data,
 		(newValue) => {
