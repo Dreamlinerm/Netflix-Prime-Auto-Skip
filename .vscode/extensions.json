@@ -1,5 +1,6 @@
 {
 	"recommendations": [
+		"antfu.goto-alias",
 		"lokalise.i18n-ally",
 		"bradlc.vscode-tailwindcss",
 		"vue.volar",
