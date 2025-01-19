@@ -105,6 +105,7 @@ Features in other supported languages:
 | [Türkçe](docs/storeDescriptions/tr.md) |
 
 <!-- description -->
+You can customize which features are enabled in the Settings.
 
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
 <ul>
@@ -152,18 +153,24 @@ Platform-Specific Features:
 </li>
 </ul>
 
-If you want to see what is implemented go [here](#implemented-feature-overview):
+Android Support in Desktop mode:
+<ul>
+<li>Prime Video</li>
+<li>Disney+ (Hotstar, STAR+)</li>
+<li>Crunchyroll</li>
+<li>HBO Max</li>
+</ul>
+To use the extension on an Android phone, download Firefox.
+
+## ☔ Safe & Open Source
+This extension is open-source! Feel free to contribute or explore the code on <a href="https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip" target="_blank">Github</a>.
 
 ## 💕 Enjoying Streaming enhanced?
+If you’re enjoying the enhanced streaming experience, please consider leaving a 5-star review! Reviews help build trust and attract new users.
+If you'd like to support further development, you can buy me a <a href="https://github.com/sponsors/Dreamlinerm" target="_blank">coffee</a>.
 
-Buy me a [coffee](https://github.com/sponsors/Dreamlinerm)! 
-
-<img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FauthorHours.json&query=time&label=Approx%20Development%20Time%20(Owner)">
-
-## Settings
-
-You can customize which features are enabled in the Settings.
-
+## Disclaimer
+Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.s.ed in the Settings.
 <!-- descriptionEnd -->
 
 ### Skip Credits, Watch Credits
