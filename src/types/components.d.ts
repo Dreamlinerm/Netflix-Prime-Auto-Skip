@@ -8,7 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppHeader: typeof import('./../components/AppHeader.vue')['default']
-    DisplayError: typeof import('./../components/state/DisplayError.vue')['default']
+    IMdiArrowLeft: typeof import('~icons/mdi/arrow-left')['default']
     IMdiChartBar: typeof import('~icons/mdi/chart-bar')['default']
     IMdiClose: typeof import('~icons/mdi/close')['default']
     IMdiCog: typeof import('~icons/mdi/cog')['default']
@@ -16,13 +16,15 @@ declare module 'vue' {
     IMdiFormatListBulleted: typeof import('~icons/mdi/format-list-bulleted')['default']
     IMdiGift: typeof import('~icons/mdi/gift')['default']
     IMdiGithub: typeof import('~icons/mdi/github')['default']
+    IMdiGlobe: typeof import('~icons/mdi/globe')['default']
+    IMdiMoonFull: typeof import('~icons/mdi/moon-full')['default']
     IMdiNetflix: typeof import('~icons/mdi/netflix')['default']
+    IMdiStarCrescent: typeof import('~icons/mdi/star-crescent')['default']
     IMdiTransitConnectionVariant: typeof import('~icons/mdi/transit-connection-variant')['default']
-    IPhArrowLeft: typeof import('~icons/ph/arrow-left')['default']
+    IMdiWhiteBalanceSunny: typeof import('~icons/mdi/white-balance-sunny')['default']
     IPhGlobe: typeof import('~icons/ph/globe')['default']
     IPhMoon: typeof import('~icons/ph/moon')['default']
     IPhSun: typeof import('~icons/ph/sun')['default']
-    LoadingSpinner: typeof import('./../components/state/LoadingSpinner.vue')['default']
     LocaleSwitch: typeof import('./../components/LocaleSwitch.vue')['default']
     OpenSettingsButton: typeof import('./../components/OpenSettingsButton.vue')['default']
     OptionalPermission: typeof import('./../components/OptionalPermission.vue')['default']
@@ -36,7 +38,6 @@ declare module 'vue' {
     SharedPagesNetflix: typeof import('./../components/shared-pages/Netflix.vue')['default']
     SharedPagesStatistics: typeof import('./../components/shared-pages/Statistics.vue')['default']
     Switch: typeof import('./../components/Switch.vue')['default']
-    TailwindEmptyState: typeof import('./../components/state/tailwind-empty-state.vue')['default']
     ThemeSwitch: typeof import('./../components/ThemeSwitch.vue')['default']
   }
 }

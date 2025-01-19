@@ -17,7 +17,7 @@ function back() {
 		class="btn btn-sm my-4"
 		@click="back"
 	>
-		<i-ph-arrow-left />
+		<i-mdi-arrow-left />
 	</button>
 </template>
 
