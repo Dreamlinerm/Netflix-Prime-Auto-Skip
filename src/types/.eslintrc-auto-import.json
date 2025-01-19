@@ -347,6 +347,7 @@
     "createSlider": true,
     "DBCache": true,
     "MovieInfo": true,
-    "useFrontendStore": true
+    "useFrontendStore": true,
+    "SettingsPromise": true
   }
 }

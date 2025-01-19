@@ -6,20 +6,6 @@ type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO"
 
 const streamingServices: Array<StreamingService> = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO"]
 
-const fullScreen = computed({
-	// @ts-expect-error ?. handles the error
-	get: () => streamingServices.every((service) => settings.value[service]?.fullScreen ?? true),
-	set: (value) => {
-		streamingServices.forEach((service) => {
-			// @ts-expect-error ?. handles the error
-			if (settings.value[service]?.fullScreen !== undefined) {
-				// @ts-expect-error ?. handles the error
-				settings.value[service].fullScreen = value
-			}
-		})
-	},
-})
-
 const speedSlider = computed({
 	get: () => streamingServices.every((service) => settings.value[service]?.speedSlider ?? true),
 	set: (value) => {
@@ -62,7 +48,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent)
 	<div class="line flex">
 		<p>{{ $t("fullscreenSwitch") }}</p>
 		<Switch
-			v-model="fullScreen"
+			v-model="settings.Video.playOnFullScreen"
 			class="ml-auto"
 		></Switch>
 	</div>

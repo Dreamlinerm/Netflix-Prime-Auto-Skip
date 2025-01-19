@@ -10,6 +10,7 @@ declare global {
   const Notification: typeof import('notivue')['Notification']
   const Notivue: typeof import('notivue')['Notivue']
   const Platforms: typeof import('../utils/helper')['Platforms']
+  const SettingsPromise: typeof import('../stores/options.store')['SettingsPromise']
   const Websites: typeof import('../utils/helper')['Websites']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const addSkippedTime: typeof import('../utils/helper')['addSkippedTime']
@@ -353,6 +354,7 @@ declare module 'vue' {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly Notification: UnwrapRef<typeof import('notivue')['Notification']>
     readonly Notivue: UnwrapRef<typeof import('notivue')['Notivue']>
+    readonly SettingsPromise: UnwrapRef<typeof import('../stores/options.store')['SettingsPromise']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly appRouter: UnwrapRef<typeof import('../utils/router/index')['appRouter']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>

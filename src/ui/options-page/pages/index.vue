@@ -18,7 +18,11 @@ const hasDisabledSetting = computed(() => {
 })
 
 const router = useRouter()
-if (hasDisabledSetting.value) router.push("/options-page/disabledSettings")
-else router.push("/options-page/SharedSettings")
+openSettings()
+async function openSettings() {
+	await SettingsPromise
+	if (hasDisabledSetting.value) router.push("/options-page/disabledSettings")
+	else router.push("/options-page/SharedSettings")
+}
 </script>
 <template>You found my easter egg! 🐣</template>
