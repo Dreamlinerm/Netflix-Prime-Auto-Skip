@@ -1,5 +1,5 @@
 <div align="center">
-<img src="docs/icons/NetflixAmazon%20Auto-Skip.svg" width="10%">
+<img src="docs/icons/NetflixAmazon%20Auto-Skip.svg" height="80rem">
 
 # Streaming enhanced ![Project Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
 
@@ -22,7 +22,7 @@
 <img alt="Development Time" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Frefs%2Fheads%2Fmain%2FauthorHours.json&query=time&label=Approx%20Dev%20Time%20(Owner)">
 <br>
 <a href="https://discord.gg/5fBYathA7d">
-<img src="https://img.shields.io/badge/Discord_Server-5a5a5a?logo=discord" width="300">
+<img src="https://img.shields.io/badge/Discord_Server-5a5a5a?logo=discord" width="200">
 </a>
 </div>
 
