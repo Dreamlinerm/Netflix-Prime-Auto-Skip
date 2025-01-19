@@ -19,8 +19,8 @@ chrome.runtime.onInstalled.addListener(async (opt) => {
 	if (opt.reason === "update" && is_DEV) {
 		chrome.tabs.create({
 			active: true,
-			// url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page"),
-			url: chrome.runtime.getURL("src/ui/action-popup/index.html#/action-popup"),
+			url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page/disabledSettings"),
+			// url: chrome.runtime.getURL("src/ui/action-popup/index.html#/action-popup"),
 		})
 	}
 })

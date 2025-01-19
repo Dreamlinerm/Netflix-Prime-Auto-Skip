@@ -14,7 +14,7 @@
 	</div>
 	<hr />
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("creditsSwitch") }}</p>
+		<p>{{ $t("skipCreditsSwitch") }}</p>
 		<Switch
 			v-model="skipCredits"
 			class="ml-auto"
@@ -36,7 +36,7 @@
 		></Switch>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("sliderSwitch") }}</p>
+		<p>{{ $t("speedSliderSwitch") }}</p>
 		<Switch
 			v-model="speedSlider"
 			class="ml-auto"
@@ -64,7 +64,7 @@
 		></Switch>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("ratingSwitch") }}</p>
+		<p>{{ $t("showRatingSwitch") }}</p>
 		<Switch
 			v-model="showRating"
 			class="ml-auto"

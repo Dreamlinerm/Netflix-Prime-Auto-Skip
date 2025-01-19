@@ -115,14 +115,14 @@ const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent)
 	</p>
 	<hr />
 	<div class="line flex">
-		<p>{{ $t("sliderSwitch") }}</p>
+		<p>{{ $t("speedSliderSwitch") }}</p>
 		<Switch
 			v-model="speedSlider"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<p class="description">
-		{{ $t("sliderDescription") }}
+		{{ $t("speedSliderDescription") }}
 	</p>
 	<p>{{ $t("sliderOptions") }}</p>
 	<table>

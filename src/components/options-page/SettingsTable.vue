@@ -56,8 +56,8 @@
 			</tr>
 			<tr>
 				<td class="tooltip">
-					<p>{{ $t("creditsSwitch") }}</p>
-					<p class="tooltiptext">{{ $t("creditsDescription") }}</p>
+					<p>{{ $t("skipCreditsSwitch") }}</p>
+					<p class="tooltiptext">{{ $t("skipCreditsDescription") }}</p>
 				</td>
 				<td>
 					<Switch
@@ -162,8 +162,8 @@
 			</tr>
 			<tr>
 				<td class="tooltip">
-					<p>{{ $t("ratingSwitch") }}</p>
-					<p class="tooltiptext">{{ $t("ratingDescription") }}</p>
+					<p>{{ $t("showRatingSwitch") }}</p>
+					<p class="tooltiptext">{{ $t("showRatingDescription") }}</p>
 				</td>
 				<td>
 					<Switch
@@ -199,8 +199,8 @@
 			</tr>
 			<tr>
 				<td class="tooltip">
-					<p>{{ $t("sliderSwitch") }}</p>
-					<p class="tooltiptext">{{ $t("sliderDescription") }}</p>
+					<p>{{ $t("speedSliderSwitch") }}</p>
+					<p class="tooltiptext">{{ $t("speedSliderDescription") }}</p>
 				</td>
 				<td>
 					<Switch
