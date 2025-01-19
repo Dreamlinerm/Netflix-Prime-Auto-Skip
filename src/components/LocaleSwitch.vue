@@ -3,7 +3,6 @@ import { i18n } from "@/utils/i18n"
 import { useFrontendStore } from "@/stores/options.store"
 const frontendStore = useFrontendStore()
 const { currentLocale } = storeToRefs(frontendStore)
-const fixLocales = ["de", "en", "es", "fr", "it", "ja", "ko", "pl", "pt", "pt_BR", "sv", "tr", "zh_CN"]
 </script>
 
 <template>
@@ -22,7 +21,7 @@ const fixLocales = ["de", "en", "es", "fr", "it", "ja", "ko", "pl", "pt", "pt_BR
 				class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-lg -ml-4 mt-2"
 			>
 				<li
-					v-for="locale in i18n?.global?.availableLocales || fixLocales"
+					v-for="locale in i18n?.global?.availableLocales"
 					:key="`locale-${locale}`"
 				>
 					<button
