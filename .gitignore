@@ -12,6 +12,7 @@ dist
 dist-ssr
 !dist/firefox/.gitkeep
 !dist/chrome/.gitkeep
+!dist/.gitkeep
 *.local
 
 
