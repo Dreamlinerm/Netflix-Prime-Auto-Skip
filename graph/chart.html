@@ -10,8 +10,6 @@
 </head>
 
 <body>
-  <h1>Last Daily Users: <span id="currentUsers"></span></h1>
-  <h1>Last Daily Downloads: <span id="currentDownloads"></span></h1>
   <div style="display: flex;">
     <div style="width: 50%">
       Firefox
@@ -45,14 +43,10 @@
   const maxDownloadsChrome = Math.max(...chromeDownloads.map((point) => point.count));
   const maxDownloads = Math.ceil(Math.max(maxDownloadsFirefox, maxDownloadsChrome) / 10) * 10;
 
-  const currentDownloads = firefoxDownloads[0].count + chromeDownloads[chromeDownloads.length - 1].count;
-  const currentUsers = firefoxUsers[0].count + chromeUsers[chromeUsers.length - 1].count;
   document.getElementById("fmaxUsers").innerText = maxUsersFirefox;
   document.getElementById("fmaxDownloads").innerText = maxDownloadsFirefox;
   document.getElementById("cmaxUsers").innerText = maxUsersChrome;
   document.getElementById("cmaxDownloads").innerText = maxDownloadsChrome;
-  document.getElementById("currentUsers").innerText = currentUsers;
-  document.getElementById("currentDownloads").innerText = currentDownloads;
   new Chart(chartFirefoxUsers, {
     type: "line",
     data: {

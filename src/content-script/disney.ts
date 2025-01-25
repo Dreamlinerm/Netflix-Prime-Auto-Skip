@@ -66,7 +66,9 @@ function Disney() {
 }
 async function Disney_skipAd(video: HTMLVideoElement) {
 	if (video) {
-		const adTimeText = document.querySelector("div.overlay_interstitials__content_time_display")
+		const adTimeText = document
+			.querySelector("ad-badge-overlay")
+			?.shadowRoot?.querySelector(".ad-badge-overlay__content--time-display")
 		if (adTimeText) {
 			const adTime = parseAdTime(adTimeText?.textContent)
 			if (adTime && adTime >= 1 && lastAdTimeText != video.currentTime) {

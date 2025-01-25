@@ -162,7 +162,7 @@ function addButton(video: HTMLVideoElement, startTime: number, endTime: number) 
 		"reverse-button css-1dbjc4n r-1awozwy r-lj0ial r-1jd5jdk r-1loqt21 r-18u37iz r-eu3ka r-1777fci r-kuhrb7 r-ymttw5 r-u8s1d r-1ff5aok r-1otgn73",
 	)
 	button.style.color = "white"
-	button.textContent = "Watch skipped ?"
+	button.textContent = "Rewind?"
 
 	const buttonTimeout = setTimeout(() => {
 		button.remove()

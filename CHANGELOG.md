@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.61
+
+- fix disney ad skip, because of changed interface
+
 ## 1.1.60
 
 - Added disabled Settings Page
