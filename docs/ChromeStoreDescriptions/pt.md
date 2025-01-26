@@ -19,7 +19,9 @@ Plataforma-Caraterísticas específicas:
   • Amazon Prime Video:
       • Pula anúncios autopromocionais (para produções do Prime Video)
       • Filtra o conteúdo pago (filmes, séries) da página inicial
-      • Remove o efeito de desfoque ao passar o mouse sobre os vídeos
+      • Remove o efeito de desfoque ao passar o mouse sobre os vídeos
+      • Move a categoria "Continuar" para o topo da página
+      • Oculte a visualização rápida do raio X em um vídeo
   • Disney+ (Hotstar, STAR+):
       • Pula anúncios autopromocionais
       • Regressa automaticamente ao modo de ecrã inteiro quando passa para o episódio seguinte

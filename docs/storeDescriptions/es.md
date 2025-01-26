@@ -28,6 +28,8 @@ Plataforma-Características específicas:
     <li>Saltea los anuncios de autopromoción (para producciones de Prime Video)</li>
     <li>Filtra los contenidos de pago (películas, series) de la página de inicio</li>
     <li>Elimina el efecto borroso al pasar el ratón por encima de los vídeos</li>
+    <li>Mueve la categoría "Continuar" a la parte superior de la página</li>
+    <li>Ocultar la vista rápida de rayos X sobre un vídeo</li>
   </ul>
 </li>
 

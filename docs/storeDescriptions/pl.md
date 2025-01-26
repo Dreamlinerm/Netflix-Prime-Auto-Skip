@@ -28,6 +28,8 @@ Platforma-Cechy szczególne:
     <li>Omija reklamy autopromocyjne (dla produkcji Prime Video)</li>
     <li>Filtruje płatne treści (filmy, seriale) ze strony głównej</li>
     <li>Usuwa efekt rozmycia po najechaniu kursorem na filmy</li>
+    <li>Przenosi kategorię "Kontynuuj" na górę strony</li>
+    <li>Ukryj szybki widok Xray nad filmem</li>
   </ul>
 </li>
 

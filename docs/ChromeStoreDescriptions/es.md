@@ -19,7 +19,9 @@ Plataforma-Características específicas:
   • Amazon Prime Video:
       • Saltea los anuncios de autopromoción (para producciones de Prime Video)
       • Filtra los contenidos de pago (películas, series) de la página de inicio
-      • Elimina el efecto borroso al pasar el ratón por encima de los vídeos
+      • Elimina el efecto borroso al pasar el ratón por encima de los vídeos
+      • Mueve la categoría "Continuar" a la parte superior de la página
+      • Ocultar la vista rápida de rayos X sobre un vídeo
   • Disney+ (Hotstar, STAR+):
       • Salta los anuncios de autopromoción
       • Vuelve automáticamente al modo de pantalla completa al pasar al siguiente episodio

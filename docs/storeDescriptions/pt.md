@@ -28,6 +28,8 @@ Plataforma-Caraterísticas específicas:
     <li>Pula anúncios autopromocionais (para produções do Prime Video)</li>
     <li>Filtra o conteúdo pago (filmes, séries) da página inicial</li>
     <li>Remove o efeito de desfoque ao passar o mouse sobre os vídeos</li>
+    <li>Move a categoria "Continuar" para o topo da página</li>
+    <li>Oculte a visualização rápida do raio X em um vídeo</li>
   </ul>
 </li>
 

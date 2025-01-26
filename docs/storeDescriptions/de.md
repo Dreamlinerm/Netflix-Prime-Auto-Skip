@@ -28,6 +28,8 @@ Plattform-spezifische Funktionen:
     <li>Überspringt Eigenwerbung (für Prime Video-Produktionen)</li>
     <li>Filtert kostenpflichtige Inhalte (Filme, Serien) auf der Startseite heraus</li>
     <li>Entfernt den Unschärfe-Effekt, wenn man mit dem Mauszeiger über Videos fährt</li>
+    <li>Verschiebt die Kategorie "Weiter" an den Anfang der Seite</li>
+    <li>Blenden Sie die Röntgenschnellansicht über einem Video aus</li>
   </ul>
 </li>
 

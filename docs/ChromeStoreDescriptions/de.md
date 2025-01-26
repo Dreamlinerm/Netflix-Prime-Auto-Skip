@@ -19,7 +19,9 @@ Plattform-spezifische Funktionen:
   • Amazon Prime Video:
       • Überspringt Eigenwerbung (für Prime Video-Produktionen)
       • Filtert kostenpflichtige Inhalte (Filme, Serien) auf der Startseite heraus
-      • Entfernt den Unschärfe-Effekt, wenn man mit dem Mauszeiger über Videos fährt
+      • Entfernt den Unschärfe-Effekt, wenn man mit dem Mauszeiger über Videos fährt
+      • Verschiebt die Kategorie "Weiter" an den Anfang der Seite
+      • Blenden Sie die Röntgenschnellansicht über einem Video aus
   • Disney+ (Hotstar, STAR+):
       • Überspringt Eigenwerbung
       • Kehrt automatisch in den Vollbildmodus zurück, wenn zur nächsten Episode gesprungen wird

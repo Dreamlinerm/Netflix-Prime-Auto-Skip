@@ -19,7 +19,9 @@ Platforme-Caractéristiques spécifiques:
   • Amazon Prime Video:
       • Supprime les publicités auto-promotionnelles (pour les productions Prime Video)
       • Filtre les contenus payants (films, séries) de la page d'accueil
-      • Supprime l'effet de flou au survol des vidéos
+      • Supprime l'effet de flou au survol des vidéos
+      • Déplace la catégorie "continuer" en haut de la page
+      • Cachez la vue rapide Xray sur une vidéo
   • Disney+ (Hotstar, STAR+):
       • Supprime les publicités auto-promotionnelles
       • Retour automatique au mode plein écran lors du passage à l'épisode suivant

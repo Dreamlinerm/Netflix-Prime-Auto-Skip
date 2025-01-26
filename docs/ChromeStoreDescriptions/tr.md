@@ -19,7 +19,9 @@ Platform-Belirli Özellikler:
   • Amazon Prime Video:
       • Kendini tanıtan reklamları atlar (Prime Video prodüksiyonları için)
       • Ana sayfadan ücretli içeriği (filmler, diziler) filtreler
-      • Videoların üzerine gelindiğinde bulanıklaştırma efektini kaldırır
+      • Videoların üzerine gelindiğinde bulanıklaştırma efektini kaldırır
+      • "Devam" kategorisini sayfanın en üstüne taşır
+      • Xray Hızlı Görünümünü bir video üzerinde gizleyin
   • Disney+ (Hotstar, STAR+):
       • Kendini tanıtan reklamları atlar
       • Bir sonraki bölüme geçerken otomatik olarak tam ekran moduna döner

@@ -19,7 +19,9 @@ Platform-Specifika funktioner:
   • Amazon Prime Video:
       • Skippar självreklamerande annonser (för Prime Video-produktioner)
       • Filtrerar bort betalt innehåll (filmer, serier) från startsidan
-      • Tar bort oskärpeeffekten när du håller muspekaren över videoklipp
+      • Tar bort oskärpeeffekten när du håller muspekaren över videoklipp
+      • Flyttar kategorin "Fortsätt" till toppen av sidan
+      • Dölj Xray Quick View över en video
   • Disney+ (Hotstar, STAR+):
       • Skippar självpromoterande annonser
       • Automatiskt återgår till helskärmsläge när du går till nästa avsnitt

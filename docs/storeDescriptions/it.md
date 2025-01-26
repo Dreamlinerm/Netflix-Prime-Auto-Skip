@@ -28,6 +28,8 @@ Platform-Caratteristiche specifiche:
     <li>Skipa gli annunci autopromozionali (per le produzioni Prime Video)</li>
     <li>Filtra i contenuti a pagamento (film, serie) dalla home page</li>
     <li>Rimuove l'effetto sfocatura quando si passa il mouse sui video</li>
+    <li>Sposta la categoria "Continua" all'inizio della pagina</li>
+    <li>Nascondere la visualizzazione rapida Xray su un video</li>
   </ul>
 </li>
 

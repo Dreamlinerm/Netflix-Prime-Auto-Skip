@@ -28,6 +28,8 @@ Platform-Specifika funktioner:
     <li>Skippar självreklamerande annonser (för Prime Video-produktioner)</li>
     <li>Filtrerar bort betalt innehåll (filmer, serier) från startsidan</li>
     <li>Tar bort oskärpeeffekten när du håller muspekaren över videoklipp</li>
+    <li>Flyttar kategorin "Fortsätt" till toppen av sidan</li>
+    <li>Dölj Xray Quick View över en video</li>
   </ul>
 </li>
 

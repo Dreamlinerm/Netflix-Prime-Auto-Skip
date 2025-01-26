@@ -28,6 +28,8 @@ Platforme-Caractéristiques spécifiques:
     <li>Supprime les publicités auto-promotionnelles (pour les productions Prime Video)</li>
     <li>Filtre les contenus payants (films, séries) de la page d'accueil</li>
     <li>Supprime l'effet de flou au survol des vidéos</li>
+    <li>Déplace la catégorie "continuer" en haut de la page</li>
+    <li>Cachez la vue rapide Xray sur une vidéo</li>
   </ul>
 </li>
 

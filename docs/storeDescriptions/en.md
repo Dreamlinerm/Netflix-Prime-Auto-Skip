@@ -27,6 +27,8 @@ Platform-Specific Features:
   <ul>
     <li>Skips self-promotional ads (for Prime Video productions)</li>
     <li>Filters out paid content (movies, series) from the home page</li>
+    <li>Moves the category "Continue" to the top of the page</li>
+    <li>Hide the Xray Quick View over a video</li>
     <li>Removes the blur effect when hovering over videos</li>
   </ul>
 </li>

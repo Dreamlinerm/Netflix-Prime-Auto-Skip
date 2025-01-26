@@ -28,6 +28,8 @@ Platform-Belirli Özellikler:
     <li>Kendini tanıtan reklamları atlar (Prime Video prodüksiyonları için)</li>
     <li>Ana sayfadan ücretli içeriği (filmler, diziler) filtreler</li>
     <li>Videoların üzerine gelindiğinde bulanıklaştırma efektini kaldırır</li>
+    <li>"Devam" kategorisini sayfanın en üstüne taşır</li>
+    <li>Xray Hızlı Görünümünü bir video üzerinde gizleyin</li>
   </ul>
 </li>
 
