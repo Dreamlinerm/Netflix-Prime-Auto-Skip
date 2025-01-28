@@ -11,9 +11,6 @@ const [major, minor, patch] = version
 	.split(/[.-]/)
 
 export default {
-	// author: {
-	//   email: "mubaidr@gmail.com",
-	// },
 	name: env.mode === "staging" ? `[INTERNAL] ${name}` : displayName || name,
 	description,
 	// up to four numbers separated by dots

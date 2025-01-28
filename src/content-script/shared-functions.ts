@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { sendMessage } from "webext-bridge/content-script"
 console.log("shared-functions loaded")
 // Global Variables

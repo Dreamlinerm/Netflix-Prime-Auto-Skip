@@ -4,6 +4,7 @@ import ManifestConfig from "./manifest.config"
 // @ts-expect-error ManifestConfig provides all required fields
 export default defineManifest((env) => ({
 	...ManifestConfig,
+	author: "Marvin Krebber",
 	icons: {
 		16: "src/assets/Logo/NetflixAmazon Auto-Skip.svg",
 		48: "src/assets/Logo/NetflixAmazon Auto-Skip.svg",
