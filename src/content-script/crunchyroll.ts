@@ -275,7 +275,7 @@ async function Crunchyroll_bigPlayerStyle() {
 		// show header on hover
 		const style = document.createElement("style")
 		const parentDiv = document.querySelector('[class^="app-layout__header"]')?.classList?.[0]
-		const styles = `
+		const styles = /*css*/ `
       .video-player-wrapper{
           max-Height: calc(100vw / 1.7777);
           height: 100vh;

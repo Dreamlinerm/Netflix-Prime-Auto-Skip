@@ -7,8 +7,10 @@ startIframe()
 
 const src = chrome.runtime.getURL("/src/ui/iframe-page/index.html")
 
-const iframe = new DOMParser().parseFromString(`<iframe class="crx-iframe" src="${src}"></iframe>`, "text/html").body
-	.firstElementChild
+const iframe = new DOMParser().parseFromString(
+	/*html*/ `<iframe class="crx-iframe" src="${src}"></iframe>`,
+	"text/html",
+).body.firstElementChild
 
 const affiliateTag = "?tag=dreamliner05-20"
 const affiliatePages = [
