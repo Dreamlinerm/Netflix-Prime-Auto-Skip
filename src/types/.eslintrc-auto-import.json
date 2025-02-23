@@ -348,6 +348,7 @@
     "DBCache": true,
     "MovieInfo": true,
     "useFrontendStore": true,
-    "SettingsPromise": true
+    "SettingsPromise": true,
+    "useCountdown": true
   }
 }
