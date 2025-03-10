@@ -306,8 +306,7 @@ async function addRating() {
 	if (isNetflix) AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")]
 	else if (isDisney) AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not(.imdb)")]
 	else if (isHotstar) AllTitleCardsTypes = [document.querySelectorAll(".swiper-slide img:not(.imdb)")]
-	else if (isHBO)
-		AllTitleCardsTypes = [document.querySelectorAll("a[class*='StyledTileLinkNormal-Beam-Web-Ent']:not(.imdb)")]
+	else if (isHBO) AllTitleCardsTypes = [document.querySelectorAll("a[class*='StyledTileLinkNormal-']:not(.imdb)")]
 	else if (isPrimeVideo)
 		AllTitleCardsTypes = [
 			document.querySelectorAll(
@@ -404,7 +403,7 @@ async function addRating() {
 				if (url.includes("video/tv")) media_type = "tv"
 				else if (url.includes("video/movie")) media_type = "movie"
 				else media_type = getMediaType(card.getAttribute("data-card-entity-type") ?? "")
-			} else if (isHBO) title = card.querySelector("p[class*='md_strong-Beam-Web-Ent']")?.textContent ?? ""
+			} else if (isHBO) title = card.querySelector("p[class*='md_strong-']")?.textContent ?? ""
 			// for the static Pixar Disney, Starplus etc. cards
 			if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
 				// sometimes more than one image is loaded for the same title
