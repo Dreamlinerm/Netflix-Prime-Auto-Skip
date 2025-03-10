@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.62
+
+- fix HBO functions since selectors changed
+
 ## 1.1.61
 
 - fix disney ad skip, because of changed interface

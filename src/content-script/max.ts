@@ -43,7 +43,7 @@ async function HBO() {
 	if (settings.value.HBO?.speedSlider) HBO_SpeedSlider(video)
 }
 function HBO_Intro(video: HTMLVideoElement, time: number) {
-	const button = document.querySelector('[class*="SkipButton-Beam-Web-Ent"]') as HTMLElement
+	const button = document.querySelector('button[class*="SkipButton-"]') as HTMLElement
 	if (button?.checkVisibility({ visibilityProperty: true })) {
 		button.click()
 		console.log("Intro skipped", button)
@@ -53,7 +53,7 @@ function HBO_Intro(video: HTMLVideoElement, time: number) {
 	}
 }
 function HBO_Credits(time: number) {
-	const button = document.querySelector('[class*="UpNextButton-Beam-Web-Ent"]') as HTMLElement
+	const button = document.querySelector('button[class*="UpNextButton-"]') as HTMLElement
 	if (button && lastAdTimeText < time - 1) {
 		lastAdTimeText = time
 		button.click()
@@ -63,7 +63,7 @@ function HBO_Credits(time: number) {
 	}
 }
 function HBO_Watch_Credits(video: HTMLVideoElement) {
-	let button = document.querySelector('[class*="DismissButton-Beam-Web-Ent"]') as HTMLElement
+	let button = document.querySelector('button[class*="DismissButton-"]') as HTMLElement
 	if (button) {
 		button.click()
 		settings.value.Statistics.SegmentsSkipped++
@@ -86,7 +86,7 @@ async function HBO_SpeedSlider(video: HTMLVideoElement) {
 	const alreadySlider = document.querySelector("#videoSpeedSlider")
 	if (!alreadySlider) {
 		// infobar position for the slider to be added
-		const position = document.querySelector('[class*="ControlsFooterBottomRight-Beam-Web-Ent"]') as HTMLElement
+		const position = document.querySelector('div[class*="ControlsFooterBottomRight-"]') as HTMLElement
 		if (position) createSlider(video, videoSpeed, position, HBOSliderStyle, HBOSpeedStyle, HBODivStyle)
 	}
 }
