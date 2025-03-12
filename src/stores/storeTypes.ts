@@ -21,6 +21,7 @@ export type settingsType = {
 		speedSlider: boolean
 		profile: boolean
 		showRating: boolean
+		removeGames: boolean
 	}
 	Disney: {
 		skipIntro: boolean
@@ -106,6 +107,7 @@ export const defaultSettings = {
 		speedSlider: true,
 		profile: true,
 		showRating: true,
+		removeGames: true,
 	},
 	Disney: {
 		skipIntro: true,

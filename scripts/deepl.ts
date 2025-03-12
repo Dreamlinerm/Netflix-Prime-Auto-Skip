@@ -5,6 +5,7 @@ import fs from "fs"
 import path from "path"
 
 config()
+console.log("process.env", process.env.DEEPL_API_KEY)
 if (process.argv.length === 2) {
 	exec(
 		"jsontt .translation/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -f EN -t DE ES FR IT JA KO PL PT SV TR ZH",

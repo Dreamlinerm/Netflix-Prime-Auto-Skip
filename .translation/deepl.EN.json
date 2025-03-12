@@ -1,4 +1,4 @@
 {
-	"test": "Moves the category \"Continue\" to the top of the page.",
-	"test2": "Hide the Xray Quick View over a video."
+	"removeGamesSwitch": "Remove Games:",
+	"removeGamesDescription": "Removes all games from the page."
 }

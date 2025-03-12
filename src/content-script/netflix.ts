@@ -84,6 +84,7 @@ function Netflix() {
 	if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped")
 	if (NSettings?.speedSlider && video) Netflix_SpeedSlider(video)
 	if (settings.value.Video?.scrollVolume && video) Netflix_scrollVolume(video)
+	if(NSettings?.removeGames) Netflix_removeGames()
 }
 async function Netflix_scrollVolume(video: HTMLVideoElement) {
 	const volumeControl = document.querySelector('[data-uia*="control-volume"] div:not(.enhanced)') as HTMLElement
@@ -223,6 +224,15 @@ function Netflix_SpeedSlider(video: HTMLVideoElement) {
 			const position = p[p.length - 2]?.firstChild?.lastChild as HTMLElement
 			if (position) createSlider(video, videoSpeed, position, NetflixSliderStyle, NetflixSpeedStyle)
 		}
+	}
+}
+function Netflix_removeGames(){
+	const gamesRow = document.querySelector('div.mobile-games-row')
+	if (gamesRow) {
+		gamesRow.remove()
+		console.log("Netflix removed games")
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
 	}
 }
 // #endregion

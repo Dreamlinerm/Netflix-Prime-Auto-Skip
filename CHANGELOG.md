@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.63
+
+- remove games category from Netflix
+
 ## 1.1.62
 
 - fix HBO functions since selectors changed

@@ -46,6 +46,6 @@ const props = defineProps({
 		default: false,
 	},
 })
-const settingsList: Array<"skipRecap" | "skipBlocked" | "profile"> = ["skipRecap", "skipBlocked", "profile"]
+const settingsList: Array<"skipRecap" | "skipBlocked" | "profile" | "removeGames"> = ["skipRecap", "skipBlocked", "profile","removeGames"]
 </script>
 <style scoped></style>

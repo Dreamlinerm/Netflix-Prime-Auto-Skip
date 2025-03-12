@@ -20,6 +20,7 @@ Platform-Specific Features:
   <ul>
     <li>Remembers and selects your last-used profile automatically</li>
     <li>Blocks the “Are you still watching?” inactivity warning</li>
+    <li>Remove games from Netflix</li>
   </ul>
 </li>
 

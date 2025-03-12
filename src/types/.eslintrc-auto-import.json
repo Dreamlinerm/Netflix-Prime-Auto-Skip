@@ -349,6 +349,7 @@
     "MovieInfo": true,
     "useFrontendStore": true,
     "SettingsPromise": true,
-    "useCountdown": true
+    "useCountdown": true,
+    "createRef": true
   }
 }
