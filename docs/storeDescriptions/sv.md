@@ -4,71 +4,56 @@ Du kan anpassa vilka funktioner som ska aktiveras i Inställningar.
 
 Detta tillägg förbättrar din streamingupplevelse på Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll och HBO Max genom att automatiskt:
 
-<ul>
-<li>Blockera annonser</li>
-<li>Skippa intron och sammanfattningar</li>
-<li>Skippa eftertexter</li>
-<li>Visa TMDB-betyg för alla program</li>
-<li>Lägga till anpassningsbar uppspelningshastighet kontroll</li>
-<li>Automatiskt börja spela upp videor i helskärm</li>
-<li>Gå till helskärm vid dubbelklick</li>
-<li>Bläddra för att ändra volymen</li>
-</ul>
+- Blockera annonser
+- Skippa intron och sammanfattningar
+- Skippa eftertexter
+- Visa TMDB-betyg för alla program
+- Lägga till anpassningsbar uppspelningshastighet kontroll
+- Automatiskt börja spela upp videor i helskärm
+- Gå till helskärm vid dubbelklick
+- Bläddra för att ändra volymen
 
 Platform-Specifika funktioner:
 
-<ul>
-<li>Netflix:
-  <ul>
-    <li>Kommer ihåg och väljer din senast använda profil automatiskt</li>
-    <li>Blockerar inaktivitetsvarningen "Tittar du fortfarande?"</li>
-    <li>Ta bort spel från Netflix</li>
-  </ul>
-</li>
+- Netflix:
 
-<li>Amazon Prime Video:
-  <ul>
-    <li>Skippar självreklamerande annonser (för Prime Video-produktioner)</li>
-    <li>Filtrerar bort betalt innehåll (filmer, serier) från startsidan</li>
-    <li>Tar bort oskärpeeffekten när du håller muspekaren över videoklipp</li>
-    <li>Flyttar kategorin "Fortsätt" till toppen av sidan</li>
-    <li>Dölj Xray Quick View över en video</li>
-  </ul>
-</li>
+    - Kommer ihåg och väljer din senast använda profil automatiskt
+    - Blockerar inaktivitetsvarningen "Tittar du fortfarande?"
+    - Ta bort spel från Netflix
 
-<li>Disney+ (Hotstar, STAR+):
-  <ul>
-    <li>Skippar självpromoterande annonser</li>
-    <li>Automatiskt återgår till helskärmsläge när du går till nästa avsnitt</li>
-  </ul>
-</li>
+- Amazon Prime Video:
 
-<li>Crunchyroll:
-  <ul>
-    <li>Kommer ihåg och väljer din senast använda profil automatiskt</li>
-    <li>Lägger till filter i utgivningskalendern så att den blir användbar</li>
-    <li>Videostorlek utökas till hela fönstret</li>
-    <li>Avaktivera numpad</li>
-  </ul>
-</li>
-</ul>
+    - Skippar självreklamerande annonser (för Prime Video-produktioner)
+    - Filtrerar bort betalt innehåll (filmer, serier) från startsidan
+    - Tar bort oskärpeeffekten när du håller muspekaren över videoklipp
+    - Flyttar kategorin "Fortsätt" till toppen av sidan
+    - Dölj Xray Quick View över en video
+
+- Disney+ (Hotstar, STAR+):
+
+    - Skippar självpromoterande annonser
+    - Automatiskt återgår till helskärmsläge när du går till nästa avsnitt
+
+- Crunchyroll:
+    - Kommer ihåg och väljer din senast använda profil automatiskt
+    - Lägger till filter i utgivningskalendern så att den blir användbar
+    - Videostorlek utökas till hela fönstret
+    - Avaktivera numpad
 
 Androidstöd i skrivbordsläge:
 
-<ul>
-<li>Prime Video</li>
-<li>Disney+ (Hotstar, STAR+)</li>
-<li>Crunchyroll</li>
-<li>HBO Max</li>
-</ul>
-För att använda tillägget på en Android-telefon, ladda ner Firefox.
+- Prime Video
+- Disney+ (Hotstar, STAR+)
+- Crunchyroll
+- HBO Max
+  För att använda tillägget på en Android-telefon, ladda ner Firefox.
 
 ☔ Säker och öppen källkod
-Det här tillägget är öppen källkod! Känn dig fri att bidra eller utforska koden på <a href='https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip' target='_blank'>Github</a>.
+Det här tillägget är öppen källkod! Känn dig fri att bidra eller utforska koden på [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
 
 💕 Njuter du av förbättrad streaming?
 Om du njuter av den förbättrade streamingupplevelsen, överväg att lämna en 5-stjärnig recension! Recensioner hjälper till att bygga förtroende och locka nya användare.
-Om du vill stödja vidareutveckling kan du köpa mig en <a href='https://github.com/sponsors/Dreamlinerm' target='_blank'>kaffe</a>.
+Om du vill stödja vidareutveckling kan du köpa mig en [kaffe](https://github.com/sponsors/Dreamlinerm).
 
 Disclaimer
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll och HBO max är varumärken och författaren till detta tillägg är inte ansluten till dessa företag.

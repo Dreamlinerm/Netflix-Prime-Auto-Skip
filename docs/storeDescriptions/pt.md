@@ -4,71 +4,56 @@ Caraterísticas
 
 Esta extensão melhora a sua experiência de streaming no Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll e HBO Max automaticamente:
 
-<ul>
-<li>Bloquear anúncios</li>
-<li>Pular introduções e recapitulações</li>
-<li>Pular créditos</li>
-<li>Exibir classificações TMDB para todos os programas</li>
-<li>Adicionar velocidade de reprodução personalizável de reprodução personalizável</li>
-<li>Iniciar automaticamente a reprodução de vídeos em ecrã total</li>
-<li>Ir para ecrã total com um duplo clique</li>
-<li>Deslocar-se para alterar o volume</li>
-</ul>
+- Bloquear anúncios
+- Pular introduções e recapitulações
+- Pular créditos
+- Exibir classificações TMDB para todos os programas
+- Adicionar velocidade de reprodução personalizável de reprodução personalizável
+- Iniciar automaticamente a reprodução de vídeos em ecrã total
+- Ir para ecrã total com um duplo clique
+- Deslocar-se para alterar o volume
 
 Plataforma-Caraterísticas específicas:
 
-<ul>
-<li>Netflix:
-  <ul>
-    <li>Lembra e seleciona automaticamente o seu último perfil utilizado</li>
-    <li>Bloqueia o aviso de inatividade "Ainda estás a ver?"</li>
-    <li>Remover jogos da Netflix</li>
-  </ul>
-</li>
+- Netflix:
 
-<li>Amazon Prime Video:
-  <ul>
-    <li>Pula anúncios autopromocionais (para produções do Prime Video)</li>
-    <li>Filtra o conteúdo pago (filmes, séries) da página inicial</li>
-    <li>Remove o efeito de desfoque ao passar o mouse sobre os vídeos</li>
-    <li>Move a categoria "Continuar" para o topo da página</li>
-    <li>Oculte a visualização rápida do raio X em um vídeo</li>
-  </ul>
-</li>
+    - Lembra e seleciona automaticamente o seu último perfil utilizado
+    - Bloqueia o aviso de inatividade "Ainda estás a ver?"
+    - Remover jogos da Netflix
 
-<li>Disney+ (Hotstar, STAR+):
-  <ul>
-    <li>Pula anúncios autopromocionais</li>
-    <li>Regressa automaticamente ao modo de ecrã inteiro quando passa para o episódio seguinte</li>
-  </ul>
-</li>
+- Amazon Prime Video:
 
-<li>Crunchyroll:
-  <ul>
-    <li>Lembra e seleciona automaticamente o seu último perfil utilizado</li>
-    <li>Adiciona filtros ao calendário de lançamentos, para que seja utilizável</li>
-    <li>Tamanho do vídeo expandido para toda a janela</li>
-    <li>Desativar o teclado numérico</li>
-  </ul>
-</li>
-</ul>
+    - Pula anúncios autopromocionais (para produções do Prime Video)
+    - Filtra o conteúdo pago (filmes, séries) da página inicial
+    - Remove o efeito de desfoque ao passar o mouse sobre os vídeos
+    - Move a categoria "Continuar" para o topo da página
+    - Oculte a visualização rápida do raio X em um vídeo
+
+- Disney+ (Hotstar, STAR+):
+
+    - Pula anúncios autopromocionais
+    - Regressa automaticamente ao modo de ecrã inteiro quando passa para o episódio seguinte
+
+- Crunchyroll:
+    - Lembra e seleciona automaticamente o seu último perfil utilizado
+    - Adiciona filtros ao calendário de lançamentos, para que seja utilizável
+    - Tamanho do vídeo expandido para toda a janela
+    - Desativar o teclado numérico
 
 Suporte para Android no modo Desktop:
 
-<ul>
-<li>Prime Video</li>
-<li>Disney+ (Hotstar, STAR+)</li>
-<li>Crunchyroll</li>
-<li>HBO Max</li>
-</ul>
-Para usar a extensão num telemóvel Android, descarregue o Firefox.
+- Prime Video
+- Disney+ (Hotstar, STAR+)
+- Crunchyroll
+- HBO Max
+  Para usar a extensão num telemóvel Android, descarregue o Firefox.
 
 ☔ Seguro e de código aberto
-Esta extensão é de código aberto! Sinta-se à vontade para contribuir ou explorar o código no <a href='https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip' target='_blank'>Github</a>.
+Esta extensão é de código aberto! Sinta-se à vontade para contribuir ou explorar o código no [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
 
 💕 Está a gostar do streaming melhorado?
 Se está a gostar da experiência de streaming melhorada, considere deixar uma avaliação de 5 estrelas! As avaliações ajudam a criar confiança e a atrair novos utilizadores.
-Se quiser apoiar o desenvolvimento, pode comprar-me um <a href="https://github.com/sponsors/Dreamlinerm" target="_blank">café</a>.
+Se quiser apoiar o desenvolvimento, pode comprar-me um [café](https://github.com/sponsors/Dreamlinerm).
 
 Disclaimer
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll e HBO max são marcas comerciais e o autor deste addon não é afiliado a estas empresas.
