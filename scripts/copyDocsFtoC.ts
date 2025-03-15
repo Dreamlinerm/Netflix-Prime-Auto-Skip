@@ -6,14 +6,8 @@ const storeDescriptionsPath = path.join("docs", "storeDescriptions")
 const ChromeStoreDescriptionsPath = path.join("docs", "ChromeStoreDescriptions")
 const storeDescriptions = fs.readdirSync(storeDescriptionsPath)
 const replacesForDescription = [
-	[/.*ul>\r?\n/g, ""],
-	["<li>", "  • "],
-	// only /li in line
-	[/\n<\/li>\r?\n/g, ""],
-	["</li>", ""],
-	// change link to markdown
-	[/<a href="(.*)" .*>(.*)<\/a>/g, "[$2]($1)"],
-	[/<a href='(.*)' .*>(.*)<\/a>/g, "[$2]($1)"],
+	["    - ", "      • "],
+	["- ", "  • "],
 ]
 // pick last file
 storeDescriptions.forEach((file) => {
