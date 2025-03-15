@@ -3,7 +3,6 @@ Ayarlar'da hangi özelliklerin etkinleştirileceğini özelleştirebilirsiniz.
 ✨ Özellikler
 
 Bu uzantı Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll ve HBO Max'teki yayın deneyiminizi otomatik olarak geliştirir:
-
 - Reklamları Engelle
 - İntroları ve Özetleri Atla
 - Kredileri Atla
@@ -16,13 +15,11 @@ Bu uzantı Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll ve HBO Ma
 Platform-Belirli Özellikler:
 
 - Netflix:
-
     - Son kullandığınız profili otomatik olarak hatırlar ve seçer
     - "Hala izliyor musunuz?" hareketsizlik uyarısını engeller
     - Netflix'ten oyunları kaldırma
 
 - Amazon Prime Video:
-
     - Kendini tanıtan reklamları atlar (Prime Video prodüksiyonları için)
     - Ana sayfadan ücretli içeriği (filmler, diziler) filtreler
     - Videoların üzerine gelindiğinde bulanıklaştırma efektini kaldırır
@@ -30,7 +27,6 @@ Platform-Belirli Özellikler:
     - Xray Hızlı Görünümünü bir video üzerinde gizleyin
 
 - Disney+ (Hotstar, STAR+):
-
     - Kendini tanıtan reklamları atlar
     - Bir sonraki bölüme geçerken otomatik olarak tam ekran moduna döner
 
@@ -41,7 +37,6 @@ Platform-Belirli Özellikler:
     - Sayısal tuş takımını devre dışı bırak
 
 Masaüstü modunda Android Desteği:
-
 - Prime Video
 - Disney+ (Hotstar, STAR+)
 - Crunchyroll

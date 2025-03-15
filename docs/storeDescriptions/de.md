@@ -1,9 +1,8 @@
-  Sie können in den Einstellungen festlegen, welche Funktionen aktiviert sind.
+Sie können in den Einstellungen festlegen, welche Funktionen aktiviert sind.
 
 ✨ Funktionen
 
 Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll und HBO Max durch automatische:
-
 - Werbung blockieren
 - Überspringen von Intros & Zusammenfassungen
 - Überspringen von Credits
@@ -38,7 +37,6 @@ Plattform-spezifische Funktionen:
     - Ziffernblock deaktivieren
 
 Android-Unterstützung im Desktop-Modus:
-
 - Prime Video
 - Disney+ (Hotstar, STAR+)
 - Crunchyroll

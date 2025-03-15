@@ -3,7 +3,6 @@
 ✨ Caratteristiche
 
 Questa estensione migliora la vostra esperienza di streaming su Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll e HBO Max in modo automatico:
-
 - Bloccando gli annunci pubblicitari
 - Salvando le introduzioni e i riassunti
 - Salvando i titoli di coda
@@ -16,13 +15,11 @@ Questa estensione migliora la vostra esperienza di streaming su Netflix, Prime V
 Platform-Caratteristiche specifiche:
 
 - Netflix:
-
     - Ricorda e seleziona automaticamente l'ultimo profilo utilizzato
     - Blocca l'avviso di inattività "Stai ancora guardando?"
     - Rimuovere i giochi da Netflix
 
 - Amazon Prime Video:
-
     - Skipa gli annunci autopromozionali (per le produzioni Prime Video)
     - Filtra i contenuti a pagamento (film, serie) dalla home page
     - Rimuove l'effetto sfocatura quando si passa il mouse sui video
@@ -30,7 +27,6 @@ Platform-Caratteristiche specifiche:
     - Nascondere la visualizzazione rapida Xray su un video
 
 - Disney+ (Hotstar, STAR+):
-
     - Skipa gli annunci autopromozionali
     - Ritorna automaticamente alla modalità a schermo intero quando si passa all'episodio successivo
 
@@ -41,7 +37,6 @@ Platform-Caratteristiche specifiche:
     - Disattiva il tastierino numerico
 
 Supporto Android in modalità Desktop:
-
 - Prime Video
 - Disney+ (Hotstar, STAR+)
 - Crunchyroll

@@ -3,7 +3,6 @@ Możesz dostosować, które funkcje są włączone w Ustawieniach.
 ✨ Funkcje
 
 To rozszerzenie poprawia jakość streamowania w serwisach Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll i HBO Max poprzez automatyczne:
-
 - Block Ads
 - Skipping Intros & Recaps
 - Skipping Credits
@@ -16,13 +15,11 @@ To rozszerzenie poprawia jakość streamowania w serwisach Netflix, Prime Video,
 Platforma-Cechy szczególne:
 
 - Netflix:
-
     - Zapamiętuje i automatycznie wybiera ostatnio używany profil
     - Blokuje ostrzeżenie o braku aktywności "Czy nadal oglądasz?"
     - Usuwanie gier z serwisu Netflix
 
 - Amazon Prime Video:
-
     - Omija reklamy autopromocyjne (dla produkcji Prime Video)
     - Filtruje płatne treści (filmy, seriale) ze strony głównej
     - Usuwa efekt rozmycia po najechaniu kursorem na filmy
@@ -30,7 +27,6 @@ Platforma-Cechy szczególne:
     - Ukryj szybki widok Xray nad filmem
 
 - Disney+ (Hotstar, STAR+):
-
     - Omija reklamy autopromocyjne
     - Automatycznie powraca do trybu pełnoekranowego po przejściu do następnego odcinka
 
@@ -41,7 +37,6 @@ Platforma-Cechy szczególne:
     - Wyłącz klawiaturę numeryczną
 
 Obsługa Androida w trybie pulpitu:
-
 - Prime Video
 - Disney+ (Hotstar, STAR+)
 - Crunchyroll
