@@ -3,6 +3,7 @@ Sie können in den Einstellungen festlegen, welche Funktionen aktiviert sind.
 ✨ Funktionen
 
 Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll und HBO Max durch automatische:
+
 <ul>
 <li>Werbung blockieren</li>
 <li>Überspringen von Intros & Zusammenfassungen</li>
@@ -15,11 +16,13 @@ Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Di
 </ul>
 
 Plattform-spezifische Funktionen:
+
 <ul>
 <li>Netflix:
   <ul>
     <li>Wählt das zuletzt verwendetes Profil automatisch aus</li>
     <li>Blockiert die Inaktivitätswarnung „Sehen Sie immer noch zu?</li>
+    <li>Spiele aus Netflix entfernen</li>
   </ul>
 </li>
 
@@ -51,6 +54,7 @@ Plattform-spezifische Funktionen:
 </ul>
 
 Android-Unterstützung im Desktop-Modus:
+
 <ul>
 <li>Prime Video</li>
 <li>Disney+ (Hotstar, STAR+)</li>

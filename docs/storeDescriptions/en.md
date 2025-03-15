@@ -3,6 +3,7 @@ You can customize which features are enabled in the Settings.
 ✨ Features
 
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
+
 <ul>
 <li>Block Ads</li>
 <li>Skipping Intros & Recaps</li>
@@ -15,6 +16,7 @@ This extension enhances your streaming experience on Netflix, Prime Video, Disne
 </ul>
 
 Platform-Specific Features:
+
 <ul>
 <li>Netflix:
   <ul>
@@ -52,6 +54,7 @@ Platform-Specific Features:
 </ul>
 
 Android Support in Desktop mode:
+
 <ul>
 <li>Prime Video</li>
 <li>Disney+ (Hotstar, STAR+)</li>

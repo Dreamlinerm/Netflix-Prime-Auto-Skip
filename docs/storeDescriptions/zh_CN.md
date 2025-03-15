@@ -3,6 +3,7 @@
 ✨功能
 
 此扩展可自动增强你在 Netflix、Prime Video、Disney+（Hotstar、STAR+）、Crunchyroll 和 HBO Max 上的流媒体体验：
+
 <ul>
 <li>屏蔽广告</li>
 <li>跳过简介和回顾</li>
@@ -15,11 +16,13 @@
 </ul>
 
 平台-具体功能：
+
 <ul>
 <li>Netflix:
   <ul>
     <li>自动记忆并选择您上次使用的配置文件</li>
     <li>阻止 "您还在观看吗？"非活动警告</li>
+    <li>从 Netflix 中删除游戏</li>
   </ul>
 </li>
 
@@ -51,6 +54,7 @@
 </ul>
 
 桌面模式下的安卓支持：
+
 <ul>
 <li>Prime Video</li>
 <li>Disney+ (Hotstar, STAR+)</li>

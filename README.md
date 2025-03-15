@@ -112,6 +112,7 @@ Features in other supported languages:
 You can customize which features are enabled in the Settings.
 
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
+
 <ul>
 <li>Block Ads</li>
 <li>Skipping Intros & Recaps</li>
@@ -124,11 +125,13 @@ This extension enhances your streaming experience on Netflix, Prime Video, Disne
 </ul>
 
 Platform-Specific Features:
+
 <ul>
 <li>Netflix:
   <ul>
     <li>Remembers and selects your last-used profile automatically</li>
     <li>Blocks the “Are you still watching?” inactivity warning</li>
+    <li>Remove games from Netflix</li>
   </ul>
 </li>
 
@@ -160,6 +163,7 @@ Platform-Specific Features:
 </ul>
 
 Android Support in Desktop mode:
+
 <ul>
 <li>Prime Video</li>
 <li>Disney+ (Hotstar, STAR+)</li>
@@ -177,6 +181,7 @@ If you'd like to support further development, you can buy me a <a href="https://
 
 ## Disclaimer
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.
+
 <!-- descriptionEnd -->
 
 ### Skip Credits, Watch Credits

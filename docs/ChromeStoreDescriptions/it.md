@@ -3,6 +3,7 @@
 ✨ Caratteristiche
 
 Questa estensione migliora la vostra esperienza di streaming su Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll e HBO Max in modo automatico:
+
   • Bloccando gli annunci pubblicitari
   • Salvando le introduzioni e i riassunti
   • Salvando i titoli di coda
@@ -13,9 +14,11 @@ Questa estensione migliora la vostra esperienza di streaming su Netflix, Prime V
   • Scorrere per modificare il volume
 
 Platform-Caratteristiche specifiche:
+
   • Netflix:
       • Ricorda e seleziona automaticamente l'ultimo profilo utilizzato
-      • Blocca l'avviso di inattività "Stai ancora guardando?"
+      • Blocca l'avviso di inattività "Stai ancora guardando?"
+      • Rimuovere i giochi da Netflix
   • Amazon Prime Video:
       • Skipa gli annunci autopromozionali (per le produzioni Prime Video)
       • Filtra i contenuti a pagamento (film, serie) dalla home page
@@ -31,6 +34,7 @@ Platform-Caratteristiche specifiche:
       • La dimensione del video viene espansa all'intera finestra
       • Disattiva il tastierino numerico
 Supporto Android in modalità Desktop:
+
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll
@@ -40,7 +44,7 @@ Per utilizzare l'estensione su un telefono Android, scaricare Firefox.
 ☔ Sicura e Open Source
 Questa estensione è open-source! Sentitevi liberi di contribuire o di esplorare il codice su [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
 
-💕 Vi piace lo streaming migliorato? 
+💕 Vi piace lo streaming migliorato?
 Se vi piace l'esperienza di streaming migliorata, vi invitiamo a lasciare una recensione a 5 stelle! Le recensioni contribuiscono a creare fiducia e ad attirare nuovi utenti.
 Se vuoi sostenere un ulteriore sviluppo, puoi comprarmi un [caffè](https://github.com/sponsors/Dreamlinerm).
 

@@ -3,6 +3,7 @@ You can customize which features are enabled in the Settings.
 ✨ Features
 
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
+
   • Block Ads
   • Skipping Intros & Recaps
   • Skipping Credits
@@ -13,9 +14,11 @@ This extension enhances your streaming experience on Netflix, Prime Video, Disne
   • Scroll to change the volume
 
 Platform-Specific Features:
+
   • Netflix:
       • Remembers and selects your last-used profile automatically
-      • Blocks the “Are you still watching?” inactivity warning
+      • Blocks the “Are you still watching?” inactivity warning
+      • Remove games from Netflix
   • Amazon Prime Video:
       • Skips self-promotional ads (for Prime Video productions)
       • Filters out paid content (movies, series) from the home page
@@ -31,6 +34,7 @@ Platform-Specific Features:
       • Video size expanded to entire window
       • Disable the numpad
 Android Support in Desktop mode:
+
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll

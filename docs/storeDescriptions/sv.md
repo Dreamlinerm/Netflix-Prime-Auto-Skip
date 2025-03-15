@@ -3,6 +3,7 @@ Du kan anpassa vilka funktioner som ska aktiveras i Inställningar.
 ✨ Funktioner
 
 Detta tillägg förbättrar din streamingupplevelse på Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll och HBO Max genom att automatiskt:
+
 <ul>
 <li>Blockera annonser</li>
 <li>Skippa intron och sammanfattningar</li>
@@ -15,11 +16,13 @@ Detta tillägg förbättrar din streamingupplevelse på Netflix, Prime Video, Di
 </ul>
 
 Platform-Specifika funktioner:
+
 <ul>
 <li>Netflix:
   <ul>
     <li>Kommer ihåg och väljer din senast använda profil automatiskt</li>
     <li>Blockerar inaktivitetsvarningen "Tittar du fortfarande?"</li>
+    <li>Ta bort spel från Netflix</li>
   </ul>
 </li>
 
@@ -51,6 +54,7 @@ Platform-Specifika funktioner:
 </ul>
 
 Androidstöd i skrivbordsläge:
+
 <ul>
 <li>Prime Video</li>
 <li>Disney+ (Hotstar, STAR+)</li>
@@ -62,8 +66,8 @@ För att använda tillägget på en Android-telefon, ladda ner Firefox.
 ☔ Säker och öppen källkod
 Det här tillägget är öppen källkod! Känn dig fri att bidra eller utforska koden på <a href='https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip' target='_blank'>Github</a>.
 
-💕 Njuter du av förbättrad streaming? 
- Om du njuter av den förbättrade streamingupplevelsen, överväg att lämna en 5-stjärnig recension! Recensioner hjälper till att bygga förtroende och locka nya användare.
+💕 Njuter du av förbättrad streaming?
+Om du njuter av den förbättrade streamingupplevelsen, överväg att lämna en 5-stjärnig recension! Recensioner hjälper till att bygga förtroende och locka nya användare.
 Om du vill stödja vidareutveckling kan du köpa mig en <a href='https://github.com/sponsors/Dreamlinerm' target='_blank'>kaffe</a>.
 
 Disclaimer

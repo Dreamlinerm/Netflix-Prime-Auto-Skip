@@ -3,6 +3,7 @@ Vous pouvez personnaliser les fonctionnalités activées dans les paramètres.
 ✨ Caractéristiques
 
 Cette extension améliore votre expérience de streaming sur Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll et HBO Max en :
+
   • Bloquer les publicités
   • Ignorer les introductions et les récapitulatifs
   • Ignorer les crédits
@@ -13,9 +14,11 @@ Cette extension améliore votre expérience de streaming sur Netflix, Prime Vide
   • Défilement pour modifier le volume
 
 Platforme-Caractéristiques spécifiques:
+
   • Netflix:
       • Rappelle et sélectionne automatiquement votre dernier profil utilisé
-      • Bloque l'avertissement d'inactivité "Are you still watching ?"
+      • Bloque l'avertissement d'inactivité "Are you still watching ?"
+      • Supprimer des jeux de Netflix
   • Amazon Prime Video:
       • Supprime les publicités auto-promotionnelles (pour les productions Prime Video)
       • Filtre les contenus payants (films, séries) de la page d'accueil
@@ -31,6 +34,7 @@ Platforme-Caractéristiques spécifiques:
       • La taille de la vidéo est étendue à l'ensemble de la fenêtre
       • Désactive le pavé numérique
 Support Android en mode bureau:
+
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll

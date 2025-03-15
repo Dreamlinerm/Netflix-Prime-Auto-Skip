@@ -3,6 +3,7 @@
 ✨特徴
 
 この拡張機能は、Netflix、Prime Video、Disney+（Hotstar、STAR+）、Crunchyroll、HBO Maxでのストリーミング体験を自動的に向上させます：
+
 <ul>
 <li>広告をブロック</li>
 <li>イントロと要約をスキップ</li>
@@ -15,11 +16,13 @@
 </ul>
 
 プラットフォーム特定の機能
+
 <ul>
 <li>Netflix:
   <ul>
     <li>最後に使用したプロファイルを自動的に記憶して選択</li>
     <li>「まだ見ていますか」という非アクティブの警告をブロックします</li>
+    <li>Netflixからゲームを削除します</li>
   </ul>
 </li>
 
@@ -50,7 +53,8 @@
 </li>
 </ul>
 
-デスクトップ モードでの Android サポート: 
+デスクトップ モードでの Android サポート:
+
 <ul>
 <li>プライム ビデオ</li>
 <li>Disney+ (Hotstar, STAR+)</li>

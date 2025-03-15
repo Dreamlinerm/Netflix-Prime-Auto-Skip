@@ -45,7 +45,6 @@ fs.readFile(path.join(storeDescriptionsPath, "en.md"), "utf8", function (err, da
 		// replace the text between <!-- description --> and <!-- descriptionEnd -->
 		// with the content of the storeDescriptionsPath
 		const descriptionText = "<!-- description -->"
-		const descriptionEndText = "<!-- descriptionEnd -->"
 		const descriptionStart = data.indexOf(descriptionText) + descriptionText.length + 2
 		const descriptionEnd = data.indexOf("<!-- descriptionEnd -->") - 2
 
