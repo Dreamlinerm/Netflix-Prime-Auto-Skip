@@ -3,7 +3,6 @@ Du kan anpassa vilka funktioner som ska aktiveras i Inställningar.
 ✨ Funktioner
 
 Detta tillägg förbättrar din streamingupplevelse på Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll och HBO Max genom att automatiskt:
-
   • Blockera annonser
   • Skippa intron och sammanfattningar
   • Skippa eftertexter
@@ -18,28 +17,31 @@ Platform-Specifika funktioner:
   • Netflix:
       • Kommer ihåg och väljer din senast använda profil automatiskt
       • Blockerar inaktivitetsvarningen "Tittar du fortfarande?"
-      • Ta bort spel från Netflix
+      • Ta bort spel från Netflix
+
   • Amazon Prime Video:
       • Skippar självreklamerande annonser (för Prime Video-produktioner)
       • Filtrerar bort betalt innehåll (filmer, serier) från startsidan
       • Tar bort oskärpeeffekten när du håller muspekaren över videoklipp
       • Flyttar kategorin "Fortsätt" till toppen av sidan
-      • Dölj Xray Quick View över en video
+      • Dölj Xray Quick View över en video
+
   • Disney+ (Hotstar, STAR+):
       • Skippar självpromoterande annonser
-      • Automatiskt återgår till helskärmsläge när du går till nästa avsnitt
+      • Automatiskt återgår till helskärmsläge när du går till nästa avsnitt
+
   • Crunchyroll:
       • Kommer ihåg och väljer din senast använda profil automatiskt
       • Lägger till filter i utgivningskalendern så att den blir användbar
       • Videostorlek utökas till hela fönstret
-      • Avaktivera numpad
-Androidstöd i skrivbordsläge:
+      • Avaktivera numpad
 
+Androidstöd i skrivbordsläge:
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll
   • HBO Max
-För att använda tillägget på en Android-telefon, ladda ner Firefox.
+  För att använda tillägget på en Android-telefon, ladda ner Firefox.
 
 ☔ Säker och öppen källkod
 Det här tillägget är öppen källkod! Känn dig fri att bidra eller utforska koden på [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).

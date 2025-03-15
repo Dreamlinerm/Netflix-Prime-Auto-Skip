@@ -3,7 +3,6 @@ Możesz dostosować, które funkcje są włączone w Ustawieniach.
 ✨ Funkcje
 
 To rozszerzenie poprawia jakość streamowania w serwisach Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll i HBO Max poprzez automatyczne:
-
   • Block Ads
   • Skipping Intros & Recaps
   • Skipping Credits
@@ -18,28 +17,31 @@ Platforma-Cechy szczególne:
   • Netflix:
       • Zapamiętuje i automatycznie wybiera ostatnio używany profil
       • Blokuje ostrzeżenie o braku aktywności "Czy nadal oglądasz?"
-      • Usuwanie gier z serwisu Netflix
+      • Usuwanie gier z serwisu Netflix
+
   • Amazon Prime Video:
       • Omija reklamy autopromocyjne (dla produkcji Prime Video)
       • Filtruje płatne treści (filmy, seriale) ze strony głównej
       • Usuwa efekt rozmycia po najechaniu kursorem na filmy
       • Przenosi kategorię "Kontynuuj" na górę strony
-      • Ukryj szybki widok Xray nad filmem
+      • Ukryj szybki widok Xray nad filmem
+
   • Disney+ (Hotstar, STAR+):
       • Omija reklamy autopromocyjne
-      • Automatycznie powraca do trybu pełnoekranowego po przejściu do następnego odcinka
+      • Automatycznie powraca do trybu pełnoekranowego po przejściu do następnego odcinka
+
   • Crunchyroll:
       • Zapamiętuje i automatycznie wybiera ostatnio używany profil
       • Dodaje filtry do kalendarza wydań, dzięki czemu jest on użyteczny
       • Rozszerzenie rozmiaru wideo do całego okna
-      • Wyłącz klawiaturę numeryczną
-Obsługa Androida w trybie pulpitu:
+      • Wyłącz klawiaturę numeryczną
 
+Obsługa Androida w trybie pulpitu:
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll
   • HBO Max
-Aby korzystać z rozszerzenia na telefonie z Androidem, pobierz Firefox.
+  Aby korzystać z rozszerzenia na telefonie z Androidem, pobierz Firefox.
 
 ☔ Bezpieczne i otwarte źródło
 To rozszerzenie jest open-source! Zachęcamy do współtworzenia lub zapoznania się z kodem na [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).

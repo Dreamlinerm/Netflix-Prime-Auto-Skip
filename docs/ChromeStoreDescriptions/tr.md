@@ -3,7 +3,6 @@ Ayarlar'da hangi özelliklerin etkinleştirileceğini özelleştirebilirsiniz.
 ✨ Özellikler
 
 Bu uzantı Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll ve HBO Max'teki yayın deneyiminizi otomatik olarak geliştirir:
-
   • Reklamları Engelle
   • İntroları ve Özetleri Atla
   • Kredileri Atla
@@ -18,28 +17,31 @@ Platform-Belirli Özellikler:
   • Netflix:
       • Son kullandığınız profili otomatik olarak hatırlar ve seçer
       • "Hala izliyor musunuz?" hareketsizlik uyarısını engeller
-      • Netflix'ten oyunları kaldırma
+      • Netflix'ten oyunları kaldırma
+
   • Amazon Prime Video:
       • Kendini tanıtan reklamları atlar (Prime Video prodüksiyonları için)
       • Ana sayfadan ücretli içeriği (filmler, diziler) filtreler
       • Videoların üzerine gelindiğinde bulanıklaştırma efektini kaldırır
       • "Devam" kategorisini sayfanın en üstüne taşır
-      • Xray Hızlı Görünümünü bir video üzerinde gizleyin
+      • Xray Hızlı Görünümünü bir video üzerinde gizleyin
+
   • Disney+ (Hotstar, STAR+):
       • Kendini tanıtan reklamları atlar
-      • Bir sonraki bölüme geçerken otomatik olarak tam ekran moduna döner
+      • Bir sonraki bölüme geçerken otomatik olarak tam ekran moduna döner
+
   • Crunchyroll:
       • Son kullandığınız profili otomatik olarak hatırlar ve seçer
       • Kullanılabilir olması için yayın takvimine filtreler ekler
       • Video boyutu tüm pencereye genişletildi
-      • Sayısal tuş takımını devre dışı bırak
-Masaüstü modunda Android Desteği:
+      • Sayısal tuş takımını devre dışı bırak
 
+Masaüstü modunda Android Desteği:
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll
   • HBO Max
-Uzantıyı bir Android telefonda kullanmak için Firefox'u indirin.
+  Uzantıyı bir Android telefonda kullanmak için Firefox'u indirin.
 
 ☔ Güvenli ve Açık Kaynak
 Bu uzantı açık kaynaklıdır! Katkıda bulunmaktan veya [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip)'daki kodu keşfetmekten çekinmeyin.

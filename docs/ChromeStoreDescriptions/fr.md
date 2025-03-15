@@ -3,7 +3,6 @@ Vous pouvez personnaliser les fonctionnalités activées dans les paramètres.
 ✨ Caractéristiques
 
 Cette extension améliore votre expérience de streaming sur Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll et HBO Max en :
-
   • Bloquer les publicités
   • Ignorer les introductions et les récapitulatifs
   • Ignorer les crédits
@@ -18,28 +17,31 @@ Platforme-Caractéristiques spécifiques:
   • Netflix:
       • Rappelle et sélectionne automatiquement votre dernier profil utilisé
       • Bloque l'avertissement d'inactivité "Are you still watching ?"
-      • Supprimer des jeux de Netflix
+      • Supprimer des jeux de Netflix
+
   • Amazon Prime Video:
       • Supprime les publicités auto-promotionnelles (pour les productions Prime Video)
       • Filtre les contenus payants (films, séries) de la page d'accueil
       • Supprime l'effet de flou au survol des vidéos
       • Déplace la catégorie "continuer" en haut de la page
-      • Cachez la vue rapide Xray sur une vidéo
+      • Cachez la vue rapide Xray sur une vidéo
+
   • Disney+ (Hotstar, STAR+):
       • Supprime les publicités auto-promotionnelles
-      • Retour automatique au mode plein écran lors du passage à l'épisode suivant
+      • Retour automatique au mode plein écran lors du passage à l'épisode suivant
+
   • Crunchyroll:
       • Rappelle et sélectionne automatiquement votre dernier profil utilisé
       • Ajoute des filtres au calendrier des sorties, pour qu'il soit utilisable
       • La taille de la vidéo est étendue à l'ensemble de la fenêtre
-      • Désactive le pavé numérique
-Support Android en mode bureau:
+      • Désactive le pavé numérique
 
+Support Android en mode bureau:
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll
   • HBO Max
-Pour utiliser l'extension sur un téléphone Android, téléchargez Firefox.
+  Pour utiliser l'extension sur un téléphone Android, téléchargez Firefox.
 
 ☔ Safe & Open Source
 Cette extension est open-source ! N'hésitez pas à contribuer ou à explorer le code sur [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).

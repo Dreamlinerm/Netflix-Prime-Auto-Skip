@@ -3,7 +3,6 @@ You can customize which features are enabled in the Settings.
 ✨ Features
 
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
-
   • Block Ads
   • Skipping Intros & Recaps
   • Skipping Credits
@@ -18,28 +17,31 @@ Platform-Specific Features:
   • Netflix:
       • Remembers and selects your last-used profile automatically
       • Blocks the “Are you still watching?” inactivity warning
-      • Remove games from Netflix
+      • Remove games from Netflix
+
   • Amazon Prime Video:
       • Skips self-promotional ads (for Prime Video productions)
       • Filters out paid content (movies, series) from the home page
       • Moves the category "Continue" to the top of the page
       • Hide the Xray Quick View over a video
-      • Removes the blur effect when hovering over videos
+      • Removes the blur effect when hovering over videos
+
   • Disney+ (Hotstar, STAR+):
       • Skips self-promotional ads
-      • Automatically returns to fullscreen mode when going to the next episode
+      • Automatically returns to fullscreen mode when going to the next episode
+
   • Crunchyroll:
       • Remembers and selects your last-used profile automatically
       • Adds filters to the release calendar, so it is useable
       • Video size expanded to entire window
-      • Disable the numpad
-Android Support in Desktop mode:
+      • Disable the numpad
 
+Android Support in Desktop mode:
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll
   • HBO Max
-To use the extension on an Android phone, download Firefox.
+  To use the extension on an Android phone, download Firefox.
 
 ☔ Safe & Open Source
 This extension is open-source! Feel free to contribute or explore the code on [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
