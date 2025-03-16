@@ -3,7 +3,7 @@ console.log("shared-functions loaded")
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
-const { data: hideTitles, promise: hideTitlesPromise } = useBrowserLocalStorage<BooleanObject>("hideTitles", {}, false)
+const { data: hideTitles, promise: hideTitlesPromise } = useBrowserSyncStorage<BooleanObject>("hideTitles", {}, false)
 export const date = new Date()
 const today = date.toISOString().split("T")[0]
 
@@ -72,9 +72,12 @@ async function getDBCache() {
 			}
 			DBCache = {}
 		}
-		if (isNetflix && settings.value.Netflix?.showRating) startShowRatingInterval()
-		else if (isDisney || isHotstar) {
-			if (settings.value.Disney?.showRating) startShowRatingInterval()
+		if (isNetflix) {
+			if (settings.value.Netflix?.showRating || settings.value.Netflix?.hideTitles)
+				startShowRatingInterval(settings.value.Netflix?.showRating, settings.value.Netflix?.hideTitles)
+		} else if (isDisney || isHotstar) {
+			if (settings.value.Disney?.showRating || settings.value.Disney?.hideTitles)
+				startShowRatingInterval(settings.value.Disney?.showRating, settings.value.Disney?.hideTitles)
 		} else if (isPrimeVideo && settings.value.Amazon?.showRating) startShowRatingInterval()
 		else if (isHBO && settings.value.HBO?.showRating) startShowRatingInterval()
 		if (getDiffInDays(settings.value.General.GCdate, date) >= GCdiff) garbageCollection()
@@ -251,20 +254,28 @@ function showRating() {
 		return true
 	} else return true
 }
-async function startShowRatingInterval() {
-	if (showRating()) addRating()
+async function startShowRatingInterval(optionShowRating = true, optionHideTitles = false) {
+	if (showRating()) addRating(optionShowRating, optionHideTitles)
 	const RatingInterval = setInterval(function () {
+		if (isNetflix) {
+			optionShowRating = settings.value.Netflix?.showRating
+			optionHideTitles = settings.value.Netflix?.hideTitles
+		} else if (isDisney) {
+			optionShowRating = settings.value.Disney?.showRating
+			optionHideTitles = settings.value.Disney?.hideTitles
+		}
+
 		if (
-			(isNetflix && !settings.value.Netflix?.showRating) ||
+			(isNetflix && !(settings.value.Netflix?.showRating || settings.value.Netflix?.hideTitles)) ||
 			(isPrimeVideo && !settings.value.Amazon?.showRating) ||
-			((isDisney || isHotstar) && !settings.value.Disney?.showRating) ||
+			((isDisney || isHotstar) && !(settings.value.Disney?.showRating || settings.value.Disney?.hideTitles)) ||
 			(isHBO && !settings.value.HBO?.showRating)
 		) {
 			console.log("stopped adding Rating")
 			clearInterval(RatingInterval)
 			return
 		}
-		if (showRating()) addRating()
+		if (showRating()) addRating(optionShowRating, optionHideTitles)
 	}, 1000)
 }
 function getDiffInDays(firstDate: string, secondDate: Date) {
@@ -305,8 +316,7 @@ function Amazon_getMediaType(type: string): "tv" | "movie" | null {
 	if (type.toLowerCase().includes("movie")) return "movie"
 	return null
 }
-async function addRating() {
-	url = window.location.href
+function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	let AllTitleCardsTypes: Array<NodeListOf<Element>> = []
 	if (isNetflix) AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")]
 	else if (isDisney) AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not(.imdb)")]
@@ -319,6 +329,12 @@ async function addRating() {
 			),
 			document.querySelectorAll("article[data-testid*='-card']:not(.imdb):not(:has(a#rating))"),
 		]
+	return AllTitleCardsTypes
+}
+
+async function addRating(showRating: boolean, optionHideTitles: boolean) {
+	url = window.location.href
+	const AllTitleCardsTypes = getAllTitleCardsTypes()
 	// on disney there are multiple images for the same title so only use the first one
 	let lastTitle = ""
 	// for each is not going in order on chrome
@@ -336,8 +352,7 @@ async function addRating() {
 			const media_type = getMediaType(card)
 			const title = getCleanTitle(card, type)
 			if (!title) continue
-			// hideTitles
-			if (isNetflix || isDisney) {
+			if (optionHideTitles) {
 				if (hideTitles.value[title]) {
 					if (isNetflix) {
 						const item = card.closest(".title-card") as HTMLElement
@@ -352,7 +367,7 @@ async function addRating() {
 			}
 
 			// for the static Pixar Disney, Starplus etc. cards
-			if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
+			if (showRating && (!isDisney || !card?.classList.contains("_1p76x1y4"))) {
 				// sometimes more than one image is loaded for the same title
 				if (lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
 					lastTitle = title

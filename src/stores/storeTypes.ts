@@ -22,6 +22,7 @@ export type settingsType = {
 		profile: boolean
 		showRating: boolean
 		removeGames: boolean
+		hideTitles: boolean
 	}
 	Disney: {
 		skipIntro: boolean
@@ -31,6 +32,7 @@ export type settingsType = {
 		speedSlider: boolean
 		showRating: boolean
 		selfAd: boolean
+		hideTitles: boolean
 	}
 	Crunchyroll: {
 		skipIntro: boolean
@@ -108,6 +110,7 @@ export const defaultSettings = {
 		profile: true,
 		showRating: true,
 		removeGames: true,
+		hideTitles: true,
 	},
 	Disney: {
 		skipIntro: true,
@@ -117,6 +120,7 @@ export const defaultSettings = {
 		speedSlider: true,
 		showRating: true,
 		selfAd: true,
+		hideTitles: true,
 	},
 	Crunchyroll: {
 		skipIntro: true,

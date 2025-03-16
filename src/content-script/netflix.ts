@@ -87,7 +87,7 @@ function Netflix() {
 	if (NSettings?.speedSlider && video) Netflix_SpeedSlider(video)
 	if (settings.value.Video?.scrollVolume && video) Netflix_scrollVolume(video)
 	if (NSettings?.removeGames) Netflix_removeGames()
-	addHideTitleButton()
+	if (NSettings?.hideTitles) addHideTitleButton()
 }
 async function Netflix_scrollVolume(video: HTMLVideoElement) {
 	const volumeControl = document.querySelector('[data-uia*="control-volume"] div:not(.enhanced)') as HTMLElement
