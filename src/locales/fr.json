@@ -105,5 +105,7 @@
   "removeGamesSwitch": "Supprimer les jeux:",
   "removeGamesDescription": "Supprime tous les jeux de la page.",
   "hideTitlesSwitch": "Bouton Masquer le film",
-  "hideTitlesDescription": "Masquer automatiquement les spectacles qui ont été masqués manuellement par l'utilisateur."
+  "hideTitlesDescription": "Masquer automatiquement les spectacles qui ont été masqués manuellement par l'utilisateur.",
+  "hiddenTitles": "Titres cachés :",
+  "removeAllHiddenTitles": "Supprimer tous les titres cachés"
 }

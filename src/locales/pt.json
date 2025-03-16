@@ -105,5 +105,7 @@
   "removeGamesSwitch": "Remover jogos:",
   "removeGamesDescription": "Remove todos os jogos da página.",
   "hideTitlesSwitch": "Botão Ocultar filme",
-  "hideTitlesDescription": "Ocultar shows automaticamente, que foram ocultos pelo usuário manualmente."
+  "hideTitlesDescription": "Ocultar shows automaticamente, que foram ocultos pelo usuário manualmente.",
+  "hiddenTitles": "Títulos ocultos:",
+  "removeAllHiddenTitles": "Remova todos os títulos ocultos"
 }

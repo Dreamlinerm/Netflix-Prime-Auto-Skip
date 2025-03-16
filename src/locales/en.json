@@ -105,5 +105,7 @@
   "removeGamesSwitch": "Remove Games:",
   "removeGamesDescription": "Removes all games from the page.",
   "hideTitlesSwitch": "Hide Movie button",
-  "hideTitlesDescription": "Automatically hide shows, which were hidden by the user manually."
+  "hideTitlesDescription": "Automatically hide shows, which were hidden by the user manually.",
+  "hiddenTitles": "Hidden Titles:",
+  "removeAllHiddenTitles": "Remove all hidden titles"
 }

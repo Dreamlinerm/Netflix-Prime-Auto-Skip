@@ -105,5 +105,7 @@
   "removeGamesSwitch": "移除游戏：",
   "removeGamesDescription": "删除页面上的所有游戏。",
   "hideTitlesSwitch": "隐藏电影按钮",
-  "hideTitlesDescription": "自动隐藏用户手动隐藏的节目。"
+  "hideTitlesDescription": "自动隐藏用户手动隐藏的节目。",
+  "hiddenTitles": "隐藏的标题：",
+  "removeAllHiddenTitles": "删除所有隐藏标题"
 }

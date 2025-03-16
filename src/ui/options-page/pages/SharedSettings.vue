@@ -181,12 +181,12 @@ function removeAllTitles() {
 		</tbody>
 	</table>
 	<hr />
-	<p>Blocked Titles:</p>
+	<p>{{ $t("hiddenTitles") }}</p>
 	<button
 		class="btn btn-sm btn-error mb-2"
 		@click="removeAllTitles"
 	>
-		Remove all Blocked Titles
+		{{ $t("removeAllHiddenTitles") }}
 	</button>
 	<div class="grid-container">
 		<div

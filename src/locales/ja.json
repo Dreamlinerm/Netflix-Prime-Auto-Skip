@@ -105,5 +105,7 @@
   "removeGamesSwitch": "ゲームを削除：",
   "removeGamesDescription": "ページからすべてのゲームを削除する。",
   "hideTitlesSwitch": "非表示ボタン",
-  "hideTitlesDescription": "ユーザーが手動で非表示にした番組を自動的に非表示にする。"
+  "hideTitlesDescription": "ユーザーが手動で非表示にした番組を自動的に非表示にする。",
+  "hiddenTitles": "隠れたタイトル",
+  "removeAllHiddenTitles": "すべての隠しタイトルを削除する"
 }

@@ -105,5 +105,7 @@
   "removeGamesSwitch": "Rimuovere i giochi:",
   "removeGamesDescription": "Rimuove tutti i giochi dalla pagina.",
   "hideTitlesSwitch": "Pulsante Nascondi filmato",
-  "hideTitlesDescription": "Nascondere automaticamente gli spettacoli che sono stati nascosti manualmente dall'utente."
+  "hideTitlesDescription": "Nascondere automaticamente gli spettacoli che sono stati nascosti manualmente dall'utente.",
+  "hiddenTitles": "Titoli nascosti:",
+  "removeAllHiddenTitles": "Rimuovere tutti i titoli nascosti"
 }

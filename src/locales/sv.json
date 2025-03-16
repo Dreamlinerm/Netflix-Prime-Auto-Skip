@@ -105,5 +105,7 @@
   "removeGamesSwitch": "Ta bort spel:",
   "removeGamesDescription": "Tar bort alla spel från sidan.",
   "hideTitlesSwitch": "Göm film-knappen",
-  "hideTitlesDescription": "Dölj automatiskt program som användaren har dolt manuellt."
+  "hideTitlesDescription": "Dölj automatiskt program som användaren har dolt manuellt.",
+  "hiddenTitles": "Dolda titlar:",
+  "removeAllHiddenTitles": "Ta bort alla dolda titlar"
 }

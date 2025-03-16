@@ -105,5 +105,7 @@
   "removeGamesSwitch": "Oyunları kaldır:",
   "removeGamesDescription": "Tüm oyunları sayfadan kaldırır.",
   "hideTitlesSwitch": "Filmi Gizle düğmesi",
-  "hideTitlesDescription": "Kullanıcı tarafından manuel olarak gizlenen gösterileri otomatik olarak gizleyin."
+  "hideTitlesDescription": "Kullanıcı tarafından manuel olarak gizlenen gösterileri otomatik olarak gizleyin.",
+  "hiddenTitles": "Gizli Başlıklar:",
+  "removeAllHiddenTitles": "Tüm gizli başlıkları kaldırın"
 }
