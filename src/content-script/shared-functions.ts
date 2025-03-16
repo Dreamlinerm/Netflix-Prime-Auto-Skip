@@ -340,11 +340,8 @@ async function addRating() {
 			if (hideTitles.value[title]) {
 				const item = card.closest(".slider-item") as HTMLElement
 				if (item) item.style.display = "none"
-				// card.style.display = "none"
-				console.log("hideTitles", hideTitles.value)
 				continue
 			}
-			if (isNetflix) addHideTitleButton(card, title)
 
 			// for the static Pixar Disney, Starplus etc. cards
 			if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
@@ -369,19 +366,6 @@ async function addRating() {
 			setDBCache()
 		}, 5000)
 	}
-}
-function addHideTitleButton(card: HTMLElement, title: string) {
-	const button = document.createElement("button")
-	button.textContent = "X"
-	button.style.cssText =
-		"position: absolute; top: 0; right: 0; background: transparent; color: white; border: none; font-size: 12px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"
-	button.onclick = function () {
-		const item = card.closest(".slider-item") as HTMLElement
-		if (item) item.style.display = "none"
-		hideTitles.value[title] = true
-		console.log("hideTitles", hideTitles.value)
-	}
-	card.appendChild(button)
 }
 function getMediaType(card: HTMLElement): "tv" | "movie" | null {
 	let media_type: "tv" | "movie" | null = null
