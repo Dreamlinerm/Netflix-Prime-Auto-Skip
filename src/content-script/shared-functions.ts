@@ -355,7 +355,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 			if (optionHideTitles) {
 				if (hideTitles.value[title]) {
 					if (isNetflix) {
-						const item = card.closest(".title-card") as HTMLElement
+						const item = card.closest(".slider-item") as HTMLElement
 						if (item) item.style.display = "none"
 					} else if (isDisney) {
 						const item = card.parentElement as HTMLElement
