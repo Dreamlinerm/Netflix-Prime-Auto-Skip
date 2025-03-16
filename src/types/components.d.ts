@@ -13,6 +13,7 @@ declare module 'vue' {
     IMdiChartBar: typeof import('~icons/mdi/chart-bar')['default']
     IMdiClose: typeof import('~icons/mdi/close')['default']
     IMdiCog: typeof import('~icons/mdi/cog')['default']
+    IMdiDelete: typeof import('~icons/mdi/delete')['default']
     IMdiDotsHorizontal: typeof import('~icons/mdi/dots-horizontal')['default']
     IMdiFormatListBulleted: typeof import('~icons/mdi/format-list-bulleted')['default']
     IMdiGift: typeof import('~icons/mdi/gift')['default']
