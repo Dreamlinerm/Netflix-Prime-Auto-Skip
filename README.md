@@ -216,6 +216,7 @@ Skip Credits and Watch Credits are mutally exclusive, but you can turn both of t
 | fullscreen on double click | ➖      | ✅          | ➖                       | ✅                                    | ?       |
 | Scroll for volume          | ✅      | ✅          | ✅                       | ✅                                    | ❌      |
 | TMDB Rating                | ✅      | ✅          | ✅                       | ❌(MAL ratings better)                | ✅      |
+| Hide Show button           | ✅      | ➖          | ✅                       | ❌                                    | ❌      |
 
 <details>
   <summary>Recap links for shows</summary>
