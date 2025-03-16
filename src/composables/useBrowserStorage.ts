@@ -15,7 +15,7 @@ function mergeDeep(defaults: any, source: any): any {
 		} else {
 			// If the type is different, use the default value
 			output[key] = defaultValue
-			console.log("Type mismatch", key, sourceValue)
+			console.log("Type mismatch", key, sourceValue, defaultValue)
 		}
 	})
 
@@ -25,21 +25,25 @@ function mergeDeep(defaults: any, source: any): any {
 function checkType(defaultValue: any, value: any): boolean {
 	// Check if the value type is the same type as the default value or null
 	// there are only strings, booleans, nulls and arrays as types left
-	return (typeof value === typeof defaultValue && Array.isArray(value) == Array.isArray(defaultValue)) || value === null
+	return (
+		value == null ||
+		defaultValue == undefined ||
+		(typeof value === typeof defaultValue && Array.isArray(value) == Array.isArray(defaultValue))
+	)
 }
 function isObject(value: any): boolean {
 	return value !== null && value instanceof Object && !Array.isArray(value)
 }
 
-export function useBrowserSyncStorage<T>(key: string, defaultValue: T) {
-	return useBrowserStorage(key, defaultValue, "sync")
+export function useBrowserSyncStorage<T>(key: string, defaultValue: T, merge = true) {
+	return useBrowserStorage(key, defaultValue, "sync", merge)
 }
 
-export function useBrowserLocalStorage<T>(key: string, defaultValue: T) {
-	return useBrowserStorage(key, defaultValue, "local")
+export function useBrowserLocalStorage<T>(key: string, defaultValue: T, merge = true) {
+	return useBrowserStorage(key, defaultValue, "local", merge)
 }
 
-function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" | "local" = "sync") {
+function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" | "local" = "sync", merge = true) {
 	const data = ref<T>(defaultValue)
 	// Blocking setting storage if it is updating from storage
 	let isUpdatingFromStorage = true
@@ -49,7 +53,7 @@ function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" 
 		chrome.storage[storageType].get(key, async (result) => {
 			if (result?.[key] !== undefined) {
 				if (defaultIsObject && isObject(result[key])) {
-					data.value = mergeDeep(defaultValue, result[key])
+					data.value = merge ? mergeDeep(defaultValue, result[key]) : result[key]
 				} else if (checkType(defaultValue, result[key])) {
 					data.value = result[key]
 				}

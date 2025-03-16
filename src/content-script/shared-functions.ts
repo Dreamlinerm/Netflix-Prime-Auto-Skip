@@ -3,7 +3,7 @@ console.log("shared-functions loaded")
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
-const { data: hideTitles, promise: hideTitlesPromise } = useBrowserLocalStorage<BooleanObject>("hideTitles", {})
+const { data: hideTitles, promise: hideTitlesPromise } = useBrowserLocalStorage<BooleanObject>("hideTitles", {}, false)
 export const date = new Date()
 const today = date.toISOString().split("T")[0]
 
@@ -39,12 +39,12 @@ export async function startSharedFunctions(platform: Platforms) {
 	if (platform == Platforms.HBO) isHBO = true
 
 	await promise
-	await hideTitlesPromise
-	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
-	getDBCache()
 	if (isNetflix) {
+		await hideTitlesPromise
 		console.log("hideTitles", hideTitles.value)
 	}
+	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
+	getDBCache()
 }
 
 type MovieInfo = {
@@ -341,6 +341,7 @@ async function addRating() {
 				const item = card.closest(".slider-item") as HTMLElement
 				if (item) item.style.display = "none"
 				// card.style.display = "none"
+				console.log("hideTitles", hideTitles.value)
 				continue
 			}
 			if (isNetflix) addHideTitleButton(card, title)
@@ -378,6 +379,7 @@ function addHideTitleButton(card: HTMLElement, title: string) {
 		const item = card.closest(".slider-item") as HTMLElement
 		if (item) item.style.display = "none"
 		hideTitles.value[title] = true
+		console.log("hideTitles", hideTitles.value)
 	}
 	card.appendChild(button)
 }
