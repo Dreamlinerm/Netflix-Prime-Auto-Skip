@@ -3,6 +3,7 @@
 ✨功能
 
 此扩展可自动增强你在 Netflix、Prime Video、Disney+（Hotstar、STAR+）、Crunchyroll 和 HBO Max 上的流媒体体验：
+
 - 屏蔽广告
 - 跳过简介和回顾
 - 跳过片尾
@@ -38,6 +39,7 @@
     - 禁用数字键盘
 
 桌面模式下的安卓支持：
+
 - Prime Video
 - Disney+ (Hotstar, STAR+)
 - Crunchyroll

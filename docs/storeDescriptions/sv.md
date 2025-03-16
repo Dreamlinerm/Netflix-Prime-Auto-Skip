@@ -3,6 +3,7 @@ Du kan anpassa vilka funktioner som ska aktiveras i Inställningar.
 ✨ Funktioner
 
 Detta tillägg förbättrar din streamingupplevelse på Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll och HBO Max genom att automatiskt:
+
 - Blockera annonser
 - Skippa intron och sammanfattningar
 - Skippa eftertexter
@@ -38,6 +39,7 @@ Platform-Specifika funktioner:
     - Avaktivera numpad
 
 Androidstöd i skrivbordsläge:
+
 - Prime Video
 - Disney+ (Hotstar, STAR+)
 - Crunchyroll

@@ -3,6 +3,7 @@
 ✨ Caratteristiche
 
 Questa estensione migliora la vostra esperienza di streaming su Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll e HBO Max in modo automatico:
+
 - Bloccando gli annunci pubblicitari
 - Salvando le introduzioni e i riassunti
 - Salvando i titoli di coda
@@ -38,6 +39,7 @@ Platform-Caratteristiche specifiche:
     - Disattiva il tastierino numerico
 
 Supporto Android in modalità Desktop:
+
 - Prime Video
 - Disney+ (Hotstar, STAR+)
 - Crunchyroll

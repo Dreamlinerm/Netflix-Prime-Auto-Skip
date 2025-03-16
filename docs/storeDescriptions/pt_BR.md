@@ -3,6 +3,7 @@ Você pode personalizar quais recursos estão ativados em Configurações.
 ✨ Recursos
 
 Essa extensão aprimora sua experiência de streaming na Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll e HBO Max automaticamente:
+
 - Bloquear anúncios
 - Ignorar introduções e recapitulações
 - Pular créditos
@@ -38,6 +39,7 @@ Recursos específicos da plataforma:
     - Desativar o teclado numérico
 
 Suporte para Android no modo Desktop:
+
 - Prime Video
 - Disney+ (Hotstar, STAR+)
 - Crunchyroll

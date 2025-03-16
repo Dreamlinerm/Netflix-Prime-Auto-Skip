@@ -3,6 +3,7 @@
 ✨特徴
 
 この拡張機能は、Netflix、Prime Video、Disney+（Hotstar、STAR+）、Crunchyroll、HBO Maxでのストリーミング体験を自動的に向上させます：
+
 - 広告をブロック
 - イントロと要約をスキップ
 - クレジットをスキップ
@@ -38,6 +39,7 @@
     - テンキーパッドを無効にする
 
 デスクトップ モードでの Android サポート:
+
 - プライム ビデオ
 - Disney+ (Hotstar, STAR+)
 - Crunchyroll
