@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.85
+
+- fix settings bug.
+
 ## 1.1.64
 
 - added hide show button to Netflix and Disney
