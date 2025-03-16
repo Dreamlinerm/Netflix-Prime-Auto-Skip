@@ -7,6 +7,7 @@ Essa extensão aprimora sua experiência de streaming na Netflix, Prime Video, D
 - Ignorar introduções e recapitulações
 - Pular créditos
 - Exibição de classificações do TMDB para todos os programas
+- Botão Ocultar filme
 - Adição de controle de velocidade de reprodução personalizável
 - Iniciar automaticamente a reprodução de vídeos em tela cheia
 - Ir para tela cheia ao clicar duas vezes

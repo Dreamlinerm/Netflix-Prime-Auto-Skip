@@ -7,6 +7,7 @@ This extension enhances your streaming experience on Netflix, Prime Video, Disne
 - Skipping Intros & Recaps
 - Skipping Credits
 - Displaying TMDB ratings for all shows
+- Hide Movie button
 - Adding customizable playback speed control
 - Automatically start to play videos in fullscreen
 - Go fullscreen on double click

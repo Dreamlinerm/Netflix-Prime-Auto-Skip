@@ -7,6 +7,7 @@ To rozszerzenie poprawia jakość streamowania w serwisach Netflix, Prime Video,
 - Skipping Intros & Recaps
 - Skipping Credits
 - Displaying TMDB ratings for all shows
+- Przycisk Ukryj film
 - Adding customizable playback speed odtwarzania
 - Automatyczne uruchamianie odtwarzania filmów na pełnym ekranie
 - Przejście na pełny ekran po dwukrotnym kliknięciu

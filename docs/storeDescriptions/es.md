@@ -7,6 +7,7 @@ Esta extensión mejora su experiencia de streaming en Netflix, Prime Video, Disn
 - Saltar intros y recapitulaciones
 - Saltar créditos
 - Mostrar clasificaciones TMDB para todos los programas
+- Botón Ocultar película
 - Añadir velocidad de reproducción personalizable. control
 - Iniciar automáticamente la reproducción de vídeos en pantalla completa
 - Ir a pantalla completa al hacer doble clic
