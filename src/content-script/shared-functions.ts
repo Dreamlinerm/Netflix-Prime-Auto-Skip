@@ -374,7 +374,7 @@ function addHideTitleButton(card: HTMLElement, title: string) {
 	const button = document.createElement("button")
 	button.textContent = "X"
 	button.style.cssText =
-		"position: absolute; top: 0; right: 0; background: red; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 12px;"
+		"position: absolute; top: 0; right: 0; background: transparent; color: white; border: none; font-size: 12px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"
 	button.onclick = function () {
 		const item = card.closest(".slider-item") as HTMLElement
 		if (item) item.style.display = "none"
