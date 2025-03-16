@@ -103,5 +103,7 @@
   "affiliateDescription": "如果打开了带有联盟链接的页面，则弹出应用联盟链接的窗口，如亚马逊黄金。",
   "addPermissionButton": "添加",
   "removeGamesSwitch": "移除游戏：",
-  "removeGamesDescription": "删除页面上的所有游戏。"
+  "removeGamesDescription": "删除页面上的所有游戏。",
+  "hideTitlesSwitch": "隐藏电影按钮",
+  "hideTitlesDescription": "自动隐藏用户手动隐藏的节目。"
 }

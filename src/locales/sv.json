@@ -103,5 +103,7 @@
   "affiliateDescription": "Om en sida med en affiliate-länk är öppen visas en popup för att tillämpa affiliate-länken, t.ex. för Amazon Prime.",
   "addPermissionButton": "Lägg till",
   "removeGamesSwitch": "Ta bort spel:",
-  "removeGamesDescription": "Tar bort alla spel från sidan."
+  "removeGamesDescription": "Tar bort alla spel från sidan.",
+  "hideTitlesSwitch": "Göm film-knappen",
+  "hideTitlesDescription": "Dölj automatiskt program som användaren har dolt manuellt."
 }

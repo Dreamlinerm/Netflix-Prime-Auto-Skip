@@ -103,5 +103,7 @@
   "affiliateDescription": "Si una página con enlace de afiliado está abierta, muestra popup para aplicar enlace de afiliado, como para amazon prime.",
   "addPermissionButton": "Añadir",
   "removeGamesSwitch": "Quitar Juegos:",
-  "removeGamesDescription": "Elimina todos los juegos de la página."
+  "removeGamesDescription": "Elimina todos los juegos de la página.",
+  "hideTitlesSwitch": "Botón Ocultar película",
+  "hideTitlesDescription": "Ocultar automáticamente los programas ocultados manualmente por el usuario."
 }

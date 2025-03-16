@@ -1,3 +1,4 @@
 {
-	"removeGamesSwitch": "Remove games from Netflix"
+	"hideTitlesSwitch": "Hide Movie button",
+	"hideTitlesDescription": "Automatically hide shows, which were hidden by the user manually."
 }

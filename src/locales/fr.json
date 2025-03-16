@@ -103,5 +103,7 @@
   "affiliateDescription": "Si une page contenant un lien d'affiliation est ouverte, une fenêtre contextuelle s'affiche pour appliquer le lien d'affiliation, comme pour amazon prime.",
   "addPermissionButton": "Ajouter",
   "removeGamesSwitch": "Supprimer les jeux:",
-  "removeGamesDescription": "Supprime tous les jeux de la page."
+  "removeGamesDescription": "Supprime tous les jeux de la page.",
+  "hideTitlesSwitch": "Bouton Masquer le film",
+  "hideTitlesDescription": "Masquer automatiquement les spectacles qui ont été masqués manuellement par l'utilisateur."
 }

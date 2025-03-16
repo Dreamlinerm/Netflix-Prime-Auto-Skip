@@ -103,5 +103,7 @@
   "affiliateDescription": "アフィリエイトリンクのあるページが開いている場合、amazonプライムのようにアフィリエイトリンクを適用するためのポップアップを表示する。",
   "addPermissionButton": "追加",
   "removeGamesSwitch": "ゲームを削除：",
-  "removeGamesDescription": "ページからすべてのゲームを削除する。"
+  "removeGamesDescription": "ページからすべてのゲームを削除する。",
+  "hideTitlesSwitch": "非表示ボタン",
+  "hideTitlesDescription": "ユーザーが手動で非表示にした番組を自動的に非表示にする。"
 }

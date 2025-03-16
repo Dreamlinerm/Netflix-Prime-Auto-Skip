@@ -103,5 +103,7 @@
   "affiliateDescription": "제휴 링크가 있는 페이지가 열려 있으면 아마존 프라임과 같이 제휴 링크를 적용할 수 있는 팝업을 표시합니다.",
   "addPermissionButton": "추가하다",
   "removeGamesSwitch": "게임 제거 :",
-  "removeGamesDescription": "페이지에서 모든 게임을 제거합니다."
+  "removeGamesDescription": "페이지에서 모든 게임을 제거합니다.",
+  "hideTitlesSwitch": "동영상 숨기기 버튼",
+  "hideTitlesDescription": "사용자가 수동으로 숨겼던 쇼를 자동으로 숨깁니다."
 }

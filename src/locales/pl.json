@@ -103,5 +103,7 @@
   "affiliateDescription": "Jeśli strona z linkiem partnerskim jest otwarta, wyświetla wyskakujące okienko, aby zastosować link partnerski, jak w przypadku amazon prime.",
   "addPermissionButton": "Dodaj",
   "removeGamesSwitch": "Usuń gry:",
-  "removeGamesDescription": "Usuwa wszystkie gry ze strony."
+  "removeGamesDescription": "Usuwa wszystkie gry ze strony.",
+  "hideTitlesSwitch": "Przycisk Ukryj film",
+  "hideTitlesDescription": "Automatycznie ukrywa programy, które zostały ukryte ręcznie przez użytkownika."
 }

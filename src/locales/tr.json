@@ -103,5 +103,7 @@
   "affiliateDescription": "Satış ortağı bağlantısı olan bir sayfa açıksa, amazon prime'da olduğu gibi satış ortağı bağlantısını uygulamak için açılır pencere gösterir.",
   "addPermissionButton": "Ekle",
   "removeGamesSwitch": "Oyunları kaldır:",
-  "removeGamesDescription": "Tüm oyunları sayfadan kaldırır."
+  "removeGamesDescription": "Tüm oyunları sayfadan kaldırır.",
+  "hideTitlesSwitch": "Filmi Gizle düğmesi",
+  "hideTitlesDescription": "Kullanıcı tarafından manuel olarak gizlenen gösterileri otomatik olarak gizleyin."
 }
