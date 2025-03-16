@@ -3,8 +3,8 @@
 
 # Streaming enhanced ![Project Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FDreamlinerm%2FNetflix-Prime-Auto-Skip%2Fmain%2Fpackage.json&query=version&label=Version)
 
-
 ## Automatically skip Ads, Intros, Recaps, Credits, etc.
+
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/">
 <img src="docs/Logos/firefox.svg" width="20px">
 <img src="https://img.shields.io/amo/users/NetflixPrime@Autoskip.io" >
@@ -26,9 +26,10 @@
 </a>
 </div>
 
-***
+---
 
 ## Download & Install
+
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"><img src="docs/Logos/download button/firefox.png" alt="Get Streaming enhanced for Firefox"/>
 <a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="docs/Logos/download button/chrome.png" alt="Get Streaming enhanced for Chromium"/>
 <a href="https://microsoftedge.microsoft.com/addons/detail/streaming-enhanced-netfli/dhfpagghjamocfaaignghcljfpppelff"><img src="docs/Logos/download button/microsoft.png" alt="Get Streaming enhanced for Edge"/>
@@ -44,11 +45,11 @@
                 </a>
 </div>
 
-Download [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/), [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the firefox/chrome extension. 
+Download [Firefox](https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/), [Kiwi Browser](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) or similar to be able to install the firefox/chrome extension.
 
-The drm for each streaming service will be installed automatically when a video started for the first time and you may need to reload the page once.
+The DRM for each streaming service will be installed automatically when a video started for the first time and you may need to reload the page once.
 
-### Supported Streaming Services:
+### Supported Streaming Services
 
 <table>
     <tr>
@@ -66,27 +67,27 @@ The drm for each streaming service will be installed automatically when a video 
 <details>
   <summary>The above table in markdown</summary>
   
-  | Netflix | Prime Video     | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO    |
-  | ---     | ---             | ---                      | ---         | ---    |
-  | ✅      | ✅             | ✅                      | ✅          | ✅    |
+  | Netflix | Prime Video | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO |
+  | ------- | ----------- | ------------------------ | ----------- | --- |
+  | ✅       | ✅           | ✅                        | ✅           | ✅   |
+
 </details>
 
 ## Table of Contents
 
 - [Android Compatibility](#android-compatibility)
 - [Contributing to Translation](#contributing-to-translation)
-- [Features](#-features)  
+- [Features](#-features)
 - [Ratings explanation](#ratings)
 - [Implemented Feature Overview](#implemented-feature-overview)
 - [Develop the Extension](#develop-the-extension)
 - [Changelog](./CHANGELOG.md)
 
+## Android Compatibility
 
-## Android Compatibility:
-
-| Netflix | Prime Video         | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO                |
-| ---     | ---                 | ---                      | ---         | ---                |
-| ❌     | ✅(tweaked Desktop Website) | ✅(default Desktop Website)      | ✅         | ✅ |
+| Netflix | Prime Video                 | Disney+ (Hotstar, STAR+)    | Crunchyroll | HBO |
+| ------- | --------------------------- | --------------------------- | ----------- | --- |
+| ❌      | ✅(tweaked Desktop Website) | ✅(default Desktop Website) | ✅          | ✅  |
 
 ## Contributing to Translation
 
@@ -109,9 +110,11 @@ Features in other supported languages:
 | [Türkçe](docs/storeDescriptions/tr.md) |
 
 <!-- description -->
+
 You can customize which features are enabled in the Settings.
 
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
+
 - Block Ads
 - Skipping Intros & Recaps
 - Skipping Credits
@@ -124,28 +127,32 @@ This extension enhances your streaming experience on Netflix, Prime Video, Disne
 Platform-Specific Features:
 
 - Netflix:
-    - Remembers and selects your last-used profile automatically
-    - Blocks the “Are you still watching?” inactivity warning
-    - Remove games from Netflix
+
+  - Remembers and selects your last-used profile automatically
+  - Blocks the “Are you still watching?” inactivity warning
+  - Remove games from Netflix
 
 - Amazon Prime Video:
-    - Skips self-promotional ads (for Prime Video productions)
-    - Filters out paid content (movies, series) from the home page
-    - Moves the category "Continue" to the top of the page
-    - Hide the Xray Quick View over a video
-    - Removes the blur effect when hovering over videos
+
+  - Skips self-promotional ads (for Prime Video productions)
+  - Filters out paid content (movies, series) from the home page
+  - Moves the category "Continue" to the top of the page
+  - Hide the Xray Quick View over a video
+  - Removes the blur effect when hovering over videos
 
 - Disney+ (Hotstar, STAR+):
-    - Skips self-promotional ads
-    - Automatically returns to fullscreen mode when going to the next episode
+
+  - Skips self-promotional ads
+  - Automatically returns to fullscreen mode when going to the next episode
 
 - Crunchyroll:
-    - Remembers and selects your last-used profile automatically
-    - Adds filters to the release calendar, so it is useable
-    - Video size expanded to entire window
-    - Disable the numpad
+  - Remembers and selects your last-used profile automatically
+  - Adds filters to the release calendar, so it is useable
+  - Video size expanded to entire window
+  - Disable the numpad
 
 Android Support in Desktop mode:
+
 - Prime Video
 - Disney+ (Hotstar, STAR+)
 - Crunchyroll
@@ -153,13 +160,16 @@ Android Support in Desktop mode:
   To use the extension on an Android phone, download Firefox.
 
 ## ☔ Safe & Open Source
+
 This extension is open-source! Feel free to contribute or explore the code on [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
 
 ## 💕 Enjoying Streaming enhanced?
+
 If you’re enjoying the enhanced streaming experience, please consider leaving a 5-star review! Reviews help build trust and attract new users.
 If you'd like to support further development, you can buy me a [coffee](https://github.com/sponsors/Dreamlinerm).
 
 ## Disclaimer
+
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.
 
 <!-- descriptionEnd -->
@@ -172,63 +182,63 @@ Skip Credits and Watch Credits are mutally exclusive, but you can turn both of t
 
 ## Ratings
 
-Click on Rating to go to the TMDB page of the movie.
+- Click on Rating to go to the TMDB page of the movie.
 
-The ratings are gathered from the TMDB API. Ratings are refreshed every month.
-If there is no score they are refreshed once per day. If the movie is newer than 50 days and has less than 100 votes it will get refreshed every 3 days.
+- The ratings are gathered from the TMDB API. Ratings are refreshed every month.
+- If there is no score they are refreshed once per day. If the movie is newer than 50 days and has less than 100 votes it will get refreshed every 3 days.
+- Currently, the ratings API is free for non commercial use, but as more users use the extension, it may be necessary to make this feature paid or remove it.
 
-| Rating | Explanation |
-| --- | --- |
-| ? | Title not found |
-| <img src="docs/Logos/greyBox.svg" height="20px"> | ? or less than 30 votes |
-| <img src="docs/Logos/redBox.svg" height="20px"> | <= 5.5 stars|
-| <img src="docs/Logos/yellowBox.svg" height="20px"> | <= 7 stars|
-| <img src="docs/Logos/greenBox.svg" height="20px"> | >7 stars|
-
+| Rating                                             | Explanation             |
+| -------------------------------------------------- | ----------------------- |
+| ?                                                  | Title not found         |
+| <img src="docs/Logos/greyBox.svg" height="20px">   | ? or less than 30 votes |
+| <img src="docs/Logos/redBox.svg" height="20px">    | <= 5.5 stars            |
+| <img src="docs/Logos/yellowBox.svg" height="20px"> | <= 7 stars              |
+| <img src="docs/Logos/greenBox.svg" height="20px">  | >7 stars                |
 
 # Implemented Feature Overview
 
-| abbrev. | definition |
-| --- | --- |
-|S|season|
-|E|episode|
-|✅| Implemented|
-|➖| Not available|
-|❌| Not implemented|
-|?| don't know if necessary|
-| Name| service specific features|
+| abbrev. | definition                |
+| ------- | ------------------------- |
+| S       | season                    |
+| E       | episode                   |
+| ✅      | Implemented               |
+| ➖      | Not available             |
+| ❌      | Not implemented           |
+| ?       | don't know if necessary   |
+| Name    | service specific features |
 
-| Feature | Netflix | Prime Video | Disney+ (Hotstar, STAR+) | Crunchyroll | HBO max |
-| --- | --- | --- | --- | --- | --- |
-| Intro | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>| ✅  <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>| ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> | ✅ [One piece](https://www.crunchyroll.com/series/GRMG8ZQZR/one-piece) | ✅ |
-| Recaps | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>| ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a> | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>| ? | ✅ |
-| Credits | ✅ | ✅ | ✅ | ❌(not necessary if outro is skipped) | ✅ |
-| Ads | ✅ | ✅ | ✅ | ❌(Ublock can do it) | ? |
-| Add Speed Slider | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Play on Fullscreen | ✅ | ✅ | ✅ | ✅ | ✅ |
-| fullscreen on double click | ➖ | ✅ | ➖ | ✅ | ? |
-| Scroll for volume |  ✅ | ✅ | ✅ | ✅ | ❌ |
-| TMDB Rating | ✅ | ✅ | ✅ | ❌(MAL ratings better) | ✅ |
-| Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li><li>Remove Games</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue"</li><li>Hide Xray</li></ul> | <ul><li>Skip self ads</li><li>Remain fullscreen</li></ul> | <ul><li>Auto pick last profile</li><li>Release Calendar Filters</li><li>Big Video size</li><li>Disable the numpad</li></ul> | ➖ |
+| Feature                    | Netflix                                                                                  | Prime Video                                                                                                    | Disney+ (Hotstar, STAR+)                                                                                          | Crunchyroll                                                                                                                 | HBO max |
+| -------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------- |
+| Intro                      | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>          | ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>                                 | ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> | ✅ [One piece](https://www.crunchyroll.com/series/GRMG8ZQZR/one-piece)                                                      | ✅      |
+| Recaps                     | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>                 | ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a>                                 | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>  | ?                                                                                                                           | ✅      |
+| Credits                    | ✅[test]()                                                                               | ✅                                                                                                             | ✅                                                                                                                | ❌(not necessary if outro is skipped)                                                                                       | ✅      |
+| Ads                        | ✅                                                                                       | ✅                                                                                                             | ✅                                                                                                                | ❌(Ublock can do it)                                                                                                        | ?       |
+| Add Speed Slider           | ✅                                                                                       | ✅                                                                                                             | ✅                                                                                                                | ✅                                                                                                                          | ✅      |
+| Play on Fullscreen         | ✅                                                                                       | ✅                                                                                                             | ✅                                                                                                                | ✅                                                                                                                          | ✅      |
+| fullscreen on double click | ➖                                                                                       | ✅                                                                                                             | ➖                                                                                                                | ✅                                                                                                                          | ?       |
+| Scroll for volume          | ✅                                                                                       | ✅                                                                                                             | ✅                                                                                                                | ✅                                                                                                                          | ❌      |
+| TMDB Rating                | ✅                                                                                       | ✅                                                                                                             | ✅                                                                                                                | ❌(MAL ratings better)                                                                                                      | ✅      |
+| Individual Features        | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li><li>Remove Games</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue"</li><li>Hide Xray</li></ul> | <ul><li>Skip self ads</li><li>Remain fullscreen</li></ul>                                                         | <ul><li>Auto pick last profile</li><li>Release Calendar Filters</li><li>Big Video size</li><li>Disable the numpad</li></ul> | ➖      |
 
 ## Develop the Extension
 
 ### Setup
 
-- ```npm install -g pnpm``` install pnpm. npm is also possible but pnpm is recommended
-- ```pnpm install``` install all required packages
-- ```pnpm build``` build firefox and chrome zip files in dist folder
-- ```pnpm web-ext``` run the extension in firefox
-- ```pnpm chrome``` run the extension in chrome
+- `npm install -g pnpm` install pnpm. npm is also possible but pnpm is recommended
+- `pnpm install` install all required packages
+- `pnpm build` build firefox and chrome zip files in dist folder
+- `pnpm web-ext` run the extension in firefox
+- `pnpm chrome` run the extension in chrome
 
 This extension was built with the template [vite-vue3-browser-extension-v3](https://github.com/mubaidr/vite-vue3-browser-extension-v3)
 
 ### Further Commands
 
-- ```pnpm dev``` hot build with sourcemaps and w/o minification for both
-- ```pnpm dev:chrome``` hot build with sourcemaps and w/o minification for chrome
-- ```pnpm dev:firefox``` hot build with sourcemaps and w/o minification for firefox
-- ```npm run start-android```  start on firefox android
+- `pnpm dev` hot build with sourcemaps and w/o minification for both
+- `pnpm dev:chrome` hot build with sourcemaps and w/o minification for chrome
+- `pnpm dev:firefox` hot build with sourcemaps and w/o minification for firefox
+- `npm run start-android` start on firefox android
 
 Further documentation is [here](develop.md)
 
@@ -236,12 +246,12 @@ Further documentation is [here](develop.md)
 
 ## Chrome
 
-To run the extension in chrome you can just load the ``dist/chrome`` folder as an unpacked extension. But every time you modify the code you have to reload the extension on the extension page manually.
-I primarily just develop in firefox and then copy the code into chrome and replace ``browser`` with ``chrome`` in the code.
+To run the extension in chrome you can just load the `dist/chrome` folder as an unpacked extension. But every time you modify the code you have to reload the extension on the extension page manually.
+I primarily just develop in firefox and then copy the code into chrome and replace `browser` with `chrome` in the code.
 
-## Firefox 
+## Firefox
 
-Just like chrome you can temporarily load the extension by going to ``about:addons``, clicking on the gear icon and then ``Install Add-ons From File``. Then you can load the ``dist/firefox`` folder as a temporary extension.
+Just like chrome you can temporarily load the extension by going to `about:addons`, clicking on the gear icon and then `Install Add-ons From File`. Then you can load the `dist/firefox` folder as a temporary extension.
 
 ## Changelog
 
