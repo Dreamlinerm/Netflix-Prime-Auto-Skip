@@ -14,3 +14,12 @@ export const useFrontendStore = defineStore("frontend", () => {
 		currentLocale,
 	}
 })
+export type BooleanObject = {
+	[key: string]: boolean
+}
+const { data: hideTitles, promise: hideTitlesPromise } = useBrowserSyncStorage<BooleanObject>("hideTitles", {}, false)
+export const useHideTitlesStore = defineStore("hideTitles", () => {
+	return {
+		hideTitles,
+	}
+})

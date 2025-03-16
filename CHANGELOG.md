@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.64
+
+- added hide show button to Netflix and Disney
+
 ## 1.1.63
 
 - remove games category from Netflix
@@ -128,6 +132,7 @@
 - Disney fix: Watch Credits
 
 ## 1.1.35
+
 ## Added Translations for:
 
 - French
@@ -685,5 +690,3 @@
 ## 1.0.0
 
 - Initial Release
-
-          

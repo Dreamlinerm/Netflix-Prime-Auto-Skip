@@ -64,6 +64,13 @@
 		></Switch>
 	</div>
 	<div class="py-1 m-0 flex">
+		<p>{{ $t("hideTitlesSwitch") }}</p>
+		<Switch
+			v-model="hideTitles"
+			class="ml-auto"
+		></Switch>
+	</div>
+	<div class="py-1 m-0 flex">
 		<p>{{ $t("showRatingSwitch") }}</p>
 		<Switch
 			v-model="showRating"
@@ -183,6 +190,13 @@ const showRating = computed({
 				settings.value[service].showRating = value
 			}
 		})
+	},
+})
+
+const hideTitles = computed({
+	get: () => settings.value?.Netflix.hideTitles && settings.value?.Disney.hideTitles,
+	set: (value) => {
+		settings.value.Netflix.hideTitles = settings.value.Disney.hideTitles = value
 	},
 })
 </script>

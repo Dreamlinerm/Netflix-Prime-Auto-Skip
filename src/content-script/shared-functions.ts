@@ -3,6 +3,7 @@ console.log("shared-functions loaded")
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+const { data: hideTitles, promise: hideTitlesPromise } = useBrowserSyncStorage<BooleanObject>("hideTitles", {}, false)
 export const date = new Date()
 const today = date.toISOString().split("T")[0]
 
@@ -38,6 +39,10 @@ export async function startSharedFunctions(platform: Platforms) {
 	if (platform == Platforms.HBO) isHBO = true
 
 	await promise
+	if (isNetflix) {
+		await hideTitlesPromise
+		console.log("hideTitles", hideTitles.value)
+	}
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	getDBCache()
 }
@@ -67,9 +72,12 @@ async function getDBCache() {
 			}
 			DBCache = {}
 		}
-		if (isNetflix && settings.value.Netflix?.showRating) startShowRatingInterval()
-		else if (isDisney || isHotstar) {
-			if (settings.value.Disney?.showRating) startShowRatingInterval()
+		if (isNetflix) {
+			if (settings.value.Netflix?.showRating || settings.value.Netflix?.hideTitles)
+				startShowRatingInterval(settings.value.Netflix?.showRating, settings.value.Netflix?.hideTitles)
+		} else if (isDisney || isHotstar) {
+			if (settings.value.Disney?.showRating || settings.value.Disney?.hideTitles)
+				startShowRatingInterval(settings.value.Disney?.showRating, settings.value.Disney?.hideTitles)
 		} else if (isPrimeVideo && settings.value.Amazon?.showRating) startShowRatingInterval()
 		else if (isHBO && settings.value.HBO?.showRating) startShowRatingInterval()
 		if (getDiffInDays(settings.value.General.GCdate, date) >= GCdiff) garbageCollection()
@@ -246,20 +254,28 @@ function showRating() {
 		return true
 	} else return true
 }
-async function startShowRatingInterval() {
-	if (showRating()) addRating()
+async function startShowRatingInterval(optionShowRating = true, optionHideTitles = false) {
+	if (showRating()) addRating(optionShowRating, optionHideTitles)
 	const RatingInterval = setInterval(function () {
+		if (isNetflix) {
+			optionShowRating = settings.value.Netflix?.showRating
+			optionHideTitles = settings.value.Netflix?.hideTitles
+		} else if (isDisney) {
+			optionShowRating = settings.value.Disney?.showRating
+			optionHideTitles = settings.value.Disney?.hideTitles
+		}
+
 		if (
-			(isNetflix && !settings.value.Netflix?.showRating) ||
+			(isNetflix && !(settings.value.Netflix?.showRating || settings.value.Netflix?.hideTitles)) ||
 			(isPrimeVideo && !settings.value.Amazon?.showRating) ||
-			((isDisney || isHotstar) && !settings.value.Disney?.showRating) ||
+			((isDisney || isHotstar) && !(settings.value.Disney?.showRating || settings.value.Disney?.hideTitles)) ||
 			(isHBO && !settings.value.HBO?.showRating)
 		) {
 			console.log("stopped adding Rating")
 			clearInterval(RatingInterval)
 			return
 		}
-		if (showRating()) addRating()
+		if (showRating()) addRating(optionShowRating, optionHideTitles)
 	}, 1000)
 }
 function getDiffInDays(firstDate: string, secondDate: Date) {
@@ -273,7 +289,7 @@ function useDBCache(title: string, card: HTMLElement, media_type: string | null)
 		// vote count is under 80 inaccurate rating
 		vote_count < 100 &&
 		// did not refresh rating in the last 0 days
-		getDiffInDays(DBCache[title].date, date) > 0 &&
+		getDiffInDays(DBCache[title].date, date) > 1 &&
 		// release date is in the last 50 days after not many people will
 		getDiffInDays(DBCache[title]?.release_date, date) <= 50
 
@@ -283,6 +299,8 @@ function useDBCache(title: string, card: HTMLElement, media_type: string | null)
 			console.log(
 				"update recent movie:",
 				title,
+				",refresh:",
+				getDiffInDays(DBCache[title].date, date),
 				",Age:",
 				getDiffInDays(DBCache[title]?.release_date, date),
 				"Vote count:",
@@ -294,14 +312,13 @@ function useDBCache(title: string, card: HTMLElement, media_type: string | null)
 		setRatingOnCard(card, DBCache[title], title)
 	}
 }
-function getMediaType(type: string) {
+function Amazon_getMediaType(type: string): "tv" | "movie" | null {
 	if (!type) return null
 	if (type.toLowerCase().includes("tv")) return "tv"
 	if (type.toLowerCase().includes("movie")) return "movie"
 	return null
 }
-async function addRating() {
-	url = window.location.href
+function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	let AllTitleCardsTypes: Array<NodeListOf<Element>> = []
 	if (isNetflix) AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")]
 	else if (isDisney) AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not(.imdb)")]
@@ -314,13 +331,18 @@ async function addRating() {
 			),
 			document.querySelectorAll("article[data-testid*='-card']:not(.imdb):not(:has(a#rating))"),
 		]
+	return AllTitleCardsTypes
+}
+
+async function addRating(showRating: boolean, optionHideTitles: boolean) {
+	url = window.location.href
+	const AllTitleCardsTypes = getAllTitleCardsTypes()
 	// on disney there are multiple images for the same title so only use the first one
 	let lastTitle = ""
 	// for each is not going in order on chrome
 	let updateDBCache = false
 	for (let type = 0; type < AllTitleCardsTypes.length; type++) {
 		const titleCards = AllTitleCardsTypes[type]
-		let media_type = null
 		for (let i = 0; i < titleCards.length; i++) {
 			const card = titleCards[i] as HTMLElement
 			// add seen class
@@ -329,85 +351,30 @@ async function addRating() {
 				if (type == 0) card?.closest("li")?.classList.add("imdb")
 				else if (type == 1) card?.classList.add("imdb")
 			}
-			let title: string | undefined
-			if (isNetflix) {
-				title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0]
-				if (url.includes("genre/83")) media_type = "tv"
-				else if (url.includes("genre/34399")) media_type = "movie"
-			} else if (isDisney) {
-				title = card?.getAttribute("aria-label")?.replace(" Disney+ Original", "")?.replace(" STAR Original", "")
-				// no section Extras on disney shows
-				if (url.includes("entity")) {
-					const SelectedTabId = document.querySelector('[aria-selected="true"]')?.id.split("_control")[0]
-					if (SelectedTabId != card.closest('div[role="tabpanel"]')?.id) title = ""
+			const media_type = getMediaType(card)
+			const title = getCleanTitle(card, type)
+			if (!title) continue
+			if (optionHideTitles) {
+				if (hideTitles.value[title]) {
+					if (isNetflix) {
+						const item = card.closest(".slider-item") as HTMLElement
+						if (item) item.style.display = "none"
+					} else if (isDisney) {
+						const item = card.parentElement as HTMLElement
+						if (item) item.style.display = "none"
+					}
+					settings.value.Statistics.SegmentsSkipped++
+					sendMessage("increaseBadge", {}, "background")
+					console.log("hideTitle", title)
+					continue
 				}
-				if (url.includes("browse/series")) media_type = "tv"
-				else if (url.includes("browse/movies")) media_type = "movie"
-				else if (/(Staffel)|(Nummer)|(Season)|(Episod)|(Number)/g.test(title ?? "")) media_type = "tv"
-				// german translation
-				if (htmlLang == "de") {
-					title = title
-						?.replace(/Nummer \d* /, "")
-						.split(" Für Details")[0]
-						.split(" Staffel")[0]
-						.split("Staffel")[0]
-						.split(" Neue")[0]
-						.split(" Alle")[0]
-						.split(" Demnächst")[0]
-						.split(" Altersfreigabe")[0]
-						.split(" Mach dich bereit")[0] // deadpool
-						//did not find translation
-						.split(" Jeden")[0]
-						.split(" Noch")[0]
-						.split(" Premiere")[0]
-				} else if (htmlLang == "en") {
-					title = title
-						?.replace(/Number \d* /, "")
-						.replace(" Select for details on this title.", "")
-						.split(" Season")[0]
-						.split("Season")[0]
-						.split(" New ")[0]
-						.split(" All Episodes")[0]
-						.split(" Coming")[0]
-						.split(" Two-Episode")[0]
-						.split(" Rated")[0]
-						.split(" Prepare for")[0] // deadpool
-						//did not find translation
-						.split(" Streaming ")[0]
-						//did not find translation
-						.replace(/ \d+ minutes remaining/g, "")
-				}
-			} else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "")
-			else if (isPrimeVideo) {
-				function fixTitle(title: string | undefined) {
-					return (
-						title
-							?.split(" - ")[0]
-							?.split(" – ")[0]
-							?.replace(/(S\d+)/g, "")
-							?.replace(/ \[.*\]/g, "")
-							?.replace(/\s\(.*\)/g, "")
-							?.replace(/:?\sStaffel-?\s\d+/g, "")
-							?.replace(/:?\sSeason-?\s\d+/g, "")
-							?.replace(/ \/ \d/g, "")
-							?.split(": Die komplette")[0]
-							// nicht sicher
-							?.split(": The complete")[0]
-					)
-				}
-				// detail means not live shows
-				if (card.querySelector("a")?.href?.includes("detail")) {
-					if (type == 0) title = fixTitle(card.getAttribute("data-card-title") ?? "")
-					else if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label") ?? "")
-				}
-				if (url.includes("video/tv")) media_type = "tv"
-				else if (url.includes("video/movie")) media_type = "movie"
-				else media_type = getMediaType(card.getAttribute("data-card-entity-type") ?? "")
-			} else if (isHBO) title = card.querySelector("p[class*='md_strong-']")?.textContent ?? ""
+				if (isDisney) addHideTitleButton(card, title)
+			}
+
 			// for the static Pixar Disney, Starplus etc. cards
-			if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
+			if (showRating && (!isDisney || !card?.classList.contains("_1p76x1y4"))) {
 				// sometimes more than one image is loaded for the same title
-				if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
+				if (lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
 					lastTitle = title
 					if (
 						(DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 7) &&
@@ -427,6 +394,118 @@ async function addRating() {
 			setDBCache()
 		}, 5000)
 	}
+}
+function addHideTitleButton(card: HTMLElement, title: string) {
+	const button = document.createElement("button")
+	button.id = "hideTitleButton"
+	button.textContent = "X"
+	button.style.cssText =
+		"position: absolute; top: 0; right: 0; background: transparent; color: white; border: none; font-size: 12px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"
+	button.onclick = function (event) {
+		// stop propagation
+		event.stopPropagation()
+		event.preventDefault()
+		const item = card.parentElement as HTMLElement
+		if (item) item.style.display = "none"
+		hideTitles.value[title] = true
+		console.log("hideTitles", hideTitles.value)
+	}
+	card.parentElement?.appendChild(button)
+}
+function getMediaType(card: HTMLElement): "tv" | "movie" | null {
+	let media_type: "tv" | "movie" | null = null
+	if (isNetflix) {
+		if (url.includes("genre/83")) media_type = "tv"
+		else if (url.includes("genre/34399")) media_type = "movie"
+	} else if (isDisney) {
+		if (url.includes("browse/series")) media_type = "tv"
+		else if (url.includes("browse/movies")) media_type = "movie"
+		else if (/(Staffel)|(Nummer)|(Season)|(Episod)|(Number)/g.test(title ?? "")) media_type = "tv"
+	} else if (isPrimeVideo) {
+		if (url.includes("video/tv")) media_type = "tv"
+		else if (url.includes("video/movie")) media_type = "movie"
+		else media_type = Amazon_getMediaType(card.getAttribute("data-card-entity-type") ?? "")
+	}
+	return media_type
+}
+
+function getCleanTitle(card: HTMLElement, type: number): string | undefined {
+	let title: string | undefined
+	if (isNetflix) {
+		title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0]
+	} else if (isDisney) {
+		title = Disney_fixTitle(card?.getAttribute("aria-label") ?? undefined)
+		// no section Extras on disney shows
+		if (url.includes("entity")) {
+			const SelectedTabId = document.querySelector('[aria-selected="true"]')?.id.split("_control")[0]
+			if (SelectedTabId != card.closest('div[role="tabpanel"]')?.id) title = ""
+		}
+	} else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "")
+	else if (isPrimeVideo) {
+		// detail means not live shows
+		if (card.querySelector("a")?.href?.includes("detail")) {
+			if (type == 0) title = Amazon_fixTitle(card.getAttribute("data-card-title") ?? "")
+			else if (type == 1) title = Amazon_fixTitle(card.querySelector("a")?.getAttribute("aria-label") ?? "")
+		}
+	} else if (isHBO) title = card.querySelector("p[class*='md_strong-']")?.textContent ?? ""
+	return title
+}
+function Disney_fixTitle(title: string | undefined): string | undefined {
+	title = title
+		?.replace(" Disney+ Original", "")
+		?.replace("Disney+ Original ", "")
+		?.replace(" STAR Original", "")
+		?.replace("STAR Original ", "")
+	// german translation
+	if (htmlLang == "de") {
+		title = title
+			?.replace(/Nummer \d* /, "")
+			.split(" Für Details")[0]
+			.split(" Staffel")[0]
+			.split("Staffel")[0]
+			.split(" Neue")[0]
+			.split(" Alle")[0]
+			.split(" Demnächst")[0]
+			.split(" Altersfreigabe")[0]
+			.split(" Mach dich bereit")[0] // deadpool
+			//did not find translation
+			.split(" Jeden")[0]
+			.split(" Noch")[0]
+			.split(" Premiere")[0]
+	} else if (htmlLang == "en") {
+		title = title
+			?.replace(/Number \d* /, "")
+			.replace(" Select for details on this title.", "")
+			.split(" Season")[0]
+			.split("Season")[0]
+			.split(" New ")[0]
+			.split(" All Episodes")[0]
+			.split(" Coming")[0]
+			.split(" Two-Episode")[0]
+			.split(" Rated")[0]
+			.split(" Prepare for")[0] // deadpool
+			//did not find translation
+			.split(" Streaming ")[0]
+			//did not find translation
+			.replace(/ \d+ minutes remaining/g, "")
+	}
+	return title
+}
+function Amazon_fixTitle(title: string | undefined) {
+	return (
+		title
+			?.split(" - ")[0]
+			?.split(" – ")[0]
+			?.replace(/(S\d+)/g, "")
+			?.replace(/ \[.*\]/g, "")
+			?.replace(/\s\(.*\)/g, "")
+			?.replace(/:?\sStaffel-?\s\d+/g, "")
+			?.replace(/:?\sSeason-?\s\d+/g, "")
+			?.replace(/ \/ \d/g, "")
+			?.split(": Die komplette")[0]
+			// nicht sicher
+			?.split(": The complete")[0]
+	)
 }
 function getColorForRating(rating: number, lowVoteCount: boolean) {
 	// I want a color gradient from red to green with yellow in the middle
@@ -485,7 +564,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 	else if (isDisney) {
 		const parentDiv = card?.closest("div")
 		if (parentDiv) {
-			if (card.nextElementSibling) {
+			if (card.nextElementSibling && card.nextElementSibling.id != "hideTitleButton") {
 				div.style.top = card.offsetHeight + "px"
 				div.style.bottom = ""
 			}

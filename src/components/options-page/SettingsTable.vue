@@ -239,6 +239,33 @@
 					></Switch>
 				</td>
 			</tr>
+			<tr>
+				<td class="tooltip">
+					<p>{{ $t("hideTitlesSwitch") }}</p>
+					<p class="tooltiptext">{{ $t("hideTitlesDescription") }}</p>
+				</td>
+				<td>
+					<Switch
+						v-model="hideTitles"
+						class="ml-auto"
+					></Switch>
+				</td>
+				<td class="other">
+					<Switch
+						v-model="settings.Netflix.hideTitles"
+						class="ml-auto"
+					></Switch>
+				</td>
+				<td class="other">➖</td>
+				<td class="other">
+					<Switch
+						v-model="settings.Disney.hideTitles"
+						class="ml-auto"
+					></Switch>
+				</td>
+				<td class="other">➖</td>
+				<td class="other">➖</td>
+			</tr>
 		</tbody>
 	</table>
 </template>
@@ -389,6 +416,12 @@ const showRating = computed({
 				settings.value[service].showRating = value
 			}
 		})
+	},
+})
+const hideTitles = computed({
+	get: () => settings.value?.Netflix.hideTitles && settings.value?.Disney.hideTitles,
+	set: (value) => {
+		settings.value.Netflix.hideTitles = settings.value.Disney.hideTitles = value
 	},
 })
 </script>
