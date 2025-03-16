@@ -380,9 +380,9 @@ function getMediaType(card: HTMLElement): "tv" | "movie" | null {
 function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 	let title: string | undefined
 	if (isNetflix) {
-		title = Netflix_fixTitle(card?.parentElement?.getAttribute("aria-label")?.split(" (")[0])
+		title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0]
 	} else if (isDisney) {
-		title = card?.getAttribute("aria-label")?.replace(" Disney+ Original", "")?.replace(" STAR Original", "")
+		title = Disney_fixTitle(card?.getAttribute("aria-label") ?? undefined)
 		// no section Extras on disney shows
 		if (url.includes("entity")) {
 			const SelectedTabId = document.querySelector('[aria-selected="true"]')?.id.split("_control")[0]
@@ -398,7 +398,12 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 	} else if (isHBO) title = card.querySelector("p[class*='md_strong-']")?.textContent ?? ""
 	return title
 }
-function Netflix_fixTitle(title: string | undefined) {
+function Disney_fixTitle(title: string | undefined): string | undefined {
+	title = title
+		?.replace(" Disney+ Original", "")
+		?.replace("Disney+ Original ", "")
+		?.replace(" STAR Original", "")
+		?.replace("STAR Original ", "")
 	// german translation
 	if (htmlLang == "de") {
 		title = title
