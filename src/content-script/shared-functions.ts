@@ -337,10 +337,18 @@ async function addRating() {
 			const title = getCleanTitle(card, type)
 			if (!title) continue
 			// hideTitles
-			if (hideTitles.value[title]) {
-				const item = card.closest(".slider-item") as HTMLElement
-				if (item) item.style.display = "none"
-				continue
+			if (isNetflix || isDisney) {
+				if (hideTitles.value[title]) {
+					if (isNetflix) {
+						const item = card.closest(".title-card") as HTMLElement
+						if (item) item.style.display = "none"
+					} else if (isDisney) {
+						const item = card.parentElement as HTMLElement
+						if (item) item.style.display = "none"
+					}
+					continue
+				}
+				if (isDisney) addHideTitleButton(card, title)
 			}
 
 			// for the static Pixar Disney, Starplus etc. cards
@@ -366,6 +374,23 @@ async function addRating() {
 			setDBCache()
 		}, 5000)
 	}
+}
+function addHideTitleButton(card: HTMLElement, title: string) {
+	const button = document.createElement("button")
+	button.id = "hideTitleButton"
+	button.textContent = "X"
+	button.style.cssText =
+		"position: absolute; top: 0; right: 0; background: transparent; color: white; border: none; font-size: 12px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"
+	button.onclick = function (event) {
+		// stop propagation
+		event.stopPropagation()
+		event.preventDefault()
+		const item = card.parentElement as HTMLElement
+		if (item) item.style.display = "none"
+		hideTitles.value[title] = true
+		console.log("hideTitles", hideTitles.value)
+	}
+	card.parentElement?.appendChild(button)
 }
 function getMediaType(card: HTMLElement): "tv" | "movie" | null {
 	let media_type: "tv" | "movie" | null = null
@@ -519,7 +544,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 	else if (isDisney) {
 		const parentDiv = card?.closest("div")
 		if (parentDiv) {
-			if (card.nextElementSibling) {
+			if (card.nextElementSibling && card.nextElementSibling.id != "hideTitleButton") {
 				div.style.top = card.offsetHeight + "px"
 				div.style.bottom = ""
 			}
