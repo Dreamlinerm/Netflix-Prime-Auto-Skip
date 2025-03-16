@@ -355,6 +355,7 @@
     "TitlesPromise": true,
     "useTitlesStore": true,
     "hideTitlesPromise": true,
-    "useHideTitlesStore": true
+    "useHideTitlesStore": true,
+    "BooleanObject": true
   }
 }

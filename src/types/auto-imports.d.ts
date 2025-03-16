@@ -348,6 +348,9 @@ declare global {
   export type { Component, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
+  export type { BooleanObject } from '../stores/options.store'
+  import('../stores/options.store')
+  // @ts-ignore
   export type { settingsType, Nullable, CrunchyListElement, CrunchyList } from '../stores/storeTypes'
   import('../stores/storeTypes')
 }

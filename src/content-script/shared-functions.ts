@@ -3,7 +3,7 @@ console.log("shared-functions loaded")
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
-const { data: hideTitles, promise: hideTitlesPromise } = useBrowserLocalStorage<object>("hideTitles", {})
+const { data: hideTitles, promise: hideTitlesPromise } = useBrowserLocalStorage<BooleanObject>("hideTitles", {})
 export const date = new Date()
 const today = date.toISOString().split("T")[0]
 
@@ -335,11 +335,20 @@ async function addRating() {
 			}
 			const media_type = getMediaType(card)
 			const title = getCleanTitle(card, type)
+			if (!title) continue
+			// hideTitles
+			if (hideTitles.value[title]) {
+				const item = card.closest(".slider-item") as HTMLElement
+				if (item) item.style.display = "none"
+				// card.style.display = "none"
+				continue
+			}
+			if (isNetflix) addHideTitleButton(card, title)
 
 			// for the static Pixar Disney, Starplus etc. cards
 			if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
 				// sometimes more than one image is loaded for the same title
-				if (title && lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
+				if (lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
 					lastTitle = title
 					if (
 						(DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 7) &&
@@ -359,6 +368,18 @@ async function addRating() {
 			setDBCache()
 		}, 5000)
 	}
+}
+function addHideTitleButton(card: HTMLElement, title: string) {
+	const button = document.createElement("button")
+	button.textContent = "X"
+	button.style.cssText =
+		"position: absolute; top: 0; right: 0; background: red; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 12px;"
+	button.onclick = function () {
+		const item = card.closest(".slider-item") as HTMLElement
+		if (item) item.style.display = "none"
+		hideTitles.value[title] = true
+	}
+	card.appendChild(button)
 }
 function getMediaType(card: HTMLElement): "tv" | "movie" | null {
 	let media_type: "tv" | "movie" | null = null
