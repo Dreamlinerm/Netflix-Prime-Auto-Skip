@@ -289,7 +289,7 @@ function useDBCache(title: string, card: HTMLElement, media_type: string | null)
 		// vote count is under 80 inaccurate rating
 		vote_count < 100 &&
 		// did not refresh rating in the last 0 days
-		getDiffInDays(DBCache[title].date, date) > 0 &&
+		getDiffInDays(DBCache[title].date, date) > 1 &&
 		// release date is in the last 50 days after not many people will
 		getDiffInDays(DBCache[title]?.release_date, date) <= 50
 
@@ -299,6 +299,8 @@ function useDBCache(title: string, card: HTMLElement, media_type: string | null)
 			console.log(
 				"update recent movie:",
 				title,
+				",refresh:",
+				getDiffInDays(DBCache[title].date, date),
 				",Age:",
 				getDiffInDays(DBCache[title]?.release_date, date),
 				"Vote count:",
@@ -361,6 +363,9 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 						const item = card.parentElement as HTMLElement
 						if (item) item.style.display = "none"
 					}
+					settings.value.Statistics.SegmentsSkipped++
+					sendMessage("increaseBadge", {}, "background")
+					console.log("hideTitle", title)
 					continue
 				}
 				if (isDisney) addHideTitleButton(card, title)
