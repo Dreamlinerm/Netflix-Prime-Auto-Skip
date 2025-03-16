@@ -5,7 +5,7 @@ startSharedFunctions(Platforms.Netflix)
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
-const { data: hideTitles, promise: hideTitlesPromise } = useBrowserLocalStorage<BooleanObject>("hideTitles", {}, false)
+const { data: hideTitles, promise: hideTitlesPromise } = useBrowserSyncStorage<BooleanObject>("hideTitles", {}, false)
 const ua = navigator.userAgent
 let lastAdTimeText: number | string = 0
 const videoSpeed: Ref<number> = ref(1)
