@@ -209,7 +209,7 @@ If there is no score they are refreshed once per day. If the movie is newer than
 | fullscreen on double click | ➖ | ✅ | ➖ | ✅ | ? |
 | Scroll for volume |  ✅ | ✅ | ✅ | ✅ | ❌ |
 | TMDB Rating | ✅ | ✅ | ✅ | ❌(MAL ratings better) | ✅ |
-| Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue"</li><li>Hide Xray</li></ul> | <ul><li>Skip self ads</li><li>Remain fullscreen</li></ul> | <ul><li>Auto pick last profile</li><li>Release Calendar Filters</li><li>Big Video size</li><li>Disable the numpad</li></ul> | ➖ |
+| Individual Features | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li><li>Remove Games</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue"</li><li>Hide Xray</li></ul> | <ul><li>Skip self ads</li><li>Remain fullscreen</li></ul> | <ul><li>Auto pick last profile</li><li>Release Calendar Filters</li><li>Big Video size</li><li>Disable the numpad</li></ul> | ➖ |
 
 ## Develop the Extension
 
