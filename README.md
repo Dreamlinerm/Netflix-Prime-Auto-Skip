@@ -196,30 +196,35 @@ Skip Credits and Watch Credits are mutally exclusive, but you can turn both of t
 | <img src="docs/Logos/yellowBox.svg" height="20px"> | <= 7 stars              |
 | <img src="docs/Logos/greenBox.svg" height="20px">  | >7 stars                |
 
-# Implemented Feature Overview
+# Implemented Shared Feature Overview
 
-| abbrev. | definition                |
-| ------- | ------------------------- |
-| S       | season                    |
-| E       | episode                   |
-| ✅      | Implemented               |
-| ➖      | Not available             |
-| ❌      | Not implemented           |
-| ?       | don't know if necessary   |
-| Name    | service specific features |
+| abbrev. | definition              |
+| ------- | ----------------------- |
+| ✅      | Implemented             |
+| ➖      | Not available           |
+| ❌      | Not implemented         |
+| ?       | don't know if necessary |
 
-| Feature                    | Netflix                                                                                  | Prime Video                                                                                                    | Disney+ (Hotstar, STAR+)                                                                                          | Crunchyroll                                                                                                                 | HBO max |
-| -------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------- |
-| Intro                      | ✅ <a href="https://www.netflix.com/watch/80011385">brooklyn nine nine S1E4</a>          | ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E4</a>                                 | ✅ <a href="https://www.disneyplus.com/en-gb/video/4e9305a0-6ade-4922-bfba-c68c53a0d5a6">star wars andor S1E2</a> | ✅ [One piece](https://www.crunchyroll.com/series/GRMG8ZQZR/one-piece)                                                      | ✅      |
-| Recaps                     | ✅ <a href="https://www.netflix.com/watch/81274622">Outer Banks S2E1</a>                 | ✅ <a href="https://www.amazon.de/gp/video/detail/B07FMF18GN">lucifer S3E3</a>                                 | ✅ <a href="https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b">Criminal Minds S1E2</a>  | ?                                                                                                                           | ✅      |
-| Credits                    | ✅[test]()                                                                               | ✅                                                                                                             | ✅                                                                                                                | ❌(not necessary if outro is skipped)                                                                                       | ✅      |
-| Ads                        | ✅                                                                                       | ✅                                                                                                             | ✅                                                                                                                | ❌(Ublock can do it)                                                                                                        | ?       |
-| Add Speed Slider           | ✅                                                                                       | ✅                                                                                                             | ✅                                                                                                                | ✅                                                                                                                          | ✅      |
-| Play on Fullscreen         | ✅                                                                                       | ✅                                                                                                             | ✅                                                                                                                | ✅                                                                                                                          | ✅      |
-| fullscreen on double click | ➖                                                                                       | ✅                                                                                                             | ➖                                                                                                                | ✅                                                                                                                          | ?       |
-| Scroll for volume          | ✅                                                                                       | ✅                                                                                                             | ✅                                                                                                                | ✅                                                                                                                          | ❌      |
-| TMDB Rating                | ✅                                                                                       | ✅                                                                                                             | ✅                                                                                                                | ❌(MAL ratings better)                                                                                                      | ✅      |
-| Individual Features        | <ul><li>Inactivity Warning</li><li>Auto pick last profile</li><li>Remove Games</li></ul> | <ul><li>Skip Self Ads</li><li>Paid Content filter</li><li>Move category "Continue"</li><li>Hide Xray</li></ul> | <ul><li>Skip self ads</li><li>Remain fullscreen</li></ul>                                                         | <ul><li>Auto pick last profile</li><li>Release Calendar Filters</li><li>Big Video size</li><li>Disable the numpad</li></ul> | ➖      |
+| Feature                    | Netflix | Prime Video | Disney+ (Hotstar, STAR+) | Crunchyroll                           | HBO max |
+| -------------------------- | ------- | ----------- | ------------------------ | ------------------------------------- | ------- |
+| Intro                      | ✅      | ✅          | ✅                       | ✅                                    | ✅      |
+| Recaps                     | ✅      | ✅          | ✅                       | ?                                     | ✅      |
+| Credits                    | ✅      | ✅          | ✅                       | ❌(not necessary if outro is skipped) | ✅      |
+| Ads                        | ✅      | ✅          | ✅                       | ❌(Ublock can do it)                  | ?       |
+| Add Speed Slider           | ✅      | ✅          | ✅                       | ✅                                    | ✅      |
+| Play on Fullscreen         | ✅      | ✅          | ✅                       | ✅                                    | ✅      |
+| fullscreen on double click | ➖      | ✅          | ➖                       | ✅                                    | ?       |
+| Scroll for volume          | ✅      | ✅          | ✅                       | ✅                                    | ❌      |
+| TMDB Rating                | ✅      | ✅          | ✅                       | ❌(MAL ratings better)                | ✅      |
+
+<details>
+  <summary>Recap links for shows</summary>
+  
+| Feature | Netflix                                                    | Prime Video                                                      | Disney+ (Hotstar, STAR+)                                                                           |
+| ------- | ---------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Recaps  | [Outer Banks S2E1](https://www.netflix.com/watch/81274622) | [lucifer S3E3](https://www.amazon.de/gp/video/detail/B07FMF18GN) | [Criminal Minds S1E2](https://www.disneyplus.com/en-gb/video/efe020f1-7a23-42b5-a330-b193eef8531b) |
+
+</details>
 
 ## Develop the Extension
 
