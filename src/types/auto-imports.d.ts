@@ -11,6 +11,7 @@ declare global {
   const Notivue: typeof import('notivue')['Notivue']
   const Platforms: typeof import('../utils/helper')['Platforms']
   const SettingsPromise: typeof import('../stores/options.store')['SettingsPromise']
+  const TitlesPromise: typeof import('../stores/options.store')['TitlesPromise']
   const Websites: typeof import('../utils/helper')['Websites']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const addSkippedTime: typeof import('../utils/helper')['addSkippedTime']
@@ -55,6 +56,7 @@ declare global {
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
+  const hideTitlesPromise: typeof import('../stores/options.store')['hideTitlesPromise']
   const i18n: typeof import('../utils/i18n')['i18n']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const increaseBadge: typeof import('../utils/helper')['increaseBadge']
@@ -218,6 +220,7 @@ declare global {
   const useFullscreen: typeof import('@vueuse/core')['useFullscreen']
   const useGamepad: typeof import('@vueuse/core')['useGamepad']
   const useGeolocation: typeof import('@vueuse/core')['useGeolocation']
+  const useHideTitlesStore: typeof import('../stores/options.store')['useHideTitlesStore']
   const useI18n: typeof import('vue-i18n')['useI18n']
   const useId: typeof import('vue')['useId']
   const useIdle: typeof import('@vueuse/core')['useIdle']
@@ -303,6 +306,7 @@ declare global {
   const useTimeoutPoll: typeof import('@vueuse/core')['useTimeoutPoll']
   const useTimestamp: typeof import('@vueuse/core')['useTimestamp']
   const useTitle: typeof import('@vueuse/core')['useTitle']
+  const useTitlesStore: typeof import('../stores/options.store')['useTitlesStore']
   const useToNumber: typeof import('@vueuse/core')['useToNumber']
   const useToString: typeof import('@vueuse/core')['useToString']
   const useToggle: typeof import('@vueuse/core')['useToggle']
@@ -552,6 +556,7 @@ declare module 'vue' {
     readonly useFullscreen: UnwrapRef<typeof import('@vueuse/core')['useFullscreen']>
     readonly useGamepad: UnwrapRef<typeof import('@vueuse/core')['useGamepad']>
     readonly useGeolocation: UnwrapRef<typeof import('@vueuse/core')['useGeolocation']>
+    readonly useHideTitlesStore: UnwrapRef<typeof import('../stores/options.store')['useHideTitlesStore']>
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useIdle: UnwrapRef<typeof import('@vueuse/core')['useIdle']>

@@ -350,6 +350,11 @@
     "useFrontendStore": true,
     "SettingsPromise": true,
     "useCountdown": true,
-    "createRef": true
+    "createRef": true,
+    "TitlesList": true,
+    "TitlesPromise": true,
+    "useTitlesStore": true,
+    "hideTitlesPromise": true,
+    "useHideTitlesStore": true
   }
 }

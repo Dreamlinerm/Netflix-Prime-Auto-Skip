@@ -14,3 +14,9 @@ export const useFrontendStore = defineStore("frontend", () => {
 		currentLocale,
 	}
 })
+const { data: hideTitles, promise: hideTitlesPromise } = useBrowserLocalStorage<object>("hideTitles", {})
+export const useHideTitlesStore = defineStore("hideTitles", () => {
+	return {
+		hideTitles,
+	}
+})

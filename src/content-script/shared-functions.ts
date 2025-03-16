@@ -3,6 +3,7 @@ console.log("shared-functions loaded")
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+const { data: hideTitles, promise: hideTitlesPromise } = useBrowserLocalStorage<object>("hideTitles", {})
 export const date = new Date()
 const today = date.toISOString().split("T")[0]
 
@@ -38,8 +39,12 @@ export async function startSharedFunctions(platform: Platforms) {
 	if (platform == Platforms.HBO) isHBO = true
 
 	await promise
+	await hideTitlesPromise
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	getDBCache()
+	if (isNetflix) {
+		console.log("hideTitles", hideTitles.value)
+	}
 }
 
 type MovieInfo = {
@@ -294,7 +299,7 @@ function useDBCache(title: string, card: HTMLElement, media_type: string | null)
 		setRatingOnCard(card, DBCache[title], title)
 	}
 }
-function getMediaType(type: string) {
+function Amazon_getMediaType(type: string): "tv" | "movie" | null {
 	if (!type) return null
 	if (type.toLowerCase().includes("tv")) return "tv"
 	if (type.toLowerCase().includes("movie")) return "movie"
@@ -320,7 +325,6 @@ async function addRating() {
 	let updateDBCache = false
 	for (let type = 0; type < AllTitleCardsTypes.length; type++) {
 		const titleCards = AllTitleCardsTypes[type]
-		let media_type = null
 		for (let i = 0; i < titleCards.length; i++) {
 			const card = titleCards[i] as HTMLElement
 			// add seen class
@@ -329,81 +333,9 @@ async function addRating() {
 				if (type == 0) card?.closest("li")?.classList.add("imdb")
 				else if (type == 1) card?.classList.add("imdb")
 			}
-			let title: string | undefined
-			if (isNetflix) {
-				title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0]
-				if (url.includes("genre/83")) media_type = "tv"
-				else if (url.includes("genre/34399")) media_type = "movie"
-			} else if (isDisney) {
-				title = card?.getAttribute("aria-label")?.replace(" Disney+ Original", "")?.replace(" STAR Original", "")
-				// no section Extras on disney shows
-				if (url.includes("entity")) {
-					const SelectedTabId = document.querySelector('[aria-selected="true"]')?.id.split("_control")[0]
-					if (SelectedTabId != card.closest('div[role="tabpanel"]')?.id) title = ""
-				}
-				if (url.includes("browse/series")) media_type = "tv"
-				else if (url.includes("browse/movies")) media_type = "movie"
-				else if (/(Staffel)|(Nummer)|(Season)|(Episod)|(Number)/g.test(title ?? "")) media_type = "tv"
-				// german translation
-				if (htmlLang == "de") {
-					title = title
-						?.replace(/Nummer \d* /, "")
-						.split(" Für Details")[0]
-						.split(" Staffel")[0]
-						.split("Staffel")[0]
-						.split(" Neue")[0]
-						.split(" Alle")[0]
-						.split(" Demnächst")[0]
-						.split(" Altersfreigabe")[0]
-						.split(" Mach dich bereit")[0] // deadpool
-						//did not find translation
-						.split(" Jeden")[0]
-						.split(" Noch")[0]
-						.split(" Premiere")[0]
-				} else if (htmlLang == "en") {
-					title = title
-						?.replace(/Number \d* /, "")
-						.replace(" Select for details on this title.", "")
-						.split(" Season")[0]
-						.split("Season")[0]
-						.split(" New ")[0]
-						.split(" All Episodes")[0]
-						.split(" Coming")[0]
-						.split(" Two-Episode")[0]
-						.split(" Rated")[0]
-						.split(" Prepare for")[0] // deadpool
-						//did not find translation
-						.split(" Streaming ")[0]
-						//did not find translation
-						.replace(/ \d+ minutes remaining/g, "")
-				}
-			} else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "")
-			else if (isPrimeVideo) {
-				function fixTitle(title: string | undefined) {
-					return (
-						title
-							?.split(" - ")[0]
-							?.split(" – ")[0]
-							?.replace(/(S\d+)/g, "")
-							?.replace(/ \[.*\]/g, "")
-							?.replace(/\s\(.*\)/g, "")
-							?.replace(/:?\sStaffel-?\s\d+/g, "")
-							?.replace(/:?\sSeason-?\s\d+/g, "")
-							?.replace(/ \/ \d/g, "")
-							?.split(": Die komplette")[0]
-							// nicht sicher
-							?.split(": The complete")[0]
-					)
-				}
-				// detail means not live shows
-				if (card.querySelector("a")?.href?.includes("detail")) {
-					if (type == 0) title = fixTitle(card.getAttribute("data-card-title") ?? "")
-					else if (type == 1) title = fixTitle(card.querySelector("a")?.getAttribute("aria-label") ?? "")
-				}
-				if (url.includes("video/tv")) media_type = "tv"
-				else if (url.includes("video/movie")) media_type = "movie"
-				else media_type = getMediaType(card.getAttribute("data-card-entity-type") ?? "")
-			} else if (isHBO) title = card.querySelector("p[class*='md_strong-']")?.textContent ?? ""
+			const media_type = getMediaType(card)
+			const title = getCleanTitle(card, type)
+
 			// for the static Pixar Disney, Starplus etc. cards
 			if (!isDisney || !card?.classList.contains("_1p76x1y4")) {
 				// sometimes more than one image is loaded for the same title
@@ -427,6 +359,96 @@ async function addRating() {
 			setDBCache()
 		}, 5000)
 	}
+}
+function getMediaType(card: HTMLElement): "tv" | "movie" | null {
+	let media_type: "tv" | "movie" | null = null
+	if (isNetflix) {
+		if (url.includes("genre/83")) media_type = "tv"
+		else if (url.includes("genre/34399")) media_type = "movie"
+	} else if (isDisney) {
+		if (url.includes("browse/series")) media_type = "tv"
+		else if (url.includes("browse/movies")) media_type = "movie"
+		else if (/(Staffel)|(Nummer)|(Season)|(Episod)|(Number)/g.test(title ?? "")) media_type = "tv"
+	} else if (isPrimeVideo) {
+		if (url.includes("video/tv")) media_type = "tv"
+		else if (url.includes("video/movie")) media_type = "movie"
+		else media_type = Amazon_getMediaType(card.getAttribute("data-card-entity-type") ?? "")
+	}
+	return media_type
+}
+
+function getCleanTitle(card: HTMLElement, type: number): string | undefined {
+	let title: string | undefined
+	if (isNetflix) {
+		title = Netflix_fixTitle(card?.parentElement?.getAttribute("aria-label")?.split(" (")[0])
+	} else if (isDisney) {
+		title = card?.getAttribute("aria-label")?.replace(" Disney+ Original", "")?.replace(" STAR Original", "")
+		// no section Extras on disney shows
+		if (url.includes("entity")) {
+			const SelectedTabId = document.querySelector('[aria-selected="true"]')?.id.split("_control")[0]
+			if (SelectedTabId != card.closest('div[role="tabpanel"]')?.id) title = ""
+		}
+	} else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "")
+	else if (isPrimeVideo) {
+		// detail means not live shows
+		if (card.querySelector("a")?.href?.includes("detail")) {
+			if (type == 0) title = Amazon_fixTitle(card.getAttribute("data-card-title") ?? "")
+			else if (type == 1) title = Amazon_fixTitle(card.querySelector("a")?.getAttribute("aria-label") ?? "")
+		}
+	} else if (isHBO) title = card.querySelector("p[class*='md_strong-']")?.textContent ?? ""
+	return title
+}
+function Netflix_fixTitle(title: string | undefined) {
+	// german translation
+	if (htmlLang == "de") {
+		title = title
+			?.replace(/Nummer \d* /, "")
+			.split(" Für Details")[0]
+			.split(" Staffel")[0]
+			.split("Staffel")[0]
+			.split(" Neue")[0]
+			.split(" Alle")[0]
+			.split(" Demnächst")[0]
+			.split(" Altersfreigabe")[0]
+			.split(" Mach dich bereit")[0] // deadpool
+			//did not find translation
+			.split(" Jeden")[0]
+			.split(" Noch")[0]
+			.split(" Premiere")[0]
+	} else if (htmlLang == "en") {
+		title = title
+			?.replace(/Number \d* /, "")
+			.replace(" Select for details on this title.", "")
+			.split(" Season")[0]
+			.split("Season")[0]
+			.split(" New ")[0]
+			.split(" All Episodes")[0]
+			.split(" Coming")[0]
+			.split(" Two-Episode")[0]
+			.split(" Rated")[0]
+			.split(" Prepare for")[0] // deadpool
+			//did not find translation
+			.split(" Streaming ")[0]
+			//did not find translation
+			.replace(/ \d+ minutes remaining/g, "")
+	}
+	return title
+}
+function Amazon_fixTitle(title: string | undefined) {
+	return (
+		title
+			?.split(" - ")[0]
+			?.split(" – ")[0]
+			?.replace(/(S\d+)/g, "")
+			?.replace(/ \[.*\]/g, "")
+			?.replace(/\s\(.*\)/g, "")
+			?.replace(/:?\sStaffel-?\s\d+/g, "")
+			?.replace(/:?\sSeason-?\s\d+/g, "")
+			?.replace(/ \/ \d/g, "")
+			?.split(": Die komplette")[0]
+			// nicht sicher
+			?.split(": The complete")[0]
+	)
 }
 function getColorForRating(rating: number, lowVoteCount: boolean) {
 	// I want a color gradient from red to green with yellow in the middle

@@ -84,7 +84,7 @@ function Netflix() {
 	if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped")
 	if (NSettings?.speedSlider && video) Netflix_SpeedSlider(video)
 	if (settings.value.Video?.scrollVolume && video) Netflix_scrollVolume(video)
-	if(NSettings?.removeGames) Netflix_removeGames()
+	if (NSettings?.removeGames) Netflix_removeGames()
 }
 async function Netflix_scrollVolume(video: HTMLVideoElement) {
 	const volumeControl = document.querySelector('[data-uia*="control-volume"] div:not(.enhanced)') as HTMLElement
@@ -226,8 +226,8 @@ function Netflix_SpeedSlider(video: HTMLVideoElement) {
 		}
 	}
 }
-function Netflix_removeGames(){
-	const gamesRow = document.querySelector('div.mobile-games-row')
+function Netflix_removeGames() {
+	const gamesRow = document.querySelector("div.mobile-games-row")
 	if (gamesRow) {
 		gamesRow.remove()
 		console.log("Netflix removed games")
