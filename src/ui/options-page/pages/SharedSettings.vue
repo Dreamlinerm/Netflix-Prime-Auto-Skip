@@ -21,7 +21,6 @@ const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent)
 
 const hideTitlesStore = useHideTitlesStore()
 const { hideTitles } = storeToRefs(hideTitlesStore)
-console.log(hideTitles.value)
 function removeTitle(title: string) {
 	delete hideTitles.value[title]
 }

@@ -26,8 +26,8 @@ function checkType(defaultValue: any, value: any): boolean {
 	// Check if the value type is the same type as the default value or null
 	// there are only strings, booleans, nulls and arrays as types left
 	return (
-		value == null ||
-		defaultValue == undefined ||
+		value === null ||
+		defaultValue === undefined ||
 		(typeof value === typeof defaultValue && Array.isArray(value) == Array.isArray(defaultValue))
 	)
 }
