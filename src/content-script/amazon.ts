@@ -217,7 +217,7 @@ async function Amazon_continuePosition() {
 }
 async function Amazon_FilterPaid() {
 	// if not on the shop page or homepremiere
-	if (url.includes("storefront") || url.includes("genre") || url.includes("movie")) {
+	if (url.includes("storefront") || url.includes("genre") || url.includes("movie") || url.includes("Amazon-Video")) {
 		// the yellow hand bag is the paid category .NbhXwl
 		document.querySelectorAll("section[data-testid='standard-carousel'] ul:has(svg.NbhXwl)").forEach((a) => {
 			deletePaidCategory(a as HTMLElement)
