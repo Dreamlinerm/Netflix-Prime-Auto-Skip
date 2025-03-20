@@ -237,6 +237,14 @@ function Netflix_removeGames() {
 		settings.value.Statistics.SegmentsSkipped++
 		sendMessage("increaseBadge", {}, "background")
 	}
+	// on chrome spiele beta gamesRow
+	const BetaRow = document.querySelector('div[data-list-context="configbased_cloudpersonalizedgames"]')
+	if (BetaRow) {
+		BetaRow.remove()
+		console.log("Netflix removed beta games")
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
+	}
 }
 
 function addHideTitleButton() {

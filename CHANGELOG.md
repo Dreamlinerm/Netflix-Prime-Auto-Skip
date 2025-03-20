@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.1.85
+## 1.1.66
+
+- fix remove games section on Netflix on chrome
+
+## 1.1.65
 
 - fix settings bug.
 
