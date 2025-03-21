@@ -108,5 +108,6 @@
   "hideTitlesDescription": "Automatycznie ukrywa programy, które zostały ukryte ręcznie przez użytkownika.",
   "hiddenTitles": "Ukryte tytuły:",
   "removeAllHiddenTitles": "Usuń wszystkie ukryte tytuły",
-  "skipIntroDelay": "Opóźnienie pominięcia intro w ms:"
+  "skipIntroDelay": "Opóźnienie pominięcia intro w ms:",
+  "skipIntroDelayDescription": "Niektóre języki mówią dłużej niż inne. To ustawienie pozwala pominąć intro z opóźnieniem, dzięki czemu w niektórych dubach mowa nie jest ucinana."
 }

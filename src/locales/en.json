@@ -108,5 +108,6 @@
   "hideTitlesDescription": "Automatically hide shows, which were hidden by the user manually.",
   "hiddenTitles": "Hidden Titles:",
   "removeAllHiddenTitles": "Remove all hidden titles",
-  "skipIntroDelay": "Skip Intro delay in ms:"
+  "skipIntroDelay": "Skip Intro delay in ms:",
+  "skipIntroDelayDescription": "Some languages talk longer than others. This setting allows you to skip the intro with a delay such that in some dubs the speech is not cut off."
 }

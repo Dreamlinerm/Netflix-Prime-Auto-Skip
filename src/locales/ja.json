@@ -108,5 +108,6 @@
   "hideTitlesDescription": "ユーザーが手動で非表示にした番組を自動的に非表示にする。",
   "hiddenTitles": "隠れたタイトル",
   "removeAllHiddenTitles": "すべての隠しタイトルを削除する",
-  "skipIntroDelay": "スキップ・イントロのディレイ（単位：ms）："
+  "skipIntroDelay": "スキップ・イントロのディレイ（単位：ms）：",
+  "skipIntroDelayDescription": "一部の言語は他の言語よりも長く話します。この設定により、一部のダブではスピーチが遮断されないように、遅延でイントロをスキップできます。"
 }

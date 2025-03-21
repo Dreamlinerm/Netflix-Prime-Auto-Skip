@@ -108,5 +108,6 @@
   "hideTitlesDescription": "Kullanıcı tarafından manuel olarak gizlenen gösterileri otomatik olarak gizleyin.",
   "hiddenTitles": "Gizli Başlıklar:",
   "removeAllHiddenTitles": "Tüm gizli başlıkları kaldırın",
-  "skipIntroDelay": "Giriş gecikmesini ms cinsinden atla:"
+  "skipIntroDelay": "Giriş gecikmesini ms cinsinden atla:",
+  "skipIntroDelayDescription": "Bazı diller diğerlerinden daha uzun konuşur. Bu ayar, bazı dublajlarda konuşmanın kesilmemesi için introyu gecikmeli olarak atlamanızı sağlar."
 }

@@ -108,5 +108,6 @@
   "hideTitlesDescription": "Automatisches Ausblenden von Sendungen, die vom Benutzer manuell ausgeblendet wurden.",
   "hiddenTitles": "Versteckte Titel:",
   "removeAllHiddenTitles": "Alle ausgeblendeten Titel entfernen",
-  "skipIntroDelay": "Skip Intro Verzögerung in ms:"
+  "skipIntroDelay": "Skip Intro Verzögerung in ms:",
+  "skipIntroDelayDescription": "In manchen Sprachen wird länger gesprochen als in anderen. Mit dieser Einstellung können Sie das Intro mit einer Verzögerung überspringen, so dass bei einigen Synchronisationen die Sprache nicht abgeschnitten wird."
 }

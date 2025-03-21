@@ -36,6 +36,7 @@
 			"
 		/>
 	</div>
+	<hr v-if="advancedSettings" />
 	<div class="p-1 m-0 flex">
 		<p class="whitespace-nowrap mr-2">{{ $t("skipIntroDelay") }}</p>
 		<input
@@ -46,6 +47,12 @@
 			min="0"
 		/>
 	</div>
+	<template v-if="advancedSettings">
+		<p class="description">
+			{{ $t("skipIntroDelayDescription") }}
+		</p>
+		<hr />
+	</template>
 </template>
 <script setup lang="ts">
 const optionsStore = useOptionsStore()

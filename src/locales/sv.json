@@ -108,5 +108,6 @@
   "hideTitlesDescription": "Dölj automatiskt program som användaren har dolt manuellt.",
   "hiddenTitles": "Dolda titlar:",
   "removeAllHiddenTitles": "Ta bort alla dolda titlar",
-  "skipIntroDelay": "Skip Intro fördröjning i ms:"
+  "skipIntroDelay": "Skip Intro fördröjning i ms:",
+  "skipIntroDelayDescription": "Vissa språk talar längre än andra. Med den här inställningen kan du hoppa över introt med en fördröjning så att talet inte avbryts i vissa dubbningar."
 }

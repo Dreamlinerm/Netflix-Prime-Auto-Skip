@@ -108,5 +108,6 @@
   "hideTitlesDescription": "Ocultar automáticamente los programas ocultados manualmente por el usuario.",
   "hiddenTitles": "Títulos ocultos:",
   "removeAllHiddenTitles": "Eliminar todos los títulos ocultos",
-  "skipIntroDelay": "Retraso de introducción de salto en ms:"
+  "skipIntroDelay": "Retraso de introducción de salto en ms:",
+  "skipIntroDelayDescription": "Algunos idiomas hablan más que otros. Este ajuste permite omitir la introducción con un retardo tal que en algunos doblajes no se corte el habla."
 }
