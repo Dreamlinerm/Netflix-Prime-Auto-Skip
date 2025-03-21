@@ -45,6 +45,7 @@ async function startDisney() {
 		const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
 		if (settings.value.Disney?.skipAd) Disney_skipAd(video)
 	}, 300)
+	arrowKeys()
 }
 
 // #region Disney
@@ -63,6 +64,19 @@ function Disney() {
 		if (settings.value.Disney?.selfAd) Disney_selfAd(video, time)
 	}
 	if (settings.value.Video?.scrollVolume) Disney_scrollVolume(video)
+}
+async function arrowKeys() {
+	// arrow keys to skip 10 seconds
+	document.addEventListener("keydown", function (event) {
+		const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
+		if (event.key === "ArrowRight") {
+			video.currentTime += 10
+			event.preventDefault()
+		} else if (event.key === "ArrowLeft") {
+			video.currentTime -= 10
+			event.preventDefault()
+		}
+	})
 }
 async function Disney_skipAd(video: HTMLVideoElement) {
 	if (video) {

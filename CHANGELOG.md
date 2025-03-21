@@ -2,8 +2,9 @@
 
 ## 1.1.66
 
-- fix remove games section on Netflix on chrome
-- fixed bug on prime chrome home page not filter paid content
+- chrome: fix remove games section on Netflix 
+- chrome: fixed  prime remove paid content on home page
+- firefox: add feature disney arrow keys fast forward
 
 ## 1.1.65
 

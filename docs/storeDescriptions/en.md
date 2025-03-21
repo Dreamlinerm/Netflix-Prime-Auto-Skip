@@ -31,6 +31,7 @@ Platform-Specific Features:
 - Disney+ (Hotstar, STAR+):
     - Skips self-promotional ads
     - Automatically returns to fullscreen mode when going to the next episode
+    - firefox: add feature disney arrow keys fast forward
 
 - Crunchyroll:
     - Remembers and selects your last-used profile automatically
