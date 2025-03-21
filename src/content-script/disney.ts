@@ -2,6 +2,7 @@ import { sendMessage } from "webext-bridge/content-script"
 import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
 startSharedFunctions(Platforms.Disney)
 // Global Variables
+const isFirefox = typeof browser !== "undefined"
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const hostname = window.location.hostname
@@ -67,16 +68,18 @@ function Disney() {
 }
 async function arrowKeys() {
 	// arrow keys to skip 10 seconds
-	document.addEventListener("keydown", function (event) {
-		const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
-		if (event.key === "ArrowRight") {
-			video.currentTime += 10
-			event.preventDefault()
-		} else if (event.key === "ArrowLeft") {
-			video.currentTime -= 10
-			event.preventDefault()
-		}
-	})
+	if (isFirefox) {
+		document.addEventListener("keydown", function (event) {
+			const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
+			if (event.key === "ArrowRight") {
+				video.currentTime += 10
+				event.preventDefault()
+			} else if (event.key === "ArrowLeft") {
+				video.currentTime -= 10
+				event.preventDefault()
+			}
+		})
+	}
 }
 async function Disney_skipAd(video: HTMLVideoElement) {
 	if (video) {
