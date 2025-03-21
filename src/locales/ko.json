@@ -107,5 +107,6 @@
   "hideTitlesSwitch": "동영상 숨기기 버튼",
   "hideTitlesDescription": "사용자가 수동으로 숨겼던 쇼를 자동으로 숨깁니다.",
   "hiddenTitles": "숨겨진 타이틀:",
-  "removeAllHiddenTitles": "모든 숨겨진 제목 제거"
+  "removeAllHiddenTitles": "모든 숨겨진 제목 제거",
+  "skipIntroDelay": "MS에서 소개 지연을 건너 뛰십시오 :"
 }

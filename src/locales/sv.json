@@ -107,5 +107,6 @@
   "hideTitlesSwitch": "Göm film-knappen",
   "hideTitlesDescription": "Dölj automatiskt program som användaren har dolt manuellt.",
   "hiddenTitles": "Dolda titlar:",
-  "removeAllHiddenTitles": "Ta bort alla dolda titlar"
+  "removeAllHiddenTitles": "Ta bort alla dolda titlar",
+  "skipIntroDelay": "Skip Intro fördröjning i ms:"
 }

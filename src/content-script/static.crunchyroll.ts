@@ -86,68 +86,25 @@ async function startPlayOnFullScreen() {
 	}
 }
 let skipped = false
-let audioButtonClicked = false
-async function setLanguage(lang: string, index: number) {
-	settings.value.Crunchyroll.dubLanguage = { lang, index }
-}
-async function registerAudioButton() {
-	const Radios = document.querySelectorAll('[data-testid="vilos-settings_radio_item"]')
-	if (Radios) {
-		Radios.forEach((radio, index) => {
-			const checked = radio.querySelector("circle.dot")?.parentNode?.parentNode?.querySelector(".r-jwli3a")
-			let lang = radio.querySelector('[dir="auto"]')?.textContent ?? ""
-			if (checked && settings.value.Crunchyroll.dubLanguage?.lang != checked?.textContent) setLanguage(lang, index)
-			radio.addEventListener("click", function () {
-				lang = radio.querySelector('[dir="auto"]')?.textContent ?? ""
-				setLanguage(lang, index)
-			})
-		})
-	}
-}
-function setAudioLanguage() {
-	// check if settings_audio_track_submenu  was clicked
-	const audioButton = document.querySelector('[data-testid="vilos-settings_audio_track_submenu"]')
-	if (audioButton) {
-		audioButton.addEventListener("click", function () {
-			if (!audioButtonClicked) {
-				audioButtonClicked = true
-				setTimeout(function () {
-					registerAudioButton()
-				}, 200)
-			}
-		})
-	} else if (audioButtonClicked) {
-		setTimeout(function () {
-			audioButtonClicked = false
-		}, 1000)
-	}
-}
 let reverseButtonClicked = false
 let reverseButtonStartTime: number
 let reverseButtonEndTime: number
 async function Crunchyroll_Intro(video: HTMLVideoElement, time: number) {
 	// saves the audio language to settings
-	setAudioLanguage()
 	if (!reverseButtonClicked) {
 		const button = document.querySelector('[data-testid="skipIntroText"]') as HTMLElement
 		if (button && !skipped) {
 			// add timeout because it can skip mid sentence if language is not japanese.
 			skipped = true
-			setTimeout(
-				function () {
-					button?.click()
-					skipped = false
-					console.log("Intro skipped", button)
-					setTimeout(function () {
-						CrunchyrollGobackbutton(video, time, video?.currentTime)
-						addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
-					}, 600)
-				},
-				settings.value.Crunchyroll?.dubLanguage?.index === 0 ||
-					settings.value.Crunchyroll?.dubLanguage?.index == undefined
-					? 0
-					: 2e3,
-			)
+			setTimeout(function () {
+				button?.click()
+				skipped = false
+				console.log("Intro skipped", button)
+				setTimeout(function () {
+					CrunchyrollGobackbutton(video, time, video?.currentTime)
+					addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
+				}, 600)
+			}, settings.value.General.Crunchyroll_skipTimeout)
 		}
 	} else if (!document.querySelector(".reverse-button")) {
 		addButton(video, reverseButtonStartTime, reverseButtonEndTime)

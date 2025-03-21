@@ -107,5 +107,6 @@
   "hideTitlesSwitch": "Pulsante Nascondi filmato",
   "hideTitlesDescription": "Nascondere automaticamente gli spettacoli che sono stati nascosti manualmente dall'utente.",
   "hiddenTitles": "Titoli nascosti:",
-  "removeAllHiddenTitles": "Rimuovere tutti i titoli nascosti"
+  "removeAllHiddenTitles": "Rimuovere tutti i titoli nascosti",
+  "skipIntroDelay": "Ritardo introduzione salto in ms:"
 }

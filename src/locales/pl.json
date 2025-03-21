@@ -107,5 +107,6 @@
   "hideTitlesSwitch": "Przycisk Ukryj film",
   "hideTitlesDescription": "Automatycznie ukrywa programy, które zostały ukryte ręcznie przez użytkownika.",
   "hiddenTitles": "Ukryte tytuły:",
-  "removeAllHiddenTitles": "Usuń wszystkie ukryte tytuły"
+  "removeAllHiddenTitles": "Usuń wszystkie ukryte tytuły",
+  "skipIntroDelay": "Opóźnienie pominięcia intro w ms:"
 }

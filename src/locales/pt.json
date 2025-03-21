@@ -107,5 +107,6 @@
   "hideTitlesSwitch": "Botão Ocultar filme",
   "hideTitlesDescription": "Ocultar shows automaticamente, que foram ocultos pelo usuário manualmente.",
   "hiddenTitles": "Títulos ocultos:",
-  "removeAllHiddenTitles": "Remova todos os títulos ocultos"
+  "removeAllHiddenTitles": "Remova todos os títulos ocultos",
+  "skipIntroDelay": "Pule o atraso da introdução no MS:"
 }

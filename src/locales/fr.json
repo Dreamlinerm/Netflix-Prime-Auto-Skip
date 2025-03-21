@@ -107,5 +107,6 @@
   "hideTitlesSwitch": "Bouton Masquer le film",
   "hideTitlesDescription": "Masquer automatiquement les spectacles qui ont été masqués manuellement par l'utilisateur.",
   "hiddenTitles": "Titres cachés :",
-  "removeAllHiddenTitles": "Supprimer tous les titres cachés"
+  "removeAllHiddenTitles": "Supprimer tous les titres cachés",
+  "skipIntroDelay": "Délai d'introduction du saut en ms :"
 }

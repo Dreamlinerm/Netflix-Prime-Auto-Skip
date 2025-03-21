@@ -38,7 +38,6 @@ export type settingsType = {
 		skipIntro: boolean
 		speedSlider: boolean
 		releaseCalendar: boolean
-		dubLanguage: { lang: string; index: number } | null
 		profile: boolean
 		bigPlayer: boolean
 		disableNumpad: boolean
@@ -78,6 +77,7 @@ export type settingsType = {
 		savedCrunchyList: CrunchyList
 		GCdate: string
 		affiliate: boolean
+		Crunchyroll_skipTimeout: number
 	}
 }
 
@@ -166,5 +166,6 @@ export const defaultSettings = {
 		savedCrunchyList: [],
 		GCdate: "2024-01-01",
 		affiliate: true,
+		Crunchyroll_skipTimeout: 0,
 	},
 }

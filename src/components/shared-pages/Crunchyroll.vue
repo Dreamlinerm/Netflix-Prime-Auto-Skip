@@ -36,6 +36,16 @@
 			"
 		/>
 	</div>
+	<div class="p-1 m-0 flex">
+		<p class="whitespace-nowrap mr-2">{{ $t("skipIntroDelay") }}</p>
+		<input
+			type="number"
+			v-model="settings.General.Crunchyroll_skipTimeout"
+			@change="setTimeout(($event.target as HTMLInputElement).value)"
+			class="w-full p-1 m-0 input border-inherit"
+			min="0"
+		/>
+	</div>
 </template>
 <script setup lang="ts">
 const optionsStore = useOptionsStore()
@@ -53,5 +63,10 @@ const settingsList: Array<"skipIntro" | "releaseCalendar" | "profile" | "bigPlay
 	"disableNumpad",
 	"profile",
 ]
+function setTimeout(num: string | null) {
+	const parsed = parseInt(num || "0")
+	if (parsed > 0) settings.value.General.Crunchyroll_skipTimeout = parsed
+	else settings.value.General.Crunchyroll_skipTimeout = 0
+}
 </script>
 <style scoped></style>

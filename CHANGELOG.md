@@ -5,6 +5,7 @@
 - chrome: fix remove games section on Netflix 
 - chrome: fixed  prime remove paid content on home page
 - firefox: add feature disney arrow keys fast forward
+- added customizable skip Intro delay on crunchyroll
 
 ## 1.1.65
 

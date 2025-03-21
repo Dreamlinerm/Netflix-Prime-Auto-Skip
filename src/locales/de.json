@@ -107,5 +107,6 @@
   "hideTitlesSwitch": "Film ausblenden button",
   "hideTitlesDescription": "Automatisches Ausblenden von Sendungen, die vom Benutzer manuell ausgeblendet wurden.",
   "hiddenTitles": "Versteckte Titel:",
-  "removeAllHiddenTitles": "Alle ausgeblendeten Titel entfernen"
+  "removeAllHiddenTitles": "Alle ausgeblendeten Titel entfernen",
+  "skipIntroDelay": "Skip Intro Verzögerung in ms:"
 }

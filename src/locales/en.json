@@ -107,5 +107,6 @@
   "hideTitlesSwitch": "Hide Movie button",
   "hideTitlesDescription": "Automatically hide shows, which were hidden by the user manually.",
   "hiddenTitles": "Hidden Titles:",
-  "removeAllHiddenTitles": "Remove all hidden titles"
+  "removeAllHiddenTitles": "Remove all hidden titles",
+  "skipIntroDelay": "Skip Intro delay in ms:"
 }

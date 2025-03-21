@@ -1,4 +1,3 @@
 {
-	"hiddenTitles": "Hidden Titles:",
-	"removeAllHiddenTitles": "Remove all hidden titles"
+	"skipIntroDelay": "Skip Intro delay in ms:"
 }

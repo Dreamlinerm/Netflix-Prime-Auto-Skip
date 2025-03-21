@@ -107,5 +107,6 @@
   "hideTitlesSwitch": "非表示ボタン",
   "hideTitlesDescription": "ユーザーが手動で非表示にした番組を自動的に非表示にする。",
   "hiddenTitles": "隠れたタイトル",
-  "removeAllHiddenTitles": "すべての隠しタイトルを削除する"
+  "removeAllHiddenTitles": "すべての隠しタイトルを削除する",
+  "skipIntroDelay": "スキップ・イントロのディレイ（単位：ms）："
 }
