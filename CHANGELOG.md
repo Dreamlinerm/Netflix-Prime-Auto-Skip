@@ -2,7 +2,8 @@
 
 ## 1.1.67
 
-- better disney ad skip
+- better Disney ad skip
+- remove games billboard
 
 ## 1.1.66
 

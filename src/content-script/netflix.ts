@@ -245,6 +245,13 @@ function Netflix_removeGames() {
 		settings.value.Statistics.SegmentsSkipped++
 		sendMessage("increaseBadge", {}, "background")
 	}
+	const billboardGames = document.querySelector("div.billboard-row.billboard-row-games")
+	if (billboardGames) {
+		billboardGames.remove()
+		console.log("Netflix removed billboard games")
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
+	}
 }
 
 function addHideTitleButton() {
