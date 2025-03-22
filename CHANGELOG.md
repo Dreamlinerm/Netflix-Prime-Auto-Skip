@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.67
+
+- better disney ad skip
+
 ## 1.1.66
 
 - chrome: fix remove games section on Netflix 

@@ -82,7 +82,7 @@ async function arrowKeys() {
 	}
 }
 async function Disney_skipAd(video: HTMLVideoElement) {
-	if (video) {
+	if (video && !video.paused) {
 		const adTimeText = document
 			.querySelector("ad-badge-overlay")
 			?.shadowRoot?.querySelector(".ad-badge-overlay__content--time-display")
