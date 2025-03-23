@@ -1,9 +1,9 @@
 package com.example.streamingenhanced
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.webkit.*
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.activity.ComponentActivity
@@ -28,23 +28,20 @@ class TvActivity : ComponentActivity() {
         setContentView(R.layout.activity_main)
 
         val webView = findViewById<WebView>(R.id.web)
-        setupWebView(webView)
+        val spinner = findViewById<Spinner>(R.id.website_spinner)
 
-        showWebsiteSelectionDialog(webView)
-    }
-
-    private fun setupWebView(webView: WebView) {
         webView.settings.setMediaPlaybackRequiresUserGesture(false)
         webView.settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW)
         webView.settings.allowFileAccess = true
         webView.settings.allowContentAccess = true
         webView.settings.domStorageEnabled = true
         // set scale of website to 1
-        webView.settings.setUseWideViewPort(true)
-        webView.setInitialScale(1)
+        webView.getSettings().setUseWideViewPort(true)
+        webView.setInitialScale(1);
+
         // Enable WebView debugging
         WebView.setWebContentsDebuggingEnabled(true)
-
+        
         webView.webChromeClient = object : WebChromeClient() {
             override fun onPermissionRequest(request: PermissionRequest?) {
                 val resources = request?.resources
@@ -61,7 +58,7 @@ class TvActivity : ComponentActivity() {
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                val selectedWebsite = view?.tag as? String
+                val selectedWebsite = spinner.selectedItem.toString()
                 val fileName = websites[selectedWebsite]?.second
                 if (fileName != null) {
                     modifyWebViewContent(webView, fileName)
@@ -71,36 +68,32 @@ class TvActivity : ComponentActivity() {
             // error could not load scripts
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 if (url != null && url.startsWith("chrome-extension://")) {
+                    // Handle the unsupported URL scheme
                     return true
                 }
                 return super.shouldOverrideUrlLoading(view, url)
             }
         }
         webView.addJavascriptInterface(WebAppInterface(this), "Android")
-    }
-
-    private fun showWebsiteSelectionDialog(webView: WebView) {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_website_selection, null)
-        val spinner = dialogView.findViewById<Spinner>(R.id.website_spinner)
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, websites.keys.toList())
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
-        AlertDialog.Builder(this)
-            .setTitle("Select Website")
-            .setView(dialogView)
-            .setPositiveButton("OK") { _, _ ->
-                val selectedWebsite = spinner.selectedItem.toString()
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: android.view.View, position: Int, id: Long) {
+                val selectedWebsite = parent.getItemAtPosition(position).toString()
                 val url = websites[selectedWebsite]?.first
+                // Add Permissions-Policy header
+                // Modify the user agent
+                // TV User Agent
                 webView.settings.userAgentString = websites[selectedWebsite]?.third
-                webView.tag = selectedWebsite
                 if (url != null) {
                     webView.loadUrl(url)
                 }
             }
-            .setCancelable(false)
-            .show()
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
     }
 
     private fun modifyWebViewContent(webView: WebView, fileName: String) {
