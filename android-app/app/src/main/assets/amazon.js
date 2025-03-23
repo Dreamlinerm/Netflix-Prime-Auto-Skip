@@ -172,21 +172,10 @@ var AmazonSkipIntroConfig = {
     attributeOldValue: false,
 };
 var AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
-var newTag = document.createElement("a");
-// remove hover from the a tag
-// document
-// 	.querySelectorAll('ul[data-testid="card-container-list"] li article section div a:not([tabindex="-1"])')
-// 	.forEach((a) => {
-// 		// a.removeAttribute("tabindex")
-// 		a.addEventListener("hover", function (e) {
-// 			e.preventDefault()
-// 			e.stopPropagation()
-// 		})
-// 	})
 function remove_unnecessary_elements() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            // new a element
+            // fix tabindex navigation
             document
                 .querySelectorAll('ul[data-testid="card-container-list"] li article section div a:not(.enhanced)')
                 .forEach(function (a) {
