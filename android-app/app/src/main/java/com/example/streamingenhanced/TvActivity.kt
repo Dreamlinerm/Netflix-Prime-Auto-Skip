@@ -1,6 +1,7 @@
 package com.example.streamingenhanced
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.webkit.*
@@ -90,6 +91,16 @@ class TvActivity : ComponentActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
+        // Load the last selected website from SharedPreferences
+        val sharedPreferences = getSharedPreferences("TvActivityPrefs", Context.MODE_PRIVATE)
+        val lastSelectedWebsite = sharedPreferences.getString("lastSelectedWebsite", null)
+        if (lastSelectedWebsite != null) {
+            val position = websites.keys.toList().indexOf(lastSelectedWebsite)
+            if (position >= 0) {
+                spinner.setSelection(position)
+            }
+        }
+
         AlertDialog.Builder(this)
             .setTitle("Select Website")
             .setView(dialogView)
@@ -100,6 +111,12 @@ class TvActivity : ComponentActivity() {
                 webView.tag = selectedWebsite
                 if (url != null) {
                     webView.loadUrl(url)
+                }
+
+                // Save the selected website to SharedPreferences
+                with(sharedPreferences.edit()) {
+                    putString("lastSelectedWebsite", selectedWebsite)
+                    apply()
                 }
             }
             .setCancelable(false)
