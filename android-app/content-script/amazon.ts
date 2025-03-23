@@ -99,8 +99,7 @@ async function startAmazon() {
 async function adjustForTV() {
 	const header = document.querySelector("header#pv-navigation-bar") as HTMLElement
 	if (header) header.style.position = "relative"
-	document.querySelector("div#nav-belt")?.remove()
-	document.querySelector("div#nav-main")?.remove()
+	document.querySelector("header#navbar-main")?.remove()
 	document.querySelector("nav#shortcut-menu")?.remove()
 }
 
