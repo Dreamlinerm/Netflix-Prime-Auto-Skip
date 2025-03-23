@@ -140,6 +140,17 @@ async function remove_unnecessary_elements() {
 				e.stopPropagation()
 			})
 		})
+	// remove the left and right buttons
+	const leftButtons = document.querySelectorAll(
+		'section button[data-testid="right-arrow"], section button[data-testid="left-arrow"]',
+	) as NodeListOf<HTMLElement>
+	leftButtons.forEach((button) => {
+		button.style.visibility = "hidden"
+	})
+	// add ul tabindex sow you can go down
+	document.querySelectorAll('ul[data-testid="card-container-list"]:not([tabindex])').forEach((ul) => {
+		ul.setAttribute("tabindex", "0")
+	})
 }
 
 async function Amazon_scrollVolume() {

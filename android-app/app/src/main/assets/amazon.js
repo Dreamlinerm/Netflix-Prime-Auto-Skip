@@ -165,6 +165,7 @@ var AmazonSkipIntroConfig = {
 var AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
 function remove_unnecessary_elements() {
     return __awaiter(this, void 0, void 0, function () {
+        var leftButtons;
         return __generator(this, function (_a) {
             // fix tabindex navigation
             document
@@ -177,6 +178,14 @@ function remove_unnecessary_elements() {
                     e.preventDefault();
                     e.stopPropagation();
                 });
+            });
+            leftButtons = document.querySelectorAll('section button[data-testid="right-arrow"], section button[data-testid="left-arrow"]');
+            leftButtons.forEach(function (button) {
+                button.style.visibility = "hidden";
+            });
+            // add ul tabindex sow you can go down
+            document.querySelectorAll('ul[data-testid="card-container-list"]:not([tabindex])').forEach(function (ul) {
+                ul.setAttribute("tabindex", "0");
             });
             return [2 /*return*/];
         });
