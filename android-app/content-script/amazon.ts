@@ -1,36 +1,15 @@
-document.querySelectorAll("button").forEach((button) => {
-	button.addEventListener(
-		"focus",
-		function ($event) {
-			const target = $event.target as HTMLElement
-			// .activeElement?.classList?.toString()
-			console.log("button focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target)
-		},
-		true,
-	)
-})
-document.querySelectorAll("a").forEach((button) => {
-	button.addEventListener(
-		"focus",
-		function ($event) {
-			const target = $event.target as HTMLElement
-			// .activeElement?.classList?.toString()
-			console.log("a focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target)
-		},
-		true,
-	)
-})
-document.querySelectorAll("div").forEach((button) => {
-	button.addEventListener(
-		"focus",
-		function ($event) {
-			const target = $event.target as HTMLElement
-			// .activeElement?.classList?.toString()
-			console.log("div focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target)
-		},
-		true,
-	)
-})
+// find the focus
+// document.querySelectorAll("div, a, button").forEach((button) => {
+// 	button.addEventListener(
+// 		"focus",
+// 		function ($event) {
+// 			const target = $event.target as HTMLElement
+// 			// .activeElement?.classList?.toString()
+// 			console.log("focus:", target)
+// 		},
+// 		true,
+// 	)
+// })
 // Shared functions
 function parseAdTime(adTimeText: string | null) {
 	if (!adTimeText) return false

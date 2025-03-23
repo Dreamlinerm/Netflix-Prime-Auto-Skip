@@ -34,27 +34,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-document.querySelectorAll("button").forEach(function (button) {
-    button.addEventListener("focus", function ($event) {
-        var target = $event.target;
-        // .activeElement?.classList?.toString()
-        console.log("button focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target);
-    }, true);
-});
-document.querySelectorAll("a").forEach(function (button) {
-    button.addEventListener("focus", function ($event) {
-        var target = $event.target;
-        // .activeElement?.classList?.toString()
-        console.log("a focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target);
-    }, true);
-});
-document.querySelectorAll("div").forEach(function (button) {
-    button.addEventListener("focus", function ($event) {
-        var target = $event.target;
-        // .activeElement?.classList?.toString()
-        console.log("div focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target);
-    }, true);
-});
+// find the focus
+// document.querySelectorAll("div, a, button").forEach((button) => {
+// 	button.addEventListener(
+// 		"focus",
+// 		function ($event) {
+// 			const target = $event.target as HTMLElement
+// 			// .activeElement?.classList?.toString()
+// 			console.log("focus:", target)
+// 		},
+// 		true,
+// 	)
+// })
 // Shared functions
 function parseAdTime(adTimeText) {
     var _a, _b, _c, _d;
