@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.webkit.*
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -27,6 +28,8 @@ class TvActivity : ComponentActivity() {
     )
     // default 'Mozilla/5.0 (Linux; Android 14; AOSP TV on x86 Build/UTT1.240131.001.F1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.5672.136 Mobile Safari/537.36'
 
+    private val websiteHistory = mutableListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,6 +38,34 @@ class TvActivity : ComponentActivity() {
         setupWebView(webView)
 
         showWebsiteSelectionDialog(webView)
+
+        webView.setOnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                // val videoElement = webView.evaluateJavascript(
+                //     "(function() { return document.querySelector('video'); })();",
+                //     null
+                // )
+                when (keyCode) {
+                    // KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                    //     Log.d("Enhanced", "KEYCODE_DPAD_RIGHT")
+                    //     true
+                    // }
+                    // KeyEvent.KEYCODE_DPAD_LEFT -> {
+                    //     Log.d("Enhanced", "KEYCODE_DPAD_LEFT")
+                    //     true
+                    // }
+                    // go back in history
+                    KeyEvent.KEYCODE_BACK -> {
+                        if (websiteHistory.isNotEmpty()) {
+                            val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
+                            webView.loadUrl(lastWebsite)
+                            true
+                        } else false
+                    }
+                    else -> false
+                }
+            } else false
+        }
     }
 
     private fun setupWebView(webView: WebView) {
@@ -110,6 +141,7 @@ class TvActivity : ComponentActivity() {
                 webView.settings.userAgentString = websites[selectedWebsite]?.third
                 webView.tag = selectedWebsite
                 if (url != null) {
+                    websiteHistory.add(url)
                     webView.loadUrl(url)
                 }
 
