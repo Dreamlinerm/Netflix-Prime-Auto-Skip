@@ -38,6 +38,7 @@ async function getDBCache() {
 	const localDBCache = localStorage.getItem("DBCache")
 	if (localDBCache) {
 		DBCache = JSON.parse(localDBCache)
+		console.log("DBCache loaded", Object.keys(DBCache).length)
 	} else {
 		localStorage.setItem("DBCache", JSON.stringify({}))
 	}
@@ -384,12 +385,14 @@ function getTMDBUrl(id: string | number, media_type: string) {
 }
 
 async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string) {
-	let div
-	if (data?.id) {
-		div = document.createElement("a")
-		div.href = getTMDBUrl(data.id, data.media_type)
-		div.target = "_blank"
-	} else div = document.createElement("div")
+	const div = document.createElement("div")
+	// let div
+	// if (data?.id) {
+	// 	div = document.createElement("a")
+	// 	div.href = getTMDBUrl(data.id, data.media_type)
+	// 	div.target = "_blank"
+	// 	div.setAttribute("tabindex", "-1")
+	// } else div = document.createElement("div")
 	const vote_count = data?.vote_count || 100
 	// right: 1.5vw;
 	div.id = "rating"
@@ -403,7 +406,8 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		padding: "0 2px 0 2px",
 		right: "0",
 		zIndex: isDisney ? "" : "9999",
-		fontSize: isMobile ? "4vw" : "1vw",
+		fontSize: "1.5vw",
+		lineHeight: "normal",
 	})
 
 	if (data?.score >= 0) {

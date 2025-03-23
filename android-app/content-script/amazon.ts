@@ -122,6 +122,7 @@ async function adjustForTV() {
 	if (header) header.style.position = "relative"
 	document.querySelector("div#nav-belt")?.remove()
 	document.querySelector("div#nav-main")?.remove()
+	document.querySelector("nav#shortcut-menu")?.remove()
 }
 
 // #region Amazon

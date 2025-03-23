@@ -58,6 +58,7 @@ class TvActivity : ComponentActivity() {
                 if (fileName != null) {
                     modifyWebViewContent(webView, fileName)
                 }
+                modifyWebViewContent(webView, "shared-functions.js")
             }
             // error could not load scripts
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {

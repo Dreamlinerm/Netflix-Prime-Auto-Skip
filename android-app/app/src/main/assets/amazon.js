@@ -139,13 +139,14 @@ function startAmazon() {
 function adjustForTV() {
     return __awaiter(this, void 0, void 0, function () {
         var header;
-        var _a, _b;
-        return __generator(this, function (_c) {
+        var _a, _b, _c;
+        return __generator(this, function (_d) {
             header = document.querySelector("header#pv-navigation-bar");
             if (header)
                 header.style.position = "relative";
             (_a = document.querySelector("div#nav-belt")) === null || _a === void 0 ? void 0 : _a.remove();
             (_b = document.querySelector("div#nav-main")) === null || _b === void 0 ? void 0 : _b.remove();
+            (_c = document.querySelector("nav#shortcut-menu")) === null || _c === void 0 ? void 0 : _c.remove();
             return [2 /*return*/];
         });
     });

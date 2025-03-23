@@ -65,6 +65,7 @@ function getDBCache() {
             localDBCache = localStorage.getItem("DBCache");
             if (localDBCache) {
                 DBCache = JSON.parse(localDBCache);
+                console.log("DBCache loaded", Object.keys(DBCache).length);
             }
             else {
                 localStorage.setItem("DBCache", JSON.stringify({}));
@@ -410,13 +411,7 @@ function setRatingOnCard(card, data, title) {
         var div, vote_count, releaseDate, parentDiv;
         var _a, _b, _c, _d, _e;
         return __generator(this, function (_f) {
-            if (data === null || data === void 0 ? void 0 : data.id) {
-                div = document.createElement("a");
-                div.href = getTMDBUrl(data.id, data.media_type);
-                div.target = "_blank";
-            }
-            else
-                div = document.createElement("div");
+            div = document.createElement("div");
             vote_count = (data === null || data === void 0 ? void 0 : data.vote_count) || 100;
             // right: 1.5vw;
             div.id = "rating";
@@ -430,7 +425,8 @@ function setRatingOnCard(card, data, title) {
                 padding: "0 2px 0 2px",
                 right: "0",
                 zIndex: isDisney ? "" : "9999",
-                fontSize: isMobile ? "4vw" : "1vw",
+                fontSize: "1.5vw",
+                lineHeight: "normal",
             });
             if ((data === null || data === void 0 ? void 0 : data.score) >= 0) {
                 releaseDate = "";
