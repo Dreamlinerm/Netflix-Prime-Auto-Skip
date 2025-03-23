@@ -1,3 +1,36 @@
+document.querySelectorAll("button").forEach((button) => {
+	button.addEventListener(
+		"focus",
+		function ($event) {
+			const target = $event.target as HTMLElement
+			// .activeElement?.classList?.toString()
+			console.log("button focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target)
+		},
+		true,
+	)
+})
+document.querySelectorAll("a").forEach((button) => {
+	button.addEventListener(
+		"focus",
+		function ($event) {
+			const target = $event.target as HTMLElement
+			// .activeElement?.classList?.toString()
+			console.log("a focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target)
+		},
+		true,
+	)
+})
+document.querySelectorAll("div").forEach((button) => {
+	button.addEventListener(
+		"focus",
+		function ($event) {
+			const target = $event.target as HTMLElement
+			// .activeElement?.classList?.toString()
+			console.log("div focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target)
+		},
+		true,
+	)
+})
 // Shared functions
 function parseAdTime(adTimeText: string | null) {
 	if (!adTimeText) return false
@@ -116,23 +149,17 @@ const AmazonSkipIntroConfig = {
 const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro)
 
 async function remove_unnecessary_elements() {
-	const elements = document.querySelectorAll(
-		'button[data-testid="right-arrow"], button[data-testid="left-arrow"]',
-	) as NodeListOf<HTMLElement>
-	elements.forEach((element) => {
-		element.style.visibility = "hidden"
-	})
-	// remove sections from buttons
-	// :not([tabindex])
+	// fix tabindex navigation
 	document
-		.querySelectorAll('ul[data-testid="card-container-list"] li article section div a[tabindex="-1"]')
-		.forEach((ul) => {
-			// add tabindex to section
-			// ul.setAttribute("tabindex", "0")
-			// ul.remove()
-			// ul.removeAttribute("tabindex")
-			const a = ul as HTMLElement
-			a.style.visibility = "hidden"
+		.querySelectorAll('ul[data-testid="card-container-list"] li article section div a:not(.enhanced)')
+		.forEach((a) => {
+			a.classList.add("enhanced")
+			a.removeAttribute("tabindex")
+			// a.removeAttribute("tabindex")
+			a.addEventListener("mouseover", function (e) {
+				e.preventDefault()
+				e.stopPropagation()
+			})
 		})
 }
 

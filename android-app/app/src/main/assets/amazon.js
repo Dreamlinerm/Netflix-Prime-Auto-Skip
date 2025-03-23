@@ -34,6 +34,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+document.querySelectorAll("button").forEach(function (button) {
+    button.addEventListener("focus", function ($event) {
+        var target = $event.target;
+        // .activeElement?.classList?.toString()
+        console.log("button focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target);
+    }, true);
+});
+document.querySelectorAll("a").forEach(function (button) {
+    button.addEventListener("focus", function ($event) {
+        var target = $event.target;
+        // .activeElement?.classList?.toString()
+        console.log("a focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target);
+    }, true);
+});
+document.querySelectorAll("div").forEach(function (button) {
+    button.addEventListener("focus", function ($event) {
+        var target = $event.target;
+        // .activeElement?.classList?.toString()
+        console.log("div focus:", target.getAttribute("data-testid"), target.getAttribute("tabindex"), target);
+    }, true);
+});
 // Shared functions
 function parseAdTime(adTimeText) {
     var _a, _b, _c, _d;
@@ -151,25 +172,31 @@ var AmazonSkipIntroConfig = {
     attributeOldValue: false,
 };
 var AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro);
+var newTag = document.createElement("a");
+// remove hover from the a tag
+// document
+// 	.querySelectorAll('ul[data-testid="card-container-list"] li article section div a:not([tabindex="-1"])')
+// 	.forEach((a) => {
+// 		// a.removeAttribute("tabindex")
+// 		a.addEventListener("hover", function (e) {
+// 			e.preventDefault()
+// 			e.stopPropagation()
+// 		})
+// 	})
 function remove_unnecessary_elements() {
     return __awaiter(this, void 0, void 0, function () {
-        var elements;
         return __generator(this, function (_a) {
-            elements = document.querySelectorAll('button[data-testid="right-arrow"], button[data-testid="left-arrow"]');
-            elements.forEach(function (element) {
-                element.style.visibility = "hidden";
-            });
-            // remove sections from buttons
-            // :not([tabindex])
+            // new a element
             document
-                .querySelectorAll('ul[data-testid="card-container-list"] li article section div a[tabindex="-1"]')
-                .forEach(function (ul) {
-                // add tabindex to section
-                // ul.setAttribute("tabindex", "0")
-                // ul.remove()
-                // ul.removeAttribute("tabindex")
-                var a = ul;
-                a.style.visibility = "hidden";
+                .querySelectorAll('ul[data-testid="card-container-list"] li article section div a:not(.enhanced)')
+                .forEach(function (a) {
+                a.classList.add("enhanced");
+                a.removeAttribute("tabindex");
+                // a.removeAttribute("tabindex")
+                a.addEventListener("mouseover", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
             });
             return [2 /*return*/];
         });
