@@ -74,6 +74,7 @@ type StatisticsKey =
 
 async function startAmazon() {
 	logStartOfAddon()
+	adjustForTV()
 	AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig)
 	AmazonObserver.observe(document, config)
 	Amazon_selfAdTimeout()
@@ -82,24 +83,15 @@ async function startAmazon() {
 		Amazon_FreeveeTimeout()
 	}, 1000)
 	setTimeout(() => Amazon_continuePosition(), 500)
+}
+async function adjustForTV() {
 	const header = document.querySelector("header#pv-navigation-bar") as HTMLElement
 	if (header) header.style.position = "relative"
 	document.querySelector("div#nav-logobar")?.remove()
-	// setTimeout(() => {
-	const searchbar = document.querySelector("form#nav-searchbar") as HTMLElement
-	if (searchbar) {
-		searchbar.style.display = "none"
-	}
-	const button = document.createElement("button")
-	button.textContent = "Show Searchbar"
-	button.addEventListener("click", () => {
-		if (searchbar) {
-			searchbar.style.display = searchbar.style.display === "none" ? "block" : "none"
-			button.textContent = searchbar.style.display === "none" ? "Show Searchbar" : "Hide Searchbar"
-		}
-	})
-	searchbar.parentElement?.appendChild(button)
-	// }, 1000)
+	// scroll down because of search bar
+	document
+		.querySelector('ul[data-testid="card-container-list"]')
+		?.scrollIntoView({ behavior: "smooth", block: "center" })
 }
 
 // #region Amazon
@@ -133,6 +125,18 @@ async function remove_unnecessary_elements() {
 	elements.forEach((element) => {
 		element.style.visibility = "hidden"
 	})
+	// remove sections from buttons
+	// :not([tabindex])
+	document
+		.querySelectorAll('ul[data-testid="card-container-list"] li article section div a[tabindex="-1"]')
+		.forEach((ul) => {
+			// add tabindex to section
+			// ul.setAttribute("tabindex", "0")
+			// ul.remove()
+			// ul.removeAttribute("tabindex")
+			const a = ul as HTMLElement
+			a.style.visibility = "hidden"
+		})
 }
 
 async function Amazon_scrollVolume() {
