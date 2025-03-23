@@ -12,11 +12,13 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 
 class TvActivity : ComponentActivity() {
+    private val TVUA = "Mozilla/5.0 (Linux; Android 14; SH-M26 Build/SA181; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/134.0.6998.108 Mobile Safari/537.36 Instagram 372.0.0.48.60 Android (34/14; 490dpi; 1080x2213; SHARP; SH-M26; Quess; qcom; in_ID; 709818019)"
+    private val chromeUA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 GLS/100.10.9939.100"
     private val websites = mapOf(
-        "Amazon DE" to Pair("https://www.amazon.de/gp/video/storefront", "amazon.js"),
-        "Amazon IT" to Pair("https://www.amazon.it/gp/video/storefront", "amazon.js"),
-        "Disney DE" to Pair("https://www.disneyplus.com/de-de", "disney.js"),
-        "Disney IT" to Pair("https://www.disneyplus.com/it-it", "disney.js")
+        "Amazon DE" to Triple("https://www.amazon.de/gp/video/storefront", "amazon.js", TVUA),
+        "Amazon IT" to Triple("https://www.amazon.it/gp/video/storefront", "amazon.js", TVUA),
+        "Disney DE" to Triple("https://www.disneyplus.com/de-de", "disney.js", chromeUA),
+        "Disney IT" to Triple("https://www.disneyplus.com/it-it", "disney.js", chromeUA)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,10 +33,7 @@ class TvActivity : ComponentActivity() {
         webView.settings.allowFileAccess = true
         webView.settings.allowContentAccess = true
         webView.settings.domStorageEnabled = true
-        // Add Permissions-Policy header
-        // Modify the user agent
-        // TV User Agent
-        webView.settings.userAgentString = "Mozilla/5.0 (Linux; Android 14; SH-M26 Build/SA181; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/134.0.6998.108 Mobile Safari/537.36 Instagram 372.0.0.48.60 Android (34/14; 490dpi; 1080x2213; SHARP; SH-M26; Quess; qcom; in_ID; 709818019)"
+        
         webView.webChromeClient = object : WebChromeClient() {
             override fun onPermissionRequest(request: PermissionRequest?) {
                 val resources = request?.resources
@@ -76,6 +75,10 @@ class TvActivity : ComponentActivity() {
             override fun onItemSelected(parent: AdapterView<*>, view: android.view.View, position: Int, id: Long) {
                 val selectedWebsite = parent.getItemAtPosition(position).toString()
                 val url = websites[selectedWebsite]?.first
+                // Add Permissions-Policy header
+                // Modify the user agent
+                // TV User Agent
+                webView.settings.userAgentString = websites[selectedWebsite]?.third
                 if (url != null) {
                     webView.loadUrl(url)
                 }

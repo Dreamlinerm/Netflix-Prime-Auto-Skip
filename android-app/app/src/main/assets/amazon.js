@@ -335,14 +335,7 @@ function Amazon_SpeedSlider(video) {
 }
 function Amazon_continuePosition() {
     return __awaiter(this, void 0, void 0, function () {
-        var continueCategory, position;
-        var _a, _b, _c;
-        return __generator(this, function (_d) {
-            continueCategory = (_a = document
-                .querySelector('.j5ZgN-._0rmWBt[data-testid="card-overlay"]')) === null || _a === void 0 ? void 0 : _a.closest('[class="+OSZzQ"]');
-            position = (_c = (_b = continueCategory === null || continueCategory === void 0 ? void 0 : continueCategory.parentNode) === null || _b === void 0 ? void 0 : _b.childNodes) === null || _c === void 0 ? void 0 : _c[2];
-            if (continueCategory && position)
-                position.before(continueCategory);
+        return __generator(this, function (_a) {
             return [2 /*return*/];
         });
     });

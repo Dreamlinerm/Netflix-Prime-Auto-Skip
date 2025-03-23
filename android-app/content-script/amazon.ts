@@ -265,11 +265,12 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 }
 
 async function Amazon_continuePosition() {
-	const continueCategory = document
-		.querySelector('.j5ZgN-._0rmWBt[data-testid="card-overlay"]')
-		?.closest('[class="+OSZzQ"]')
-	const position = continueCategory?.parentNode?.childNodes?.[2]
-	if (continueCategory && position) position.before(continueCategory)
+	// TODO: put back
+	// const continueCategory = document
+	// 	.querySelector('.j5ZgN-._0rmWBt[data-testid="card-overlay"]')
+	// 	?.closest('[class="+OSZzQ"]')
+	// const position = continueCategory?.parentNode?.childNodes?.[2]
+	// if (continueCategory && position) position.before(continueCategory)
 }
 async function Amazon_FilterPaid() {
 	// if not on the shop page or homepremiere
