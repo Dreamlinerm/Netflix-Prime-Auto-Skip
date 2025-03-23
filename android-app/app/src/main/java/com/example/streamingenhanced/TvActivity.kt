@@ -16,10 +16,13 @@ class TvActivity : ComponentActivity() {
     private val chromeUA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 GLS/100.10.9939.100"
     private val firefoxUA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.1"
     private val websites = mapOf(
-        "Amazon DE" to Triple("https://www.amazon.de/gp/video/storefront", "amazon.js", chromeUA),
-        "Amazon IT" to Triple("https://www.amazon.it/gp/video/storefront", "amazon.js", chromeUA),
+        "Amazon.com" to Triple("https://www.amazon.com/gp/video/storefront", "amazon.js", chromeUA),
+        "Amazon.co.jp" to Triple("https://www.amazon.co.jp/gp/video/storefront", "amazon.js", chromeUA),
+        "Amazon.co.uk" to Triple("https://www.amazon.co.uk/gp/video/storefront", "amazon.js", chromeUA),
+        "Amazon.de" to Triple("https://www.amazon.de/gp/video/storefront", "amazon.js", chromeUA),
+        "Primevideo.com" to Triple("https://www.primevideo.com/", "amazon.js", chromeUA),
         "Disney DE" to Triple("https://www.disneyplus.com/de-de", "disney.js", chromeUA),
-        "Disney IT" to Triple("https://www.disneyplus.com/it-it", "disney.js", chromeUA)
+        "Starplus" to Triple("https://www.starplus.com", "disney.js", chromeUA)
     )
     // default 'Mozilla/5.0 (Linux; Android 14; AOSP TV on x86 Build/UTT1.240131.001.F1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.5672.136 Mobile Safari/537.36'
 
