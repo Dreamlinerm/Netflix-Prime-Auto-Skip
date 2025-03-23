@@ -33,6 +33,9 @@ class TvActivity : ComponentActivity() {
         webView.settings.allowFileAccess = true
         webView.settings.allowContentAccess = true
         webView.settings.domStorageEnabled = true
+
+        // Enable WebView debugging
+        WebView.setWebContentsDebuggingEnabled(true)
         
         webView.webChromeClient = object : WebChromeClient() {
             override fun onPermissionRequest(request: PermissionRequest?) {
