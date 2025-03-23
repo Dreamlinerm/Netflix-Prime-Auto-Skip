@@ -87,11 +87,8 @@ async function startAmazon() {
 async function adjustForTV() {
 	const header = document.querySelector("header#pv-navigation-bar") as HTMLElement
 	if (header) header.style.position = "relative"
-	document.querySelector("div#nav-logobar")?.remove()
-	// scroll down because of search bar
-	document
-		.querySelector('ul[data-testid="card-container-list"]')
-		?.scrollIntoView({ behavior: "smooth", block: "center" })
+	document.querySelector("div#nav-belt")?.remove()
+	document.querySelector("div#nav-main")?.remove()
 }
 
 // #region Amazon

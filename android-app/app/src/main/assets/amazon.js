@@ -123,10 +123,8 @@ function adjustForTV() {
             header = document.querySelector("header#pv-navigation-bar");
             if (header)
                 header.style.position = "relative";
-            (_a = document.querySelector("div#nav-logobar")) === null || _a === void 0 ? void 0 : _a.remove();
-            // scroll down because of search bar
-            (_b = document
-                .querySelector('ul[data-testid="card-container-list"]')) === null || _b === void 0 ? void 0 : _b.scrollIntoView({ behavior: "smooth", block: "center" });
+            (_a = document.querySelector("div#nav-belt")) === null || _a === void 0 ? void 0 : _a.remove();
+            (_b = document.querySelector("div#nav-main")) === null || _b === void 0 ? void 0 : _b.remove();
             return [2 /*return*/];
         });
     });

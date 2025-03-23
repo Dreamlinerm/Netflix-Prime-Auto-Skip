@@ -15,8 +15,8 @@ class TvActivity : ComponentActivity() {
     private val TVUA = "Mozilla/5.0 (Linux; Android 14; SH-M26 Build/SA181; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/134.0.6998.108 Mobile Safari/537.36 Instagram 372.0.0.48.60 Android (34/14; 490dpi; 1080x2213; SHARP; SH-M26; Quess; qcom; in_ID; 709818019)"
     private val chromeUA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 GLS/100.10.9939.100"
     private val websites = mapOf(
-        "Amazon DE" to Triple("https://www.amazon.de/gp/video/storefront", "amazon.js", TVUA),
-        "Amazon IT" to Triple("https://www.amazon.it/gp/video/storefront", "amazon.js", TVUA),
+        "Amazon DE" to Triple("https://www.amazon.de/gp/video/storefront", "amazon.js", chromeUA),
+        "Amazon IT" to Triple("https://www.amazon.it/gp/video/storefront", "amazon.js", chromeUA),
         "Disney DE" to Triple("https://www.disneyplus.com/de-de", "disney.js", chromeUA),
         "Disney IT" to Triple("https://www.disneyplus.com/it-it", "disney.js", chromeUA)
     )
