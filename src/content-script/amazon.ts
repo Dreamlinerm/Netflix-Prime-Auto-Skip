@@ -231,7 +231,7 @@ async function deletePaidCategory(a: HTMLElement) {
 		a.children.length - a.querySelectorAll('[data-hidden="true"]').length - 2 <=
 		a.querySelectorAll("[data-testid='card-overlay'] svg.NbhXwl").length
 	) {
-		const section = a.closest('[class="+OSZzQ"]')
+		const section = a.closest('[class*="+OSZzQ"]')
 		console.log("Filtered paid category", section)
 		section?.remove()
 		settings.value.Statistics.SegmentsSkipped++

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.68
+
+- fix prime remove paid content on home page
+
 ## 1.1.67
 
 - better Disney ad skip
