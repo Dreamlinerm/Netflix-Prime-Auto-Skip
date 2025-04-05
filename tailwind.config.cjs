@@ -23,6 +23,8 @@ module.exports = {
 				light: {
 					primary: "#fff",
 					"primary-content": "#000",
+					secondary: "#0082fc",
+					"secondary-content": "#fff",
 				},
 			},
 			{
