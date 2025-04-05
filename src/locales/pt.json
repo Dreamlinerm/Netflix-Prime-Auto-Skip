@@ -109,5 +109,6 @@
   "hiddenTitles": "Títulos ocultos:",
   "removeAllHiddenTitles": "Remova todos os títulos ocultos",
   "skipIntroDelay": "Pule o atraso da introdução no MS:",
-  "skipIntroDelayDescription": "Algumas línguas falam mais tempo do que outras. Esta definição permite-lhe saltar a introdução com um atraso de modo a que, em algumas dublagens, o discurso não seja cortado."
+  "skipIntroDelayDescription": "Algumas línguas falam mais tempo do que outras. Esta definição permite-lhe saltar a introdução com um atraso de modo a que, em algumas dublagens, o discurso não seja cortado.",
+  "switchLanguage": "Mudar de idioma:"
 }

@@ -109,5 +109,6 @@
   "hiddenTitles": "Titoli nascosti:",
   "removeAllHiddenTitles": "Rimuovere tutti i titoli nascosti",
   "skipIntroDelay": "Ritardo introduzione salto in ms:",
-  "skipIntroDelayDescription": "Alcune lingue parlano più a lungo di altre. Questa impostazione consente di saltare l'introduzione con un ritardo tale da non interrompere il parlato in alcune lingue."
+  "skipIntroDelayDescription": "Alcune lingue parlano più a lungo di altre. Questa impostazione consente di saltare l'introduzione con un ritardo tale da non interrompere il parlato in alcune lingue.",
+  "switchLanguage": "Lingua di commutazione:"
 }

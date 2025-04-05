@@ -109,5 +109,6 @@
   "hiddenTitles": "隐藏的标题：",
   "removeAllHiddenTitles": "删除所有隐藏标题",
   "skipIntroDelay": "跳过MS中的介绍延迟：",
-  "skipIntroDelayDescription": "有些语言的语音比其他语言长。通过此设置，您可以跳过带有延迟的开场白，这样在某些配音中，语音就不会被切断。"
+  "skipIntroDelayDescription": "有些语言的语音比其他语言长。通过此设置，您可以跳过带有延迟的开场白，这样在某些配音中，语音就不会被切断。",
+  "switchLanguage": "开关语言："
 }

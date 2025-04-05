@@ -109,5 +109,6 @@
   "hiddenTitles": "Titres cachés :",
   "removeAllHiddenTitles": "Supprimer tous les titres cachés",
   "skipIntroDelay": "Délai d'introduction du saut en ms :",
-  "skipIntroDelayDescription": "Certaines langues parlent plus longtemps que d'autres. Ce paramètre vous permet de sauter l'introduction avec un délai de sorte que, dans certains doublages, la parole ne soit pas coupée."
+  "skipIntroDelayDescription": "Certaines langues parlent plus longtemps que d'autres. Ce paramètre vous permet de sauter l'introduction avec un délai de sorte que, dans certains doublages, la parole ne soit pas coupée.",
+  "switchLanguage": "Langue du commutateur :"
 }

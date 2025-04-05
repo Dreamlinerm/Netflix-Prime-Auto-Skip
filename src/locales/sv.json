@@ -109,5 +109,6 @@
   "hiddenTitles": "Dolda titlar:",
   "removeAllHiddenTitles": "Ta bort alla dolda titlar",
   "skipIntroDelay": "Skip Intro fördröjning i ms:",
-  "skipIntroDelayDescription": "Vissa språk talar längre än andra. Med den här inställningen kan du hoppa över introt med en fördröjning så att talet inte avbryts i vissa dubbningar."
+  "skipIntroDelayDescription": "Vissa språk talar längre än andra. Med den här inställningen kan du hoppa över introt med en fördröjning så att talet inte avbryts i vissa dubbningar.",
+  "switchLanguage": "Växla Språk:"
 }

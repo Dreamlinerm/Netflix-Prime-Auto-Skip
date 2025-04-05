@@ -109,5 +109,6 @@
   "hiddenTitles": "숨겨진 타이틀:",
   "removeAllHiddenTitles": "모든 숨겨진 제목 제거",
   "skipIntroDelay": "MS에서 소개 지연을 건너 뛰십시오 :",
-  "skipIntroDelayDescription": "일부 언어는 다른 언어보다 길게 말하는 경우가 있습니다. 이 설정을 사용하면 일부 더빙에서 음성이 끊어지지 않도록 지연 시간을 두고 인트로를 건너뛸 수 있습니다."
+  "skipIntroDelayDescription": "일부 언어는 다른 언어보다 길게 말하는 경우가 있습니다. 이 설정을 사용하면 일부 더빙에서 음성이 끊어지지 않도록 지연 시간을 두고 인트로를 건너뛸 수 있습니다.",
+  "switchLanguage": "언어 전환:"
 }

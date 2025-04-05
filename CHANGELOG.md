@@ -2,8 +2,7 @@
 
 ## 1.1.69
 
-- fix visual bugs on settings page
-- always choose dark mode on default settings page
+- various Settings improvements
 
 ## 1.1.68
 

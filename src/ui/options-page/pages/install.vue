@@ -21,6 +21,11 @@ const optionalSettings = computed({
 				v-model="optionalSettings"
 				class="ml-auto"
 			></Switch>
+			<br />
+			<span class="flex flex-row justify-center items-center">
+				{{ $t("switchLanguage") }}
+				<LocaleSwitch />
+			</span>
 		</p>
 	</div>
 	<OptionalPermission />

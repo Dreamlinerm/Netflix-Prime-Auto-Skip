@@ -3,6 +3,21 @@ import { i18n } from "@/utils/i18n"
 import { useFrontendStore } from "@/stores/options.store"
 const frontendStore = useFrontendStore()
 const { currentLocale } = storeToRefs(frontendStore)
+const LocaleTranslation = {
+	de: "Deutsch",
+	en: "English",
+	es: "Español",
+	fr: "Français",
+	it: "Italiano",
+	ja: "日本語",
+	ko: "한국어",
+	pl: "Polski",
+	pt: "Português",
+	pt_BR: "Português (Brasil)",
+	sv: "Svenska",
+	tr: "Türkçe",
+	zh_CN: "简体中文",
+}
 </script>
 
 <template>
@@ -28,7 +43,7 @@ const { currentLocale } = storeToRefs(frontendStore)
 						class="text-primary-content px-4"
 						@click="currentLocale = locale"
 					>
-						{{ locale }}
+						{{ LocaleTranslation[locale as keyof typeof LocaleTranslation] }}
 					</button>
 				</li>
 			</ul>
