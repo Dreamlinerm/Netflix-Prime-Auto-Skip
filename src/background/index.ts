@@ -4,11 +4,10 @@
 const is_DEV = process.env.NODE_ENV === "development"
 
 chrome.runtime.onInstalled.addListener(async (opt) => {
+	// await chrome.storage.local.clear()
 	// await chrome.storage.sync.clear()
 	// Check if reason is install or update. Eg: opt.reason === 'install' // If extension is installed.
 	if (opt.reason === "install") {
-		// await chrome.storage.local.clear()
-		// await chrome.storage.sync.clear()
 		chrome.tabs.create({
 			active: true,
 			// Open the setup page and append `?type=install` to the URL so frontend

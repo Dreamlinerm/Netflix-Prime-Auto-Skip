@@ -2,7 +2,7 @@
 
 ## 1.1.69
 
-- various Settings improvements
+- various Settings visual and translation improvements
 
 ## 1.1.68
 
