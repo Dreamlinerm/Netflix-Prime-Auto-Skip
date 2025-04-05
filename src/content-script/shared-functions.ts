@@ -517,6 +517,10 @@ function getColorForRating(rating: number, lowVoteCount: boolean) {
 	if (rating <= 7) return "rgb(245, 197, 24)" //#f5c518
 	return "rgb(0, 166, 0)"
 }
+function getTransparencyForRating(rating: number, lowVoteCount: boolean) {
+	if ((!rating || rating <= 7) && !lowVoteCount) return "0.5"
+	return "1"
+}
 function getTMDBUrl(id: string | number, media_type: string) {
 	return `https://www.themoviedb.org/${media_type}/${id}`
 }
@@ -528,7 +532,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		div.href = getTMDBUrl(data.id, data.media_type)
 		div.target = "_blank"
 	} else div = document.createElement("div")
-	const vote_count = data?.vote_count || 100
+	const vote_count = data?.vote_count || 0
 	// right: 1.5vw;
 	div.id = "rating"
 	Object.assign(div.style, {
@@ -559,9 +563,15 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		console.log("no score found:", title, data)
 	}
 	if (isNetflix) {
-		card.closest(".title-card-container")?.appendChild(div)
-	} else if (isHBO) card.appendChild(div)
-	else if (isDisney) {
+		const titleCardContainer = card.closest(".title-card-container") as HTMLElement
+		if (titleCardContainer) {
+			titleCardContainer.appendChild(div)
+			titleCardContainer.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
+		}
+	} else if (isHBO) {
+		card.appendChild(div)
+		card.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
+	} else if (isDisney) {
 		const parentDiv = card?.closest("div")
 		if (parentDiv) {
 			if (card.nextElementSibling && card.nextElementSibling.id != "hideTitleButton") {
@@ -570,13 +580,17 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 			}
 			parentDiv.style.position = "relative"
 			parentDiv.appendChild(div)
+			parentDiv.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
 		}
-	} else if (isHotstar) card?.parentElement?.appendChild(div)
-	else if (isPrimeVideo) {
+	} else if (isHotstar) {
+		card?.parentElement?.appendChild(div)
+		card?.parentElement?.style.setProperty("opacity", getTransparencyForRating(data?.score, vote_count < 50))
+	} else if (isPrimeVideo) {
 		if (card.getAttribute("data-card-title")) card?.firstChild?.firstChild?.appendChild(div)
 		else if (card.querySelector('div[data-testid="title-metadata-main"]')) {
 			card.querySelector('div[data-testid="title-metadata-main"]')?.appendChild(div)
 		} else card.appendChild(div)
+		card.closest("li")?.style.setProperty("opacity", getTransparencyForRating(data?.score, vote_count < 50))
 	}
 }
 function OnFullScreenChange() {
