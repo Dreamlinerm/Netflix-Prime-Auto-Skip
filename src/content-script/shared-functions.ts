@@ -528,7 +528,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		div.href = getTMDBUrl(data.id, data.media_type)
 		div.target = "_blank"
 	} else div = document.createElement("div")
-	const vote_count = data?.vote_count || 100
+	const vote_count = data?.vote_count || 0
 	// right: 1.5vw;
 	div.id = "rating"
 	Object.assign(div.style, {
