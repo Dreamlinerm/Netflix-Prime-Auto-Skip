@@ -11,7 +11,7 @@
 				"panel": "new"
 			},
 			"runOptions": {
-				"runOn": "default"
+				"runOn": "folderOpen"
 			}
 		},
 		{
@@ -24,7 +24,7 @@
 				"panel": "new"
 			},
 			"runOptions": {
-				"runOn": "default"
+				"runOn": "folderOpen"
 			}
 		}
 	]
