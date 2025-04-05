@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.69
+
+- fix visual bugs on settings page
+- always choose dark mode on default settings page
+
 ## 1.1.68
 
 - fix prime remove paid content on home page
