@@ -138,7 +138,7 @@ async function AmazonGobackbutton(video: HTMLVideoElement, startTime: number, en
 		if (buttonInHTML) {
 			function goBack() {
 				video.currentTime = startTime
-				if (buttonInHTML) buttonInHTML.remove()
+				buttonInHTML?.remove()
 				console.log("stopped observing| Intro")
 				AmazonSkipIntroObserver.disconnect()
 				const waitTime = endTime - startTime + 2
