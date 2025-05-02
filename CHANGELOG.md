@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.70
+
+- fixed user suggested errors in french translation
+
 ## 1.1.69
 
 - various Settings visual and translation improvements
@@ -15,8 +19,8 @@
 
 ## 1.1.66
 
-- chrome: fix remove games section on Netflix 
-- chrome: fixed  prime remove paid content on home page
+- chrome: fix remove games section on Netflix
+- chrome: fixed prime remove paid content on home page
 - firefox: add feature disney arrow keys fast forward
 - added customizable skip Intro delay on crunchyroll
 
