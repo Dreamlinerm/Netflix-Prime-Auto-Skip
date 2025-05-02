@@ -30,7 +30,6 @@ Plattform-spezifische Funktionen:
 
 - Disney+ (Hotstar, STAR+): 
     - Überspringt Eigenwerbung
-    - Kehrt automatisch in den Vollbildmodus zurück, wenn zur nächsten Episode gesprungen wird
 
 - Crunchyroll: 
     - Wählt das zuletzt verwendetes Profil automatisch aus

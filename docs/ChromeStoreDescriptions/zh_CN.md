@@ -3,10 +3,12 @@
 ✨功能
 
 此扩展可自动增强你在 Netflix、Prime Video、Disney+（Hotstar、STAR+）、Crunchyroll 和 HBO Max 上的流媒体体验：
+
   • 屏蔽广告
   • 跳过简介和回顾
   • 跳过片尾
   • 显示所有节目的 TMDB 评分
+  • 隐藏电影按钮
   • 添加可自定义的播放速度控制
   • 自动开始全屏播放视频
   • 双击即可全屏播放
@@ -28,7 +30,6 @@
 
   • Disney+ (Hotstar, STAR+):
       • 屏蔽自我推销广告
-      • 进入下一集时自动返回全屏模式
 
   • Crunchyroll:
       • 自动记忆并选择您上次使用的配置文件
@@ -37,6 +38,7 @@
       • 禁用数字键盘
 
 桌面模式下的安卓支持：
+
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll

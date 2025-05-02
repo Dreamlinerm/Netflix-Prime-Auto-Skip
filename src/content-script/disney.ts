@@ -164,7 +164,6 @@ async function Disney_skipCredits(currentTime: number) {
 		// time is to avoid clicking too fast
 		const time = currentTime
 		if (time && lastAdTimeText != time) {
-			const videoFullscreen = document.fullscreenElement !== null
 			lastAdTimeText = time
 			if (settings.value.Disney?.skipCredits) {
 				button.click()
@@ -172,26 +171,6 @@ async function Disney_skipCredits(currentTime: number) {
 				settings.value.Statistics.SegmentsSkipped++
 				sendMessage("increaseBadge", {}, "background")
 				resetLastATimeText()
-			}
-			if (!isHotstar) {
-				// keep video fullscreen
-				setTimeout(function () {
-					if (videoFullscreen && document.fullscreenElement == null) {
-						chrome.runtime.sendMessage({ type: "fullscreen" })
-						function resetFullscreen() {
-							chrome.runtime.sendMessage({ type: "exitFullscreen" })
-							console.log("exitFullscreen")
-							removeEventListener("fullscreenchange", resetFullscreen)
-						}
-						addEventListener("fullscreenchange", resetFullscreen)
-						document.onkeydown = function (evt) {
-							if ("key" in evt && (evt.key === "Escape" || evt.key === "Esc")) {
-								chrome.runtime.sendMessage({ type: "exitFullscreen" })
-							}
-						}
-						console.log("fullscreen")
-					}
-				}, 1000)
 			}
 		}
 	}

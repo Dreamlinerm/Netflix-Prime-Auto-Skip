@@ -30,7 +30,6 @@ Platforma-Cechy szczególne:
 
 - Disney+ (Hotstar, STAR+):
     - Omija reklamy autopromocyjne
-    - Automatycznie powraca do trybu pełnoekranowego po przejściu do następnego odcinka
 
 - Crunchyroll:
     - Zapamiętuje i automatycznie wybiera ostatnio używany profil

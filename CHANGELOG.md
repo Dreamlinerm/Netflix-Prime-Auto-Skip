@@ -3,6 +3,7 @@
 ## 1.1.70
 
 - fixed user suggested errors in french translation
+- removed Feature (remain fullscreen on next episode), which was fixed by itself
 
 ## 1.1.69
 

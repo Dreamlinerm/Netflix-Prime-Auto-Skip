@@ -30,7 +30,6 @@ Platform-Specifika funktioner:
 
 - Disney+ (Hotstar, STAR+):
     - Skippar självpromoterande annonser
-    - Automatiskt återgår till helskärmsläge när du går till nästa avsnitt
 
 - Crunchyroll:
     - Kommer ihåg och väljer din senast använda profil automatiskt

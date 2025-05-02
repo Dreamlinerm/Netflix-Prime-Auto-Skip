@@ -3,10 +3,12 @@
 ✨ Caratteristiche
 
 Questa estensione migliora la vostra esperienza di streaming su Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll e HBO Max in modo automatico:
+
   • Bloccando gli annunci pubblicitari
   • Salvando le introduzioni e i riassunti
   • Salvando i titoli di coda
   • Visualizzando le valutazioni TMDB per tutti gli spettacoli
+  • Pulsante Nascondi filmato
   • Aggiungi una velocità di riproduzione personalizzabile
   • Avviare automaticamente la riproduzione dei video a schermo intero
   • Andare a schermo intero con un doppio clic
@@ -28,7 +30,6 @@ Platform-Caratteristiche specifiche:
 
   • Disney+ (Hotstar, STAR+):
       • Skipa gli annunci autopromozionali
-      • Ritorna automaticamente alla modalità a schermo intero quando si passa all'episodio successivo
 
   • Crunchyroll:
       • Ricorda e seleziona automaticamente l'ultimo profilo utilizzato
@@ -37,6 +38,7 @@ Platform-Caratteristiche specifiche:
       • Disattiva il tastierino numerico
 
 Supporto Android in modalità Desktop:
+
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll

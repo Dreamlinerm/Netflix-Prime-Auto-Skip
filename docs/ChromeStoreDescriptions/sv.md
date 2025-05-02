@@ -3,10 +3,12 @@ Du kan anpassa vilka funktioner som ska aktiveras i Inställningar.
 ✨ Funktioner
 
 Detta tillägg förbättrar din streamingupplevelse på Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll och HBO Max genom att automatiskt:
+
   • Blockera annonser
   • Skippa intron och sammanfattningar
   • Skippa eftertexter
   • Visa TMDB-betyg för alla program
+  • Göm film-knappen
   • Lägga till anpassningsbar uppspelningshastighet kontroll
   • Automatiskt börja spela upp videor i helskärm
   • Gå till helskärm vid dubbelklick
@@ -28,7 +30,6 @@ Platform-Specifika funktioner:
 
   • Disney+ (Hotstar, STAR+):
       • Skippar självpromoterande annonser
-      • Automatiskt återgår till helskärmsläge när du går till nästa avsnitt
 
   • Crunchyroll:
       • Kommer ihåg och väljer din senast använda profil automatiskt
@@ -37,6 +38,7 @@ Platform-Specifika funktioner:
       • Avaktivera numpad
 
 Androidstöd i skrivbordsläge:
+
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll

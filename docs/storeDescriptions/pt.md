@@ -30,7 +30,6 @@ Plataforma-Caraterísticas específicas:
 
 - Disney+ (Hotstar, STAR+):
     - Pula anúncios autopromocionais
-    - Regressa automaticamente ao modo de ecrã inteiro quando passa para o episódio seguinte
 
 - Crunchyroll:
     - Lembra e seleciona automaticamente o seu último perfil utilizado

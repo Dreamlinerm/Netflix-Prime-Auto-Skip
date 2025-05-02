@@ -3,10 +3,12 @@ Puede personalizar las funciones que se activan en los Ajustes.
 ✨ Características
 
 Esta extensión mejora su experiencia de streaming en Netflix, Prime Video, Disney + (Hotstar, STAR +), Crunchyroll, y HBO Max de forma automática:
+
   • Bloquear anuncios
   • Saltar intros y recapitulaciones
   • Saltar créditos
   • Mostrar clasificaciones TMDB para todos los programas
+  • Botón Ocultar película
   • Añadir velocidad de reproducción personalizable. control
   • Iniciar automáticamente la reproducción de vídeos en pantalla completa
   • Ir a pantalla completa al hacer doble clic
@@ -28,7 +30,6 @@ Plataforma-Características específicas:
 
   • Disney+ (Hotstar, STAR+):
       • Salta los anuncios de autopromoción
-      • Vuelve automáticamente al modo de pantalla completa al pasar al siguiente episodio
 
   • Crunchyroll:
       • Recuerda y selecciona tu último perfil utilizado automáticamente
@@ -37,6 +38,7 @@ Plataforma-Características específicas:
       • Desactiva el teclado numérico
 
 Soporte Android en modo Escritorio:
+
   • Prime Video
   • Disney+ (Hotstar, STAR+)
   • Crunchyroll

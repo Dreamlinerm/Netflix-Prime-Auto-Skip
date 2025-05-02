@@ -30,7 +30,6 @@ Platform-Belirli Özellikler:
 
 - Disney+ (Hotstar, STAR+):
     - Kendini tanıtan reklamları atlar
-    - Bir sonraki bölüme geçerken otomatik olarak tam ekran moduna döner
 
 - Crunchyroll:
     - Son kullandığınız profili otomatik olarak hatırlar ve seçer

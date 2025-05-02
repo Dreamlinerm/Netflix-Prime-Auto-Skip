@@ -30,7 +30,6 @@ Recursos específicos da plataforma:
 
 - Disney+ (Hotstar, STAR+):
     - Pula os anúncios de autopromoção
-    - Retorna automaticamente ao modo de tela cheia ao passar para o próximo episódio
 
 - Crunchyroll:
     - Lembra e seleciona automaticamente seu último perfil usado
