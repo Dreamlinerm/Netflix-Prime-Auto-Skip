@@ -1,10 +1,12 @@
 package com.example.streamingenhanced
 
 import android.app.AlertDialog
+import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.KeyEvent
 import android.webkit.*
@@ -227,12 +229,25 @@ class TvActivity : ComponentActivity() {
     }
 
     private fun showUpdateDialog(downloadUrl: String) {
+        Log.d("UpdateCheck", "downloadUrl: $downloadUrl")
         AlertDialog.Builder(this)
             .setTitle("Update Available")
             .setMessage("A new version of the app is available. Would you like to update?")
             .setPositiveButton("Update") { _, _ ->
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(downloadUrl))
-                startActivity(intent)
+                try {
+                    val request = DownloadManager.Request(Uri.parse(downloadUrl)).apply {
+                        setTitle("Downloading Update")
+                        setDescription("Downloading the latest version of Streaming Enhanced.")
+                        setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                        setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "StreamingEnhanced-v1.0.1.apk")
+                    }
+                    val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                    downloadManager.enqueue(request)
+                    Toast.makeText(this, "Downloading update...", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Log.e("UpdateDialog", "Failed to download update", e)
+                    Toast.makeText(this, "Failed to download the update.", Toast.LENGTH_LONG).show()
+                }
             }
             .setNegativeButton("Cancel", null)
             .show()
