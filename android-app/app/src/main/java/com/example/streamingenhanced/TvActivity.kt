@@ -175,6 +175,25 @@ class TvActivity : ComponentActivity() {
         val bufferedReader = BufferedReader(InputStreamReader(inputStream))
         return bufferedReader.use { it.readText() }
     }
+    // TODO: remove this function
+    private fun getUnsafeOkHttpClient(): OkHttpClient {
+        val trustAllCerts = arrayOf<javax.net.ssl.TrustManager>(
+            object : javax.net.ssl.X509TrustManager {
+                override fun checkClientTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {}
+                override fun checkServerTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {}
+                override fun getAcceptedIssuers(): Array<java.security.cert.X509Certificate> = arrayOf()
+            }
+        )
+
+        val sslContext = javax.net.ssl.SSLContext.getInstance("SSL")
+        sslContext.init(null, trustAllCerts, java.security.SecureRandom())
+        val sslSocketFactory = sslContext.socketFactory
+
+        return OkHttpClient.Builder()
+            .sslSocketFactory(sslSocketFactory, trustAllCerts[0] as javax.net.ssl.X509TrustManager)
+            .hostnameVerifier { _, _ -> true }
+            .build()
+    }
 
     private fun checkForUpdates() {
         val packageInfo = packageManager.getPackageInfo(packageName, 0)
@@ -184,17 +203,18 @@ class TvActivity : ComponentActivity() {
 
         Thread {
             try {
-                val client = OkHttpClient()
+                val client = getUnsafeOkHttpClient()
+                //val client = OkHttpClient()
                 val request = Request.Builder().url(updateUrl).build()
                 val response = client.newCall(request).execute()
                 val responseBody = response.body?.string()
-
                 if (responseBody != null) {
                     val jsonObject = JSONObject(responseBody)
                     val latestVersion = jsonObject.getString("version")
                     val downloadUrl = jsonObject.getString("downloadUrl")
-
+                    Log.d("UpdateCheck", "latestVersion: $latestVersion")
                     if (latestVersion > currentVersion) {
+                        Log.d("UpdateCheck", ">")
                         runOnUiThread {
                             showUpdateDialog(downloadUrl)
                         }
