@@ -2,16 +2,23 @@ package com.example.streamingenhanced
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.webkit.*
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.ComponentActivity
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import android.content.pm.PackageManager
+//import androidx.appcompat.app.AppCompatActivity
 
 class TvActivity : ComponentActivity() {
     private val TVUA = "Mozilla/5.0 (Linux; Android 14; SH-M26 Build/SA181; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/134.0.6998.108 Mobile Safari/537.36 Instagram 372.0.0.48.60 Android (34/14; 490dpi; 1080x2213; SHARP; SH-M26; Quess; qcom; in_ID; 709818019)"
@@ -33,6 +40,8 @@ class TvActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        checkForUpdates() // Check for updates on app startup
 
         val webView = findViewById<WebView>(R.id.web)
         setupWebView(webView)
@@ -165,6 +174,48 @@ class TvActivity : ComponentActivity() {
         val inputStream = assets.open(fileName)
         val bufferedReader = BufferedReader(InputStreamReader(inputStream))
         return bufferedReader.use { it.readText() }
+    }
+
+    private fun checkForUpdates() {
+        val packageInfo = packageManager.getPackageInfo(packageName, 0)
+        val currentVersion = packageInfo.versionName
+        Log.d("AppVersion", "Version Name: $currentVersion")
+        val updateUrl = "https://raw.githubusercontent.com/Dreamlinerm/Netflix-Prime-Auto-Skip/refs/heads/main/android-app/app-update.json" // Replace with your server URL
+
+        Thread {
+            try {
+                val client = OkHttpClient()
+                val request = Request.Builder().url(updateUrl).build()
+                val response = client.newCall(request).execute()
+                val responseBody = response.body?.string()
+
+                if (responseBody != null) {
+                    val jsonObject = JSONObject(responseBody)
+                    val latestVersion = jsonObject.getString("version")
+                    val downloadUrl = jsonObject.getString("downloadUrl")
+
+                    if (latestVersion > currentVersion) {
+                        runOnUiThread {
+                            showUpdateDialog(downloadUrl)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("UpdateCheck", "Failed to check for updates", e)
+            }
+        }.start()
+    }
+
+    private fun showUpdateDialog(downloadUrl: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Update Available")
+            .setMessage("A new version of the app is available. Would you like to update?")
+            .setPositiveButton("Update") { _, _ ->
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(downloadUrl))
+                startActivity(intent)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     // JavaScript interface class
