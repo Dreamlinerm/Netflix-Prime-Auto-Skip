@@ -20,6 +20,9 @@ import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import android.content.pm.PackageManager
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
+
 //import androidx.appcompat.app.AppCompatActivity
 
 class TvActivity : ComponentActivity() {
@@ -38,6 +41,50 @@ class TvActivity : ComponentActivity() {
     // default 'Mozilla/5.0 (Linux; Android 14; AOSP TV on x86 Build/UTT1.240131.001.F1; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.5672.136 Mobile Safari/537.36'
 
     private val websiteHistory = mutableListOf<String>()
+    private var downloadId: Long = -1
+    private val FILENAME_APK = "update.apk"
+
+    private val downloadCompleteReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            Log.d("DownloadReceiver", "Download completed")
+            val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            if (id == downloadId) {
+                val query = DownloadManager.Query()
+                query.setFilterById(downloadId)
+                val downloadManager = context?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+                val cursor = downloadManager.query(query)
+                if (cursor.moveToFirst()) {
+                    val status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
+                    if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                        val uriString = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI))
+                        if (uriString != null) {
+                            val uri = Uri.parse(uriString)
+                            installApk(uri)
+                        }
+                    } else {
+                        Log.e("DownloadReceiver", "Download failed")
+                    }
+                }
+                cursor.close()
+            }
+        }
+    }
+
+    private fun installApk(uri: Uri) {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "application/vnd.android.package-archive")
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
+        }
+        startActivity(intent)
+    }
+
+    // private static void installAPK(File apkFile) {
+    //     Uri uri = FileProvider.getUriForFile(activity, activity.getPackageName() + ".provider", apkFile);
+    //     Intent i = new Intent(Intent.ACTION_VIEW);
+    //     i.setDataAndType(uri, CONTENT_TYPE_APK);
+    //     i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    //     activity.startActivity(i);
+    // }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +124,11 @@ class TvActivity : ComponentActivity() {
                 }
             } else false
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(downloadCompleteReceiver) // Unregister the receiver to avoid memory leaks
     }
 
     private fun setupWebView(webView: WebView) {
@@ -144,7 +196,7 @@ class TvActivity : ComponentActivity() {
         }
 
         AlertDialog.Builder(this)
-            .setTitle("Select Website")
+            .setTitle("Select Website Test")
             .setView(dialogView)
             .setPositiveButton("OK") { _, _ ->
                 val selectedWebsite = spinner.selectedItem.toString()
@@ -239,10 +291,14 @@ class TvActivity : ComponentActivity() {
                         setTitle("Downloading Update")
                         setDescription("Downloading the latest version of Streaming Enhanced.")
                         setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                        setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "StreamingEnhanced-v1.0.1.apk")
+                        setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, FILENAME_APK)
                     }
                     val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-                    downloadManager.enqueue(request)
+                    downloadId = downloadManager.enqueue(request)
+                    Log.d("UpdateCheck", "downloadId: $downloadId")
+                    // install apk after download
+                    val filter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+                    registerReceiver(downloadCompleteReceiver, filter)
                     Toast.makeText(this, "Downloading update...", Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {
                     Log.e("UpdateDialog", "Failed to download update", e)
