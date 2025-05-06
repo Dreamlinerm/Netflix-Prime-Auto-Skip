@@ -23,6 +23,7 @@ import android.content.pm.PackageManager
 import android.content.BroadcastReceiver
 import android.content.IntentFilter
 import java.io.File
+import androidx.core.content.FileProvider
 
 //import androidx.appcompat.app.AppCompatActivity
 
@@ -72,7 +73,12 @@ class TvActivity : ComponentActivity() {
         }
     }
 
-    private fun installApk(uri: Uri) {
+    private fun installApk(file: File) {
+        val uri = FileProvider.getUriForFile(
+            this,
+            "${applicationContext.packageName}.provider",
+            file
+        )
         val intent = Intent(Intent.ACTION_VIEW).apply {
             setDataAndType(uri, "application/vnd.android.package-archive")
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
@@ -301,7 +307,7 @@ class TvActivity : ComponentActivity() {
                             }
                             Log.d("UpdateCheck", "File downloaded to: ${file.absolutePath}")
                             runOnUiThread {
-                                installApk(Uri.fromFile(file))
+                                installApk(file)
                             }
                         } else {
                             Log.e("UpdateCheck", "Failed to download update: ${response.code}")
