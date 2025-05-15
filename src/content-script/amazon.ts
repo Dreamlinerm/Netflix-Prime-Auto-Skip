@@ -1,16 +1,99 @@
-import { sendMessage, onMessage } from "webext-bridge/content-script"
-import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
 // Global Variables
+async function sendMessage(...args) {
+	return
+}
 
-const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+const settings = {
+	value: {
+		Amazon: {
+			skipIntro: true,
+			skipCredits: true,
+			watchCredits: false,
+			selfAd: true,
+			skipAd: true,
+			speedSlider: true,
+			filterPaid: true,
+			continuePosition: true,
+			showRating: true,
+			xray: true,
+		},
+		Netflix: {
+			skipIntro: true,
+			skipRecap: true,
+			skipCredits: true,
+			watchCredits: false,
+			skipBlocked: true,
+			skipAd: true,
+			speedSlider: true,
+			profile: true,
+			showRating: true,
+			removeGames: true,
+			hideTitles: true,
+		},
+		Disney: {
+			skipIntro: true,
+			skipCredits: true,
+			watchCredits: false,
+			skipAd: true,
+			speedSlider: true,
+			showRating: true,
+			selfAd: true,
+			hideTitles: true,
+		},
+		Crunchyroll: {
+			skipIntro: true,
+			speedSlider: true,
+			releaseCalendar: true,
+			dubLanguage: null,
+			profile: true,
+			bigPlayer: true,
+			disableNumpad: true,
+		},
+		HBO: {
+			skipIntro: true,
+			skipCredits: true,
+			watchCredits: false,
+			speedSlider: true,
+			showRating: true,
+		},
+		Video: {
+			playOnFullScreen: true,
+			epilepsy: false,
+			userAgent: true,
+			doubleClick: false,
+			scrollVolume: false,
+			showYear: false,
+		},
+		Statistics: {
+			AmazonAdTimeSkipped: 0,
+			NetflixAdTimeSkipped: 0,
+			DisneyAdTimeSkipped: 0,
+			IntroTimeSkipped: 0,
+			RecapTimeSkipped: 0,
+			SegmentsSkipped: 0,
+		},
+		General: {
+			Crunchyroll_profilePicture: "",
+			profileName: "",
+			profilePicture: "",
+			sliderSteps: 1,
+			sliderMin: 5,
+			sliderMax: 20,
+			filterDub: true,
+			filterQueued: true,
+			savedCrunchyList: [],
+			GCdate: "2024-01-01",
+			affiliate: true,
+			Crunchyroll_skipTimeout: 0,
+		},
+	},
+}
 const ua = navigator.userAgent
-const isMobile = /mobile|streamingEnhanced/i.test(ua)
 let lastAdTimeText: number | string = 0
-const videoSpeed: Ref<number> = ref(1)
+const videoSpeed: number = 1
 const url = window.location.href
 const hostname = window.location.hostname
 const title = document.title
-const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url))
 const config = { attributes: true, childList: true, subtree: true }
 async function logStartOfAddon() {
 	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
@@ -28,19 +111,15 @@ async function addSkippedTime(startTime: number, endTime: number, key: Statistic
 		console.log(key, endTime - startTime)
 		settings.value.Statistics[key] += endTime - startTime
 		sendMessage("increaseBadge", {}, "background")
+
+		console.log(`Updated ${key}:`, settings.value.Statistics[key])
 	}
 }
 
-if (isPrimeVideo) {
-	startSharedFunctions(Platforms.Amazon)
-	startAmazon()
-}
-
 async function startAmazon() {
-	await promise
 	logStartOfAddon()
+	adjustForTV()
 	AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig)
-	if (settings.value?.Video?.doubleClick) Amazon_doubleClick()
 	AmazonObserver.observe(document, config)
 	if (settings.value.Amazon?.selfAd) Amazon_selfAdTimeout()
 	if (settings.value.Amazon?.skipAd) {
@@ -50,7 +129,6 @@ async function startAmazon() {
 		}, 1000)
 	}
 	if (settings.value.Amazon?.continuePosition) setTimeout(() => Amazon_continuePosition(), 500)
-	if (settings.value.Video?.userAgent && isMobile) Amazon_customizeMobileView()
 }
 
 // #region Amazon
@@ -66,6 +144,7 @@ function Amazon() {
 	if (settings.value.Amazon?.speedSlider) Amazon_SpeedSlider(video)
 	if (settings.value.Amazon?.xray) Amazon_xray()
 	if (settings.value.Video?.scrollVolume) Amazon_scrollVolume()
+	remove_unnecessary_elements()
 }
 const AmazonSkipIntroConfig = {
 	attributes: true,
@@ -328,29 +407,6 @@ async function Amazon_selfAdTimeout() {
 	}, 100)
 }
 
-async function Amazon_customizeMobileView() {
-	console.log("customizeMobileView")
-	// customize mobile view for desktop website
-	// /gp/video/detail/ is the film description page otherwise looks weird
-	if (!url.includes("/gp/video/detail/")) {
-		// add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
-		const meta = document.createElement("meta")
-		meta.name = "viewport"
-		meta.content = "width=device-width, initial-scale=1"
-		document.head.appendChild(meta)
-
-		// make amazon more mobile friendly
-		const navBelt = document.querySelector("#nav-belt") as HTMLElement
-		if (navBelt) {
-			navBelt.style.width = "100vw"
-			navBelt.style.display = "flex"
-			navBelt.style.flexDirection = "column"
-			navBelt.style.height = "fit-content"
-		}
-		const navMain = document.querySelector("#nav-main") as HTMLElement
-		if (navMain) navMain.style.display = "none"
-	}
-}
 async function Amazon_xray() {
 	document.querySelector(".xrayQuickViewList")?.remove()
 	// remove bad background hue which is annoying
@@ -361,16 +417,108 @@ async function Amazon_xray() {
 		b.style.background = "transparent"
 	}
 }
+// #endregion
+// #region tv specific
+// find the focus
+// document.querySelectorAll("div, a, button").forEach((button) => {
+// 	button.addEventListener(
+// 		"focus",
+// 		function ($event) {
+// 			const target = $event.target as HTMLElement
+// 			// .activeElement?.classList?.toString()
+// 			console.log("focus:", target)
+// 		},
+// 		true,
+// 	)
+// })
+// Shared functions
+function parseAdTime(adTimeText: string | null) {
+	if (!adTimeText) return false
+	const adTime: number =
+		parseInt(/:\d+/.exec(adTimeText ?? "")?.[0].substring(1) ?? "") +
+		parseInt(/\d+/.exec(adTimeText ?? "")?.[0] ?? "") * 60
+	if (isNaN(adTime)) return false
+	return adTime
+}
 
-async function Amazon_doubleClick() {
-	if (settings.value.Video?.doubleClick) {
-		// event listener for double click
-		document.ondblclick = function () {
-			const button = document.querySelector(".dv-player-fullscreen button[class*=fullscreen-button]") as HTMLElement
-			button?.click()
-		}
-	} else {
-		document.ondblclick = null
+function createSlider(
+	video: HTMLVideoElement,
+	videoSpeed: number,
+	position: HTMLElement,
+	sliderStyle: string,
+	speedStyle: string,
+	divStyle = "",
+) {
+	videoSpeed = videoSpeed || video.playbackRate
+
+	const slider = document.createElement("input")
+	slider.id = "videoSpeedSlider"
+	slider.type = "range"
+	slider.min = "5"
+	slider.max = "20"
+	slider.value = "10"
+	slider.step = "1"
+	slider.style.cssText = sliderStyle
+
+	const speed = document.createElement("p")
+	speed.id = "videoSpeed"
+	speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x"
+	speed.style.cssText = speedStyle
+	if (divStyle) {
+		const div = document.createElement("div")
+		div.style.cssText = divStyle
+		div.appendChild(slider)
+		div.appendChild(speed)
+		position.prepend(div)
+	} else position.prepend(slider, speed)
+
+	if (videoSpeed) video.playbackRate = videoSpeed
+	speed.onclick = function () {
+		slider.style.display = slider.style.display === "block" ? "none" : "block"
+	}
+	slider.oninput = function () {
+		const sliderValue = parseFloat(slider.value)
+		speed.textContent = (sliderValue / 10).toFixed(1) + "x"
+		video.playbackRate = sliderValue / 10
+		videoSpeed = sliderValue / 10
+	}
+
+	return { slider, speed }
+}
+
+async function adjustForTV() {
+	const loggedIn = document.querySelector("div#nav-al-signin")
+	if (loggedIn) {
+		const header = document.querySelector("header#pv-navigation-bar") as HTMLElement
+		if (header) header.style.position = "relative"
+		document.querySelector("header#navbar-main")?.remove()
+		document.querySelector("nav#shortcut-menu")?.remove()
 	}
 }
+async function remove_unnecessary_elements() {
+	// fix tabindex navigation
+	document
+		.querySelectorAll('ul[data-testid="card-container-list"] li article section div a:not(.enhanced)')
+		.forEach((a) => {
+			a.classList.add("enhanced")
+			a.removeAttribute("tabindex")
+			// a.removeAttribute("tabindex")
+			a.addEventListener("mouseover", function (e) {
+				e.preventDefault()
+				e.stopPropagation()
+			})
+		})
+	// remove the left and right buttons
+	const leftButtons = document.querySelectorAll(
+		'section button[data-testid="right-arrow"], section button[data-testid="left-arrow"]',
+	) as NodeListOf<HTMLElement>
+	leftButtons.forEach((button) => {
+		button.style.visibility = "hidden"
+	})
+	// add ul tabindex sow you can go down
+	document.querySelectorAll('ul[data-testid="card-container-list"]:not([tabindex])').forEach((ul) => {
+		ul.setAttribute("tabindex", "0")
+	})
+}
 // #endregion
+startAmazon()

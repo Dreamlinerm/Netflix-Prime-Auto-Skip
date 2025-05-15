@@ -487,10 +487,13 @@ function createSlider(
 }
 
 async function adjustForTV() {
-	const header = document.querySelector("header#pv-navigation-bar") as HTMLElement
-	if (header) header.style.position = "relative"
-	document.querySelector("header#navbar-main")?.remove()
-	document.querySelector("nav#shortcut-menu")?.remove()
+	const loggedIn = document.querySelector("div#nav-al-signin")
+	if (loggedIn) {
+		const header = document.querySelector("header#pv-navigation-bar") as HTMLElement
+		if (header) header.style.position = "relative"
+		document.querySelector("header#navbar-main")?.remove()
+		document.querySelector("nav#shortcut-menu")?.remove()
+	}
 }
 async function remove_unnecessary_elements() {
 	// fix tabindex navigation
