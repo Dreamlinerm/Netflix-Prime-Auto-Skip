@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { useI18n } from "vue-i18n"
+
+const { t } = useI18n()
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
 
 function resetAddon() {
-	if (confirm("You want to reset the Settings.\n\nAre you sure you want to do this?")) {
+	if (confirm(t("resetConfirm"))) {
 		settings.value = defaultSettings
 	}
 }
@@ -14,7 +17,7 @@ function replaceSettings(event: Event) {
 	const input = event.target as HTMLInputElement
 	const file = input.files?.[0]
 	if (file === undefined || file.type !== "application/json") {
-		alert("The file you uploaded is not a valid JSON file.")
+		alert(t("invalidJson"))
 		return
 	} else {
 		const reader = new FileReader()
@@ -23,7 +26,7 @@ function replaceSettings(event: Event) {
 				const data = JSON.parse(e.target?.result as string)
 				settings.value = data
 			} catch (e) {
-				alert("The file you uploaded is not a valid JSON file.")
+				alert(t("invalidJson"))
 				return
 			}
 		})

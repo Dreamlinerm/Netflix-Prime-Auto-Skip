@@ -1,3 +1,4 @@
 {
-	"switchLanguage": "Switch Language:"
+	"resetConfirm": "You want to reset the Settings.\n\nAre you sure you want to do this?",
+	"invalidJson": "The file you uploaded is not a valid JSON file."
 }
