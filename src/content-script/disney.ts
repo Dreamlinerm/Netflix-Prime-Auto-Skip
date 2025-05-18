@@ -269,10 +269,10 @@ async function Disney_SpeedKeyboard() {
 	// slider.step = settings.value.General.sliderSteps.toString()
 	const steps = settings.value.General.sliderSteps / 10
 	if (video) {
-		video.addEventListener("keydown", (event: KeyboardEvent) => {
+		document.addEventListener("keydown", (event: KeyboardEvent) => {
 			const alreadySlider: HTMLInputElement | null = document.querySelector("#videoSpeedSlider")
 			const speed = document.querySelector("#videoSpeed")
-			if (event.key === "w") {
+			if (event.key === "d") {
 				video.playbackRate = Math.min(video.playbackRate + steps, settings.value.General.sliderMax / 10)
 				console.log("Speed increased to", video.playbackRate)
 				videoSpeed.value = video.playbackRate * 10

@@ -150,6 +150,10 @@ export function createSlider(
 	const speed = document.createElement("p")
 	speed.id = "videoSpeed"
 	speed.textContent = videoSpeed.value ? videoSpeed.value.toFixed(1) + "x" : "1.0x"
+	watch(videoSpeed, (newValue) => {
+		speed.textContent = newValue.toFixed(1) + "x"
+		slider.value = (newValue * 10).toString()
+	})
 	speed.style.cssText = speedStyle
 	if (divStyle) {
 		const div = document.createElement("div")

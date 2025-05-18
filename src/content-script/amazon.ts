@@ -197,7 +197,16 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 			if (position) createSlider(video, videoSpeed, position, AmazonSliderStyle, "")
 		} else {
 			// need to resync the slider with the video sometimes
-			const speed = document.querySelector(".dv-player-fullscreen #videoSpeed")
+			const speed = document.querySelector(".dv-player-fullscreen #videoSpeed") as HTMLElement
+			if (speed) {
+				speed.onclick = function () {
+					alreadySlider.style.display = alreadySlider.style.display === "block" ? "none" : "block"
+				}
+				watch(videoSpeed, (newValue) => {
+					speed.textContent = newValue.toFixed(1) + "x"
+					alreadySlider.value = (newValue * 10).toString()
+				})
+			}
 			if (video.playbackRate != parseFloat(alreadySlider.value) / 10) {
 				video.playbackRate = parseFloat(alreadySlider.value) / 10
 			}
@@ -209,34 +218,18 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 	}
 }
 async function Amazon_SpeedKeyboard() {
-	const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
-	// 	slider.min = settings.value.General.sliderMin.toString()
-	// slider.max = settings.value.General.sliderMax.toString()
-	// slider.value = (videoSpeed.value * 10).toString()
-	// slider.step = settings.value.General.sliderSteps.toString()
 	const steps = settings.value.General.sliderSteps / 10
-	console.log("Amazon_SpeedKeyboard", steps, videoSpeed.value)
-	if (video) {
-		document.addEventListener("keydown", (event: KeyboardEvent) => {
-			const alreadySlider: HTMLInputElement | null = document.querySelector("#videoSpeedSlider")
-			const speed = document.querySelector("#videoSpeed")
-			if (event.key === "d") {
-				video.playbackRate = Math.min(video.playbackRate + steps, settings.value.General.sliderMax / 10)
-				console.log("Speed increased to", video.playbackRate)
-				videoSpeed.value = video.playbackRate * 10
-				if (alreadySlider) alreadySlider.value = (video.playbackRate * 10).toFixed(1)
-				if (speed) speed.textContent = video.playbackRate.toFixed(1) + "x"
-			} else if (event.key === "s") {
-				video.playbackRate = Math.max(video.playbackRate - steps, settings.value.General.sliderMin / 10)
-				console.log("Speed decreased to", video.playbackRate)
-				videoSpeed.value = video.playbackRate * 10
-				if (alreadySlider) alreadySlider.value = (video.playbackRate * 10).toFixed(1)
-				if (speed) speed.textContent = video.playbackRate.toFixed(1) + "x"
-			} else {
-				console.log("key pressed", event, event.key)
-			}
-		})
-	}
+	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
+		if (!video) return
+		if (event.key === "d") {
+			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
+			videoSpeed.value = video.playbackRate
+		} else if (event.key === "s") {
+			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
+			videoSpeed.value = video.playbackRate
+		}
+	})
 }
 
 async function Amazon_continuePosition() {
