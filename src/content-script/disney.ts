@@ -41,6 +41,7 @@ async function startDisney() {
 	await promise
 	logStartOfAddon()
 	if (isHotstar) Hotstar_doubleClick()
+	// if (settings.value.Disney?.speedSlider) Disney_SpeedKeyboard()
 	DisneyObserver.observe(document, config)
 	setInterval(function () {
 		const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
@@ -258,6 +259,33 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 				videoSpeed.value = sliderValue / 10
 			}
 		}
+	}
+}
+async function Disney_SpeedKeyboard() {
+	const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
+	// 	slider.min = settings.value.General.sliderMin.toString()
+	// slider.max = settings.value.General.sliderMax.toString()
+	// slider.value = (videoSpeed.value * 10).toString()
+	// slider.step = settings.value.General.sliderSteps.toString()
+	const steps = settings.value.General.sliderSteps / 10
+	if (video) {
+		video.addEventListener("keydown", (event: KeyboardEvent) => {
+			const alreadySlider: HTMLInputElement | null = document.querySelector("#videoSpeedSlider")
+			const speed = document.querySelector("#videoSpeed")
+			if (event.key === "w") {
+				video.playbackRate = Math.min(video.playbackRate + steps, settings.value.General.sliderMax / 10)
+				console.log("Speed increased to", video.playbackRate)
+				videoSpeed.value = video.playbackRate * 10
+				if (alreadySlider) alreadySlider.value = (video.playbackRate * 10).toFixed(1)
+				if (speed) speed.textContent = video.playbackRate.toFixed(1) + "x"
+			} else if (event.key === "s") {
+				video.playbackRate = Math.max(video.playbackRate - steps, settings.value.General.sliderMin / 10)
+				console.log("Speed decreased to", video.playbackRate)
+				videoSpeed.value = video.playbackRate * 10
+				if (alreadySlider) alreadySlider.value = (video.playbackRate * 10).toFixed(1)
+				if (speed) speed.textContent = video.playbackRate.toFixed(1) + "x"
+			}
+		})
 	}
 }
 
