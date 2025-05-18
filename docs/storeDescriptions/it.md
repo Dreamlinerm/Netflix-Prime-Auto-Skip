@@ -9,7 +9,7 @@ Questa estensione migliora la vostra esperienza di streaming su Netflix, Prime V
 - Salvando i titoli di coda
 - Visualizzando le valutazioni TMDB per tutti gli spettacoli
 - Pulsante Nascondi filmato
-- Aggiungi una velocità di riproduzione personalizzabile
+- Aggiungi una velocità di riproduzione personalizzabile (scorciatoie da tastiera: s, d)
 - Avviare automaticamente la riproduzione dei video a schermo intero
 - Andare a schermo intero con un doppio clic
 - Scorrere per modificare il volume

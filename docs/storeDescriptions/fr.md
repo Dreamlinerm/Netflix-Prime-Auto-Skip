@@ -9,7 +9,7 @@ Cette extension améliore votre expérience de streaming sur Netflix, Prime Vide
 - Ignorer les crédits
 - Affichage des notes TMDB pour toutes les émissions
 - Bouton Masquer le film
-- Ajout d'un contrôle de vitesse de lecture personnalisable
+- Ajout d'un contrôle de vitesse de lecture personnalisable (raccourcis clavier : s, d)
 - Démarrer automatiquement la lecture des vidéos en plein écran
 - Passer en plein écran en double-cliquant
 - Défilement pour modifier le volume

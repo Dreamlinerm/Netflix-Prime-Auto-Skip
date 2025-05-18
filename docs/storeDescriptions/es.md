@@ -9,7 +9,7 @@ Esta extensión mejora su experiencia de streaming en Netflix, Prime Video, Disn
 - Saltar créditos
 - Mostrar clasificaciones TMDB para todos los programas
 - Botón Ocultar película
-- Añadir velocidad de reproducción personalizable. control
+- Añadir velocidad de reproducción personalizable. control (atajos de teclado: s, d)
 - Iniciar automáticamente la reproducción de vídeos en pantalla completa
 - Ir a pantalla completa al hacer doble clic
 - Desplácese para cambiar el volumen
