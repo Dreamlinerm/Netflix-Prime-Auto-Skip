@@ -41,6 +41,7 @@ async function startAmazon() {
 	logStartOfAddon()
 	AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig)
 	if (settings.value?.Video?.doubleClick) Amazon_doubleClick()
+	if (settings.value.Amazon?.speedSlider) Amazon_SpeedKeyboard()
 	AmazonObserver.observe(document, config)
 	if (settings.value.Amazon?.selfAd) Amazon_selfAdTimeout()
 	if (settings.value.Amazon?.skipAd) {
@@ -205,6 +206,36 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 				video.playbackRate = parseFloat(alreadySlider.value) / 10
 			}
 		}
+	}
+}
+async function Amazon_SpeedKeyboard() {
+	const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
+	// 	slider.min = settings.value.General.sliderMin.toString()
+	// slider.max = settings.value.General.sliderMax.toString()
+	// slider.value = (videoSpeed.value * 10).toString()
+	// slider.step = settings.value.General.sliderSteps.toString()
+	const steps = settings.value.General.sliderSteps / 10
+	console.log("Amazon_SpeedKeyboard", steps, videoSpeed.value)
+	if (video) {
+		document.addEventListener("keydown", (event: KeyboardEvent) => {
+			const alreadySlider: HTMLInputElement | null = document.querySelector("#videoSpeedSlider")
+			const speed = document.querySelector("#videoSpeed")
+			if (event.key === "d") {
+				video.playbackRate = Math.min(video.playbackRate + steps, settings.value.General.sliderMax / 10)
+				console.log("Speed increased to", video.playbackRate)
+				videoSpeed.value = video.playbackRate * 10
+				if (alreadySlider) alreadySlider.value = (video.playbackRate * 10).toFixed(1)
+				if (speed) speed.textContent = video.playbackRate.toFixed(1) + "x"
+			} else if (event.key === "s") {
+				video.playbackRate = Math.max(video.playbackRate - steps, settings.value.General.sliderMin / 10)
+				console.log("Speed decreased to", video.playbackRate)
+				videoSpeed.value = video.playbackRate * 10
+				if (alreadySlider) alreadySlider.value = (video.playbackRate * 10).toFixed(1)
+				if (speed) speed.textContent = video.playbackRate.toFixed(1) + "x"
+			} else {
+				console.log("key pressed", event, event.key)
+			}
+		})
 	}
 }
 
