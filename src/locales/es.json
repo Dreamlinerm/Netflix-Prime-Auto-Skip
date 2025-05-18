@@ -57,7 +57,7 @@
 	"importSettings": "Importar/exportar todos los ajustes",
 	"saveSettings": "Guardar configuración como archivo",
 	"uploadSettings": "Cargar configuración:",
-	"resetAddon": "Restablecer Addon por defecto",
+	"resetAddon": "Restablecer la extension por defecto",
 	"noWrap": "nowrap",
 	"watchCreditsSwitch": "Ver créditos:",
 	"watchCreditsDescription": "Ver siempre los créditos de cada serie",
