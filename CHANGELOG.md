@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.71
+
+- added keyboard shortcuts s,d to change the playback speed
+- fixed some missing translations
+
 ## 1.1.70
 
 - fixed user suggested errors in french translation
