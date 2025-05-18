@@ -46,7 +46,7 @@ function replaceSettings(event: Event) {
 				</a>
 			</div>
 			<div class="flex flex-row flex-align">
-				<p>Upload Settings:</p>
+				<p>{{ $t("uploadSettings") }}</p>
 				<input
 					type="file"
 					name="settings"

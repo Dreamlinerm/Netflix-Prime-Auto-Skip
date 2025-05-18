@@ -56,7 +56,7 @@
   "statisticSegmentsDescription": "Amount of Individual Segments Skipped like an Intro or an Ad for Netflix, Amazon and Disney+",
   "importSettings": "Import/Export all Settings",
   "saveSettings": "Save Settings as file",
-  "uploadSettings": "Upload settings",
+  "uploadSettings": "Upload Settings:",
   "resetAddon": "Reset Addon to default",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "Watch Credits:",
