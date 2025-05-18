@@ -164,10 +164,15 @@ export function createSlider(
 	} else position.prepend(slider, speed)
 
 	if (videoSpeed.value) video.playbackRate = videoSpeed.value
-	speed.onclick = function () {
+	speed.onclick = function (event) {
+		event.stopPropagation()
 		slider.style.display = slider.style.display === "block" ? "none" : "block"
 	}
-	slider.oninput = function () {
+	slider.onclick = function (event) {
+		event.stopPropagation()
+	}
+	slider.oninput = function (event) {
+		event.stopPropagation()
 		const sliderValue = parseFloat(slider.value)
 		speed.textContent = (sliderValue / 10).toFixed(1) + "x"
 		video.playbackRate = sliderValue / 10

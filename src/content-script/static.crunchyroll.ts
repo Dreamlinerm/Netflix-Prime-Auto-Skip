@@ -1,4 +1,5 @@
 import { sendMessage } from "webext-bridge/content-script"
+import { createSlider } from "@/content-script/shared-functions"
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
@@ -12,6 +13,7 @@ async function startCrunchyroll() {
 	logStartOfAddon()
 	if (settings.value.Crunchyroll.disableNumpad) Crunchyroll_disableNumpad()
 	if (settings.value.Video.doubleClick) startdoubleClick()
+	if (settings.value.Crunchyroll.speedSlider) Crunchyroll_SpeedKeyboard()
 	CrunchyrollObserver.observe(document, config)
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	watch(
@@ -145,57 +147,31 @@ async function CrunchyrollGobackbutton(video: HTMLVideoElement, startTime: numbe
 	addButton(video, startTime, endTime)
 }
 
-let videoSpeed: number
-async function setVideoSpeed(speed: number) {
-	videoSpeed = speed
-}
+const videoSpeed: Ref<number> = ref(1)
+const CrunchyrollSliderStyle = "display: none;width:200px;"
+const CrunchyrollSpeedStyle = "color: white;margin: auto;padding: 0 5px;"
 async function Crunchyroll_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
 		const alreadySlider = document.querySelector("#videoSpeedSlider")
 		if (!alreadySlider) {
-			// infobar position for the slider to be added
-			// console.log((document.querySelector("#settingsControl"));
 			const position = document.querySelector("#settingsControl")?.parentElement
-			if (position) {
-				videoSpeed = videoSpeed || video.playbackRate
-
-				const slider = document.createElement("input")
-				slider.id = "videoSpeedSlider"
-				slider.type = "range"
-				slider.min = settings.value.General.sliderMin.toString()
-				slider.max = settings.value.General.sliderMax.toString()
-				slider.value = (videoSpeed * 10).toString()
-				slider.step = settings.value.General.sliderSteps.toString()
-				slider.style.display = "none"
-				slider.style.width = "200px"
-
-				const speed = document.createElement("p")
-				speed.id = "videoSpeed"
-				speed.textContent = videoSpeed ? videoSpeed.toFixed(1) + "x" : "1.0x"
-				// makes the button clickable
-				// speed.setAttribute("class", "control-icon-btn");
-				speed.style.color = "white"
-				speed.style.margin = "auto"
-				speed.style.padding = "0 5px"
-				position.prepend(slider, speed)
-
-				if (videoSpeed) video.playbackRate = videoSpeed
-				speed.onclick = function (event) {
-					event.stopPropagation()
-					slider.style.display = slider.style.display === "block" ? "none" : "block"
-				}
-				slider.onclick = function (event) {
-					event.stopPropagation()
-				}
-				slider.oninput = function (event) {
-					event.stopPropagation()
-					speed.textContent = (parseInt(slider.value) / 10).toFixed(1) + "x"
-					video.playbackRate = parseInt(slider.value) / 10
-					setVideoSpeed(parseInt(slider.value) / 10)
-				}
-			}
+			if (position) createSlider(video, videoSpeed, position, CrunchyrollSliderStyle, CrunchyrollSpeedStyle)
 		}
 	}
+}
+async function Crunchyroll_SpeedKeyboard() {
+	const steps = settings.value.General.sliderSteps / 10
+	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		const video = document.querySelector("video") as HTMLVideoElement
+		if (!video) return
+		if (event.key === "d") {
+			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
+			videoSpeed.value = video.playbackRate
+		} else if (event.key === "s") {
+			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
+			videoSpeed.value = video.playbackRate
+		}
+	})
 }
 async function Crunchyroll_disableNumpad() {
 	addEventListener(
