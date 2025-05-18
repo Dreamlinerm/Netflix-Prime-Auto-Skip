@@ -15,6 +15,7 @@ async function startHBO() {
 	logStartOfAddon()
 	startSharedFunctions(Platforms.HBO)
 	HBOObserver.observe(document, config)
+	if (settings.value.HBO?.speedSlider) HBO_SpeedKeyboard()
 }
 type StatisticsKey =
 	| "AmazonAdTimeSkipped"
@@ -89,6 +90,20 @@ async function HBO_SpeedSlider(video: HTMLVideoElement) {
 		const position = document.querySelector('div[class*="ControlsFooterBottomRight-"]') as HTMLElement
 		if (position) createSlider(video, videoSpeed, position, HBOSliderStyle, HBOSpeedStyle, HBODivStyle)
 	}
+}
+async function HBO_SpeedKeyboard() {
+	const steps = settings.value.General.sliderSteps / 10
+	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		const video = document.querySelector("video") as HTMLVideoElement
+		if (!video) return
+		if (event.key === "d") {
+			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
+			videoSpeed.value = video.playbackRate
+		} else if (event.key === "s") {
+			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
+			videoSpeed.value = video.playbackRate
+		}
+	})
 }
 // #endregion
 
