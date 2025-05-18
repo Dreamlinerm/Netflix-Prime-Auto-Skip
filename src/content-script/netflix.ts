@@ -43,6 +43,7 @@ async function startNetflix() {
 	logStartOfAddon()
 	if (settings.value.Netflix?.profile) AutoPickProfile()
 	if (settings.value.Netflix?.skipAd) Netflix_SkipAdInterval()
+	if (settings.value.Netflix?.speedSlider) Netflix_SpeedKeyboard()
 	NetflixObserver.observe(document, config)
 }
 
@@ -228,6 +229,20 @@ function Netflix_SpeedSlider(video: HTMLVideoElement) {
 			if (position) createSlider(video, videoSpeed, position, NetflixSliderStyle, NetflixSpeedStyle)
 		}
 	}
+}
+async function Netflix_SpeedKeyboard() {
+	const steps = settings.value.General.sliderSteps / 10
+	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		const video = document.querySelector("video") as HTMLVideoElement
+		if (!video) return
+		if (event.key === "d") {
+			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
+			videoSpeed.value = video.playbackRate
+		} else if (event.key === "s") {
+			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
+			videoSpeed.value = video.playbackRate
+		}
+	})
 }
 function Netflix_removeGames() {
 	const gamesRow = document.querySelector("div.mobile-games-row")
