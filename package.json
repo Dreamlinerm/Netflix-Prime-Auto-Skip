@@ -44,7 +44,6 @@
 		"@intlify/unplugin-vue-i18n": "^6.0.8",
 		"@parvineyvazov/json-translator": "^3.2.2",
 		"@types/eslint": "^9.6.1",
-		"@types/eslint__js": "~9.14.0",
 		"@types/node": "^22.15.18",
 		"@types/webextension-polyfill": "^0.12.3",
 		"@vitejs/plugin-vue": "^5.2.4",
