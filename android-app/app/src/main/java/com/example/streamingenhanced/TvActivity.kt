@@ -54,7 +54,7 @@ class TvActivity : ComponentActivity() {
                             ),
                     "Amazon.de" to
                             Triple(
-                                    "https://www.amazon.de/gp/video/detail/B09TVBNZVJ/ref=atv_hm_hom_c_2rJ89Q_brws_5_1?jic=44%7CCgtmcmVld2l0aGFkcxIMc3Vic2NyaXB0aW9uEgRzdm9k",
+                                    "https://www.amazon.de/gp/video/storefront",
                                     "amazon.js",
                                     chromeUA
                             ),
@@ -66,6 +66,7 @@ class TvActivity : ComponentActivity() {
             )
 
     // https://www.amazon.de/gp/video/storefront
+    // https://www.amazon.de/gp/video/detail/B09TVBNZVJ/ref=atv_hm_hom_c_2rJ89Q_brws_5_1?jic=44%7CCgtmcmVld2l0aGFkcxIMc3Vic2NyaXB0aW9uEgRzdm9k
     // default 'Mozilla/5.0 (Linux; Android 14; AOSP TV on x86 Build/UTT1.240131.001.F1; wv)
     // AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/113.0.5672.136 Mobile
     // Safari/537.36'
