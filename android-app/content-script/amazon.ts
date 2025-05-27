@@ -510,6 +510,20 @@ async function adjustForTV() {
 		document.querySelector("header#navbar-main")?.remove()
 		document.querySelector("nav#shortcut-menu")?.remove()
 	}
+	document.onkeydown = function (event: KeyboardEvent) {
+		console.log("Key pressed:", event.key)
+		// if(event.key === "ArrowUp"){
+		// 	if
+		// }
+		// if (event.key === "Enter") {
+		// 	const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
+		// 	if (video && video.paused) {
+		// 		video.play()
+		// 	} else if (video && !video.paused) {
+		// 		video.pause()
+		// 	}
+		// }
+	}
 }
 async function remove_unnecessary_elements(video: HTMLVideoElement) {
 	// fix tabindex navigation
@@ -532,18 +546,18 @@ async function remove_unnecessary_elements(video: HTMLVideoElement) {
 		button.style.visibility = "hidden"
 	})
 	// add ul tabindex sow you can go down
-	document.querySelectorAll('ul[data-testid="card-container-list"]:not([tabindex])').forEach((ul) => {
-		ul.setAttribute("tabindex", "0")
-	})
-	if (video) {
-		const buttonsToRemove = document.querySelectorAll(
-			'button:not([class*="subtitleaudiomenu-button"]):not([tabindex="-1"]), div:has(h1[class*="title-text"]):not([tabindex="-1"])',
-		)
-		buttonsToRemove.forEach((button) => {
-			// add tabindex -1 to buttons that are not needed
-			button.setAttribute("tabindex", "-1")
-		})
-	}
+	// document.querySelectorAll('ul[data-testid="card-container-list"]:not([tabindex])').forEach((ul) => {
+	// 	ul.setAttribute("tabindex", "0")
+	// })
+	// if (video) {
+	// 	const buttonsToRemove = document.querySelectorAll(
+	// 		'button:not([class*="subtitleaudiomenu-button"]):not([class*="playpause-button"]):not([tabindex="-1"]), div:has(h1[class*="title-text"]):not([tabindex="-1"])',
+	// 	)
+	// 	buttonsToRemove.forEach((button) => {
+	// 		// add tabindex -1 to buttons that are not needed
+	// 		button.setAttribute("tabindex", "-1")
+	// 	})
+	// }
 }
 // #endregion
 startAmazon()

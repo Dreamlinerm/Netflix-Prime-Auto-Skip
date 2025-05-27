@@ -641,13 +641,27 @@ function adjustForTV() {
                 (_a = document.querySelector("header#navbar-main")) === null || _a === void 0 ? void 0 : _a.remove();
                 (_b = document.querySelector("nav#shortcut-menu")) === null || _b === void 0 ? void 0 : _b.remove();
             }
+            document.onkeydown = function (event) {
+                console.log("Key pressed:", event.key);
+                // if(event.key === "ArrowUp"){
+                // 	if
+                // }
+                // if (event.key === "Enter") {
+                // 	const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
+                // 	if (video && video.paused) {
+                // 		video.play()
+                // 	} else if (video && !video.paused) {
+                // 		video.pause()
+                // 	}
+                // }
+            };
             return [2 /*return*/];
         });
     });
 }
 function remove_unnecessary_elements(video) {
     return __awaiter(this, void 0, void 0, function () {
-        var leftButtons, buttonsToRemove;
+        var leftButtons;
         return __generator(this, function (_a) {
             // fix tabindex navigation
             document
@@ -665,17 +679,6 @@ function remove_unnecessary_elements(video) {
             leftButtons.forEach(function (button) {
                 button.style.visibility = "hidden";
             });
-            // add ul tabindex sow you can go down
-            document.querySelectorAll('ul[data-testid="card-container-list"]:not([tabindex])').forEach(function (ul) {
-                ul.setAttribute("tabindex", "0");
-            });
-            if (video) {
-                buttonsToRemove = document.querySelectorAll('button:not([class*="subtitleaudiomenu-button"]):not([tabindex="-1"]), div:has(h1[class*="title-text"]):not([tabindex="-1"])');
-                buttonsToRemove.forEach(function (button) {
-                    // add tabindex -1 to buttons that are not needed
-                    button.setAttribute("tabindex", "-1");
-                });
-            }
             return [2 /*return*/];
         });
     });
