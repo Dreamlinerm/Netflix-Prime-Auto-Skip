@@ -80,7 +80,7 @@
 		"vite-plugin-vue-devtools": "^7.7.6",
 		"vite-plugin-zip-pack": "^1.2.4",
 		"vue-tsc": "^2.2.10",
-		"web-ext": "^8.6.0",
+		"web-ext": "^8.7.1",
 		"webext-bridge": "^6.0.1"
 	},
 	"overrides": {
