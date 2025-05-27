@@ -104,7 +104,6 @@ class TvActivity : ComponentActivity() {
         setupWebView(webView)
 
         showWebsiteSelectionDialog(webView)
-
         webView.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN) {
                 // val videoElement = webView.evaluateJavascript(
@@ -112,16 +111,9 @@ class TvActivity : ComponentActivity() {
                 //     null
                 // )
                 when (keyCode) {
-                    // KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                    //     Log.d("Enhanced", "KEYCODE_DPAD_RIGHT")
-                    //     true
-                    // }
-                    // KeyEvent.KEYCODE_DPAD_LEFT -> {
-                    //     Log.d("Enhanced", "KEYCODE_DPAD_LEFT")
-                    //     true
-                    // }
                     // go back in history
                     KeyEvent.KEYCODE_BACK -> {
+                        Log.d("Interceptor", "KEYCODE_BACK intercepted")
                         if (websiteHistory.isNotEmpty()) {
                             val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
                             webView.loadUrl(lastWebsite)
@@ -138,6 +130,23 @@ class TvActivity : ComponentActivity() {
         super.onDestroy()
         unregisterReceiver(downloadCompleteReceiver) // Unregister the receiver to avoid memory leaks
     }
+
+    // override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+    //     if (event.action == KeyEvent.ACTION_DOWN) {
+    //         Log.d("Interceptor", "dispatchKeyEvent: key pressed: ${event.keyCode}, action: ${event.action}")
+    //         when (event.keyCode) {
+    //             KeyEvent.KEYCODE_DPAD_RIGHT -> {
+    //                 Log.d("Interceptor", "KEYCODE_DPAD_RIGHT intercepted in dispatchKeyEvent")
+    //                 return true
+    //             }
+    //             KeyEvent.KEYCODE_DPAD_LEFT -> {
+    //                 Log.d("Interceptor", "KEYCODE_DPAD_LEFT intercepted in dispatchKeyEvent")
+    //                 return true
+    //             }
+    //         }
+    //     }
+    //     return super.dispatchKeyEvent(event)
+    // }
 
     private fun setupWebView(webView: WebView) {
         webView.settings.setMediaPlaybackRequiresUserGesture(false)
