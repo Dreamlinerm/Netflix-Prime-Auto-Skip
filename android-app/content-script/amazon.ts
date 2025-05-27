@@ -90,7 +90,7 @@ const settings = {
 }
 const ua = navigator.userAgent
 let lastAdTimeText: number | string = 0
-const videoSpeed: number = 1
+let videoSpeed: number = 1
 const url = window.location.href
 const hostname = window.location.hostname
 const title = document.title
@@ -120,6 +120,7 @@ async function startAmazon() {
 	logStartOfAddon()
 	adjustForTV()
 	AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig)
+	if (settings.value.Amazon?.speedSlider) Amazon_SpeedKeyboard()
 	AmazonObserver.observe(document, config)
 	if (settings.value.Amazon?.selfAd) Amazon_selfAdTimeout()
 	if (settings.value.Amazon?.skipAd) {
@@ -144,7 +145,7 @@ function Amazon() {
 	if (settings.value.Amazon?.speedSlider) Amazon_SpeedSlider(video)
 	if (settings.value.Amazon?.xray) Amazon_xray()
 	if (settings.value.Video?.scrollVolume) Amazon_scrollVolume()
-	remove_unnecessary_elements()
+	remove_unnecessary_elements(video)
 }
 const AmazonSkipIntroConfig = {
 	attributes: true,
@@ -285,6 +286,21 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 			}
 		}
 	}
+}
+if (settings.value.Amazon?.speedSlider) Amazon_SpeedKeyboard()
+async function Amazon_SpeedKeyboard() {
+	const steps = settings.value.General.sliderSteps / 10
+	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
+		if (!video) return
+		if (event.key === "d") {
+			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
+			videoSpeed = video.playbackRate
+		} else if (event.key === "s") {
+			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
+			videoSpeed = video.playbackRate
+		}
+	})
 }
 
 async function Amazon_continuePosition() {
@@ -495,7 +511,7 @@ async function adjustForTV() {
 		document.querySelector("nav#shortcut-menu")?.remove()
 	}
 }
-async function remove_unnecessary_elements() {
+async function remove_unnecessary_elements(video: HTMLVideoElement) {
 	// fix tabindex navigation
 	document
 		.querySelectorAll('ul[data-testid="card-container-list"] li article section div a:not(.enhanced)')
@@ -519,6 +535,15 @@ async function remove_unnecessary_elements() {
 	document.querySelectorAll('ul[data-testid="card-container-list"]:not([tabindex])').forEach((ul) => {
 		ul.setAttribute("tabindex", "0")
 	})
+	if (video) {
+		const buttonsToRemove = document.querySelectorAll(
+			'button:not([class*="subtitleaudiomenu-button"]):not([tabindex="-1"]), div[class*="title-text"]',
+		)
+		buttonsToRemove.forEach((button) => {
+			// add tabindex -1 to buttons that are not needed
+			button.setAttribute("tabindex", "-1")
+		})
+	}
 }
 // #endregion
 startAmazon()

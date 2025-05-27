@@ -34,6 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _a;
 // Global Variables
 function sendMessage() {
     var args = [];
@@ -162,21 +163,23 @@ function addSkippedTime(startTime, endTime, key) {
 }
 function startAmazon() {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, _b, _c;
-        return __generator(this, function (_d) {
+        var _a, _b, _c, _d;
+        return __generator(this, function (_e) {
             logStartOfAddon();
             adjustForTV();
             AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig);
+            if ((_a = settings.value.Amazon) === null || _a === void 0 ? void 0 : _a.speedSlider)
+                Amazon_SpeedKeyboard();
             AmazonObserver.observe(document, config);
-            if ((_a = settings.value.Amazon) === null || _a === void 0 ? void 0 : _a.selfAd)
+            if ((_b = settings.value.Amazon) === null || _b === void 0 ? void 0 : _b.selfAd)
                 Amazon_selfAdTimeout();
-            if ((_b = settings.value.Amazon) === null || _b === void 0 ? void 0 : _b.skipAd) {
+            if ((_c = settings.value.Amazon) === null || _c === void 0 ? void 0 : _c.skipAd) {
                 // timeout of 100 ms because the ad is not loaded fast enough and the video will crash
                 setTimeout(function () {
                     Amazon_FreeveeTimeout();
                 }, 1000);
             }
-            if ((_c = settings.value.Amazon) === null || _c === void 0 ? void 0 : _c.continuePosition)
+            if ((_d = settings.value.Amazon) === null || _d === void 0 ? void 0 : _d.continuePosition)
                 setTimeout(function () { return Amazon_continuePosition(); }, 500);
             return [2 /*return*/];
         });
@@ -201,7 +204,7 @@ function Amazon() {
         Amazon_xray();
     if ((_f = settings.value.Video) === null || _f === void 0 ? void 0 : _f.scrollVolume)
         Amazon_scrollVolume();
-    remove_unnecessary_elements();
+    remove_unnecessary_elements(video);
 }
 var AmazonSkipIntroConfig = {
     attributes: true,
@@ -369,6 +372,30 @@ function Amazon_SpeedSlider(video) {
                     };
                 }
             }
+            return [2 /*return*/];
+        });
+    });
+}
+if ((_a = settings.value.Amazon) === null || _a === void 0 ? void 0 : _a.speedSlider)
+    Amazon_SpeedKeyboard();
+function Amazon_SpeedKeyboard() {
+    return __awaiter(this, void 0, void 0, function () {
+        var steps;
+        return __generator(this, function (_a) {
+            steps = settings.value.General.sliderSteps / 10;
+            document.addEventListener("keydown", function (event) {
+                var video = document.querySelector(AmazonVideoClass);
+                if (!video)
+                    return;
+                if (event.key === "d") {
+                    video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10);
+                    videoSpeed = video.playbackRate;
+                }
+                else if (event.key === "s") {
+                    video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6);
+                    videoSpeed = video.playbackRate;
+                }
+            });
             return [2 /*return*/];
         });
     });
@@ -618,9 +645,9 @@ function adjustForTV() {
         });
     });
 }
-function remove_unnecessary_elements() {
+function remove_unnecessary_elements(video) {
     return __awaiter(this, void 0, void 0, function () {
-        var leftButtons;
+        var leftButtons, buttonsToRemove;
         return __generator(this, function (_a) {
             // fix tabindex navigation
             document
@@ -642,6 +669,13 @@ function remove_unnecessary_elements() {
             document.querySelectorAll('ul[data-testid="card-container-list"]:not([tabindex])').forEach(function (ul) {
                 ul.setAttribute("tabindex", "0");
             });
+            if (video) {
+                buttonsToRemove = document.querySelectorAll('button:not([class*="subtitleaudiomenu-button"]):not([tabindex="-1"]), div[class*="title-text"]');
+                buttonsToRemove.forEach(function (button) {
+                    // add tabindex -1 to buttons that are not needed
+                    button.setAttribute("tabindex", "-1");
+                });
+            }
             return [2 /*return*/];
         });
     });
