@@ -537,7 +537,7 @@ async function remove_unnecessary_elements(video: HTMLVideoElement) {
 	})
 	if (video) {
 		const buttonsToRemove = document.querySelectorAll(
-			'button:not([class*="subtitleaudiomenu-button"]):not([tabindex="-1"]), div[class*="title-text"]',
+			'button:not([class*="subtitleaudiomenu-button"]):not([tabindex="-1"]), div:has(h1[class*="title-text"]):not([tabindex="-1"])',
 		)
 		buttonsToRemove.forEach((button) => {
 			// add tabindex -1 to buttons that are not needed

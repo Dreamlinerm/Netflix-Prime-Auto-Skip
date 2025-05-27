@@ -670,7 +670,7 @@ function remove_unnecessary_elements(video) {
                 ul.setAttribute("tabindex", "0");
             });
             if (video) {
-                buttonsToRemove = document.querySelectorAll('button:not([class*="subtitleaudiomenu-button"]):not([tabindex="-1"]), div[class*="title-text"]');
+                buttonsToRemove = document.querySelectorAll('button:not([class*="subtitleaudiomenu-button"]):not([tabindex="-1"]), div:has(h1[class*="title-text"]):not([tabindex="-1"])');
                 buttonsToRemove.forEach(function (button) {
                     // add tabindex -1 to buttons that are not needed
                     button.setAttribute("tabindex", "-1");
