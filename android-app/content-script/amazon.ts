@@ -558,6 +558,11 @@ async function remove_unnecessary_elements(video: HTMLVideoElement) {
 	// 		button.setAttribute("tabindex", "-1")
 	// 	})
 	// }
+	// accept cookies
+	const cookieButton = document.querySelector('input[data-cel-widget="sp-cc-accept"]') as HTMLInputElement
+	if (cookieButton) {
+		cookieButton.click()
+	}
 }
 // #endregion
 startAmazon()
