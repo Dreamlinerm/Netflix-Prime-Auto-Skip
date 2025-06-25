@@ -37,6 +37,7 @@ export type settingsType = {
 	}
 	Crunchyroll: {
 		skipIntro: boolean
+		skipCredits: boolean
 		speedSlider: boolean
 		releaseCalendar: boolean
 		profile: boolean
@@ -126,6 +127,7 @@ export const defaultSettings = {
 	},
 	Crunchyroll: {
 		skipIntro: true,
+		skipCredits: true,
 		speedSlider: true,
 		releaseCalendar: true,
 		dubLanguage: null,

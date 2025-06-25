@@ -47,7 +47,7 @@ function Crunchyroll() {
 	const video = document.querySelector("video")
 	if (!video) return
 	const time = video?.currentTime
-	if (settings.value.Crunchyroll?.skipIntro) Crunchyroll_Intro(video, time)
+	Crunchyroll_Intro_Outro(video, time)
 	if (settings.value.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider(video)
 	if (settings.value.Video?.scrollVolume) Crunchyroll_scrollVolume(video)
 }
@@ -91,7 +91,11 @@ let skipped = false
 let reverseButtonClicked = false
 let reverseButtonStartTime: number
 let reverseButtonEndTime: number
-async function Crunchyroll_Intro(video: HTMLVideoElement, time: number) {
+async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
+	// check if intro or outro
+	const isOutro = time > video.duration / 2
+	if (!settings.value.Crunchyroll?.skipIntro && !isOutro) return
+	if (!settings.value.Crunchyroll?.skipCredits && isOutro) return
 	// saves the audio language to settings
 	if (!reverseButtonClicked) {
 		const button = document.querySelector('[data-testid="skipIntroText"]') as HTMLElement
