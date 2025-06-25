@@ -115,6 +115,6 @@
   "invalidJson": "Yüklediğiniz dosya geçerli bir JSON dosyası değil.",
   "improveUISwitch": "Video Kullanıcı Arayüzünü İyileştirin",
   "improveUIDescription": "Video Oynatıcı Kullanıcı Arayüzü çeşitli şekillerde geliştirildi.",
-  "skipAfterCreditsSwitch": "Çıkış Sahnesinden Sonra Atla:",
-  "skipAfterCreditsDescription": "Crunchyroll'da Outro ve Outro Sonrası Sahneyi Atlayın."
+  "skipAfterCreditsSwitch": "Jenerik Sonrası Sahneyi Atla:",
+  "skipAfterCreditsDescription": "Jenerikten Sonraki Sahneyi Atlayın."
 }

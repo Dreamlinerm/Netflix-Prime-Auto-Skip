@@ -115,6 +115,6 @@
   "invalidJson": "アップロードされたファイルは有効なJSONファイルではありません。",
   "improveUISwitch": "ビデオUIの改善",
   "improveUIDescription": "ビデオプレーヤーのUIを様々な方法で強化。",
-  "skipAfterCreditsSwitch": "アウトロシーンの後にスキップする：",
-  "skipAfterCreditsDescription": "Crunchyrollでアウトロとアフター・アウトロのシーンをスキップする。"
+  "skipAfterCreditsSwitch": "アフタークレジットのシーンをスキップする：",
+  "skipAfterCreditsDescription": "クレジット後のシーンをスキップする。"
 }

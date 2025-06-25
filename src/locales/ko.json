@@ -115,6 +115,6 @@
   "invalidJson": "업로드한 파일이 유효한 JSON 파일이 아닙니다.",
   "improveUISwitch": "비디오 UI 개선",
   "improveUIDescription": "다양한 방식으로 개선된 동영상 플레이어 UI.",
-  "skipAfterCreditsSwitch": "아웃트로 장면 이후 건너뛰기:",
-  "skipAfterCreditsDescription": "크런치롤에서 아웃트로 및 애프터 아웃트로 장면 건너뛰기."
+  "skipAfterCreditsSwitch": "애프터 크레딧 장면 건너뛰기:",
+  "skipAfterCreditsDescription": "크레딧 후 장면 건너뛰기."
 }

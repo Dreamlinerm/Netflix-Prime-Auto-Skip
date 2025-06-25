@@ -115,6 +115,6 @@
   "invalidJson": "The file you uploaded is not a valid JSON file.",
   "improveUISwitch": "Improve Video UI",
   "improveUIDescription": "Enhanced Video Player UI in various ways.",
-  "skipAfterCreditsSwitch": "Skip After Outro Scene:",
-  "skipAfterCreditsDescription": "Skip Outro and After Outro Scene on Crunchyroll."
+  "skipAfterCreditsSwitch": "Skip After Credits Scene:",
+  "skipAfterCreditsDescription": "Skip the Scene after the Credits."
 }

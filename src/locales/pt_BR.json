@@ -115,6 +115,6 @@
   "invalidJson": "O ficheiro que carregou não é um ficheiro JSON válido.",
   "improveUISwitch": "Melhorar a IU de vídeo",
   "improveUIDescription": "IU do leitor de vídeo melhorada de várias formas.",
-  "skipAfterCreditsSwitch": "Saltar após a cena final:",
-  "skipAfterCreditsDescription": "Skip Outro e After Outro Scene no Crunchyroll."
+  "skipAfterCreditsSwitch": "Saltar a cena após os créditos:",
+  "skipAfterCreditsDescription": "Saltar a cena após os créditos."
 }

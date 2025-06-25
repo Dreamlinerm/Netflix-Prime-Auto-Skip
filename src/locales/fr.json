@@ -115,6 +115,6 @@
   "invalidJson": "Le fichier que vous avez téléchargé n'est pas un fichier JSON valide.",
   "improveUISwitch": "Améliorer l'interface utilisateur de la vidéo",
   "improveUIDescription": "Amélioration de l'interface utilisateur du lecteur vidéo de diverses manières.",
-  "skipAfterCreditsSwitch": "Skip After Outro Scene :",
-  "skipAfterCreditsDescription": "Skip Outro et After Outro Scene sur Crunchyroll."
+  "skipAfterCreditsSwitch": "Sauter la scène après le générique :",
+  "skipAfterCreditsDescription": "Sauter la scène après le générique."
 }

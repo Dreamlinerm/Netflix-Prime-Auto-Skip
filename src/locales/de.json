@@ -115,6 +115,6 @@
   "invalidJson": "Die von Ihnen hochgeladene Datei ist keine gültige JSON-Datei.",
   "improveUISwitch": "Verbessern der Video-UI",
   "improveUIDescription": "Die Benutzeroberfläche des Video-Players wurde auf verschiedene Weise verbessert.",
-  "skipAfterCreditsSwitch": "Outro-Szene überspringen:",
-  "skipAfterCreditsDescription": "Die Szene nach dem Abspann überspringen."
+  "skipAfterCreditsSwitch": "Szene nach dem Abspann überspringen:",
+  "skipAfterCreditsDescription": "Überspringen Sie die Szene nach dem Abspann."
 }

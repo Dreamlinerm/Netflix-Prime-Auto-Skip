@@ -115,6 +115,6 @@
   "invalidJson": "Il file caricato non è un file JSON valido.",
   "improveUISwitch": "Migliorare l'interfaccia video",
   "improveUIDescription": "Miglioramento dell'interfaccia del lettore video in vari modi.",
-  "skipAfterCreditsSwitch": "Salta dopo la scena d'uscita:",
-  "skipAfterCreditsDescription": "Salta l'outro e la scena dopo l'outro su Crunchyroll."
+  "skipAfterCreditsSwitch": "Salta la scena dopo i crediti:",
+  "skipAfterCreditsDescription": "Saltare la scena dopo i crediti."
 }

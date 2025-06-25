@@ -115,6 +115,6 @@
   "invalidJson": "Den fil du laddade upp är inte en giltig JSON-fil.",
   "improveUISwitch": "Förbättra användargränssnittet för video",
   "improveUIDescription": "Förbättrat användargränssnittet för videospelare på olika sätt.",
-  "skipAfterCreditsSwitch": "Hoppa över efter outro-scenen:",
-  "skipAfterCreditsDescription": "Skip Outro and After Outro Scene på Crunchyroll."
+  "skipAfterCreditsSwitch": "Hoppa över eftertexter Scen:",
+  "skipAfterCreditsDescription": "Hoppa över scenen efter eftertexterna."
 }
