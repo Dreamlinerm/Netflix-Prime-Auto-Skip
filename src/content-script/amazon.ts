@@ -1,5 +1,6 @@
 import { sendMessage } from "webext-bridge/content-script"
 import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
+import { set } from "@vueuse/core"
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
@@ -52,6 +53,7 @@ async function startAmazon() {
 	}
 	if (settings.value.Amazon?.continuePosition) setTimeout(() => Amazon_continuePosition(), 500)
 	if (settings.value.Video?.userAgent && isMobile) Amazon_customizeMobileView()
+	if (settings.value.Amazon?.improveUI) Amazon_improveUI()
 }
 
 // #region Amazon
@@ -194,7 +196,7 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 			// infobar position for the slider to be added
 			const position = document.querySelector(".dv-player-fullscreen [class*=infobar-container]")?.firstChild
 				?.lastChild as HTMLElement
-			if (position) createSlider(video, videoSpeed, position, AmazonSliderStyle, "")
+			if (position) createSlider(video, videoSpeed, position, AmazonSliderStyle, "cursor: pointer;")
 		} else {
 			// need to resync the slider with the video sometimes
 			const speed = document.querySelector(".dv-player-fullscreen #videoSpeed") as HTMLElement
@@ -396,5 +398,15 @@ async function Amazon_doubleClick() {
 	} else {
 		document.ondblclick = null
 	}
+}
+async function Amazon_improveUI() {
+	// add css to dom
+	const style = document.createElement("style")
+	style.textContent = `
+		.fpqiyer{
+			opacity: 0.6 !important;
+		}
+	`
+	document.head.appendChild(style)
 }
 // #endregion
