@@ -112,5 +112,7 @@
   "skipIntroDelayDescription": "Certaines langues parlent plus longtemps que d'autres. Ce paramètre vous permet de sauter l'introduction avec un délai de sorte que, dans certains doublages, la parole ne soit pas coupée.",
   "switchLanguage": "Changer de langue :",
   "resetConfirm": "Vous souhaitez réinitialiser les paramètres.\n\nÊtes-vous sûr de vouloir le faire ?",
-  "invalidJson": "Le fichier que vous avez téléchargé n'est pas un fichier JSON valide."
+  "invalidJson": "Le fichier que vous avez téléchargé n'est pas un fichier JSON valide.",
+  "improveUISwitch": "Améliorer l'interface utilisateur de la vidéo",
+  "improveUIDescription": "Amélioration de l'interface utilisateur du lecteur vidéo de diverses manières."
 }

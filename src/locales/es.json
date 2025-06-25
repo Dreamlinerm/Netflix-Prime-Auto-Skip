@@ -112,5 +112,7 @@
   "skipIntroDelayDescription": "Algunos idiomas hablan más que otros. Este ajuste permite omitir la introducción con un retardo tal que en algunos doblajes no se corte el habla.",
   "switchLanguage": "Cambiar de idioma:",
   "resetConfirm": "Desea restablecer la configuración.\n\nEstás seguro de que quieres hacerlo?",
-  "invalidJson": "El archivo que ha cargado no es un archivo JSON válido."
+  "invalidJson": "El archivo que ha cargado no es un archivo JSON válido.",
+  "improveUISwitch": "Mejorar la interfaz de vídeo",
+  "improveUIDescription": "Mejoras en la interfaz de usuario del reproductor de vídeo."
 }

@@ -99,7 +99,7 @@ export const defaultSettings = {
 		continuePosition: true,
 		showRating: true,
 		xray: true,
-		improveUI: false,
+		improveUI: true,
 	},
 	Netflix: {
 		skipIntro: true,

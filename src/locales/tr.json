@@ -112,5 +112,7 @@
   "skipIntroDelayDescription": "Bazı diller diğerlerinden daha uzun konuşur. Bu ayar, bazı dublajlarda konuşmanın kesilmemesi için introyu gecikmeli olarak atlamanızı sağlar.",
   "switchLanguage": "Dil değiştir:",
   "resetConfirm": "Ayarları sıfırlamak istiyorsunuz.\n\nBunu yapmak istediğinden emin misin?",
-  "invalidJson": "Yüklediğiniz dosya geçerli bir JSON dosyası değil."
+  "invalidJson": "Yüklediğiniz dosya geçerli bir JSON dosyası değil.",
+  "improveUISwitch": "Video Kullanıcı Arayüzünü İyileştirin",
+  "improveUIDescription": "Video Oynatıcı Kullanıcı Arayüzü çeşitli şekillerde geliştirildi."
 }

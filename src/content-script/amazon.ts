@@ -400,12 +400,18 @@ async function Amazon_doubleClick() {
 	}
 }
 async function Amazon_improveUI() {
-	// add css to dom
 	const style = document.createElement("style")
+	// ui opacity
 	// .fpqiyer{
 	// 		opacity: 0.6 !important;
 	// 	}
+	// background blur
 	style.textContent = `
+		.atvwebplayersdk-playpause-button,
+		.atvwebplayersdk-fastseekback-button,
+		.atvwebplayersdk-fastseekforward-button {
+		    opacity: 0.45 !important;
+		}
 		.f1makowq{
 			opacity: 0 !important;
 		}
