@@ -10,6 +10,7 @@ export type settingsType = {
 		continuePosition: boolean
 		showRating: boolean
 		xray: boolean
+		improveUI: boolean
 	}
 	Netflix: {
 		skipIntro: boolean
@@ -98,6 +99,7 @@ export const defaultSettings = {
 		continuePosition: true,
 		showRating: true,
 		xray: true,
+		improveUI: true,
 	},
 	Netflix: {
 		skipIntro: true,

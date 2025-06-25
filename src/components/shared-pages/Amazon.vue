@@ -34,11 +34,12 @@ const props = defineProps({
 	},
 })
 
-const settingsList: Array<"selfAd" | "filterPaid" | "continuePosition" | "xray"> = [
+const settingsList: Array<"selfAd" | "filterPaid" | "continuePosition" | "xray" | "improveUI"> = [
 	"selfAd",
 	"filterPaid",
 	"continuePosition",
 	"xray",
+	"improveUI",
 ]
 </script>
 <style scoped></style>

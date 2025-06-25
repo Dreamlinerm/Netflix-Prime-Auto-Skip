@@ -112,5 +112,7 @@
   "skipIntroDelayDescription": "Niektóre języki mówią dłużej niż inne. To ustawienie pozwala pominąć intro z opóźnieniem, dzięki czemu w niektórych dubach mowa nie jest ucinana.",
   "switchLanguage": "Switch Language:",
   "resetConfirm": "Chcesz zresetować ustawienia.\n\nCzy na pewno chcesz to zrobić?",
-  "invalidJson": "Przesłany plik nie jest prawidłowym plikiem JSON."
+  "invalidJson": "Przesłany plik nie jest prawidłowym plikiem JSON.",
+  "improveUISwitch": "Ulepszony interfejs użytkownika wideo",
+  "improveUIDescription": "Ulepszony interfejs odtwarzacza wideo na różne sposoby."
 }

@@ -112,5 +112,7 @@
   "skipIntroDelayDescription": "一部の言語は他の言語よりも長く話します。この設定により、一部のダブではスピーチが遮断されないように、遅延でイントロをスキップできます。",
   "switchLanguage": "言語切り替え：",
   "resetConfirm": "設定をリセットしたい。\n\n本当によろしいですか？",
-  "invalidJson": "アップロードされたファイルは有効なJSONファイルではありません。"
+  "invalidJson": "アップロードされたファイルは有効なJSONファイルではありません。",
+  "improveUISwitch": "ビデオUIの改善",
+  "improveUIDescription": "ビデオプレーヤーのUIを様々な方法で強化。"
 }

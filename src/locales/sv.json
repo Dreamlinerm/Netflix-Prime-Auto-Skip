@@ -112,5 +112,7 @@
   "skipIntroDelayDescription": "Vissa språk talar längre än andra. Med den här inställningen kan du hoppa över introt med en fördröjning så att talet inte avbryts i vissa dubbningar.",
   "switchLanguage": "Växla Språk:",
   "resetConfirm": "Du vill återställa inställningarna.\n\nÄr du säker på att du vill göra detta?",
-  "invalidJson": "Den fil du laddade upp är inte en giltig JSON-fil."
+  "invalidJson": "Den fil du laddade upp är inte en giltig JSON-fil.",
+  "improveUISwitch": "Förbättra användargränssnittet för video",
+  "improveUIDescription": "Förbättrat användargränssnittet för videospelare på olika sätt."
 }

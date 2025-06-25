@@ -112,5 +112,7 @@
   "skipIntroDelayDescription": "Alcune lingue parlano più a lungo di altre. Questa impostazione consente di saltare l'introduzione con un ritardo tale da non interrompere il parlato in alcune lingue.",
   "switchLanguage": "Lingua di commutazione:",
   "resetConfirm": "Si desidera ripristinare le impostazioni.\n\nÈ sicuro di volerlo fare?",
-  "invalidJson": "Il file caricato non è un file JSON valido."
+  "invalidJson": "Il file caricato non è un file JSON valido.",
+  "improveUISwitch": "Migliorare l'interfaccia video",
+  "improveUIDescription": "Miglioramento dell'interfaccia del lettore video in vari modi."
 }

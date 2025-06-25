@@ -1,5 +1,6 @@
 import { sendMessage } from "webext-bridge/content-script"
 import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
+import { set } from "@vueuse/core"
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
@@ -52,6 +53,7 @@ async function startAmazon() {
 	}
 	if (settings.value.Amazon?.continuePosition) setTimeout(() => Amazon_continuePosition(), 500)
 	if (settings.value.Video?.userAgent && isMobile) Amazon_customizeMobileView()
+	if (settings.value.Amazon?.improveUI) Amazon_improveUI()
 }
 
 // #region Amazon
@@ -396,5 +398,24 @@ async function Amazon_doubleClick() {
 	} else {
 		document.ondblclick = null
 	}
+}
+async function Amazon_improveUI() {
+	const style = document.createElement("style")
+	// ui opacity
+	// .fpqiyer{
+	// 		opacity: 0.6 !important;
+	// 	}
+	// background blur
+	style.textContent = `
+		.atvwebplayersdk-playpause-button,
+		.atvwebplayersdk-fastseekback-button,
+		.atvwebplayersdk-fastseekforward-button {
+		    opacity: 0.45 !important;
+		}
+		.f1makowq{
+			opacity: 0 !important;
+		}
+	`
+	document.head.appendChild(style)
 }
 // #endregion
