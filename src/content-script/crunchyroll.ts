@@ -271,7 +271,8 @@ async function Crunchyroll_AutoPickProfile() {
 	}
 }
 async function Crunchyroll_bigPlayerStyle() {
-	if (document.querySelector(".video-player-wrapper")) {
+	const wrapper = await waitForElement(".video-player-wrapper")
+	if (wrapper) {
 		// show header on hover
 		const style = document.createElement("style")
 		const parentDiv = document.querySelector('[class^="app-layout__header"]')?.classList?.[0]
@@ -306,6 +307,25 @@ async function Crunchyroll_bigPlayerStyle() {
 		style.appendChild(document.createTextNode(styles))
 		document.head.appendChild(style)
 	}
+}
+
+async function waitForElement(selector: string, timeout = 10000): Promise<Element | null> {
+	return new Promise((resolve) => {
+		const element = document.querySelector(selector)
+		if (element) return resolve(element)
+		const observer = new MutationObserver(() => {
+			const el = document.querySelector(selector)
+			if (el) {
+				observer.disconnect()
+				resolve(el)
+			}
+		})
+		observer.observe(document.body, { childList: true, subtree: true })
+		setTimeout(() => {
+			observer.disconnect()
+			resolve(null)
+		}, timeout)
+	})
 }
 // #endregion
 startCrunchyroll()
