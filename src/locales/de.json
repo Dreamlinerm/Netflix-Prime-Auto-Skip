@@ -114,5 +114,7 @@
   "resetConfirm": "Sie möchten die Einstellungen zurücksetzen.\n\nSind Sie sicher, dass Sie das tun wollen?",
   "invalidJson": "Die von Ihnen hochgeladene Datei ist keine gültige JSON-Datei.",
   "improveUISwitch": "Verbessern der Video-UI",
-  "improveUIDescription": "Die Benutzeroberfläche des Video-Players wurde auf verschiedene Weise verbessert."
+  "improveUIDescription": "Die Benutzeroberfläche des Video-Players wurde auf verschiedene Weise verbessert.",
+  "skipAfterCreditsSwitch": "Outro-Szene überspringen:",
+  "skipAfterCreditsDescription": "Die Szene nach dem Abspann überspringen."
 }

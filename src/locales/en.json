@@ -114,5 +114,7 @@
   "resetConfirm": "You want to reset the Settings.\n\nAre you sure you want to do this?",
   "invalidJson": "The file you uploaded is not a valid JSON file.",
   "improveUISwitch": "Improve Video UI",
-  "improveUIDescription": "Enhanced Video Player UI in various ways."
+  "improveUIDescription": "Enhanced Video Player UI in various ways.",
+  "skipAfterCreditsSwitch": "Skip After Outro Scene:",
+  "skipAfterCreditsDescription": "Skip Outro and After Outro Scene on Crunchyroll."
 }

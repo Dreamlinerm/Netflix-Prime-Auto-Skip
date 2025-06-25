@@ -1,4 +1,4 @@
 {
-	"improveUISwitch": "Improve Video UI",
-	"improveUIDescription": "Enhanced Video Player UI in various ways."
+	"skipAfterCreditsSwitch": "Skip After Outro Scene:",
+	"skipAfterCreditsDescription": "Skip Outro and After Outro Scene on Crunchyroll."
 }

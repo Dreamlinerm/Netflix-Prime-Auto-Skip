@@ -114,5 +114,7 @@
   "resetConfirm": "Pretende repor as Definições.\n\nTem a certeza de que quer fazer isto?",
   "invalidJson": "O ficheiro que carregou não é um ficheiro JSON válido.",
   "improveUISwitch": "Melhorar a IU de vídeo",
-  "improveUIDescription": "IU do leitor de vídeo melhorada de várias formas."
+  "improveUIDescription": "IU do leitor de vídeo melhorada de várias formas.",
+  "skipAfterCreditsSwitch": "Saltar após a cena final:",
+  "skipAfterCreditsDescription": "Skip Outro e After Outro Scene no Crunchyroll."
 }

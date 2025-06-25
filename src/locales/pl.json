@@ -114,5 +114,7 @@
   "resetConfirm": "Chcesz zresetować ustawienia.\n\nCzy na pewno chcesz to zrobić?",
   "invalidJson": "Przesłany plik nie jest prawidłowym plikiem JSON.",
   "improveUISwitch": "Ulepszony interfejs użytkownika wideo",
-  "improveUIDescription": "Ulepszony interfejs odtwarzacza wideo na różne sposoby."
+  "improveUIDescription": "Ulepszony interfejs odtwarzacza wideo na różne sposoby.",
+  "skipAfterCreditsSwitch": "Pomiń scenę końcową:",
+  "skipAfterCreditsDescription": "Pomiń outro i scenę po outro na Crunchyroll."
 }

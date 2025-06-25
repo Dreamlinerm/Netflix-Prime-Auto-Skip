@@ -99,7 +99,11 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 	// saves the audio language to settings
 	if (!reverseButtonClicked) {
 		const button = document.querySelector('[data-testid="skipIntroText"]') as HTMLElement
-		if (button && !skipped) {
+		if (button && isOutro && settings.value.Crunchyroll?.skipAfterCredits) {
+			video.currentTime = video.duration // skip to the end of the video
+			console.log("SkipAfterCredits")
+			return
+		} else if (button && !skipped) {
 			// add timeout because it can skip mid sentence if language is not japanese.
 			skipped = true
 			setTimeout(function () {

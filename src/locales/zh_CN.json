@@ -114,5 +114,7 @@
   "resetConfirm": "您想重置设置。\n\n您确定要这样做吗？",
   "invalidJson": "您上传的文件不是有效的 JSON 文件。",
   "improveUISwitch": "改进视频用户界面",
-  "improveUIDescription": "以多种方式增强视频播放器用户界面。"
+  "improveUIDescription": "以多种方式增强视频播放器用户界面。",
+  "skipAfterCreditsSwitch": "跳过片尾曲",
+  "skipAfterCreditsDescription": "在 Crunchyroll 上跳过片尾曲和片尾曲后的场景。"
 }

@@ -3,6 +3,7 @@
 ## 1.1.72
 
 - improved Amazon Prime Video Player UI
+- added Crunchyroll optional Feature to skip after Credits Scene
 - fix Crunchyroll bigPlayerStyle bug
 
 ## 1.1.71

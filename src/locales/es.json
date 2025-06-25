@@ -114,5 +114,7 @@
   "resetConfirm": "Desea restablecer la configuración.\n\nEstás seguro de que quieres hacerlo?",
   "invalidJson": "El archivo que ha cargado no es un archivo JSON válido.",
   "improveUISwitch": "Mejorar la interfaz de vídeo",
-  "improveUIDescription": "Mejoras en la interfaz de usuario del reproductor de vídeo."
+  "improveUIDescription": "Mejoras en la interfaz de usuario del reproductor de vídeo.",
+  "skipAfterCreditsSwitch": "Saltar después de la escena final:",
+  "skipAfterCreditsDescription": "Skip Outro y After Outro Scene en Crunchyroll."
 }

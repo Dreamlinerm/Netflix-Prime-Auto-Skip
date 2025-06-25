@@ -114,5 +114,7 @@
   "resetConfirm": "Ayarları sıfırlamak istiyorsunuz.\n\nBunu yapmak istediğinden emin misin?",
   "invalidJson": "Yüklediğiniz dosya geçerli bir JSON dosyası değil.",
   "improveUISwitch": "Video Kullanıcı Arayüzünü İyileştirin",
-  "improveUIDescription": "Video Oynatıcı Kullanıcı Arayüzü çeşitli şekillerde geliştirildi."
+  "improveUIDescription": "Video Oynatıcı Kullanıcı Arayüzü çeşitli şekillerde geliştirildi.",
+  "skipAfterCreditsSwitch": "Çıkış Sahnesinden Sonra Atla:",
+  "skipAfterCreditsDescription": "Crunchyroll'da Outro ve Outro Sonrası Sahneyi Atlayın."
 }
