@@ -402,9 +402,12 @@ async function Amazon_doubleClick() {
 async function Amazon_improveUI() {
 	// add css to dom
 	const style = document.createElement("style")
+	// .fpqiyer{
+	// 		opacity: 0.6 !important;
+	// 	}
 	style.textContent = `
-		.fpqiyer{
-			opacity: 0.6 !important;
+		.f1makowq{
+			opacity: 0 !important;
 		}
 	`
 	document.head.appendChild(style)
