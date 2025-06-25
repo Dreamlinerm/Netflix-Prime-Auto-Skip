@@ -194,7 +194,7 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 			// infobar position for the slider to be added
 			const position = document.querySelector(".dv-player-fullscreen [class*=infobar-container]")?.firstChild
 				?.lastChild as HTMLElement
-			if (position) createSlider(video, videoSpeed, position, AmazonSliderStyle, "")
+			if (position) createSlider(video, videoSpeed, position, AmazonSliderStyle, "cursor: pointer;")
 		} else {
 			// need to resync the slider with the video sometimes
 			const speed = document.querySelector(".dv-player-fullscreen #videoSpeed") as HTMLElement
