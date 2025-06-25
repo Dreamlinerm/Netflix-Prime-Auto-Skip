@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.72
+
+- improved Amazon Prime Video Player UI
+- fix Crunchyroll bigPlayerStyle bug
+
 ## 1.1.71
 
 - added keyboard shortcuts s,d to change the playback speed
