@@ -405,12 +405,20 @@ async function Amazon_improveUI() {
 	// .fpqiyer{
 	// 		opacity: 0.6 !important;
 	// 	}
+	// .f10twsrv
+
+	// button opacity
 	// background blur
 	style.textContent = `
 		.atvwebplayersdk-playpause-button,
 		.atvwebplayersdk-fastseekback-button,
-		.atvwebplayersdk-fastseekforward-button {
-		    opacity: 0.45 !important;
+		.atvwebplayersdk-fastseekforward-button{
+		  opacity: 0.45 !important;
+		}
+		.atvwebplayersdk-playpause-button:hover,
+		.atvwebplayersdk-fastseekback-button:hover,
+		.atvwebplayersdk-fastseekforward-button:hover{
+		  opacity: 0.8 !important;
 		}
 		.f1makowq{
 			opacity: 0 !important;
