@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.73
+
+-
+
 ## 1.1.72
 
 - improved Amazon Prime Video Player UI

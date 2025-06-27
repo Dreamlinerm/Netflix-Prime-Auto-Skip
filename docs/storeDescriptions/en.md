@@ -36,7 +36,7 @@ Platform-Specific Features:
     - Remembers and selects your last-used profile automatically
     - Adds filters to the release calendar, so it is useable
     - Video size expanded to entire window
-    - Disable the numpad
+    - Disable the numpad controls
 
 Android Support in Desktop mode:
 
