@@ -9,7 +9,7 @@ Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Di
 - Überspringen von Credits
 - Anzeigen von TMDB-Bewertungen für alle Shows
 - Film ausblenden button
-- Hinzufügen eines anpassbaren Geschwindigkeitsreglers
+- Hinzufügen eines anpassbaren Geschwindigkeitsreglers (Tastaturkürzel: s, d)
 - Automatische Videowiedergabe im Vollbildmodus
 - In Vollbildmodus gehen mit Doppelklick
 - Scrollen, um die Lautstärke zu ändern
@@ -30,7 +30,6 @@ Plattform-spezifische Funktionen:
 
 - Disney+ (Hotstar, STAR+): 
     - Überspringt Eigenwerbung
-    - Kehrt automatisch in den Vollbildmodus zurück, wenn zur nächsten Episode gesprungen wird
 
 - Crunchyroll: 
     - Wählt das zuletzt verwendetes Profil automatisch aus

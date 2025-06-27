@@ -9,7 +9,7 @@ To rozszerzenie poprawia jakość streamowania w serwisach Netflix, Prime Video,
 - Skipping Credits
 - Displaying TMDB ratings for all shows
 - Przycisk Ukryj film
-- Adding customizable playback speed odtwarzania
+- Adding customizable playback speed odtwarzania (skróty klawiaturowe: s, d)
 - Automatyczne uruchamianie odtwarzania filmów na pełnym ekranie
 - Przejście na pełny ekran po dwukrotnym kliknięciu
 - Przewiń, aby zmienić głośność
@@ -30,7 +30,6 @@ Platforma-Cechy szczególne:
 
 - Disney+ (Hotstar, STAR+):
     - Omija reklamy autopromocyjne
-    - Automatycznie powraca do trybu pełnoekranowego po przejściu do następnego odcinka
 
 - Crunchyroll:
     - Zapamiętuje i automatycznie wybiera ostatnio używany profil

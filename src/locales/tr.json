@@ -56,7 +56,7 @@
   "statisticSegmentsDescription": "Netflix, Amazon ve Disney+ için Giriş veya Reklam Gibi Atlanan Bireysel Bölümlerin Miktarı",
   "importSettings": "Tüm Ayarları İçe/Dışa Aktar",
   "saveSettings": "Ayarları dosya olarak kaydet",
-  "uploadSettings": "Yükleme ayarları",
+  "uploadSettings": "Yükleme ayarları:",
   "resetAddon": "Eklentiyi varsayılana sıfırla",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "İzleme Kredileri:",
@@ -110,5 +110,11 @@
   "removeAllHiddenTitles": "Tüm gizli başlıkları kaldırın",
   "skipIntroDelay": "Giriş gecikmesini ms cinsinden atla:",
   "skipIntroDelayDescription": "Bazı diller diğerlerinden daha uzun konuşur. Bu ayar, bazı dublajlarda konuşmanın kesilmemesi için introyu gecikmeli olarak atlamanızı sağlar.",
-  "switchLanguage": "Dil değiştir:"
+  "switchLanguage": "Dil değiştir:",
+  "resetConfirm": "Ayarları sıfırlamak istiyorsunuz.\n\nBunu yapmak istediğinden emin misin?",
+  "invalidJson": "Yüklediğiniz dosya geçerli bir JSON dosyası değil.",
+  "improveUISwitch": "Video Kullanıcı Arayüzünü İyileştirin",
+  "improveUIDescription": "Video Oynatıcı Kullanıcı Arayüzü çeşitli şekillerde geliştirildi.",
+  "skipAfterCreditsSwitch": "Jenerik Sonrası Sahneyi Atla:",
+  "skipAfterCreditsDescription": "Jenerikten Sonraki Sahneyi Atlayın."
 }

@@ -1,5 +1,6 @@
-import { sendMessage, onMessage } from "webext-bridge/content-script"
+import { sendMessage } from "webext-bridge/content-script"
 import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
+import { set } from "@vueuse/core"
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
@@ -41,6 +42,7 @@ async function startAmazon() {
 	logStartOfAddon()
 	AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig)
 	if (settings.value?.Video?.doubleClick) Amazon_doubleClick()
+	if (settings.value.Amazon?.speedSlider) Amazon_SpeedKeyboard()
 	AmazonObserver.observe(document, config)
 	if (settings.value.Amazon?.selfAd) Amazon_selfAdTimeout()
 	if (settings.value.Amazon?.skipAd) {
@@ -51,6 +53,7 @@ async function startAmazon() {
 	}
 	if (settings.value.Amazon?.continuePosition) setTimeout(() => Amazon_continuePosition(), 500)
 	if (settings.value.Video?.userAgent && isMobile) Amazon_customizeMobileView()
+	if (settings.value.Amazon?.improveUI) Amazon_improveUI()
 }
 
 // #region Amazon
@@ -138,7 +141,7 @@ async function AmazonGobackbutton(video: HTMLVideoElement, startTime: number, en
 		if (buttonInHTML) {
 			function goBack() {
 				video.currentTime = startTime
-				if (buttonInHTML) buttonInHTML.remove()
+				buttonInHTML?.remove()
 				console.log("stopped observing| Intro")
 				AmazonSkipIntroObserver.disconnect()
 				const waitTime = endTime - startTime + 2
@@ -193,10 +196,19 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 			// infobar position for the slider to be added
 			const position = document.querySelector(".dv-player-fullscreen [class*=infobar-container]")?.firstChild
 				?.lastChild as HTMLElement
-			if (position) createSlider(video, videoSpeed, position, AmazonSliderStyle, "")
+			if (position) createSlider(video, videoSpeed, position, AmazonSliderStyle, "cursor: pointer;")
 		} else {
 			// need to resync the slider with the video sometimes
-			const speed = document.querySelector(".dv-player-fullscreen #videoSpeed")
+			const speed = document.querySelector(".dv-player-fullscreen #videoSpeed") as HTMLElement
+			if (speed) {
+				speed.onclick = function () {
+					alreadySlider.style.display = alreadySlider.style.display === "block" ? "none" : "block"
+				}
+				watch(videoSpeed, (newValue) => {
+					speed.textContent = newValue.toFixed(1) + "x"
+					alreadySlider.value = (newValue * 10).toString()
+				})
+			}
 			if (video.playbackRate != parseFloat(alreadySlider.value) / 10) {
 				video.playbackRate = parseFloat(alreadySlider.value) / 10
 			}
@@ -206,6 +218,20 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 			}
 		}
 	}
+}
+async function Amazon_SpeedKeyboard() {
+	const steps = settings.value.General.sliderSteps / 10
+	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
+		if (!video) return
+		if (event.key === "d") {
+			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
+			videoSpeed.value = video.playbackRate
+		} else if (event.key === "s") {
+			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
+			videoSpeed.value = video.playbackRate
+		}
+	})
 }
 
 async function Amazon_continuePosition() {
@@ -372,5 +398,32 @@ async function Amazon_doubleClick() {
 	} else {
 		document.ondblclick = null
 	}
+}
+async function Amazon_improveUI() {
+	const style = document.createElement("style")
+	// ui opacity
+	// .fpqiyer{
+	// 		opacity: 0.6 !important;
+	// 	}
+	// .f10twsrv
+
+	// button opacity
+	// background blur
+	style.textContent = `
+		.atvwebplayersdk-playpause-button,
+		.atvwebplayersdk-fastseekback-button,
+		.atvwebplayersdk-fastseekforward-button{
+		  opacity: 0.45 !important;
+		}
+		.atvwebplayersdk-playpause-button:hover,
+		.atvwebplayersdk-fastseekback-button:hover,
+		.atvwebplayersdk-fastseekforward-button:hover{
+		  opacity: 0.8 !important;
+		}
+		.f1makowq{
+			opacity: 0 !important;
+		}
+	`
+	document.head.appendChild(style)
 }
 // #endregion

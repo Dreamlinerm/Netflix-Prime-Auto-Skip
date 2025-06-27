@@ -83,7 +83,12 @@
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td class="other">➖</td>
+				<td class="other">
+					<Switch
+						v-model="settings.Crunchyroll.skipCredits"
+						class="ml-auto"
+					></Switch>
+				</td>
 				<td class="other">
 					<Switch
 						v-model="HBOSkipCredits"

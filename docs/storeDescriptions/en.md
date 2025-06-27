@@ -9,7 +9,7 @@ This extension enhances your streaming experience on Netflix, Prime Video, Disne
 - Skipping Credits
 - Displaying TMDB ratings for all shows
 - Hide Movie button
-- Adding customizable playback speed control
+- Adding customizable playback speed control (keyboard shortcuts: s, d)
 - Automatically start to play videos in fullscreen
 - Go fullscreen on double click
 - Scroll to change the volume
@@ -30,14 +30,13 @@ Platform-Specific Features:
 
 - Disney+ (Hotstar, STAR+):
     - Skips self-promotional ads
-    - Automatically returns to fullscreen mode when going to the next episode
     - firefox: add feature disney arrow keys fast forward
 
 - Crunchyroll:
     - Remembers and selects your last-used profile automatically
     - Adds filters to the release calendar, so it is useable
     - Video size expanded to entire window
-    - Disable the numpad
+    - Disable the numpad controls
 
 Android Support in Desktop mode:
 

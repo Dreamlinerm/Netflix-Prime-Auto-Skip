@@ -56,7 +56,7 @@
   "statisticSegmentsDescription": "Anzahl der übersprungenen einzelnen Segmente wie ein Intro oder eine Werbung für Netflix, Amazon und Disney+",
   "importSettings": "Alle Einstellungen importieren/exportieren",
   "saveSettings": "Einstellungen als Datei speichern",
-  "uploadSettings": "Einstellungen hochladen",
+  "uploadSettings": "Einstellungen hochladen:",
   "resetAddon": "Addon auf Standard zurücksetzen",
   "noWrap": "unset",
   "watchCreditsSwitch": "Abspann ansehen:",
@@ -110,5 +110,11 @@
   "removeAllHiddenTitles": "Alle ausgeblendeten Titel entfernen",
   "skipIntroDelay": "Skip Intro Verzögerung in ms:",
   "skipIntroDelayDescription": "In manchen Sprachen wird länger gesprochen als in anderen. Mit dieser Einstellung können Sie das Intro mit einer Verzögerung überspringen, so dass bei einigen Synchronisationen die Sprache nicht abgeschnitten wird.",
-  "switchLanguage": "Sprache wechseln:"
+  "switchLanguage": "Sprache wechseln:",
+  "resetConfirm": "Sie möchten die Einstellungen zurücksetzen.\n\nSind Sie sicher, dass Sie das tun wollen?",
+  "invalidJson": "Die von Ihnen hochgeladene Datei ist keine gültige JSON-Datei.",
+  "improveUISwitch": "Verbessern der Video-UI",
+  "improveUIDescription": "Die Benutzeroberfläche des Video-Players wurde auf verschiedene Weise verbessert.",
+  "skipAfterCreditsSwitch": "Szene nach dem Abspann überspringen:",
+  "skipAfterCreditsDescription": "Überspringen Sie die Szene nach dem Abspann."
 }

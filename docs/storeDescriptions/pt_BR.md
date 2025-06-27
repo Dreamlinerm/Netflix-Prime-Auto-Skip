@@ -9,7 +9,7 @@ Essa extensão aprimora sua experiência de streaming na Netflix, Prime Video, D
 - Pular créditos
 - Exibição de classificações do TMDB para todos os programas
 - Botão Ocultar filme
-- Adição de controle de velocidade de reprodução personalizável
+- Adição de controle de velocidade de reprodução personalizável (atalhos de teclado: s, d)
 - Iniciar automaticamente a reprodução de vídeos em tela cheia
 - Ir para tela cheia ao clicar duas vezes
 - Deslocar-se para alterar o volume
@@ -30,7 +30,6 @@ Recursos específicos da plataforma:
 
 - Disney+ (Hotstar, STAR+):
     - Pula os anúncios de autopromoção
-    - Retorna automaticamente ao modo de tela cheia ao passar para o próximo episódio
 
 - Crunchyroll:
     - Lembra e seleciona automaticamente seu último perfil usado

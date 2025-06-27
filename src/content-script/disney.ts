@@ -41,6 +41,7 @@ async function startDisney() {
 	await promise
 	logStartOfAddon()
 	if (isHotstar) Hotstar_doubleClick()
+	if (settings.value.Disney?.speedSlider) Disney_SpeedKeyboard()
 	DisneyObserver.observe(document, config)
 	setInterval(function () {
 		const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
@@ -164,7 +165,6 @@ async function Disney_skipCredits(currentTime: number) {
 		// time is to avoid clicking too fast
 		const time = currentTime
 		if (time && lastAdTimeText != time) {
-			const videoFullscreen = document.fullscreenElement !== null
 			lastAdTimeText = time
 			if (settings.value.Disney?.skipCredits) {
 				button.click()
@@ -172,26 +172,6 @@ async function Disney_skipCredits(currentTime: number) {
 				settings.value.Statistics.SegmentsSkipped++
 				sendMessage("increaseBadge", {}, "background")
 				resetLastATimeText()
-			}
-			if (!isHotstar) {
-				// keep video fullscreen
-				setTimeout(function () {
-					if (videoFullscreen && document.fullscreenElement == null) {
-						chrome.runtime.sendMessage({ type: "fullscreen" })
-						function resetFullscreen() {
-							chrome.runtime.sendMessage({ type: "exitFullscreen" })
-							console.log("exitFullscreen")
-							removeEventListener("fullscreenchange", resetFullscreen)
-						}
-						addEventListener("fullscreenchange", resetFullscreen)
-						document.onkeydown = function (evt) {
-							if ("key" in evt && (evt.key === "Escape" || evt.key === "Esc")) {
-								chrome.runtime.sendMessage({ type: "exitFullscreen" })
-							}
-						}
-						console.log("fullscreen")
-					}
-				}, 1000)
 			}
 		}
 	}
@@ -268,7 +248,16 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 			if (position) createSlider(video, videoSpeed, position, DisneySliderStyle, DisneySpeedStyle)
 		} else {
 			// need to resync the slider with the video sometimes
-			const speed = document.querySelector("#videoSpeed")
+			const speed = document.querySelector("#videoSpeed") as HTMLElement
+			if (speed) {
+				speed.onclick = function () {
+					alreadySlider.style.display = alreadySlider.style.display === "block" ? "none" : "block"
+				}
+				watch(videoSpeed, (newValue) => {
+					speed.textContent = newValue.toFixed(1) + "x"
+					alreadySlider.value = (newValue * 10).toString()
+				})
+			}
 			if (video.playbackRate !== parseFloat(alreadySlider.value) / 10) {
 				video.playbackRate = parseFloat(alreadySlider.value) / 10
 			}
@@ -280,6 +269,20 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 			}
 		}
 	}
+}
+async function Disney_SpeedKeyboard() {
+	const steps = settings.value.General.sliderSteps / 10
+	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
+		if (!video) return
+		if (event.key === "d") {
+			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
+			videoSpeed.value = video.playbackRate
+		} else if (event.key === "s") {
+			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
+			videoSpeed.value = video.playbackRate
+		}
+	})
 }
 
 async function Disney_selfAd(video: HTMLVideoElement, time: number) {

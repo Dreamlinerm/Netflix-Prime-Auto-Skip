@@ -56,7 +56,7 @@
   "statisticSegmentsDescription": "Quantidade de segmentos individuais ignorados como introdução ou um anúncio da Netflix, Amazon e Disney+",
   "importSettings": "Importar ou exportar configurações",
   "saveSettings": "Salvar configurações para um arquivo",
-  "uploadSettings": "Carregar configurações",
+  "uploadSettings": "Carregar configurações:",
   "resetAddon": "Redefinir a extensão para o padrão",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "Assista os créditos:",
@@ -110,5 +110,11 @@
   "removeAllHiddenTitles": "Remova todos os títulos ocultos",
   "skipIntroDelay": "Pule o atraso da introdução no MS:",
   "skipIntroDelayDescription": "Algumas línguas falam mais tempo do que outras. Esta definição permite-lhe saltar a introdução com um atraso de modo a que, em algumas dublagens, o discurso não seja cortado.",
-  "switchLanguage": "Mudar de idioma:"
+  "switchLanguage": "Mudar de idioma:",
+  "resetConfirm": "Pretende repor as Definições.\n\nTem a certeza de que quer fazer isto?",
+  "invalidJson": "O ficheiro que carregou não é um ficheiro JSON válido.",
+  "improveUISwitch": "Melhorar a IU de vídeo",
+  "improveUIDescription": "IU do leitor de vídeo melhorada de várias formas.",
+  "skipAfterCreditsSwitch": "Saltar a cena após os créditos:",
+  "skipAfterCreditsDescription": "Saltar a cena após os créditos."
 }

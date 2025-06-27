@@ -56,7 +56,7 @@
   "statisticSegmentsDescription": "Netflix、亚马逊和迪士尼+跳过介绍或广告等个别片段的数量",
   "importSettings": "导入/导出所有设置",
   "saveSettings": "将设置保存为文件",
-  "uploadSettings": "上传设置",
+  "uploadSettings": "上传设置:",
   "resetAddon": "将插件重置为默认设置",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "腕表荣誉",
@@ -110,5 +110,11 @@
   "removeAllHiddenTitles": "删除所有隐藏标题",
   "skipIntroDelay": "跳过MS中的介绍延迟：",
   "skipIntroDelayDescription": "有些语言的语音比其他语言长。通过此设置，您可以跳过带有延迟的开场白，这样在某些配音中，语音就不会被切断。",
-  "switchLanguage": "开关语言："
+  "switchLanguage": "开关语言：",
+  "resetConfirm": "您想重置设置。\n\n您确定要这样做吗？",
+  "invalidJson": "您上传的文件不是有效的 JSON 文件。",
+  "improveUISwitch": "改进视频用户界面",
+  "improveUIDescription": "以多种方式增强视频播放器用户界面。",
+  "skipAfterCreditsSwitch": "跳过片尾场景",
+  "skipAfterCreditsDescription": "跳过字幕后的场景"
 }

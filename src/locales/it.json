@@ -56,7 +56,7 @@
   "statisticSegmentsDescription": "Quantità di singoli segmenti saltati come un'introduzione o una pubblicità per Netflix, Amazon e Disney+",
   "importSettings": "Importazione/Esportazione di tutte le impostazioni",
   "saveSettings": "Salva le impostazioni come file",
-  "uploadSettings": "Impostazioni di caricamento",
+  "uploadSettings": "Impostazioni di caricamento:",
   "resetAddon": "Ripristinare l'impostazione predefinita del componente aggiuntivo",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "Guarda i crediti:",
@@ -110,5 +110,11 @@
   "removeAllHiddenTitles": "Rimuovere tutti i titoli nascosti",
   "skipIntroDelay": "Ritardo introduzione salto in ms:",
   "skipIntroDelayDescription": "Alcune lingue parlano più a lungo di altre. Questa impostazione consente di saltare l'introduzione con un ritardo tale da non interrompere il parlato in alcune lingue.",
-  "switchLanguage": "Lingua di commutazione:"
+  "switchLanguage": "Lingua di commutazione:",
+  "resetConfirm": "Si desidera ripristinare le impostazioni.\n\nÈ sicuro di volerlo fare?",
+  "invalidJson": "Il file caricato non è un file JSON valido.",
+  "improveUISwitch": "Migliorare l'interfaccia video",
+  "improveUIDescription": "Miglioramento dell'interfaccia del lettore video in vari modi.",
+  "skipAfterCreditsSwitch": "Salta la scena dopo i crediti:",
+  "skipAfterCreditsDescription": "Saltare la scena dopo i crediti."
 }

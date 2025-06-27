@@ -56,7 +56,7 @@
   "statisticSegmentsDescription": "Liczba pominiętych pojedynczych segmentów, takich jak intro lub reklama w serwisach Netflix, Amazon i Disney+",
   "importSettings": "Import/eksport wszystkich ustawień",
   "saveSettings": "Zapisz ustawienia jako plik",
-  "uploadSettings": "Ustawienia przesyłania",
+  "uploadSettings": "Ustawienia przesyłania:",
   "resetAddon": "Przywróć domyślne ustawienia dodatku",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "Kredyty na oglądanie:",
@@ -110,5 +110,11 @@
   "removeAllHiddenTitles": "Usuń wszystkie ukryte tytuły",
   "skipIntroDelay": "Opóźnienie pominięcia intro w ms:",
   "skipIntroDelayDescription": "Niektóre języki mówią dłużej niż inne. To ustawienie pozwala pominąć intro z opóźnieniem, dzięki czemu w niektórych dubach mowa nie jest ucinana.",
-  "switchLanguage": "Switch Language:"
+  "switchLanguage": "Switch Language:",
+  "resetConfirm": "Chcesz zresetować ustawienia.\n\nCzy na pewno chcesz to zrobić?",
+  "invalidJson": "Przesłany plik nie jest prawidłowym plikiem JSON.",
+  "improveUISwitch": "Ulepszony interfejs użytkownika wideo",
+  "improveUIDescription": "Ulepszony interfejs odtwarzacza wideo na różne sposoby.",
+  "skipAfterCreditsSwitch": "Pomiń scenę po napisach końcowych:",
+  "skipAfterCreditsDescription": "Pomiń scenę po napisach końcowych."
 }

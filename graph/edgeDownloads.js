@@ -1,7 +1,1 @@
-let edgeDownloads = [
-  { date: "2024-08-01", count: 12 },
-  { date: "2024-09-01", count: 152 },
-  { date: "2024-10-01", count: 186 },
-  { date: "2024-11-01", count: 226 },
-  { date: "2024-12-01", count: 164 },
-];
+let edgeDownloads = [{"date":"2024-08-01","count":12},{"date":"2024-09-01","count":152},{"date":"2024-10-01","count":186},{"date":"2024-11-01","count":226},{"date":"2024-12-01","count":268},{"date":"2025-01-01","count":212},{"date":"2025-02-01","count":259},{"date":"2025-03-01","count":296},{"date":"2025-04-01","count":170}]

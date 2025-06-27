@@ -56,8 +56,8 @@
   "statisticSegmentsDescription": "Amount of Individual Segments Skipped like an Intro or an Ad for Netflix, Amazon and Disney+",
   "importSettings": "Import/Export all Settings",
   "saveSettings": "Save Settings as file",
-  "uploadSettings": "Upload settings",
-  "resetAddon": "Reset Addon to default",
+  "uploadSettings": "Upload settings:",
+  "resetAddon": "Reset addon to default",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "Watch Credits:",
   "watchCreditsDescription": "Always watch the credits of every series",
@@ -110,5 +110,11 @@
   "removeAllHiddenTitles": "Remove all hidden titles",
   "skipIntroDelay": "Skip Intro delay in ms:",
   "skipIntroDelayDescription": "Some languages talk longer than others. This setting allows you to skip the intro with a delay such that in some dubs the speech is not cut off.",
-  "switchLanguage": "Switch Language:"
+  "switchLanguage": "Switch Language:",
+  "resetConfirm": "You want to reset the Settings.\n\nAre you sure you want to do this?",
+  "invalidJson": "The file you uploaded is not a valid JSON file.",
+  "improveUISwitch": "Improve Video UI",
+  "improveUIDescription": "Enhanced Video Player UI in various ways.",
+  "skipAfterCreditsSwitch": "Skip After Credits Scene:",
+  "skipAfterCreditsDescription": "Skip the Scene after the Credits."
 }

@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.1.73
+
+-
+
+## 1.1.72
+
+- improved Amazon Prime Video Player UI
+- added Crunchyroll optional Feature to skip after Credits Scene
+- fix Crunchyroll bigPlayerStyle bug
+
+## 1.1.71
+
+- added keyboard shortcuts s,d to change the playback speed
+- fixed some missing translations
+
+## 1.1.70
+
+- fixed user suggested errors in french translation
+- removed Feature (remain fullscreen on next episode), which was fixed by itself
+
 ## 1.1.69
 
 - various Settings visual and translation improvements
@@ -15,8 +35,8 @@
 
 ## 1.1.66
 
-- chrome: fix remove games section on Netflix 
-- chrome: fixed  prime remove paid content on home page
+- chrome: fix remove games section on Netflix
+- chrome: fixed prime remove paid content on home page
 - firefox: add feature disney arrow keys fast forward
 - added customizable skip Intro delay on crunchyroll
 

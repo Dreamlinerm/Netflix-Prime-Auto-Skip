@@ -1,3 +1,4 @@
 {
-	"switchLanguage": "Switch Language:"
+	"skipAfterCreditsSwitch": "Skip After Credits Scene:",
+	"skipAfterCreditsDescription": "Skip the Scene after the Credits."
 }

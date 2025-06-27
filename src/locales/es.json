@@ -56,8 +56,8 @@
   "statisticSegmentsDescription": "Cantidad de segmentos individuales omitidos como una introducción o un anuncio para Netflix, Amazon y Disney+.",
   "importSettings": "Importar/exportar todos los ajustes",
   "saveSettings": "Guardar configuración como archivo",
-  "uploadSettings": "Cargar configuración",
-  "resetAddon": "Restablecer Addon por defecto",
+  "uploadSettings": "Cargar configuración:",
+  "resetAddon": "Restablecer la extension por defecto",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "Ver créditos:",
   "watchCreditsDescription": "Ver siempre los créditos de cada serie",
@@ -110,5 +110,11 @@
   "removeAllHiddenTitles": "Eliminar todos los títulos ocultos",
   "skipIntroDelay": "Retraso de introducción de salto en ms:",
   "skipIntroDelayDescription": "Algunos idiomas hablan más que otros. Este ajuste permite omitir la introducción con un retardo tal que en algunos doblajes no se corte el habla.",
-  "switchLanguage": "Cambiar de idioma:"
+  "switchLanguage": "Cambiar de idioma:",
+  "resetConfirm": "Desea restablecer la configuración.\n\nEstás seguro de que quieres hacerlo?",
+  "invalidJson": "El archivo que ha cargado no es un archivo JSON válido.",
+  "improveUISwitch": "Mejorar la interfaz de vídeo",
+  "improveUIDescription": "Mejoras en la interfaz de usuario del reproductor de vídeo.",
+  "skipAfterCreditsSwitch": "Saltar escena después de los créditos:",
+  "skipAfterCreditsDescription": "Sáltate la escena después de los créditos."
 }

@@ -10,6 +10,7 @@ export type settingsType = {
 		continuePosition: boolean
 		showRating: boolean
 		xray: boolean
+		improveUI: boolean
 	}
 	Netflix: {
 		skipIntro: boolean
@@ -36,6 +37,8 @@ export type settingsType = {
 	}
 	Crunchyroll: {
 		skipIntro: boolean
+		skipCredits: boolean
+		skipAfterCredits: boolean
 		speedSlider: boolean
 		releaseCalendar: boolean
 		profile: boolean
@@ -98,6 +101,7 @@ export const defaultSettings = {
 		continuePosition: true,
 		showRating: true,
 		xray: true,
+		improveUI: true,
 	},
 	Netflix: {
 		skipIntro: true,
@@ -124,6 +128,8 @@ export const defaultSettings = {
 	},
 	Crunchyroll: {
 		skipIntro: true,
+		skipCredits: true,
+		skipAfterCredits: false,
 		speedSlider: true,
 		releaseCalendar: true,
 		dubLanguage: null,

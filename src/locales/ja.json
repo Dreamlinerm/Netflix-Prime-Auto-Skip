@@ -56,7 +56,7 @@
   "statisticSegmentsDescription": "Netflix、Amazon、Disney+のイントロや広告のようにスキップされた個別セグメントの量",
   "importSettings": "すべての設定のインポート/エクスポート",
   "saveSettings": "設定をファイルに保存",
-  "uploadSettings": "設定のアップロード",
+  "uploadSettings": "設定のアップロード:",
   "resetAddon": "アドオンをデフォルトに戻す",
   "noWrap": "ナウラップ",
   "watchCreditsSwitch": "クレジットを見る",
@@ -110,5 +110,11 @@
   "removeAllHiddenTitles": "すべての隠しタイトルを削除する",
   "skipIntroDelay": "スキップ・イントロのディレイ（単位：ms）：",
   "skipIntroDelayDescription": "一部の言語は他の言語よりも長く話します。この設定により、一部のダブではスピーチが遮断されないように、遅延でイントロをスキップできます。",
-  "switchLanguage": "言語切り替え："
+  "switchLanguage": "言語切り替え：",
+  "resetConfirm": "設定をリセットしたい。\n\n本当によろしいですか？",
+  "invalidJson": "アップロードされたファイルは有効なJSONファイルではありません。",
+  "improveUISwitch": "ビデオUIの改善",
+  "improveUIDescription": "ビデオプレーヤーのUIを様々な方法で強化。",
+  "skipAfterCreditsSwitch": "アフタークレジットのシーンをスキップする：",
+  "skipAfterCreditsDescription": "クレジット後のシーンをスキップする。"
 }

@@ -56,7 +56,7 @@
   "statisticSegmentsDescription": "넷플릭스, 아마존 및 디즈니+의 인트로 또는 광고처럼 건너뛴 개별 세그먼트의 수",
   "importSettings": "모든 설정 가져오기/내보내기",
   "saveSettings": "설정을 파일로 저장",
-  "uploadSettings": "업로드 설정",
+  "uploadSettings": "업로드 설정:",
   "resetAddon": "애드온을 기본값으로 재설정",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "크레딧 보기:",
@@ -110,5 +110,11 @@
   "removeAllHiddenTitles": "모든 숨겨진 제목 제거",
   "skipIntroDelay": "MS에서 소개 지연을 건너 뛰십시오 :",
   "skipIntroDelayDescription": "일부 언어는 다른 언어보다 길게 말하는 경우가 있습니다. 이 설정을 사용하면 일부 더빙에서 음성이 끊어지지 않도록 지연 시간을 두고 인트로를 건너뛸 수 있습니다.",
-  "switchLanguage": "언어 전환:"
+  "switchLanguage": "언어 전환:",
+  "resetConfirm": "설정을 재설정하려고 합니다.\n\n정말 이 작업을 수행하시겠습니까?",
+  "invalidJson": "업로드한 파일이 유효한 JSON 파일이 아닙니다.",
+  "improveUISwitch": "비디오 UI 개선",
+  "improveUIDescription": "다양한 방식으로 개선된 동영상 플레이어 UI.",
+  "skipAfterCreditsSwitch": "애프터 크레딧 장면 건너뛰기:",
+  "skipAfterCreditsDescription": "크레딧 후 장면 건너뛰기."
 }
