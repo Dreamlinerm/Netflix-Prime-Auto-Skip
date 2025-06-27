@@ -59,6 +59,7 @@ export type settingsType = {
 		doubleClick: boolean
 		scrollVolume: boolean
 		showYear: boolean
+		dimLowRatings: boolean
 	}
 	Statistics: {
 		AmazonAdTimeSkipped: number
@@ -158,6 +159,7 @@ export const defaultSettings = {
 		doubleClick: true,
 		scrollVolume: true,
 		showYear: false,
+		dimLowRatings: false,
 	},
 	Statistics: {
 		AmazonAdTimeSkipped: 0,

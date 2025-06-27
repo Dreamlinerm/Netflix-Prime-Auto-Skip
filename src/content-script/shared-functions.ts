@@ -530,6 +530,7 @@ function getColorForRating(rating: number, lowVoteCount: boolean) {
 	}
 }
 function getIsTransparent(rating: number, lowVoteCount: boolean) {
+	if (!settings.value.Video?.dimLowRatings) return false
 	if ((!rating || rating <= settings.value.General.RatingThresholds[0].value) && !lowVoteCount) return true
 	return false
 }
@@ -589,9 +590,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		const titleCardContainer = card.closest(".title-card-container") as HTMLElement
 		if (titleCardContainer) {
 			titleCardContainer.appendChild(div)
-			if (getIsTransparent(data?.score, vote_count < 50)) {
-				titleCardContainer.appendChild(greyOverlay)
-			}
+			if (getIsTransparent(data?.score, vote_count < 50)) titleCardContainer.appendChild(greyOverlay)
 			// titleCardContainer.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
 		}
 	} else if (isHBO) {

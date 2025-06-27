@@ -118,7 +118,9 @@
   "skipAfterCreditsSwitch": "애프터 크레딧 장면 건너뛰기:",
   "skipAfterCreditsDescription": "크레딧 후 장면 건너뛰기.",
   "editRatings": "등급 임계값 및 색상을 편집합니다:",
-  "dimmDescription": "디밍 임계값에 사용되는 최저 등급입니다.",
+  "dimmDescription": "가장 낮은 등급으로 어둡게 표시합니다.",
   "pickColor": "색상 선택",
-  "pickRating": "등급 선택 임계값"
+  "pickRating": "등급 선택 임계값",
+  "reset": "색상 재설정",
+  "dimLowRatings": "디밍 낮은 등급"
 }

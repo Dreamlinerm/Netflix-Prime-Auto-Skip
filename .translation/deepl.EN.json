@@ -1,6 +1,5 @@
 {
-	"editRatings": "Edit Rating thresholds and colors:",
-	"dimmDescription": "Lowest Rating used for dimming threshold.",
-	"pickColor": "Pick color",
-	"pickRating": "Pick Rating threshold"
+	"reset": "Reset Color",
+	"dimLowRatings": "Dimm Low Ratings",
+	"dimmDescription": "Dimm Shows with the lowest Rating."
 }

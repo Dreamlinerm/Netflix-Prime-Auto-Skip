@@ -118,7 +118,9 @@
   "skipAfterCreditsSwitch": "Saltar escena después de los créditos:",
   "skipAfterCreditsDescription": "Sáltate la escena después de los créditos.",
   "editRatings": "Editar umbrales y colores de clasificación:",
-  "dimmDescription": "Calificación más baja utilizada para el umbral de regulación.",
+  "dimmDescription": "Dimm Shows con la calificación más baja.",
   "pickColor": "Elige el color",
-  "pickRating": "Umbral de puntuación"
+  "pickRating": "Umbral de puntuación",
+  "reset": "Restablecer color",
+  "dimLowRatings": "Dimm baja clasificación"
 }

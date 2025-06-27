@@ -118,7 +118,9 @@
   "skipAfterCreditsSwitch": "Sauter la scène après le générique :",
   "skipAfterCreditsDescription": "Sauter la scène après le générique.",
   "editRatings": "Modifier les seuils de classement et les couleurs :",
-  "dimmDescription": "Cote la plus basse utilisée pour le seuil de gradation.",
+  "dimmDescription": "Spectacles Dimm avec la note la plus basse.",
   "pickColor": "Choisir la couleur",
-  "pickRating": "Seuil d'évaluation des choix"
+  "pickRating": "Seuil d'évaluation des choix",
+  "reset": "Réinitialiser la couleur",
+  "dimLowRatings": "Dimm Low Ratings"
 }

@@ -118,7 +118,9 @@
   "skipAfterCreditsSwitch": "Saltar a cena após os créditos:",
   "skipAfterCreditsDescription": "Saltar a cena após os créditos.",
   "editRatings": "Editar limiares e cores da classificação:",
-  "dimmDescription": "Classificação mais baixa utilizada para o limiar de regulação da intensidade luminosa.",
+  "dimmDescription": "Programas Dimm com a classificação mais baixa.",
   "pickColor": "Escolher cor",
-  "pickRating": "Limiar de classificação da escolha"
+  "pickRating": "Limiar de classificação da escolha",
+  "reset": "Redefinir cor",
+  "dimLowRatings": "Dimm Low Ratings"
 }

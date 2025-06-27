@@ -56,10 +56,18 @@ function removeAllTitles() {
 	<OptionalPermission />
 	<hr />
 	<div>
-		<p>{{ $t("editRatings") }}</p>
+		<div class="line flex">
+			<p>{{ $t("dimLowRatings") }}</p>
+			<Switch
+				v-model="settings.Video.dimLowRatings"
+				class="ml-auto"
+			></Switch>
+		</div>
 		<p class="description">
 			{{ $t("dimmDescription") }}
 		</p>
+		<hr />
+		<p>{{ $t("editRatings") }}</p>
 		<table>
 			<thead>
 				<tr>
@@ -85,6 +93,12 @@ function removeAllTitles() {
 								class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm z-10"
 							>
 								<ColorPicker v-model="threshold.color" />
+								<button
+									@click="threshold.color = defaultSettings.General.RatingThresholds[index].color"
+									class="btn btn-error"
+								>
+									{{ $t("reset") }}
+								</button>
 							</div>
 						</div>
 					</td>

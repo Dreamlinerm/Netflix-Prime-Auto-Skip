@@ -118,7 +118,9 @@
   "skipAfterCreditsSwitch": "Salta la scena dopo i crediti:",
   "skipAfterCreditsDescription": "Saltare la scena dopo i crediti.",
   "editRatings": "Modifica delle soglie di valutazione e dei colori:",
-  "dimmDescription": "Valutazione più bassa utilizzata per la soglia di oscuramento.",
+  "dimmDescription": "Spettacoli Dimm con la valutazione più bassa.",
   "pickColor": "Scegliere il colore",
-  "pickRating": "Soglia di valutazione del plettro"
+  "pickRating": "Soglia di valutazione del plettro",
+  "reset": "Azzeramento del colore",
+  "dimLowRatings": "Valutazioni basse Dimm"
 }

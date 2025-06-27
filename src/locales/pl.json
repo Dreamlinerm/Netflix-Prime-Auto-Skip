@@ -118,7 +118,9 @@
   "skipAfterCreditsSwitch": "Pomiń scenę po napisach końcowych:",
   "skipAfterCreditsDescription": "Pomiń scenę po napisach końcowych.",
   "editRatings": "Edycja progów ocen i kolorów:",
-  "dimmDescription": "Najniższa wartość używana dla progu ściemniania.",
+  "dimmDescription": "Programy Dimm z najniższą oceną.",
   "pickColor": "Wybierz kolor",
-  "pickRating": "Próg oceny wyboru"
+  "pickRating": "Próg oceny wyboru",
+  "reset": "Resetuj kolor",
+  "dimLowRatings": "Dimm Low Ratings"
 }

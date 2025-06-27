@@ -2,7 +2,8 @@
 
 ## 1.1.73
 
--
+- added Feature to dimm shows with the lowest Rating
+- added Customizable Rating Thresholds and a color picker
 
 ## 1.1.72
 

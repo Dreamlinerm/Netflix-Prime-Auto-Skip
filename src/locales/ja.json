@@ -118,7 +118,9 @@
   "skipAfterCreditsSwitch": "アフタークレジットのシーンをスキップする：",
   "skipAfterCreditsDescription": "クレジット後のシーンをスキップする。",
   "editRatings": "レーティングのしきい値と色を編集する：",
-  "dimmDescription": "調光スレッショルドに使用される最低定格。",
+  "dimmDescription": "最低視聴率のDIMMショー",
   "pickColor": "ピックカラー",
-  "pickRating": "ピック評価基準値"
+  "pickRating": "ピック評価基準値",
+  "reset": "リセットカラー",
+  "dimLowRatings": "ディム低格付け"
 }

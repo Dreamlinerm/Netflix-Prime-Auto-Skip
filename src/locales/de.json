@@ -118,7 +118,9 @@
   "skipAfterCreditsSwitch": "Szene nach dem Abspann überspringen:",
   "skipAfterCreditsDescription": "Überspringen Sie die Szene nach dem Abspann.",
   "editRatings": "Bearbeiten Sie Bewertungsschwellen und Farben:",
-  "dimmDescription": "Niedrigster Wert, der für die Dimmschwelle verwendet wird.",
+  "dimmDescription": "Dimm-Shows mit der niedrigsten Bewertung.",
   "pickColor": "Farbe auswählen",
-  "pickRating": "Pick-Rating-Schwelle"
+  "pickRating": "Pick-Rating-Schwelle",
+  "reset": "Farbe zurücksetzen",
+  "dimLowRatings": "Dimm Low Ratings"
 }
