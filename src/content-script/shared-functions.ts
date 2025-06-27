@@ -516,29 +516,21 @@ function Amazon_fixTitle(title: string | undefined) {
 			?.split(": The complete")[0]
 	)
 }
-enum RatingColors {
-	Red = "red",
-	Grey = "grey",
-	Yellow = "rgb(245, 197, 24)", // #f5c
-	Green = "rgb(0, 166, 0)",
-}
-const ratingMap = {
-	red: 5.5,
-	yellow: 7,
-}
 
 function getColorForRating(rating: number, lowVoteCount: boolean) {
 	// I want a color gradient from red to green with yellow in the middle
 	// the ratings are between 0 and 10
 	// the average rating is 6.5
 	// https://distributionofthings.com/imdb-movie-ratings/
-	if (!rating || lowVoteCount) return RatingColors.Grey
-	if (rating <= ratingMap["red"]) return RatingColors.Red
-	if (rating <= ratingMap["yellow"]) return RatingColors.Yellow
-	return RatingColors.Green
+	if (!rating || lowVoteCount) return "grey"
+	for (const threshold of settings.value.General.RatingThresholds) {
+		if (rating <= threshold.value) {
+			return threshold.color
+		}
+	}
 }
 function getIsTransparent(rating: number, lowVoteCount: boolean) {
-	if ((!rating || rating <= ratingMap["red"]) && !lowVoteCount) return true
+	if ((!rating || rating <= settings.value.General.RatingThresholds[0].value) && !lowVoteCount) return true
 	return false
 }
 function getTMDBUrl(id: string | number, media_type: string) {

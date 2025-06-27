@@ -81,12 +81,19 @@ export type settingsType = {
 		GCdate: string
 		affiliate: boolean
 		Crunchyroll_skipTimeout: number
+		RatingThresholds: Array<{ color: string; value: number }>
 	}
 }
 
 export type Nullable<T> = T | null | undefined
 export type CrunchyListElement = { href: Nullable<string>; name: Nullable<string>; time: string }
 export type CrunchyList = Array<CrunchyListElement>
+enum RatingColors {
+	Red = "red",
+	Grey = "grey",
+	Yellow = "rgb(245, 197, 24)", // #f5c
+	Green = "rgb(0, 166, 0)",
+}
 
 // Default settings
 export const defaultSettings = {
@@ -173,5 +180,10 @@ export const defaultSettings = {
 		GCdate: "2024-01-01",
 		affiliate: true,
 		Crunchyroll_skipTimeout: 0,
+		RatingThresholds: [
+			{ color: RatingColors.Red, value: 5.5 },
+			{ color: RatingColors.Yellow, value: 7 },
+			{ color: RatingColors.Green, value: 10 },
+		],
 	},
 }

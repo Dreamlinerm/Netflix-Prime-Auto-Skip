@@ -55,6 +55,42 @@ function removeAllTitles() {
 	<OptionalPermission />
 	<hr />
 	<div class="line flex">
+		<p>{{ $t("Edit Rating thresholds:") }}</p>
+		<p class="description">
+			{{ $t("Lowest Rating used for dimming threshold") }}
+		</p>
+		<br />
+		<table>
+			<thead>
+				<tr>
+					<th>{{ $t("color") }}</th>
+					<th>{{ $t("value") }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr
+					v-for="(threshold, index) in settings.General.RatingThresholds"
+					:key="index"
+				>
+					<td>
+						<div
+							style="width: 50px; height: 50px"
+							:style="{ backgroundColor: threshold.color }"
+						></div>
+					</td>
+					<td>
+						<input
+							v-model="settings.General.RatingThresholds[index].value"
+							type="number"
+							class="input border-inherit"
+						/>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<hr />
+	<div class="line flex">
 		<p>{{ $t("fullscreenSwitch") }}</p>
 		<Switch
 			v-model="settings.Video.playOnFullScreen"
