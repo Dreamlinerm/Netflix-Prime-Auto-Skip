@@ -93,12 +93,6 @@ function removeAllTitles() {
 								class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm z-10"
 							>
 								<ColorPicker v-model="threshold.color" />
-								<button
-									@click="threshold.color = defaultSettings.General.RatingThresholds[index].color"
-									class="btn btn-error"
-								>
-									{{ $t("reset") }}
-								</button>
 							</div>
 						</div>
 					</td>
@@ -110,6 +104,14 @@ function removeAllTitles() {
 							class="input border-inherit"
 							:disabled="threshold.value === 10"
 						/>
+					</td>
+					<td>
+						<button
+							@click="settings.General.RatingThresholds[index] = defaultSettings.General.RatingThresholds[index]"
+							class="btn btn-error"
+						>
+							{{ $t("reset") }}
+						</button>
 					</td>
 				</tr>
 			</tbody>

@@ -121,6 +121,6 @@
   "dimmDescription": "Dimm Shows with the lowest Rating.",
   "pickColor": "Pick color",
   "pickRating": "Pick Rating threshold",
-  "reset": "Reset Color",
+  "reset": "Reset",
   "dimLowRatings": "Dimm Low Ratings"
 }

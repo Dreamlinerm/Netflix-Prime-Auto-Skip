@@ -121,6 +121,6 @@
   "dimmDescription": "가장 낮은 등급으로 어둡게 표시합니다.",
   "pickColor": "색상 선택",
   "pickRating": "등급 선택 임계값",
-  "reset": "색상 재설정",
+  "reset": "초기화",
   "dimLowRatings": "디밍 낮은 등급"
 }

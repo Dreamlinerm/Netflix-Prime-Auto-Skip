@@ -121,6 +121,6 @@
   "dimmDescription": "评分最低的 Dimm 节目。",
   "pickColor": "选择颜色",
   "pickRating": "挑选评级阈值",
-  "reset": "重置颜色",
+  "reset": "重置",
   "dimLowRatings": "调光低评级"
 }
