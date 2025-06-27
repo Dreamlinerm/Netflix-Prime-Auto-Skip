@@ -57,14 +57,14 @@ function removeAllTitles() {
 	<hr />
 	<div>
 		<div class="line flex">
-			<p>{{ $t("dimLowRatings") }}</p>
+			<p>{{ $t("dimLowRatingsSwitch") }}</p>
 			<Switch
 				v-model="settings.Video.dimLowRatings"
 				class="ml-auto"
 			></Switch>
 		</div>
 		<p class="description">
-			{{ $t("dimmDescription") }}
+			{{ $t("dimLowRatingsDescription") }}
 		</p>
 		<hr />
 		<p>{{ $t("editRatings") }}</p>

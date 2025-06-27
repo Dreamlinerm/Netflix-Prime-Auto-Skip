@@ -118,9 +118,9 @@
   "skipAfterCreditsSwitch": "Skip After Credits Scene:",
   "skipAfterCreditsDescription": "Skip the Scene after the Credits.",
   "editRatings": "Edit Rating thresholds and colors:",
-  "dimmDescription": "Dimm Shows with the lowest Rating.",
+  "dimLowRatingsDescription": "Dimm Shows with the lowest Rating.",
   "pickColor": "Pick color",
   "pickRating": "Pick Rating threshold",
   "reset": "Reset",
-  "dimLowRatings": "Dimm Low Ratings"
+  "dimLowRatingsSwitch": "Dimm Low Ratings"
 }
