@@ -116,5 +116,9 @@
   "improveUISwitch": "ビデオUIの改善",
   "improveUIDescription": "ビデオプレーヤーのUIを様々な方法で強化。",
   "skipAfterCreditsSwitch": "アフタークレジットのシーンをスキップする：",
-  "skipAfterCreditsDescription": "クレジット後のシーンをスキップする。"
+  "skipAfterCreditsDescription": "クレジット後のシーンをスキップする。",
+  "editRatings": "レーティングのしきい値と色を編集する：",
+  "dimmDescription": "調光スレッショルドに使用される最低定格。",
+  "pickColor": "ピックカラー",
+  "pickRating": "ピック評価基準値"
 }

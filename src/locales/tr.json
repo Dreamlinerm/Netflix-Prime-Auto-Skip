@@ -116,5 +116,9 @@
   "improveUISwitch": "Video Kullanıcı Arayüzünü İyileştirin",
   "improveUIDescription": "Video Oynatıcı Kullanıcı Arayüzü çeşitli şekillerde geliştirildi.",
   "skipAfterCreditsSwitch": "Jenerik Sonrası Sahneyi Atla:",
-  "skipAfterCreditsDescription": "Jenerikten Sonraki Sahneyi Atlayın."
+  "skipAfterCreditsDescription": "Jenerikten Sonraki Sahneyi Atlayın.",
+  "editRatings": "Derecelendirme eşiklerini ve renklerini düzenleyin:",
+  "dimmDescription": "Karartma eşiği için kullanılan En Düşük Derecelendirme.",
+  "pickColor": "Renk seç",
+  "pickRating": "Seçim Derecelendirme eşiği"
 }

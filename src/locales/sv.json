@@ -116,5 +116,9 @@
   "improveUISwitch": "Förbättra användargränssnittet för video",
   "improveUIDescription": "Förbättrat användargränssnittet för videospelare på olika sätt.",
   "skipAfterCreditsSwitch": "Hoppa över eftertexter Scen:",
-  "skipAfterCreditsDescription": "Hoppa över scenen efter eftertexterna."
+  "skipAfterCreditsDescription": "Hoppa över scenen efter eftertexterna.",
+  "editRatings": "Redigera tröskelvärden och färger för Rating:",
+  "dimmDescription": "Lägsta värde som används för dimmertröskel.",
+  "pickColor": "Välj färg",
+  "pickRating": "Välj betygsgräns"
 }

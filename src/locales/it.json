@@ -116,5 +116,9 @@
   "improveUISwitch": "Migliorare l'interfaccia video",
   "improveUIDescription": "Miglioramento dell'interfaccia del lettore video in vari modi.",
   "skipAfterCreditsSwitch": "Salta la scena dopo i crediti:",
-  "skipAfterCreditsDescription": "Saltare la scena dopo i crediti."
+  "skipAfterCreditsDescription": "Saltare la scena dopo i crediti.",
+  "editRatings": "Modifica delle soglie di valutazione e dei colori:",
+  "dimmDescription": "Valutazione più bassa utilizzata per la soglia di oscuramento.",
+  "pickColor": "Scegliere il colore",
+  "pickRating": "Soglia di valutazione del plettro"
 }

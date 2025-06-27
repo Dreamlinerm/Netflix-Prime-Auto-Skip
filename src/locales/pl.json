@@ -116,5 +116,9 @@
   "improveUISwitch": "Ulepszony interfejs użytkownika wideo",
   "improveUIDescription": "Ulepszony interfejs odtwarzacza wideo na różne sposoby.",
   "skipAfterCreditsSwitch": "Pomiń scenę po napisach końcowych:",
-  "skipAfterCreditsDescription": "Pomiń scenę po napisach końcowych."
+  "skipAfterCreditsDescription": "Pomiń scenę po napisach końcowych.",
+  "editRatings": "Edycja progów ocen i kolorów:",
+  "dimmDescription": "Najniższa wartość używana dla progu ściemniania.",
+  "pickColor": "Wybierz kolor",
+  "pickRating": "Próg oceny wyboru"
 }

@@ -1,4 +1,6 @@
 {
-	"skipAfterCreditsSwitch": "Skip After Credits Scene:",
-	"skipAfterCreditsDescription": "Skip the Scene after the Credits."
+	"editRatings": "Edit Rating thresholds and colors:",
+	"dimmDescription": "Lowest Rating used for dimming threshold.",
+	"pickColor": "Pick color",
+	"pickRating": "Pick Rating threshold"
 }

@@ -116,5 +116,9 @@
   "improveUISwitch": "Melhorar a IU de vídeo",
   "improveUIDescription": "IU do leitor de vídeo melhorada de várias formas.",
   "skipAfterCreditsSwitch": "Saltar a cena após os créditos:",
-  "skipAfterCreditsDescription": "Saltar a cena após os créditos."
+  "skipAfterCreditsDescription": "Saltar a cena após os créditos.",
+  "editRatings": "Editar limiares e cores da classificação:",
+  "dimmDescription": "Classificação mais baixa utilizada para o limiar de regulação da intensidade luminosa.",
+  "pickColor": "Escolher cor",
+  "pickRating": "Limiar de classificação da escolha"
 }

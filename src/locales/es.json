@@ -116,5 +116,9 @@
   "improveUISwitch": "Mejorar la interfaz de vídeo",
   "improveUIDescription": "Mejoras en la interfaz de usuario del reproductor de vídeo.",
   "skipAfterCreditsSwitch": "Saltar escena después de los créditos:",
-  "skipAfterCreditsDescription": "Sáltate la escena después de los créditos."
+  "skipAfterCreditsDescription": "Sáltate la escena después de los créditos.",
+  "editRatings": "Editar umbrales y colores de clasificación:",
+  "dimmDescription": "Calificación más baja utilizada para el umbral de regulación.",
+  "pickColor": "Elige el color",
+  "pickRating": "Umbral de puntuación"
 }

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Sketch } from "@ckpack/vue-color"
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
 
@@ -54,17 +55,16 @@ function removeAllTitles() {
 	<OptionsPageSettingsTable></OptionsPageSettingsTable>
 	<OptionalPermission />
 	<hr />
-	<div class="line flex">
-		<p>{{ $t("Edit Rating thresholds:") }}</p>
+	<div>
+		<p>{{ $t("editRatings") }}</p>
 		<p class="description">
-			{{ $t("Lowest Rating used for dimming threshold") }}
+			{{ $t("dimmDescription") }}
 		</p>
-		<br />
 		<table>
 			<thead>
 				<tr>
-					<th>{{ $t("color") }}</th>
-					<th>{{ $t("value") }}</th>
+					<th>{{ $t("pickColor") }}</th>
+					<th>{{ $t("pickRating") }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -73,16 +73,28 @@ function removeAllTitles() {
 					:key="index"
 				>
 					<td>
-						<div
-							style="width: 50px; height: 50px"
-							:style="{ backgroundColor: threshold.color }"
-						></div>
+						<div class="dropdown">
+							<div
+								style="width: 30px; height: 30px"
+								:style="{ backgroundColor: threshold.color }"
+								tabindex="0"
+								role="button"
+							></div>
+							<div
+								tabindex="0"
+								class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm z-10"
+							>
+								<ColorPicker v-model="threshold.color" />
+							</div>
+						</div>
 					</td>
 					<td>
+						<=
 						<input
-							v-model="settings.General.RatingThresholds[index].value"
+							v-model="threshold.value"
 							type="number"
 							class="input border-inherit"
+							:disabled="threshold.value === 10"
 						/>
 					</td>
 				</tr>

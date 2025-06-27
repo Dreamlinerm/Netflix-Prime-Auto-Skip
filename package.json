@@ -28,6 +28,7 @@
 		"connectTv": "adb connect 192.168.178.29"
 	},
 	"dependencies": {
+		"@ckpack/vue-color": "^1.6.0",
 		"marked": "^15.0.11",
 		"notivue": "^2.4.5",
 		"pinia": "^3.0.2",

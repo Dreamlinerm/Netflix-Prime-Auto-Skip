@@ -116,5 +116,9 @@
   "improveUISwitch": "Améliorer l'interface utilisateur de la vidéo",
   "improveUIDescription": "Amélioration de l'interface utilisateur du lecteur vidéo de diverses manières.",
   "skipAfterCreditsSwitch": "Sauter la scène après le générique :",
-  "skipAfterCreditsDescription": "Sauter la scène après le générique."
+  "skipAfterCreditsDescription": "Sauter la scène après le générique.",
+  "editRatings": "Modifier les seuils de classement et les couleurs :",
+  "dimmDescription": "Cote la plus basse utilisée pour le seuil de gradation.",
+  "pickColor": "Choisir la couleur",
+  "pickRating": "Seuil d'évaluation des choix"
 }

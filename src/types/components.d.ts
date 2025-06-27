@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppHeader: typeof import('./../components/AppHeader.vue')['default']
+    ColorPicker: typeof import('./../components/ColorPicker.vue')['default']
     IMdiArrowLeft: typeof import('~icons/mdi/arrow-left')['default']
     IMdiChartBar: typeof import('~icons/mdi/chart-bar')['default']
     IMdiClose: typeof import('~icons/mdi/close')['default']

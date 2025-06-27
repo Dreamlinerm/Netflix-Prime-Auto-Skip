@@ -116,5 +116,9 @@
   "improveUISwitch": "改进视频用户界面",
   "improveUIDescription": "以多种方式增强视频播放器用户界面。",
   "skipAfterCreditsSwitch": "跳过片尾场景",
-  "skipAfterCreditsDescription": "跳过字幕后的场景"
+  "skipAfterCreditsDescription": "跳过字幕后的场景",
+  "editRatings": "编辑评级阈值和颜色：",
+  "dimmDescription": "用于调光阈值的最低额定值。",
+  "pickColor": "选择颜色",
+  "pickRating": "挑选评级阈值"
 }
