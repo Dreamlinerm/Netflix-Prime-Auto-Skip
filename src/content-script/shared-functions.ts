@@ -516,19 +516,30 @@ function Amazon_fixTitle(title: string | undefined) {
 			?.split(": The complete")[0]
 	)
 }
+enum RatingColors {
+	Red = "red",
+	Grey = "grey",
+	Yellow = "rgb(245, 197, 24)", // #f5c
+	Green = "rgb(0, 166, 0)",
+}
+const ratingMap = {
+	red: 5.5,
+	yellow: 7,
+}
+
 function getColorForRating(rating: number, lowVoteCount: boolean) {
 	// I want a color gradient from red to green with yellow in the middle
 	// the ratings are between 0 and 10
 	// the average rating is 6.5
 	// https://distributionofthings.com/imdb-movie-ratings/
-	if (!rating || lowVoteCount) return "grey"
-	if (rating <= 5.5) return "red"
-	if (rating <= 7) return "rgb(245, 197, 24)" //#f5c518
-	return "rgb(0, 166, 0)"
+	if (!rating || lowVoteCount) return RatingColors.Grey
+	if (rating <= ratingMap["red"]) return RatingColors.Red
+	if (rating <= ratingMap["yellow"]) return RatingColors.Yellow
+	return RatingColors.Green
 }
-function getTransparencyForRating(rating: number, lowVoteCount: boolean) {
-	if ((!rating || rating <= 7) && !lowVoteCount) return "0.5"
-	return "1"
+function getIsTransparent(rating: number, lowVoteCount: boolean) {
+	if ((!rating || rating <= ratingMap["red"]) && !lowVoteCount) return true
+	return false
 }
 function getTMDBUrl(id: string | number, media_type: string) {
 	return `https://www.themoviedb.org/${media_type}/${id}`
@@ -553,7 +564,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		borderRadius: "5px",
 		padding: "0 2px 0 2px",
 		right: isNetflix ? "0.2vw" : "0",
-		zIndex: isDisney ? "" : "9999",
+		zIndex: isDisney ? "" : "2",
 		fontSize: isMobile ? "4vw" : "1vw",
 	})
 
@@ -571,15 +582,30 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		div.setAttribute("alt", title)
 		console.log("no score found:", title, data)
 	}
+	const greyOverlay = document.createElement("div")
+	Object.assign(greyOverlay.style, {
+		position: "absolute",
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+		background: "rgba(40, 40, 40, 0.7)" /* grey with 70% opacity */,
+		pointerEvents: "none" /* allows clicks to pass through */,
+		zIndex: 2,
+	})
 	if (isNetflix) {
 		const titleCardContainer = card.closest(".title-card-container") as HTMLElement
 		if (titleCardContainer) {
 			titleCardContainer.appendChild(div)
-			titleCardContainer.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
+			if (getIsTransparent(data?.score, vote_count < 50)) {
+				titleCardContainer.appendChild(greyOverlay)
+			}
+			// titleCardContainer.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
 		}
 	} else if (isHBO) {
 		card.appendChild(div)
-		card.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
+		if (getIsTransparent(data?.score, vote_count < 50)) card.appendChild(greyOverlay)
+		// card.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
 	} else if (isDisney) {
 		const parentDiv = card?.closest("div")
 		if (parentDiv) {
@@ -589,17 +615,21 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 			}
 			parentDiv.style.position = "relative"
 			parentDiv.appendChild(div)
-			parentDiv.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
+			if (getIsTransparent(data?.score, vote_count < 50)) parentDiv.appendChild(greyOverlay)
+			// parentDiv.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
 		}
 	} else if (isHotstar) {
 		card?.parentElement?.appendChild(div)
-		card?.parentElement?.style.setProperty("opacity", getTransparencyForRating(data?.score, vote_count < 50))
+		if (getIsTransparent(data?.score, vote_count < 50)) card.appendChild(greyOverlay)
+		// card?.parentElement?.style.setProperty("opacity", getTransparencyForRating(data?.score, vote_count < 50))
 	} else if (isPrimeVideo) {
-		if (card.getAttribute("data-card-title")) card?.firstChild?.firstChild?.appendChild(div)
-		else if (card.querySelector('div[data-testid="title-metadata-main"]')) {
-			card.querySelector('div[data-testid="title-metadata-main"]')?.appendChild(div)
-		} else card.appendChild(div)
-		card.closest("li")?.style.setProperty("opacity", getTransparencyForRating(data?.score, vote_count < 50))
+		let position: HTMLElement = card
+		if (card.getAttribute("data-card-title")) position = card?.firstChild?.firstChild as HTMLElement
+		else if (card.querySelector('div[data-testid="title-metadata-main"]'))
+			position = card.querySelector('div[data-testid="title-metadata-main"]') as HTMLElement
+		position?.appendChild(div)
+		if (getIsTransparent(data?.score, vote_count < 50)) position?.appendChild(greyOverlay)
+		// card.closest("li")?.style.setProperty("opacity", getTransparencyForRating(data?.score, vote_count < 50))
 	}
 }
 function OnFullScreenChange() {
