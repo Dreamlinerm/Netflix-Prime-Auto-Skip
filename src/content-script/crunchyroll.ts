@@ -50,12 +50,11 @@ function filterQueued(display: displayType) {
 }
 
 function filterDub(display: displayType) {
-	const list = document.querySelectorAll("cite[itemprop='name']")
+	const first = Array.from(document.querySelectorAll("cite[itemprop='name']"))
+	// filter out everything except the first element by title
+	const list = first.filter((element, index) => index != first.findIndex((el) => el.textContent == element.textContent))
 	list.forEach((element) => {
-		if (
-			(element?.textContent?.includes("Dub") || element?.textContent?.includes("Audio")) &&
-			element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement
-		)
+		if (element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement)
 			element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
 	})
 	if (display == "block" && settings.value.General.filterQueued) filterQueued("none")

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.74
+
+- fixed bug in Crunchyroll Release Calendar
+
 ## 1.1.73
 
 - added Feature to dimm shows with the lowest Rating
