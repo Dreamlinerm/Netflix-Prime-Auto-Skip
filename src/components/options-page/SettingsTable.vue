@@ -9,6 +9,7 @@
 				<th class="other">Disney+</th>
 				<th class="other">Crunchyroll</th>
 				<th class="other">HBO</th>
+				<th class="other">Paramount+</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,6 +51,12 @@
 				<td class="other">
 					<Switch
 						v-model="settings.HBO.skipIntro"
+						class="ml-auto"
+					></Switch>
+				</td>
+				<td class="other">
+					<Switch
+						v-model="settings.Paramount.skipIntro"
 						class="ml-auto"
 					></Switch>
 				</td>
@@ -95,6 +102,12 @@
 						class="ml-auto"
 					></Switch>
 				</td>
+				<td class="other">
+					<Switch
+						v-model="settings.Paramount.skipCredits"
+						class="ml-auto"
+					></Switch>
+				</td>
 			</tr>
 			<tr>
 				<td class="tooltip">
@@ -132,6 +145,12 @@
 						class="ml-auto"
 					></Switch>
 				</td>
+				<td class="other">
+					<Switch
+						v-model="settings.Paramount.watchCredits"
+						class="ml-auto"
+					></Switch>
+				</td>
 			</tr>
 			<tr>
 				<td class="tooltip">
@@ -164,6 +183,12 @@
 				</td>
 				<td class="other">➖</td>
 				<td class="other">➖</td>
+				<td class="other">
+					<Switch
+						v-model="settings.Paramount.skipAd"
+						class="ml-auto"
+					></Switch>
+				</td>
 			</tr>
 			<tr>
 				<td class="tooltip">
@@ -198,6 +223,12 @@
 				<td class="other">
 					<Switch
 						v-model="settings.HBO.showRating"
+						class="ml-auto"
+					></Switch>
+				</td>
+				<td class="other">
+					<Switch
+						v-model="settings.Paramount.showRating"
 						class="ml-auto"
 					></Switch>
 				</td>
@@ -243,6 +274,12 @@
 						class="ml-auto"
 					></Switch>
 				</td>
+				<td class="other">
+					<Switch
+						v-model="settings.Paramount.speedSlider"
+						class="ml-auto"
+					></Switch>
+				</td>
 			</tr>
 			<tr>
 				<td class="tooltip">
@@ -270,6 +307,7 @@
 				</td>
 				<td class="other">➖</td>
 				<td class="other">➖</td>
+				<td class="other">➖</td>
 			</tr>
 		</tbody>
 	</table>
@@ -278,9 +316,9 @@
 <script setup lang="ts">
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
-type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO"
+type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO" | "Paramount"
 
-const streamingServices: Array<StreamingService> = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO"]
+const streamingServices: Array<StreamingService> = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO", "Paramount"]
 
 const skipIntro = computed({
 	get: () => streamingServices.every((service) => settings.value[service].skipIntro),
@@ -395,9 +433,17 @@ const watchCredits = computed({
 	},
 })
 const skipAd = computed({
-	get: () => settings.value?.Amazon.skipAd && settings.value?.Netflix.skipAd && settings.value?.Disney.skipAd,
+	get: () =>
+		settings.value?.Amazon.skipAd &&
+		settings.value?.Netflix.skipAd &&
+		settings.value?.Disney.skipAd &&
+		settings.value?.Paramount.skipAd,
 	set: (value) => {
-		settings.value.Amazon.skipAd = settings.value.Netflix.skipAd = settings.value.Disney.skipAd = value
+		settings.value.Amazon.skipAd =
+			settings.value.Netflix.skipAd =
+			settings.value.Disney.skipAd =
+			settings.value.Paramount.skipAd =
+				value
 	},
 })
 
