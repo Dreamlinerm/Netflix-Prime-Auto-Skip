@@ -105,16 +105,16 @@ function PARA_Watch_Credits(video: HTMLVideoElement) {
 	// 	console.log("Watched Credits", button)
 	// }
 }
-const PARASliderStyle = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;"
-const PARASpeedStyle = "font-size: 1.5em;color:#b2b2b2;"
-const PARADivStyle = "height:48px;display: flex;align-items: center;"
+const PARASliderStyle = "width:200px;display:none;"
+const PARASpeedStyle = "font-size: 1.5em;width: 2em;color:#fff;cursor: pointer;"
+const PARADivStyle = "height:48px;display: flex;align-items: center;align-self:center;"
 async function PARA_SpeedSlider(video: HTMLVideoElement) {
-	// const alreadySlider = document.querySelector("#videoSpeedSlider")
-	// if (!alreadySlider) {
-	// 	// infobar position for the slider to be added
-	// 	const position = document.querySelector('div[class*="ControlsFooterBottomRight-"]') as HTMLElement
-	// 	if (position) createSlider(video, videoSpeed, position, PARASliderStyle, PARASpeedStyle, PARADivStyle)
-	// }
+	const alreadySlider = document.querySelector("#videoSpeedSlider")
+	if (!alreadySlider) {
+		// infobar position for the slider to be added
+		const position = document.querySelector("div.controls-bottom-right") as HTMLElement
+		if (position) createSlider(video, videoSpeed, position, PARASliderStyle, PARASpeedStyle, PARADivStyle)
+	}
 }
 async function PARA_SpeedKeyboard() {
 	// const steps = settings.value.General.sliderSteps / 10
