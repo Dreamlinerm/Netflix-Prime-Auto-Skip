@@ -52,7 +52,7 @@ export type settingsType = {
 		speedSlider: boolean
 		showRating: boolean
 	}
-	PARA: {
+	Paramount: {
 		skipIntro: boolean
 		skipCredits: boolean
 		watchCredits: boolean
@@ -159,7 +159,7 @@ export const defaultSettings = {
 		speedSlider: true,
 		showRating: true,
 	},
-	PARA: {
+	Paramount: {
 		skipIntro: true,
 		skipCredits: true,
 		watchCredits: false,

@@ -2,9 +2,9 @@
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
 
-type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO" | "PARA"
+type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO" | "Paramount"
 
-const streamingServices: Array<StreamingService> = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO", "PARA"]
+const streamingServices: Array<StreamingService> = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO", "Paramount"]
 
 const speedSlider = computed({
 	get: () => streamingServices.every((service) => settings.value[service]?.speedSlider ?? true),

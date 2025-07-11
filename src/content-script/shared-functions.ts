@@ -17,7 +17,7 @@ let isNetflix = /netflix/i.test(hostname)
 let isDisney = /disneyplus|starplus/i.test(hostname)
 const isHotstar = /hotstar/i.test(hostname)
 let isHBO = /max.com/i.test(hostname)
-let isPARA = /paramount/i.test(hostname) || /paramountplus/i.test(hostname)
+let isParamount = /paramount/i.test(hostname) || /paramountplus/i.test(hostname)
 const htmlLang = document.documentElement.lang
 
 const AmazonVideoClass = ".dv-player-fullscreen video"
@@ -31,7 +31,7 @@ export enum Platforms {
 	Hotstar = "hotstar",
 	Crunchyroll = "crunchyroll",
 	HBO = "hbo",
-	PARA = "paramount",
+	Paramount = "paramount",
 }
 
 export async function startSharedFunctions(platform: Platforms) {
@@ -39,7 +39,7 @@ export async function startSharedFunctions(platform: Platforms) {
 	if (platform == Platforms.Netflix) isNetflix = true
 	if (platform == Platforms.Disney) isDisney = true
 	if (platform == Platforms.HBO) isHBO = true
-	if (platform == Platforms.PARA) isPARA = true
+	if (platform == Platforms.Paramount) isParamount = true
 
 	await promise
 	if (isNetflix) {
@@ -83,7 +83,7 @@ async function getDBCache() {
 				startShowRatingInterval(settings.value.Disney?.showRating, settings.value.Disney?.hideTitles)
 		} else if (isPrimeVideo && settings.value.Amazon?.showRating) startShowRatingInterval()
 		else if (isHBO && settings.value.HBO?.showRating) startShowRatingInterval()
-		else if (isPARA && settings.value.PARA?.showRating) startShowRatingInterval()
+		else if (isParamount && settings.value.Paramount?.showRating) startShowRatingInterval()
 		if (getDiffInDays(settings.value.General.GCdate, date) >= GCdiff) garbageCollection()
 	})
 	chrome.storage.local.onChanged.addListener(function (changes) {
@@ -284,7 +284,7 @@ async function startShowRatingInterval(optionShowRating = true, optionHideTitles
 			(isPrimeVideo && !settings.value.Amazon?.showRating) ||
 			((isDisney || isHotstar) && !(settings.value.Disney?.showRating || settings.value.Disney?.hideTitles)) ||
 			(isHBO && !settings.value.HBO?.showRating) ||
-			(isPARA && !settings.value.PARA?.showRating)
+			(isParamount && !settings.value.Paramount?.showRating)
 		) {
 			console.log("stopped adding Rating")
 			clearInterval(RatingInterval)
@@ -339,7 +339,7 @@ function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	else if (isDisney) AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not(.imdb)")]
 	else if (isHotstar) AllTitleCardsTypes = [document.querySelectorAll(".swiper-slide img:not(.imdb)")]
 	else if (isHBO) AllTitleCardsTypes = [document.querySelectorAll("a[class*='StyledTileLinkNormal-']:not(.imdb)")]
-	else if (isPARA)
+	else if (isParamount)
 		AllTitleCardsTypes = [document.querySelectorAll("a[href*='/shows']:not(.imdb), a[href*='/movies']:not(.imdb)")]
 	else if (isPrimeVideo)
 		AllTitleCardsTypes = [
@@ -363,7 +363,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 		for (let i = 0; i < titleCards.length; i++) {
 			const card = titleCards[i] as HTMLElement
 			// add seen class
-			if (isNetflix || isDisney || isHotstar || isHBO || isPARA) card.classList.add("imdb")
+			if (isNetflix || isDisney || isHotstar || isHBO || isParamount) card.classList.add("imdb")
 			else if (isPrimeVideo) {
 				if (type == 0) card?.closest("li")?.classList.add("imdb")
 				else if (type == 1) card?.classList.add("imdb")
@@ -438,7 +438,7 @@ function getMediaType(card: HTMLElement): "tv" | "movie" | null {
 		if (url.includes("browse/series")) media_type = "tv"
 		else if (url.includes("browse/movies")) media_type = "movie"
 		else if (/(Staffel)|(Nummer)|(Season)|(Episod)|(Number)/g.test(title ?? "")) media_type = "tv"
-	} else if (isPARA) {
+	} else if (isParamount) {
 		const href = card.getAttribute("href") || ""
 		if (href.includes("/shows/")) media_type = "tv"
 		else if (href.includes("/movies/")) media_type = "movie"
@@ -469,7 +469,7 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 			else if (type == 1) title = Amazon_fixTitle(card.querySelector("a")?.getAttribute("aria-label") ?? "")
 		}
 	} else if (isHBO) title = card.querySelector("p[class*='md_strong-']")?.textContent ?? ""
-	else if (isPARA) title = card.getAttribute("title") ?? ""
+	else if (isParamount) title = card.getAttribute("title") ?? ""
 	return title
 }
 function Disney_fixTitle(title: string | undefined): string | undefined {
@@ -610,7 +610,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		card.appendChild(div)
 		if (getIsTransparent(data?.score, vote_count < 50)) card.appendChild(greyOverlay)
 		// card.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
-	} else if (isPARA) {
+	} else if (isParamount) {
 		card.style.position = "unset"
 		card.appendChild(div)
 		if (getIsTransparent(data?.score, vote_count < 50)) card.appendChild(greyOverlay)
@@ -645,7 +645,7 @@ function OnFullScreenChange() {
 	let video: HTMLVideoElement
 	if (isDisney)
 		video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
-	else if (isNetflix || isHotstar || isHBO || isPARA) video = document.querySelector("video") as HTMLVideoElement
+	else if (isNetflix || isHotstar || isHBO || isParamount) video = document.querySelector("video") as HTMLVideoElement
 	else video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
 	//TODO: window.fullScreen
 	if (document.fullscreenElement && video) {

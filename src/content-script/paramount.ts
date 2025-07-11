@@ -9,13 +9,13 @@ async function logStartOfAddon() {
 	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
 	console.log("Settings", settings.value)
 }
-async function startPARA() {
+async function startParamount() {
 	await promise
 	logStartOfAddon()
-	startSharedFunctions(Platforms.PARA)
-	PARAObserver.observe(document, config)
-	if (settings.value.PARA?.speedSlider) PARA_SpeedKeyboard()
-	if (settings.value.Video?.scrollVolume) PARA_doubleClick()
+	startSharedFunctions(Platforms.Paramount)
+	ParamountObserver.observe(document, config)
+	if (settings.value.Paramount?.speedSlider) Paramount_SpeedKeyboard()
+	if (settings.value.Video?.scrollVolume) Paramount_doubleClick()
 }
 type StatisticsKey =
 	| "AmazonAdTimeSkipped"
@@ -32,16 +32,16 @@ async function addSkippedTime(startTime: number, endTime: number, key: Statistic
 	}
 }
 
-// #region PARA
-// PARA functions
-const PARAObserver = new MutationObserver(PARA)
-async function PARA() {
+// #region Paramount
+// Paramount functions
+const ParamountObserver = new MutationObserver(Paramount)
+async function Paramount() {
 	const video: HTMLVideoElement = document.querySelector("video") as HTMLVideoElement
 	const time = video?.currentTime
-	if (settings.value.PARA?.skipIntro) PARA_Intro(video, time)
-	if (settings.value.PARA?.skipCredits) PARA_Credits(time)
-	if (settings.value.PARA?.watchCredits) PARA_Watch_Credits(video)
-	if (settings.value.PARA?.speedSlider) PARA_SpeedSlider(video)
+	if (settings.value.Paramount?.skipIntro) Paramount_Intro(video, time)
+	if (settings.value.Paramount?.skipCredits) Paramount_Credits(time)
+	if (settings.value.Paramount?.watchCredits) Paramount_Watch_Credits(video)
+	if (settings.value.Paramount?.speedSlider) Paramount_SpeedSlider(video)
 }
 let lastIntroTime = -1
 function resetLastIntroTime() {
@@ -49,7 +49,7 @@ function resetLastIntroTime() {
 		lastIntroTime = -1
 	}, 5000)
 }
-function PARA_Intro(video: HTMLVideoElement, time: number) {
+function Paramount_Intro(video: HTMLVideoElement, time: number) {
 	const button = document.querySelector("button.skip-button") as HTMLElement
 	if (button && button.getAttribute("disabled") !== "") {
 		const timeCheck = Math.floor(video?.currentTime ?? 0)
@@ -71,7 +71,7 @@ async function resetLastCreditText(time = 1000) {
 		lastCreditText = ""
 	}, time)
 }
-function PARA_Credits(time: number) {
+function Paramount_Credits(time: number) {
 	const div = document.querySelector('div[class*="end-card-panel-"]') as HTMLElement
 	if (div) {
 		const button = div.querySelector("button.play-button") as HTMLElement
@@ -88,7 +88,7 @@ function PARA_Credits(time: number) {
 		}
 	}
 }
-function PARA_Watch_Credits(video: HTMLVideoElement) {
+function Paramount_Watch_Credits(video: HTMLVideoElement) {
 	const div = document.querySelector('div[class*="end-card-panel-"]') as HTMLElement
 	const button = div?.querySelector("button#close-btn") as HTMLElement
 	if (button) {
@@ -98,15 +98,16 @@ function PARA_Watch_Credits(video: HTMLVideoElement) {
 		console.log("Watched Credits", button)
 	}
 }
-const PARASliderStyle = "width:200px;display:none;"
-const PARASpeedStyle = "font-size: 1.5em;width: 2em;color:#fff;cursor: pointer;"
-const PARADivStyle = "height:48px;display: flex;align-items: center;align-self:center;"
-async function PARA_SpeedSlider(video: HTMLVideoElement) {
+const ParamountSliderStyle = "width:200px;display:none;"
+const ParamountSpeedStyle = "font-size: 1.5em;width: 2em;color:#fff;cursor: pointer;"
+const ParamountDivStyle = "height:48px;display: flex;align-items: center;align-self:center;"
+async function Paramount_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
 		const alreadySlider = document.querySelector("#videoSpeedSlider") as HTMLInputElement
 		if (!alreadySlider) {
 			const position = document.querySelector("div.controls-bottom-right") as HTMLElement
-			if (position) createSlider(video, videoSpeed, position, PARASliderStyle, PARASpeedStyle, PARADivStyle)
+			if (position)
+				createSlider(video, videoSpeed, position, ParamountSliderStyle, ParamountSpeedStyle, ParamountDivStyle)
 		} else {
 			// need to resync the slider with the video sometimes
 			const speed = document.querySelector("#videoSpeed") as HTMLElement
@@ -129,7 +130,7 @@ async function PARA_SpeedSlider(video: HTMLVideoElement) {
 		}
 	}
 }
-async function PARA_SpeedKeyboard() {
+async function Paramount_SpeedKeyboard() {
 	// const steps = settings.value.General.sliderSteps / 10
 	// document.addEventListener("keydown", (event: KeyboardEvent) => {
 	// 	const video = document.querySelector("video") as HTMLVideoElement
@@ -144,7 +145,7 @@ async function PARA_SpeedKeyboard() {
 	// })
 }
 
-async function PARA_doubleClick() {
+async function Paramount_doubleClick() {
 	if (settings.value.Video?.doubleClick) {
 		// event listener for double click
 		document.ondblclick = function () {
@@ -157,4 +158,4 @@ async function PARA_doubleClick() {
 }
 // #endregion
 
-startPARA()
+startParamount()
