@@ -52,6 +52,14 @@ export type settingsType = {
 		speedSlider: boolean
 		showRating: boolean
 	}
+	Paramount: {
+		skipIntro: boolean
+		skipCredits: boolean
+		watchCredits: boolean
+		speedSlider: boolean
+		showRating: boolean
+		skipAd: boolean
+	}
 	Video: {
 		playOnFullScreen: boolean
 		epilepsy: boolean
@@ -65,6 +73,7 @@ export type settingsType = {
 		AmazonAdTimeSkipped: number
 		NetflixAdTimeSkipped: number
 		DisneyAdTimeSkipped: number
+		ParamountAdTimeSkipped: number
 		IntroTimeSkipped: number
 		RecapTimeSkipped: number
 		SegmentsSkipped: number
@@ -152,6 +161,14 @@ export const defaultSettings = {
 		speedSlider: true,
 		showRating: true,
 	},
+	Paramount: {
+		skipIntro: true,
+		skipCredits: true,
+		watchCredits: false,
+		speedSlider: true,
+		showRating: true,
+		skipAd: true,
+	},
 	Video: {
 		playOnFullScreen: true,
 		epilepsy: false,
@@ -165,6 +182,7 @@ export const defaultSettings = {
 		AmazonAdTimeSkipped: 0,
 		NetflixAdTimeSkipped: 0,
 		DisneyAdTimeSkipped: 0,
+		ParamountAdTimeSkipped: 0,
 		IntroTimeSkipped: 0,
 		RecapTimeSkipped: 0,
 		SegmentsSkipped: 0,

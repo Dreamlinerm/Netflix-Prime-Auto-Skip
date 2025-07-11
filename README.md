@@ -110,6 +110,7 @@ Features in other supported languages:
 | [Türkçe](docs/storeDescriptions/tr.md) |
 
 <!-- description -->
+
 You can customize which features are enabled in the Settings.
 
 This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
@@ -127,26 +128,29 @@ This extension enhances your streaming experience on Netflix, Prime Video, Disne
 Platform-Specific Features:
 
 - Netflix:
-    - Remembers and selects your last-used profile automatically
-    - Blocks the “Are you still watching?” inactivity warning
-    - Remove games from Netflix
+
+  - Remembers and selects your last-used profile automatically
+  - Blocks the “Are you still watching?” inactivity warning
+  - Remove games from Netflix
 
 - Amazon Prime Video:
-    - Skips self-promotional ads (for Prime Video productions)
-    - Filters out paid content (movies, series) from the home page
-    - Moves the category "Continue" to the top of the page
-    - Hide the Xray Quick View over a video
-    - Removes the blur effect when hovering over videos
+
+  - Skips self-promotional ads (for Prime Video productions)
+  - Filters out paid content (movies, series) from the home page
+  - Moves the category "Continue" to the top of the page
+  - Hide the Xray Quick View over a video
+  - Removes the blur effect when hovering over videos
 
 - Disney+ (Hotstar, STAR+):
-    - Skips self-promotional ads
-    - firefox: add feature disney arrow keys fast forward
+
+  - Skips self-promotional ads
+  - firefox: add feature disney arrow keys fast forward
 
 - Crunchyroll:
-    - Remembers and selects your last-used profile automatically
-    - Adds filters to the release calendar, so it is useable
-    - Video size expanded to entire window
-    - Disable the numpad
+  - Remembers and selects your last-used profile automatically
+  - Adds filters to the release calendar, so it is useable
+  - Video size expanded to entire window
+  - Disable the numpad
 
 Android Support in Desktop mode:
 
@@ -164,13 +168,16 @@ Broken Features:
 - Since I am a single developer, I may not be able to fix issues immediately. Please be patient and I will do my best to resolve them as soon as possible.
 
 ## ☔ Safe & Open Source
+
 This extension is open-source! Feel free to contribute or explore the code on [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
 
 ## 💕 Enjoying Streaming enhanced?
+
 If you'd like to support further development, you can buy me a [coffee](https://github.com/sponsors/Dreamlinerm).
 If you’re enjoying the enhanced streaming experience, please consider leaving a 5-star review!
 
 ## Disclaimer
+
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.
 
 <!-- descriptionEnd -->
@@ -199,25 +206,26 @@ Skip Credits and Watch Credits are mutally exclusive, but you can turn both of t
 
 # Implemented Shared Feature Overview
 
-| abbrev. | definition              |
-| ------- | ----------------------- |
-| ✅      | Implemented             |
-| ➖      | Not available           |
-| ❌      | Not implemented         |
-| ?       | don't know if necessary |
+| abbrev.  | definition                                            |
+| -------- | ----------------------------------------------------- |
+| ✅       | Implemented                                           |
+| ➖       | Not available                                         |
+| ❌       | Not implemented                                       |
+| ?        | don't know if necessary                               |
+| (Ublock) | blocked by Ublock Origin, but can be used as fallback |
 
-| Feature                    | Netflix | Prime Video | Disney+ (Hotstar, STAR+) | Crunchyroll                           | HBO max |
-| -------------------------- | ------- | ----------- | ------------------------ | ------------------------------------- | ------- |
-| Intro                      | ✅      | ✅          | ✅                       | ✅                                    | ✅      |
-| Recaps                     | ✅      | ✅          | ✅                       | ?                                     | ✅      |
-| Credits                    | ✅      | ✅          | ✅                       | ❌(not necessary if outro is skipped) | ✅      |
-| Ads                        | ✅      | ✅          | ✅                       | ❌(Ublock can do it)                  | ?       |
-| Add Speed Slider           | ✅      | ✅          | ✅                       | ✅                                    | ✅      |
-| Play on Fullscreen         | ✅      | ✅          | ✅                       | ✅                                    | ✅      |
-| fullscreen on double click | ➖      | ✅          | ➖                       | ✅                                    | ?       |
-| Scroll for volume          | ✅      | ✅          | ✅                       | ✅                                    | ❌      |
-| TMDB Rating                | ✅      | ✅          | ✅                       | ❌(MAL ratings better)                | ✅      |
-| Hide Show button           | ✅      | ➖          | ✅                       | ❌                                    | ❌      |
+| Feature                    | Netflix | Prime Video | Disney+ (Hotstar, STAR+) | Crunchyroll          | HBO max | Paramount+ |
+| -------------------------- | ------- | ----------- | ------------------------ | -------------------- | ------- | ---------- |
+| Intro                      | ✅      | ✅          | ✅                       | ✅                   | ✅      | ✅         |
+| Recaps                     | ✅      | ✅          | ✅                       | ?                    | ✅      | ?          |
+| Credits                    | ✅      | ✅          | ✅                       | ✅                   | ✅      | ✅         |
+| Ads                        | ✅      | ✅(Ublock)  | ✅                       | ❌(Ublock)           | ?       | ✅(Ublock) |
+| Add Speed Slider           | ✅      | ✅          | ✅                       | ✅                   | ✅      | ✅         |
+| Play on Fullscreen         | ✅      | ✅          | ✅                       | ✅                   | ✅      | ✅         |
+| fullscreen on double click | ➖      | ✅          | ➖                       | ✅                   | ?       | ✅         |
+| Scroll for volume          | ✅      | ✅          | ✅                       | ✅                   | ❌      | ❌         |
+| TMDB Rating                | ✅      | ✅          | ✅                       | ❌(TODO: MAL rating) | ✅      | ✅         |
+| Hide Show button           | ✅      | ➖          | ✅                       | ❌                   | ❌      | ❌         |
 
 <details>
   <summary>Recap links for shows</summary>

@@ -105,9 +105,9 @@
 <script setup lang="ts">
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
-type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO"
+type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO" | "Paramount"
 
-const streamingServices: Array<StreamingService> = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO"]
+const streamingServices: Array<StreamingService> = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO", "Paramount"]
 
 const skipIntro = computed({
 	get: () => streamingServices.every((service) => settings.value[service].skipIntro),
