@@ -339,7 +339,8 @@ function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	else if (isDisney) AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not(.imdb)")]
 	else if (isHotstar) AllTitleCardsTypes = [document.querySelectorAll(".swiper-slide img:not(.imdb)")]
 	else if (isHBO) AllTitleCardsTypes = [document.querySelectorAll("a[class*='StyledTileLinkNormal-']:not(.imdb)")]
-	else if (isPARA) AllTitleCardsTypes = [document.querySelectorAll("a[class*='zoom-carousel-']:not(.imdb)")]
+	else if (isPARA)
+		AllTitleCardsTypes = [document.querySelectorAll("a[href*='/shows']:not(.imdb), a[href*='/movies']:not(.imdb)")]
 	else if (isPrimeVideo)
 		AllTitleCardsTypes = [
 			document.querySelectorAll(
