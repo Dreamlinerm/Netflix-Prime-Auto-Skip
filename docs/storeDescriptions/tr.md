@@ -1,8 +1,17 @@
-Ayarlar'da hangi özelliklerin etkinleştirileceğini özelleştirebilirsiniz.
+Desteklenen Akış Hizmetleri:
+
+- Netflix
+- Prime Video
+- Disney+ (Hotstar, STAR+)
+- Crunchyroll
+- HBO Max
+- Paramount+
 
 ✨ Özellikler
 
-Bu uzantı Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll ve HBO Max'teki yayın deneyiminizi otomatik olarak geliştirir:
+Ayarlar'da hangi özelliklerin etkinleştirileceğini özelleştirebilirsiniz.
+
+Bu uzantı yayın deneyiminizi otomatik olarak geliştirir:
 
 - Reklamları Engelle
 - İntroları ve Özetleri Atla

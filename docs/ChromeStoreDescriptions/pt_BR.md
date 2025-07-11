@@ -1,8 +1,17 @@
-Você pode personalizar quais recursos estão ativados em Configurações.
+Serviços de streaming suportados:
+
+  • Netflix
+  • Prime Video
+  • Disney+ (Hotstar, STAR+)
+  • Crunchyroll
+  • HBO Max
+  • Paramount+
 
 ✨ Recursos
 
-Essa extensão aprimora sua experiência de streaming na Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll e HBO Max automaticamente:
+Você pode personalizar quais recursos estão ativados em Configurações.
+
+Essa extensão aprimora sua experiência de streaming automaticamente:
 
   • Bloquear anúncios
   • Ignorar introduções e recapitulações

@@ -1,8 +1,16 @@
-Sie können in den Einstellungen festlegen, welche Funktionen aktiviert sind.
+Unterstützte Streaming-Dienste:
 
+- Netflix
+- Prime Video
+- Disney+ (Hotstar, STAR+)
+- Crunchyroll
+- HBO Max
+- Paramount+
 ✨ Funktionen
 
-Diese Erweiterung verbessert Ihr Streaming-Erlebnis auf Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll und HBO Max durch automatische:
+Sie können in den Einstellungen festlegen, welche Funktionen aktiviert sind.
+
+Diese Erweiterung verbessert Ihr Streaming-Erlebnis durch automatisch:
 
 - Werbung blockieren
 - Überspringen von Intros & Zusammenfassungen

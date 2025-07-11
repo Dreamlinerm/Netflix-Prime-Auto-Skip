@@ -1,8 +1,17 @@
-どの機能を有効にするかは設定でカスタマイズできます
+対応ストリーミング・サービス：
+
+- Netflix
+- Prime Video
+- Disney+ (Hotstar, STAR+)
+- Crunchyroll
+- HBO Max
+- Paramount+
 
 ✨特徴
 
-この拡張機能は、Netflix、Prime Video、Disney+（Hotstar、STAR+）、Crunchyroll、HBO Maxでのストリーミング体験を自動的に向上させます：
+どの機能を有効にするかは設定でカスタマイズできます
+
+この拡張機能はでのストリーミング体験を自動的に向上させます：
 
 - 広告をブロック
 - イントロと要約をスキップ

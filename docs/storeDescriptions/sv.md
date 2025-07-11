@@ -1,8 +1,17 @@
-Du kan anpassa vilka funktioner som ska aktiveras i Inställningar.
+Streamingtjänster som stöds:
+
+- Netflix
+- Prime Video
+- Disney+ (Hotstar, STAR+)
+- Crunchyroll
+- HBO Max
+- Paramount+
 
 ✨ Funktioner
 
-Detta tillägg förbättrar din streamingupplevelse på Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll och HBO Max genom att automatiskt:
+Du kan anpassa vilka funktioner som ska aktiveras i Inställningar.
+
+Detta tillägg förbättrar din streamingupplevelse genom att automatiskt:
 
 - Blockera annonser
 - Skippa intron och sammanfattningar

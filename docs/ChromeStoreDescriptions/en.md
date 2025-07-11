@@ -1,8 +1,17 @@
-You can customize which features are enabled in the Settings.
+Supported Streaming Services:
+
+  • Netflix
+  • Prime Video
+  • Disney+ (Hotstar, STAR+)
+  • Crunchyroll
+  • HBO Max
+  • Paramount+
 
 ✨ Features
 
-This extension enhances your streaming experience on Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll, and HBO Max by automatically:
+You can customize which features are enabled in the Settings.
+
+This extension enhances your streaming experience by automatically:
 
   • Block Ads
   • Skipping Intros & Recaps
@@ -36,7 +45,7 @@ Platform-Specific Features:
       • Remembers and selects your last-used profile automatically
       • Adds filters to the release calendar, so it is useable
       • Video size expanded to entire window
-      • Disable the numpad
+      • Disable the numpad controls
 
 Android Support in Desktop mode:
 

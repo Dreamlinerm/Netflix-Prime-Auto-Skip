@@ -1,8 +1,17 @@
-Możesz dostosować, które funkcje są włączone w Ustawieniach.
+Obsługiwane usługi przesyłania strumieniowego:
+
+- Netflix
+- Prime Video
+- Disney+ (Hotstar, STAR+)
+- Crunchyroll
+- HBO Max
+- Paramount+
 
 ✨ Funkcje
 
-To rozszerzenie poprawia jakość streamowania w serwisach Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll i HBO Max poprzez automatyczne:
+Możesz dostosować, które funkcje są włączone w Ustawieniach.
+
+To rozszerzenie poprawia jakość streamowania w serwisach poprzez automatyczne:
 
 - Block Ads
 - Skipping Intros & Recaps

@@ -1,8 +1,17 @@
-您可以在设置中自定义启用哪些功能。
+支持流媒体服务：
+
+  • Netflix
+  • Prime Video
+  • Disney+ (Hotstar, STAR+)
+  • Crunchyroll
+  • HBO Max
+  • Paramount+
 
 ✨功能
 
-此扩展可自动增强你在 Netflix、Prime Video、Disney+（Hotstar、STAR+）、Crunchyroll 和 HBO Max 上的流媒体体验：
+您可以在设置中自定义启用哪些功能。
+
+此扩展可自动增强你在流媒体平台上的体验：
 
   • 屏蔽广告
   • 跳过简介和回顾

@@ -1,8 +1,17 @@
-Vous pouvez personnaliser les fonctionnalités activées dans les paramètres.
+Services de streaming pris en charge :
+
+- Netflix
+- Prime Video
+- Disney+ (Hotstar, STAR+)
+- Crunchyroll
+- HBO Max
+- Paramount+
 
 ✨ Caractéristiques
 
-Cette extension améliore votre expérience de streaming sur Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll et HBO Max en :
+Vous pouvez personnaliser les fonctionnalités activées dans les paramètres.
+
+Cette extension améliore votre expérience de streaming en :
 
 - Bloquer les publicités
 - Ignorer les introductions et les récapitulatifs

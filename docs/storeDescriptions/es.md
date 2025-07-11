@@ -1,8 +1,17 @@
-Puede personalizar las funciones que se activan en los Ajustes.
+Servicios de streaming compatibles:
+
+- Netflix
+- Prime Video
+- Disney+ (Hotstar, STAR+)
+- Crunchyroll
+- HBO Max
+- Paramount+
 
 ✨ Características
 
-Esta extensión mejora su experiencia de streaming en Netflix, Prime Video, Disney + (Hotstar, STAR +), Crunchyroll, y HBO Max de forma automática:
+Puede personalizar las funciones que se activan en los Ajustes.
+
+Esta extensión mejora su experiencia de streaming de forma automática:
 
 - Bloquear anuncios
 - Saltar intros y recapitulaciones
