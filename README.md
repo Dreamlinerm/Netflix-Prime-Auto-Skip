@@ -206,25 +206,26 @@ Skip Credits and Watch Credits are mutally exclusive, but you can turn both of t
 
 # Implemented Shared Feature Overview
 
-| abbrev. | definition              |
-| ------- | ----------------------- |
-| ✅      | Implemented             |
-| ➖      | Not available           |
-| ❌      | Not implemented         |
-| ?       | don't know if necessary |
+| abbrev.  | definition                                            |
+| -------- | ----------------------------------------------------- |
+| ✅       | Implemented                                           |
+| ➖       | Not available                                         |
+| ❌       | Not implemented                                       |
+| ?        | don't know if necessary                               |
+| (Ublock) | blocked by Ublock Origin, but can be used as fallback |
 
-| Feature                    | Netflix | Prime Video | Disney+ (Hotstar, STAR+) | Crunchyroll                           | HBO max | Paramount+ |
-| -------------------------- | ------- | ----------- | ------------------------ | ------------------------------------- | ------- | ---------- |
-| Intro                      | ✅      | ✅          | ✅                       | ✅                                    | ✅      | ✅         |
-| Recaps                     | ✅      | ✅          | ✅                       | ?                                     | ✅      | ?          |
-| Credits                    | ✅      | ✅          | ✅                       | ❌(not necessary if outro is skipped) | ✅      | ✅         |
-| Ads                        | ✅      | ✅          | ✅                       | ❌(Ublock can do it)                  | ?       | ✅         |
-| Add Speed Slider           | ✅      | ✅          | ✅                       | ✅                                    | ✅      | ✅         |
-| Play on Fullscreen         | ✅      | ✅          | ✅                       | ✅                                    | ✅      | ✅         |
-| fullscreen on double click | ➖      | ✅          | ➖                       | ✅                                    | ?       | ✅         |
-| Scroll for volume          | ✅      | ✅          | ✅                       | ✅                                    | ❌      | ❌         |
-| TMDB Rating                | ✅      | ✅          | ✅                       | ❌(MAL ratings better)                | ✅      | ✅         |
-| Hide Show button           | ✅      | ➖          | ✅                       | ❌                                    | ❌      | ❌         |
+| Feature                    | Netflix | Prime Video | Disney+ (Hotstar, STAR+) | Crunchyroll          | HBO max | Paramount+ |
+| -------------------------- | ------- | ----------- | ------------------------ | -------------------- | ------- | ---------- |
+| Intro                      | ✅      | ✅          | ✅                       | ✅                   | ✅      | ✅         |
+| Recaps                     | ✅      | ✅          | ✅                       | ?                    | ✅      | ?          |
+| Credits                    | ✅      | ✅          | ✅                       | ✅                   | ✅      | ✅         |
+| Ads                        | ✅      | ✅(Ublock)  | ✅                       | ❌(Ublock)           | ?       | ✅(Ublock) |
+| Add Speed Slider           | ✅      | ✅          | ✅                       | ✅                   | ✅      | ✅         |
+| Play on Fullscreen         | ✅      | ✅          | ✅                       | ✅                   | ✅      | ✅         |
+| fullscreen on double click | ➖      | ✅          | ➖                       | ✅                   | ?       | ✅         |
+| Scroll for volume          | ✅      | ✅          | ✅                       | ✅                   | ❌      | ❌         |
+| TMDB Rating                | ✅      | ✅          | ✅                       | ❌(TODO: MAL rating) | ✅      | ✅         |
+| Hide Show button           | ✅      | ➖          | ✅                       | ❌                   | ❌      | ❌         |
 
 <details>
   <summary>Recap links for shows</summary>
