@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.75
+
+- Added Paramount+ streaming service
+
 ## 1.1.74
 
 - fixed bug in Crunchyroll Release Calendar
