@@ -55,7 +55,7 @@ function PARA_Intro(video: HTMLVideoElement, time: number) {
 		if (typeof timeCheck === "number" && lastIntroTime != timeCheck) {
 			lastIntroTime = timeCheck
 			resetLastIntroTime()
-			// button.click()
+			button.click()
 			console.log("Intro skipped", button)
 			setTimeout(function () {
 				addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
