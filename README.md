@@ -219,7 +219,7 @@ Skip Credits and Watch Credits are mutally exclusive, but you can turn both of t
 | Recaps                     | ✅      | ✅          | ✅                       | ?                                     | ✅      | ?          |
 | Credits                    | ✅      | ✅          | ✅                       | ❌(not necessary if outro is skipped) | ✅      | ✅         |
 | Ads                        | ✅      | ✅          | ✅                       | ❌(Ublock can do it)                  | ?       | ❌         |
-| Add Speed Slider           | ✅      | ✅          | ✅                       | ✅                                    | ✅      | ❌         |
+| Add Speed Slider           | ✅      | ✅          | ✅                       | ✅                                    | ✅      | ✅         |
 | Play on Fullscreen         | ✅      | ✅          | ✅                       | ✅                                    | ✅      | ✅         |
 | fullscreen on double click | ➖      | ✅          | ➖                       | ✅                                    | ?       | ✅         |
 | Scroll for volume          | ✅      | ✅          | ✅                       | ✅                                    | ❌      | ❌         |

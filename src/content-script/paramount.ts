@@ -109,11 +109,31 @@ const PARASliderStyle = "width:200px;display:none;"
 const PARASpeedStyle = "font-size: 1.5em;width: 2em;color:#fff;cursor: pointer;"
 const PARADivStyle = "height:48px;display: flex;align-items: center;align-self:center;"
 async function PARA_SpeedSlider(video: HTMLVideoElement) {
-	const alreadySlider = document.querySelector("#videoSpeedSlider")
-	if (!alreadySlider) {
-		// infobar position for the slider to be added
-		const position = document.querySelector("div.controls-bottom-right") as HTMLElement
-		if (position) createSlider(video, videoSpeed, position, PARASliderStyle, PARASpeedStyle, PARADivStyle)
+	if (video) {
+		const alreadySlider = document.querySelector("#videoSpeedSlider") as HTMLInputElement
+		if (!alreadySlider) {
+			const position = document.querySelector("div.controls-bottom-right") as HTMLElement
+			if (position) createSlider(video, videoSpeed, position, PARASliderStyle, PARASpeedStyle, PARADivStyle)
+		} else {
+			// need to resync the slider with the video sometimes
+			const speed = document.querySelector("#videoSpeed") as HTMLElement
+			if (speed) {
+				speed.onclick = function () {
+					alreadySlider.style.display = alreadySlider.style.display === "block" ? "none" : "block"
+				}
+				watch(videoSpeed, (newValue) => {
+					speed.textContent = newValue.toFixed(1) + "x"
+					alreadySlider.value = (newValue * 10).toString()
+				})
+			}
+			if (video.playbackRate != parseFloat(alreadySlider.value) / 10) {
+				video.playbackRate = parseFloat(alreadySlider.value) / 10
+			}
+			alreadySlider.oninput = function () {
+				if (speed) speed.textContent = (parseFloat(alreadySlider.value) / 10).toFixed(1) + "x"
+				video.playbackRate = parseFloat(alreadySlider.value) / 10
+			}
+		}
 	}
 }
 async function PARA_SpeedKeyboard() {
