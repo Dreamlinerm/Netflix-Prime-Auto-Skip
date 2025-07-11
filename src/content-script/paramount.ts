@@ -15,6 +15,7 @@ async function startPARA() {
 	startSharedFunctions(Platforms.PARA)
 	PARAObserver.observe(document, config)
 	if (settings.value.PARA?.speedSlider) PARA_SpeedKeyboard()
+	if (settings.value.Video?.scrollVolume) PARA_doubleClick()
 }
 type StatisticsKey =
 	| "AmazonAdTimeSkipped"
@@ -128,6 +129,18 @@ async function PARA_SpeedKeyboard() {
 	// 		videoSpeed.value = video.playbackRate
 	// 	}
 	// })
+}
+
+async function PARA_doubleClick() {
+	if (settings.value.Video?.doubleClick) {
+		// event listener for double click
+		document.ondblclick = function () {
+			const fullscreenButton = document.querySelector("button.btn-fullscreen") as HTMLElement
+			fullscreenButton?.click()
+		}
+	} else {
+		document.ondblclick = null
+	}
 }
 // #endregion
 
