@@ -4,6 +4,7 @@ import { sendMessage } from "webext-bridge/content-script"
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const videoSpeed: Ref<number> = ref(1)
+let lastAdTimeText: number = 0
 const config = { attributes: true, childList: true, subtree: true }
 async function logStartOfAddon() {
 	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
@@ -30,6 +31,12 @@ async function addSkippedTime(startTime: number, endTime: number, key: Statistic
 		settings.value.Statistics[key] += endTime - startTime
 		sendMessage("increaseBadge", {}, "background")
 	}
+}
+async function resetLastAdTimeText(time = 1000) {
+	// timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
+	setTimeout(() => {
+		lastAdTimeText = 0
+	}, time)
 }
 
 // #region Paramount
@@ -158,7 +165,17 @@ async function Paramount_doubleClick() {
 	}
 }
 async function Paramount_SkipAd(video: HTMLVideoElement) {
-	//
+	const adTime = parseInt(document.querySelector("div.ad-info-manager-circular-loader-copy")?.textContent ?? "0")
+	if (adTime > 0 && !lastAdTimeText) {
+		lastAdTimeText = adTime
+		resetLastAdTimeText(3000)
+		video.currentTime += adTime
+		document.querySelector("div.ad-click-overlay")?.remove()
+		console.log("Skipped ad, length:", adTime, "s")
+		settings.value.Statistics.ParamountAdTimeSkipped += adTime
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
+	}
 }
 // #endregion
 
