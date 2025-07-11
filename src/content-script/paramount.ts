@@ -1,3 +1,4 @@
+import { env } from "node:process"
 import { startSharedFunctions, createSlider, Platforms } from "@/content-script/shared-functions"
 import { sendMessage } from "webext-bridge/content-script"
 // Global Variables
@@ -170,7 +171,14 @@ async function Paramount_SkipAd(video: HTMLVideoElement) {
 		lastAdTimeText = adTime
 		resetLastAdTimeText(3000)
 		video.currentTime += adTime
-		document.querySelector("div.ad-click-overlay")?.remove()
+		const adOverlay = document.querySelector("div.ad-click-overlay") as HTMLElement
+		if (adOverlay) {
+			adOverlay.remove()
+			video.onclick = function (event) {
+				if (video.paused) video.play()
+				else video.pause()
+			}
+		}
 		console.log("Skipped ad, length:", adTime, "s")
 		settings.value.Statistics.ParamountAdTimeSkipped += adTime
 		settings.value.Statistics.SegmentsSkipped++
