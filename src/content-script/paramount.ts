@@ -4,7 +4,6 @@ import { sendMessage } from "webext-bridge/content-script"
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const videoSpeed: Ref<number> = ref(1)
-let lastAdTimeText: number = 0
 const config = { attributes: true, childList: true, subtree: true }
 async function logStartOfAddon() {
 	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
@@ -51,12 +50,12 @@ function resetLastIntroTime() {
 }
 function PARA_Intro(video: HTMLVideoElement, time: number) {
 	const button = document.querySelector("button.skip-button") as HTMLElement
-	if (button?.getAttribute("disabled") !== "") {
+	if (button && button.getAttribute("disabled") !== "") {
 		const timeCheck = Math.floor(video?.currentTime ?? 0)
 		if (typeof timeCheck === "number" && lastIntroTime != timeCheck) {
 			lastIntroTime = timeCheck
 			resetLastIntroTime()
-			button.click()
+			// button.click()
 			console.log("Intro skipped", button)
 			setTimeout(function () {
 				addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
@@ -64,58 +63,71 @@ function PARA_Intro(video: HTMLVideoElement, time: number) {
 		}
 	}
 }
-
+let lastCreditText = ""
+async function resetLastCreditText(time = 1000) {
+	// timeout of 1 second to make sure the button is not pressed too fast, it will crash or slow the website otherwise
+	setTimeout(() => {
+		lastCreditText = ""
+	}, time)
+}
 function PARA_Credits(time: number) {
-	const button = document.querySelector('button[class*="UpNextButton-"]') as HTMLElement
-	if (button && lastAdTimeText < time - 1) {
-		lastAdTimeText = time
-		button.click()
-		settings.value.Statistics.SegmentsSkipped++
-		sendMessage("increaseBadge", {}, "background")
-		console.log("Credits skipped", button)
+	const div = document.querySelector('div[class*="end-card-panel-"]') as HTMLElement
+	if (div) {
+		const button = div.querySelector("button.play-button") as HTMLElement
+		// only skipping to next episode not an entirely new series
+		const newEpNumber = div.querySelector("h2.sub-title") as HTMLElement
+		const title = newEpNumber?.getAttribute("title") ?? ""
+		if (lastCreditText != title && button) {
+			lastCreditText = title
+			resetLastCreditText()
+			button.click()
+			settings.value.Statistics.SegmentsSkipped++
+			sendMessage("increaseBadge", {}, "background")
+			console.log("skipped Credits", button)
+		}
 	}
 }
 function PARA_Watch_Credits(video: HTMLVideoElement) {
-	let button = document.querySelector('button[class*="DismissButton-"]') as HTMLElement
-	if (button) {
-		button.click()
-		settings.value.Statistics.SegmentsSkipped++
-		sendMessage("increaseBadge", {}, "background")
-		console.log("Watched Credits", button)
-	}
-	// is movie
-	button = document.querySelector(".player-shrink-transition-enter-done") as HTMLElement
-	if (video && button) {
-		video.click()
-		settings.value.Statistics.SegmentsSkipped++
-		sendMessage("increaseBadge", {}, "background")
-		console.log("Watched Credits", button)
-	}
+	// let button = document.querySelector('button[class*="DismissButton-"]') as HTMLElement
+	// if (button) {
+	// 	button.click()
+	// 	settings.value.Statistics.SegmentsSkipped++
+	// 	sendMessage("increaseBadge", {}, "background")
+	// 	console.log("Watched Credits", button)
+	// }
+	// // is movie
+	// button = document.querySelector(".player-shrink-transition-enter-done") as HTMLElement
+	// if (video && button) {
+	// 	video.click()
+	// 	settings.value.Statistics.SegmentsSkipped++
+	// 	sendMessage("increaseBadge", {}, "background")
+	// 	console.log("Watched Credits", button)
+	// }
 }
 const PARASliderStyle = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;"
 const PARASpeedStyle = "font-size: 1.5em;color:#b2b2b2;"
 const PARADivStyle = "height:48px;display: flex;align-items: center;"
 async function PARA_SpeedSlider(video: HTMLVideoElement) {
-	const alreadySlider = document.querySelector("#videoSpeedSlider")
-	if (!alreadySlider) {
-		// infobar position for the slider to be added
-		const position = document.querySelector('div[class*="ControlsFooterBottomRight-"]') as HTMLElement
-		if (position) createSlider(video, videoSpeed, position, PARASliderStyle, PARASpeedStyle, PARADivStyle)
-	}
+	// const alreadySlider = document.querySelector("#videoSpeedSlider")
+	// if (!alreadySlider) {
+	// 	// infobar position for the slider to be added
+	// 	const position = document.querySelector('div[class*="ControlsFooterBottomRight-"]') as HTMLElement
+	// 	if (position) createSlider(video, videoSpeed, position, PARASliderStyle, PARASpeedStyle, PARADivStyle)
+	// }
 }
 async function PARA_SpeedKeyboard() {
-	const steps = settings.value.General.sliderSteps / 10
-	document.addEventListener("keydown", (event: KeyboardEvent) => {
-		const video = document.querySelector("video") as HTMLVideoElement
-		if (!video) return
-		if (event.key === "d") {
-			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
-			videoSpeed.value = video.playbackRate
-		} else if (event.key === "s") {
-			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
-			videoSpeed.value = video.playbackRate
-		}
-	})
+	// const steps = settings.value.General.sliderSteps / 10
+	// document.addEventListener("keydown", (event: KeyboardEvent) => {
+	// 	const video = document.querySelector("video") as HTMLVideoElement
+	// 	if (!video) return
+	// 	if (event.key === "d") {
+	// 		video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
+	// 		videoSpeed.value = video.playbackRate
+	// 	} else if (event.key === "s") {
+	// 		video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
+	// 		videoSpeed.value = video.playbackRate
+	// 	}
+	// })
 }
 // #endregion
 
