@@ -89,21 +89,14 @@ function PARA_Credits(time: number) {
 	}
 }
 function PARA_Watch_Credits(video: HTMLVideoElement) {
-	// let button = document.querySelector('button[class*="DismissButton-"]') as HTMLElement
-	// if (button) {
-	// 	button.click()
-	// 	settings.value.Statistics.SegmentsSkipped++
-	// 	sendMessage("increaseBadge", {}, "background")
-	// 	console.log("Watched Credits", button)
-	// }
-	// // is movie
-	// button = document.querySelector(".player-shrink-transition-enter-done") as HTMLElement
-	// if (video && button) {
-	// 	video.click()
-	// 	settings.value.Statistics.SegmentsSkipped++
-	// 	sendMessage("increaseBadge", {}, "background")
-	// 	console.log("Watched Credits", button)
-	// }
+	const div = document.querySelector('div[class*="end-card-panel-"]') as HTMLElement
+	const button = div?.querySelector("button.close-btn") as HTMLElement
+	if (button) {
+		button.click()
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
+		console.log("Watched Credits", button)
+	}
 }
 const PARASliderStyle = "width:200px;display:none;"
 const PARASpeedStyle = "font-size: 1.5em;width: 2em;color:#fff;cursor: pointer;"
