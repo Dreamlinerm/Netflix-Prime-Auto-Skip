@@ -58,6 +58,7 @@ export type settingsType = {
 		watchCredits: boolean
 		speedSlider: boolean
 		showRating: boolean
+		skipAd: boolean
 	}
 	Video: {
 		playOnFullScreen: boolean
@@ -165,6 +166,7 @@ export const defaultSettings = {
 		watchCredits: false,
 		speedSlider: true,
 		showRating: true,
+		skipAd: true,
 	},
 	Video: {
 		playOnFullScreen: true,

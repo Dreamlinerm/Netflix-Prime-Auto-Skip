@@ -42,6 +42,7 @@ async function Paramount() {
 	if (settings.value.Paramount?.skipCredits) Paramount_Credits(time)
 	if (settings.value.Paramount?.watchCredits) Paramount_Watch_Credits(video)
 	if (settings.value.Paramount?.speedSlider) Paramount_SpeedSlider(video)
+	if (settings.value.Paramount?.skipAd) Paramount_SkipAd(video)
 }
 let lastIntroTime = -1
 function resetLastIntroTime() {
@@ -131,18 +132,18 @@ async function Paramount_SpeedSlider(video: HTMLVideoElement) {
 	}
 }
 async function Paramount_SpeedKeyboard() {
-	// const steps = settings.value.General.sliderSteps / 10
-	// document.addEventListener("keydown", (event: KeyboardEvent) => {
-	// 	const video = document.querySelector("video") as HTMLVideoElement
-	// 	if (!video) return
-	// 	if (event.key === "d") {
-	// 		video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
-	// 		videoSpeed.value = video.playbackRate
-	// 	} else if (event.key === "s") {
-	// 		video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
-	// 		videoSpeed.value = video.playbackRate
-	// 	}
-	// })
+	const steps = settings.value.General.sliderSteps / 10
+	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		const video = document.querySelector("video") as HTMLVideoElement
+		if (!video) return
+		if (event.key === "d") {
+			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
+			videoSpeed.value = video.playbackRate
+		} else if (event.key === "s") {
+			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
+			videoSpeed.value = video.playbackRate
+		}
+	})
 }
 
 async function Paramount_doubleClick() {
@@ -155,6 +156,9 @@ async function Paramount_doubleClick() {
 	} else {
 		document.ondblclick = null
 	}
+}
+async function Paramount_SkipAd(video: HTMLVideoElement) {
+	//
 }
 // #endregion
 
