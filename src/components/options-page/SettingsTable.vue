@@ -330,13 +330,10 @@ const skipIntro = computed({
 })
 
 const skipCredits = computed({
-	// @ts-expect-error ?. handles the error
 	get: () => streamingServices.every((service) => settings.value[service]?.skipCredits ?? true),
 	set: (value) => {
 		streamingServices.forEach((service) => {
-			// @ts-expect-error ?. handles the error
 			if (settings.value[service]?.skipCredits !== undefined) {
-				// @ts-expect-error ?. handles the error
 				settings.value[service].skipCredits = value
 			}
 		})
@@ -423,9 +420,7 @@ const watchCredits = computed({
 		})
 		if (value) {
 			streamingServices.forEach((service) => {
-				// @ts-expect-error ?. handles the error
 				if (settings.value[service]?.skipCredits !== undefined) {
-					// @ts-expect-error ?. handles the error
 					settings.value[service].skipCredits = false
 				}
 			})

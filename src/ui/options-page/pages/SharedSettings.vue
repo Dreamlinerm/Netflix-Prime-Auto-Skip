@@ -96,7 +96,7 @@ function removeAllTitles() {
 						</div>
 					</td>
 					<td>
-						<=
+						&lt;=
 						<input
 							v-model="threshold.value"
 							type="number"
