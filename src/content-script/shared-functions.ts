@@ -30,6 +30,7 @@ export enum Platforms {
 	Hotstar = "hotstar",
 	Crunchyroll = "crunchyroll",
 	HBO = "hbo",
+	PARA = "paramount",
 }
 
 export async function startSharedFunctions(platform: Platforms) {

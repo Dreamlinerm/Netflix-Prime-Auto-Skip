@@ -52,6 +52,13 @@ export type settingsType = {
 		speedSlider: boolean
 		showRating: boolean
 	}
+	PARA: {
+		skipIntro: boolean
+		skipCredits: boolean
+		watchCredits: boolean
+		speedSlider: boolean
+		showRating: boolean
+	}
 	Video: {
 		playOnFullScreen: boolean
 		epilepsy: boolean
@@ -146,6 +153,13 @@ export const defaultSettings = {
 		disableNumpad: true,
 	},
 	HBO: {
+		skipIntro: true,
+		skipCredits: true,
+		watchCredits: false,
+		speedSlider: true,
+		showRating: true,
+	},
+	PARA: {
 		skipIntro: true,
 		skipCredits: true,
 		watchCredits: false,
