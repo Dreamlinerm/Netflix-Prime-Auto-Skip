@@ -90,7 +90,7 @@ function PARA_Credits(time: number) {
 }
 function PARA_Watch_Credits(video: HTMLVideoElement) {
 	const div = document.querySelector('div[class*="end-card-panel-"]') as HTMLElement
-	const button = div?.querySelector("button.close-btn") as HTMLElement
+	const button = div?.querySelector("button#close-btn") as HTMLElement
 	if (button) {
 		button.click()
 		settings.value.Statistics.SegmentsSkipped++
