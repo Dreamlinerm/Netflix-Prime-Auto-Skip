@@ -50,10 +50,22 @@ function filterQueued(display: displayType) {
 }
 
 function filterDub(display: displayType) {
+	// filter all titles that contain "Dub" or "Audio"
+	const list = document.querySelectorAll("cite[itemprop='name']")
+	list.forEach((element) => {
+		if (
+			(element?.textContent?.includes("Dub") || element?.textContent?.includes("Audio")) &&
+			element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement
+		)
+			element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
+	})
+	// filter all titles which are duplicated
 	const first = Array.from(document.querySelectorAll("cite[itemprop='name']"))
 	// filter out everything except the first element by title
-	const list = first.filter((element, index) => index != first.findIndex((el) => el.textContent == element.textContent))
-	list.forEach((element) => {
+	const duplicates = first.filter(
+		(element, index) => index != first.findIndex((el) => el.textContent == element.textContent),
+	)
+	duplicates.forEach((element) => {
 		if (element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement)
 			element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
 	})
