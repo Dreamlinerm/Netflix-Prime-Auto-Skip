@@ -60,7 +60,7 @@ function filterDub(display: displayType) {
 			element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
 	})
 	// filter all titles which are duplicated
-	const first = Array.from(document.querySelectorAll("cite[itemprop='name']"))
+	const first = Array.from(list)
 	// filter out everything except the first element by title
 	const duplicates = first.filter(
 		(element, index) => index != first.findIndex((el) => el.textContent == element.textContent),
