@@ -25,6 +25,99 @@ import org.json.JSONObject
 // import androidx.appcompat.app.AppCompatActivity
 
 class TvActivity : ComponentActivity() {
+    private var isMouseMode = true
+    private var backLongPressHandled = false
+    private val LONG_PRESS_INTERVAL = 500L // ms
+
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        if (event.keyCode == KeyEvent.KEYCODE_BACK) {
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                if (!backLongPressHandled) {
+                    backLongPressHandled = false
+                    val handler = android.os.Handler()
+                    handler.postDelayed(
+                            {
+                                if (!backLongPressHandled && isPressed(event)) {
+                                    toggleMouseMode()
+                                    backLongPressHandled = true
+                                }
+                            },
+                            LONG_PRESS_INTERVAL
+                    )
+                }
+                return true
+            } else if (event.action == KeyEvent.ACTION_UP) {
+                if (!backLongPressHandled) {
+                    // Single press: go back in history if possible
+                    if (websiteHistory.isNotEmpty()) {
+                        val webView = findViewById<WebView>(R.id.web)
+                        val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
+                        webView.loadUrl(lastWebsite)
+                        backLongPressHandled = true
+                        return true
+                    }
+                }
+                // Always reset for next press
+                backLongPressHandled = false
+            }
+        }
+        if (isMouseMode) {
+            when (event.keyCode) {
+                KeyEvent.KEYCODE_DPAD_UP -> {
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_UP intercepted")
+                    val webView = findViewById<WebView>(R.id.web)
+                    webView.evaluateJavascript("window.virtualCursor.move(0,-1);", null)
+                    return true
+                }
+                KeyEvent.KEYCODE_DPAD_LEFT -> {
+
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_LEFT intercepted")
+                    val webView = findViewById<WebView>(R.id.web)
+                    webView.evaluateJavascript("window.virtualCursor.move(-1,0);", null)
+                    return true
+                }
+                KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_RIGHT intercepted")
+                    val webView = findViewById<WebView>(R.id.web)
+                    webView.evaluateJavascript("window.virtualCursor.move(1,0);", null)
+                    return true
+                }
+                KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_CENTER intercepted")
+                    val webView = findViewById<WebView>(R.id.web)
+                    webView.evaluateJavascript("window.virtualCursor.click();", null)
+                    return true
+                }
+                KeyEvent.KEYCODE_DPAD_DOWN -> {
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_DOWN intercepted")
+                    val webView = findViewById<WebView>(R.id.web)
+                    webView.evaluateJavascript("window.virtualCursor.move(0,1);", null)
+                    return true
+                }
+            // KeyEvent.KEYCODE_BACK -> {
+            //     Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_BACK intercepted")
+            //     if (websiteHistory.isNotEmpty()) {
+            //         val webView = findViewById<WebView>(R.id.web)
+            //         val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
+            //         webView.loadUrl(lastWebsite)
+            //         return true
+            //     }
+            // }
+            }
+        }
+        return super.dispatchKeyEvent(event)
+    }
+
+    private fun toggleMouseMode() {
+        isMouseMode = !isMouseMode
+        val mode = if (isMouseMode) "Virtual Mouse Mode" else "Regular Mode"
+        Toast.makeText(this, "Switched to $mode", Toast.LENGTH_SHORT).show()
+        Log.d("TvActivity", "Switched to $mode")
+    }
+
+    private fun isPressed(event: KeyEvent): Boolean {
+        return event.action == KeyEvent.ACTION_DOWN || event.isLongPress
+    }
     private val TVUA =
             "Mozilla/5.0 (Linux; Android 14; SH-M26 Build/SA181; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/134.0.6998.108 Mobile Safari/537.36 Instagram 372.0.0.48.60 Android (34/14; 490dpi; 1080x2213; SHARP; SH-M26; Quess; qcom; in_ID; 709818019)"
     private val chromeUA =
@@ -136,30 +229,6 @@ class TvActivity : ComponentActivity() {
         setupWebView(webView)
 
         showWebsiteSelectionDialog(webView)
-        webView.setOnKeyListener { _, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN) {
-                when (keyCode) {
-                    // KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                    //     Log.d("Interceptor", "KEYCODE_DPAD_RIGHT: goForward()")
-                    //     true
-                    // }
-                    // KeyEvent.KEYCODE_DPAD_LEFT -> {
-                    //     Log.d("Interceptor", "KEYCODE_DPAD_LEFT: goBack()")
-                    //     true
-                    // }
-                    // go back in history
-                    KeyEvent.KEYCODE_BACK -> {
-                        Log.d("Interceptor", "KEYCODE_BACK intercepted")
-                        if (websiteHistory.isNotEmpty()) {
-                            val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
-                            webView.loadUrl(lastWebsite)
-                            true
-                        } else false
-                    }
-                    else -> false
-                }
-            } else false
-        }
     }
 
     override fun onDestroy() {
@@ -204,6 +273,7 @@ class TvActivity : ComponentActivity() {
                         if (fileName != null) {
                             modifyWebViewContent(webView, fileName)
                         }
+                        modifyWebViewContent(webView, "virtual-cursor.js")
                         modifyWebViewContent(webView, "shared-functions.js")
                     }
                     // error could not load scripts
