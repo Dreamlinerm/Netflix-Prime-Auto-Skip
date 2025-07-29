@@ -1,6 +1,10 @@
 console.log("virtual-cursor.js")
 // virtual-cursor.js
 if (!window.virtualCursor) {
+	// const fuctionMap = {
+
+	// }
+	const AmazonVideoClass = ".dv-player-fullscreen video"
 	window.virtualCursor = {
 		x: Math.floor(window.innerWidth / 2 - 12),
 		y: Math.floor(window.innerHeight / 2 - 12),
@@ -63,18 +67,30 @@ if (!window.virtualCursor) {
 			this.cursor.style.left = this.x + "px"
 			this.cursor.style.top = this.y + "px"
 			const el = document.elementFromPoint(this.x + 12, this.y + 12)
-			if (el) {
-				// focus the element under the cursor
-				el.focus()
-			}
-
+			el?.focus()
 			// Show cursor and reset hide timer
 			this.showCursor()
 		},
 		click: function () {
 			this.showCursor()
-			const el = document.elementFromPoint(this.x + 12, this.y + 12)
-			el?.click()
+			let el = document.elementFromPoint(this.x + 12, this.y + 12)
+			if (el.tagName == "IMG") el = el.closest("button, a, div")
+			console.log("el", el)
+			// amazon fix for play buttons
+			if (el.classList.contains("fewcsle")) {
+				console.log("click on fewcsle element")
+				const button = el.querySelector("button")
+				if (button) {
+					if (button.classList.contains("atvwebplayersdk-fastseekback-button")) this.rewind()
+					else if (button.classList.contains("atvwebplayersdk-fastseekforward-button")) this.forward()
+					else if (button.classList.contains("atvwebplayersdk-playpause-button")) this.clickVideo()
+					else {
+						console.log("clicking button", button)
+						el?.click()
+					}
+				}
+			} else if (el.tagName === "VIDEO") this.clickVideo()
+			else el?.click()
 		},
 		showCursor: function () {
 			if (this.cursor) {
@@ -83,6 +99,28 @@ if (!window.virtualCursor) {
 				this._hideTimeout = setTimeout(() => {
 					this.cursor.style.display = "none"
 				}, 1200)
+			}
+		},
+		clickVideo: function () {
+			console.log("clickVideo")
+			const video = document.querySelector(AmazonVideoClass)
+			if (video) {
+				if (video.paused) video.play()
+				else video.pause()
+			}
+		},
+		forward: function () {
+			console.log("forward")
+			const video = document.querySelector(AmazonVideoClass)
+			if (video) {
+				video.currentTime += 10
+			}
+		},
+		rewind: function () {
+			console.log("rewind")
+			const video = document.querySelector(AmazonVideoClass)
+			if (video) {
+				video.currentTime -= 10
 			}
 		},
 	}

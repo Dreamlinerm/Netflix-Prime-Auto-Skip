@@ -147,9 +147,15 @@ class TvActivity : ComponentActivity() {
                                     "amazon.js",
                                     chromeUA
                             ),
+                    // "Amazon.de" to
+                    //         Triple(
+                    //                 "https://www.amazon.de/gp/video/storefront",
+                    //                 "amazon.js",
+                    //                 chromeUA
+                    //         ),
                     "Amazon.de" to
                             Triple(
-                                    "https://www.amazon.de/gp/video/storefront",
+                                    "https://www.amazon.de/gp/video/storefront/?pvp=/ref%3Ddvm_crs_nav_de_xs_s_d_disc_eg_al?ref_=nav_cs_prime_video",
                                     "amazon.js",
                                     chromeUA
                             ),
