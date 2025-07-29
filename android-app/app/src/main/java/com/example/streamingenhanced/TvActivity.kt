@@ -62,47 +62,49 @@ class TvActivity : ComponentActivity() {
             }
         }
         if (isMouseMode) {
-            when (event.keyCode) {
-                KeyEvent.KEYCODE_DPAD_UP -> {
-                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_UP intercepted")
-                    val webView = findViewById<WebView>(R.id.web)
-                    webView.evaluateJavascript("window.virtualCursor.move(0,-1);", null)
-                    return true
-                }
-                KeyEvent.KEYCODE_DPAD_LEFT -> {
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                when (event.keyCode) {
+                    KeyEvent.KEYCODE_DPAD_UP -> {
+                        Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_UP intercepted")
+                        val webView = findViewById<WebView>(R.id.web)
+                        webView.evaluateJavascript("window.virtualCursor.move(0,-1);", null)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_LEFT -> {
 
-                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_LEFT intercepted")
-                    val webView = findViewById<WebView>(R.id.web)
-                    webView.evaluateJavascript("window.virtualCursor.move(-1,0);", null)
-                    return true
+                        Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_LEFT intercepted")
+                        val webView = findViewById<WebView>(R.id.web)
+                        webView.evaluateJavascript("window.virtualCursor.move(-1,0);", null)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                        Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_RIGHT intercepted")
+                        val webView = findViewById<WebView>(R.id.web)
+                        webView.evaluateJavascript("window.virtualCursor.move(1,0);", null)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                        Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_CENTER intercepted")
+                        val webView = findViewById<WebView>(R.id.web)
+                        webView.evaluateJavascript("window.virtualCursor.click();", null)
+                        return true
+                    }
+                    KeyEvent.KEYCODE_DPAD_DOWN -> {
+                        Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_DOWN intercepted")
+                        val webView = findViewById<WebView>(R.id.web)
+                        webView.evaluateJavascript("window.virtualCursor.move(0,1);", null)
+                        return true
+                    }
+                // KeyEvent.KEYCODE_BACK -> {
+                //     Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_BACK intercepted")
+                //     if (websiteHistory.isNotEmpty()) {
+                //         val webView = findViewById<WebView>(R.id.web)
+                //         val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
+                //         webView.loadUrl(lastWebsite)
+                //         return true
+                //     }
+                // }
                 }
-                KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_RIGHT intercepted")
-                    val webView = findViewById<WebView>(R.id.web)
-                    webView.evaluateJavascript("window.virtualCursor.move(1,0);", null)
-                    return true
-                }
-                KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
-                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_CENTER intercepted")
-                    val webView = findViewById<WebView>(R.id.web)
-                    webView.evaluateJavascript("window.virtualCursor.click();", null)
-                    return true
-                }
-                KeyEvent.KEYCODE_DPAD_DOWN -> {
-                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_DOWN intercepted")
-                    val webView = findViewById<WebView>(R.id.web)
-                    webView.evaluateJavascript("window.virtualCursor.move(0,1);", null)
-                    return true
-                }
-            // KeyEvent.KEYCODE_BACK -> {
-            //     Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_BACK intercepted")
-            //     if (websiteHistory.isNotEmpty()) {
-            //         val webView = findViewById<WebView>(R.id.web)
-            //         val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
-            //         webView.loadUrl(lastWebsite)
-            //         return true
-            //     }
-            // }
             }
         }
         return super.dispatchKeyEvent(event)
