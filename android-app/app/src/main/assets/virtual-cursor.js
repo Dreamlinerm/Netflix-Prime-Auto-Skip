@@ -74,7 +74,7 @@ if (!window.virtualCursor) {
 		click: function () {
 			this.showCursor()
 			const el = document.elementFromPoint(this.x + 12, this.y + 12)
-			if (el) el.click()
+			el?.click()
 		},
 		showCursor: function () {
 			if (this.cursor) {
