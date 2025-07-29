@@ -22,6 +22,9 @@ if (!window.virtualCursor) {
 			this.cursor.style.left = this.x + "px"
 			this.cursor.style.top = this.y + "px"
 			document.body.appendChild(this.cursor)
+			// focus in the middle of the screen
+			const el = document.elementFromPoint(this.x + 12, this.y + 12)
+			if (el) el.focus()
 		},
 		move: function (dx, dy) {
 			const viewportHeight = window.innerHeight

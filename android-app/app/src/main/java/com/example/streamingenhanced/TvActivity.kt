@@ -25,37 +25,41 @@ import org.json.JSONObject
 // import androidx.appcompat.app.AppCompatActivity
 
 class TvActivity : ComponentActivity() {
-    private var isMouseMode = false
-    private var lastDpadDownPressTime: Long = 0
-    private var dpadDownPressCount = 0
-    private val DOUBLE_PRESS_INTERVAL = 300 // ms
+    private var isMouseMode = true
+    private var backLongPressHandled = false
+    private val LONG_PRESS_INTERVAL = 500L // ms
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        if (event.keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+        if (event.keyCode == KeyEvent.KEYCODE_BACK) {
             if (event.action == KeyEvent.ACTION_DOWN) {
-                val currentTime = System.currentTimeMillis()
-                if (currentTime - lastDpadDownPressTime < DOUBLE_PRESS_INTERVAL) {
-                    dpadDownPressCount++
-                } else {
-                    dpadDownPressCount = 1
-                }
-                lastDpadDownPressTime = currentTime
-                // If in mouse mode, move the mouse
-                if (isMouseMode) {
-                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_DOWN intercepted")
-                    val webView = findViewById<WebView>(R.id.web)
-                    webView.evaluateJavascript("window.virtualCursor.move(0,1);", null)
-                    // Do not return here, allow double press logic to work
+                if (!backLongPressHandled) {
+                    backLongPressHandled = false
+                    val handler = android.os.Handler()
+                    handler.postDelayed(
+                            {
+                                if (!backLongPressHandled && isPressed(event)) {
+                                    toggleMouseMode()
+                                    backLongPressHandled = true
+                                }
+                            },
+                            LONG_PRESS_INTERVAL
+                    )
                 }
                 return true
             } else if (event.action == KeyEvent.ACTION_UP) {
-                if (dpadDownPressCount == 2) {
-                    toggleMouseMode()
-                    dpadDownPressCount = 0
-                    return true
+                if (!backLongPressHandled) {
+                    // Single press: go back in history if possible
+                    if (websiteHistory.isNotEmpty()) {
+                        val webView = findViewById<WebView>(R.id.web)
+                        val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
+                        webView.loadUrl(lastWebsite)
+                        backLongPressHandled = true
+                        return true
+                    }
                 }
+                // Always reset for next press
+                backLongPressHandled = false
             }
-            // If not in mouse mode, let it fall through (or handle as needed)
         }
         if (isMouseMode) {
             when (event.keyCode) {
@@ -84,15 +88,21 @@ class TvActivity : ComponentActivity() {
                     webView.evaluateJavascript("window.virtualCursor.click();", null)
                     return true
                 }
-                KeyEvent.KEYCODE_BACK -> {
-                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_BACK intercepted")
-                    if (websiteHistory.isNotEmpty()) {
-                        val webView = findViewById<WebView>(R.id.web)
-                        val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
-                        webView.loadUrl(lastWebsite)
-                        return true
-                    }
+                KeyEvent.KEYCODE_DPAD_DOWN -> {
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_DOWN intercepted")
+                    val webView = findViewById<WebView>(R.id.web)
+                    webView.evaluateJavascript("window.virtualCursor.move(0,1);", null)
+                    return true
                 }
+            // KeyEvent.KEYCODE_BACK -> {
+            //     Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_BACK intercepted")
+            //     if (websiteHistory.isNotEmpty()) {
+            //         val webView = findViewById<WebView>(R.id.web)
+            //         val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
+            //         webView.loadUrl(lastWebsite)
+            //         return true
+            //     }
+            // }
             }
         }
         return super.dispatchKeyEvent(event)
@@ -219,22 +229,6 @@ class TvActivity : ComponentActivity() {
         setupWebView(webView)
 
         showWebsiteSelectionDialog(webView)
-        webView.setOnKeyListener { _, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN) {
-                when (keyCode) {
-                    // go back in history
-                    KeyEvent.KEYCODE_BACK -> {
-                        Log.d("Interceptor", "KEYCODE_BACK intercepted")
-                        if (websiteHistory.isNotEmpty()) {
-                            val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
-                            webView.loadUrl(lastWebsite)
-                            true
-                        } else false
-                    }
-                    else -> false
-                }
-            } else false
-        }
     }
 
     override fun onDestroy() {
