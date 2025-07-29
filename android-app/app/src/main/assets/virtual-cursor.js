@@ -51,6 +51,11 @@ if (!window.virtualCursor) {
 			this.y += dy * this.step
 			this.cursor.style.left = this.x + "px"
 			this.cursor.style.top = this.y + "px"
+			const el = document.elementFromPoint(this.x + 12, this.y + 12)
+			if (el) {
+				// focus the element under the cursor
+				el.focus()
+			}
 
 			// Show cursor and reset hide timer
 			this.cursor.style.display = "block"

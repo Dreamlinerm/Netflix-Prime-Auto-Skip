@@ -25,49 +25,88 @@ import org.json.JSONObject
 // import androidx.appcompat.app.AppCompatActivity
 
 class TvActivity : ComponentActivity() {
+    private var isMouseMode = false
+    private var lastDpadDownPressTime: Long = 0
+    private var dpadDownPressCount = 0
+    private val DOUBLE_PRESS_INTERVAL = 300 // ms
+
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        when (event.keyCode) {
-            KeyEvent.KEYCODE_DPAD_UP -> {
-                Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_UP intercepted")
-                val webView = findViewById<WebView>(R.id.web)
-                webView.evaluateJavascript("window.virtualCursor.move(0,-1);", null)
-                return true
-            }
-            KeyEvent.KEYCODE_DPAD_DOWN -> {
-                Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_DOWN intercepted")
-                val webView = findViewById<WebView>(R.id.web)
-                webView.evaluateJavascript("window.virtualCursor.move(0,1);", null)
-                return true
-            }
-            KeyEvent.KEYCODE_DPAD_LEFT -> {
-                Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_LEFT intercepted")
-                val webView = findViewById<WebView>(R.id.web)
-                webView.evaluateJavascript("window.virtualCursor.move(-1,0);", null)
-                return true
-            }
-            KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_RIGHT intercepted")
-                val webView = findViewById<WebView>(R.id.web)
-                webView.evaluateJavascript("window.virtualCursor.move(1,0);", null)
-                return true
-            }
-            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
-                Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_CENTER intercepted")
-                val webView = findViewById<WebView>(R.id.web)
-                webView.evaluateJavascript("window.virtualCursor.click();", null)
-                return true
-            }
-            KeyEvent.KEYCODE_BACK -> {
-                Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_BACK intercepted")
-                if (websiteHistory.isNotEmpty()) {
+        if (event.keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                val currentTime = System.currentTimeMillis()
+                if (currentTime - lastDpadDownPressTime < DOUBLE_PRESS_INTERVAL) {
+                    dpadDownPressCount++
+                } else {
+                    dpadDownPressCount = 1
+                }
+                lastDpadDownPressTime = currentTime
+                // If in mouse mode, move the mouse
+                if (isMouseMode) {
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_DOWN intercepted")
                     val webView = findViewById<WebView>(R.id.web)
-                    val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
-                    webView.loadUrl(lastWebsite)
+                    webView.evaluateJavascript("window.virtualCursor.move(0,1);", null)
+                    // Do not return here, allow double press logic to work
+                }
+                return true
+            } else if (event.action == KeyEvent.ACTION_UP) {
+                if (dpadDownPressCount == 2) {
+                    toggleMouseMode()
+                    dpadDownPressCount = 0
                     return true
+                }
+            }
+            // If not in mouse mode, let it fall through (or handle as needed)
+        }
+        if (isMouseMode) {
+            when (event.keyCode) {
+                KeyEvent.KEYCODE_DPAD_UP -> {
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_UP intercepted")
+                    val webView = findViewById<WebView>(R.id.web)
+                    webView.evaluateJavascript("window.virtualCursor.move(0,-1);", null)
+                    return true
+                }
+                KeyEvent.KEYCODE_DPAD_LEFT -> {
+
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_LEFT intercepted")
+                    val webView = findViewById<WebView>(R.id.web)
+                    webView.evaluateJavascript("window.virtualCursor.move(-1,0);", null)
+                    return true
+                }
+                KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_RIGHT intercepted")
+                    val webView = findViewById<WebView>(R.id.web)
+                    webView.evaluateJavascript("window.virtualCursor.move(1,0);", null)
+                    return true
+                }
+                KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_DPAD_CENTER intercepted")
+                    val webView = findViewById<WebView>(R.id.web)
+                    webView.evaluateJavascript("window.virtualCursor.click();", null)
+                    return true
+                }
+                KeyEvent.KEYCODE_BACK -> {
+                    Log.d("Interceptor", "dispatchKeyEvent: KEYCODE_BACK intercepted")
+                    if (websiteHistory.isNotEmpty()) {
+                        val webView = findViewById<WebView>(R.id.web)
+                        val lastWebsite = websiteHistory.removeAt(websiteHistory.size - 1)
+                        webView.loadUrl(lastWebsite)
+                        return true
+                    }
                 }
             }
         }
         return super.dispatchKeyEvent(event)
+    }
+
+    private fun toggleMouseMode() {
+        isMouseMode = !isMouseMode
+        val mode = if (isMouseMode) "Virtual Mouse Mode" else "Regular Mode"
+        Toast.makeText(this, "Switched to $mode", Toast.LENGTH_SHORT).show()
+        Log.d("TvActivity", "Switched to $mode")
+    }
+
+    private fun isPressed(event: KeyEvent): Boolean {
+        return event.action == KeyEvent.ACTION_DOWN || event.isLongPress
     }
     private val TVUA =
             "Mozilla/5.0 (Linux; Android 14; SH-M26 Build/SA181; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/134.0.6998.108 Mobile Safari/537.36 Instagram 372.0.0.48.60 Android (34/14; 490dpi; 1080x2213; SHARP; SH-M26; Quess; qcom; in_ID; 709818019)"
