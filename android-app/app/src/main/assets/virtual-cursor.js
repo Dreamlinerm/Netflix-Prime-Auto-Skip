@@ -58,7 +58,7 @@ if (!window.virtualCursor) {
 				const mouseOverEvent = new MouseEvent("mouseover", {
 					bubbles: true,
 					clientX: this.x + 12,
-					clientY: this.y + 12
+					clientY: this.y + 12,
 				})
 				el.dispatchEvent(mouseOverEvent)
 			}
@@ -71,7 +71,7 @@ if (!window.virtualCursor) {
 			}, 1200)
 		},
 		click: function () {
-			var el = document.elementFromPoint(this.x + 12, this.y + 12)
+			const el = document.elementFromPoint(this.x + 12, this.y + 12)
 			//const childButton = el.closest("button");
 			//if (childButton){
 			//console.log("child", childButton)
