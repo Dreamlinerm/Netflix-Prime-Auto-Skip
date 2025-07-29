@@ -46,6 +46,14 @@ if (!window.virtualCursor) {
 					return
 				}
 			}
+			// Check for horizontal movement
+			// if mouse at borders do not move
+			if (
+				(dx > 0 && this.x + this.step > window.innerWidth - 24) || // moving right, near right edge
+				(dx < 0 && this.x - this.step < 0) // moving left, near left edge
+			) {
+				return
+			}
 
 			this.x += dx * this.step
 			this.y += dy * this.step
@@ -58,21 +66,20 @@ if (!window.virtualCursor) {
 			}
 
 			// Show cursor and reset hide timer
-			this.cursor.style.display = "block"
-			if (this._hideTimeout) clearTimeout(this._hideTimeout)
-			this._hideTimeout = setTimeout(() => {
-				this.cursor.style.display = "none"
-			}, 1200)
+			this.showCursor()
 		},
 		click: function () {
+			this.showCursor()
 			const el = document.elementFromPoint(this.x + 12, this.y + 12)
-			//const childButton = el.closest("button");
-			//if (childButton){
-			//console.log("child", childButton)
-			//childButton.click()}
-			if (el) {
-				console.log("el", el)
-				el.click()
+			if (el) el.click()
+		},
+		showCursor: function () {
+			if (this.cursor) {
+				this.cursor.style.display = "block"
+				if (this._hideTimeout) clearTimeout(this._hideTimeout)
+				this._hideTimeout = setTimeout(() => {
+					this.cursor.style.display = "none"
+				}, 1200)
 			}
 		},
 	}
