@@ -23,6 +23,7 @@ if (!window.virtualCursor) {
 			this.cursor.style.top = this.y + "px"
 			document.body.appendChild(this.cursor)
 		},
+		_lastElement: null,
 		move: function (dx, dy) {
 			const viewportHeight = window.innerHeight
 			const cursorBottom = this.y + 24
@@ -52,15 +53,49 @@ if (!window.virtualCursor) {
 			this.cursor.style.left = this.x + "px"
 			this.cursor.style.top = this.y + "px"
 
-			// Fire hover event on the element under the cursor
+			// Track the element under the cursor
 			const el = document.elementFromPoint(this.x + 12, this.y + 12)
+			if (el !== this._lastElement) {
+				// If we left an element, fire mouseout/mouseleave
+				if (this._lastElement) {
+					const mouseOutEvent = new MouseEvent("mouseout", {
+						bubbles: true,
+						clientX: this.x + 12,
+						clientY: this.y + 12,
+					})
+					this._lastElement.dispatchEvent(mouseOutEvent)
+					const mouseLeaveEvent = new MouseEvent("mouseleave", {
+						bubbles: true,
+						clientX: this.x + 12,
+						clientY: this.y + 12,
+					})
+					this._lastElement.dispatchEvent(mouseLeaveEvent)
+				}
+				// If we entered a new element, fire mouseover/mouseenter
+				if (el) {
+					const mouseOverEvent = new MouseEvent("mouseover", {
+						bubbles: true,
+						clientX: this.x + 12,
+						clientY: this.y + 12,
+					})
+					el.dispatchEvent(mouseOverEvent)
+					const mouseEnterEvent = new MouseEvent("mouseenter", {
+						bubbles: true,
+						clientX: this.x + 12,
+						clientY: this.y + 12,
+					})
+					el.dispatchEvent(mouseEnterEvent)
+				}
+				this._lastElement = el
+			}
+			// Always fire mousemove on the current element
 			if (el) {
-				const mouseOverEvent = new MouseEvent("mouseover", {
+				const mouseMoveEvent = new MouseEvent("mousemove", {
 					bubbles: true,
 					clientX: this.x + 12,
 					clientY: this.y + 12,
 				})
-				el.dispatchEvent(mouseOverEvent)
+				el.dispatchEvent(mouseMoveEvent)
 			}
 
 			// Show cursor and reset hide timer
