@@ -1,3 +1,4 @@
+@layer globalCss, base, utilities;
 /* required for vue-devtools
  @use "/node_modules/vite-plugin-vue-devtools/src/overlay/devtools-overlay.css"; */
 @import "tailwindcss";
@@ -35,6 +36,7 @@
 	--color-accent: #00ffff;
 	--color-neutral: #161616;
 	--color-base-100: #212121;
+	--color-error: #ff5861;
 	--color-error-content: #fff;
 }
 
@@ -62,12 +64,13 @@ h3 {
 	@apply text-lg;
 }
 
-.btn {
-	@apply text-xl h-9 leading-9;
-}
-
-p {
-	@apply text-2xl;
+@layer globalCss {
+	p {
+		@apply text-2xl;
+	}
+	.btn {
+		@apply text-xl h-9 leading-9;
+	}
 }
 
 /* WebKit and Chromiums */
