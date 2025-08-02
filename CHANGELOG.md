@@ -3,6 +3,7 @@
 ## 1.1.77
 
 - fix bug in Crunchyroll Release Calendar
+- added Tooltips to Action Popup
 
 dev:
 
