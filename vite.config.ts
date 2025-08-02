@@ -90,7 +90,6 @@ export default defineConfig({
 				{
 					notivue: ["Notivue", "Notification", ["push", "pushNotification"]],
 				},
-				// { "@tailwindcss/vite": ["tailwindcss"] },
 			],
 			dts: "src/types/auto-imports.d.ts",
 			dirs: ["src/composables/**", "src/stores/**", "src/utils/**"],

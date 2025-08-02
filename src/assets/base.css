@@ -1,7 +1,7 @@
 /* required for vue-devtools
  @use "/node_modules/vite-plugin-vue-devtools/src/overlay/devtools-overlay.css"; */
 @import "tailwindcss";
-@import "tailwindcss/preflight";
+/* @import "tailwindcss/preflight"; */
 @tailwind utilities;
 
 @theme {
