@@ -4,6 +4,11 @@
 
 - fix bug in Crunchyroll Release Calendar
 
+dev:
+
+- migrate tailwindcss to version 4
+- migrate daisyui to version 5
+
 ## 1.1.76
 
 - fixed bug in Crunchyroll Release Calendar
