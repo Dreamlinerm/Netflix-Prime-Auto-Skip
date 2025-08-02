@@ -473,6 +473,7 @@ const hideTitles = computed({
 </script>
 
 <style scoped>
+@reference "@/assets/base.css";
 table {
 	@apply border-[1px] border-solid border-primary-content;
 }

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.77
+
+- fix bug in Crunchyroll Release Calendar
+- added Tooltips to Action Popup
+
+dev:
+
+- migrate tailwindcss to version 4
+- migrate daisyui to version 5
+
 ## 1.1.76
 
 - fixed bug in Crunchyroll Release Calendar

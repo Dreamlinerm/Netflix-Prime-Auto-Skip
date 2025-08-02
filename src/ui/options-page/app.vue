@@ -216,6 +216,7 @@ watch(
 </template>
 
 <style scoped>
+@reference "@/assets/base.css";
 /* The side navigation menu */
 .sidenav {
 	@apply h-full bg-[#111] px-2.5 gap-5;
@@ -277,7 +278,7 @@ watch(
 		@apply m-1.5 px-2.5 py-1.5;
 	}
 	.blueButtons {
-		@apply mx-1.5 text-base !important;
+		@apply mx-1.5 text-base;
 	}
 	body {
 		@apply flex-col;

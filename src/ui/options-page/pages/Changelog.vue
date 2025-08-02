@@ -12,21 +12,13 @@ const changelog = __CHANGELOG__
 	<div>
 		<p>Version: {{ version }}</p>
 		<!-- eslint-disable vue/no-v-html -->
-		<div
-			class="prose changelog"
-			v-html="marked(changelog)"
-		/>
+		<div v-html="marked(changelog)" />
 		<!--eslint-enable-->
 	</div>
 </template>
 
-<style lang="scss" scoped>
-:deep(.changelog) {
-	input[type="checkbox"] {
-		@apply checkbox checkbox-info disabled:opacity-100;
-	}
-	table {
-		@apply table table-zebra;
-	}
+<style>
+ul {
+	color: var(--color-gray-300);
 }
 </style>

@@ -1,0 +1,87 @@
+@layer globalCss, base, utilities, higher;
+/* required for vue-devtools
+ @use "/node_modules/vite-plugin-vue-devtools/src/overlay/devtools-overlay.css"; */
+@import "tailwindcss";
+@tailwind utilities;
+@theme {
+	--color-netflix: #e60010;
+	--color-amazon: #00aeef;
+	--color-disney: #1d1fff;
+	--color-crunchyroll: #f78b24;
+}
+
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+	name: "light";
+	default: false;
+	prefersdark: false;
+	color-scheme: light;
+
+	--color-primary: #fff;
+	--color-primary-content: #000;
+	--color-secondary: #0082fc;
+	--color-secondary-content: #fff;
+}
+
+@plugin "daisyui/theme" {
+	name: "dark";
+	default: true;
+	prefersdark: true;
+	color-scheme: dark;
+
+	--color-primary: #242424;
+	--color-primary-content: #fff;
+	--color-secondary: #0082fc;
+	--color-secondary-content: #fff;
+	--color-accent: #00ffff;
+	--color-neutral: #161616;
+	--color-base-100: #212121;
+	--color-error: #ff5861;
+	--color-error-content: #fff;
+}
+
+.description {
+	@apply text-base p-[10px_80px_20px_20px];
+}
+
+h1,
+h2,
+h3,
+p {
+	@apply m-0;
+}
+
+hr {
+	@apply my-1;
+}
+h1 {
+	@apply text-2xl font-bold;
+}
+h2 {
+	@apply text-xl font-semibold;
+}
+h3 {
+	@apply text-lg;
+}
+@layer higher {
+	.btn {
+		@apply text-xl h-12 leading-9;
+	}
+}
+
+@layer globalCss {
+	p {
+		@apply text-2xl;
+	}
+}
+
+/* WebKit and Chromiums */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+	background-color: #212121;
+}
+::-webkit-scrollbar-thumb {
+	background: grey;
+	border-radius: 5px;
+}

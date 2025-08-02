@@ -11,7 +11,7 @@ function openSettings() {
 
 <template>
 	<div class="navbar text-primary-content justify-between">
-		<div>
+		<div class="flex">
 			<RouterLink
 				to="/"
 				class="flex gap-2 items-center"
@@ -21,7 +21,7 @@ function openSettings() {
 					alt="logo"
 					class="h-12 w-auto"
 				/>
-				<h2 class="text-wrap w-24">{{ $t("pageTitle") }}</h2>
+				<h2 class="text-wrap w-24 p-0">{{ $t("pageTitle") }}</h2>
 			</RouterLink>
 			<a
 				target="_blank"
@@ -32,7 +32,7 @@ function openSettings() {
 						: 'https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle'
 				"
 			>
-				<p class="text-nowrap text-base">
+				<p class="text-nowrap text-base p-0">
 					{{ $t("rateNow") }}
 				</p>
 				<img
@@ -45,7 +45,7 @@ function openSettings() {
 				/>
 			</a>
 		</div>
-		<div>
+		<div class="flex h-full items-center">
 			<a
 				class="flex flex-center"
 				style="font-size: 1.5rem"
@@ -95,8 +95,7 @@ function openSettings() {
 </template>
 
 <style scoped>
-h2,
 p {
-	@apply p-0;
+	font-size: initial;
 }
 </style>

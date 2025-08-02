@@ -1,7 +1,7 @@
 import { sendMessage } from "webext-bridge/content-script"
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 // This import scss file is used to style the iframe that is injected into the page
-import "./index.scss"
+import "./index.css"
 
 startIframe()
 

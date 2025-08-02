@@ -63,7 +63,7 @@ function filterDub(display: displayType) {
 	const first = Array.from(list)
 	// filter out everything except the first element by title
 	const duplicates = first.filter(
-		(element, index) => index != first.findIndex((el) => el.textContent == element.textContent),
+		(element, index) => index != first.findIndex((el) => element.textContent.includes(el.textContent)),
 	)
 	duplicates.forEach((element) => {
 		if (element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement)
