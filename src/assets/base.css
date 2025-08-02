@@ -1,7 +1,6 @@
 /* required for vue-devtools
  @use "/node_modules/vite-plugin-vue-devtools/src/overlay/devtools-overlay.css"; */
 @import "tailwindcss";
-/* @import "tailwindcss/preflight"; */
 @tailwind utilities;
 @theme {
 	--color-netflix: #e60010;
@@ -40,45 +39,35 @@
 }
 
 .description {
-	font-size: 1rem; /* text-base */
-	padding: 10px 80px 20px 20px;
+	@apply text-base p-[10px_80px_20px_20px];
 }
 
 h1,
 h2,
 h3,
 p {
-	margin: 0;
-	color: var(--color-primary-content); /* text-primary-content*/
+	@apply m-0;
 }
 
 hr {
-	margin-top: 0.25rem; /* my-1 */
-	margin-bottom: 0.25rem;
+	@apply my-1;
 }
-
 h1 {
-	font-size: 1.5rem; /* text-2xl */
-	font-weight: 700; /* font-bold */
+	@apply text-2xl font-bold;
 }
-
 h2 {
-	font-size: 1.25rem; /* text-xl */
-	font-weight: 600; /* font-semibold */
+	@apply text-xl font-semibold;
 }
-
 h3 {
-	font-size: 1.125rem; /* text-lg */
+	@apply text-lg;
 }
 
 .btn {
-	font-size: 1.25rem; /* text-xl */
-	height: 2.25rem; /* h-9 */
-	line-height: 2.25rem; /* leading-9 */
+	@apply text-xl h-9 leading-9;
 }
 
 p {
-	font-size: 1.5rem; /* text-2xl */
+	@apply text-2xl;
 }
 
 /* WebKit and Chromiums */
