@@ -8,7 +8,6 @@ const gotoSettings = () => {
 <template>
 	<button
 		class="btn btn-secondary rounded-2xl w-full mt-auto"
-		style="height: 50px"
 		@click="gotoSettings"
 	>
 		{{ $t("openSharedSettings") }}

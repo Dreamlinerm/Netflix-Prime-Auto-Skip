@@ -19,7 +19,7 @@ function openSettings() {
 				<img
 					src="@assets/logo.png"
 					alt="logo"
-					style="height: 3rem"
+					class="h-12 w-auto"
 				/>
 				<h2 class="text-wrap w-24 p-0">{{ $t("pageTitle") }}</h2>
 			</RouterLink>
