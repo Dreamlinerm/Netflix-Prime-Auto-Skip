@@ -22,6 +22,11 @@ chrome.runtime.onInstalled.addListener(async (opt) => {
 			url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page/install"),
 			// url: chrome.runtime.getURL("src/ui/action-popup/index.html#/action-popup"),
 		})
+		chrome.tabs.create({
+			active: true,
+			url: chrome.runtime.getURL("src/ui/action-popup/index.html#/"),
+			// url: chrome.runtime.getURL("src/ui/action-popup/index.html#/action-popup"),
+		})
 	}
 })
 

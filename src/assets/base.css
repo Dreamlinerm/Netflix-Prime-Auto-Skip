@@ -3,7 +3,6 @@
 @import "tailwindcss";
 /* @import "tailwindcss/preflight"; */
 @tailwind utilities;
-
 @theme {
 	--color-netflix: #e60010;
 	--color-amazon: #00aeef;
