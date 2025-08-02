@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.77
+
+- fix bug in Crunchyroll Release Calendar
+
 ## 1.1.76
 
 - fixed bug in Crunchyroll Release Calendar
