@@ -12,10 +12,7 @@ const changelog = __CHANGELOG__
 	<div>
 		<p>Version: {{ version }}</p>
 		<!-- eslint-disable vue/no-v-html -->
-		<div
-			class="prose checkbox checkbox-info disabled:opacity-100 w-full"
-			v-html="marked(changelog)"
-		/>
+		<div v-html="marked(changelog)" />
 		<!--eslint-enable-->
 	</div>
 </template>
