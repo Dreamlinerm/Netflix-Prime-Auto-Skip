@@ -473,11 +473,12 @@ const hideTitles = computed({
 </script>
 
 <style scoped>
+@reference "@/assets/base.css";
 table {
-	border: 1px solid var(--color-primary-content);
+	@apply border-[1px] border-solid border-primary-content;
 }
 .featureTable tr *:nth-of-type(2) {
-	border-right: 1px solid var(--color-primary-content);
+	@apply border-r-[1px] border-primary-content;
 }
 .featureTable tr td:nth-of-type(2) label {
 	margin-right: 20px;
@@ -490,22 +491,20 @@ td {
 	text-align: center;
 }
 p {
-	margin: 0;
+	@apply m-0;
 }
 
 .tooltip {
 	border-bottom: 1px dotted white;
-	white-space: nowrap;
-	display: inline-block;
-	position: relative;
+	@apply whitespace-nowrap inline-block relative;
 }
 @media only screen and (max-width: 800px), only screen and (max-height: 600px) {
 	.tooltip {
 		white-space: wrap;
 	}
 	/* label {
-        transform: scale(0.8);
-    } */
+		transform: scale(0.8);
+	} */
 	.featureTable tr td:nth-of-type(2) label {
 		margin-right: unset;
 	}
@@ -525,8 +524,7 @@ p {
 	z-index: 1;
 	bottom: 100%;
 	left: 0%;
-	background-color: var(--color-primary-content);
-	color: var(--color-primary);
+	@apply bg-primary-content text-primary;
 }
 .tooltiptext {
 	white-space: normal;

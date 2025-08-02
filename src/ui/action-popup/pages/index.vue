@@ -94,7 +94,6 @@ const githubUrl = __GITHUB_URL__
 	<div class="grid grid-cols-2 gap-2 pt-2">
 		<a
 			class="btn btn-secondary rounded-2xl"
-			style="height: 50px"
 			:href="githubUrl"
 			target="_blank"
 		>
@@ -103,7 +102,6 @@ const githubUrl = __GITHUB_URL__
 		</a>
 		<a
 			class="btn btn-secondary rounded-2xl"
-			style="height: 50px"
 			href="https://github.com/sponsors/Dreamlinerm"
 			target="_blank"
 		>
@@ -117,6 +115,7 @@ const githubUrl = __GITHUB_URL__
 </template>
 
 <style scoped>
+@reference "@/assets/base.css";
 /* When you mouse over the navigation links, change their color */
 .menuButton:hover,
 .popupMenuButton:hover {
@@ -124,25 +123,12 @@ const githubUrl = __GITHUB_URL__
 }
 
 .popupMenuButton {
-	/* @apply rounded-[15px] p-5 bg-[#242424] cursor-pointer text-white flex items-center select-none; */
-	border-radius: 15px;
-	padding: 1.25rem; /* p-5 = 1.25rem */
-	background-color: #242424;
-	cursor: pointer;
-	color: #fff;
-	display: flex;
-	align-items: center;
-	user-select: none;
+	@apply rounded-[15px] p-5 bg-[#242424] cursor-pointer text-white flex items-center select-none;
 }
 .popupMenuButton .icon {
-	/* @apply m-0 w-full h-auto; */
-	margin: 0;
-	width: 100%;
-	height: auto;
+	@apply m-0 w-full h-auto;
 }
 .icon {
-	/* @apply text-white fill-current; */
-	color: #fff;
-	fill: currentColor;
+	@apply text-white fill-current;
 }
 </style>
