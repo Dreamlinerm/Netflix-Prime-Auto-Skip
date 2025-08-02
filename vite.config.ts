@@ -15,6 +15,7 @@ import TurboConsole from "unplugin-turbo-console/vite"
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite"
 import { dirname, relative, resolve } from "node:path"
 import "dotenv/config"
+import tailwindcss from "@tailwindcss/vite"
 
 const PORT = Number(process.env.PORT || "") || 3303
 
@@ -43,23 +44,6 @@ export default defineConfig({
 		},
 	},
 
-	css: {
-		preprocessorOptions: {
-			scss: {
-				api: "modern",
-				// additionalData: `@use "/src/assets/base.scss";`,
-				additionalData: (content, filePath) => {
-					// do not include base.scss (tailwind etc) in content-script iframe as it will be affect main page styles
-					if (filePath.includes("content-script/index.scss")) {
-						return content
-					}
-
-					return `@use "/src/assets/base.scss";\n${content}`
-				},
-			},
-		},
-	},
-
 	plugins: [
 		VueI18nPlugin({
 			include: resolve(dirname(fileURLToPath(import.meta.url)), "./src/locales/**"),
@@ -85,6 +69,7 @@ export default defineConfig({
 		// imagemin({}),
 
 		TurboConsole(),
+		tailwindcss(),
 
 		// https://github.com/unplugin/unplugin-auto-import
 		AutoImport({
@@ -105,6 +90,7 @@ export default defineConfig({
 				{
 					notivue: ["Notivue", "Notification", ["push", "pushNotification"]],
 				},
+				// { "@tailwindcss/vite": ["tailwindcss"] },
 			],
 			dts: "src/types/auto-imports.d.ts",
 			dirs: ["src/composables/**", "src/stores/**", "src/utils/**"],

@@ -1,0 +1,94 @@
+/* required for vue-devtools
+ @use "/node_modules/vite-plugin-vue-devtools/src/overlay/devtools-overlay.css"; */
+@import "tailwindcss";
+@import "tailwindcss/preflight";
+@tailwind utilities;
+
+@theme {
+	--color-netflix: #e60010;
+	--color-amazon: #00aeef;
+	--color-disney: #1d1fff;
+	--color-crunchyroll: #f78b24;
+}
+
+@plugin "daisyui";
+@plugin "daisyui/theme" {
+	name: "light";
+	default: false;
+	prefersdark: false;
+	color-scheme: light;
+
+	--color-primary: #fff;
+	--color-primary-content: #000;
+	--color-secondary: #0082fc;
+	--color-secondary-content: #fff;
+}
+
+@plugin "daisyui/theme" {
+	name: "dark";
+	default: true;
+	prefersdark: true;
+	color-scheme: dark;
+
+	--color-primary: #242424;
+	--color-primary-content: #fff;
+	--color-secondary: #0082fc;
+	--color-secondary-content: #fff;
+	--color-accent: #00ffff;
+	--color-neutral: #161616;
+	--color-base-100: #212121;
+	--color-error-content: #fff;
+}
+
+.description {
+	font-size: 1rem; /* text-base */
+	padding: 10px 80px 20px 20px;
+}
+
+h1,
+h2,
+h3,
+p {
+	margin: 0;
+	color: var(--color-primary-content); /* text-primary-content*/
+}
+
+hr {
+	margin-top: 0.25rem; /* my-1 */
+	margin-bottom: 0.25rem;
+}
+
+h1 {
+	font-size: 1.5rem; /* text-2xl */
+	font-weight: 700; /* font-bold */
+}
+
+h2 {
+	font-size: 1.25rem; /* text-xl */
+	font-weight: 600; /* font-semibold */
+}
+
+h3 {
+	font-size: 1.125rem; /* text-lg */
+}
+
+.btn {
+	font-size: 1.25rem; /* text-xl */
+	height: 2.25rem; /* h-9 */
+	line-height: 2.25rem; /* leading-9 */
+}
+
+p {
+	font-size: 1.5rem; /* text-2xl */
+}
+
+/* WebKit and Chromiums */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+	background-color: #212121;
+}
+::-webkit-scrollbar-thumb {
+	background: grey;
+	border-radius: 5px;
+}

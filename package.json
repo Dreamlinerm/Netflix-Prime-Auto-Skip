@@ -64,7 +64,6 @@
 		"eslint": "^9.27.0",
 		"eslint-plugin-vue": "^10.1.0",
 		"globals": "^16.1.0",
-		"postcss": "^8.5.6",
 		"prettier": "^3.5.3",
 		"tailwindcss": "^4.1.11",
 		"terser": "^5.39.2",
