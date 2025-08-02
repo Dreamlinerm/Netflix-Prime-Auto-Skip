@@ -6,7 +6,7 @@
 	"scripts": {
 		"web-ext": "web-ext run",
 		"firefox": "web-ext run --keep-profile-changes --firefox-profile=test2",
-		"firefox:verbose": "web-ext run --keep-profile-changes --firefox-profile=test2 --verbose",
+		"firefox:noProfile": "web-ext run",
 		"chrome": "web-ext run --source-dir dist/chrome/ -t chromium",
 		"start-android": "adb devices && web-ext run -t firefox-android --firefox-apk org.mozilla.firefox --adb-device 38091FDJH002WH",
 		"build": "npm run build:chrome && npm run build:firefox",
