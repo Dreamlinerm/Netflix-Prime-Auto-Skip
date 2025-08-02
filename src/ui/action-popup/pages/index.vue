@@ -122,13 +122,25 @@ const githubUrl = __GITHUB_URL__
 }
 
 .popupMenuButton {
-	@apply rounded-[15px] p-5 bg-[#242424] cursor-pointer text-white flex items-center select-none;
+	/* @apply rounded-[15px] p-5 bg-[#242424] cursor-pointer text-white flex items-center select-none; */
+	border-radius: 15px;
+	padding: 1.25rem; /* p-5 = 1.25rem */
+	background-color: #242424;
+	cursor: pointer;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	user-select: none;
 }
 .popupMenuButton .icon {
-	@apply m-0 w-full h-auto;
+	/* @apply m-0 w-full h-auto; */
+	margin: 0;
+	width: 100%;
+	height: auto;
 }
 .icon {
-	@apply text-white fill-current;
+	/* @apply text-white fill-current; */
+	color: #fff;
+	fill: currentColor;
 }
 </style>
->

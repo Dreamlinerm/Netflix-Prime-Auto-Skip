@@ -180,7 +180,7 @@ watch(
 			<div class="mt-auto">
 				<div class="flex flex-col mb-2 MenuButtons">
 					<a
-						class="btn btn-secondary rounded-2xl blueButtons m-[5px_15px]"
+						class="btn btn-secondary rounded-2xl blueButtons"
 						:href="githubUrl"
 						target="_blank"
 					>
@@ -188,7 +188,7 @@ watch(
 						Github
 					</a>
 					<a
-						class="btn btn-secondary rounded-2xl blueButtons m-[5px_15px]"
+						class="btn btn-secondary rounded-2xl blueButtons"
 						href="https://github.com/sponsors/Dreamlinerm"
 						target="_blank"
 					>
@@ -218,10 +218,27 @@ watch(
 <style scoped>
 /* The side navigation menu */
 .sidenav {
-	@apply h-full bg-[#111] px-2.5 gap-5;
+	/* @apply h-full bg-[#111] px-2.5 gap-5; */
+	height: 100%;
+	background-color: #111;
+	padding-left: 0.625rem; /* 2.5 */
+	padding-right: 0.625rem;
+	gap: 1.25rem; /* 5 */
 }
 .menuButton {
-	@apply rounded-[15px] m-[5px_15px] p-[13px_20px] max-w-[400px] no-underline whitespace-nowrap cursor-pointer text-primary-content text-[1.5rem] select-none items-center;
+	/* @apply rounded-[15px] m-[5px_15px] p-[13px_20px] max-w-[400px] no-underline whitespace-nowrap cursor-pointer text-primary-content text-[1.5rem] select-none items-center; */
+	border-radius: 15px;
+	margin: 5px 15px;
+	padding: 13px 20px;
+	max-width: 400px;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	color: var(--color-primary-content); /* text-primary-content */
+	font-size: 1.5rem;
+	user-select: none;
+	align-items: center;
+	display: flex;
 	/*TODO: change whitespace according language*/
 }
 /* When you mouse over the navigation links, change their color */
@@ -229,67 +246,111 @@ watch(
 	background-color: #4d0000;
 }
 .IconBox {
-	@apply p-5;
+	/* @apply p-5; */
+	padding: 1.25rem; /* 5 */
 }
 .Logo {
-	@apply h-12;
+	/* @apply h-12; */
+	height: 3rem; /* 12 */
 }
 .title {
-	@apply py-0 text-white;
+	/* @apply py-0 text-white; */
+	padding-top: 0;
+	padding-bottom: 0;
+	color: #fff;
 }
 
 .content {
-	@apply min-w-[200px] min-h-[450px];
+	/* @apply min-w-[200px] min-h-[450px]; */
+	min-width: 200px;
+	min-height: 450px;
 }
 .page {
-	@apply p-[80px_0_0_3%] w-[97%];
+	/* @apply p-[80px_0_0_3%] w-[97%]; */
+	padding: 80px 0 0 3%;
+	width: 97%;
 }
 
 .icon {
-	@apply w-8 h-8 mx-1.5;
+	/* @apply w-8 h-8 mx-1.5;s */
+	width: 2rem; /* 8 */
+	height: 2rem;
+	margin-left: 0.375rem; /* 1.5 */
+	margin-right: 0.375rem;
 }
 .wrapper {
-	@apply flex flex-row;
+	/* @apply flex flex-row;s */
+	display: flex;
+	flex-direction: row;
+}
+
+.blueButtons {
+	margin: 5px 15px;
 }
 
 @media only screen and (max-width: 800px), only screen and (max-height: 600px) {
 	.wrapper {
-		@apply flex flex-col;
+		display: flex;
+		flex-direction: column;
 	}
 	.menuButton p,
 	.menuButton div,
 	.IconBox {
-		@apply hidden;
+		/* @apply hidden; */
+		display: none;
 	}
 	.MenuButtons {
-		@apply pt-1.5;
+		/* @apply pt-1.5; */
+		padding-top: 0.375rem; /* 1.5 */
 	}
 }
 
 @media only screen and (max-height: 800px), only screen and (max-width: 1000px) {
 	.wrapper {
-		@apply flex flex-col;
+		/* @apply flex flex-col; */
+		display: flex;
+		flex-direction: column;
 	}
 	.MenuButtons {
-		@apply flex-row justify-center;
+		/* @apply flex-row justify-center; */
+		flex-direction: row;
+		justify-content: center;
+		display: flex;
 	}
 	.menuButton {
-		@apply m-1.5 px-2.5 py-1.5;
+		/* @apply m-1.5 px-2.5 py-1.5; */
+		margin: 0.375rem; /* 1.5 */
+		padding-left: 0.625rem; /* 2.5 */
+		padding-right: 0.625rem;
+		padding-top: 0.375rem;
+		padding-bottom: 0.375rem;
 	}
 	.blueButtons {
-		@apply mx-1.5 text-base !important;
+		/* @apply mx-1.5 text-base !important; */
+		/* margin-left: 0.375rem;
+		margin-right: 0.375rem; */
+		font-size: 1rem; /* base */
 	}
 	body {
-		@apply flex-col;
+		/* @apply flex-col;s */
+		flex-direction: column;
 	}
 	.page {
-		@apply p-0 mx-3.5 w-[calc(100%-30px)];
+		/* @apply p-0 mx-3.5 w-[calc(100%-30px)]; */
+		padding: 0;
+		margin-left: 0.875rem; /* 3.5 */
+		margin-right: 0.875rem;
+		width: calc(100% - 30px);
 	}
 	.IconBox {
-		@apply pt-2.5 flex-row;
+		/* @apply pt-2.5 flex-row; */
+		padding-top: 0.625rem; /* 2.5 */
+		flex-direction: row;
 	}
 	.sidenav {
-		@apply h-auto block;
+		/* @apply h-auto block; */
+		height: auto;
+		display: block;
 	}
 }
 </style>
