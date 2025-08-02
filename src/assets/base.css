@@ -1,4 +1,4 @@
-@layer globalCss, base, utilities;
+@layer globalCss, base, utilities, higher;
 /* required for vue-devtools
  @use "/node_modules/vite-plugin-vue-devtools/src/overlay/devtools-overlay.css"; */
 @import "tailwindcss";
@@ -63,13 +63,15 @@ h2 {
 h3 {
 	@apply text-lg;
 }
+@layer higher {
+	.btn {
+		@apply text-xl h-12 leading-9;
+	}
+}
 
 @layer globalCss {
 	p {
 		@apply text-2xl;
-	}
-	.btn {
-		@apply text-xl h-9 leading-9;
 	}
 }
 
