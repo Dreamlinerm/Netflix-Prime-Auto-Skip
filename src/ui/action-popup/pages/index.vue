@@ -94,6 +94,7 @@ const githubUrl = __GITHUB_URL__
 	<div class="grid grid-cols-2 gap-2 pt-2">
 		<a
 			class="btn btn-secondary rounded-2xl"
+			style="height: 50px"
 			:href="githubUrl"
 			target="_blank"
 		>
@@ -102,6 +103,7 @@ const githubUrl = __GITHUB_URL__
 		</a>
 		<a
 			class="btn btn-secondary rounded-2xl"
+			style="height: 50px"
 			href="https://github.com/sponsors/Dreamlinerm"
 			target="_blank"
 		>
