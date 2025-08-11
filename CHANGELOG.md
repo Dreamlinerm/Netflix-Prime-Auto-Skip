@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.78
+
+- added Tooltips to Action Popup Settings
+
 ## 1.1.77
 
 - fix bug in Crunchyroll Release Calendar
