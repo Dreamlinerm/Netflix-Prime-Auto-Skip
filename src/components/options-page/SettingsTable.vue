@@ -14,9 +14,15 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td class="tooltip">
+				<td class="tooltip flex">
 					<p>{{ $t("skipIntroSwitch") }}</p>
-					<p class="tooltiptext">{{ $t("skipIntroDescription") }}</p>
+					<i-mdi-help-circle height="1rem" />
+					<div
+						class="tooltip-content text-primary-content"
+						style="transform: unset; inset: auto auto var(--tt-off) 0%"
+					>
+						{{ $t("skipIntroDescription") }}
+					</div>
 				</td>
 				<td>
 					<Switch
@@ -62,9 +68,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="tooltip">
+				<td class="tooltip flex">
 					<p>{{ $t("skipCreditsSwitch") }}</p>
-					<p class="tooltiptext">{{ $t("skipCreditsDescription") }}</p>
+					<i-mdi-help-circle height="1rem" />
+					<div
+						class="tooltip-content text-primary-content"
+						style="transform: unset; inset: auto auto var(--tt-off) 0%"
+					>
+						{{ $t("skipCreditsDescription") }}
+					</div>
 				</td>
 				<td>
 					<Switch
@@ -110,9 +122,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="tooltip">
+				<td class="tooltip flex">
 					<p>{{ $t("watchCreditsSwitch") }}</p>
-					<p class="tooltiptext">{{ $t("watchCreditsDescription") }}</p>
+					<i-mdi-help-circle height="1rem" />
+					<div
+						class="tooltip-content text-primary-content"
+						style="transform: unset; inset: auto auto var(--tt-off) 0%"
+					>
+						{{ $t("watchCreditsDescription") }}
+					</div>
 				</td>
 				<td>
 					<Switch
@@ -153,9 +171,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="tooltip">
+				<td class="tooltip flex">
 					<p>{{ $t("skipAdSwitch") }}</p>
-					<p class="tooltiptext">{{ $t("skipAdDescription") }}</p>
+					<i-mdi-help-circle height="1rem" />
+					<div
+						class="tooltip-content text-primary-content"
+						style="transform: unset; inset: auto auto var(--tt-off) 0%"
+					>
+						{{ $t("skipAdDescription") }}
+					</div>
 				</td>
 				<td>
 					<Switch
@@ -191,9 +215,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="tooltip">
+				<td class="tooltip flex">
 					<p>{{ $t("showRatingSwitch") }}</p>
-					<p class="tooltiptext">{{ $t("showRatingDescription") }}</p>
+					<i-mdi-help-circle height="1rem" />
+					<div
+						class="tooltip-content text-primary-content"
+						style="transform: unset; inset: auto auto var(--tt-off) 0%"
+					>
+						{{ $t("showRatingDescription") }}
+					</div>
 				</td>
 				<td>
 					<Switch
@@ -234,9 +264,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="tooltip">
+				<td class="tooltip flex">
 					<p>{{ $t("speedSliderSwitch") }}</p>
-					<p class="tooltiptext">{{ $t("speedSliderDescription") }}</p>
+					<i-mdi-help-circle height="1rem" />
+					<div
+						class="tooltip-content text-primary-content"
+						style="transform: unset; inset: auto auto var(--tt-off) 0%"
+					>
+						{{ $t("speedSliderDescription") }}
+					</div>
 				</td>
 				<td>
 					<Switch
@@ -282,9 +318,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="tooltip">
+				<td class="tooltip flex">
 					<p>{{ $t("hideTitlesSwitch") }}</p>
-					<p class="tooltiptext">{{ $t("hideTitlesDescription") }}</p>
+					<i-mdi-help-circle height="1rem" />
+					<div
+						class="tooltip-content text-primary-content"
+						style="transform: unset; inset: auto auto var(--tt-off) 0%"
+					>
+						{{ $t("hideTitlesDescription") }}
+					</div>
 				</td>
 				<td>
 					<Switch
@@ -494,14 +536,7 @@ p {
 	@apply m-0;
 }
 
-.tooltip {
-	border-bottom: 1px dotted white;
-	@apply whitespace-nowrap inline-block relative;
-}
 @media only screen and (max-width: 800px), only screen and (max-height: 600px) {
-	.tooltip {
-		white-space: wrap;
-	}
 	/* label {
 		transform: scale(0.8);
 	} */
@@ -511,36 +546,5 @@ p {
 	.other {
 		display: none;
 	}
-}
-
-.tooltip .tooltiptext {
-	visibility: hidden;
-	width: 300px;
-	color: #000;
-	text-align: center;
-	border-radius: 6px;
-	padding: 5px 0;
-	position: absolute;
-	z-index: 1;
-	bottom: 100%;
-	left: 0%;
-	@apply bg-primary-content text-primary;
-}
-.tooltiptext {
-	white-space: normal;
-}
-.tooltip .tooltiptext::after {
-	content: "";
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	margin-left: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: #fff transparent transparent transparent;
-}
-
-.tooltip:hover .tooltiptext {
-	visibility: visible;
 }
 </style>
