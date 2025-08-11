@@ -6,10 +6,13 @@
 		</h1>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("skipIntroSwitch") }}</p>
-		<div class="tooltip">
+		<div class="tooltip flex">
+			<p>{{ $t("skipIntroSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
+			<div
+				class="tooltip-content text-primary-content"
+				style="transform: unset; inset: auto auto var(--tt-off) 0%"
+			>
 				{{ $t("skipIntroDescription") }}
 			</div>
 		</div>
@@ -20,10 +23,13 @@
 	</div>
 	<hr />
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("skipCreditsSwitch") }}</p>
-		<div class="tooltip">
+		<div class="tooltip flex">
+			<p>{{ $t("skipCreditsSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
+			<div
+				class="tooltip-content text-primary-content"
+				style="transform: unset; inset: auto auto var(--tt-off) 0%"
+			>
 				{{ $t("skipCreditsDescription") }}
 			</div>
 		</div>
@@ -33,10 +39,13 @@
 		></Switch>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("watchCreditsSwitch") }}</p>
-		<div class="tooltip">
+		<div class="tooltip flex">
+			<p>{{ $t("watchCreditsSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
+			<div
+				class="tooltip-content text-primary-content"
+				style="transform: unset; inset: auto auto var(--tt-off) 0%"
+			>
 				{{ $t("watchCreditsDescription") }}
 			</div>
 		</div>
@@ -47,10 +56,13 @@
 	</div>
 	<hr />
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("skipAdSwitch") }}</p>
-		<div class="tooltip">
+		<div class="tooltip flex">
+			<p>{{ $t("skipAdSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
+			<div
+				class="tooltip-content text-primary-content"
+				style="transform: unset; inset: auto auto var(--tt-off) 0%"
+			>
 				{{ $t("skipAdDescription") }}
 			</div>
 		</div>
@@ -60,10 +72,13 @@
 		></Switch>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("speedSliderSwitch") }}</p>
-		<div class="tooltip">
+		<div class="tooltip flex">
+			<p>{{ $t("speedSliderSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
+			<div
+				class="tooltip-content text-primary-content"
+				style="transform: unset; inset: auto auto var(--tt-off) 0%"
+			>
 				{{ $t("speedSliderDescription") }}
 			</div>
 		</div>
@@ -73,10 +88,13 @@
 		></Switch>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("fullscreenSwitch") }}</p>
-		<div class="tooltip">
+		<div class="tooltip flex">
+			<p>{{ $t("fullscreenSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
+			<div
+				class="tooltip-content text-primary-content"
+				style="transform: unset; inset: auto auto var(--tt-off) 0%"
+			>
 				{{ $t("fullscreenDescription") }}
 			</div>
 		</div>
@@ -86,10 +104,13 @@
 		></Switch>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("doubleClickSwitch") }}</p>
-		<div class="tooltip">
+		<div class="tooltip flex">
+			<p>{{ $t("doubleClickSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
+			<div
+				class="tooltip-content text-primary-content"
+				style="transform: unset; inset: auto auto var(--tt-off) 0%"
+			>
 				{{ $t("doubleClickDescription") }}
 			</div>
 		</div>
@@ -99,10 +120,13 @@
 		></Switch>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("scrollVolumeSwitch") }}</p>
-		<div class="tooltip">
+		<div class="tooltip flex">
+			<p>{{ $t("scrollVolumeSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
+			<div
+				class="tooltip-content text-primary-content"
+				style="transform: unset; inset: auto auto var(--tt-off) 0%"
+			>
 				{{ $t("scrollVolumeDescription") }}
 			</div>
 		</div>
@@ -112,10 +136,13 @@
 		></Switch>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("hideTitlesSwitch") }}</p>
-		<div class="tooltip">
+		<div class="tooltip flex">
+			<p>{{ $t("hideTitlesSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
+			<div
+				class="tooltip-content text-primary-content"
+				style="transform: unset; inset: auto auto var(--tt-off) 0%"
+			>
 				{{ $t("hideTitlesDescription") }}
 			</div>
 		</div>
@@ -125,10 +152,13 @@
 		></Switch>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("showRatingSwitch") }}</p>
-		<div class="tooltip">
+		<div class="tooltip flex">
+			<p>{{ $t("showRatingSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
+			<div
+				class="tooltip-content text-primary-content"
+				style="transform: unset; inset: auto auto var(--tt-off) 0%"
+			>
 				{{ $t("showRatingDescription") }}
 			</div>
 		</div>
@@ -138,10 +168,13 @@
 		></Switch>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("showYearSwitch") }}</p>
-		<div class="tooltip">
+		<div class="tooltip flex">
+			<p>{{ $t("showYearSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
+			<div
+				class="tooltip-content text-primary-content"
+				style="transform: unset; inset: auto auto var(--tt-off) 0%"
+			>
 				{{ $t("showYearDescription") }}
 			</div>
 		</div>

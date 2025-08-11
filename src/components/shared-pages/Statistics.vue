@@ -10,7 +10,10 @@
 			<p>{{ $t("statisticAd", ["Amazon"]) }}</p>
 			<template v-if="!advancedSettings">
 				<i-mdi-help-circle height="1rem" />
-				<div class="tooltip-content text-primary-content">
+				<div
+					class="tooltip-content text-primary-content"
+					style="transform: unset; inset: auto auto var(--tt-off) 0%"
+				>
 					{{ $t("amazonAdDescription") }}
 				</div>
 			</template>
@@ -28,7 +31,10 @@
 			<p>{{ $t("statisticAd", ["Netflix"]) }}</p>
 			<template v-if="!advancedSettings">
 				<i-mdi-help-circle height="1rem" />
-				<div class="tooltip-content text-primary-content">
+				<div
+					class="tooltip-content text-primary-content"
+					style="transform: unset; inset: auto auto var(--tt-off) 0%"
+				>
 					{{ $t("netflixAdDescription") }}
 				</div>
 			</template>
@@ -46,7 +52,10 @@
 			<p>{{ $t("statisticAd", ["Disney"]) }}</p>
 			<template v-if="!advancedSettings">
 				<i-mdi-help-circle height="1rem" />
-				<div class="tooltip-content text-primary-content">
+				<div
+					class="tooltip-content text-primary-content"
+					style="transform: unset; inset: auto auto var(--tt-off) 0%"
+				>
 					{{ $t("disneyAdDescription") }}
 				</div>
 			</template>
@@ -64,7 +73,10 @@
 			<p>{{ $t("statisticIntro") }}</p>
 			<template v-if="!advancedSettings">
 				<i-mdi-help-circle height="1rem" />
-				<div class="tooltip-content text-primary-content">
+				<div
+					class="tooltip-content text-primary-content"
+					style="transform: unset; inset: auto auto var(--tt-off) 0%"
+				>
 					{{ $t("statisticIntroDescription") }}
 				</div>
 			</template>
@@ -82,7 +94,10 @@
 			<p>{{ $t("statisticRecap") }}</p>
 			<template v-if="!advancedSettings">
 				<i-mdi-help-circle height="1rem" />
-				<div class="tooltip-content text-primary-content">
+				<div
+					class="tooltip-content text-primary-content"
+					style="transform: unset; inset: auto auto var(--tt-off) 0%"
+				>
 					{{ $t("statisticskipRecapDescription") }}
 				</div>
 			</template>
@@ -100,7 +115,10 @@
 			<p>{{ $t("statisticSegments") }}</p>
 			<template v-if="!advancedSettings">
 				<i-mdi-help-circle height="1rem" />
-				<div class="tooltip-content text-primary-content">
+				<div
+					class="tooltip-content text-primary-content"
+					style="transform: unset; inset: auto auto var(--tt-off) 0%"
+				>
 					{{ $t("statisticSegmentsDescription") }}
 				</div>
 			</template>

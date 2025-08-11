@@ -10,15 +10,17 @@
 		:key="setting"
 	>
 		<div class="p-1 m-0 flex">
-			<p>{{ $t(setting + "Switch") }}</p>
-			<div
-				class="tooltip"
-				v-if="!advancedSettings"
-			>
-				<i-mdi-help-circle height="1rem" />
-				<div class="tooltip-content text-primary-content">
-					{{ $t(setting + "Description") }}
-				</div>
+			<div class="tooltip flex">
+				<p>{{ $t(setting + "Switch") }}</p>
+				<template v-if="!advancedSettings">
+					<i-mdi-help-circle height="1rem" />
+					<div
+						class="tooltip-content text-primary-content"
+						style="transform: unset; inset: auto auto var(--tt-off) 0%"
+					>
+						{{ $t(setting + "Description") }}
+					</div>
+				</template>
 			</div>
 			<Switch
 				v-model="settings.Crunchyroll[setting]"

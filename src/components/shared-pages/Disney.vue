@@ -6,15 +6,17 @@
 		</h1>
 	</div>
 	<div class="py-1 m-0 flex">
-		<p>{{ $t("selfAdSwitch") }}</p>
-		<div
-			class="tooltip"
-			v-if="!advancedSettings"
-		>
-			<i-mdi-help-circle height="1rem" />
-			<div class="tooltip-content text-primary-content">
-				{{ $t("selfAdDescription") }}
-			</div>
+		<div class="tooltip flex">
+			<p>{{ $t("selfAdSwitch") }}</p>
+			<template v-if="!advancedSettings">
+				<i-mdi-help-circle height="1rem" />
+				<div
+					class="tooltip-content text-primary-content"
+					style="transform: unset; inset: auto auto var(--tt-off) 0%"
+				>
+					{{ $t("selfAdDescription") }}
+				</div>
+			</template>
 		</div>
 		<Switch
 			v-model="settings.Disney.selfAd"
