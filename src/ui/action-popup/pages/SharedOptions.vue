@@ -7,6 +7,12 @@
 	</div>
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("skipIntroSwitch") }}</p>
+		<div class="tooltip">
+			<i-mdi-help-circle height="1rem" />
+			<div class="tooltip-content text-primary-content">
+				{{ $t("skipIntroDescription") }}
+			</div>
+		</div>
 		<Switch
 			v-model="skipIntro"
 			class="ml-auto"
@@ -15,6 +21,12 @@
 	<hr />
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("skipCreditsSwitch") }}</p>
+		<div class="tooltip">
+			<i-mdi-help-circle height="1rem" />
+			<div class="tooltip-content text-primary-content">
+				{{ $t("skipCreditsDescription") }}
+			</div>
+		</div>
 		<Switch
 			v-model="skipCredits"
 			class="ml-auto"
@@ -22,6 +34,12 @@
 	</div>
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("watchCreditsSwitch") }}</p>
+		<div class="tooltip">
+			<i-mdi-help-circle height="1rem" />
+			<div class="tooltip-content text-primary-content">
+				{{ $t("watchCreditsDescription") }}
+			</div>
+		</div>
 		<Switch
 			v-model="watchCredits"
 			class="ml-auto"
@@ -30,6 +48,12 @@
 	<hr />
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("skipAdSwitch") }}</p>
+		<div class="tooltip">
+			<i-mdi-help-circle height="1rem" />
+			<div class="tooltip-content text-primary-content">
+				{{ $t("skipAdDescription") }}
+			</div>
+		</div>
 		<Switch
 			v-model="blockAds"
 			class="ml-auto"
@@ -37,6 +61,12 @@
 	</div>
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("speedSliderSwitch") }}</p>
+		<div class="tooltip">
+			<i-mdi-help-circle height="1rem" />
+			<div class="tooltip-content text-primary-content">
+				{{ $t("speedSliderDescription") }}
+			</div>
+		</div>
 		<Switch
 			v-model="speedSlider"
 			class="ml-auto"
@@ -44,6 +74,12 @@
 	</div>
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("fullscreenSwitch") }}</p>
+		<div class="tooltip">
+			<i-mdi-help-circle height="1rem" />
+			<div class="tooltip-content text-primary-content">
+				{{ $t("fullscreenDescription") }}
+			</div>
+		</div>
 		<Switch
 			v-model="settings.Video.playOnFullScreen"
 			class="ml-auto"
@@ -51,6 +87,12 @@
 	</div>
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("doubleClickSwitch") }}</p>
+		<div class="tooltip">
+			<i-mdi-help-circle height="1rem" />
+			<div class="tooltip-content text-primary-content">
+				{{ $t("doubleClickDescription") }}
+			</div>
+		</div>
 		<Switch
 			v-model="settings.Video.doubleClick"
 			class="ml-auto"
@@ -58,6 +100,12 @@
 	</div>
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("scrollVolumeSwitch") }}</p>
+		<div class="tooltip">
+			<i-mdi-help-circle height="1rem" />
+			<div class="tooltip-content text-primary-content">
+				{{ $t("scrollVolumeDescription") }}
+			</div>
+		</div>
 		<Switch
 			v-model="settings.Video.scrollVolume"
 			class="ml-auto"
@@ -65,6 +113,12 @@
 	</div>
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("hideTitlesSwitch") }}</p>
+		<div class="tooltip">
+			<i-mdi-help-circle height="1rem" />
+			<div class="tooltip-content text-primary-content">
+				{{ $t("hideTitlesDescription") }}
+			</div>
+		</div>
 		<Switch
 			v-model="hideTitles"
 			class="ml-auto"
@@ -72,6 +126,12 @@
 	</div>
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("showRatingSwitch") }}</p>
+		<div class="tooltip">
+			<i-mdi-help-circle height="1rem" />
+			<div class="tooltip-content text-primary-content">
+				{{ $t("showRatingDescription") }}
+			</div>
+		</div>
 		<Switch
 			v-model="showRating"
 			class="ml-auto"
@@ -79,6 +139,12 @@
 	</div>
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("showYearSwitch") }}</p>
+		<div class="tooltip">
+			<i-mdi-help-circle height="1rem" />
+			<div class="tooltip-content text-primary-content">
+				{{ $t("showYearDescription") }}
+			</div>
+		</div>
 		<Switch
 			v-model="settings.Video.showYear"
 			class="ml-auto"

@@ -6,7 +6,15 @@
 		</h1>
 	</div>
 	<div class="py-1 m-0 flex justify-between">
-		<p>{{ $t("statisticAd", ["Amazon"]) }}</p>
+		<div class="tooltip flex">
+			<p>{{ $t("statisticAd", ["Amazon"]) }}</p>
+			<template v-if="!advancedSettings">
+				<i-mdi-help-circle height="1rem" />
+				<div class="tooltip-content text-primary-content">
+					{{ $t("amazonAdDescription") }}
+				</div>
+			</template>
+		</div>
 		<p>{{ getTimeFormatted(settings.Statistics.AmazonAdTimeSkipped) }}</p>
 	</div>
 	<template v-if="advancedSettings">
@@ -16,7 +24,15 @@
 		<hr />
 	</template>
 	<div class="py-1 m-0 flex justify-between">
-		<p>{{ $t("statisticAd", ["Netflix"]) }}</p>
+		<div class="tooltip flex">
+			<p>{{ $t("statisticAd", ["Netflix"]) }}</p>
+			<template v-if="!advancedSettings">
+				<i-mdi-help-circle height="1rem" />
+				<div class="tooltip-content text-primary-content">
+					{{ $t("netflixAdDescription") }}
+				</div>
+			</template>
+		</div>
 		<p>{{ getTimeFormatted(settings.Statistics.NetflixAdTimeSkipped) }}</p>
 	</div>
 	<template v-if="advancedSettings">
@@ -26,7 +42,15 @@
 		<hr />
 	</template>
 	<div class="py-1 m-0 flex justify-between">
-		<p>{{ $t("statisticAd", ["Disney"]) }}</p>
+		<div class="tooltip flex">
+			<p>{{ $t("statisticAd", ["Disney"]) }}</p>
+			<template v-if="!advancedSettings">
+				<i-mdi-help-circle height="1rem" />
+				<div class="tooltip-content text-primary-content">
+					{{ $t("disneyAdDescription") }}
+				</div>
+			</template>
+		</div>
 		<p>{{ getTimeFormatted(settings.Statistics.DisneyAdTimeSkipped) }}</p>
 	</div>
 	<template v-if="advancedSettings">
@@ -36,7 +60,15 @@
 		<hr />
 	</template>
 	<div class="py-1 m-0 flex justify-between">
-		<p>{{ $t("statisticIntro") }}</p>
+		<div class="tooltip flex">
+			<p>{{ $t("statisticIntro") }}</p>
+			<template v-if="!advancedSettings">
+				<i-mdi-help-circle height="1rem" />
+				<div class="tooltip-content text-primary-content">
+					{{ $t("statisticIntroDescription") }}
+				</div>
+			</template>
+		</div>
 		<p>{{ getTimeFormatted(settings.Statistics.IntroTimeSkipped) }}</p>
 	</div>
 	<template v-if="advancedSettings">
@@ -46,7 +78,15 @@
 		<hr />
 	</template>
 	<div class="py-1 m-0 flex justify-between">
-		<p>{{ $t("statisticRecap") }}</p>
+		<div class="tooltip flex">
+			<p>{{ $t("statisticRecap") }}</p>
+			<template v-if="!advancedSettings">
+				<i-mdi-help-circle height="1rem" />
+				<div class="tooltip-content text-primary-content">
+					{{ $t("statisticskipRecapDescription") }}
+				</div>
+			</template>
+		</div>
 		<p>{{ getTimeFormatted(settings.Statistics.RecapTimeSkipped) }}</p>
 	</div>
 	<template v-if="advancedSettings">
@@ -56,7 +96,15 @@
 		<hr />
 	</template>
 	<div class="py-1 m-0 flex justify-between">
-		<p>{{ $t("statisticSegments") }}</p>
+		<div class="tooltip flex">
+			<p>{{ $t("statisticSegments") }}</p>
+			<template v-if="!advancedSettings">
+				<i-mdi-help-circle height="1rem" />
+				<div class="tooltip-content text-primary-content">
+					{{ $t("statisticSegmentsDescription") }}
+				</div>
+			</template>
+		</div>
 		<p>{{ settings.Statistics.SegmentsSkipped }}</p>
 	</div>
 	<template v-if="advancedSettings">

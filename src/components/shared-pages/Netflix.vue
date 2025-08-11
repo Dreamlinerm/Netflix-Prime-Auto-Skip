@@ -11,6 +11,15 @@
 	>
 		<div class="py-1 m-0 flex">
 			<p>{{ $t(setting + "Switch") }}</p>
+			<div
+				class="tooltip"
+				v-if="!advancedSettings"
+			>
+				<i-mdi-help-circle height="1rem" />
+				<div class="tooltip-content text-primary-content">
+					{{ $t(setting + "Description") }}
+				</div>
+			</div>
 			<Switch
 				v-model="settings.Netflix[setting]"
 				class="ml-auto"
@@ -46,6 +55,11 @@ const props = defineProps({
 		default: false,
 	},
 })
-const settingsList: Array<"skipRecap" | "skipBlocked" | "profile" | "removeGames"> = ["skipRecap", "skipBlocked", "profile","removeGames"]
+const settingsList: Array<"skipRecap" | "skipBlocked" | "profile" | "removeGames"> = [
+	"skipRecap",
+	"skipBlocked",
+	"profile",
+	"removeGames",
+]
 </script>
 <style scoped></style>

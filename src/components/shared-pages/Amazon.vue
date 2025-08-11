@@ -11,6 +11,15 @@
 	>
 		<div class="py-1 m-0 flex">
 			<p>{{ $t(setting + "Switch") }}</p>
+			<div
+				class="tooltip"
+				v-if="!advancedSettings"
+			>
+				<i-mdi-help-circle height="1rem" />
+				<div class="tooltip-content text-primary-content">
+					{{ $t(setting + "Description") }}
+				</div>
+			</div>
 			<Switch
 				v-model="settings.Amazon[setting]"
 				class="ml-auto"

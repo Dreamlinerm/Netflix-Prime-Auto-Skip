@@ -19,6 +19,7 @@ declare module 'vue' {
     IMdiFormatListBulleted: typeof import('~icons/mdi/format-list-bulleted')['default']
     IMdiGift: typeof import('~icons/mdi/gift')['default']
     IMdiGithub: typeof import('~icons/mdi/github')['default']
+    IMdiHelpCircle: typeof import('~icons/mdi/help-circle')['default']
     IMdiNetflix: typeof import('~icons/mdi/netflix')['default']
     IMdiTransitConnectionVariant: typeof import('~icons/mdi/transit-connection-variant')['default']
     IPhGlobe: typeof import('~icons/ph/globe')['default']
