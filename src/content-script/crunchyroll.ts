@@ -60,14 +60,18 @@ function filterDub(display: displayType) {
 			element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
 	})
 	// filter all titles which are duplicated
-	const first = Array.from(list)
-	// filter out everything except the first element by title
-	const duplicates = first.filter(
-		(element, index) => index != first.findIndex((el) => element.textContent.includes(el.textContent)),
-	)
-	duplicates.forEach((element) => {
-		if (element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement)
-			element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
+	const daysList = document.querySelectorAll("li.day")
+	daysList.forEach((element) => {
+		const showList = element.querySelectorAll("cite[itemprop='name']")
+		const first = Array.from(showList)
+		// filter out everything except the first element by title
+		const duplicates = first.filter(
+			(element, index) => index != first.findIndex((el) => element.textContent.includes(el.textContent)),
+		)
+		duplicates.forEach((element) => {
+			if (element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement)
+				element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
+		})
 	})
 	if (display == "block" && settings.value.General.filterQueued) filterQueued("none")
 }
