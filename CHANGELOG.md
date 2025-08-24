@@ -3,6 +3,9 @@
 ## 1.1.78
 
 - added Tooltips to Action Popup Settings
+- improved on Portugese Brazil translation
+- fixed Play on fullscreen Localization
+- changed settings sidenav
 
 ## 1.1.77
 
