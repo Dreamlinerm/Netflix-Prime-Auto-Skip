@@ -50,29 +50,35 @@ function filterQueued(display: displayType) {
 }
 
 function filterDub(display: displayType) {
+	// check if dub is included in titles
+	let filterCount = 0
 	// filter all titles that contain "Dub" or "Audio"
 	const list = document.querySelectorAll("cite[itemprop='name']")
 	list.forEach((element) => {
 		if (
 			(element?.textContent?.includes("Dub") || element?.textContent?.includes("Audio")) &&
 			element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement
-		)
+		) {
+			filterCount++
 			element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
+		}
 	})
-	// filter all titles which are duplicated
-	const daysList = document.querySelectorAll("li.day")
-	daysList.forEach((element) => {
-		const showList = element.querySelectorAll("cite[itemprop='name']")
-		const first = Array.from(showList)
-		// filter out everything except the first element by title
-		const duplicates = first.filter(
-			(element, index) => index != first.findIndex((el) => element.textContent.includes(el.textContent)),
-		)
-		duplicates.forEach((element) => {
-			if (element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement)
-				element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
+	if (filterCount == 0) {
+		// filter all titles which are duplicated
+		const daysList = document.querySelectorAll("li.day")
+		daysList.forEach((element) => {
+			const showList = element.querySelectorAll("cite[itemprop='name']")
+			const first = Array.from(showList)
+			// filter out everything except the first element by title
+			const duplicates = first.filter(
+				(element, index) => index != first.findIndex((el) => element.textContent.includes(el.textContent)),
+			)
+			duplicates.forEach((element) => {
+				if (element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement)
+					element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
+			})
 		})
-	})
+	}
 	if (display == "block" && settings.value.General.filterQueued) filterQueued("none")
 }
 type FilterFunction = (display: displayType) => void
