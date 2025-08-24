@@ -2,7 +2,7 @@
 
 ## 1.1.78
 
-- Crunchyroll: fixed Release calendar filtering for dub
+- Crunchyroll: fixed Release calendar filtering for dub incorrectly
 - added Tooltips to Action Popup Settings
 - improved on Portugese Brazil translation
 - fixed Play on fullscreen Localization
