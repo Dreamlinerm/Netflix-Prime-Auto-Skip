@@ -89,13 +89,13 @@
 	</div>
 	<div class="py-1 m-0 flex">
 		<div class="tooltip flex">
-			<p>{{ $t("fullscreenSwitch") }}</p>
+			<p>{{ $t("playOnFullScreenSwitch") }}</p>
 			<i-mdi-help-circle height="1rem" />
 			<div
 				class="tooltip-content text-primary-content"
 				style="transform: unset; inset: auto auto var(--tt-off) 0%"
 			>
-				{{ $t("fullscreenDescription") }}
+				{{ $t("playOnFullScreenDescription") }}
 			</div>
 		</div>
 		<Switch

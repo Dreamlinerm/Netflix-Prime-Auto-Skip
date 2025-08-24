@@ -118,14 +118,14 @@ function removeAllTitles() {
 	</div>
 	<hr />
 	<div class="line flex">
-		<p>{{ $t("fullscreenSwitch") }}</p>
+		<p>{{ $t("playOnFullScreenSwitch") }}</p>
 		<Switch
 			v-model="settings.Video.playOnFullScreen"
 			class="ml-auto"
 		></Switch>
 	</div>
 	<p class="description">
-		{{ $t("fullscreenDescription") }}
+		{{ $t("playOnFullScreenDescription") }}
 	</p>
 	<hr />
 	<div class="line flex">
