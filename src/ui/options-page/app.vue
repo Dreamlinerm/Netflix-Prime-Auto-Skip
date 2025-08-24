@@ -41,28 +41,6 @@ watch(
 						<p class="font text-base text-white">{{ version }}</p>
 					</div>
 				</div>
-				<a
-					target="_blank"
-					class="flex justify-center items-center flex-col text-center no-underline"
-					:href="
-						isFirefox
-							? 'https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/'
-							: 'https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle'
-					"
-				>
-					<p class="text-base text-white">
-						{{ $t("rateNow") }}
-					</p>
-					<img
-						:src="
-							isFirefox
-								? 'https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010'
-								: 'https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010'
-						"
-						alt="rating"
-						class="w-24"
-					/>
-				</a>
 			</div>
 			<div class="flex flex-col MenuButtons flex-wrap">
 				<RouterLink
@@ -180,6 +158,28 @@ watch(
 			<div class="mt-auto">
 				<div class="flex flex-col mb-2 MenuButtons">
 					<a
+						target="_blank"
+						class="flex justify-center items-center flex-col text-center no-underline"
+						:href="
+							isFirefox
+								? 'https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/'
+								: 'https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle'
+						"
+					>
+						<p class="text-base text-white">
+							{{ $t("rateNow") }}
+						</p>
+						<img
+							:src="
+								isFirefox
+									? 'https://img.shields.io/amo/stars/NetflixPrime@Autoskip.io?color=e60010'
+									: 'https://img.shields.io/chrome-web-store/stars/akaimhgappllmlkadblbdknhbfghdgle?color=e60010'
+							"
+							alt="rating"
+							class="w-24"
+						/>
+					</a>
+					<a
 						class="btn btn-secondary rounded-2xl blueButtons m-[5px_15px]"
 						:href="githubUrl"
 						target="_blank"
@@ -219,7 +219,7 @@ watch(
 @reference "@/assets/base.css";
 /* The side navigation menu */
 .sidenav {
-	@apply h-full bg-[#111] px-2.5 gap-5;
+	@apply h-full bg-[#111] px-2.5 gap-3;
 }
 .menuButton {
 	@apply rounded-[15px] m-[5px_15px] p-[13px_20px] max-w-[400px] no-underline whitespace-nowrap cursor-pointer text-primary-content text-[1.5rem] select-none items-center;
