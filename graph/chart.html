@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <h2>Total Users: <span id="totalUsers"></span></h2>
+  <h2>Total Daily Users: <span id="totalDailyUsers"></span></h2>
   <h2>Total Downloads: <span id="totalDownloads"></span></h2>
   <div style="display: flex;">
     <div style="width: 50%">
@@ -47,15 +47,15 @@
   const maxDownloadsChrome = Math.max(...chromeDownloads.map((point) => point.count));
   const maxDownloads = Math.ceil(Math.max(maxDownloadsFirefox, maxDownloadsChrome) / 10) * 10;
 
-  const TotalUsers = firefoxUsers[0].count + chromeUsers[chromeUsers.length - 3].count + edgeUsers[edgeUsers.length - 1].count;
-  const TotalDownloads = firefoxDownloads.reduce((acc, point) => acc + point.count, 0) + chromeDownloads.reduce((acc, point) => acc + point.count, 0) + edgeDownloads.reduce((acc, point) => acc + point.count, 0);
+  const totalDailyUsers = firefoxUsers[0].count + chromeUsers[chromeUsers.length - 3].count + edgeUsers[edgeUsers.length - 1].count;
+  const totalDownloads = firefoxDownloads.reduce((acc, point) => acc + point.count, 0) + chromeDownloads.reduce((acc, point) => acc + point.count, 0) + edgeDownloads.reduce((acc, point) => acc + point.count, 0);
 
   document.getElementById("fmaxUsers").innerText = maxUsersFirefox;
   document.getElementById("fmaxDownloads").innerText = maxDownloadsFirefox;
   document.getElementById("cmaxUsers").innerText = maxUsersChrome;
   document.getElementById("cmaxDownloads").innerText = maxDownloadsChrome;
-  document.getElementById("totalUsers").innerText = TotalUsers;
-  document.getElementById("totalDownloads").innerText = TotalDownloads;
+  document.getElementById("totalDailyUsers").innerText = totalDailyUsers;
+  document.getElementById("totalDownloads").innerText = totalDownloads;
   new Chart(chartFirefoxUsers, {
     type: "line",
     data: {
