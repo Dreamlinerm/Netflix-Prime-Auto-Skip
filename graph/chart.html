@@ -7,12 +7,14 @@
   <script src="firefoxDownloads.js"></script>
   <script src="ChromeUsers.js"></script>
   <script src="ChromeDownloads.js"></script>
+  <script src="chromeUninstall.js"></script>
   <script src="edgeUsers.js"></script>
   <script src="edgeDownloads.js"></script>
 </head>
 
 <body>
   <h2>Total Daily Users: <span id="totalDailyUsers"></span></h2>
+  <h2>Estimated Total Users with chrome ratio: <span id="estimatedTotalUsers"></span></h2>
   <h2>Total Downloads: <span id="totalDownloads"></span></h2>
   <div style="display: flex;">
     <div style="width: 33%">
@@ -32,33 +34,40 @@
       Chrome
       <canvas id="ChromeUsers"></canvas>
       <canvas id="ChromeDownloads"></canvas>
+      <canvas id="ChromeUninstall"></canvas>
       <h2>Chrome Max Users: <span id="cmaxUsers"></span></h2>
+      <h2>Chrome Total Users: <span id="chromeTotalUsers"></span></h2>
+      <h2>Chrome Retention Rate: <span id="ChromeRetentionRate"></span>%</h2>
+      <h2>Chrome Ratio Max/Total Users: <span id="chromeRatioMaxTotal"></span></h2>
     </div>
   </div>
 </body>
 
 <script>
-  const chartFirefoxUsers = document.getElementById("users");
-  const chartFirefoxDownloads = document.getElementById("downloads");
-  const chartChromeUsers = document.getElementById("ChromeUsers");
-  const chartChromeDownloads = document.getElementById("ChromeDownloads");
-  const chartEdgeUsers = document.getElementById("EdgeUsers");
-  const chartEdgeDownloads = document.getElementById("EdgeDownloads");
-
   const maxUsersFirefox = Math.max(...firefoxUsers.map((point) => point.count));
   const maxUsersChrome = Math.max(...chromeUsers.map((point) => point.count));
   const maxUsersEdge = Math.max(...edgeUsers.map((point) => point.count));
   const maxUsers = Math.ceil(Math.max(maxUsersFirefox, maxUsersChrome, maxUsersEdge) / 1000) * 1000;
 
-  const totalDailyUsers = firefoxUsers[0].count + chromeUsers[chromeUsers.length - 3].count + edgeUsers[edgeUsers.length - 1].count;
+  // chrome specific stats
+  const chromeTotalUsers = chromeDownloads.reduce((acc, point) => acc + point.count, 0) - chromeUninstall.reduce((acc, point) => acc + point.count, 0);
+  const ChromeRetentionRate = (chromeTotalUsers / chromeDownloads.reduce((acc, point) => acc + point.count, 0)) * 100;
+  const chromeRatioMaxTotal = maxUsersChrome / chromeTotalUsers;
+
+  const totalDailyUsers = firefoxUsers[0].count + chromeUsers[chromeUsers.length - 2].count + edgeUsers[edgeUsers.length - 1].count;
+  const estimatedTotalUsers = Math.round(totalDailyUsers / chromeRatioMaxTotal); // rough estimate
   const totalDownloads = firefoxDownloads.reduce((acc, point) => acc + point.count, 0) + chromeDownloads.reduce((acc, point) => acc + point.count, 0) + edgeDownloads.reduce((acc, point) => acc + point.count, 0);
 
   document.getElementById("fmaxUsers").innerText = maxUsersFirefox;
   document.getElementById("cmaxUsers").innerText = maxUsersChrome;
   document.getElementById("emaxUsers").innerText = maxUsersEdge;
   document.getElementById("totalDailyUsers").innerText = totalDailyUsers;
+  document.getElementById("estimatedTotalUsers").innerText = estimatedTotalUsers;
   document.getElementById("totalDownloads").innerText = totalDownloads;
-  new Chart(chartFirefoxUsers, {
+  document.getElementById("chromeTotalUsers").innerText = chromeTotalUsers;
+  document.getElementById("ChromeRetentionRate").innerText = ChromeRetentionRate.toFixed(2);
+  document.getElementById("chromeRatioMaxTotal").innerText = chromeRatioMaxTotal.toFixed(2);
+  new Chart(document.getElementById("users"), {
     type: "line",
     data: {
       labels: firefoxUsers.map((point) => point.date).reverse(),
@@ -84,8 +93,7 @@
       // },
     },
   });
-
-  new Chart(chartFirefoxDownloads, {
+  new Chart(document.getElementById("downloads"), {
     type: "line",
     data: {
       labels: firefoxDownloads.map((point) => point.date).reverse(),
@@ -111,7 +119,7 @@
       // },
     },
   });
-  new Chart(chartChromeUsers, {
+  new Chart(document.getElementById("ChromeUsers"), {
     type: "line",
     data: {
       labels: chromeUsers.map((point) => point.date),
@@ -137,7 +145,7 @@
       // },
     },
   });
-  new Chart(chartChromeDownloads, {
+  new Chart(document.getElementById("ChromeDownloads"), {
     type: "line",
     data: {
       labels: chromeDownloads.map((point) => point.date),
@@ -163,7 +171,33 @@
       // },
     },
   });
-  new Chart(chartEdgeUsers, {
+  new Chart(document.getElementById("ChromeUninstall"), {
+    type: "line",
+    data: {
+      labels: chromeUninstall.map((point) => point.date),
+      datasets: [
+        {
+          label: "Uninstalls per Day",
+          data: chromeUninstall.map((point) => point.count),
+          borderWidth: 2,
+          trendlineLinear: {
+            lineStyle: "solid",
+            width: 2,
+          }
+        },
+      ],
+    },
+    options: {
+      pointRadius: 3,
+      // scales: {
+      //   y: {
+      //     min: 0,
+      //     max: maxDownloads,
+      //   },
+      // },
+    },
+  });
+  new Chart(document.getElementById("EdgeUsers"), {
     type: "line",
     data: {
       labels: edgeUsers.map((point) => point.date),
@@ -189,7 +223,7 @@
       // },
     },
   });
-  new Chart(chartEdgeDownloads, {
+  new Chart(document.getElementById("EdgeDownloads"), {
     type: "line",
     data: {
       labels: edgeDownloads.map((point) => point.date),

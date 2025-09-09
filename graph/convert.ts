@@ -7,6 +7,7 @@ function convertCsv(name) {
 		.split("\n")
 		// remove the first two lines
 		.slice(2)
+		.filter((line) => line.trim() !== "")
 		.map((line) => line.split(","))
 		.map((line) => {
 			return {
@@ -26,6 +27,7 @@ function convertCsv(name) {
 }
 convertCsv("chromeUsers")
 convertCsv("chromeDownloads")
+convertCsv("chromeUninstall")
 
 function convertEdgeCsv(name) {
 	const file = fs.readFileSync(path.join(__dirname, name + ".csv"), "utf-8")
