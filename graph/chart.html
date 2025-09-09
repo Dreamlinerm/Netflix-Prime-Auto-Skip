@@ -15,20 +15,24 @@
   <h2>Total Daily Users: <span id="totalDailyUsers"></span></h2>
   <h2>Total Downloads: <span id="totalDownloads"></span></h2>
   <div style="display: flex;">
-    <div style="width: 50%">
+    <div style="width: 33%">
+      Edge
+      <canvas id="EdgeUsers"></canvas>
+      <canvas id="EdgeDownloads"></canvas>
+      <h2>Edge Max Users: <span id="emaxUsers"></span></h2>
+    </div>
+    <div style="width: 33%">
       Firefox
       <!-- https://www.chartjs.org/ -->
       <canvas id="users"></canvas>
       <canvas id="downloads"></canvas>
       <h2>Firefox Max Users: <span id="fmaxUsers"></span></h2>
-      <h2>Firefox Max Downloads: <span id="fmaxDownloads"></span></h2>
     </div>
-    <div style="width: 50%">
+    <div style="width: 33%">
       Chrome
       <canvas id="ChromeUsers"></canvas>
       <canvas id="ChromeDownloads"></canvas>
       <h2>Chrome Max Users: <span id="cmaxUsers"></span></h2>
-      <h2>Chrome Max Downloads: <span id="cmaxDownloads"></span></h2>
     </div>
   </div>
 </body>
@@ -38,22 +42,20 @@
   const chartFirefoxDownloads = document.getElementById("downloads");
   const chartChromeUsers = document.getElementById("ChromeUsers");
   const chartChromeDownloads = document.getElementById("ChromeDownloads");
+  const chartEdgeUsers = document.getElementById("EdgeUsers");
+  const chartEdgeDownloads = document.getElementById("EdgeDownloads");
 
   const maxUsersFirefox = Math.max(...firefoxUsers.map((point) => point.count));
   const maxUsersChrome = Math.max(...chromeUsers.map((point) => point.count));
-  const maxUsers = Math.ceil(Math.max(maxUsersFirefox, maxUsersChrome) / 1000) * 1000;
-
-  const maxDownloadsFirefox = Math.max(...firefoxDownloads.map((point) => point.count));
-  const maxDownloadsChrome = Math.max(...chromeDownloads.map((point) => point.count));
-  const maxDownloads = Math.ceil(Math.max(maxDownloadsFirefox, maxDownloadsChrome) / 10) * 10;
+  const maxUsersEdge = Math.max(...edgeUsers.map((point) => point.count));
+  const maxUsers = Math.ceil(Math.max(maxUsersFirefox, maxUsersChrome, maxUsersEdge) / 1000) * 1000;
 
   const totalDailyUsers = firefoxUsers[0].count + chromeUsers[chromeUsers.length - 3].count + edgeUsers[edgeUsers.length - 1].count;
   const totalDownloads = firefoxDownloads.reduce((acc, point) => acc + point.count, 0) + chromeDownloads.reduce((acc, point) => acc + point.count, 0) + edgeDownloads.reduce((acc, point) => acc + point.count, 0);
 
   document.getElementById("fmaxUsers").innerText = maxUsersFirefox;
-  document.getElementById("fmaxDownloads").innerText = maxDownloadsFirefox;
   document.getElementById("cmaxUsers").innerText = maxUsersChrome;
-  document.getElementById("cmaxDownloads").innerText = maxDownloadsChrome;
+  document.getElementById("emaxUsers").innerText = maxUsersEdge;
   document.getElementById("totalDailyUsers").innerText = totalDailyUsers;
   document.getElementById("totalDownloads").innerText = totalDownloads;
   new Chart(chartFirefoxUsers, {
@@ -143,6 +145,58 @@
         {
           label: "Downloads per Day",
           data: chromeDownloads.map((point) => point.count),
+          borderWidth: 2,
+          trendlineLinear: {
+            lineStyle: "solid",
+            width: 2,
+          }
+        },
+      ],
+    },
+    options: {
+      pointRadius: 3,
+      // scales: {
+      //   y: {
+      //     min: 0,
+      //     max: maxDownloads,
+      //   },
+      // },
+    },
+  });
+  new Chart(chartEdgeUsers, {
+    type: "line",
+    data: {
+      labels: edgeUsers.map((point) => point.date),
+      datasets: [
+        {
+          label: "Daily users",
+          data: edgeUsers.map((point) => point.count),
+          borderWidth: 2,
+          trendlineLinear: {
+            lineStyle: "solid",
+            width: 2,
+          }
+        },
+      ],
+    },
+    options: {
+      pointRadius: 3,
+      // scales: {
+      //   y: {
+      //     min: 0,
+      //     max: maxUsers,
+      //   },
+      // },
+    },
+  });
+  new Chart(chartEdgeDownloads, {
+    type: "line",
+    data: {
+      labels: edgeDownloads.map((point) => point.date),
+      datasets: [
+        {
+          label: "Downloads per Day",
+          data: edgeDownloads.map((point) => point.count),
           borderWidth: 2,
           trendlineLinear: {
             lineStyle: "solid",
