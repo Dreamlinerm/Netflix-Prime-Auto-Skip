@@ -411,15 +411,14 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 						useDBCache(title, card, media_type)
 					}
 					// if element is not visible skip it
-					// else if (!isElementVisible(card)) {
-					// 	if (isNetflix || isDisney || isHotstar || isHBO || isParamount) card.classList.remove("imdb")
-					// 	else if (isPrimeVideo) {
-					// 		if (type == 0) card?.closest("li")?.classList.remove("imdb")
-					// 		else if (type == 1) card?.classList.remove("imdb")
-					// 	}
-					// 	continue
-					// }
-					else {
+					else if (!isElementVisible(card)) {
+						if (isNetflix || isDisney || isHotstar || isHBO || isParamount) card.classList.remove("imdb")
+						else if (isPrimeVideo) {
+							if (type == 0) card?.closest("li")?.classList.remove("imdb")
+							else if (type == 1) card?.classList.remove("imdb")
+						}
+						continue
+					} else {
 						getMovieInfo(title, card, media_type)
 						updateDBCache = true
 					}

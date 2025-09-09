@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.79
+
+- only pull ratings for visible elements, to reduce API calls
+
 ## 1.1.78
 
 - Crunchyroll: fixed Release calendar filtering for dub incorrectly
