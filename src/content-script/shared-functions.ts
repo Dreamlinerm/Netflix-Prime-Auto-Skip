@@ -350,6 +350,17 @@ function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 		]
 	return AllTitleCardsTypes
 }
+function isElementVisible(el: HTMLElement): boolean {
+	if (!el) return false
+	const rect = el.getBoundingClientRect()
+	const visible =
+		// el.checkVisibility({ checkOpacity: true, visibilityProperty: true, contentVisibilityAuto: true }) &&
+		rect.bottom > 0 &&
+		rect.right > 0 &&
+		rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
+		rect.left < (window.innerWidth || document.documentElement.clientWidth)
+	return visible
+}
 
 async function addRating(showRating: boolean, optionHideTitles: boolean) {
 	url = window.location.href
@@ -398,7 +409,17 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 						(!media_type || DBCache[title]?.media_type == media_type)
 					) {
 						useDBCache(title, card, media_type)
-					} else {
+					}
+					// if element is not visible skip it
+					// else if (!isElementVisible(card)) {
+					// 	if (isNetflix || isDisney || isHotstar || isHBO || isParamount) card.classList.remove("imdb")
+					// 	else if (isPrimeVideo) {
+					// 		if (type == 0) card?.closest("li")?.classList.remove("imdb")
+					// 		else if (type == 1) card?.classList.remove("imdb")
+					// 	}
+					// 	continue
+					// }
+					else {
 						getMovieInfo(title, card, media_type)
 						updateDBCache = true
 					}
