@@ -227,7 +227,7 @@ async function getMovieInfo(
 	if (year) url += `&year=${year}`
 	const data: TMDBResponse = await sendMessage("fetch", { url }, "background")
 	if (data != undefined) {
-		if (data?.results.length > 0) data.results = data.results?.filter((item) => item.media_type != "person")
+		if (data?.results?.length > 0) data.results = data.results.filter((item) => item.media_type != "person")
 		// themoviedb
 		const movie = data?.results?.[0]
 		const compiledData: MovieInfo = {
@@ -352,16 +352,16 @@ function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	return AllTitleCardsTypes
 }
 function isElementVisible(el: HTMLElement): boolean {
-	return true
-	// if (!el) return false
-	// const rect = el.getBoundingClientRect()
-	// const visible =
-	// 	// el.checkVisibility({ checkOpacity: true, visibilityProperty: true, contentVisibilityAuto: true }) &&
-	// 	rect.bottom > 0 &&
-	// 	rect.right > 0 &&
-	// 	rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
-	// 	rect.left < (window.innerWidth || document.documentElement.clientWidth)
-	// return visible
+	// return true
+	if (!el) return false
+	const rect = el.getBoundingClientRect()
+	const visible =
+		// el.checkVisibility({ checkOpacity: true, visibilityProperty: true, contentVisibilityAuto: true }) &&
+		rect.bottom > 0 &&
+		rect.right > 0 &&
+		rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
+		rect.left < (window.innerWidth || document.documentElement.clientWidth)
+	return visible
 }
 
 async function addRating(showRating: boolean, optionHideTitles: boolean) {
