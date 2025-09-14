@@ -227,7 +227,7 @@ async function getMovieInfo(
 	if (year) url += `&year=${year}`
 	const data: TMDBResponse = await sendMessage("fetch", { url }, "background")
 	if (data != undefined) {
-		if (data?.results?.length > 0) data.results = data.results.filter((item) => item.media_type != "person")
+		if (data?.results) data.results = data.results?.filter((item) => item.media_type?.toLowerCase() !== "person")
 		// themoviedb
 		const movie = data?.results?.[0]
 		const compiledData: MovieInfo = {
