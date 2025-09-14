@@ -581,6 +581,9 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 	const vote_count = data?.vote_count || 0
 	// right: 1.5vw;
 	div.id = "rating"
+	let zIndexValue = "2"
+	if (isDisney) zIndexValue = ""
+	else if (isPrimeVideo) zIndexValue = "3"
 	Object.assign(div.style, {
 		position: "absolute",
 		bottom: "0",
@@ -590,7 +593,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		borderRadius: "5px",
 		padding: "0 2px 0 2px",
 		right: isNetflix ? "0.2vw" : "0",
-		zIndex: isDisney ? "" : "2",
+		zIndex: zIndexValue,
 		fontSize: isMobile ? "4vw" : "1vw",
 	})
 
