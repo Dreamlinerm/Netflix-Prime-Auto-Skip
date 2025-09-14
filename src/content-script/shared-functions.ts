@@ -227,6 +227,7 @@ async function getMovieInfo(
 	if (year) url += `&year=${year}`
 	const data: TMDBResponse = await sendMessage("fetch", { url }, "background")
 	if (data != undefined) {
+		if (data?.results.length > 0) data.results = data.results?.filter((item) => item.media_type != "person")
 		// themoviedb
 		const movie = data?.results?.[0]
 		const compiledData: MovieInfo = {
@@ -502,6 +503,7 @@ function Disney_fixTitle(title: string | undefined): string | undefined {
 	if (htmlLang == "de") {
 		title = title
 			?.replace(/Nummer \d* /, "")
+			?.replace("\n", " ")
 			.split(" Für Details")[0]
 			.split(" Staffel")[0]
 			.split("Staffel")[0]
@@ -514,9 +516,12 @@ function Disney_fixTitle(title: string | undefined): string | undefined {
 			.split(" Jeden")[0]
 			.split(" Noch")[0]
 			.split(" Premiere")[0]
-	} else if (htmlLang == "en") {
+	}
+	// else if (htmlLang == "en" || htmlLang == "en-US" || htmlLang == "en-GB") {
+	else {
 		title = title
 			?.replace(/Number \d* /, "")
+			?.replace("\n", " ")
 			.replace(" Select for details on this title.", "")
 			.split(" Season")[0]
 			.split("Season")[0]
@@ -605,10 +610,26 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 			// releaseDate = year >= 100 ? (year + " ").substring(1) : year + " ";
 		}
 		div.textContent = releaseDate + data.score?.toFixed(1)
-		div.setAttribute("alt", data?.title + ", OG title: " + title + ", Vote count: " + vote_count)
+		div.setAttribute(
+			"alt",
+			"Filtered title: " +
+				title +
+				", Fetched title: " +
+				data?.title +
+				", media_type: " +
+				data?.media_type +
+				", Vote count: " +
+				vote_count,
+		)
 	} else {
 		div.textContent = "?"
-		div.setAttribute("alt", title)
+		div.setAttribute(
+			"alt",
+			"Filtered title: " +
+				title +
+				(data?.title ? ", Fetched title: " + data?.title : "") +
+				(data?.media_type ? ", media_type: " + data?.media_type : ""),
+		)
 		console.log("no score found:", title, data)
 	}
 	const greyOverlay = document.createElement("div")
