@@ -223,7 +223,7 @@ async function getMovieInfo(
 ) {
 	const locale = htmlLang || navigator?.language || "en-US"
 	const queryType = media_type ?? "multi"
-	let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURI(title)}&include_adult=false&language=${locale}&page=1`
+	let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURIComponent(title)}&include_adult=false&language=${locale}&page=1`
 	if (year) url += `&year=${year}`
 	const data: TMDBResponse = await sendMessage("fetch", { url }, "background")
 	if (data != undefined) {
@@ -352,15 +352,16 @@ function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	return AllTitleCardsTypes
 }
 function isElementVisible(el: HTMLElement): boolean {
-	if (!el) return false
-	const rect = el.getBoundingClientRect()
-	const visible =
-		// el.checkVisibility({ checkOpacity: true, visibilityProperty: true, contentVisibilityAuto: true }) &&
-		rect.bottom > 0 &&
-		rect.right > 0 &&
-		rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
-		rect.left < (window.innerWidth || document.documentElement.clientWidth)
-	return visible
+	return true
+	// if (!el) return false
+	// const rect = el.getBoundingClientRect()
+	// const visible =
+	// 	// el.checkVisibility({ checkOpacity: true, visibilityProperty: true, contentVisibilityAuto: true }) &&
+	// 	rect.bottom > 0 &&
+	// 	rect.right > 0 &&
+	// 	rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
+	// 	rect.left < (window.innerWidth || document.documentElement.clientWidth)
+	// return visible
 }
 
 async function addRating(showRating: boolean, optionHideTitles: boolean) {
