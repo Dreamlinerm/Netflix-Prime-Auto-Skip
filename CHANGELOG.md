@@ -4,7 +4,7 @@
 
 - only pull ratings for visible elements, to reduce API calls
 - fixed TMDB ratings not clickable on Prime Video
-- fixed Disney Ratings in Britain
+- fixed Disney Ratings in Britain and other
 
 ## 1.1.78
 
