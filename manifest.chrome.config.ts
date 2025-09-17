@@ -3,12 +3,12 @@ import ManifestConfig from "./manifest.config"
 // import packageJson from "./package.json" with { type: "json" }
 
 // displayNameShort,
-const { name, descriptionShort } = packageJsonsss
+// const { name, descriptionShort } = packageJsonsss
 // @ts-expect-error ManifestConfig provides all required fields
 export default defineManifest((env) => ({
 	...ManifestConfig,
 	// name: env.mode === "staging" ? `[INTERNAL] ${name}` : displayNameShort || name,
-	description: descriptionShort,
+	// description: descriptionShort,
 	author: {
 		email: "marvinkrebber@yahoo.de",
 	},
