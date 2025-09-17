@@ -1,12 +1,3 @@
-Supported Streaming Services:
-
-- Netflix
-- Prime Video
-- Disney+ (Hotstar, STAR+)
-- Crunchyroll
-- HBO Max
-- Paramount+
-
 ✨ Features
 
 You can customize which features are enabled in the Settings.
