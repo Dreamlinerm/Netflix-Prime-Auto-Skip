@@ -485,7 +485,10 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 	if (isNetflix) {
 		title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0]
 	} else if (isDisney) {
-		title = Disney_fixTitle(card?.getAttribute("aria-label") ?? undefined)
+		const prompt = card.querySelector('div[data-testid="hero-carousel-prompt"]')
+		if (prompt?.textContent)
+			title = Disney_fixTitle(card?.getAttribute("aria-label")?.replace(" " + prompt.textContent, ""))
+		else title = Disney_fixTitle(card?.getAttribute("aria-label") ?? undefined)
 		// no section Extras on disney shows
 		if (url.includes("entity")) {
 			const SelectedTabId = document.querySelector('[aria-selected="true"]')?.id.split("_control")[0]
