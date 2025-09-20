@@ -298,6 +298,12 @@ function getDiffInDays(firstDate: string, secondDate: Date) {
 	if (!firstDate || !secondDate) return 31
 	return Math.round(Math.abs(new Date(secondDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24))
 }
+
+// DBCache logic
+// 1. Condition No Cached Rating -> Fetch Rating
+// 2. Condition No Rating but in Cache if cache older than 7 days -> Fetch Rating
+// 3. Condition Cached Rating older than 30 days -> Fetch Rating
+// 4. Condition Cached Rating older than 1 day, Vote count under 100 and Release date in the last 50 days -> Fetch Rating
 function useDBCache(title: string, card: HTMLElement, media_type: string | null) {
 	if (!DBCache[title]?.date) DBCache[title].date = today
 	const vote_count = DBCache[title]?.vote_count || 100
