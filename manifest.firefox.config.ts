@@ -15,6 +15,9 @@ export default defineManifest((env) => ({
 	browser_specific_settings: {
 		gecko: {
 			id: "NetflixPrime@Autoskip.io",
+			data_collection_permissions: {
+				required: ["none"],
+			},
 		},
 	},
 	manifest_version: 3,
