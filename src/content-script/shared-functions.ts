@@ -337,7 +337,8 @@ function Amazon_getMediaType(type: string): "tv" | "movie" | null {
 function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	let AllTitleCardsTypes: Array<NodeListOf<Element>> = []
 	if (isNetflix) AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")]
-	else if (isDisney) AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not(.imdb)")]
+	else if (isDisney)
+		AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not([href^='/browse/page']):not(.imdb)")]
 	else if (isHotstar) AllTitleCardsTypes = [document.querySelectorAll(".swiper-slide img:not(.imdb)")]
 	else if (isHBO) AllTitleCardsTypes = [document.querySelectorAll("a[class*='StyledTileLinkNormal-']:not(.imdb)")]
 	else if (isParamount)
@@ -506,9 +507,9 @@ function Disney_fixTitle(title: string | undefined): string | undefined {
 			?.replace(/Nummer \d* /, "")
 			?.replace("\n", " ")
 			.split(" Für Details")[0]
+			.split(" Neue")[0]
 			.split(" Staffel")[0]
 			.split("Staffel")[0]
-			.split(" Neue")[0]
 			.split(" Alle")[0]
 			.split(" Demnächst")[0]
 			.split(" Altersfreigabe")[0]
@@ -524,10 +525,10 @@ function Disney_fixTitle(title: string | undefined): string | undefined {
 			?.replace(/Number \d* /, "")
 			?.replace("\n", " ")
 			.replace(" Select for details on this title.", "")
+			.split(" New")[0]
 			.split(" Season")[0]
 			.split("Season")[0]
-			.split(" New ")[0]
-			.split(" All Episodes")[0]
+			.split(" All")[0]
 			.split(" Coming")[0]
 			.split(" Two-Episode")[0]
 			.split(" Rated")[0]
