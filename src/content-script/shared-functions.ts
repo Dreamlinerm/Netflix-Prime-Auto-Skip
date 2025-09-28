@@ -507,7 +507,13 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 		}
 	} else if (isHBO) {
 		const href = card.getAttribute("href") || ""
-		if (href.includes("show") || href.includes("series") || href.includes("movie") || href.includes("topical")) {
+		if (
+			href.includes("show") ||
+			href.includes("series") ||
+			href.includes("movie") ||
+			href.includes("topical") ||
+			href.includes("standalone")
+		) {
 			title = card.querySelector("p[class*='md_strong-']")?.textContent ?? ""
 		}
 	} else if (isParamount) title = card.getAttribute("title") ?? ""
