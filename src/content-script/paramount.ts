@@ -17,7 +17,7 @@ async function startParamount() {
 	startSharedFunctions(Platforms.Paramount)
 	ParamountObserver.observe(document, config)
 	if (settings.value.Paramount?.speedSlider) Paramount_SpeedKeyboard()
-	if (settings.value.Video?.scrollVolume) Paramount_doubleClick()
+	if (settings.value.Video?.doubleClick) Paramount_doubleClick()
 }
 type StatisticsKey =
 	| "AmazonAdTimeSkipped"
