@@ -472,6 +472,10 @@ function getMediaType(card: HTMLElement): "tv" | "movie" | null {
 		const href = card.getAttribute("href") || ""
 		if (href.includes("/shows/")) media_type = "tv"
 		else if (href.includes("/movies/")) media_type = "movie"
+	} else if (isHBO) {
+		const href = card.getAttribute("href") || ""
+		if (href.includes("show") || href.includes("series")) media_type = "tv"
+		else if (href.includes("movie")) media_type = "movie"
 	} else if (isPrimeVideo) {
 		if (url.includes("video/tv")) media_type = "tv"
 		else if (url.includes("video/movie")) media_type = "movie"
@@ -501,8 +505,12 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 			if (type == 0) title = Amazon_fixTitle(card.getAttribute("data-card-title") ?? "")
 			else if (type == 1) title = Amazon_fixTitle(card.querySelector("a")?.getAttribute("aria-label") ?? "")
 		}
-	} else if (isHBO) title = card.querySelector("p[class*='md_strong-']")?.textContent ?? ""
-	else if (isParamount) title = card.getAttribute("title") ?? ""
+	} else if (isHBO) {
+		const href = card.getAttribute("href") || ""
+		if (href.includes("show") || href.includes("series") || href.includes("movie") || href.includes("topical")) {
+			title = card.querySelector("p[class*='md_strong-']")?.textContent ?? ""
+		}
+	} else if (isParamount) title = card.getAttribute("title") ?? ""
 	return title
 }
 function Disney_fixTitle(title: string | undefined): string | undefined {
