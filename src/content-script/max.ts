@@ -16,6 +16,7 @@ async function startHBO() {
 	startSharedFunctions(Platforms.HBO)
 	HBOObserver.observe(document, config)
 	if (settings.value.HBO?.speedSlider) HBO_SpeedKeyboard()
+	if (settings.value.Video?.doubleClick) HBO_doubleClick()
 }
 type StatisticsKey =
 	| "AmazonAdTimeSkipped"
@@ -104,6 +105,17 @@ async function HBO_SpeedKeyboard() {
 			videoSpeed.value = video.playbackRate
 		}
 	})
+}
+async function HBO_doubleClick() {
+	if (settings.value.Video?.doubleClick) {
+		// event listener for double click
+		document.ondblclick = function () {
+			const fullscreenButton = document.querySelector('[data-testid="player-ux-fullscreen-button"]') as HTMLElement
+			fullscreenButton?.click()
+		}
+	} else {
+		document.ondblclick = null
+	}
 }
 // #endregion
 
