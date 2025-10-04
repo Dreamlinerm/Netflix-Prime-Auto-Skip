@@ -59,7 +59,7 @@
 	"uploadSettings": "設定のアップロード:",
 	"resetAddon": "アドオンをデフォルトに戻す",
 	"noWrap": "ナウラップ",
-	"watchCreditsSwitch": "クレジットを見る",
+	"watchCreditsSwitch": "常にクレジットを見る：",
 	"watchCreditsDescription": "すべてのシリーズのクレジットを見る",
 	"conflictingTitle": "相反するすべての機能",
 	"showRatingSwitch": "TMDBの評価",

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.81
+
+- fixed disney skip credits/skip intro separation due to changed ui.
+
 ## 1.1.80
 
 - better ratings for disney title cards.

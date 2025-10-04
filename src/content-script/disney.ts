@@ -144,7 +144,12 @@ async function Disney_Intro(video: HTMLVideoElement, time: number) {
 		button = document
 			.evaluate("//span[contains(., 'Skip Intro')]", document, null, XPathResult.ANY_TYPE, null)
 			?.iterateNext()?.parentElement as HTMLElement
-	if (button && !document.querySelector('[data-testid="icon-restart"]')?.parentElement) {
+	if (
+		button &&
+		!document.querySelector('[data-testid="icon-restart"]')?.parentElement &&
+		!document.querySelector("[class^='overlay_upnext']")
+	) {
+		console.log("Intro/Recap found", document.querySelector('[data-testid="icon-restart"]'))
 		button.click()
 		console.log("Intro/Recap skipped", button)
 		setTimeout(function () {
@@ -155,7 +160,10 @@ async function Disney_Intro(video: HTMLVideoElement, time: number) {
 async function Disney_skipCredits(currentTime: number) {
 	let button: HTMLElement
 	if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]') as HTMLElement
-	else if (isDisney) button = document.querySelector('[data-testid="icon-restart"]')?.parentElement as HTMLElement
+	else if (isDisney)
+		button =
+			document.querySelector('[data-testid="icon-restart"]')?.parentElement ||
+			(document.querySelector(".overlay_upnextlite_button-container")?.firstChild as HTMLElement)
 	else
 		button = document
 			.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)
