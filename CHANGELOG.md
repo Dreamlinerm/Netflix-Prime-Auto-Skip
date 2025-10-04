@@ -2,8 +2,11 @@
 
 ## 1.1.81
 
-- fixed disney skip credits/skip intro separation due to changed ui.
-- fixed netflix proper ad skip due to changed ui.
+- Netflix majorly improved ad skipping due to changed website.
+- fixed not skipping above 60 sec ads on Netflix
+- faster forwarding ads on Netflix than before.
+
+- fixed disney skip credits/skip intro separation (issue due to changed ui).
 
 ## 1.1.80
 

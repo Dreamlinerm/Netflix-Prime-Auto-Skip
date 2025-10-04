@@ -178,14 +178,13 @@ function Netflix_SkipAdInterval() {
 		// .default-ltr-cache-mmvz9h or ltr-mmvz9h
 		const adLength = parseAdTime(document.querySelector('span[class*="mmvz9h"]')?.textContent)
 		// 16 max but too fast
-		console.log("Ad length:", adLength)
 		if (video && (adLength || lastAdTimeText)) {
 			let playBackRate = 8
 			if (isEdge) playBackRate = 3
 			if ((adLength || lastAdTimeText) && video.paused) {
 				video.play()
 			}
-			if (adLength > 8 && video.playbackRate != playBackRate) {
+			if (adLength > 2 && video.playbackRate != playBackRate) {
 				console.log("Ad skipped, length:", adLength, "s")
 				settings.value.Statistics.NetflixAdTimeSkipped += adLength
 				settings.value.Statistics.SegmentsSkipped++
@@ -194,10 +193,8 @@ function Netflix_SkipAdInterval() {
 				video.muted = true
 				video.playbackRate = playBackRate
 				lastAdTimeText = adLength
-			} else if (adLength > 2 && video.playbackRate < 2) {
-				video.playbackRate = Math.min(adLength / 2, 1)
-				lastAdTimeText = adLength
-			} // added lastAdTimeText because other speedsliders are not working anymore
+			}
+			// added lastAdTimeText because other speedsliders are not working anymore
 			else if (adLength <= 2 || (!adLength && lastAdTimeText)) {
 				// videospeed is speedSlider value
 				video.muted = false
