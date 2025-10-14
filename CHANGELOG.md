@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.82
+
+- Crunchyroll: fixed "filter dub" on Release Calendar
+
 ## 1.1.81
 
 - Netflix majorly improved ad skipping due to changed website.

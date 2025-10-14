@@ -49,6 +49,23 @@ function filterQueued(display: displayType) {
 	if (display == "block" && settings.value.General.filterDub) filterDub("none")
 }
 
+const langs = [
+	"English",
+	"Deutsch",
+	"Français",
+	"English",
+	"Japanese",
+	"French",
+	"German",
+	"América Latina",
+	"Portuguese",
+	"Português",
+	"Spanish",
+	"Indonesian",
+	"Italian",
+	"Castilian",
+	"Russian",
+]
 function filterDub(display: displayType) {
 	// check if dub is included in titles
 	let filterCount = 0
@@ -56,7 +73,9 @@ function filterDub(display: displayType) {
 	const list = document.querySelectorAll("cite[itemprop='name']")
 	list.forEach((element) => {
 		if (
-			(element?.textContent?.includes("Dub") || element?.textContent?.includes("Audio")) &&
+			(element?.textContent?.includes("Dub") ||
+				Array.from(langs).some((lang) => element?.textContent?.includes(lang)) ||
+				element?.textContent?.includes("Audio")) &&
 			element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement
 		) {
 			filterCount++
