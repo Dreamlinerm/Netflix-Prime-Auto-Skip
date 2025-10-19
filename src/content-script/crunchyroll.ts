@@ -82,7 +82,8 @@ function filterDub(display: displayType) {
 			element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
 		}
 	})
-	if (filterCount == 0) {
+	// url = https://www.crunchyroll.com/de/simulcastcalendar
+	if (filterCount == 0 && /crunchyroll.com\/..\/simulcastcalendar/.test(url)) {
 		// filter all titles which are duplicated
 		const daysList = document.querySelectorAll("li.day")
 		daysList.forEach((element) => {
