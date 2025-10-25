@@ -340,6 +340,7 @@
     "watchTriggerable": true,
     "watchWithFilter": true,
     "whenever": true,
-    "tailwindcss": true
+    "tailwindcss": true,
+    "crunchyListStore": true
   }
 }

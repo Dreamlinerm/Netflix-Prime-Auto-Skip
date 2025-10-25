@@ -40,6 +40,7 @@ declare global {
   const createSlider: typeof import('../utils/helper')['createSlider']
   const createTemplatePromise: typeof import('@vueuse/core')['createTemplatePromise']
   const createUnrefFn: typeof import('@vueuse/core')['createUnrefFn']
+  const crunchyListStore: typeof import('../stores/options.store')['crunchyListStore']
   const customRef: typeof import('vue')['customRef']
   const date: typeof import('../utils/helper')['date']
   const debouncedRef: typeof import('@vueuse/core')['debouncedRef']
@@ -388,6 +389,7 @@ declare module 'vue' {
     readonly createSharedComposable: UnwrapRef<typeof import('@vueuse/core')['createSharedComposable']>
     readonly createTemplatePromise: UnwrapRef<typeof import('@vueuse/core')['createTemplatePromise']>
     readonly createUnrefFn: UnwrapRef<typeof import('@vueuse/core')['createUnrefFn']>
+    readonly crunchyListStore: UnwrapRef<typeof import('../stores/options.store')['crunchyListStore']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>

@@ -87,17 +87,12 @@ export type settingsType = {
 		sliderMax: number
 		filterDub: boolean
 		filterQueued: boolean
-		savedCrunchyList: CrunchyList
 		GCdate: string
 		affiliate: boolean
 		Crunchyroll_skipTimeout: number
 		RatingThresholds: Array<{ color: string; value: number }>
 	}
 }
-
-export type Nullable<T> = T | null | undefined
-export type CrunchyListElement = { href: Nullable<string>; name: Nullable<string>; time: string }
-export type CrunchyList = Array<CrunchyListElement>
 enum RatingColors {
 	Red = "red",
 	Grey = "grey",
@@ -196,7 +191,6 @@ export const defaultSettings = {
 		sliderMax: 20,
 		filterDub: true,
 		filterQueued: true,
-		savedCrunchyList: [],
 		GCdate: "2024-01-01",
 		affiliate: true,
 		Crunchyroll_skipTimeout: 0,
@@ -207,3 +201,7 @@ export const defaultSettings = {
 		],
 	},
 }
+
+export type Nullable<T> = T | null | undefined
+export type CrunchyListElement = { href: Nullable<string>; name: Nullable<string>; time: string }
+export type CrunchyList = Array<CrunchyListElement>

@@ -3,6 +3,7 @@
 ## 1.1.83
 
 - Crunchyroll: fixed showing dub episodes for future episodes.
+- fixed storage not syncing properly due to Crunchyroll Release Calendar.
 
 ## 1.1.82
 

@@ -4,6 +4,7 @@ startSharedFunctions(Platforms.Crunchyroll)
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+const { data: crunchyList, promise: crunchyListPromise } = useBrowserSyncStorage<CrunchyList>("crunchyList", [], false)
 const url = window.location.href
 const date = new Date()
 const config = { attributes: true, childList: true, subtree: true }
@@ -15,6 +16,7 @@ async function logStartOfAddon() {
 async function startCrunchyroll() {
 	// watch ready state
 	await promise
+	await crunchyListPromise
 	logStartOfAddon()
 	if (settings.value.Crunchyroll.releaseCalendar) Crunchyroll_ReleaseCalendar()
 	if (settings.value.Crunchyroll.profile) {
@@ -223,7 +225,7 @@ function createLocalList() {
 	return localList
 }
 function filterOldList(isCurrentWeek: boolean, localList: CrunchyList) {
-	let oldList = toRaw(settings.value.General.savedCrunchyList)
+	let oldList = toRaw(crunchyList.value)
 	const lastElement = localList[localList.length - 1]
 	if (!lastElement?.time) return oldList
 	const lastTime = new Date(lastElement.time)
@@ -257,9 +259,8 @@ const shiftSunday = (a: number) => (a + 6) % 7
 function addSavedCrunchyList() {
 	const localList = createLocalList()
 	const isCurrentWeek = clickOnCurrentDay()
-	const oldList =
-		localList.length > 0 ? filterOldList(isCurrentWeek, localList) : toRaw(settings.value.General.savedCrunchyList)
-	settings.value.General.savedCrunchyList = localList.concat(oldList)
+	const oldList = localList.length > 0 ? filterOldList(isCurrentWeek, localList) : toRaw(crunchyList.value)
+	crunchyList.value = localList.concat(oldList)
 	if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
 		// now add the old list to the website list
 		document.querySelectorAll("section.calendar-day").forEach((element) => {
