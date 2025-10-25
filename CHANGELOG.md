@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.83
+
+- Crunchyroll: fixed showing dub episodes for future episodes.
+
 ## 1.1.82
 
 - Crunchyroll: fixed "filter dub" on Release Calendar

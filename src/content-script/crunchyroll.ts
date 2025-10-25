@@ -211,9 +211,10 @@ function clickOnCurrentDay() {
 function createLocalList() {
 	const localList: CrunchyList = []
 	document.querySelectorAll("div.queue-flag.queued:not(.enhanced)").forEach((element) => {
+		const li = element.closest("li")
 		const h1 = element.nextElementSibling?.firstChild?.nextSibling as HTMLAnchorElement
 		const name = h1?.firstChild?.nextSibling?.textContent
-		if (!name?.includes("Dub")) {
+		if (li?.checkVisibility()) {
 			const href = h1?.href
 			const time = element.parentElement?.parentElement?.firstElementChild?.getAttribute("datetime") ?? ""
 			localList.push({ href, name, time })
