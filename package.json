@@ -2,7 +2,7 @@
 	"displayName": "Streaming enhanced Netflix Disney Prime Video",
 	"description": "Skip ads, intros, credits and add adjust speed, etc. on Netflix, Prime video, Disney+, Crunchyroll and HBO max.",
 	"name": "streaming-enhanced",
-	"version": "1.1.83",
+	"version": "1.1.84",
 	"scripts": {
 		"web-ext": "web-ext run",
 		"firefox": "web-ext run --keep-profile-changes --firefox-profile=test2",

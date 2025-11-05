@@ -68,15 +68,20 @@ const langs = [
 	"Castilian",
 	"Russian",
 ]
+// (1123-Current)
+// (Eps 38+)
 function filterDub(display: displayType) {
 	// check if dub is included in titles
 	let filterCount = 0
 	// filter all titles that contain "Dub" or "Audio"
 	const list = document.querySelectorAll("cite[itemprop='name']")
 	list.forEach((element) => {
+		// Filter Season 1 from title
+		element.textContent = element?.textContent.replace(/Season \d*/, "")
 		if (
 			(element?.textContent?.includes("Dub") ||
-				Array.from(langs).some((lang) => element?.textContent?.includes(lang)) ||
+				/[^(]*\(\D*\)[^(]*/g.test(element?.textContent) ||
+				// Array.from(langs).some((lang) => element?.textContent?.includes(lang)) ||
 				element?.textContent?.includes("Audio")) &&
 			element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement
 		) {

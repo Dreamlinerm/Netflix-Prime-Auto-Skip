@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.84
+
+- changed settings reset button to include sync and local storage.
+- Crunchyroll: fixed showing some dub episodes on Release Calendar.
+- Crunchyroll: removed Season 1 from title.
+
 ## 1.1.83
 
 - Crunchyroll: fixed showing dub episodes for future episodes.
