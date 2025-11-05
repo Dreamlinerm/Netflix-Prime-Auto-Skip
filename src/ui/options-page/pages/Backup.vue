@@ -5,9 +5,12 @@ const { t } = useI18n()
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
 
-function resetAddon() {
+async function resetAddon() {
 	if (confirm(t("resetConfirm"))) {
-		settings.value = defaultSettings
+		await chrome.storage.local.clear()
+		await chrome.storage.sync.clear()
+		// settings.value = defaultSettings
+		location.reload()
 	}
 }
 let file = new Blob([JSON.stringify(settings.value)], { type: "text/json" })
