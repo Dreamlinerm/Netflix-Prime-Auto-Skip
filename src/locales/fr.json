@@ -97,8 +97,6 @@
 	"installTurnOnOptional": "Activer toutes les fonctions optionnelles :",
 	"tabsPermission": "requis pour ouvrir automatiquement les paramètres corrects",
 	"missingPermission": "Permissions manquantes détectées",
-	"affiliateSwitch": "Popup d'affiliation :",
-	"affiliateDescription": "Si une page contenant un lien d'affiliation est ouverte, une fenêtre contextuelle s'affiche pour appliquer le lien d'affiliation, comme pour amazon prime.",
 	"addPermissionButton": "Ajouter",
 	"removeGamesSwitch": "Supprimer les jeux:",
 	"removeGamesDescription": "Supprime tous les jeux de la page.",

@@ -97,8 +97,6 @@
 	"installTurnOnOptional": "Attiva tutte le funzionalità opzionali:",
 	"tabsPermission": "necessario per l'apertura automatica delle impostazioni del sito",
 	"missingPermission": "Permessi mancanti rilevati",
-	"affiliateSwitch": "Popup affiliato:",
-	"affiliateDescription": "Se una pagina con link affiliato è aperta, mostra un popup per applicarlo (es. Amazon Prime).",
 	"addPermissionButton": "Aggiungi",
 	"removeGamesSwitch": "Rimuovi categoria giochi:",
 	"removeGamesDescription": "Rimuove la categoria giochi dall'interfaccia di Netflix.",

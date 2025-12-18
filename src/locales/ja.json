@@ -97,8 +97,6 @@
 	"installTurnOnOptional": "すべてのオプション機能をオンにする：",
 	"tabsPermission": "正しい設定の自動オープンに必要",
 	"missingPermission": "欠落したパーミッションが検出された",
-	"affiliateSwitch": "アフィリエイト・ポップアップ",
-	"affiliateDescription": "アフィリエイトリンクのあるページが開いている場合、amazonプライムのようにアフィリエイトリンクを適用するためのポップアップを表示する。",
 	"addPermissionButton": "追加",
 	"removeGamesSwitch": "ゲームを削除：",
 	"removeGamesDescription": "ページからすべてのゲームを削除する。",

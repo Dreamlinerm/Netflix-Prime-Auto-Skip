@@ -97,8 +97,6 @@
 	"installTurnOnOptional": "Turn on all optional features:",
 	"tabsPermission": "necessary for the automatic opening of the correct settings",
 	"missingPermission": "Missing permissions detected",
-	"affiliateSwitch": "Affiliate Popup:",
-	"affiliateDescription": "If a page with affiliate link is open, shows popup to apply affiliate link, like for amazon prime.",
 	"addPermissionButton": "Add",
 	"removeGamesSwitch": "Remove Games:",
 	"removeGamesDescription": "Removes all games from the page.",

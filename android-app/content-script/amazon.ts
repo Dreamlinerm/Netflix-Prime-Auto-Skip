@@ -83,7 +83,6 @@ const settings = {
 			filterQueued: true,
 			savedCrunchyList: [],
 			GCdate: "2024-01-01",
-			affiliate: true,
 			Crunchyroll_skipTimeout: 0,
 		},
 	},

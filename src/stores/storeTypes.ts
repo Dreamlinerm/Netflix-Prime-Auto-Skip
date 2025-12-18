@@ -88,7 +88,6 @@ export type settingsType = {
 		filterDub: boolean
 		filterQueued: boolean
 		GCdate: string
-		affiliate: boolean
 		Crunchyroll_skipTimeout: number
 		RatingThresholds: Array<{ color: string; value: number }>
 	}
@@ -192,7 +191,6 @@ export const defaultSettings = {
 		filterDub: true,
 		filterQueued: true,
 		GCdate: "2024-01-01",
-		affiliate: true,
 		Crunchyroll_skipTimeout: 0,
 		RatingThresholds: [
 			{ color: RatingColors.Red, value: 5.5 },

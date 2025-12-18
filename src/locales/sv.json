@@ -97,8 +97,6 @@
 	"installTurnOnOptional": "Slå på alla tillvalsfunktioner:",
 	"tabsPermission": "nödvändigt för automatisk öppning av rätt inställningar",
 	"missingPermission": "Saknade behörigheter upptäckta",
-	"affiliateSwitch": "Affiliate Popup:",
-	"affiliateDescription": "Om en sida med en affiliate-länk är öppen visas en popup för att tillämpa affiliate-länken, t.ex. för Amazon Prime.",
 	"addPermissionButton": "Lägg till",
 	"removeGamesSwitch": "Ta bort spel:",
 	"removeGamesDescription": "Tar bort alla spel från sidan.",

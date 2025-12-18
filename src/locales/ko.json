@@ -97,8 +97,6 @@
 	"installTurnOnOptional": "모든 옵션 기능을 켭니다:",
 	"tabsPermission": "올바른 설정을 자동으로 여는 데 필요합니다.",
 	"missingPermission": "누락된 권한이 감지됨",
-	"affiliateSwitch": "제휴사 팝업:",
-	"affiliateDescription": "제휴 링크가 있는 페이지가 열려 있으면 아마존 프라임과 같이 제휴 링크를 적용할 수 있는 팝업을 표시합니다.",
 	"addPermissionButton": "추가하다",
 	"removeGamesSwitch": "게임 제거 :",
 	"removeGamesDescription": "페이지에서 모든 게임을 제거합니다.",
