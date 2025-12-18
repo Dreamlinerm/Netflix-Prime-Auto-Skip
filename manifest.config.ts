@@ -25,32 +25,7 @@ export default {
 	action: {
 		default_popup: "src/ui/action-popup/index.html",
 	},
-	// web_accessible_resources: [
-	// 	{
-	// 		matches: [
-	// 			"*://*.primevideo.com/*",
-	// 			"*://*.amazon.com/*",
-	// 			"*://*.amazon.co.jp/*",
-	// 			"*://*.amazon.de/*",
-	// 			"*://*.amazon.co.uk/*",
-	// 		],
-	// 		resources: ["src/ui/iframe-page/index.html"],
-	// 		use_dynamic_url: false,
-	// 	},
-	// ],
 	content_scripts: [
-		// {
-		// 	all_frames: false,
-		// 	js: ["src/content-script/iframe.ts"],
-		// 	matches: [
-		// 		"*://*.primevideo.com/*",
-		// 		"*://*.amazon.com/*",
-		// 		"*://*.amazon.co.jp/*",
-		// 		"*://*.amazon.de/*",
-		// 		"*://*.amazon.co.uk/*",
-		// 	],
-		// 	run_at: "document_end",
-		// },
 		{
 			js: ["src/content-script/crunchyroll.ts"],
 			matches: ["*://*.crunchyroll.com/*"],

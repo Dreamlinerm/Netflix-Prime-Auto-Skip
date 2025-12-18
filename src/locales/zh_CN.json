@@ -97,8 +97,6 @@
 	"installTurnOnOptional": "打开所有可选功能：",
 	"tabsPermission": "自动打开正确设置的必要条件",
 	"missingPermission": "检测到权限缺失",
-	"iframeTitle": "支持 Streaming enhanced ❤️",
-	"iframeButton": "申请联盟链接",
 	"affiliateSwitch": "联盟弹出窗口：",
 	"affiliateDescription": "如果打开了带有联盟链接的页面，则弹出应用联盟链接的窗口，如亚马逊黄金。",
 	"addPermissionButton": "添加",

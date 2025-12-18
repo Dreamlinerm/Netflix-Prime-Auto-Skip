@@ -97,8 +97,6 @@
 	"installTurnOnOptional": "Tüm isteğe bağlı özellikleri açın:",
 	"tabsPermission": "doğru ayarların otomatik olarak açılması için gerekli",
 	"missingPermission": "Eksik izinler algılandı",
-	"iframeTitle": "Support Streaming enhanced ❤️",
-	"iframeButton": "Satış ortağı bağlantısını uygulayın",
 	"affiliateSwitch": "Affiliate Popup:",
 	"affiliateDescription": "Satış ortağı bağlantısı olan bir sayfa açıksa, amazon prime'da olduğu gibi satış ortağı bağlantısını uygulamak için açılır pencere gösterir.",
 	"addPermissionButton": "Ekle",

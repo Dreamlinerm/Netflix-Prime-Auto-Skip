@@ -97,8 +97,6 @@
 	"installTurnOnOptional": "Attiva tutte le funzionalità opzionali:",
 	"tabsPermission": "necessario per l'apertura automatica delle impostazioni del sito",
 	"missingPermission": "Permessi mancanti rilevati",
-	"iframeTitle": "Supporta Streaming enhanced ❤️",
-	"iframeButton": "Applica link affiliato",
 	"affiliateSwitch": "Popup affiliato:",
 	"affiliateDescription": "Se una pagina con link affiliato è aperta, mostra un popup per applicarlo (es. Amazon Prime).",
 	"addPermissionButton": "Aggiungi",

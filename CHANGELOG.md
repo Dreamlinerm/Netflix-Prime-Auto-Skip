@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.85
+
+- removed unused iframe affiliate code
+
 ## 1.1.84
 
 - changed settings reset button to include sync and local storage.

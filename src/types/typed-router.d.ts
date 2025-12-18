@@ -25,8 +25,6 @@ declare module 'vue-router/auto-routes' {
     '/action-popup/Netflix': RouteRecordInfo<'/action-popup/Netflix', '/action-popup/Netflix', Record<never, never>, Record<never, never>>,
     '/action-popup/SharedOptions': RouteRecordInfo<'/action-popup/SharedOptions', '/action-popup/SharedOptions', Record<never, never>, Record<never, never>>,
     '/action-popup/Statistics': RouteRecordInfo<'/action-popup/Statistics', '/action-popup/Statistics', Record<never, never>, Record<never, never>>,
-    '/content-script-iframe/': RouteRecordInfo<'/content-script-iframe/', '/content-script-iframe', Record<never, never>, Record<never, never>>,
-    '/iframe-page/': RouteRecordInfo<'/iframe-page/', '/iframe-page', Record<never, never>, Record<never, never>>,
     '/options-page/': RouteRecordInfo<'/options-page/', '/options-page', Record<never, never>, Record<never, never>>,
     '/options-page/Amazon': RouteRecordInfo<'/options-page/Amazon', '/options-page/Amazon', Record<never, never>, Record<never, never>>,
     '/options-page/Backup': RouteRecordInfo<'/options-page/Backup', '/options-page/Backup', Record<never, never>, Record<never, never>>,
