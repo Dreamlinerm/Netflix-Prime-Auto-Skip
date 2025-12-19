@@ -52,7 +52,6 @@ if (!ViteConfig.plugins) {
 ViteConfig.build.outDir = browserOutDir
 
 ViteConfig.build.minify = false
-ViteConfig.build.sourcemap = true
 
 if (IS_DEV) {
 	ViteConfig.build.minify = false

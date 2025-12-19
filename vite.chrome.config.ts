@@ -55,7 +55,6 @@ ViteConfig.build.outDir = browserOutDir
 //   : `/dist/${browser}`
 
 ViteConfig.build.minify = false
-ViteConfig.build.sourcemap = true
 
 if (IS_DEV) {
 	ViteConfig.build.minify = false
