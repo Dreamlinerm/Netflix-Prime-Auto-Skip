@@ -145,6 +145,11 @@ export default defineConfig({
 		sourcemap: false,
 		write: true,
 		rollupOptions: {
+			output: {
+				entryFileNames: "[name].js",
+				chunkFileNames: "[name].js",
+				assetFileNames: "[name].[ext]",
+			},
 			// ui or pages that are not specified in manifest file need to be specified here
 			input: {
 				// setup: "src/ui/setup/index.html",
