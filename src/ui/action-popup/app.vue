@@ -45,4 +45,6 @@ chrome.tabs.query(query, callback)
 	</div>
 </template>
 
-<style scoped></style>
+<style>
+@import "@/assets/base.css";
+</style>

@@ -4,7 +4,6 @@ import { pinia } from "@/utils/pinia"
 import { appRouter } from "@/utils/router"
 import { createApp } from "vue"
 import App from "./app.vue"
-import "./popup.css"
 
 appRouter.addRoute({
 	path: "/",

@@ -215,8 +215,8 @@ watch(
 	</div>
 </template>
 
-<style scoped>
-@reference "@/assets/base.css";
+<style>
+@import "@/assets/base.css";
 /* The side navigation menu */
 .sidenav {
 	@apply h-full bg-[#111] px-2.5 gap-3;
