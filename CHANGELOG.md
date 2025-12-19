@@ -2,6 +2,7 @@
 
 ## 1.1.85
 
+- made build deterministic for firefox review.
 - removed unused iframe affiliate code
 
 ## 1.1.84
