@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.86
+
+- made build deterministic for firefox review.
+
 ## 1.1.85
 
 - made build deterministic for firefox review.
