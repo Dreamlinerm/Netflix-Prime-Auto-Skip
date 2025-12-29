@@ -3,6 +3,7 @@
 ## 1.1.87
 
 - fixed Amazon Filter Paid Content on amazon.com (not .de)
+- fixed don't use skip intro on amazon Credits.
 
 ## 1.1.86
 

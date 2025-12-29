@@ -105,7 +105,7 @@ function Amazon_Intro() {
 		// recap on lucifer season 3 episode 3
 		// intro lucifer season 3 episode 4
 		const button = document.querySelector("[class*=skipelement]") as HTMLButtonElement
-		if (button?.checkVisibility()) {
+		if (button?.checkVisibility() && !document.querySelector("[class*=nextupcard-button]")) {
 			const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
 			const time = Math.floor(video?.currentTime ?? 0)
 			if (typeof time === "number" && lastIntroTime != time) {
