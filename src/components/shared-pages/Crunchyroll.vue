@@ -49,7 +49,18 @@
 	</div>
 	<hr v-if="advancedSettings" />
 	<div class="p-1 m-0 flex">
-		<p class="whitespace-nowrap mr-2">{{ $t("crunchyrollDelay") }}</p>
+		<div class="tooltip flex">
+			<p class="whitespace-nowrap mr-2">{{ $t("crunchyrollDelay") }}</p>
+			<template v-if="!advancedSettings">
+				<i-mdi-help-circle height="1rem" />
+				<div
+					class="tooltip-content text-primary-content"
+					style="transform: unset; inset: auto auto var(--tt-off) 0%"
+				>
+					{{ $t("crunchyrollDelayDescription") }}
+				</div>
+			</template>
+		</div>
 		<input
 			type="number"
 			v-model="settings.General.Crunchyroll_skipTimeout"
