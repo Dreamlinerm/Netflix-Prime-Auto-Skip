@@ -353,9 +353,9 @@ function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	else if (isPrimeVideo)
 		AllTitleCardsTypes = [
 			document.querySelectorAll(
-				"li:not(.imdb) article[data-card-title]:not([data-card-entity-type='EVENT']):not([data-card-title='Live-TV'])",
+				"li article[data-card-title]:not([data-card-entity-type='EVENT']):not([data-card-title='Live-TV']):not(:has(#rating))",
 			),
-			document.querySelectorAll("article[data-testid*='-card']:not(.imdb):not(:has(a#rating))"),
+			document.querySelectorAll("article[data-testid*='-card']:not(:has(#rating))"),
 		]
 	return AllTitleCardsTypes
 }

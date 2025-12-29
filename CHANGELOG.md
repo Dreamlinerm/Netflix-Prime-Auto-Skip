@@ -5,6 +5,7 @@
 - fixed Amazon Filter Paid Content on amazon.com (not .de)
 - fixed don't use skip intro on amazon Credits.
 - Crunchyroll: Changed timeout to include credits and intro skips.
+- fixed Amazon ratings not showing if scroll back.
 
 ## 1.1.86
 
