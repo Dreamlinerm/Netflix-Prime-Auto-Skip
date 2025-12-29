@@ -49,7 +49,7 @@
 	</div>
 	<hr v-if="advancedSettings" />
 	<div class="p-1 m-0 flex">
-		<p class="whitespace-nowrap mr-2">{{ $t("skipIntroDelay") }}</p>
+		<p class="whitespace-nowrap mr-2">{{ $t("crunchyrollDelay") }}</p>
 		<input
 			type="number"
 			v-model="settings.General.Crunchyroll_skipTimeout"
@@ -60,7 +60,7 @@
 	</div>
 	<template v-if="advancedSettings">
 		<p class="description">
-			{{ $t("skipIntroDelayDescription") }}
+			{{ $t("crunchyrollDelayDescription") }}
 		</p>
 		<hr />
 	</template>

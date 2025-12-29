@@ -87,6 +87,7 @@ async function startPlayOnFullScreen() {
 		removeEventListener("fullscreenchange", OnFullScreenChange)
 	}
 }
+// add timeout because it can skip mid sentence if language is not japanese.
 let skipped = false
 let reverseButtonClicked = false
 let reverseButtonStartTime: number
@@ -99,21 +100,21 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 	// saves the audio language to settings
 	if (!reverseButtonClicked) {
 		const button = document.querySelector('[data-testid="skipIntroText"]') as HTMLElement
-		if (button && isOutro && settings.value.Crunchyroll?.skipAfterCredits) {
-			video.currentTime = video.duration // skip to the end of the video
-			console.log("SkipAfterCredits")
-			return
-		} else if (button && !skipped) {
-			// add timeout because it can skip mid sentence if language is not japanese.
+		if (button && !skipped) {
 			skipped = true
 			setTimeout(function () {
-				button?.click()
 				skipped = false
-				console.log("Intro skipped", button)
-				setTimeout(function () {
-					CrunchyrollGobackbutton(video, time, video?.currentTime)
-					addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
-				}, 600)
+				if (isOutro && settings.value.Crunchyroll?.skipAfterCredits) {
+					video.currentTime = video.duration // skip to the end of the video
+					console.log("SkipAfterCredits", settings.value.General.Crunchyroll_skipTimeout)
+				} else {
+					button?.click()
+					console.log("Intro skipped", button, settings.value.General.Crunchyroll_skipTimeout)
+					setTimeout(function () {
+						CrunchyrollGobackbutton(video, time, video?.currentTime)
+						addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
+					}, 600)
+				}
 			}, settings.value.General.Crunchyroll_skipTimeout)
 		}
 	} else if (!document.querySelector(".reverse-button")) {
