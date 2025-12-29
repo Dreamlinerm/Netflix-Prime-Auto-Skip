@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.87
+
+- fixed Amazon Filter Paid Content on amazon.com (not .de)
+
 ## 1.1.86
 
 - made build deterministic for firefox review.

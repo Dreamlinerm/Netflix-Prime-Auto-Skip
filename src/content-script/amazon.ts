@@ -245,7 +245,7 @@ async function Amazon_FilterPaid() {
 	// if not on the shop page or homepremiere
 	if (url.includes("storefront") || url.includes("genre") || url.includes("movie") || url.includes("Amazon-Video")) {
 		// the yellow hand bag is the paid category .NbhXwl
-		document.querySelectorAll("section[data-testid='standard-carousel'] ul:has(svg.NbhXwl)").forEach((a) => {
+		document.querySelectorAll("section[data-testid*='carousel'] ul:has(svg.NbhXwl)").forEach((a) => {
 			deletePaidCategory(a as HTMLElement)
 		})
 	}
@@ -257,7 +257,7 @@ async function deletePaidCategory(a: HTMLElement) {
 		a.children.length - a.querySelectorAll('[data-hidden="true"]').length - 2 <=
 		a.querySelectorAll("[data-testid='card-overlay'] svg.NbhXwl").length
 	) {
-		const section = a.closest('[class*="+OSZzQ"]')
+		const section = a.closest("section")
 		console.log("Filtered paid category", section)
 		section?.remove()
 		settings.value.Statistics.SegmentsSkipped++

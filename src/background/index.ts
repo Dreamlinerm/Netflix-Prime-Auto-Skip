@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(async (opt) => {
 	// await chrome.storage.local.clear()
 	// await chrome.storage.sync.clear()
 	// Check if reason is install or update. Eg: opt.reason === 'install' // If extension is installed.
-	if (opt.reason === "install") {
+	if (opt.reason === "install" && !is_DEV) {
 		await chrome.storage.local.clear()
 		chrome.tabs.create({
 			active: true,
@@ -18,16 +18,16 @@ chrome.runtime.onInstalled.addListener(async (opt) => {
 	}
 
 	if (opt.reason === "update" && is_DEV) {
-		chrome.tabs.create({
-			active: true,
-			url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page/install"),
-			// url: chrome.runtime.getURL("src/ui/action-popup/index.html#/action-popup"),
-		})
-		chrome.tabs.create({
-			active: true,
-			url: chrome.runtime.getURL("src/ui/action-popup/index.html#/"),
-			// url: chrome.runtime.getURL("src/ui/action-popup/index.html#/action-popup"),
-		})
+		// chrome.tabs.create({
+		// 	active: true,
+		// 	url: chrome.runtime.getURL("src/ui/options-page/index.html#/options-page/install"),
+		// 	// url: chrome.runtime.getURL("src/ui/action-popup/index.html#/action-popup"),
+		// })
+		// chrome.tabs.create({
+		// 	active: true,
+		// 	url: chrome.runtime.getURL("src/ui/action-popup/index.html#/"),
+		// 	// url: chrome.runtime.getURL("src/ui/action-popup/index.html#/action-popup"),
+		// })
 	}
 })
 
