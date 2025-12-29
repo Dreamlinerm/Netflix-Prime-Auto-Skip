@@ -1,4 +1,4 @@
 {
-	"crunchyrollDelay": "Skip Intro delay in ms:",
-	"crunchyrollDelayDescription": "Some languages talk longer than others. This setting allows you to skip the intro with a delay such that in some dubs the speech is not cut off."
+	"crunchyrollDelay": "Skip delay in ms:",
+	"crunchyrollDelayDescription": "Some languages take longer than others. This setting allows you to skip the intro and credits with a delay such that in some dubs the speech is not cut off."
 }
