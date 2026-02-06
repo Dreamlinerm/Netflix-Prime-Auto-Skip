@@ -18,6 +18,7 @@
 		"format": "prettier --write .",
 		"lint": "eslint . --fix --cache",
 		"lint:manifest": "web-ext lint",
+		"test:amazon-filter": "tsx --test src/content-script/amazonFilterPaidGuard.test.ts",
 		"typecheck": "vue-tsc --noEmit",
 		"transGoogle": "jsontt .translation/deepl.EN.json -m google2 -n google2 -fb yes -cl 3 -f en -t de fr es pt it ja pl sv zh-CN ko tr",
 		"deepl": "jsontt .translation/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -f EN -t DE ES FR IT JA KO PL PT SV TR ZH",

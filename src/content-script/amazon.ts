@@ -1,5 +1,10 @@
 import { sendMessage } from "webext-bridge/content-script"
 import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
+import {
+	isStoreIconTitle,
+	shouldRemoveWholePaidSection,
+	shouldRunAmazonPaidFilter,
+} from "@/content-script/amazonFilterPaidGuard"
 import { set } from "@vueuse/core"
 // Global Variables
 
@@ -8,11 +13,14 @@ const ua = navigator.userAgent
 const isMobile = /mobile|streamingEnhanced/i.test(ua)
 let lastAdTimeText: number | string = 0
 const videoSpeed: Ref<number> = ref(1)
-const url = window.location.href
+const initialUrl = window.location.href
 const hostname = window.location.hostname
 const title = document.title
-const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url))
+const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(initialUrl))
 const config = { attributes: true, childList: true, subtree: true }
+const AMAZON_PAID_CARD_SELECTOR = 'article[data-card-entitlement="Unentitled"]'
+const AMAZON_STORE_ICON_SELECTOR = "svg.NbhXwl, [data-testid='entitlement-icon'] svg"
+let lastFilterPaidDebugAt = 0
 async function logStartOfAddon() {
 	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
 	console.log("Settings", settings.value)
@@ -242,21 +250,41 @@ async function Amazon_continuePosition() {
 	if (continueCategory && position) position.before(continueCategory)
 }
 async function Amazon_FilterPaid() {
-	// if not on the shop page or homepremiere
-	if (url.includes("storefront") || url.includes("genre") || url.includes("movie") || url.includes("Amazon-Video")) {
-		// the yellow hand bag is the paid category .NbhXwl
-		document.querySelectorAll("section[data-testid*='carousel'] ul:has(svg.NbhXwl)").forEach((a) => {
-			deletePaidCategory(a as HTMLElement)
-		})
+	const currentUrl = window.location.href
+	// only run in storefront-like pages where rows are rendered
+	if (!shouldRunAmazonPaidFilter(currentUrl)) return
+
+	const carouselRows = Array.from(document.querySelectorAll("section[data-testid*='carousel'] ul"))
+	let rowsWithPaidContent = 0
+	carouselRows.forEach((a) => {
+		const rowHasPaidContent = hasPaidMarker(a)
+		if (!rowHasPaidContent) return
+		deletePaidCategory(a as HTMLElement)
+		rowsWithPaidContent++
+	})
+	if (!rowsWithPaidContent && Date.now() - lastFilterPaidDebugAt > 10000) {
+		lastFilterPaidDebugAt = Date.now()
+		console.log("FilterPaid active but no paid markers found", { url: currentUrl, carousels: carouselRows.length })
 	}
 }
+function hasPaidMarker(element: ParentNode) {
+	if (element.querySelector(AMAZON_PAID_CARD_SELECTOR)) return true
+	return Array.from(element.querySelectorAll(AMAZON_STORE_ICON_SELECTOR)).some((icon) => {
+		if (icon.classList.contains("NbhXwl")) return true
+		const iconTitle = icon.querySelector("title")?.textContent ?? ""
+		return isStoreIconTitle(iconTitle)
+	})
+}
 async function deletePaidCategory(a: HTMLElement) {
+	const visibleCards = Array.from(a.children).filter((child): child is HTMLElement => {
+		return child instanceof HTMLElement && child.tagName === "LI" && child.dataset.hidden !== "true"
+	})
+	const paidCards = visibleCards.filter((card) => hasPaidMarker(card))
+	if (paidCards.length === 0) return
+
 	// if the section is mostly paid content delete it
 	// -2 because sometimes there are title banners
-	if (
-		a.children.length - a.querySelectorAll('[data-hidden="true"]').length - 2 <=
-		a.querySelectorAll("[data-testid='card-overlay'] svg.NbhXwl").length
-	) {
+	if (shouldRemoveWholePaidSection(visibleCards.length, paidCards.length)) {
 		const section = a.closest("section")
 		console.log("Filtered paid category", section)
 		section?.remove()
@@ -265,7 +293,7 @@ async function deletePaidCategory(a: HTMLElement) {
 	}
 	// remove individual paid elements
 	else {
-		a.querySelectorAll("li:has(svg.NbhXwl)").forEach((b) => {
+		paidCards.forEach((b) => {
 			console.log("Filtered paid Element", b)
 			b.remove()
 			settings.value.Statistics.SegmentsSkipped++
@@ -356,9 +384,10 @@ async function Amazon_selfAdTimeout() {
 
 async function Amazon_customizeMobileView() {
 	console.log("customizeMobileView")
+	const currentUrl = window.location.href
 	// customize mobile view for desktop website
 	// /gp/video/detail/ is the film description page otherwise looks weird
-	if (!url.includes("/gp/video/detail/")) {
+	if (!currentUrl.includes("/gp/video/detail/")) {
 		// add <meta name="viewport" content="width=device-width, initial-scale=1" /> to head
 		const meta = document.createElement("meta")
 		meta.name = "viewport"

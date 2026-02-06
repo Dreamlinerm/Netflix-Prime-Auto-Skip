@@ -90,10 +90,13 @@ const settings = {
 const ua = navigator.userAgent
 let lastAdTimeText: number | string = 0
 let videoSpeed: number = 1
-const url = window.location.href
 const hostname = window.location.hostname
 const title = document.title
 const config = { attributes: true, childList: true, subtree: true }
+const AMAZON_PAID_CARD_SELECTOR = 'article[data-card-entitlement="Unentitled"]'
+const AMAZON_STORE_ICON_SELECTOR = "svg.NbhXwl, [data-testid='entitlement-icon'] svg"
+const AMAZON_ALLOWED_FILTER_PATHS = /(storefront|genre|movie|amazon-video|\/tv|\/addons)/i
+let lastFilterPaidDebugAt = 0
 async function logStartOfAddon() {
 	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
 	console.log("Settings", settings.value)
@@ -310,21 +313,41 @@ async function Amazon_continuePosition() {
 	if (continueCategory && position) position.before(continueCategory)
 }
 async function Amazon_FilterPaid() {
-	// if not on the shop page or homepremiere
-	if (url.includes("storefront") || url.includes("genre") || url.includes("movie") || url.includes("Amazon-Video")) {
-		// the yellow hand bag is the paid category .NbhXwl
-		document.querySelectorAll("section[data-testid='standard-carousel'] ul:has(svg.NbhXwl)").forEach((a) => {
-			deletePaidCategory(a as HTMLElement)
-		})
+	const currentUrl = window.location.href
+	// only run in storefront-like pages where rows are rendered
+	if (!AMAZON_ALLOWED_FILTER_PATHS.test(currentUrl)) return
+
+	const carouselRows = Array.from(document.querySelectorAll("section[data-testid*='carousel'] ul"))
+	let rowsWithPaidContent = 0
+	carouselRows.forEach((a) => {
+		const rowHasPaidContent = hasPaidMarker(a)
+		if (!rowHasPaidContent) return
+		deletePaidCategory(a as HTMLElement)
+		rowsWithPaidContent++
+	})
+	if (!rowsWithPaidContent && Date.now() - lastFilterPaidDebugAt > 10000) {
+		lastFilterPaidDebugAt = Date.now()
+		console.log("FilterPaid active but no paid markers found", { url: currentUrl, carousels: carouselRows.length })
 	}
 }
+function hasPaidMarker(element: ParentNode) {
+	if (element.querySelector(AMAZON_PAID_CARD_SELECTOR)) return true
+	return Array.from(element.querySelectorAll(AMAZON_STORE_ICON_SELECTOR)).some((icon) => {
+		if (icon.classList.contains("NbhXwl")) return true
+		const iconTitle = icon.querySelector("title")?.textContent ?? ""
+		return /store/i.test(iconTitle)
+	})
+}
 async function deletePaidCategory(a: HTMLElement) {
+	const visibleCards = Array.from(a.children).filter((child): child is HTMLElement => {
+		return child instanceof HTMLElement && child.tagName === "LI" && child.dataset.hidden !== "true"
+	})
+	const paidCards = visibleCards.filter((card) => hasPaidMarker(card))
+	if (paidCards.length === 0) return
+
 	// if the section is mostly paid content delete it
 	// -2 because sometimes there are title banners
-	if (
-		a.children.length - a.querySelectorAll('[data-hidden="true"]').length - 2 <=
-		a.querySelectorAll("[data-testid='card-overlay'] svg.NbhXwl").length
-	) {
+	if (visibleCards.length - 2 <= paidCards.length) {
 		const section = a.closest('[class*="+OSZzQ"]')
 		console.log("Filtered paid category", section)
 		section?.remove()
@@ -333,7 +356,7 @@ async function deletePaidCategory(a: HTMLElement) {
 	}
 	// remove individual paid elements
 	else {
-		a.querySelectorAll("li:has(svg.NbhXwl)").forEach((b) => {
+		paidCards.forEach((b) => {
 			console.log("Filtered paid Element", b)
 			b.remove()
 			settings.value.Statistics.SegmentsSkipped++
