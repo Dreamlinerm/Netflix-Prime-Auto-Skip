@@ -20,30 +20,36 @@ vi.mock("webextension-polyfill", () => {
 	}
 })
 
-global.chrome = {
+const chromeMock = {
+	tabs: {
+		create: vi.fn(),
+	},
 	runtime: {
-		onInstalled: {
-			addListener: vi.fn(),
-		},
-		onMessage: {
-			addListener: vi.fn(),
-		},
-		sendMessage: vi.fn(),
+		getURL: vi.fn((path) => `chrome-extension://mock/${path}`),
 	},
 	storage: {
 		local: {
-			get: vi.fn(),
-			set: vi.fn(),
+			get: vi.fn((key, callback) => callback({ [key]: "mockValue" })),
+			set: vi.fn((items, callback) => callback && callback()),
 			onChanged: {
-				addListener: vi.fn(),
+				addListener: vi.fn((callback) => {
+					// Simulate a change event
+					callback({ key: { newValue: "mockValue" } })
+				}),
 			},
 		},
 		sync: {
-			get: vi.fn(),
-			set: vi.fn(),
+			get: vi.fn((key, callback) => callback({ [key]: "mockValue" })),
+			set: vi.fn((items, callback) => callback && callback()),
 			onChanged: {
-				addListener: vi.fn(),
+				addListener: vi.fn((callback) => {
+					// Simulate a change event
+					callback({ key: { newValue: "mockValue" } })
+				}),
 			},
 		},
 	},
-} as any
+}
+
+global.chrome = chromeMock
+global.$t = (key) => key // Mock the $t function to return the key itself
