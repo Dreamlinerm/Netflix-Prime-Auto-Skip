@@ -147,7 +147,12 @@ export default defineConfig({
 		rollupOptions: {
 			output: {
 				entryFileNames: "[name].js",
-				chunkFileNames: "[name].js",
+				chunkFileNames: (chunkInfo) => {
+					const chunkName = chunkInfo.name ?? "chunk"
+					// Chrome extensions reserve root filenames starting with "_".
+					const safeName = chunkName.replace(/^_+/, "")
+					return `${safeName}.js`
+				},
 				assetFileNames: "[name].[ext]",
 			},
 			// ui or pages that are not specified in manifest file need to be specified here
