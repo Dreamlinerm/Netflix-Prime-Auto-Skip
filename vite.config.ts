@@ -8,6 +8,7 @@ import Components from "unplugin-vue-components/vite"
 import { createHtmlPlugin } from "vite-plugin-html"
 import VueRouter from "unplugin-vue-router/vite"
 import { defineConfig } from "vite"
+import { defineConfig as defineVitestConfig } from "vitest/config"
 // @ts-expect-error commonjs module
 import { defineViteConfig as define } from "./define.config.mjs"
 import vueDevTools from "vite-plugin-vue-devtools"
@@ -181,4 +182,12 @@ export default defineConfig({
 	},
 
 	define,
+	test: {
+		globals: true,
+		environment: "jsdom",
+		setupFiles: "vitest.setup.ts",
+		coverage: {
+			reporter: ["text", "json", "html"],
+		},
+	},
 })

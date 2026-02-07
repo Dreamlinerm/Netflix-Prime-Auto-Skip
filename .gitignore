@@ -29,3 +29,4 @@ dist-ssr
 .eslintcache
 .env
 test/*
+coverage/

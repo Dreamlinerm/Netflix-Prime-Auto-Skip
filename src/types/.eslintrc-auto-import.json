@@ -47,6 +47,7 @@
     "createSharedComposable": true,
     "createTemplatePromise": true,
     "createUnrefFn": true,
+    "crunchyListStore": true,
     "customRef": true,
     "debouncedRef": true,
     "debouncedWatch": true,
@@ -339,8 +340,6 @@
     "watchThrottled": true,
     "watchTriggerable": true,
     "watchWithFilter": true,
-    "whenever": true,
-    "tailwindcss": true,
-    "crunchyListStore": true
+    "whenever": true
   }
 }
