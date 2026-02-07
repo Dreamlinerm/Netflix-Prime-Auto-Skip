@@ -20,7 +20,6 @@ const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title
 const config = { attributes: true, childList: true, subtree: true }
 const AMAZON_PAID_CARD_SELECTOR = 'article[data-card-entitlement="Unentitled"]'
 const AMAZON_STORE_ICON_SELECTOR = "svg.NbhXwl, [data-testid='entitlement-icon'] svg"
-let lastFilterPaidDebugAt = 0
 async function logStartOfAddon() {
 	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
 	console.log("Settings", settings.value)
@@ -254,18 +253,18 @@ async function Amazon_FilterPaid() {
 	// only run in storefront-like pages where rows are rendered
 	if (!shouldRunAmazonPaidFilter(currentUrl)) return
 
-	const carouselRows = Array.from(document.querySelectorAll("section[data-testid*='carousel'] ul"))
-	let rowsWithPaidContent = 0
+	const carouselRows = Array.from(
+		document.querySelectorAll(
+			"section[data-testid*='carousel'] ul:has(" +
+				AMAZON_STORE_ICON_SELECTOR +
+				"), ul:has(" +
+				AMAZON_PAID_CARD_SELECTOR +
+				")",
+		),
+	)
 	carouselRows.forEach((a) => {
-		const rowHasPaidContent = hasPaidMarker(a)
-		if (!rowHasPaidContent) return
 		deletePaidCategory(a as HTMLElement)
-		rowsWithPaidContent++
 	})
-	if (!rowsWithPaidContent && Date.now() - lastFilterPaidDebugAt > 10000) {
-		lastFilterPaidDebugAt = Date.now()
-		console.log("FilterPaid active but no paid markers found", { url: currentUrl, carousels: carouselRows.length })
-	}
 }
 function hasPaidMarker(element: ParentNode) {
 	if (element.querySelector(AMAZON_PAID_CARD_SELECTOR)) return true
@@ -283,10 +282,9 @@ async function deletePaidCategory(a: HTMLElement) {
 	if (paidCards.length === 0) return
 
 	// if the section is mostly paid content delete it
-	// -2 because sometimes there are title banners
 	if (shouldRemoveWholePaidSection(visibleCards.length, paidCards.length)) {
 		const section = a.closest("section")
-		console.log("Filtered paid category", section)
+		// console.log("Filtered paid category", section)
 		section?.remove()
 		settings.value.Statistics.SegmentsSkipped++
 		sendMessage("increaseBadge", {}, "background")
@@ -294,7 +292,7 @@ async function deletePaidCategory(a: HTMLElement) {
 	// remove individual paid elements
 	else {
 		paidCards.forEach((b) => {
-			console.log("Filtered paid Element", b)
+			// console.log("Filtered paid Element", b)
 			b.remove()
 			settings.value.Statistics.SegmentsSkipped++
 			sendMessage("increaseBadge", {}, "background")
