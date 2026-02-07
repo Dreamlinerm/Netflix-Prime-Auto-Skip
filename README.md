@@ -253,22 +253,37 @@ Skip Credits and Watch Credits are mutally exclusive, but you can turn both of t
 
 - `npm install -g pnpm` install pnpm. npm is also possible but pnpm is recommended
 - `pnpm install` install all required packages
-- `pnpm build` build firefox and chrome zip files in dist folder
-- `pnpm web-ext` run the extension in firefox
-- `pnpm chrome` run the extension in chrome
+- `pnpm build` build firefox and chrome zip files for release.
 
-This extension was built with the template [vite-vue3-browser-extension-v3](https://github.com/mubaidr/vite-vue3-browser-extension-v3)
+This extension is based on the template [vite-vue3-browser-extension-v3](https://github.com/mubaidr/vite-vue3-browser-extension-v3)
 
-### Further Commands
+### Building with live reload
 
-- `pnpm dev` hot build with sourcemaps and w/o minification for both
-- `pnpm dev:chrome` hot build with sourcemaps and w/o minification for chrome
-- `pnpm dev:firefox` hot build with sourcemaps and w/o minification for firefox
-- `npm run start-android` start on firefox android
+- `pnpm dev` build both chrome and firefox files
+- `pnpm dev:chrome` build only chrome files
+- `pnpm dev:firefox` build only firefox files
+
+### Open in Browser with live reload
+
+- `pnpm web-ext` Open in firefox.
+- `pnpm chrome` Open in chrome.
+- `pnpm firefox` Open in firefox with permanent firefox profile
+- `pnpm start-android` start on firefox android
+
+### Running unit tests
+
+- `pnpm test` run all tests with live reload
+- `pnpm test:coverage` run coverage report
+
+### Formatting and Linting Commands
+
+- `pnpm format` run prettier on all files
+- `pnpm lint` run esLint
+- `pnpm lint:manifest` web-ext lint manifest files
 
 Further documentation is [here](develop.md)
 
-## Open the Extension without web-ext
+## Open the Extension without web-ext/live reload
 
 ## Chrome
 

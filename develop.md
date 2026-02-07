@@ -37,18 +37,11 @@
 └── package.json            # Project dependencies and scripts
 ```
 
-### Formatting and Linting Commands
-
-- `pnpm format` run prettier on all files
-- `pnpm lint` run esLint
-- `pnpm lint:manifest` web-ext lint manifest files
-
 ### Author Commands
 
 - `pnpm transDeepL` translate .translation/deepl.EN.json and output them into the locales files directly
 - `pnpm hours` calculate the hours spent on the project
 - `pnpm copyDocsFtoC` copy the docs from the firefox folder to the chrome folder
-- `pnpm firefox` run extension with permanent firefox profile
 
 ## Development tools
 
