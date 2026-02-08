@@ -1,6 +1,14 @@
-import { sendMessage } from "webext-bridge/content-script"
-import { onMessage } from "webext-bridge/background"
 import { vi } from "vitest"
+
+vi.mock("webext-bridge/content-script", () => {
+	console.log("Global mock for webext-bridge applied")
+	return {
+		sendMessage: vi.fn(),
+		onMessage: {
+			addListener: vi.fn(),
+		},
+	}
+})
 
 vi.mock("webextension-polyfill", () => {
 	console.log("Global mock for webextension-polyfill applied")
