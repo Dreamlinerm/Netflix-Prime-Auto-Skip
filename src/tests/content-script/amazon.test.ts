@@ -1,9 +1,5 @@
 import { describe, it, expect } from "vitest"
-import {
-	isStoreIconTitle,
-	shouldRemoveWholePaidSection,
-	shouldRunAmazonPaidFilter,
-} from "../../content-script/amazonFilterPaidGuard"
+import { isStoreIconTitle, shouldRemoveWholePaidSection, shouldRunAmazonPaidFilter } from "../../content-script/amazon"
 
 describe("shouldRunAmazonPaidFilter", () => {
 	it("matches storefront and browse urls", () => {

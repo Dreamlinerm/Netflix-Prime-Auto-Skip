@@ -1,11 +1,5 @@
 import { sendMessage } from "webext-bridge/content-script"
 import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
-import {
-	isStoreIconTitle,
-	shouldRemoveWholePaidSection,
-	shouldRunAmazonPaidFilter,
-} from "@/content-script/amazonFilterPaidGuard"
-import { set } from "@vueuse/core"
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
@@ -248,6 +242,21 @@ async function Amazon_continuePosition() {
 	const position = continueCategory?.parentNode?.childNodes?.[2]
 	if (continueCategory && position) position.before(continueCategory)
 }
+const AMAZON_ALLOWED_FILTER_PATHS = /(storefront|genre|movie|amazon-video|\/tv|\/addons)/i
+export function shouldRunAmazonPaidFilter(url: string) {
+	return AMAZON_ALLOWED_FILTER_PATHS.test(url)
+}
+
+export function isStoreIconTitle(title: string | null | undefined) {
+	return /store/i.test(title ?? "")
+}
+
+export function shouldRemoveWholePaidSection(visibleCardsCount: number, paidCardsCount: number, bannerOffset = 2) {
+	// bannerOffset = 2 because sometimes there are title banners, wich are not paid content.
+	if (visibleCardsCount <= 0 || paidCardsCount <= 0) return false
+	return visibleCardsCount - bannerOffset <= paidCardsCount
+}
+
 async function Amazon_FilterPaid() {
 	const currentUrl = window.location.href
 	// only run in storefront-like pages where rows are rendered
