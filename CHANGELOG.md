@@ -2,7 +2,7 @@
 
 ## 1.1.89
 
-- fixed Amazon Filter Paid Content
+- improved Amazon Filter Paid Content
 
 ## 1.1.88
 
