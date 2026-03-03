@@ -528,17 +528,20 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 	} else if (isParamount) title = card.getAttribute("title") ?? ""
 	return title
 }
-function Disney_fixTitle(title: string | undefined): string | undefined {
+export function Disney_fixTitle(title: string | undefined): string | undefined {
 	title = title
 		?.replace(" Disney+ Original", "")
 		?.replace("Disney+ Original ", "")
 		?.replace(" STAR Original", "")
 		?.replace("STAR Original ", "")
+		?.replace(" STAR Generic", "")
+		?.replace(" Hulu Original Series", "")
 	// german translation
 	if (htmlLang == "de") {
 		title = title
 			?.replace(/Nummer \d* /, "")
 			?.replace("\n", " ")
+			?.replace(" Label:", "")
 			.split(" Für Details")[0]
 			.split(" Neue")[0]
 			.split(" Staffel")[0]
@@ -557,6 +560,8 @@ function Disney_fixTitle(title: string | undefined): string | undefined {
 		title = title
 			?.replace(/Number \d* /, "")
 			?.replace("\n", " ")
+			?.split(" Label:")[0]
+			.replace(" Badge", "")
 			.replace(" Select for details on this title.", "")
 			.split(" New")[0]
 			.split(" Season")[0]
@@ -568,8 +573,10 @@ function Disney_fixTitle(title: string | undefined): string | undefined {
 			.split(" Prepare for")[0] // deadpool
 			//did not find translation
 			.split(" Streaming ")[0]
-			//did not find translation
-			.replace(/ \d+ minutes remaining/g, "")
+			// e.g. "Moana 1 hour 54 minutes remaining" -> "Moana"
+			.replace(/\s+\d+\s+hour[s]?\s+\d+\s+minutes remaining/g, "")
+			.replace(/\s+\d+\s+hour[s]?\s+minutes remaining/g, "")
+			.replace(/\s+\d+\s+minutes remaining/g, "")
 	}
 	return title
 }
@@ -665,7 +672,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 				(data?.title ? ", Fetched title: " + data?.title : "") +
 				(data?.media_type ? ", media_type: " + data?.media_type : ""),
 		)
-		console.log("no score found:", title, data)
+		console.log("no score found:", title, data, card)
 	}
 	const greyOverlay = document.createElement("div")
 	Object.assign(greyOverlay.style, {

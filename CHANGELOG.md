@@ -4,6 +4,7 @@
 
 - changed to close xray only once per page load.
 - changed not skipping intros or recaps on episode 1, since they are often recaps of new seasons.
+- TMDB disney fixed some more titles.
 
 ## 1.1.89
 

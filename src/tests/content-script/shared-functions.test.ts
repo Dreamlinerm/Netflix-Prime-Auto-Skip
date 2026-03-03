@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest"
-import { parseAdTime, createSlider } from "../../content-script/shared-functions"
+import { parseAdTime, createSlider, Disney_fixTitle } from "../../content-script/shared-functions"
+import Testitles from "../fixtures/titles.json"
 
 describe("parseAdTime", () => {
 	it("should parse '1:30' as 90 seconds", () => {
@@ -46,5 +47,31 @@ describe("createSlider", () => {
 		expect(slider.type).toBe("range")
 		// Check speed text
 		expect(speed.textContent).toContain("x")
+	})
+})
+
+// Array.from(document.querySelectorAll("a[data-testid='set-item']:not([href^='/browse/page'])")).map((card) => {
+// 	return card.getAttribute("aria-label")
+// })
+
+describe("Disney_fixTitle", () => {
+	it("should strip the title correctly", () => {
+		const title = "New Episode Badge The Mandalorian Select for details on this title."
+		const expected = "The Mandalorian"
+		expect(Disney_fixTitle(title)).toBe(expected)
+	})
+})
+
+describe("Disney_fixTitle", () => {
+	it.each(Testitles.map((title, index) => [index, title] as const))("Disney_fixTitle (Title #%i)", (_index, title) => {
+		const fixedTitle = Disney_fixTitle(title)
+		console.log("Original Title:", title)
+		console.log("Fixed Title:", fixedTitle)
+		expect(fixedTitle).toBeTruthy()
+		expect(fixedTitle!.length).toBeLessThan(title.length)
+		// if (fixedTitle!.length > 40) {
+		// 	expect(fixedTitle).toBeFalsy()
+		// }
+		expect(fixedTitle!.length).toBeLessThan(40)
 	})
 })
