@@ -413,14 +413,17 @@ async function Amazon_customizeMobileView() {
 		if (navMain) navMain.style.display = "none"
 	}
 }
+let lastClosedXrayUrl = ""
 async function Amazon_xray() {
-	document.querySelector(".xrayQuickViewList")?.remove()
-	// remove bad background hue which is annoying
-	const b = document.querySelector(".fkpovp9.f8hspre:not(.enhanced)") as HTMLElement
-	if (b) {
-		b.classList.add("enhanced")
-		b.style.backgroundColor = "transparent"
-		b.style.background = "transparent"
+	if (lastClosedXrayUrl === window.location.href) return
+	const xrayButton = document.querySelector(".xrayVodHeaderTitle.expanded") as HTMLElement
+	if (xrayButton) {
+		xrayButton.click()
+		// increase stats
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
+		console.log("Xray closed", xrayButton)
+		lastClosedXrayUrl = window.location.href
 	}
 }
 

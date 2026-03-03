@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.90
+
+- changed to close xray only once per page load.
+
 ## 1.1.89
 
 - improved Amazon Filter Paid Content
