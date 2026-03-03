@@ -49,6 +49,15 @@ export async function startSharedFunctions(platform: Platforms) {
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	getDBCache()
 }
+export function getCurrentEpisodeNumber(title: string | null | undefined) {
+	if (!title) return null
+
+	// Works across "Season 2, Ep. 1", "Staffel 2, F. 1", etc.
+	const nums = title.match(/\d+/g)?.map(Number) ?? []
+	if (nums.length === 0) return null
+	// usually [season, episode] -> take last number
+	return nums[nums.length - 1]
+}
 
 type MovieInfo = {
 	id: number

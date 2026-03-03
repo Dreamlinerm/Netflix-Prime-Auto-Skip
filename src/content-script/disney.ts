@@ -1,5 +1,11 @@
 import { sendMessage } from "webext-bridge/content-script"
-import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
+import {
+	startSharedFunctions,
+	parseAdTime,
+	createSlider,
+	Platforms,
+	getCurrentEpisodeNumber,
+} from "@/content-script/shared-functions"
 startSharedFunctions(Platforms.Disney)
 // Global Variables
 const isFirefox = typeof browser !== "undefined"
@@ -133,6 +139,12 @@ async function Disney_scrollVolume(video: HTMLVideoElement) {
 }
 
 async function Disney_Intro(video: HTMLVideoElement, time: number) {
+	if (
+		getCurrentEpisodeNumber(
+			document.querySelector("title-bug")?.shadowRoot?.querySelector(".subtitle-field span")?.textContent,
+		) == 1
+	)
+		return
 	// intro star wars andor Season 1 episode 2
 	// Recap Criminal Minds Season 1 Episode 2
 	let button: HTMLElement | undefined

@@ -1,5 +1,10 @@
 import { sendMessage } from "webext-bridge/content-script"
-import { startSharedFunctions, createSlider, Platforms } from "@/content-script/shared-functions"
+import {
+	startSharedFunctions,
+	createSlider,
+	Platforms,
+	getCurrentEpisodeNumber,
+} from "@/content-script/shared-functions"
 
 startSharedFunctions(Platforms.Netflix)
 // Global Variables
@@ -8,6 +13,7 @@ const { data: settings, promise } = useBrowserSyncStorage<settingsType>("setting
 const { data: hideTitles, promise: hideTitlesPromise } = useBrowserSyncStorage<BooleanObject>("hideTitles", {}, false)
 const ua = navigator.userAgent
 let lastAdTimeText: number | string = 0
+let curVideoTitle: string | null = null
 const videoSpeed: Ref<number> = ref(1)
 const isEdge = /edg/i.test(ua)
 const config = { attributes: true, childList: true, subtree: true }
@@ -54,7 +60,8 @@ function Netflix() {
 	const video = document.querySelector("video")
 	const NSettings = settings.value.Netflix
 	if (NSettings?.profile) Netflix_profile()
-	if (NSettings?.skipIntro) {
+	curVideoTitle = getTitle() || curVideoTitle
+	if (NSettings?.skipIntro && getCurrentEpisodeNumber(curVideoTitle) != 1) {
 		if (Netflix_General('[data-uia="player-skip-intro"]', "Intro skipped", false)) {
 			if (video) {
 				const time = video?.currentTime
@@ -79,9 +86,6 @@ function Netflix() {
 	}
 	if (NSettings?.skipCredits) {
 		Netflix_General('[data-uia="next-episode-seamless-button-draining"]', "Credits skipped")
-		// if (!Netflix_General('[data-uia="next-episode-seamless-button-draining"]', "Credits skipped draining")) {
-		// 	Netflix_General('[data-uia="next-episode-seamless-button"]', "Credits skipped regular")
-		// }
 	}
 	if (NSettings?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched")
 	if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped")
@@ -89,6 +93,17 @@ function Netflix() {
 	if (settings.value.Video?.scrollVolume && video) Netflix_scrollVolume(video)
 	if (NSettings?.removeGames) Netflix_removeGames()
 	if (NSettings?.hideTitles) addHideTitleButton()
+}
+function getTitle() {
+	// Netflix renders the current title/episode info in the control bar.
+	// Example (DE): <div data-uia="video-title"><h4>Show</h4><span>Flg. 1</span><span>Episode name</span></div>
+	// Example (EN): "S2:E1" or "Episode 1". We avoid language-specific keywords and just take the last number.
+	const container = document.querySelector('[data-uia="video-title"]')
+	if (!container) return ""
+
+	return Array.from(container.querySelectorAll("span"))
+		.map((s) => (s.textContent ?? "").trim())
+		.join(" ")
 }
 async function Netflix_scrollVolume(video: HTMLVideoElement) {
 	const volumeControl = document.querySelector('[data-uia*="control-volume"] div:not(.enhanced)') as HTMLElement

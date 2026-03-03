@@ -1,4 +1,9 @@
-import { startSharedFunctions, createSlider, Platforms } from "@/content-script/shared-functions"
+import {
+	startSharedFunctions,
+	createSlider,
+	Platforms,
+	getCurrentEpisodeNumber,
+} from "@/content-script/shared-functions"
 import { sendMessage } from "webext-bridge/content-script"
 // Global Variables
 
@@ -45,6 +50,8 @@ async function HBO() {
 	if (settings.value.HBO?.speedSlider) HBO_SpeedSlider(video)
 }
 function HBO_Intro(video: HTMLVideoElement, time: number) {
+	if (getCurrentEpisodeNumber(document.querySelector('[data-testid="player-ux-season-episode"]')?.textContent) == 1)
+		return
 	const button = document.querySelector('button[class*="SkipButton-"]') as HTMLElement
 	if (button?.checkVisibility({ visibilityProperty: true })) {
 		button.click()

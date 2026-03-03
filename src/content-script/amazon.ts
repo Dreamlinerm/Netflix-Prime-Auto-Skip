@@ -1,5 +1,11 @@
 import { sendMessage } from "webext-bridge/content-script"
-import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
+import {
+	startSharedFunctions,
+	parseAdTime,
+	createSlider,
+	Platforms,
+	getCurrentEpisodeNumber,
+} from "@/content-script/shared-functions"
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
@@ -101,7 +107,10 @@ function resetLastIntroTime() {
 	}, 5000)
 }
 function Amazon_Intro() {
-	if (settings.value.Amazon?.skipIntro) {
+	if (
+		settings.value.Amazon?.skipIntro &&
+		getCurrentEpisodeNumber(document.querySelector('[data-testid="dp-atf-play-button"]')?.textContent) != 1
+	) {
 		// skips intro and recap
 		// recap on lucifer season 3 episode 3
 		// intro lucifer season 3 episode 4
@@ -416,7 +425,7 @@ async function Amazon_customizeMobileView() {
 let lastClosedXrayUrl = ""
 async function Amazon_xray() {
 	if (lastClosedXrayUrl === window.location.href) return
-	const xrayButton = document.querySelector(".xrayVodHeaderTitle.expanded") as HTMLElement
+	const xrayButton = document.querySelector(".xrayVodHeaderTitle.expanded .arrow.show") as HTMLElement
 	if (xrayButton) {
 		xrayButton.click()
 		// increase stats
