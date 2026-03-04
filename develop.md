@@ -37,6 +37,15 @@
 └── package.json            # Project dependencies and scripts
 ```
 
+### Environment variables
+
+Create .env file in the root of the project with the following content:
+
+```
+DEEPL_API_KEY=...
+TMDB_TOKEN=...
+```
+
 ### Author Commands
 
 - `pnpm transDeepL` translate .translation/deepl.EN.json and output them into the locales files directly

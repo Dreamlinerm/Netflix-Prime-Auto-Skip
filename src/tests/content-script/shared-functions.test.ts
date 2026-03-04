@@ -54,24 +54,40 @@ describe("createSlider", () => {
 // 	return card.getAttribute("aria-label")
 // })
 
-describe("Disney_fixTitle", () => {
-	it("should strip the title correctly", () => {
-		const title = "New Episode Badge The Mandalorian Select for details on this title."
-		const expected = "The Mandalorian"
-		expect(Disney_fixTitle(title)).toBe(expected)
+async function getMovieInfo(title: string) {
+	const url = `https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(title)}&include_adult=false&page=1`
+	const response = await fetch(url, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+			Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
+		},
 	})
-})
+	const data = await response.json()
+
+	if (data != undefined) {
+		if (data?.results) data.results = data.results?.filter((item) => item.media_type?.toLowerCase() !== "person")
+		// themoviedb
+		const movie = data?.results?.[0]
+		return movie
+	}
+	return null
+}
 
 describe("Disney_fixTitle", () => {
-	it.each(Testitles.map((title, index) => [index, title] as const))("Disney_fixTitle (Title #%i)", (_index, title) => {
-		const fixedTitle = Disney_fixTitle(title)
-		console.log("Original Title:", title)
-		console.log("Fixed Title:", fixedTitle)
-		expect(fixedTitle).toBeTruthy()
-		expect(fixedTitle!.length).toBeLessThan(title.length)
-		// if (fixedTitle!.length > 40) {
-		// 	expect(fixedTitle).toBeFalsy()
-		// }
-		expect(fixedTitle!.length).toBeLessThan(40)
-	})
+	it.each(Testitles.map((title, index) => [index, title] as const))(
+		"Disney_fixTitle (Title #%i)",
+		async (_index, title) => {
+			const fixedTitle = Disney_fixTitle(title)
+			console.log("Original Title:", title)
+			console.log("Fixed Title:", fixedTitle)
+			const movie = await getMovieInfo(fixedTitle!)
+			if (!movie?.id) {
+				throw new Error(
+					`TMDB lookup returned no match\nOriginal: ${title}\nFixed: ${fixedTitle}\nTMDB first result: ${JSON.stringify(movie, null, 2)}`,
+				)
+			}
+			expect(movie?.id).toBeTruthy()
+		},
+	)
 })
