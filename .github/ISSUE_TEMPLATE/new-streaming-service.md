@@ -13,7 +13,7 @@ Page: e.g. [https://www.starplus.com/](https://www.starplus.com/)
 definetly available in Country: USA e.g.
 
 ### Steps
-For each feature you want added, create a page snapshot with the add-on Single File ([Chrome](https://chrome.google.com/webstore/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle) [Firefox](https://addons.mozilla.org/en-US/firefox/addon/single-file/)) and attach the files to the issue.
+For each feature you want added, create a page snapshot with the add-on Single File ([Chrome](https://chromewebstore.google.com/detail/singlefile/mpiodijhokgodhhofbcjdecpffjipkle) [Firefox](https://addons.mozilla.org/en-US/firefox/addon/single-file/)) and attach the files to the issue.
 
 Features that require a snapshot with single file:
 * Home Page

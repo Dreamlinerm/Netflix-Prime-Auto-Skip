@@ -12,7 +12,7 @@
 <img alt="Mozilla Add-on Rating" src="https://img.shields.io/amo/rating/NetflixPrime%40Autoskip.io">
 </a>
 <br>
-<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
+<a href="https://chromewebstore.google.com/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle">
 <img src="docs/Logos/chrome.svg" width="20px">
 <img src="https://img.shields.io/chrome-web-store/users/akaimhgappllmlkadblbdknhbfghdgle" >
 <img alt="Chrome Web Store Rating" src="https://img.shields.io/chrome-web-store/rating/akaimhgappllmlkadblbdknhbfghdgle">
@@ -31,7 +31,7 @@
 ## Download & Install
 
 <a href="https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/"><img src="docs/Logos/download button/firefox.png" alt="Get Streaming enhanced for Firefox"/>
-<a href="https://chrome.google.com/webstore/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="docs/Logos/download button/chrome.png" alt="Get Streaming enhanced for Chromium"/>
+<a href="https://chromewebstore.google.com/detail/streaming-enhanced-netfli/akaimhgappllmlkadblbdknhbfghdgle"><img src="docs/Logos/download button/chrome.png" alt="Get Streaming enhanced for Chromium"/>
 <a href="https://microsoftedge.microsoft.com/addons/detail/streaming-enhanced-netfli/dhfpagghjamocfaaignghcljfpppelff"><img src="docs/Logos/download button/microsoft.png" alt="Get Streaming enhanced for Edge"/>
 
 ## Install on Android
