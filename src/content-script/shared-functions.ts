@@ -528,7 +528,8 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 	} else if (isParamount) title = card.getAttribute("title") ?? ""
 	return title
 }
-
+const Brands = String.raw`Hulu Original Series|Disney\+ Original|STAR (?:Original|Generic)|ZDF Enterprises`
+const Badge = String.raw`New(?: (?:Episode|Movie|Series))? Badge|`
 export const DISNEY_TITLE_RE_EN = new RegExp(
 	[
 		String.raw`^`,
@@ -537,7 +538,9 @@ export const DISNEY_TITLE_RE_EN = new RegExp(
 		// sometimes there is a "Disney+ Original" or "STAR Original" badge in the title, but it is not consistent
 		// starting the non capturing group
 		String.raw`(?:(?:`,
-		String.raw`Catch Up on the Series|New(?: (?:Episode|Movie|Series))? Badge|Hulu Original Series|Disney\+ Original|STAR (?:Original|Generic)|ZDF Enterprises`,
+		String.raw`Catch Up on the Series|`,
+		Badge,
+		Brands,
 		String.raw`)\s+)*`,
 		// ending the non capturing group
 		String.raw`\s*`,
@@ -546,65 +549,51 @@ export const DISNEY_TITLE_RE_EN = new RegExp(
 		// lookahead for keywords that indicate end of title and start of additional info, e.g. Season
 		String.raw`(?=`,
 		// these keywords indicate that the title has ended and additional info has started, such as season number, release date, rating, etc.
-		String.raw`\s+(?:Season\b|Rated\b|Released\b|Coming\b|Prepare\b|New Episode\b|Catch Up on the Series|New(?: (?:Episode|Movie|Series))? Badge|Hulu Original Series|Disney\+ Original|STAR (?:Original|Generic)|ZDF Enterprises|Select for details on this title\.|\d+\s+hour\b|\d+\s+minutes remaining\b)`,
+		String.raw`\s+(?:`,
+		String.raw`Season\b|New Episode\b|Rated\b|Released\b|Coming\b|Prepare\b|Catch Up on the Series|`,
+		Badge,
+		String.raw`Select for details on this title\.|`,
+		String.raw`\d+\s+hour\b|\d+\s+minutes remaining\b|`,
+		Brands,
 		// or the end of the string
-		"|$",
-		")",
+		String.raw`)`,
+		String.raw`|$`,
+		String.raw`)`,
 	].join(""),
 )
 
 export const DISNEY_TITLE_RE_DE = new RegExp(
 	[
 		String.raw`^`,
-		// sometimes there is a "Number 1 " or "Number 2 " badge in the title, but it is not consistent
+		// ranking badge
 		String.raw`(?:Nummer\s+\d+\s+)?`,
-		// sometimes there is a "Disney+ Original" or "STAR Original" badge in the title, but it is not consistent
-		// starting the non capturing group
-		String.raw`(?:(?:`,
-		String.raw`Catch Up on the Series|New(?: (?:Episode|Movie|Series))? Badge|Hulu Original Series|Disney\+ Original|STAR (?:Original|Generic)|ZDF Enterprises`,
-		String.raw`)\s+)*`,
-		// ending the non capturing group
+		// provider / brand badges (can appear multiple times, sometimes both before and after "Label: ...")
+		String.raw`(?:(?:${Brands})\s+)*`,
+		// label badge (can appear multiple times, and may appear before the actual title)
+		String.raw`(?:Label:\s+(?:Neuer Film|Neue Serie|Neue Folge|Neu)\s+)*`,
 		String.raw`\s*`,
-		// The title is captured in a non-greedy way until we reach one of the following keywords that indicate additional info, or the end of the string
+		// Sometimes the UI contains countdown-only tiles like "Nur noch 60 Sekunden ...".
+		String.raw`(?!Nur\s+noch\s+\d+\s+Sekunden\b)`,
+		// capture the title until we reach one of the known metadata / CTA markers
 		String.raw`(?<title>[\s\S]+?)`,
-		// lookahead for keywords that indicate end of title and start of additional info, e.g. Season
 		String.raw`(?=`,
-		// these keywords indicate that the title has ended and additional info has started, such as season number, release date, rating, etc.
-		String.raw`\s+(?:Season\b|Rated\b|Released\b|Coming\b|Prepare\b|New Episode\b|Catch Up on the Series|New(?: (?:Episode|Movie|Series))? Badge|Hulu Original Series|Disney\+ Original|STAR (?:Original|Generic)|ZDF Enterprises|Select for details on this title\.|\d+\s+hour\b|\d+\s+minutes remaining\b)`,
-		// or the end of the string
-		"|$",
-		")",
+		String.raw`\s+(?:`,
+		// typical UI strings
+		String.raw`Jetzt\s+aufholen\b|Altersfreigabe:|Erscheinungsjahr:|Genre:|Label:|`,
+		String.raw`Ab\b|ab\b|Neue Folge\b|Mach\s+dich\s+bereit\b|`,
+		String.raw`Für\s+Details\s+zu\s+diesem\s+Titel\s+auswählen\.|`,
+		String.raw`Staffel\b|Folge\b|Noch\b|\d+\s*Stunde\b|\d+\s*Stunden\b|\d+\s*Minuten\b|`,
+		Brands,
+		String.raw`)`,
+		String.raw`|$`,
+		String.raw`)`,
 	].join(""),
+	"u",
 )
 export function Disney_fixTitle(title: string | undefined): string | undefined {
-	// german translation
-	if (htmlLang == "de") {
-		title = title
-			?.replace(/\s?Disney\+ Original/, "")
-			?.replace(/\s?STAR Original/, "")
-			?.replace(/\s?STAR Generic/, "")
-			?.replace(/\s?Hulu Original Series/, "")
-			?.replace(/Nummer \d* /, "")
-			?.replace("\n", " ")
-			?.replace(" Label:", "")
-			?.split(" Für Details")[0]
-			?.split(" Neue")[0]
-			?.split(" Staffel")[0]
-			?.split("Staffel")[0]
-			?.split(" Alle")[0]
-			?.split(" Demnächst")[0]
-			?.split(" Altersfreigabe")[0]
-			?.split(" Mach dich bereit")[0] // deadpool
-			//did not find translation
-			?.split(" Jeden")[0]
-			?.split(" Noch")[0]
-			?.split(" Premiere")[0]
-	}
+	if (htmlLang == "de") return title?.match(DISNEY_TITLE_RE_DE)?.groups?.title?.trim()
 	// else if (htmlLang == "en" || htmlLang == "en-US" || htmlLang == "en-GB") {
-	else {
-		return title?.match(DISNEY_TITLE_RE_EN)?.groups?.title?.trim()
-	}
-	return title
+	else return title?.match(DISNEY_TITLE_RE_EN)?.groups?.title?.trim()
 }
 function Amazon_fixTitle(title: string | undefined) {
 	return (
