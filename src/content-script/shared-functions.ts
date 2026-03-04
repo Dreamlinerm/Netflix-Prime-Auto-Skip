@@ -528,15 +528,62 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 	} else if (isParamount) title = card.getAttribute("title") ?? ""
 	return title
 }
+
+export const DISNEY_TITLE_RE_EN = new RegExp(
+	[
+		String.raw`^`,
+		// sometimes there is a "Number 1 " or "Number 2 " badge in the title, but it is not consistent
+		String.raw`(?:Number\s+\d+\s+)?`,
+		// sometimes there is a "Disney+ Original" or "STAR Original" badge in the title, but it is not consistent
+		// starting the non capturing group
+		String.raw`(?:(?:`,
+		String.raw`Catch Up on the Series|New(?: (?:Episode|Movie|Series))? Badge|Hulu Original Series|Disney\+ Original|STAR (?:Original|Generic)|ZDF Enterprises`,
+		String.raw`)\s+)*`,
+		// ending the non capturing group
+		String.raw`\s*`,
+		// The title is captured in a non-greedy way until we reach one of the following keywords that indicate additional info, or the end of the string
+		String.raw`(?<title>[\s\S]+?)`,
+		// lookahead for keywords that indicate end of title and start of additional info, e.g. Season
+		String.raw`(?=`,
+		// these keywords indicate that the title has ended and additional info has started, such as season number, release date, rating, etc.
+		String.raw`\s+(?:Season\b|Rated\b|Released\b|Coming\b|Prepare\b|New Episode\b|Catch Up on the Series|New(?: (?:Episode|Movie|Series))? Badge|Hulu Original Series|Disney\+ Original|STAR (?:Original|Generic)|ZDF Enterprises|Select for details on this title\.|\d+\s+hour\b|\d+\s+minutes remaining\b)`,
+		// or the end of the string
+		"|$",
+		")",
+	].join(""),
+)
+
+export const DISNEY_TITLE_RE_DE = new RegExp(
+	[
+		String.raw`^`,
+		// sometimes there is a "Number 1 " or "Number 2 " badge in the title, but it is not consistent
+		String.raw`(?:Nummer\s+\d+\s+)?`,
+		// sometimes there is a "Disney+ Original" or "STAR Original" badge in the title, but it is not consistent
+		// starting the non capturing group
+		String.raw`(?:(?:`,
+		String.raw`Catch Up on the Series|New(?: (?:Episode|Movie|Series))? Badge|Hulu Original Series|Disney\+ Original|STAR (?:Original|Generic)|ZDF Enterprises`,
+		String.raw`)\s+)*`,
+		// ending the non capturing group
+		String.raw`\s*`,
+		// The title is captured in a non-greedy way until we reach one of the following keywords that indicate additional info, or the end of the string
+		String.raw`(?<title>[\s\S]+?)`,
+		// lookahead for keywords that indicate end of title and start of additional info, e.g. Season
+		String.raw`(?=`,
+		// these keywords indicate that the title has ended and additional info has started, such as season number, release date, rating, etc.
+		String.raw`\s+(?:Season\b|Rated\b|Released\b|Coming\b|Prepare\b|New Episode\b|Catch Up on the Series|New(?: (?:Episode|Movie|Series))? Badge|Hulu Original Series|Disney\+ Original|STAR (?:Original|Generic)|ZDF Enterprises|Select for details on this title\.|\d+\s+hour\b|\d+\s+minutes remaining\b)`,
+		// or the end of the string
+		"|$",
+		")",
+	].join(""),
+)
 export function Disney_fixTitle(title: string | undefined): string | undefined {
-	title = title
-		?.replace(/\s?Disney\+ Original/, "")
-		?.replace(/\s?STAR Original/, "")
-		?.replace(/\s?STAR Generic/, "")
-		?.replace(/\s?Hulu Original Series/, "")
 	// german translation
 	if (htmlLang == "de") {
 		title = title
+			?.replace(/\s?Disney\+ Original/, "")
+			?.replace(/\s?STAR Original/, "")
+			?.replace(/\s?STAR Generic/, "")
+			?.replace(/\s?Hulu Original Series/, "")
 			?.replace(/Nummer \d* /, "")
 			?.replace("\n", " ")
 			?.replace(" Label:", "")
@@ -555,27 +602,7 @@ export function Disney_fixTitle(title: string | undefined): string | undefined {
 	}
 	// else if (htmlLang == "en" || htmlLang == "en-US" || htmlLang == "en-GB") {
 	else {
-		title = title
-			?.replace(/Number \d* /, "")
-			?.replace("\n", " ")
-			?.split(" Label:")[0]
-			?.replace(" Badge", "")
-			?.replace(" Select for details on this title.", "")
-			?.replace("New Episode ", "")
-			?.split(" New")[0]
-			?.split(" Season")[0]
-			?.split("Season")[0]
-			?.split(" All")[0]
-			?.split(" Coming")[0]
-			?.split(" Two-Episode")[0]
-			?.split(" Rated")[0]
-			?.split(" Prepare for")[0] // deadpool
-			//did not find translation
-			?.split(" Streaming ")[0]
-			// e.g. "Moana 1 hour 54 minutes remaining" -> "Moana"
-			?.replace(/\s+\d+\s+hour[s]?\s+\d+\s+minutes remaining/g, "")
-			?.replace(/\s+\d+\s+hour[s]?\s+minutes remaining/g, "")
-			?.replace(/\s+\d+\s+minutes remaining/g, "")
+		return title?.match(DISNEY_TITLE_RE_EN)?.groups?.title?.trim()
 	}
 	return title
 }
