@@ -50,9 +50,10 @@ describe("createSlider", () => {
 	})
 })
 
-// Array.from(document.querySelectorAll("a[data-testid='set-item']:not([href^='/browse/page'])")).map((card) => {
-// 	return card.getAttribute("aria-label")
-// })
+const TMDB_TOKEN = process.env.TMDB_TOKEN
+if (!TMDB_TOKEN) {
+	throw new Error("TMDB_TOKEN is not defined in environment variables")
+}
 
 async function getMovieInfo(title: string) {
 	const url = `https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(title)}&include_adult=false&page=1`
@@ -60,7 +61,7 @@ async function getMovieInfo(title: string) {
 		method: "GET",
 		headers: {
 			accept: "application/json",
-			Authorization: `Bearer ${process.env.TMDB_TOKEN}`,
+			Authorization: `Bearer ${TMDB_TOKEN}`,
 		},
 	})
 	const data = await response.json()
@@ -73,6 +74,10 @@ async function getMovieInfo(title: string) {
 	}
 	return null
 }
+
+// Array.from(document.querySelectorAll("a[data-testid='set-item']:not([href^='/browse/page'])")).map((card) => {
+// 	return card.getAttribute("aria-label")
+// })
 
 describe("Disney_fixTitle", () => {
 	it.each(Testitles.map((title, index) => [index, title] as const))(

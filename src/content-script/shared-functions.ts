@@ -530,30 +530,28 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 }
 export function Disney_fixTitle(title: string | undefined): string | undefined {
 	title = title
-		?.replace(" Disney+ Original", "")
-		?.replace("Disney+ Original ", "")
-		?.replace(" STAR Original", "")
-		?.replace("STAR Original ", "")
-		?.replace(" STAR Generic", "")
-		?.replace(" Hulu Original Series", "")
+		?.replace(/\s?Disney\+ Original/, "")
+		?.replace(/\s?STAR Original/, "")
+		?.replace(/\s?STAR Generic/, "")
+		?.replace(/\s?Hulu Original Series/, "")
 	// german translation
 	if (htmlLang == "de") {
 		title = title
 			?.replace(/Nummer \d* /, "")
 			?.replace("\n", " ")
 			?.replace(" Label:", "")
-			.split(" Für Details")[0]
-			.split(" Neue")[0]
-			.split(" Staffel")[0]
-			.split("Staffel")[0]
-			.split(" Alle")[0]
-			.split(" Demnächst")[0]
-			.split(" Altersfreigabe")[0]
-			.split(" Mach dich bereit")[0] // deadpool
+			?.split(" Für Details")[0]
+			?.split(" Neue")[0]
+			?.split(" Staffel")[0]
+			?.split("Staffel")[0]
+			?.split(" Alle")[0]
+			?.split(" Demnächst")[0]
+			?.split(" Altersfreigabe")[0]
+			?.split(" Mach dich bereit")[0] // deadpool
 			//did not find translation
-			.split(" Jeden")[0]
-			.split(" Noch")[0]
-			.split(" Premiere")[0]
+			?.split(" Jeden")[0]
+			?.split(" Noch")[0]
+			?.split(" Premiere")[0]
 	}
 	// else if (htmlLang == "en" || htmlLang == "en-US" || htmlLang == "en-GB") {
 	else {
@@ -561,22 +559,23 @@ export function Disney_fixTitle(title: string | undefined): string | undefined {
 			?.replace(/Number \d* /, "")
 			?.replace("\n", " ")
 			?.split(" Label:")[0]
-			.replace(" Badge", "")
-			.replace(" Select for details on this title.", "")
-			.split(" New")[0]
-			.split(" Season")[0]
-			.split("Season")[0]
-			.split(" All")[0]
-			.split(" Coming")[0]
-			.split(" Two-Episode")[0]
-			.split(" Rated")[0]
-			.split(" Prepare for")[0] // deadpool
+			?.replace(" Badge", "")
+			?.replace(" Select for details on this title.", "")
+			?.replace("New Episode ", "")
+			?.split(" New")[0]
+			?.split(" Season")[0]
+			?.split("Season")[0]
+			?.split(" All")[0]
+			?.split(" Coming")[0]
+			?.split(" Two-Episode")[0]
+			?.split(" Rated")[0]
+			?.split(" Prepare for")[0] // deadpool
 			//did not find translation
-			.split(" Streaming ")[0]
+			?.split(" Streaming ")[0]
 			// e.g. "Moana 1 hour 54 minutes remaining" -> "Moana"
-			.replace(/\s+\d+\s+hour[s]?\s+\d+\s+minutes remaining/g, "")
-			.replace(/\s+\d+\s+hour[s]?\s+minutes remaining/g, "")
-			.replace(/\s+\d+\s+minutes remaining/g, "")
+			?.replace(/\s+\d+\s+hour[s]?\s+\d+\s+minutes remaining/g, "")
+			?.replace(/\s+\d+\s+hour[s]?\s+minutes remaining/g, "")
+			?.replace(/\s+\d+\s+minutes remaining/g, "")
 	}
 	return title
 }
