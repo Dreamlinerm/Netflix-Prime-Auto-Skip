@@ -591,9 +591,9 @@ export const DISNEY_TITLE_RE_DE = new RegExp(
 	"u",
 )
 export function Disney_fixTitle(title: string | undefined): string | undefined {
-	if (htmlLang == "de") return title?.match(DISNEY_TITLE_RE_DE)?.groups?.title?.trim()
-	// else if (htmlLang == "en" || htmlLang == "en-US" || htmlLang == "en-GB") {
-	else return title?.match(DISNEY_TITLE_RE_EN)?.groups?.title?.trim()
+	// else (htmlLang == "en" || htmlLang == "en-US" || htmlLang == "en-GB")
+	const regex = htmlLang == "de" ? DISNEY_TITLE_RE_DE : DISNEY_TITLE_RE_EN
+	return title?.match(regex)?.groups?.title?.trim()
 }
 function Amazon_fixTitle(title: string | undefined) {
 	return (
