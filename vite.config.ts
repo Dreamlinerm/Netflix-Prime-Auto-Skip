@@ -18,6 +18,7 @@ import "dotenv/config"
 import tailwindcss from "@tailwindcss/vite"
 
 const PORT = Number(process.env.PORT || "") || 3303
+const IS_DEV = process.env.NODE_ENV === "development"
 
 function getImmediateDirectories(dirPath: string): string[] {
 	try {
@@ -50,8 +51,7 @@ export default defineConfig({
 			globalSFCScope: true,
 			compositionOnly: true,
 		}),
-
-		vueDevTools(),
+		IS_DEV ? vueDevTools() : undefined,
 
 		// https://github.com/posva/unplugin-vue-router
 		VueRouter({
@@ -66,9 +66,7 @@ export default defineConfig({
 
 		vue(),
 
-		// imagemin({}),
-
-		TurboConsole(),
+		IS_DEV ? TurboConsole() : undefined,
 		tailwindcss(),
 
 		// https://github.com/unplugin/unplugin-auto-import
