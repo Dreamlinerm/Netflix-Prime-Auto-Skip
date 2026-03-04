@@ -163,7 +163,7 @@ watch(
 						:href="
 							isFirefox
 								? 'https://addons.mozilla.org/firefox/addon/netflix-prime-auto-skip/'
-								: 'https://chrome.google.com/webstore/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle'
+								: 'https://chromewebstore.google.com/detail/netflixprime-auto-skip/akaimhgappllmlkadblbdknhbfghdgle'
 						"
 					>
 						<p class="text-base text-white">
