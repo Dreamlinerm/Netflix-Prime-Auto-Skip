@@ -22,6 +22,7 @@ archive.pipe(output)
 const exceptions = [
 	".git",
 	".github",
+	".playwright",
 	".translation",
 	".vscode",
 	"android-app",
@@ -29,9 +30,12 @@ const exceptions = [
 	"coverage",
 	"dist",
 	"docs",
+	"e2e",
 	"graph",
 	"node_modules",
+	"playwright-report",
 	"releases",
+	"test-results",
 ]
 const baseDir = path.join(__dirname, "../")
 fs.readdirSync(baseDir).forEach((file) => {

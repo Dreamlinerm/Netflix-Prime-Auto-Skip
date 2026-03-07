@@ -30,3 +30,8 @@ dist-ssr
 .env
 test/*
 coverage/
+
+# Playwright
+playwright-report/
+test-results/
+.playwright/

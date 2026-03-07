@@ -52,6 +52,34 @@ TMDB_TOKEN=...
 - `pnpm hours` calculate the hours spent on the project
 - `pnpm copyDocsFtoC` copy the docs from the firefox folder to the chrome folder
 
+## E2E tests (Playwright)
+
+Playwright is set up to run E2E tests against the unpacked Chromium extension build in `dist/chrome`.
+
+- Install browsers once: `pnpm exec playwright install chromium`
+- Run E2E tests: `pnpm test:e2e`
+- UI mode: `pnpm test:e2e:ui`
+
+Notes:
+
+- The extension is loaded via `--disable-extensions-except` + `--load-extension`.
+- By default the fixture runs headed (recommended for extensions). You can try headless with `PW_HEADLESS=1`, but extension support in headless can be flaky depending on Chromium.
+
+### Staying signed in (Netflix, etc.)
+
+By default, the E2E fixture creates a temporary Chromium profile and deletes it after each run. If you want to stay signed into Netflix between runs, use a persistent `userDataDir`.
+
+1. Create / reuse a persistent profile and sign in once folder `.playwright/user-data`:
+
+- `pnpm auth`
+
+Environment variables:
+
+- `PW_USER_DATA_DIR=...` uses a custom profile directory (also not deleted).
+- `PW_CHANNEL=chrome` optionally runs tests in your installed Google Chrome instead of bundled Chromium.
+
+Tip: using an _existing_ Chrome profile directly can be flaky (profile lock, version mismatch). If you want to import your existing login, prefer logging in once via `pnpm auth` into the Playwright profile.
+
 ## Development tools
 
 ### Vite Plugins
