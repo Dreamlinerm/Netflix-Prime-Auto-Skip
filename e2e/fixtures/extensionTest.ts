@@ -24,7 +24,9 @@ export const test = base.extend<ExtensionFixtures>({
 
 		const userDataDir = explicitUserDataDir
 			? path.resolve(process.cwd(), explicitUserDataDir)
-			: path.resolve(process.cwd(), ".playwright/user-data")
+			: usePersistentProfile
+				? path.resolve(process.cwd(), ".playwright/user-data")
+				: fs.mkdtempSync(path.join(os.tmpdir(), "playwright-ext-"))
 
 		if (shouldKeepProfile) {
 			fs.mkdirSync(userDataDir, { recursive: true })

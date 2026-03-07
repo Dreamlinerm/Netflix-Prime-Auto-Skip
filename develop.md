@@ -73,6 +73,14 @@ By default, the E2E fixture creates a temporary Chromium profile and deletes it 
 
 - `pnpm auth`
 
+2. Open a Playwright recording browser with that same profile:
+
+- `pnpm record`
+
+You can also use Playwright's built-in recorder (without loading the extension) like this:
+
+- `pnpm exec playwright codegen --user-data-dir .playwright/user-data https://www.netflix.com`
+
 Environment variables:
 
 - `PW_USER_DATA_DIR=...` uses a custom profile directory (also not deleted).
