@@ -6,15 +6,16 @@ import {
 	Platforms,
 	getCurrentEpisodeNumber,
 } from "@/content-script/shared-functions"
-startSharedFunctions(Platforms.Disney)
-// Global Variables
 const isFirefox = typeof browser !== "undefined"
-
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
+
 const hostname = window.location.hostname
 const isDisney = /disneyplus|starplus/i.test(hostname)
-const isHotstar = /hotstar/i.test(hostname)
+const isHotstar = /hotstar|jiostar|jiocinema/i.test(hostname)
 const isStarPlus = /starplus/i.test(hostname)
+
+if (isHotstar) startSharedFunctions(Platforms.Hotstar)
+else startSharedFunctions(Platforms.Disney)
 let lastAdTimeText: number | string = 0
 const config = { attributes: true, childList: true, subtree: true }
 async function logStartOfAddon() {

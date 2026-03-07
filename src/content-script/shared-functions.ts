@@ -15,7 +15,7 @@ const title = document.title
 const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url))
 let isNetflix = /netflix/i.test(hostname)
 let isDisney = /disneyplus|starplus/i.test(hostname)
-const isHotstar = /hotstar/i.test(hostname)
+const isHotstar = /hotstar|jiostar|jiocinema/i.test(hostname)
 let isHBO = /max.com/i.test(hostname)
 let isParamount = /paramount/i.test(hostname) || /paramountplus/i.test(hostname)
 const htmlLang = document.documentElement.lang
@@ -284,7 +284,7 @@ async function startShowRatingInterval(optionShowRating = true, optionHideTitles
 		if (isNetflix) {
 			optionShowRating = settings.value.Netflix?.showRating
 			optionHideTitles = settings.value.Netflix?.hideTitles
-		} else if (isDisney) {
+		} else if (isDisney || isHotstar) {
 			optionShowRating = settings.value.Disney?.showRating
 			optionHideTitles = settings.value.Disney?.hideTitles
 		}
@@ -355,7 +355,7 @@ function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	if (isNetflix) AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")]
 	else if (isDisney)
 		AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not([href^='/browse/page']):not(.imdb)")]
-	else if (isHotstar) AllTitleCardsTypes = [document.querySelectorAll(".swiper-slide img:not(.imdb)")]
+	else if (isHotstar) AllTitleCardsTypes = [document.querySelectorAll("article:not(.imdb), .swiper-slide img:not(.imdb)")]
 	else if (isHBO) AllTitleCardsTypes = [document.querySelectorAll("a[class*='StyledTileLinkNormal-']:not(.imdb)")]
 	else if (isParamount)
 		AllTitleCardsTypes = [document.querySelectorAll("a[href*='/shows']:not(.imdb), a[href*='/movies']:not(.imdb)")]
@@ -366,6 +366,7 @@ function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 			),
 			document.querySelectorAll("article[data-testid*='-card']:not(:has(#rating))"),
 		]
+	console.log("[DEBUG] getAllTitleCardsTypes returning lengths:", AllTitleCardsTypes.map(list => list.length))
 	return AllTitleCardsTypes
 }
 function isElementVisible(el: HTMLElement): boolean {
@@ -382,6 +383,7 @@ function isElementVisible(el: HTMLElement): boolean {
 }
 
 async function addRating(showRating: boolean, optionHideTitles: boolean) {
+	console.log("[DEBUG] addRating started. showRating=", showRating, "hideTitles=", optionHideTitles, "isHotstar=", isHotstar)
 	url = window.location.href
 	const AllTitleCardsTypes = getAllTitleCardsTypes()
 	// on disney there are multiple images for the same title so only use the first one
@@ -406,7 +408,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 					if (isNetflix) {
 						const item = card.closest(".slider-item") as HTMLElement
 						if (item) item.style.display = "none"
-					} else if (isDisney) {
+					} else if (isDisney || isHotstar) {
 						const item = card.parentElement as HTMLElement
 						if (item) item.style.display = "none"
 					}
@@ -415,7 +417,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 					console.log("hideTitle", title)
 					continue
 				}
-				if (isDisney) addHideTitleButton(card, title)
+				if (isDisney || isHotstar) addHideTitleButton(card, title)
 			}
 
 			// for the static Pixar Disney, Starplus etc. cards
@@ -431,6 +433,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 					}
 					// if element is not visible skip it
 					else if (!isElementVisible(card)) {
+						console.log("[DEBUG] skipping card because not visible", title)
 						if (isNetflix || isDisney || isHotstar || isHBO || isParamount) card.classList.remove("imdb")
 						else if (isPrimeVideo) {
 							if (type == 0) card?.closest("li")?.classList.remove("imdb")
@@ -438,6 +441,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 						}
 						continue
 					} else {
+						console.log("[DEBUG] fetching movie info for", title)
 						getMovieInfo(title, card, media_type)
 						updateDBCache = true
 					}
@@ -507,7 +511,13 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 			const SelectedTabId = document.querySelector('[aria-selected="true"]')?.id.split("_control")[0]
 			if (SelectedTabId != card.closest('div[role="tabpanel"]')?.id) title = ""
 		}
-	} else if (isHotstar) title = card?.getAttribute("alt")?.replace(/(S\d+\sE\d+)/g, "")
+	} else if (isHotstar) {
+		let rawTitle = card?.getAttribute("alt") ||
+			card.closest("a")?.getAttribute("aria-label") ||
+			card.querySelector("img")?.getAttribute("alt") ||
+			card.querySelector("span")?.textContent || "";
+		title = rawTitle.replace(/(S\d+\sE\d+)/g, "");
+	}
 	else if (isPrimeVideo) {
 		// detail means not live shows
 		if (card.querySelector("a")?.href?.includes("detail")) {
@@ -670,22 +680,22 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		div.setAttribute(
 			"alt",
 			"Filtered title: " +
-				title +
-				", Fetched title: " +
-				data?.title +
-				", media_type: " +
-				data?.media_type +
-				", Vote count: " +
-				vote_count,
+			title +
+			", Fetched title: " +
+			data?.title +
+			", media_type: " +
+			data?.media_type +
+			", Vote count: " +
+			vote_count,
 		)
 	} else {
 		div.textContent = "?"
 		div.setAttribute(
 			"alt",
 			"Filtered title: " +
-				title +
-				(data?.title ? ", Fetched title: " + data?.title : "") +
-				(data?.media_type ? ", media_type: " + data?.media_type : ""),
+			title +
+			(data?.title ? ", Fetched title: " + data?.title : "") +
+			(data?.media_type ? ", media_type: " + data?.media_type : ""),
 		)
 		console.log("no score found:", title, data, card)
 	}
@@ -729,9 +739,20 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 			// parentDiv.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
 		}
 	} else if (isHotstar) {
-		card?.parentElement?.appendChild(div)
-		if (getIsTransparent(data?.score, vote_count < 50)) card.appendChild(greyOverlay)
-		// card?.parentElement?.style.setProperty("opacity", getTransparencyForRating(data?.score, vote_count < 50))
+		let targetContainer = card;
+		// If the card is an article, we inject into the parent <a> tag to avoid overflow:hidden
+		if (card?.tagName?.toLowerCase() === "article") {
+			targetContainer = card.parentElement as HTMLElement;
+		} else if (card?.tagName?.toLowerCase() === "img") {
+			targetContainer = card.closest("a") as HTMLElement || card.parentElement as HTMLElement;
+		}
+
+		if (targetContainer) {
+			targetContainer.style.setProperty("position", "relative", "important");
+			div.style.zIndex = "9999";
+			targetContainer.appendChild(div);
+			if (getIsTransparent(data?.score, vote_count < 50)) targetContainer.appendChild(greyOverlay);
+		}
 	} else if (isPrimeVideo) {
 		let position: HTMLElement = card
 		if (card.getAttribute("data-card-title")) position = card?.firstChild?.firstChild as HTMLElement
