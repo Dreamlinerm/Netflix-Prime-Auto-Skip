@@ -510,7 +510,7 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 			if (SelectedTabId != card.closest('div[role="tabpanel"]')?.id) title = ""
 		}
 	} else if (isHotstar) {
-		let rawTitle =
+		const rawTitle =
 			card?.getAttribute("alt") ||
 			card.closest("a")?.getAttribute("aria-label") ||
 			card.querySelector("img")?.getAttribute("alt") ||
