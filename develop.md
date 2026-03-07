@@ -44,12 +44,6 @@ Create .env file in the root of the project with the following content:
 ```
 DEEPL_API_KEY=...
 TMDB_TOKEN=...
-
-# Optional: use an existing Chrome profile for Playwright (advanced).
-# Close all Chrome windows before running Playwright.
-PLAYWRIGHT_CHROME_USER_DATA_DIR=...
-# If PLAYWRIGHT_CHROME_USER_DATA_DIR points at ".../User Data", pick a profile folder:
-PLAYWRIGHT_CHROME_PROFILE_DIR=Default
 ```
 
 ### Author Commands
@@ -57,39 +51,6 @@ PLAYWRIGHT_CHROME_PROFILE_DIR=Default
 - `pnpm transDeepL` translate .translation/deepl.EN.json and output them into the locales files directly
 - `pnpm hours` calculate the hours spent on the project
 - `pnpm copyDocsFtoC` copy the docs from the firefox folder to the chrome folder
-
-## E2E tests (Playwright)
-
-Playwright is set up to run E2E tests against the unpacked Chromium extension build in `dist/chrome`.
-
-- Install browsers once: `pnpm exec playwright install chromium`
-- Run E2E tests: `pnpm test:e2e`
-- UI mode: `pnpm test:e2e:ui`
-
-Notes:
-
-- The extension is loaded via `--disable-extensions-except` + `--load-extension`.
-- The fixture runs headed (recommended for extensions).
-
-### Staying signed in (Netflix, etc.)
-
-The E2E fixture uses a persistent Chrome profile stored in `.playwright/user-data` so you stay signed in between runs.
-
-1. Create / reuse a persistent profile and sign in once folder `.playwright/user-data`:
-
-- `pnpm auth`
-
-2. Open a Playwright recording browser with that same profile:
-
-- `pnpm record`
-
-You can also use Playwright's built-in recorder (without loading the extension) like this:
-
-- `pnpm exec playwright codegen --user-data-dir .playwright/user-data https://www.netflix.com`
-
-Tip: using an _existing_ Chrome profile directly can be flaky (profile lock, version mismatch). Prefer logging in once via `pnpm auth` into the Playwright profile.
-
-If you still want to use your real Chrome profile, set `PLAYWRIGHT_CHROME_USER_DATA_DIR` in `.env` (see `.env.example`).
 
 ## Development tools
 
