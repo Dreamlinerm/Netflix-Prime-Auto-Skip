@@ -2,8 +2,6 @@ import { chromium } from "@playwright/test"
 import fs from "node:fs"
 import path from "node:path"
 
-process.env.PWDEBUG ??= "1"
-
 const projectRoot = process.cwd()
 
 const extensionPath = path.resolve(projectRoot, "dist/chrome")
