@@ -6,6 +6,7 @@ const query = { active: true, currentWindow: true }
 function callback(tabs: chrome.tabs.Tab[]) {
 	const currentUrl = tabs?.[0]?.url || ""
 	const isPrimeVideo = /.amazon.|.primevideo./i.test(currentUrl)
+	const isNetflix = /.netflix./i.test(currentUrl)
 	const isDisney = /.disneyplus.|.starplus.|.hotstar./i.test(currentUrl)
 	const isCrunchyroll = /.crunchyroll./i.test(currentUrl)
 	// const isHBO = /max/i.test(currentUrl);
