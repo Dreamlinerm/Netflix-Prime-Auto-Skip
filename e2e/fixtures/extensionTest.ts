@@ -1,6 +1,5 @@
 import { test as base, chromium, type BrowserContext } from "@playwright/test"
 import fs from "node:fs"
-import os from "node:os"
 import path from "node:path"
 
 type ExtensionFixtures = {
@@ -11,32 +10,19 @@ type ExtensionFixtures = {
 
 export const test = base.extend<ExtensionFixtures>({
 	context: async ({}, use) => {
-		const extensionPath = path.resolve(process.cwd(), process.env.EXTENSION_PATH ?? "dist/chrome")
+		const extensionPath = path.resolve(process.cwd(), "dist/chrome")
 		if (!fs.existsSync(extensionPath)) {
-			throw new Error(
-				`Extension build not found at ${extensionPath}. Run \"pnpm build:chrome\" first (or set EXTENSION_PATH).`,
-			)
+			throw new Error(`Extension build not found at ${extensionPath}. Run "pnpm build:chrome" first.`)
 		}
 
-		const explicitUserDataDir = process.env.PW_USER_DATA_DIR?.trim()
-		const usePersistentProfile = process.env.PW_PERSISTENT === "1"
-		const shouldKeepProfile = Boolean(explicitUserDataDir || usePersistentProfile)
-
-		const userDataDir = explicitUserDataDir
-			? path.resolve(process.cwd(), explicitUserDataDir)
-			: usePersistentProfile
-				? path.resolve(process.cwd(), ".playwright/user-data")
-				: fs.mkdtempSync(path.join(os.tmpdir(), "playwright-ext-"))
-
-		if (shouldKeepProfile) {
-			fs.mkdirSync(userDataDir, { recursive: true })
-		}
-
-		const channel = process.env.PW_CHANNEL?.trim() || undefined
+		// Keep a persistent Chrome profile in the repo-local folder.
+		// This makes it easy to stay signed-in between runs.
+		const userDataDir = path.resolve(process.cwd(), ".playwright/user-data")
+		fs.mkdirSync(userDataDir, { recursive: true })
 
 		const context = await chromium.launchPersistentContext(userDataDir, {
-			headless: process.env.PW_HEADLESS === "1",
-			channel,
+			headless: false,
+			channel: "chrome",
 			args: [
 				`--disable-extensions-except=${extensionPath}`,
 				`--load-extension=${extensionPath}`,
@@ -49,9 +35,6 @@ export const test = base.extend<ExtensionFixtures>({
 			await use(context)
 		} finally {
 			await context.close()
-			if (!shouldKeepProfile) {
-				fs.rmSync(userDataDir, { recursive: true, force: true })
-			}
 		}
 	},
 

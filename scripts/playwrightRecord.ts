@@ -6,21 +6,18 @@ process.env.PWDEBUG ??= "1"
 
 const projectRoot = process.cwd()
 
-const extensionPath = path.resolve(projectRoot, process.env.EXTENSION_PATH ?? "dist/chrome")
+const extensionPath = path.resolve(projectRoot, "dist/chrome")
 if (!fs.existsSync(extensionPath)) {
-	throw new Error(
-		`Extension build not found at ${extensionPath}. Run "pnpm build:chrome" first (or set EXTENSION_PATH).`,
-	)
+	throw new Error(`Extension build not found at ${extensionPath}. Run "pnpm build:chrome" first.`)
 }
 
-const userDataDir = path.resolve(projectRoot, (process.env.PW_USER_DATA_DIR?.trim() || ".playwright/user-data").trim())
-const channel = process.env.PW_CHANNEL?.trim() || undefined
+const userDataDir = path.resolve(projectRoot, ".playwright/user-data")
 
 fs.mkdirSync(userDataDir, { recursive: true })
 
 const context = await chromium.launchPersistentContext(userDataDir, {
 	headless: false,
-	channel,
+	channel: "chrome",
 	args: [
 		`--disable-extensions-except=${extensionPath}`,
 		`--load-extension=${extensionPath}`,

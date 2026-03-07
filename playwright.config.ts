@@ -10,6 +10,8 @@ export default defineConfig({
 	workers: 1,
 	reporter: [["list"], ["html", { open: "never" }]],
 	use: {
+		channel: "chrome",
+		headless: false,
 		trace: "on-first-retry",
 		screenshot: "only-on-failure",
 		video: "retain-on-failure",

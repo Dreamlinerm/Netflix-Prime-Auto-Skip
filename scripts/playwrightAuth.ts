@@ -6,27 +6,25 @@ import { stdin as input, stdout as output } from "node:process"
 
 const projectRoot = process.cwd()
 
-const userDataDir = path.resolve(projectRoot, (process.env.PW_USER_DATA_DIR?.trim() || ".playwright/user-data").trim())
-
-const channel = process.env.PW_CHANNEL?.trim() || undefined
+const userDataDir = path.resolve(projectRoot, ".playwright/user-data")
 
 fs.mkdirSync(userDataDir, { recursive: true })
 
 const context = await chromium.launchPersistentContext(userDataDir, {
 	headless: false,
-	channel,
+	channel: "chrome",
 	args: ["--no-first-run", "--no-default-browser-check"],
 })
 
 try {
 	const page = await context.newPage()
-	page.goto("https://www.netflix.com")
+	await page.goto("https://www.netflix.com")
 	const page2 = await context.newPage()
-	page2.goto("https://www.amazon.de")
+	await page2.goto("https://www.amazon.de")
 	const page3 = await context.newPage()
-	page3.goto("https://www.disneyplus.com")
+	await page3.goto("https://www.disneyplus.com")
 	const page4 = await context.newPage()
-	page4.goto("https://www.crunchyroll.com")
+	await page4.goto("https://www.crunchyroll.com")
 
 	console.log("\nLogin Helper")
 	console.log(`- Browser profile: ${userDataDir}`)
