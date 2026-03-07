@@ -148,10 +148,12 @@ async function Disney_Intro(video: HTMLVideoElement, time: number) {
 	// intro star wars andor Season 1 episode 2
 	// Recap Criminal Minds Season 1 Episode 2
 	let button: HTMLElement | undefined
-	if (isDisney) {
-		button = isStarPlus
-			? (document.querySelector('[data-gv2elementkey="playNext"]') as HTMLElement)
-			: (document.querySelector(".skip__button") as HTMLElement)
+	if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]') as HTMLElement
+	else if (isDisney) {
+		button = document
+			.querySelector("skip-overlay")
+			?.shadowRoot?.querySelector("skip-button")
+			?.shadowRoot?.querySelector("button") as HTMLElement
 	} else
 		button = document
 			.evaluate("//span[contains(., 'Skip Intro')]", document, null, XPathResult.ANY_TYPE, null)

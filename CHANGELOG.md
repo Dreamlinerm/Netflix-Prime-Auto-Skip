@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.91
+
+- Disney: fixed skip intro, because of changed ui.
+
 ## 1.1.90
 
 - changed to close xray only once per page load.
