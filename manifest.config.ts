@@ -46,7 +46,7 @@ export default {
 		},
 		{
 			js: ["src/content-script/disney.ts"],
-			matches: ["*://*.disneyplus.com/*", "*://*.hotstar.com/*", "*://*.starplus.com/*"],
+			matches: ["*://*.disneyplus.com/*", "*://*.hotstar.com/*", "*://*.starplus.com/*", "*://*.jiostar.com/*", "*://*.jiocinema.com/*"],
 		},
 		{
 			js: ["src/content-script/max.ts"],

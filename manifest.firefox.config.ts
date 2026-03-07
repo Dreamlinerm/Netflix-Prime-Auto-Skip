@@ -32,6 +32,8 @@ export default defineManifest((env) => ({
 		"webRequestBlocking",
 		"*://*.disneyplus.com/*",
 		"*://*.starplus.com/*",
+		"*://*.jiostar.com/*",
+		"*://*.jiocinema.com/*",
 		"*://*.primevideo.com/*",
 		"*://*.amazon.com/*",
 		"*://*.amazon.co.jp/*",
