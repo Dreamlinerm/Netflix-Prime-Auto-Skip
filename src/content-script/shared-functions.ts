@@ -366,7 +366,6 @@ function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 			),
 			document.querySelectorAll("article[data-testid*='-card']:not(:has(#rating))"),
 		]
-	console.log("[DEBUG] getAllTitleCardsTypes returning lengths:", AllTitleCardsTypes.map(list => list.length))
 	return AllTitleCardsTypes
 }
 function isElementVisible(el: HTMLElement): boolean {
