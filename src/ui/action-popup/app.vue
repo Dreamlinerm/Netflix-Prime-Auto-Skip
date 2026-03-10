@@ -37,8 +37,6 @@ chrome.tabs.query(query, callback)
 			</div>
 			<RouterView />
 		</div>
-
-
 	</div>
 </template>
 

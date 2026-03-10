@@ -205,8 +205,6 @@ watch(
 				<div class="p-4 prose">
 					<RouterView />
 				</div>
-
-
 			</div>
 		</div>
 	</div>
