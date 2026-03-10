@@ -21,31 +21,31 @@ const LocaleTranslation = {
 </script>
 
 <template>
-		<div class="dropdown dropdown-end p-0">
-			<div
-				tabindex="0"
-				role="button"
-				class="flex gap-1 py-1 px-2"
-			>
+	<div class="dropdown dropdown-end p-0">
+		<div
+			tabindex="0"
+			role="button"
+			class="flex gap-1 py-1 px-2"
+		>
 			<div>
 				<i-ph-globe />
 			</div>
-			</div>
-			<ul
-				tabindex="-1"
-				class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-lg -ml-4 mt-2"
-			>
-				<li
-					v-for="locale in i18n?.global?.availableLocales"
-					:key="`locale-${locale}`"
-				>
-					<button
-						class="text-primary-content px-4"
-						@click="currentLocale = locale"
-					>
-						{{ LocaleTranslation[locale as keyof typeof LocaleTranslation] }}
-					</button>
-				</li>
-			</ul>
 		</div>
+		<ul
+			tabindex="-1"
+			class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-lg -ml-4 mt-2"
+		>
+			<li
+				v-for="locale in i18n?.global?.availableLocales"
+				:key="`locale-${locale}`"
+			>
+				<button
+					class="text-primary-content px-4"
+					@click="currentLocale = locale"
+				>
+					{{ LocaleTranslation[locale as keyof typeof LocaleTranslation] }}
+				</button>
+			</li>
+		</ul>
+	</div>
 </template>

@@ -1,5 +1,8 @@
 auto-imports.d.ts
+.eslintrc-auto-import.json
+typed-router.d.ts
 components.d.ts
 pnpm-lock.yaml
 yarn.lock
 node_modules/
+src/locales/
