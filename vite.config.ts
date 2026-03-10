@@ -6,7 +6,7 @@ import IconsResolver from "unplugin-icons/resolver"
 import Icons from "unplugin-icons/vite"
 import Components from "unplugin-vue-components/vite"
 import { createHtmlPlugin } from "vite-plugin-html"
-import VueRouter from "unplugin-vue-router/vite"
+import VueRouter from "vue-router/vite"
 import { defineConfig } from "vite"
 import { configDefaults } from "vitest/config"
 // @ts-expect-error commonjs module
@@ -77,9 +77,6 @@ export default defineConfig({
 				"vue-router",
 				"@vueuse/core",
 				"pinia",
-				{
-					"vue-router/auto": ["definePage"],
-				},
 				{
 					"vue-i18n": ["useI18n", "t"],
 				},
