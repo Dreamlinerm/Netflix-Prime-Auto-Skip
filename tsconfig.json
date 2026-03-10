@@ -25,15 +25,9 @@
 	"include": [
 		"package.json",
 		"vite.config.ts",
-		// "manifest.config.ts",
 		"src/**/*.ts",
 		"src/**/*.d.ts",
 		"src/**/*.tsx",
 		"src/**/*.vue"
 	]
-	// "references": [
-	//   {
-	//     "path": "./tsconfig.node.json"
-	//   }
-	// ]
 }
