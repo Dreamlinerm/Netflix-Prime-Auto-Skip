@@ -5,7 +5,6 @@ import fs from "node:fs"
 import path from "node:path"
 
 config()
-console.log("process.env", process.env.DEEPL_API_KEY)
 // set DEEPL_API_KEY=... in terminal
 if (process.argv.length === 2) {
 	exec(
