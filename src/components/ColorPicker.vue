@@ -5,26 +5,26 @@
 <script lang="ts">
 import { Sketch } from "@ckpack/vue-color"
 export default {
+	components: {
+		Sketch,
+	},
+	props: {
+		modelValue: String,
+	},
+	emits: ["update:modelValue"],
 	data() {
 		return {
 			color: "#000",
 		}
-	},
-	components: {
-		Sketch,
-	},
-	mounted() {
-		this.color = this.modelValue
 	},
 	watch: {
 		color() {
 			this.$emit("update:modelValue", this.color.hex8 || this.modelValue)
 		},
 	},
-	props: {
-		modelValue: String,
+	mounted() {
+		this.color = this.modelValue
 	},
-	emits: ["update:modelValue"],
 }
 </script>
 

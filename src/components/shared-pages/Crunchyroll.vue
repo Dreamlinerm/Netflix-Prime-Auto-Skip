@@ -62,11 +62,11 @@
 			</template>
 		</div>
 		<input
-			type="number"
 			v-model="settings.General.Crunchyroll_skipTimeout"
-			@change="setTimeout(($event.target as HTMLInputElement).value)"
+			type="number"
 			class="w-full p-1 m-0 input border-inherit"
 			min="0"
+			@change="setTimeout(($event.target as HTMLInputElement).value)"
 		/>
 	</div>
 	<template v-if="advancedSettings">

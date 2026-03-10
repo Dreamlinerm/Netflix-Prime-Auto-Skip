@@ -97,8 +97,8 @@ function removeAllTitles() {
 					</td>
 					<td>
 						<button
-							@click="settings.General.RatingThresholds[index] = defaultSettings.General.RatingThresholds[index]"
 							class="btn btn-error"
+							@click="settings.General.RatingThresholds[index] = defaultSettings.General.RatingThresholds[index]"
 						>
 							{{ $t("reset") }}
 						</button>

@@ -31,7 +31,7 @@ function getImmediateDirectories(dirPath: string): string[] {
 			.filter((item): item is fs.Dirent => item.isDirectory()) // Type guard
 			.map((item) => item.name)
 	} catch (err) {
-		throw new Error(`Error reading directories: ${(err as Error).message}`)
+		throw new Error(`Error reading directories: ${(err as Error).message}`, { cause: err })
 	}
 }
 
