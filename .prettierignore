@@ -6,3 +6,6 @@ pnpm-lock.yaml
 yarn.lock
 node_modules/
 src/locales/
+*.md
+*.json
+*.js
