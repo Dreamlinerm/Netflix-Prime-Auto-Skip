@@ -7,8 +7,6 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue').EffectScope
-  const Notification: typeof import('notivue').Notification
-  const Notivue: typeof import('notivue').Notivue
   const SettingsPromise: typeof import('../stores/options.store').SettingsPromise
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const appRouter: typeof import('../utils/router/index').appRouter
@@ -67,7 +65,6 @@ declare global {
   const mapWritableState: typeof import('pinia').mapWritableState
   const markRaw: typeof import('vue').markRaw
   const nextTick: typeof import('vue').nextTick
-  const notivue: typeof import('../utils/notifications').notivue
   const onActivated: typeof import('vue').onActivated
   const onBeforeMount: typeof import('vue').onBeforeMount
   const onBeforeRouteLeave: typeof import('vue-router').onBeforeRouteLeave
@@ -93,7 +90,6 @@ declare global {
   const pinia: typeof import('../utils/pinia').pinia
   const provide: typeof import('vue').provide
   const provideLocal: typeof import('@vueuse/core').provideLocal
-  const pushNotification: typeof import('notivue').push
   const reactify: typeof import('@vueuse/core').reactify
   const reactifyObject: typeof import('@vueuse/core').reactifyObject
   const reactive: typeof import('vue').reactive
@@ -349,8 +345,6 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
-    readonly Notification: UnwrapRef<typeof import('notivue')['Notification']>
-    readonly Notivue: UnwrapRef<typeof import('notivue')['Notivue']>
     readonly SettingsPromise: UnwrapRef<typeof import('../stores/options.store')['SettingsPromise']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly appRouter: UnwrapRef<typeof import('../utils/router/index')['appRouter']>
@@ -409,7 +403,6 @@ declare module 'vue' {
     readonly mapWritableState: UnwrapRef<typeof import('pinia')['mapWritableState']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
-    readonly notivue: UnwrapRef<typeof import('../utils/notifications')['notivue']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>
     readonly onBeforeRouteLeave: UnwrapRef<typeof import('vue-router')['onBeforeRouteLeave']>
@@ -435,7 +428,6 @@ declare module 'vue' {
     readonly pinia: UnwrapRef<typeof import('../utils/pinia')['pinia']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly provideLocal: UnwrapRef<typeof import('@vueuse/core')['provideLocal']>
-    readonly pushNotification: UnwrapRef<typeof import('notivue')['push']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>

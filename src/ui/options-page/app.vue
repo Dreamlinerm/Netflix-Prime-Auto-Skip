@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Notivue, Notification } from "notivue"
 const isFirefox = typeof browser !== "undefined"
 const version = __VERSION__
 const githubUrl = __GITHUB_URL__
@@ -207,9 +206,7 @@ watch(
 					<RouterView />
 				</div>
 
-				<Notivue v-slot="item">
-					<Notification :item="item" />
-				</Notivue>
+
 			</div>
 		</div>
 	</div>

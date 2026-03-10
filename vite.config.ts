@@ -83,9 +83,6 @@ export default defineConfig({
 				{
 					"webextension-polyfill": [["*", "browser"]],
 				},
-				{
-					notivue: ["Notivue", "Notification", ["push", "pushNotification"]],
-				},
 			],
 			dts: "src/types/auto-imports.d.ts",
 			dirs: ["src/composables/**", "src/stores/**", "src/utils/**"],

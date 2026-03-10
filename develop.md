@@ -67,7 +67,6 @@ TMDB_TOKEN=...
 
 - [Pinia](https://pinia.vuejs.org/) - Intuitive, type safe, light and flexible Store for Vue
 - [VueUse](https://github.com/antfu/vueuse) - collection of useful composition APIs
-- [Notivue](https://github.com/smastrom/notivue) - toast notification system
 - [Vue-i18n](https://kazupon.github.io/vue-i18n/) - Internationalization plugin for Vue.js
 
 ### Plugins

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Notivue, Notification } from "notivue"
 const router = useRouter()
 // if on streaming page open settings for page
 const query = { active: true, currentWindow: true }
@@ -39,9 +38,7 @@ chrome.tabs.query(query, callback)
 			<RouterView />
 		</div>
 
-		<Notivue v-slot="item">
-			<Notification :item="item" />
-		</Notivue>
+
 	</div>
 </template>
 
