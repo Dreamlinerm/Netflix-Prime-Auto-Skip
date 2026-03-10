@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import { config } from "dotenv"
-import { exec } from "child_process"
-import fs from "fs"
-import path from "path"
+import { exec } from "node:child_process"
+import fs from "node:fs"
+import path from "node:path"
 
 config()
 console.log("process.env", process.env.DEEPL_API_KEY)
@@ -32,7 +32,6 @@ if (process.argv.length === 3) {
 
 	// Step 1: Read the deepl.Lang.json file
 	const deepLang = ["DE", "EN", "ES", "FR", "IT", "JA", "KO", "PL", "PT", "PT", "SV", "TR", "ZH"]
-	// const locales = fs.readdirSync(localesPath);
 	const firefoxLocales = ["de", "en", "es", "fr", "it", "ja", "ko", "pl", "pt", "pt_BR", "sv", "tr", "zh_CN"]
 	deepLang.forEach((trans, index) => {
 		fs.readFile(path.join(".translation\\", "deepl." + trans + ".json"), "utf8", function (err, newKeys) {

@@ -114,9 +114,9 @@
   "skipAfterCreditsSwitch": "跳过片尾场景",
   "skipAfterCreditsDescription": "跳过字幕后的场景",
   "editRatings": "编辑评级阈值和颜色：",
-  "dimmDescription": "评分最低的 Dimm 节目。",
   "pickColor": "选择颜色",
   "pickRating": "挑选评级阈值",
   "reset": "重置",
-  "dimLowRatingsSwitch": "调光低评级"
+  "dimLowRatingsSwitch": "调光低评级",
+  "dimLowRatingsDescription": "评分最低的 Dimm 节目。"
 }

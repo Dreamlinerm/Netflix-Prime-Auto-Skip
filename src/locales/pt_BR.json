@@ -114,9 +114,9 @@
   "skipAfterCreditsSwitch": "Pular final dos créditos:",
   "skipAfterCreditsDescription": "Pular a cena pós créditos.",
   "editRatings": "Editar limites de cores de classificação:",
-  "dimmDescription": "Reorganiza programas com classificação baixa no final.",
   "pickColor": "Escolher cor",
   "pickRating": "Escolha um limite de classificação",
   "reset": "Reiniciar",
-  "dimLowRatingsSwitch": "Opções para classificações baixas"
+  "dimLowRatingsSwitch": "Opções para classificações baixas",
+  "dimLowRatingsDescription": "Programas Dimm com a classificação mais baixa."
 }

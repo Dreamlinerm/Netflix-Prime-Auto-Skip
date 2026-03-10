@@ -114,9 +114,9 @@
   "skipAfterCreditsSwitch": "Hoppa över eftertexter Scen:",
   "skipAfterCreditsDescription": "Hoppa över scenen efter eftertexterna.",
   "editRatings": "Redigera tröskelvärden och färger för Rating:",
-  "dimmDescription": "Dimm-program med lägst betyg.",
   "pickColor": "Välj färg",
   "pickRating": "Välj betygsgräns",
   "reset": "Återställning",
-  "dimLowRatingsSwitch": "Dimm låg betyg"
+  "dimLowRatingsSwitch": "Dimm låg betyg",
+  "dimLowRatingsDescription": "Dimm-program med lägst betyg."
 }

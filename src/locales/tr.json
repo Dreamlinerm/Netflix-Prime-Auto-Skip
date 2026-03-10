@@ -114,9 +114,9 @@
   "skipAfterCreditsSwitch": "Jenerik Sonrası Sahneyi Atla:",
   "skipAfterCreditsDescription": "Jenerikten Sonraki Sahneyi Atlayın.",
   "editRatings": "Derecelendirme eşiklerini ve renklerini düzenleyin:",
-  "dimmDescription": "En Düşük Puanlı Dimm Programları.",
   "pickColor": "Renk seç",
   "pickRating": "Seçim Derecelendirme eşiği",
   "reset": "Sıfırla",
-  "dimLowRatingsSwitch": "Dimm Düşük Değerler"
+  "dimLowRatingsSwitch": "Dimm Düşük Değerler",
+  "dimLowRatingsDescription": "En Düşük Puanlı Dimm Programları."
 }

@@ -114,9 +114,9 @@
   "skipAfterCreditsSwitch": "Salta scena dopo i titoli di coda:",
   "skipAfterCreditsDescription": "Salta la scena dopo i titoli di coda.",
   "editRatings": "Modifica soglie e colori valutazioni:",
-  "dimmDescription": "Rende meno visibili i contenuti con valutazione bassa.",
   "pickColor": "Scegli colore",
   "pickRating": "Scegli soglia valutazione",
   "reset": "Ripristina",
-  "dimLowRatingsSwitch": "Sfuma titoli con rating basso"
+  "dimLowRatingsSwitch": "Sfuma titoli con rating basso",
+  "dimLowRatingsDescription": "Spettacoli Dimm con la valutazione più bassa."
 }

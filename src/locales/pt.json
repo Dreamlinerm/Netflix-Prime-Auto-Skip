@@ -114,9 +114,9 @@
   "skipAfterCreditsSwitch": "Saltar a cena após os créditos:",
   "skipAfterCreditsDescription": "Saltar a cena após os créditos.",
   "editRatings": "Editar limiares e cores da classificação:",
-  "dimmDescription": "Programas Dimm com a classificação mais baixa.",
   "pickColor": "Escolher cor",
   "pickRating": "Limiar de classificação da escolha",
   "reset": "Reiniciar",
-  "dimLowRatingsSwitch": "Dimm Low Ratings"
+  "dimLowRatingsSwitch": "Dimm Low Ratings",
+  "dimLowRatingsDescription": "Programas Dimm com a classificação mais baixa."
 }
