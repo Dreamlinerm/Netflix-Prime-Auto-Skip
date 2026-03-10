@@ -3,6 +3,7 @@
 ## 1.1.91
 
 - Disney: fixed skip intro, because of changed ui.
+- Disney: support for jiostar and jiocinema urls, since they merged with hotstar.
 
 ## 1.1.90
 
