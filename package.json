@@ -48,7 +48,7 @@
 		"@iconify-json/mdi": "^1.2.3",
 		"@iconify-json/ph": "^1.2.2",
 		"@intlify/unplugin-vue-i18n": "^6.0.8",
-		"@parvineyvazov/json-translator": "^3.2.2",
+		"@parvineyvazov/json-translator": "^4.1.0",
 		"@types/eslint": "^9.6.1",
 		"@types/node": "^24.1.0",
 		"@types/webextension-polyfill": "^0.12.3",
