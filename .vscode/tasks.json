@@ -2,9 +2,9 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Open firefox", // Name of task
+			"label": "Open firefox",
 			"type": "shell",
-			"command": "pnpm firefox", // Enter your command here
+			"command": "npm run firefox",
 			"group": "none",
 			"presentation": {
 				"reveal": "always",
@@ -12,9 +12,9 @@
 			}
 		},
 		{
-			"label": "Build firefox", // Name of task
+			"label": "Build firefox",
 			"type": "shell",
-			"command": "pnpm dev:firefox", // Enter your command here
+			"command": "npm run dev:firefox",
 			"group": "none",
 			"presentation": {
 				"reveal": "always",
