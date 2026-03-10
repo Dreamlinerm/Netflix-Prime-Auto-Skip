@@ -3,6 +3,7 @@
 ## 1.1.92
 
 - fixed weird formatting of sliders
+- fix: language button
 
 ## 1.1.91
 
