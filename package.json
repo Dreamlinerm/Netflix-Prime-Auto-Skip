@@ -56,7 +56,7 @@
 		"@vitest/coverage-v8": "4.0.18",
 		"@vitest/ui": "^4.0.18",
 		"@vue/compiler-sfc": "^3.5.14",
-		"@vueuse/core": "^13.2.0",
+		"@vueuse/core": "^14.2.1",
 		"archiver": "^7.0.1",
 		"autoprefixer": "^10.4.21",
 		"chalk": "^5.4.1",
