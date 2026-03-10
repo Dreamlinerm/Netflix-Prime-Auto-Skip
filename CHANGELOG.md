@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.92
+
+- 
+
 ## 1.1.91
 
 - Disney: fixed skip intro, because of changed ui.

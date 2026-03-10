@@ -107,7 +107,7 @@
 		}
 	},
 	"engines": {
-		"npm": ">=18",
+		"node": ">=18",
 		"pnpm": ">=3"
 	},
 	"private": true,

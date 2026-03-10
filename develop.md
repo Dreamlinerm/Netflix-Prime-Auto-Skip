@@ -48,9 +48,9 @@ TMDB_TOKEN=...
 
 ### Author Commands
 
-- `pnpm transDeepL` translate .translation/deepl.EN.json and output them into the locales files directly
-- `pnpm hours` calculate the hours spent on the project
-- `pnpm copyDocsFtoC` copy the docs from the firefox folder to the chrome folder
+- `npm run transDeepL` translate .translation/deepl.EN.json and output them into the locales files directly
+- `npm run hours` calculate the hours spent on the project
+- `npm run copyDocsFtoC` copy the docs from the firefox folder to the chrome folder
 
 ## Development tools
 

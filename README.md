@@ -111,15 +111,6 @@ Features in other supported languages:
 
 <!-- description -->
 
-Supported Streaming Services:
-
-- Netflix
-- Prime Video
-- Disney+ (Hotstar, STAR+)
-- Crunchyroll
-- HBO Max
-- Paramount+
-
 ✨ Features
 
 You can customize which features are enabled in the Settings.
@@ -139,29 +130,26 @@ This extension enhances your streaming experience by automatically:
 Platform-Specific Features:
 
 - Netflix:
-
-  - Remembers and selects your last-used profile automatically
-  - Blocks the “Are you still watching?” inactivity warning
-  - Remove games from Netflix
+    - Remembers and selects your last-used profile automatically
+    - Blocks the “Are you still watching?” inactivity warning
+    - Remove games from Netflix
 
 - Amazon Prime Video:
-
-  - Skips self-promotional ads (for Prime Video productions)
-  - Filters out paid content (movies, series) from the home page
-  - Moves the category "Continue" to the top of the page
-  - Hide the Xray Quick View over a video
-  - Removes the blur effect when hovering over videos
+    - Skips self-promotional ads (for Prime Video productions)
+    - Filters out paid content (movies, series) from the home page
+    - Moves the category "Continue" to the top of the page
+    - Hide the Xray Quick View over a video
+    - Removes the blur effect when hovering over videos
 
 - Disney+ (Hotstar, STAR+):
-
-  - Skips self-promotional ads
-  - firefox: add feature disney arrow keys fast forward
+    - Skips self-promotional ads
+    - firefox: add feature disney arrow keys fast forward
 
 - Crunchyroll:
-  - Remembers and selects your last-used profile automatically
-  - Adds filters to the release calendar, so it is useable
-  - Video size expanded to entire window
-  - Disable the numpad controls
+    - Remembers and selects your last-used profile automatically
+    - Adds filters to the release calendar, so it is useable
+    - Video size expanded to entire window
+    - Disable the numpad controls
 
 Android Support in Desktop mode:
 
@@ -179,17 +167,15 @@ Broken Features:
 - Since I am a single developer, I may not be able to fix issues immediately. Please be patient and I will do my best to resolve them as soon as possible.
 
 ## ☔ Safe & Open Source
-
 This extension is open-source! Feel free to contribute or explore the code on [Github](https://github.com/Dreamlinerm/Netflix-Prime-Auto-Skip).
 
 ## 💕 Enjoying Streaming enhanced?
-
 If you'd like to support further development, you can buy me a [coffee](https://github.com/sponsors/Dreamlinerm).
 If you’re enjoying the enhanced streaming experience, please consider leaving a 5-star review!
 
 ## Disclaimer
-
 Netflix, Prime Video, Disney+ (Hotstar, STAR+), Crunchyroll and HBO max are trademarks and the author of this addon is not affiliated with these companies.
+
 
 <!-- descriptionEnd -->
 
@@ -251,35 +237,34 @@ Skip Credits and Watch Credits are mutally exclusive, but you can turn both of t
 
 ### Setup
 
-- `npm install -g pnpm` install pnpm. npm is also possible but pnpm is recommended
-- `pnpm install` install all required packages
-- `pnpm build` build firefox and chrome zip files for release.
+- `npm install` install all required packages
+- `npm run build` build firefox and chrome zip files for release.
 
 This extension is based on the template [vite-vue3-browser-extension-v3](https://github.com/mubaidr/vite-vue3-browser-extension-v3)
 
 ### Building with live reload
 
-- `pnpm dev` build both chrome and firefox files
-- `pnpm dev:chrome` build only chrome files
-- `pnpm dev:firefox` build only firefox files
+- `npm run dev` build both chrome and firefox files
+- `npm run dev:chrome` build only chrome files
+- `npm run dev:firefox` build only firefox files
 
 ### Open in Browser with live reload
 
-- `pnpm web-ext` Open in firefox.
-- `pnpm chrome` Open in chrome.
-- `pnpm firefox` Open in firefox with permanent firefox profile
-- `pnpm start-android` start on firefox android
+- `npm run web-ext` Open in firefox.
+- `npm run chrome` Open in chrome.
+- `npm run firefox` Open in firefox with permanent firefox profile
+- `npm run start-android` start on firefox android
 
 ### Running unit tests
 
-- `pnpm test` run all tests with live reload
-- `pnpm test:coverage` run coverage report
+- `npm run test` run all tests with live reload
+- `npm run test:coverage` run coverage report
 
 ### Formatting and Linting Commands
 
-- `pnpm format` run prettier on all files
-- `pnpm lint` run esLint
-- `pnpm lint:manifest` web-ext lint manifest files
+- `npm run format` run prettier on all files
+- `npm run lint` run esLint
+- `npm run lint:manifest` web-ext lint manifest files
 
 Further documentation is [here](develop.md)
 
