@@ -1,7 +1,7 @@
 Command to build scripts
 
 ```bash
-pnpm tstv
+npm run tstv
 ```
 TV:
 | Feature          | Prime Video | Disney+ (Hotstar, STAR+) |
