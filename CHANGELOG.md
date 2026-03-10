@@ -2,7 +2,7 @@
 
 ## 1.1.92
 
-- 
+- fixed weird formatting of sliders
 
 ## 1.1.91
 

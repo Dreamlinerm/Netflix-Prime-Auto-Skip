@@ -21,18 +21,18 @@ const LocaleTranslation = {
 </script>
 
 <template>
-	<div>
-		<div class="dropdown dropdown-end">
+		<div class="dropdown dropdown-end p-0">
 			<div
 				tabindex="0"
 				role="button"
-				class="flex gap-1"
+				class="flex gap-1 py-1 px-2"
 			>
+			<div>
 				<i-ph-globe />
-				<!-- {{ currentLocale }} -->
+			</div>
 			</div>
 			<ul
-				tabindex="0"
+				tabindex="-1"
 				class="dropdown-content menu bg-base-100 rounded-box z-[1] shadow-lg -ml-4 mt-2"
 			>
 				<li
@@ -48,5 +48,4 @@ const LocaleTranslation = {
 				</li>
 			</ul>
 		</div>
-	</div>
 </template>
