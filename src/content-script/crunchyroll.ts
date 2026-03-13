@@ -37,9 +37,10 @@ async function startCrunchyroll() {
 // Crunchyroll functions
 
 function showAllElements() {
-	const list = document.querySelectorAll("article")
+	const list = document.querySelectorAll("li article.release.js-release")
 	list.forEach((element) => {
 		if (!element.parentElement) return
+		element.parentElement.classList.remove("removed")
 		element.parentElement.style.display = "block"
 	})
 }
@@ -77,9 +78,13 @@ type show = {
 }
 function filterFunctions() {
 	const lastIndexByTitle = new Map<string, Array<show>>()
-	const list = document.querySelectorAll("article")
+	const list = document.querySelectorAll("li article.release.js-release")
 	list.forEach((element, index) => {
 		if (!element.parentElement) return
+		if (!element?.checkVisibility()) {
+			element.parentElement.classList.add("removed")
+			return
+		}
 		const titleElement = element?.querySelector("cite[itemprop='name']")
 		const title = getTitle(titleElement)
 		if (titleElement?.textContent) titleElement.textContent = title.replace(/Season \d*/, "")
@@ -88,10 +93,13 @@ function filterFunctions() {
 		const episodeNumber = Number.parseInt(
 			element.querySelector("a.available-episode-link")?.textContent?.match(/Episodes? (\d+)/)?.[1] ?? "-1",
 		)
-		if (settings.value.General.filterDub && titleContainsDub(title)) element.parentElement.style.display = "none"
-		else if (settings.value.General.filterQueued && queuedFlag && !premiereFlag)
+		if (settings.value.General.filterDub && titleContainsDub(title)) {
 			element.parentElement.style.display = "none"
-		else if (settings.value.General.filterDuplicates) {
+			element.parentElement.classList.add("removed")
+		} else if (settings.value.General.filterQueued && queuedFlag && !premiereFlag) {
+			element.parentElement.style.display = "none"
+			element.parentElement.classList.add("removed")
+		} else if (settings.value.General.filterDuplicates) {
 			if (lastIndexByTitle.has(title)) {
 				lastIndexByTitle.get(title)?.push({ index, episode: episodeNumber })
 			} else {
@@ -107,6 +115,7 @@ function filterFunctions() {
 				const element = list[show.index]
 				if (!element.parentElement) return
 				element.parentElement.style.display = "none"
+				element.parentElement.classList.add("removed")
 			})
 		}
 	})
@@ -127,7 +136,6 @@ function createFilterElement(
 	input.id = filterType
 	input.onclick = function () {
 		settings.value.General[filterType] = input.checked
-		console.log("input.checked", input.checked)
 		showAllElements()
 		filterFunctions()
 	}
@@ -165,7 +173,7 @@ function addShowsToList(position: HTMLElement, list: CrunchyList) {
 
 		const div1 = document.createElement("div")
 		const div2 = document.createElement("div")
-		div2.className = "queue-flag queued enhanced"
+		div2.className = "queue-flag queued"
 
 		const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
 		svg.setAttribute("viewBox", "0 0 48 48")
@@ -218,15 +226,13 @@ function clickOnCurrentDay() {
 }
 function createLocalList() {
 	const localList: CrunchyList = []
-	document.querySelectorAll("div.queue-flag.queued:not(.enhanced)").forEach((element) => {
-		const li = element.closest("li")
-		const h1 = element.nextElementSibling?.firstChild?.nextSibling as HTMLAnchorElement
+	document.querySelectorAll("ol.releases li:not(.removed) article.release.js-release").forEach((element) => {
+		const h1 = element.querySelector("h1.season-name a") as HTMLAnchorElement
 		const name = h1?.firstChild?.nextSibling?.textContent
-		if (li?.checkVisibility()) {
-			const href = h1?.href
-			const time = element.parentElement?.parentElement?.firstElementChild?.getAttribute("datetime") ?? ""
-			localList.push({ href, name, time })
-		}
+		const href = h1?.href
+		const time = element.firstElementChild?.getAttribute("datetime") ?? ""
+		console.log(element, h1, { href, name, time })
+		localList.push({ href, name, time })
 	})
 	return localList
 }
@@ -267,7 +273,7 @@ function addSavedCrunchyList() {
 	const isCurrentWeek = clickOnCurrentDay()
 	const oldList = localList.length > 0 ? filterOldList(isCurrentWeek, localList) : toRaw(crunchyList.value)
 	crunchyList.value = localList.concat(oldList)
-	if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
+	if (isCurrentWeek) {
 		// now add the old list to the website list
 		document.querySelectorAll("section.calendar-day").forEach((element) => {
 			const datetime = element.querySelector("time")?.getAttribute("datetime") ?? ""
