@@ -74,7 +74,7 @@ function titleContainsDub(title: string) {
 const getTitle = (el: Element | null) => el?.textContent?.trim() ?? ""
 type show = {
 	index: number
-	episode?: number
+	episode: number
 }
 function filterFunctions() {
 	const lastIndexByTitle = new Map<string, Array<show>>()
@@ -107,10 +107,14 @@ function filterFunctions() {
 			}
 		}
 	})
-	// if there are multiple shows with the same title, only show the one with the highest episode number or the last index
+	// if there are multiple shows with the same title, only show the one with the highest episode number or the first index
 	lastIndexByTitle.forEach((shows) => {
 		if (shows.length > 1) {
-			shows.sort((a, b) => (b.episode ?? -1) - (a.episode ?? -1))
+			shows.sort((a, b) => {
+				const episodeDiff = b.episode - a.episode
+				if (episodeDiff !== 0) return episodeDiff
+				return a.index - b.index
+			})
 			shows.slice(1).forEach((show) => {
 				const element = list[show.index]
 				if (!element.parentElement) return
@@ -231,7 +235,6 @@ function createLocalList() {
 		const name = h1?.firstChild?.nextSibling?.textContent
 		const href = h1?.href
 		const time = element.firstElementChild?.getAttribute("datetime") ?? ""
-		console.log(element, h1, { href, name, time })
 		localList.push({ href, name, time })
 	})
 	return localList
