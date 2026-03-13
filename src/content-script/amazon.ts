@@ -447,6 +447,7 @@ async function Amazon_doubleClick() {
 		document.ondblclick = null
 	}
 }
+let timer: NodeJS.Timeout
 async function Amazon_improveUI() {
 	const style = document.createElement("style")
 	// ui opacity
@@ -473,5 +474,16 @@ async function Amazon_improveUI() {
 		}
 	`
 	document.head.appendChild(style)
+
+	// no more hover animation on scroll, because it is annoying.
+	document.addEventListener("scroll", () => {
+		document.body.style.pointerEvents = "none"
+	})
+	document.addEventListener("scrollend", () => {
+		clearTimeout(timer)
+		timer = setTimeout(() => {
+			document.body.style.pointerEvents = "auto"
+		}, 400)
+	})
 }
 // #endregion
