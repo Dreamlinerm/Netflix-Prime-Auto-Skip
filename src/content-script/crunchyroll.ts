@@ -35,7 +35,10 @@ async function startCrunchyroll() {
 }
 // #region Crunchyroll
 // Crunchyroll functions
-
+function setReleaseRemoved(element: HTMLElement) {
+	element.classList.add("removed")
+	element.style.display = "none"
+}
 function showAllElements() {
 	const list = document.querySelectorAll("li article.release.js-release")
 	list.forEach((element) => {
@@ -77,7 +80,7 @@ type show = {
 	episode: number
 }
 function filterFunctions() {
-	const lastIndexByTitle = new Map<string, Array<show>>()
+	const showsByTitle = new Map<string, Array<show>>()
 	const list = document.querySelectorAll("li article.release.js-release")
 	list.forEach((element, index) => {
 		if (!element.parentElement) return
@@ -94,21 +97,19 @@ function filterFunctions() {
 			element.querySelector("a.available-episode-link")?.textContent?.match(/Episodes? (\d+)/)?.[1] ?? "-1",
 		)
 		if (settings.value.General.filterDub && titleContainsDub(title)) {
-			element.parentElement.style.display = "none"
-			element.parentElement.classList.add("removed")
+			setReleaseRemoved(element.parentElement)
 		} else if (settings.value.General.filterQueued && queuedFlag && !premiereFlag) {
-			element.parentElement.style.display = "none"
-			element.parentElement.classList.add("removed")
+			setReleaseRemoved(element.parentElement)
 		} else if (settings.value.General.filterDuplicates) {
-			if (lastIndexByTitle.has(title)) {
-				lastIndexByTitle.get(title)?.push({ index, episode: episodeNumber })
+			if (showsByTitle.has(title)) {
+				showsByTitle.get(title)?.push({ index, episode: episodeNumber })
 			} else {
-				lastIndexByTitle.set(title, [{ index, episode: episodeNumber }])
+				showsByTitle.set(title, [{ index, episode: episodeNumber }])
 			}
 		}
 	})
 	// if there are multiple shows with the same title, only show the one with the highest episode number or the first index
-	lastIndexByTitle.forEach((shows) => {
+	showsByTitle.forEach((shows) => {
 		if (shows.length > 1) {
 			shows.sort((a, b) => {
 				const episodeDiff = b.episode - a.episode
@@ -117,9 +118,7 @@ function filterFunctions() {
 			})
 			shows.slice(1).forEach((show) => {
 				const element = list[show.index]
-				if (!element.parentElement) return
-				element.parentElement.style.display = "none"
-				element.parentElement.classList.add("removed")
+				if (element.parentElement) setReleaseRemoved(element.parentElement)
 			})
 		}
 	})
