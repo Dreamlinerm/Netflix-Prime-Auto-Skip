@@ -87,6 +87,7 @@ export type settingsType = {
 		sliderMax: number
 		filterDub: boolean
 		filterQueued: boolean
+		filterDuplicates: boolean
 		GCdate: string
 		Crunchyroll_skipTimeout: number
 		RatingThresholds: Array<{ color: string; value: number }>
@@ -190,6 +191,7 @@ export const defaultSettings = {
 		sliderMax: 20,
 		filterDub: true,
 		filterQueued: true,
+		filterDuplicates: true,
 		GCdate: "2024-01-01",
 		Crunchyroll_skipTimeout: 0,
 		RatingThresholds: [

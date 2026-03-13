@@ -35,20 +35,17 @@ async function startCrunchyroll() {
 }
 // #region Crunchyroll
 // Crunchyroll functions
-
-type displayType = "block" | "none"
-function filterQueued(display: displayType) {
-	document.querySelectorAll("div.queue-flag:not(.queued)").forEach((element) => {
-		// if not on premiere
-		if (element?.parentElement?.parentElement?.parentElement) {
-			element.parentElement.parentElement.parentElement.style.display = element.parentElement.parentElement
-				.querySelector(".premiere-flag")
-				?.checkVisibility()
-				? "block"
-				: display
-		}
+function setReleaseRemoved(element: HTMLElement) {
+	element.classList.add("removed")
+	element.style.display = "none"
+}
+function showAllElements() {
+	const list = document.querySelectorAll("li article.release.js-release")
+	list.forEach((element) => {
+		if (!element.parentElement) return
+		element.parentElement.classList.remove("removed")
+		element.parentElement.style.display = "block"
 	})
-	if (display == "block" && settings.value.General.filterDub) filterDub("none")
 }
 
 const langs = [
@@ -68,52 +65,69 @@ const langs = [
 	"Castilian",
 	"Russian",
 ]
-// (1123-Current)
-// (Eps 38+)
-function filterDub(display: displayType) {
-	// check if dub is included in titles
-	let filterCount = 0
-	// filter all titles that contain "Dub" or "Audio"
-	const list = document.querySelectorAll("cite[itemprop='name']")
-	list.forEach((element) => {
-		// Filter Season 1 from title
-		element.textContent = element?.textContent.replace(/Season \d*/, "")
-		if (
-			(element?.textContent?.includes("Dub") ||
-				/[^(]*\(\D*\)[^(]*/g.test(element?.textContent) ||
-				// Array.from(langs).some((lang) => element?.textContent?.includes(lang)) ||
-				element?.textContent?.includes("Audio")) &&
-			element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement
-		) {
-			filterCount++
-			element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
+function titleContainsDub(title: string) {
+	return (
+		title?.includes("Dub") ||
+		/[^(]*\(\D*\)[^(]*/g.test(title) ||
+		// Array.from(langs).some((lang) => element?.textContent?.includes(lang)) ||
+		title?.includes("Audio")
+	)
+}
+
+const getTitle = (el: Element | null) => el?.textContent?.trim() ?? ""
+type show = {
+	index: number
+	episode: number
+}
+function filterFunctions() {
+	const showsByTitle = new Map<string, Array<show>>()
+	const list = document.querySelectorAll("li article.release.js-release")
+	list.forEach((element, index) => {
+		if (!element.parentElement) return
+		if (!element?.checkVisibility()) {
+			element.parentElement.classList.add("removed")
+			return
+		}
+		const titleElement = element?.querySelector("cite[itemprop='name']")
+		const title = getTitle(titleElement)
+		if (titleElement?.textContent) titleElement.textContent = title.replace(/Season \d*/, "")
+		const queuedFlag = element.querySelector("div.queue-flag:not(.queued)")
+		const premiereFlag = element.querySelector("div.premiere-flag")
+		const episodeNumber = Number.parseInt(
+			element.querySelector("a.available-episode-link")?.textContent?.match(/Episodes? (\d+)/)?.[1] ?? "-1",
+		)
+		if (settings.value.General.filterDub && titleContainsDub(title)) {
+			setReleaseRemoved(element.parentElement)
+		} else if (settings.value.General.filterQueued && queuedFlag && !premiereFlag) {
+			setReleaseRemoved(element.parentElement)
+		} else if (settings.value.General.filterDuplicates) {
+			if (showsByTitle.has(title)) {
+				showsByTitle.get(title)?.push({ index, episode: episodeNumber })
+			} else {
+				showsByTitle.set(title, [{ index, episode: episodeNumber }])
+			}
 		}
 	})
-	// url = https://www.crunchyroll.com/de/simulcastcalendar
-	if (filterCount == 0 && /crunchyroll.com\/..\/simulcastcalendar/.test(url)) {
-		// filter all titles which are duplicated
-		const daysList = document.querySelectorAll("li.day")
-		daysList.forEach((element) => {
-			const showList = element.querySelectorAll("cite[itemprop='name']")
-			const first = Array.from(showList)
-			// filter out everything except the first element by title
-			const duplicates = first.filter(
-				(element, index) => index != first.findIndex((el) => element.textContent.includes(el.textContent)),
-			)
-			duplicates.forEach((element) => {
-				if (element?.parentElement?.parentElement?.parentElement?.parentElement?.parentElement)
-					element.parentElement.parentElement.parentElement.parentElement.parentElement.style.display = display
+	// if there are multiple shows with the same title, only show the one with the highest episode number or the first index
+	showsByTitle.forEach((shows) => {
+		if (shows.length > 1) {
+			shows.sort((a, b) => {
+				const episodeDiff = b.episode - a.episode
+				if (episodeDiff !== 0) return episodeDiff
+				return a.index - b.index
 			})
-		})
-	}
-	if (display == "block" && settings.value.General.filterQueued) filterQueued("none")
+			shows.slice(1).forEach((show) => {
+				const element = list[show.index]
+				if (element.parentElement) setReleaseRemoved(element.parentElement)
+			})
+		}
+	})
 }
-type FilterFunction = (display: displayType) => void
+
 function createFilterElement(
-	filterType: "filterQueued" | "filterDub",
+	filterType: "filterQueued" | "filterDub" | "filterDuplicates",
 	filterText: string,
 	settingsValue: boolean,
-	filterFunction: FilterFunction,
 ) {
 	const label = document.createElement("label")
 	const span = document.createElement("span")
@@ -125,9 +139,8 @@ function createFilterElement(
 	input.id = filterType
 	input.onclick = function () {
 		settings.value.General[filterType] = input.checked
-		console.log("input.checked", input.checked)
-		filterFunction(input.checked ? "none" : "block")
-		//setStorage()
+		showAllElements()
+		filterFunctions()
 	}
 	const p = document.createElement("p")
 	p.style.width = "100px"
@@ -142,10 +155,13 @@ function addButtons() {
 	if (!toggleForm?.firstElementChild) return
 	toggleForm.style.display = "flex"
 	toggleForm.firstElementChild.appendChild(
-		createFilterElement("filterQueued", "Show Playlist only", settings.value.General.filterQueued, filterQueued),
+		createFilterElement("filterQueued", "Show Playlist only", settings.value.General.filterQueued),
 	)
 	toggleForm.firstElementChild.appendChild(
-		createFilterElement("filterDub", "Filter Dub", settings.value.General.filterDub, filterDub),
+		createFilterElement("filterDub", "Filter Dub", settings.value.General.filterDub),
+	)
+	toggleForm.firstElementChild.appendChild(
+		createFilterElement("filterDuplicates", "Filter Duplicates", settings.value.General.filterDuplicates),
 	)
 }
 // start of add CrunchyList to Crunchyroll
@@ -160,7 +176,7 @@ function addShowsToList(position: HTMLElement, list: CrunchyList) {
 
 		const div1 = document.createElement("div")
 		const div2 = document.createElement("div")
-		div2.className = "queue-flag queued enhanced"
+		div2.className = "queue-flag queued"
 
 		const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
 		svg.setAttribute("viewBox", "0 0 48 48")
@@ -199,16 +215,12 @@ function addShowsToList(position: HTMLElement, list: CrunchyList) {
 	})
 }
 function clickOnCurrentDay() {
-	const days = document.querySelectorAll(".specific-date [datetime]")
-	// @ts-expect-error days is a NodeList
+	const days = document.querySelectorAll(".specific-date [datetime]") as NodeListOf<HTMLTimeElement>
 	for (const day of days) {
-		const dateOnPage = new Date(day.getAttribute("datetime"))
+		const dateOnPage = new Date(day?.getAttribute("datetime") ?? "")
 		// if the day of the week is the same as today click on it, like if its Monday click on Monday
 		if (date.getDay() == dateOnPage.getDay()) {
-			// need timeout because the page is not fully loaded
-			setTimeout(() => {
-				day.click()
-			}, 1000)
+			day.closest("li.day")?.classList.add("active")
 			// isCurrentWeek
 			return date.toLocaleDateString() == dateOnPage.toLocaleDateString()
 		}
@@ -217,15 +229,12 @@ function clickOnCurrentDay() {
 }
 function createLocalList() {
 	const localList: CrunchyList = []
-	document.querySelectorAll("div.queue-flag.queued:not(.enhanced)").forEach((element) => {
-		const li = element.closest("li")
-		const h1 = element.nextElementSibling?.firstChild?.nextSibling as HTMLAnchorElement
+	document.querySelectorAll("ol.releases li:not(.removed) article.release.js-release").forEach((element) => {
+		const h1 = element.querySelector("h1.season-name a") as HTMLAnchorElement
 		const name = h1?.firstChild?.nextSibling?.textContent
-		if (li?.checkVisibility()) {
-			const href = h1?.href
-			const time = element.parentElement?.parentElement?.firstElementChild?.getAttribute("datetime") ?? ""
-			localList.push({ href, name, time })
-		}
+		const href = h1?.href
+		const time = element.firstElementChild?.getAttribute("datetime") ?? ""
+		localList.push({ href, name, time })
 	})
 	return localList
 }
@@ -266,7 +275,7 @@ function addSavedCrunchyList() {
 	const isCurrentWeek = clickOnCurrentDay()
 	const oldList = localList.length > 0 ? filterOldList(isCurrentWeek, localList) : toRaw(crunchyList.value)
 	crunchyList.value = localList.concat(oldList)
-	if (isCurrentWeek && !document.querySelector("div.queue-flag.queued.enhanced")) {
+	if (isCurrentWeek) {
 		// now add the old list to the website list
 		document.querySelectorAll("section.calendar-day").forEach((element) => {
 			const datetime = element.querySelector("time")?.getAttribute("datetime") ?? ""
@@ -283,9 +292,7 @@ function addSavedCrunchyList() {
 }
 async function Crunchyroll_ReleaseCalendar() {
 	if (url.includes("simulcastcalendar")) {
-		// Show playlist only
-		filterQueued(settings.value.General.filterQueued ? "none" : "block")
-		filterDub(settings.value.General.filterDub ? "none" : "block")
+		filterFunctions()
 		if (!document.querySelector("#filterQueued")) addButtons()
 		// add saved CrunchyList and click on current day
 		addSavedCrunchyList()
