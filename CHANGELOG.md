@@ -3,6 +3,7 @@
 ## 1.1.92
 
 - Amazon: removed hover on scroll, since it is annoying
+- Crunchyroll: fixed release calendar duplicate shows.
 - fixed weird formatting of sliders
 - fix: language button
 
