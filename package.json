@@ -74,7 +74,6 @@
 		"typescript-eslint": "^8.57.0",
 		"unplugin-auto-import": "^21.0.0",
 		"unplugin-icons": "^23.0.1",
-		"unplugin-turbo-console": "^2.3.0",
 		"unplugin-vue-components": "^31.0.0",
 		"vite": "^7.0.8",
 		"vite-plugin-html": "^3.2.2",

@@ -12,7 +12,6 @@ import { configDefaults } from "vitest/config"
 // @ts-expect-error commonjs module
 import { defineViteConfig as define } from "./define.config.mjs"
 import vueDevTools from "vite-plugin-vue-devtools"
-import TurboConsole from "unplugin-turbo-console/vite"
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite"
 import { dirname, relative, resolve } from "node:path"
 import "dotenv/config"
@@ -67,8 +66,6 @@ export default defineConfig({
 		}),
 
 		vue(),
-
-		IS_DEV ? TurboConsole() : undefined,
 		tailwindcss(),
 
 		// https://github.com/unplugin/unplugin-auto-import
