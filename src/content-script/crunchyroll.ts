@@ -52,7 +52,6 @@ const langs = [
 	"English",
 	"Deutsch",
 	"Français",
-	"English",
 	"Japanese",
 	"French",
 	"German",
@@ -64,14 +63,35 @@ const langs = [
 	"Italian",
 	"Castilian",
 	"Russian",
+	"España",
+	"Italiano",
+	"Brasil",
+	"普通话",
+	"Русский",
 ]
+const filterNoDubs = "all"
+const filterAllDubs = "none"
+const dubLanguageRegex = /\(([^()\d]+?)(?:\s+Dub)?\)(?!.*\([^()]*\))/
 function titleContainsDub(title: string) {
-	return (
+	const isDub =
 		title?.includes("Dub") ||
 		/[^(]*\(\D*\)[^(]*/g.test(title) ||
 		// Array.from(langs).some((lang) => element?.textContent?.includes(lang)) ||
 		title?.includes("Audio")
-	)
+	if (isDub) {
+		const dubLanguage = dubLanguageRegex.exec(title)?.[1]?.trim()
+		if (dubLanguage && !langs.includes(dubLanguage)) {
+			langs.push(dubLanguage)
+		}
+	}
+	return isDub
+}
+
+function titleContainsAllowedDub(title: string) {
+	const selectedDubLanguage = settings.value.Crunchyroll.dubLanguage
+	if (selectedDubLanguage === filterNoDubs) return true
+	else if (selectedDubLanguage === filterAllDubs) return false
+	return title?.includes(selectedDubLanguage)
 }
 
 const getTitle = (el: Element | null) => el?.textContent?.trim() ?? ""
@@ -96,11 +116,11 @@ function filterFunctions() {
 		const episodeNumber = Number.parseInt(
 			element.querySelector("a.available-episode-link")?.textContent?.match(/Episodes? (\d+)/)?.[1] ?? "-1",
 		)
-		if (settings.value.General.filterDub && titleContainsDub(title)) {
+		if (titleContainsDub(title) && !titleContainsAllowedDub(title)) {
 			setReleaseRemoved(element.parentElement)
-		} else if (settings.value.General.filterQueued && queuedFlag && !premiereFlag) {
+		} else if (settings.value.Crunchyroll.filterQueued && queuedFlag && !premiereFlag) {
 			setReleaseRemoved(element.parentElement)
-		} else if (settings.value.General.filterDuplicates) {
+		} else if (settings.value.Crunchyroll.filterDuplicates) {
 			if (showsByTitle.has(title)) {
 				showsByTitle.get(title)?.push({ index, episode: episodeNumber })
 			} else {
@@ -125,7 +145,7 @@ function filterFunctions() {
 }
 
 function createFilterElement(
-	filterType: "filterQueued" | "filterDub" | "filterDuplicates",
+	filterType: "filterQueued" | "filterDuplicates",
 	filterText: string,
 	settingsValue: boolean,
 ) {
@@ -138,7 +158,7 @@ function createFilterElement(
 	input.checked = settingsValue
 	input.id = filterType
 	input.onclick = function () {
-		settings.value.General[filterType] = input.checked
+		settings.value.Crunchyroll[filterType] = input.checked
 		showAllElements()
 		filterFunctions()
 	}
@@ -150,18 +170,58 @@ function createFilterElement(
 	span.appendChild(p)
 	return label
 }
+
+function createDubLanguageSelectElement() {
+	const label = document.createElement("label")
+	const span = document.createElement("span")
+	span.style.display = "flex"
+	span.style.alignItems = "start"
+	span.style.flexDirection = "column"
+
+	const select = document.createElement("select")
+	select.id = "filterDubLanguage"
+	const selectedDubLanguage = settings.value.Crunchyroll.dubLanguage || filterAllDubs
+
+	const options = [filterAllDubs, filterNoDubs, ...langs]
+	options.forEach((lang) => {
+		const option = document.createElement("option")
+		option.value = lang
+		option.textContent = lang
+		select.appendChild(option)
+	})
+
+	select.value = selectedDubLanguage
+
+	if (!options.includes(selectedDubLanguage)) {
+		select.value = filterAllDubs
+		settings.value.Crunchyroll.dubLanguage = filterAllDubs
+	}
+
+	select.onchange = function () {
+		settings.value.Crunchyroll.dubLanguage = select.value
+		showAllElements()
+		filterFunctions()
+	}
+
+	const p = document.createElement("p")
+	p.textContent = "Show these dubs:"
+
+	label.appendChild(span)
+	span.appendChild(p)
+	span.appendChild(select)
+	return label
+}
+
 function addButtons() {
 	const toggleForm = document.querySelector("#filter_toggle_form") as HTMLElement
 	if (!toggleForm?.firstElementChild) return
 	toggleForm.style.display = "flex"
+	toggleForm.firstElementChild.appendChild(createDubLanguageSelectElement())
 	toggleForm.firstElementChild.appendChild(
-		createFilterElement("filterQueued", "Show Playlist only", settings.value.General.filterQueued),
+		createFilterElement("filterQueued", "Show Playlist only", settings.value.Crunchyroll.filterQueued),
 	)
 	toggleForm.firstElementChild.appendChild(
-		createFilterElement("filterDub", "Filter Dub", settings.value.General.filterDub),
-	)
-	toggleForm.firstElementChild.appendChild(
-		createFilterElement("filterDuplicates", "Filter Duplicates", settings.value.General.filterDuplicates),
+		createFilterElement("filterDuplicates", "Filter Duplicates", settings.value.Crunchyroll.filterDuplicates),
 	)
 }
 // start of add CrunchyList to Crunchyroll

@@ -44,6 +44,9 @@ export type settingsType = {
 		profile: boolean
 		bigPlayer: boolean
 		disableNumpad: boolean
+		filterQueued: boolean
+		dubLanguage: string
+		filterDuplicates: boolean
 	}
 	HBO: {
 		skipIntro: boolean
@@ -85,9 +88,6 @@ export type settingsType = {
 		sliderSteps: number
 		sliderMin: number
 		sliderMax: number
-		filterDub: boolean
-		filterQueued: boolean
-		filterDuplicates: boolean
 		GCdate: string
 		Crunchyroll_skipTimeout: number
 		RatingThresholds: Array<{ color: string; value: number }>
@@ -144,10 +144,12 @@ export const defaultSettings = {
 		skipAfterCredits: false,
 		speedSlider: true,
 		releaseCalendar: true,
-		dubLanguage: null,
 		profile: true,
 		bigPlayer: true,
 		disableNumpad: true,
+		filterQueued: true,
+		dubLanguage: "none",
+		filterDuplicates: true,
 	},
 	HBO: {
 		skipIntro: true,
@@ -189,9 +191,6 @@ export const defaultSettings = {
 		sliderSteps: 1,
 		sliderMin: 5,
 		sliderMax: 20,
-		filterDub: true,
-		filterQueued: true,
-		filterDuplicates: true,
 		GCdate: "2024-01-01",
 		Crunchyroll_skipTimeout: 0,
 		RatingThresholds: [

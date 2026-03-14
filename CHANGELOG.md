@@ -3,6 +3,7 @@
 ## 1.1.92
 
 - Amazon: removed hover on scroll, since it is annoying
+- Crunchyroll: added option to not filter specific dub languages, instead of all or none.
 - Crunchyroll: fixed release calendar duplicate shows.
 - fixed weird formatting of sliders
 - fix: language button
