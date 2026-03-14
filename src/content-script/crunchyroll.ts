@@ -99,6 +99,7 @@ type show = {
 	index: number
 	episode: number
 }
+export const getEpisodeRegex = /(\d+)(?!.*\d)/
 function filterFunctions() {
 	const showsByTitle = new Map<string, Array<show>>()
 	const list = document.querySelectorAll("li article.release.js-release")
@@ -114,7 +115,7 @@ function filterFunctions() {
 		const queuedFlag = element.querySelector("div.queue-flag:not(.queued)")
 		const premiereFlag = element.querySelector("div.premiere-flag")
 		const episodeNumber = Number.parseInt(
-			element.querySelector("a.available-episode-link")?.textContent?.match(/Episodes? (\d+)/)?.[1] ?? "-1",
+			element.querySelector("a.available-episode-link")?.textContent?.match(getEpisodeRegex)?.[1] ?? "-1",
 		)
 		if (titleContainsDub(title) && !titleContainsAllowedDub(title)) {
 			setReleaseRemoved(element.parentElement)
