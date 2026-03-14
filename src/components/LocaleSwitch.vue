@@ -21,7 +21,7 @@ const LocaleTranslation = {
 </script>
 
 <template>
-	<div class="dropdown dropdown-end p-0">
+	<div class="dropdown dropdown-end p-0 cursor-pointer">
 		<div
 			tabindex="0"
 			role="button"

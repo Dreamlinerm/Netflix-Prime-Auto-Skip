@@ -450,11 +450,6 @@ async function Amazon_doubleClick() {
 let timer: NodeJS.Timeout
 async function Amazon_improveUI() {
 	const style = document.createElement("style")
-	// ui opacity
-	// .fpqiyer{
-	// 		opacity: 0.6 !important;
-	// 	}
-	// .f10twsrv
 
 	// button opacity
 	// background blur
