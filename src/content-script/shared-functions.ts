@@ -21,7 +21,7 @@ let isParamount = /paramount/i.test(hostname) || /paramountplus/i.test(hostname)
 const htmlLang = document.documentElement.lang
 
 const AmazonVideoClass = ".dv-player-fullscreen video"
-let DBCache: DBCache = {}
+let DBCache: DBCacheType = {}
 
 export enum Platforms {
 	Netflix = "netflix",
@@ -70,34 +70,34 @@ type MovieInfo = {
 	date: string
 	db: string
 }
-type DBCache = {
+type DBCacheType = {
 	[title: string]: MovieInfo
 }
 async function getDBCache() {
-	chrome.storage.local.get("DBCache", function (result) {
-		DBCache = result?.DBCache
-		if (typeof DBCache !== "object") {
-			console.log("DBCache not found, creating new one", DBCache)
-			try {
-				chrome.storage.local.set({ DBCache: {} })
-			} catch (error) {
-				console.log(error)
-			}
-			DBCache = {}
+	const result = await browser.storage.local.get("DBCache")
+	DBCache = result?.DBCache as DBCacheType
+	if (typeof DBCache !== "object") {
+		console.log("DBCache not found, creating new one", DBCache)
+		try {
+			await browser.storage.local.set({ DBCache: {} })
+		} catch (error) {
+			console.log(error)
 		}
-		if (isNetflix) {
-			if (settings.value.Netflix?.showRating || settings.value.Netflix?.hideTitles)
-				startShowRatingInterval(settings.value.Netflix?.showRating, settings.value.Netflix?.hideTitles)
-		} else if (isDisney || isHotstar) {
-			if (settings.value.Disney?.showRating || settings.value.Disney?.hideTitles)
-				startShowRatingInterval(settings.value.Disney?.showRating, settings.value.Disney?.hideTitles)
-		} else if (isPrimeVideo && settings.value.Amazon?.showRating) startShowRatingInterval()
-		else if (isHBO && settings.value.HBO?.showRating) startShowRatingInterval()
-		else if (isParamount && settings.value.Paramount?.showRating) startShowRatingInterval()
-		if (getDiffInDays(settings.value.General.GCdate, date) >= GCdiff) garbageCollection()
-	})
-	chrome.storage.local.onChanged.addListener(function (changes) {
-		if (changes?.DBCache) DBCache = changes.DBCache.newValue
+		DBCache = {}
+	}
+	if (isNetflix) {
+		if (settings.value.Netflix?.showRating || settings.value.Netflix?.hideTitles)
+			startShowRatingInterval(settings.value.Netflix?.showRating, settings.value.Netflix?.hideTitles)
+	} else if (isDisney || isHotstar) {
+		if (settings.value.Disney?.showRating || settings.value.Disney?.hideTitles)
+			startShowRatingInterval(settings.value.Disney?.showRating, settings.value.Disney?.hideTitles)
+	} else if (isPrimeVideo && settings.value.Amazon?.showRating) startShowRatingInterval()
+	else if (isHBO && settings.value.HBO?.showRating) startShowRatingInterval()
+	else if (isParamount && settings.value.Paramount?.showRating) startShowRatingInterval()
+	if (getDiffInDays(settings.value.General.GCdate, date) >= GCdiff) garbageCollection()
+
+	browser.storage.onChanged.addListener(function (changes, areaName) {
+		if (areaName === "local" && changes?.DBCache) DBCache = changes.DBCache.newValue as DBCacheType
 	})
 }
 // set DB Cache if cache size under 5MB
@@ -107,11 +107,11 @@ async function setDBCache() {
 	const megaBytes = kiloBytes / 1024
 	if (megaBytes < 5) {
 		console.log("updateDBCache size:", megaBytes.toFixed(4) + " MB")
-		chrome.storage.local.set({ DBCache })
+		await browser.storage.local.set({ DBCache })
 	} else {
 		console.log("DBCache cleared", megaBytes)
 		DBCache = {}
-		chrome.storage.local.set({ DBCache })
+		await browser.storage.local.set({ DBCache })
 	}
 }
 

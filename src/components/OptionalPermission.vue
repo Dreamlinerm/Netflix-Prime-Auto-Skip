@@ -1,24 +1,18 @@
 <script lang="ts" setup>
-const isFirefox = typeof browser !== "undefined"
-const optionalPermissions = ["tabs"]
+const optionalPermissions: string[] = ["tabs"]
 const unsetPermissions: Ref<string[]> = ref([])
 checkOptionalPermissions()
 async function checkOptionalPermissions() {
 	for (const permission of optionalPermissions) {
-		if (isFirefox) {
-			const result = await browser.permissions.contains({ permissions: [permission] })
-			if (!result) unsetPermissions.value.push(permission)
-		} else {
-			const result = await chrome.permissions.contains({ permissions: [permission] })
-			if (!result) unsetPermissions.value.push(permission)
-		}
+		const result = await browser.permissions.contains({ permissions: [permission] })
+		if (!result) unsetPermissions.value.push(permission)
 	}
 }
 
 async function requestUnsetPermissions() {
 	unsetPermissions.value.forEach(async (permission) => {
-		const requestPermission = await chrome.permissions.request({ permissions: [permission] })
-		unsetPermissions.value = unsetPermissions.value.filter((p) => p !== permission)
+		const result = await browser.permissions.request({ permissions: [permission] })
+		if (result) unsetPermissions.value = unsetPermissions.value.filter((p) => p !== permission)
 	})
 }
 </script>

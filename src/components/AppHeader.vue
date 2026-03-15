@@ -2,9 +2,9 @@
 const isFirefox = typeof browser !== "undefined"
 const githubUrl = __GITHUB_URL__
 function openSettings() {
-	chrome.tabs.create({
+	browser.tabs.create({
 		active: true,
-		url: chrome.runtime.getURL("src/ui/options-page/index.html#"),
+		url: browser.runtime.getURL("src/ui/options-page/index.html#"),
 	})
 }
 </script>

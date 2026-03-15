@@ -48,29 +48,27 @@ function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" 
 	// Blocking setting storage if it is updating from storage
 	let isUpdatingFromStorage = true
 	const defaultIsObject = isObject(defaultValue)
-	// Initialize storage with the value from chrome.storage
-	const promise = new Promise((resolve) => {
-		chrome.storage[storageType].get(key, async (result) => {
-			if (result?.[key] !== undefined) {
-				if (defaultIsObject && isObject(result[key])) {
-					data.value = merge ? mergeDeep(defaultValue, result[key]) : result[key]
-				} else if (checkType(defaultValue, result[key])) {
-					data.value = result[key]
-				}
+	// Initialize storage with the value from browser.storage
+	const promise = (async () => {
+		const result = await browser.storage[storageType].get(key)
+		if (result?.[key] !== undefined) {
+			if (defaultIsObject && isObject(result[key])) {
+				data.value = merge ? mergeDeep(defaultValue, result[key]) : result[key]
+			} else if (checkType(defaultValue, result[key])) {
+				data.value = result[key]
 			}
-			await nextTick()
-			isUpdatingFromStorage = false
-			resolve(true)
-		})
-	})
+		}
+		await nextTick()
+		isUpdatingFromStorage = false
+	})()
 
-	// Watch for changes in the storage and update chrome.storage
+	// Watch for changes in the storage and update browser.storage
 	watch(
 		data,
 		(newValue) => {
 			if (!isUpdatingFromStorage) {
 				if (checkType(defaultValue, newValue)) {
-					chrome.storage[storageType].set({ [key]: toRaw(newValue) })
+					void browser.storage[storageType].set({ [key]: toRaw(newValue) })
 				} else {
 					console.error("not updating " + key + ": type mismatch")
 				}
@@ -79,10 +77,10 @@ function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" 
 		{ deep: true, flush: "post" },
 	)
 	// Add the onChanged listener here
-	chrome.storage[storageType].onChanged.addListener(async function (changes) {
-		if (changes?.[key]) {
+	browser.storage.onChanged.addListener(async function (changes, areaName) {
+		if (areaName === storageType && changes?.[key]) {
 			isUpdatingFromStorage = true
-			const { oldValue, newValue } = changes[key]
+			const { newValue } = changes[key]
 			data.value = newValue
 			await nextTick()
 			isUpdatingFromStorage = false

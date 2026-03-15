@@ -7,8 +7,8 @@ const { settings } = storeToRefs(optionsStore)
 
 async function resetAddon() {
 	if (confirm(t("resetConfirm"))) {
-		await chrome.storage.local.clear()
-		await chrome.storage.sync.clear()
+		await browser.storage.local.clear()
+		await browser.storage.sync.clear()
 		// settings.value = defaultSettings
 		location.reload()
 	}

@@ -2,7 +2,7 @@
 const router = useRouter()
 // if on streaming page open settings for page
 const query = { active: true, currentWindow: true }
-function callback(tabs: chrome.tabs.Tab[]) {
+function callback(tabs: Array<{ url?: string }>) {
 	const currentUrl = tabs?.[0]?.url || ""
 	const isPrimeVideo = /.amazon.|.primevideo./i.test(currentUrl)
 	const isNetflix = /.netflix./i.test(currentUrl)
@@ -18,7 +18,7 @@ function callback(tabs: chrome.tabs.Tab[]) {
 const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent)
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
-chrome.tabs.query(query, callback)
+browser.tabs.query(query).then(callback)
 </script>
 
 <template>

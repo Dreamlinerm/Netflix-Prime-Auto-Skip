@@ -5,7 +5,7 @@ import { i18n } from "@/utils/i18n" // Adjust the import path according to your 
 export function useLocale() {
 	let defaultLocale = "en"
 	const localeKey = "user-locale"
-	chrome.storage.local.get(localeKey, async (result) => {
+	browser.storage.local.get(localeKey).then(async (result) => {
 		if (result?.[localeKey] == undefined) {
 			// browser lang
 			const lang = navigator.language.split("-")[0]
