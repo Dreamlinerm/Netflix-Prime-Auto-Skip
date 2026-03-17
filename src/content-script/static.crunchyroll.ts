@@ -11,7 +11,7 @@ async function logStartOfAddon() {
 async function startCrunchyroll() {
 	await promise
 	logStartOfAddon()
-	if (settings.value.Crunchyroll.disableNumpad) Crunchyroll_disableNumpad()
+	// if (settings.value.Crunchyroll.disableNumpad) Crunchyroll_disableNumpad()
 	if (settings.value.Video.doubleClick) startdoubleClick()
 	if (settings.value.Crunchyroll.speedSlider) Crunchyroll_SpeedKeyboard()
 	CrunchyrollObserver.observe(document, config)
@@ -99,7 +99,8 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 	if (!settings.value.Crunchyroll?.skipCredits && isOutro) return
 	// saves the audio language to settings
 	if (!reverseButtonClicked) {
-		const button = document.querySelector('[data-testid="skipIntroText"]') as HTMLElement
+		const button = document.querySelector('button[aria-label="Skip Recap"]') as HTMLElement
+		console.log("Crunchyroll_Intro_Outro", button, time, video.duration)
 		if (button && !skipped) {
 			skipped = true
 			setTimeout(function () {
