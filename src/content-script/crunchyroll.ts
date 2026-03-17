@@ -23,18 +23,104 @@ async function startCrunchyroll() {
 		const pickInterval = setInterval(function () {
 			Crunchyroll_AutoPickProfile()
 		}, 100)
-		setTimeout(function () {
-			if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle()
-		}, 1000)
 		// only click on profile on page load not when switching profiles
 		setTimeout(function () {
 			clearInterval(pickInterval)
 		}, 2000)
-		CrunchyrollObserver.observe(document, config)
 	}
+	setTimeout(function () {
+		if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle()
+	}, 1000)
+	CrunchyrollObserver.observe(document, config)
 }
 // #region Crunchyroll
 // Crunchyroll functions
+const CrunchyrollObserver = new MutationObserver(Crunchyroll)
+async function Crunchyroll() {
+	if (settings.value.Crunchyroll?.profile) Crunchyroll_profile()
+}
+async function Crunchyroll_profile() {
+	// save profile
+	const img = document.querySelector(".avatar-wrapper img") as HTMLImageElement
+	if (img && img.src !== settings.value.General.Crunchyroll_profilePicture) {
+		settings.value.General.Crunchyroll_profilePicture = img.src
+		//setStorage()
+		console.log("Profile switched to", img.src)
+	}
+}
+async function Crunchyroll_AutoPickProfile() {
+	// click on profile picture
+	if (document.querySelector(".profile-item-name")) {
+		document.querySelectorAll(".erc-profile-item img")?.forEach((element) => {
+			const img = element as HTMLImageElement
+			if (img.src === settings.value.General.Crunchyroll_profilePicture) {
+				img.click()
+				console.log("Profile automatically chosen:", img.src)
+				settings.value.Statistics.SegmentsSkipped++
+				sendMessage("increaseBadge", {}, "background")
+			}
+		})
+	}
+}
+async function Crunchyroll_bigPlayerStyle() {
+	const wrapper = await waitForElement(".video-player-wrapper")
+	if (wrapper) {
+		// show header on hover
+		const style = document.createElement("style")
+		const parentDiv = document.querySelector('[class^="app-layout__header"]')?.classList?.[0]
+		const styles = /*css*/ `
+      .video-player-wrapper{
+          max-Height: calc(100vw / 1.7777);
+          height: 100vh;
+      }
+			.${parentDiv} {
+					position: absolute;
+          top: 0;
+          width: 100%;
+          height: 3.75rem;
+          z-index: 999;
+			}
+      .erc-large-header {
+          position: absolute;
+          top: 0;
+          width: 100%;
+          height: 3.75rem;
+          z-index: 999;
+      }
+      .erc-large-header .header-content {
+          position: absolute;
+          top: -3.75rem;
+          transition: top 0.4s, top 0.4s;
+      }
+      .erc-large-header:hover .header-content {
+          top: 0;
+      }
+    `
+		style.appendChild(document.createTextNode(styles))
+		document.head.appendChild(style)
+	}
+}
+
+async function waitForElement(selector: string, timeout = 10000): Promise<Element | null> {
+	return new Promise((resolve) => {
+		const element = document.querySelector(selector)
+		if (element) return resolve(element)
+		const observer = new MutationObserver(() => {
+			const el = document.querySelector(selector)
+			if (el) {
+				observer.disconnect()
+				resolve(el)
+			}
+		})
+		observer.observe(document.body, { childList: true, subtree: true })
+		setTimeout(() => {
+			observer.disconnect()
+			resolve(null)
+		}, timeout)
+	})
+}
+
+// #region Release Calendar
 function setReleaseRemoved(element: HTMLElement) {
 	element.classList.add("removed")
 	element.style.display = "none"
@@ -359,89 +445,6 @@ async function Crunchyroll_ReleaseCalendar() {
 		addSavedCrunchyList()
 	}
 }
-const CrunchyrollObserver = new MutationObserver(Crunchyroll)
-async function Crunchyroll() {
-	if (settings.value.Crunchyroll?.profile) Crunchyroll_profile()
-}
-async function Crunchyroll_profile() {
-	// save profile
-	const img = document.querySelector(".avatar-wrapper img") as HTMLImageElement
-	if (img && img.src !== settings.value.General.Crunchyroll_profilePicture) {
-		settings.value.General.Crunchyroll_profilePicture = img.src
-		//setStorage()
-		console.log("Profile switched to", img.src)
-	}
-}
-async function Crunchyroll_AutoPickProfile() {
-	// click on profile picture
-	if (document.querySelector(".profile-item-name")) {
-		document.querySelectorAll(".erc-profile-item img")?.forEach((element) => {
-			const img = element as HTMLImageElement
-			if (img.src === settings.value.General.Crunchyroll_profilePicture) {
-				img.click()
-				console.log("Profile automatically chosen:", img.src)
-				settings.value.Statistics.SegmentsSkipped++
-				sendMessage("increaseBadge", {}, "background")
-			}
-		})
-	}
-}
-async function Crunchyroll_bigPlayerStyle() {
-	const wrapper = await waitForElement(".video-player-wrapper")
-	if (wrapper) {
-		// show header on hover
-		const style = document.createElement("style")
-		const parentDiv = document.querySelector('[class^="app-layout__header"]')?.classList?.[0]
-		const styles = /*css*/ `
-      .video-player-wrapper{
-          max-Height: calc(100vw / 1.7777);
-          height: 100vh;
-      }
-			.${parentDiv} {
-					position: absolute;
-          top: 0;
-          width: 100%;
-          height: 3.75rem;
-          z-index: 999;
-			}
-      .erc-large-header {
-          position: absolute;
-          top: 0;
-          width: 100%;
-          height: 3.75rem;
-          z-index: 999;
-      }
-      .erc-large-header .header-content {
-          position: absolute;
-          top: -3.75rem;
-          transition: top 0.4s, top 0.4s;
-      }
-      .erc-large-header:hover .header-content {
-          top: 0;
-      }
-    `
-		style.appendChild(document.createTextNode(styles))
-		document.head.appendChild(style)
-	}
-}
-
-async function waitForElement(selector: string, timeout = 10000): Promise<Element | null> {
-	return new Promise((resolve) => {
-		const element = document.querySelector(selector)
-		if (element) return resolve(element)
-		const observer = new MutationObserver(() => {
-			const el = document.querySelector(selector)
-			if (el) {
-				observer.disconnect()
-				resolve(el)
-			}
-		})
-		observer.observe(document.body, { childList: true, subtree: true })
-		setTimeout(() => {
-			observer.disconnect()
-			resolve(null)
-		}, timeout)
-	})
-}
+// #endregion
 // #endregion
 startCrunchyroll()
