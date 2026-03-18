@@ -147,7 +147,6 @@ async function Crunchyroll_scrollVolume(video: HTMLVideoElement) {
 
 function OnFullScreenChange() {
 	const video = document.querySelector("video") as HTMLVideoElement
-	//TODO: check if document.fullscreenElement is working before: window.fullScreen
 	if (document.fullscreenElement && video) {
 		video.play()
 		console.log("auto-played on fullscreen")
@@ -209,7 +208,6 @@ function addButton(video: HTMLVideoElement, startTime: number, endTime: number) 
 		"class",
 		"reverse-button kat:inline-flex kat:items-center kat:justify-center kat:rounded-full kat:border kat:border-solid kat:ps-24 kat:pe-24 kat:pt-12 kat:pb-12 kat:text-sm kat:font-semibold kat:leading-none kat:transition-colors kat:duration-200 kat:outline-none kat:cursor-pointer kat:disabled:cursor-not-allowed kat:bg-neutral-50 kat:border-transparent kat:text-neutral-900 kat:hover:bg-neutral-200 kat:active:bg-neutral-300 kat:focus-visible:ring-4 kat:focus-visible:ring-taupe-600 kat:disabled:bg-neutral-600 kat:disabled:text-neutral-400 kat:z-1001 kat:gap-4 kat:min-w-161 kat:h-44 kat:shadow-lg kat:self-end kat:mr-40 kat:pointer-events-auto",
 	)
-	// button.style.color = "white"
 	button.textContent = "Rewind?"
 
 	const buttonTimeout = setTimeout(() => {
@@ -226,7 +224,6 @@ function addButton(video: HTMLVideoElement, startTime: number, endTime: number) 
 		button.remove()
 		clearTimeout(buttonTimeout)
 		const waitTime = endTime - startTime + 2
-		//console.log("waiting for:", waitTime);
 		setTimeout(function () {
 			reverseButtonClicked = false
 		}, waitTime * 1000)
