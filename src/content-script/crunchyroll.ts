@@ -119,25 +119,6 @@ async function Crunchyroll_bigPlayerStyle() {
 	document.head.appendChild(style)
 }
 
-async function waitForElement(selector: string, timeout = 10000): Promise<Element | null> {
-	return new Promise((resolve) => {
-		const element = document.querySelector(selector)
-		if (element) return resolve(element)
-		const observer = new MutationObserver(() => {
-			const el = document.querySelector(selector)
-			if (el) {
-				observer.disconnect()
-				resolve(el)
-			}
-		})
-		observer.observe(document.body, { childList: true, subtree: true })
-		setTimeout(() => {
-			observer.disconnect()
-			resolve(null)
-		}, timeout)
-	})
-}
-
 async function Crunchyroll_scrollVolume(video: HTMLVideoElement) {
 	const volumeControl = document.querySelector(
 		'[data-testid="bottom-left-controls-stack"]:not(.enhanced) [data-testid="volume-slider-container"]',
@@ -192,7 +173,7 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 			skipped = true
 			setTimeout(function () {
 				if (isOutro && settings.value.Crunchyroll?.skipAfterCredits) {
-					video.currentTime = video.duration // skip to the end of the video
+					video.fastSeek(video.duration) // skip to the end of the video
 					console.log("SkipAfterCredits", settings.value.General.Crunchyroll_skipTimeout)
 				} else {
 					button?.click()
@@ -227,7 +208,8 @@ function addButton(video: HTMLVideoElement, startTime: number, endTime: number) 
 	}, 5000)
 	button.onclick = function () {
 		reverseButtonClicked = true
-		video.currentTime = startTime
+		// TODO: does not work
+		video.fastSeek(startTime)
 		button.remove()
 		clearTimeout(buttonTimeout)
 		const waitTime = endTime - startTime + 2
