@@ -44,7 +44,6 @@ Platform-Specifika funktioner:
       • Kommer ihåg och väljer din senast använda profil automatiskt
       • Lägger till filter i utgivningskalendern så att den blir användbar
       • Videostorlek utökas till hela fönstret
-      • Avaktivera numpad
 
 Androidstöd i skrivbordsläge:
 

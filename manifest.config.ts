@@ -59,11 +59,6 @@ export default {
 			matches: ["*://*.max.com/*", "*://*.hbomax.com/*"],
 		},
 		{
-			all_frames: true,
-			js: ["src/content-script/static.crunchyroll.ts"],
-			matches: ["https://static.crunchyroll.com/vilos-v2/web/vilos/player.html*"],
-		},
-		{
 			js: ["src/content-script/paramount.ts"],
 			matches: ["*://*.paramountplus.com/*"],
 		},

@@ -83,8 +83,6 @@
   "homeButton": "Início",
   "bigPlayerSwitch": "Vídeo maior:",
   "bigPlayerDescription": "Aumenta o tamanho do vídeo para toda a janela do browser sem ecrã completo.",
-  "disableNumpadSwitch": "Desativar o teclado numérico:",
-  "disableNumpadDescription": "Desativar as teclas do teclado numérico para não alterar acidentalmente a hora/posição atual do vídeo.",
   "doubleClickSwitch": "Ecrã completo com um duplo clique:",
   "doubleClickDescription": "Se fizer duplo clique no vídeo, este passará para ecrã inteiro.",
   "scrollVolumeSwitch": "Deslocação para o volume:",

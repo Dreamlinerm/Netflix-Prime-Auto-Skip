@@ -44,7 +44,6 @@ Recursos específicos da plataforma:
     - Lembra e seleciona automaticamente seu último perfil usado
     - Adiciona filtros ao calendário de lançamentos, para que ele possa ser usado
     - Tamanho do vídeo expandido para toda a janela
-    - Desativar o teclado numérico
 
 Suporte para Android no modo Desktop:
 

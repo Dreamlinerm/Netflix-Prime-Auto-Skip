@@ -83,8 +83,6 @@
   "homeButton": "Strona główna",
   "bigPlayerSwitch": "Wideo większe:",
   "bigPlayerDescription": "Rozszerza rozmiar wideo do całego okna przeglądarki bez pełnego ekranu.",
-  "disableNumpadSwitch": "Wyłącz klawiaturę numeryczną:",
-  "disableNumpadDescription": "Wyłącz klawisze numeryczne, aby przypadkowo nie zmienić bieżącego czasu/pozycji wideo.",
   "doubleClickSwitch": "Pełny ekran po dwukrotnym kliknięciu:",
   "doubleClickDescription": "Dwukrotne kliknięcie wideo spowoduje przejście do trybu pełnoekranowego.",
   "scrollVolumeSwitch": "Przewijanie głośności:",

@@ -83,8 +83,6 @@
   "homeButton": "ホーム",
   "bigPlayerSwitch": "ビデオも大きくなった：",
   "bigPlayerDescription": "フルスクリーンにすることなく、動画サイズをブラウザウィンドウ全体に拡大します。",
-  "disableNumpadSwitch": "テンキーパッドを無効にする：",
-  "disableNumpadDescription": "誤って現在のビデオ時間/位置を変更しないように、テンキーキーを無効にします。",
   "doubleClickSwitch": "ダブルクリックでフルスクリーン：",
   "doubleClickDescription": "ビデオをダブルクリックするとフルスクリーンになります。",
   "scrollVolumeSwitch": "音量をスクロールする：",

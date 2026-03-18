@@ -43,7 +43,6 @@ Plattform-spezifische Funktionen:
     - Wählt das zuletzt verwendetes Profil automatisch aus
     - Fügt Filter zum Veröffentlichungskalender hinzu, so dass dieser nutzbar ist
     - Erweitert die größe des Videos zum gesamten Browserfenster
-    - Ziffernblock deaktivieren
 
 Android-Unterstützung im Desktop-Modus:
 

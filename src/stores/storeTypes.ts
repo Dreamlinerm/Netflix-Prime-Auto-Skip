@@ -43,7 +43,6 @@ export type settingsType = {
 		releaseCalendar: boolean
 		profile: boolean
 		bigPlayer: boolean
-		disableNumpad: boolean
 		filterQueued: boolean
 		dubLanguage: string
 		filterDuplicates: boolean
@@ -146,7 +145,6 @@ export const defaultSettings = {
 		releaseCalendar: true,
 		profile: true,
 		bigPlayer: true,
-		disableNumpad: true,
 		filterQueued: true,
 		dubLanguage: "none",
 		filterDuplicates: true,

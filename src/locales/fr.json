@@ -83,8 +83,6 @@
   "homeButton": "Accueil",
   "bigPlayerSwitch": "Agrandir la vidéo :",
   "bigPlayerDescription": "Étend la taille de la vidéo à toute la fenêtre du navigateur sans plein écran.",
-  "disableNumpadSwitch": "Désactiver le pavé numérique :",
-  "disableNumpadDescription": "Désactivez les touches du pavé numérique afin de ne pas modifier accidentellement la durée/la position de la vidéo en cours.",
   "doubleClickSwitch": "Plein écran en double-cliquant :",
   "doubleClickDescription": "Si vous double-cliquez sur la vidéo, elle s'affichera en plein écran.",
   "scrollVolumeSwitch": "Défilement pour le volume :",

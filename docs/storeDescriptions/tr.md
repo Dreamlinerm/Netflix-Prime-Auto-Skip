@@ -44,7 +44,6 @@ Platform-Belirli Özellikler:
     - Son kullandığınız profili otomatik olarak hatırlar ve seçer
     - Kullanılabilir olması için yayın takvimine filtreler ekler
     - Video boyutu tüm pencereye genişletildi
-    - Sayısal tuş takımını devre dışı bırak
 
 Masaüstü modunda Android Desteği:
 

@@ -1,5 +1,5 @@
 import { sendMessage } from "webext-bridge/content-script"
-import { startSharedFunctions, Platforms } from "@/content-script/shared-functions"
+import { startSharedFunctions, Platforms, createSlider } from "@/content-script/shared-functions"
 startSharedFunctions(Platforms.Crunchyroll)
 // Global Variables
 
@@ -13,6 +13,21 @@ async function logStartOfAddon() {
 	console.log("Settings", settings.value)
 }
 
+type StatisticsKey =
+	| "AmazonAdTimeSkipped"
+	| "NetflixAdTimeSkipped"
+	| "DisneyAdTimeSkipped"
+	| "IntroTimeSkipped"
+	| "RecapTimeSkipped"
+	| "SegmentsSkipped"
+async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
+	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+		console.log(key, endTime - startTime)
+		settings.value.Statistics[key] += endTime - startTime
+		sendMessage("increaseBadge", {}, "background")
+	}
+}
+
 async function startCrunchyroll() {
 	// watch ready state
 	await promise
@@ -23,18 +38,247 @@ async function startCrunchyroll() {
 		const pickInterval = setInterval(function () {
 			Crunchyroll_AutoPickProfile()
 		}, 100)
-		setTimeout(function () {
-			if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle()
-		}, 1000)
 		// only click on profile on page load not when switching profiles
 		setTimeout(function () {
 			clearInterval(pickInterval)
 		}, 2000)
-		CrunchyrollObserver.observe(document, config)
 	}
+	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
+	if (settings.value.Video.doubleClick) startdoubleClick()
+	if (settings.value.Crunchyroll.speedSlider) Crunchyroll_SpeedKeyboard()
+	CrunchyrollObserver.observe(document, config)
 }
 // #region Crunchyroll
 // Crunchyroll functions
+const CrunchyrollObserver = new MutationObserver(Crunchyroll)
+async function Crunchyroll() {
+	if (settings.value.Crunchyroll?.profile) Crunchyroll_profile()
+	const video = document.querySelector("video")
+	if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle(video)
+	if (!video) return
+	const time = video?.currentTime
+	Crunchyroll_Intro_Outro(video, time)
+	if (settings.value.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider(video)
+	if (settings.value.Video?.scrollVolume) Crunchyroll_scrollVolume(video)
+}
+async function Crunchyroll_profile() {
+	// save profile
+	const img = document.querySelector(".avatar-wrapper img") as HTMLImageElement
+	if (img && img.src !== settings.value.General.Crunchyroll_profilePicture) {
+		settings.value.General.Crunchyroll_profilePicture = img.src
+		//setStorage()
+		console.log("Profile switched to", img.src)
+	}
+}
+async function Crunchyroll_AutoPickProfile() {
+	// click on profile picture
+	if (document.querySelector(".profile-item-name")) {
+		document.querySelectorAll(".erc-profile-item img")?.forEach((element) => {
+			const img = element as HTMLImageElement
+			if (img.src === settings.value.General.Crunchyroll_profilePicture) {
+				img.click()
+				console.log("Profile automatically chosen:", img.src)
+				settings.value.Statistics.SegmentsSkipped++
+				sendMessage("increaseBadge", {}, "background")
+			}
+		})
+	}
+}
+async function Crunchyroll_bigPlayerStyle(video: HTMLVideoElement | null) {
+	const styleId = "enhanced-crunchyroll-big-player-style"
+	const existingStyle = document.getElementById(styleId)
+	if (!video) {
+		existingStyle?.remove()
+		return
+	}
+	// check if style already exists
+	if (existingStyle) return
+
+	// show header on hover
+	const style = document.createElement("style")
+	style.id = styleId
+	const styles = /*css*/ `
+      .video-player-wrapper{
+          max-Height: calc(100vw / 1.7777);
+          height: 100vh;
+      }
+			[class^="app-layout__header"] {
+					position: absolute;
+          top: 0;
+          width: 100%;
+          height: 3.75rem;
+          z-index: 999;
+			}
+      .erc-large-header {
+          position: absolute;
+          top: 0;
+          width: 100%;
+          height: 3.75rem;
+          z-index: 999;
+      }
+      .erc-large-header .header-content {
+          position: absolute;
+          top: -3.75rem;
+          transition: top 0.4s, top 0.4s;
+      }
+      .erc-large-header:hover .header-content {
+          top: 0;
+      }
+    `
+	style.appendChild(document.createTextNode(styles))
+	document.head.appendChild(style)
+}
+
+async function Crunchyroll_scrollVolume(video: HTMLVideoElement) {
+	const volumeControl = document.querySelector(
+		'[data-testid="bottom-left-controls-stack"]:not(.enhanced) [data-testid="volume-slider-container"]',
+	) as HTMLElement
+	if (volumeControl) {
+		volumeControl?.parentElement?.classList.add("enhanced")
+		volumeControl.addEventListener("wheel", (event: WheelEvent) => {
+			event.preventDefault()
+			let volume = video.volume
+			if (event.deltaY < 0) volume = Math.min(1, volume + 0.1)
+			else volume = Math.max(0, volume - 0.1)
+			video.volume = volume
+		})
+	}
+}
+
+function OnFullScreenChange() {
+	const video = document.querySelector("video") as HTMLVideoElement
+	if (document.fullscreenElement && video) {
+		video.play()
+		console.log("auto-played on fullscreen")
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
+	}
+}
+async function startPlayOnFullScreen() {
+	if (settings.value.Video?.playOnFullScreen) {
+		console.log("started observing| PlayOnFullScreen")
+		addEventListener("fullscreenchange", OnFullScreenChange)
+	} else {
+		console.log("stopped observing| PlayOnFullScreen")
+		removeEventListener("fullscreenchange", OnFullScreenChange)
+	}
+}
+
+// add timeout because it can skip mid sentence if language is not japanese.
+let skipped = false
+let reverseButtonClicked = false
+let reverseButtonStartTime: number
+let reverseButtonEndTime: number
+async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
+	// check if intro or outro
+	const isOutro = time > video.duration / 2
+	if (!settings.value.Crunchyroll?.skipIntro && !isOutro) return
+	if (!settings.value.Crunchyroll?.skipCredits && isOutro) return
+	// saves the audio language to settings
+	if (!reverseButtonClicked) {
+		const button = document.querySelector('button:has(svg[data-testid="skip-intro-icon"])') as HTMLElement
+		if (button && !skipped) {
+			skipped = true
+			setTimeout(function () {
+				if (isOutro && settings.value.Crunchyroll?.skipAfterCredits) {
+					video.fastSeek(video.duration) // skip to the end of the video
+					console.log("SkipAfterCredits", settings.value.General.Crunchyroll_skipTimeout)
+				} else {
+					button?.click()
+					console.log("Intro skipped", button, settings.value.General.Crunchyroll_skipTimeout)
+					setTimeout(function () {
+						CrunchyrollGobackbutton(time, video?.currentTime)
+						addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
+					}, 600)
+				}
+				setTimeout(function () {
+					skipped = false
+				}, 1000)
+			}, settings.value.General.Crunchyroll_skipTimeout)
+		}
+	} else if (!document.querySelector(".reverse-button")) {
+		addButton(reverseButtonStartTime, reverseButtonEndTime)
+	}
+}
+
+function addButton(startTime: number, endTime: number) {
+	if (reverseButtonClicked) return
+	const button = document.createElement("div")
+	button.setAttribute(
+		"class",
+		"reverse-button kat:inline-flex kat:items-center kat:justify-center kat:rounded-full kat:border kat:border-solid kat:ps-24 kat:pe-24 kat:pt-12 kat:pb-12 kat:text-sm kat:font-semibold kat:leading-none kat:transition-colors kat:duration-200 kat:outline-none kat:cursor-pointer kat:disabled:cursor-not-allowed kat:bg-neutral-50 kat:border-transparent kat:text-neutral-900 kat:hover:bg-neutral-200 kat:active:bg-neutral-300 kat:focus-visible:ring-4 kat:focus-visible:ring-taupe-600 kat:disabled:bg-neutral-600 kat:disabled:text-neutral-400 kat:z-1001 kat:gap-4 kat:min-w-161 kat:h-44 kat:shadow-lg kat:self-end kat:mr-40 kat:pointer-events-auto",
+	)
+	button.textContent = "Rewind?"
+
+	const buttonTimeout = setTimeout(() => {
+		button.remove()
+	}, 5000)
+	button.onclick = function () {
+		reverseButtonClicked = true
+		const reverseButton = document.querySelector('[data-testid="jump-backward-button"]') as HTMLElement
+		// each click rewinds 10 seconds, so click multiple times if the skipped time is more than 10 seconds
+		const clicksNeeded = Math.ceil((endTime - startTime) / 10)
+		for (let i = 0; i < clicksNeeded; i++) {
+			reverseButton?.click()
+		}
+		button.remove()
+		clearTimeout(buttonTimeout)
+		const waitTime = endTime - startTime + 2
+		setTimeout(function () {
+			reverseButtonClicked = false
+		}, waitTime * 1000)
+	}
+	const position = document
+		.querySelector('[data-testid="player-controls-root"]')
+		?.querySelector('[data-testid="bottom-controls-autohide"]') as HTMLElement
+	if (position) {
+		position.before(button)
+	}
+}
+
+async function CrunchyrollGobackbutton(startTime: number, endTime: number) {
+	reverseButtonStartTime = startTime
+	reverseButtonEndTime = endTime
+	addButton(startTime, endTime)
+}
+
+const videoSpeed: Ref<number> = ref(1)
+const CrunchyrollSliderStyle = "display: none;margin: auto;;width:200px;"
+const CrunchyrollSpeedStyle = "color: white;margin: auto;padding: 0 5px;"
+async function Crunchyroll_SpeedSlider(video: HTMLVideoElement) {
+	if (video) {
+		const alreadySlider = document.querySelector("#videoSpeedSlider")
+		if (!alreadySlider) {
+			const position = document.querySelector('[data-testid="bottom-right-controls-stack"]') as HTMLElement
+			if (position) createSlider(video, videoSpeed, position, CrunchyrollSliderStyle, CrunchyrollSpeedStyle)
+		}
+	}
+}
+
+async function Crunchyroll_SpeedKeyboard() {
+	const steps = settings.value.General.sliderSteps / 10
+	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		const video = document.querySelector("video") as HTMLVideoElement
+		if (!video) return
+		if (event.key === "d") {
+			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
+			videoSpeed.value = video.playbackRate
+		} else if (event.key === "s") {
+			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
+			videoSpeed.value = video.playbackRate
+		}
+	})
+}
+
+async function startdoubleClick() {
+	// event listener for double click
+	document.ondblclick = function () {
+		const fullScreenButton = document.querySelector('button[data-testid="fullscreen-button"]') as HTMLElement
+		fullScreenButton?.click()
+	}
+}
+
+// #region Release Calendar
 function setReleaseRemoved(element: HTMLElement) {
 	element.classList.add("removed")
 	element.style.display = "none"
@@ -359,89 +603,6 @@ async function Crunchyroll_ReleaseCalendar() {
 		addSavedCrunchyList()
 	}
 }
-const CrunchyrollObserver = new MutationObserver(Crunchyroll)
-async function Crunchyroll() {
-	if (settings.value.Crunchyroll?.profile) Crunchyroll_profile()
-}
-async function Crunchyroll_profile() {
-	// save profile
-	const img = document.querySelector(".avatar-wrapper img") as HTMLImageElement
-	if (img && img.src !== settings.value.General.Crunchyroll_profilePicture) {
-		settings.value.General.Crunchyroll_profilePicture = img.src
-		//setStorage()
-		console.log("Profile switched to", img.src)
-	}
-}
-async function Crunchyroll_AutoPickProfile() {
-	// click on profile picture
-	if (document.querySelector(".profile-item-name")) {
-		document.querySelectorAll(".erc-profile-item img")?.forEach((element) => {
-			const img = element as HTMLImageElement
-			if (img.src === settings.value.General.Crunchyroll_profilePicture) {
-				img.click()
-				console.log("Profile automatically chosen:", img.src)
-				settings.value.Statistics.SegmentsSkipped++
-				sendMessage("increaseBadge", {}, "background")
-			}
-		})
-	}
-}
-async function Crunchyroll_bigPlayerStyle() {
-	const wrapper = await waitForElement(".video-player-wrapper")
-	if (wrapper) {
-		// show header on hover
-		const style = document.createElement("style")
-		const parentDiv = document.querySelector('[class^="app-layout__header"]')?.classList?.[0]
-		const styles = /*css*/ `
-      .video-player-wrapper{
-          max-Height: calc(100vw / 1.7777);
-          height: 100vh;
-      }
-			.${parentDiv} {
-					position: absolute;
-          top: 0;
-          width: 100%;
-          height: 3.75rem;
-          z-index: 999;
-			}
-      .erc-large-header {
-          position: absolute;
-          top: 0;
-          width: 100%;
-          height: 3.75rem;
-          z-index: 999;
-      }
-      .erc-large-header .header-content {
-          position: absolute;
-          top: -3.75rem;
-          transition: top 0.4s, top 0.4s;
-      }
-      .erc-large-header:hover .header-content {
-          top: 0;
-      }
-    `
-		style.appendChild(document.createTextNode(styles))
-		document.head.appendChild(style)
-	}
-}
-
-async function waitForElement(selector: string, timeout = 10000): Promise<Element | null> {
-	return new Promise((resolve) => {
-		const element = document.querySelector(selector)
-		if (element) return resolve(element)
-		const observer = new MutationObserver(() => {
-			const el = document.querySelector(selector)
-			if (el) {
-				observer.disconnect()
-				resolve(el)
-			}
-		})
-		observer.observe(document.body, { childList: true, subtree: true })
-		setTimeout(() => {
-			observer.disconnect()
-			resolve(null)
-		}, timeout)
-	})
-}
+// #endregion
 // #endregion
 startCrunchyroll()

@@ -83,8 +83,6 @@
   "homeButton": "Startseite",
   "bigPlayerSwitch": "Video vergrößern:",
   "bigPlayerDescription": "Erweitert die größe des Videos zum gesamten Browserfenster ohne Vollbild.",
-  "disableNumpadSwitch": "Ziffernblock deaktivieren:",
-  "disableNumpadDescription": "Deaktivieren Sie die Zifferntasten, damit nicht versehentlich die aktuelle Videozeit /-position geändert wird.",
   "doubleClickSwitch": "Vollbildmodus mit Doppelklick:",
   "doubleClickDescription": "Wenn Sie auf das Video doppelklicken, wird es im Vollbildmodus angezeigt.",
   "scrollVolumeSwitch": "Scrollen für Lautstärke:",
