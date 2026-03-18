@@ -208,8 +208,12 @@ function addButton(video: HTMLVideoElement, startTime: number, endTime: number) 
 	}, 5000)
 	button.onclick = function () {
 		reverseButtonClicked = true
-		// TODO: does not work
-		video.fastSeek(startTime)
+		const reverseButton = document.querySelector('[data-testid="jump-backward-button"]') as HTMLElement
+		// each click rewinds 10 seconds, so click multiple times if the skipped time is more than 10 seconds
+		const clicksNeeded = Math.ceil((endTime - startTime) / 10)
+		for (let i = 0; i < clicksNeeded; i++) {
+			reverseButton?.click()
+		}
 		button.remove()
 		clearTimeout(buttonTimeout)
 		const waitTime = endTime - startTime + 2
