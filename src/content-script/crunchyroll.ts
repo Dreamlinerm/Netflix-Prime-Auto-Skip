@@ -47,7 +47,6 @@ async function startCrunchyroll() {
 	if (settings.value.Video.doubleClick) startdoubleClick()
 	if (settings.value.Crunchyroll.speedSlider) Crunchyroll_SpeedKeyboard()
 	CrunchyrollObserver.observe(document, config)
-	if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle()
 }
 // #region Crunchyroll
 // Crunchyroll functions
@@ -55,6 +54,7 @@ const CrunchyrollObserver = new MutationObserver(Crunchyroll)
 async function Crunchyroll() {
 	if (settings.value.Crunchyroll?.profile) Crunchyroll_profile()
 	const video = document.querySelector("video")
+	if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle(video)
 	if (!video) return
 	const time = video?.currentTime
 	Crunchyroll_Intro_Outro(video, time)
@@ -84,9 +84,19 @@ async function Crunchyroll_AutoPickProfile() {
 		})
 	}
 }
-async function Crunchyroll_bigPlayerStyle() {
+async function Crunchyroll_bigPlayerStyle(video: HTMLVideoElement | null) {
+	const styleId = "enhanced-crunchyroll-big-player-style"
+	const existingStyle = document.getElementById(styleId)
+	if (!video) {
+		existingStyle?.remove()
+		return
+	}
+	// check if style already exists
+	if (existingStyle) return
+
 	// show header on hover
 	const style = document.createElement("style")
+	style.id = styleId
 	const styles = /*css*/ `
       .video-player-wrapper{
           max-Height: calc(100vw / 1.7777);
