@@ -187,7 +187,7 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 					button?.click()
 					console.log("Intro skipped", button, settings.value.General.Crunchyroll_skipTimeout)
 					setTimeout(function () {
-						CrunchyrollGobackbutton(video, time, video?.currentTime)
+						CrunchyrollGobackbutton(time, video?.currentTime)
 						addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
 					}, 600)
 				}
@@ -197,11 +197,11 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 			}, settings.value.General.Crunchyroll_skipTimeout)
 		}
 	} else if (!document.querySelector(".reverse-button")) {
-		addButton(video, reverseButtonStartTime, reverseButtonEndTime)
+		addButton(reverseButtonStartTime, reverseButtonEndTime)
 	}
 }
 
-function addButton(video: HTMLVideoElement, startTime: number, endTime: number) {
+function addButton(startTime: number, endTime: number) {
 	if (reverseButtonClicked) return
 	const button = document.createElement("div")
 	button.setAttribute(
@@ -236,10 +236,10 @@ function addButton(video: HTMLVideoElement, startTime: number, endTime: number) 
 	}
 }
 
-async function CrunchyrollGobackbutton(video: HTMLVideoElement, startTime: number, endTime: number) {
+async function CrunchyrollGobackbutton(startTime: number, endTime: number) {
 	reverseButtonStartTime = startTime
 	reverseButtonEndTime = endTime
-	addButton(video, startTime, endTime)
+	addButton(startTime, endTime)
 }
 
 const videoSpeed: Ref<number> = ref(1)
