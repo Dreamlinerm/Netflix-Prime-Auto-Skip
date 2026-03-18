@@ -83,8 +83,6 @@
   "homeButton": "Hem",
   "bigPlayerSwitch": "Video större:",
   "bigPlayerDescription": "Utökar videostorleken till hela webbläsarfönstret utan helskärm.",
-  "disableNumpadSwitch": "Inaktivera numpad:",
-  "disableNumpadDescription": "Inaktivera numpad-tangenterna så att du inte av misstag ändrar den aktuella videotiden/positionen.",
   "doubleClickSwitch": "Fullskärm genom att dubbelklicka:",
   "doubleClickDescription": "Om du dubbelklickar på videon kommer den att visas i helskärm.",
   "scrollVolumeSwitch": "Bläddra för volym:",

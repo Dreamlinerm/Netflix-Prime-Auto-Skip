@@ -59,7 +59,7 @@ async function Crunchyroll() {
 	const video = document.querySelector("video")
 	if (!video) return
 	const time = video?.currentTime
-	// Crunchyroll_Intro_Outro(video, time)
+	Crunchyroll_Intro_Outro(video, time)
 	if (settings.value.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider(video)
 	if (settings.value.Video?.scrollVolume) Crunchyroll_scrollVolume(video)
 }
@@ -145,18 +145,17 @@ async function waitForElement(selector: string, timeout = 10000): Promise<Elemen
 }
 
 async function Crunchyroll_scrollVolume(video: HTMLVideoElement) {
-	const volumeControl = document.querySelector('[data-testid="vilos-volume_container"]:not(.enhanced)') as HTMLElement
+	const volumeControl = document.querySelector(
+		'[data-testid="bottom-left-controls-stack"]:not(.enhanced) [data-testid="volume-slider-container"]',
+	) as HTMLElement
 	if (volumeControl) {
-		volumeControl.classList.add("enhanced")
+		volumeControl?.parentElement?.classList.add("enhanced")
 		volumeControl.addEventListener("wheel", (event: WheelEvent) => {
 			event.preventDefault()
 			let volume = video.volume
 			if (event.deltaY < 0) volume = Math.min(1, volume + 0.1)
 			else volume = Math.max(0, volume - 0.1)
 			video.volume = volume
-			const sliderKnob = document.querySelector('div[data-testid="vilos-volume_slider"]')?.children?.[1]?.firstChild
-				?.firstChild as HTMLElement
-			if (sliderKnob) sliderKnob.style.transform = `translateX(${volume * 61}px) translateX(-8px) scale(1)`
 		})
 	}
 }
@@ -193,7 +192,8 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 	if (!settings.value.Crunchyroll?.skipCredits && isOutro) return
 	// saves the audio language to settings
 	if (!reverseButtonClicked) {
-		const button = document.querySelector('button[aria-label="Skip Recap"]') as HTMLElement
+		const button = (document.querySelector('button[aria-label="Skip Recap"]') ||
+			document.querySelector('button[aria-label="Skip Intro"]')) as HTMLElement
 		if (button && !skipped) {
 			skipped = true
 			setTimeout(function () {
@@ -208,7 +208,9 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 						addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
 					}, 600)
 				}
-				skipped = false
+				setTimeout(function () {
+					skipped = false
+				}, 1000)
 			}, settings.value.General.Crunchyroll_skipTimeout)
 		}
 	} else if (!document.querySelector(".reverse-button")) {
@@ -221,9 +223,9 @@ function addButton(video: HTMLVideoElement, startTime: number, endTime: number) 
 	const button = document.createElement("div")
 	button.setAttribute(
 		"class",
-		"reverse-button css-1dbjc4n r-1awozwy r-lj0ial r-1jd5jdk r-1loqt21 r-18u37iz r-eu3ka r-1777fci r-kuhrb7 r-ymttw5 r-u8s1d r-1ff5aok r-1otgn73",
+		"reverse-button kat:inline-flex kat:items-center kat:justify-center kat:rounded-full kat:border kat:border-solid kat:ps-24 kat:pe-24 kat:pt-12 kat:pb-12 kat:text-sm kat:font-semibold kat:leading-none kat:transition-colors kat:duration-200 kat:outline-none kat:cursor-pointer kat:disabled:cursor-not-allowed kat:bg-neutral-50 kat:border-transparent kat:text-neutral-900 kat:hover:bg-neutral-200 kat:active:bg-neutral-300 kat:focus-visible:ring-4 kat:focus-visible:ring-taupe-600 kat:disabled:bg-neutral-600 kat:disabled:text-neutral-400 kat:z-1001 kat:gap-4 kat:min-w-161 kat:h-44 kat:shadow-lg kat:self-end kat:mr-40 kat:pointer-events-auto",
 	)
-	button.style.color = "white"
+	// button.style.color = "white"
 	button.textContent = "Rewind?"
 
 	const buttonTimeout = setTimeout(() => {
@@ -240,8 +242,12 @@ function addButton(video: HTMLVideoElement, startTime: number, endTime: number) 
 			reverseButtonClicked = false
 		}, waitTime * 1000)
 	}
-	const position = document.querySelector("#velocity-overlay-package")
-	if (position) position.appendChild(button)
+	const position = document
+		.querySelector('[data-testid="player-controls-root"]')
+		?.querySelector('[data-testid="bottom-controls-autohide"]') as HTMLElement
+	if (position) {
+		position.before(button)
+	}
 }
 
 async function CrunchyrollGobackbutton(video: HTMLVideoElement, startTime: number, endTime: number) {
@@ -251,13 +257,13 @@ async function CrunchyrollGobackbutton(video: HTMLVideoElement, startTime: numbe
 }
 
 const videoSpeed: Ref<number> = ref(1)
-const CrunchyrollSliderStyle = "display: none;width:200px;"
+const CrunchyrollSliderStyle = "display: none;margin: auto;;width:200px;"
 const CrunchyrollSpeedStyle = "color: white;margin: auto;padding: 0 5px;"
 async function Crunchyroll_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
 		const alreadySlider = document.querySelector("#videoSpeedSlider")
 		if (!alreadySlider) {
-			const position = document.querySelector("#settingsControl")?.parentElement
+			const position = document.querySelector('[data-testid="bottom-right-controls-stack"]') as HTMLElement
 			if (position) createSlider(video, videoSpeed, position, CrunchyrollSliderStyle, CrunchyrollSpeedStyle)
 		}
 	}
@@ -285,11 +291,12 @@ async function startdoubleClick() {
 			const video = document.querySelector("video")
 			if (video) {
 				// video is fullscreen
-				//TODO: check if document.fullscreenElement is working before: window.fullScreen
 				if (document.fullscreenElement) {
 					document.exitFullscreen()
+					console.log("double click fullscreen exited")
 				} else {
 					document.body.requestFullscreen()
+					console.log("double click fullscreen")
 				}
 			}
 		}

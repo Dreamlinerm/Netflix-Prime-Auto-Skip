@@ -83,8 +83,6 @@
   "homeButton": "Ev",
   "bigPlayerSwitch": "Video daha büyük:",
   "bigPlayerDescription": "Video boyutunu tam ekran olmadan tüm tarayıcı penceresine genişletir.",
-  "disableNumpadSwitch": "Numpad'i devre dışı bırakın:",
-  "disableNumpadDescription": "Mevcut video zamanını/konumunu yanlışlıkla değiştirmemek için sayısal tuşları devre dışı bırakın.",
   "doubleClickSwitch": "Çift tıklayarak tam ekran yapın:",
   "doubleClickDescription": "Videoya çift tıklarsanız tam ekrana geçecektir.",
   "scrollVolumeSwitch": "Ses seviyesi için kaydırın:",

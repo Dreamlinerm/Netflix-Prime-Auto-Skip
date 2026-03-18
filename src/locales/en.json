@@ -83,8 +83,6 @@
   "homeButton": "Home",
   "bigPlayerSwitch": "Video bigger:",
   "bigPlayerDescription": "Extends the video size to the entire browser window without full screen.",
-  "disableNumpadSwitch": "Disable numpad:",
-  "disableNumpadDescription": "Disable the numpad keys so you don't accidentally change the current video time/position.",
   "doubleClickSwitch": "Fullscreen by double clicking:",
   "doubleClickDescription": "If you double click on the video it will go to fullscreen.",
   "scrollVolumeSwitch": "Scroll for volume:",

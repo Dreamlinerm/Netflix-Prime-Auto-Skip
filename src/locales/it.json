@@ -83,8 +83,6 @@
   "homeButton": "Home",
   "bigPlayerSwitch": "Video ingrandito:",
   "bigPlayerDescription": "Estende il video all'intera finestra del browser senza schermo intero.",
-  "disableNumpadSwitch": "Disattiva tastierino numerico:",
-  "disableNumpadDescription": "Disattiva i tasti numerici per non modificare accidentalmente la posizione del video.",
   "doubleClickSwitch": "Schermo intero con doppio clic:",
   "doubleClickDescription": "Doppio clic sul video per attivare lo schermo intero.",
   "scrollVolumeSwitch": "Scorri per il volume:",

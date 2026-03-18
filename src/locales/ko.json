@@ -83,8 +83,6 @@
   "homeButton": "홈",
   "bigPlayerSwitch": "동영상 크게 보기:",
   "bigPlayerDescription": "동영상 크기를 전체 화면 없이 브라우저 창 전체로 확장합니다.",
-  "disableNumpadSwitch": "숫자 패드를 비활성화합니다:",
-  "disableNumpadDescription": "현재 동영상 시간/위치를 실수로 변경하지 않도록 숫자패드 키를 비활성화합니다.",
   "doubleClickSwitch": "두 번 클릭하면 전체 화면으로 전환됩니다:",
   "doubleClickDescription": "동영상을 두 번 클릭하면 전체 화면으로 이동합니다.",
   "scrollVolumeSwitch": "볼륨을 찾으려면 스크롤합니다:",

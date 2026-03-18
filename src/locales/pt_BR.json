@@ -83,8 +83,6 @@
   "homeButton": "Início",
   "bigPlayerSwitch": "Vídeo extendido:",
   "bigPlayerDescription": "Estende o tamanho do vídeo para toda a janela do navegador sem ser em modo tela cheia.",
-  "disableNumpadSwitch": "Desativar o teclado numérico:",
-  "disableNumpadDescription": "Desative as teclas do teclado numérico para não alterar acidentalmente o tempo/posição do vídeo atual.",
   "doubleClickSwitch": "Duplo clique para tela cheia:",
   "doubleClickDescription": "Se você clicar duas vezes no vídeo, ele será exibido em tela cheia.",
   "scrollVolumeSwitch": "Deslocamento de volume:",
