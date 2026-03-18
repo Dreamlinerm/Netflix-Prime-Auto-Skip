@@ -87,13 +87,12 @@ async function Crunchyroll_AutoPickProfile() {
 async function Crunchyroll_bigPlayerStyle() {
 	// show header on hover
 	const style = document.createElement("style")
-	const parentDiv = document.querySelector('[class^="app-layout__header"]')?.classList?.[0]
 	const styles = /*css*/ `
       .video-player-wrapper{
           max-Height: calc(100vw / 1.7777);
           height: 100vh;
       }
-			.${parentDiv} {
+			[class^="app-layout__header"] {
 					position: absolute;
           top: 0;
           width: 100%;
