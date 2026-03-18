@@ -271,23 +271,10 @@ async function Crunchyroll_SpeedKeyboard() {
 }
 
 async function startdoubleClick() {
-	if (settings.value.Video?.doubleClick) {
-		// event listener for double click
-		document.ondblclick = function () {
-			const video = document.querySelector("video")
-			if (video) {
-				// video is fullscreen
-				if (document.fullscreenElement) {
-					document.exitFullscreen()
-					console.log("double click fullscreen exited")
-				} else {
-					document.body.requestFullscreen()
-					console.log("double click fullscreen")
-				}
-			}
-		}
-	} else {
-		document.ondblclick = null
+	// event listener for double click
+	document.ondblclick = function () {
+		const fullScreenButton = document.querySelector('button[data-testid="fullscreen-button"]') as HTMLElement
+		fullScreenButton?.click()
 	}
 }
 
