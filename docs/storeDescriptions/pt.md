@@ -44,7 +44,6 @@ Plataforma-Caraterísticas específicas:
     - Lembra e seleciona automaticamente o seu último perfil utilizado
     - Adiciona filtros ao calendário de lançamentos, para que seja utilizável
     - Tamanho do vídeo expandido para toda a janela
-    - Desativar o teclado numérico
 
 Suporte para Android no modo Desktop:
 

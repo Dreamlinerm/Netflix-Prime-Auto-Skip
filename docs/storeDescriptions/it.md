@@ -45,7 +45,6 @@ Platform-Caratteristiche specifiche:
     - Ricorda e seleziona automaticamente l'ultimo profilo utilizzato
     - Aggiunge filtri al calendario delle uscite, in modo che sia utilizzabile
     - La dimensione del video viene espansa all'intera finestra
-    - Disattiva il tastierino numerico
 
 Supporto Android in modalità Desktop:
 

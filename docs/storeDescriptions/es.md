@@ -44,7 +44,6 @@ Plataforma-Características específicas:
     - Recuerda y selecciona tu último perfil utilizado automáticamente
     - Añade filtros al calendario de estrenos, para que sea utilizable
     - Tamaño del vídeo ampliado a toda la ventana
-    - Desactiva el teclado numérico
 
 Soporte Android en modo Escritorio:
 

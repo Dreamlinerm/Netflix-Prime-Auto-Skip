@@ -44,7 +44,6 @@ Platforma-Cechy szczególne:
     - Zapamiętuje i automatycznie wybiera ostatnio używany profil
     - Dodaje filtry do kalendarza wydań, dzięki czemu jest on użyteczny
     - Rozszerzenie rozmiaru wideo do całego okna
-    - Wyłącz klawiaturę numeryczną
 
 Obsługa Androida w trybie pulpitu:
 

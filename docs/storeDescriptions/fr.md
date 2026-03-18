@@ -44,7 +44,6 @@ Platforme-Caractéristiques spécifiques:
     - Rappelle et sélectionne automatiquement votre dernier profil utilisé
     - Ajoute des filtres au calendrier des sorties, pour qu'il soit utilisable
     - La taille de la vidéo est étendue à l'ensemble de la fenêtre
-    - Désactive le pavé numérique
 
 Support Android en mode bureau:
 
