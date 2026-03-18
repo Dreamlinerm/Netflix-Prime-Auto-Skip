@@ -57,7 +57,8 @@ async function Crunchyroll() {
 	const video = document.querySelector("video")
 	if (!video) return
 	const time = video?.currentTime
-	Crunchyroll_Intro_Outro(video, time)
+	if (settings.value.Crunchyroll?.skipIntro) Crunchyroll_Intro(video, time)
+	if (settings.value.Crunchyroll?.skipCredits) Crunchyroll_Outro(video, time)
 	if (settings.value.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider(video)
 	if (settings.value.Video?.scrollVolume) Crunchyroll_scrollVolume(video)
 }
@@ -160,11 +161,7 @@ let skipped = false
 let reverseButtonClicked = false
 let reverseButtonStartTime: number
 let reverseButtonEndTime: number
-async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
-	// check if intro or outro
-	const isOutro = time > video.duration / 2
-	if (!settings.value.Crunchyroll?.skipIntro && !isOutro) return
-	if (!settings.value.Crunchyroll?.skipCredits && isOutro) return
+async function Crunchyroll_Intro(video: HTMLVideoElement, time: number) {
 	// saves the audio language to settings
 	if (!reverseButtonClicked) {
 		const button = (document.querySelector('button[aria-label="Skip Recap"]') ||
@@ -172,15 +169,36 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 		if (button && !skipped) {
 			skipped = true
 			setTimeout(function () {
-				if (isOutro && settings.value.Crunchyroll?.skipAfterCredits) {
+				button?.click()
+				console.log("Intro skipped", button, settings.value.General.Crunchyroll_skipTimeout)
+				setTimeout(function () {
+					CrunchyrollGobackbutton(video, time, video?.currentTime)
+					addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
+				}, 600)
+				setTimeout(function () {
+					skipped = false
+				}, 1000)
+			}, settings.value.General.Crunchyroll_skipTimeout)
+		}
+	} else if (!document.querySelector(".reverse-button")) {
+		addButton(video, reverseButtonStartTime, reverseButtonEndTime)
+	}
+}
+async function Crunchyroll_Outro(video: HTMLVideoElement, time: number) {
+	// saves the audio language to settings
+	if (!reverseButtonClicked) {
+		const button = document.querySelector('button[aria-label="Skip Credits"]') as HTMLElement
+		if (button && !skipped) {
+			skipped = true
+			setTimeout(function () {
+				if (settings.value.Crunchyroll?.skipAfterCredits) {
 					video.fastSeek(video.duration) // skip to the end of the video
 					console.log("SkipAfterCredits", settings.value.General.Crunchyroll_skipTimeout)
 				} else {
 					button?.click()
-					console.log("Intro skipped", button, settings.value.General.Crunchyroll_skipTimeout)
+					console.log("Outro skipped", button, settings.value.General.Crunchyroll_skipTimeout)
 					setTimeout(function () {
 						CrunchyrollGobackbutton(video, time, video?.currentTime)
-						addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
 					}, 600)
 				}
 				setTimeout(function () {
