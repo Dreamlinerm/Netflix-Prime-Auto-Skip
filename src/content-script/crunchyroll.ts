@@ -43,13 +43,11 @@ async function startCrunchyroll() {
 			clearInterval(pickInterval)
 		}, 2000)
 	}
-	setTimeout(function () {
-		if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle()
-	}, 1000)
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	if (settings.value.Video.doubleClick) startdoubleClick()
 	if (settings.value.Crunchyroll.speedSlider) Crunchyroll_SpeedKeyboard()
 	CrunchyrollObserver.observe(document, config)
+	if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle()
 }
 // #region Crunchyroll
 // Crunchyroll functions
@@ -87,12 +85,10 @@ async function Crunchyroll_AutoPickProfile() {
 	}
 }
 async function Crunchyroll_bigPlayerStyle() {
-	const wrapper = await waitForElement(".video-player-wrapper")
-	if (wrapper) {
-		// show header on hover
-		const style = document.createElement("style")
-		const parentDiv = document.querySelector('[class^="app-layout__header"]')?.classList?.[0]
-		const styles = /*css*/ `
+	// show header on hover
+	const style = document.createElement("style")
+	const parentDiv = document.querySelector('[class^="app-layout__header"]')?.classList?.[0]
+	const styles = /*css*/ `
       .video-player-wrapper{
           max-Height: calc(100vw / 1.7777);
           height: 100vh;
@@ -120,9 +116,8 @@ async function Crunchyroll_bigPlayerStyle() {
           top: 0;
       }
     `
-		style.appendChild(document.createTextNode(styles))
-		document.head.appendChild(style)
-	}
+	style.appendChild(document.createTextNode(styles))
+	document.head.appendChild(style)
 }
 
 async function waitForElement(selector: string, timeout = 10000): Promise<Element | null> {
