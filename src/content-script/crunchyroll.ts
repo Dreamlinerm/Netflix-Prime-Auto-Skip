@@ -243,8 +243,8 @@ async function CrunchyrollGobackbutton(startTime: number, endTime: number) {
 }
 
 const videoSpeed: Ref<number> = ref(1)
-const CrunchyrollSliderStyle = "display: none;margin: auto;;width:200px;"
-const CrunchyrollSpeedStyle = "color: white;margin: auto;padding: 0 5px;"
+const CrunchyrollSliderStyle = "display: none;margin: auto;width:200px;"
+const CrunchyrollSpeedStyle = "color: white;margin: auto;padding: 0 5px;width: 40px;"
 async function Crunchyroll_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
 		const alreadySlider = document.querySelector("#videoSpeedSlider")
