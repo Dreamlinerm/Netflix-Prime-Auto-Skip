@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.93
+
+- Crunchyroll: updated functions, because of new player ui.
+- Crunchyroll: removed disable numpad feature, since it is no longer necessary with the new player ui.
+
 ## 1.1.92
 
 - Amazon: removed hover on scroll, since it is annoying
