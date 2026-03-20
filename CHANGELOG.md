@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.94
+
+- Amazon: fixed all functions, because of changed ui.
+
 ## 1.1.93
 
 - Crunchyroll: updated functions, because of new player ui.
