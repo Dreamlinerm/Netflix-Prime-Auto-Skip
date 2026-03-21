@@ -194,7 +194,6 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 			alreadySlider.style.display = "none"
 			alreadySpeed.style.display = "none"
 		} else {
-			alreadySlider.style.display = "block"
 			alreadySpeed.style.display = "block"
 		}
 	}
