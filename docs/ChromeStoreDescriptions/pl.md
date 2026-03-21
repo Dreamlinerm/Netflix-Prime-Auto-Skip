@@ -35,7 +35,6 @@ Platforma-Cechy szczególne:
       • Filtruje płatne treści (filmy, seriale) ze strony głównej
       • Usuwa efekt rozmycia po najechaniu kursorem na filmy
       • Przenosi kategorię "Kontynuuj" na górę strony
-      • Ukryj szybki widok Xray nad filmem
 
   • Disney+ (Hotstar, STAR+):
       • Omija reklamy autopromocyjne

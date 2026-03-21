@@ -1,11 +1,5 @@
 import { sendMessage } from "webext-bridge/content-script"
-import {
-	startSharedFunctions,
-	parseAdTime,
-	createSlider,
-	Platforms,
-	getCurrentEpisodeNumber,
-} from "@/content-script/shared-functions"
+import { startSharedFunctions, parseAdTime, createSlider, Platforms } from "@/content-script/shared-functions"
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
@@ -13,8 +7,8 @@ const ua = navigator.userAgent
 const isMobile = /mobile|streamingEnhanced/i.test(ua)
 let lastAdTimeText: number | string = 0
 const videoSpeed: Ref<number> = ref(1)
-const initialUrl = window.location.href
-const hostname = window.location.hostname
+const initialUrl = globalThis.location.href
+const hostname = globalThis.location.hostname
 const title = document.title
 const isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(initialUrl))
 const config = { attributes: true, childList: true, subtree: true }
@@ -47,11 +41,9 @@ if (isPrimeVideo) {
 async function startAmazon() {
 	await promise
 	logStartOfAddon()
-	AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig)
 	if (settings.value?.Video?.doubleClick) Amazon_doubleClick()
 	if (settings.value.Amazon?.speedSlider) Amazon_SpeedKeyboard()
 	AmazonObserver.observe(document, config)
-	if (settings.value.Amazon?.selfAd) Amazon_selfAdTimeout()
 	if (settings.value.Amazon?.skipAd) {
 		// timeout of 100 ms because the ad is not loaded fast enough and the video will crash
 		setTimeout(function () {
@@ -71,71 +63,64 @@ const AmazonObserver = new MutationObserver(Amazon)
 function Amazon() {
 	if (settings.value.Amazon?.filterPaid) Amazon_FilterPaid()
 	const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
+	if (settings.value.Amazon?.skipIntro) Amazon_Intro(video)
 	if (settings.value.Amazon?.skipCredits) Amazon_Credits()
 	if (settings.value.Amazon?.watchCredits) Amazon_Watch_Credits()
 	if (settings.value.Amazon?.speedSlider) Amazon_SpeedSlider(video)
-	if (settings.value.Amazon?.xray) Amazon_xray()
-	if (settings.value.Video?.scrollVolume) Amazon_scrollVolume()
+	// if (settings.value.Video?.scrollVolume) Amazon_scrollVolume()
 }
-const AmazonSkipIntroConfig = {
-	attributes: true,
-	attributeFilter: [".skipelement"],
-	subtree: true,
-	childList: true,
-	attributeOldValue: false,
-}
-const AmazonSkipIntroObserver = new MutationObserver(Amazon_Intro)
 
-async function Amazon_scrollVolume() {
-	const volumeControl = document.querySelector('[aria-label="Volume"]:not(.enhanced)') as HTMLElement
-	if (volumeControl) {
-		volumeControl.classList.add("enhanced")
-		volumeControl?.addEventListener("wheel", (event: WheelEvent) => {
-			const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
-			if (!video) return
-			let volume = video.volume
-			if (event.deltaY < 0) volume = Math.min(1, volume + 0.1)
-			else volume = Math.max(0, volume - 0.1)
-			video.volume = volume
-		})
-	}
-}
+// async function Amazon_scrollVolume() {
+// 	const volumeControl = document.querySelector('[aria-label="Volume"]:not(.enhanced)') as HTMLElement
+// 	if (volumeControl) {
+// 		volumeControl.classList.add("enhanced")
+// 		volumeControl?.addEventListener("wheel", (event: WheelEvent) => {
+// 			const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
+// 			if (!video) return
+// 			let volume = video.volume
+// 			if (event.deltaY < 0) volume = Math.min(1, volume + 0.1)
+// 			else volume = Math.max(0, volume - 0.1)
+// 			video.volume = volume
+// 		})
+// 	}
+// }
 let lastIntroTime = -1
 function resetLastIntroTime() {
 	setTimeout(() => {
 		lastIntroTime = -1
 	}, 5000)
 }
-function Amazon_Intro() {
-	if (
-		settings.value.Amazon?.skipIntro &&
-		getCurrentEpisodeNumber(document.querySelector('[data-testid="dp-atf-play-button"]')?.textContent) != 1
-	) {
+
+function Amazon_Intro(video: HTMLVideoElement) {
+	if (!reverseButtonClicked && lastIntroTime === -1) {
 		// skips intro and recap
 		// recap on lucifer season 3 episode 3
 		// intro lucifer season 3 episode 4
-		const button = document.querySelector("[class*=skipelement]") as HTMLButtonElement
-		if (button?.checkVisibility() && !document.querySelector("[class*=nextupcard-button]")) {
-			const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
+		const button = document.querySelector(
+			"button.f1xhgfrd.fg4c0o1.fxdt570.ff1ld61.f1cet4yo.f11un3wk.fe9afsx.fj0jixm.f1e5razt.fw6qvwa.f1vpdgub.f1g75y8b, button[aria-label='Vorspann überspringen'], button[aria-label='Skip Intro']",
+		) as HTMLButtonElement
+		if (button?.checkVisibility()) {
 			const time = Math.floor(video?.currentTime ?? 0)
-			if (typeof time === "number" && lastIntroTime != time) {
-				lastIntroTime = time
-				resetLastIntroTime()
-				button.click()
-				console.log("Intro skipped", button)
-				//delay where the video is loaded
-				setTimeout(function () {
-					AmazonGobackbutton(video, time, video.currentTime)
-					addSkippedTime(time, video.currentTime, "IntroTimeSkipped")
-				}, 50)
-			}
+			lastIntroTime = time
+			resetLastIntroTime()
+			button.click()
+			console.log("Intro skipped", button)
+			//delay where the video is loaded
+			setTimeout(function () {
+				AmazonGobackbutton(video, button?.parentElement?.parentElement?.parentElement, time, video.currentTime)
+				addSkippedTime(time, video.currentTime, "IntroTimeSkipped")
+			}, 50)
 		}
 	}
 }
-let reverseButton = false
-async function AmazonGobackbutton(video: HTMLVideoElement, startTime: number, endTime: number) {
-	if (!reverseButton) {
-		reverseButton = true
+let reverseButtonClicked = false
+async function AmazonGobackbutton(
+	video: HTMLVideoElement,
+	position: HTMLElement | null | undefined,
+	startTime: number,
+	endTime: number,
+) {
+	if (position) {
 		// go back button
 		const button = document.createElement("button")
 		button.style.cssText = "padding: 0px 22px; line-height: normal; min-width: 0px; z-index: 999; pointer-events: all;"
@@ -143,36 +128,34 @@ async function AmazonGobackbutton(video: HTMLVideoElement, startTime: number, en
 			"class",
 			"fqye4e3 f1ly7q5u fk9c3ap fz9ydgy f1xrlb00 f1hy0e6n fgbpje3 f1uteees f1h2a8xb  f1cg7427 fiqc9rt fg426ew f1ekwadg",
 		)
-		button.setAttribute("data-uia", "reverse-button")
+		button.dataset.uia = "reverse-button"
 		//  browser.i18n.getMessage("WatchSkippedButton")
 		button.textContent = "Rewind?"
-		document.querySelector(".atvwebplayersdk-action-buttons")?.appendChild(button)
-		const buttonInHTML = document.querySelector('[data-uia="reverse-button"]')
-		if (buttonInHTML) {
-			function goBack() {
-				video.currentTime = startTime
-				buttonInHTML?.remove()
-				console.log("stopped observing| Intro")
-				AmazonSkipIntroObserver.disconnect()
-				const waitTime = endTime - startTime + 2
-				setTimeout(function () {
-					console.log("restarted observing| Intro")
-					AmazonSkipIntroObserver.observe(document, AmazonSkipIntroConfig)
-				}, waitTime * 1000)
-			}
-			buttonInHTML.addEventListener("click", goBack)
-			setTimeout(() => {
-				buttonInHTML.remove()
-				reverseButton = false
-			}, 5000)
+		position?.appendChild(button)
+		const buttonTimeout = setTimeout(() => {
+			button?.remove()
+		}, 5000)
+		function goBack() {
+			reverseButtonClicked = true
+			video.currentTime = startTime
+			button?.remove()
+			clearTimeout(buttonTimeout)
+			console.log("stopped observing| Intro")
+			const waitTime = endTime - startTime + 2
+			setTimeout(function () {
+				reverseButtonClicked = false
+			}, waitTime * 1000)
 		}
+		button.addEventListener("click", goBack)
 	}
 }
 async function Amazon_Credits() {
-	const button = document.querySelector("[class*=nextupcard-button]") as HTMLElement
+	const button = document.querySelector(
+		"button.f1h7p346.fl0ztaa.f1w91twd.f1hy0e6n.fgbpje3.fe9afsx.fj0jixm",
+	) as HTMLElement
 	if (button) {
 		// only skipping to next episode not an entirely new series
-		const newEpNumber = document.querySelector("[class*=nextupcard-episode]") as HTMLElement
+		const newEpNumber = document.querySelector(".f14s8172.f615xjr.f1jlz00e") as HTMLElement
 		if (
 			// is series
 			newEpNumber?.textContent &&
@@ -190,7 +173,7 @@ async function Amazon_Credits() {
 	}
 }
 async function Amazon_Watch_Credits() {
-	const button = document.querySelector("[class*=nextupcardhide-button]") as HTMLElement
+	const button = document.querySelector("button.fs9qhvw.fl0ztaa.f1w91twd") as HTMLElement
 	if (button) {
 		button.click()
 		settings.value.Statistics.SegmentsSkipped++
@@ -202,30 +185,17 @@ const AmazonSliderStyle = "height: 1em;background: rgb(221, 221, 221);display: n
 async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
 		const alreadySlider = document.querySelector(".dv-player-fullscreen #videoSpeedSlider") as HTMLInputElement
+		const alreadySpeed = document.querySelector(".dv-player-fullscreen #videoSpeed") as HTMLElement
+		const position = document.querySelector(".f1y5vpot")?.lastChild as HTMLElement
 		if (!alreadySlider) {
 			// infobar position for the slider to be added
-			const position = document.querySelector(".dv-player-fullscreen [class*=infobar-container]")?.firstChild
-				?.lastChild as HTMLElement
 			if (position) createSlider(video, videoSpeed, position, AmazonSliderStyle, "cursor: pointer;")
+		} else if (position.classList.contains("fkt4e8w")) {
+			alreadySlider.style.display = "none"
+			alreadySpeed.style.display = "none"
 		} else {
-			// need to resync the slider with the video sometimes
-			const speed = document.querySelector(".dv-player-fullscreen #videoSpeed") as HTMLElement
-			if (speed) {
-				speed.onclick = function () {
-					alreadySlider.style.display = alreadySlider.style.display === "block" ? "none" : "block"
-				}
-				watch(videoSpeed, (newValue) => {
-					speed.textContent = newValue.toFixed(1) + "x"
-					alreadySlider.value = (newValue * 10).toString()
-				})
-			}
-			if (video.playbackRate != parseFloat(alreadySlider.value) / 10) {
-				video.playbackRate = parseFloat(alreadySlider.value) / 10
-			}
-			alreadySlider.oninput = function () {
-				if (speed) speed.textContent = (parseFloat(alreadySlider.value) / 10).toFixed(1) + "x"
-				video.playbackRate = parseFloat(alreadySlider.value) / 10
-			}
+			alreadySlider.style.display = "block"
+			alreadySpeed.style.display = "block"
 		}
 	}
 }
@@ -246,8 +216,8 @@ async function Amazon_SpeedKeyboard() {
 
 async function Amazon_continuePosition() {
 	const continueCategory = document
-		.querySelector('.j5ZgN-._0rmWBt[data-testid="card-overlay"]')
-		?.closest('[class="+OSZzQ"]')
+		.querySelector(".fbl-progress-bar")
+		?.closest('[data-testid="navigation-carousel-wrapper"]')
 	const position = continueCategory?.parentNode?.childNodes?.[2]
 	if (continueCategory && position) position.before(continueCategory)
 }
@@ -335,7 +305,7 @@ function Amazon_FreeveeTimeout() {
 async function skipAd(video: HTMLVideoElement) {
 	// Series grimm
 	// there area multiple adtime texts, the dv-player-fullscreen is the correct one
-	const adTimeText = document.querySelector(".dv-player-fullscreen .atvwebplayersdk-ad-timer-text")
+	const adTimeText = document.querySelector(".dv-player-fullscreen .atvwebplayersdk-ad-timer-remaining-time")
 	if (adTimeText?.checkVisibility()) {
 		let adTime
 		adTime = parseAdTime(adTimeText?.childNodes?.[0]?.textContent)
@@ -361,46 +331,10 @@ async function resetLastATimeText(time = 1000) {
 		lastAdTimeText = 0
 	}, time)
 }
-async function Amazon_selfAdTimeout() {
-	// set loop every 1 sec and check if ad is there
-	const AdInterval = setInterval(function () {
-		if (!settings.value.Amazon.selfAd) {
-			console.log("stopped observing| Self Ad")
-			clearInterval(AdInterval)
-			return
-		}
-		const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
-		if (video) {
-			video.onplay = function () {
-				// if video is playing
-				const dvWebPlayer = document.querySelector("#dv-web-player")
-				if (dvWebPlayer && getComputedStyle(dvWebPlayer).display != "none") {
-					const button = document.querySelector(".fu4rd6c.f1cw2swo") as HTMLElement
-					if (button) {
-						// only getting the time after :08
-						const adTime = parseInt(
-							/:\d+/
-								.exec(document.querySelector(".atvwebplayersdk-adtimeindicator-text")?.innerHTML ?? "")?.[0]
-								?.substring(1) ?? "",
-						)
-						// wait for 100ms before skipping to make sure the button is not pressed too fast, or there will be infinite loading
-						setTimeout(() => {
-							button.click()
-							if (typeof adTime === "number") settings.value.Statistics.AmazonAdTimeSkipped += adTime
-							settings.value.Statistics.SegmentsSkipped++
-							sendMessage("increaseBadge", {}, "background")
-							console.log("Self Ad skipped, length:", adTime, button)
-						}, 150)
-					}
-				}
-			}
-		}
-	}, 100)
-}
 
 async function Amazon_customizeMobileView() {
 	console.log("customizeMobileView")
-	const currentUrl = window.location.href
+	const currentUrl = globalThis.location.href
 	// customize mobile view for desktop website
 	// /gp/video/detail/ is the film description page otherwise looks weird
 	if (!currentUrl.includes("/gp/video/detail/")) {
@@ -422,26 +356,14 @@ async function Amazon_customizeMobileView() {
 		if (navMain) navMain.style.display = "none"
 	}
 }
-let lastClosedXrayUrl = ""
-async function Amazon_xray() {
-	if (lastClosedXrayUrl === window.location.href) return
-	const xrayButton = document.querySelector(".xrayVodHeaderTitle.expanded .arrow.show") as HTMLElement
-	if (xrayButton) {
-		xrayButton.click()
-		// increase stats
-		settings.value.Statistics.SegmentsSkipped++
-		sendMessage("increaseBadge", {}, "background")
-		console.log("Xray closed", xrayButton)
-		lastClosedXrayUrl = window.location.href
-	}
-}
-
 async function Amazon_doubleClick() {
 	if (settings.value.Video?.doubleClick) {
 		// event listener for double click
 		document.ondblclick = function () {
-			const button = document.querySelector(".dv-player-fullscreen button[class*=fullscreen-button]") as HTMLElement
-			button?.click()
+			const FullscreenButton = document.querySelector(
+				"button[aria-label*='Fullscreen'], button[aria-label*='Vollbild']",
+			) as HTMLButtonElement
+			FullscreenButton?.click()
 		}
 	} else {
 		document.ondblclick = null
@@ -449,27 +371,6 @@ async function Amazon_doubleClick() {
 }
 let timer: NodeJS.Timeout
 async function Amazon_improveUI() {
-	const style = document.createElement("style")
-
-	// button opacity
-	// background blur
-	style.textContent = `
-		.atvwebplayersdk-playpause-button,
-		.atvwebplayersdk-fastseekback-button,
-		.atvwebplayersdk-fastseekforward-button{
-		  opacity: 0.45 !important;
-		}
-		.atvwebplayersdk-playpause-button:hover,
-		.atvwebplayersdk-fastseekback-button:hover,
-		.atvwebplayersdk-fastseekforward-button:hover{
-		  opacity: 0.8 !important;
-		}
-		.f1makowq{
-			opacity: 0 !important;
-		}
-	`
-	document.head.appendChild(style)
-
 	// no more hover animation on scroll, because it is annoying.
 	document.addEventListener("scroll", () => {
 		document.body.style.pointerEvents = "none"

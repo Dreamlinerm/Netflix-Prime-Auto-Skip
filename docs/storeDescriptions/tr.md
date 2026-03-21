@@ -35,7 +35,6 @@ Platform-Belirli Özellikler:
     - Ana sayfadan ücretli içeriği (filmler, diziler) filtreler
     - Videoların üzerine gelindiğinde bulanıklaştırma efektini kaldırır
     - "Devam" kategorisini sayfanın en üstüne taşır
-    - Xray Hızlı Görünümünü bir video üzerinde gizleyin
 
 - Disney+ (Hotstar, STAR+):
     - Kendini tanıtan reklamları atlar

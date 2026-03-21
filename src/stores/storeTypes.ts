@@ -3,13 +3,11 @@ export type settingsType = {
 		skipIntro: boolean
 		skipCredits: boolean
 		watchCredits: boolean
-		selfAd: boolean
 		skipAd: boolean
 		speedSlider: boolean
 		filterPaid: boolean
 		continuePosition: boolean
 		showRating: boolean
-		xray: boolean
 		improveUI: boolean
 	}
 	Netflix: {
@@ -105,13 +103,11 @@ export const defaultSettings = {
 		skipIntro: true,
 		skipCredits: true,
 		watchCredits: false,
-		selfAd: true,
 		skipAd: true,
 		speedSlider: true,
 		filterPaid: false,
 		continuePosition: true,
 		showRating: true,
-		xray: true,
 		improveUI: true,
 	},
 	Netflix: {

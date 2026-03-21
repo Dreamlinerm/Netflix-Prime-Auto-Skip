@@ -138,7 +138,6 @@ Platform-Specific Features:
     - Skips self-promotional ads (for Prime Video productions)
     - Filters out paid content (movies, series) from the home page
     - Moves the category "Continue" to the top of the page
-    - Hide the Xray Quick View over a video
     - Removes the blur effect when hovering over videos
 
 - Disney+ (Hotstar, STAR+):
