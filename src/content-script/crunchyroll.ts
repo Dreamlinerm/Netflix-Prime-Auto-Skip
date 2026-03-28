@@ -545,7 +545,7 @@ function createLocalList() {
 }
 function filterOldList(isCurrentWeek: boolean, localList: CrunchyList) {
 	let oldList = toRaw(crunchyList.value)
-	const lastElement = localList[localList.length - 1]
+	const lastElement = localList.at(-1)
 	if (!lastElement?.time) return oldList
 	const lastTime = new Date(lastElement.time)
 	const [lastDay, lastHr, lastMin] = [lastTime.getDay(), lastTime.getHours(), lastTime.getMinutes()]

@@ -491,7 +491,7 @@ function getMediaType(card: HTMLElement): MediaType {
 	} else if (isPrimeVideo) {
 		if (url.includes("video/tv")) media_type = "tv"
 		else if (url.includes("video/movie")) media_type = "movie"
-		else media_type = Amazon_getMediaType(card.getAttribute("data-card-entity-type") ?? "")
+		else media_type = Amazon_getMediaType(card.dataset.cardEntityType ?? "")
 	}
 	return media_type
 }
@@ -521,7 +521,7 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 	} else if (isPrimeVideo) {
 		// detail means not live shows
 		if (card.querySelector("a")?.href?.includes("detail")) {
-			if (type == 0) title = Amazon_fixTitle(card.getAttribute("data-card-title") ?? "")
+			if (type == 0) title = Amazon_fixTitle(card.dataset.cardTitle ?? "")
 			else if (type == 1) title = Amazon_fixTitle(card.querySelector("a")?.getAttribute("aria-label") ?? "")
 		}
 	} else if (isHBO) {
@@ -753,7 +753,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		}
 	} else if (isPrimeVideo) {
 		let position: HTMLElement = card
-		if (card.getAttribute("data-card-title")) position = card?.firstChild?.firstChild as HTMLElement
+		if (card.dataset.cardTitle) position = card?.firstChild?.firstChild as HTMLElement
 		else if (card.querySelector('div[data-testid="title-metadata-main"]'))
 			position = card.querySelector('div[data-testid="title-metadata-main"]') as HTMLElement
 		position?.appendChild(div)
