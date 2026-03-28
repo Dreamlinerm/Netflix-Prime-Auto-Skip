@@ -114,5 +114,7 @@
   "pickRating": "등급 선택 임계값",
   "reset": "초기화",
   "dimLowRatingsSwitch": "디밍 낮은 등급",
-  "dimLowRatingsDescription": "가장 낮은 등급으로 어둡게 표시합니다."
+  "dimLowRatingsDescription": "가장 낮은 등급으로 어둡게 표시합니다.",
+  "disabledSettingsOverviewTitle": "비활성화 설정 개요",
+  "disabledSettingsOverviewDescription": "{1} 카테고리에서 {0} 설정을 비활성화했습니다."
 }

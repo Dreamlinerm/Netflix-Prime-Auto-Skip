@@ -114,5 +114,7 @@
   "pickRating": "Scegli soglia valutazione",
   "reset": "Ripristina",
   "dimLowRatingsSwitch": "Sfuma titoli con rating basso",
-  "dimLowRatingsDescription": "Spettacoli Dimm con la valutazione più bassa."
+  "dimLowRatingsDescription": "Spettacoli Dimm con la valutazione più bassa.",
+  "disabledSettingsOverviewTitle": "Panoramica delle impostazioni disabilitate",
+  "disabledSettingsOverviewDescription": "{0} impostazioni disabilitate in {1} categorie."
 }

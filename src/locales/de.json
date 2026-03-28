@@ -114,5 +114,8 @@
   "pickRating": "Pick-Rating-Schwelle",
   "reset": "Zurücksetzen",
   "dimLowRatingsSwitch": "Dimm Low Ratings",
-  "dimLowRatingsDescription": "Dimm-Shows mit der niedrigsten Bewertung."
+  "dimLowRatingsDescription": "Dimm-Shows mit der niedrigsten Bewertung.",
+  "primeVideo": "Prime Video",
+  "disabledSettingsOverviewTitle": "Übersicht der deaktivierten Einstellungen",
+  "disabledSettingsOverviewDescription": "{0} Einstellungen in {1} Kategorien deaktiviert."
 }

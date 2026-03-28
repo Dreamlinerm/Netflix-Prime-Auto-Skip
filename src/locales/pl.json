@@ -114,5 +114,7 @@
   "pickRating": "Próg oceny wyboru",
   "reset": "Reset",
   "dimLowRatingsSwitch": "Dimm Low Ratings",
-  "dimLowRatingsDescription": "Programy Dimm z najniższą oceną."
+  "dimLowRatingsDescription": "Programy Dimm z najniższą oceną.",
+  "disabledSettingsOverviewTitle": "Przegląd wyłączonych ustawień",
+  "disabledSettingsOverviewDescription": "{0} ustawień wyłączonych w {1} kategoriach."
 }

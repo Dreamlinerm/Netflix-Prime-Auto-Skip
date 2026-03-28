@@ -36,10 +36,9 @@
 	</template>
 	<div class="py-1 m-0 flex">
 		<p>{{ $t("user") + " " }}</p>
-		<!-- <p style="text-transform: capitalize">{{ settings.General.pr }}</p> -->
 		<img
 			style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px"
-			alt="profile Picture"
+			alt="profile"
 			:src="
 				settings.General.Crunchyroll_profilePicture
 					? settings.General.Crunchyroll_profilePicture
@@ -89,9 +88,8 @@ const settingsList: Array<
 	"skipIntro" | "skipCredits" | "skipAfterCredits" | "releaseCalendar" | "profile" | "bigPlayer"
 > = ["skipAfterCredits", "releaseCalendar", "bigPlayer", "profile"]
 function setTimeout(num: string | null) {
-	const parsed = parseInt(num || "0")
+	const parsed = Number.parseInt(num || "0")
 	if (parsed > 0) settings.value.General.Crunchyroll_skipTimeout = parsed
 	else settings.value.General.Crunchyroll_skipTimeout = 0
 }
 </script>
-<style scoped></style>

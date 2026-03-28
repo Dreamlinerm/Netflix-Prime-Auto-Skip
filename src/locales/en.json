@@ -110,9 +110,12 @@
   "skipAfterCreditsSwitch": "Skip After Credits Scene:",
   "skipAfterCreditsDescription": "Skip the Scene after the Credits.",
   "editRatings": "Edit Rating thresholds and colors:",
-  "dimLowRatingsDescription": "Dimm Shows with the lowest Rating.",
   "pickColor": "Pick color",
   "pickRating": "Pick Rating threshold",
   "reset": "Reset",
-  "dimLowRatingsSwitch": "Dimm Low Ratings"
+  "dimLowRatingsSwitch": "Dimm Low Ratings",
+  "dimLowRatingsDescription": "Dimm Shows with the lowest Rating.",
+  "primeVideo": "Prime Video",
+  "disabledSettingsOverviewTitle": "Disabled settings overview",
+  "disabledSettingsOverviewDescription": "{0} settings disabled in {1} categories."
 }

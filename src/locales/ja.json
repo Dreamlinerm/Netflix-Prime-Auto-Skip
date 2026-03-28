@@ -114,5 +114,7 @@
   "pickRating": "ピック評価基準値",
   "reset": "リセット",
   "dimLowRatingsSwitch": "ディム低格付け",
-  "dimLowRatingsDescription": "最低視聴率のDIMMショー"
+  "dimLowRatingsDescription": "最低視聴率のDIMMショー",
+  "disabledSettingsOverviewTitle": "無効設定の概要",
+  "disabledSettingsOverviewDescription": "{0}の設定が{1}のカテゴリで無効になっている。"
 }

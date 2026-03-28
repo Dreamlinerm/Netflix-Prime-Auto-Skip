@@ -114,5 +114,7 @@
   "pickRating": "Välj betygsgräns",
   "reset": "Återställning",
   "dimLowRatingsSwitch": "Dimm låg betyg",
-  "dimLowRatingsDescription": "Dimm-program med lägst betyg."
+  "dimLowRatingsDescription": "Dimm-program med lägst betyg.",
+  "disabledSettingsOverviewTitle": "Översikt över inaktiverade inställningar",
+  "disabledSettingsOverviewDescription": "{0} inställningar inaktiverade i {1} kategorier."
 }

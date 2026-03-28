@@ -114,5 +114,7 @@
   "pickRating": "Umbral de puntuación",
   "reset": "Restablecer",
   "dimLowRatingsSwitch": "Dimm baja clasificación",
-  "dimLowRatingsDescription": "Dimm Shows con la calificación más baja."
+  "dimLowRatingsDescription": "Dimm Shows con la calificación más baja.",
+  "disabledSettingsOverviewTitle": "Resumen de ajustes desactivados",
+  "disabledSettingsOverviewDescription": "{0} ajustes desactivados en {1} categorías."
 }

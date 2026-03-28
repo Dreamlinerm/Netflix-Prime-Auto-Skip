@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { StreamingService as BaseStreamingService } from "@/constants/streamingServices"
 
+const { t } = useI18n()
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
 type StreamingService = BaseStreamingService | "Video"
@@ -69,7 +70,7 @@ function setSharedSettingValue(setting: string, value: boolean) {
 }
 
 function getCategoryTitle(category: StreamingService) {
-	if (category === "Video") return "Shared Settings"
+	if (category === "Video") return t("sharedSettings")
 	if (category === "Amazon") return "Prime Video"
 	if (category === "Disney") return "Disney+"
 	return category
@@ -121,10 +122,14 @@ watch(hasDisabledSetting, (value) => {
 
 <template>
 	<div class="overview-header">
-		<h1>Disabled settings overview</h1>
+		<h1>{{ $t("disabledSettingsOverviewTitle") }}</h1>
 		<p class="description">
-			{{ totalDisabledSettings }} settings disabled in
-			{{ disabledSettingsByCategory.length + (disabledSharedSettings.length ? 1 : 0) }} categories.
+			{{
+				$t("disabledSettingsOverviewDescription", [
+					totalDisabledSettings,
+					disabledSettingsByCategory.length + (disabledSharedSettings.length ? 1 : 0),
+				])
+			}}
 		</p>
 	</div>
 

@@ -114,5 +114,7 @@
   "pickRating": "Escolha um limite de classificação",
   "reset": "Reiniciar",
   "dimLowRatingsSwitch": "Opções para classificações baixas",
-  "dimLowRatingsDescription": "Programas Dimm com a classificação mais baixa."
+  "dimLowRatingsDescription": "Programas Dimm com a classificação mais baixa.",
+  "disabledSettingsOverviewTitle": "Vista geral das definições de desativação",
+  "disabledSettingsOverviewDescription": "{0} definições desactivadas em {1} categorias."
 }

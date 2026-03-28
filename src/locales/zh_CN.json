@@ -114,5 +114,7 @@
   "pickRating": "挑选评级阈值",
   "reset": "重置",
   "dimLowRatingsSwitch": "调光低评级",
-  "dimLowRatingsDescription": "评分最低的 Dimm 节目。"
+  "dimLowRatingsDescription": "评分最低的 Dimm 节目。",
+  "disabledSettingsOverviewTitle": "禁用设置概览",
+  "disabledSettingsOverviewDescription": "在 {1} 类别中禁用 {0} 设置。"
 }

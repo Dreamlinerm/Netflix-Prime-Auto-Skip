@@ -114,5 +114,7 @@
   "pickRating": "Seçim Derecelendirme eşiği",
   "reset": "Sıfırla",
   "dimLowRatingsSwitch": "Dimm Düşük Değerler",
-  "dimLowRatingsDescription": "En Düşük Puanlı Dimm Programları."
+  "dimLowRatingsDescription": "En Düşük Puanlı Dimm Programları.",
+  "disabledSettingsOverviewTitle": "Devre dışı ayarlara genel bakış",
+  "disabledSettingsOverviewDescription": "{1} kategoride {0} ayar devre dışı bırakıldı."
 }

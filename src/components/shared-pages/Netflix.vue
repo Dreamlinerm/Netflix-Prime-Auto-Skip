@@ -39,7 +39,7 @@
 		<p style="text-transform: capitalize">{{ settings.General.profileName }}</p>
 		<img
 			style="margin-left: auto; height: 40px; border-radius: 4px; margin-right: 8px"
-			alt="profile Picture"
+			alt="profile"
 			:src="
 				settings.General.profilePicture
 					? settings.General.profilePicture
@@ -64,4 +64,3 @@ const settingsList: Array<"skipRecap" | "skipBlocked" | "profile" | "removeGames
 	"removeGames",
 ]
 </script>
-<style scoped></style>
