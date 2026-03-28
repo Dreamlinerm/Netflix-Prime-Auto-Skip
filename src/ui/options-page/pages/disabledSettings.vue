@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import type { StreamingService as BaseStreamingService } from "@/constants/streamingServices"
+
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
-type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO" | "Video" | "Paramount"
+type StreamingService = BaseStreamingService | "Video"
 const settingsCategories: Array<StreamingService> = [
 	"Video",
 	"Amazon",

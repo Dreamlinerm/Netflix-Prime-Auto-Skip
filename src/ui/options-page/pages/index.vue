@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import type { StreamingService as BaseStreamingService } from "@/constants/streamingServices"
+
 // go to Shared Setting Page
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
-type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO" | "Video"
+type StreamingService = BaseStreamingService | "Video"
 const settingsCategories: Array<StreamingService> = ["Video", "Amazon", "Netflix", "Disney", "Crunchyroll", "HBO"]
 const hasDisabledSetting = computed(() => {
 	return settingsCategories.some((category) => {

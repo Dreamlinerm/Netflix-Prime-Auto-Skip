@@ -195,11 +195,10 @@
 	</a>
 </template>
 <script setup lang="ts">
+import { streamingServices } from "@/constants/streamingServices"
+
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
-type StreamingService = "Amazon" | "Netflix" | "Disney" | "Crunchyroll" | "HBO" | "Paramount"
-
-const streamingServices: Array<StreamingService> = ["Amazon", "Netflix", "Disney", "Crunchyroll", "HBO", "Paramount"]
 
 const skipIntro = computed({
 	get: () => streamingServices.every((service) => settings.value[service].skipIntro),
