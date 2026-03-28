@@ -46,6 +46,7 @@ async function startCrunchyroll() {
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	if (settings.value.Video.doubleClick) startdoubleClick()
 	if (settings.value.Crunchyroll.speedSlider) Crunchyroll_SpeedKeyboard()
+	if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle()
 	CrunchyrollObserver.observe(document, config)
 }
 // #region Crunchyroll
@@ -54,7 +55,6 @@ const CrunchyrollObserver = new MutationObserver(Crunchyroll)
 async function Crunchyroll() {
 	if (settings.value.Crunchyroll?.profile) Crunchyroll_profile()
 	const video = document.querySelector("video")
-	if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle(video)
 	if (!video) return
 	const time = video?.currentTime
 	Crunchyroll_Intro_Outro(video, time)
@@ -84,48 +84,21 @@ async function Crunchyroll_AutoPickProfile() {
 		})
 	}
 }
-async function Crunchyroll_bigPlayerStyle(video: HTMLVideoElement | null) {
-	const styleId = "enhanced-crunchyroll-big-player-style"
+const styleId = "enhanced-crunchyroll-big-player-style"
+async function Crunchyroll_bigPlayerStyle() {
 	const existingStyle = document.getElementById(styleId)
-	if (!video) {
-		existingStyle?.remove()
-		return
-	}
-	// check if style already exists
 	if (existingStyle) return
 
-	// show header on hover
+	// keep the header above the player in normal flow (not sticky/overlayed)
 	const style = document.createElement("style")
 	style.id = styleId
 	const styles = /*css*/ `
       .video-player-wrapper{
-          max-Height: calc(100vw / 1.7777);
+					max-height: calc(100vw / 1.7777);
           height: 100vh;
       }
-			[class^="app-layout__header"] {
-					position: absolute;
-          top: 0;
-          width: 100%;
-          height: 3.75rem;
-          z-index: 999;
-			}
-      .erc-large-header {
-          position: absolute;
-          top: 0;
-          width: 100%;
-          height: 3.75rem;
-          z-index: 999;
-      }
-      .erc-large-header .header-content {
-          position: absolute;
-          top: -3.75rem;
-          transition: top 0.4s, top 0.4s;
-      }
-      .erc-large-header:hover .header-content {
-          top: 0;
-      }
-    `
-	style.appendChild(document.createTextNode(styles))
+  `
+	style.textContent = styles
 	document.head.appendChild(style)
 }
 

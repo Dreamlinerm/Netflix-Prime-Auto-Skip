@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.95
+
+- Crunchyroll: Removed header adjustment of big player style, because fullscreen button not clickable.
+
+
 ## 1.1.94
 
 - Amazon: fixed all functions, because of changed ui.
