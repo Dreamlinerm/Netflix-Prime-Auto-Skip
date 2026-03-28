@@ -51,6 +51,15 @@ TMDB_TOKEN=...
 - `npm run transDeepL` translate .translation/deepl.EN.json and output them into the locales files directly
 - `npm run hours` calculate the hours spent on the project
 - `npm run copyDocsFtoC` copy the docs from the firefox folder to the chrome folder
+- `web-ext sign --channel listed --api-key $env:AMO_JWT_ISSUER --api-secret $env:AMO_JWT_SECRET --source-dir dist/firefox --artifacts-dir dist/` sign the extension for release.
+- `web-ext sign --channel unlisted --api-key $env:AMO_JWT_ISSUER --api-secret $env:AMO_JWT_SECRET --source-dir dist/firefox --artifacts-dir dist/` sign the extension for unlisted release.
+
+### Firefox review:
+
+Firefox reviewers install instructions:
+
+- `npm install` install all required packages
+- `npm run build:firefox` build firefox zip file for release.
 
 ## Development tools
 
