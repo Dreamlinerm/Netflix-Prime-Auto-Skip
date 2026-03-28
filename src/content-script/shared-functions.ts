@@ -9,8 +9,8 @@ const today = date.toISOString().split("T")[0]
 
 const ua = navigator.userAgent
 const isMobile = /mobile|streamingEnhanced/i.test(ua)
-let url = window.location.href
-const hostname = window.location.hostname
+let url = globalThis.location.href
+const hostname = globalThis.location.hostname
 const title = document.title
 let isPrimeVideo = /amazon|primevideo/i.test(hostname) && (/video/i.test(title) || /video/i.test(url))
 let isNetflix = /netflix/i.test(hostname)
@@ -57,7 +57,7 @@ export function getCurrentEpisodeNumber(title: string | null | undefined) {
 	const nums = title.match(/\d+/g)?.map(Number) ?? []
 	if (nums.length === 0) return null
 	// usually [season, episode] -> take last number
-	return nums[nums.length - 1]
+	return nums.at(-1)
 }
 
 type MovieInfo = {
@@ -136,9 +136,9 @@ async function garbageCollection() {
 export function parseAdTime(adTimeText: string | null) {
 	if (!adTimeText) return false
 	const adTime: number =
-		parseInt(/:\d+/.exec(adTimeText ?? "")?.[0].substring(1) ?? "") +
-		parseInt(/\d+/.exec(adTimeText ?? "")?.[0] ?? "") * 60
-	if (isNaN(adTime)) return false
+		Number.parseInt(/:\d+/.exec(adTimeText ?? "")?.[0].substring(1) ?? "") +
+		Number.parseInt(/\d+/.exec(adTimeText ?? "")?.[0] ?? "") * 60
+	if (Number.isNaN(adTime)) return false
 	return adTime
 }
 
@@ -187,7 +187,7 @@ export function createSlider(
 	}
 	slider.oninput = function (event) {
 		event.stopPropagation()
-		const sliderValue = parseFloat(slider.value)
+		const sliderValue = Number.parseFloat(slider.value)
 		speed.textContent = (sliderValue / 10).toFixed(1) + "x"
 		video.playbackRate = sliderValue / 10
 		videoSpeed.value = sliderValue / 10
@@ -259,7 +259,7 @@ async function getMovieInfo(
 const uuidRegex = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/g
 function showRating() {
 	if (isDisney) {
-		url = window.location.href
+		url = globalThis.location.href
 		// disable search and suggested movies
 		if (url.includes("search")) return false
 		if (url.includes("entity")) {
@@ -272,7 +272,7 @@ function showRating() {
 		return true
 	} else if (isPrimeVideo) {
 		// suggested movies
-		if (window.location.href.includes("detail")) {
+		if (globalThis.location.href.includes("detail")) {
 			return document.querySelector('[data-testid="btf-related-tab"]')?.getAttribute("tabIndex") == "0"
 		}
 		return true
@@ -345,7 +345,8 @@ function useDBCache(title: string, card: HTMLElement, media_type: string | null)
 		setRatingOnCard(card, DBCache[title], title)
 	}
 }
-function Amazon_getMediaType(type: string): "tv" | "movie" | null {
+export type MediaType = "tv" | "movie" | null
+function Amazon_getMediaType(type: string): MediaType {
 	if (!type) return null
 	if (type.toLowerCase().includes("tv")) return "tv"
 	if (type.toLowerCase().includes("movie")) return "movie"
@@ -384,7 +385,7 @@ function isElementVisible(el: HTMLElement): boolean {
 }
 
 async function addRating(showRating: boolean, optionHideTitles: boolean) {
-	url = window.location.href
+	url = globalThis.location.href
 	const AllTitleCardsTypes = getAllTitleCardsTypes()
 	// on disney there are multiple images for the same title so only use the first one
 	let lastTitle = ""
@@ -470,8 +471,8 @@ function addHideTitleButton(card: HTMLElement, title: string) {
 	}
 	card.parentElement?.appendChild(button)
 }
-function getMediaType(card: HTMLElement): "tv" | "movie" | null {
-	let media_type: "tv" | "movie" | null = null
+function getMediaType(card: HTMLElement): MediaType {
+	let media_type: MediaType = null
 	if (isNetflix) {
 		if (url.includes("genre/83")) media_type = "tv"
 		else if (url.includes("genre/34399")) media_type = "movie"
@@ -516,7 +517,7 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 			card.querySelector("img")?.getAttribute("alt") ||
 			card.querySelector("span")?.textContent ||
 			""
-		title = rawTitle.replace(/(S\d+\sE\d+)/g, "")
+		title = rawTitle.replaceAll(/(S\d+\sE\d+)/g, "")
 	} else if (isPrimeVideo) {
 		// detail means not live shows
 		if (card.querySelector("a")?.href?.includes("detail")) {
@@ -609,12 +610,12 @@ function Amazon_fixTitle(title: string | undefined) {
 		title
 			?.split(" - ")[0]
 			?.split(" – ")[0]
-			?.replace(/(S\d+)/g, "")
-			?.replace(/ \[.*\]/g, "")
-			?.replace(/\s\(.*\)/g, "")
-			?.replace(/:?\sStaffel-?\s\d+/g, "")
-			?.replace(/:?\sSeason-?\s\d+/g, "")
-			?.replace(/ \/ \d/g, "")
+			?.replaceAll(/(S\d+)/g, "")
+			?.replaceAll(/ \[.*\]/g, "")
+			?.replaceAll(/\s\(.*\)/g, "")
+			?.replaceAll(/:?\sStaffel-?\s\d+/g, "")
+			?.replaceAll(/:?\sSeason-?\s\d+/g, "")
+			?.replaceAll(/ \/ \d/g, "")
 			?.split(": Die komplette")[0]
 			// nicht sicher
 			?.split(": The complete")[0]
@@ -672,8 +673,6 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		let releaseDate = ""
 		if (settings.value.Video?.showYear && data?.release_date) {
 			releaseDate = new Date(data?.release_date)?.getFullYear() + "-"
-			// const year = new Date(data?.release_date)?.getYear();
-			// releaseDate = year >= 100 ? (year + " ").substring(1) : year + " ";
 		}
 		div.textContent = releaseDate + data.score?.toFixed(1)
 		div.setAttribute(
@@ -768,7 +767,6 @@ function OnFullScreenChange() {
 		video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
 	else if (isNetflix || isHotstar || isHBO || isParamount) video = document.querySelector("video") as HTMLVideoElement
 	else video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
-	//TODO: window.fullScreen
 	if (document.fullscreenElement && video) {
 		video.play()
 		console.log("auto-played on fullscreen")

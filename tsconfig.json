@@ -2,9 +2,9 @@
 	"compilerOptions": {
 		"forceConsistentCasingInFileNames": true,
 		"incremental": true,
-		"target": "ES6",
+		"target": "ESNext",
 		"jsx": "preserve",
-		"lib": ["ES6", "DOM"],
+		"lib": ["ESNext", "DOM"],
 		"useDefineForClassFields": true,
 		"module": "ESNext",
 		"moduleResolution": "Bundler",

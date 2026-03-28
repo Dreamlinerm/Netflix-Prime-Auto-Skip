@@ -1,4 +1,3 @@
-import { env } from "node:process"
 import { startSharedFunctions, createSlider, Platforms } from "@/content-script/shared-functions"
 import { sendMessage } from "webext-bridge/content-script"
 // Global Variables
@@ -129,12 +128,12 @@ async function Paramount_SpeedSlider(video: HTMLVideoElement) {
 					alreadySlider.value = (newValue * 10).toString()
 				})
 			}
-			if (video.playbackRate != parseFloat(alreadySlider.value) / 10) {
-				video.playbackRate = parseFloat(alreadySlider.value) / 10
+			if (video.playbackRate != Number.parseFloat(alreadySlider.value) / 10) {
+				video.playbackRate = Number.parseFloat(alreadySlider.value) / 10
 			}
 			alreadySlider.oninput = function () {
-				if (speed) speed.textContent = (parseFloat(alreadySlider.value) / 10).toFixed(1) + "x"
-				video.playbackRate = parseFloat(alreadySlider.value) / 10
+				if (speed) speed.textContent = (Number.parseFloat(alreadySlider.value) / 10).toFixed(1) + "x"
+				video.playbackRate = Number.parseFloat(alreadySlider.value) / 10
 			}
 		}
 	}
@@ -166,7 +165,7 @@ async function Paramount_doubleClick() {
 	}
 }
 async function Paramount_SkipAd(video: HTMLVideoElement) {
-	const adTime = parseInt(document.querySelector("div.ad-info-manager-circular-loader-copy")?.textContent ?? "0")
+	const adTime = Number.parseInt(document.querySelector("div.ad-info-manager-circular-loader-copy")?.textContent ?? "0")
 	if (adTime > 0 && !lastAdTimeText) {
 		lastAdTimeText = adTime
 		resetLastAdTimeText(3000)

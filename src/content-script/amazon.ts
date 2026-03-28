@@ -236,7 +236,7 @@ export function shouldRemoveWholePaidSection(visibleCardsCount: number, paidCard
 }
 
 async function Amazon_FilterPaid() {
-	const currentUrl = window.location.href
+	const currentUrl = globalThis.location.href
 	// only run in storefront-like pages where rows are rendered
 	if (!shouldRunAmazonPaidFilter(currentUrl)) return
 

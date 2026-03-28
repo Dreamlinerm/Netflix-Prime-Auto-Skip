@@ -5,7 +5,7 @@ startSharedFunctions(Platforms.Crunchyroll)
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const { data: crunchyList, promise: crunchyListPromise } = useBrowserSyncStorage<CrunchyList>("crunchyList", [], false)
-const url = window.location.href
+const url = globalThis.location.href
 const date = new Date()
 const config = { attributes: true, childList: true, subtree: true }
 async function logStartOfAddon() {
@@ -520,7 +520,7 @@ function addShowsToList(position: HTMLElement, list: CrunchyList) {
 	})
 }
 function clickOnCurrentDay() {
-	const days = document.querySelectorAll(".specific-date [datetime]") as NodeListOf<HTMLTimeElement>
+	const days = document.querySelectorAll(".specific-date [datetime]")
 	for (const day of days) {
 		const dateOnPage = new Date(day?.getAttribute("datetime") ?? "")
 		// if the day of the week is the same as today click on it, like if its Monday click on Monday

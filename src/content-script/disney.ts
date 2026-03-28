@@ -9,7 +9,7 @@ import {
 const isFirefox = typeof browser !== "undefined"
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 
-const hostname = window.location.hostname
+const hostname = globalThis.location.hostname
 const isDisney = /disneyplus|starplus/i.test(hostname)
 const isHotstar = /hotstar|jiostar|jiocinema/i.test(hostname)
 const isStarPlus = /starplus/i.test(hostname)
@@ -217,7 +217,7 @@ async function Disney_addHomeButton() {
 			homeButton.style.backgroundColor = "#40424A"
 		}
 		homeButton.onclick = function () {
-			window.location.href = "/"
+			globalThis.location.href = "/"
 		}
 		buttonDiv.appendChild(homeButton)
 	}
@@ -281,11 +281,11 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 					alreadySlider.value = (newValue * 10).toString()
 				})
 			}
-			if (video.playbackRate !== parseFloat(alreadySlider.value) / 10) {
-				video.playbackRate = parseFloat(alreadySlider.value) / 10
+			if (video.playbackRate !== Number.parseFloat(alreadySlider.value) / 10) {
+				video.playbackRate = Number.parseFloat(alreadySlider.value) / 10
 			}
 			alreadySlider.oninput = function () {
-				const sliderValue = parseFloat(alreadySlider.value)
+				const sliderValue = Number.parseFloat(alreadySlider.value)
 				if (speed) speed.textContent = (sliderValue / 10).toFixed(1) + "x"
 				video.playbackRate = sliderValue / 10
 				videoSpeed.value = sliderValue / 10

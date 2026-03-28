@@ -124,7 +124,6 @@ function decodeHtmlEntities(str: string) {
 	return new DOMParser().parseFromString("<!doctype html><body>" + str, "text/html").body.textContent
 }
 function Netflix_profile() {
-	// AutoPickProfile();
 	const currentProfile = document.querySelector("[href*='/YourAccount']")
 	if (currentProfile) {
 		// there is a space before the - thats why slice -1
@@ -141,7 +140,7 @@ function Netflix_profile() {
 	}
 }
 function AutoPickProfile() {
-	if (!window.location.pathname.includes("Profile") && !window.location.pathname.includes("profile")) {
+	if (!globalThis.location.pathname.includes("Profile") && !globalThis.location.pathname.includes("profile")) {
 		const profileButtons = document.querySelectorAll(".profile-name")
 		profileButtons.forEach((button) => {
 			if (button.textContent === settings.value.General.profileName) {
@@ -175,10 +174,10 @@ function parseAdTime(adTimeText: string | null | undefined) {
 	let adTime: number
 	if (adTimeText.includes(":")) {
 		adTime =
-			parseInt(/:\d+/.exec(adTimeText ?? "")?.[0].substring(1) ?? "") +
-			parseInt(/\d+/.exec(adTimeText ?? "")?.[0] ?? "") * 60
-	} else adTime = parseInt(adTimeText)
-	if (isNaN(adTime)) return 0
+			Number.parseInt(/:\d+/.exec(adTimeText ?? "")?.[0].substring(1) ?? "") +
+			Number.parseInt(/\d+/.exec(adTimeText ?? "")?.[0] ?? "") * 60
+	} else adTime = Number.parseInt(adTimeText)
+	if (Number.isNaN(adTime)) return 0
 	return adTime
 }
 
