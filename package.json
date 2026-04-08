@@ -75,7 +75,7 @@
 		"unplugin-auto-import": "^21.0.0",
 		"unplugin-icons": "^23.0.1",
 		"unplugin-vue-components": "^31.0.0",
-		"vite": "^7.0.8",
+		"vite": "^7.3.2",
 		"vite-plugin-html": "^3.2.2",
 		"vite-plugin-vue-devtools": "^8.0.0",
 		"vite-plugin-zip-pack": "^1.2.4",
