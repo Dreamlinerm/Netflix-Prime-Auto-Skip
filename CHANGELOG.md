@@ -4,6 +4,7 @@
 
 - Crunchyroll: Removed header adjustment of big player style, because fullscreen button not clickable.
 - Crunchyroll: fixed skip intro, fixed removed selected speed when changing episode.
+- Amazon: reverted back to old player ui.
 
 
 ## 1.1.94
