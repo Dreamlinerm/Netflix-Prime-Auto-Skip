@@ -58,8 +58,301 @@ async function Crunchyroll() {
 	if (!video) return
 	const time = video?.currentTime
 	Crunchyroll_Intro_Outro(video, time)
+	Crunchyroll_hideNativeSpeedControl()
+	Crunchyroll_autoHideNativeSkipButtons()
+	Crunchyroll_UpNextButton()
 	if (settings.value.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider(video)
 	if (settings.value.Video?.scrollVolume) Crunchyroll_scrollVolume(video)
+}
+
+const crunchyrollNextEpisodeButtonId = "enhanced-crunchyroll-next-episode-button"
+function Crunchyroll_getSkipIntroButton(): HTMLElement | null {
+	const icon = document.querySelector('svg[data-testid="skip-intro-icon"]') as SVGElement | null
+	return (icon?.closest("button") as HTMLElement | null) ?? null
+}
+
+function Crunchyroll_getNextEpisodeUrl(): string | null {
+	const currentUrl = globalThis.location.href
+
+	// 1) Best-effort: standard document hint for pagination.
+	const relNext = document.querySelector('link[rel="next"][href]') as HTMLLinkElement | null
+	const relNextHref = relNext?.href?.trim()
+	if (relNextHref && relNextHref !== currentUrl) return relNextHref
+
+	// 2) Try to find an "Up Next / Next Episode" link in the DOM (varies by UI / locale).
+	const candidates = Array.from(document.querySelectorAll('a[href*="/watch/"][href]')) as HTMLAnchorElement[]
+	for (const a of candidates) {
+		const href = a.href?.trim()
+		if (!href || href === currentUrl) continue
+		const label = (a.getAttribute("aria-label") ?? a.textContent ?? "").trim().toLowerCase()
+		if (!label) continue
+
+		// Keep this list short and robust; it’s only used as a hint.
+		if (
+			label.includes("up next") ||
+			label.includes("next episode") ||
+			label.includes("siguiente") ||
+			label.includes("prochain") ||
+			label.includes("nächste") ||
+			label.includes("seguinte")
+		) {
+			return href
+		}
+	}
+
+	return null
+}
+
+function Crunchyroll_UpNextButton() {
+	const nextUrl = Crunchyroll_getNextEpisodeUrl()
+	const existing = document.getElementById(crunchyrollNextEpisodeButtonId)
+
+	// Don't show "Next episode" mid-episode; only near the end where it makes sense.
+	const video = document.querySelector("video") as HTMLVideoElement | null
+	if (!Crunchyroll_isNearVideoEnd(video)) {
+		existing?.remove()
+		return
+	}
+
+	// Only show the button if we can confidently resolve a next-episode URL.
+	if (!nextUrl) {
+		existing?.remove()
+		return
+	}
+
+	// Prefer the existing control stack (same place as the speed slider).
+	const position =
+		(document.querySelector('[data-testid="bottom-right-controls-stack"]') as HTMLElement) ||
+		(document.querySelector('[data-testid="player-controls-root"]') as HTMLElement)
+	if (!position) return
+
+	if (existing) {
+		existing.setAttribute("data-next-url", nextUrl)
+		if ((existing as HTMLElement).dataset.enhancedAutohideInit !== "1") {
+			Crunchyroll_setupAutoHideNextEpisodeButton(existing as HTMLElement)
+		}
+		return
+	}
+
+	const button = document.createElement("button")
+	button.id = crunchyrollNextEpisodeButtonId
+	button.type = "button"
+	button.setAttribute("data-next-url", nextUrl)
+	button.setAttribute("aria-label", "Next episode")
+	button.textContent = "Siguiente"
+	button.style.cssText =
+		"margin-left:8px;padding:6px 10px;border-radius:9999px;border:1px solid rgba(255,255,255,0.6);background:rgba(0,0,0,0.35);color:white;font-weight:600;cursor:pointer;pointer-events:auto;"
+
+	button.onclick = (event) => {
+		event.stopPropagation()
+		event.preventDefault()
+		const url = button.getAttribute("data-next-url")
+		if (url) globalThis.location.href = url
+	}
+
+	position.prepend(button)
+	Crunchyroll_setupAutoHideNextEpisodeButton(button)
+}
+
+let crunchyrollNextButtonAutoHideSetup = false
+let crunchyrollNextButtonHideTimeout: number | undefined
+let crunchyrollNativeButtonsAutoHideSetup = false
+const crunchyrollAutoHideTimeouts = new WeakMap<HTMLElement, number>()
+
+function Crunchyroll_isNearVideoEnd(video: HTMLVideoElement | null): boolean {
+	if (!video) return false
+	const duration = video.duration
+	const currentTime = video.currentTime
+	if (!Number.isFinite(duration) || duration <= 0) return false
+	if (!Number.isFinite(currentTime) || currentTime < 0) return false
+
+	const remaining = duration - currentTime
+	// Show when last 60s OR last 10% of the video (whichever comes first).
+	return remaining <= 60 || currentTime / duration >= 0.9
+}
+
+function Crunchyroll_getPlayerRoot(): HTMLElement | null {
+	return (
+		(document.querySelector('[data-testid="player-controls-root"]') as HTMLElement) ||
+		(document.querySelector(".video-player-wrapper") as HTMLElement) ||
+		((document.querySelector("video") as HTMLElement | null)?.parentElement as HTMLElement | null)
+	)
+}
+
+function Crunchyroll_isPlayerUiActive(): boolean {
+	const controlsRoot = document.querySelector('[data-testid="player-controls-root"]') as HTMLElement | null
+	const bottomControls = controlsRoot?.querySelector('[data-testid="bottom-controls-autohide"]') as HTMLElement | null
+	const el = bottomControls || controlsRoot
+	if (!el) return false
+	const style = window.getComputedStyle(el)
+	if (style.display === "none") return false
+	if (style.visibility === "hidden") return false
+	// When controls autohide, they are commonly faded out.
+	const opacity = Number.parseFloat(style.opacity || "1")
+	if (Number.isFinite(opacity) && opacity <= 0.05) return false
+	return true
+}
+
+function Crunchyroll_setupAutoHide(button: HTMLElement, timeoutMs: number) {
+	if (!button) return
+	if (button.dataset.enhancedAutohideInit === "1") return
+	button.dataset.enhancedAutohideInit = "1"
+
+	button.style.transition = button.style.transition || "opacity 150ms ease"
+
+	const show = () => {
+		button.style.opacity = "1"
+		button.style.pointerEvents = "auto"
+	}
+	const hide = () => {
+		button.style.opacity = "0"
+		button.style.pointerEvents = "none"
+	}
+	const scheduleHide = () => {
+		const existingTimeout = crunchyrollAutoHideTimeouts.get(button)
+		if (existingTimeout) window.clearTimeout(existingTimeout)
+		const t = window.setTimeout(() => {
+			// don't hide while interacting
+			if (!document.contains(button)) return
+			if (button.matches(":hover") || button.matches(":focus-visible")) return
+			hide()
+		}, timeoutMs)
+		crunchyrollAutoHideTimeouts.set(button, t)
+	}
+
+	// Start visible, then hide.
+	show()
+	scheduleHide()
+
+	button.addEventListener("mouseenter", () => {
+		const existingTimeout = crunchyrollAutoHideTimeouts.get(button)
+		if (existingTimeout) window.clearTimeout(existingTimeout)
+		show()
+	})
+	button.addEventListener("mouseleave", () => scheduleHide())
+	button.addEventListener("focusin", () => {
+		const existingTimeout = crunchyrollAutoHideTimeouts.get(button)
+		if (existingTimeout) window.clearTimeout(existingTimeout)
+		show()
+	})
+	button.addEventListener("focusout", () => scheduleHide())
+}
+
+function Crunchyroll_isUiEnabledElement(el: HTMLElement): boolean {
+	// We must not force-show buttons that Crunchyroll has disabled for mid-episode.
+	// We intentionally ignore opacity because we use opacity to hide; we only check structural visibility.
+	if (!el) return false
+	if (el.getAttribute("aria-hidden") === "true") return false
+	const style = window.getComputedStyle(el)
+	if (style.display === "none") return false
+	if (style.visibility === "hidden") return false
+	return true
+}
+
+function Crunchyroll_wakeAutoHiddenButtons() {
+	// Called when the user moves the cursor and Crunchyroll shows its UI.
+	// We should only show buttons if Crunchyroll still considers them visible/enabled.
+	const video = document.querySelector("video") as HTMLVideoElement | null
+
+	// Next episode button: only near end.
+	const nextBtn = document.getElementById(crunchyrollNextEpisodeButtonId) as HTMLElement | null
+	if (nextBtn) {
+		if (Crunchyroll_isNearVideoEnd(video)) {
+			nextBtn.style.opacity = "1"
+			nextBtn.style.pointerEvents = "auto"
+			const existingTimeout = crunchyrollAutoHideTimeouts.get(nextBtn)
+			if (existingTimeout) window.clearTimeout(existingTimeout)
+			const t = window.setTimeout(() => {
+				if (!document.contains(nextBtn)) return
+				if (nextBtn.matches(":hover") || nextBtn.matches(":focus-visible")) return
+				nextBtn.style.opacity = "0"
+				nextBtn.style.pointerEvents = "none"
+			}, 5000)
+			crunchyrollAutoHideTimeouts.set(nextBtn, t)
+		} else {
+			nextBtn.style.opacity = "0"
+			nextBtn.style.pointerEvents = "none"
+		}
+	}
+
+	// Native skip buttons: show only if Crunchyroll still has them active/visible.
+	const skipIntroBtn = Crunchyroll_getSkipIntroButton()
+	if (skipIntroBtn && Crunchyroll_isUiEnabledElement(skipIntroBtn)) {
+		skipIntroBtn.style.opacity = "1"
+		skipIntroBtn.style.pointerEvents = "auto"
+		const existingTimeout = crunchyrollAutoHideTimeouts.get(skipIntroBtn)
+		if (existingTimeout) window.clearTimeout(existingTimeout)
+		// If the player UI is active, hide together with it (fast polling until it disappears).
+		// Otherwise, fallback to 5s.
+		if (Crunchyroll_isPlayerUiActive()) {
+			const startedAt = Date.now()
+			const poll = window.setInterval(() => {
+				// safety stop after 30s
+				if (Date.now() - startedAt > 30_000) {
+					window.clearInterval(poll)
+					return
+				}
+				if (!document.contains(skipIntroBtn)) {
+					window.clearInterval(poll)
+					return
+				}
+				if (skipIntroBtn.matches(":hover") || skipIntroBtn.matches(":focus-visible")) return
+				if (!Crunchyroll_isPlayerUiActive()) {
+					skipIntroBtn.style.opacity = "0"
+					skipIntroBtn.style.pointerEvents = "none"
+					window.clearInterval(poll)
+				}
+			}, 150)
+			// store interval id so we can clear on next wake
+			crunchyrollAutoHideTimeouts.set(skipIntroBtn, poll as unknown as number)
+		} else {
+			const t = window.setTimeout(() => {
+				if (!document.contains(skipIntroBtn)) return
+				if (skipIntroBtn.matches(":hover") || skipIntroBtn.matches(":focus-visible")) return
+				skipIntroBtn.style.opacity = "0"
+				skipIntroBtn.style.pointerEvents = "none"
+			}, 5000)
+			crunchyrollAutoHideTimeouts.set(skipIntroBtn, t)
+		}
+	}
+}
+
+function Crunchyroll_setupPlayerWakeListeners() {
+	if (crunchyrollNativeButtonsAutoHideSetup) return
+	crunchyrollNativeButtonsAutoHideSetup = true
+	const playerRoot = Crunchyroll_getPlayerRoot()
+	const onMove = () => Crunchyroll_wakeAutoHiddenButtons()
+	playerRoot?.addEventListener("mousemove", onMove, { passive: true })
+	playerRoot?.addEventListener("touchstart", onMove, { passive: true })
+}
+
+function Crunchyroll_autoHideNativeSkipButtons() {
+	// At least "Skip intro" uses this icon in current UI.
+	const skipIntro = Crunchyroll_getSkipIntroButton()
+	if (skipIntro) {
+		// Hide after 7.5s if not used; show again when Crunchyroll UI appears
+		// (but only while Crunchyroll still has the button visible/enabled).
+		Crunchyroll_setupAutoHide(skipIntro, 7500)
+	}
+	Crunchyroll_setupPlayerWakeListeners()
+}
+function Crunchyroll_setupAutoHideNextEpisodeButton(button: HTMLElement) {
+	// Re-check (button can be replaced by the site, etc.)
+	if (!button || button.id !== crunchyrollNextEpisodeButtonId) return
+	Crunchyroll_setupAutoHide(button, 5000)
+	Crunchyroll_setupPlayerWakeListeners()
+}
+
+const crunchyrollHideNativeSpeedStyleId = "enhanced-crunchyroll-hide-native-speed"
+function Crunchyroll_hideNativeSpeedControl() {
+	// Hide Crunchyroll's new native playback speed button (keep extension speed slider).
+	if (document.getElementById(crunchyrollHideNativeSpeedStyleId)) return
+	const style = document.createElement("style")
+	style.id = crunchyrollHideNativeSpeedStyleId
+	style.textContent = /*css*/ `
+		[data-testid="playback-speed-button"] { display: none !important; }
+	`
+	document.head.appendChild(style)
 }
 async function Crunchyroll_profile() {
 	// save profile
@@ -149,7 +442,7 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 	if (!settings.value.Crunchyroll?.skipCredits && isOutro) return
 	// saves the audio language to settings
 	if (!reverseButtonClicked) {
-		const button = document.querySelector('button:has(svg[data-testid="skip-intro-icon"])') as HTMLElement
+		const button = Crunchyroll_getSkipIntroButton()
 		if (button && !skipped) {
 			skipped = true
 			setTimeout(function () {
@@ -494,7 +787,8 @@ function addShowsToList(position: HTMLElement, list: CrunchyList) {
 }
 function clickOnCurrentDay() {
 	const days = document.querySelectorAll(".specific-date [datetime]")
-	for (const day of days) {
+	for (let i = 0; i < days.length; i++) {
+		const day = days[i]
 		const dateOnPage = new Date(day?.getAttribute("datetime") ?? "")
 		// if the day of the week is the same as today click on it, like if its Monday click on Monday
 		if (date.getDay() == dateOnPage.getDay()) {
