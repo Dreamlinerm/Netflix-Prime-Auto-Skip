@@ -223,7 +223,12 @@ async function Crunchyroll_SpeedSlider(video: HTMLVideoElement) {
 		const alreadySlider = document.querySelector("#videoSpeedSlider")
 		if (!alreadySlider) {
 			const position = document.querySelector('[data-testid="bottom-right-controls-stack"]') as HTMLElement
-			if (position) createSlider(video, videoSpeed, position, CrunchyrollSliderStyle, CrunchyrollSpeedStyle)
+			if (position) {
+				createSlider(video, videoSpeed, position, CrunchyrollSliderStyle, CrunchyrollSpeedStyle)
+				document.querySelector('button[data-testid="playback-speed-button"]')?.remove()
+			}
+		} else {
+			video.playbackRate = videoSpeed.value
 		}
 	}
 }
