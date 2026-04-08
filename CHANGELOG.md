@@ -3,6 +3,7 @@
 ## 1.1.95
 
 - Crunchyroll: Removed header adjustment of big player style, because fullscreen button not clickable.
+- Crunchyroll: fixed skip intro.
 
 
 ## 1.1.94

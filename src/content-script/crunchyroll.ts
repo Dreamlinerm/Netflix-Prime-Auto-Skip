@@ -150,7 +150,7 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 	// saves the audio language to settings
 	if (!reverseButtonClicked) {
 		const button = document.querySelector('button:has(svg[data-testid="skip-intro-icon"])') as HTMLElement
-		if (button && !skipped) {
+		if (button && button.checkVisibility({ opacityProperty: true }) && !skipped) {
 			skipped = true
 			setTimeout(function () {
 				if (isOutro && settings.value.Crunchyroll?.skipAfterCredits) {
