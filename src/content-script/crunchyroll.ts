@@ -74,12 +74,12 @@ function Crunchyroll_getSkipIntroButton(): HTMLElement | null {
 function Crunchyroll_getNextEpisodeUrl(): string | null {
 	const currentUrl = globalThis.location.href
 
-	// 1) Best-effort: standard document hint for pagination.
+	// Best-effort: standard document hint for pagination.
 	const relNext = document.querySelector('link[rel="next"][href]') as HTMLLinkElement | null
 	const relNextHref = relNext?.href?.trim()
 	if (relNextHref && relNextHref !== currentUrl) return relNextHref
 
-	// 2) Try to find an "Up Next / Next Episode" link in the DOM (varies by UI / locale).
+	// Try to find an "Up Next / Next Episode" link in the DOM (varies by UI / locale).
 	const candidates = Array.from(document.querySelectorAll('a[href*="/watch/"][href]')) as HTMLAnchorElement[]
 	for (const a of candidates) {
 		const href = a.href?.trim()
@@ -106,13 +106,6 @@ function Crunchyroll_getNextEpisodeUrl(): string | null {
 function Crunchyroll_UpNextButton() {
 	const nextUrl = Crunchyroll_getNextEpisodeUrl()
 	const existing = document.getElementById(crunchyrollNextEpisodeButtonId)
-
-	// Don't show "Next episode" mid-episode; only near the end where it makes sense.
-	const video = document.querySelector("video") as HTMLVideoElement | null
-	if (!Crunchyroll_isNearVideoEnd(video)) {
-		existing?.remove()
-		return
-	}
 
 	// Only show the button if we can confidently resolve a next-episode URL.
 	if (!nextUrl) {
@@ -154,22 +147,8 @@ function Crunchyroll_UpNextButton() {
 	Crunchyroll_setupAutoHideNextEpisodeButton(button)
 }
 
-let crunchyrollNextButtonAutoHideSetup = false
-let crunchyrollNextButtonHideTimeout: number | undefined
 let crunchyrollNativeButtonsAutoHideSetup = false
 const crunchyrollAutoHideTimeouts = new WeakMap<HTMLElement, number>()
-
-function Crunchyroll_isNearVideoEnd(video: HTMLVideoElement | null): boolean {
-	if (!video) return false
-	const duration = video.duration
-	const currentTime = video.currentTime
-	if (!Number.isFinite(duration) || duration <= 0) return false
-	if (!Number.isFinite(currentTime) || currentTime < 0) return false
-
-	const remaining = duration - currentTime
-	// Show when last 60s OR last 10% of the video (whichever comes first).
-	return remaining <= 60 || currentTime / duration >= 0.9
-}
 
 function Crunchyroll_getPlayerRoot(): HTMLElement | null {
 	return (
@@ -252,27 +231,21 @@ function Crunchyroll_isUiEnabledElement(el: HTMLElement): boolean {
 function Crunchyroll_wakeAutoHiddenButtons() {
 	// Called when the user moves the cursor and Crunchyroll shows its UI.
 	// We should only show buttons if Crunchyroll still considers them visible/enabled.
-	const video = document.querySelector("video") as HTMLVideoElement | null
 
-	// Next episode button: only near end.
+	// Next episode button.
 	const nextBtn = document.getElementById(crunchyrollNextEpisodeButtonId) as HTMLElement | null
 	if (nextBtn) {
-		if (Crunchyroll_isNearVideoEnd(video)) {
-			nextBtn.style.opacity = "1"
-			nextBtn.style.pointerEvents = "auto"
-			const existingTimeout = crunchyrollAutoHideTimeouts.get(nextBtn)
-			if (existingTimeout) window.clearTimeout(existingTimeout)
-			const t = window.setTimeout(() => {
-				if (!document.contains(nextBtn)) return
-				if (nextBtn.matches(":hover") || nextBtn.matches(":focus-visible")) return
-				nextBtn.style.opacity = "0"
-				nextBtn.style.pointerEvents = "none"
-			}, 5000)
-			crunchyrollAutoHideTimeouts.set(nextBtn, t)
-		} else {
+		nextBtn.style.opacity = "1"
+		nextBtn.style.pointerEvents = "auto"
+		const existingTimeout = crunchyrollAutoHideTimeouts.get(nextBtn)
+		if (existingTimeout) window.clearTimeout(existingTimeout)
+		const t = window.setTimeout(() => {
+			if (!document.contains(nextBtn)) return
+			if (nextBtn.matches(":hover") || nextBtn.matches(":focus-visible")) return
 			nextBtn.style.opacity = "0"
 			nextBtn.style.pointerEvents = "none"
-		}
+		}, 5000)
+		crunchyrollAutoHideTimeouts.set(nextBtn, t)
 	}
 
 	// Native skip buttons: show only if Crunchyroll still has them active/visible.
@@ -330,9 +303,9 @@ function Crunchyroll_autoHideNativeSkipButtons() {
 	// At least "Skip intro" uses this icon in current UI.
 	const skipIntro = Crunchyroll_getSkipIntroButton()
 	if (skipIntro) {
-		// Hide after 7.5s if not used; show again when Crunchyroll UI appears
+		// Hide after 6s if not used; show again when Crunchyroll UI appears
 		// (but only while Crunchyroll still has the button visible/enabled).
-		Crunchyroll_setupAutoHide(skipIntro, 7500)
+		Crunchyroll_setupAutoHide(skipIntro, 6000)
 	}
 	Crunchyroll_setupPlayerWakeListeners()
 }
