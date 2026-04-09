@@ -58,7 +58,10 @@ async function Crunchyroll() {
 	if (!video) return
 	const time = video?.currentTime
 	Crunchyroll_Intro_Outro(video, time)
-	Crunchyroll_hideNativeSpeedControl()
+	// Only override/hide Crunchyroll's native controls when the related extension feature is enabled.
+	// Otherwise we can cause brief "flash" effects on resume (e.g. starting mid-episode).
+	if (settings.value.Crunchyroll?.speedSlider) Crunchyroll_hideNativeSpeedControl()
+	// Keep the native skip button from lingering on-screen for long periods.
 	Crunchyroll_autoHideNativeSkipButtons()
 	Crunchyroll_UpNextButton()
 	if (settings.value.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider(video)
@@ -66,9 +69,28 @@ async function Crunchyroll() {
 }
 
 const crunchyrollNextEpisodeButtonId = "enhanced-crunchyroll-next-episode-button"
-function Crunchyroll_getSkipIntroButton(): HTMLElement | null {
-	const icon = document.querySelector('svg[data-testid="skip-intro-icon"]') as SVGElement | null
-	return (icon?.closest("button") as HTMLElement | null) ?? null
+function Crunchyroll_getSkipButtons(): HTMLElement[] {
+	// Avoid relying on `:has()` (can throw on some Chromium builds / contexts).
+	// Find the icon and walk up to its button.
+	const icons = Array.from(document.querySelectorAll('svg[data-testid="skip-intro-icon"]')) as SVGElement[]
+	const set = new Set<HTMLElement>()
+	for (const icon of icons) {
+		const btn = icon.closest("button") as HTMLElement | null
+		if (btn) set.add(btn)
+	}
+	return Array.from(set)
+}
+
+function Crunchyroll_hide(btn: HTMLElement) {
+	btn.style.opacity = "0"
+	btn.style.pointerEvents = "none"
+	btn.style.visibility = "hidden"
+}
+
+function Crunchyroll_show(btn: HTMLElement) {
+	btn.style.opacity = "1"
+	btn.style.pointerEvents = "auto"
+	btn.style.visibility = "visible"
 }
 
 function Crunchyroll_getNextEpisodeUrl(): string | null {
@@ -149,6 +171,13 @@ function Crunchyroll_UpNextButton() {
 
 let crunchyrollNativeButtonsAutoHideSetup = false
 const crunchyrollAutoHideTimeouts = new WeakMap<HTMLElement, number>()
+const crunchyrollSkipButtonHiddenByExtAttr = "data-enhanced-skip-hidden"
+// Prevent the skip button from flashing back right after we auto-skip.
+const crunchyrollSkipButtonReshowCooldownMs = 2500
+
+function Crunchyroll_isAutoskipEnabled(): boolean {
+	return Boolean(settings.value.Crunchyroll?.skipIntro || settings.value.Crunchyroll?.skipCredits)
+}
 
 function Crunchyroll_getPlayerRoot(): HTMLElement | null {
 	return (
@@ -174,24 +203,24 @@ function Crunchyroll_isPlayerUiActive(): boolean {
 
 function Crunchyroll_setupAutoHide(button: HTMLElement, timeoutMs: number) {
 	if (!button) return
-	if (button.dataset.enhancedAutohideInit === "1") return
+	if (button.dataset.enhancedAutohideInit === "1") return // Already initialized – don't reset the timer.
 	button.dataset.enhancedAutohideInit = "1"
-
 	button.style.transition = button.style.transition || "opacity 150ms ease"
 
 	const show = () => {
 		button.style.opacity = "1"
+		button.style.visibility = "visible"
 		button.style.pointerEvents = "auto"
 	}
 	const hide = () => {
 		button.style.opacity = "0"
+		button.style.visibility = "hidden"
 		button.style.pointerEvents = "none"
 	}
 	const scheduleHide = () => {
 		const existingTimeout = crunchyrollAutoHideTimeouts.get(button)
 		if (existingTimeout) window.clearTimeout(existingTimeout)
 		const t = window.setTimeout(() => {
-			// don't hide while interacting
 			if (!document.contains(button)) return
 			if (button.matches(":hover") || button.matches(":focus-visible")) return
 			hide()
@@ -199,8 +228,6 @@ function Crunchyroll_setupAutoHide(button: HTMLElement, timeoutMs: number) {
 		crunchyrollAutoHideTimeouts.set(button, t)
 	}
 
-	// Start visible, then hide.
-	show()
 	scheduleHide()
 
 	button.addEventListener("mouseenter", () => {
@@ -228,11 +255,23 @@ function Crunchyroll_isUiEnabledElement(el: HTMLElement): boolean {
 	return true
 }
 
-function Crunchyroll_wakeAutoHiddenButtons() {
-	// Called when the user moves the cursor and Crunchyroll shows its UI.
-	// We should only show buttons if Crunchyroll still considers them visible/enabled.
+function Crunchyroll_isActionableButton(el: HTMLElement): boolean {
+	// Stricter than Crunchyroll_isUiEnabledElement: for autoskip we only want buttons the site
+	// is currently presenting to the user, not ones we temporarily revealed/modified.
+	if (!Crunchyroll_isUiEnabledElement(el)) return false
+	const style = window.getComputedStyle(el)
+	const opacity = Number.parseFloat(style.opacity || "1")
+	if (Number.isFinite(opacity) && opacity <= 0.05) return false
+	if (style.pointerEvents === "none") return false
+	return true
+}
 
-	// Next episode button.
+function Crunchyroll_wakeAutoHiddenButtons() {
+	// Don't touch the global auto-hide timer here.  It runs independently and
+	// handles the initial 6-second hide.  The wake function only re-shows
+	// buttons that are already hidden and handles subsequent hide cycles with
+	// its own per-button timers.
+
 	const nextBtn = document.getElementById(crunchyrollNextEpisodeButtonId) as HTMLElement | null
 	if (nextBtn) {
 		nextBtn.style.opacity = "1"
@@ -248,65 +287,124 @@ function Crunchyroll_wakeAutoHiddenButtons() {
 		crunchyrollAutoHideTimeouts.set(nextBtn, t)
 	}
 
-	// Native skip buttons: show only if Crunchyroll still has them active/visible.
-	const skipIntroBtn = Crunchyroll_getSkipIntroButton()
-	if (skipIntroBtn && Crunchyroll_isUiEnabledElement(skipIntroBtn)) {
-		skipIntroBtn.style.opacity = "1"
-		skipIntroBtn.style.pointerEvents = "auto"
-		const existingTimeout = crunchyrollAutoHideTimeouts.get(skipIntroBtn)
+	const buttons = Crunchyroll_getSkipButtons()
+
+	buttons.forEach((btn) => {
+		if (!Crunchyroll_isUiEnabledElement(btn)) return
+
+		// Only apply the "post-skip" hiding/unhiding logic when autoskip is enabled.
+		// If autoskip is disabled, we should not interfere with Crunchyroll's own state machine
+		// beyond our timed autohide.
+		if (Crunchyroll_isAutoskipEnabled() && btn.getAttribute(crunchyrollSkipButtonHiddenByExtAttr) === "1") {
+			// If we hid this node because we *just* skipped, don't immediately re-show it.
+			if (Date.now() - lastSkipAtMs < crunchyrollSkipButtonReshowCooldownMs) return
+			// Only allow re-show when Crunchyroll is truly presenting it as actionable again.
+			if (!Crunchyroll_isActionableButton(btn)) return
+			btn.removeAttribute(crunchyrollSkipButtonHiddenByExtAttr)
+		}
+
+		btn.style.opacity = "1"
+		btn.style.visibility = "visible"
+		btn.style.pointerEvents = "auto"
+
+		const existingTimeout = crunchyrollAutoHideTimeouts.get(btn)
 		if (existingTimeout) window.clearTimeout(existingTimeout)
-		// If the player UI is active, hide together with it (fast polling until it disappears).
-		// Otherwise, fallback to 5s.
+
 		if (Crunchyroll_isPlayerUiActive()) {
 			const startedAt = Date.now()
 			const poll = window.setInterval(() => {
-				// safety stop after 30s
 				if (Date.now() - startedAt > 30_000) {
 					window.clearInterval(poll)
 					return
 				}
-				if (!document.contains(skipIntroBtn)) {
+				if (!document.contains(btn)) {
 					window.clearInterval(poll)
 					return
 				}
-				if (skipIntroBtn.matches(":hover") || skipIntroBtn.matches(":focus-visible")) return
+				if (btn.matches(":hover") || btn.matches(":focus-visible")) return
 				if (!Crunchyroll_isPlayerUiActive()) {
-					skipIntroBtn.style.opacity = "0"
-					skipIntroBtn.style.pointerEvents = "none"
+					btn.style.opacity = "0"
+					btn.style.pointerEvents = "none"
 					window.clearInterval(poll)
 				}
 			}, 150)
-			// store interval id so we can clear on next wake
-			crunchyrollAutoHideTimeouts.set(skipIntroBtn, poll as unknown as number)
+
+			crunchyrollAutoHideTimeouts.set(btn, poll as unknown as number)
 		} else {
 			const t = window.setTimeout(() => {
-				if (!document.contains(skipIntroBtn)) return
-				if (skipIntroBtn.matches(":hover") || skipIntroBtn.matches(":focus-visible")) return
-				skipIntroBtn.style.opacity = "0"
-				skipIntroBtn.style.pointerEvents = "none"
+				if (!document.contains(btn)) return
+				if (btn.matches(":hover") || btn.matches(":focus-visible")) return
+				btn.style.opacity = "0"
+				btn.style.visibility = "hidden"
+				btn.style.pointerEvents = "none"
 			}, 5000)
-			crunchyrollAutoHideTimeouts.set(skipIntroBtn, t)
+
+			crunchyrollAutoHideTimeouts.set(btn, t)
 		}
-	}
+	})
 }
 
 function Crunchyroll_setupPlayerWakeListeners() {
+	// Important: the player root can be null early in navigation/SPA transitions.
+	// If we mark setup as done too early, buttons can be auto-hidden and never woken.
+	const playerRoot = Crunchyroll_getPlayerRoot()
+	if (!playerRoot) return
 	if (crunchyrollNativeButtonsAutoHideSetup) return
 	crunchyrollNativeButtonsAutoHideSetup = true
-	const playerRoot = Crunchyroll_getPlayerRoot()
 	const onMove = () => Crunchyroll_wakeAutoHiddenButtons()
-	playerRoot?.addEventListener("mousemove", onMove, { passive: true })
-	playerRoot?.addEventListener("touchstart", onMove, { passive: true })
+	playerRoot.addEventListener("mousemove", onMove, { passive: true })
+	playerRoot.addEventListener("touchstart", onMove, { passive: true })
 }
 
+// ── Global timer for native skip-button auto-hide ──────────────────────
+// We use a GLOBAL timer instead of per-element timers because Crunchyroll's
+// React can replace the button DOM node on every render cycle, which would
+// reset any per-element state and prevent the timeout from ever completing.
+let skipButtonGlobalHideTimer: number | null = null
+let skipButtonsAutoHideActive = false
+
 function Crunchyroll_autoHideNativeSkipButtons() {
-	// At least "Skip intro" uses this icon in current UI.
-	const skipIntro = Crunchyroll_getSkipIntroButton()
-	if (skipIntro) {
-		// Hide after 6s if not used; show again when Crunchyroll UI appears
-		// (but only while Crunchyroll still has the button visible/enabled).
-		Crunchyroll_setupAutoHide(skipIntro, 6000)
+	const buttons = Crunchyroll_getSkipButtons()
+
+	if (buttons.length === 0) {
+		// Buttons gone from DOM → reset so the next appearance starts fresh.
+		if (skipButtonGlobalHideTimer) {
+			window.clearTimeout(skipButtonGlobalHideTimer)
+			skipButtonGlobalHideTimer = null
+		}
+		skipButtonsAutoHideActive = false
+		return
 	}
+
+	// Already scheduled → don't restart the timer.
+	if (skipButtonsAutoHideActive) return
+	skipButtonsAutoHideActive = true
+
+	const appearedAt = Date.now()
+
+	// Poll periodically: hide after 6 s OR when the player UI hides, whichever
+	// comes first.  Polling avoids the problem of a single setTimeout being
+	// invalidated by DOM element replacement.
+	skipButtonGlobalHideTimer = window.setInterval(() => {
+		const elapsed = Date.now() - appearedAt
+		const uiActive = Crunchyroll_isPlayerUiActive()
+
+		// Give at least 1 s of visibility so the button doesn't flash-and-vanish
+		// if the UI is already hidden when the button first appears.
+		if (elapsed >= 6000 || (elapsed >= 1000 && !uiActive)) {
+			// Query DOM fresh – the actual elements may have been replaced since we started.
+			const currentButtons = Crunchyroll_getSkipButtons()
+			currentButtons.forEach((btn) => {
+				if (btn.matches(":hover") || btn.matches(":focus-visible")) return
+				btn.style.transition = btn.style.transition || "opacity 150ms ease"
+				btn.style.opacity = "0"
+				btn.style.pointerEvents = "none"
+			})
+			window.clearInterval(skipButtonGlobalHideTimer!)
+			skipButtonGlobalHideTimer = null
+		}
+	}, 200) as unknown as number
+
 	Crunchyroll_setupPlayerWakeListeners()
 }
 function Crunchyroll_setupAutoHideNextEpisodeButton(button: HTMLElement) {
@@ -408,29 +506,92 @@ let skipped = false
 let reverseButtonClicked = false
 let reverseButtonStartTime: number
 let reverseButtonEndTime: number
+let lastSkipAtMs = 0
+let lastRewindPromptStartSec: number | null = null
+let lastRewindPromptAtMs = 0
+
+function Crunchyroll_markRewindPromptShown(startTime: number) {
+	// Key by start second only; end time can vary slightly due to async timing.
+	lastRewindPromptStartSec = Math.floor(startTime)
+	lastRewindPromptAtMs = Date.now()
+}
+
+function Crunchyroll_hasShownRewindPromptRecently(startTime: number, windowMs: number) {
+	const key = Math.floor(startTime)
+	if (lastRewindPromptStartSec !== key) return false
+	return Date.now() - lastRewindPromptAtMs < windowMs
+}
+function Crunchyroll_forceHideSkipButtons() {
+	if (!Crunchyroll_isAutoskipEnabled()) return
+	const buttons = Crunchyroll_getSkipButtons()
+
+	buttons.forEach((btn) => {
+		btn.style.opacity = "0"
+		btn.style.visibility = "hidden"
+		btn.style.pointerEvents = "none"
+		btn.setAttribute(crunchyrollSkipButtonHiddenByExtAttr, "1")
+	})
+}
+
 async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
-	// check if intro or outro
 	const isOutro = time > video.duration / 2
-	if (!settings.value.Crunchyroll?.skipIntro && !isOutro) return
-	if (!settings.value.Crunchyroll?.skipCredits && isOutro) return
-	// saves the audio language to settings
+
+	const shouldSkipIntro = settings.value.Crunchyroll?.skipIntro && !isOutro
+	const shouldSkipCredits = settings.value.Crunchyroll?.skipCredits && isOutro
+
+	if (!shouldSkipIntro && !shouldSkipCredits) return
+
 	if (!reverseButtonClicked) {
-		const button = Crunchyroll_getSkipIntroButton()
-		if (button && !skipped) {
+		const buttons = Crunchyroll_getSkipButtons()
+		// Use isUiEnabledElement (not isActionableButton) because our own auto-hide
+		// may have left stale inline opacity/pointer-events on the button.  Crunchyroll
+		// re-activates the same DOM node for credits, so we must not reject it.
+		const button = buttons.find((b) => Crunchyroll_isUiEnabledElement(b))
+		const now = Date.now()
+
+		if (button && !skipped && now - lastSkipAtMs > 15_000) {
 			skipped = true
-			setTimeout(function () {
-				if (isOutro && settings.value.Crunchyroll?.skipAfterCredits) {
-					video.fastSeek(video.duration) // skip to the end of the video
-					console.log("SkipAfterCredits", settings.value.General.Crunchyroll_skipTimeout)
+			lastSkipAtMs = now
+
+			setTimeout(() => {
+				const start = time
+
+				if (shouldSkipCredits && settings.value.Crunchyroll?.skipAfterCredits) {
+					video.fastSeek(video.duration)
 				} else {
-					button?.click()
-					console.log("Intro skipped", button, settings.value.General.Crunchyroll_skipTimeout)
-					setTimeout(function () {
-						CrunchyrollGobackbutton(time, video?.currentTime)
-						addSkippedTime(time, video?.currentTime, "IntroTimeSkipped")
-					}, 600)
+					button.click()
 				}
-				setTimeout(function () {
+
+				// Hide ALL skip buttons immediately after the click.
+				Crunchyroll_forceHideSkipButtons()
+
+				// After 4 s, restore the button so credits autoskip can detect it.
+				// Reset the auto-hide state FIRST so the MutationObserver will
+				// re-arm a fresh 6 s hide cycle as soon as the button is visible.
+				setTimeout(() => {
+					if (skipButtonGlobalHideTimer) {
+						window.clearInterval(skipButtonGlobalHideTimer)
+						skipButtonGlobalHideTimer = null
+					}
+					skipButtonsAutoHideActive = false
+					Crunchyroll_show(button)
+				}, 4000)
+
+				setTimeout(() => {
+					const end = video.currentTime
+					if (typeof end === "number") {
+						const jumpedBy = end - start
+						if (jumpedBy > 0.75 && !Crunchyroll_hasShownRewindPromptRecently(start, 60_000)) {
+							CrunchyrollGobackbutton(start, end)
+							Crunchyroll_markRewindPromptShown(start)
+
+							if (shouldSkipIntro) addSkippedTime(start, end, "IntroTimeSkipped")
+							else if (shouldSkipCredits) addSkippedTime(start, end, "SegmentsSkipped")
+						}
+					}
+				}, 600)
+
+				setTimeout(() => {
 					skipped = false
 				}, 1000)
 			}, settings.value.General.Crunchyroll_skipTimeout)
@@ -442,6 +603,11 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 
 function addButton(startTime: number, endTime: number) {
 	if (reverseButtonClicked) return
+	// If it auto-removed, don't immediately re-add it for the same skip.
+	if (Crunchyroll_hasShownRewindPromptRecently(startTime, 60_000)) return
+	Crunchyroll_markRewindPromptShown(startTime)
+	// Make sure the native skip control is fully hidden before showing the rewind prompt.
+	Crunchyroll_forceHideSkipButtons()
 	const button = document.createElement("div")
 	button.setAttribute(
 		"class",
