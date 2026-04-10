@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.95
+## 1.1.97
 
 - Amazon: Updated UI again, Amazon may do some A/B testing with the video player ui.
 - Crunchyroll: Removed header adjustment of big player style, because fullscreen button not clickable.
