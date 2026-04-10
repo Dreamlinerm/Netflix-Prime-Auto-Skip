@@ -35,6 +35,7 @@ Platform-Specifika funktioner:
     - Filtrerar bort betalt innehåll (filmer, serier) från startsidan
     - Tar bort oskärpeeffekten när du håller muspekaren över videoklipp
     - Flyttar kategorin "Fortsätt" till toppen av sidan
+    - Dölj Xray Quick View över en video
 
 - Disney+ (Hotstar, STAR+):
     - Skippar självpromoterande annonser

@@ -35,6 +35,7 @@ Platforme-Caractéristiques spécifiques:
       • Filtre les contenus payants (films, séries) de la page d'accueil
       • Supprime l'effet de flou au survol des vidéos
       • Déplace la catégorie "continuer" en haut de la page
+      • Cachez la vue rapide Xray sur une vidéo
 
   • Disney+ (Hotstar, STAR+):
       • Supprime les publicités auto-promotionnelles

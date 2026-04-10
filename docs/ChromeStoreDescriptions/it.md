@@ -36,6 +36,7 @@ Platform-Caratteristiche specifiche:
       • Filtra i contenuti a pagamento (film, serie) dalla home page
       • Rimuove l'effetto sfocatura quando si passa il mouse sui video
       • Sposta la categoria "Continua" all'inizio della pagina
+      • Nascondere la visualizzazione rapida Xray su un video
 
   • Disney+ (Hotstar, STAR+):
       • Skipa gli annunci autopromozionali
