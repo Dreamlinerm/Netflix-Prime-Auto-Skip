@@ -24,15 +24,7 @@ const serviceCategories: Exclude<StreamingService, "Video">[] = [
 ]
 
 const excludedSettings = new Set(["watchCredits", "epilepsy"])
-const sharedServiceSettings = new Set([
-	"skipIntro",
-	"skipCredits",
-	"watchCredits",
-	"skipAd",
-	"showRating",
-	"speedSlider",
-	"hideTitles",
-])
+const sharedServiceSettings = new Set(["skipIntro", "skipCredits", "skipAd", "showRating", "speedSlider", "hideTitles"])
 
 function isDisabledSetting(category: StreamingService, setting: string) {
 	if (category !== "Video" && sharedServiceSettings.has(setting)) return false
