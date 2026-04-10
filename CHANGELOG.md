@@ -2,10 +2,9 @@
 
 ## 1.1.95
 
+- Amazon: Updated UI again, Amazon may do some A/B testing with the video player ui.
 - Crunchyroll: Removed header adjustment of big player style, because fullscreen button not clickable.
-- Crunchyroll: fixed skip intro, fixed removed selected speed when changing episode.
-- Amazon: Updated UI again.
-
+- Crunchyroll: fixed skip intro, fixed removed selected speed when changing episode, fixed multiple revert buttons spawning.
 
 ## 1.1.94
 
