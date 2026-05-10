@@ -231,7 +231,9 @@ async function getMovieInfo(
 	media_type: string | null = null,
 	year: string | null = null,
 ) {
-	const locale = htmlLang || navigator?.language || "en-US"
+	let locale = htmlLang || i18n.global.locale.value || navigator?.language || "en-US"
+	if (locale.length > 5) locale = locale.substring(0, 2)
+	if (locale === "eng") locale = "en"
 	const queryType = media_type ?? "multi"
 	let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURIComponent(title)}&include_adult=false&language=${locale}&page=1`
 	if (year) url += `&year=${year}`
@@ -358,7 +360,11 @@ function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	else if (isDisney)
 		AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not([href^='/browse/page']):not(.imdb)")]
 	else if (isHotstar)
-		AllTitleCardsTypes = [document.querySelectorAll("article:not(.imdb), .swiper-slide img:not(.imdb)")]
+		AllTitleCardsTypes = [
+			document.querySelectorAll(
+				"[data-testid='tray-card-default']:not(.imdb), [data-testid='tray-horizontal-card-hover']:not(.imdb)",
+			),
+		]
 	else if (isHBO) AllTitleCardsTypes = [document.querySelectorAll("a[class*='StyledTileLinkNormal-']:not(.imdb)")]
 	else if (isParamount)
 		AllTitleCardsTypes = [document.querySelectorAll("a[href*='/shows']:not(.imdb), a[href*='/movies']:not(.imdb)")]
@@ -410,7 +416,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 						const item = card.closest(".slider-item") as HTMLElement
 						if (item) item.style.display = "none"
 					} else if (isDisney || isHotstar) {
-						const item = card.parentElement as HTMLElement
+						const item = (card.closest("[data-testid='tray-card-default']") || card.closest("a") || card.parentElement) as HTMLElement
 						if (item) item.style.display = "none"
 					}
 					settings.value.Statistics.SegmentsSkipped++
@@ -418,7 +424,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 					console.log("hideTitle", title)
 					continue
 				}
-				if (isDisney || isHotstar) addHideTitleButton(card, title)
+				if (isDisney) addHideTitleButton(card, title)
 			}
 
 			// for the static Pixar Disney, Starplus etc. cards
@@ -455,6 +461,9 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 	}
 }
 function addHideTitleButton(card: HTMLElement, title: string) {
+	const target = (card.closest("[data-testid='tray-card-default']") || card.closest("a") || card.parentElement) as HTMLElement
+	if (!target || target.querySelector("#hideTitleButton")) return
+
 	const button = document.createElement("button")
 	button.id = "hideTitleButton"
 	button.textContent = "X"
@@ -464,12 +473,12 @@ function addHideTitleButton(card: HTMLElement, title: string) {
 		// stop propagation
 		event.stopPropagation()
 		event.preventDefault()
-		const item = card.parentElement as HTMLElement
+		const item = (card.closest("[data-testid='tray-card-default']") || card.closest("a") || card.parentElement) as HTMLElement
 		if (item) item.style.display = "none"
 		hideTitles.value[title] = true
 		console.log("hideTitles", hideTitles.value)
 	}
-	card.parentElement?.appendChild(button)
+	target.appendChild(button)
 }
 function getMediaType(card: HTMLElement): MediaType {
 	let media_type: MediaType = null
@@ -491,7 +500,9 @@ function getMediaType(card: HTMLElement): MediaType {
 	} else if (isPrimeVideo) {
 		if (url.includes("video/tv")) media_type = "tv"
 		else if (url.includes("video/movie")) media_type = "movie"
-		else media_type = Amazon_getMediaType(card.dataset.cardEntityType ?? "")
+	} else if (isHotstar) {
+		if (url.includes("/movies/")) media_type = "movie"
+		else if (url.includes("/tv-shows/")) media_type = "tv"
 	}
 	return media_type
 }
@@ -512,12 +523,22 @@ function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 		}
 	} else if (isHotstar) {
 		const rawTitle =
+			card?.querySelector("[data-testid='action']")?.getAttribute("aria-label") ||
+			card?.querySelector("a")?.getAttribute("aria-label") ||
+			card?.getAttribute("aria-label") ||
 			card?.getAttribute("alt") ||
-			card.closest("a")?.getAttribute("aria-label") ||
 			card.querySelector("img")?.getAttribute("alt") ||
+			card.querySelector("[data-testid='card-hover-title-cutout'] img")?.getAttribute("alt") ||
 			card.querySelector("span")?.textContent ||
 			""
-		title = rawTitle.replaceAll(/(S\d+\sE\d+)/g, "")
+		// Cleaning: Remove "S1 E1", trailing numbers like " 2", and split by comma
+		title = rawTitle
+			.replaceAll(/(S\d+\sE\d+)/g, "")
+			.split(",")[0]
+			.replace(/\s\d+$/, "") // Remove trailing number (e.g., "Harry Potter 2" -> "Harry Potter")
+			.trim()
+
+		if (!title || ["show", "movie", "live", "episode", "special", "free"].includes(title.toLowerCase())) title = undefined
 	} else if (isPrimeVideo) {
 		// detail means not live shows
 		if (card.querySelector("a")?.href?.includes("detail")) {
@@ -737,16 +758,19 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 			// parentDiv.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
 		}
 	} else if (isHotstar) {
-		let targetContainer = card
-		// If the card is an article, we inject into the parent <a> tag to avoid overflow:hidden
-		if (card?.tagName?.toLowerCase() === "article") {
-			targetContainer = card.parentElement as HTMLElement
-		} else if (card?.tagName?.toLowerCase() === "img") {
-			targetContainer = (card.closest("a") as HTMLElement) || (card.parentElement as HTMLElement)
+		let targetContainer: HTMLElement | null = card
+		// If standard card, inject into the inner <a> tag (or action div if <a> is missing)
+		if (card.dataset.testid === "tray-card-default") {
+			targetContainer = card.querySelector("a") || (card.querySelector("[data-testid='action']") as HTMLElement)
+		} else if (card.dataset.testid === "tray-horizontal-card-hover") {
+			targetContainer = card.querySelector('[data-testid="card-hover-container"]')
 		}
 
-		if (targetContainer) {
-			targetContainer.style.setProperty("position", "relative", "important")
+		if (targetContainer && !targetContainer.querySelector("#rating")) {
+			// Only set relative if not already set by Hotstar to be safe
+			if (getComputedStyle(targetContainer).position === "static") {
+				targetContainer.style.position = "relative"
+			}
 			div.style.zIndex = "9999"
 			targetContainer.appendChild(div)
 			if (getIsTransparent(data?.score, vote_count < 50)) targetContainer.appendChild(greyOverlay)
