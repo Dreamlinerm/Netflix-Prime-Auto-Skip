@@ -461,8 +461,9 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 	}
 }
 function addHideTitleButton(card: HTMLElement, title: string) {
+	// For Hotstar, always target the outermost card container to avoid breaking internal layout
 	const target = (isHotstar
-		? card.closest("[data-testid='tray-card-default']") || card.closest("a") || card.parentElement
+		? card.closest("[data-testid='tray-card-default']") || card.closest("[data-testid='tray-horizontal-card-hover']") || card
 		: card.parentElement) as HTMLElement
 	if (!target || target.querySelector("#hideTitleButton")) return
 
@@ -470,14 +471,12 @@ function addHideTitleButton(card: HTMLElement, title: string) {
 	button.id = "hideTitleButton"
 	button.textContent = "X"
 	button.style.cssText =
-		"position: absolute; top: 0; right: 0; background: transparent; color: white; border: none; font-size: 12px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;"
+		"position: absolute; top: 0; right: 0; background: transparent; color: white; border: none; font-size: 12px;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; z-index: 10;"
 	button.onclick = function (event) {
 		// stop propagation
 		event.stopPropagation()
 		event.preventDefault()
-		const item = (isHotstar
-			? card.closest("[data-testid='tray-card-default']") || card.closest("a") || card.parentElement
-			: card.parentElement) as HTMLElement
+		const item = target
 		if (item) item.style.display = "none"
 		hideTitles.value[title] = true
 		console.log("hideTitles", hideTitles.value)
@@ -774,20 +773,9 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 			// parentDiv.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
 		}
 	} else if (isHotstar) {
-		let targetContainer: HTMLElement | null = card
-		// If standard card, inject into the inner <a> tag (or action div if <a> is missing)
-		if (card.dataset.testid === "tray-card-default") {
-			targetContainer = card.querySelector("a") || (card.querySelector("[data-testid='action']") as HTMLElement)
-		} else if (card.dataset.testid === "tray-horizontal-card-hover") {
-			targetContainer = card.querySelector('[data-testid="card-hover-container"]')
-		}
-
+		const targetContainer = card // card is the outermost container from getAllTitleCardsTypes
 		if (targetContainer && !targetContainer.querySelector("#rating")) {
-			// Only set relative if not already set by Hotstar to be safe
-			if (getComputedStyle(targetContainer).position === "static") {
-				targetContainer.style.position = "relative"
-			}
-			div.style.zIndex = "9999"
+			div.style.zIndex = "10"
 			targetContainer.appendChild(div)
 			if (getIsTransparent(data?.score, vote_count < 50)) targetContainer.appendChild(greyOverlay)
 		}
