@@ -231,9 +231,7 @@ async function getMovieInfo(
 	media_type: string | null = null,
 	year: string | null = null,
 ) {
-	let locale = htmlLang || i18n.global.locale.value || navigator?.language || "en-US"
-	if (locale.length > 5) locale = locale.substring(0, 2)
-	if (locale === "eng") locale = "en"
+	const locale = htmlLang || navigator?.language || "en-US"
 	const queryType = media_type ?? "multi"
 	let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURIComponent(title)}&include_adult=false&language=${locale}&page=1`
 	if (year) url += `&year=${year}`
@@ -416,7 +414,9 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 						const item = card.closest(".slider-item") as HTMLElement
 						if (item) item.style.display = "none"
 					} else if (isDisney || isHotstar) {
-						const item = (card.closest("[data-testid='tray-card-default']") || card.closest("a") || card.parentElement) as HTMLElement
+						const item = (isHotstar
+							? card.closest("[data-testid='tray-card-default']") || card.closest("a") || card.parentElement
+							: card.parentElement) as HTMLElement
 						if (item) item.style.display = "none"
 					}
 					settings.value.Statistics.SegmentsSkipped++
@@ -424,7 +424,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 					console.log("hideTitle", title)
 					continue
 				}
-				if (isDisney) addHideTitleButton(card, title)
+				if (isDisney || isHotstar) addHideTitleButton(card, title)
 			}
 
 			// for the static Pixar Disney, Starplus etc. cards
@@ -461,7 +461,9 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 	}
 }
 function addHideTitleButton(card: HTMLElement, title: string) {
-	const target = (card.closest("[data-testid='tray-card-default']") || card.closest("a") || card.parentElement) as HTMLElement
+	const target = (isHotstar
+		? card.closest("[data-testid='tray-card-default']") || card.closest("a") || card.parentElement
+		: card.parentElement) as HTMLElement
 	if (!target || target.querySelector("#hideTitleButton")) return
 
 	const button = document.createElement("button")
@@ -473,7 +475,9 @@ function addHideTitleButton(card: HTMLElement, title: string) {
 		// stop propagation
 		event.stopPropagation()
 		event.preventDefault()
-		const item = (card.closest("[data-testid='tray-card-default']") || card.closest("a") || card.parentElement) as HTMLElement
+		const item = (isHotstar
+			? card.closest("[data-testid='tray-card-default']") || card.closest("a") || card.parentElement
+			: card.parentElement) as HTMLElement
 		if (item) item.style.display = "none"
 		hideTitles.value[title] = true
 		console.log("hideTitles", hideTitles.value)
@@ -500,6 +504,7 @@ function getMediaType(card: HTMLElement): MediaType {
 	} else if (isPrimeVideo) {
 		if (url.includes("video/tv")) media_type = "tv"
 		else if (url.includes("video/movie")) media_type = "movie"
+		else media_type = Amazon_getMediaType(card.dataset.cardEntityType ?? "")
 	} else if (isHotstar) {
 		if (url.includes("/movies/")) media_type = "movie"
 		else if (url.includes("/tv-shows/")) media_type = "tv"
@@ -665,11 +670,22 @@ function getTMDBUrl(id: string | number, media_type: string) {
 }
 
 async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string) {
-	let div
+	let div: HTMLElement
 	if (data?.id) {
-		div = document.createElement("a")
-		div.href = getTMDBUrl(data.id, data.media_type)
-		div.target = "_blank"
+		if (isHotstar) {
+			div = document.createElement("div")
+			div.style.cursor = "pointer"
+			div.onclick = (event) => {
+				event.stopPropagation()
+				event.preventDefault()
+				window.open(getTMDBUrl(data.id, data.media_type), "_blank")
+			}
+		} else {
+			const a = document.createElement("a")
+			a.href = getTMDBUrl(data.id, data.media_type)
+			a.target = "_blank"
+			div = a
+		}
 	} else div = document.createElement("div")
 	const vote_count = data?.vote_count || 0
 	// right: 1.5vw;
