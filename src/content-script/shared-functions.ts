@@ -149,6 +149,7 @@ export function createSlider(
 	sliderStyle: string,
 	speedStyle: string,
 	divStyle = "",
+	cleanupTarget: HTMLElement | null | undefined = null,
 ) {
 	videoSpeed.value = videoSpeed.value || video.playbackRate
 
@@ -176,6 +177,29 @@ export function createSlider(
 		div.appendChild(speed)
 		position.prepend(div)
 	} else position.prepend(slider, speed)
+
+	// removes slider if the target element is removed from the DOM
+	if (cleanupTarget) {
+		const cleanup = () => {
+			if (divStyle) {
+				slider.parentElement?.remove()
+			} else {
+				slider.remove()
+				speed.remove()
+			}
+		}
+		const cleanupObserver = new MutationObserver(() => {
+			if (!cleanupTarget.isConnected) {
+				cleanup()
+				cleanupObserver.disconnect()
+			}
+		})
+		cleanupObserver.observe(document.body ?? document.documentElement, { childList: true, subtree: true })
+		if (!cleanupTarget.isConnected) {
+			cleanup()
+			cleanupObserver.disconnect()
+		}
+	}
 
 	if (videoSpeed.value) video.playbackRate = videoSpeed.value
 	speed.onclick = function (event) {
