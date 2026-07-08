@@ -170,7 +170,7 @@ let reverseButtonStartTime: number
 let reverseButtonEndTime: number
 async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 	// If skips at second 0 it cancels previous watch time
-	if (video.paused || video.currentTime >= 1) return
+	if (video.paused || video.currentTime <= 2) return
 	// check if intro or outro
 	const isOutro = time > video.duration / 2
 	if (!settings.value.Crunchyroll?.skipIntro && !isOutro) return
@@ -178,7 +178,12 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 	// saves the audio language to settings
 	if (!reverseButtonClicked) {
 		const button = document.querySelector('button:has(svg[data-testid="skip-intro-icon"])') as HTMLElement
-		if (button && button.checkVisibility({ opacityProperty: true }) && !skipped) {
+		if (
+			button &&
+			button.checkVisibility({ opacityProperty: true }) &&
+			!skipped &&
+			!button?.getAttribute("aria-label")?.toLowerCase()?.includes("recap")
+		) {
 			skipped = true
 			setTimeout(function () {
 				if (isOutro && settings.value.Crunchyroll?.skipAfterCredits) {

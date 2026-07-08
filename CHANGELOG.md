@@ -2,8 +2,9 @@
 
 # 1.1.99
 
-- Crunchyroll: fix bug cancel progress if intro at second 0.
 - Amazon: fixed speed slider for A/B test UI.
+- Crunchyroll: fix bug cancel progress if intro at second 0.
+- Crunchyroll: stopped skipping recap 
 
 ## 1.1.98
 
