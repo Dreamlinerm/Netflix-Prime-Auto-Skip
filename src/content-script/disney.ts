@@ -259,14 +259,26 @@ const DisneySpeedStyle =
 	"height:10px;min-width:40px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;"
 async function Disney_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
-		const alreadySlider: HTMLInputElement | null = document.querySelector("#videoSpeedSlider")
+		const alreadySlider: HTMLInputElement | null = (document.querySelector("#videoSpeedSlider") ||
+			// 2. A/B test Disney UI
+			document
+				?.querySelector("main-app-controls-overlay")
+				?.shadowRoot?.querySelector("#videoSpeedSlider")) as HTMLInputElement
 		if (!alreadySlider) {
 			// infobar position for the slider to be added
 			let position: HTMLElement | null
-			if (isDisney) position = document.querySelector(".controls__right")
-			else
+			if (isDisney) {
+				position = document.querySelector(".controls__right")
+				// 2. A/B test Disney UI
+				if (!position) {
+					position = document
+						?.querySelector("main-app-controls-overlay")
+						?.shadowRoot?.querySelector(".utility-controls") as HTMLElement
+				}
+			} else {
 				position = document.querySelector(".icon-player-landscape")?.parentElement?.parentElement?.parentElement
 					?.parentElement as HTMLElement
+			}
 			if (position) createSlider(video, videoSpeed, position, DisneySliderStyle, DisneySpeedStyle)
 		} else {
 			// need to resync the slider with the video sometimes
