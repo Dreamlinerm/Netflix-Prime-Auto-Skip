@@ -107,3 +107,43 @@ Firefox reviewers install instructions:
 - `vite.config.ts` - Base vite configuration
 - `vite.chrome.config.ts` - Chrome/ chromium based browsers specific vite configuration
 - `vite.firefox.config.ts` - Firefox specific vite configuration
+
+
+### Amazon new UI Language Support:
+
+Deutsch
+English
+
+### not supported yet:
+
+Bahasa Indonesia
+Bahasa Melayu
+Dansk
+Español
+Español Latinoamérica
+Français
+Italiano
+Magyar
+Nederlands
+Norsk
+Polski
+Português (Brasil)
+Português (Portugal)
+Română
+Suomi
+Svenska
+Türkçe
+Wikang Filipino
+Čeština
+Ελληνικά
+Русский
+עברית
+العربية
+हिन्दी
+தமிழ்
+తెలుగు
+ไทย
+日本語
+简体中文
+繁體中文
+한국어

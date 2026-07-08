@@ -200,8 +200,13 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 		const alreadySlider = document.querySelector(".dv-player-fullscreen #videoSpeedSlider") as HTMLInputElement
 		if (!alreadySlider) {
 			// infobar position for the slider to be added
-			const position = document.querySelector(".dv-player-fullscreen [class*=infobar-container], .f1y5vpot")?.firstChild
+			let position = document.querySelector(".dv-player-fullscreen [class*=infobar-container]")?.firstChild
 				?.lastChild as HTMLElement
+			//  AB/B test/ UI fallback
+			if (!position) {
+				position = document.querySelector("#atvwebplayersdk-play-pause-button")?.parentElement?.parentElement
+					?.parentElement?.lastChild as HTMLElement
+			}
 			if (position) createSlider(video, videoSpeed, position, AmazonSliderStyle, "cursor: pointer;")
 		} else {
 			// need to resync the slider with the video sometimes
