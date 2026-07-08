@@ -1,10 +1,11 @@
 // create a zip file of every file and folder in ../ directory except list of exceptions
 import * as fs from "fs"
 import * as path from "path"
+import { fileURLToPath } from "node:url"
 // import * as archiver from "archiver"
 import * as archiverModule from "archiver"
 const archiver = archiverModule.default
-const __dirname = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:\/)/, "$1"))
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const output = fs.createWriteStream(path.join(__dirname, "../dist/archive.zip"))
 const archive = archiver("zip", {
 	zlib: { level: 9 }, // Sets the compression level.
