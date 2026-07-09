@@ -3,6 +3,7 @@
 # 1.1.99
 
 - Amazon: fixed speed slider for A/B test UI.
+- Amazon: fixed skip intro for A/B UI for most popular languages.
 - Crunchyroll: fix bug cancel progress if intro at second 0.
 - Crunchyroll: stopped skipping recap 
 

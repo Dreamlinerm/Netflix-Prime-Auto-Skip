@@ -106,9 +106,31 @@ function Amazon_Intro(video: HTMLVideoElement) {
 	) {
 		// skips intro and recap
 		// Supernatural S2 E3
-		const button = document.querySelector(
-			"[class*=skipelement], button.f1xhgfrd.fg4c0o1.fxdt570.ff1ld61.f1cet4yo.f11un3wk.fe9afsx.fj0jixm.f1e5razt.fw6qvwa.f1vpdgub.f1g75y8b, button[aria-label='Vorspann überspringen'], button[aria-label='Skip Intro']",
-		) as HTMLButtonElement
+		let button = document.querySelector("[class*=skipelement]") as HTMLButtonElement | undefined
+		// Fallback match with textContent for other languages
+		if (!button) {
+			button = Array.from(document.querySelectorAll("button")).find((button) => {
+				const buttonText = button.textContent?.replace(/\s+/g, " ").trim().toLowerCase() ?? ""
+				// langs covered by catchall intro:
+				// buttonText === "skip intro" || // english
+				// buttonText === "passer l'intro" || // français
+				// buttonText === "salta intro" || // italiano
+				// buttonText === "omitir introducción" || // español
+				// buttonText === "avançar introdução" || // português
+				// buttonText === "intro overslaan" || // nederlands
+
+				return (
+					buttonText === "vorspann überspringen" || // deutsch
+					buttonText === "pular abertura" || // português brasil
+					buttonText === "イントロをスキップ" || // 日本語
+					buttonText === "pomiń wstęp" || // polski
+					buttonText === "소개 건너뛰기" || // 한국어
+					buttonText === "jeneriği atla" || // Türkçe
+					buttonText === "laktawan ang intro" || // Wikang Filipino
+					buttonText.includes("intro")
+				)
+			}) as HTMLButtonElement | undefined
+		}
 
 		if (button?.checkVisibility() && !document.querySelector("[class*=nextupcard-button]")) {
 			const time = Math.floor(video?.currentTime ?? 0)
@@ -161,12 +183,10 @@ async function AmazonGobackbutton(
 	}
 }
 async function Amazon_Credits() {
-	const button = document.querySelector(
-		"[class*=nextupcard-button], button.f1h7p346.fl0ztaa.f1w91twd.f1hy0e6n.fgbpje3.fe9afsx.fj0jixm",
-	) as HTMLElement
+	const button = document.querySelector("[class*=nextupcard-button]") as HTMLElement | undefined
 	if (button) {
 		// only skipping to next episode not an entirely new series
-		const newEpNumber = document.querySelector("[class*=nextupcard-episode], .f14s8172.f615xjr.f1jlz00e") as HTMLElement
+		const newEpNumber = document.querySelector("[class*=nextupcard-episode]") as HTMLElement
 		if (
 			// is series
 			newEpNumber?.textContent &&
@@ -184,9 +204,7 @@ async function Amazon_Credits() {
 	}
 }
 async function Amazon_Watch_Credits() {
-	const button = document.querySelector(
-		"[class*=nextupcardhide-button], button.fs9qhvw.fl0ztaa.f1w91twd",
-	) as HTMLElement
+	const button = document.querySelector("[class*=nextupcardhide-button]") as HTMLElement
 	if (button) {
 		button.click()
 		settings.value.Statistics.SegmentsSkipped++

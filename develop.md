@@ -113,37 +113,37 @@ Firefox reviewers install instructions:
 
 Deutsch
 English
+Français
+Español
+Español Latinoamérica
+Português (Brasil)
+Português (Portugal)
+日本語
+한국어
+Italiano
+Polski
+Nederlands
 
 ### not supported yet:
 
-Bahasa Indonesia
-Bahasa Melayu
-Dansk
-Español
-Español Latinoamérica
-Français
-Italiano
-Magyar
-Nederlands
-Norsk
-Polski
-Português (Brasil)
-Português (Portugal)
-Română
-Suomi
-Svenska
-Türkçe
-Wikang Filipino
-Čeština
-Ελληνικά
-Русский
-עברית
-العربية
-हिन्दी
-தமிழ்
-తెలుగు
-ไทย
-日本語
 简体中文
 繁體中文
-한국어
+हिन्दी
+العربية
+Bahasa Indonesia
+Русский
+Bahasa Melayu
+తెలుగు
+Türkçe
+தமிழ்
+Wikang Filipino
+ไทย
+Română
+Svenska
+Magyar
+Čeština
+Ελληνικά
+עברית
+Dansk
+Norsk
+Suomi
