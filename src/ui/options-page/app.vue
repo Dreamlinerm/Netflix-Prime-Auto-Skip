@@ -80,7 +80,7 @@ watch(
 					<i-mdi-netflix class="icon" />
 					<div>Netflix</div>
 				</RouterLink>
-				<RouterLink
+				<!-- <RouterLink
 					to="/options-page/Disney"
 					class="menuButton flex"
 					:class="hash.endsWith('Disney') ? 'bg-netflix' : 'bg-primary'"
@@ -93,7 +93,6 @@ watch(
 						xmlns="http://www.w3.org/2000/svg"
 						class="icon text-primary-content"
 					>
-						<!-- fill="#1d1fff" -->
 						<path
 							transform="matrix(.1 0 0 -.1 0 700)"
 							fill="currentColor"
@@ -101,7 +100,7 @@ watch(
 						/>
 					</svg>
 					<div>Disney+</div>
-				</RouterLink>
+				</RouterLink> -->
 				<RouterLink
 					to="/options-page/Crunchyroll"
 					class="menuButton flex"

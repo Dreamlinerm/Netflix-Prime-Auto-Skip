@@ -6,13 +6,14 @@ function callback(tabs: Array<{ url?: string }>) {
 	const currentUrl = tabs?.[0]?.url || ""
 	const isPrimeVideo = /.amazon.|.primevideo./i.test(currentUrl)
 	const isNetflix = /.netflix./i.test(currentUrl)
-	const isDisney = /.disneyplus.|.starplus.|.hotstar./i.test(currentUrl)
+	// const isDisney = /.disneyplus.|.starplus.|.hotstar./i.test(currentUrl)
 	const isCrunchyroll = /.crunchyroll./i.test(currentUrl)
 	// const isHBO = /max/i.test(currentUrl);
 	if (isPrimeVideo) router.push("/action-popup/Amazon")
 	else if (isNetflix) router.push("/action-popup/Netflix")
-	else if (isDisney) router.push("/action-popup/Disney")
+	// else if (isDisney) router.push("/action-popup/Disney")
 	else if (isCrunchyroll) router.push("/action-popup/Crunchyroll")
+	else router.push("/action-popup/SharedOptions")
 	// else if (isHBO) Menu("HBO");
 }
 const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent)

@@ -36,7 +36,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SharedPagesAmazon: typeof import('./../components/shared-pages/Amazon.vue')['default']
     SharedPagesCrunchyroll: typeof import('./../components/shared-pages/Crunchyroll.vue')['default']
-    SharedPagesDisney: typeof import('./../components/shared-pages/Disney.vue')['default']
     SharedPagesNetflix: typeof import('./../components/shared-pages/Netflix.vue')['default']
     SharedPagesStatistics: typeof import('./../components/shared-pages/Statistics.vue')['default']
     Switch: typeof import('./../components/Switch.vue')['default']

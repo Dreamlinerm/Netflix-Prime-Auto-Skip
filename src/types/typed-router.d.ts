@@ -47,13 +47,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/action-popup/Disney': RouteRecordInfo<
-      '/action-popup/Disney',
-      '/action-popup/Disney',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/action-popup/Netflix': RouteRecordInfo<
       '/action-popup/Netflix',
       '/action-popup/Netflix',
@@ -180,12 +173,6 @@ declare module 'vue-router/auto-routes' {
     'src/ui/action-popup/pages/Crunchyroll.vue': {
       routes:
         | '/action-popup/Crunchyroll'
-      views:
-        | never
-    }
-    'src/ui/action-popup/pages/Disney.vue': {
-      routes:
-        | '/action-popup/Disney'
       views:
         | never
     }

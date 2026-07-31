@@ -55,7 +55,7 @@ const githubUrl = __GITHUB_URL__
 				<i-mdi-netflix class="icon" />
 			</RouterLink>
 		</div>
-		<div class="tooltip">
+		<!-- <div class="tooltip">
 			<div class="tooltip-content">
 				<div class="text-2xl font-black">Disney</div>
 			</div>
@@ -71,7 +71,6 @@ const githubUrl = __GITHUB_URL__
 					xmlns="http://www.w3.org/2000/svg"
 					class="icon"
 				>
-					<!-- fill="#1d1fff" -->
 					<path
 						transform="matrix(.1 0 0 -.1 0 700)"
 						fill="currentColor"
@@ -79,7 +78,7 @@ const githubUrl = __GITHUB_URL__
 					/>
 				</svg>
 			</RouterLink>
-		</div>
+		</div> -->
 		<div class="tooltip">
 			<div class="tooltip-content">
 				<div class="text-2xl font-black">Crunchyroll</div>

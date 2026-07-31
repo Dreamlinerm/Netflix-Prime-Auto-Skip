@@ -31,7 +31,6 @@ export type settingsType = {
 		skipAd: boolean
 		speedSlider: boolean
 		showRating: boolean
-		selfAd: boolean
 		hideTitles: boolean
 	}
 	Crunchyroll: {
@@ -133,7 +132,6 @@ export const defaultSettings = {
 		skipAd: true,
 		speedSlider: true,
 		showRating: true,
-		selfAd: true,
 		hideTitles: true,
 	},
 	Crunchyroll: {
