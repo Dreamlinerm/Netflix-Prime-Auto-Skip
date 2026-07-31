@@ -85,8 +85,8 @@ const props = defineProps({
 	},
 })
 const settingsList: Array<
-	"skipIntro" | "skipCredits" | "skipAfterCredits" | "releaseCalendar" | "profile" | "bigPlayer" | "hideHeader"
-> = ["skipAfterCredits", "releaseCalendar", "bigPlayer", "hideHeader", "profile"]
+	"skipIntro" | "skipCredits" | "skipAfterCredits" | "releaseCalendar" | "profile" | "bigPlayer"
+> = ["skipAfterCredits", "releaseCalendar", "bigPlayer", "profile"]
 function setTimeout(num: string | null) {
 	const parsed = Number.parseInt(num || "0")
 	if (parsed > 0) settings.value.General.Crunchyroll_skipTimeout = parsed

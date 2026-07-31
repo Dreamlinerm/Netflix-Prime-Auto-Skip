@@ -46,7 +46,6 @@ async function startCrunchyroll() {
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	if (settings.value.Video.doubleClick) startdoubleClick()
 	if (settings.value.Crunchyroll.speedSlider) Crunchyroll_SpeedKeyboard()
-	if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle()
 	CrunchyrollObserver.observe(document, config)
 }
 // #region Crunchyroll
@@ -56,6 +55,7 @@ async function Crunchyroll() {
 	if (settings.value.Crunchyroll?.profile) Crunchyroll_profile()
 	const video = document.querySelector("video")
 	if (!video) return
+	if (settings.value.Crunchyroll?.bigPlayer) Crunchyroll_bigPlayerStyle()
 	const time = video?.currentTime
 	Crunchyroll_Intro_Outro(video, time)
 	if (settings.value.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider(video)
@@ -97,9 +97,6 @@ async function Crunchyroll_bigPlayerStyle() {
 					max-height: calc(100vw / 1.7777);
           height: 100vh;
       }
-  `
-	if (settings.value.Crunchyroll.hideHeader) {
-		styles += /*css*/ `
 			[class^="app-layout__header"] {
 					position: absolute;
           top: 0;
@@ -122,8 +119,7 @@ async function Crunchyroll_bigPlayerStyle() {
       .erc-large-header:hover .header-content {
           top: 0;
       }
-		`
-	}
+  `
 	style.textContent = styles
 	document.head.appendChild(style)
 }
