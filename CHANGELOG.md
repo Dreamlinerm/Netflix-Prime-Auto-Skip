@@ -1,6 +1,6 @@
 # Changelog
 
-# 1.2.00
+# 1.1.100
 
 - Disney: fixed new UI
 - Crunchyroll: removed hideHeader option
