@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.2.00
+
+- Disney: fixed new UI
+
 # 1.1.99
 
 - Amazon: fixed speed slider for A/B test UI.

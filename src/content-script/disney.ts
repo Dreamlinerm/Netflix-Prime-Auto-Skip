@@ -254,21 +254,22 @@ async function Disney_Watch_Credits() {
 	}
 }
 
-const DisneySliderStyle = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;"
-const DisneySpeedStyle =
-	"height:10px;min-width:40px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;"
+const DisneySliderStyle = "pointer-events: auto;background: rgb(221, 221, 221);display: none;width:200px;z-index:1000;"
+const DisneySpeedStyle = "height:20px;color:#f9f9f9;pointer-events: auto;padding: 0 5px;z-index:1000;"
 async function Disney_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
-		const alreadySlider: HTMLInputElement | null = document
-			?.querySelector("main-app-controls-overlay")
-			?.shadowRoot?.querySelector("#videoSpeedSlider") as HTMLInputElement
+		document.querySelector("pointer-actions")?.style?.setProperty("z-index", "0")
+		const disneyControls = document.querySelector("main-app-controls-overlay")?.shadowRoot
+		const alreadySlider: HTMLInputElement | null = disneyControls?.querySelector(
+			"#videoSpeedSlider",
+		) as HTMLInputElement
 		if (!alreadySlider) {
 			// infobar position for the slider to be added
 			let position: HTMLElement | null
 			if (isDisney) {
 				position = document
 					?.querySelector("main-app-controls-overlay")
-					?.shadowRoot?.querySelector(".utility-controls") as HTMLElement
+					?.shadowRoot?.querySelector(".experience-controls") as HTMLElement
 			} else {
 				position = document.querySelector(".icon-player-landscape")?.parentElement?.parentElement?.parentElement
 					?.parentElement as HTMLElement
@@ -276,7 +277,7 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 			if (position) createSlider(video, videoSpeed, position, DisneySliderStyle, DisneySpeedStyle)
 		} else {
 			// need to resync the slider with the video sometimes
-			const speed = document.querySelector("#videoSpeed") as HTMLElement
+			const speed = disneyControls?.querySelector("#videoSpeed") as HTMLElement
 			if (speed) {
 				speed.onclick = function (event) {
 					event.stopPropagation()
