@@ -3,6 +3,7 @@
 # 1.2.00
 
 - Disney: fixed new UI
+- Crunchyroll: removed hideHeader option
 
 # 1.1.99
 
