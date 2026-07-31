@@ -54,7 +54,6 @@ async function startDisney() {
 		const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
 		if (settings.value.Disney?.skipAd) Disney_skipAd(video)
 	}, 300)
-	arrowKeys()
 }
 
 // #region Disney
@@ -70,24 +69,8 @@ function Disney() {
 	if (settings.value.Disney?.speedSlider) Disney_SpeedSlider(video)
 	if (isDisney) {
 		Disney_addHomeButton()
-		if (settings.value.Disney?.selfAd) Disney_selfAd(video, time)
 	}
 	if (settings.value.Video?.scrollVolume) Disney_scrollVolume(video)
-}
-async function arrowKeys() {
-	// arrow keys to skip 10 seconds
-	if (isFirefox) {
-		document.addEventListener("keydown", function (event) {
-			const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
-			if (event.key === "ArrowRight") {
-				video.currentTime += 10
-				event.preventDefault()
-			} else if (event.key === "ArrowLeft") {
-				video.currentTime -= 10
-				event.preventDefault()
-			}
-		})
-	}
 }
 async function Disney_skipAd(video: HTMLVideoElement) {
 	if (video && !video.paused) {
@@ -142,7 +125,10 @@ async function Disney_scrollVolume(video: HTMLVideoElement) {
 async function Disney_Intro(video: HTMLVideoElement, time: number) {
 	if (
 		getCurrentEpisodeNumber(
-			document.querySelector("title-bug")?.shadowRoot?.querySelector(".subtitle-field span")?.textContent,
+			document
+				.querySelector("main-app-controls-overlay")
+				?.shadowRoot?.querySelector("title-bug")
+				?.shadowRoot?.querySelector(".subtitle-field span")?.textContent,
 		) == 1
 	)
 		return
@@ -159,11 +145,7 @@ async function Disney_Intro(video: HTMLVideoElement, time: number) {
 		button = document
 			.evaluate("//span[contains(., 'Skip Intro')]", document, null, XPathResult.ANY_TYPE, null)
 			?.iterateNext()?.parentElement as HTMLElement
-	if (
-		button &&
-		!document.querySelector('[data-testid="icon-restart"]')?.parentElement &&
-		!document.querySelector("[class^='overlay_upnext']")
-	) {
+	if (button) {
 		console.log("Intro/Recap found", document.querySelector('[data-testid="icon-restart"]'))
 		button.click()
 		console.log("Intro/Recap skipped", button)
@@ -176,15 +158,12 @@ async function Disney_skipCredits(currentTime: number) {
 	let button: HTMLElement
 	if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]') as HTMLElement
 	else if (isDisney)
-		button =
-			document.querySelector('[data-testid="icon-restart"]')?.parentElement ||
-			(document.querySelector(".overlay_upnextlite_button-container")?.firstChild as HTMLElement)
+		button = document.querySelector("up-next-lite-v1")?.shadowRoot?.querySelector("button") as HTMLElement
 	else
 		button = document
 			.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)
 			?.iterateNext()?.parentElement as HTMLElement
-	// button.getAttribute("data-testid") is to avoid clicking the next episode button when different show.
-	if (button && !button.dataset.testid) {
+	if (button) {
 		// time is to avoid clicking too fast
 		const time = currentTime
 		if (time && lastAdTimeText != time) {
@@ -224,8 +203,7 @@ async function Disney_addHomeButton() {
 async function Disney_Watch_Credits() {
 	let button: Element | null | undefined
 	if (isStarPlus) button = document.querySelector('[data-gv2elementkey="playNext"]')
-	else if (isDisney && !document.querySelector('[data-testid="playback-action-button"]'))
-		button = document.querySelector('[data-testid="icon-restart"]')?.parentElement
+	else if (isDisney) button = document.querySelector("up-next-lite-v1")?.shadowRoot?.querySelector("button")
 	else
 		button = document
 			.evaluate("//span[contains(., 'Next Episode')]", document, null, XPathResult.ANY_TYPE, null)
@@ -318,19 +296,6 @@ async function Disney_SpeedKeyboard() {
 			videoSpeed.value = video.playbackRate
 		}
 	})
-}
-
-async function Disney_selfAd(video: HTMLVideoElement, time: number) {
-	if (isDisney) {
-		const button: HTMLElement | null = document.querySelector(".overlay_interstitials__promo_skip_button")
-		if (button) {
-			button.click()
-			console.log("SelfAd skipped", button)
-			setTimeout(function () {
-				addSkippedTime(time, video?.currentTime, "DisneyAdTimeSkipped")
-			}, 600)
-		}
-	}
 }
 
 async function Hotstar_doubleClick() {
