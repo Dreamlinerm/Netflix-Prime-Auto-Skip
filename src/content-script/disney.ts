@@ -259,22 +259,16 @@ const DisneySpeedStyle =
 	"height:10px;min-width:40px;color:#f9f9f9;pointer-events: auto;position: relative;bottom: 8px;padding: 0 5px;"
 async function Disney_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
-		const alreadySlider: HTMLInputElement | null = (document.querySelector("#videoSpeedSlider") ||
-			// 2. A/B test Disney UI
-			document
-				?.querySelector("main-app-controls-overlay")
-				?.shadowRoot?.querySelector("#videoSpeedSlider")) as HTMLInputElement
+		const alreadySlider: HTMLInputElement | null = document
+			?.querySelector("main-app-controls-overlay")
+			?.shadowRoot?.querySelector("#videoSpeedSlider") as HTMLInputElement
 		if (!alreadySlider) {
 			// infobar position for the slider to be added
 			let position: HTMLElement | null
 			if (isDisney) {
-				position = document.querySelector(".controls__right")
-				// 2. A/B test Disney UI
-				if (!position) {
-					position = document
-						?.querySelector("main-app-controls-overlay")
-						?.shadowRoot?.querySelector(".utility-controls") as HTMLElement
-				}
+				position = document
+					?.querySelector("main-app-controls-overlay")
+					?.shadowRoot?.querySelector(".utility-controls") as HTMLElement
 			} else {
 				position = document.querySelector(".icon-player-landscape")?.parentElement?.parentElement?.parentElement
 					?.parentElement as HTMLElement
@@ -284,7 +278,10 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 			// need to resync the slider with the video sometimes
 			const speed = document.querySelector("#videoSpeed") as HTMLElement
 			if (speed) {
-				speed.onclick = function () {
+				speed.onclick = function (event) {
+					event.stopPropagation()
+					event.preventDefault()
+					event.stopImmediatePropagation()
 					alreadySlider.style.display = alreadySlider.style.display === "block" ? "none" : "block"
 				}
 				watch(videoSpeed, (newValue) => {
@@ -295,7 +292,10 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 			if (video.playbackRate !== Number.parseFloat(alreadySlider.value) / 10) {
 				video.playbackRate = Number.parseFloat(alreadySlider.value) / 10
 			}
-			alreadySlider.oninput = function () {
+			alreadySlider.oninput = function (event) {
+				event.stopPropagation()
+				event.preventDefault()
+				event.stopImmediatePropagation()
 				const sliderValue = Number.parseFloat(alreadySlider.value)
 				if (speed) speed.textContent = (sliderValue / 10).toFixed(1) + "x"
 				video.playbackRate = sliderValue / 10
