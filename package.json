@@ -81,7 +81,7 @@
 		"vite-plugin-zip-pack": "^1.2.4",
 		"vitest": "^4.1.8",
 		"vue-tsc": "^3.0.5",
-		"web-ext": "^10.4.0",
+		"web-ext": "^10.5.0",
 		"webext-bridge": "^6.0.1"
 	},
 	"private": true,
