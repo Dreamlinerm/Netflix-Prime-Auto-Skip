@@ -2,6 +2,10 @@ import { sendMessage } from "webext-bridge/content-script"
 console.log("shared-functions loaded")
 // Global Variables
 
+// Set to true to re-enable the verbose "[RatingDebug]" logging added while diagnosing the Netflix
+// 2026 UI redesign (broken rating/hideTitles/removeGames selectors). Kept as a one-line toggle in
+// case similar selector breakage needs debugging again in the future.
+const DEBUG = false
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const { data: hideTitles, promise: hideTitlesPromise } = useBrowserSyncStorage<BooleanObject>("hideTitles", {}, false)
 export const date = new Date()
@@ -84,6 +88,19 @@ async function getDBCache() {
 			console.log(error)
 		}
 		DBCache = {}
+	} else {
+		// One-time repair: entries with no "id" mean the TMDB lookup failed outright when they were cached
+		// (e.g. missing/invalid TMDB_TOKEN, rate limiting, network error at the time). Keep them around so
+		// they display "?" for now, but never let the "fresh cache" 7-day shortcut trust them - that check
+		// lives in addRating() and requires an "id" to be present. Here we just log how many are affected
+		// so it's clear in the console why some ratings were stuck on "?" before this fix.
+		const failedLookups = Object.keys(DBCache).filter((key) => !DBCache[key]?.id && !DBCache[key]?.score)
+		if (DEBUG && failedLookups.length > 0) {
+			console.log(
+				`[RatingDebug] ${failedLookups.length} cached title(s) had no TMDB match recorded (likely from a previous run without a valid TMDB_TOKEN). They will be retried automatically instead of staying stuck on "?".`,
+				failedLookups,
+			)
+		}
 	}
 	if (isNetflix) {
 		if (settings.value.Netflix?.showRating || settings.value.Netflix?.hideTitles)
@@ -266,6 +283,22 @@ async function getMovieInfo(
 	let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURIComponent(title)}&include_adult=false&language=${locale}&page=1`
 	if (year) url += `&year=${year}`
 	const data: TMDBResponse = await sendMessage("fetch", { url }, "background")
+	// TMDB returns { success: false, status_code, status_message } on auth errors (e.g. missing/invalid TMDB_TOKEN)
+	// instead of throwing, so we need to detect that shape explicitly to tell it apart from "no results found".
+	const errorData = data as unknown as { success?: boolean; status_code?: number; status_message?: string }
+	if (errorData?.success === false) {
+		if (DEBUG) {
+			console.error(
+				"%c[RatingDebug] TMDB API error - ratings will show '?' until this is fixed:",
+				"color:red;font-weight:bold;",
+				errorData.status_message,
+				"(status_code:",
+				errorData.status_code,
+				"). This usually means TMDB_TOKEN is missing/invalid in your local build. Add a valid token to a .env file at the project root (TMDB_TOKEN=...), then rebuild with 'npm run build:chrome'.",
+			)
+		}
+		return
+	}
 	if (data != undefined) {
 		if (data?.results) data.results = data.results?.filter((item) => item.media_type?.toLowerCase() !== "person")
 		// themoviedb
@@ -384,8 +417,21 @@ function Amazon_getMediaType(type: string): MediaType {
 }
 function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	let AllTitleCardsTypes: Array<NodeListOf<Element>> = []
-	if (isNetflix) AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")]
-	else if (isDisney)
+	if (isNetflix) {
+		// Netflix 2026 UI redesign: cards are now anchors with a stable data-uia attribute
+		// (e.g. <a data-uia="standard-card" aria-label="Title" href="/browse?jbv=ID">), the old
+		// ".title-card .boxart-container" classes are gone. "cloud-game-card" is excluded here
+		// since games are handled separately by removeGames.
+		const modernCards = document.querySelectorAll(
+			'a[data-uia="standard-card"]:not(.imdb), a[data-uia="progress-card"]:not(.imdb)',
+		)
+		if (modernCards.length > 0) {
+			AllTitleCardsTypes = [modernCards]
+		} else {
+			// legacy fallback (older Netflix builds)
+			AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")]
+		}
+	} else if (isDisney)
 		AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not([href^='/browse/page']):not(.imdb)")]
 	else if (isHotstar)
 		AllTitleCardsTypes = [
@@ -418,9 +464,70 @@ function isElementVisible(el: HTMLElement): boolean {
 	return visible
 }
 
+// throttle noisy debug logs so we don't flood the console on every 1s interval tick
+let lastAddRatingDebugLog = 0
+let cardSelectorDiscoveryLastUrl = ""
+// One-shot(per url) discovery helper: when the normal selectors find 0 cards, walk up from more
+// resilient anchors (links to /title/, /watch/, or elements with aria-label + img) so we can read
+// the *current* class names / data attributes Netflix (or another site) is using, straight from the console,
+// without needing to manually open devtools and inspect an element.
+function discoverNetflixCardSelectors() {
+	if (cardSelectorDiscoveryLastUrl === url) return
+	cardSelectorDiscoveryLastUrl = url
+	const anchors = Array.from(document.querySelectorAll('a[href*="/title/"], a[href*="/watch/"]')) as HTMLElement[]
+	console.log("%c[RatingDebug][Discover][Netflix] anchors linking to /title/ or /watch/ found:", "color:#ff9800;font-weight:bold;", anchors.length)
+	const seen = new Set<string>()
+	for (const a of anchors.slice(0, 40)) {
+		let el: HTMLElement | null = a
+		const chain: Array<string> = []
+		for (let depth = 0; depth < 6 && el; depth++) {
+			const cls = typeof el.className === "string" && el.className ? ` class="${el.className}"` : ""
+			const testId = el.getAttribute?.("data-testid")
+			const dataUia = el.getAttribute?.("data-uia")
+			const extra = (testId ? ` data-testid="${testId}"` : "") + (dataUia ? ` data-uia="${dataUia}"` : "")
+			chain.push(`<${el.tagName.toLowerCase()}${cls}${extra}>`)
+			el = el.parentElement
+		}
+		const key = chain.join(" > ")
+		if (!seen.has(key)) {
+			seen.add(key)
+			console.log(
+				"[RatingDebug][Discover][Netflix] ancestor chain (closest -> up 6 levels):",
+				chain.join(" > "),
+				"| aria-label on anchor or parent:",
+				a.getAttribute("aria-label") || a.parentElement?.getAttribute("aria-label") || null,
+			)
+		}
+	}
+	if (anchors.length === 0) {
+		console.log(
+			"[RatingDebug][Discover][Netflix] no anchors with /title/ or /watch/ found either. Trying broader search for elements with aria-label + img",
+		)
+		const candidates = Array.from(document.querySelectorAll("[aria-label] img, img[alt]")).slice(0, 20)
+		for (const img of candidates) {
+			const container = img.closest("[aria-label]") || img.parentElement
+			console.log("[RatingDebug][Discover][Netflix] candidate card element:", container, "img alt:", img.getAttribute("alt"))
+		}
+	}
+}
 async function addRating(showRating: boolean, optionHideTitles: boolean) {
 	url = globalThis.location.href
 	const AllTitleCardsTypes = getAllTitleCardsTypes()
+	if (DEBUG && Date.now() - lastAddRatingDebugLog > 5000) {
+		lastAddRatingDebugLog = Date.now()
+		console.log("%c[RatingDebug] cards found per selector", "color:#00aeef;font-weight:bold;", {
+			url,
+			showRating,
+			optionHideTitles,
+			cardCounts: AllTitleCardsTypes.map((list) => list.length),
+		})
+		if (AllTitleCardsTypes.every((list) => list.length === 0)) {
+			console.warn(
+				"[RatingDebug] no title cards matched any selector. The site's HTML/CSS classes for cards have likely changed, see getAllTitleCardsTypes()",
+			)
+			if (isNetflix) discoverNetflixCardSelectors()
+		}
+	}
 	// on disney there are multiple images for the same title so only use the first one
 	let lastTitle = ""
 	// for each is not going in order on chrome
@@ -437,12 +544,28 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 			}
 			const media_type = getMediaType(card)
 			const title = getCleanTitle(card, type)
-			if (!title) continue
+			if (!title) {
+				if (DEBUG && isNetflix)
+					console.log(
+						"[RatingDebug][Netflix] could not extract title (parentElement aria-label missing/empty) for card",
+						card,
+					)
+				continue
+			}
 			if (optionHideTitles) {
 				if (hideTitles.value[title]) {
 					if (isNetflix) {
-						const item = card.closest(".slider-item") as HTMLElement
+						// legacy UI used ".slider-item"; the 2026 redesign wraps each card in a
+						// "[data-virtual-slot]" cell, which is the one we need to hide
+						const item = (card.closest(".slider-item") ||
+							card.closest("[data-virtual-slot]") ||
+							card.parentElement) as HTMLElement
 						if (item) item.style.display = "none"
+						else if (DEBUG)
+							console.warn(
+								"[RatingDebug][Netflix] hideTitles: no suitable ancestor found, cannot hide card for title",
+								title,
+							)
 					} else if (isDisney) {
 						const item = card.parentElement as HTMLElement
 						if (item) item.style.display = "none"
@@ -465,8 +588,13 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 				// sometimes more than one image is loaded for the same title
 				if (lastTitle != title && !title.includes("Netflix") && !title.includes("Prime Video")) {
 					lastTitle = title
+					// Only trust a "fresh cache, no score yet" entry if TMDB actually matched a title (has an id).
+					// Entries with no id at all mean the lookup failed outright (e.g. missing/invalid TMDB_TOKEN,
+					// rate limiting, network error) and must always be retried, otherwise they'd be stuck showing
+					// "?" forever once cached, even after the underlying problem (like a missing token) is fixed.
 					if (
-						(DBCache[title]?.score || getDiffInDays(DBCache[title]?.date, date) <= 7) &&
+						(DBCache[title]?.score ||
+							(DBCache[title]?.id && getDiffInDays(DBCache[title]?.date, date) <= 7)) &&
 						(!media_type || DBCache[title]?.media_type == media_type)
 					) {
 						useDBCache(title, card, media_type)
@@ -552,7 +680,20 @@ function getMediaType(card: HTMLElement): MediaType {
 function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 	let title: string | undefined
 	if (isNetflix) {
-		title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0]
+		// Netflix 2026 UI: aria-label is on the card <a> itself (data-uia="standard-card"/"progress-card")
+		const ownAriaLabel = card?.getAttribute("aria-label")
+		if (ownAriaLabel) {
+			title = ownAriaLabel.split(" (")[0]
+		} else {
+			// legacy fallback: aria-label was on the parent element in the older UI
+			const parentAriaLabel = card?.parentElement?.getAttribute("aria-label")
+			title = parentAriaLabel?.split(" (")[0]
+			if (DEBUG && !parentAriaLabel)
+				console.log(
+					"[RatingDebug][Netflix] getCleanTitle: no aria-label found on card or its parent, DOM structure may have changed",
+					card,
+				)
+		}
 	} else if (isDisney) {
 		const prompt = card.querySelector('div[data-testid="hero-carousel-prompt"]')
 		if (prompt?.textContent)
@@ -784,11 +925,20 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		zIndex: 2,
 	})
 	if (isNetflix) {
-		const titleCardContainer = card.closest(".title-card-container") as HTMLElement
+		// legacy UI used a distinct ".title-card-container" ancestor; the 2026 redesign has no such
+		// wrapper class anymore, so we fall back to the card <a> element itself (data-uia="standard-card"/"progress-card")
+		const titleCardContainer = (card.closest(".title-card-container") as HTMLElement) || card
 		if (titleCardContainer) {
+			if (getComputedStyle(titleCardContainer).position === "static") titleCardContainer.style.position = "relative"
 			titleCardContainer.appendChild(div)
 			if (getIsTransparent(data?.score, vote_count < 50)) titleCardContainer.appendChild(greyOverlay)
 			// titleCardContainer.style.opacity = getTransparencyForRating(data?.score, vote_count < 50)
+		} else if (DEBUG) {
+			console.warn(
+				"[RatingDebug][Netflix] setRatingOnCard: no suitable ancestor found, rating badge cannot be inserted for title",
+				title,
+				card,
+			)
 		}
 	} else if (isHBO) {
 		card.appendChild(div)

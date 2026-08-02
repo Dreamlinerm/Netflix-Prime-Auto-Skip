@@ -2,6 +2,9 @@
 // import { extPay } from '@/utils/payment/extPay'
 // extPay.startBackground()
 const is_DEV = process.env.NODE_ENV === "development"
+// Set to true to re-enable the TMDB fetch/token diagnostic logging added while debugging why
+// ratings showed "?" (missing TMDB_TOKEN / failed requests). One-line toggle for future debugging.
+const DEBUG = false
 
 browser.runtime.onInstalled.addListener(async (opt) => {
 	// await browser.storage.local.clear()
@@ -65,6 +68,13 @@ async function setBadgeText(text: string, tabId: number) {
 // onMessage
 onMessage("fetch", async (message: { data: { url: string } }) => {
 	const { data } = message
+	if (DEBUG && !__TMDB_TOKEN__) {
+		console.warn(
+			"[Background] TMDB_TOKEN is empty in this build. Ratings will fail with a 401 and show '?'. " +
+				"Create a .env file at the project root with TMDB_TOKEN=<your TMDB API Read Access Token> " +
+				"(get one for free at https://www.themoviedb.org/settings/api) and rebuild the extension.",
+		)
+	}
 	try {
 		const response = await fetch(data.url, {
 			method: "GET",
@@ -74,6 +84,9 @@ onMessage("fetch", async (message: { data: { url: string } }) => {
 			},
 		})
 		const responseData = await response.json()
+		if (DEBUG && !response.ok) {
+			console.error("[Background] TMDB fetch failed:", response.status, response.statusText, responseData, data.url)
+		}
 		return responseData
 	} catch (error) {
 		console.error(error)

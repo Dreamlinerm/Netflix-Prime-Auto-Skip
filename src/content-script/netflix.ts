@@ -17,6 +17,10 @@ let curVideoTitle: string | null = null
 const videoSpeed: Ref<number> = ref(1)
 const isEdge = /edg/i.test(ua)
 const config = { attributes: true, childList: true, subtree: true }
+// Set to true to re-enable the verbose selector-snapshot/discovery logging added while diagnosing
+// the Netflix 2026 UI redesign (rating/removeGames/hideTitles selectors). Kept in the code so it's
+// a one-line toggle if Netflix changes its markup again in the future.
+const DEBUG = false
 async function logStartOfAddon() {
 	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
 	console.log("Settings", settings.value)
@@ -50,8 +54,80 @@ async function startNetflix() {
 	if (settings.value.Netflix?.profile) AutoPickProfile()
 	if (settings.value.Netflix?.skipAd) Netflix_SkipAdInterval()
 	if (settings.value.Netflix?.speedSlider) Netflix_SpeedKeyboard()
+	if (DEBUG) Netflix_DebugInterval()
 	NetflixObserver.observe(document, config)
 }
+
+// #region Debug logging
+// Logs a snapshot of the selectors this extension relies on every few seconds.
+// Netflix regularly changes its internal (undocumented) class names / data-uia attributes,
+// if any of the counts below unexpectedly drop to 0/false while the corresponding feature
+// is enabled in settings, that selector is very likely the one that Netflix broke.
+function Netflix_DebugInterval() {
+	setInterval(() => {
+		const NSettings = settings.value.Netflix
+		console.log("%c[NetflixDebug] selector snapshot", "color:#00aeef;font-weight:bold;", {
+			url: globalThis.location.href,
+			settings: NSettings,
+			videoFound: !!document.querySelector("video"),
+			// Rating feature
+			"videoTitleContainer [data-uia='video-title']": !!document.querySelector('[data-uia="video-title"]'),
+			curVideoTitle,
+			"rating: a[data-uia=standard-card]/[progress-card] count": document.querySelectorAll(
+				'a[data-uia="standard-card"]:not(.imdb), a[data-uia="progress-card"]:not(.imdb)',
+			).length,
+			"rating: cards already tagged .imdb": document.querySelectorAll(
+				'a[data-uia="standard-card"].imdb, a[data-uia="progress-card"].imdb',
+			).length,
+			// legacy (pre-2026 UI) selectors, kept to detect if Netflix reverts/A-B tests the old markup
+			"rating(legacy): .title-card .boxart-container count": document.querySelectorAll(
+				".title-card .boxart-container:not(.imdb)",
+			).length,
+			// removeGames feature
+			"removeGames: a[data-uia=cloud-game-card] count": document.querySelectorAll(
+				'a[data-uia="cloud-game-card"]',
+			).length,
+			"removeGames(legacy): div.mobile-games-row": !!document.querySelector("div.mobile-games-row"),
+			"removeGames(legacy): [data-list-context=configbased_cloudpersonalizedgames]": !!document.querySelector(
+				'div[data-list-context="configbased_cloudpersonalizedgames"]',
+			),
+			"removeGames(legacy): div.billboard-row.billboard-row-games": !!document.querySelector(
+				"div.billboard-row.billboard-row-games",
+			),
+			// hideTitles feature
+			"hideTitles: [data-virtual-slot] count": document.querySelectorAll("[data-virtual-slot]").length,
+			"hideTitles(legacy): .slider-item count": document.querySelectorAll(".slider-item").length,
+			// skipBlocked / skip buttons (in-player)
+			"skipBlocked: [data-uia=interrupt-autoplay-continue]": !!document.querySelector(
+				'[data-uia="interrupt-autoplay-continue"]',
+			),
+			"skipIntro: [data-uia=player-skip-intro]": !!document.querySelector('[data-uia="player-skip-intro"]'),
+			"skipRecap: [data-uia=player-skip-recap]": !!document.querySelector('[data-uia="player-skip-recap"]'),
+		})
+		// If the games row selectors find nothing, try to auto-discover the current class/attribute names
+		// by scanning for anything that mentions "game" in its class, id, or data-* attributes.
+		if (
+			settings.value.Netflix?.removeGames &&
+			!document.querySelector("div.mobile-games-row") &&
+			!document.querySelector('div[data-list-context="configbased_cloudpersonalizedgames"]') &&
+			!document.querySelector("div.billboard-row.billboard-row-games")
+		) {
+			const candidates = Array.from(document.querySelectorAll("*")).filter((el) => {
+				const cls = typeof el.className === "string" ? el.className : ""
+				const attrs = el.getAttributeNames?.().join(" ") ?? ""
+				return /game/i.test(cls) || /game/i.test(attrs)
+			}) as Array<HTMLElement>
+			if (candidates.length > 0) {
+				console.log(
+					"%c[NetflixDebug][Discover] removeGames: elements mentioning 'game' found (old selectors matched none):",
+					"color:#ff9800;font-weight:bold;",
+					candidates.slice(0, 15),
+				)
+			}
+		}
+	}, 5000)
+}
+// #endregion
 
 // #region Netflix
 // Netflix Observer
@@ -99,7 +175,12 @@ function getTitle() {
 	// Example (DE): <div data-uia="video-title"><h4>Show</h4><span>Flg. 1</span><span>Episode name</span></div>
 	// Example (EN): "S2:E1" or "Episode 1". We avoid language-specific keywords and just take the last number.
 	const container = document.querySelector('[data-uia="video-title"]')
-	if (!container) return ""
+	if (!container) {
+		if (DEBUG && document.querySelector("video")) {
+			console.log("[NetflixDebug] getTitle: video present but [data-uia='video-title'] not found, selector may be outdated")
+		}
+		return ""
+	}
 
 	return Array.from(container.querySelectorAll("span"))
 		.map((s) => (s.textContent ?? "").trim())
@@ -270,6 +351,23 @@ async function Netflix_SpeedKeyboard() {
 	})
 }
 function Netflix_removeGames() {
+	// 2026 UI: game cards use data-uia="cloud-game-card" (no more dedicated ".mobile-games-row" class).
+	// Remove the whole <section> row that contains them, works regardless of locale/heading text.
+	const gameCards = document.querySelectorAll('a[data-uia="cloud-game-card"]')
+	if (gameCards.length > 0) {
+		const rowsToRemove = new Set<HTMLElement>()
+		gameCards.forEach((el) => {
+			const row = (el.closest("section") || el.closest('[data-uia^="carousel-row"]')) as HTMLElement | null
+			if (row) rowsToRemove.add(row)
+		})
+		rowsToRemove.forEach((row) => {
+			row.remove()
+			console.log("Netflix removed games row (2026 UI)", row)
+			settings.value.Statistics.SegmentsSkipped++
+			sendMessage("increaseBadge", {}, "background")
+		})
+	}
+	// legacy selectors, kept as fallback for older Netflix builds
 	const gamesRow = document.querySelector("div.mobile-games-row")
 	if (gamesRow) {
 		gamesRow.remove()
@@ -308,7 +406,8 @@ function addHideTitleButton() {
 	button.className = "color-supplementary hasIcon round ltr-5nwnrm"
 	button.style.cssText = "aspect-ratio: 1 / 1;"
 	button.onclick = function () {
-		const item = a.closest(".slider-item") as HTMLElement
+		// legacy UI used ".slider-item"; 2026 redesign wraps each card in "[data-virtual-slot]"
+		const item = (a.closest(".slider-item") || a.closest("[data-virtual-slot]")) as HTMLElement
 		if (item) item.style.display = "none"
 		expandButton.closest(".previewModal--container")?.remove()
 		hideTitles.value[title] = true
