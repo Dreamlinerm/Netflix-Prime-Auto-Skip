@@ -10,7 +10,12 @@ startSharedFunctions(Platforms.Netflix)
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
-const { data: hideTitles, promise: hideTitlesPromise } = useBrowserSyncStorage<BooleanObject>("hideTitles", {}, false)
+const { data: blockedTitles, promise: blockedTitlesPromise } = useBrowserLocalStorage<BlockedTitles>(
+	"blockedTitles",
+	{},
+	false,
+)
+const today = new Date().toISOString().split("T")[0]
 const ua = navigator.userAgent
 let lastAdTimeText: number | string = 0
 let curVideoTitle: string | null = null
@@ -45,7 +50,7 @@ async function resetLastATimeText(time = 1000) {
 
 async function startNetflix() {
 	await promise
-	await hideTitlesPromise
+	await blockedTitlesPromise
 	logStartOfAddon()
 	if (settings.value.Netflix?.profile) AutoPickProfile()
 	if (settings.value.Netflix?.skipAd) Netflix_SkipAdInterval()
@@ -311,7 +316,7 @@ function addHideTitleButton() {
 		const item = a.closest(".slider-item") as HTMLElement
 		if (item) item.style.display = "none"
 		expandButton.closest(".previewModal--container")?.remove()
-		hideTitles.value[title] = true
+		blockedTitles.value[title] = { platform: "Netflix", mediaType: null, posterPath: null, dateAdded: today }
 	}
 
 	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")

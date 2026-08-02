@@ -3,7 +3,11 @@ console.log("shared-functions loaded")
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
-const { data: hideTitles, promise: hideTitlesPromise } = useBrowserSyncStorage<BooleanObject>("hideTitles", {}, false)
+const { data: blockedTitles, promise: blockedTitlesPromise } = useBrowserLocalStorage<BlockedTitles>(
+	"blockedTitles",
+	{},
+	false,
+)
 export const date = new Date()
 const today = date.toISOString().split("T")[0]
 
@@ -43,9 +47,9 @@ export async function startSharedFunctions(platform: Platforms) {
 	if (platform == Platforms.Paramount) isParamount = true
 
 	await promise
-	if (isNetflix) {
-		await hideTitlesPromise
-		console.log("hideTitles", hideTitles.value)
+	if (isNetflix || isPrimeVideo) {
+		await blockedTitlesPromise
+		console.log("blockedTitles", blockedTitles.value)
 	}
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	getDBCache()
@@ -67,6 +71,7 @@ type MovieInfo = {
 	vote_count: number
 	release_date: string
 	media_type: string
+	poster_path: string | null
 	date: string
 	db: string
 }
@@ -91,8 +96,10 @@ async function getDBCache() {
 	} else if (isDisney || isHotstar) {
 		if (settings.value.Disney?.showRating || settings.value.Disney?.hideTitles)
 			startShowRatingInterval(settings.value.Disney?.showRating, settings.value.Disney?.hideTitles)
-	} else if (isPrimeVideo && settings.value.Amazon?.showRating) startShowRatingInterval()
-	else if (isHBO && settings.value.HBO?.showRating) startShowRatingInterval()
+	} else if (isPrimeVideo) {
+		if (settings.value.Amazon?.showRating || settings.value.Amazon?.hideTitles)
+			startShowRatingInterval(settings.value.Amazon?.showRating, settings.value.Amazon?.hideTitles)
+	} else if (isHBO && settings.value.HBO?.showRating) startShowRatingInterval()
 	else if (isParamount && settings.value.Paramount?.showRating) startShowRatingInterval()
 	if (getDiffInDays(settings.value.General.GCdate, date) >= GCdiff) garbageCollection()
 
@@ -277,6 +284,7 @@ async function getMovieInfo(
 			vote_count: movie?.vote_count,
 			release_date: movie?.release_date || movie?.first_air_date,
 			title: movie?.title || movie?.original_title || movie?.name || movie?.original_name,
+			poster_path: movie?.poster_path ?? null,
 			date: today,
 			db: "tmdb",
 		}
@@ -318,11 +326,14 @@ async function startShowRatingInterval(optionShowRating = true, optionHideTitles
 		} else if (isDisney || isHotstar) {
 			optionShowRating = settings.value.Disney?.showRating
 			optionHideTitles = settings.value.Disney?.hideTitles
+		} else if (isPrimeVideo) {
+			optionShowRating = settings.value.Amazon?.showRating
+			optionHideTitles = settings.value.Amazon?.hideTitles
 		}
 
 		if (
 			(isNetflix && !(settings.value.Netflix?.showRating || settings.value.Netflix?.hideTitles)) ||
-			(isPrimeVideo && !settings.value.Amazon?.showRating) ||
+			(isPrimeVideo && !(settings.value.Amazon?.showRating || settings.value.Amazon?.hideTitles)) ||
 			((isDisney || isHotstar) && !(settings.value.Disney?.showRating || settings.value.Disney?.hideTitles)) ||
 			(isHBO && !settings.value.HBO?.showRating) ||
 			(isParamount && !settings.value.Paramount?.showRating)
@@ -439,7 +450,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 			const title = getCleanTitle(card, type)
 			if (!title) continue
 			if (optionHideTitles) {
-				if (hideTitles.value[title]) {
+				if (blockedTitles.value[title]) {
 					if (isNetflix) {
 						const item = card.closest(".slider-item") as HTMLElement
 						if (item) item.style.display = "none"
@@ -451,13 +462,16 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 							card.closest("a") ||
 							card.parentElement) as HTMLElement
 						if (item) item.style.display = "none"
+					} else if (isPrimeVideo) {
+						const item = (type == 0 ? card.closest("li") : card) as HTMLElement
+						if (item) item.style.display = "none"
 					}
 					settings.value.Statistics.SegmentsSkipped++
 					sendMessage("increaseBadge", {}, "background")
-					console.log("hideTitle", title)
+					console.log("blockedTitle", title)
 					continue
 				}
-				if (isDisney || isHotstar) addHideTitleButton(card, title)
+				if (isDisney || isHotstar || isPrimeVideo) addHideTitleButton(card, title, media_type, type)
 			}
 
 			// for the static Pixar Disney, Starplus etc. cards
@@ -493,17 +507,20 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 		}, 5000)
 	}
 }
-function addHideTitleButton(card: HTMLElement, title: string) {
+function addHideTitleButton(card: HTMLElement, title: string, mediaType: MediaType, cardType = 0) {
 	let target: HTMLElement
 	if (isHotstar) {
 		// For Hotstar, always target the outermost card container to avoid breaking internal layout
 		target = (card.closest("[data-testid='tray-card-default']") ||
 			card.closest("[data-testid='tray-horizontal-card-hover']") ||
 			card) as HTMLElement
+	} else if (isPrimeVideo) {
+		target = (cardType == 0 ? card.closest("li") : card) as HTMLElement
 	} else {
 		target = card.parentElement as HTMLElement
 	}
 	if (!target || target.querySelector("#hideTitleButton")) return
+	if (isPrimeVideo && getComputedStyle(target).position === "static") target.style.position = "relative"
 
 	const button = document.createElement("button")
 	button.id = "hideTitleButton"
@@ -516,8 +533,13 @@ function addHideTitleButton(card: HTMLElement, title: string) {
 		event.preventDefault()
 		const item = target
 		if (item) item.style.display = "none"
-		hideTitles.value[title] = true
-		console.log("hideTitles", hideTitles.value)
+		blockedTitles.value[title] = {
+			platform: isPrimeVideo ? "Amazon" : "Disney",
+			mediaType,
+			posterPath: DBCache[title]?.poster_path ?? null,
+			dateAdded: today,
+		}
+		console.log("blockedTitles", blockedTitles.value)
 	}
 	target.appendChild(button)
 }

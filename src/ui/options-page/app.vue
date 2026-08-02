@@ -126,6 +126,15 @@ watch(
 					<div>Crunchyroll</div>
 				</RouterLink>
 				<RouterLink
+					to="/options-page/BlockedTitles"
+					class="menuButton flex"
+					:class="hash.endsWith('BlockedTitles') ? 'bg-netflix' : 'bg-primary'"
+					draggable="false"
+				>
+					<i-mdi-eye-off-outline class="icon" />
+					<p>{{ $t("blockedTitlesNav") }}</p>
+				</RouterLink>
+				<RouterLink
 					to="/options-page/Backup"
 					class="menuButton flex"
 					:class="hash.endsWith('Backup') ? 'bg-netflix' : 'bg-primary'"

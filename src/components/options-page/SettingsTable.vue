@@ -340,7 +340,12 @@
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td class="other">➖</td>
+				<td class="other">
+					<Switch
+						v-model="settings.Amazon.hideTitles"
+						class="ml-auto"
+					></Switch>
+				</td>
 				<td class="other">
 					<Switch
 						v-model="settings.Disney.hideTitles"
@@ -506,9 +511,9 @@ const showRating = computed({
 	},
 })
 const hideTitles = computed({
-	get: () => settings.value?.Netflix.hideTitles && settings.value?.Disney.hideTitles,
+	get: () => settings.value?.Netflix.hideTitles && settings.value?.Amazon.hideTitles && settings.value?.Disney.hideTitles,
 	set: (value) => {
-		settings.value.Netflix.hideTitles = settings.value.Disney.hideTitles = value
+		settings.value.Netflix.hideTitles = settings.value.Amazon.hideTitles = settings.value.Disney.hideTitles = value
 	},
 })
 </script>

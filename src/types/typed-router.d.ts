@@ -89,6 +89,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/options-page/BlockedTitles': RouteRecordInfo<
+      '/options-page/BlockedTitles',
+      '/options-page/BlockedTitles',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/options-page/Changelog': RouteRecordInfo<
       '/options-page/Changelog',
       '/options-page/Changelog',
@@ -209,6 +216,12 @@ declare module 'vue-router/auto-routes' {
     'src/ui/options-page/pages/Backup.vue': {
       routes:
         | '/options-page/Backup'
+      views:
+        | never
+    }
+    'src/ui/options-page/pages/BlockedTitles.vue': {
+      routes:
+        | '/options-page/BlockedTitles'
       views:
         | never
     }

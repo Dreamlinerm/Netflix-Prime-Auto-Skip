@@ -10,6 +10,7 @@ export type settingsType = {
 		showRating: boolean
 		xray: boolean
 		improveUI: boolean
+		hideTitles: boolean
 	}
 	Netflix: {
 		skipIntro: boolean
@@ -110,6 +111,7 @@ export const defaultSettings = {
 		showRating: true,
 		xray: true,
 		improveUI: true,
+		hideTitles: true,
 	},
 	Netflix: {
 		skipIntro: true,

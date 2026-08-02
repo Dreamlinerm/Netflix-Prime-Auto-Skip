@@ -1,3 +1,5 @@
+import type { StreamingService } from "@/constants/streamingServices"
+
 // 8KB item
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 export const useOptionsStore = defineStore("options", () => {
@@ -27,11 +29,25 @@ export const useFrontendStore = defineStore("frontend", () => {
 export type BooleanObject = {
 	[key: string]: boolean
 }
+export type MediaType = "tv" | "movie" | null
+export type BlockedTitleEntry = {
+	platform: StreamingService | "Unknown"
+	mediaType: MediaType
+	posterPath: string | null
+	dateAdded: string
+}
+export type BlockedTitles = {
+	[title: string]: BlockedTitleEntry
+}
 
-// 8KB item
-const { data: hideTitles, promise: hideTitlesPromise } = useBrowserSyncStorage<BooleanObject>("hideTitles", {}, false)
-export const useHideTitlesStore = defineStore("hideTitles", () => {
+const { data: blockedTitles, promise: blockedTitlesPromise } = useBrowserLocalStorage<BlockedTitles>(
+	"blockedTitles",
+	{},
+	false,
+)
+export const useBlockedTitlesStore = defineStore("blockedTitles", () => {
 	return {
-		hideTitles,
+		blockedTitles,
 	}
 })
+export const BlockedTitlesPromise = blockedTitlesPromise
