@@ -334,7 +334,7 @@ async function startShowRatingInterval(optionShowRating = true, optionHideTitles
 		if (showRating()) addRating(optionShowRating, optionHideTitles)
 	}, 1000)
 }
-function getDiffInDays(firstDate: string, secondDate: Date) {
+export function getDiffInDays(firstDate: string, secondDate: Date) {
 	if (!firstDate || !secondDate) return 31
 	return Math.round(Math.abs(new Date(secondDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24))
 }
@@ -686,7 +686,7 @@ function Amazon_fixTitle(title: string | undefined) {
 	)
 }
 
-function getColorForRating(rating: number, lowVoteCount: boolean) {
+export function getColorForRating(rating: number, lowVoteCount: boolean) {
 	// I want a color gradient from red to green with yellow in the middle
 	// the ratings are between 0 and 10
 	// the average rating is 6.5
@@ -698,7 +698,7 @@ function getColorForRating(rating: number, lowVoteCount: boolean) {
 		}
 	}
 }
-function getIsTransparent(rating: number, lowVoteCount: boolean) {
+export function getIsTransparent(rating: number, lowVoteCount: boolean) {
 	if (!settings.value.Video?.dimLowRatings) return false
 	if ((!rating || rating <= settings.value.General.RatingThresholds[0].value) && !lowVoteCount) return true
 	return false

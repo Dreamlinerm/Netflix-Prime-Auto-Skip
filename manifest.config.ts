@@ -66,6 +66,7 @@ export default {
 	options_page: "src/ui/options-page/index.html",
 	permissions: ["storage"],
 	optional_permissions: ["tabs"],
+	host_permissions: ["https://api.myanimelist.net/*"],
 	icons: {
 		16: "src/assets/Logo/NetflixAmazon Auto-Skip--16.png",
 		48: "src/assets/Logo/NetflixAmazon Auto-Skip--48.png",

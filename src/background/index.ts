@@ -80,6 +80,23 @@ onMessage("fetch", async (message: { data: { url: string } }) => {
 		return { error: (error as Error).message }
 	}
 })
+onMessage("fetchMAL", async (message: { data: { url: string } }) => {
+	const { data } = message
+	try {
+		const response = await fetch(data.url, {
+			method: "GET",
+			headers: {
+				accept: "application/json",
+				"X-MAL-CLIENT-ID": __MAL_CLIENT_ID__,
+			},
+		})
+		const responseData = await response.json()
+		return responseData
+	} catch (error) {
+		console.error(error)
+		return { error: (error as Error).message }
+	}
+})
 onMessage("setBadgeText", async (message: { sender: any; data: { text: string } }) => {
 	const { sender, data } = message
 	if (sender?.tabId) setBadgeText(data.text, sender.tabId)

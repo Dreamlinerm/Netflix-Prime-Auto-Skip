@@ -9,3 +9,4 @@ declare const __DISPLAY_NAME__: string
 declare const __CHANGELOG__: string
 declare const __GITHUB_URL__: string
 declare const __TMDB_TOKEN__: string
+declare const __MAL_CLIENT_ID__: string
