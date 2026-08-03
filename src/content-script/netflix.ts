@@ -270,6 +270,7 @@ async function Netflix_SpeedKeyboard() {
 	})
 }
 function Netflix_removeGames() {
+	// TODO: firefox might be deprecated, today 03.08.2026
 	const gamesRow = document.querySelector("div.mobile-games-row")
 	if (gamesRow) {
 		gamesRow.remove()
@@ -278,17 +279,10 @@ function Netflix_removeGames() {
 		sendMessage("increaseBadge", {}, "background")
 	}
 	// on chrome spiele beta gamesRow
-	const BetaRow = document.querySelector('div[data-list-context="configbased_cloudpersonalizedgames"]')
+	const BetaRow = document.querySelector('a[data-uia="cloud-game-card"]')?.closest("section")
 	if (BetaRow) {
 		BetaRow.remove()
 		console.log("Netflix removed beta games")
-		settings.value.Statistics.SegmentsSkipped++
-		sendMessage("increaseBadge", {}, "background")
-	}
-	const billboardGames = document.querySelector("div.billboard-row.billboard-row-games")
-	if (billboardGames) {
-		billboardGames.remove()
-		console.log("Netflix removed billboard games")
 		settings.value.Statistics.SegmentsSkipped++
 		sendMessage("increaseBadge", {}, "background")
 	}

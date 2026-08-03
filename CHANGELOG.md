@@ -2,6 +2,10 @@
 
 # 1.1.100
 
+- Netflix: fixed remove games and TMDB ratings
+
+# 1.1.100
+
 - Disney: fixed new UI
 - Crunchyroll: removed hideHeader option
 

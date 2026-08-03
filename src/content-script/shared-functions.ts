@@ -384,7 +384,10 @@ function Amazon_getMediaType(type: string): MediaType {
 }
 function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	let AllTitleCardsTypes: Array<NodeListOf<Element>> = []
-	if (isNetflix) AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")]
+	if (isNetflix)
+		AllTitleCardsTypes = [
+			document.querySelectorAll('a[data-uia="standard-card"]:not(.imdb), a[data-uia="progress-card"]:not(.imdb)'),
+		]
 	else if (isDisney)
 		AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not([href^='/browse/page']):not(.imdb)")]
 	else if (isHotstar)
@@ -441,7 +444,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 			if (optionHideTitles) {
 				if (hideTitles.value[title]) {
 					if (isNetflix) {
-						const item = card.closest(".slider-item") as HTMLElement
+						const item = (card.closest("[data-virtual-slot]") || card.parentElement) as HTMLElement
 						if (item) item.style.display = "none"
 					} else if (isDisney) {
 						const item = card.parentElement as HTMLElement
@@ -552,7 +555,7 @@ function getMediaType(card: HTMLElement): MediaType {
 function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 	let title: string | undefined
 	if (isNetflix) {
-		title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0]
+		title = card?.getAttribute("aria-label")?.split(" (")[0]
 	} else if (isDisney) {
 		const prompt = card.querySelector('div[data-testid="hero-carousel-prompt"]')
 		if (prompt?.textContent)
@@ -784,7 +787,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		zIndex: 2,
 	})
 	if (isNetflix) {
-		const titleCardContainer = card.closest(".title-card-container") as HTMLElement
+		const titleCardContainer = card.closest("div[data-virtual-slot]") as HTMLElement
 		if (titleCardContainer) {
 			titleCardContainer.appendChild(div)
 			if (getIsTransparent(data?.score, vote_count < 50)) titleCardContainer.appendChild(greyOverlay)
