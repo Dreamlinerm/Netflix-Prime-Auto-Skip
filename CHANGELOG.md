@@ -1,8 +1,8 @@
 # Changelog
 
-# 1.1.100
+# 1.1.101
 
-- Netflix: fixed remove games and TMDB ratings
+- Netflix: fixed TMDB ratings, remove games, and hide title button, because of changed UI.
 
 # 1.1.100
 

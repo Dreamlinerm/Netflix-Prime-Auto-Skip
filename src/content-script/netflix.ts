@@ -289,20 +289,22 @@ function Netflix_removeGames() {
 }
 
 function addHideTitleButton() {
-	const expandButton = document.querySelector(".buttonControls--expand-button:not(.enhanced)")
+	const expandButton = document.querySelector("div.buttonControls--expand-button:not(.enhanced)")
 	if (!expandButton?.parentElement) return
 	expandButton.classList.add("enhanced")
-	const id = expandButton.closest("a")?.href?.split("?")[0]?.split(".com")[1]?.replace("title", "watch")
+	const id = expandButton.closest("a")?.href?.split("?")[0]?.split("/")?.at(-1)
 	if (!id) return
-	const a = document.querySelector(`a[href*="${id}"].slider-refocus`)
+	console.log("id", id)
+	const a = document.querySelector(`a[href*="${id}"]`)
 	const title = a?.getAttribute("aria-label")
+	console.log("Hide title button added for", title, a, expandButton)
 	if (!a || !title) return
 	// Create the button
 	const button = document.createElement("button")
-	button.className = "color-supplementary hasIcon round ltr-5nwnrm"
-	button.style.cssText = "aspect-ratio: 1 / 1;"
+	button.className = "color-supplementary"
+	button.style.cssText = "aspect-ratio: 1 / 1;border-radius: 50%;margin: 0;"
 	button.onclick = function () {
-		const item = a.closest(".slider-item") as HTMLElement
+		const item = a.closest("div[data-virtual-slot]") as HTMLElement
 		if (item) item.style.display = "none"
 		expandButton.closest(".previewModal--container")?.remove()
 		hideTitles.value[title] = true
@@ -310,8 +312,7 @@ function addHideTitleButton() {
 
 	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
 	svg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
-	svg.setAttribute("width", "24")
-	svg.setAttribute("height", "24")
+	svg.style.cssText = "width:24px;height:24px;"
 	svg.setAttribute("viewBox", "0 0 24 24")
 	const path = document.createElementNS("http://www.w3.org/2000/svg", "path")
 	path.setAttribute("fill", "currentColor")
