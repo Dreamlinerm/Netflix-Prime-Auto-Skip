@@ -3,7 +3,6 @@
 # 1.1.101
 
 - Netflix: fixed TMDB ratings, remove games, and hide title button, because of changed UI.
-- Crunchyroll: stopped skipping the after-credits preview unless "Skip to next episode" is enabled.
 
 # 1.1.100
 
