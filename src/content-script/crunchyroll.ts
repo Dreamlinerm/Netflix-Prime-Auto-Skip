@@ -159,6 +159,10 @@ async function startPlayOnFullScreen() {
 	}
 }
 
+export function shouldBlockPreviewSkip(ariaLabel: string | null | undefined, skipAfterCredits: boolean): boolean {
+	return !skipAfterCredits && (ariaLabel?.toLowerCase().includes("preview") ?? false)
+}
+
 // add timeout because it can skip mid sentence if language is not japanese.
 let skipped = false
 let reverseButtonClicked = false
@@ -174,11 +178,12 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 	// saves the audio language to settings
 	if (!reverseButtonClicked) {
 		const button = document.querySelector('button:has(svg[data-testid="skip-intro-icon"])') as HTMLElement
+		const ariaLabel = button?.getAttribute("aria-label")
 		if (
 			button &&
 			button.checkVisibility({ opacityProperty: true }) &&
 			!skipped &&
-			!button?.getAttribute("aria-label")?.toLowerCase()?.includes("recap")
+			!ariaLabel?.toLowerCase()?.includes("recap")
 		) {
 			skipped = true
 			setTimeout(function () {
@@ -191,6 +196,8 @@ async function Crunchyroll_Intro_Outro(video: HTMLVideoElement, time: number) {
 						button?.click()
 						console.log("Outro skipped", button)
 					}
+				} else if (shouldBlockPreviewSkip(ariaLabel, !!settings.value.Crunchyroll?.skipAfterCredits)) {
+					console.log("After-credits preview left alone (skipAfterCredits disabled)", button)
 				} else {
 					button?.click()
 					console.log("Intro skipped", button, settings.value.General.Crunchyroll_skipTimeout)
