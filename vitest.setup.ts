@@ -24,6 +24,16 @@ vi.mock("webextension-polyfill", () => {
 					addListener: vi.fn(),
 				},
 			},
+			sync: {
+				get: vi.fn(),
+				set: vi.fn(),
+				onChanged: {
+					addListener: vi.fn(),
+				},
+			},
+			onChanged: {
+				addListener: vi.fn(),
+			},
 		},
 	}
 })
