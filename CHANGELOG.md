@@ -3,6 +3,7 @@
 # 1.1.102
 
 - Crunchyroll: Added Myanimelist API support for Crunchyroll.
+- Crunchyroll: stopped skipping the after-credits preview unless "Skip to next episode" is enabled.
 
 # 1.1.101
 
