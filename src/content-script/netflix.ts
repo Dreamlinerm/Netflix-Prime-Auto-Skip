@@ -294,10 +294,8 @@ function addHideTitleButton() {
 	expandButton.classList.add("enhanced")
 	const id = expandButton.closest("a")?.href?.split("?")[0]?.split("/")?.at(-1)
 	if (!id) return
-	console.log("id", id)
 	const a = document.querySelector(`a[href*="${id}"]`)
 	const title = a?.getAttribute("aria-label")
-	console.log("Hide title button added for", title, a, expandButton)
 	if (!a || !title) return
 	// Create the button
 	const button = document.createElement("button")
