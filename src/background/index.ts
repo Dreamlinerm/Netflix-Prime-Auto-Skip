@@ -68,17 +68,18 @@ type FetchRequestType = "tmdb" | "mal" | "noAuth"
 onMessage("fetch", async (message: { data: { url: string; type: FetchRequestType } }) => {
 	const { data } = message
 	try {
+		let headers: Record<string, string>
 		if (data.type === "noAuth") {
-			const headers = {
+			headers = {
 				accept: "application/json",
 			}
 		} else if (data.type === "mal") {
-			const headers = {
+			headers = {
 				accept: "application/json",
 				"X-MAL-CLIENT-ID": __MAL_CLIENT_ID__,
 			}
 		} else if (data.type === "tmdb") {
-			const headers = {
+			headers = {
 				accept: "application/json",
 				Authorization: `Bearer ${__TMDB_TOKEN__}`,
 			}

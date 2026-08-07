@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.1.102
+
+- Crunchyroll: Added Myanimelist API support for Crunchyroll.
+
 # 1.1.101
 
 - Netflix: fixed TMDB ratings, remove games, and hide title button, because of changed UI.
