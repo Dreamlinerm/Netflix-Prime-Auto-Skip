@@ -62,16 +62,32 @@ async function setBadgeText(text: string, tabId: number) {
 	action.setBadgeText({ text, tabId })
 }
 
+type FetchRequestType = "tmdb" | "mal" | "noAuth"
+
 // onMessage
-onMessage("fetch", async (message: { data: { url: string } }) => {
+onMessage("fetch", async (message: { data: { url: string; type: FetchRequestType } }) => {
 	const { data } = message
 	try {
-		const response = await fetch(data.url, {
-			method: "GET",
-			headers: {
+		if (data.type === "noAuth") {
+			const headers = {
+				accept: "application/json",
+			}
+		} else if (data.type === "mal") {
+			const headers = {
+				accept: "application/json",
+				"X-MAL-CLIENT-ID": __MAL_CLIENT_ID__,
+			}
+		} else if (data.type === "tmdb") {
+			const headers = {
 				accept: "application/json",
 				Authorization: `Bearer ${__TMDB_TOKEN__}`,
-			},
+			}
+		} else {
+			throw new Error(`Unknown fetch type: ${data.type}`)
+		}
+		const response = await fetch(data.url, {
+			method: "GET",
+			headers,
 		})
 		const responseData = await response.json()
 		return responseData

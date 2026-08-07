@@ -18,6 +18,7 @@ export const defineViteConfig = {
 	__CHANGELOG__: jsn(changelog),
 	__GITHUB_URL__: jsn(packageJson.repository.url),
 	__TMDB_TOKEN__: jsn(process.env.TMDB_TOKEN || ""),
+	__MAL_CLIENT_ID__: jsn(process.env.MAL_CLIENT_ID || ""),
 	// Set the HTML title for all pages from package.json so you can use %HTML_TITLE% in your HTML files.
 	HTML_TITLE: jsn(packageJson.displayName),
 }

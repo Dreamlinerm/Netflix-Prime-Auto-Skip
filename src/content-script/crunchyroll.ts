@@ -1,5 +1,12 @@
 import { sendMessage } from "webext-bridge/content-script"
-import { startSharedFunctions, Platforms, createSlider } from "@/content-script/shared-functions"
+import {
+	startSharedFunctions,
+	Platforms,
+	createSlider,
+	getColorForRating,
+	getIsTransparent,
+	getDiffInDays,
+} from "@/content-script/shared-functions"
 startSharedFunctions(Platforms.Crunchyroll)
 // Global Variables
 
@@ -7,6 +14,7 @@ const { data: settings, promise } = useBrowserSyncStorage<settingsType>("setting
 const { data: crunchyList, promise: crunchyListPromise } = useBrowserSyncStorage<CrunchyList>("crunchyList", [], false)
 const url = globalThis.location.href
 const date = new Date()
+const today = date.toISOString().split("T")[0]
 const config = { attributes: true, childList: true, subtree: true }
 async function logStartOfAddon() {
 	console.log("%cStreaming enhanced", "color: #00aeef;font-size: 2em;")
@@ -47,7 +55,194 @@ async function startCrunchyroll() {
 	if (settings.value.Video.doubleClick) startdoubleClick()
 	if (settings.value.Crunchyroll.speedSlider) Crunchyroll_SpeedKeyboard()
 	CrunchyrollObserver.observe(document, config)
+	getMALCache()
 }
+// #region MAL Rating
+// MyAnimeList integration: shows a TMDB-badge-style rating in the bottom right corner of browse cards
+type MALNode = {
+	id: number
+	title: string
+	main_picture?: { medium: string; large: string }
+	mean?: number
+	num_scoring_users?: number
+	media_type?: string
+	start_date?: string
+}
+type MALSearchResponse = {
+	data?: Array<{ node: MALNode }>
+}
+type MALCacheEntry = {
+	id: number
+	title: string
+	score: number | null
+	num_scoring_users: number
+	media_type: string
+	start_date: string
+	poster: string | null
+	date: string
+}
+type MALCacheType = { [title: string]: MALCacheEntry }
+let MALCache: MALCacheType = {}
+// how long a rating should be kept in the cache before refetching
+const MALGCdiff = 30
+
+function getMALUrl(id: number) {
+	return `https://myanimelist.net/anime/${id}`
+}
+
+async function getMALCache() {
+	const result = await browser.storage.local.get("MALCache")
+	MALCache = result?.MALCache as MALCacheType
+	if (typeof MALCache !== "object") {
+		console.log("MALCache not found, creating new one", MALCache)
+		try {
+			await browser.storage.local.set({ MALCache: {} })
+		} catch (error) {
+			console.log(error)
+		}
+		MALCache = {}
+	}
+	if (settings.value.Crunchyroll?.showRating) startMALRatingInterval()
+	if (getDiffInDays(settings.value.General.MALGCdate, date) >= MALGCdiff) malGarbageCollection()
+	browser.storage.onChanged.addListener(function (changes, areaName) {
+		if (areaName === "local" && changes?.MALCache) MALCache = changes.MALCache.newValue as MALCacheType
+	})
+}
+// set MAL Cache if cache size under 5MB
+async function setMALCache() {
+	const size = new TextEncoder().encode(JSON.stringify(MALCache)).length
+	const megaBytes = size / 1024 / 1024
+	if (megaBytes < 5) {
+		await browser.storage.local.set({ MALCache })
+	} else {
+		console.log("MALCache cleared", megaBytes)
+		MALCache = {}
+		await browser.storage.local.set({ MALCache })
+	}
+}
+async function malGarbageCollection() {
+	// clear every rating older than 30 days
+	console.log("malGarbageCollection started, deleting old ratings:")
+	const keys = Object.keys(MALCache)
+	for (const key of keys) {
+		if (getDiffInDays(MALCache[key].date, date) >= MALGCdiff) {
+			delete MALCache[key]
+		}
+	}
+	settings.value.General.MALGCdate = today
+	setMALCache()
+}
+
+// MAL's search endpoint returns a 400 "invalid q" for very long queries, so trim to
+// just the part before a subtitle-separating colon, then hard-cap the length as a safety net
+const MAL_MAX_QUERY_LENGTH = 64
+function getMALSearchQuery(title: string) {
+	const beforeColon = title.split(":")[0].trim()
+	return beforeColon.slice(0, MAL_MAX_QUERY_LENGTH).trim()
+}
+
+async function getMALInfo(title: string, card: HTMLElement) {
+	const searchUrl = `https://api.myanimelist.net/v2/anime?q=${encodeURIComponent(getMALSearchQuery(title))}&limit=1&fields=mean,num_scoring_users,media_type,start_date,main_picture`
+	const data: MALSearchResponse = await sendMessage("fetch", { url: searchUrl, type: "mal" }, "background")
+	const node = data?.data?.[0]?.node
+	if (!node) console.log("MAL: no match or fetch error for", title, data)
+	const compiledData: MALCacheEntry = {
+		id: node?.id ?? 0,
+		title: node?.title ?? title,
+		score: node?.mean ?? null,
+		num_scoring_users: node?.num_scoring_users ?? 0,
+		media_type: node?.media_type ?? "",
+		start_date: node?.start_date ?? "",
+		poster: node?.main_picture?.medium ?? null,
+		date: today,
+	}
+	MALCache[title] = compiledData
+	setMALRatingOnCard(card, compiledData)
+	setMALCache()
+}
+
+function setMALRatingOnCard(card: HTMLElement, data: MALCacheEntry) {
+	if (card.querySelector("#mal-rating")) return
+	// no MAL match: still show a "?" badge instead of nothing, same as the TMDB rating badge does
+	const a = data?.id ? document.createElement("a") : document.createElement("div")
+	a.id = "mal-rating"
+	if (data?.id) {
+		;(a as HTMLAnchorElement).href = getMALUrl(data.id)
+		;(a as HTMLAnchorElement).target = "_blank"
+	}
+	const voteCount = data.num_scoring_users || 0
+	const score = data.score ?? 0
+	Object.assign(a.style, {
+		position: "absolute",
+		bottom: "0",
+		right: "0.2vw",
+		color: "black",
+		textDecoration: "none",
+		background: getColorForRating(score, voteCount < 50),
+		borderRadius: "5px",
+		padding: "0 2px 0 2px",
+		zIndex: "2",
+		fontSize: "1vw",
+	})
+	if (data.score) {
+		let releaseText = ""
+		if (settings.value.Video?.showYear && data.start_date) {
+			releaseText = new Date(data.start_date).getFullYear() + "-"
+		}
+		a.textContent = releaseText + data.score.toFixed(1)
+	} else {
+		a.textContent = "?"
+	}
+	card.style.position = "relative"
+	card.appendChild(a)
+	if (getIsTransparent(score, voteCount < 50)) {
+		const greyOverlay = document.createElement("div")
+		Object.assign(greyOverlay.style, {
+			position: "absolute",
+			top: "0",
+			left: "0",
+			right: "0",
+			bottom: "0",
+			background: "rgba(40, 40, 40, 0.7)",
+			pointerEvents: "none",
+			zIndex: "1",
+		})
+		card.appendChild(greyOverlay)
+	}
+}
+
+// no-match results (id 0, e.g. from a since-fixed query bug or a transient API error) are
+// retried much sooner than real matches, instead of being stuck for the full 30-day cache window
+const MAL_NO_MATCH_RETRY_DAYS = 1
+function addMALRating() {
+	const cards = document.querySelectorAll('div[data-t~="series-card"]:not(.mal-rated)')
+	cards.forEach((cardEl) => {
+		const card = cardEl as HTMLElement
+		card.classList.add("mal-rated")
+		const title = card.querySelector('h3[data-t="title"] a')?.textContent?.trim()
+		if (!title) return
+		const cached = MALCache[title]
+		const cacheTtlDays = cached?.id ? MALGCdiff : MAL_NO_MATCH_RETRY_DAYS
+		if (cached && getDiffInDays(cached.date, date) < cacheTtlDays) {
+			setMALRatingOnCard(card, cached)
+		} else {
+			getMALInfo(title, card)
+		}
+	})
+}
+
+async function startMALRatingInterval() {
+	addMALRating()
+	const MALRatingInterval = setInterval(function () {
+		if (!settings.value.Crunchyroll?.showRating) {
+			console.log("stopped observing| MAL Rating")
+			clearInterval(MALRatingInterval)
+			return
+		}
+		addMALRating()
+	}, 1000)
+}
+// #endregion
 // #region Crunchyroll
 // Crunchyroll functions
 const CrunchyrollObserver = new MutationObserver(Crunchyroll)
