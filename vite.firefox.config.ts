@@ -76,6 +76,12 @@ const postBuildPlugin = () => {
 			const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"))
 			// change manifest version to 2
 			manifest.manifest_version = 2
+			const permissions = new Set<string>(manifest.permissions ?? [])
+			for (const hostPermission of manifest.host_permissions ?? []) {
+				permissions.add(hostPermission)
+			}
+			manifest.permissions = [...permissions]
+			delete manifest.host_permissions
 			let webacessibleRecources: string[] = []
 			for (const resource of manifest.web_accessible_resources) {
 				webacessibleRecources = [...webacessibleRecources, ...(resource.resources as string[])]
