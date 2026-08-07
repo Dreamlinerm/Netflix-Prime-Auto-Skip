@@ -265,7 +265,7 @@ async function getMovieInfo(
 	const queryType = media_type ?? "multi"
 	let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURIComponent(title)}&include_adult=false&language=${locale}&page=1`
 	if (year) url += `&year=${year}`
-	const data: TMDBResponse = await sendMessage("fetch", { url }, "background")
+	const data: TMDBResponse = await sendMessage("fetch", { url, type: "tmdb" }, "background")
 	if (data != undefined) {
 		if (data?.results) data.results = data.results?.filter((item) => item.media_type?.toLowerCase() !== "person")
 		// themoviedb

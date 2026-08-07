@@ -143,7 +143,7 @@ function getMALSearchQuery(title: string) {
 
 async function getMALInfo(title: string, card: HTMLElement) {
 	const searchUrl = `https://api.myanimelist.net/v2/anime?q=${encodeURIComponent(getMALSearchQuery(title))}&limit=1&fields=mean,num_scoring_users,media_type,start_date,main_picture`
-	const data: MALSearchResponse = await sendMessage("fetchMAL", { url: searchUrl }, "background")
+	const data: MALSearchResponse = await sendMessage("fetch", { url: searchUrl, type: "mal" }, "background")
 	const node = data?.data?.[0]?.node
 	if (!node) console.log("MAL: no match or fetch error for", title, data)
 	const compiledData: MALCacheEntry = {
