@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const githubUrl = __GITHUB_URL__
+function openHiddenTitles() {
+	browser.tabs.create({ url: browser.runtime.getURL("src/ui/options-page/index.html#/options-page/HiddenTitles") })
+}
 </script>
 
 <template>
@@ -120,6 +123,20 @@ const githubUrl = __GITHUB_URL__
 					height="100%"
 				/>
 			</RouterLink>
+		</div>
+		<div class="tooltip">
+			<div class="tooltip-content">
+				<div class="text-2xl font-black">{{ $t("hiddenTitlesNav") }}</div>
+			</div>
+			<div
+				class="popupMenuButton flex"
+				@click="openHiddenTitles"
+			>
+				<i-mdi-eye-off-outline
+					width="100%"
+					height="100%"
+				/>
+			</div>
 		</div>
 	</div>
 	<div class="grid grid-cols-2 gap-2 pt-2">

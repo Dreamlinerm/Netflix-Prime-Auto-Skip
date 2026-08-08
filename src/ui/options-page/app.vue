@@ -126,6 +126,15 @@ watch(
 					<div>Crunchyroll</div>
 				</RouterLink>
 				<RouterLink
+					to="/options-page/HiddenTitles"
+					class="menuButton flex"
+					:class="hash.endsWith('HiddenTitles') ? 'bg-netflix' : 'bg-primary'"
+					draggable="false"
+				>
+					<i-mdi-eye-off-outline class="icon" />
+					<p>{{ $t("hiddenTitlesNav") }}</p>
+				</RouterLink>
+				<RouterLink
 					to="/options-page/Backup"
 					class="menuButton flex"
 					:class="hash.endsWith('Backup') ? 'bg-netflix' : 'bg-primary'"

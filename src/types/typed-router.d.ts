@@ -122,6 +122,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/options-page/HiddenTitles': RouteRecordInfo<
+      '/options-page/HiddenTitles',
+      '/options-page/HiddenTitles',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/options-page/install': RouteRecordInfo<
       '/options-page/install',
       '/options-page/install',
@@ -262,6 +269,14 @@ declare module 'vue-router/auto-routes' {
     'src/ui/options-page/pages/Disney.vue': {
       routes:
         | '/options-page/Disney'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/ui/options-page/pages/HiddenTitles.vue': {
+      routes:
+        | '/options-page/HiddenTitles'
       views:
         | never
       pathParamNames:

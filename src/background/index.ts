@@ -3,6 +3,23 @@
 // extPay.startBackground()
 const is_DEV = process.env.NODE_ENV === "development"
 
+async function migrateHideTitlesToHiddenTitles() {
+	const { hideTitles } = await browser.storage.sync.get("hideTitles")
+	if (!hideTitles || typeof hideTitles !== "object" || Object.keys(hideTitles).length === 0) return
+
+	const { hiddenTitles } = await browser.storage.local.get("hiddenTitles")
+	const migrated: HiddenTitles = { ...(hiddenTitles ?? {}) }
+	const today = new Date().toISOString().split("T")[0]
+	for (const title of Object.keys(hideTitles)) {
+		if (!migrated[title]) {
+			migrated[title] = { platform: "Unknown", mediaType: null, posterPath: null, dateAdded: today }
+		}
+	}
+	await browser.storage.local.set({ hiddenTitles: migrated })
+	await browser.storage.sync.remove("hideTitles")
+	console.log("migrated hideTitles to hiddenTitles", migrated)
+}
+
 browser.runtime.onInstalled.addListener(async (opt) => {
 	// await browser.storage.local.clear()
 	// await browser.storage.sync.clear()
@@ -15,6 +32,10 @@ browser.runtime.onInstalled.addListener(async (opt) => {
 			// can know if we need to show the install page or update page.
 			url: browser.runtime.getURL("src/ui/options-page/index.html#/options-page/install"),
 		})
+	}
+
+	if (opt.reason === "update") {
+		await migrateHideTitlesToHiddenTitles()
 	}
 
 	if (opt.reason === "update" && is_DEV) {
