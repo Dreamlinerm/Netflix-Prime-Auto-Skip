@@ -14,10 +14,15 @@ import type {
   ParamValueZeroOrMore,
   ParamValueZeroOrOne,
 } from 'vue-router'
+import type {
+  _ExtractParamParserType,
+} from 'vue-router/experimental'
 
 declare module 'vue-router' {
   interface TypesConfig {
-    ParamParsers: never
+    _ParamParsers: {}
+    RouteNamedMap: import('vue-router/auto-routes').RouteNamedMap
+    _RouteFileInfoMap: import('vue-router/auto-routes')._RouteFileInfoMap
   }
 }
 
@@ -170,11 +175,15 @@ declare module 'vue-router/auto-routes' {
         | '/action-popup/'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/ui/action-popup/pages/Amazon.vue': {
       routes:
         | '/action-popup/Amazon'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'src/ui/action-popup/pages/Crunchyroll.vue': {
@@ -182,11 +191,15 @@ declare module 'vue-router/auto-routes' {
         | '/action-popup/Crunchyroll'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/ui/action-popup/pages/Netflix.vue': {
       routes:
         | '/action-popup/Netflix'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'src/ui/action-popup/pages/SharedOptions.vue': {
@@ -194,11 +207,15 @@ declare module 'vue-router/auto-routes' {
         | '/action-popup/SharedOptions'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/ui/action-popup/pages/Statistics.vue': {
       routes:
         | '/action-popup/Statistics'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'src/ui/options-page/pages/index.vue': {
@@ -206,17 +223,23 @@ declare module 'vue-router/auto-routes' {
         | '/options-page/'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/ui/options-page/pages/Amazon.vue': {
       routes:
         | '/options-page/Amazon'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/ui/options-page/pages/Backup.vue': {
       routes:
         | '/options-page/Backup'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'src/ui/options-page/pages/BlockedTitles.vue': {
@@ -230,11 +253,15 @@ declare module 'vue-router/auto-routes' {
         | '/options-page/Changelog'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/ui/options-page/pages/Crunchyroll.vue': {
       routes:
         | '/options-page/Crunchyroll'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'src/ui/options-page/pages/disabledSettings.vue': {
@@ -242,11 +269,15 @@ declare module 'vue-router/auto-routes' {
         | '/options-page/disabledSettings'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/ui/options-page/pages/Disney.vue': {
       routes:
         | '/options-page/Disney'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'src/ui/options-page/pages/install.vue': {
@@ -254,11 +285,15 @@ declare module 'vue-router/auto-routes' {
         | '/options-page/install'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/ui/options-page/pages/Netflix.vue': {
       routes:
         | '/options-page/Netflix'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'src/ui/options-page/pages/SharedSettings.vue': {
@@ -266,11 +301,15 @@ declare module 'vue-router/auto-routes' {
         | '/options-page/SharedSettings'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/ui/options-page/pages/Statistics.vue': {
       routes:
         | '/options-page/Statistics'
       views:
+        | never
+      pathParamNames:
         | never
     }
   }

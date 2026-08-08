@@ -2,12 +2,10 @@
 import * as fs from "fs"
 import * as path from "path"
 import { fileURLToPath } from "node:url"
-// import * as archiver from "archiver"
-import * as archiverModule from "archiver"
-const archiver = archiverModule.default
+import { ZipArchive } from "archiver"
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const output = fs.createWriteStream(path.join(__dirname, "../dist/archive.zip"))
-const archive = archiver("zip", {
+const archive = new ZipArchive({
 	zlib: { level: 9 }, // Sets the compression level.
 })
 

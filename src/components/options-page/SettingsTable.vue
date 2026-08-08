@@ -249,7 +249,12 @@
 						class="ml-auto"
 					></Switch>
 				</td>
-				<td class="other">➖</td>
+				<td class="other">
+					<Switch
+						v-model="settings.Crunchyroll.showRating"
+						class="ml-auto"
+					></Switch>
+				</td>
 				<td class="other">
 					<Switch
 						v-model="settings.HBO.showRating"

@@ -275,6 +275,7 @@ async function Netflix_SpeedKeyboard() {
 	})
 }
 function Netflix_removeGames() {
+	// TODO: firefox might be deprecated, today 03.08.2026
 	const gamesRow = document.querySelector("div.mobile-games-row")
 	if (gamesRow) {
 		gamesRow.remove()
@@ -283,37 +284,30 @@ function Netflix_removeGames() {
 		sendMessage("increaseBadge", {}, "background")
 	}
 	// on chrome spiele beta gamesRow
-	const BetaRow = document.querySelector('div[data-list-context="configbased_cloudpersonalizedgames"]')
+	const BetaRow = document.querySelector('a[data-uia="cloud-game-card"]')?.closest("section")
 	if (BetaRow) {
 		BetaRow.remove()
 		console.log("Netflix removed beta games")
 		settings.value.Statistics.SegmentsSkipped++
 		sendMessage("increaseBadge", {}, "background")
 	}
-	const billboardGames = document.querySelector("div.billboard-row.billboard-row-games")
-	if (billboardGames) {
-		billboardGames.remove()
-		console.log("Netflix removed billboard games")
-		settings.value.Statistics.SegmentsSkipped++
-		sendMessage("increaseBadge", {}, "background")
-	}
 }
 
 function addHideTitleButton() {
-	const expandButton = document.querySelector(".buttonControls--expand-button:not(.enhanced)")
+	const expandButton = document.querySelector("div.buttonControls--expand-button:not(.enhanced)")
 	if (!expandButton?.parentElement) return
 	expandButton.classList.add("enhanced")
-	const id = expandButton.closest("a")?.href?.split("?")[0]?.split(".com")[1]?.replace("title", "watch")
+	const id = expandButton.closest("a")?.href?.split("?")[0]?.split("/")?.at(-1)
 	if (!id) return
-	const a = document.querySelector(`a[href*="${id}"].slider-refocus`)
+	const a = document.querySelector(`a[href*="${id}"]`)
 	const title = a?.getAttribute("aria-label")
 	if (!a || !title) return
 	// Create the button
 	const button = document.createElement("button")
-	button.className = "color-supplementary hasIcon round ltr-5nwnrm"
-	button.style.cssText = "aspect-ratio: 1 / 1;"
+	button.className = "color-supplementary"
+	button.style.cssText = "aspect-ratio: 1 / 1;border-radius: 50%;margin: 0;"
 	button.onclick = function () {
-		const item = a.closest(".slider-item") as HTMLElement
+		const item = a.closest("div[data-virtual-slot]") as HTMLElement
 		if (item) item.style.display = "none"
 		expandButton.closest(".previewModal--container")?.remove()
 		blockedTitles.value[title] = { platform: "Netflix", mediaType: null, posterPath: null, dateAdded: today }
@@ -321,8 +315,7 @@ function addHideTitleButton() {
 
 	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
 	svg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
-	svg.setAttribute("width", "24")
-	svg.setAttribute("height", "24")
+	svg.style.cssText = "width:24px;height:24px;"
 	svg.setAttribute("viewBox", "0 0 24 24")
 	const path = document.createElementNS("http://www.w3.org/2000/svg", "path")
 	path.setAttribute("fill", "currentColor")

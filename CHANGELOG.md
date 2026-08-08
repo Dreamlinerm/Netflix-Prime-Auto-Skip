@@ -1,5 +1,14 @@
 # Changelog
 
+# 1.1.102
+
+- Crunchyroll: Added Myanimelist API support for Crunchyroll.
+- Crunchyroll: stopped skipping the after-credits preview unless "Skip to next episode" is enabled.
+
+# 1.1.101
+
+- Netflix: fixed TMDB ratings, remove games, and hide title button, because of changed UI.
+
 # 1.1.100
 
 - Disney: fixed new UI

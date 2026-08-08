@@ -45,6 +45,7 @@ export type settingsType = {
 		filterQueued: boolean
 		dubLanguage: string
 		filterDuplicates: boolean
+		showRating: boolean
 	}
 	HBO: {
 		skipIntro: boolean
@@ -87,6 +88,7 @@ export type settingsType = {
 		sliderMin: number
 		sliderMax: number
 		GCdate: string
+		MALGCdate: string
 		Crunchyroll_skipTimeout: number
 		RatingThresholds: Array<{ color: string; value: number }>
 	}
@@ -146,6 +148,7 @@ export const defaultSettings = {
 		filterQueued: true,
 		dubLanguage: "none",
 		filterDuplicates: true,
+		showRating: true,
 	},
 	HBO: {
 		skipIntro: true,
@@ -188,6 +191,7 @@ export const defaultSettings = {
 		sliderMin: 5,
 		sliderMax: 20,
 		GCdate: "2024-01-01",
+		MALGCdate: "2024-01-01",
 		Crunchyroll_skipTimeout: 0,
 		RatingThresholds: [
 			{ color: RatingColors.Red, value: 5.5 },

@@ -272,7 +272,7 @@ async function getMovieInfo(
 	const queryType = media_type ?? "multi"
 	let url = `https://api.themoviedb.org/3/search/${queryType}?query=${encodeURIComponent(title)}&include_adult=false&language=${locale}&page=1`
 	if (year) url += `&year=${year}`
-	const data: TMDBResponse = await sendMessage("fetch", { url }, "background")
+	const data: TMDBResponse = await sendMessage("fetch", { url, type: "tmdb" }, "background")
 	if (data != undefined) {
 		if (data?.results) data.results = data.results?.filter((item) => item.media_type?.toLowerCase() !== "person")
 		// themoviedb
@@ -345,7 +345,7 @@ async function startShowRatingInterval(optionShowRating = true, optionHideTitles
 		if (showRating()) addRating(optionShowRating, optionHideTitles)
 	}, 1000)
 }
-function getDiffInDays(firstDate: string, secondDate: Date) {
+export function getDiffInDays(firstDate: string, secondDate: Date) {
 	if (!firstDate || !secondDate) return 31
 	return Math.round(Math.abs(new Date(secondDate).getTime() - new Date(firstDate).getTime()) / (1000 * 60 * 60 * 24))
 }
@@ -395,7 +395,10 @@ function Amazon_getMediaType(type: string): MediaType {
 }
 function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	let AllTitleCardsTypes: Array<NodeListOf<Element>> = []
-	if (isNetflix) AllTitleCardsTypes = [document.querySelectorAll(".title-card .boxart-container:not(.imdb)")]
+	if (isNetflix)
+		AllTitleCardsTypes = [
+			document.querySelectorAll('a[data-uia="standard-card"]:not(.imdb), a[data-uia="progress-card"]:not(.imdb)'),
+		]
 	else if (isDisney)
 		AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not([href^='/browse/page']):not(.imdb)")]
 	else if (isHotstar)
@@ -452,7 +455,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 			if (optionHideTitles) {
 				if (blockedTitles.value[title]) {
 					if (isNetflix) {
-						const item = card.closest(".slider-item") as HTMLElement
+						const item = (card.closest("[data-virtual-slot]") || card.parentElement) as HTMLElement
 						if (item) item.style.display = "none"
 					} else if (isDisney) {
 						const item = card.parentElement as HTMLElement
@@ -574,7 +577,7 @@ function getMediaType(card: HTMLElement): MediaType {
 function getCleanTitle(card: HTMLElement, type: number): string | undefined {
 	let title: string | undefined
 	if (isNetflix) {
-		title = card?.parentElement?.getAttribute("aria-label")?.split(" (")[0]
+		title = card?.getAttribute("aria-label")?.split(" (")[0]
 	} else if (isDisney) {
 		const prompt = card.querySelector('div[data-testid="hero-carousel-prompt"]')
 		if (prompt?.textContent)
@@ -708,7 +711,7 @@ function Amazon_fixTitle(title: string | undefined) {
 	)
 }
 
-function getColorForRating(rating: number, lowVoteCount: boolean) {
+export function getColorForRating(rating: number, lowVoteCount: boolean) {
 	// I want a color gradient from red to green with yellow in the middle
 	// the ratings are between 0 and 10
 	// the average rating is 6.5
@@ -720,7 +723,7 @@ function getColorForRating(rating: number, lowVoteCount: boolean) {
 		}
 	}
 }
-function getIsTransparent(rating: number, lowVoteCount: boolean) {
+export function getIsTransparent(rating: number, lowVoteCount: boolean) {
 	if (!settings.value.Video?.dimLowRatings) return false
 	if ((!rating || rating <= settings.value.General.RatingThresholds[0].value) && !lowVoteCount) return true
 	return false
@@ -806,7 +809,7 @@ async function setRatingOnCard(card: HTMLElement, data: MovieInfo, title: string
 		zIndex: 2,
 	})
 	if (isNetflix) {
-		const titleCardContainer = card.closest(".title-card-container") as HTMLElement
+		const titleCardContainer = card.closest("div[data-virtual-slot]") as HTMLElement
 		if (titleCardContainer) {
 			titleCardContainer.appendChild(div)
 			if (getIsTransparent(data?.score, vote_count < 50)) titleCardContainer.appendChild(greyOverlay)
