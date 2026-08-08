@@ -38,6 +38,5 @@ export default defineManifest((env) => ({
 		"*://*.amazon.co.uk/*",
 		"*://*.max.com/*",
 		"*://*.hbomax.com/*",
-		"https://api.myanimelist.net/*",
 	],
 }))

@@ -1,9 +1,5 @@
 # Changelog
 
-# 1.1.103
-
-- Removed MAL permission on chrome because its annoying people, and the extension works without it.
-
 # 1.1.102
 
 - Crunchyroll: Added Myanimelist API support for Crunchyroll.
