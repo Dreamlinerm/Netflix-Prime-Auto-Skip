@@ -2,7 +2,8 @@
 
 # 1.1.105
 
-- TODO
+- Prime Video: Added hide titles feature
+- Added new Hide Titles tab in settings page.
 
 # 1.1.102
 

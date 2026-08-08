@@ -546,7 +546,6 @@ function addHideTitleButton(card: HTMLElement, title: string, mediaType: MediaTy
 			posterPath: DBCache[title]?.poster_path ?? null,
 			dateAdded: today,
 		}
-		console.log("hiddenTitles", hiddenTitles.value)
 	}
 	target.appendChild(button)
 }
