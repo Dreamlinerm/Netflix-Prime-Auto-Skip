@@ -454,20 +454,18 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 			if (!title) continue
 			if (optionHideTitles) {
 				if (hiddenTitles.value[title]) {
-					if (isNetflix) {
-						const item = (card.closest("[data-virtual-slot]") || card.parentElement) as HTMLElement
-						if (item) item.style.display = "none"
-					} else if (isDisney) {
-						const item = card.parentElement as HTMLElement
-						if (item) item.style.display = "none"
-					} else if (isHotstar) {
-						const item = (card.closest("[data-testid='tray-card-default']") ||
+					let item
+					if (isNetflix) item = (card.closest("[data-virtual-slot]") || card.parentElement) as HTMLElement
+					else if (isDisney) item = card.parentElement as HTMLElement
+					else if (isHotstar)
+						item = (card.closest("[data-testid='tray-card-default']") ||
 							card.closest("a") ||
 							card.parentElement) as HTMLElement
-						if (item) item.style.display = "none"
-					} else if (isPrimeVideo) {
-						const item = (type == 0 ? card.closest("li") : card) as HTMLElement
-						if (item) item.style.display = "none"
+					else if (isPrimeVideo) item = card.closest("li") as HTMLElement
+
+					if (item) {
+						if (item.style.display === "none") continue
+						item.style.display = "none"
 					}
 					settings.value.Statistics.SegmentsSkipped++
 					sendMessage("increaseBadge", {}, "background")
@@ -518,7 +516,7 @@ function addHideTitleButton(card: HTMLElement, title: string, mediaType: MediaTy
 			card.closest("[data-testid='tray-horizontal-card-hover']") ||
 			card) as HTMLElement
 	} else if (isPrimeVideo) {
-		target = (cardType == 0 ? card.closest("li") : card) as HTMLElement
+		target = (cardType == 0 ? card?.querySelector('[data-testid="packshot"]') : card) as HTMLElement
 	} else {
 		target = card.parentElement as HTMLElement
 	}
@@ -535,7 +533,13 @@ function addHideTitleButton(card: HTMLElement, title: string, mediaType: MediaTy
 		event.stopPropagation()
 		event.preventDefault()
 		const item = target
-		if (item) item.style.display = "none"
+		if (item) {
+			if (isDisney || isHotstar) item.style.display = "none"
+			else if (isPrimeVideo) {
+				const li = card.closest("li")
+				if (li) li.style.display = "none"
+			}
+		}
 		hiddenTitles.value[title] = {
 			platform: isPrimeVideo ? "Amazon" : "Disney",
 			mediaType,

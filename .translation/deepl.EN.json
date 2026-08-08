@@ -1,8 +1,4 @@
 {
-  "unhideSelected": "Show selected ({0})",
-  "unhideAll": "Show all",
-  "unhideAllConfirm": "Show every title on every platform? This cannot be undone.",
-  "noHiddenTitles": "No hidden titles yet.",
-  "movieType": "Movie",
-  "tvType": "TV Show"
+	"hideHeaderSwitch": "Hide Header on Player",
+	"hideHeaderDescription": "Also hides the Website header on the video player."
 }
