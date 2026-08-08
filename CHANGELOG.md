@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.1.105
+
+- TODO
+
 # 1.1.102
 
 - Crunchyroll: Added Myanimelist API support for Crunchyroll.
