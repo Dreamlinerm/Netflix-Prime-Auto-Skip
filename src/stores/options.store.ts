@@ -30,14 +30,14 @@ export type BooleanObject = {
 	[key: string]: boolean
 }
 export type MediaType = "tv" | "movie" | null
-export type BlockedTitleEntry = {
+export type HiddenTitleEntry = {
 	platform: StreamingService | "Unknown"
 	mediaType: MediaType
 	posterPath: string | null
 	dateAdded: string
 }
 export type HiddenTitles = {
-	[title: string]: BlockedTitleEntry
+	[title: string]: HiddenTitleEntry
 }
 
 const { data: hiddenTitles, promise: hiddenTitlesPromise } = useBrowserLocalStorage<HiddenTitles>(

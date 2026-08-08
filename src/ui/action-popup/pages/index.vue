@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const githubUrl = __GITHUB_URL__
-function openBlockedTitles() {
-	browser.tabs.create({ url: browser.runtime.getURL("src/ui/options-page/index.html#/options-page/BlockedTitles") })
+function openHiddenTitles() {
+	browser.tabs.create({ url: browser.runtime.getURL("src/ui/options-page/index.html#/options-page/HiddenTitles") })
 }
 </script>
 
@@ -126,11 +126,11 @@ function openBlockedTitles() {
 		</div>
 		<div class="tooltip">
 			<div class="tooltip-content">
-				<div class="text-2xl font-black">{{ $t("blockedTitlesNav") }}</div>
+				<div class="text-2xl font-black">{{ $t("hiddenTitlesNav") }}</div>
 			</div>
 			<div
 				class="popupMenuButton flex"
-				@click="openBlockedTitles"
+				@click="openHiddenTitles"
 			>
 				<i-mdi-eye-off-outline
 					width="100%"

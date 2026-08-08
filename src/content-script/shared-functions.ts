@@ -471,7 +471,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 					}
 					settings.value.Statistics.SegmentsSkipped++
 					sendMessage("increaseBadge", {}, "background")
-					console.log("blockedTitle", title)
+					console.log("hidden Title", title)
 					continue
 				}
 				if (isDisney || isHotstar || isPrimeVideo) addHideTitleButton(card, title, media_type, type)

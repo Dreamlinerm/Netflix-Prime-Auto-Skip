@@ -94,13 +94,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/options-page/BlockedTitles': RouteRecordInfo<
-      '/options-page/BlockedTitles',
-      '/options-page/BlockedTitles',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/options-page/Changelog': RouteRecordInfo<
       '/options-page/Changelog',
       '/options-page/Changelog',
@@ -125,6 +118,13 @@ declare module 'vue-router/auto-routes' {
     '/options-page/Disney': RouteRecordInfo<
       '/options-page/Disney',
       '/options-page/Disney',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/options-page/HiddenTitles': RouteRecordInfo<
+      '/options-page/HiddenTitles',
+      '/options-page/HiddenTitles',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -242,14 +242,6 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
-    'src/ui/options-page/pages/BlockedTitles.vue': {
-      routes:
-        | '/options-page/BlockedTitles'
-      views:
-        | never
-      pathParamNames:
-        | never
-    }
     'src/ui/options-page/pages/Changelog.vue': {
       routes:
         | '/options-page/Changelog'
@@ -277,6 +269,14 @@ declare module 'vue-router/auto-routes' {
     'src/ui/options-page/pages/Disney.vue': {
       routes:
         | '/options-page/Disney'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/ui/options-page/pages/HiddenTitles.vue': {
+      routes:
+        | '/options-page/HiddenTitles'
       views:
         | never
       pathParamNames:

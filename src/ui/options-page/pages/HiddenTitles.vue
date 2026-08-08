@@ -9,7 +9,7 @@ const { hiddenTitles } = storeToRefs(hiddenTitlesStore)
 type PlatformFilter = "all" | "Netflix" | "Amazon" | "Disney" | "Unknown"
 type TypeFilter = "all" | "movie" | "tv"
 type SortKey = "dateAdded" | "title" | "platform"
-type Row = { title: string } & BlockedTitleEntry
+type Row = { title: string } & HiddenTitleEntry
 
 const KNOWN_PLATFORM_LABELS: Record<string, string> = {
 	Netflix: "Netflix",
@@ -67,17 +67,17 @@ function toggleSelectAll() {
 	})
 }
 
-function unblock(title: string) {
+function show(title: string) {
 	delete hiddenTitles.value[title]
 	delete selected.value[title]
 }
 function unblockSelected() {
 	Object.keys(selected.value)
 		.filter((title) => selected.value[title])
-		.forEach(unblock)
+		.forEach(show)
 }
-function unblockAll() {
-	if (!confirm(t("unblockAllConfirm"))) return
+function showAll() {
+	if (!confirm(t("unhideAllConfirm"))) return
 	hiddenTitles.value = {}
 	selected.value = {}
 }
@@ -106,8 +106,8 @@ watch(filteredRows, ensurePosters, { immediate: true })
 </script>
 
 <template>
-	<h1>{{ $t("blockedTitlesPageTitle") }}</h1>
-	<p class="description">{{ $t("blockedTitlesPageDescription") }}</p>
+	<h1>{{ $t("hiddenTitlesPageTitle") }}</h1>
+	<p class="description">{{ $t("hiddenTitlesPageDescription") }}</p>
 
 	<div class="toolbar flex flex-wrap items-center gap-2 my-2">
 		<input
@@ -182,14 +182,14 @@ watch(filteredRows, ensurePosters, { immediate: true })
 			:disabled="selectedCount === 0"
 			@click="unblockSelected"
 		>
-			{{ $t("unblockSelected", [selectedCount]) }}
+			{{ $t("unhideSelected", [selectedCount]) }}
 		</button>
 		<button
 			class="btn btn-sm btn-outline btn-error"
 			:disabled="rows.length === 0"
-			@click="unblockAll"
+			@click="showAll"
 		>
-			{{ $t("unblockAll") }}
+			{{ $t("unhideAll") }}
 		</button>
 	</div>
 
@@ -197,7 +197,7 @@ watch(filteredRows, ensurePosters, { immediate: true })
 		v-if="filteredRows.length === 0"
 		class="description"
 	>
-		{{ $t("noBlockedTitles") }}
+		{{ $t("noHiddenTitles") }}
 	</p>
 
 	<div
@@ -217,8 +217,8 @@ watch(filteredRows, ensurePosters, { immediate: true })
 			/>
 			<button
 				class="unblock-btn"
-				:title="$t('unblock')"
-				@click="unblock(row.title)"
+				:title="$t('unhide')"
+				@click="show(row.title)"
 			>
 				<i-mdi-close />
 			</button>
@@ -308,9 +308,9 @@ watch(filteredRows, ensurePosters, { immediate: true })
 				<td>
 					<button
 						class="btn btn-xs btn-error"
-						@click="unblock(row.title)"
+						@click="show(row.title)"
 					>
-						{{ $t("unblock") }}
+						{{ $t("unhide") }}
 					</button>
 				</td>
 			</tr>
