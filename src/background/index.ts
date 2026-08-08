@@ -3,21 +3,21 @@
 // extPay.startBackground()
 const is_DEV = process.env.NODE_ENV === "development"
 
-async function migrateHideTitlesToBlockedTitles() {
+async function migrateHideTitlesToHiddenTitles() {
 	const { hideTitles } = await browser.storage.sync.get("hideTitles")
 	if (!hideTitles || typeof hideTitles !== "object" || Object.keys(hideTitles).length === 0) return
 
-	const { blockedTitles } = await browser.storage.local.get("blockedTitles")
-	const migrated: BlockedTitles = { ...(blockedTitles ?? {}) }
+	const { hiddenTitles } = await browser.storage.local.get("hiddenTitles")
+	const migrated: HiddenTitles = { ...(hiddenTitles ?? {}) }
 	const today = new Date().toISOString().split("T")[0]
 	for (const title of Object.keys(hideTitles)) {
 		if (!migrated[title]) {
 			migrated[title] = { platform: "Unknown", mediaType: null, posterPath: null, dateAdded: today }
 		}
 	}
-	await browser.storage.local.set({ blockedTitles: migrated })
-	await browser.storage.sync.set({ hideTitles: {} })
-	console.log("migrated hideTitles to blockedTitles", migrated)
+	await browser.storage.local.set({ hiddenTitles: migrated })
+	await browser.storage.sync.remove("hideTitles")
+	console.log("migrated hideTitles to hiddenTitles", migrated)
 }
 
 browser.runtime.onInstalled.addListener(async (opt) => {
@@ -35,7 +35,7 @@ browser.runtime.onInstalled.addListener(async (opt) => {
 	}
 
 	if (opt.reason === "update") {
-		await migrateHideTitlesToBlockedTitles()
+		await migrateHideTitlesToHiddenTitles()
 	}
 
 	if (opt.reason === "update" && is_DEV) {

@@ -3,8 +3,8 @@ import { useI18n } from "vue-i18n"
 
 const { t } = useI18n()
 
-const blockedTitlesStore = useBlockedTitlesStore()
-const { blockedTitles } = storeToRefs(blockedTitlesStore)
+const hiddenTitlesStore = useHiddenTitlesStore()
+const { hiddenTitles } = storeToRefs(hiddenTitlesStore)
 
 type PlatformFilter = "all" | "Netflix" | "Amazon" | "Disney" | "Unknown"
 type TypeFilter = "all" | "movie" | "tv"
@@ -29,7 +29,9 @@ const sortDir = ref<"asc" | "desc">("desc")
 const viewMode = ref<"icon" | "list">("icon")
 const selected = ref<BooleanObject>({})
 
-const rows = computed<Array<Row>>(() => Object.entries(blockedTitles.value).map(([title, entry]) => ({ title, ...entry })))
+const rows = computed<Array<Row>>(() =>
+	Object.entries(hiddenTitles.value).map(([title, entry]) => ({ title, ...entry })),
+)
 
 const filteredRows = computed(() => {
 	let list = rows.value
@@ -66,7 +68,7 @@ function toggleSelectAll() {
 }
 
 function unblock(title: string) {
-	delete blockedTitles.value[title]
+	delete hiddenTitles.value[title]
 	delete selected.value[title]
 }
 function unblockSelected() {
@@ -76,21 +78,23 @@ function unblockSelected() {
 }
 function unblockAll() {
 	if (!confirm(t("unblockAllConfirm"))) return
-	blockedTitles.value = {}
+	hiddenTitles.value = {}
 	selected.value = {}
 }
 
 // posterPath: null = never fetched, "" = fetched, TMDB has none, string = poster path
 const fetchingTitles = new Set<string>()
 async function ensurePosters() {
-	const missing = filteredRows.value.filter((row) => row.posterPath === null && !fetchingTitles.has(row.title)).slice(0, 60)
+	const missing = filteredRows.value
+		.filter((row) => row.posterPath === null && !fetchingTitles.has(row.title))
+		.slice(0, 60)
 	for (const row of missing) {
 		fetchingTitles.add(row.title)
 		fetchPosterInfo(row.title, row.mediaType).then((info) => {
 			fetchingTitles.delete(row.title)
-			const current = blockedTitles.value[row.title]
+			const current = hiddenTitles.value[row.title]
 			if (!current) return
-			blockedTitles.value[row.title] = {
+			hiddenTitles.value[row.title] = {
 				...current,
 				posterPath: info?.posterPath ?? "",
 				mediaType: current.mediaType ?? info?.mediaType ?? null,

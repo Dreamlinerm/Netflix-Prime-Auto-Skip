@@ -1,8 +1,6 @@
 {
   "globals": {
     "BlockedTitleEntry": true,
-    "BlockedTitles": true,
-    "BlockedTitlesPromise": true,
     "BooleanObject": true,
     "Component": true,
     "ComponentPublicInstance": true,
@@ -14,6 +12,8 @@
     "ExtractDefaultPropTypes": true,
     "ExtractPropTypes": true,
     "ExtractPublicPropTypes": true,
+    "HiddenTitles": true,
+    "HiddenTitlesPromise": true,
     "InjectionKey": true,
     "MaybeRef": true,
     "MaybeRefOrGetter": true,
@@ -172,7 +172,6 @@
     "useAttrs": true,
     "useBase64": true,
     "useBattery": true,
-    "useBlockedTitlesStore": true,
     "useBluetooth": true,
     "useBreakpoints": true,
     "useBroadcastChannel": true,
@@ -227,6 +226,7 @@
     "useFullscreen": true,
     "useGamepad": true,
     "useGeolocation": true,
+    "useHiddenTitlesStore": true,
     "useI18n": true,
     "useId": true,
     "useIdle": true,

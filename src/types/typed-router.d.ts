@@ -247,6 +247,8 @@ declare module 'vue-router/auto-routes' {
         | '/options-page/BlockedTitles'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'src/ui/options-page/pages/Changelog.vue': {
       routes:

@@ -3,8 +3,8 @@ console.log("shared-functions loaded")
 // Global Variables
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
-const { data: blockedTitles, promise: blockedTitlesPromise } = useBrowserLocalStorage<BlockedTitles>(
-	"blockedTitles",
+const { data: hiddenTitles, promise: hiddenTitlesPromise } = useBrowserLocalStorage<HiddenTitles>(
+	"hiddenTitles",
 	{},
 	false,
 )
@@ -48,8 +48,8 @@ export async function startSharedFunctions(platform: Platforms) {
 
 	await promise
 	if (isNetflix || isPrimeVideo) {
-		await blockedTitlesPromise
-		console.log("blockedTitles", blockedTitles.value)
+		await hiddenTitlesPromise
+		console.log("hiddenTitles", hiddenTitles.value)
 	}
 	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
 	getDBCache()
@@ -453,7 +453,7 @@ async function addRating(showRating: boolean, optionHideTitles: boolean) {
 			const title = getCleanTitle(card, type)
 			if (!title) continue
 			if (optionHideTitles) {
-				if (blockedTitles.value[title]) {
+				if (hiddenTitles.value[title]) {
 					if (isNetflix) {
 						const item = (card.closest("[data-virtual-slot]") || card.parentElement) as HTMLElement
 						if (item) item.style.display = "none"
@@ -536,13 +536,13 @@ function addHideTitleButton(card: HTMLElement, title: string, mediaType: MediaTy
 		event.preventDefault()
 		const item = target
 		if (item) item.style.display = "none"
-		blockedTitles.value[title] = {
+		hiddenTitles.value[title] = {
 			platform: isPrimeVideo ? "Amazon" : "Disney",
 			mediaType,
 			posterPath: DBCache[title]?.poster_path ?? null,
 			dateAdded: today,
 		}
-		console.log("blockedTitles", blockedTitles.value)
+		console.log("hiddenTitles", hiddenTitles.value)
 	}
 	target.appendChild(button)
 }

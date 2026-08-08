@@ -8,8 +8,8 @@
 // biome-ignore lint: disable
 export {}
 declare global {
-  const BlockedTitlesPromise: typeof import('../stores/options.store').BlockedTitlesPromise
   const EffectScope: typeof import('vue').EffectScope
+  const HiddenTitlesPromise: typeof import('../stores/options.store').HiddenTitlesPromise
   const SettingsPromise: typeof import('../stores/options.store').SettingsPromise
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const appRouter: typeof import('../utils/router/index').appRouter
@@ -156,7 +156,6 @@ declare global {
   const useAttrs: typeof import('vue').useAttrs
   const useBase64: typeof import('@vueuse/core').useBase64
   const useBattery: typeof import('@vueuse/core').useBattery
-  const useBlockedTitlesStore: typeof import('../stores/options.store').useBlockedTitlesStore
   const useBluetooth: typeof import('@vueuse/core').useBluetooth
   const useBreakpoints: typeof import('@vueuse/core').useBreakpoints
   const useBroadcastChannel: typeof import('@vueuse/core').useBroadcastChannel
@@ -211,6 +210,7 @@ declare global {
   const useFullscreen: typeof import('@vueuse/core').useFullscreen
   const useGamepad: typeof import('@vueuse/core').useGamepad
   const useGeolocation: typeof import('@vueuse/core').useGeolocation
+  const useHiddenTitlesStore: typeof import('../stores/options.store').useHiddenTitlesStore
   const useHideTitlesStore: typeof import('../stores/options.store').useHideTitlesStore
   const useI18n: typeof import('vue-i18n').useI18n
   const useId: typeof import('vue').useId
@@ -339,7 +339,7 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { BooleanObject, MediaType, BlockedTitleEntry, BlockedTitles } from '../stores/options.store'
+  export type { BooleanObject, MediaType, BlockedTitleEntry, HiddenTitles } from '../stores/options.store'
   import('../stores/options.store')
   // @ts-ignore
   export type { settingsType, Nullable, CrunchyListElement, CrunchyList } from '../stores/storeTypes'
@@ -351,8 +351,8 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
-    readonly BlockedTitlesPromise: UnwrapRef<typeof import('../stores/options.store')['BlockedTitlesPromise']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly HiddenTitlesPromise: UnwrapRef<typeof import('../stores/options.store')['HiddenTitlesPromise']>
     readonly SettingsPromise: UnwrapRef<typeof import('../stores/options.store')['SettingsPromise']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly appRouter: UnwrapRef<typeof import('../utils/router/index')['appRouter']>
@@ -498,7 +498,6 @@ declare module 'vue' {
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useBase64: UnwrapRef<typeof import('@vueuse/core')['useBase64']>
     readonly useBattery: UnwrapRef<typeof import('@vueuse/core')['useBattery']>
-    readonly useBlockedTitlesStore: UnwrapRef<typeof import('../stores/options.store')['useBlockedTitlesStore']>
     readonly useBluetooth: UnwrapRef<typeof import('@vueuse/core')['useBluetooth']>
     readonly useBreakpoints: UnwrapRef<typeof import('@vueuse/core')['useBreakpoints']>
     readonly useBroadcastChannel: UnwrapRef<typeof import('@vueuse/core')['useBroadcastChannel']>
@@ -553,6 +552,7 @@ declare module 'vue' {
     readonly useFullscreen: UnwrapRef<typeof import('@vueuse/core')['useFullscreen']>
     readonly useGamepad: UnwrapRef<typeof import('@vueuse/core')['useGamepad']>
     readonly useGeolocation: UnwrapRef<typeof import('@vueuse/core')['useGeolocation']>
+    readonly useHiddenTitlesStore: UnwrapRef<typeof import('../stores/options.store')['useHiddenTitlesStore']>
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useIdle: UnwrapRef<typeof import('@vueuse/core')['useIdle']>

@@ -36,18 +36,18 @@ export type BlockedTitleEntry = {
 	posterPath: string | null
 	dateAdded: string
 }
-export type BlockedTitles = {
+export type HiddenTitles = {
 	[title: string]: BlockedTitleEntry
 }
 
-const { data: blockedTitles, promise: blockedTitlesPromise } = useBrowserLocalStorage<BlockedTitles>(
-	"blockedTitles",
+const { data: hiddenTitles, promise: hiddenTitlesPromise } = useBrowserLocalStorage<HiddenTitles>(
+	"hiddenTitles",
 	{},
 	false,
 )
-export const useBlockedTitlesStore = defineStore("blockedTitles", () => {
+export const useHiddenTitlesStore = defineStore("hiddenTitles", () => {
 	return {
-		blockedTitles,
+		hiddenTitles,
 	}
 })
-export const BlockedTitlesPromise = blockedTitlesPromise
+export const HiddenTitlesPromise = hiddenTitlesPromise
