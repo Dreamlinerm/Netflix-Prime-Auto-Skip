@@ -8,8 +8,9 @@ config()
 console.log("Imported env variables:", process.env.DEEPL_API_KEY ? "DEEPL_API_KEY: ✅" : "DEEPL_API_KEY; ❌")
 // set DEEPL_API_KEY=... in terminal
 if (process.argv.length === 2) {
+	console.log("Starting the translation process")
 	exec(
-		"jsontt .translation/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -f EN -t DE ES FR IT JA KO PL PT SV TR ZH",
+		"jsontt .translation/deepl.EN.json -m deepl -n deepl -fb yes -cl 3 -c no -f EN -t DE ES FR IT JA KO PL PT SV TR ZH",
 		(error, stdout, stderr) => {
 			if (error) {
 				console.error(`Error: ${error.message}`)

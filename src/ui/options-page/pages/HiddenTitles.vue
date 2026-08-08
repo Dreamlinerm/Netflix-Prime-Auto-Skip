@@ -40,7 +40,7 @@ const filteredRows = computed(() => {
 	if (platformFilter.value !== "all") list = list.filter((row) => row.platform === platformFilter.value)
 	if (typeFilter.value !== "all") list = list.filter((row) => row.mediaType === typeFilter.value)
 	return [...list].sort((a, b) => {
-		let cmp = 0
+		let cmp
 		if (sortKey.value === "title") cmp = a.title.localeCompare(b.title)
 		else if (sortKey.value === "platform") cmp = a.platform.localeCompare(b.platform)
 		else cmp = a.dateAdded.localeCompare(b.dateAdded)
