@@ -82,6 +82,65 @@ function showAll() {
 	selected.value = {}
 }
 
+function exportTitles() {
+	const blob = new Blob([JSON.stringify(hiddenTitles.value, null, 2)], { type: "application/json" })
+	const url = URL.createObjectURL(blob)
+	const a = document.createElement("a")
+	a.href = url
+	a.download = `hidden-titles-${new Date().toISOString().slice(0, 10)}.json`
+	a.click()
+	URL.revokeObjectURL(url)
+}
+
+const importInput = ref<HTMLInputElement | null>(null)
+function triggerImport() {
+	importInput.value?.click()
+}
+function isHiddenTitleEntry(value: unknown): value is HiddenTitleEntry {
+	return (
+		typeof value === "object" &&
+		value !== null &&
+		typeof (value as HiddenTitleEntry).platform === "string" &&
+		typeof (value as HiddenTitleEntry).dateAdded === "string"
+	)
+}
+function importTitles(event: Event) {
+	const input = event.target as HTMLInputElement
+	const file = input.files?.[0]
+	if (!file) return
+	const reader = new FileReader()
+	reader.addEventListener("load", (e) => {
+		try {
+			const data = JSON.parse(e.target?.result as string)
+			if (typeof data !== "object" || data === null || Array.isArray(data)) throw new Error("invalid")
+			let added = 0
+			let skipped = 0
+			const merged = { ...hiddenTitles.value }
+			for (const [title, entry] of Object.entries(data as Record<string, unknown>)) {
+				if (!isHiddenTitleEntry(entry)) continue
+				if (merged[title]) {
+					skipped++
+					continue
+				}
+				added++
+				merged[title] = {
+					platform: entry.platform,
+					mediaType: entry.mediaType ?? null,
+					posterPath: entry.posterPath ?? null,
+					dateAdded: entry.dateAdded,
+				}
+			}
+			hiddenTitles.value = merged
+			alert(t("importHiddenTitlesResult", [added, skipped]))
+		} catch (e) {
+			alert(t("invalidJson"))
+		} finally {
+			input.value = ""
+		}
+	})
+	reader.readAsText(file)
+}
+
 // posterPath: null = never fetched, "" = fetched, TMDB has none, string = poster path
 const fetchingTitles = new Set<string>()
 async function ensurePosters() {
@@ -191,6 +250,31 @@ watch(filteredRows, ensurePosters, { immediate: true })
 		>
 			{{ $t("unhideAll") }}
 		</button>
+		<div class="divider divider-horizontal mx-0"></div>
+		<button
+			class="btn btn-sm btn-outline"
+			:disabled="rows.length === 0"
+			:title="$t('exportHiddenTitlesDescription')"
+			@click="exportTitles"
+		>
+			<i-mdi-download />
+			{{ $t("exportHiddenTitles") }}
+		</button>
+		<button
+			class="btn btn-sm btn-outline"
+			:title="$t('importHiddenTitlesDescription')"
+			@click="triggerImport"
+		>
+			<i-mdi-upload />
+			{{ $t("importHiddenTitles") }}
+		</button>
+		<input
+			ref="importInput"
+			type="file"
+			accept="application/json"
+			class="hidden"
+			@change="importTitles"
+		/>
 	</div>
 
 	<p

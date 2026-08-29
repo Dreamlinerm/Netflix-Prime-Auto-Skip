@@ -143,5 +143,10 @@
   "disabledSettingsOverviewTitle": "Disabled settings overview",
   "disabledSettingsOverviewDescription": "{0} settings disabled in {1} categories.",
   "hideHeaderSwitch": "Hide Header on Player",
-  "hideHeaderDescription": "Also hides the Website header on the video player."
+  "hideHeaderDescription": "Also hides the Website header on the video player.",
+  "exportHiddenTitles": "Export",
+  "exportHiddenTitlesDescription": "Download your hidden titles as a JSON file, so you can import them on another browser.",
+  "importHiddenTitles": "Import",
+  "importHiddenTitlesDescription": "Import hidden titles from a JSON file exported from another browser. Existing hidden titles are kept.",
+  "importHiddenTitlesResult": "Import complete: {0} title(s) added, {1} already hidden."
 }

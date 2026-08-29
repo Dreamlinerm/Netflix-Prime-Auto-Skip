@@ -142,5 +142,10 @@
   "unhideAllConfirm": "모든 플랫폼의 모든 제목을 표시하시겠습니까? 이 작업은 되돌릴 수 없습니다.",
   "noHiddenTitles": "아직 숨겨진 제목은 없습니다.",
   "movieType": "영화",
-  "tvType": "TV 프로그램"
+  "tvType": "TV 프로그램",
+  "exportHiddenTitles": "내보내기",
+  "exportHiddenTitlesDescription": "숨겨진 제목을 JSON 파일로 다운로드하여 다른 브라우저에서 가져올 수 있습니다.",
+  "importHiddenTitles": "가져오기",
+  "importHiddenTitlesDescription": "다른 브라우저에서 내보낸 JSON 파일의 숨겨진 제목을 가져옵니다. 기존에 있던 숨겨진 제목은 그대로 유지됩니다.",
+  "importHiddenTitlesResult": "가져오기 완료: {0}개의 제목이 추가되었으며, {1}개는 이미 숨겨져 있습니다."
 }

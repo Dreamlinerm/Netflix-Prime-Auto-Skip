@@ -142,5 +142,10 @@
   "unhideAllConfirm": "Her başlık her platformda gösterilsin mi? Bu geri alınamaz.",
   "noHiddenTitles": "Henüz gizli başlık yok.",
   "movieType": "Film",
-  "tvType": "TV Şovu"
+  "tvType": "TV Şovu",
+  "exportHiddenTitles": "Dışa Aktar",
+  "exportHiddenTitlesDescription": "Gizli başlıklarınızı bir JSON dosyası olarak indirin; böylece bunları başka bir tarayıcıya aktarabilirsiniz.",
+  "importHiddenTitles": "İthalat",
+  "importHiddenTitlesDescription": "Başka bir tarayıcıdan dışa aktarılan bir JSON dosyasından gizli başlıkları içe aktarın. Mevcut gizli başlıklar korunur.",
+  "importHiddenTitlesResult": "İçe aktarma tamamlandı: {0} başlık eklendi, {1} zaten gizlenmişti."
 }

@@ -142,5 +142,10 @@
   "unhideAllConfirm": "Mostrare tutti i titoli su tutte le piattaforme? Questa operazione non può essere annullata.",
   "noHiddenTitles": "Non ci sono ancora titoli nascosti.",
   "movieType": "Film",
-  "tvType": "Programma televisivo"
+  "tvType": "Programma televisivo",
+  "exportHiddenTitles": "Esporta",
+  "exportHiddenTitlesDescription": "Scarica i tuoi titoli nascosti in un file JSON, in modo da poterli importare su un altro browser.",
+  "importHiddenTitles": "Importa",
+  "importHiddenTitlesDescription": "Importa i titoli nascosti da un file JSON esportato da un altro browser. I titoli nascosti già presenti vengono mantenuti.",
+  "importHiddenTitlesResult": "Importazione completata: {0} titoli aggiunti, {1} già nascosti."
 }

@@ -142,5 +142,10 @@
   "unhideAllConfirm": "¿Mostrar todos los títulos en todas las plataformas? Esta acción no se puede deshacer.",
   "noHiddenTitles": "Aún no hay títulos ocultos.",
   "movieType": "Película",
-  "tvType": "Serie"
+  "tvType": "Serie",
+  "exportHiddenTitles": "Exportar",
+  "exportHiddenTitlesDescription": "Descarga tus títulos ocultos en un archivo JSON para poder importarlos a otro navegador.",
+  "importHiddenTitles": "Importar",
+  "importHiddenTitlesDescription": "Importar títulos ocultos desde un archivo JSON exportado desde otro navegador. Se conservan los títulos ocultos ya existentes.",
+  "importHiddenTitlesResult": "Importación completada: se han añadido {0} títulos, {1} ya estaban ocultos."
 }

@@ -142,5 +142,10 @@
   "unhideAllConfirm": "在每个平台上显示每个标题？此操作无法撤消。",
   "noHiddenTitles": "还没有隐藏标题。",
   "movieType": "电影",
-  "tvType": "电视节目"
+  "tvType": "电视节目",
+  "exportHiddenTitles": "导出",
+  "exportHiddenTitlesDescription": "将您的隐藏标题下载为 JSON 文件，以便在其他浏览器中导入。",
+  "importHiddenTitles": "导入",
+  "importHiddenTitlesDescription": "从另一个浏览器导出的 JSON 文件中导入隐藏标题。现有的隐藏标题将被保留。",
+  "importHiddenTitlesResult": "导入完成：已添加 {0} 个标题，其中 {1} 个已被隐藏。"
 }

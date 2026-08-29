@@ -142,5 +142,10 @@
   "unhideAllConfirm": "すべてのプラットフォームのすべてのタイトルを表示しますか？この操作は元に戻せません。",
   "noHiddenTitles": "まだ非表示のタイトルはありません。",
   "movieType": "映画",
-  "tvType": "テレビ番組"
+  "tvType": "テレビ番組",
+  "exportHiddenTitles": "エクスポート",
+  "exportHiddenTitlesDescription": "非表示のタイトルをJSONファイルとしてダウンロードすれば、別のブラウザにインポートできます。",
+  "importHiddenTitles": "インポート",
+  "importHiddenTitlesDescription": "別のブラウザからエクスポートしたJSONファイルから、非表示のタイトルをインポートします。既存の非表示のタイトルは保持されます。",
+  "importHiddenTitlesResult": "インポートが完了しました：{0}件のタイトルが追加され、{1}件はすでに非表示になっています。"
 }

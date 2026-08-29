@@ -142,5 +142,10 @@
   "unhideSelected": "Afficher la sélection ({0})",
   "unhideAll": "Tout afficher",
   "unhideAllConfirm": "Afficher tous les titres sur toutes les plateformes ? Cette action est irréversible.",
-  "noHiddenTitles": "Il n'y a pas encore de titres cachés."
+  "noHiddenTitles": "Il n'y a pas encore de titres cachés.",
+  "exportHiddenTitles": "Exporter",
+  "exportHiddenTitlesDescription": "Téléchargez vos titres cachés sous forme de fichier JSON, afin de pouvoir les importer sur un autre navigateur.",
+  "importHiddenTitles": "Importer",
+  "importHiddenTitlesDescription": "Importez des titres cachés à partir d'un fichier JSON exporté d'un autre navigateur. Les titres déjà cachés sont conservés.",
+  "importHiddenTitlesResult": "Importation terminée : {0} titre(s) ajouté(s), {1} déjà caché(s)."
 }

@@ -142,5 +142,10 @@
   "unhideAllConfirm": "Wyświetlić wszystkie tytuły na wszystkich platformach? Nie można cofnąć tej czynności.",
   "noHiddenTitles": "Nie ma jeszcze ukrytych tytułów.",
   "movieType": "Film",
-  "tvType": "Program telewizyjny"
+  "tvType": "Program telewizyjny",
+  "exportHiddenTitles": "Eksport",
+  "exportHiddenTitlesDescription": "Pobierz swoje ukryte tytuły w postaci pliku JSON, aby móc je zaimportować do innej przeglądarki.",
+  "importHiddenTitles": "Importuj",
+  "importHiddenTitlesDescription": "Zaimportuj ukryte tytuły z pliku JSON wyeksportowanego z innej przeglądarki. Istniejące ukryte tytuły zostaną zachowane.",
+  "importHiddenTitlesResult": "Import zakończony: dodano {0} tytułów, {1} jest już ukrytych."
 }

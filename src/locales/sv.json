@@ -142,5 +142,10 @@
   "unhideAllConfirm": "Visa alla titlar på alla plattformar? Det här går inte att ångra.",
   "noHiddenTitles": "Inga dolda titlar ännu.",
   "movieType": "Film",
-  "tvType": "TV-program"
+  "tvType": "TV-program",
+  "exportHiddenTitles": "Export",
+  "exportHiddenTitlesDescription": "Ladda ner dina dolda titlar som en JSON-fil så att du kan importera dem i en annan webbläsare.",
+  "importHiddenTitles": "Importera",
+  "importHiddenTitlesDescription": "Importera dolda rubriker från en JSON-fil som exporterats från en annan webbläsare. Befintliga dolda rubriker behålls.",
+  "importHiddenTitlesResult": "Importen är klar: {0} titel(er) har lagts till, {1} är redan dolda."
 }

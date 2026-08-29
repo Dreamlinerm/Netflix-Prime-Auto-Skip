@@ -143,5 +143,10 @@
   "unhideAllConfirm": "Alle Titel auf allen Plattformen anzeigen? Dieser Vorgang kann nicht rückgängig gemacht werden.",
   "noHiddenTitles": "Bisher gibt es noch keine versteckten Titel.",
   "movieType": "Film",
-  "tvType": "Fernsehserie"
+  "tvType": "Fernsehserie",
+  "exportHiddenTitles": "Exportieren",
+  "exportHiddenTitlesDescription": "Laden Sie Ihre verborgenen Titel als JSON-Datei herunter, damit Sie sie in einen anderen Browser importieren können.",
+  "importHiddenTitles": "Importieren",
+  "importHiddenTitlesDescription": "Versteckte Titel aus einer JSON-Datei importieren, die aus einem anderen Browser exportiert wurde. Vorhandene versteckte Titel bleiben erhalten.",
+  "importHiddenTitlesResult": "Import abgeschlossen: {0} Titel hinzugefügt, {1} bereits ausgeblendet."
 }
