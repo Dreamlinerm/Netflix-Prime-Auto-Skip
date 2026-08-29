@@ -2,7 +2,7 @@
 
 # 1.1.106
 
-- Add websiteContent permission to firefox data_collection_permissions, because TMDB and MyAnimeList rating APIs use websiteContent. 
+- Add websiteContent permission to Firefox data_collection_permissions. This is required for the TMDB and MyAnimeList movie-rating APIs.
 - Add Import/Export for hidden titles.
 - Add better translations for Spanish.
 
