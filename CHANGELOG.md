@@ -1,5 +1,10 @@
 # Changelog
 
+# 1.1.106
+
+- Add websiteContent permission to firefox data_collection_permissions, because TMDB and MyAnimeList rating APIs use websiteContent. 
+- Add better translations for Spanish.
+
 # 1.1.105
 
 - Prime Video: Added hide titles feature
