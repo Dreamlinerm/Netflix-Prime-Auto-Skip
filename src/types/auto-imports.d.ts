@@ -8,7 +8,11 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const CLOUD_SYNC_VERSION: typeof import('../utils/cloudSync/types').CLOUD_SYNC_VERSION
+  const CloudSyncError: typeof import('../utils/cloudSync/types').CloudSyncError
+  const CloudSyncPromise: typeof import('../stores/options.store').CloudSyncPromise
   const EffectScope: typeof import('vue').EffectScope
+  const GOOGLE_DRIVE_FILE_NAME: typeof import('../utils/cloudSync/googleDrive').GOOGLE_DRIVE_FILE_NAME
   const HiddenTitlesPromise: typeof import('../stores/options.store').HiddenTitlesPromise
   const SettingsPromise: typeof import('../stores/options.store').SettingsPromise
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
@@ -21,6 +25,9 @@ declare global {
   const computedEager: typeof import('@vueuse/core').computedEager
   const computedInject: typeof import('@vueuse/core').computedInject
   const computedWithControl: typeof import('@vueuse/core').computedWithControl
+  const connectCloudProvider: typeof import('../utils/cloudSync/index').connectCloudProvider
+  const connectDropbox: typeof import('../utils/cloudSync/dropbox').connectDropbox
+  const connectGoogleDrive: typeof import('../utils/cloudSync/googleDrive').connectGoogleDrive
   const controlledComputed: typeof import('@vueuse/core').controlledComputed
   const controlledRef: typeof import('@vueuse/core').controlledRef
   const createApp: typeof import('vue').createApp
@@ -39,19 +46,28 @@ declare global {
   const customRef: typeof import('vue').customRef
   const debouncedRef: typeof import('@vueuse/core').debouncedRef
   const debouncedWatch: typeof import('@vueuse/core').debouncedWatch
+  const defaultCloudSyncSettings: typeof import('../stores/options.store').defaultCloudSyncSettings
   const defaultSettings: typeof import('../stores/storeTypes').defaultSettings
   const defineAsyncComponent: typeof import('vue').defineAsyncComponent
   const defineComponent: typeof import('vue').defineComponent
   const defineStore: typeof import('pinia').defineStore
+  const disconnectCloudProvider: typeof import('../utils/cloudSync/index').disconnectCloudProvider
+  const downloadDropboxFile: typeof import('../utils/cloudSync/dropbox').downloadDropboxFile
+  const downloadGoogleDriveFile: typeof import('../utils/cloudSync/googleDrive').downloadGoogleDriveFile
   const eagerComputed: typeof import('@vueuse/core').eagerComputed
   const effectScope: typeof import('vue').effectScope
   const extendRef: typeof import('@vueuse/core').extendRef
   const fetchPosterInfo: typeof import('../utils/tmdb').fetchPosterInfo
+  const findGoogleDriveFileId: typeof import('../utils/cloudSync/googleDrive').findGoogleDriveFileId
+  const generateCodeChallenge: typeof import('../utils/cloudSync/pkce').generateCodeChallenge
+  const generateCodeVerifier: typeof import('../utils/cloudSync/pkce').generateCodeVerifier
+  const generateState: typeof import('../utils/cloudSync/pkce').generateState
   const getActivePinia: typeof import('pinia').getActivePinia
   const getCurrentInstance: typeof import('vue').getCurrentInstance
   const getCurrentScope: typeof import('vue').getCurrentScope
   const getCurrentWatcher: typeof import('vue').getCurrentWatcher
   const h: typeof import('vue').h
+  const hideTitle: typeof import('../utils/hiddenTitlesActions').hideTitle
   const i18n: typeof import('../utils/i18n').i18n
   const ignorableWatch: typeof import('@vueuse/core').ignorableWatch
   const inject: typeof import('vue').inject
@@ -102,6 +118,7 @@ declare global {
   const reactiveOmit: typeof import('@vueuse/core').reactiveOmit
   const reactivePick: typeof import('@vueuse/core').reactivePick
   const readonly: typeof import('vue').readonly
+  const reconcile: typeof import('../utils/cloudSync/reconcile').reconcile
   const ref: typeof import('vue').ref
   const refAutoReset: typeof import('@vueuse/core').refAutoReset
   const refDebounced: typeof import('@vueuse/core').refDebounced
@@ -109,8 +126,11 @@ declare global {
   const refManualReset: typeof import('@vueuse/core').refManualReset
   const refThrottled: typeof import('@vueuse/core').refThrottled
   const refWithControl: typeof import('@vueuse/core').refWithControl
+  const refreshDropboxAccessToken: typeof import('../utils/cloudSync/dropbox').refreshDropboxAccessToken
+  const refreshGoogleDriveAccessToken: typeof import('../utils/cloudSync/googleDrive').refreshGoogleDriveAccessToken
   const resolveComponent: typeof import('vue').resolveComponent
   const resolveRef: typeof import('@vueuse/core').resolveRef
+  const runCloudSync: typeof import('../utils/cloudSync/index').runCloudSync
   const setActivePinia: typeof import('pinia').setActivePinia
   const setMapStoreSuffix: typeof import('pinia').setMapStoreSuffix
   const shallowReactive: typeof import('vue').shallowReactive
@@ -134,9 +154,12 @@ declare global {
   const tryOnMounted: typeof import('@vueuse/core').tryOnMounted
   const tryOnScopeDispose: typeof import('@vueuse/core').tryOnScopeDispose
   const tryOnUnmounted: typeof import('@vueuse/core').tryOnUnmounted
+  const unhideTitle: typeof import('../utils/hiddenTitlesActions').unhideTitle
   const unref: typeof import('vue').unref
   const unrefElement: typeof import('@vueuse/core').unrefElement
   const until: typeof import('@vueuse/core').until
+  const uploadDropboxFile: typeof import('../utils/cloudSync/dropbox').uploadDropboxFile
+  const uploadGoogleDriveFile: typeof import('../utils/cloudSync/googleDrive').uploadGoogleDriveFile
   const useActiveElement: typeof import('@vueuse/core').useActiveElement
   const useAnimate: typeof import('@vueuse/core').useAnimate
   const useArrayDifference: typeof import('@vueuse/core').useArrayDifference
@@ -166,6 +189,7 @@ declare global {
   const useClipboard: typeof import('@vueuse/core').useClipboard
   const useClipboardItems: typeof import('@vueuse/core').useClipboardItems
   const useCloned: typeof import('@vueuse/core').useCloned
+  const useCloudSyncStore: typeof import('../stores/options.store').useCloudSyncStore
   const useColorMode: typeof import('@vueuse/core').useColorMode
   const useConfirmDialog: typeof import('@vueuse/core').useConfirmDialog
   const useCountdown: typeof import('@vueuse/core').useCountdown
@@ -339,11 +363,17 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { BooleanObject, MediaType, HiddenTitleEntry, HiddenTitles } from '../stores/options.store'
+  export type { BooleanObject, MediaType, HiddenTitleEntry, HiddenTitles, HiddenTitleTombstones, CloudSyncProvider, CloudSyncSettings } from '../stores/options.store'
   import('../stores/options.store')
   // @ts-ignore
   export type { settingsType, Nullable, CrunchyListElement, CrunchyList } from '../stores/storeTypes'
   import('../stores/storeTypes')
+  // @ts-ignore
+  export type { LocalSyncState } from '../utils/cloudSync/reconcile'
+  import('../utils/cloudSync/reconcile')
+  // @ts-ignore
+  export type { CloudSyncError, CloudSyncPayload, TokenBundle } from '../utils/cloudSync/types'
+  import('../utils/cloudSync/types')
 }
 
 // for vue template auto import
@@ -351,7 +381,11 @@ import { UnwrapRef } from 'vue'
 declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
+    readonly CLOUD_SYNC_VERSION: UnwrapRef<typeof import('../utils/cloudSync/types')['CLOUD_SYNC_VERSION']>
+    readonly CloudSyncError: UnwrapRef<typeof import('../utils/cloudSync/types')['CloudSyncError']>
+    readonly CloudSyncPromise: UnwrapRef<typeof import('../stores/options.store')['CloudSyncPromise']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly GOOGLE_DRIVE_FILE_NAME: UnwrapRef<typeof import('../utils/cloudSync/googleDrive')['GOOGLE_DRIVE_FILE_NAME']>
     readonly HiddenTitlesPromise: UnwrapRef<typeof import('../stores/options.store')['HiddenTitlesPromise']>
     readonly SettingsPromise: UnwrapRef<typeof import('../stores/options.store')['SettingsPromise']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
@@ -364,6 +398,9 @@ declare module 'vue' {
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
     readonly computedInject: UnwrapRef<typeof import('@vueuse/core')['computedInject']>
     readonly computedWithControl: UnwrapRef<typeof import('@vueuse/core')['computedWithControl']>
+    readonly connectCloudProvider: UnwrapRef<typeof import('../utils/cloudSync/index')['connectCloudProvider']>
+    readonly connectDropbox: UnwrapRef<typeof import('../utils/cloudSync/dropbox')['connectDropbox']>
+    readonly connectGoogleDrive: UnwrapRef<typeof import('../utils/cloudSync/googleDrive')['connectGoogleDrive']>
     readonly controlledComputed: UnwrapRef<typeof import('@vueuse/core')['controlledComputed']>
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
@@ -382,19 +419,28 @@ declare module 'vue' {
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly debouncedRef: UnwrapRef<typeof import('@vueuse/core')['debouncedRef']>
     readonly debouncedWatch: UnwrapRef<typeof import('@vueuse/core')['debouncedWatch']>
+    readonly defaultCloudSyncSettings: UnwrapRef<typeof import('../stores/options.store')['defaultCloudSyncSettings']>
     readonly defaultSettings: UnwrapRef<typeof import('../stores/storeTypes')['defaultSettings']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly defineStore: UnwrapRef<typeof import('pinia')['defineStore']>
+    readonly disconnectCloudProvider: UnwrapRef<typeof import('../utils/cloudSync/index')['disconnectCloudProvider']>
+    readonly downloadDropboxFile: UnwrapRef<typeof import('../utils/cloudSync/dropbox')['downloadDropboxFile']>
+    readonly downloadGoogleDriveFile: UnwrapRef<typeof import('../utils/cloudSync/googleDrive')['downloadGoogleDriveFile']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly fetchPosterInfo: UnwrapRef<typeof import('../utils/tmdb')['fetchPosterInfo']>
+    readonly findGoogleDriveFileId: UnwrapRef<typeof import('../utils/cloudSync/googleDrive')['findGoogleDriveFileId']>
+    readonly generateCodeChallenge: UnwrapRef<typeof import('../utils/cloudSync/pkce')['generateCodeChallenge']>
+    readonly generateCodeVerifier: UnwrapRef<typeof import('../utils/cloudSync/pkce')['generateCodeVerifier']>
+    readonly generateState: UnwrapRef<typeof import('../utils/cloudSync/pkce')['generateState']>
     readonly getActivePinia: UnwrapRef<typeof import('pinia')['getActivePinia']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getCurrentWatcher: UnwrapRef<typeof import('vue')['getCurrentWatcher']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
+    readonly hideTitle: UnwrapRef<typeof import('../utils/hiddenTitlesActions')['hideTitle']>
     readonly i18n: UnwrapRef<typeof import('../utils/i18n')['i18n']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -445,6 +491,7 @@ declare module 'vue' {
     readonly reactiveOmit: UnwrapRef<typeof import('@vueuse/core')['reactiveOmit']>
     readonly reactivePick: UnwrapRef<typeof import('@vueuse/core')['reactivePick']>
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
+    readonly reconcile: UnwrapRef<typeof import('../utils/cloudSync/reconcile')['reconcile']>
     readonly ref: UnwrapRef<typeof import('vue')['ref']>
     readonly refAutoReset: UnwrapRef<typeof import('@vueuse/core')['refAutoReset']>
     readonly refDebounced: UnwrapRef<typeof import('@vueuse/core')['refDebounced']>
@@ -452,7 +499,10 @@ declare module 'vue' {
     readonly refManualReset: UnwrapRef<typeof import('@vueuse/core')['refManualReset']>
     readonly refThrottled: UnwrapRef<typeof import('@vueuse/core')['refThrottled']>
     readonly refWithControl: UnwrapRef<typeof import('@vueuse/core')['refWithControl']>
+    readonly refreshDropboxAccessToken: UnwrapRef<typeof import('../utils/cloudSync/dropbox')['refreshDropboxAccessToken']>
+    readonly refreshGoogleDriveAccessToken: UnwrapRef<typeof import('../utils/cloudSync/googleDrive')['refreshGoogleDriveAccessToken']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
+    readonly runCloudSync: UnwrapRef<typeof import('../utils/cloudSync/index')['runCloudSync']>
     readonly setActivePinia: UnwrapRef<typeof import('pinia')['setActivePinia']>
     readonly setMapStoreSuffix: UnwrapRef<typeof import('pinia')['setMapStoreSuffix']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
@@ -476,9 +526,12 @@ declare module 'vue' {
     readonly tryOnMounted: UnwrapRef<typeof import('@vueuse/core')['tryOnMounted']>
     readonly tryOnScopeDispose: UnwrapRef<typeof import('@vueuse/core')['tryOnScopeDispose']>
     readonly tryOnUnmounted: UnwrapRef<typeof import('@vueuse/core')['tryOnUnmounted']>
+    readonly unhideTitle: UnwrapRef<typeof import('../utils/hiddenTitlesActions')['unhideTitle']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly unrefElement: UnwrapRef<typeof import('@vueuse/core')['unrefElement']>
     readonly until: UnwrapRef<typeof import('@vueuse/core')['until']>
+    readonly uploadDropboxFile: UnwrapRef<typeof import('../utils/cloudSync/dropbox')['uploadDropboxFile']>
+    readonly uploadGoogleDriveFile: UnwrapRef<typeof import('../utils/cloudSync/googleDrive')['uploadGoogleDriveFile']>
     readonly useActiveElement: UnwrapRef<typeof import('@vueuse/core')['useActiveElement']>
     readonly useAnimate: UnwrapRef<typeof import('@vueuse/core')['useAnimate']>
     readonly useArrayDifference: UnwrapRef<typeof import('@vueuse/core')['useArrayDifference']>
@@ -508,6 +561,7 @@ declare module 'vue' {
     readonly useClipboard: UnwrapRef<typeof import('@vueuse/core')['useClipboard']>
     readonly useClipboardItems: UnwrapRef<typeof import('@vueuse/core')['useClipboardItems']>
     readonly useCloned: UnwrapRef<typeof import('@vueuse/core')['useCloned']>
+    readonly useCloudSyncStore: UnwrapRef<typeof import('../stores/options.store')['useCloudSyncStore']>
     readonly useColorMode: UnwrapRef<typeof import('@vueuse/core')['useColorMode']>
     readonly useConfirmDialog: UnwrapRef<typeof import('@vueuse/core')['useConfirmDialog']>
     readonly useCountdown: UnwrapRef<typeof import('@vueuse/core')['useCountdown']>

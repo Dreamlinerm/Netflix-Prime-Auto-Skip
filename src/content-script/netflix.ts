@@ -15,6 +15,11 @@ const { data: hiddenTitles, promise: hiddenTitlesPromise } = useBrowserLocalStor
 	{},
 	false,
 )
+const { data: hiddenTitlesTombstones } = useBrowserLocalStorage<HiddenTitleTombstones>(
+	"hiddenTitlesTombstones",
+	{},
+	false,
+)
 const today = new Date().toISOString().split("T")[0]
 const ua = navigator.userAgent
 let lastAdTimeText: number | string = 0
@@ -310,7 +315,12 @@ function addHideTitleButton() {
 		const item = a.closest("div[data-virtual-slot]") as HTMLElement
 		if (item) item.style.display = "none"
 		expandButton.closest(".previewModal--container")?.remove()
-		hiddenTitles.value[title] = { platform: "Netflix", mediaType: null, posterPath: null, dateAdded: today }
+		hideTitle(hiddenTitles, hiddenTitlesTombstones, title, {
+			platform: "Netflix",
+			mediaType: null,
+			posterPath: null,
+			dateAdded: today,
+		})
 	}
 
 	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")

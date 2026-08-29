@@ -101,6 +101,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/options-page/CloudSync': RouteRecordInfo<
+      '/options-page/CloudSync',
+      '/options-page/CloudSync',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/options-page/Crunchyroll': RouteRecordInfo<
       '/options-page/Crunchyroll',
       '/options-page/Crunchyroll',
@@ -245,6 +252,14 @@ declare module 'vue-router/auto-routes' {
     'src/ui/options-page/pages/Changelog.vue': {
       routes:
         | '/options-page/Changelog'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/ui/options-page/pages/CloudSync.vue': {
+      routes:
+        | '/options-page/CloudSync'
       views:
         | never
       pathParamNames:

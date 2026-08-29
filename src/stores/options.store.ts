@@ -39,15 +39,74 @@ export type HiddenTitleEntry = {
 export type HiddenTitles = {
 	[title: string]: HiddenTitleEntry
 }
+// title -> ISO date the title was unhidden, used so cloud sync doesn't resurrect it
+export type HiddenTitleTombstones = {
+	[title: string]: string
+}
 
 const { data: hiddenTitles, promise: hiddenTitlesPromise } = useBrowserLocalStorage<HiddenTitles>(
 	"hiddenTitles",
 	{},
 	false,
 )
+const { data: hiddenTitlesTombstones, promise: hiddenTitlesTombstonesPromise } =
+	useBrowserLocalStorage<HiddenTitleTombstones>("hiddenTitlesTombstones", {}, false)
 export const useHiddenTitlesStore = defineStore("hiddenTitles", () => {
 	return {
 		hiddenTitles,
+		hiddenTitlesTombstones,
 	}
 })
-export const HiddenTitlesPromise = hiddenTitlesPromise
+export const HiddenTitlesPromise = Promise.all([hiddenTitlesPromise, hiddenTitlesTombstonesPromise])
+
+export type CloudSyncProvider = "none" | "googleDrive" | "dropbox"
+export type CloudSyncSettings = {
+	provider: CloudSyncProvider
+	googleDrive: {
+		clientId: string
+		clientSecret: string
+		refreshToken: string | null
+		accessToken: string | null
+		accessTokenExpiresAt: number | null
+		fileId: string | null
+	}
+	dropbox: {
+		appKey: string
+		refreshToken: string | null
+		accessToken: string | null
+		accessTokenExpiresAt: number | null
+	}
+	lastSyncedAt: string | null
+	lastError: string | null
+}
+export const defaultCloudSyncSettings: CloudSyncSettings = {
+	provider: "none",
+	googleDrive: {
+		clientId: "",
+		clientSecret: "",
+		refreshToken: null,
+		accessToken: null,
+		accessTokenExpiresAt: null,
+		fileId: null,
+	},
+	dropbox: {
+		appKey: "",
+		refreshToken: null,
+		accessToken: null,
+		accessTokenExpiresAt: null,
+	},
+	lastSyncedAt: null,
+	lastError: null,
+}
+
+const { data: cloudSync, promise: cloudSyncPromise } = useBrowserLocalStorage<CloudSyncSettings>(
+	"cloudSync",
+	defaultCloudSyncSettings,
+	true,
+)
+export const useCloudSyncStore = defineStore("cloudSync", () => {
+	return {
+		cloudSync,
+	}
+})
+export const CloudSyncPromise = cloudSyncPromise

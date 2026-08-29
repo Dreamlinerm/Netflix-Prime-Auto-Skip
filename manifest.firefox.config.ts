@@ -27,6 +27,8 @@ export default defineManifest((env) => ({
 	},
 	permissions: [
 		"storage",
+		"identity",
+		"alarms",
 		"webRequest",
 		"webRequestBlocking",
 		"*://*.disneyplus.com/*",

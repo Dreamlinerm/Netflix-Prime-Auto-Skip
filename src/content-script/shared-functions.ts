@@ -8,6 +8,11 @@ const { data: hiddenTitles, promise: hiddenTitlesPromise } = useBrowserLocalStor
 	{},
 	false,
 )
+const { data: hiddenTitlesTombstones } = useBrowserLocalStorage<HiddenTitleTombstones>(
+	"hiddenTitlesTombstones",
+	{},
+	false,
+)
 export const date = new Date()
 const today = date.toISOString().split("T")[0]
 
@@ -540,12 +545,12 @@ function addHideTitleButton(card: HTMLElement, title: string, mediaType: MediaTy
 				if (li) li.style.display = "none"
 			}
 		}
-		hiddenTitles.value[title] = {
+		hideTitle(hiddenTitles, hiddenTitlesTombstones, title, {
 			platform: isPrimeVideo ? "Amazon" : "Disney",
 			mediaType,
 			posterPath: DBCache[title]?.poster_path ?? null,
 			dateAdded: today,
-		}
+		})
 	}
 	target.appendChild(button)
 }

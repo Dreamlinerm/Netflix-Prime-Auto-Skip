@@ -144,6 +144,15 @@ watch(
 					<p>{{ $t("backup") }}</p>
 				</RouterLink>
 				<RouterLink
+					to="/options-page/CloudSync"
+					class="menuButton flex"
+					:class="hash.endsWith('CloudSync') ? 'bg-netflix' : 'bg-primary'"
+					draggable="false"
+				>
+					<i-mdi-cloud-sync-outline class="icon" />
+					<p>{{ $t("cloudSyncNav") }}</p>
+				</RouterLink>
+				<RouterLink
 					to="/options-page/Statistics"
 					class="menuButton flex"
 					:class="hash.endsWith('Statistics') ? 'bg-netflix' : 'bg-primary'"

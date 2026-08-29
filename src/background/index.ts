@@ -173,3 +173,55 @@ if (isFirefox && isMobile) {
 		)
 	}
 }
+
+// Cloud sync (Google Drive / Dropbox) - the background script is the one context guaranteed
+// to observe hiddenTitles/hiddenTitlesTombstones changes regardless of which UI made them.
+async function getCloudSyncState(): Promise<{ settings: CloudSyncSettings; local: LocalSyncState }> {
+	const stored = await browser.storage.local.get(["cloudSync", "hiddenTitles", "hiddenTitlesTombstones"])
+	const settings: CloudSyncSettings = { ...defaultCloudSyncSettings, ...((stored.cloudSync as CloudSyncSettings) ?? {}) }
+	const local: LocalSyncState = {
+		items: (stored.hiddenTitles as HiddenTitles) ?? {},
+		tombstones: (stored.hiddenTitlesTombstones as HiddenTitleTombstones) ?? {},
+	}
+	return { settings, local }
+}
+
+async function runCloudSyncNow() {
+	const { settings, local } = await getCloudSyncState()
+	if (settings.provider === "none") return
+	const result = await runCloudSync(settings, local)
+	await browser.storage.local.set({ cloudSync: result.settings })
+	if (result.local) {
+		await browser.storage.local.set({
+			hiddenTitles: result.local.items,
+			hiddenTitlesTombstones: result.local.tombstones,
+		})
+	}
+}
+
+let cloudSyncDebounceTimer: ReturnType<typeof setTimeout> | undefined
+function scheduleCloudSync() {
+	if (cloudSyncDebounceTimer) clearTimeout(cloudSyncDebounceTimer)
+	cloudSyncDebounceTimer = setTimeout(() => {
+		cloudSyncDebounceTimer = undefined
+		runCloudSyncNow().catch((error) => console.error("Cloud sync failed", error))
+	}, 3000)
+}
+
+browser.storage.onChanged.addListener((changes, areaName) => {
+	if (areaName !== "local") return
+	if (changes.hiddenTitles || changes.hiddenTitlesTombstones) scheduleCloudSync()
+})
+
+const CLOUD_SYNC_ALARM = "cloudSyncPull"
+browser.alarms.create(CLOUD_SYNC_ALARM, { periodInMinutes: 15 })
+browser.alarms.onAlarm.addListener((alarm) => {
+	if (alarm.name === CLOUD_SYNC_ALARM) runCloudSyncNow().catch((error) => console.error("Cloud sync failed", error))
+})
+
+browser.runtime.onStartup.addListener(() => {
+	runCloudSyncNow().catch((error) => console.error("Cloud sync failed", error))
+})
+
+// also pull whenever the service worker wakes up for any other reason
+runCloudSyncNow().catch((error) => console.error("Cloud sync failed", error))
