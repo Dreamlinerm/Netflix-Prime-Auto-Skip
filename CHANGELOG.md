@@ -2,6 +2,10 @@
 
 # 1.1.106
 
+- added strict_min_version: "142" since firefox requires it for websiteContent permission
+
+# 1.1.106
+
 - Add websiteContent permission to Firefox data_collection_permissions. This is required for the TMDB and MyAnimeList movie-rating APIs.
 - Add Import/Export for hidden titles.
 - Add better translations for Spanish.
