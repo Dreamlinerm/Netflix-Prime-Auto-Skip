@@ -1,3 +1,4 @@
+import { isPlaybackShortcut } from "@/utils/playbackKeyboard"
 import { startSharedFunctions, createSlider, Platforms } from "@/content-script/shared-functions"
 import { sendMessage } from "webext-bridge/content-script"
 // Global Variables
@@ -15,8 +16,8 @@ async function startParamount() {
 	logStartOfAddon()
 	startSharedFunctions(Platforms.Paramount)
 	ParamountObserver.observe(document, config)
-	if (settings.value.Paramount?.speedSlider) Paramount_SpeedKeyboard()
-	if (settings.value.Video?.doubleClick) Paramount_doubleClick()
+	Paramount_SpeedKeyboard()
+	watch(() => settings.value.Video.doubleClick, Paramount_doubleClick, { immediate: true })
 }
 type StatisticsKey =
 	| "AmazonAdTimeSkipped"
@@ -26,7 +27,7 @@ type StatisticsKey =
 	| "RecapTimeSkipped"
 	| "SegmentsSkipped"
 async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
-	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+	if (endTime > startTime) {
 		console.log(key, endTime - startTime)
 		settings.value.Statistics[key] += endTime - startTime
 		sendMessage("increaseBadge", {}, "background")
@@ -59,9 +60,9 @@ function resetLastIntroTime() {
 }
 function Paramount_Intro(video: HTMLVideoElement, time: number) {
 	const button = document.querySelector("button.skip-button") as HTMLElement
-	if (button && button.getAttribute("disabled") !== "") {
+	if (button && !button.hasAttribute("disabled")) {
 		const timeCheck = Math.floor(video?.currentTime ?? 0)
-		if (typeof timeCheck === "number" && lastIntroTime != timeCheck) {
+		if (Number.isFinite(timeCheck) && lastIntroTime != timeCheck) {
 			lastIntroTime = timeCheck
 			resetLastIntroTime()
 			button.click()
@@ -123,10 +124,6 @@ async function Paramount_SpeedSlider(video: HTMLVideoElement) {
 				speed.onclick = function () {
 					alreadySlider.style.display = alreadySlider.style.display === "block" ? "none" : "block"
 				}
-				watch(videoSpeed, (newValue) => {
-					speed.textContent = newValue.toFixed(1) + "x"
-					alreadySlider.value = (newValue * 10).toString()
-				})
 			}
 			if (video.playbackRate != Number.parseFloat(alreadySlider.value) / 10) {
 				video.playbackRate = Number.parseFloat(alreadySlider.value) / 10
@@ -139,14 +136,15 @@ async function Paramount_SpeedSlider(video: HTMLVideoElement) {
 	}
 }
 async function Paramount_SpeedKeyboard() {
-	const steps = settings.value.General.sliderSteps / 10
 	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		if (!settings.value.Paramount.speedSlider || !isPlaybackShortcut(event)) return
+		const steps = settings.value.General.sliderSteps / 10
 		const video = document.querySelector("video") as HTMLVideoElement
 		if (!video) return
 		if (event.key === "d") {
 			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
 			videoSpeed.value = video.playbackRate
-		} else if (event.key === "s") {
+		} else {
 			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
 			videoSpeed.value = video.playbackRate
 		}

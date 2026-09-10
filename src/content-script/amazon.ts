@@ -1,3 +1,4 @@
+import { isPlaybackShortcut } from "@/utils/playbackKeyboard"
 import { sendMessage } from "webext-bridge/content-script"
 import {
 	startSharedFunctions,
@@ -32,7 +33,7 @@ type StatisticsKey =
 	| "RecapTimeSkipped"
 	| "SegmentsSkipped"
 async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
-	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+	if (endTime > startTime) {
 		console.log(key, endTime - startTime)
 		settings.value.Statistics[key] += endTime - startTime
 		sendMessage("increaseBadge", {}, "background")
@@ -47,18 +48,40 @@ if (isPrimeVideo) {
 async function startAmazon() {
 	await promise
 	logStartOfAddon()
-	if (settings.value?.Video?.doubleClick) Amazon_doubleClick()
-	if (settings.value.Amazon?.speedSlider) Amazon_SpeedKeyboard()
+	watch(() => settings.value.Video.doubleClick, Amazon_doubleClick, { immediate: true })
+	Amazon_SpeedKeyboard()
 	AmazonObserver.observe(document, config)
-	if (settings.value.Amazon?.selfAd) Amazon_selfAdTimeout()
-	if (settings.value.Amazon?.skipAd) {
-		// timeout of 100 ms because the ad is not loaded fast enough and the video will crash
-		setTimeout(function () {
-			Amazon_FreeveeTimeout()
-		}, 1000)
-	}
+	watch(
+		() => settings.value.Amazon.skipAd,
+		(enabled, _previous, onCleanup) => {
+			if (!enabled) return
+			let stop = () => {}
+			const delay = setTimeout(() => {
+				stop = Amazon_FreeveeTimeout()
+			}, 1000)
+			onCleanup(() => {
+				clearTimeout(delay)
+				stop()
+				lastAdTimeText = 0
+			})
+		},
+		{ immediate: true },
+	)
+	watch(
+		() => settings.value.Amazon.selfAd,
+		(enabled, _previous, onCleanup) => {
+			if (enabled) onCleanup(Amazon_selfAdTimeout())
+		},
+		{ immediate: true },
+	)
 	if (settings.value.Video?.userAgent && isMobile) Amazon_customizeMobileView()
-	if (settings.value.Amazon?.improveUI) Amazon_improveUI()
+	watch(
+		() => settings.value.Amazon.improveUI,
+		(enabled, _previous, onCleanup) => {
+			if (enabled) onCleanup(Amazon_improveUI())
+		},
+		{ immediate: true },
+	)
 }
 
 // #region Amazon
@@ -78,12 +101,14 @@ function Amazon() {
 }
 
 async function Amazon_scrollVolume() {
-	const volumeControl = document.querySelector('[aria-label="Volume"]:not(.enhanced)') as HTMLElement
+	const volumeControl = document.querySelector(
+		'[class*=volume]:is(button, div, input):not(.enhanced), [aria-label="Volume"]:not(.enhanced), [aria-label="Lautstärke"]:not(.enhanced), [aria-label="Volumen"]:not(.enhanced)',
+	) as HTMLElement
 	if (volumeControl) {
 		volumeControl.classList.add("enhanced")
 		volumeControl?.addEventListener("wheel", (event: WheelEvent) => {
 			const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
-			if (!video) return
+			if (!video || !settings.value.Video.scrollVolume) return
 			let volume = video.volume
 			if (event.deltaY < 0) volume = Math.min(1, volume + 0.1)
 			else volume = Math.max(0, volume - 0.1)
@@ -99,6 +124,7 @@ function resetLastIntroTime() {
 }
 
 function Amazon_Intro(video: HTMLVideoElement) {
+	if (!video) return
 	if (
 		!reverseButtonClicked &&
 		lastIntroTime === -1 &&
@@ -110,7 +136,7 @@ function Amazon_Intro(video: HTMLVideoElement) {
 		// Fallback match with textContent for other languages
 		if (!button) {
 			button = Array.from(document.querySelectorAll("button")).find((button) => {
-				const buttonText = button.textContent?.replace(/\s+/g, " ").trim().toLowerCase() ?? ""
+				const buttonText = button.textContent!.replace(/\s+/g, " ").trim().toLowerCase()
 				// langs covered by catchall intro:
 				// buttonText === "skip intro" || // english
 				// buttonText === "passer l'intro" || // français
@@ -133,13 +159,14 @@ function Amazon_Intro(video: HTMLVideoElement) {
 		}
 
 		if (button?.checkVisibility() && !document.querySelector("[class*=nextupcard-button]")) {
-			const time = Math.floor(video?.currentTime ?? 0)
+			const time = Math.floor(video.currentTime)
 			lastIntroTime = time
 			resetLastIntroTime()
 			button.click()
 			console.log("Intro skipped", button)
 			//delay where the video is loaded
 			setTimeout(function () {
+				if (!video.isConnected || !settings.value.Amazon.skipIntro) return
 				AmazonGobackbutton(video, button?.parentElement?.parentElement?.parentElement, time, video.currentTime)
 				addSkippedTime(time, video.currentTime, "IntroTimeSkipped")
 			}, 50)
@@ -194,7 +221,7 @@ async function Amazon_Credits() {
 			!/(?<!\S)1(?!\S)/.exec(newEpNumber.textContent) &&
 			lastAdTimeText != newEpNumber.textContent
 		) {
-			lastAdTimeText = newEpNumber.textContent ?? ""
+			lastAdTimeText = newEpNumber.textContent!
 			resetLastATimeText()
 			button.click()
 			settings.value.Statistics.SegmentsSkipped++
@@ -234,10 +261,6 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 				speed.onclick = function () {
 					alreadySlider.style.display = alreadySlider.style.display === "block" ? "none" : "block"
 				}
-				watch(videoSpeed, (newValue) => {
-					speed.textContent = newValue.toFixed(1) + "x"
-					alreadySlider.value = (newValue * 10).toString()
-				})
 			}
 			if (video.playbackRate != parseFloat(alreadySlider.value) / 10) {
 				video.playbackRate = parseFloat(alreadySlider.value) / 10
@@ -250,31 +273,43 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 	}
 }
 async function Amazon_SpeedKeyboard() {
-	const steps = settings.value.General.sliderSteps / 10
-	document.addEventListener("keydown", (event: KeyboardEvent) => {
-		const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
-		if (!video) return
-		if (event.key === "d") {
-			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
-			videoSpeed.value = video.playbackRate
-		} else if (event.key === "s") {
-			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
-			videoSpeed.value = video.playbackRate
-		}
-	})
+	document.addEventListener(
+		"keydown",
+		(event: KeyboardEvent) => {
+			if (!settings.value.Amazon.speedSlider || !isPlaybackShortcut(event)) return
+			const steps = settings.value.General.sliderSteps / 10
+			const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
+			if (!video) return
+			// Prime also uses S for subtitles. Consume handled keys before its player listeners.
+			event.preventDefault()
+			event.stopPropagation()
+			if (event.key === "d") {
+				video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
+				videoSpeed.value = video.playbackRate
+			} else {
+				video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
+				videoSpeed.value = video.playbackRate
+			}
+		},
+		true,
+	)
 }
 
 const AMAZON_ALLOWED_FILTER_PATHS = /(storefront|genre|movie|amazon-video|\/tv|\/addons)/i
 export function shouldRunAmazonPaidFilter(url: string) {
-	return AMAZON_ALLOWED_FILTER_PATHS.test(url)
+	try {
+		return AMAZON_ALLOWED_FILTER_PATHS.test(new URL(url).pathname)
+	} catch {
+		return false
+	}
 }
 
 export function isStoreIconTitle(title: string | null | undefined) {
 	return /store/i.test(title ?? "")
 }
 
-export function shouldRemoveWholePaidSection(visibleCardsCount: number, paidCardsCount: number, bannerOffset = 2) {
-	// bannerOffset = 2 because sometimes there are title banners, wich are not paid content.
+export function shouldRemoveWholePaidSection(visibleCardsCount: number, paidCardsCount: number, bannerOffset = 0) {
+	// bannerOffset = 0 because sometimes there are title banners, wich are not paid content.
 	if (visibleCardsCount <= 0 || paidCardsCount <= 0) return false
 	return visibleCardsCount - bannerOffset <= paidCardsCount
 }
@@ -333,17 +368,13 @@ async function deletePaidCategory(a: HTMLElement) {
 function Amazon_FreeveeTimeout() {
 	// set loop every 1 sec and check if ad is there
 	const AdInterval = setInterval(function () {
-		if (!settings.value.Amazon.skipAd) {
-			console.log("stopped observing| FreeVee Ad")
-			clearInterval(AdInterval)
-			return
-		}
 		const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
 		if (video && !video.paused && video.currentTime > 0) {
 			// && !video.paused
 			skipAd(video)
 		}
 	}, 100)
+	return () => clearInterval(AdInterval)
 }
 async function skipAd(video: HTMLVideoElement) {
 	// Series grimm
@@ -374,41 +405,37 @@ async function resetLastATimeText(time = 1000) {
 		lastAdTimeText = 0
 	}, time)
 }
-async function Amazon_selfAdTimeout() {
-	// set loop every 1 sec and check if ad is there
-	const AdInterval = setInterval(function () {
-		if (!settings.value.Amazon.selfAd) {
-			console.log("stopped observing| Self Ad")
-			clearInterval(AdInterval)
+function Amazon_selfAdTimeout() {
+	const pending = new Set<ReturnType<typeof setTimeout>>()
+	let handled: HTMLElement | null = null
+	const inspect = () => {
+		const video = document.querySelector<HTMLVideoElement>(AmazonVideoClass)
+		const player = document.querySelector<HTMLElement>("#dv-web-player")
+		const button = player?.querySelector<HTMLElement>(".fu4rd6c.f1cw2swo")
+		if (!button || !button.checkVisibility() || !player || getComputedStyle(player).display === "none") {
+			handled = null
 			return
 		}
-		const video = document.querySelector(AmazonVideoClass) as HTMLVideoElement
-		if (video) {
-			video.onplay = function () {
-				// if video is playing
-				const dvWebPlayer = document.querySelector("#dv-web-player")
-				if (dvWebPlayer && getComputedStyle(dvWebPlayer).display != "none") {
-					const button = document.querySelector(".fu4rd6c.f1cw2swo") as HTMLElement
-					if (button) {
-						// only getting the time after :08
-						const adTime = parseInt(
-							/:\d+/
-								.exec(document.querySelector(".atvwebplayersdk-adtimeindicator-text")?.innerHTML ?? "")?.[0]
-								?.substring(1) ?? "",
-						)
-						// wait for 100ms before skipping to make sure the button is not pressed too fast, or there will be infinite loading
-						setTimeout(() => {
-							button.click()
-							if (typeof adTime === "number") settings.value.Statistics.AmazonAdTimeSkipped += adTime
-							settings.value.Statistics.SegmentsSkipped++
-							sendMessage("increaseBadge", {}, "background")
-							console.log("Self Ad skipped, length:", adTime, button)
-						}, 150)
-					}
-				}
-			}
-		}
-	}, 100)
+		if (!settings.value.Amazon.selfAd || !video || video.paused || handled === button) return
+		handled = button
+		const adTime = parseAdTime(player.querySelector(".atvwebplayersdk-adtimeindicator-text")?.textContent ?? null)
+		const timer = setTimeout(() => {
+			pending.delete(timer)
+			if (!settings.value.Amazon.selfAd || !button.isConnected || !video.isConnected) return
+			button.click()
+			if (typeof adTime === "number") settings.value.Statistics.AmazonAdTimeSkipped += adTime
+			settings.value.Statistics.SegmentsSkipped++
+			sendMessage("increaseBadge", {}, "background")
+		}, 150)
+		pending.add(timer)
+	}
+	const interval = setInterval(inspect, 100)
+	document.addEventListener("play", inspect, true)
+	return () => {
+		clearInterval(interval)
+		for (const timer of pending) clearTimeout(timer)
+		document.removeEventListener("play", inspect, true)
+	}
 }
 
 async function Amazon_customizeMobileView() {
@@ -462,8 +489,12 @@ async function Amazon_doubleClick() {
 		document.ondblclick = null
 	}
 }
-let timer: NodeJS.Timeout
-async function Amazon_improveUI() {
+function Amazon_improveUI() {
+	let timer: ReturnType<typeof setTimeout>
+	const originalPointerEvents = document.body.style.pointerEvents
+	const restore = () => {
+		document.body.style.pointerEvents = originalPointerEvents
+	}
 	const style = document.createElement("style")
 
 	// button opacity
@@ -485,15 +516,24 @@ async function Amazon_improveUI() {
 	`
 	document.head.appendChild(style)
 
-	// no more hover animation on scroll, because it is annoying.
-	document.addEventListener("scroll", () => {
+	// Always restore controls, even on browsers that never emit scrollend.
+	const onScroll = () => {
 		document.body.style.pointerEvents = "none"
-	})
-	document.addEventListener("scrollend", () => {
 		clearTimeout(timer)
-		timer = setTimeout(() => {
-			document.body.style.pointerEvents = "auto"
-		}, 400)
-	})
+		timer = setTimeout(restore, 400)
+	}
+	const onScrollEnd = () => {
+		clearTimeout(timer)
+		timer = setTimeout(restore, 400)
+	}
+	document.addEventListener("scroll", onScroll)
+	document.addEventListener("scrollend", onScrollEnd)
+	return () => {
+		clearTimeout(timer)
+		restore()
+		document.removeEventListener("scroll", onScroll)
+		document.removeEventListener("scrollend", onScrollEnd)
+		style.remove()
+	}
 }
 // #endregion

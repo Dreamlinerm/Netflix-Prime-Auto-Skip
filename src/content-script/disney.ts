@@ -1,3 +1,4 @@
+import { isPlaybackShortcut } from "@/utils/playbackKeyboard"
 import { sendMessage } from "webext-bridge/content-script"
 import {
 	startSharedFunctions,
@@ -48,7 +49,7 @@ async function startDisney() {
 	await promise
 	logStartOfAddon()
 	if (isHotstar) Hotstar_doubleClick()
-	if (settings.value.Disney?.speedSlider) Disney_SpeedKeyboard()
+	Disney_SpeedKeyboard()
 	DisneyObserver.observe(document, config)
 	setInterval(function () {
 		const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
@@ -70,7 +71,7 @@ function Disney() {
 	if (isDisney) {
 		Disney_addHomeButton()
 	}
-	if (settings.value.Video?.scrollVolume) Disney_scrollVolume(video)
+	if (settings.value.Video?.scrollVolume) Disney_scrollVolume()
 }
 async function Disney_skipAd(video: HTMLVideoElement) {
 	if (video && !video.paused) {
@@ -99,11 +100,13 @@ async function Disney_skipAd(video: HTMLVideoElement) {
 		}
 	}
 }
-async function Disney_scrollVolume(video: HTMLVideoElement) {
+async function Disney_scrollVolume() {
 	const volumeControl = document.querySelector("div.audio-control:not(.enhanced)") as HTMLElement
 	if (volumeControl) {
 		volumeControl.classList.add("enhanced")
 		volumeControl.addEventListener("wheel", (event: WheelEvent) => {
+			const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility())
+			if (!video || !settings.value.Video.scrollVolume) return
 			console.log("wheel")
 			let volume = video.volume
 			if (event.deltaY < 0) volume = Math.min(1, volume + 0.1)
@@ -111,7 +114,7 @@ async function Disney_scrollVolume(video: HTMLVideoElement) {
 			video.volume = volume
 			const sliderContainer = volumeControl.querySelector(".slider-container")
 			const sliderChildren = (sliderContainer?.firstChild as HTMLElement)?.children
-			if (sliderChildren.length > 2) {
+			if (sliderChildren && sliderChildren.length > 2) {
 				const firstChild = sliderChildren[1] as HTMLElement
 				const secondChild = sliderChildren[2] as HTMLElement
 				firstChild.style.strokeDashoffset = 100 - volume * 100 + "px"
@@ -211,7 +214,7 @@ async function Disney_Watch_Credits() {
 	if (button) {
 		// only skip if the next video is the next episode of a series (there is a timer)
 		let time
-		if (isDisney) time = /\d+/.exec(button?.textContent ?? "")?.[0]
+		if (isDisney) time = /\d+/.exec(button.textContent!)?.[0]
 		if (
 			(isHotstar &&
 				!document
@@ -236,7 +239,7 @@ const DisneySliderStyle = "pointer-events: auto;background: rgb(221, 221, 221);d
 const DisneySpeedStyle = "height:20px;color:#f9f9f9;pointer-events: auto;padding: 0 5px;z-index:1000;"
 async function Disney_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
-		document.querySelector("pointer-actions")?.style?.setProperty("z-index", "0")
+		document.querySelector<HTMLElement>("pointer-actions")?.style?.setProperty("z-index", "0")
 		const disneyControls = document.querySelector("main-app-controls-overlay")?.shadowRoot
 		const alreadySlider: HTMLInputElement | null = disneyControls?.querySelector(
 			"#videoSpeedSlider",
@@ -263,10 +266,6 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 					event.stopImmediatePropagation()
 					alreadySlider.style.display = alreadySlider.style.display === "block" ? "none" : "block"
 				}
-				watch(videoSpeed, (newValue) => {
-					speed.textContent = newValue.toFixed(1) + "x"
-					alreadySlider.value = (newValue * 10).toString()
-				})
 			}
 			if (video.playbackRate !== Number.parseFloat(alreadySlider.value) / 10) {
 				video.playbackRate = Number.parseFloat(alreadySlider.value) / 10
@@ -284,14 +283,15 @@ async function Disney_SpeedSlider(video: HTMLVideoElement) {
 	}
 }
 async function Disney_SpeedKeyboard() {
-	const steps = settings.value.General.sliderSteps / 10
 	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		if (!settings.value.Disney.speedSlider || !isPlaybackShortcut(event)) return
+		const steps = settings.value.General.sliderSteps / 10
 		const video = Array.from(document.querySelectorAll("video")).find((v) => v.checkVisibility()) as HTMLVideoElement
 		if (!video) return
 		if (event.key === "d") {
 			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
 			videoSpeed.value = video.playbackRate
-		} else if (event.key === "s") {
+		} else {
 			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
 			videoSpeed.value = video.playbackRate
 		}

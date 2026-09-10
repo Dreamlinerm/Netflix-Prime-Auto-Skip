@@ -2,6 +2,9 @@ import { describe, it, expect } from "vitest"
 import { isStoreIconTitle, shouldRemoveWholePaidSection, shouldRunAmazonPaidFilter } from "../../content-script/amazon"
 
 describe("shouldRunAmazonPaidFilter", () => {
+	it("ignores an invalid URL instead of throwing", () => {
+		expect(shouldRunAmazonPaidFilter("not a URL")).toBe(false)
+	})
 	it("matches storefront and browse urls", () => {
 		expect(shouldRunAmazonPaidFilter("https://www.primevideo.com/storefront/home")).toBe(true)
 		expect(shouldRunAmazonPaidFilter("https://www.primevideo.com/movie/0ABC")).toBe(true)
@@ -25,8 +28,9 @@ describe("isStoreIconTitle", () => {
 })
 
 describe("shouldRemoveWholePaidSection", () => {
-	it("follows current threshold rule", () => {
-		expect(shouldRemoveWholePaidSection(8, 6)).toBe(true)
+	it("removes a whole row only when all non-banner cards are paid", () => {
+		expect(shouldRemoveWholePaidSection(8, 6)).toBe(false)
+		expect(shouldRemoveWholePaidSection(8, 6, 2)).toBe(true)
 		expect(shouldRemoveWholePaidSection(8, 5)).toBe(false)
 		expect(shouldRemoveWholePaidSection(2, 2)).toBe(true)
 		expect(shouldRemoveWholePaidSection(0, 0)).toBe(false)

@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest"
 import { Disney_fixTitle } from "../../content-script/shared-functions"
-import Testitles from "../fixtures/titles.json"
 
 describe("Disney_fixTitle", () => {
 	it("details_plain", () => {

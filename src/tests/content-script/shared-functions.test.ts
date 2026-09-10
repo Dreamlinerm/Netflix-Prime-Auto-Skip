@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest"
+import { ref } from "vue"
 import { parseAdTime, createSlider } from "../../content-script/shared-functions"
 
 describe("parseAdTime", () => {
@@ -23,16 +24,11 @@ describe("parseAdTime", () => {
 	})
 })
 
-// Mock Ref type for createSlider
-class Ref {
-	constructor(public value: number) {}
-}
-
 describe("createSlider", () => {
 	it("should create slider and speed elements", () => {
 		const video = document.createElement("video") as HTMLVideoElement
 		video.playbackRate = 1.0
-		const videoSpeed = new Ref(1.0)
+		const videoSpeed = ref(1.0)
 		const position = document.createElement("div")
 		const sliderStyle = "width: 100px;"
 		const speedStyle = "font-size: 12px;"
