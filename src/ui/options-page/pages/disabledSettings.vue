@@ -34,8 +34,6 @@ function isDisabledSetting(category: StreamingService, setting: string) {
 }
 
 function isSharedSettingDisabled(setting: string) {
-	if (!sharedServiceSettings.has(setting)) return false
-
 	return serviceCategories.some((category) => {
 		const categorySettings = settings.value[category] as Record<string, unknown>
 		const value = categorySettings[setting]
@@ -64,16 +62,16 @@ function setSharedSettingValue(setting: string, value: boolean) {
 function getCategoryTitle(category: StreamingService) {
 	if (category === "Video") return t("sharedSettings")
 	if (category === "Amazon") return "Prime Video"
-	if (category === "Disney") return "Disney+"
-	return category
+
+	return ({ Disney: "Disney+" } as Partial<Record<StreamingService, string>>)[category] || category
 }
 
 function getCategoryTitleClass(category: StreamingService) {
 	if (category === "Amazon") return "text-amazon"
 	if (category === "Netflix") return "text-netflix"
-	if (category === "Disney") return "text-disney"
+
 	if (category === "Crunchyroll") return "text-crunchyroll"
-	return ""
+	return ({ Disney: "text-disney" } as Partial<Record<StreamingService, string>>)[category] || ""
 }
 
 const disabledSettingsByCategory = computed(() => {

@@ -1,6 +1,8 @@
+import { isPlaybackShortcut } from "@/utils/playbackKeyboard"
 import { sendMessage } from "webext-bridge/content-script"
 import {
 	startSharedFunctions,
+	parseAdTime as parseClockTime,
 	createSlider,
 	Platforms,
 	getCurrentEpisodeNumber,
@@ -34,7 +36,7 @@ type StatisticsKey =
 	| "RecapTimeSkipped"
 	| "SegmentsSkipped"
 async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
-	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+	if (endTime > startTime) {
 		console.log(key, endTime - startTime)
 		settings.value.Statistics[key] += endTime - startTime
 		sendMessage("increaseBadge", {}, "background")
@@ -53,8 +55,14 @@ async function startNetflix() {
 	await hiddenTitlesPromise
 	logStartOfAddon()
 	if (settings.value.Netflix?.profile) AutoPickProfile()
-	if (settings.value.Netflix?.skipAd) Netflix_SkipAdInterval()
-	if (settings.value.Netflix?.speedSlider) Netflix_SpeedKeyboard()
+	watch(
+		() => settings.value.Netflix.skipAd,
+		(enabled, _previous, onCleanup) => {
+			if (enabled) onCleanup(Netflix_SkipAdInterval())
+		},
+		{ immediate: true },
+	)
+	Netflix_SpeedKeyboard()
 	NetflixObserver.observe(document, config)
 }
 
@@ -95,7 +103,7 @@ function Netflix() {
 	if (NSettings?.watchCredits) Netflix_General('[data-uia="watch-credits-seamless-button"]', "Credits watched")
 	if (NSettings?.skipBlocked) Netflix_General('[data-uia="interrupt-autoplay-continue"]', "Blocked skipped")
 	if (NSettings?.speedSlider && video) Netflix_SpeedSlider(video)
-	if (settings.value.Video?.scrollVolume && video) Netflix_scrollVolume(video)
+	if (settings.value.Video?.scrollVolume && video) Netflix_scrollVolume()
 	if (NSettings?.removeGames) Netflix_removeGames()
 	if (NSettings?.hideTitles) addHideTitleButton()
 }
@@ -107,20 +115,21 @@ function getTitle() {
 	if (!container) return ""
 
 	return Array.from(container.querySelectorAll("span"))
-		.map((s) => (s.textContent ?? "").trim())
+		.map((s) => s.textContent!.trim())
 		.join(" ")
 }
-async function Netflix_scrollVolume(video: HTMLVideoElement) {
+async function Netflix_scrollVolume() {
 	const volumeControl = document.querySelector('[data-uia*="control-volume"] div:not(.enhanced)') as HTMLElement
 	if (volumeControl) {
 		volumeControl.classList.add("enhanced")
 		const handleVolumeControl = (event: WheelEvent) => {
+			const video = document.querySelector("video")
+			if (!video || !settings.value.Video.scrollVolume) return
 			let volume = video.volume
 			if (event.deltaY < 0) volume = Math.min(1, volume + 0.1)
 			else volume = Math.max(0, volume - 0.1)
 			video.volume = volume
 		}
-		volumeControl?.removeEventListener("wheel", handleVolumeControl)
 		volumeControl?.addEventListener("wheel", handleVolumeControl)
 	}
 }
@@ -174,54 +183,40 @@ function Netflix_General(selector: string, name: string, incBadge = true) {
 	return false
 }
 
-function parseAdTime(adTimeText: string | null | undefined) {
-	if (!adTimeText) return 0
-	let adTime: number
-	if (adTimeText.includes(":")) {
-		adTime =
-			Number.parseInt(/:\d+/.exec(adTimeText ?? "")?.[0].substring(1) ?? "") +
-			Number.parseInt(/\d+/.exec(adTimeText ?? "")?.[0] ?? "") * 60
-	} else adTime = Number.parseInt(adTimeText)
-	if (Number.isNaN(adTime)) return 0
-	return adTime
+function parseAdTime(text: string | null | undefined) {
+	if (!text) return 0
+	if (text.includes(":")) return parseClockTime(text) || 0
+	const seconds = Number(text.trim())
+	return Number.isSafeInteger(seconds) && seconds >= 0 ? seconds : 0
 }
 
 function Netflix_SkipAdInterval() {
+	let original: { video: HTMLVideoElement; muted: boolean; rate: number; opacity: string } | null = null
+	const pending = new Set<ReturnType<typeof setTimeout>>()
+	const restore = () => {
+		if (!original) return
+		original.video.muted = original.muted
+		original.video.playbackRate = original.rate
+		original.video.style.opacity = original.opacity
+		original = null
+	}
 	const AdInterval = setInterval(() => {
-		if (!settings.value.Netflix?.skipAd) {
-			console.log("stopped observing| Ad")
-			clearInterval(AdInterval)
-			return
-		}
 		const video = document.querySelector("video")
-		// .default-ltr-cache-mmvz9h or ltr-mmvz9h
 		const adLength = parseAdTime(document.querySelector('span[class*="mmvz9h"]')?.textContent)
-		// 16 max but too fast
-		if (video && (adLength || lastAdTimeText)) {
-			let playBackRate = 8
-			if (isEdge) playBackRate = 3
-			if ((adLength || lastAdTimeText) && video.paused) {
-				video.play()
-			}
-			if (adLength > 2 && video.playbackRate != playBackRate) {
-				console.log("Ad skipped, length:", adLength, "s")
+		if (original && original.video !== video) restore()
+		if (video && adLength > 2) {
+			if (!original) {
+				original = { video, muted: video.muted, rate: video.playbackRate, opacity: video.style.opacity }
 				settings.value.Statistics.NetflixAdTimeSkipped += adLength
 				settings.value.Statistics.SegmentsSkipped++
 				sendMessage("increaseBadge", {}, "background")
-				if (settings.value.Video.epilepsy) video.style.opacity = "0"
-				video.muted = true
-				video.playbackRate = playBackRate
-				lastAdTimeText = adLength
 			}
-			// added lastAdTimeText because other speedsliders are not working anymore
-			else if (adLength <= 2 || (!adLength && lastAdTimeText)) {
-				// videospeed is speedSlider value
-				video.muted = false
-				video.playbackRate = videoSpeed.value
-				lastAdTimeText = 0
-				if (settings.value.Video.epilepsy) video.style.opacity = "1"
-			}
-		}
+			if (video.paused) void video.play().catch((error) => console.warn("Could not resume ad playback", error))
+			if (settings.value.Video.epilepsy) video.style.opacity = "0"
+			video.muted = true
+			video.playbackRate = isEdge ? 3 : 8
+		} else restore()
+
 		// pause video shows ad
 		// sherlock show comes alot.
 		const div = document.querySelector('div[data-uia="pause-ad-title-display"]')
@@ -237,13 +232,20 @@ function Netflix_SkipAdInterval() {
 			console.log("Remove Video Paused ad", button)
 			settings.value.Statistics.SegmentsSkipped++
 			sendMessage("increaseBadge", {}, "background")
-			setTimeout(() => {
+			const timer = setTimeout(() => {
+				pending.delete(timer)
 				// not always a video is showing on next episode apparently
 				const v = video || document.querySelector("video")
 				v?.pause()
 			}, 100)
+			pending.add(timer)
 		}
 	}, 100)
+	return () => {
+		clearInterval(AdInterval)
+		for (const timer of pending) clearTimeout(timer)
+		restore()
+	}
 }
 const NetflixSliderStyle = "display: none;width:200px;"
 const NetflixSpeedStyle = "font-size: 3em;padding: 0 5px;margin: unset;align-content: center;"
@@ -261,14 +263,15 @@ function Netflix_SpeedSlider(video: HTMLVideoElement) {
 	}
 }
 async function Netflix_SpeedKeyboard() {
-	const steps = settings.value.General.sliderSteps / 10
 	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		if (!settings.value.Netflix.speedSlider || !isPlaybackShortcut(event)) return
+		const steps = settings.value.General.sliderSteps / 10
 		const video = document.querySelector("video") as HTMLVideoElement
 		if (!video) return
 		if (event.key === "d") {
 			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
 			videoSpeed.value = video.playbackRate
-		} else if (event.key === "s") {
+		} else {
 			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
 			videoSpeed.value = video.playbackRate
 		}

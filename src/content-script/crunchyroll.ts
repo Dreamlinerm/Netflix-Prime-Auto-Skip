@@ -1,3 +1,4 @@
+import { isPlaybackShortcut } from "@/utils/playbackKeyboard"
 import { sendMessage } from "webext-bridge/content-script"
 import {
 	startSharedFunctions,
@@ -29,7 +30,7 @@ type StatisticsKey =
 	| "RecapTimeSkipped"
 	| "SegmentsSkipped"
 async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
-	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+	if (endTime > startTime) {
 		console.log(key, endTime - startTime)
 		settings.value.Statistics[key] += endTime - startTime
 		sendMessage("increaseBadge", {}, "background")
@@ -51,9 +52,9 @@ async function startCrunchyroll() {
 			clearInterval(pickInterval)
 		}, 2000)
 	}
-	if (settings.value.Video.playOnFullScreen) startPlayOnFullScreen()
+	watch(() => settings.value.Video.playOnFullScreen, startPlayOnFullScreen, { immediate: true })
 	if (settings.value.Video.doubleClick) startdoubleClick()
-	if (settings.value.Crunchyroll.speedSlider) Crunchyroll_SpeedKeyboard()
+	Crunchyroll_SpeedKeyboard()
 	CrunchyrollObserver.observe(document, config)
 	getMALCache()
 }
@@ -254,7 +255,7 @@ async function Crunchyroll() {
 	const time = video?.currentTime
 	Crunchyroll_Intro_Outro(video, time)
 	if (settings.value.Crunchyroll?.speedSlider) Crunchyroll_SpeedSlider(video)
-	if (settings.value.Video?.scrollVolume) Crunchyroll_scrollVolume(video)
+	if (settings.value.Video?.scrollVolume) Crunchyroll_scrollVolume()
 }
 async function Crunchyroll_profile() {
 	// save profile
@@ -287,7 +288,7 @@ async function Crunchyroll_bigPlayerStyle() {
 	// keep the header above the player in normal flow (not sticky/overlayed)
 	const style = document.createElement("style")
 	style.id = styleId
-	let styles = /*css*/ `
+	const styles = /*css*/ `
       .video-player-wrapper{
 					max-height: calc(100vw / 1.7777);
           height: 100vh;
@@ -319,13 +320,15 @@ async function Crunchyroll_bigPlayerStyle() {
 	document.head.appendChild(style)
 }
 
-async function Crunchyroll_scrollVolume(video: HTMLVideoElement) {
+async function Crunchyroll_scrollVolume() {
 	const volumeControl = document.querySelector(
 		'[data-testid="bottom-left-controls-stack"]:not(.enhanced) [data-testid="volume-slider-container"]',
 	) as HTMLElement
 	if (volumeControl) {
 		volumeControl?.parentElement?.classList.add("enhanced")
 		volumeControl.addEventListener("wheel", (event: WheelEvent) => {
+			const video = document.querySelector("video")
+			if (!video || !settings.value.Video.scrollVolume) return
 			event.preventDefault()
 			let volume = video.volume
 			if (event.deltaY < 0) volume = Math.min(1, volume + 0.1)
@@ -456,29 +459,28 @@ const videoSpeed: Ref<number> = ref(1)
 const CrunchyrollSliderStyle = "display: none;margin: auto;width:200px;"
 const CrunchyrollSpeedStyle = "color: white;margin: auto;padding: 0 5px;width: 40px;"
 async function Crunchyroll_SpeedSlider(video: HTMLVideoElement) {
-	if (video) {
-		const alreadySlider = document.querySelector("#videoSpeedSlider")
-		if (!alreadySlider) {
-			const position = document.querySelector('[data-testid="bottom-right-controls-stack"]') as HTMLElement
-			if (position) {
-				createSlider(video, videoSpeed, position, CrunchyrollSliderStyle, CrunchyrollSpeedStyle)
-				document.querySelector('button[data-testid="playback-speed-button"]')?.remove()
-			}
-		} else {
-			video.playbackRate = videoSpeed.value
+	const alreadySlider = document.querySelector("#videoSpeedSlider")
+	if (!alreadySlider) {
+		const position = document.querySelector('[data-testid="bottom-right-controls-stack"]') as HTMLElement
+		if (position) {
+			createSlider(video, videoSpeed, position, CrunchyrollSliderStyle, CrunchyrollSpeedStyle)
+			document.querySelector('button[data-testid="playback-speed-button"]')?.remove()
 		}
+	} else {
+		video.playbackRate = videoSpeed.value
 	}
 }
 
 async function Crunchyroll_SpeedKeyboard() {
-	const steps = settings.value.General.sliderSteps / 10
 	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		if (!settings.value.Crunchyroll.speedSlider || !isPlaybackShortcut(event)) return
+		const steps = settings.value.General.sliderSteps / 10
 		const video = document.querySelector("video") as HTMLVideoElement
 		if (!video) return
 		if (event.key === "d") {
 			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
 			videoSpeed.value = video.playbackRate
-		} else if (event.key === "s") {
+		} else {
 			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
 			videoSpeed.value = video.playbackRate
 		}
@@ -501,9 +503,8 @@ function setReleaseRemoved(element: HTMLElement) {
 function showAllElements() {
 	const list = document.querySelectorAll("li article.release.js-release")
 	list.forEach((element) => {
-		if (!element.parentElement) return
-		element.parentElement.classList.remove("removed")
-		element.parentElement.style.display = "block"
+		element.parentElement!.classList.remove("removed")
+		element.parentElement!.style.display = "block"
 	})
 }
 
@@ -563,9 +564,8 @@ function filterFunctions() {
 	const showsByTitle = new Map<string, Array<show>>()
 	const list = document.querySelectorAll("li article.release.js-release")
 	list.forEach((element, index) => {
-		if (!element.parentElement) return
 		if (!element?.checkVisibility()) {
-			element.parentElement.classList.add("removed")
+			element.parentElement!.classList.add("removed")
 			return
 		}
 		const titleElement = element?.querySelector("cite[itemprop='name']")
@@ -577,9 +577,9 @@ function filterFunctions() {
 			element.querySelector("a.available-episode-link")?.textContent?.match(getEpisodeRegex)?.[1] ?? "-1",
 		)
 		if (titleContainsDub(title) && !titleContainsAllowedDub(title)) {
-			setReleaseRemoved(element.parentElement)
+			setReleaseRemoved(element.parentElement!)
 		} else if (settings.value.Crunchyroll.filterQueued && queuedFlag && !premiereFlag) {
-			setReleaseRemoved(element.parentElement)
+			setReleaseRemoved(element.parentElement!)
 		} else if (settings.value.Crunchyroll.filterDuplicates) {
 			if (showsByTitle.has(title)) {
 				showsByTitle.get(title)?.push({ index, episode: episodeNumber })
@@ -598,7 +598,7 @@ function filterFunctions() {
 			})
 			shows.slice(1).forEach((show) => {
 				const element = list[show.index]
-				if (element.parentElement) setReleaseRemoved(element.parentElement)
+				setReleaseRemoved(element.parentElement!)
 			})
 		}
 	})
@@ -737,7 +737,7 @@ function addShowsToList(position: HTMLElement, list: CrunchyList) {
 function clickOnCurrentDay() {
 	const days = document.querySelectorAll(".specific-date [datetime]")
 	for (const day of days) {
-		const dateOnPage = new Date(day?.getAttribute("datetime") ?? "")
+		const dateOnPage = new Date(day.getAttribute("datetime")!)
 		// if the day of the week is the same as today click on it, like if its Monday click on Monday
 		if (date.getDay() == dateOnPage.getDay()) {
 			day.closest("li.day")?.classList.add("active")

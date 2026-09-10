@@ -1,29 +1,18 @@
 import { watch } from "vue"
 import { useBrowserLocalStorage } from "./useBrowserStorage"
-import { i18n } from "@/utils/i18n" // Adjust the import path according to your project structure
+import { i18n } from "@/utils/i18n"
 
 export function useLocale() {
-	let defaultLocale = "en"
-	const localeKey = "user-locale"
-	browser.storage.local.get(localeKey).then(async (result) => {
-		if (result?.[localeKey] == undefined) {
-			// browser lang
-			const lang = navigator.language.split("-")[0]
-			defaultLocale = i18n?.global?.availableLocales?.includes(lang) ? lang : defaultLocale
-			i18n.global.locale.value = defaultLocale
-		}
-	})
-
-	// Use the useBrowserLocalStorage composable to persist the locale
-	const { data: currentLocale } = useBrowserLocalStorage<string>(localeKey, defaultLocale, false)
-
-	// Initialize the locale from i18n
-	// currentLocale.value = i18n.global.locale.value
-
-	// Watch for changes in the locale and update i18n
-	watch(currentLocale, (newLocale) => {
-		i18n.global.locale.value = newLocale
-	})
-
+	const language = navigator.language.split("-")[0]
+	const supported = (locale: string) => i18n.global.availableLocales.includes(locale)
+	const defaultLocale = supported(language) ? language : "en"
+	const { data: currentLocale } = useBrowserLocalStorage<string>("user-locale", defaultLocale, false)
+	watch(
+		currentLocale,
+		(locale) => {
+			i18n.global.locale.value = supported(locale) ? locale : defaultLocale
+		},
+		{ immediate: true },
+	)
 	return currentLocale
 }

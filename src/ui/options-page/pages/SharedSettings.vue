@@ -1,16 +1,15 @@
 <script setup lang="ts">
+import { defaultSettings } from "@/stores/storeTypes"
 import { streamingServices } from "@/constants/streamingServices"
 
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
 
 const speedSlider = computed({
-	get: () => streamingServices.every((service) => settings.value[service]?.speedSlider ?? true),
+	get: () => streamingServices.every((service) => settings.value[service].speedSlider),
 	set: (value) => {
 		streamingServices.forEach((service) => {
-			if (settings.value[service]?.speedSlider !== undefined) {
-				settings.value[service].speedSlider = value
-			}
+			settings.value[service].speedSlider = value
 		})
 	},
 })
@@ -87,7 +86,7 @@ const isMobile = /mobile|streamingEnhanced/i.test(navigator.userAgent)
 					<td>
 						<button
 							class="btn btn-error"
-							@click="settings.General.RatingThresholds[index] = defaultSettings.General.RatingThresholds[index]"
+							@click="settings.General.RatingThresholds[index] = { ...defaultSettings.General.RatingThresholds[index] }"
 						>
 							{{ $t("reset") }}
 						</button>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-const optionalPermissions: string[] = ["tabs"]
-const unsetPermissions: Ref<string[]> = ref([])
+const optionalPermissions: Array<"tabs"> = ["tabs"]
+const unsetPermissions: Ref<Array<"tabs">> = ref([])
 checkOptionalPermissions()
 async function checkOptionalPermissions() {
 	for (const permission of optionalPermissions) {

@@ -27,7 +27,10 @@
 		"hours": "git hours -since 2018-02-01 -before today -author marvinkrebber@yahoo.de > authorHours.json && tsx scripts/hourstxtToJSON.ts",
 		"copyDocsFtoC": "tsx scripts/copyDocsFtoC.ts",
 		"tstv": "cd android-app/content-script && tsc amazon.ts --outDir ../app/src/main/assets && tsc disney.ts --outDir ../app/src/main/assets && tsc shared-functions.ts --outDir ../app/src/main/assets",
-		"connectTv": "adb connect 192.168.178.29"
+		"connectTv": "adb connect 192.168.178.29",
+		"test:audit": "vitest run",
+		"test:bugs": "cross-env REGRESSION_MODE=strict vitest run -t BUG",
+		"typecheck:audit": "vue-tsc --noEmit -p tsconfig.audit.json"
 	},
 	"dependencies": {
 		"@ckpack/vue-color": "^1.6.0",
@@ -47,12 +50,13 @@
 		"@iconify-json/ph": "^1.2.2",
 		"@intlify/unplugin-vue-i18n": "^11.2.4",
 		"@parvineyvazov/json-translator": "^4.1.0",
+		"@types/archiver": "^8.0.0",
 		"@types/eslint": "^9.6.1",
 		"@types/node": "^26.2.0",
 		"@types/webextension-polyfill": "^0.12.5",
 		"@vitejs/plugin-vue": "^6.0.8",
-		"@vitest/coverage-v8": "4.1.10",
-		"@vitest/ui": "^4.1.10",
+		"@vitest/coverage-v8": "4.1.11",
+		"@vitest/ui": "4.1.11",
 		"@vue/compiler-sfc": "^3.5.41",
 		"@vueuse/core": "^14.4.0",
 		"archiver": "^8.0.0",
@@ -79,7 +83,7 @@
 		"vite-plugin-html": "^3.2.2",
 		"vite-plugin-vue-devtools": "^8.2.1",
 		"vite-plugin-zip-pack": "^1.2.4",
-		"vitest": "^4.1.10",
+		"vitest": "4.1.11",
 		"vue-tsc": "^3.3.9",
 		"web-ext": "^10.6.0",
 		"webext-bridge": "^6.0.1"

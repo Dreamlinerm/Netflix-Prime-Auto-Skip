@@ -28,6 +28,8 @@ dist-ssr
 .translation/*
 .eslintcache
 .env
+.env.*
+!.env.example
 test/*
 coverage/
 
@@ -35,3 +37,5 @@ coverage/
 playwright-report/
 test-results/
 .playwright/
+# Local TypeScript incremental cache
+*.tsbuildinfo

@@ -1,3 +1,4 @@
+import { isPlaybackShortcut } from "@/utils/playbackKeyboard"
 import {
 	startSharedFunctions,
 	createSlider,
@@ -20,8 +21,8 @@ async function startHBO() {
 	logStartOfAddon()
 	startSharedFunctions(Platforms.HBO)
 	HBOObserver.observe(document, config)
-	if (settings.value.HBO?.speedSlider) HBO_SpeedKeyboard()
-	if (settings.value.Video?.doubleClick) HBO_doubleClick()
+	HBO_SpeedKeyboard()
+	watch(() => settings.value.Video.doubleClick, HBO_doubleClick, { immediate: true })
 }
 type StatisticsKey =
 	| "AmazonAdTimeSkipped"
@@ -31,7 +32,7 @@ type StatisticsKey =
 	| "RecapTimeSkipped"
 	| "SegmentsSkipped"
 async function addSkippedTime(startTime: number, endTime: number, key: StatisticsKey) {
-	if (typeof startTime === "number" && typeof endTime === "number" && endTime > startTime) {
+	if (endTime > startTime) {
 		console.log(key, endTime - startTime)
 		settings.value.Statistics[key] += endTime - startTime
 		sendMessage("increaseBadge", {}, "background")
@@ -100,14 +101,15 @@ async function HBO_SpeedSlider(video: HTMLVideoElement) {
 	}
 }
 async function HBO_SpeedKeyboard() {
-	const steps = settings.value.General.sliderSteps / 10
 	document.addEventListener("keydown", (event: KeyboardEvent) => {
+		if (!settings.value.HBO.speedSlider || !isPlaybackShortcut(event)) return
+		const steps = settings.value.General.sliderSteps / 10
 		const video = document.querySelector("video") as HTMLVideoElement
 		if (!video) return
 		if (event.key === "d") {
 			video.playbackRate = Math.min(video.playbackRate + steps * 2, settings.value.General.sliderMax / 10)
 			videoSpeed.value = video.playbackRate
-		} else if (event.key === "s") {
+		} else {
 			video.playbackRate = Math.max(video.playbackRate - steps * 2, 0.6)
 			videoSpeed.value = video.playbackRate
 		}
