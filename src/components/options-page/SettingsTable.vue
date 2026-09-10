@@ -117,6 +117,11 @@
 				<td class="other">
 					<Switch
 						v-model="settings.Paramount.skipCredits"
+						@update:model-value="
+							(value) => {
+								if (value) settings.Paramount.watchCredits = false
+							}
+						"
 						class="ml-auto"
 					></Switch>
 				</td>
@@ -166,6 +171,11 @@
 				<td class="other">
 					<Switch
 						v-model="settings.Paramount.watchCredits"
+						@update:model-value="
+							(value) => {
+								if (value) settings.Paramount.skipCredits = false
+							}
+						"
 						class="ml-auto"
 					></Switch>
 				</td>
@@ -366,10 +376,12 @@
 </template>
 
 <script setup lang="ts">
+import { useSharedCredits } from "@/composables/useSharedCredits"
 import { streamingServices } from "@/constants/streamingServices"
 
 const optionsStore = useOptionsStore()
 const { settings } = storeToRefs(optionsStore)
+const { skipCredits, watchCredits } = useSharedCredits(settings)
 
 const skipIntro = computed({
 	get: () => streamingServices.every((service) => settings.value[service].skipIntro),
@@ -377,26 +389,6 @@ const skipIntro = computed({
 		streamingServices.forEach((service) => {
 			settings.value[service].skipIntro = value
 		})
-	},
-})
-
-const skipCredits = computed({
-	get: () => streamingServices.every((service) => settings.value[service]?.skipCredits ?? true),
-	set: (value) => {
-		streamingServices.forEach((service) => {
-			if (settings.value[service]?.skipCredits !== undefined) {
-				settings.value[service].skipCredits = value
-			}
-		})
-		if (value) {
-			streamingServices.forEach((service) => {
-				// @ts-expect-error ?. handles the error
-				if (settings.value[service]?.watchCredits !== undefined) {
-					// @ts-expect-error ?. handles the error
-					settings.value[service].watchCredits = false
-				}
-			})
-		}
 	},
 })
 
@@ -458,26 +450,6 @@ const HBOWatchCredits = computed({
 	},
 })
 
-const watchCredits = computed({
-	// @ts-expect-error ?. handles the error
-	get: () => streamingServices.every((service) => settings.value[service]?.watchCredits ?? true),
-	set: (value) => {
-		streamingServices.forEach((service) => {
-			// @ts-expect-error ?. handles the error
-			if (settings.value[service]?.watchCredits !== undefined) {
-				// @ts-expect-error ?. handles the error
-				settings.value[service].watchCredits = value
-			}
-		})
-		if (value) {
-			streamingServices.forEach((service) => {
-				if (settings.value[service]?.skipCredits !== undefined) {
-					settings.value[service].skipCredits = false
-				}
-			})
-		}
-	},
-})
 const skipAd = computed({
 	get: () =>
 		settings.value?.Amazon.skipAd &&
@@ -503,20 +475,16 @@ const speedSlider = computed({
 })
 
 const showRating = computed({
-	// @ts-expect-error ?. handles the error
-	get: () => streamingServices.every((service) => settings.value[service]?.showRating ?? true),
+	get: () => streamingServices.every((service) => settings.value[service].showRating),
 	set: (value) => {
 		streamingServices.forEach((service) => {
-			// @ts-expect-error ?. handles the error
-			if (settings.value[service]?.showRating !== undefined) {
-				// @ts-expect-error ?. handles the error
-				settings.value[service].showRating = value
-			}
+			settings.value[service].showRating = value
 		})
 	},
 })
 const hideTitles = computed({
-	get: () => settings.value?.Netflix.hideTitles && settings.value?.Amazon.hideTitles && settings.value?.Disney.hideTitles,
+	get: () =>
+		settings.value?.Netflix.hideTitles && settings.value?.Amazon.hideTitles && settings.value?.Disney.hideTitles,
 	set: (value) => {
 		settings.value.Netflix.hideTitles = settings.value.Amazon.hideTitles = settings.value.Disney.hideTitles = value
 	},

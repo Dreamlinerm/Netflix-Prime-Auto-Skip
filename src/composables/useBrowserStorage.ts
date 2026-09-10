@@ -1,20 +1,20 @@
-import { ref, watch, nextTick } from "vue"
-function mergeDeep(defaults: any, source: any): any {
+import { ref, watch, nextTick, toRaw, getCurrentScope, onScopeDispose } from "vue"
+export function mergeDeep(defaults: any, source: any): any {
 	// Merge the default options with the stored options
-	const output = { ...defaults } // Start with defaults
+	const output = structuredClone(toRaw(defaults)) // Start with defaults
 
 	Object.keys(defaults).forEach((key) => {
 		const defaultValue = defaults[key]
 		const sourceValue = source?.[key]
 
-		if (isObject(defaultValue) && sourceValue != null) {
+		if (isObject(defaultValue) && isObject(sourceValue)) {
 			// Recursively merge nested objects
 			output[key] = mergeDeep(defaultValue, sourceValue)
 		} else if (checkType(defaultValue, sourceValue)) {
-			output[key] = sourceValue
+			output[key] = structuredClone(toRaw(sourceValue))
 		} else {
 			// If the type is different, use the default value
-			output[key] = defaultValue
+			output[key] = structuredClone(toRaw(defaultValue))
 			console.log("Type mismatch", key, sourceValue, defaultValue)
 		}
 	})
@@ -26,9 +26,9 @@ function checkType(defaultValue: any, value: any): boolean {
 	// Check if the value type is the same type as the default value or null
 	// there are only strings, booleans, nulls and arrays as types left
 	return (
-		value === null ||
 		defaultValue === undefined ||
-		(typeof value === typeof defaultValue && Array.isArray(value) == Array.isArray(defaultValue))
+		(defaultValue === null && value === null) ||
+		(value !== null && typeof value === typeof defaultValue && Array.isArray(value) == Array.isArray(defaultValue))
 	)
 }
 function isObject(value: any): boolean {
@@ -44,22 +44,27 @@ export function useBrowserLocalStorage<T>(key: string, defaultValue: T, merge = 
 }
 
 function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" | "local" = "sync", merge = true) {
-	const data = ref<T>(defaultValue)
-	// Blocking setting storage if it is updating from storage
+	const defaults = structuredClone(toRaw(defaultValue))
+	const data = ref<T>(structuredClone(defaults))
+	const defaultIsObject = isObject(defaults)
+	const normalize = (value: unknown) => {
+		if (value === undefined) return structuredClone(defaults)
+		if (defaultIsObject && isObject(value)) return merge ? mergeDeep(defaults, value) : structuredClone(value)
+		return checkType(defaults, value) ? structuredClone(value) : structuredClone(defaults)
+	}
 	let isUpdatingFromStorage = true
-	const defaultIsObject = isObject(defaultValue)
-	// Initialize storage with the value from browser.storage
+	let revision = 0
+	let disposed = false
 	const promise = (async () => {
-		const result = await browser.storage[storageType].get(key)
-		if (result?.[key] !== undefined) {
-			if (defaultIsObject && isObject(result[key])) {
-				data.value = merge ? mergeDeep(defaultValue, result[key]) : result[key]
-			} else if (checkType(defaultValue, result[key])) {
-				data.value = result[key]
-			}
+		try {
+			const result = await browser.storage[storageType].get(key)
+			if (!disposed && revision === 0) data.value = normalize(result?.[key])
+		} catch (error) {
+			console.error("Could not load " + key, error)
+		} finally {
+			await nextTick()
+			isUpdatingFromStorage = false
 		}
-		await nextTick()
-		isUpdatingFromStorage = false
 	})()
 
 	// Watch for changes in the storage and update browser.storage
@@ -68,7 +73,9 @@ function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" 
 		(newValue) => {
 			if (!isUpdatingFromStorage) {
 				if (checkType(defaultValue, newValue)) {
-					void browser.storage[storageType].set({ [key]: toRaw(newValue) })
+					void browser.storage[storageType]
+						.set({ [key]: toRaw(newValue) })
+						.catch((error) => console.error("Could not save " + key, error))
 				} else {
 					console.error("not updating " + key + ": type mismatch")
 				}
@@ -77,14 +84,21 @@ function useBrowserStorage<T>(key: string, defaultValue: T, storageType: "sync" 
 		{ deep: true, flush: "post" },
 	)
 	// Add the onChanged listener here
-	browser.storage.onChanged.addListener(async function (changes, areaName) {
-		if (areaName === storageType && changes?.[key]) {
+	const onChanged = async (changes: Record<string, { newValue?: unknown }>, areaName: string) => {
+		if (!disposed && areaName === storageType && changes?.[key]) {
+			const currentRevision = ++revision
 			isUpdatingFromStorage = true
 			const { newValue } = changes[key]
-			data.value = newValue
+			data.value = normalize(newValue)
 			await nextTick()
-			isUpdatingFromStorage = false
+			if (currentRevision === revision) isUpdatingFromStorage = false
 		}
-	})
+	}
+	browser.storage.onChanged.addListener(onChanged)
+	if (getCurrentScope())
+		onScopeDispose(() => {
+			disposed = true
+			browser.storage.onChanged.removeListener(onChanged)
+		})
 	return { data, promise }
 }

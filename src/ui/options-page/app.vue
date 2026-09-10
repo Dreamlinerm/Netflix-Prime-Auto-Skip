@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const isFirefox = typeof browser !== "undefined"
+const isFirefox = /firefox/i.test(navigator.userAgent)
 const version = __VERSION__
 const githubUrl = __GITHUB_URL__
 import { useFrontendStore } from "@/stores/options.store"

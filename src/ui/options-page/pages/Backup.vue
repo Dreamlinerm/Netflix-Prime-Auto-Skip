@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { mergeDeep } from "@/composables/useBrowserStorage"
+import { defaultSettings } from "@/stores/storeTypes"
 import { useI18n } from "vue-i18n"
 
 const { t } = useI18n()
@@ -13,13 +15,21 @@ async function resetAddon() {
 		location.reload()
 	}
 }
-let file = new Blob([JSON.stringify(settings.value)], { type: "text/json" })
-const href = URL.createObjectURL(file)
+const href = ref("")
+watch(
+	settings,
+	(value, _old, onCleanup) => {
+		const url = URL.createObjectURL(new Blob([JSON.stringify(value)], { type: "application/json" }))
+		href.value = url
+		onCleanup(() => URL.revokeObjectURL(url))
+	},
+	{ deep: true, immediate: true },
+)
 
 function replaceSettings(event: Event) {
 	const input = event.target as HTMLInputElement
 	const file = input.files?.[0]
-	if (file === undefined || file.type !== "application/json") {
+	if (file === undefined) {
 		alert(t("invalidJson"))
 		return
 	} else {
@@ -27,7 +37,16 @@ function replaceSettings(event: Event) {
 		reader.addEventListener("load", (e) => {
 			try {
 				const data = JSON.parse(e.target?.result as string)
-				settings.value = data
+				if (
+					!data ||
+					typeof data !== "object" ||
+					Array.isArray(data) ||
+					!Object.keys(defaultSettings).every(
+						(key) => data[key] && typeof data[key] === "object" && !Array.isArray(data[key]),
+					)
+				)
+					throw new Error("Invalid settings")
+				settings.value = mergeDeep(defaultSettings, data)
 			} catch (e) {
 				alert(t("invalidJson"))
 				return
@@ -56,7 +75,7 @@ function replaceSettings(event: Event) {
 				<input
 					type="file"
 					name="settings"
-					accept="text/json"
+					accept=".json,application/json"
 					class="file-input w-full max-w-xs"
 					@change="replaceSettings"
 				/>
@@ -65,7 +84,7 @@ function replaceSettings(event: Event) {
 				<input
 					type="file"
 					name="settings"
-					accept="text/json"
+					accept=".json,application/json"
 				/>
 				<div class="btn btn-secondary rounded-2xl">{{ $t("uploadSettings") }}</div>
 			</div> -->

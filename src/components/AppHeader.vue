@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const isFirefox = typeof browser !== "undefined"
+const isFirefox = /firefox/i.test(navigator.userAgent)
 const githubUrl = __GITHUB_URL__
 function openSettings() {
 	browser.tabs.create({

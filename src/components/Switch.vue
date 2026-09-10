@@ -3,7 +3,7 @@
 		<input
 			:checked="props.modelValue"
 			type="checkbox"
-			@input="emit('update:modelValue', $event.target.checked)"
+			@input="emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
 		/>
 		<span class="slider round"></span>
 	</label>

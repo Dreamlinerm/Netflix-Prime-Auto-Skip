@@ -120,15 +120,15 @@ onMessage("fetch", async (message: { data: { url: string; type: FetchRequestType
 })
 onMessage("setBadgeText", async (message: { sender: any; data: { text: string } }) => {
 	const { sender, data } = message
-	if (sender?.tabId) setBadgeText(data.text, sender.tabId)
+	if (sender?.tabId != null) setBadgeText(data.text, sender.tabId)
 })
 onMessage("increaseBadge", async (message: { sender: any }) => {
 	const { sender } = message
-	if (sender?.tabId) increaseBadge(sender.tabId)
+	if (sender?.tabId != null) increaseBadge(sender.tabId)
 })
 onMessage("resetBadge", async (message: { sender: any }) => {
 	const { sender } = message
-	if (sender?.tabId) {
+	if (sender?.tabId != null) {
 		if (Badges[sender.tabId]) delete Badges[sender.tabId]
 		action.setBadgeText({ text: "", tabId: sender.tabId })
 	}
