@@ -4,7 +4,7 @@
 		"incremental": true,
 		"target": "ESNext",
 		"jsx": "preserve",
-		"lib": ["ESNext", "DOM"],
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"useDefineForClassFields": true,
 		"module": "ESNext",
 		"moduleResolution": "Bundler",

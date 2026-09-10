@@ -1,0 +1,31 @@
+name: Web extension tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "26"
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run typecheck:audit
+      - run: npx eslint src vitest.config.ts vitest.setup.ts
+      - run: npm run test:coverage
+      - run: npm run build:chrome
+        env:
+          CHOKIDAR_USEPOLLING: "true"
+      - run: npm run build:firefox
+        env:
+          CHOKIDAR_USEPOLLING: "true"
