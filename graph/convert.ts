@@ -1,7 +1,7 @@
 import fs from "fs"
 import path from "path"
 const __dirname = path.resolve()
-function convertCsv(name) {
+function convertCsv(name: string) {
 	const file = fs
 		.readFileSync(path.join(__dirname, name + ".csv"), "utf-8")
 		.split("\n")
@@ -16,7 +16,7 @@ function convertCsv(name) {
 			}
 		})
 	// remove all entries until count is greater than 0
-	while (file[0].count === 0) {
+	while (file.length && file[0].count === 0) {
 		file.shift()
 	}
 	// // delete last two entries
@@ -29,7 +29,7 @@ convertCsv("chromeUsers")
 convertCsv("chromeDownloads")
 convertCsv("chromeUninstall")
 
-function convertEdgeCsv(name) {
+function convertEdgeCsv(name: string) {
 	const file = fs.readFileSync(path.join(__dirname, name + ".csv"), "utf-8")
 	const firstLine = file.split("\n")[0]
 	const userCountPosition = firstLine.split(",").indexOf("userCount")
@@ -39,6 +39,7 @@ function convertEdgeCsv(name) {
 		.split("\n")
 		// remove the first line
 		.slice(1)
+		.filter((line) => line.trim() !== "")
 		.map((line) => line.split(","))
 		.map((line) => {
 			return {
