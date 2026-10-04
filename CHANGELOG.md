@@ -1,9 +1,8 @@
 # Changelog
 
-# 1.1.107
+# 1.1.108
 
 - Netflix: fixed auto select profile
-
 
 # 1.1.106
 
