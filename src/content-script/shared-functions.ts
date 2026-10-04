@@ -397,7 +397,9 @@ function getAllTitleCardsTypes(): Array<NodeListOf<Element>> {
 	let AllTitleCardsTypes: Array<NodeListOf<Element>> = []
 	if (isNetflix)
 		AllTitleCardsTypes = [
-			document.querySelectorAll('a[data-uia="standard-card"]:not(.imdb), a[data-uia="progress-card"]:not(.imdb)'),
+			document.querySelectorAll(
+				'a[data-uia="standard-card"]:not(.imdb), a[data-uia="progress-card"]:not(.imdb), a[data-uia="ranked-card"]:not(.imdb)',
+			),
 		]
 	else if (isDisney)
 		AllTitleCardsTypes = [document.querySelectorAll("a[data-testid='set-item']:not([href^='/browse/page']):not(.imdb)")]
