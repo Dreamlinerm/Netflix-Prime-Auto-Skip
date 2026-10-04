@@ -1,5 +1,10 @@
 # Changelog
 
+# 1.1.107
+
+- Netflix: fixed auto select profile
+
+
 # 1.1.106
 
 - added strict_min_version: "142" since firefox requires it for websiteContent permission

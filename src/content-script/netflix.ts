@@ -124,43 +124,36 @@ async function Netflix_scrollVolume(video: HTMLVideoElement) {
 		volumeControl?.addEventListener("wheel", handleVolumeControl)
 	}
 }
-// to parse html umlaut symbols like &auml; to ä
-function decodeHtmlEntities(str: string) {
-	return new DOMParser().parseFromString("<!doctype html><body>" + str, "text/html").body.textContent
-}
 function Netflix_profile() {
-	const currentProfile = document.querySelector("[href*='/YourAccount']")
-	if (currentProfile) {
-		// there is a space before the - thats why slice -1
-		const currentProfileName = decodeHtmlEntities(
-			currentProfile?.getAttribute("aria-label")?.split("–")?.[0].split("-")?.[0].slice(0, -1) ?? "",
-		)
-		if (currentProfileName && currentProfileName !== settings.value.General.profileName) {
-			// small profile picture
-			settings.value.General.profilePicture = (currentProfile?.firstChild?.firstChild as HTMLImageElement)?.src
-			console.log("Profile switched to", currentProfileName, settings.value.General?.profilePicture)
-			settings.value.General.profileName = currentProfileName
-			console.log("Profile switched to", currentProfileName)
-		}
+	const avatar = document.querySelector(
+		'button[data-uia="navigation+profile-menu+trigger"] img[data-uia="navigation+profile-menu+Avatar"]',
+	) as HTMLImageElement | null
+	if (!avatar) return
+	const currentProfileName = avatar.alt.trim()
+	const currentProfilePicture = avatar.src
+	if (
+		currentProfileName &&
+		(currentProfileName !== settings.value.General.profileName ||
+			currentProfilePicture !== settings.value.General.profilePicture)
+	) {
+		settings.value.General.profileName = currentProfileName
+		settings.value.General.profilePicture = currentProfilePicture
+		console.log("Profile switched to", currentProfileName, currentProfilePicture)
 	}
 }
 function AutoPickProfile() {
-	if (!globalThis.location.pathname.includes("Profile") && !globalThis.location.pathname.includes("profile")) {
-		const profileButtons = document.querySelectorAll(".profile-name")
-		profileButtons.forEach((button) => {
-			if (button.textContent === settings.value.General.profileName) {
-				// big profile picture
-				// slice(4, -1) to remove the url(" ") from the string
-				settings.value.General.profilePicture = (
-					button?.parentElement?.firstChild?.firstChild as HTMLElement
-				)?.style?.backgroundImage?.slice(5, -2)
-				button?.parentElement?.click()
-				console.log("Profile automatically chosen:", settings.value.General.profileName)
-				settings.value.Statistics.SegmentsSkipped++
-				sendMessage("increaseBadge", {}, "background")
-			}
-		})
-	}
+	// if the user is not on the profile selection page, we don't need to pick a profile
+	if (globalThis.location.pathname.includes("ManageProfiles")) return
+	const profileButtons = document.querySelectorAll("button[data-uia*='profile-selector']") as NodeListOf<HTMLElement>
+	profileButtons.forEach((button) => {
+		if (button.textContent === settings.value.General.profileName) {
+			settings.value.General.profilePicture = (button?.firstChild?.firstChild as HTMLImageElement)?.src
+			button.click()
+			console.log("Profile automatically chosen:", settings.value.General.profileName)
+			settings.value.Statistics.SegmentsSkipped++
+			sendMessage("increaseBadge", {}, "background")
+		}
+	})
 }
 function Netflix_General(selector: string, name: string, incBadge = true) {
 	const button = document.querySelector(selector) as HTMLElement
