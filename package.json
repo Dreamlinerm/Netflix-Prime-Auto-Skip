@@ -58,7 +58,7 @@
 		"archiver": "^8.0.0",
 		"chalk": "^6.0.0",
 		"chrome-types": "^0.1.438",
-		"concurrently": "^10.0.4",
+		"concurrently": "^10.0.6",
 		"cross-env": "^10.1.0",
 		"daisyui": "^5.7.16",
 		"dotenv": "^17.4.2",
@@ -81,7 +81,7 @@
 		"vite-plugin-zip-pack": "^1.2.4",
 		"vitest": "^4.1.11",
 		"vue-tsc": "^3.3.9",
-		"web-ext": "^10.6.0",
+		"web-ext": "^10.8.0",
 		"webext-bridge": "^6.0.1"
 	},
 	"private": true,
