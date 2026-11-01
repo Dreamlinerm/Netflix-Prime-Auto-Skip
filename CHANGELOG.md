@@ -4,6 +4,7 @@
 
 - Netflix: fix auto pick profile
 - Crunchyroll: adjust to new release calendar.
+- Amazon: fix speedslider
 
 # 1.1.108
 
