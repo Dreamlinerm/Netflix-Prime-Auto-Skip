@@ -583,7 +583,7 @@ function getCalendarItemKey(item: CrunchyList[number]) {
 	return `${item.href ?? ""}|${release.getDay()}|${release.getHours()}:${release.getMinutes()}`
 }
 
-function getCalendarItemsFromPage(
+export function getCalendarItemsFromPage(
 	columns: HTMLElement[],
 	locale: string,
 ): { items: CrunchyList; shownTitles: Set<string> } {
@@ -594,15 +594,14 @@ function getCalendarItemsFromPage(
 		column
 			.querySelectorAll<HTMLElement>('[data-t="release-calendar-card"]:not([data-enhanced-saved-calendar])')
 			.forEach((card) => {
-				const episodeLink = card.querySelector<HTMLAnchorElement>('[data-t="watch-page-link"]')
 				const seriesLink = card.querySelector<HTMLAnchorElement>('[data-t="series-page-link"]')
 				const name = seriesLink?.textContent?.trim()
 				if (name) shownTitles.add(name)
 				if (!isCalendarReleaseQueued(card)) return
 				const timeLabel = card.querySelector('[data-t="publish-time"]')?.textContent ?? ""
 				const time = parseCalendarReleaseTimestamp(weekdayLabel, timeLabel, locale)
-				if (!episodeLink?.href || !name || !time) return
-				items.push({ href: episodeLink.href, name, time })
+				if (!seriesLink?.href || !name || !time) return
+				items.push({ href: seriesLink.href, name, time })
 			})
 	})
 	return { items, shownTitles }

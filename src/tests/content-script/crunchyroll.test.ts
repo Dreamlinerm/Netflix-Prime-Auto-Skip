@@ -4,6 +4,7 @@ import {
 	isCalendarReleaseAlreadyShown,
 	isCalendarReleaseUpcoming,
 	isCalendarReleaseQueued,
+	getCalendarItemsFromPage,
 	formatCalendarReleaseTime,
 	parseCalendarReleaseTimestamp,
 	shouldHideCalendarRelease,
@@ -45,6 +46,25 @@ describe("release calendar", () => {
 
 		card.innerHTML = '<button data-t="add-to-watchlist-btn"></button>'
 		expect(isCalendarReleaseQueued(card)).toBe(false)
+	})
+
+	it("saves the series page URL instead of the episode URL", () => {
+		const column = document.createElement("section")
+		column.innerHTML = `
+			<span class="day-weekday">Tuesday</span>
+			<div data-t="release-calendar-card">
+				<a data-t="watch-page-link" href="https://www.crunchyroll.com/watch/episode-id/episode-title">Episode</a>
+				<a data-t="series-page-link" href="https://www.crunchyroll.com/series/series-id/series-title">Series Name</a>
+				<button data-t="remove-from-watchlist-btn"></button>
+				<span data-t="publish-time">14:30</span>
+			</div>
+		`
+
+		const { items } = getCalendarItemsFromPage([column], "en")
+
+		expect(items).toHaveLength(1)
+		expect(items[0].href).toContain("/series/")
+		expect(items[0].href).toBe("https://www.crunchyroll.com/series/series-id/series-title")
 	})
 
 	it("keeps premieres visible when filtering to watchlist shows", () => {
