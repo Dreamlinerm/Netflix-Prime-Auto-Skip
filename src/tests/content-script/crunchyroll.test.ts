@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest"
 import {
 	getEpisodeRegex,
+	isCalendarReleaseAlreadyShown,
+	isCalendarReleaseUpcoming,
 	isCalendarReleaseQueued,
 	parseCalendarReleaseTimestamp,
 	shouldHideCalendarRelease,
@@ -58,9 +60,28 @@ describe("release calendar", () => {
 		expect(shouldHideCalendarRelease(queuedRelease, true)).toBe(false)
 	})
 
-	it("parses localized calendar dates and 12-hour release times", () => {
+	it("uses weekday and airtime, not the saved calendar date, to determine upcoming releases", () => {
+		const now = new Date(2026, 10, 1, 10, 0)
+		const previousSundayFutureAirtime = new Date(2026, 9, 25, 11, 0).toISOString()
+		const previousSundayPastAirtime = new Date(2026, 9, 25, 9, 0).toISOString()
+		const previousMondayAirtime = new Date(2026, 9, 26, 9, 0).toISOString()
+
+		expect(isCalendarReleaseUpcoming(previousSundayFutureAirtime, now)).toBe(true)
+		expect(isCalendarReleaseUpcoming(previousSundayPastAirtime, now)).toBe(false)
+		expect(isCalendarReleaseUpcoming(previousMondayAirtime, now)).toBe(true)
+	})
+
+	it("matches already shown releases by show title, regardless of URL or airtime", () => {
+		const shownTitles = new Set(["My Hero Academia"])
+
+		expect(isCalendarReleaseAlreadyShown("My Hero Academia", shownTitles, "en")).toBe(true)
+		expect(isCalendarReleaseAlreadyShown("  MY HERO ACADEMIA  ", shownTitles, "en")).toBe(true)
+		expect(isCalendarReleaseAlreadyShown("Another Show", shownTitles, "en")).toBe(false)
+		expect(isCalendarReleaseAlreadyShown(undefined, shownTitles, "en")).toBe(false)
+	})
+
+	it("parses localized weekdays and 12-hour release times without relying on the calendar date", () => {
 		const timestamp = parseCalendarReleaseTimestamp(
-			"26. Okt.",
 			"Montag",
 			"Veröffentlichungszeit: 1:30 PM",
 			"de",
@@ -68,20 +89,20 @@ describe("release calendar", () => {
 		)
 		expect(timestamp).not.toBeNull()
 		const releaseDate = new Date(timestamp!)
-		expect([releaseDate.getFullYear(), releaseDate.getMonth(), releaseDate.getDate()]).toEqual([2026, 9, 26])
+		expect([releaseDate.getFullYear(), releaseDate.getMonth(), releaseDate.getDate()]).toEqual([2026, 10, 2])
 		expect([releaseDate.getHours(), releaseDate.getMinutes()]).toEqual([13, 30])
 	})
 
-	it("parses 24-hour times and month-first dates", () => {
-		const timestamp = parseCalendarReleaseTimestamp("Oct 27", "Tuesday", "14:30", "en", new Date(2026, 10, 1))
+	it("parses 24-hour times from localized weekday labels", () => {
+		const timestamp = parseCalendarReleaseTimestamp("Tuesday", "14:30", "en", new Date(2026, 10, 1))
 		expect(timestamp).not.toBeNull()
 		const releaseDate = new Date(timestamp!)
-		expect([releaseDate.getFullYear(), releaseDate.getMonth(), releaseDate.getDate()]).toEqual([2026, 9, 27])
+		expect([releaseDate.getFullYear(), releaseDate.getMonth(), releaseDate.getDate()]).toEqual([2026, 10, 3])
 		expect([releaseDate.getHours(), releaseDate.getMinutes()]).toEqual([14, 30])
 	})
 
 	it("rejects calendar entries with an unrecognized date or time", () => {
-		expect(parseCalendarReleaseTimestamp("unknown", "Montag", "1:30 PM", "de")).toBeNull()
-		expect(parseCalendarReleaseTimestamp("26. Okt.", "Montag", "25:90", "de")).toBeNull()
+		expect(parseCalendarReleaseTimestamp("unknown", "1:30 PM", "de")).toBeNull()
+		expect(parseCalendarReleaseTimestamp("Montag", "25:90", "de")).toBeNull()
 	})
 })

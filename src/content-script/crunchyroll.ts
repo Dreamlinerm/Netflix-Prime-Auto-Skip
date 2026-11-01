@@ -503,65 +503,15 @@ function normalizeCalendarText(value: string, locale: string) {
 	return value.toLocaleLowerCase(locale).replace(/[\p{P}\p{Z}\s]/gu, "")
 }
 
-function getCalendarColumnDate(
-	dateLabel: string,
-	weekdayLabel: string,
-	locale: string,
-	referenceDate = new Date(),
-): Date | null {
-	const dateFormatter = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short" })
-	const weekdayFormatter = new Intl.DateTimeFormat(locale, { weekday: "long" })
-	const parts = dateFormatter.formatToParts(new Date(2026, 0, 15))
-	const dayComesBeforeMonth =
-		parts.findIndex((part) => part.type === "day") < parts.findIndex((part) => part.type === "month")
-	const numberMatches = [...dateLabel.matchAll(/\d+/g)]
-	const normalizedDateLabel = normalizeCalendarText(dateLabel, locale)
-
-	for (let month = 0; month < 12; month++) {
-		const monthLabel = dateFormatter
-			.formatToParts(new Date(2026, month, 15))
-			.find((part) => part.type === "month")?.value
-		if (!monthLabel) continue
-		const monthIndex = dateLabel.toLocaleLowerCase(locale).indexOf(monthLabel.toLocaleLowerCase(locale))
-		if (!normalizedDateLabel.includes(normalizeCalendarText(monthLabel, locale)) || monthIndex < 0) continue
-		const monthEnd = monthIndex + monthLabel.length
-		const dayMatch = numberMatches.find((match) =>
-			dayComesBeforeMonth ? (match.index ?? Number.MAX_SAFE_INTEGER) < monthIndex : (match.index ?? -1) >= monthEnd,
-		)
-		const day = Number(dayMatch?.[0])
-		if (!day || day > 31) continue
-
-		const matchingDates: Date[] = []
-		for (let year = referenceDate.getFullYear() - 1; year <= referenceDate.getFullYear() + 1; year++) {
-			const candidate = new Date(year, month, day)
-			if (candidate.getMonth() !== month || candidate.getDate() !== day) continue
-			if (
-				!weekdayLabel ||
-				normalizeCalendarText(weekdayFormatter.format(candidate), locale) ===
-					normalizeCalendarText(weekdayLabel, locale)
-			) {
-				matchingDates.push(candidate)
-			}
-		}
-		if (matchingDates.length > 0) {
-			return matchingDates.sort(
-				(a, b) => Math.abs(a.getTime() - referenceDate.getTime()) - Math.abs(b.getTime() - referenceDate.getTime()),
-			)[0]
-		}
-	}
-	return null
-}
-
 export function parseCalendarReleaseTimestamp(
-	dateLabel: string,
 	weekdayLabel: string,
 	timeLabel: string,
 	locale: string,
 	referenceDate = new Date(),
 ): string | null {
-	const releaseDate = getCalendarColumnDate(dateLabel, weekdayLabel, locale, referenceDate)
+	const weekday = getCalendarWeekdayIndex(weekdayLabel, locale)
 	const timeMatch = timeLabel.match(/(\d{1,2}):(\d{2})(?:\s*([ap])\.?m\.?)?/i)
-	if (!releaseDate || !timeMatch) return null
+	if (weekday === null || !timeMatch) return null
 
 	let hours = Number(timeMatch[1])
 	const minutes = Number(timeMatch[2])
@@ -569,6 +519,9 @@ export function parseCalendarReleaseTimestamp(
 	if (minutes > 59 || (meridiem ? hours < 1 || hours > 12 : hours > 23)) return null
 	if (meridiem === "p" && hours < 12) hours += 12
 	if (meridiem === "a" && hours === 12) hours = 0
+	const releaseDate = new Date(referenceDate)
+	const daysUntilRelease = (weekday - referenceDate.getDay() + 7) % 7
+	releaseDate.setDate(releaseDate.getDate() + daysUntilRelease)
 	releaseDate.setHours(hours, minutes, 0, 0)
 	return releaseDate.toISOString()
 }
@@ -577,32 +530,76 @@ export function isCalendarReleaseQueued(card: ParentNode) {
 	return card.querySelector('[data-t="remove-from-watchlist-btn"]') !== null
 }
 
+function getCalendarWeekdayIndex(label: string, locale: string) {
+	const formatter = new Intl.DateTimeFormat(locale, { weekday: "long" })
+	const referenceSunday = new Date(2026, 0, 4)
+	for (let weekday = 0; weekday < 7; weekday++) {
+		if (
+			normalizeCalendarText(
+				formatter.format(
+					new Date(referenceSunday.getFullYear(), referenceSunday.getMonth(), referenceSunday.getDate() + weekday),
+				),
+				locale,
+			) === normalizeCalendarText(label, locale)
+		) {
+			return weekday
+		}
+	}
+	return null
+}
+
+export function isCalendarReleaseUpcoming(time: string, now = new Date()) {
+	const release = new Date(time)
+	if (Number.isNaN(release.getTime())) return false
+	const daysUntilRelease = (release.getDay() - now.getDay() + 7) % 7
+	if (daysUntilRelease !== 0) return true
+	return release.getHours() * 60 + release.getMinutes() > now.getHours() * 60 + now.getMinutes()
+}
+
+export function isCalendarReleaseAlreadyShown(
+	title: string | null | undefined,
+	shownTitles: ReadonlySet<string>,
+	locale: string,
+) {
+	if (!title) return false
+	const normalizedTitle = normalizeCalendarText(title, locale)
+	return Array.from(shownTitles).some((shownTitle) => normalizeCalendarText(shownTitle, locale) === normalizedTitle)
+}
+
 export function shouldHideCalendarRelease(card: ParentNode, filterQueued: boolean) {
 	const isPremiere = card.querySelector('[data-t="premiere-tag"]') !== null
 	return filterQueued && !isCalendarReleaseQueued(card) && !isPremiere
 }
 
 function getCalendarItemKey(item: CrunchyList[number]) {
-	return `${item.href ?? ""}|${item.time}`
+	if (item.href?.includes("/watch/")) return item.href
+	const release = new Date(item.time)
+	return `${item.href ?? ""}|${release.getDay()}|${release.getHours()}:${release.getMinutes()}`
 }
 
-function getCalendarItemsFromPage(columns: HTMLElement[], locale: string): CrunchyList {
+function getCalendarItemsFromPage(
+	columns: HTMLElement[],
+	locale: string,
+): { items: CrunchyList; shownTitles: Set<string> } {
 	const items: CrunchyList = []
+	const shownTitles = new Set<string>()
 	columns.forEach((column) => {
-		const dateLabel = column.querySelector(".day-date")?.textContent?.trim() ?? ""
 		const weekdayLabel = column.querySelector(".day-weekday")?.textContent?.trim() ?? ""
 		column
 			.querySelectorAll<HTMLElement>('[data-t="release-calendar-card"]:not([data-enhanced-saved-calendar])')
 			.forEach((card) => {
+				const episodeLink = card.querySelector<HTMLAnchorElement>('[data-t="watch-page-link"]')
+				const seriesLink = card.querySelector<HTMLAnchorElement>('[data-t="series-page-link"]')
+				const name = seriesLink?.textContent?.trim()
+				if (name) shownTitles.add(name)
 				if (!isCalendarReleaseQueued(card)) return
-				const titleLink = card.querySelector<HTMLAnchorElement>('[data-t="series-page-link"]')
 				const timeLabel = card.querySelector('[data-t="publish-time"]')?.textContent ?? ""
-				const time = parseCalendarReleaseTimestamp(dateLabel, weekdayLabel, timeLabel, locale)
-				if (!titleLink?.href || !titleLink.textContent?.trim() || !time) return
-				items.push({ href: titleLink.href, name: titleLink.textContent.trim(), time })
+				const time = parseCalendarReleaseTimestamp(weekdayLabel, timeLabel, locale)
+				if (!episodeLink?.href || !name || !time) return
+				items.push({ href: episodeLink.href, name, time })
 			})
 	})
-	return items
+	return { items, shownTitles }
 }
 
 function createSavedCalendarCell(item: CrunchyList[number]) {
@@ -625,68 +622,36 @@ function createSavedCalendarCell(item: CrunchyList[number]) {
 }
 
 function syncSavedCalendar(columns: HTMLElement[], locale: string) {
-	const liveItems = getCalendarItemsFromPage(columns, locale)
 	const currentDate = new Date()
-	const upcomingLiveItems = liveItems.filter((item) => new Date(item.time) > currentDate)
-	const liveKeys = new Set(upcomingLiveItems.map(getCalendarItemKey))
-	const liveHrefs = new Set(
-		columns.flatMap((column) =>
-			Array.from(column.querySelectorAll<HTMLAnchorElement>('[data-t="series-page-link"]')).map((link) => link.href),
-		),
-	)
+	const { items: liveItems, shownTitles } = getCalendarItemsFromPage(columns, locale)
+	const upcomingLiveItems = liveItems.filter((item) => isCalendarReleaseUpcoming(item.time, currentDate))
 	const previousItems = toRaw(crunchyList.value).filter((item) => {
-		const itemTime = new Date(item.time)
-		if (!item.href || !item.name || Number.isNaN(itemTime.getTime()) || itemTime <= currentDate) return false
-		return !liveHrefs.has(item.href) || liveKeys.has(getCalendarItemKey(item))
+		if (!item.href || !item.name || !isCalendarReleaseUpcoming(item.time, currentDate)) return false
+		return !isCalendarReleaseAlreadyShown(item.name, shownTitles, locale)
 	})
 	const itemsByKey = new Map<string, CrunchyList[number]>()
 	;[...previousItems, ...upcomingLiveItems].forEach((item) => itemsByKey.set(getCalendarItemKey(item), item))
 	const savedItems = [...itemsByKey.values()].sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
 	if (JSON.stringify(toRaw(crunchyList.value)) !== JSON.stringify(savedItems)) crunchyList.value = savedItems
 
-	const currentWeekDates = columns.map((column) => {
-		const dateLabel = column.querySelector(".day-date")?.textContent?.trim() ?? ""
-		const weekdayLabel = column.querySelector(".day-weekday")?.textContent?.trim() ?? ""
-		return getCalendarColumnDate(dateLabel, weekdayLabel, locale)
-	})
 	const displayedKeys = new Set(upcomingLiveItems.map(getCalendarItemKey))
 	const savedItemsByKey = new Map(savedItems.map((item) => [getCalendarItemKey(item), item]))
 	document.querySelectorAll<HTMLElement>(`[${savedCalendarAttribute}]`).forEach((cell) => {
 		const key = cell.getAttribute(savedCalendarAttribute) ?? ""
 		const item = savedItemsByKey.get(key)
-		const column = cell.closest<HTMLElement>('section[data-t="day-column"]')
-		const dateLabel = column?.querySelector(".day-date")?.textContent?.trim() ?? ""
-		const weekdayLabel = column?.querySelector(".day-weekday")?.textContent?.trim() ?? ""
-		const columnDate = getCalendarColumnDate(dateLabel, weekdayLabel, locale)
-		const itemDate = item ? new Date(item.time) : null
-		const isOnCurrentDay =
-			columnDate &&
-			itemDate &&
-			columnDate.getFullYear() === itemDate.getFullYear() &&
-			columnDate.getMonth() === itemDate.getMonth() &&
-			columnDate.getDate() === itemDate.getDate()
-		if (!item || !isOnCurrentDay) cell.remove()
+		if (!item || !isCalendarReleaseUpcoming(item.time, currentDate)) cell.remove()
 	})
 	savedItems.forEach((item) => {
-		const itemDate = new Date(item.time)
-		const isDisplayed = currentWeekDates.some(
-			(day) =>
-				day &&
-				day.getFullYear() === itemDate.getFullYear() &&
-				day.getMonth() === itemDate.getMonth() &&
-				day.getDate() === itemDate.getDate(),
+		if (
+			!isCalendarReleaseUpcoming(item.time, currentDate) ||
+			displayedKeys.has(getCalendarItemKey(item)) ||
+			isCalendarReleaseAlreadyShown(item.name, shownTitles, locale)
 		)
-		if (!isDisplayed || itemDate <= currentDate || displayedKeys.has(getCalendarItemKey(item))) return
+			return
+		const itemWeekday = new Date(item.time).getDay()
 		const column = columns.find((candidate) => {
-			const dateLabel = candidate.querySelector(".day-date")?.textContent?.trim() ?? ""
 			const weekdayLabel = candidate.querySelector(".day-weekday")?.textContent?.trim() ?? ""
-			const day = getCalendarColumnDate(dateLabel, weekdayLabel, locale)
-			return (
-				day &&
-				day.getFullYear() === itemDate.getFullYear() &&
-				day.getMonth() === itemDate.getMonth() &&
-				day.getDate() === itemDate.getDate()
-			)
+			return getCalendarWeekdayIndex(weekdayLabel, locale) === itemWeekday
 		})
 		const dayBody = column?.querySelector<HTMLElement>(".day-body")
 		const itemKey = getCalendarItemKey(item)
