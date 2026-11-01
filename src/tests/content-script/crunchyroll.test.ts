@@ -7,8 +7,10 @@ import {
 	isCalendarReleaseQueued,
 	getCalendarItemsFromPage,
 	createSavedCalendarCell,
+	mergeCalendarItems,
 	formatCalendarReleaseTime,
 	parseCalendarReleaseTimestamp,
+	shouldDisplaySavedCalendarItem,
 	shouldHideCalendarRelease,
 	shouldBlockPreviewSkip,
 } from "../../content-script/crunchyroll"
@@ -131,6 +133,44 @@ describe("release calendar", () => {
 
 		const sundayNow = new Date(2026, 10, 1, 10, 0)
 		expect(isCalendarReleaseOnPastDay(monday, columns, "en", sundayNow)).toBe(true)
+	})
+
+	it("keeps prior-day saved shows only while they are listed and restores upcoming shows", () => {
+		const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+		const columns = weekdays.map((weekday) => {
+			const column = document.createElement("section")
+			column.innerHTML = `<span class="day-weekday">${weekday}</span>`
+			return column
+		})
+		const now = new Date(2026, 10, 4, 10, 0)
+		const pastDayStillListed = {
+			href: "https://www.crunchyroll.com/series/listed",
+			name: "Listed Show",
+			time: new Date(2026, 10, 2, 15, 0).toISOString(),
+		}
+		const pastDayRemoved = {
+			href: "https://www.crunchyroll.com/series/removed",
+			name: "Removed Show",
+			time: new Date(2026, 10, 2, 16, 0).toISOString(),
+		}
+		const upcoming = {
+			href: "https://www.crunchyroll.com/series/upcoming",
+			name: "Upcoming Show",
+			time: new Date(2026, 10, 5, 15, 0).toISOString(),
+		}
+
+		const merged = mergeCalendarItems(
+			[pastDayStillListed, pastDayRemoved, upcoming],
+			[],
+			new Set(["Listed Show"]),
+			columns,
+			"en",
+			now,
+		)
+
+		expect(merged.map((item) => item.name)).toEqual(["Listed Show", "Upcoming Show"])
+		expect(shouldDisplaySavedCalendarItem(pastDayStillListed, new Set(["Listed Show"]), columns, "en", now)).toBe(false)
+		expect(shouldDisplaySavedCalendarItem(upcoming, new Set(), columns, "en", now)).toBe(true)
 	})
 
 	it("matches already shown releases by show title, regardless of URL or airtime", () => {

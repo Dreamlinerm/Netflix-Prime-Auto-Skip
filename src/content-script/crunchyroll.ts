@@ -600,6 +600,41 @@ function getCalendarItemKey(item: CrunchyList[number]) {
 	return `${item.href ?? ""}|${release.getDay()}|${release.getHours()}:${release.getMinutes()}`
 }
 
+export function mergeCalendarItems(
+	savedItems: CrunchyList,
+	liveItems: CrunchyList,
+	shownTitles: ReadonlySet<string>,
+	columns: HTMLElement[],
+	locale: string,
+	now = new Date(),
+): CrunchyList {
+	const retainedItems = savedItems.filter((item) => {
+		if (!item.href || !item.name) return false
+		const alreadyShown = isCalendarReleaseAlreadyShown(item.name, shownTitles, locale)
+		if (isCalendarReleaseOnPastDay(item.time, columns, locale, now)) return alreadyShown
+		return isCalendarReleaseUpcoming(item.time, now) && !alreadyShown
+	})
+	const itemsByKey = new Map<string, CrunchyList[number]>()
+	;[...retainedItems, ...liveItems.filter((item) => isCalendarReleaseUpcoming(item.time, now))].forEach((item) =>
+		itemsByKey.set(getCalendarItemKey(item), item),
+	)
+	return [...itemsByKey.values()].sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
+}
+
+export function shouldDisplaySavedCalendarItem(
+	item: CrunchyList[number],
+	shownTitles: ReadonlySet<string>,
+	columns: HTMLElement[],
+	locale: string,
+	now = new Date(),
+) {
+	return (
+		isCalendarReleaseUpcoming(item.time, now) &&
+		!isCalendarReleaseOnPastDay(item.time, columns, locale, now) &&
+		!isCalendarReleaseAlreadyShown(item.name, shownTitles, locale)
+	)
+}
+
 export function getCalendarItemsFromPage(
 	columns: HTMLElement[],
 	locale: string,
@@ -675,50 +710,34 @@ function syncSavedCalendar(columns: HTMLElement[], locale: string) {
 	const use24Hour =
 		document.querySelector<HTMLInputElement>('input[name="release-calendar-time-format"]')?.checked ?? false
 	const { items: liveItems, shownTitles } = getCalendarItemsFromPage(columns, locale)
-	const upcomingLiveItems = liveItems.filter((item) => isCalendarReleaseUpcoming(item.time, currentDate))
-	const previousItems = toRaw(crunchyList.value).filter((item) => {
-		if (!item.href || !item.name) return false
-		if (isCalendarReleaseOnPastDay(item.time, columns, locale, currentDate)) {
-			return isCalendarReleaseAlreadyShown(item.name, shownTitles, locale)
-		}
-		if (!isCalendarReleaseUpcoming(item.time, currentDate)) return false
-		return !isCalendarReleaseAlreadyShown(item.name, shownTitles, locale)
-	})
-	const itemsByKey = new Map<string, CrunchyList[number]>()
-	;[...previousItems, ...upcomingLiveItems].forEach((item) => itemsByKey.set(getCalendarItemKey(item), item))
-	const savedItems = [...itemsByKey.values()].sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
+	const savedItems = mergeCalendarItems(toRaw(crunchyList.value), liveItems, shownTitles, columns, locale, currentDate)
 	if (JSON.stringify(toRaw(crunchyList.value)) !== JSON.stringify(savedItems)) crunchyList.value = savedItems
 
 	document.querySelectorAll('[data-t="day-empty-message"]').forEach((message) => message.remove())
-	const displayedKeys = new Set(upcomingLiveItems.map(getCalendarItemKey))
-	const savedItemsByKey = new Map(savedItems.map((item) => [getCalendarItemKey(item), item]))
+	const tilesToDisplay = new Map(
+		savedItems
+			.filter((item) => shouldDisplaySavedCalendarItem(item, shownTitles, columns, locale, currentDate))
+			.map((item) => [getCalendarItemKey(item), item]),
+	)
 	document.querySelectorAll<HTMLElement>(`[${savedCalendarAttribute}]`).forEach((cell) => {
 		const key = cell.getAttribute(savedCalendarAttribute) ?? ""
-		const item = savedItemsByKey.get(key)
-		if (!item || !isCalendarReleaseUpcoming(item.time, currentDate)) cell.remove()
-		else {
+		const item = tilesToDisplay.get(key)
+		if (!item) {
+			cell.remove()
+		} else {
 			const time = cell.querySelector("time")
 			if (time) time.textContent = formatCalendarReleaseTime(item.time, locale, use24Hour)
+			tilesToDisplay.delete(key)
 		}
 	})
-	savedItems.forEach((item) => {
-		if (
-			!isCalendarReleaseUpcoming(item.time, currentDate) ||
-			displayedKeys.has(getCalendarItemKey(item)) ||
-			isCalendarReleaseAlreadyShown(item.name, shownTitles, locale)
-		)
-			return
+	tilesToDisplay.forEach((item) => {
 		const itemWeekday = new Date(item.time).getDay()
 		const column = columns.find((candidate) => {
 			const weekdayLabel = candidate.querySelector(".day-weekday")?.textContent?.trim() ?? ""
 			return getCalendarWeekdayIndex(weekdayLabel, locale) === itemWeekday
 		})
 		const dayBody = column?.querySelector<HTMLElement>(".day-body")
-		const itemKey = getCalendarItemKey(item)
-		const alreadySaved = Array.from(dayBody?.querySelectorAll<HTMLElement>(`[${savedCalendarAttribute}]`) ?? []).some(
-			(cell) => cell.getAttribute(savedCalendarAttribute) === itemKey,
-		)
-		if (dayBody && !alreadySaved) dayBody.appendChild(createSavedCalendarCell(item, locale, use24Hour))
+		if (dayBody) dayBody.appendChild(createSavedCalendarCell(item, locale, use24Hour))
 	})
 }
 
