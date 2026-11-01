@@ -43,8 +43,6 @@ export type settingsType = {
 		profile: boolean
 		bigPlayer: boolean
 		filterQueued: boolean
-		dubLanguage: string
-		filterDuplicates: boolean
 		showRating: boolean
 	}
 	HBO: {
@@ -146,8 +144,6 @@ export const defaultSettings = {
 		profile: true,
 		bigPlayer: true,
 		filterQueued: true,
-		dubLanguage: "none",
-		filterDuplicates: true,
 		showRating: true,
 	},
 	HBO: {

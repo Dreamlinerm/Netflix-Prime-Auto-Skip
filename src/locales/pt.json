@@ -65,7 +65,7 @@
   "showRatingSwitch": "Classificação TMDB:",
   "showRatingDescription": "Adicionar a classificação TMDB a todos os filmes e séries",
   "releaseCalendarSwitch": "Adicionar opções de calendário de lançamento:",
-  "releaseCalendarDescription": "Adiciona as caixas de verificação \"Mostrar apenas listas de reprodução\" e \"Filtrar DUB\" ao calendário de lançamentos",
+  "releaseCalendarDescription": "Adiciona o filtro \"Mostrar apenas a lista de interesses\" e guarda no calendário os próximos lançamentos dessa lista.",
   "epilepsySwitch": "Opção de epilepsia",
   "epilepsyDescription": "Escurecer o ecrã quando saltar o anúncio",
   "userAgentSwitch": "Mudar para sítios Web de secretária",

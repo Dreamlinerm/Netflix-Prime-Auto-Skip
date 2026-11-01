@@ -65,7 +65,7 @@
   "showRatingSwitch": "Clasificación TMDB:",
   "showRatingDescription": "Añadir la clasificación TMDB a todas las películas y series",
   "releaseCalendarSwitch": "Añadir opciones de calendario de estrenos:",
-  "releaseCalendarDescription": "Añade las casillas \"Mostrar solo listas de reproducción\" y \"Filtrar doblaje\" al calendario de estrenos.",
+  "releaseCalendarDescription": "Añade el filtro «Mostrar solo la lista de seguimiento» y guarda los próximos estrenos de esa lista en el calendario.",
   "epilepsySwitch": "Modo epilepsia:",
   "epilepsyDescription": "Oscurecer la pantalla al omitir un anuncio",
   "userAgentSwitch": "Cambiar a sitio web de escritorio:",

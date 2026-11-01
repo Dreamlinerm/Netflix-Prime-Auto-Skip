@@ -65,7 +65,7 @@
   "showRatingSwitch": "TMDB Bewertung:",
   "showRatingDescription": "Zeigt die TMDB Bewertung für jeden Film/Serie an",
   "releaseCalendarSwitch": "Release-Kalender Optionen hinzufügen:",
-  "releaseCalendarDescription": "Fügt dem Veröffentlichungskalender die Kontrollkästchen 'Nur Playlists anzeigen' und 'DUB filtern' hinzu",
+  "releaseCalendarDescription": "Ergänzt den Filter „Nur Watchlist anzeigen“ und speichert kommende Watchlist-Veröffentlichungen im Kalender.",
   "epilepsySwitch": "Epilepsy option",
   "epilepsyDescription": "Beim überspringen der Werbung den Bildschirm verdunkeln",
   "userAgentSwitch": "Zu Desktop-Webseiten wechseln",

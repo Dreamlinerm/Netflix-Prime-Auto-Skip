@@ -65,7 +65,7 @@
   "showRatingSwitch": "TMDB 등급:",
   "showRatingDescription": "모든 영화 및 시리즈에 TMDB 등급 추가하기",
   "releaseCalendarSwitch": "릴리즈 캘린더 옵션을 추가합니다:",
-  "releaseCalendarDescription": "출시 캘린더에 '재생목록만 표시' 및 'DUB 필터링' 확인란을 추가합니다.",
+  "releaseCalendarDescription": "'관심 목록만 표시' 필터를 추가하고 예정된 관심 목록 공개작을 캘린더에 저장합니다.",
   "epilepsySwitch": "간질 옵션",
   "epilepsyDescription": "광고 건너뛰기 시 화면 어둡게 하기",
   "userAgentSwitch": "데스크톱 웹사이트로 전환",

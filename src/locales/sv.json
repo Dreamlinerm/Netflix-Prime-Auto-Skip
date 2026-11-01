@@ -65,7 +65,7 @@
   "showRatingSwitch": "TMDB Betyg:",
   "showRatingDescription": "Lägga till TMDB-betyg för varje film och serie",
   "releaseCalendarSwitch": "Lägg till alternativ för Release Calendar:",
-  "releaseCalendarDescription": "Lägger till kryssrutorna \"Visa endast spellistor\" och \"Filtrera DUB\" i releasekalendern",
+  "releaseCalendarDescription": "Lägger till filtret \"Visa endast bevakningslistan\" och sparar kommande releaser från listan i kalendern.",
   "epilepsySwitch": "Alternativ för epilepsi",
   "epilepsyDescription": "Mörka skärmen när du hoppar över annonsen",
   "userAgentSwitch": "Byt till desktop-webbplatser",

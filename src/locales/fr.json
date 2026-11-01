@@ -67,7 +67,7 @@
   "showRatingSwitch": "Notation TMDB :",
   "showRatingDescription": "Ajouter la note TMDB à chaque film et série",
   "releaseCalendarSwitch": "Ajouter des options de calendrier de diffusion :",
-  "releaseCalendarDescription": "Ajoute les cases à cocher \"Afficher uniquement les listes de lecture\" et \"Filtrer DUB\" au calendrier des sorties.",
+  "releaseCalendarDescription": "Ajoute le filtre « Afficher uniquement la liste de suivi » et enregistre dans le calendrier les prochaines sorties de cette liste.",
   "epilepsySwitch": "Option épilepsie",
   "epilepsyDescription": "Assombrir l'écran lorsque l'on saute la publicité",
   "userAgentSwitch": "Passer à des sites web de bureau",

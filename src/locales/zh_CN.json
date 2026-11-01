@@ -65,7 +65,7 @@
   "showRatingSwitch": "TMDB Rating：",
   "showRatingDescription": "为每部电影和剧集添加 TMDB 评级",
   "releaseCalendarSwitch": "添加发布日历选项：",
-  "releaseCalendarDescription": "在发布日历中添加 \"仅显示播放列表 \"和 \"过滤 DUB \"复选框",
+  "releaseCalendarDescription": "添加“仅显示关注列表”筛选器，并将关注列表中的即将播出内容保存到日历。",
   "epilepsySwitch": "癫痫选项",
   "epilepsyDescription": "跳过广告时使屏幕变暗",
   "userAgentSwitch": "切换到桌面网站",

@@ -12,7 +12,6 @@ startSharedFunctions(Platforms.Crunchyroll)
 
 const { data: settings, promise } = useBrowserSyncStorage<settingsType>("settings", defaultSettings)
 const { data: crunchyList, promise: crunchyListPromise } = useBrowserSyncStorage<CrunchyList>("crunchyList", [], false)
-const url = globalThis.location.href
 const date = new Date()
 const today = date.toISOString().split("T")[0]
 const config = { attributes: true, childList: true, subtree: true }
@@ -494,332 +493,295 @@ async function startdoubleClick() {
 }
 
 // #region Release Calendar
-function setReleaseRemoved(element: HTMLElement) {
-	element.classList.add("removed")
-	element.style.display = "none"
-}
-function showAllElements() {
-	const list = document.querySelectorAll("li article.release.js-release")
-	list.forEach((element) => {
-		if (!element.parentElement) return
-		element.parentElement.classList.remove("removed")
-		element.parentElement.style.display = "block"
-	})
-}
 
-const langs = [
-	"English",
-	"Deutsch",
-	"Français",
-	"Japanese",
-	"French",
-	"German",
-	"América Latina",
-	"Portuguese",
-	"Português",
-	"Spanish",
-	"Indonesian",
-	"Italian",
-	"Castilian",
-	"Russian",
-	"España",
-	"Italiano",
-	"Brasil",
-	"普通话",
-	"Русский",
-]
-const filterNoDubs = "all"
-const filterAllDubs = "none"
-const dubLanguageRegex = /\(([^()\d]+?)(?:\s+Dub)?\)(?!.*\([^()]*\))/
-function titleContainsDub(title: string) {
-	const isDub =
-		title?.includes("Dub") ||
-		/[^(]*\(\D*\)[^(]*/g.test(title) ||
-		// Array.from(langs).some((lang) => element?.textContent?.includes(lang)) ||
-		title?.includes("Audio")
-	if (isDub) {
-		const dubLanguage = dubLanguageRegex.exec(title)?.[1]?.trim()
-		if (dubLanguage && !langs.includes(dubLanguage)) {
-			langs.push(dubLanguage)
-		}
-	}
-	return isDub
-}
-
-function titleContainsAllowedDub(title: string) {
-	const selectedDubLanguage = settings.value.Crunchyroll.dubLanguage
-	if (selectedDubLanguage === filterNoDubs) return true
-	else if (selectedDubLanguage === filterAllDubs) return false
-	return title?.includes(selectedDubLanguage)
-}
-
-const getTitle = (el: Element | null) => el?.textContent?.trim() ?? ""
-type show = {
-	index: number
-	episode: number
-}
 export const getEpisodeRegex = /(\d+)(?!.*\d)/
-function filterFunctions() {
-	const showsByTitle = new Map<string, Array<show>>()
-	const list = document.querySelectorAll("li article.release.js-release")
-	list.forEach((element, index) => {
-		if (!element.parentElement) return
-		if (!element?.checkVisibility()) {
-			element.parentElement.classList.add("removed")
-			return
-		}
-		const titleElement = element?.querySelector("cite[itemprop='name']")
-		const title = getTitle(titleElement)
-		if (titleElement?.textContent) titleElement.textContent = title.replace(/Season \d*/, "")
-		const queuedFlag = element.querySelector("div.queue-flag:not(.queued)")
-		const premiereFlag = element.querySelector("div.premiere-flag")
-		const episodeNumber = Number.parseInt(
-			element.querySelector("a.available-episode-link")?.textContent?.match(getEpisodeRegex)?.[1] ?? "-1",
+
+const calendarHiddenClass = "streaming-enhanced-calendar-hidden"
+const savedCalendarAttribute = "data-enhanced-saved-calendar"
+
+function normalizeCalendarText(value: string, locale: string) {
+	return value.toLocaleLowerCase(locale).replace(/[\p{P}\p{Z}\s]/gu, "")
+}
+
+function getCalendarColumnDate(
+	dateLabel: string,
+	weekdayLabel: string,
+	locale: string,
+	referenceDate = new Date(),
+): Date | null {
+	const dateFormatter = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short" })
+	const weekdayFormatter = new Intl.DateTimeFormat(locale, { weekday: "long" })
+	const parts = dateFormatter.formatToParts(new Date(2026, 0, 15))
+	const dayComesBeforeMonth =
+		parts.findIndex((part) => part.type === "day") < parts.findIndex((part) => part.type === "month")
+	const numberMatches = [...dateLabel.matchAll(/\d+/g)]
+	const normalizedDateLabel = normalizeCalendarText(dateLabel, locale)
+
+	for (let month = 0; month < 12; month++) {
+		const monthLabel = dateFormatter
+			.formatToParts(new Date(2026, month, 15))
+			.find((part) => part.type === "month")?.value
+		if (!monthLabel) continue
+		const monthIndex = dateLabel.toLocaleLowerCase(locale).indexOf(monthLabel.toLocaleLowerCase(locale))
+		if (!normalizedDateLabel.includes(normalizeCalendarText(monthLabel, locale)) || monthIndex < 0) continue
+		const monthEnd = monthIndex + monthLabel.length
+		const dayMatch = numberMatches.find((match) =>
+			dayComesBeforeMonth ? (match.index ?? Number.MAX_SAFE_INTEGER) < monthIndex : (match.index ?? -1) >= monthEnd,
 		)
-		if (titleContainsDub(title) && !titleContainsAllowedDub(title)) {
-			setReleaseRemoved(element.parentElement)
-		} else if (settings.value.Crunchyroll.filterQueued && queuedFlag && !premiereFlag) {
-			setReleaseRemoved(element.parentElement)
-		} else if (settings.value.Crunchyroll.filterDuplicates) {
-			if (showsByTitle.has(title)) {
-				showsByTitle.get(title)?.push({ index, episode: episodeNumber })
-			} else {
-				showsByTitle.set(title, [{ index, episode: episodeNumber }])
+		const day = Number(dayMatch?.[0])
+		if (!day || day > 31) continue
+
+		const matchingDates: Date[] = []
+		for (let year = referenceDate.getFullYear() - 1; year <= referenceDate.getFullYear() + 1; year++) {
+			const candidate = new Date(year, month, day)
+			if (candidate.getMonth() !== month || candidate.getDate() !== day) continue
+			if (
+				!weekdayLabel ||
+				normalizeCalendarText(weekdayFormatter.format(candidate), locale) ===
+					normalizeCalendarText(weekdayLabel, locale)
+			) {
+				matchingDates.push(candidate)
 			}
 		}
-	})
-	// if there are multiple shows with the same title, only show the one with the highest episode number or the first index
-	showsByTitle.forEach((shows) => {
-		if (shows.length > 1) {
-			shows.sort((a, b) => {
-				const episodeDiff = b.episode - a.episode
-				if (episodeDiff !== 0) return episodeDiff
-				return a.index - b.index
-			})
-			shows.slice(1).forEach((show) => {
-				const element = list[show.index]
-				if (element.parentElement) setReleaseRemoved(element.parentElement)
-			})
+		if (matchingDates.length > 0) {
+			return matchingDates.sort(
+				(a, b) => Math.abs(a.getTime() - referenceDate.getTime()) - Math.abs(b.getTime() - referenceDate.getTime()),
+			)[0]
 		}
+	}
+	return null
+}
+
+export function parseCalendarReleaseTimestamp(
+	dateLabel: string,
+	weekdayLabel: string,
+	timeLabel: string,
+	locale: string,
+	referenceDate = new Date(),
+): string | null {
+	const releaseDate = getCalendarColumnDate(dateLabel, weekdayLabel, locale, referenceDate)
+	const timeMatch = timeLabel.match(/(\d{1,2}):(\d{2})(?:\s*([ap])\.?m\.?)?/i)
+	if (!releaseDate || !timeMatch) return null
+
+	let hours = Number(timeMatch[1])
+	const minutes = Number(timeMatch[2])
+	const meridiem = timeMatch[3]?.toLowerCase()
+	if (minutes > 59 || (meridiem ? hours < 1 || hours > 12 : hours > 23)) return null
+	if (meridiem === "p" && hours < 12) hours += 12
+	if (meridiem === "a" && hours === 12) hours = 0
+	releaseDate.setHours(hours, minutes, 0, 0)
+	return releaseDate.toISOString()
+}
+
+export function isCalendarReleaseQueued(card: ParentNode) {
+	return card.querySelector('[data-t="remove-from-watchlist-btn"]') !== null
+}
+
+export function shouldHideCalendarRelease(card: ParentNode, filterQueued: boolean) {
+	const isPremiere = card.querySelector('[data-t="premiere-tag"]') !== null
+	return filterQueued && !isCalendarReleaseQueued(card) && !isPremiere
+}
+
+function getCalendarItemKey(item: CrunchyList[number]) {
+	return `${item.href ?? ""}|${item.time}`
+}
+
+function getCalendarItemsFromPage(columns: HTMLElement[], locale: string): CrunchyList {
+	const items: CrunchyList = []
+	columns.forEach((column) => {
+		const dateLabel = column.querySelector(".day-date")?.textContent?.trim() ?? ""
+		const weekdayLabel = column.querySelector(".day-weekday")?.textContent?.trim() ?? ""
+		column
+			.querySelectorAll<HTMLElement>('[data-t="release-calendar-card"]:not([data-enhanced-saved-calendar])')
+			.forEach((card) => {
+				if (!isCalendarReleaseQueued(card)) return
+				const titleLink = card.querySelector<HTMLAnchorElement>('[data-t="series-page-link"]')
+				const timeLabel = card.querySelector('[data-t="publish-time"]')?.textContent ?? ""
+				const time = parseCalendarReleaseTimestamp(dateLabel, weekdayLabel, timeLabel, locale)
+				if (!titleLink?.href || !titleLink.textContent?.trim() || !time) return
+				items.push({ href: titleLink.href, name: titleLink.textContent.trim(), time })
+			})
 	})
+	return items
 }
 
-function createFilterElement(
-	filterType: "filterQueued" | "filterDuplicates",
-	filterText: string,
-	settingsValue: boolean,
-) {
-	const label = document.createElement("label")
-	const span = document.createElement("span")
-	span.style.display = "flex"
-	span.style.alignItems = "center"
-	const input = document.createElement("input")
-	input.type = "checkbox"
-	input.checked = settingsValue
-	input.id = filterType
-	input.onclick = function () {
-		settings.value.Crunchyroll[filterType] = input.checked
-		showAllElements()
-		filterFunctions()
-	}
-	const p = document.createElement("p")
-	p.style.width = "100px"
-	p.textContent = filterText
-	label.appendChild(span)
-	span.appendChild(input)
-	span.appendChild(p)
-	return label
+function createSavedCalendarCell(item: CrunchyList[number]) {
+	const cell = document.createElement("div")
+	cell.className = "grid-cell enhanced-saved-calendar-cell"
+	cell.setAttribute(savedCalendarAttribute, getCalendarItemKey(item))
+
+	const card = document.createElement("div")
+	card.className = "enhanced-saved-calendar-card"
+	const time = document.createElement("time")
+	time.textContent = new Date(item.time).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })
+	card.appendChild(time)
+
+	const title = item.href ? document.createElement("a") : document.createElement("span")
+	if (title instanceof HTMLAnchorElement) title.href = item.href ?? ""
+	title.textContent = item.name ?? ""
+	card.appendChild(title)
+	cell.appendChild(card)
+	return cell
 }
 
-function createDubLanguageSelectElement() {
-	const label = document.createElement("label")
-	const span = document.createElement("span")
-	span.style.display = "flex"
-	span.style.alignItems = "start"
-	span.style.flexDirection = "column"
-
-	const select = document.createElement("select")
-	select.id = "filterDubLanguage"
-	const selectedDubLanguage = settings.value.Crunchyroll.dubLanguage || filterAllDubs
-
-	const options = [filterAllDubs, filterNoDubs, ...langs]
-	options.forEach((lang) => {
-		const option = document.createElement("option")
-		option.value = lang
-		option.textContent = lang
-		select.appendChild(option)
+function syncSavedCalendar(columns: HTMLElement[], locale: string) {
+	const liveItems = getCalendarItemsFromPage(columns, locale)
+	const currentDate = new Date()
+	const upcomingLiveItems = liveItems.filter((item) => new Date(item.time) > currentDate)
+	const liveKeys = new Set(upcomingLiveItems.map(getCalendarItemKey))
+	const liveHrefs = new Set(
+		columns.flatMap((column) =>
+			Array.from(column.querySelectorAll<HTMLAnchorElement>('[data-t="series-page-link"]')).map((link) => link.href),
+		),
+	)
+	const previousItems = toRaw(crunchyList.value).filter((item) => {
+		const itemTime = new Date(item.time)
+		if (!item.href || !item.name || Number.isNaN(itemTime.getTime()) || itemTime <= currentDate) return false
+		return !liveHrefs.has(item.href) || liveKeys.has(getCalendarItemKey(item))
 	})
+	const itemsByKey = new Map<string, CrunchyList[number]>()
+	;[...previousItems, ...upcomingLiveItems].forEach((item) => itemsByKey.set(getCalendarItemKey(item), item))
+	const savedItems = [...itemsByKey.values()].sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
+	if (JSON.stringify(toRaw(crunchyList.value)) !== JSON.stringify(savedItems)) crunchyList.value = savedItems
 
-	select.value = selectedDubLanguage
-
-	if (!options.includes(selectedDubLanguage)) {
-		select.value = filterAllDubs
-		settings.value.Crunchyroll.dubLanguage = filterAllDubs
-	}
-
-	select.onchange = function () {
-		settings.value.Crunchyroll.dubLanguage = select.value
-		showAllElements()
-		filterFunctions()
-	}
-
-	const p = document.createElement("p")
-	p.textContent = "Show these dubs:"
-
-	label.appendChild(span)
-	span.appendChild(p)
-	span.appendChild(select)
-	return label
-}
-
-function addButtons() {
-	const toggleForm = document.querySelector("#filter_toggle_form") as HTMLElement
-	if (!toggleForm?.firstElementChild) return
-	toggleForm.style.display = "flex"
-	toggleForm.firstElementChild.appendChild(createDubLanguageSelectElement())
-	toggleForm.firstElementChild.appendChild(
-		createFilterElement("filterQueued", "Show Playlist only", settings.value.Crunchyroll.filterQueued),
-	)
-	toggleForm.firstElementChild.appendChild(
-		createFilterElement("filterDuplicates", "Filter Duplicates", settings.value.Crunchyroll.filterDuplicates),
-	)
-}
-// start of add CrunchyList to Crunchyroll
-function addShowsToList(position: HTMLElement, list: CrunchyList) {
-	list.forEach((element) => {
-		const article = document.createElement("article")
-		article.className = "release js-release"
-
-		const time = document.createElement("time")
-		time.className = "available-time"
-		time.textContent = new Date(element.time).toLocaleString([], { hour: "2-digit", minute: "2-digit" })
-
-		const div1 = document.createElement("div")
-		const div2 = document.createElement("div")
-		div2.className = "queue-flag queued"
-
-		const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-		svg.setAttribute("viewBox", "0 0 48 48")
-
-		const use = document.createElementNS("http://www.w3.org/2000/svg", "use")
-		use.setAttributeNS(
-			"http://www.w3.org/1999/xlink",
-			"xlink:href",
-			"/i/svg/simulcastcalendar/calendar_icons.svg#cr_bookmark",
+	const currentWeekDates = columns.map((column) => {
+		const dateLabel = column.querySelector(".day-date")?.textContent?.trim() ?? ""
+		const weekdayLabel = column.querySelector(".day-weekday")?.textContent?.trim() ?? ""
+		return getCalendarColumnDate(dateLabel, weekdayLabel, locale)
+	})
+	const displayedKeys = new Set(upcomingLiveItems.map(getCalendarItemKey))
+	const savedItemsByKey = new Map(savedItems.map((item) => [getCalendarItemKey(item), item]))
+	document.querySelectorAll<HTMLElement>(`[${savedCalendarAttribute}]`).forEach((cell) => {
+		const key = cell.getAttribute(savedCalendarAttribute) ?? ""
+		const item = savedItemsByKey.get(key)
+		const column = cell.closest<HTMLElement>('section[data-t="day-column"]')
+		const dateLabel = column?.querySelector(".day-date")?.textContent?.trim() ?? ""
+		const weekdayLabel = column?.querySelector(".day-weekday")?.textContent?.trim() ?? ""
+		const columnDate = getCalendarColumnDate(dateLabel, weekdayLabel, locale)
+		const itemDate = item ? new Date(item.time) : null
+		const isOnCurrentDay =
+			columnDate &&
+			itemDate &&
+			columnDate.getFullYear() === itemDate.getFullYear() &&
+			columnDate.getMonth() === itemDate.getMonth() &&
+			columnDate.getDate() === itemDate.getDate()
+		if (!item || !isOnCurrentDay) cell.remove()
+	})
+	savedItems.forEach((item) => {
+		const itemDate = new Date(item.time)
+		const isDisplayed = currentWeekDates.some(
+			(day) =>
+				day &&
+				day.getFullYear() === itemDate.getFullYear() &&
+				day.getMonth() === itemDate.getMonth() &&
+				day.getDate() === itemDate.getDate(),
 		)
-
-		svg.appendChild(use)
-		div2.appendChild(svg)
-
-		const h1 = document.createElement("h1")
-		h1.className = "season-name"
-
-		const a = document.createElement("a")
-		a.className = "js-season-name-link"
-		a.href = element?.href || ""
-		a.setAttribute("itemprop", "url")
-
-		const cite = document.createElement("cite")
-		cite.setAttribute("itemprop", "name")
-		cite.textContent = element?.name || ""
-
-		a.appendChild(cite)
-		h1.appendChild(a)
-
-		div1.appendChild(div2)
-		div1.appendChild(h1)
-
-		article.appendChild(time)
-		article.appendChild(div1)
-		position.appendChild(article)
-	})
-}
-function clickOnCurrentDay() {
-	const days = document.querySelectorAll(".specific-date [datetime]")
-	for (const day of days) {
-		const dateOnPage = new Date(day?.getAttribute("datetime") ?? "")
-		// if the day of the week is the same as today click on it, like if its Monday click on Monday
-		if (date.getDay() == dateOnPage.getDay()) {
-			day.closest("li.day")?.classList.add("active")
-			// isCurrentWeek
-			return date.toLocaleDateString() == dateOnPage.toLocaleDateString()
-		}
-	}
-	return false
-}
-function createLocalList() {
-	const localList: CrunchyList = []
-	document.querySelectorAll("ol.releases li:not(.removed) article.release.js-release").forEach((element) => {
-		const queuedFlag = element.querySelector("div.queue-flag:not(.queued)")
-		const premiereFlag = element.querySelector("div.premiere-flag")
-		if (premiereFlag && !queuedFlag) return
-		const h1 = element.querySelector("h1.season-name a") as HTMLAnchorElement
-		const name = h1?.firstChild?.nextSibling?.textContent
-		const href = h1?.href
-		const time = element.firstElementChild?.getAttribute("datetime") ?? ""
-		localList.push({ href, name, time })
-	})
-	return localList
-}
-function filterOldList(isCurrentWeek: boolean, localList: CrunchyList) {
-	let oldList = toRaw(crunchyList.value)
-	const lastElement = localList.at(-1)
-	if (!lastElement?.time) return oldList
-	const lastTime = new Date(lastElement.time)
-	const [lastDay, lastHr, lastMin] = [lastTime.getDay(), lastTime.getHours(), lastTime.getMinutes()]
-	// delete all previous weekdays from oldList
-	if (!isCurrentWeek) {
-		oldList = []
-	} else {
-		// delete all items from weekday before today
-		oldList = oldList
-			.filter((item) => {
-				return item && shiftSunday(date.getDay()) - shiftSunday(new Date(item.time).getDay()) <= 0
-			})
-			// delete all items from same weekday before lastElement time
-			.filter((item) => {
-				const itemTime = new Date(item.time)
-				const itemHr = itemTime.getHours()
-				// no shows today yet
-				const itemDay = itemTime.getDay()
-				return (
-					lastDay != itemDay ||
-					itemDay != date.getDay() ||
-					itemHr > lastHr ||
-					(itemHr == lastHr && itemTime.getMinutes() > lastMin)
-				)
-			})
-	}
-	return oldList
-}
-const shiftSunday = (a: number) => (a + 6) % 7
-function addSavedCrunchyList() {
-	const localList = createLocalList()
-	const isCurrentWeek = clickOnCurrentDay()
-	const oldList = localList.length > 0 ? filterOldList(isCurrentWeek, localList) : toRaw(crunchyList.value)
-	crunchyList.value = localList.concat(oldList)
-	if (isCurrentWeek) {
-		// now add the old list to the website list
-		document.querySelectorAll("section.calendar-day").forEach((element) => {
-			const datetime = element.querySelector("time")?.getAttribute("datetime") ?? ""
-			const weekday = new Date(datetime).getDay()
-			// remove Schedule Coming Soon text
-			if (shiftSunday(date.getDay()) - shiftSunday(weekday) < 0)
-				element?.children?.[1]?.firstChild?.nextSibling?.remove()
-			addShowsToList(
-				element.children[1] as HTMLElement,
-				oldList.filter((item) => new Date(item.time).getDay() == weekday),
+		if (!isDisplayed || itemDate <= currentDate || displayedKeys.has(getCalendarItemKey(item))) return
+		const column = columns.find((candidate) => {
+			const dateLabel = candidate.querySelector(".day-date")?.textContent?.trim() ?? ""
+			const weekdayLabel = candidate.querySelector(".day-weekday")?.textContent?.trim() ?? ""
+			const day = getCalendarColumnDate(dateLabel, weekdayLabel, locale)
+			return (
+				day &&
+				day.getFullYear() === itemDate.getFullYear() &&
+				day.getMonth() === itemDate.getMonth() &&
+				day.getDate() === itemDate.getDate()
 			)
 		})
-	}
+		const dayBody = column?.querySelector<HTMLElement>(".day-body")
+		const itemKey = getCalendarItemKey(item)
+		const alreadySaved = Array.from(dayBody?.querySelectorAll<HTMLElement>(`[${savedCalendarAttribute}]`) ?? []).some(
+			(cell) => cell.getAttribute(savedCalendarAttribute) === itemKey,
+		)
+		if (dayBody && !alreadySaved) dayBody.appendChild(createSavedCalendarCell(item))
+	})
 }
-async function Crunchyroll_ReleaseCalendar() {
-	if (url.includes("simulcastcalendar")) {
-		filterFunctions()
-		if (!document.querySelector("#filterQueued")) addButtons()
-		// add saved CrunchyList and click on current day
-		addSavedCrunchyList()
+
+function applyQueuedCalendarFilter() {
+	const filter = document.querySelector<HTMLInputElement>("#enhanced-filter-queued")
+	if (filter && filter.checked !== settings.value.Crunchyroll.filterQueued) {
+		filter.checked = settings.value.Crunchyroll.filterQueued
 	}
+	document
+		.querySelectorAll<HTMLElement>('[data-t="release-calendar-card"]:not([data-enhanced-saved-calendar])')
+		.forEach((card) => {
+			const cell = card.closest<HTMLElement>('[data-t="release-cell"]') ?? card
+			const shouldHide = shouldHideCalendarRelease(card, settings.value.Crunchyroll.filterQueued)
+			if (cell.classList.contains(calendarHiddenClass) !== shouldHide) {
+				cell.classList.toggle(calendarHiddenClass, shouldHide)
+			}
+		})
+}
+
+function addCalendarStyles() {
+	if (document.getElementById("enhanced-crunchyroll-calendar-style")) return
+	const style = document.createElement("style")
+	style.id = "enhanced-crunchyroll-calendar-style"
+	style.textContent = `
+		.${calendarHiddenClass} { display: none !important; }
+		.enhanced-saved-calendar-card {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+			height: 100%;
+			padding: 0.75rem;
+			border: 1px solid currentColor;
+			border-radius: 0.5rem;
+			color: inherit;
+			background: rgba(128, 128, 128, 0.12);
+		}
+		.enhanced-saved-calendar-card a { color: inherit; font-weight: 600; }
+		.enhanced-calendar-filter { display: inline-flex; align-items: center; gap: 0.5rem; }
+	`
+	document.head.appendChild(style)
+}
+
+function addQueuedCalendarFilter() {
+	const titleGroup = document.querySelector<HTMLElement>(".title-group")
+	if (!titleGroup || titleGroup.querySelector("#enhanced-filter-queued")) return
+	const label = document.createElement("label")
+	label.className = "enhanced-calendar-filter"
+	label.htmlFor = "enhanced-filter-queued"
+	const input = document.createElement("input")
+	input.id = "enhanced-filter-queued"
+	input.type = "checkbox"
+	input.checked = settings.value.Crunchyroll.filterQueued
+	input.addEventListener("change", () => {
+		settings.value.Crunchyroll.filterQueued = input.checked
+		applyQueuedCalendarFilter()
+	})
+	const text = document.createElement("span")
+	text.textContent = "Show watchlist only"
+	label.append(input, text)
+	titleGroup.appendChild(label)
+}
+
+let calendarSyncTimeout: ReturnType<typeof setTimeout> | undefined
+let calendarObserver: MutationObserver | undefined
+function syncReleaseCalendar() {
+	if (!location.pathname.includes("/releasecalendar")) return
+	const columns = Array.from(document.querySelectorAll<HTMLElement>('section[data-t="day-column"]'))
+	if (columns.length === 0) return
+	addCalendarStyles()
+	addQueuedCalendarFilter()
+	applyQueuedCalendarFilter()
+	syncSavedCalendar(columns, document.documentElement.lang || navigator.language)
+}
+
+function Crunchyroll_ReleaseCalendar() {
+	if (calendarObserver) return
+	calendarObserver = new MutationObserver(() => {
+		clearTimeout(calendarSyncTimeout)
+		calendarSyncTimeout = setTimeout(syncReleaseCalendar, 100)
+	})
+	calendarObserver.observe(document.documentElement, {
+		attributes: true,
+		attributeFilter: ["data-t"],
+		characterData: true,
+		childList: true,
+		subtree: true,
+	})
+	syncReleaseCalendar()
 }
 // #endregion
 // #endregion

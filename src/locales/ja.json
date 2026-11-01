@@ -65,7 +65,7 @@
   "showRatingSwitch": "TMDBの評価",
   "showRatingDescription": "すべての映画とシリーズにTMDBの評価を加える",
   "releaseCalendarSwitch": "リリースカレンダーのオプションを追加：",
-  "releaseCalendarDescription": "リリースカレンダーに「プレイリストのみ表示」と「DUBをフィルタリング」のチェックボックスを追加",
+  "releaseCalendarDescription": "「ウォッチリストのみ表示」フィルターを追加し、今後のウォッチリスト作品をカレンダーに保存します。",
   "epilepsySwitch": "てんかんオプション",
   "epilepsyDescription": "広告スキップ時に画面を暗くする",
   "userAgentSwitch": "デスクトップウェブサイトへの切り替え",

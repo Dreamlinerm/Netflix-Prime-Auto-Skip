@@ -65,7 +65,7 @@
   "showRatingSwitch": "Classificações TMDB:",
   "showRatingDescription": "Adiciona a classificação do TMDB a todos os filmes e séries",
   "releaseCalendarSwitch": "Incluir calendário de lançamento:",
-  "releaseCalendarDescription": "Adiciona as caixas de seleção \"Mostrar somente listas de reprodução\" e \"Filtrar\" ao calendário de lançamentos",
+  "releaseCalendarDescription": "Adiciona o filtro \"Mostrar apenas a lista de interesses\" e salva no calendário os próximos lançamentos dessa lista.",
   "epilepsySwitch": "Opção de epilepsia",
   "epilepsyDescription": "Escurecer a tela ao pular o anúncio",
   "userAgentSwitch": "Mudar para versão PC",

@@ -65,7 +65,7 @@
   "showRatingSwitch": "Ocena TMDB:",
   "showRatingDescription": "Dodawanie oceny TMDB do każdego filmu i serialu",
   "releaseCalendarSwitch": "Dodaj opcje kalendarza wydań:",
-  "releaseCalendarDescription": "Dodaje pola wyboru \"Pokaż tylko listy odtwarzania\" i \"Filtruj DUB\" do kalendarza wydań.",
+  "releaseCalendarDescription": "Dodaje filtr „Pokaż tylko listę obserwowanych” i zapisuje nadchodzące premiery z tej listy w kalendarzu.",
   "epilepsySwitch": "Opcja padaczki",
   "epilepsyDescription": "Przyciemnianie ekranu podczas pomijania reklam",
   "userAgentSwitch": "Przełączanie na witryny stacjonarne",

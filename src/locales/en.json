@@ -87,7 +87,7 @@
   "showRatingSwitch": "TMDB Rating:",
   "showRatingDescription": "Adding the TMDB rating to every movie and series",
   "releaseCalendarSwitch": "Add Release Calendar options:",
-  "releaseCalendarDescription": "Adds the checkboxes 'Show Playlists only' and 'Filter DUB' to the release calendar",
+  "releaseCalendarDescription": "Adds a 'Show watchlist only' filter and saves upcoming watchlist releases to the calendar",
   "epilepsySwitch": "Epilepsy option",
   "epilepsyDescription": "Darken the screen when skipping the ad",
   "userAgentSwitch": "Switch to desktop websites",

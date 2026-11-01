@@ -65,7 +65,7 @@
   "showRatingSwitch": "TMDB Değerlendirmesi:",
   "showRatingDescription": "Her film ve diziye TMDB derecelendirmesinin eklenmesi",
   "releaseCalendarSwitch": "Yayın Takvimi seçenekleri ekleyin:",
-  "releaseCalendarDescription": "Yayın takvimine 'Yalnızca Çalma Listelerini Göster' ve 'DUB'ı Filtrele' onay kutularını ekler",
+  "releaseCalendarDescription": "'Yalnızca izleme listesini göster' filtresini ekler ve listedeki yaklaşan yayınları takvime kaydeder.",
   "epilepsySwitch": "Epilepsi seçeneği",
   "epilepsyDescription": "Reklamı atlarken ekranı karartın",
   "userAgentSwitch": "Masaüstü web sitelerine geçiş yapın",
