@@ -2,6 +2,7 @@
 
 # 1.1.109
 
+- Netflix: fix auto pick profile
 - Crunchyroll: adjust to new release calendar.
 
 # 1.1.108

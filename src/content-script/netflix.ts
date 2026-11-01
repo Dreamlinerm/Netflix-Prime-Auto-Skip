@@ -52,10 +52,13 @@ async function startNetflix() {
 	await promise
 	await hiddenTitlesPromise
 	logStartOfAddon()
-	if (settings.value.Netflix?.profile) AutoPickProfile()
 	if (settings.value.Netflix?.skipAd) Netflix_SkipAdInterval()
 	if (settings.value.Netflix?.speedSlider) Netflix_SpeedKeyboard()
 	NetflixObserver.observe(document, config)
+	if (settings.value.Netflix?.profile) {
+		// 100ms timeout wait for page to be loaded.
+		setTimeout(() => AutoPickProfile(), 500)
+	}
 }
 
 // #region Netflix
