@@ -705,6 +705,11 @@ export function createSavedCalendarCell(item: CrunchyList[number], locale: strin
 	return cell
 }
 
+export function updateSavedCalendarCellTime(cell: ParentNode, time: string, locale: string, use24Hour: boolean) {
+	const timeElement = cell.querySelector<HTMLElement>('[data-t="publish-time"]')
+	if (timeElement) timeElement.textContent = formatCalendarReleaseTime(time, locale, use24Hour)
+}
+
 function syncSavedCalendar(columns: HTMLElement[], locale: string) {
 	const currentDate = new Date()
 	const use24Hour =
@@ -725,8 +730,7 @@ function syncSavedCalendar(columns: HTMLElement[], locale: string) {
 		if (!item) {
 			cell.remove()
 		} else {
-			const time = cell.querySelector("time")
-			if (time) time.textContent = formatCalendarReleaseTime(item.time, locale, use24Hour)
+			updateSavedCalendarCellTime(cell, item.time, locale, use24Hour)
 			tilesToDisplay.delete(key)
 		}
 	})
@@ -802,6 +806,10 @@ function syncReleaseCalendar() {
 
 function Crunchyroll_ReleaseCalendar() {
 	if (calendarObserver) return
+	document.addEventListener("change", (event) => {
+		if (event.target instanceof HTMLInputElement && event.target.name === "release-calendar-time-format")
+			syncReleaseCalendar()
+	})
 	calendarObserver = new MutationObserver(() => {
 		clearTimeout(calendarSyncTimeout)
 		calendarSyncTimeout = setTimeout(syncReleaseCalendar, 100)

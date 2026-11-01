@@ -9,6 +9,7 @@ import {
 	createSavedCalendarCell,
 	mergeCalendarItems,
 	formatCalendarReleaseTime,
+	updateSavedCalendarCellTime,
 	parseCalendarReleaseTimestamp,
 	shouldDisplaySavedCalendarItem,
 	shouldHideCalendarRelease,
@@ -187,6 +188,18 @@ describe("release calendar", () => {
 
 		expect(formatCalendarReleaseTime(time, "en-US", true)).toBe("15:05")
 		expect(formatCalendarReleaseTime(time, "en-US", false)).toBe("3:05 PM")
+	})
+
+	it("updates an existing saved tile when the calendar time format changes", () => {
+		const cell = document.createElement("div")
+		cell.innerHTML = '<span data-t="publish-time"></span>'
+		const time = new Date(2026, 0, 4, 15, 5).toISOString()
+
+		updateSavedCalendarCellTime(cell, time, "en-US", false)
+		expect(cell.querySelector('[data-t="publish-time"]')?.textContent).toBe("3:05 PM")
+
+		updateSavedCalendarCellTime(cell, time, "en-US", true)
+		expect(cell.querySelector('[data-t="publish-time"]')?.textContent).toBe("15:05")
 	})
 
 	it("parses localized weekdays and 12-hour release times without relying on the calendar date", () => {
