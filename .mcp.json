@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "firefox-devtools": {
+      "command": "cmd",
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@mozilla/firefox-devtools-mcp@latest",
+        "--connect-existing",
+        "--marionette-port",
+        "2828",
+        "--tool-preset",
+        "developer"
+      ]
+    }
+  }
+}

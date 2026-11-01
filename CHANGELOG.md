@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.1.109
+
+- Crunchyroll: adjust to new release calendar.
+
 # 1.1.108
 
 - Netflix: fixed auto select profile
