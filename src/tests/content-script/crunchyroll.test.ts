@@ -4,6 +4,7 @@ import {
 	isCalendarReleaseAlreadyShown,
 	isCalendarReleaseUpcoming,
 	isCalendarReleaseQueued,
+	formatCalendarReleaseTime,
 	parseCalendarReleaseTimestamp,
 	shouldHideCalendarRelease,
 	shouldBlockPreviewSkip,
@@ -78,6 +79,13 @@ describe("release calendar", () => {
 		expect(isCalendarReleaseAlreadyShown("  MY HERO ACADEMIA  ", shownTitles, "en")).toBe(true)
 		expect(isCalendarReleaseAlreadyShown("Another Show", shownTitles, "en")).toBe(false)
 		expect(isCalendarReleaseAlreadyShown(undefined, shownTitles, "en")).toBe(false)
+	})
+
+	it("formats saved release times according to the calendar's time format", () => {
+		const time = new Date(2026, 0, 4, 15, 5).toISOString()
+
+		expect(formatCalendarReleaseTime(time, "en-US", true)).toBe("15:05")
+		expect(formatCalendarReleaseTime(time, "en-US", false)).toBe("3:05 PM")
 	})
 
 	it("parses localized weekdays and 12-hour release times without relying on the calendar date", () => {

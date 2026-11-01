@@ -566,6 +566,12 @@ export function isCalendarReleaseAlreadyShown(
 	return Array.from(shownTitles).some((shownTitle) => normalizeCalendarText(shownTitle, locale) === normalizedTitle)
 }
 
+export function formatCalendarReleaseTime(time: string, locale: string, use24Hour?: boolean) {
+	const options: Intl.DateTimeFormatOptions = { hour: "numeric", minute: "2-digit" }
+	if (use24Hour !== undefined) options.hourCycle = use24Hour ? "h23" : "h12"
+	return new Date(time).toLocaleTimeString(locale, options)
+}
+
 export function shouldHideCalendarRelease(card: ParentNode, filterQueued: boolean) {
 	const isPremiere = card.querySelector('[data-t="premiere-tag"]') !== null
 	return filterQueued && !isCalendarReleaseQueued(card) && !isPremiere
@@ -602,7 +608,7 @@ function getCalendarItemsFromPage(
 	return { items, shownTitles }
 }
 
-function createSavedCalendarCell(item: CrunchyList[number]) {
+function createSavedCalendarCell(item: CrunchyList[number], locale: string, use24Hour: boolean) {
 	const cell = document.createElement("div")
 	cell.className = "grid-cell enhanced-saved-calendar-cell"
 	cell.setAttribute(savedCalendarAttribute, getCalendarItemKey(item))
@@ -610,7 +616,7 @@ function createSavedCalendarCell(item: CrunchyList[number]) {
 	const card = document.createElement("div")
 	card.className = "enhanced-saved-calendar-card"
 	const time = document.createElement("time")
-	time.textContent = new Date(item.time).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })
+	time.textContent = formatCalendarReleaseTime(item.time, locale, use24Hour)
 	card.appendChild(time)
 
 	const title = item.href ? document.createElement("a") : document.createElement("span")
@@ -623,6 +629,8 @@ function createSavedCalendarCell(item: CrunchyList[number]) {
 
 function syncSavedCalendar(columns: HTMLElement[], locale: string) {
 	const currentDate = new Date()
+	const use24Hour =
+		document.querySelector<HTMLInputElement>('input[name="release-calendar-time-format"]')?.checked ?? false
 	const { items: liveItems, shownTitles } = getCalendarItemsFromPage(columns, locale)
 	const upcomingLiveItems = liveItems.filter((item) => isCalendarReleaseUpcoming(item.time, currentDate))
 	const previousItems = toRaw(crunchyList.value).filter((item) => {
@@ -634,12 +642,17 @@ function syncSavedCalendar(columns: HTMLElement[], locale: string) {
 	const savedItems = [...itemsByKey.values()].sort((a, b) => Date.parse(a.time) - Date.parse(b.time))
 	if (JSON.stringify(toRaw(crunchyList.value)) !== JSON.stringify(savedItems)) crunchyList.value = savedItems
 
+	document.querySelectorAll('[data-t="day-empty-message"]').forEach((message) => message.remove())
 	const displayedKeys = new Set(upcomingLiveItems.map(getCalendarItemKey))
 	const savedItemsByKey = new Map(savedItems.map((item) => [getCalendarItemKey(item), item]))
 	document.querySelectorAll<HTMLElement>(`[${savedCalendarAttribute}]`).forEach((cell) => {
 		const key = cell.getAttribute(savedCalendarAttribute) ?? ""
 		const item = savedItemsByKey.get(key)
 		if (!item || !isCalendarReleaseUpcoming(item.time, currentDate)) cell.remove()
+		else {
+			const time = cell.querySelector("time")
+			if (time) time.textContent = formatCalendarReleaseTime(item.time, locale, use24Hour)
+		}
 	})
 	savedItems.forEach((item) => {
 		if (
@@ -658,7 +671,7 @@ function syncSavedCalendar(columns: HTMLElement[], locale: string) {
 		const alreadySaved = Array.from(dayBody?.querySelectorAll<HTMLElement>(`[${savedCalendarAttribute}]`) ?? []).some(
 			(cell) => cell.getAttribute(savedCalendarAttribute) === itemKey,
 		)
-		if (dayBody && !alreadySaved) dayBody.appendChild(createSavedCalendarCell(item))
+		if (dayBody && !alreadySaved) dayBody.appendChild(createSavedCalendarCell(item, locale, use24Hour))
 	})
 }
 
@@ -741,7 +754,7 @@ function Crunchyroll_ReleaseCalendar() {
 	})
 	calendarObserver.observe(document.documentElement, {
 		attributes: true,
-		attributeFilter: ["data-t"],
+		attributeFilter: ["data-t", "aria-checked"],
 		characterData: true,
 		childList: true,
 		subtree: true,
