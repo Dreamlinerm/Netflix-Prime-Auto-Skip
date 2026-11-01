@@ -243,8 +243,10 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 				video.playbackRate = parseFloat(alreadySlider.value) / 10
 			}
 			alreadySlider.oninput = function () {
-				if (speed) speed.textContent = (parseFloat(alreadySlider.value) / 10).toFixed(1) + "x"
-				video.playbackRate = parseFloat(alreadySlider.value) / 10
+				const sliderValue = parseFloat(alreadySlider.value) / 10
+				if (speed) speed.textContent = sliderValue.toFixed(1) + "x"
+				video.playbackRate = sliderValue
+				videoSpeed.value = sliderValue
 			}
 		}
 	}
