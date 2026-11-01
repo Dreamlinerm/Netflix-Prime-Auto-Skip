@@ -494,6 +494,9 @@ async function startdoubleClick() {
 }
 
 // #region Release Calendar
+// Save queued shows with their series links and weekday/airtime. Restore saved shows only for upcoming slots;
+// prune past airtimes and keep a prior-day entry only while its title is still listed in Crunchyroll's calendar.
+// The watchlist-only filter leaves premieres visible, and restored tiles follow Crunchyroll's layout and time format.
 
 export const getEpisodeRegex = /(\d+)(?!.*\d)/
 
@@ -555,6 +558,19 @@ export function isCalendarReleaseUpcoming(time: string, now = new Date()) {
 	const daysUntilRelease = (release.getDay() - now.getDay() + 7) % 7
 	if (daysUntilRelease !== 0) return true
 	return release.getHours() * 60 + release.getMinutes() > now.getHours() * 60 + now.getMinutes()
+}
+
+export function isCalendarReleaseOnPastDay(time: string, columns: HTMLElement[], locale: string, now = new Date()) {
+	const releaseWeekday = new Date(time).getDay()
+	const currentColumnIndex = columns.findIndex((column) => {
+		const weekdayLabel = column.querySelector(".day-weekday")?.textContent?.trim() ?? ""
+		return getCalendarWeekdayIndex(weekdayLabel, locale) === now.getDay()
+	})
+	const releaseColumnIndex = columns.findIndex((column) => {
+		const weekdayLabel = column.querySelector(".day-weekday")?.textContent?.trim() ?? ""
+		return getCalendarWeekdayIndex(weekdayLabel, locale) === releaseWeekday
+	})
+	return currentColumnIndex >= 0 && releaseColumnIndex >= 0 && releaseColumnIndex < currentColumnIndex
 }
 
 export function isCalendarReleaseAlreadyShown(
@@ -661,7 +677,11 @@ function syncSavedCalendar(columns: HTMLElement[], locale: string) {
 	const { items: liveItems, shownTitles } = getCalendarItemsFromPage(columns, locale)
 	const upcomingLiveItems = liveItems.filter((item) => isCalendarReleaseUpcoming(item.time, currentDate))
 	const previousItems = toRaw(crunchyList.value).filter((item) => {
-		if (!item.href || !item.name || !isCalendarReleaseUpcoming(item.time, currentDate)) return false
+		if (!item.href || !item.name) return false
+		if (isCalendarReleaseOnPastDay(item.time, columns, locale, currentDate)) {
+			return isCalendarReleaseAlreadyShown(item.name, shownTitles, locale)
+		}
+		if (!isCalendarReleaseUpcoming(item.time, currentDate)) return false
 		return !isCalendarReleaseAlreadyShown(item.name, shownTitles, locale)
 	})
 	const itemsByKey = new Map<string, CrunchyList[number]>()

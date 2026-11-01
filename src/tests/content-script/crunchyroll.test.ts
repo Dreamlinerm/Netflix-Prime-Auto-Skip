@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest"
 import {
 	getEpisodeRegex,
 	isCalendarReleaseAlreadyShown,
+	isCalendarReleaseOnPastDay,
 	isCalendarReleaseUpcoming,
 	isCalendarReleaseQueued,
 	getCalendarItemsFromPage,
@@ -110,6 +111,26 @@ describe("release calendar", () => {
 		expect(isCalendarReleaseUpcoming(previousSundayFutureAirtime, now)).toBe(true)
 		expect(isCalendarReleaseUpcoming(previousSundayPastAirtime, now)).toBe(false)
 		expect(isCalendarReleaseUpcoming(previousMondayAirtime, now)).toBe(true)
+	})
+
+	it("treats calendar columns before today as past, including when the week wraps", () => {
+		const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+		const columns = weekdays.map((weekday) => {
+			const column = document.createElement("section")
+			column.innerHTML = `<span class="day-weekday">${weekday}</span>`
+			return column
+		})
+		const now = new Date(2026, 10, 4, 10, 0)
+		const monday = new Date(2026, 10, 2, 15, 0).toISOString()
+		const wednesday = new Date(2026, 10, 4, 9, 0).toISOString()
+		const sunday = new Date(2026, 10, 1, 15, 0).toISOString()
+
+		expect(isCalendarReleaseOnPastDay(monday, columns, "en", now)).toBe(true)
+		expect(isCalendarReleaseOnPastDay(wednesday, columns, "en", now)).toBe(false)
+		expect(isCalendarReleaseOnPastDay(sunday, columns, "en", now)).toBe(false)
+
+		const sundayNow = new Date(2026, 10, 1, 10, 0)
+		expect(isCalendarReleaseOnPastDay(monday, columns, "en", sundayNow)).toBe(true)
 	})
 
 	it("matches already shown releases by show title, regardless of URL or airtime", () => {
