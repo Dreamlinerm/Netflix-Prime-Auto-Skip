@@ -213,6 +213,7 @@ async function Amazon_Watch_Credits() {
 	}
 }
 const AmazonSliderStyle = "height: 1em;background: rgb(221, 221, 221);display: none;width:200px;"
+const AmazonSliderContainerStyle = "display:flex;align-items:center;gap:8px;width:max-content;"
 async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
 		let pauseButton = undefined
@@ -228,16 +229,17 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 				pauseButton = document.querySelector("#atvwebplayersdk-play-pause-button") as HTMLElement
 				position = pauseButton?.parentElement?.parentElement?.parentElement?.lastChild as HTMLElement
 			}
-			if (position)
-				createSlider(
+			if (position) {
+				const { slider } = createSlider(
 					video,
 					videoSpeed,
 					position,
 					AmazonSliderStyle,
 					"cursor: pointer;margin: 0;",
-					"",
+					AmazonSliderContainerStyle,
 					nextEpisodeButton ?? pauseButton,
 				)
+			}
 		} else {
 			// need to resync the slider with the video sometimes
 			const speed = document.querySelector(".dv-player-fullscreen #videoSpeed") as HTMLElement
