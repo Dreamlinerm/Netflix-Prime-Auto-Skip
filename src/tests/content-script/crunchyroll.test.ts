@@ -5,6 +5,7 @@ import {
 	isCalendarReleaseUpcoming,
 	isCalendarReleaseQueued,
 	getCalendarItemsFromPage,
+	createSavedCalendarCell,
 	formatCalendarReleaseTime,
 	parseCalendarReleaseTimestamp,
 	shouldHideCalendarRelease,
@@ -65,6 +66,25 @@ describe("release calendar", () => {
 		expect(items).toHaveLength(1)
 		expect(items[0].href).toContain("/series/")
 		expect(items[0].href).toBe("https://www.crunchyroll.com/series/series-id/series-title")
+	})
+
+	it("builds restored calendar tiles with Crunchyroll's card structure and the extension SVG", () => {
+		const cell = createSavedCalendarCell(
+			{
+				href: "https://www.crunchyroll.com/series/series-id/series-title",
+				name: "Series Name",
+				time: new Date(2026, 0, 4, 14, 30).toISOString(),
+			},
+			"en",
+			true,
+		)
+
+		expect(cell.querySelector(".release-calendar-card--Aj27Z.erc-release-card")).not.toBeNull()
+		expect(cell.querySelector(".release-calendar-card__thumbnail-wrapper--AYnvY")).not.toBeNull()
+		expect(cell.querySelector(".release-calendar-card__body--qWW18")).not.toBeNull()
+		expect(cell.querySelector('[data-t="publish-time"]')?.textContent).toBe("14:30")
+		expect(cell.querySelector(".release-calendar-card__title-link--49V7a")?.textContent).toBe("Series Name")
+		expect(cell.querySelector("img")?.getAttribute("src")).toMatch(/^data:image\/svg\+xml/)
 	})
 
 	it("keeps premieres visible when filtering to watchlist shows", () => {

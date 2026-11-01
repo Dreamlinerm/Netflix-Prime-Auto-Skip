@@ -1,4 +1,5 @@
 import { sendMessage } from "webext-bridge/content-script"
+import extensionLogo from "@/assets/Logo/NetflixAmazon Auto-Skip.svg?inline"
 import {
 	startSharedFunctions,
 	Platforms,
@@ -607,21 +608,48 @@ export function getCalendarItemsFromPage(
 	return { items, shownTitles }
 }
 
-function createSavedCalendarCell(item: CrunchyList[number], locale: string, use24Hour: boolean) {
+export function createSavedCalendarCell(item: CrunchyList[number], locale: string, use24Hour: boolean) {
 	const cell = document.createElement("div")
 	cell.className = "grid-cell enhanced-saved-calendar-cell"
 	cell.setAttribute(savedCalendarAttribute, getCalendarItemKey(item))
 
 	const card = document.createElement("div")
-	card.className = "enhanced-saved-calendar-card"
-	const time = document.createElement("time")
-	time.textContent = formatCalendarReleaseTime(item.time, locale, use24Hour)
-	card.appendChild(time)
+	card.className = "release-calendar-card--Aj27Z erc-release-card"
+	const imageLink = document.createElement("a")
+	imageLink.className = "release-calendar-card__thumbnail-wrapper--AYnvY"
+	imageLink.href = item.href ?? ""
+	imageLink.setAttribute("data-t", "series-page-link")
+	const thumbnail = document.createElement("div")
+	thumbnail.className = "release-calendar-card__thumbnail--2l0P2"
+	const image = document.createElement("img")
+	image.src = extensionLogo
+	image.alt = ""
+	image.loading = "lazy"
+	image.style.width = "100%"
+	image.style.aspectRatio = "16 / 9"
+	image.style.objectFit = "contain"
+	thumbnail.appendChild(image)
+	imageLink.appendChild(thumbnail)
+	card.appendChild(imageLink)
 
-	const title = item.href ? document.createElement("a") : document.createElement("span")
-	if (title instanceof HTMLAnchorElement) title.href = item.href ?? ""
-	title.textContent = item.name ?? ""
-	card.appendChild(title)
+	const body = document.createElement("div")
+	body.className = "release-calendar-card__body--qWW18"
+	const time = document.createElement("span")
+	time.className = "text--gq6o- text--is-bold--yth2a text--is-s--JP2oa release-calendar-card__publish-time--ERS32"
+	time.setAttribute("data-t", "publish-time")
+	time.textContent = formatCalendarReleaseTime(item.time, locale, use24Hour)
+	body.appendChild(time)
+
+	const title = document.createElement("h4")
+	title.className = "text--gq6o- text--is-bold--yth2a text--is-m--pqiL- release-calendar-card__title--qU4s8"
+	const titleLink = document.createElement("a")
+	titleLink.className = "release-calendar-card__title-link--49V7a"
+	titleLink.href = item.href ?? ""
+	titleLink.setAttribute("data-t", "series-page-link")
+	titleLink.textContent = item.name ?? ""
+	title.appendChild(titleLink)
+	body.appendChild(title)
+	card.appendChild(body)
 	cell.appendChild(card)
 	return cell
 }
@@ -696,18 +724,6 @@ function addCalendarStyles() {
 	style.id = "enhanced-crunchyroll-calendar-style"
 	style.textContent = `
 		.${calendarHiddenClass} { display: none !important; }
-		.enhanced-saved-calendar-card {
-			display: flex;
-			flex-direction: column;
-			gap: 0.5rem;
-			height: 100%;
-			padding: 0.75rem;
-			border: 1px solid currentColor;
-			border-radius: 0.5rem;
-			color: inherit;
-			background: rgba(128, 128, 128, 0.12);
-		}
-		.enhanced-saved-calendar-card a { color: inherit; font-weight: 600; }
 		.enhanced-calendar-filter { display: inline-flex; align-items: center; gap: 0.5rem; }
 	`
 	document.head.appendChild(style)
