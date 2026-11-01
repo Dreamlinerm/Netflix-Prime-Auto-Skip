@@ -806,10 +806,6 @@ function syncReleaseCalendar() {
 
 function Crunchyroll_ReleaseCalendar() {
 	if (calendarObserver) return
-	document.addEventListener("change", (event) => {
-		if (event.target instanceof HTMLInputElement && event.target.name === "release-calendar-time-format")
-			syncReleaseCalendar()
-	})
 	calendarObserver = new MutationObserver(() => {
 		clearTimeout(calendarSyncTimeout)
 		calendarSyncTimeout = setTimeout(syncReleaseCalendar, 100)
