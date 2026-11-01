@@ -217,20 +217,37 @@ async function Amazon_SpeedSlider(video: HTMLVideoElement) {
 	if (video) {
 		let pauseButton = undefined
 		const alreadySlider = document.querySelector(".dv-player-fullscreen #videoSpeedSlider") as HTMLInputElement
+		const nextEpisodeButton = document.querySelector(
+			".dv-player-fullscreen #atvwebplayersdk-next-episode-button",
+		) as HTMLElement | null
+		const nextEpisodePosition = nextEpisodeButton?.parentElement?.parentElement
 		if (!alreadySlider) {
-			// infobar position for the slider to be added
-			let position = document.querySelector(".dv-player-fullscreen [class*=infobar-container]")?.firstChild
-				?.lastChild as HTMLElement
-			//  AB/B test/ UI fallback
+			let position = nextEpisodePosition
+			// Movie fallback position
 			if (!position) {
 				pauseButton = document.querySelector("#atvwebplayersdk-play-pause-button") as HTMLElement
 				position = pauseButton?.parentElement?.parentElement?.parentElement?.lastChild as HTMLElement
 			}
-			if (position) createSlider(video, videoSpeed, position, AmazonSliderStyle, "cursor: pointer;", "", pauseButton)
+			if (position)
+				createSlider(
+					video,
+					videoSpeed,
+					position,
+					AmazonSliderStyle,
+					"cursor: pointer;margin: 0;",
+					"",
+					nextEpisodeButton ?? pauseButton,
+				)
 		} else {
 			// need to resync the slider with the video sometimes
 			const speed = document.querySelector(".dv-player-fullscreen #videoSpeed") as HTMLElement
 			if (speed) {
+				if (
+					nextEpisodePosition &&
+					(alreadySlider.parentElement !== nextEpisodePosition || speed.parentElement !== nextEpisodePosition)
+				) {
+					nextEpisodePosition.prepend(alreadySlider, speed)
+				}
 				speed.onclick = function () {
 					alreadySlider.style.display = alreadySlider.style.display === "block" ? "none" : "block"
 				}
