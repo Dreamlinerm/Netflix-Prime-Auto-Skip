@@ -50,6 +50,7 @@ async function Paramount() {
 	if (settings.value.Paramount?.watchCredits) Paramount_Watch_Credits(video)
 	if (settings.value.Paramount?.speedSlider) Paramount_SpeedSlider(video)
 	if (settings.value.Paramount?.skipAd) Paramount_SkipAd(video)
+	Paramount_unmuteOnStart(video)
 }
 let lastIntroTime = -1
 function resetLastIntroTime() {
@@ -182,6 +183,13 @@ async function Paramount_SkipAd(video: HTMLVideoElement) {
 		settings.value.Statistics.ParamountAdTimeSkipped += adTime
 		settings.value.Statistics.SegmentsSkipped++
 		sendMessage("increaseBadge", {}, "background")
+	}
+}
+async function Paramount_unmuteOnStart(video: HTMLVideoElement) {
+	// On paramount when starting a video it is muted by default, this will unmute it
+	if (video && video.muted) {
+		video.muted = false
+		console.log("Unmuted video on start")
 	}
 }
 // #endregion

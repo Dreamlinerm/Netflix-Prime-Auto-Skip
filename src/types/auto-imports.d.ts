@@ -110,7 +110,6 @@ declare global {
   const refThrottled: typeof import('@vueuse/core').refThrottled
   const refWithControl: typeof import('@vueuse/core').refWithControl
   const resolveComponent: typeof import('vue').resolveComponent
-  const resolveRef: typeof import('@vueuse/core').resolveRef
   const setActivePinia: typeof import('pinia').setActivePinia
   const setMapStoreSuffix: typeof import('pinia').setMapStoreSuffix
   const shallowReactive: typeof import('vue').shallowReactive
@@ -211,7 +210,6 @@ declare global {
   const useGamepad: typeof import('@vueuse/core').useGamepad
   const useGeolocation: typeof import('@vueuse/core').useGeolocation
   const useHiddenTitlesStore: typeof import('../stores/options.store').useHiddenTitlesStore
-  const useHideTitlesStore: typeof import('../stores/options.store').useHideTitlesStore
   const useI18n: typeof import('vue-i18n').useI18n
   const useId: typeof import('vue').useId
   const useIdle: typeof import('@vueuse/core').useIdle

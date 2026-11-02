@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.1.110
+
+- Paramount: new feature: unmute video on start, since paramount mutes the video by default.
+
 # 1.1.109
 
 - Netflix: fix auto pick profile
