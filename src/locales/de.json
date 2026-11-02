@@ -57,6 +57,7 @@
   "importSettings": "Alle Einstellungen importieren/exportieren",
   "saveSettings": "Einstellungen als Datei speichern",
   "uploadSettings": "Einstellungen hochladen:",
+  "settingsImported": "Einstellungen erfolgreich importiert",
   "resetAddon": "Addon auf Standard zurücksetzen",
   "noWrap": "unset",
   "watchCreditsSwitch": "Immer Abspann ansehen:",

@@ -28,6 +28,8 @@ function replaceSettings(event: Event) {
 			try {
 				const data = JSON.parse(e.target?.result as string)
 				settings.value = data
+				alert(t("settingsImported"))
+				input.value = ""
 			} catch (e) {
 				alert(t("invalidJson"))
 				return

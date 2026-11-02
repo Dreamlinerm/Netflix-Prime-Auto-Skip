@@ -57,6 +57,7 @@
   "importSettings": "Import/eksport wszystkich ustawień",
   "saveSettings": "Zapisz ustawienia jako plik",
   "uploadSettings": "Ustawienia przesyłania:",
+  "settingsImported": "Ustawienia zostały pomyślnie zaimportowane",
   "resetAddon": "Przywróć domyślne ustawienia dodatku",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "Zawsze oglądaj końcowe:",

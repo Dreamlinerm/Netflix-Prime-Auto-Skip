@@ -57,6 +57,7 @@
   "importSettings": "导入/导出所有设置",
   "saveSettings": "将设置保存为文件",
   "uploadSettings": "上传设置:",
+  "settingsImported": "设置已成功导入",
   "resetAddon": "将插件重置为默认设置",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "永远看片尾字幕：",

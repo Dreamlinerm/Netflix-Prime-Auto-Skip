@@ -79,6 +79,7 @@
   "importSettings": "Import/Export all Settings",
   "saveSettings": "Save Settings as file",
   "uploadSettings": "Upload settings:",
+  "settingsImported": "Settings successfully imported",
   "resetAddon": "Reset addon to default",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "Always watch credits:",

@@ -57,6 +57,7 @@
   "importSettings": "모든 설정 가져오기/내보내기",
   "saveSettings": "설정을 파일로 저장",
   "uploadSettings": "업로드 설정:",
+  "settingsImported": "설정이 정상적으로 가져왔습니다.",
   "resetAddon": "애드온을 기본값으로 재설정",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "항상 크레딧 보기:",

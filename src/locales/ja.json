@@ -57,6 +57,7 @@
   "importSettings": "すべての設定のインポート/エクスポート",
   "saveSettings": "設定をファイルに保存",
   "uploadSettings": "設定のアップロード:",
+  "settingsImported": "設定が正常にインポートされました",
   "resetAddon": "アドオンをデフォルトに戻す",
   "noWrap": "ナウラップ",
   "watchCreditsSwitch": "常にクレジットを見る：",

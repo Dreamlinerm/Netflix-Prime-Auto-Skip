@@ -59,6 +59,7 @@
   "importSettings": "Importer/exporter tous les paramètres",
   "saveSettings": "Enregistrer les paramètres dans un fichier",
   "uploadSettings": "Paramètres de téléchargement:",
+  "settingsImported": "Les paramètres ont été importés avec succès",
   "resetAddon": "Réinitialiser l'extension",
   "noWrap": "Nowrap",
   "watchCreditsSwitch": "Voir toujours les crédits :",

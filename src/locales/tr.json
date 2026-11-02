@@ -57,6 +57,7 @@
   "importSettings": "Tüm Ayarları İçe/Dışa Aktar",
   "saveSettings": "Ayarları dosya olarak kaydet",
   "uploadSettings": "Yükleme ayarları:",
+  "settingsImported": "Ayarlar başarıyla içe aktarıldı",
   "resetAddon": "Eklentiyi varsayılana sıfırla",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "Her zaman jeneriği izleyin:",

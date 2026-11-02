@@ -57,6 +57,7 @@
   "importSettings": "Importa/Esporta impostazioni",
   "saveSettings": "Salva impostazioni su file",
   "uploadSettings": "Carica impostazioni:",
+  "settingsImported": "Impostazioni importate con successo",
   "resetAddon": "Ripristina estensione",
   "noWrap": "nowrap",
   "watchCreditsSwitch": "Non saltare mai i titoli di coda:",

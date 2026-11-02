@@ -57,6 +57,7 @@
   "importSettings": "Importera/exportera alla inställningar",
   "saveSettings": "Spara inställningar som fil",
   "uploadSettings": "Ladda upp inställningar:",
+  "settingsImported": "Inställningar har importerats framgångsrikt",
   "resetAddon": "Återställ Addon till standard",
   "noWrap": "nurap",
   "watchCreditsSwitch": "Titta alltid på eftertexterna:",
