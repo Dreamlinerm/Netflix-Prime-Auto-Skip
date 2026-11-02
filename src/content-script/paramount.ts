@@ -17,7 +17,6 @@ async function startParamount() {
 	ParamountObserver.observe(document, config)
 	if (settings.value.Paramount?.speedSlider) Paramount_SpeedKeyboard()
 	if (settings.value.Video?.doubleClick) Paramount_doubleClick()
-	Paramount_unmuteOnStart()
 }
 type StatisticsKey =
 	| "AmazonAdTimeSkipped"
@@ -51,6 +50,7 @@ async function Paramount() {
 	if (settings.value.Paramount?.watchCredits) Paramount_Watch_Credits(video)
 	if (settings.value.Paramount?.speedSlider) Paramount_SpeedSlider(video)
 	if (settings.value.Paramount?.skipAd) Paramount_SkipAd(video)
+	Paramount_unmuteOnStart(video)
 }
 let lastIntroTime = -1
 function resetLastIntroTime() {
@@ -185,11 +185,12 @@ async function Paramount_SkipAd(video: HTMLVideoElement) {
 		sendMessage("increaseBadge", {}, "background")
 	}
 }
-async function Paramount_unmuteOnStart() {
+let alreadyUnmuted = false
+async function Paramount_unmuteOnStart(video: HTMLVideoElement) {
 	// On paramount when starting a video it is muted by default, this will unmute it
-	const video: HTMLVideoElement = document.querySelector("video") as HTMLVideoElement
-	if (video && video.muted) {
+	if (!alreadyUnmuted && video && video.muted) {
 		video.muted = false
+		alreadyUnmuted = true
 		console.log("Unmuted video on start")
 	}
 }
