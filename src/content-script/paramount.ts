@@ -192,6 +192,8 @@ async function Paramount_unmuteOnStart(video: HTMLVideoElement) {
 		video.muted = false
 		alreadyUnmuted = true
 		console.log("Unmuted video on start")
+		settings.value.Statistics.SegmentsSkipped++
+		sendMessage("increaseBadge", {}, "background")
 	}
 }
 // #endregion
