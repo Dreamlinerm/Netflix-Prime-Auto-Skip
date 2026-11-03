@@ -1,5 +1,9 @@
 # Changelog
 
+# 1.1.111
+
+- Paramount: rm feature: not necessary if change firefox setting
+
 # 1.1.110
 
 - Paramount: new feature: unmute video on start, since paramount mutes the video by default.
